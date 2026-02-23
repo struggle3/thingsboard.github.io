@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: JWT Authentication
-description: JWT Authentication
+title: JWT 认证
+description: JWT 认证
 
 configure-jwt-auth-provider:
   0:

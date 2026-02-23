@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: ThingsBoard PE Releases table
-description: ThingsBoard architecture
+title: ThingsBoard PE 发布版本表
+description: ThingsBoard 架构
 table-of-contents: "false"
 ---
 {% assign docsPrefix = "pe/" %}

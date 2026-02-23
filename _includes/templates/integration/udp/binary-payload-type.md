@@ -1,11 +1,11 @@
-In this case, the payload looks like this:
+此情况下，payload 格式如下：
 
 ```text
 \x53\x4e\x2d\x30\x30\x31\x64\x65\x66\x61\x75\x6c\x74\x32\x35\x2e\x37\x36\x39
 ``` 
 
-Here is the description of the bytes in this payload:
-- **0-5** bytes - **\x53\x4e\x2d\x30\x30\x31** - device name. If we convert it to text - **SN-001**;
-- **6-12** bytes - **\x64\x65\x66\x61\x75\x6c\x74** - device type. If we convert it to text - **default**;
-- **13-16** bytes - **\x32\x35\x2e\x37** - temperature telemetry. If we convert it to text - **25.7**;
-- **17-18** bytes - **\x36\x39** - humidity telemetry. If we convert it to text - **69**.
+该 payload 中各字节说明如下：
+- **0-5** 字节 - **\x53\x4e\x2d\x30\x30\x31** - 设备名称，转为文本为 **SN-001**；
+- **6-12** 字节 - **\x64\x65\x66\x61\x75\x6c\x74** - 设备类型，转为文本为 **default**；
+- **13-16** 字节 - **\x32\x35\x2e\x37** - 温度遥测，转为文本为 **25.7**；
+- **17-18** 字节 - **\x36\x39** - 湿度遥测，转为文本为 **69**。

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Manage alarms and RPC requests on edge devices
-description: ThingsBoard Edge use case #1
+title: 在边缘设备上管理告警和RPC请求
+description: ThingsBoard Edge使用场景 #1
 
 configureAlarmRules:
     0:

@@ -1,24 +1,24 @@
-Adds details from the message originator's **customer** (e.g., name, email, country) to either the message data or the message metadata.
+将消息来源实体的**客户**详情（如名称、邮箱、国家）添加到消息 data 或 metadata。
 
-## Configuration
+## 配置
 
-The node's configuration allows you to select which customer details you want to fetch and where to place them in the message.
+节点配置允许选择要获取的客户详情及其在消息中的放置位置。
 
-- **Select details**: A set of customer details to retrieve. You must select at least one detail. The available options are:
-    * *Id*: The unique identifier of the customer.
-    * *Title*: The name of the customer.
-    * *Country*: The customer's country.
-    * *State*: The state or province.
-    * *City*: The city.
-    * *Zip*: The postal or ZIP code.
-    * *Address*: The primary street address.
-    * *Address2*: The secondary street address.
-    * *Email*: The contact email address.
-    * *Phone*: The contact phone number.
-    * *Additional Info*: The `description` field from the customer's `additionalInfo` JSON object.
-- **Add selected details to**: Determines the destination for the fetched customer details.
-    * *Message*: Adds the details to the message data payload. The message data must be a JSON object for this to succeed.
-    * *Metadata*: Adds the details to the message metadata.
+- **Select details**：要获取的客户详情集合。至少需选择一项。可用选项：
+    * *Id*：客户的唯一标识符。
+    * *Title*：客户名称。
+    * *Country*：客户国家。
+    * *State*：州/省。
+    * *City*：城市。
+    * *Zip*：邮编。
+    * *Address*：主要街道地址。
+    * *Address2*：次要街道地址。
+    * *Email*：联系邮箱地址。
+    * *Phone*：联系电话。
+    * *Additional Info*：客户 `additionalInfo` JSON 对象中的 `description` 字段。
+- **Add selected details to**：确定获取的客户详情的目标位置。
+    * *Message*：将详情添加到消息 data 负载。消息 data 必须为 JSON 对象才能成功。
+    * *Metadata*：将详情添加到消息 metadata。
 
 ### JSON Schema
 
@@ -66,35 +66,30 @@ The node's configuration allows you to select which customer details you want to
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node identifies the customer associated with the incoming message originator. For example, if the originator is a device, the node fetches the customer that the device is
-   assigned to.
-2. It reads the **Select details** set to determine which customer details to fetch.
-3. The node then asynchronously retrieves the values for the selected details from the customer entity.
-4. For each fetched detail, a new key is created by prepending `customer_` to the detail's name. For example, selecting `Email` results in the key `customer_email`, and `Title`
-   results in `customer_title`.
-5. If a selected detail is not set for the customer, it is simply skipped and not added to the message.
-6. Based on the **Add selected details to** setting, the node adds the resulting key-value pairs (e.g., `"customer_email": "info@example.com"`) to either the message data or the
-   message metadata.
-7. The enriched message is forwarded via the **Success** connection. If an error occurs (for instance, the originator is not assigned to a customer, or trying to add details to
-   non-JSON message data), the original message is routed to the **Failure** connection.
+1. 节点识别与入站消息来源实体关联的客户。例如，若来源实体为设备，节点获取该设备所分配到的客户。
+2. 读取**Select details**集合以确定要获取的客户详情。
+3. 节点异步从客户实体获取所选详情的值。
+4. 对每个获取的详情，通过在详情名称前添加 `customer_` 创建新键。例如，选择 `Email` 得到键 `customer_email`，`Title` 得到 `customer_title`。
+5. 若客户未设置所选详情，则跳过不添加到消息。
+6. 根据**Add selected details to**设置，节点将结果键值对（如 `"customer_email": "info@example.com"`）添加到消息 data 或 metadata。
+7. 丰富后的消息经 **Success** 连接转发。若发生错误（如来源实体未分配给客户，或尝试向非 JSON 消息 data 添加详情），原始消息经 **Failure** 连接路由。
 
-## Output connections
+## 输出连接
 
-- **Success**: The message has been successfully enriched with the customer's details.
-- **Failure**: An error occurred during processing. For example, this can happen if **Add selected details to** is set to *Message* but the incoming message data is not a valid
-  JSON object, or if the message originator is not assigned to a customer.
+- **Success**：消息已成功使用客户详情丰富。
+- **Failure**：处理过程中发生错误。例如，**Add selected details to** 设为 `Message` 但入站消息 data 不是有效 JSON 对象时，或消息来源实体未分配给客户时。
 
-## Examples
+## 示例
 
-### Example 1: Adding customer contact info to metadata
+### 示例 1：将客户联系信息添加到 metadata
 
-**Incoming message**
+**入站消息**
 
 Metadata: `{}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -106,13 +101,13 @@ Metadata: `{}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The message originator (e.g., a device) is assigned to a customer with the title `Company A` and the email `contact@companya.com`.
+消息来源实体（如设备）分配给 title 为 `Company A`、邮箱为 `contact@companya.com` 的客户。
 
-**Outgoing message**
+**出站消息**
 
-The node adds the fetched details to the metadata and routes the message via the `Success` connection.
+节点将获取的详情添加到 metadata，消息经 `Success` 连接路由。
 
 Metadata:
 
@@ -123,15 +118,15 @@ Metadata:
 }
 ```
 
-**Explanation**: The node fetched the `Title` and `Email` from the customer and added them to the message metadata under the keys `customer_title` and `customer_email`.
+**说明**：节点从客户获取 `Title` 和 `Email`，并以键 `customer_title` 和 `customer_email` 添加到消息 metadata。
 
-### Example 2: Adding customer location to message data
+### 示例 2：将客户位置添加到消息 data
 
-**Incoming message**:
+**入站消息**：
 
 Data: `{}`
 
-**Node configuration**:
+**节点配置**：
 
 ```json
 {
@@ -142,13 +137,13 @@ Data: `{}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The message originator is assigned to a customer whose country is set to `United States`.
+消息来源实体分配给国家设置为 `United States` 的客户。
 
-**Outgoing message**
+**出站消息**
 
-The new key-value pair is merged into the message data's JSON object. The message is routed via the `Success` connection.
+新键值对合并到消息 data 的 JSON 对象中。消息经 `Success` 连接路由。
 
 Data:
 
@@ -158,4 +153,4 @@ Data:
 }
 ```
 
-**Explanation**: The node retrieved the `Country` from the customer and added it to the message data with the key `customer_country`.
+**说明**：节点从客户获取 `Country`，并以键 `customer_country` 添加到消息 data。

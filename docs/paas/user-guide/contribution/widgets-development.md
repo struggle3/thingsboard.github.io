@@ -2,7 +2,7 @@
 layout: docwithnav-paas
 assignees:
 - ikulikov
-title: Widgets development guide
+title: 部件开发指南
 
 ---
 

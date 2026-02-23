@@ -11,17 +11,17 @@ hidetoc: "true"
 
 <div id="install-thanks" class="center">
     <div class="thanks-content">
-        <p class="thank-you">Thank you!</p>
+        <p class="thank-you">感谢您！</p>
         <div id="silver-form" style="display: none;">
-            <p>Thanks for applying for Silver Hardware Partner Program.<br>Please check your email for further instructions.</p>
+            <p>感谢您申请白银硬件合作伙伴计划。<br>请查收您的邮箱以获取进一步说明。</p>
         </div>    
         <div id="gold-form" style="display: none;">
-            <p>Thanks for applying for Gold Hardware Partner Program.<br>Please check your email for further instructions.</p>
+            <p>感谢您申请黄金硬件合作伙伴计划。<br>请查收您的邮箱以获取进一步说明。</p>
         </div>    
         <div id="platinum-form" style="display: none;">
-            <p>Thanks for applying for Platinum Hardware Partner Program.<br>Please check your email for further instructions.</p>
+            <p>感谢您申请铂金硬件合作伙伴计划。<br>请查收您的邮箱以获取进一步说明。</p>
         </div>   
-        <a class="homepage" href="/">Homepage</a>
+        <a class="homepage" href="/">首页</a>
     </div>
 </div>
 

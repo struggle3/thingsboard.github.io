@@ -1,75 +1,74 @@
 ---
 layout: docwithnav
-title: Temperature upload over MQTT using Nettra RTU
-description: ThingsBoard IoT Platform sample for temperature upload over MQTT using Nettra RTU
+title: 使用 Nettra RTU 通过 MQTT 上传温度
+description: ThingsBoard 物联网平台示例：使用 Nettra RTU 通过 MQTT 上传温度
 hidetoc: "true"
 ---
 
-## Table of contents
-1. [Introduction](#introduction)
-3. [Prerequisites](#prerequisites)
-4. [Connection diagram](#connection_diagram)
-5. [ThingsBoard configuration](#tb_configuration)
-6. [Connect RTU-X to PC](#connection_pc)
-7. [RTU-X configuration](#rtu_configuration)
-8. [Data visualization](#data_visualization)
+## 目录
+1. [简介](#introduction)
+2. [前置条件](#prerequisites)
+3. [连接示意图](#connection_diagram)
+4. [ThingsBoard 配置](#tb_configuration)
+5. [将 RTU-X 连接到 PC](#connection_pc)
+6. [RTU-X 配置](#rtu_configuration)
+7. [数据可视化](#data_visualization)
 
-## Introduction
+## 简介
 
-This guide contains step-by-step instructions on how to connect your Nettra RTU device to ThingsBoard Community Edition through TCP/IP via wifi, using as sample, one of the many applications that the Nettra RTU has. At the end of this guide, you will be able to monitor data using Thingsboard web UI to display it.
+本指南包含分步说明，介绍如何通过 Wi-Fi 使用 TCP/IP 将 Nettra RTU 设备连接到 ThingsBoard 社区版，并以 Nettra RTU 众多应用之一为例。完成本指南后，您将能够使用 ThingsBoard Web UI 监控并显示数据。
 
 ### Nettra RTU
-[Nettra RTU](https://nettra.tech) called **"RTU-X"** is a powerful IoT electronic device that has digital and analog inputs and outputs, as well as several integrated communication interfaces as modem, ethernet, bluetooth, 802.15.4, RS485, RS232 and GPS. It is an ideal product to implement monitoring, data acquisition and control applications over a distributed data network.
+[Nettra RTU](https://nettra.tech) 又称 **RTU-X**，是一款功能强大的物联网电子设备，具有数字和模拟输入输出，以及多种集成通信接口（调制解调器、以太网、蓝牙、802.15.4、RS485、RS232 和 GPS）。它是实现分布式数据网络上监控、数据采集和控制应用的理想产品。
 
-The RTU-X is easly configurable via a [RTU-X Configuration Interface](http://wiki.nettra.tech/en/downloads). To adapt the RTU-X to each application, it runs a fully customizable script, accessible and editable from the Configuration Interface. In this guide we will provide one as an example quite simple and easy to understand.
+RTU-X 可通过 [RTU-X 配置界面](http://wiki.nettra.tech/en/downloads) 轻松配置。为适应各应用场景，RTU-X 运行完全可自定义的脚本，可从配置界面访问和编辑。本指南将提供一个简单易懂的示例。
 
-Once you complete this sample/tutorial, you will see your sensor data on a dashboard like the following on the right.
+完成本示例/教程后，您将在仪表板中看到传感器数据，如下图所示。
 <br><br>
 
 ![rtu_x](https://user-images.githubusercontent.com/61634031/133831823-b6e2420e-5669-433a-a3fa-54b506ab24b9.png) ![dash2](https://user-images.githubusercontent.com/61634031/134074200-5063cd05-6091-4f36-90a3-91771373bd65.png)
 
 
-## Prerequisites
+## 前置条件
 
-
-### Hardware
+### 硬件
 
  - 1x [RTU-X](https://nettra.tech)
- - 1x 12VDC supply voltage
+ - 1x 12V 直流电源
 
-### Software
- - [RTU-X Configuration Interface](http://wiki.nettra.tech/en/downloads).
- - You will need to have ThingsBoard server up and running. Use either [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"} or [Installation Guide](https://thingsboard.io/docs/user-guide/install/ubuntu/) to install ThingsBoard.
+### 软件
+ - [RTU-X 配置界面](http://wiki.nettra.tech/en/downloads)
+ - 需要运行 ThingsBoard 服务器。可使用 [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"} 或参考 [安装指南](https://thingsboard.io/docs/user-guide/install/ubuntu/) 安装 ThingsBoard
 
-## Connection diagram
+## 连接示意图
 
-The following picture summarizes the connections for this simple project:
+下图展示了本简单项目的连接方式：
 <br><br>
 ![copy_941957077](https://user-images.githubusercontent.com/61634031/133837072-8340491f-ea35-4204-91e1-7d513641d7bb.png)
 
-## ThingsBoard configuration
+## ThingsBoard 配置
 
-This step contains instructions that are necessary to connect your device to ThingsBoard.
+本步骤包含将设备连接到 ThingsBoard 所需的说明。
 
-See [ThingsBoard Cloud](https://thingsboard.io/installations/) page for more details how to get your account.
+有关获取账号的详细信息，请参阅 [ThingsBoard Cloud](https://thingsboard.io/installations/) 页面。
 
-### Device
+### 设备
 
-1. Go to *"Devices"* section. 
-2. Click on *"+"* button and create a device with the name **"RTU-X"**. Set *"Device type"* to **"default"**.
+1. 进入「**Devices**」部分
+2. 点击「**+**」按钮，创建名为 **RTU-X** 的设备。将「**Device type**」设置为 **default**
 <br><br>
 ![add_opt (1)](https://user-images.githubusercontent.com/61634031/133840783-8b605dfd-3a50-430b-bb63-a8244a53cad9.png)
 <br><br>
-3. Once the device is created, open its details and click *"Copy access token"*. Please save this device token. It will be referred to later as **$RTU_DEMO_TOKEN**.
+3. 设备创建后，打开其详情并点击「**Copy access token**」。请保存此设备令牌，后文将引用为 **$RTU_DEMO_TOKEN**。
 <br><br>
 ![access_opt (3)](https://user-images.githubusercontent.com/61634031/133840798-1ea7dc07-c157-4fda-ab1c-9ecb0bba1bb8.png)
 
-### Dashboard
+### 仪表板
 
-Download the dashboard file (.json) using this [link](/docs/samples/nettrartu-x/resources/rtu_x_dashboard.json).
-Use import/export [instructions](https://thingsboard.io/docs/user-guide/dashboards/#import-dashboard) to import the dashboard to your ThingsBoard instance.
+使用此 [链接](/docs/samples/nettrartu-x/resources/rtu_x_dashboard.json) 下载仪表板文件 (.json)。
+按 [导入/导出说明](https://thingsboard.io/docs/user-guide/dashboards/#import-dashboard) 将仪表板导入 ThingsBoard 实例。
 
-## Connect RTU-X to PC
+## 将 RTU-X 连接到 PC
 
  - Download and install the latest version of [RTU-X Configuration Interface](http://wiki.nettra.tech/en/downloads).
 
@@ -106,14 +105,14 @@ Use import/export [instructions](https://thingsboard.io/docs/user-guide/dashboar
 
    ![rtu4_step4](https://user-images.githubusercontent.com/61634031/134022869-f1ec2a5b-dfee-4571-96a4-7fd1fcd81778.png)
 
-## RTU-X configuration
+## RTU-X 配置
 
-Once you have your RTU-X connected to the PC, we can proceed with its configuration.
+RTU-X 连接到 PC 后，即可进行配置。
 
 ### MQTT
 
-1. Go to *"Communications"*.
-2. Click on *"MQTT"*.
+1. 进入「**Communications**」
+2. 点击「**MQTT**」
 3. On *"Interface"* select *"Modem"*. On *"Format"* select *"Thingsboard"*. On *"URI"* paste *"mqtt://thingsboard.cloud:1883"*. On *"Password"* paste the Device Acces Token from *"Device"* step.
 4. Click on *"Apply Changes"*.
 
@@ -151,27 +150,27 @@ while (1)
 
 ![rtu6_step6](https://user-images.githubusercontent.com/61634031/134028433-e7412285-9f4e-4d67-9f3c-80879f99191f.png)
 
-## Data visualization
+## 数据可视化
 
-Finally, open ThingsBoard Web UI with same user and password as *ThingsBoard configuration* section.
+最后，使用与「ThingsBoard 配置」部分相同的用户名和密码打开 ThingsBoard Web UI。
 
-Go to *"Devices"* section and locate *"RTU-X Device"*, open device details and switch to *"Latest telemetry"* tab.
-If all is configured correctly you should be able to see latest values of *"variable"* in the table.<br><br>
+进入「**Devices**」部分，找到「**RTU-X Device**」，打开设备详情并切换到「**Latest telemetry**」标签。
+若配置正确，您应在表格中看到「**variable**」的最新值。<br><br>
 
 ![dev](https://user-images.githubusercontent.com/61634031/134029353-d4d80304-0396-4a10-b313-02a249300280.png)
 
-After, open *"Dashboards"* section then locate and open *"RTU-X"* dashboard.
-As a result, you will see an analog gauge (similar to dashboard image in the introduction).<br><br>
+然后打开「**Dashboards**」部分，找到并打开「**RTU-X**」仪表板。
+结果将显示一个模拟表盘（与简介中的仪表板图片类似）。<br><br>
 
 ![dash](https://user-images.githubusercontent.com/61634031/134030076-19fd80de-38fd-4114-b1f1-221f61756782.png)
 
-## See also
+## 另请参阅
 
-Browse other [samples](https://thingsboard.io/docs/samples/) or explore guides related to main ThingsBoard features:
+浏览其他 [示例](https://thingsboard.io/docs/samples/) 或查看 ThingsBoard 主要功能相关指南：
 
- - [Device attributes](https://thingsboard.io/docs/user-guide/attributes/) - how to use device attributes.
- - [Data Visualization](https://thingsboard.io/docs/guides/#AnchorIDDataVisualization) - how to visualize collected data.
- - [Data Analytics](https://thingsboard.io/docs/guides/#AnchorIDDataAnalytics) - how to collect telemetry data.
- - [Rule Engine](https://thingsboard.io/docs/user-guide/rule-engine-2-0/re-getting-started/) - how to use rule engine to analyze data from devices.
- - [Using RPC capabilities](https://thingsboard.io/docs/user-guide/rule-engine-2-0/tutorials/rpc-request-tutorial/) - how to send commands to/from devices.
+ - [设备属性](https://thingsboard.io/docs/user-guide/attributes/) - 如何使用设备属性
+ - [数据可视化](https://thingsboard.io/docs/guides/#AnchorIDDataVisualization) - 如何可视化采集的数据
+ - [数据分析](https://thingsboard.io/docs/guides/#AnchorIDDataAnalytics) - 如何采集遥测数据
+ - [规则引擎](https://thingsboard.io/docs/user-guide/rule-engine-2-0/re-getting-started/) - 如何使用规则引擎分析设备数据
+ - [使用 RPC 功能](https://thingsboard.io/docs/user-guide/rule-engine-2-0/tutorials/rpc-request-tutorial/) - 如何向/从设备发送命令
 

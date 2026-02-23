@@ -1,13 +1,13 @@
-#### Prerequisites
+#### 前提条件
 
-* Have a proxy server (**HTTP** or **HTTPS**) with its address, port, and credentials (if required).
-* Consider the addresses that should bypass the proxy (e.g., internal resources).
-* Have **Java 17** installed.
-* **ThingsBoard Edge** is installed and running.
+* 具备代理服务器（**HTTP** 或 **HTTPS**），含地址、端口及凭据（如需）。
+* 明确需绕过代理的地址（如内网资源）。
+* 已安装 **Java 17**。
+* 已安装并运行 **ThingsBoard Edge**。
 
-#### Step 1. Modify Configuration File
+#### 步骤 1. 修改配置文件
 
-To configure **ThingsBoard Edge** behind proxy running on debian-based installation (e.g., Ubuntu), modify the **tb-edge.conf** file:
+在基于 Debian 的安装（如 Ubuntu）中配置代理后的 **ThingsBoard Edge**，请修改 **tb-edge.conf** 文件：
 
 ```bash
 sudo tee -a /etc/tb-edge/conf/tb-edge.conf > /dev/null <<EOL
@@ -21,12 +21,12 @@ EOL
 ```
 {: .copy-code}
 
-* Replace _proxy_host_ and _proxy_port_ with your proxy's hostname and port.
-* If there are hosts that should bypass the proxy (e.g., local network addresses), set <non_proxy_hosts> using a format like: localhost|127.0.0.1|yourdomain.com
+* 将 _proxy_host_ 和 _proxy_port_ 替换为代理的主机名和端口。
+* 若有需绕过代理的主机（如内网地址），按格式设置 <non_proxy_hosts>：localhost|127.0.0.1|yourdomain.com
 
-##### Configure Authentication (If Required)
+##### 配置认证（如需）
 
-If your proxy requires authentication, add the following parameters:
+若代理需认证，添加以下参数：
 
 ```bash
 #(Optional) Add authentication if required
@@ -35,57 +35,57 @@ export CLOUD_RPC_PROXY_PASSWORD="proxy_password"
 ```
 {: .copy-code}
 
-* Replace _proxy_user_ and _proxy_password_ with your actual credentials.
+* 将 _proxy_user_ 和 _proxy_password_ 替换为实际凭据。
 
-##### Verify the Changes (Optional)
+##### 验证更改（可选）
 
-To verify the changes, run the following command:
+运行以下命令验证更改：
 
 ```bash
 cat /etc/tb-edge/conf/tb-edge.conf
 ```
 {: .copy-code}
 
-#### Step 2. Restart ThingsBoard Edge
+#### 步骤 2. 重启 ThingsBoard Edge
 
-For the changes to take effect, restart the service after modifying the **tb-edge.conf** file:
+修改 **tb-edge.conf** 后需重启服务使更改生效：
 
 ```bash
 sudo service tb-edge restart
 ```
 {: .copy-code}
 
-Once the **Edge** service is started, open the **Edge UI** at [http://localhost:8080](http://localhost:8080){: target="_blank"}. Use the **tenant credentials** to log in.
+**Edge** 服务启动后，在 [http://localhost:8080](http://localhost:8080){: target="_blank"} 打开 **Edge UI**，使用 **租户凭据** 登录。
 
 {% capture docker-deployment %}
-If the Edge HTTP bind port was changed to **18080** during Edge installation, access the **ThingsBoard Edge** instance at [http://localhost:18080](http://localhost:18080){: target="_blank"}.
+若 Edge 安装时将 HTTP 绑定端口改为 **18080**，请通过 [http://localhost:18080](http://localhost:18080){: target="_blank"} 访问 **ThingsBoard Edge** 实例。
 {% endcapture %}
 {% include templates/info-banner.md content=docker-deployment %}
 
-#### Troubleshooting
+#### 故障排查
 
-**ThingsBoard Edge** logs stored in the following directory:
+**ThingsBoard Edge** 日志存放在以下目录：
 
 ```bash
 /var/log/tb-edge
 ```
-To check if there are any errors on the service side:
+检查服务端是否有错误：
 
 ```bash
 cat /var/log/tb-edge/tb-edge.log | grep ERROR
 ```
 {: .copy-code}
 
-Check connectivity:
+检查连通性：
 
 ```bash
 curl -x http://proxy_host:proxy_port https://your_tb_cloud_url
 ```
 {: .copy-code}
 
-* Replace _proxy_host_ and _proxy_port_ with your proxy's hostname and port.
+* 将 _proxy_host_ 和 _proxy_port_ 替换为代理的主机名和端口。
 
-Confirm that the service can reach the proxy server:
+确认服务可到达代理服务器：
 
 ```bash
 ping proxy_host
@@ -93,8 +93,8 @@ traceroute proxy_host
 ```
 {: .copy-code}
 
-* Replace _proxy_host_ with your proxy's hostname.
+* 将 _proxy_host_ 替换为代理的主机名。
 
-### Next Steps
+### 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

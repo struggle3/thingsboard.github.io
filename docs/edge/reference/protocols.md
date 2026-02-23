@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Device Connectivity Protocols
-description: Supported IoT protocols for IoT device connectivity
+title: 设备连接协议
+description: 支持的IoT设备连接协议
 
 ---
 

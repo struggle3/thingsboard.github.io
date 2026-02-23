@@ -1,17 +1,17 @@
 |---
-| **Parameter**            | **Default value**                            | **Description**                                                |
+| **参数**            | **默认值**                            | **说明**                                                |
 |:-|:-|-
-| type                     | **file**                                     | Storage type (Saving data to hard drive)                       |
-| data_folder_path         | **./data/**                                  | Path to folder, that will contains data (Relative or Absolute).|
-| max_read_records_count   | **6**                                        | Count of messages to get from storage and send to ThingsBoard. |
-| max_file_count *         | **5**                                        | Maximum count of file that will be saved.                      |
-| max_records_per_file *   | **14**                                       | Maximum count of records that will be stored in one file.      |
+| type                     | **file**                                     | 存储类型（将数据保存到硬盘）                       |
+| data_folder_path         | **./data/**                                  | 存放数据的文件夹路径（相对或绝对路径）。|
+| max_read_records_count   | **6**                                        | 从存储中读取并发送到 ThingsBoard 的消息数量。 |
+| max_file_count *         | **5**                                        | 保存的文件最大数量。                      |
+| max_records_per_file *   | **14**                                       | 单文件存储的最大记录数。      |
 |---
 
 
-\* -- If receive data when storage has already counted this amount, described in this parameter, new data will lose.
+\* -- 若数据量已达该参数，新收到的数据将会丢失。
 
-Storage section of configuration file will look like:
+配置文件中的 storage 部分如下所示：
 
 ```json
 ...

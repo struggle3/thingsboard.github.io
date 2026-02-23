@@ -39,9 +39,9 @@
 {%- assign prev_minor = prev_parts[1] -%}
 
 {% if patch_status == "true" %}
-### Upgrading {{ platform }} to latest {{ base_version }} ({{ current_version }})
+### 将 {{ platform }} 升级到最新 {{ base_version }}（{{ current_version }}）
 {% else %}
-### Upgrading {{ platform }} to {{ current_version }}
+### 将 {{ platform }} 升级到 {{ current_version }}
 {% endif %}
 
 {%- if x_status == "true" -%}
@@ -66,13 +66,13 @@
 {%- endif -%}
 
 {% capture difference %}
-**NOTE:**
+**注意：**
 {% if curr_major > "4" or (curr_major == "4" and curr_minor >= "2") %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version }}{% if patch_status == "true" %} or any {{ base_version }} patch{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version }}{% if patch_status == "true" %} 或任意 {{ base_version }} 补丁{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version }}**]({{ prev_version_href }})。
 {% else %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} and ThingsBoard version {{ v | strip }}{% endfor %}{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version_label }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} 和 ThingsBoard 版本 {{ v | strip }}{% endfor %}{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version_label }}**]({{ prev_version_href }})。
 {% endif %}
 {% endcapture %}
 
@@ -98,7 +98,7 @@ In order to upgrade to {{ current_version_with_platform | upcase }} you need to 
 {%- endif -%}
 {%- endif -%}
 
-#### {{ platform }} service upgrade
+#### {{ platform }} 服务升级
 
 {% assign skipUpgrade = false %}
 {% if update_status == "false" %}

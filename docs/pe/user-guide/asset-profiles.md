@@ -2,14 +2,14 @@
 layout: docwithnav-pe
 assignees:
 - ikulikov
-title: Asset profiles
-description: IoT Asset profiles
+title: 资产档案
+description: IoT 资产档案
 redirect_from: "/docs/pe/user-guide/ui/asset-profiles"
 
 asset-profile-details-page:
     0:
         image: /images/user-guide/asset-profile/asset-profile-details-page-1-pe.png
-        title: 'Clicking an asset profile opens a detailed view where you can access and manage all aspects of that profile.'
+        title: '点击资产档案可打开详细视图，在此可访问和管理该档案的各个方面。'
 
 ---
 

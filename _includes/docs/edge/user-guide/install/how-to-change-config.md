@@ -1,22 +1,19 @@
 * TOC
 {:toc}
 
-This guide will help you to get familiar with ThingsBoard Edge configuration files and parameters. We **recommend** to
-configure ThingsBoard Edge using environment variables. This way you do not need to merge the configuration files when new
-edge release arrives. List of available configuration parameters and corresponding environment variables is
-located [here](#configuration-parameters).
+本指南将帮助您熟悉 ThingsBoard Edge 配置文件和参数。我们 **建议** 使用环境变量配置 ThingsBoard Edge。这样在新 Edge 版本发布时无需合并配置文件。可用配置参数及对应环境变量列表见[此处](#configuration-parameters)。
 
-## How to change configuration parameters?
+## 如何更改配置参数？
 
 ### Linux
 
-If ThingsBoard Edge is installed on **Linux**, you may specify the environment variables in the tb-edge.conf file:
+若 ThingsBoard Edge 安装在 **Linux** 上，可在 tb-edge.conf 文件中指定环境变量：
 
 ```bash
 sudo nano /usr/share/tb-edge/conf/tb-edge.conf
 ```
 
-Use simple example below to add new environment variable 'HTTP_BIND_PORT' with value '8081'.
+使用以下简单示例添加新环境变量 'HTTP_BIND_PORT'，值为 '8081'：
 
 ```bash
 ...
@@ -25,29 +22,24 @@ export HTTP_BIND_PORT=8081
 
 ### Windows
 
-If ThingsBoard Edge is installed on **Windows**, you may specify the environment variables in
-the tb-edge.yml file located in the following directory:
+若 ThingsBoard Edge 安装在 **Windows** 上，可在以下目录的 tb-edge.yml 文件中指定环境变量：
 
 ```bash
 YOUR_INSTALL_DIR/conf
 ```
 
-The configuration file is written in YAML.
+配置文件使用 YAML 格式编写。
 
-All configuration parameters have corresponding environment variable name and default value. In order to change
-configuration parameter you can simply change it's default value. For example:
+所有配置参数均有对应的环境变量名称和默认值。要更改配置参数，只需更改其默认值。例如：
 
 ```bash
 server:
   address: "${HTTP_BIND_ADDRESS:0.0.0.0}"
 ```
 
-In this case, *'HTTP_BIND_ADDRESS'* is environment variable name and *'0.0.0.0'* is a default value.
+此例中，*'HTTP_BIND_ADDRESS'* 为环境变量名称，*'0.0.0.0'* 为默认值。
 
-### Docker based deployment
+### Docker 部署
 
-If ThingsBoard Edge is installed in a docker compose environment, you may edit the scripts and add environment variables for
-the corresponding containers.
-See [docker documentation](https://docs.docker.com/compose/environment-variables/#/the-envfile-configuration-option) for
-more details.
-
+若 ThingsBoard Edge 在 docker compose 环境中安装，可编辑脚本并为相应容器添加环境变量。
+详见 [docker documentation](https://docs.docker.com/compose/environment-variables/#/the-envfile-configuration-option)。

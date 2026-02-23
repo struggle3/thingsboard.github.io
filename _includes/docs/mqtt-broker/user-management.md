@@ -1,16 +1,15 @@
 * TOC
 {:toc}
 
-By default, the system is initially established with a singular admin user, with username **sysadmin@thingsboard.org** and password **sysadmin**.
+默认情况下，系统最初仅建立一个管理员用户，用户名为 **sysadmin@thingsboard.org**，密码为 **sysadmin**。
 
-However, when operating in a production environment, it is strongly advised to create a new admin user, either remove the default user entirely 
-or modify the password associated with the aforementioned user.
+但在生产环境中运行时，强烈建议创建新的管理员用户，完全删除默认用户，或修改上述用户的密码。
 
-Throughout this documentation, all provided examples will employ the **curl** command to execute REST requests, thus showcasing practical implementations of the API interactions.
+本文档中，所有示例均使用 **curl** 命令执行 REST 请求，以展示实际的 API 调用。
 
 {% include templates/mqtt-broker/authentication.md %}
 
-## Get all users
+## 获取所有用户
 
 ```bash
 curl --location --request GET "http://localhost:8083/api/admin?pageSize=50&page=0" \
@@ -18,10 +17,10 @@ curl --location --request GET "http://localhost:8083/api/admin?pageSize=50&page=
 ```
 {: .copy-code}
 
-Within the system, every user entity possesses a distinct and unique identifier known as the **id**. 
-This id serves as a reference point and can be utilized to perform operations such as _updating_ or _deleting_ users.
+系统中，每个用户实体都具有唯一标识符 **id**。
+该 id 可作为引用，用于执行更新或删除用户等操作。
 
-## Create/update user
+## 创建/更新用户
 
 {% if docsPrefix == null %}
 
@@ -58,9 +57,9 @@ curl --location --request POST 'http://localhost:8083/api/admin' \
 
 {% endif %}
 
-If _$USER_ID_ is _null_ or _id_ field is absent in the request body, the new admin user will be created, otherwise the user with _$USER_ID_ identifier will be updated.
+若 _$USER_ID_ 为 _null_ 或请求体中缺少 _id_ 字段，将创建新的管理员用户，否则将更新指定 _$USER_ID_ 的用户。
 
-## Delete user
+## 删除用户
 
 ```bash
 curl --location --request DELETE 'http://localhost:8083/api/admin/$USER_ID' \
@@ -68,4 +67,4 @@ curl --location --request DELETE 'http://localhost:8083/api/admin/$USER_ID' \
 ```
 {: .copy-code}
 
-Paste actual ID of the user you want to delete instead of _$USER_ID_.
+请将 _$USER_ID_ 替换为要删除用户的实际 ID。

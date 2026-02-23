@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: calculate delta
-description: Calculates the delta (difference) between the current value in an incoming message and the previous value from the same originator, optionally including the time elapsed between messages.
+description: 计算入站消息中的当前值与同一 originator 的上一次值之间的差值，可选择包含消息间经过的时间。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

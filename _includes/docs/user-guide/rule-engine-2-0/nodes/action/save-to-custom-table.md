@@ -1,16 +1,13 @@
-Stores the incoming message data in a custom Cassandra table.
+将传入消息数据存储到自定义 Cassandra 表中。
 
-## Configuration
+## 配置
 
-- **Custom table name** - The name of the target custom table without the `cs_tb_` prefix. The table must already exist in the Cassandra cluster with the full name
-  `cs_tb_{tableName}`. Prefix is necessary to distinguish custom tables from ThingsBoard standard tables.
-- **Fields mapping** - A mapping between message field names (keys) and table column names (values). Each entry defines how a field from the message data should be stored in the
-  corresponding table column.
-- **Default TTL** - Time-To-Live in seconds for the inserted records. Set to 0 to disable TTL. When set to a positive value, records will automatically expire after the specified
-  duration.
+- **Custom table name** - 目标自定义表名，不含 `cs_tb_` 前缀。表中必须已存在于 Cassandra 集群中，完整名称为 `cs_tb_{tableName}`。前缀用于区分自定义表与 ThingsBoard 标准表。
+- **Fields mapping** - 消息字段名（键）与表列名（值）的映射。每个条目定义消息数据中的字段如何存入对应表列。
+- **Default TTL** - 插入记录的生存时间（秒）。设为 0 表示禁用 TTL。设为正值时，记录将在指定时长后自动过期。
 
 {% capture entity_id_field_key_note %}
-**Note**: When **$entityId** is used as a message field key, the node will write the message originator ID to the corresponding table column instead of looking for this field in the message data.
+**注意**：当 **$entityId** 用作消息字段键时，节点会将消息发起者 ID 写入对应表列，而非在消息数据中查找该字段。
 {% endcapture %}
 {% include templates/info-banner.md content=entity_id_field_key_note %}
 
@@ -49,39 +46,39 @@ Stores the incoming message data in a custom Cassandra table.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. Parses the incoming message data as JSON and validates it's a JSON object.
-2. For each field mapping entry:
-    - If the message field key is `$entityId`, uses the message originator's ID
-    - Otherwise, looks for the field in the message data
-    - Maps JSON primitive values to appropriate Cassandra data types:
-        - Numbers with decimal points → Double
-        - Numbers without decimal points → Long
-        - Booleans → Boolean
-        - Strings → String
-    - JSON objects are converted to string representation
-    - Missing fields or non-primitive/non-object values cause processing to fail
-3. Constructs and executes an `INSERT` statement with the mapped values.
-4. If TTL is configured (> 0), applies the TTL to the inserted record.
-5. On successful insertion, routes the message to `Success`. On any error, routes to `Failure`.
+1. 将传入消息数据解析为 JSON 并验证为 JSON 对象。
+2. 对每个字段映射条目：
+    - 若消息字段键为 `$entityId`，使用消息发起者的 ID
+    - 否则在消息数据中查找该字段
+    - 将 JSON 基本类型映射到对应 Cassandra 数据类型：
+        - 带小数点的数字 → Double
+        - 不带小数点的数字 → Long
+        - 布尔值 → Boolean
+        - 字符串 → String
+    - JSON 对象转为字符串表示
+    - 缺少字段或非基本/非对象值将导致处理失败
+3. 构造并执行带映射值的 `INSERT` 语句。
+4. 若配置了 TTL（> 0），则对插入记录应用 TTL。
+5. 插入成功后路由到 `Success`，发生任何错误时路由到 `Failure`。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The data was successfully saved to the custom table
+    - 数据已成功保存到自定义表
 - `Failure`
-    - Target table doesn't exist
-    - Message data is not a valid JSON object
-    - Required message field is missing
-    - Message field value is not a JSON primitive or object
-    - Database connection or insertion error
+    - 目标表不存在
+    - 消息数据不是有效 JSON 对象
+    - 必需的消息字段缺失
+    - 消息字段值不是 JSON 基本类型或对象
+    - 数据库连接或插入错误
 
-## Examples
+## 示例
 
-### Example 1 — Basic data insertion
+### 示例 1 — 基本数据插入
 
-**Incoming message**
+**传入消息**
 
 Data:
 
@@ -94,7 +91,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -109,28 +106,28 @@ Data:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- Table `cs_tb_sensor_data` exists with columns: `temp_value`, `humidity_level`, `room_name`, `is_active`.
+- 表 `cs_tb_sensor_data` 存在，列为：`temp_value`、`humidity_level`、`room_name`、`is_active`。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入相同。经由 `Success` 连接路由。
 
-**Result**
+**结果**
 
-A new record is inserted into `cs_tb_sensor_data`:
+在 `cs_tb_sensor_data` 中插入一条新记录：
 
 - `temp_value`: 23.5 (Double)
 - `humidity_level`: 60 (Long)
 - `room_name`: "Room A" (String)
 - `is_active`: true (Boolean)
 
-### Example 2 — Using entity ID mapping
+### 示例 2 — 使用实体 ID 映射
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE` with ID `a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6`
+Originator: `DEVICE`，ID 为 `a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6`
 
 Data:
 
@@ -141,7 +138,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -155,18 +152,18 @@ Data:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- Table `cs_tb_device_readings` exists with columns: `device_id`, `sensor_value`, `read_time`.
+- 表 `cs_tb_device_readings` 存在，列为：`device_id`、`sensor_value`、`read_time`。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入相同。经由 `Success` 连接路由。
 
-**Result**
+**结果**
 
-A new record is inserted into `cs_tb_device_readings` with TTL of 3600 seconds:
+在 `cs_tb_device_readings` 中插入一条新记录，TTL 为 3600 秒：
 
-- `device_id`: `a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6` (ID of the originator device)
+- `device_id`: `a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6`（发起者设备 ID）
 - `sensor_value`: 150.7 (Double)
 - `read_time`: 1640995200 (Long)

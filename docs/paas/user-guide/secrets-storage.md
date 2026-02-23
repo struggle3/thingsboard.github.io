@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Secrets storage
-description: Secrets storage guide
+title: 密钥存储
+description: 密钥存储指南
 
 creating-secret:
     0:

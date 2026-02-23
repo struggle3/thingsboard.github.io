@@ -1,33 +1,33 @@
-### Configure AWS tools
+### 配置 AWS 工具
 
 ```bash
 aws configure
 ```
 {: .copy-code}
 
-### Configuration overview
+### 配置概述
 
-To deploy the EKS cluster, we recommend using a pre-defined EKS cluster configuration file.
-Please download it using next command:
+要部署 EKS 集群，建议使用预定义的 EKS 集群配置文件。
+请使用以下命令下载：
 
 ```bash
 curl -o cluster.yml https://raw.githubusercontent.com/thingsboard/tbmq/{{ site.release.broker_branch }}/k8s/helm/aws/cluster.yml
 ```
 {: .copy-code}
 
-Here are the fields you can change depending on your needs:
-- `region` - should be the AWS region where you want your cluster to be located (the default value is `us-east-1`)
-- `availabilityZones` - should specify the exact IDs of the region's availability zones (the default value is `[ us-east-1a,us-east-1b,us-east-1c ]`)
-- `instanceType` - type of the instances for node groups. Change per workload (e.g., TBMQ, Redis, Kafka).
-- `desiredCapacity` - number of nodes per node group. Defaults are suggested for testing.
-- `volumeType` - type of EBS volume for EC2 nodes. Defaults to `gp3`.
+可根据需要修改以下字段：
+- `region` - 集群所在的 AWS 区域（默认 `us-east-1`）
+- `availabilityZones` - 区域可用区的具体 ID（默认 `[ us-east-1a,us-east-1b,us-east-1c ]`）
+- `instanceType` - 节点组实例类型。可按工作负载（如 TBMQ、Redis、Kafka）分别调整。
+- `desiredCapacity` - 每个节点组的节点数。默认值适用于测试。
+- `volumeType` - EC2 节点的 EBS 卷类型。默认为 `gp3`。
 
-Refer to [Amazon EC2 Instance types](https://aws.amazon.com/ec2/instance-types/)
-to choose the right instance types for your production workloads.
+请参阅 [Amazon EC2 Instance types](https://aws.amazon.com/ec2/instance-types/)
+为生产工作负载选择合适的实例类型。
 
-### PostgreSQL consideration (Optional Node Group)
+### PostgreSQL 相关说明（可选节点组）
 
-TBMQ Helm chart supports external PostgreSQL, so you might not need this node group:
+TBMQ Helm chart 支持外部 PostgreSQL，因此可能不需要此节点组：
 
 ```yaml
   - name: tbmq-postgresql
@@ -40,14 +40,14 @@ TBMQ Helm chart supports external PostgreSQL, so you might not need this node gr
     volumeSize: 20
 ```
 
-You can safely remove this section if:
+以下情况可安全移除此部分：
 
- - You're using Amazon RDS or an existing PostgreSQL service.
- - You want to keep your database outside the EKS cluster.
+ - 使用 Amazon RDS 或现有 PostgreSQL 服务。
+ - 希望将数据库置于 EKS 集群外部。
 
-###  IAM setup for OIDC and AWS Load Balancer Controller
+### OIDC 与 AWS Load Balancer Controller 的 IAM 设置
 
-By including the following block in your `cluster.yml`, you automatically enable IAM roles for service accounts and provision the AWS Load Balancer Controller service account:
+在 `cluster.yml` 中包含以下块，将自动启用服务账户的 IAM 角色并为 AWS Load Balancer Controller 创建服务账户：
 
 ```yaml
 iam:
@@ -60,53 +60,53 @@ iam:
         awsLoadBalancerController: true
 ```
 
-This configuration:
- - Enables [OIDC](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) integration (required for IAM roles for service accounts).
- - Automatically creates a service account with the appropriate IAM policies for the [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).
+此配置：
+ - 启用 [OIDC](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) 集成（服务账户 IAM 角色所需）。
+ - 自动创建具有 [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html) 适当 IAM 策略的服务账户。
 
-This is the easiest and most integrated way to set things up when using `eksctl`.
+使用 `eksctl` 时，这是最简单、最集成的方式。
 
-Alternative, if you prefer not to manage IAM inside `cluster.yml`, or your organization requires manual IAM policy creation, you can set it up manually after cluster creation.
+若不愿在 `cluster.yml` 中管理 IAM，或组织要求手动创建 IAM 策略，可在集群创建后手动设置。
 
-Follow these official guides from AWS: 
+请遵循以下 AWS 官方指南：
 
-- [Create an IAM OIDC provider for your cluster](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
-- [Route internet traffic with AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
+- [为集群创建 IAM OIDC 提供程序](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+- [使用 AWS Load Balancer Controller 路由互联网流量](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
 
-### Add-ons explained
+### 插件说明
 
-The `addons` section in `cluster.yml` automatically installs and configures essential components that extend the base functionality of your EKS cluster.
+`cluster.yml` 中的 `addons` 部分会自动安装并配置扩展 EKS 集群基础功能的必要组件。
 
- - **aws-ebs-csi-driver** - enables dynamic provisioning of Amazon EBS volumes using the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
-   TBMQ components like Redis and Kafka require persistent storage. This driver allows Kubernetes to provision `gp3` volumes on-demand when a PersistentVolumeClaim is created.
- - **aws-efs-csi-driver** - allows your workloads to use Amazon EFS (Elastic File System) as a persistent volume via the [EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html).
-   TBMQ doesn't require EFS, but this is useful if you want shared access to the same volume from multiple pods (e.g., for shared logs, config files, or stateful workloads with horizontal scaling).
- - **vpc-cni** - installs the [Amazon VPC CNI plugin](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html), which enables Kubernetes pods to have native VPC networking. 
-   Provides each pod with its own IP address from the VPC subnet. Essential for efficient pod-to-pod and pod-to-external communication.
- - **coredns** - provides internal DNS resolution for Kubernetes services via [CoreDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
- - **kube-proxy** - manages network rules on each node to handle service routing, via [kube-proxy](https://kubernetes.io/docs/concepts/services-networking/service/#kube-proxy).
+ - **aws-ebs-csi-driver** - 通过 [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) 启用 Amazon EBS 卷动态配置。
+   Redis 和 Kafka 等 TBMQ 组件需要持久化存储。此驱动允许 Kubernetes 在创建 PersistentVolumeClaim 时按需配置 `gp3` 卷。
+ - **aws-efs-csi-driver** - 通过 [EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html) 使工作负载可使用 Amazon EFS（Elastic File System）作为持久卷。
+   TBMQ 不需要 EFS，但若需多个 pods 共享同一卷（如共享日志、配置文件或支持水平扩展的有状态工作负载），则很有用。
+ - **vpc-cni** - 安装 [Amazon VPC CNI 插件](https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html)，使 Kubernetes pods 具备原生 VPC 网络能力。
+   为每个 pod 从 VPC 子网分配独立 IP 地址。对 pod 间及 pod 对外通信至关重要。
+ - **coredns** - 通过 [CoreDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) 为 Kubernetes 服务提供内部 DNS 解析。
+ - **kube-proxy** - 通过 [kube-proxy](https://kubernetes.io/docs/concepts/services-networking/service/#kube-proxy) 管理各节点上的网络规则以处理服务路由。
 
-### Create EKS cluster
+### 创建 EKS 集群
 
 ```bash
 eksctl create cluster -f cluster.yml
 ```
 {: .copy-code}
 
-### Create GP3 storage class and make it default
+### 创建 GP3 存储类并将其设为默认
 
 {% include templates/mqtt-broker/install/aws/gp3-sc.md %}
 
-### Attach Policy
+### 附加策略
 
-If you've created your EKS cluster using the provided `cluster.yml`, then the following are already configured automatically:
- - OIDC provider is enabled (withOIDC: true)
- - Service account aws-load-balancer-controller is created in the kube-system namespace.
- - The account is annotated for IAM access and linked with the well-known AWS-managed policy.
+若使用提供的 `cluster.yml` 创建了 EKS 集群，则以下内容已自动配置：
+ - 已启用 OIDC 提供程序（withOIDC: true）
+ - 已在 kube-system 命名空间中创建服务账户 aws-load-balancer-controller。
+ - 该账户已标注 IAM 访问权限并与 AWS 托管已知策略关联。
 
-However, you must manually attach the AWSLoadBalancerControllerIAMPolicy (or your custom policy) to the IAM role created by eksctl.
+但您必须手动将 AWSLoadBalancerControllerIAMPolicy（或自定义策略）附加到 eksctl 创建的 IAM 角色。
 
- - Find the role created by `eksctl`:
+ - 查找 `eksctl` 创建的角色：
 
 ```bash
 aws iam list-roles \
@@ -115,15 +115,15 @@ aws iam list-roles \
 ```
 {: .copy-code}
 
-Looks for something like:
+输出应类似：
 
 ```text
 eksctl-tbmq-addon-iamserviceaccount-kube-syst-Role1-J9l4M87BqmNu
 ```
 
-- Attach the policy:
+- 附加策略：
 
-Replace both `YOUR_AWS_ACCOUNT_ID` and `ROLE_NAME` with your actual AWS account ID and the IAM role name found in the previous step:
+将 `YOUR_AWS_ACCOUNT_ID` 和 `ROLE_NAME` 替换为实际 AWS 账户 ID 和上一步找到的 IAM 角色名称：
 
 ```bash
 aws iam attach-role-policy \
@@ -132,23 +132,23 @@ aws iam attach-role-policy \
 ```
 {: .copy-code}
 
-You can verify the attachment with:
+可使用以下命令验证附加结果：
 
 ```bash
 aws iam list-attached-role-policies --role-name ROLE_NAME
 ```
 {: .copy-code}
 
-You should see similar output:
+输出应类似：
 
 ```text
 ATTACHEDPOLICIES        arn:aws:iam::YOUR_AWS_ACCOUNT_ID:policy/AWSLoadBalancerControllerIAMPolicy     AWSLoadBalancerControllerIAMPolicy
 ```
 
-### Create AWS Load Balancer Controller
+### 创建 AWS Load Balancer Controller
 
-To support Network Load Balancer (NLB) and Application Load Balancer (ALB) provisioning via Kubernetes annotations,
-you'll need to deploy the AWS Load Balancer Controller into your EKS cluster.
+要支持通过 Kubernetes 注解配置 Network Load Balancer (NLB) 和 Application Load Balancer (ALB)，
+需在 EKS 集群中部署 AWS Load Balancer Controller。
 
 ```bash
 helm repo add eks https://aws.github.io/eks-charts
@@ -156,7 +156,7 @@ helm repo update
 ```
 {: .copy-code}
 
-After that, install the controller into the `kube-system` namespace and associates it with your cluster:
+然后，将 controller 安装到 `kube-system` 命名空间并关联到您的集群：
 
 ```bash
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
@@ -167,14 +167,14 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 ```
 {: .copy-code}
 
-Verify that the controller is installed:
+验证 controller 是否已安装：
 
 ```bash
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
 {: .copy-code}
 
-An example output is as follows.
+示例输出如下。
 
 ```text
 NAME                           READY   UP-TO-DATE   AVAILABLE   AGE

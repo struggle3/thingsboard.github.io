@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas 
-title: ChirpStack Integration 
-description: ChirpStack Integration Guide 
+title: ChirpStack 集成
+description: ChirpStack 集成指南 
 
 api-keys:
     0:

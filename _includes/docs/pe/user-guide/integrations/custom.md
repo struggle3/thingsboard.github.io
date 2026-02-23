@@ -8,20 +8,18 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-Custom integration is **only executed remotely** from the main ThingsBoard instance. It allows to create integration with custom configuration 
-that will use any transport protocol for communication with your devices.
+Custom集成**仅在主ThingsBoard实例上远程执行**。它允许创建使用自定义配置的集成，可选用任意传输协议与设备通信。
 
-This guide contains step-by-step instructions on how to create and launch ThingsBoard custom integration.
-For example, we will launch custom integration that uses TCP transport protocol to stream data from devices and pushes the converted data to 
-[{{hostName}}](https://{{hostName}}/signup).
+本指南提供创建并启动ThingsBoard custom integration的逐步说明。
+例如，我们将启动使用TCP传输协议的custom integration，从设备流式传输数据并将转换后的数据推送到[{{hostName}}](https://{{hostName}}/signup)。
 
-Before we start, you can find the full code of custom integration example that we will use in this guide [here](https://github.com/thingsboard/remote-integration-example).
+开始前，可在[此处](https://github.com/thingsboard/remote-integration-example)找到本指南将使用的custom integration示例完整代码。
  
-## Prerequisites
+## 前置条件
 
-We assume you already have a tenant administrator account on your own ThingsBoard PE v2.4.1+ instance or {{hostName}}.
+我们假定您已在自己的 ThingsBoard PE v2.4.1+ 实例或 {{hostName}} 上拥有租户管理员账户。
 
 Let’s assume that we have a sensor which is sending current temperature, humidity and battery level readings respectively in the following format: **“25,40,94”**.
  
@@ -29,16 +27,16 @@ Let’s assume that we have a sensor which is sending current temperature, humid
 
 Before setting up a custom integration, you need to create an Uplink and a Downlink converters.
 
-### Uplink Converter
+### 上行转换器
 
-Let's create uplink converter.
+创建uplink converter。
 
 ![image](/images/user-guide/integrations/remote/custom-converter.gif)
 
-**NOTE**: Although the Debug mode is very useful for development and troubleshooting, leaving it enabled in production mode may tremendously increase the disk space, used by the database, because all the debugging data is stored there. 
-It is highly recommended to turn the Debug mode off when done debugging. 
+**注意**：尽管 Debug mode 对开发和故障排查很有用，但在生产模式下保持启用会大幅增加数据库占用的磁盘空间，因所有调试数据都会存储其中。
+强烈建议调试完成后关闭 Debug mode。 
 
-See the following script that is pasted to the Decoder function section:
+以下为粘贴到Decoder function区域的脚本：
 
 ```javascript
 /** Decoder **/
@@ -77,46 +75,46 @@ function decodeToJson(payload) {
 return result;
 ``` 
 
-The purpose of the decoder function is to parse the incoming data and metadata to a format that ThingsBoard can consume. 
-**deviceName** and **deviceType** are required, while **attributes** and **telemetry** are optional.
-**Attributes** and **telemetry** are flat key-value objects. Nested objects are not supported.
+decoder函数用于将传入数据和metadata解析为ThingsBoard可消费的格式。
+**deviceName**和**deviceType**为必填，**attributes**和**telemetry**为可选。
+**Attributes**和**telemetry**为扁平键值对象，不支持嵌套对象。
 
 ### Downlink Converter
 
-We will not use the Downlink converter in this guide so there is no need to create one.
-In case you have another use case, please refer to the following [instructions](/docs/{{peDocsPrefix}}user-guide/integrations/#downlink-data-converter).
+本指南中不会使用 Downlink converter，因此无需创建。
+若有其他使用场景，请参阅以下 [说明](/docs/{{peDocsPrefix}}user-guide/integrations/#downlink-data-converter)。
  
-## Custom Integration Setup
+## Custom Integration 配置
  
-Let's create custom integration. 
+创建 custom integration。
 
 ![image](/images/user-guide/integrations/remote/custom-integration.gif)
 
-Notice that **Execute remotely** is enabled automatically when we choose **Custom** type and we enable **Debug mode**.
+选择 **Custom** 类型并启用 **Debug mode** 时，**Execute remotely** 会自动启用。
 
-**Integration class** is used to create an instance of the integration using the Java reflective method. 
+**Integration class** 用于通过 Java 反射方法创建 integration 实例。
 
-The **Integration JSON configuration** is the custom configuration that has two fields in our case:
-- **port**, which will be used to bind the TCP server-client communication
-- **msgGenerationIntervalMs**, the interval between generating the messages
+**Integration JSON configuration** 为自定义配置，本示例中包含两个字段：
+- **port**：用于绑定 TCP 服务端与客户端通信
+- **msgGenerationIntervalMs**：消息生成的间隔
 
-We will get back to this later in this guide.
+我们将在本指南后续部分回到此配置。
 
-## Custom Integration Application
+## Custom Integration 应用
 
-### Download the sample application
+### 下载示例应用
 
-Feel free to grab the [code from the ThingsBoard repository](https://github.com/thingsboard/remote-integration-example) and build the project with maven:
+可从 [ThingsBoard 仓库](https://github.com/thingsboard/remote-integration-example) 获取代码，并用 maven 构建项目：
 
 ```bash
 mvn clean install
 ```
 
-Go ahead and add that maven project to your favorite IDE.
+将 maven 项目添加到您常用的 IDE 中。
 
-### Dependencies review
+### 依赖概览
 
-Main dependencies that are used in the project:
+项目中使用的主要依赖：
 
 ```xml
 <!-- Api ThingsBoard provides to create custom integration -->
@@ -147,15 +145,15 @@ Once the [client emulator](https://github.com/thingsboard/remote-integration-exa
 , it will start sending auto-generated data to ThingsBoard in the following format: **“25,40,94”**. 
 The Integration will pass the incoming message as-is to the [uplink converter](/docs/{{peDocsPrefix}}user-guide/integrations/custom/#uplink-converter) and push data to ThingsBoard.
 
-**Note:** starting from ThingsBoard version 3.3.1 a new required configuration property was added to tb-remote-integration.yml:
+**注意**：自 ThingsBoard 3.3.1 起，tb-remote-integration.yml 中新增了必需配置属性：
 
 ```yml
 service:
   type: "${TB_SERVICE_TYPE:tb-integration}"
 ```
 
-In case that you are using custom remote integration of the older version, and plan to upgrade your custom integration to the 3.3.1 version be sure that you have that property added to the tb-remote-integration.yml file.
+若使用旧版 custom remote integration，并计划将 custom integration 升级至 3.3.1，请确保已在 tb-remote-integration.yml 文件中添加该属性。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

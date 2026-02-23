@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Contact Tracing Badge to ThingsBoard?"
+title: "如何将Contact Tracing Badge连接到ThingsBoard？"
 redirect_to: "/device-library/ce/contact-tracing-badge/"
 ---

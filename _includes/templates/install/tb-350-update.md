@@ -1,9 +1,9 @@
 {% capture tb_3_5_0_upgrade_note %}
-**Important note before upgrading to ThingsBoard 3.5**
+**升级至 ThingsBoard 3.5 前的重要提示**
 
-ThingsBoard UI was migrated to Angular 15. You need to re-build your custom widgets and rule nodes (which use UI) on Angular 15.
+ThingsBoard UI 已迁移至 Angular 15。您需要在 Angular 15 上重新构建自定义部件和规则节点（使用 UI 的部分）。
 
-We suggest consulting [**this guide**](https://v15.material.angular.io/guide/mdc-migration).
+建议参阅 [**本指南**](https://v15.material.angular.io/guide/mdc-migration)。
 
 {% endcapture %}
 {% include templates/warn-banner.md content=tb_3_5_0_upgrade_note %}

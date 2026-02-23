@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Managing domain
-description: Domain managing through TBMQ
+title: 域名管理
+description: 通过 TBMQ 管理域名
 
 register-domain:
   0:

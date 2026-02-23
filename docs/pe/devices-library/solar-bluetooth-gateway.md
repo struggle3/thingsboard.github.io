@@ -1,5 +1,6 @@
 ---
 layout: docwithnav-pe
-title: "How to connect Solar Bluetooth Gateway to ThingsBoard?"
+title: "如何将 Solar Bluetooth Gateway 连接到 ThingsBoard？"
+description: Solar Bluetooth Gateway 与 ThingsBoard 的连接指南
 redirect_to: "/device-library/pe/solar-bluetooth-gateway/"
 ---

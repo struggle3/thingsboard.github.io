@@ -1,12 +1,12 @@
 {% assign current_version = include.version %}
 
-1. Change the parameter `TB_VERSION` in the `.env` file.
+1. 修改`.env`文件中的`TB_VERSION`参数。
 
 ```.env
 TB_VERSION={{ current_version }}
 ```
 
-2. Execute the following commands:
+2. 执行以下命令：
 
 {% if include.skipUpgrade %}
 

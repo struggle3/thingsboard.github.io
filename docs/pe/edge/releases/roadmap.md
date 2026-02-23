@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: ThingsBoard Edge Professional Edition Roadmap
-description: Upcoming releases
+title: ThingsBoard Edge 专业版路线图
+description: 即将发布的版本
 effective-url: '/docs/pe/edge/releases/roadmap/'
 ---
 

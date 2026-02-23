@@ -1,4 +1,4 @@
-{% assign deviceName = "ACE MQTT 4G GPS Gateway" %}
+﻿{% assign deviceName = "ACE MQTT 4G GPS Gateway" %}
 {% assign deviceVendorLink = "https://aceautomation.eu/product/ace-gtw-4g-mini-4g-wifi-modbus-gateway-mqtt-to-usb-modbus-rtu-master-gateway/" %}
 {% assign controllerName = "Siemens LOGO!" %}
 {% assign controllerVendorLink = "https://www.siemens.com/ua/uk/produkty/avtomatyzatsiya-promyslovosti/systemy-avtomatyzatsiyi/systemy-promyslovoyi-avtomatyzatsiyi-simatic/plc-kontrolery-simatic/lohichnyy-modul-logo.html" %}
@@ -11,7 +11,7 @@
 
 
 
-## Introduction
+## 概述
 [The ACE Automation MQTT 4G GPS Gateway]({{deviceVendorLink}}){: target="_blank"} is a cutting-edge device that revolutionizes data communication and connectivity 
 for industrial and IoT applications. Equipped with 4G capabilities, this gateway ensures reliable and high-speed data 
 transmission over cellular networks, even in remote locations. It integrates GPS technology for real-time location 
@@ -20,11 +20,11 @@ lightweight and efficient, enabling seamless integration into existing IoT ecosy
 guarantees reliable operation in harsh environments, making it a valuable solution for optimizing operations and 
 harnessing real-time data. Simplify your connectivity and data management with the ACE Automation MQTT 4G GPS Gateway.
 
-## Prerequisites
+## 前置条件
 
 To continue with this guide, we will need the following:  
 {{ prerequisites }}
-- [ThingsBoard account]({{thingsboardInstanceLink}}){: target="_blank"}  
+- [ThingsBoard 账户]({{thingsboardInstanceLink}}){: target="_blank"}  
 
 
 ## Import Rule chain
@@ -292,8 +292,7 @@ config topics
 {% endcapture %}
 {% include code-toggle.liquid code=gatewayCode params="conf|.copy-code.expandable-20" %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/ready-to-go-devices/check-data-on-thingsboard-block.md %}
 
 {% capture readytogodevicestogglespec %}
@@ -302,7 +301,7 @@ New Dashboard%,%newDashboard%,%templates/device-library/ready-to-go-devices/gate
 
 {% include content-toggle.liquid content-toggle-id="minicomputersDashboard" toggle-spec=readytogodevicestogglespec %}
 
-## Conclusion
+## 总结
 
 With the knowledge in this guide, you can easily connect your ACE Automation MQTT 4G GPS Gateway and use the built-in 
 integration to retrieve data from devices connected to ACE Automation MQTT 4G GPS Gateway.

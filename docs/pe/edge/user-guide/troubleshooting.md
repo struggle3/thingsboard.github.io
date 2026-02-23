@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Troubleshooting
-description: ThingsBoard Edge troubleshooting
+title: 故障排查
+description: ThingsBoard Edge 故障排查
 
 how-to-import-dashboard:
   0:

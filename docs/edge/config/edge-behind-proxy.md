@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Installing Edge Behind a Proxy
-description: Detailed instructions on how to connect ThingsBoard Edge to ThingsBoard Cloud behind a proxy.
+title: 在代理后安装Edge
+description: 如何在代理后将ThingsBoard Edge连接到ThingsBoard Cloud的详细说明。
 
 configs:
     0:

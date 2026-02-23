@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: What is ThingsBoard?
-description: ThingsBoard key features and advantages for the rapid development of IoT projects and applications.
+title: 介绍
+description: ThingsBoard的关键功能与优势助力IoT项目与应用快速开发。
 redirect_from: "/docs/user-guide/overview/"
 ---
 

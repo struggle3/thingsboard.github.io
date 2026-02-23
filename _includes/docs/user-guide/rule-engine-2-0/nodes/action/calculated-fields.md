@@ -1,15 +1,15 @@
-Triggers calculated field processing for incoming time series or attributes without persisting the data to the database.
+对 incoming time series 或 attributes 触发计算字段处理，但不将数据持久化到数据库。
 
-## Preconditions
+## 前置条件
 
-The message type and data structure must correspond to your incoming data type:
+消息类型和数据结构需与 incoming 数据类型一致：
 
-- **Time series data**: Use `POST_TELEMETRY_REQUEST` with [formats defined here](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries)
-- **Attributes data**: Use `POST_ATTRIBUTES_REQUEST` with [formats defined here](/docs/user-guide/rule-engine-2-0/nodes/action/save-attributes)
+- **Time series 数据**：使用 `POST_TELEMETRY_REQUEST`，[格式见此处](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries)
+- **Attributes 数据**：使用 `POST_ATTRIBUTES_REQUEST`，[格式见此处](/docs/user-guide/rule-engine-2-0/nodes/action/save-attributes)
 
-## Configuration
+## 配置
 
-This node has no configuration options.
+该节点无配置选项。
 
 ### JSON Schema
 
@@ -24,39 +24,39 @@ This node has no configuration options.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node examines the **type** of the incoming message.
-2. For `POST_TELEMETRY_REQUEST` or `POST_ATTRIBUTES_REQUEST` messages:
-    - Parses the time series or attribute data from the message data (including attribute scope from metadata when applicable)
-    - Triggers the evaluation of any calculated fields that use this data
-    - The incoming time series or attribute data itself is **not** persisted to the database
-3. When calculated fields are evaluated:
-    - A new message is generated with the originator whose calculated field state was updated
-    - This new message is pushed into the root rule chain of the originator
-4. After triggering calculated field processing, the original message is forwarded to the `Success` connection
-5. If an unsupported message type is received or an error occurs, the message is routed to the `Failure` connection
+1. 节点检查入站消息的**类型**。
+2. 对于 `POST_TELEMETRY_REQUEST` 或 `POST_ATTRIBUTES_REQUEST` 消息：
+    - 从消息 data 解析时序或属性数据（适用时包含 metadata 中的属性 scope）
+    - 触发使用该数据的计算字段的评估
+    - 入站时序或属性数据本身**不会**持久化到数据库
+3. 当计算字段被评估时：
+    - 生成一条以计算字段状态已更新的来源实体为来源的新消息
+    - 该新消息被推入来源实体的根规则链
+4. 触发计算字段处理后，原始消息经 `Success` 连接转发
+5. 若收到不支持的消息类型或发生错误，消息经 `Failure` 连接路由
 
 {% capture persistence_note %}
-**Note**: The calculated results are included in the newly generated message (step 3). To persist these results to the database, you still need to use a "save time series" or "save attributes" node in the rule chain.
+**注意**：计算结果包含在新生成的消息中（步骤 3）。要将这些结果持久化到数据库，仍需在规则链中使用「save time series」或「save attributes」节点。
 {% endcapture %}
 {% include templates/info-banner.md content=persistence_note %}
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The message data contains valid time series or attribute data and calculated field processing was triggered
-    - The message data is empty (no processing required)
+    - 消息 data 包含有效的时序或属性数据且已触发计算字段处理
+    - 消息 data 为空（无需处理）
 - `Failure`
-    - The incoming message type is not `POST_TELEMETRY_REQUEST` or `POST_ATTRIBUTES_REQUEST`
-    - The incoming message data could not be parsed into time series data or attributes data
-    - An unexpected error occurred during message processing
+    - 入站消息类型不是 `POST_TELEMETRY_REQUEST` 或 `POST_ATTRIBUTES_REQUEST`
+    - 入站消息 data 无法解析为时序数据或属性数据
+    - 消息处理过程中发生意外错误
 
-## Examples
+## 示例
 
-### Example 1 — Processing time series for calculated fields
+### 示例 1 — 为计算字段处理时序
 
-**Incoming message**
+**入站消息**
 
 Type: `POST_TELEMETRY_REQUEST`
 
@@ -71,28 +71,27 @@ Data:
 
 Originator: `DEVICE`.
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
 The device has a calculated field "heatIndex" defined that uses the formula: `temperature + 0.5 * humidity`
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The calculated field "heatIndex" is evaluated using the incoming temperature and humidity values (25.5 + 0.5 * 60 = 55.5). A new message containing the calculated value is
-generated with the device as the originator and pushed to the root rule chain. The original time series data (temperature and humidity) is **not** stored in the database.
+使用入站温度和湿度值评估计算字段「heatIndex」(25.5 + 0.5 * 60 = 55.5)。生成包含计算值、以设备为来源实体的新消息并推入根规则链。原始时序数据（temperature 和 humidity）**不会**存储到数据库。
 
-### Example 2 — Processing attributes for calculated fields
+### 示例 2 — 为计算字段处理属性
 
-**Incoming message**
+**入站消息**
 
 Type: `POST_ATTRIBUTES_REQUEST`
 
@@ -115,64 +114,62 @@ Metadata:
 
 Originator: `DEVICE`.
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
 The device has a calculated field "speedPercentage" defined that calculates: `(currentSpeed / maxSpeed) * 100`
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The calculated field "speedPercentage" is evaluated (75 / 100 * 100 = 75%). A new message with the calculated value is generated and pushed to the root rule chain. The original
-attributes are **not** persisted to the database.
+评估计算字段「speedPercentage」(75 / 100 * 100 = 75%)。生成包含计算值的新消息并推入根规则链。原始属性**不会**持久化到数据库。
 
-### Example 3 — Empty payload handling
+### 示例 3 — 空负载处理
 
-**Incoming message**
+**入站消息**
 
 Type: `POST_TELEMETRY_REQUEST`
 
 Data: `{}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-No calculated fields are triggered since the data is empty. The message passes through successfully without any processing.
+因 data 为空，未触发任何计算字段。消息成功透传，无任何处理。
 
-### Example 4 — Unsupported message type
+### 示例 4 — 不支持的消息类型
 
-**Incoming message**
+**入站消息**
 
 Type: `ENTITY_CREATED`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Failure` connection.
+出站消息与入站消息相同。经 `Failure` 连接路由。
 
-**Result**
+**结果**
 
-The processing fails because the node only supports `POST_TELEMETRY_REQUEST` and `POST_ATTRIBUTES_REQUEST` message types. `ENTITY_CREATED` lifecycle events cannot trigger
-calculated field processing.
+处理失败，因为该节点仅支持 `POST_TELEMETRY_REQUEST` 和 `POST_ATTRIBUTES_REQUEST` 消息类型。`ENTITY_CREATED` 生命周期事件无法触发计算字段处理。

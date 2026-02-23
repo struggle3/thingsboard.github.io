@@ -1,28 +1,27 @@
-Executes user-defined function to transform an incoming message. The script can modify the message data, metadata, and type. 
-Based on the script's logic, it can produce a single modified message or multiple new messages, each with a customized content.
-Supports **TBEL** and **JavaScript**.
+执行用户自定义函数以转换入站消息。脚本可修改消息的 data、metadata 和 type。
+根据脚本逻辑，可产生一条修改后的消息或多条新消息，每条均可有定制内容。
+支持 **TBEL** 和 **JavaScript**。
 
-## Configuration
+## 配置
 
-The node provides a choice of scripting language and a code editor to write the transformation logic.
+节点提供脚本语言选择和代码编辑器以编写转换逻辑。
 
-- **Language Selector** - choose between **TBEL** (ThingsBoard Expression Language) or **JavaScript**.
-- **Script Editor** - a text area where you write the body of the transformation function.
+- **语言选择** — 在 **TBEL**（ThingsBoard Expression Language）与 **JavaScript** 之间选择。
+- **脚本编辑器** — 编写转换函数体的文本区域。
 
-### Transformation function
+### 转换函数
 
-The code entered into the script editor acts as the body of a transformation function. This function implicitly receives three arguments that are available as variables in your
-script:
+脚本编辑器中的代码作为转换函数体。该函数隐式接收三个参数，在脚本中作为变量使用：
 
-- `msg` - the data of the incoming message, typically as a JSON object.
-- `metadata` - the metadata of the incoming message, as a key-value object where all values are strings.
-- `msgType` - the type of the incoming message, as a string.
+- `msg` — 入站消息的 data，通常为 JSON 对象。
+- `metadata` — 入站消息的 metadata，键值对象，所有值为字符串。
+- `msgType` — 入站消息的类型，字符串。
 
-The function must **return** an object (for a single output message) or an array of objects (for multiple output messages). Each object must contain the following keys:
+函数必须**返回**一个对象（单条输出消息）或对象数组（多条输出消息）。每个对象必须包含以下键：
 
-- `msg` - the data for the new outgoing message.
-- `metadata` - the metadata for the new message.
-- `msgType` - the type for the new message.
+- `msg` — 新出站消息的 data。
+- `metadata` — 新消息的 metadata。
+- `msgType` — 新消息的 type。
 
 ### JSON Schema
 
@@ -57,37 +56,37 @@ The function must **return** an object (for a single output message) or an array
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node executes the user-defined script, passing the incoming message's `msg`, `metadata`, and `msgType` as arguments.
-2. The script's return value determines the output:
-    - If it returns a **single object**, one new message is prepared.
-    - If it returns an **array of objects**, one new message is prepared for each object in the array.
-3. For each new message to be created, the node constructs its content:
-    - It uses the `msg`, `metadata`, and `msgType` values from the object returned by the script.
-    - The message originator and other properties are preserved from the original message.
-4. All newly created messages are sent out via the `Success` chain. The original message is acknowledged after all new messages have been successfully enqueued.
-5. If the script encounters an error during execution (e.g., a syntax error or runtime exception), the original message is routed to the `Failure` chain.
+1. 节点执行用户自定义脚本，传入入站消息的 `msg`、`metadata` 和 `msgType` 作为参数。
+2. 脚本返回值决定输出：
+    - 若返回**单个对象**，准备一条新消息。
+    - 若返回**对象数组**，为数组中每个对象准备一条新消息。
+3. 对每条要创建的新消息，节点构建其内容：
+    - 使用脚本返回对象中的 `msg`、`metadata` 和 `msgType` 值。
+    - 消息来源实体及其他属性从原始消息保留。
+4. 所有新消息经 `Success` 链发送。所有新消息成功入队后确认原始消息。
+5. 若脚本执行时出错（如语法错误或运行时异常），原始消息经 `Failure` 链路由。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - One or more transformed messages are sent through this chain.
-- `Failure`:
-    - If the script execution fails with an error.
+- `Success`：
+    - 一条或多条转换后的消息经此链发送。
+- `Failure`：
+    - 脚本执行出错时。
 
-## Examples
+## 示例
 
-### Example 1 — Preparing multiple REST API requests
+### 示例 1 — 准备多条 REST API 请求
 
-This example demonstrates how to generate multiple outgoing messages from a single trigger message. 
-This is a common scenario when you need to fetch data from an external API that requires separate requests for different telemetry information.
+本示例演示如何从单条触发消息生成多条出站消息。
+当需要从外部 API 获取数据，且不同遥测信息需单独请求时，这是常见场景。
 
-**Scenario**: An incoming message specifies a list of metrics to be fetched from an external system. 
-The script node acts as a request generator, iterating through the list and creating a separate, formatted JSON-RPC request message for each metric. 
-These messages can then be individually processed by a "rest api call" node.
+**场景**：入站消息指定要从外部系统获取的指标列表。
+脚本节点充当请求生成器，遍历列表并为每个指标创建独立的、格式化的 JSON-RPC 请求消息。
+这些消息随后可被「rest api call」节点分别处理。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -112,7 +111,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -166,11 +165,11 @@ foreach(metric: msg.metrics) {
 return outgoingMessages;
 ```
 
-**Outgoing messages**
+**出站消息**
 
-Three new messages are created and sent via the `Success` connection, one for each metric requested in the original message.
+经 `Success` 连接创建并发送三条新消息，对应原始消息中请求的每个指标一条。
 
-* Message 1: Request for `voltage`
+* Message 1: 请求 `voltage`
     * Data:
       ```json
       {
@@ -188,24 +187,22 @@ Three new messages are created and sent via the `Success` connection, one for ea
       }
       ```
     * Type: `API_REQUEST`
-* Message 2: Request for `pressure`
-    * Data: (Identical to above, but `metric` is `pressure`)
-* Message 3: Request for `signalStrength`
-    * Data: (Identical to above, but `metric` is `signalStrength`)
+* Message 2: 请求 `pressure`
+    * Data: （同上，但 `metric` 为 `pressure`）
+* Message 3: 请求 `signalStrength`
+    * Data: （同上，但 `metric` 为 `signalStrength`）
 
-**Explanation**: The script iterates over the metrics array from the incoming message. 
-For each item in the array, it constructs a complete JSON-RPC request body, populating it with data from both the incoming message (`startTime`, `endTime`) 
-and its metadata (`apiKey`, `serialId`). This results in three distinct messages, each ready to query the API for a specific metric.
+**说明**：脚本遍历入站消息中的 metrics 数组。对数组中每一项，构建完整的 JSON-RPC 请求体，用入站消息（`startTime`、`endTime`）和其 metadata（`apiKey`、`serialId`）填充。结果为三条不同消息，每条 ready 用于查询特定指标的 API。
 
-### Example 2 — Parsing a REST API response
+### 示例 2 — 解析 REST API 响应
 
-This example demonstrates how to transform a message with a custom data structure into a single, standardized telemetry message that ThingsBoard can store.
-This is a common scenario when fetching data from external systems or third-party APIs.
+本示例演示如何将具有自定义数据结构的消息转换为 ThingsBoard 可存储的单一标准化遥测消息。
+从外部系统或第三方 API 获取数据时，这是常见场景。
 
-**Scenario**: A "rest api call" node queries an external API and receives a response in a non-standard format.
-The script node will parse this response, extract the relevant values, and reformat the message data into a structure that can be saved using "save time series" node.
+**场景**：「rest api call」节点查询外部 API 并收到非标准格式的响应。
+脚本节点解析该响应，提取相关值，并将消息 data 重新格式化为可用「save time series」节点保存的结构。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -243,7 +240,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -287,9 +284,9 @@ output.msgType = "POST_TELEMETRY_REQUEST";
 return output;
 ```
 
-**Outgoing messages**
+**出站消息**
 
-Original message is transformed and sent via the `Success` chain.
+原始消息被转换并经 `Success` 链发送。
 
 Data:
 
@@ -324,6 +321,4 @@ Data:
 
 Message type: `POST_TELEMETRY_REQUEST`
 
-**Explanation**: The script processes the incoming message, which contains a batch of observations in a custom format. 
-It iterates through the observations array, transforming each entry into the standard ThingsBoard timeseries format. 
-It does this by converting the time string to a Unix timestamp and using the top-level metric field (`pressure`) as the dynamic telemetry key.
+**说明**：脚本处理包含自定义格式批量观测的入站消息。遍历 observations 数组，将每项转换为标准的 ThingsBoard 时间序列格式。具体做法是将时间字符串转为 Unix 时间戳，并使用顶层 metric 字段（`pressure`）作为动态遥测键。

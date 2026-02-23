@@ -1,9 +1,8 @@
-Performs mathematical operations and functions on numeric data. Arguments can be retrieved from multiple sources (constants, message data, message metadata, attributes, or time
-series data) and results can be saved to the message or directly to database as attributes or time series.
+对数值数据执行数学运算和函数。参数可从多种来源获取（常量、消息数据、消息元数据、属性或时序数据），结果可保存到消息或直接写入数据库作为属性或时序。
 
-## Configuration
+## 配置
 
-### Supported functions
+### 支持函数
 
 <style>
 
@@ -65,75 +64,70 @@ series data) and results can be saved to the message or directly to database as 
 | DEG       | 1                   | Converts an angle measured in radians to an approximately equivalent angle measured in degrees.                                                                                                                       | [Math.toDegrees](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Math.html#toDegrees(double))     |
 | CUSTOM    | 0-16                | Use this function to specify complex math expressions. For example, transform Fahrenheit to Celsius using (x - 32) / 1.8)                                                                                             | [exp4j](https://www.objecthunter.net/exp4j)                                                                              |
 
-### Using CUSTOM function
+### 使用 CUSTOM 函数
 
-When you select the CUSTOM operation, you can write your own mathematical expression instead of using predefined operations. This allows you to perform complex calculations that
-combine multiple operations in a single node.
+选择 CUSTOM 操作时，可编写自定义数学表达式替代预定义运算，从而在单个节点中执行多步复杂计算。
 
-**Key points:**
+**要点：**
 
-- You can use up to 16 arguments with predefined names (displayed on the configuration form)
-- Use these predefined argument names directly in your expression
-- The expression is evaluated using the [exp4j library](https://www.objecthunter.net/exp4j/) - refer to its documentation for detailed syntax rules
-- Supports standard mathematical operators: `+`, `-`, `*`, `/`, `^` (power), and parentheses
-- Supports standard functions (`sin()`, `cos()`, `sqrt()`, `abs()`, etc.) plus custom functions: `ln(x)` (natural logarithm), `lg(x)` (base 10 logarithm), `logab(a, b)` (logarithm
-  of b with base a)
-- Available built-in constants: `π` or `pi` (3.14159265358979323846), `e` (2.7182818284590452354), `φ` (1.61803398874)
+- 最多可使用 16 个具预定义名称的参数（在配置表单中显示）
+- 在表达式中直接使用这些预定义参数名
+- 表达式通过 [exp4j 库](https://www.objecthunter.net/exp4j/) 求值，详细语法请参考其文档
+- 支持标准数学运算符：`+`、`-`、`*`、`/`、`^`（幂）及括号
+- 支持标准函数（`sin()`、`cos()`、`sqrt()`、`abs()` 等）及自定义函数：`ln(x)`（自然对数）、`lg(x)`（以 10 为底对数）、`logab(a, b)`（以 a 为底的 b 的对数）
+- 可用内置常量：`π` 或 `pi`（3.14159265358979323846）、`e`（2.7182818284590452354）、`φ`（1.61803398874）
 
-**Expression examples:**
+**表达式示例：**
 
-| Use case              | Expression        | Description                                     |
+| 使用场景              | 表达式             | 说明                                     |
 |-----------------------|-------------------|-------------------------------------------------|
-| Fahrenheit to Celsius | `(x - 32) / 1.8`  | Convert temperature from °F to °C               |
-| Pythagorean theorem   | `sqrt(x^2 + y^2)` | Calculate hypotenuse using square root function |
-| Circle area           | `pi * r^2`        | Calculate area using the built-in π constant    |
+| 华氏转摄氏            | `(x - 32) / 1.8`  | 将温度从 °F 转换为 °C               |
+| 勾股定理              | `sqrt(x^2 + y^2)` | 使用平方根计算斜边 |
+| 圆面积                | `pi * r^2`        | 使用内置 π 常量计算面积    |
 
-### Arguments
+### 参数
 
-Arguments for mathematical operations can be retrieved from the following sources:
+数学运算的参数可从以下来源获取：
 
-- **Constant** - A fixed numerical value specified directly in the configuration
-- **Message** - Reads a value from a field in the JSON message payload
-- **Metadata** - Reads a value from the message metadata
-- **Attribute** - Fetch the attribute value from the database for the message originator
-- **Time series** - Retrieve the latest time series value from the database for the message originator
+- **Constant** - 在配置中直接指定的固定数值
+- **Message** - 从 JSON 消息负载的字段读取
+- **Metadata** - 从消息元数据读取
+- **Attribute** - 从数据库获取消息发起者的属性值
+- **Time series** - 从数据库获取消息发起者的最新时序值
 
-Each argument can have a default value that will be used if the source value is missing.
+每个参数可指定默认值，当来源值缺失时使用。
 
 {% capture template_support_note %}
-**Note**: When specifying keys to fetch or extract values, you can use [templatization](/docs/{{docsPrefix}}user-guide/templatization/) (e.g., `${metadataKey}` or
-`$[dataKey]`) to dynamically construct key names based on message content.
+**注意**：指定用于获取或提取值的 key 时，可使用[模板化](/docs/{{docsPrefix}}user-guide/templatization/)（如 `${metadataKey}` 或
+`$[dataKey]`）根据消息内容动态构造 key 名。
 {% endcapture %}
 {% include templates/info-banner.md content=template_support_note %}
 
 {% capture numeric_values_note %}
-**Note**: All argument values must be numeric or strings that can be parsed as numbers. The node will fail if a value is an array, object, or non-numeric string, unless a default
-value is specified.
+**注意**：所有参数值必须为数值或可解析为数字的字符串。若值为数组、对象或非数字字符串，节点将失败，除非指定了默认值。
 {% endcapture %}
 {% include templates/info-banner.md content=numeric_values_note %}
 
-### Result
+### 结果
 
-The calculation result can be saved to one or more destinations:
+计算结果可保存到一个或多个目标：
 
-- **Message** - Save the result to a specified key in the message data
-- **Metadata** - Save the result to a specified key in the metadata
-- **Attribute** - Save as an originator attribute (with configurable scope: Server or Shared)
-- **Time series** - Save as a time series data point with the current timestamp
+- **Message** - 保存到消息数据的指定 key
+- **Metadata** - 保存到元数据的指定 key
+- **Attribute** - 作为发起者属性保存（可配置 scope：Server 或 Shared）
+- **Time series** - 作为带当前时间戳的时序数据点保存
 
-When saving to attributes or time series, you can optionally also add the result to the message data and/or metadata for use in subsequent rule nodes.
+保存到属性或时序时，也可选择将结果同时加入消息数据和/或元数据，供后续规则节点使用。
 
-You can specify the number of digits after the decimal point for the result. The value will be rounded to the specified precision using half-up rounding mode (rounds towards the
-nearest neighbor, and if both neighbors are equidistant, rounds up).
+可指定结果的小数位数。值将按四舍五入到指定精度（向最近邻居舍入，若两侧等距则向上舍入）。
 
 {% capture synchronization_note %}
-**Note**: Processing for a given originator is performed sequentially within the scope of a server node, preventing race conditions when reading from and writing to the database.
+**注意**：对给定发起者的处理在服务器节点范围内顺序执行，避免读写数据库时的竞态条件。
 {% endcapture %}
 {% include templates/info-banner.md content=synchronization_note %}
 
 {% capture performance_note %}
-**Performance tip**: This node is optimized for mathematical calculations and provides better performance than script nodes, as it eliminates the overhead of script compilation and
-execution. Use this node whenever possible for numeric operations.
+**性能提示**：此节点针对数学计算优化，比脚本节点性能更好，无需脚本编译与执行开销。数值运算请尽量使用此节点。
 {% endcapture %}
 {% include templates/info-banner.md content=performance_note %}
 
@@ -281,27 +275,26 @@ execution. Use this node whenever possible for numeric operations.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. For each argument, the node retrieves the value from the configured source (constant, message data, metadata, attribute, or time series). If a value cannot be retrieved and no
-   default value is specified, processing fails.
-2. All argument values are converted to numeric (double) format. If conversion fails, processing fails.
-3. The node performs the mathematical calculation using the retrieved argument values according to the selected operation.
-4. The result is formatted according to the configured precision (rounded to the specified number of decimal places).
-5. The result is saved to the configured destination(s): message, metadata, attribute, and/or time series.
-6. When processing completes successfully, the message is forwarded via the `Success` connection.
+1. 对每个参数，节点从配置的来源（常量、消息数据、元数据、属性或时序）获取值。若无法获取且未指定默认值，处理失败。
+2. 所有参数值转换为数值（double）格式。转换失败则处理失败。
+3. 节点根据所选运算，使用获取的参数值执行数学计算。
+4. 结果按配置精度格式化（四舍五入到指定小数位）。
+5. 结果保存到配置的目标：消息、元数据、属性和/或时序。
+6. 处理成功完成后，消息经 `Success` 连接转发。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The mathematical operation completed successfully and the result was saved.
+    - 数学运算成功完成且结果已保存。
 - `Failure`
-    - An error occurred during processing, such as:
-        - Missing required argument without a default value
-        - Failed to convert an argument value to a number
-        - Division by zero
-        - Invalid mathematical operation (e.g., square root of negative number for real numbers)
-        - Other unexpected error
+    - 处理过程中出错，例如：
+        - 缺失必需参数且无默认值
+        - 参数值无法转换为数字
+        - 除零
+        - 无效数学运算（如实数范围内负数的平方根）
+        - 其他意外错误
 
 ## Examples
 

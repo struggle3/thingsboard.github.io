@@ -1,45 +1,39 @@
-Extracts latitude and longitude from the incoming message and monitors whether the entity enters, leaves, or remains inside/outside a configured geofence (polygon or circle). The
-node tracks state transitions and duration thresholds to produce different event types.
+从传入消息中提取经纬度，并监控实体是否进入、离开或停留在配置的地理围栏（多边形或圆形）内/外。节点跟踪状态转换和时长阈值以产生不同事件类型。
 
-When an entity **enters** the geofence, a message is routed via `Entered`. When it **leaves**, the message goes via `Left`. Messages can also be routed via `Inside` or `Outside`
-based on the configured presence monitoring strategy and minimum duration requirements.
+当实体**进入**围栏时，消息经 `Entered` 路由；**离开**时经 `Left` 路由。根据配置的在场监控策略和最短停留时长，消息也可经 `Inside` 或 `Outside` 路由。
 
-## Configuration
+## 配置
 
-### Coordinate field names
+### 坐标字段名
 
-Specifies which message fields contain the GPS coordinates to monitor.
+指定消息中用于监控的 GPS 坐标字段。
 
-* **Latitude field name** — name of the key that contains the latitude of the point to check.
-* **Longitude field name** — name of the key that contains the longitude of the point to check.
+* **Latitude field name** — 包含待检查点纬度的 key 名。
+* **Longitude field name** — 包含待检查点经度的 key 名。
 
-Both fields are checked first in message data, then fall back to metadata if not found in data.
+两字段先在消息数据中查找，若未找到则回退到元数据。
 
 ---
 
-### Geofence configuration
+### 地理围栏配置
 
-The geofence can be either a **Polygon** or a **Circle**. Polygons are suitable for irregular boundaries like property lines or delivery zones, while circles are appropriate for
-simple radius-based monitoring around a point of interest.
+地理围栏可为**多边形**或**圆形**。多边形适用于不规则边界（如物业线、配送区），圆形适用于以兴趣点为中心、基于半径的简单监控。
 
-There are two ways to configure the geofence:
+有两种配置方式：
 
-**Static configuration** — Define the geofence directly in the node settings. This approach is suitable when boundaries remain constant or when all devices share the same
-monitoring area. The configuration applies to all messages processed by this node.
+**静态配置** — 在节点设置中直接定义地理围栏。适用于边界不变或所有设备共享同一监控区域。该配置对经本节点处理的所有消息生效。
 
-**Dynamic configuration** — Load the geofence definition from each message's metadata. This method is useful when different entities require different boundaries, or when zones
-change frequently.
+**动态配置** — 从每条消息的元数据加载地理围栏定义。适用于不同实体需要不同边界或区域频繁变更的场景。
 
-#### Configuration fields
+#### 配置字段
 
-* **Perimeter type** — specifies the geofence shape: *Polygon* or *Circle*.
+* **Perimeter type** — 指定围栏形状：*Polygon* 或 *Circle*。
 
-* **Fetch perimeter information from metadata** — determines the configuration method:
-    * **Disabled (static)**: The geofence is defined once in the node configuration. All messages use the same boundary.
-    * **Enabled (dynamic)**: Each message can have its own geofence defined in metadata. The node reads the boundary from the specified metadata key.
+* **Fetch perimeter information from metadata** — 决定配置方式：
+    * **Disabled (static)**：地理围栏在节点配置中定义一次，所有消息共用同一边界。
+    * **Enabled (dynamic)**：每条消息可在元数据中定义自己的地理围栏，节点从指定元数据 key 读取边界。
 
-* **Perimeter key name** — used only when dynamic configuration is enabled. Specifies which metadata key contains the geofence definition. The format of the value depends on the
-  perimeter type (see format examples below).
+* **Perimeter key name** — 仅动态配置启用时使用。指定包含地理围栏定义的元数据 key。值格式取决于围栏类型（见下方格式示例）。
 
 **For static Polygon configuration**:
 

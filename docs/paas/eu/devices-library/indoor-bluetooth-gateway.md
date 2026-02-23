@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect Indoor Bluetooth Gateway to ThingsBoard?"
+title: "如何将Indoor Bluetooth Gateway连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/indoor-bluetooth-gateway/"
 ---

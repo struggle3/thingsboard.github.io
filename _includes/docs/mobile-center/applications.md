@@ -1,53 +1,42 @@
-{% if docsPrefix == null %}
-{% assign MOBILE_APPLICATION_LINK = "[ThingsBoard Mobile Application](/docs/mobile/)" %}
-{% assign MOBILE_APPLICATION = "ThingsBoard Mobile Application" %}
-{% assign GETTING_STARTED = "[Getting started with the ThingsBoard Mobile Application](/docs/mobile/getting-started/)" %}
-{% endif %}
-{% if (docsPrefix == "pe/") or (docsPrefix == "paas/") or (docsPrefix == "paas/eu/") %}
-{% assign MOBILE_APPLICATION_LINK = "[ThingsBoard PE Mobile Application](/docs/pe/mobile/)" %}
-{% assign MOBILE_APPLICATION = "ThingsBoard PE Mobile Application" %}
-{% assign GETTING_STARTED = "[Getting started with the ThingsBoard PE Mobile Application](/docs/pe/mobile/getting-started/)" %}
-{% endif %}
-
 * TOC
 {:toc}
 
-The "**Applications**" tab in the "**Mobile center**" serves as a control center for your [mobile applications](/docs/{{docsPrefix}}mobile/){:target="_blank"}. It allows you to:
+"**移动中心**"中的"**应用**"选项卡用作[移动应用](/docs/{{docsPrefix}}mobile/){:target="_blank"}的控制中心。它允许您：
 
-- **Add new applications**: Create configurations for new mobile apps to integrate with ThingsBoard.
-- **Edit the existing applications**: Update application details, such as package names, statuses, versions, or store information.
-- **Delete applications**: Remove obsolete or unused application configurations from the ThingsBoard platform.
+- **添加新应用**：创建与ThingsBoard集成的新移动应用配置。
+- **编辑现有应用**：更新应用详情，如包名、状态、版本或应用商店信息。
+- **删除应用**：从ThingsBoard平台移除过时或未使用的应用配置。
 
-## Add application
+## 添加应用
 
-To add a new mobile application, following these steps: 
+要添加新的移动应用，请遵循以下步骤：
 
-- Go to the "**Applications**" tab on the "**Mobile center**" page, and click the "**+ Add application**" button in the upper-right corner of the window.
-- Enter the **application package** name.
-- Select the **platform type**: Android or iOS.
-- An **Application Secret** will be generated automatically. Remember it or replace with your own.
-- Set the **application status**:
-  - **Draft**: For applications that are still in development. You can add store information (e.g., Google Play Store or App Store link, and SHA256 certificate fingerprints or App ID) later after the application is created and published.
-  - **Published**: For applications that are ready to be launched and used by end users.
-  - **Deprecated**: For older applications that are no longer actively supported but still available.
-  - **Suspended**: For applications that are temporarily disabled or restricted from use.
-- (Optional) Specify minimum/latest app versions and release notes.
-- Add **store information**:
-  - **Android**: **Google Play Store link** and **SHA256 certificate fingerprints**.
-  - **iOS**: **App Store link** and **App ID**.
-- Click "**Add**" to save your application and complete the process.
+- 进入"**移动中心**"页面的"**应用**"选项卡，并点击窗口右上角的"**+ 添加应用**"按钮。
+- 输入**应用包**名称。
+- 选择**平台类型**：Android或iOS。
+- **应用密钥**将自动生成。请记住或替换为您自己的。
+- 设置**应用状态**：
+  - **草稿**：适用于仍在开发中的应用。您可以在应用创建并发布后添加应用商店信息（如Google Play Store或App Store链接、SHA256证书指纹或App ID）。
+  - **已发布**：适用于已准备好发布供最终用户使用的应用。
+  - **已弃用**：适用于不再积极支持但仍可用的旧版应用。
+  - **已暂停**：适用于暂时禁用或限制使用的应用。
+- （可选）指定最低/最新应用版本及发布说明。
+- 添加**应用商店信息**：
+  - **Android**：**Google Play Store链接**和**SHA256证书指纹**。
+  - **iOS**：**App Store链接**和**App ID**。
+- 点击"**添加**"保存应用并完成流程。
 
 {% include images-gallery.html imageCollection="add-application" %}
 
-## Edit application
+## 编辑应用
 
-You can edit almost all fields of the mobile application, except for the platform type.
-To edit a mobile application, open its details and enter the edit mode by clicking the large orange "pencil" button. Make the necessary changes, and then save them.
+您几乎可以编辑移动应用的所有字段，平台类型除外。
+要编辑移动应用，请打开其详情并点击大型橙色"铅笔"按钮进入编辑模式。进行必要的更改，然后保存。
 
 {% include images-gallery.html imageCollection="edit-application" %}
 
-## Delete application
+## 删除应用
 
-To delete the application, click the "trash" icon and then confirm deletion.
+要删除应用，请点击"垃圾桶"图标，然后确认删除。
 
 {% include images-gallery.html imageCollection="delete-application" %}

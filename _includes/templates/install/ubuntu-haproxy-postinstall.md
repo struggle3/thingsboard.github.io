@@ -1,3 +1,3 @@
-You may want to configure HTTPS access using HAProxy. 
-This is possible in case you are hosting ThingsBoard in the cloud and have a valid DNS name assigned to your instance.
-Please follow this [guide](/docs/user-guide/install/pe/add-haproxy-ubuntu) to install HAProxy and generate valid SSL certificate using Let's Encrypt.
+您可能希望使用 HAProxy 配置 HTTPS 访问。 
+若在云端托管 ThingsBoard 且已为实例分配有效 DNS 名称，则可实现。
+请参阅此[指南](/docs/user-guide/install/pe/add-haproxy-ubuntu)安装 HAProxy 并使用 Let's Encrypt 生成有效 SSL 证书。

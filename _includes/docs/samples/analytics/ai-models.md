@@ -4,78 +4,78 @@
 {% assign sinceVersion = "4.2" %}
 {% include templates/since.md %}
 
-<b>AI models</b> are machine learning or large language models that can process data, generate predictions, detect anomalies, or produce human-like responses.
-In the context of ThingsBoard, AI models are used to extend IoT data processing capabilities by enabling advanced analytics and automation.
+<b>AI 模型</b>是能够处理数据、生成预测、检测异常或产生类人响应的机器学习或大语言模型。
+在 ThingsBoard 中，AI 模型用于通过高级分析和自动化扩展 IoT 数据处理能力。
 
-By integrating external AI providers (such as OpenAI, Google Gemini, Azure OpenAI, Amazon Bedrock, etc.), you can:
-- <b>Predict</b> future values (e.g., energy consumption or equipment temperature).
-- <b>Detect anomalies</b> in real-time telemetry streams. (see [industrial equipment fault detection example](/docs/{{docsPrefix}}samples/analytics/ai-predictive-maintenance/){:target="_blank"}).
-- <b>Classify device states</b> (e.g., OK, Warning, Fault).
-- <b>Generate responses</b> or natural-language insights for operators and end-users.
+通过集成外部 AI 提供方（如 OpenAI、Google Gemini、Azure OpenAI、Amazon Bedrock 等），您可以：
+- <b>预测</b>未来值（如能耗或设备温度）。
+- <b>检测</b>实时遥测流中的异常。（参见[工业设备故障检测示例](/docs/{{docsPrefix}}samples/analytics/ai-predictive-maintenance/){:target="_blank"}）。
+- <b>分类</b>设备状态（如 OK、Warning、Fault）。
+- <b>生成</b>面向操作员和最终用户的响应或自然语言洞察。
 
-ThingsBoard allows you to configure and connect to different AI providers, manage model settings, and use the models inside the [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"} for automation and decision-making.
+ThingsBoard 允许您配置并连接不同的 AI 提供方、管理模型设置，并在 [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"} 中用于自动化与决策。
 
-## Adding AI models to ThingsBoard
+## 向 ThingsBoard 添加 AI 模型
 
-To add an AI model in ThingsBoard, follow these steps:
+在 ThingsBoard 中添加 AI 模型，请按以下步骤操作：
 
-- Go to the "<b>AI models</b>" tab of the "<b>Settings</b>" page.
-- Click the "<b>Add model</b>" button (located in the top-right corner).
-- This will open a form where you can configure AI model:
-  - <b>Name</b> - provide a meaningful name for the AI model.
-  - [Provider](#provider-configuration) — select the **AI provider**, specify the **base URL** (required only for [OpenAI](#openai) and [Ollama](#ollama)), and enter the provider&#39;s **authentication credentials**.
-  - [Model ID](#model-configuration) – choose which model to use (or deployment name, in the case of **Azure OpenAI**).
-  - [Advanced settings](#advanced-model-settings) – configure optional parameters (such as temperature, top P, max tokens) if supported by the provider.
-- Click "<b>Save</b>" to complete adding the new AI model.
+- 进入「<b>Settings</b>」页面的「<b>AI models</b>」标签页。
+- 点击「<b>Add model</b>」按钮（位于右上角）。
+- 将打开可用于配置 AI 模型表单：
+  - <b>Name</b> - 为 AI 模型提供有意义的名称。
+  - [Provider](#provider-configuration) — 选择 **AI provider**，指定 **base URL**（仅 [OpenAI](#openai) 和 [Ollama](#ollama) 需要），并输入 provider 的 **authentication credentials**。
+  - [Model ID](#model-configuration) – 选择要使用的模型（在 **Azure OpenAI** 中为 deployment name）。
+  - [Advanced settings](#advanced-model-settings) – 如 provider 支持，可配置可选参数（如 temperature、top P、max tokens）。
+- 点击「<b>Save</b>」完成添加。
 
-Once saved, the model becomes available for use in the [AI request node](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/nodes/external/ai-request/){:target="_blank"} of the [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"}.
+保存后，模型可在 [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"} 的 [AI request node](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/nodes/external/ai-request/){:target="_blank"} 中使用。
 
 {% include images-gallery.html imageCollection="adding-ai-model" %}
 
-## Provider configuration
+## Provider 配置
 
-In the <b>Provider</b> section, select the <b>AI provider</b>, specify the <b>base URL</b> (required only for [OpenAI](#openai) and [Ollama](#ollama)), and enter the <b>authentication credentials</b> (e.g., API key, key file, etc.).
+在 <b>Provider</b> 区域选择 <b>AI provider</b>，指定 <b>base URL</b>（仅 [OpenAI](#openai) 和 [Ollama](#ollama) 需要），并输入 <b>authentication credentials</b>（如 API key、key file 等）。
 
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
 {% capture difference %}
-We recommend using [Secrets storage](/docs/{{docsPrefix}}user-guide/secrets-storage/){:target="_blank"} to securely store your credentials.{% endcapture %}
+建议使用 [Secrets storage](/docs/{{docsPrefix}}user-guide/secrets-storage/){:target="_blank"} 安全存储凭证。{% endcapture %}
 {% include templates/info-banner.md content=difference %}
 {% endif %}
 
-<br><b><font size="4">Supported AI providers</font></b>
+<br><b><font size="4">支持的 AI providers</font></b>
 
-ThingsBoard currently supports integration with the following AI providers:
+ThingsBoard 目前支持与以下 AI providers 集成：
 
 {% include images-gallery.html imageCollection="ai-provider-configuration" %}
 
 #### OpenAI
 
-- <b>Base URL</b>: Specify the address for accessing the OpenAI API.
-- <b>Authentication</b>: API key.
-- You can obtain your API key from the [OpenAI dashboard](https://platform.openai.com/api-keys){:target="_blank"}.
+- <b>Base URL</b>：指定访问 OpenAI API 的地址。
+- <b>Authentication</b>：API key。
+- 可从 [OpenAI dashboard](https://platform.openai.com/api-keys){:target="_blank"} 获取 API key。
 
-##### Using OpenAI-compatible models
+##### 使用 OpenAI 兼容模型
 
 {% assign sinceVersion = "4.2.1" %}
 {% include templates/since.md %}
 
-When working with models compatible with the OpenAI API, an important parameter is the **base URL**, which defines the address used to send requests to the API.
+使用兼容 OpenAI API 的模型时，一个重要参数是 **base URL**，它定义了向 API 发送请求所使用的地址。
 
-<b><font size="3">Official Base URL</font></b>
+<b><font size="3">官方 Base URL</font></b>
 
-The standard OpenAI API endpoint, preconfigured in ThingsBoard. Use this to access models hosted by OpenAI.
+ThingsBoard 中预配置的标准 OpenAI API 端点。用于访问 OpenAI 托管的模型。
 
-<b><font size="3">Custom Base URL</font></b>
+<b><font size="3">自定义 Base URL</font></b>
 
-An alternative endpoint for providers that implement the OpenAI-compatible API protocol. 
-Use this when there is no dedicated integration for your provider and they offer an OpenAI-compatible API (e.g., DeepSeek, Qwen, self-hosted Ollama).
+实现 OpenAI 兼容 API 协议的 provider 的替代端点。 
+当没有针对该 provider 的专用集成且其提供 OpenAI 兼容 API 时使用（如 DeepSeek、Qwen、自托管 Ollama）。
 
 {% capture difference %}
-When using a custom base URL, the **API key becomes optional**. This enables working with models that do not require authentication, such as locally hosted models. However, most cloud model providers will still require a valid API key.
+使用自定义 base URL 时，**API key 为可选**。这样可支持无需认证的模型，如本地托管模型。但大多数云模型 provider 仍需要有效的 API key。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-<b>Example base URLs:</b>
+<b>Base URL 示例：</b>
 
 | Provider                 | Base URL                                                 |
 |--------------------------|----------------------------------------------------------|
@@ -84,7 +84,7 @@ When using a custom base URL, the **API key becomes optional**. This enables wor
 | Ollama (local)           | `http://localhost:11434/v1`                              |
 
 {% capture ollama_note %}
-[Ollama](#ollama) is also available as a separate integration with additional configuration options.
+[Ollama](#ollama) 也作为独立集成提供，具有更多配置选项。
 {% endcapture %}
 {% include templates/info-banner.md content=ollama_note %}
 
@@ -92,54 +92,54 @@ When using a custom base URL, the **API key becomes optional**. This enables wor
 
 #### Azure OpenAI
 
-- Authentication: <b>API</b> key and <b>endpoint</b>.
-- You need to create a <b>deployment</b> of the desired model in [Azure AI Studio](https://oai.azure.com/){:target="_blank"}.
-  - Obtain the <b>API</b> key and <b>endpoint URL</b> from the deployment page.
-  - Optionally, you may set the service version.
+- Authentication：<b>API</b> key 和 <b>endpoint</b>。
+- 需在 [Azure AI Studio](https://oai.azure.com/){:target="_blank"} 中创建目标模型的 <b>deployment</b>。
+  - 从 deployment 页面获取 <b>API</b> key 和 <b>endpoint URL</b>。
+  - 可选：可设置 service version。
 
 <hr>
 
 #### Google AI Gemini
 
-- Authentication: <b>API key</b>.
-- You can obtain the API key from the [Google AI Studio](https://aistudio.google.com/apikey){:target="_blank"}.
+- Authentication：<b>API key</b>。
+- 可从 [Google AI Studio](https://aistudio.google.com/apikey){:target="_blank"} 获取 API key。
 
 <hr>
 
 #### Google Vertex AI Gemini
 
-- Authentication: <b>Service account key file</b>.
-- Required parameters:
-  - Google Cloud Project ID. 
-  - Location of the target model (region).
-  - Service account key file with correct permission to be able to interact with Vertex AI.
+- Authentication：<b>Service account key file</b>。
+- 必需参数：
+  - Google Cloud Project ID。 
+  - 目标模型所在区域 (region)。
+  - 具有与 Vertex AI 交互权限的 Service account key file。
 
 <hr>
 
 #### Mistral AI
 
-- Authentication: <b>API key</b>. 
-- You can obtain your API key from the [Mistral AI portal](https://docs.mistral.ai/getting-started/quickstart/){:target="_blank"}.
+- Authentication：<b>API key</b>。 
+- 可从 [Mistral AI portal](https://docs.mistral.ai/getting-started/quickstart/){:target="_blank"} 获取 API key。
 
 <hr>
 
 #### Anthropic
 
-- Authentication: <b>API key</b>.
-- You can obtain your API key from the [Anthropic console](https://console.anthropic.com/settings/keys){:target="_blank"}.
+- Authentication：<b>API key</b>。
+- 可从 [Anthropic console](https://console.anthropic.com/settings/keys){:target="_blank"} 获取 API key。
 
 <hr>
 
 #### Amazon Bedrock
 
-- Authentication: <b>AWS IAM credentials</b>.
-- Required parameters:
-  - Access key ID. 
-  - Secret access key. 
-  - AWS region (where inference will run).
+- Authentication：<b>AWS IAM credentials</b>。
+- 必需参数：
+  - Access key ID。 
+  - Secret access key。 
+  - AWS region（推理运行所在区域）。
 
 {% capture bedrock_note %}
-Authentication with Bedrock API keys is not supported.
+不支持使用 Bedrock API keys 进行 Authentication。
 {% endcapture %}
 {% include templates/info-banner.md content=bedrock_note %}
 
@@ -147,9 +147,9 @@ Authentication with Bedrock API keys is not supported.
 
 #### GitHub Models
 
-- Authentication: <b>Personal access token</b>.
-- Token must have the `models:read` permission.
-- You can create a token following [this guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token){:target="_blank"}.
+- Authentication：<b>Personal access token</b>。
+- Token 需具有 `models:read` 权限。
+- 可按照[此指南](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token){:target="_blank"} 创建 token。
 
 <hr>
 
@@ -158,89 +158,89 @@ Authentication with Bedrock API keys is not supported.
 {% assign sinceVersion = "4.2.1" %}
 {% include templates/since.md %}
 
-[Ollama](https://ollama.com/){:target="_blank"} allows you to easily run open large language models, such as **Llama 3** and **Mistral**, directly on your own machine. This enables local experimentation, offline usage, and greater control over your data.
+[Ollama](https://ollama.com/){:target="_blank"} 让您可以在本机轻松运行 Llama 3、Mistral 等开源大语言模型。支持本地实验、离线使用以及对数据的更好掌控。
 
-To connect to your Ollama server, you need its **base URL** (e.g., *http://localhost:11434*) and an **authentication method**. The following options are supported:
+要连接 Ollama 服务，需要其 **base URL**（如 *http://localhost:11434*）和 **authentication method**。支持以下选项：
 
 ![image](/images/samples/analytics/ai-models/ollama-authentication-method.png)
 
 - <b>None</b>
-  - Default method for a standard Ollama installation. 
-  - No authentication is required, and no credentials are sent with requests.
+  - 标准 Ollama 安装的默认方式。 
+  - 无需 authentication，请求中不发送 credentials。
 
 - <b>Basic</b>
-  - Use when Ollama is secured behind a reverse proxy requiring **HTTP Basic Authentication**. 
-  - The provided username and password are combined into a `username:password` string, Base64-encoded, and sent in the header:
+  - 当 Ollama 位于需要 **HTTP Basic Authentication** 的 reverse proxy 之后时使用。 
+  - 提供的 username 和 password 组合为 `username:password` 字符串，进行 Base64 编码后以 header 形式发送：
   ```text
   Authorization: Basic <encoded_credentials>
   ```
 - <b>Token</b>
-  - Use when Ollama is secured behind a reverse proxy requiring **Bearer Token Authentication**. 
-  - The provided token is sent in the header:
+  - 当 Ollama 位于需要 **Bearer Token Authentication** 的 reverse proxy 之后时使用。 
+  - 提供的 token 在 header 中发送：
   ```text
   Authorization: Bearer <token>
   ```
 
 {% capture difference %}
-**Security Recommendation:** When using **Basic** or **Token** authentication, always connect via an `HTTPS` URL. Using plain `HTTP` will transmit credentials in clear text, which is insecure.
+**安全建议**：使用 **Basic** 或 **Token** authentication 时，始终通过 `HTTPS` URL 连接。使用明文 `HTTP` 会在网络上明文传输 credentials，不安全。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 <hr>
 
-## Model configuration
+## Model 配置
 
-After you&#39;ve selected and authenticated your AI provider, you need to specify which particular AI model to use (or deployment name in the case of [Azure OpenAI](#azure-openai)).
+选择并完成 AI provider 的 authentication 后，需指定要使用的具体 AI 模型（[Azure OpenAI](#azure-openai) 中为 deployment name）。
 
-For some providers (like OpenAI), ThingsBoard offers <b>autocomplete options</b> with popular models.
-You are <b>not limited</b> to this list – you can specify any model ID supported by the provider, including <b>model aliases</b> or <b>snapshots</b>.
-For <b>production usage</b>, we recommend using model snapshots to ensure predictable performance (Model aliases may be updated by the provider to point to a new snapshot, which can change response quality).
+对于部分 providers（如 OpenAI），ThingsBoard 提供 <b>autocomplete 选项</b>，包含常用模型。
+您<b>不限于</b>该列表 —— 可指定 provider 支持的任意 model ID，包括 <b>model aliases</b> 或 <b>snapshots</b>。
+<b>生产环境</b>建议使用 model snapshots 以确保可预测的表现（Model aliases 可能被 provider 更新并指向新 snapshot，从而影响响应质量）。
 
 {% include images-gallery.html imageCollection="ai-model-id" %}
 
-### Advanced model settings
+### 高级模型设置
 
-Some models support advanced configuration parameters (depending on the provider), such as:
-- <b>Temperature</b> – Adjusts the level of randomness in the model's output. Higher values increase randomness, while lower values decrease it.
-- <b>Top P</b> – Creates a pool of the most probable tokens for the model to choose from. Higher values create a larger and more diverse pool, while lower values create a smaller one.
-- <b>Top K</b> - Restricts the model's choices to a fixed set of the "K" most likely tokens.
-- <b>Presence penalty</b> - Applies a fixed penalty to the likelihood of a token if it has already appeared in the text.
-- <b>Frequency penalty</b> - Applies a penalty to a token's likelihood that increases based on its frequency in the text.
-- <b>Maximum output tokens</b> – Sets the maximum number of tokens that the model can generate in a single response.
-- <b>Context length</b> – Defines the size of the context window in tokens. This value sets the total memory limit for the model, including both the user's input and the generated response.
+部分模型支持高级配置参数（取决于 provider），例如：
+- <b>Temperature</b> – 调整模型输出随机度。值越高越随机，越低越确定。
+- <b>Top P</b> – 为模型创建最可能 token 池。值越大池越大、越多样，越小越聚焦。
+- <b>Top K</b> - 将模型选择限制在「K」个最可能 token 的固定集合内。
+- <b>Presence penalty</b> - 对已出现过的 token 施加固定惩罚。
+- <b>Frequency penalty</b> - 根据 token 在文本中的出现频率施加递增惩罚。
+- <b>Maximum output tokens</b> – 设置模型单次响应可生成的最大 token 数。
+- <b>Context length</b> – 以 token 为单位定义 context window 大小。此值设置模型的总内存限制，包括用户输入和生成响应。
 
 {% capture advanced_settings_tip %}
-If advanced settings cause errors, try removing their values. In this case, defaults will be applied. This often resolves incompatibility issues for certain models.
+若 advanced settings 导致错误，可尝试移除其值。此时将应用默认值。这通常可解决与某些模型的兼容性问题。
 {% endcapture %}
 {% include templates/info-banner.md content=advanced_settings_tip %}
 
 {% include images-gallery.html imageCollection="advanced-model-settings" %}
 
-## Connectivity test
+## Connectivity 测试
 
-Click a <b>Check connectivity</b> button to validate your configuration.
-A test request is sent to the provider API using the supplied credentials and model settings.
+点击 <b>Check connectivity</b> 按钮验证配置。
+将使用提供的 credentials 和 model 设置向 provider API 发送测试请求。
 
-If the response is successful, you will see a ✅ <b>green checkmark</b>.
+若响应成功，将显示 ✅ <b>绿色勾选</b>。
 
 {% include images-gallery.html imageCollection="check-connectivity-1" %}
 
 {% capture best_practice %}
-Always use the connectivity check after configuring a provider to ensure smooth runtime execution.
+配置 provider 后始终使用 connectivity 检查，以确保运行时正常执行。
 {% endcapture %}
 {% include templates/info-banner.md content=best_practice %}
 
-If an error occurs (e.g., invalid API key, non-existing model), an error message with details will be displayed ❌.
+若发生错误（如无效 API key、不存在的 model），将显示带详情的错误消息 ❌。
 
 {% include images-gallery.html imageCollection="check-connectivity-2" %}
 
-This feature ensures your configuration is valid and prevents runtime errors when models are used in production.
+此功能可确保配置有效，并在生产环境中使用模型时避免运行时错误。
 
 {% capture test_cost_note %}
-Even though the test request is trivial (e.g., "What is the capital of X country?"), providers usually charge for it. However, the cost is minimal.
+尽管测试请求较简单（如「X 国首都是哪里？」），provider 通常仍会收费。但费用很低。
 {% endcapture %}
 {% include templates/info-banner.md content=test_cost_note %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/multi-project-guides-banner.md %}

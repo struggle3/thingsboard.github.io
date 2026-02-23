@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: deduplication
-description: Deduplicates messages from the same originator within a configurable time interval using strategies to return either the first, last, or all messages as a combined result.
+description: 在可配置的时间间隔内对同一 originator 的消息去重，采用策略返回第一条、最后一条或合并后的所有消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

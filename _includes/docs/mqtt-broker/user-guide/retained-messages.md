@@ -1,120 +1,119 @@
 * TOC
 {:toc}
 
-Retained Messages is an MQTT feature that allows storing the "last known good" message for a 
-particular topic on the broker and delivering the message to a client whenever the client subscribes to a matching topic.
+保留消息是 MQTT 的一种特性，允许 broker 存储特定主题的「最后已知有效」消息，
+并在客户端订阅匹配主题时向其投递该消息。
 
-There are a few important notes to mention regarding retained messages:
-* Only **one message** can be stored on the broker **per topic**.
-* The **next message** published on the same topic will **replace the previous one**.
-* The **message with an empty payload** published on the same topic will **clear** it entirely from that topic.
-* The subscribers for the topic will receive **only the last message** if available.
+关于保留消息需注意以下几点：
+* broker 上**每个主题**仅可存储**一条消息**。
+* 同主题上**下一条发布的消息**将**替换前一条**。
+* 同主题上发布的**空负载消息**将**清除**该主题的全部保留消息。
+* 该主题的订阅者将收到**仅最后一条**消息（如有）。
 
-## Retained Messages usage
+## 保留消息的用法
 
-When a client subscribes to a topic, it typically only receives messages published after it has subscribed. 
-However, with retained messages, the broker stores the last message sent to that topic, ensuring that any new subscriber immediately receives the latest retained message, 
-even if it was published before the subscription was made.
+客户端订阅主题时，通常只会收到订阅之后发布的消息。
+但有了保留消息后，broker 会保存该主题上的最后一条消息，使任何新订阅者都能立即收到最新保留消息，
+即使它是在订阅建立之前发布的。
 
-When to use Retained Messages:
+何时使用保留消息：
 
-* **Initial state information**: if your subscribers need to know the last known value of a topic upon connection, retained messages are ideal. 
-For instance, in a temperature monitoring system, new subscribers will receive the last reported temperature right away, without waiting for the next update.
-* **Critical configuration or status updates**: for topics that carry important configuration data or device status updates, 
-retained messages ensure that even newly connected devices or clients receive the current status immediately. 
-For example, a retained message can be used to inform clients of the system’s operational state, such as "Device Online" or "Service in Maintenance."
-* **Last Will and Testament (LWT) notifications**: retained messages work well in conjunction with LWT messages. 
-For instance, you can use a retained message to announce the current availability of a device, and if the device disconnects unexpectedly, the LWT can update this status accordingly.
-* **Persistent commands or instructions**: if you publish control commands or instructions that need to be retained until a client receives them (e.g., turning on a device), 
-using retained messages ensures that the command persists until a subscriber is ready to process it.
+* **初始状态信息**：若订阅者连接时需要知道主题的最后已知值，保留消息很合适。
+例如在温度监控系统中，新订阅者会立即收到最近一次上报的温度，无需等待下次更新。
+* **关键配置或状态更新**：对于承载重要配置数据或设备状态更新的主题，
+保留消息可确保新连接的设备或客户端也能立即获得当前状态。 
+例如，可用保留消息通知客户端系统’s 运行状态，如「Device Online」或「Service in Maintenance」。
+* **Last Will and Testament(LWT)通知**：保留消息可与 LWT 消息配合使用。
+例如，可用保留消息公告设备当前可用性，若设备意外断开，LWT 可相应更新该状态。
+* **持久化命令或指令**：若发布的控制命令或指令需保留至某客户端收到为止（如开设备），
+使用保留消息可确保该命令一直保留到有订阅者准备好处理它。
 
-When to avoid Retained Messages:
+何时避免使用保留消息：
 
-* **Frequent real-time updates**: if your topic provides frequent real-time data (like sensor readings that are updated every second), 
-using retained messages may not add significant value and could create unnecessary overhead, as the latest data will naturally be sent to subscribers.
-* **Sensitive or temporary data**: if the messages contain temporary or sensitive information that shouldn’t persist for new subscribers 
-(e.g., one-time notifications or alerts), retained messages should be avoided.
+* **频繁实时更新**：若主题提供频繁的实时数据（如每秒更新的传感器读数），
+使用保留消息可能意义不大且产生不必要开销，因为最新数据会自然发给订阅者。
+* **敏感或临时数据**：若消息包含不应为新订阅者持久保存的临时或敏感信息（如一次性通知或告警），应避免使用保留消息。
 
-By leveraging retained messages effectively, you can ensure that new subscribers always receive the latest critical information without waiting, 
-improving the overall responsiveness and user experience in your MQTT setup.
+有效利用保留消息，可让新订阅者无需等待即可获得最新关键信息，
+提升 MQTT 配置的整体响应性和用户体验。
 
-## Publish Retained Message
+## 发布保留消息
 
-In MQTT, the retained message refers to a regular publish message with the **retained flag** set to _true_.
-Let's consider a simple command using `mosquitto_pub` to publish a retained message. 
+在 MQTT 中，保留消息指将 **retained flag** 设为 _true_ 的普通发布消息。
+以下示例使用 `mosquitto_pub` 发布一条保留消息。 
 
 ```shell
 mosquitto_pub -d -h "YOUR_MQTT_BROKER_HOST" -p 1883 -D PUBLISH user-property hello world -q 1 -t demo/topic -V mqttv5 -m "Hello world" -r
 ```
 {: .copy-code}
 
-**Note:** do not forget to put your hostname instead of `YOUR_MQTT_BROKER_HOST`. 
-Make sure authentications are disabled. Otherwise, adjust the commands in this guide appropriately.
+**注意**：请将 `YOUR_MQTT_BROKER_HOST` 替换为您的 broker 主机名。
+确保已禁用认证，否则请相应调整本指南中的命令。
 
-Utilize the following command to connect to a locally deployed TBMQ using default credentials:
+使用以下命令以默认凭证连接本地部署的 TBMQ：
 
 ```bash
 mosquitto_pub -d -h "localhost" -p 1883 -D PUBLISH user-property hello world -q 1 -t demo/topic -V mqttv5 -m "Hello world" -r -u tbmq_websockets_username
 ```
 {: .copy-code}
 
-## Payload, User Properties
+## 负载与用户属性
 
-To access and view the payload and user properties of the last message for a specific topic on the WEB UI Retained Messages page, please follow these steps:
+要在 Web UI 的保留消息页查看某主题最后一条消息的负载和用户属性，请按以下步骤操作：
 
-1. Open page Retained Messages.
-2. Optionally, use the filter to find the retained message by topic, payload, or QoS.
-3. To view the payload of a retained message, click on the icon `{}`. 
-4. To view the User Properties of retained message click on the icon `[]`. Please note that if the button is disabled, the retained message does not have any user properties.
+1. 打开「保留消息」页面。
+2. 可选：使用筛选按主题、负载或 QoS 查找保留消息。
+3. 查看保留消息负载，点击图标 `{}`。
+4. 查看保留消息的用户属性，点击图标 `[]`。若按钮禁用，表示该保留消息无用户属性。
 
 {% include images-gallery.html imageCollection="details-retained-messages" %}
 
-## Deleting Retained Message
+## 删除保留消息
 
-Deleting a retained message is a straightforward process. To remove a previous retained message, you can send a new retained message with a `zero-byte payload` to the 
-specific topic associated with the retained message you want to delete. Subsequently, any new subscribers to that topic will no longer receive the previously retained message.
+删除保留消息很简单。要移除既有保留消息，可向要删除的保留消息对应主题发送一条带 `zero-byte payload` 的新保留消息。
+之后，该主题的任何新订阅者都不会再收到之前的保留消息。
 
-To delete a retained message for the topic `demo/topic`, you can use the following command, specifying the `-n` flag with a zero-byte payload:
+要删除主题 `demo/topic` 的保留消息，可使用以下命令，通过 `-n` 参数指定零字节负载：
 
 ```shell
 mosquitto_pub -d -h "YOUR_MQTT_BROKER_HOST" -p 1883 -q 1 -t demo/topic -n -r
 ```
 {: .copy-code}
 
-For local deployment using default credentials:
+使用默认凭证的本地部署：
 ```shell
 mosquitto_pub -d -h "localhost" -p 1883 -q 1 -t demo/topic -n -r -u tbmq_websockets_username
 ```
 {: .copy-code}
 
-To delete retained messages using the WEB UI of TBMQ, you have two options based on the number of messages you want to delete:
-1. **Deleting a Single Retained Message.** Click on the icon 'Delete retained message' and confirm action.
-2. **Deleting Multiple Retained Messages:** 
-  * Select messages you want to delete.
-  * Click on the 'Delete retained messages' button in the top right corner and confirm the action when prompted.
+在 TBMQ 的 Web UI 中删除保留消息有两种方式，取决于要删除的消息数量：
+1. **删除单条保留消息**：点击「Delete retained message」图标并确认。
+2. **删除多条保留消息**：
+  * 勾选要删除的消息。
+  * 点击右上角「Delete retained messages」按钮，出现提示时确认。
 
 {% include images-gallery.html imageCollection="delete-retained-messages" %}
 
-## Clearing Empty Retained Message Nodes
+## 清理空保留消息节点
 
-Retained messages in the broker are stored in the memory using the [Trie](https://en.wikipedia.org/wiki/Trie) data structure, 
-which is known for its efficient searching capabilities.
-The Trie (also called a prefix tree) is a tree-based data structure that allows for quick retrieval of information based on a key or a sequence of characters.
+broker 中的保留消息使用 [Trie](https://en.wikipedia.org/wiki/Trie) 数据结构存储在内存中，
+该结构以高效检索著称。
+Trie（又称前缀树）是一种基于树的数据结构，可根据键或字符序列快速检索信息。
 
-The Trie organizes the topic names in a hierarchical manner, where each node represents a topic level from the topic name.
-By using the Trie data structure, the broker can quickly locate and retrieve retained messages based on the topic filter provided by a subscribing client. 
-This ensures that clients receive the retained messages they are interested in without significant delays, contributing to improved performance and responsiveness of the broker.
+Trie 以层级方式组织主题名，每个节点代表主题名中的一个主题层级。
+通过 Trie 数据结构，broker 可根据订阅客户端提供的主题过滤器快速定位和获取保留消息。
+确保客户端在无明显延迟下收到感兴趣的保留消息，有助于提升 broker 的性能和响应速度。
 
-When a retained message is deleted, the broker removes the message payload from its memory and marks the node as empty.
-Over time, if many retained messages are deleted, there may be many empty nodes left in the broker's memory.
-These empty nodes can cause inefficiencies and waste memory resources.
+删除保留消息时，broker 从内存中移除消息负载并将对应节点标记为空。
+若大量保留消息被删除，broker 内存中可能留下许多空节点。
+这些空节点会降低效率并浪费内存资源。
 
-Clearing empty retained message nodes frees up memory resources and can improve the performance of the broker, 
-as it can process MQTT messages more quickly when there are fewer empty nodes to search through.
+清理空保留消息节点可释放内存资源并提升 broker 性能，
+因为空节点减少后 broker 能更快处理 MQTT 消息。
 
-To Clear empty retained message nodes click on the button 'Clear empty retained messages nodes' in the top right corner and confirm action.
+要清理空保留消息节点，请点击右上角「Clear empty retained messages nodes」按钮并确认。
 
 {% include images-gallery.html imageCollection="clear-empty-retained-messages" %}
 
-Additionally, the broker is configured to clear empty retained message nodes by a scheduler. This is controlled by the following environment variables:
+此外，broker 可通过调度器定期清理空保留消息节点。由以下环境变量控制：
 `MQTT_RETAIN_MSG_TRIE_CLEAR_NODES_CRON` and `MQTT_RETAIN_MSG_TRIE_CLEAR_NODES_ZONE`.

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Get Support
-description: TBMQ help links
+title: 获取支持
+description: TBMQ 帮助链接
 
 ---
 

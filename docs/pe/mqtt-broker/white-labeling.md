@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: White Labeling
-description: TBMQ PE White labeling
+title: 白标
+description: TBMQ PE 白标
 redirect_from: "/docs/mqtt-broker/white-labeling/"
 
 white-labeling-default:

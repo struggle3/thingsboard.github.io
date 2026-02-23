@@ -1,4 +1,4 @@
-Execute the following command to delete the Minikube cluster:
+执行以下命令删除 Minikube 集群：
 
 ```bash
 minikube delete

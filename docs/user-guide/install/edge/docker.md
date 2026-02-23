@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Installing ThingsBoard Edge using Docker (Linux or Mac OS)
-description: Installing ThingsBoard Edge using Docker (Linux or Mac OS)
+title: 使用 Docker 安装 ThingsBoard Edge（Linux 或 Mac OS）
+description: 使用 Docker 在 Linux 或 Mac OS 上安装 ThingsBoard Edge
 
 ---
 
@@ -12,11 +12,11 @@ description: Installing ThingsBoard Edge using Docker (Linux or Mac OS)
 
 {% assign docsPrefix = "edge/" %}
 
-This guide provides step-by-step instructions for running **ThingsBoard Edge** on **Linux or Mac OS** using **Docker**.
+本指南介绍在 **Linux 或 Mac OS** 上使用 **Docker** 运行 **ThingsBoard Edge** 的步骤。
 
 {% include templates/edge/install/prerequisites.md %}
 
-### Docker installation
+### Docker 安装
 
 {% capture local-deployment %}
 **ThingsBoard** supports **Docker Compose V2** (Docker Desktop or Compose plugin) starting from **3.4.2 release**.
@@ -30,27 +30,27 @@ We strongly recommend **upgrading to and using Docker Compose V2**, as Docker no
 
 {% include templates/install/docker-install-note.md %}
 
-## Guided Installation Using ThingsBoard Server Pre-configured Instructions
+## 使用 ThingsBoard Server 预配置指令进行引导安装
 
 {% include templates/edge/install/tb-server-pre-configured-install-instructions.md %}
 
 {% include templates/edge/install/manual-install-instructions-intro.md %}
 
-### Step 1. Running ThingsBoard Edge
+### 步骤 1：运行 ThingsBoard Edge
 
 {% include templates/edge/install/docker-images-location.md %}
 
 {% include templates/edge/install/copy-edge-credentials.md %}
 
-### Step 2. Choose Queue and/or Database Services
+### 步骤 2：选择 Queue 和/或 Database 服务
 
-**ThingsBoard Edge** is able to use different messaging systems/brokers for storing the messages and communication between ThingsBoard services. How to choose the right queue implementation?
+**ThingsBoard Edge** 可使用多种消息系统/代理来存储消息并实现 ThingsBoard 服务间通信。如何选择合适的 queue 实现？
 
-* **In Memory** queue implementation is built-in and default. It is useful for development (PoC) environments and is not suitable for production deployments or any sort of cluster deployments.
+* **In Memory** 为内置默认 queue 实现，适用于开发（PoC）环境，不适合生产部署或集群部署。
 
-* **Kafka** is recommended for production deployments. This queue is used on most of the ThingsBoard production environments now.
+* **Kafka** 适用于生产部署，当前大多数 ThingsBoard 生产环境均使用该 queue。
 
-* **Hybrid** implementation combines PostgreSQL and Cassandra databases with Kafka queue service. It is recommended if you plan to manage 1M+ devices in production or handle high data ingestion rate (more than 5000 msg/sec).
+* **Hybrid** 实现将 PostgreSQL 和 Cassandra 与 Kafka queue 服务相结合，若计划在生产中管理 100 万以上设备或需要高数据摄入速率（超过 5000 msg/sec），建议采用。
 
 Create a docker compose file for the **ThingsBoard Edge** service:
 
@@ -61,20 +61,20 @@ Hybrid <small>(PostgreSQL+Cassandra with Kafka queue service)</small>%,%hybrid%,
 
 {% include content-toggle.liquid content-toggle-id="ubuntuThingsboardQueue" toggle-spec=contenttogglespecqueue %}
 
-### Step 3. Open ThingsBoard Edge UI
+### 步骤 3：打开 ThingsBoard Edge UI
 
 {% include templates/edge/install/open-edge-ui.md %}
 
-### Step 4. Detaching, Stop and Start Commands
+### 步骤 4：分离、停止与启动命令
 
 {% assign serviceFullName = "ThingsBoard Edge" %}
 {% include templates/edge/detaching-stop-start-edge.md %}
 
-## Troubleshooting
+## 故障排除
 
 {% include templates/edge/install/docker-troubleshooting.md %}
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/install/next-steps.md %}
 

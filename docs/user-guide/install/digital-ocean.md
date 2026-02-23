@@ -1,11 +1,11 @@
 ---
 layout: docwithnav
-title: Installing ThingsBoard on DigitalOcean 
-description: Installing ThingsBoard on DigitalOcean
+title: 在 DigitalOcean 上安装 ThingsBoard
+description: 在 DigitalOcean 上安装 ThingsBoard
 
 ---
 
-This guide describes how to install ThingsBoard Community Edition on DigitalOcean. 
+This guide describes how to install ThingsBoard社区版on DigitalOcean. 
 
 * TOC
 {:toc}

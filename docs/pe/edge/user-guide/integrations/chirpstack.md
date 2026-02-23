@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: ChirpStack Integration
-description: The ChirpStack Integration Guide
+title: ChirpStack 集成
+description: ChirpStack 集成指南
 
 basic-settings:
     0:

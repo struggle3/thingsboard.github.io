@@ -1,8 +1,8 @@
-Create a regional cluster distributed across 3 zones with nodes of your preferred machine type.
-The example below provisions one **e2-standard-4** node per zone **(three nodes total)**, but you can modify the `--machine-type` and `--num-nodes` to suit your workload requirements.
-For a full list of available machine types and their specifications, refer to the [GCP machine types documentation](https://cloud.google.com/compute/docs/machine-resource).
+在 3 个可用区内创建分布式的区域集群，使用您偏好的机器类型。
+以下示例在每个可用区预置 **1** 个 **e2-standard-4** 节点（**共三个节点**），但您可以根据工作负载需求修改 `--machine-type` 和 `--num-nodes`。
+有关可用机器类型及其规格的完整列表，请参阅 [GCP 机器类型文档](https://cloud.google.com/compute/docs/machine-resource)。
 
-Execute the following command (recommended):
+执行以下命令（推荐）：
 
 ```bash
 gcloud container clusters create $TB_CLUSTER_NAME \
@@ -17,4 +17,4 @@ gcloud container clusters create $TB_CLUSTER_NAME \
 ```
 {: .copy-code}
 
-Alternatively, you may use [this](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-regional-cluster) guide for custom cluster setup.
+或者，您可以使用[此](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-regional-cluster)指南进行自定义集群设置。

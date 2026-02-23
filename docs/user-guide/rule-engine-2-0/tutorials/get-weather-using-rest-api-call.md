@@ -1,10 +1,10 @@
 ---
 layout: docwithnav
-title: Weather reading using REST API calls
-description: REST API weather guide
+title: 使用 REST API 调用获取天气
+description: REST API 天气指南
 ---
 
-This tutorial will show how to get weather data using REST API.
+本教程演示如何使用 REST API 获取天气数据。
 
 * TOC
 {:toc}

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: device profile
-description: Evaluates incoming messages against alarm rules defined in the device profile of the message originator and creates, updates, or clears alarms based on the evaluation results.
+description: 根据消息 originator 的 device profile 中定义的 alarm 规则评估入站消息，并根据评估结果创建、更新或清除 alarm。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

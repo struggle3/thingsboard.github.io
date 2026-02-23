@@ -1,28 +1,28 @@
-To install **PostgreSQL**, follow the instructions below.
+要安装 **PostgreSQL**，请按以下说明操作。
 
-Update your system:
+更新系统：
 ```bash
 sudo dnf update
 ```
 {: .copy-code}
 
-Install the repository RPM:
+安装仓库 RPM：
 
-* **For CentOS/RHEL 8:**
+* **CentOS/RHEL 8：**
 
 ```bash
 sudo dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 ```
 {: .copy-code}
 
-* **For CentOS/RHEL 9:**
+* **CentOS/RHEL 9：**
 
 ```bash
 sudo dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 ```
 {: .copy-code}
 
-Install packages and initialize PostgreSQL. The PostgreSQL service will automatically start every time the system boots up.
+安装软件包并初始化 PostgreSQL。PostgreSQL 服务将在系统启动时自动运行。
 
 ```bash
 sudo dnf -qy module disable postgresql && \

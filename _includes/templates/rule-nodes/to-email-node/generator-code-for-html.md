@@ -1,4 +1,4 @@
-Example of generator JS code
+generator JS 代码示例
 ```js
 var metadata = { userEmail: 'info@thingsboard.org', isHtml: true };
 var msgType = "POST_TELEMETRY_REQUEST";

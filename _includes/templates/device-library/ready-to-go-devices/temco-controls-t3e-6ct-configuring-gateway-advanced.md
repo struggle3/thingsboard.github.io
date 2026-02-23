@@ -1,44 +1,44 @@
 {% assign creatingGatewayCE = '
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-1-ce.png,
-        title: Open the ThingsBoard in your browser and log in. Go to "**Entities**" > "**Gateways**" tab in the sidebar and click on "**+**" button. Fill in "**Name**" and "**Device profile**" fields and click "**Create**" button;
+        title: 在浏览器中打开 ThingsBoard 并登录。在侧边栏进入「**实体**」>「**网关**」选项卡，点击「**+**」按钮。填写「**名称**」和「**设备档案**」字段并点击「**创建**」按钮；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-2-ce.png,
-        title: Start gateway using launch command; 
+        title: 使用启动命令启动网关； 
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-3-ce.png,
-        title: The gateway has been created. Click on the "**Connectors configuration**" button in the sidebar menu;
+        title: 网关已创建。点击侧边栏菜单中的「**连接器配置**」按钮；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-4-ce.png,
-        title: Click on "**+**" button to add a new connector;
+        title: 点击「**+**」按钮添加新连接器；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/advanced-temco-tstat10-gateway-configuring-1-ce.png,
-        title: Select "**BACnet**" connector type, fill in the "**Name**" field, disable filling configuration with default values and click "**Add**" button;
+        title: 选择「**BACnet**」连接器类型，填写「**名称**」字段，禁用默认值填充配置，点击「**添加**」按钮；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-t3e-6ct/advanced-temco-t3e-6ct-gateway-configuring-2-ce.png,
-        title: In the created connector, go to "**Advanced**" section and paste the JSON configuration below. Replace **host** and **port** configuration parameter values with the device&#39;s host and port. Also, replace "**DEVICE_HOST**" in "**altResponsesAddresses**" with device host. Click on "Save" button.
+        title: 在已创建的连接器中，进入「**高级**」部分并粘贴下方的 JSON 配置。将 **host** 和 **port** 配置参数值替换为设备的 host 和 port。同时将「**altResponsesAddresses**」中的「**DEVICE_HOST**」替换为设备 host。点击「保存」按钮。
 '
 %}
 
 {% assign creatingGatewayPE = '
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-1-pe.png,
-        title: Open the ThingsBoard in your browser and log in. Go to "**Entities**" > "**Gateways**" tab in the sidebar and click on "**+**" button. Fill in "**Name**" and "**Device profile**" fields and click "**Create**" button;
+        title: 在浏览器中打开 ThingsBoard 并登录。在侧边栏进入「**实体**」>「**网关**」选项卡，点击「**+**」按钮。填写「**名称**」和「**设备档案**」字段并点击「**创建**」按钮；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-2-pe.png,
-        title: Start gateway using launch command; 
+        title: 使用启动命令启动网关； 
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-3-pe.png,
-        title: The gateway has been created. Click on the "**Connectors configuration**" button in the sidebar menu;
+        title: 网关已创建。点击侧边栏菜单中的「**连接器配置**」按钮；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/temco-tstat10-gateway-configuring-4-pe.png,
-        title: Click on "**+**" button to add a new connector;
+        title: 点击「**+**」按钮添加新连接器；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-tstat10/advanced-temco-tstat10-gateway-configuring-1-pe.png,
-        title: Select "**BACnet**" connector type, fill in the "**Name**" field, disable filling configuration with default values and click "**Add**" button;
+        title: 选择「**BACnet**」连接器类型，填写「**名称**」字段，禁用默认值填充配置，点击「**添加**」按钮；
     ===
         image: /images/devices-library/ready-to-go-devices/temco-t3e-6ct/advanced-temco-t3e-6ct-gateway-configuring-2-pe.png,
-        title: In the created connector, go to "**Advanced**" section and paste the JSON configuration below. Replace **host** and **port** configuration parameter values with the device&#39;s host and port. Also, replace "**DEVICE_HOST**" in "**altResponsesAddresses**" with device host. Click on "Save" button.
+        title: 在已创建的连接器中，进入「**高级**」部分并粘贴下方的 JSON 配置。将 **host** 和 **port** 配置参数值替换为设备的 host 和 port。同时将「**altResponsesAddresses**」中的「**DEVICE_HOST**」替换为设备 host。点击「保存」按钮。
 '
 %}
 

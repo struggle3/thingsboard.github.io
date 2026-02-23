@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - ashvayka
-title: Installing ThingsBoard Trendz Analytics on Windows
-description: Installing ThingsBoard Trendz Analytics on Windows
+title: 在 Windows 上安装 ThingsBoard Trendz Analytics
+description: 在 Windows 上安装 ThingsBoard Trendz Analytics
 
 trendz-settings:
   0:
@@ -37,16 +37,16 @@ trendz-sync:
 * TOC
 {:toc}
 
-This guide explains how to install **Trendz Analytics** on **Windows 10 or 11** (32-bit/64-bit).
+本指南说明如何在**Windows 10或11**（32位/64位）上安装**Trendz Analytics**。
 
-**Important note before proceeding with Windows installation**
+**Windows安装前重要说明**
 
-Certain Trendz Analytics features like **predictions, metric explorations, and Python calculation fields** require a Python executor.
+Trendz Analytics的部分功能（如**predictions**、**metric explorations**和**Python calculation fields**）依赖Python executor。
 
-The python executor runs **only via Docker**. Even on Windows, Docker is essential to fully utilize all Trendz features.  
-We recommend following the [Docker (Windows) installation guide](/docs/trendz/install/docker-windows) and using the Docker installation instead of Windows.
+Python executor**仅能通过Docker运行**。即使在Windows上，也要使用Docker才能完整使用Trendz。
+建议遵循[Docker (Windows) 安装指南](/docs/trendz/install/docker-windows)，采用Docker安装而非Windows。
 
-Proceed here **only** if you have a compelling reason to use a combined Windows + Docker setup.
+**仅**在有充分理由使用Windows + Docker组合方案时再继续阅读本文。
 
 ## Prerequisites
 
@@ -67,44 +67,43 @@ Proceed here **only** if you have a compelling reason to use a combined Windows 
 
 ### Step 2. Trendz Analytics service installation
 
-Download and extract the package.
+下载并解压安装包。
 
 ```bash
 https://dist.thingsboard.io/trendz-windows-{{ site.release.trendz_ver }}.zip
 ```
 {: .copy-code}
 
-**Note:** We assume you have extracted Trendz package to default location: *C:\Program Files (x86)\trendz*
+**注意：** 假设Trendz解压到默认路径：*C:\Program Files (x86)\trendz*
 
 ### Step 3. Configure Trendz database
 
-Trendz uses PostgreSQL as a database. You can install PostgreSQL on the same serverfor Trendz or use managed PostgreSQL 
-service from your cloud vendor.
+Trendz使用PostgreSQL作为数据库。可在同一服务器为Trendz安装PostgreSQL，或使用云商的托管PostgreSQL服务。
 
 * **PostgreSQL Installation**
 
-Download the installation file (PostgreSQL 12.17 or newer releases) [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows) and follow the installation instructions.
+在[此处](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)下载安装文件（PostgreSQL 12.17或更新版本）并按照说明安装。
 
-During PostgreSQL installation, you will be prompted for superuser (postgres) password.
-Don't forget this password. It will be used later. For simplicity, we will substitute it with "postgres".
+安装PostgreSQL时会提示设置superuser（postgres）密码。
+请记住该密码，后续将使用。为简化说明，下例以"postgres"代替。
 
 * **Create Database for Trendz**
 
-Once installed, launch the "pgAdmin" software and login as superuser (postgres). 
-Open your server and create database "trendz" with owner "postgres".
+安装完成后，启动"pgAdmin"并以superuser（postgres）登录。
+打开服务器并创建owner为"postgres"的"trendz"数据库。
 
 * **Configure database connection for Trendz**
 
-Open the Notepad or other editor as administrator user (right click on the app icon and select "Run as administrator").  
-Open the following file for editing (select "All Files" instead of "Text Documents" in file choosing dialog, the encoding is UTF-8):
+以管理员身份打开记事本或其他编辑器（右键应用图标选择"以管理员身份运行"）。
+打开并编辑以下文件（在文件选择对话框中选"所有文件"而非"文本文档"，编码为UTF-8）：
 
 ```text 
 C:\Program Files (x86)\trendz\conf\trendz.yml
 ``` 
 {: .copy-code}
 
-and locate "datasource" block. Replace SPRING_DATASOURCE_URL, SPRING_DATASOURCE_USERNAME and SPRING_DATASOURCE_PASSWORD
-properties with valid values. Don't forget to replace "postgres" with your real postgres user password:
+定位到"datasource"块。将SPRING_DATASOURCE_URL、SPRING_DATASOURCE_USERNAME和SPRING_DATASOURCE_PASSWORD
+替换为有效值。勿忘将"postgres"替换为真实的postgres密码：
 
 ```yml
 datasource:
@@ -119,13 +118,13 @@ datasource:
 
 ### Step 4. Run installation script
 
-Launch windows shell (Command Prompt) as Administrator. Change directory to your Trendz installation directory.
+以管理员身份打开Windows shell（命令提示符）。切换到Trendz安装目录。
 
-Execute **install.bat** script to install Trendz as a Windows service.
-This means it will be automatically started on system startup. 
-Similar, **uninstall.bat** will remove Trendz from Windows services.
-The output should be similar to this one:
-  
+执行**install.bat**脚本，将Trendz安装为Windows服务。
+即系统启动时自动运行。
+同理，**uninstall.bat**可从Windows服务中移除Trendz。
+输出应类似：
+
   ```text
 C:\Program Files (x86)\trendz>install.bat
 Detecting Java version installed.
@@ -138,22 +137,22 @@ Trendz Analytics installed successfully!
 
 ### Step 5. Start Trendz service
 
-Now let's start the Trendz service!
-Open the command prompt as an Administrator and execute the following command:
+启动Trendz服务。
+以管理员身份打开命令提示符，执行：
 
 ```shell
 net start trendz
 ```
 {: .copy-code}
 
-Expected output:
+预期输出：
 
 ```text
 The Trendz Analytics service is starting.
 The Trendz Analytics service was started successfully.
 ```
 
-In order to restart the Trendz service you can execute following commands:
+重启Trendz服务可执行：
 
 ```shell
 net stop trendz
@@ -166,10 +165,10 @@ net start trendz
 
 ### Step 7. Install Trendz Python Executor
 
-To utilize all Trendz capabilities, such as Trendz Python Calculation Fields or Prediction Models, it is essential to
-install an additional service: the Trendz Python Executor, which can securely run Python code.
+要使用Trendz Python Calculation Fields或Prediction Models等全部Trendz能力，
+需安装Trendz Python Executor——该服务可安全运行Python代码。
 
-You can learn more about how to install it [here](/docs/trendz/install/python-executor-configuration).
+安装方法[见](/docs/trendz/install/python-executor-configuration)。
 
 ## Authentication
 
@@ -177,50 +176,50 @@ You can learn more about how to install it [here](/docs/trendz/install/python-ex
 
 ## Troubleshooting
 
-The log files are located in **logs** folder ("C:\Program Files (x86)\trendz\logs" in our case).
+日志文件位于**logs**文件夹（本例为"C:\Program Files (x86)\trendz\logs"）。
 
-The **trendz.log** file should contain following line:
+**trendz.log**中应包含：
 
 ```text
 YYYY-MM-DD HH:mm:ss,sss [main] INFO  o.t.t.TrendzApplication - Started TrendzApplication in x.xxx seconds (JVM running for x.xxx)
 ```
 
-In case of any unclear errors, use general [troubleshooting guide](/docs/user-guide/troubleshooting/#getting-help) or [contact us](/docs/contact-us/).
+如有不明错误，可参考通用[troubleshooting指南](/docs/user-guide/troubleshooting/#getting-help)或[联系我们](/docs/contact-us/)。
 
 ## Windows firewall settings
 
-In order to have external access to Trendz Web UI 
-you need to create a new inbound rule with Windows Firewall with Advanced Security.
+若需从外部访问Trendz Web UI，
+需在Windows Firewall with Advanced Security中创建新的入站规则。
  
-- Open "Windows Firewall" from "Control Panel":
+- 从"控制面板"打开"Windows Firewall"：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-1.png)
 
-- Click "Advanced settings" on the left panel:
+- 点击左侧"Advanced settings"：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-2.png)
 
-- Select "Inbound Rules" on the left panel, then click "New Rule..." on the right "Actions" panel:
+- 在左侧选择"Inbound Rules"，然后点击右侧"Actions"面板的"New Rule..."：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-3.png)
 
-- Now new "New Inbound Rule Wizard" window will open. On the first step "Rule Type" select "Port" option: 
+- 打开"New Inbound Rule Wizard"。第一步"Rule Type"选择"Port"： 
 
 ![image](/images/user-guide/install/windows/windows7-firewall-4.png)
 
-- On the "Protocol and Ports" step select "TCP" protocol and enter port **8888** in the "Specific local ports" field:
+- 在"Protocol and Ports"步骤选择"TCP"协议，在"Specific local ports"中输入端口**8888**：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-5.png)
 
-- On the "Action" step leave "Allow the connection" option selected:
+- 在"Action"步骤保持"Allow the connection"：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-6.png)
 
-- On the "Profile" step select Windows network profiles when to apply this rule:
+- 在"Profile"步骤选择应用此规则的Windows网络配置文件：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-7.png)
 
-- Finally, give the name to this rule (for ex. "Trendz Service Networking") and click "Finish".
+- 最后为规则命名（如"Trendz Service Networking"）并点击"Finish"。
 
 ![image](/images/user-guide/install/windows/windows7-firewall-8.png)
 

@@ -3,6 +3,6 @@
 
 ![image](/images/coming-soon.jpg)
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "SecurityGuide" %}{% include templates/mqtt-broker-guides-banner.md %}

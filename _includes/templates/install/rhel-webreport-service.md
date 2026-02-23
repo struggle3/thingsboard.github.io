@@ -1,12 +1,11 @@
-
-Download installation package for the [Reports Server](/docs/pe/user-guide/reporting/#reports-server) component:
+下载 [Reports Server](/docs/pe/user-guide/reporting/#reports-server) 组件的安装包：
 
 ```bash
 wget https://dist.thingsboard.io/tb-web-report-{{ site.release.pe_ver }}.rpm
 ```
 {: .copy-code}
 
-Install third-party libraries:
+安装第三方库：
 
 ```bash
 sudo yum install pango.x86_64 libXcomposite.x86_64 libXcursor.x86_64 libXdamage.x86_64 libXext.x86_64 \
@@ -16,14 +15,14 @@ sudo yum install pango.x86_64 libXcomposite.x86_64 libXcursor.x86_64 libXdamage.
 ```
 {: .copy-code}
 
-Install Roboto fonts:
+安装 Roboto 字体：
 
 ```bash
 sudo yum install google-roboto-fonts -y
 ```
 {: .copy-code}
 
-Install Noto fonts (Japanese, Chinese, etc.):
+安装 Noto 字体（日语、中文等）：
 
 ```bash
 mkdir ~/noto
@@ -38,7 +37,7 @@ cd ..
 rm -rf ~/noto
 ```
 
-Install and start Web Report service:
+安装并启动 Web Report 服务：
 
 ```bash
 sudo rpm -Uvh tb-web-report-{{ site.release.pe_ver }}.rpm

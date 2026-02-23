@@ -1,6 +1,6 @@
-bigheader: "Getting Started"
-abstract: "Getting Started with ThingsBoard Edge."
+bigheader: "入门"
+abstract: "ThingsBoard Edge入门。"
 hidetoc: "true"
 toc:
-  - title: Getting Started
+  - title: 入门
     path: /docs/edge/getting-started/

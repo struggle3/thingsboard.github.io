@@ -1,14 +1,14 @@
-bigheader: "Architecture"
-abstract: "Design docs, deployment scenarios and performance"
+bigheader: "架构"
+abstract: "设计文档、部署场景与性能"
 toc:
-- title: Architecture Overview
+- title: 架构概览
   path: /docs/pe/reference/
-- title: Monolithic architecture
+- title: 单体架构
   path: /docs/pe/reference/monolithic/
-- title: Microservices architecture
+- title: 微服务架构
   path: /docs/pe/reference/msa/
-- title: Deployment scenarios
+- title: 部署场景
   path: /docs/pe/reference/iot-platform-deployment-scenarios/
-- title: Performance on AWS EC2
+- title: AWS EC2性能
   path: /docs/pe/reference/performance-aws-instances/
   new: true

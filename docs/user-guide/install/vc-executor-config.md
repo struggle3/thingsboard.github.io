@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - vparomskiy
-title: Version control executor parameters
-description: ThingsBoard configuration parameters and environment variables
+title: Version control executor 参数
+description: ThingsBoard 配置参数与环境变量
 
 ---
 

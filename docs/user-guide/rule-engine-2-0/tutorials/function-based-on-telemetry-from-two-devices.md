@@ -1,6 +1,6 @@
 ---
 layout: docwithnav
-title: Data function based on telemetry from 2 devices
-description: Data function based on telemetry from 2 devices
+title: 基于两个设备 telemetry 的数据函数
+description: 基于两个设备 telemetry 的数据函数
 redirect_to: "/docs/tutorials/function-based-on-telemetry-from-two-devices/"
 ---

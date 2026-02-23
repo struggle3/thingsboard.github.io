@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Reporting overview
-description: Reporting overview
+title: 报表概览
+description: 报表概览
 
 create-new-report-template:
     0:

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: delete relation
-description: Deletes relations with message originator. 
+description: 删除与消息 originator 的 relation。 
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

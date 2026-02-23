@@ -1,35 +1,34 @@
-You can configure additional settings like: TLS connection, byte order, word order, and other. The following parameters 
-are used to configure advanced connection settings:
+您可以配置其他设置，例如：TLS 连接、字节序、字序等。以下参数用于配置高级连接设置：
 
-- **Byte order** - byte order for the Modbus connection, either **LITTLE** or **BIG**.
-- **Word order** - word order for the Modbus connection, either **LITTLE** or **BIG**.
-- **Vendor name** - name of the vendor for the Modbus connection.
-- **Product code** - product code for the Modbus connection.
-- **Vendor URL** - URL of the vendor for the Modbus connection.
-- **Product name** - name of the product for the Modbus connection.
-- **Model name** - model name for the Modbus connection.
-- **TLS** - enable or disable TLS connection for the Modbus connection (**Only for TCP and UDP connections**):
-  - **Path to client certificate** - path to the client certificate file.
-  - **Path to client private key** - path to the client private key file.
-  - **Password** - password for the client private key file.
+- **字节序** - Modbus 连接的字节序，可选 **LITTLE** 或 **BIG**。
+- **字序** - Modbus 连接的字序，可选 **LITTLE** 或 **BIG**。
+- **厂商名称** - Modbus 连接的厂商名称。
+- **产品代码** - Modbus 连接的产品代码。
+- **厂商 URL** - Modbus 连接的厂商 URL。
+- **产品名称** - Modbus 连接的产品名称。
+- **型号名称** - Modbus 连接的型号名称。
+- **TLS** - 启用或禁用 Modbus 连接的 TLS（**仅用于 TCP 和 UDP 连接**）：
+  - **客户端证书路径** - 客户端证书文件路径。
+  - **客户端私钥路径** - 客户端私钥文件路径。
+  - **密码** - 客户端私钥文件密码。
 
 {% capture difference %}
-All configuration parameters list, and their detailed description can be found in the 
-[Advanced configuration](/docs/iot-gateway/config/modbus/#device-rpc-methods) section.
+所有配置参数列表及详细说明请参阅 
+[高级配置](/docs/iot-gateway/config/modbus/#device-rpc-methods) 章节。
 
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/modbus/#usage-examples-2) section.
+更多使用示例请参阅 [示例用法](/docs/iot-gateway/config/modbus/#usage-examples-2) 章节。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To configure advanced connection settings, follow these steps:
+配置高级连接设置的步骤：
 
 {% assign advancedConnectionSettingsBasic = '
     ===
         image: /images/gateway/modbus-connector/advanced-connection-settings-basic-1-ce.png,
-        title: Click on the "**Advanced connection settings**" subsection to open it;
+        title: 点击「**高级连接设置**」子部分将其打开；
     ===
         image: /images/gateway/modbus-connector/advanced-connection-settings-basic-2-ce.png,
-        title: Make the necessary settings.
+        title: 进行必要设置。
 '
 %}
 

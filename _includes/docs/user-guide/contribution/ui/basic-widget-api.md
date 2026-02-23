@@ -1,61 +1,61 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-All widget-related code is located in the [JavaScript section](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/#javascript-section).
-The built-in variable **self** that is a reference to the widget instance is also available.
-Each widget function should be defined as a property of the **self** variable.
-The **self** variable has a property **ctx** of type [WidgetContext](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/models/widget-component.models.ts#L83), which is a reference to the widget context that contains all the necessary API and data used by widget instance.
-Below is a brief description of widget context properties:
+所有与部件相关的代码位于 [JavaScript 区域](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/#javascript-section)。
+内置变量 **self** 为部件实例的引用。
+每个部件函数应定义为 **self** 变量的属性。
+**self** 变量具有 **ctx** 属性，类型为 [WidgetContext](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/models/widget-component.models.ts#L83)，即部件上下文的引用，包含部件实例使用的所有必要 API 和数据。
+以下为部件上下文属性的简要说明：
 
 | **Property**                     | **Type**           | **Description**                                                                                                                                                                                                                                                                                                    |
 |----------------------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $container                       | jQuery Object      | Container element of the widget. Can be used to dynamically access or modify widget DOM using jQuery API.                                                                                                                                                                                                          |
-| $scope                           | [IDynamicWidgetComponent](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/models/widget-component.models.ts#L274")             | Reference to the current widget component. Can be used to access/modify component properties when widget is built using Angular approach.                                                                                                                                                                          |
-| width                            | Number             | Current width of widget container in pixels.                                                                                                                                                                                                                                                                       |
-| height                           | Number             | Current height of widget container in pixels.                                                                                                                                                                                                                                                                      |
-| isEdit                           | Boolean            | Indicates whether the dashboard is in in the view or editing state.                                                                                                                                                                                                                                                |
-| isMobile                         | Boolean            | Indicates whether the dashboard view is less then 960px width (default mobile breakpoint).                                                                                                                                                                                                                         |
-| widgetConfig                     | [WidgetConfig](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L341)             | Common widget configuration containing properties such as **color** (text color), **backgroundColor** (widget background color), etc.                                                                                                                                                                              |
-| settings                         | Object             | Widget settings containing widget specific properties according to the defined [settings json schema](#settings-schema-section).                                                                                                                                                                                   |
-| datasources                      | Array<[Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)>  | Array of resolved widget datasources. See [Subscription object](#subscription-object).                                                                                                                                                                                                                             |
-| data                             | Array<[DatasourceData](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L275)>  | Array of latest datasources data. See [Subscription object](#subscription-object).                                                                                                                                                                                                                                 |
-| timeWindow                       | [WidgetTimewindow](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/time/time.models.ts#L104)   | Current widget timewindow (applicable for timeseries widgets). Holds information about current timewindow bounds. **minTime** - minimum time in UTC milliseconds, **maxTime** - maximum time in UTC milliseconds, **interval** - current aggregation interval in milliseconds.                                     |
-| units                            | String             | Optional property defining units text of values displayed by widget. Useful for simple widgets like cards or gauges.                                                                                                                                                                                               |
-| decimals                         | Number             | Optional property defining how many positions should be used to display decimal part of the value number.                                                                                                                                                                                                          |
-| hideTitlePanel                   | Boolean            | Manages visibility of widget title panel. Useful for widget with custom title panels or different states. **updateWidgetParams()** function must be called after this property change.                                                                                                                             |
-| widgetTitle                      | String             | If set, will override configured widget title text. **updateWidgetParams()** function must be called after this property change.                                                                                                                                                                                   |
-| detectChanges()                  | Function           | Trigger change detection for current widget. Must be invoked when widget HTML template bindings should be updated due to widget data changes.                                                                                                                                                                      |
-| updateWidgetParams()             | Function           | Updates widget with runtime set properties such as **widgetTitle**, **hideTitlePanel**, etc. Must be invoked for these property changes to take effect.                                                                                                                                                            |
-| pageLink(pageSize, page, textSearch, sortOrder) | [PageLink](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/page/page-link.ts#L98) | Is used to create sorting configuration for GET requests. **pageSize** - determines the number of entities displayed on a page, **page** - specifies which page should be displayed, **textSearch** - filters entities based on the included text, **sortOrder** - sets the order in which entities are displayed. |
-| defaultSubscription              | [IWidgetSubscription](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L220")             | Default widget subscription object contains all subscription information, including current data, according to the widget type. See [Subscription object](#subscription-object).                                                                                                                                   |
-| timewindowFunctions              | [TimewindowFunctions](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L45)             | Object with timewindow functions used to manage widget data time frame. Can be used by Time-series or Alarm widgets. See [Timewindow functions](#timewindow-functions).                                                                                                                                            |
-| controlApi                       | [RpcApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L58)             | Object that provides API functions for RPC (Control) widgets. See [Control API](#control-api).                                                                                                                                                                                                                     | 
-| actionsApi                       | [WidgetActionsApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L67)             | A set of API functions for working with user-defined actions. See [Actions API](#actions-api).                                                                                                                                                                                                                     |
-| stateController                  | [IStateController](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L121)             | Reference to Dashboard state controller, providing API to manage the current dashboard state. See [State Controller](#state-controller).                                                                                                                                                                           |
+| $container                       | jQuery Object      | 部件容器元素。可使用 jQuery API 动态访问或修改部件 DOM。                                                                                                                                                                                                          |
+| $scope                           | [IDynamicWidgetComponent](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/models/widget-component.models.ts#L274")             | 当前部件组件的引用。当部件基于 Angular 方式构建时，可用于访问/修改组件属性。                                                                                                                                                                          |
+| width                            | Number             | 部件容器当前宽度（像素）。                                                                                                                                                                                                                                                                       |
+| height                           | Number             | 部件容器当前高度（像素）。                                                                                                                                                                                                                                                                      |
+| isEdit                           | Boolean            | 指示 dashboard 处于查看还是编辑状态。                                                                                                                                                                                                                                                |
+| isMobile                         | Boolean            | 指示 dashboard 视图宽度是否小于 960px（默认移动端断点）。                                                                                                                                                                                                                         |
+| widgetConfig                     | [WidgetConfig](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L341)             | 通用部件配置，包含 **color**（文本颜色）、**backgroundColor**（部件背景色）等属性。                                                                                                                                                                              |
+| settings                         | Object             | 部件设置，按定义的 [settings json schema](#settings-schema-section) 包含部件专属属性。                                                                                                                                                                                   |
+| datasources                      | Array<[Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)>  | 已解析的部件 datasources 数组。见 [Subscription object](#subscription-object)。                                                                                                                                                                                                                             |
+| data                             | Array<[DatasourceData](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L275)>  | datasources 最新数据数组。见 [Subscription object](#subscription-object)。                                                                                                                                                                                                                                 |
+| timeWindow                       | [WidgetTimewindow](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/time/time.models.ts#L104)   | 当前部件 timewindow（适用于 timeseries 部件）。包含当前 timewindow 边界信息：**minTime** - UTC 毫秒最小时间，**maxTime** - UTC 毫秒最大时间，**interval** - 当前聚合间隔（毫秒）。                                     |
+| units                            | String             | 可选属性，定义部件显示值的单位文本。适用于卡片、仪表盘等简单部件。                                                                                                                                                                                               |
+| decimals                         | Number             | 可选属性，定义显示数值小数部分的位数。                                                                                                                                                                                                          |
+| hideTitlePanel                   | Boolean            | 控制部件标题面板可见性。适用于自定义标题面板或多种状态的部件。修改此属性后必须调用 **updateWidgetParams()**。                                                                                                                             |
+| widgetTitle                      | String             | 若设置，将覆盖已配置的部件标题文本。修改此属性后必须调用 **updateWidgetParams()**。                                                                                                                                                                                   |
+| detectChanges()                  | Function           | 触发当前部件的变更检测。当部件数据变更导致 HTML 模板绑定需更新时应调用。                                                                                                                                                                      |
+| updateWidgetParams()             | Function           | 用运行时设置（如 **widgetTitle**、**hideTitlePanel** 等）更新部件。修改这些属性后必须调用以使修改生效。                                                                                                                                                            |
+| pageLink(pageSize, page, textSearch, sortOrder) | [PageLink](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/page/page-link.ts#L98) | 用于创建 GET 请求的排序配置。**pageSize** - 每页实体数，**page** - 页码，**textSearch** - 按文本过滤实体，**sortOrder** - 实体显示顺序。 |
+| defaultSubscription              | [IWidgetSubscription](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L220")             | 默认部件订阅对象，按部件类型包含全部订阅信息（含当前数据）。见 [Subscription object](#subscription-object)。                                                                                                                                   |
+| timewindowFunctions              | [TimewindowFunctions](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L45)             | 管理部件数据时间范围的 timewindow 函数对象。适用于 Time-series 或 Alarm 部件。见 [Timewindow functions](#timewindow-functions)。                                                                                                                                            |
+| controlApi                       | [RpcApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L58)             | 为 RPC（Control）部件提供 API 函数的对象。见 [Control API](#control-api)。                                                                                                                                                                                                                     | 
+| actionsApi                       | [WidgetActionsApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L67)             | 与用户自定义动作相关的 API 函数集。见 [Actions API](#actions-api)。                                                                                                                                                                                                                     |
+| stateController                  | [IStateController](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L121)             | Dashboard 状态控制器引用，提供管理当前 dashboard 状态的 API。见 [State Controller](#state-controller)。                                                                                                                                                                           |
 
-In order to implement a new widget, the following JavaScript functions should be defined *(Note: each function is optional and can be implemented according to  widget specific behaviour):*
+实现新部件时，应定义以下 JavaScript 函数（*注：每个函数均为可选，可按部件具体行为实现*）：
 
 | **Function**                                                       | **Description**                                                                                                                                                                                                                                                                                              |
 |--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ``` onInit() ```                                                   | The first function that is called when the widget is ready for initialization. It should be used to prepare widget DOM, process widget settings and handle initial subscription information.                                                                                                                 |
-| ``` onDataUpdated() ```                                            | Called when the new data is available from the widget subscription. Latest data can be accessed from the [**defaultSubscription** object](#subscription-object) of widget context (**ctx**).                                                                                                                 |
-| ``` onResize() ```                                                 | Called when widget container is resized. Latest width and height can be obtained from widget context (**ctx**).                                                                                                                                                                                              |
-| ``` onEditModeChanged() ```                                        | Called when dashboard editing mode is changed. Latest mode is handled by isEdit property of **ctx**.                                                                                                                                                                                                         |
-| ``` onMobileModeChanged() ```                                      | Called when dashboard view width crosses mobile breakpoint. Latest state is handled by isMobile property of **ctx**.                                                                                                                                                                                         |
-| ``` onDestroy() ```                                                | Called when widget element is destroyed. Should be used to cleanup all resources if necessary.                                                                                                                                                                                                               |
-| ``` getSettingsSchema() ```                                        | Optional function returning widget settings schema json as alternative to **Settings tab** of [Settings schema section](#settings-schema-section).                                                                                                                                                           |
-| ``` getDataKeySettingsSchema() ```                                 | Optional function returning particular data key settings schema json as alternative to **Data key settings schema** tab of [Settings schema section](#settings-schema-section).                                                                                                                              |
-| ``` typeParameters() ```                                           | Returns [WidgetTypeParameters](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L146) object describing widget datasource parameters. See [Type parameters object](#type-parameters-object).                           |
-| ``` actionSources() ```                                            | Returns map describing available widget action sources ([WidgetActionSource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L118)) used to define user actions. See [Action sources object](#action-sources-object). |
+| ``` onInit() ```                                                   | 部件就绪初始化时调用的首个函数。用于准备部件 DOM、处理部件设置并处理初始订阅信息。                                                                                                                 |
+| ``` onDataUpdated() ```                                            | 部件订阅有新数据时调用。最新数据可通过部件上下文 **ctx** 的 [**defaultSubscription** object](#subscription-object) 访问。                                                                                                                 |
+| ``` onResize() ```                                                 | 部件容器尺寸改变时调用。最新宽高可从部件上下文 **ctx** 获取。                                                                                                                                                                                              |
+| ``` onEditModeChanged() ```                                        | dashboard 编辑模式切换时调用。当前模式由 **ctx** 的 isEdit 属性提供。                                                                                                                                                                                                         |
+| ``` onMobileModeChanged() ```                                      | dashboard 视图宽度越过移动端断点时调用。当前状态由 **ctx** 的 isMobile 属性提供。                                                                                                                                                                                         |
+| ``` onDestroy() ```                                                | 部件元素销毁时调用。应在必要时用于释放所有资源。                                                                                                                                                                                                               |
+| ``` getSettingsSchema() ```                                        | 可选函数，返回部件 settings schema json，作为 [Settings schema section](#settings-schema-section) 中 **Settings tab** 的替代。                                                                                                                                                           |
+| ``` getDataKeySettingsSchema() ```                                 | 可选函数，返回特定 data key 的 settings schema json，作为 [Settings schema section](#settings-schema-section) 中 **Data key settings schema** 选项卡的替代。                                                                                                                              |
+| ``` typeParameters() ```                                           | 返回描述部件 datasource 参数的 [WidgetTypeParameters](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L146) 对象。见 [Type parameters object](#type-parameters-object)。                           |
+| ``` actionSources() ```                                            | 返回描述可用部件动作源的映射 ([WidgetActionSource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L118))，用于定义用户动作。见 [Action sources object](#action-sources-object)。 |
 
 
 #### Subscription object
 
-The widget subscription object is instance of [IWidgetSubscription](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L220") and contains all subscription information, including current data, according to the [widget type](/docs/{{docsPrefix}}user-guide/ui/widget-library/#widget-types).
-Depending on widget type, subscription object provides different data structures.
-For [Latest values](/docs/{{docsPrefix}}user-guide/ui/widget-library/#latest-values) and [Time-series](/docs/{{docsPrefix}}user-guide/ui/widget-library/#time-series) widget types, it provides the following properties:
+部件订阅对象为 [IWidgetSubscription](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L220") 的实例，按 [部件类型](/docs/{{docsPrefix}}user-guide/ui/widget-library/#widget-types) 包含全部订阅信息（含当前数据）。
+依部件类型不同，订阅对象提供不同数据结构。
+[Latest values](/docs/{{docsPrefix}}user-guide/ui/widget-library/#latest-values) 与 [Time-series](/docs/{{docsPrefix}}user-guide/ui/widget-library/#time-series) 类型提供以下属性：
 
 - **datasources** - array of datasources (Array<[Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)>) used by this subscription, it has the following structure:
 
@@ -84,7 +84,7 @@ For [Latest values](/docs/{{docsPrefix}}user-guide/ui/widget-library/#latest-val
     ]
 ```
 
-- **data** - array of latest data (Array<[DatasourceData](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L275)>) received in scope of this subscription, it has the following structure:
+- **data** - 此订阅范围内接收到的最新数据数组 (Array<[DatasourceData](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L275)>)，结构如下：
 
 ```javascript
     data = [
@@ -103,9 +103,9 @@ For [Latest values](/docs/{{docsPrefix}}user-guide/ui/widget-library/#latest-val
     ]
 ```
 
-For [Alarm widget](/docs/{{docsPrefix}}user-guide/ui/widget-library/#alarm-widget) type it provides the following properties:
+[Alarm widget](/docs/{{docsPrefix}}user-guide/ui/widget-library/#alarm-widget) 类型提供以下属性：
 
-- **alarmSource** - ([Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)) information about entity for which alarms are fetched, it has the following structure:
+- **alarmSource** - ([Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)) 获取告警的实体信息，结构如下：
 
 ```javascript
     alarmSource = {
@@ -128,7 +128,7 @@ For [Alarm widget](/docs/{{docsPrefix}}user-guide/ui/widget-library/#alarm-widge
     }
 ```
 
-- **alarms** - array of alarms (Array<[Alarm](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/alarm.models.ts#L88)>) received in scope of this subscription, it has the following structure:
+- **alarms** - 此订阅范围内接收到的告警数组 (Array<[Alarm](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/alarm.models.ts#L88)>)，结构如下：
 
 ```javascript
     alarms = [
@@ -159,85 +159,85 @@ For [Alarm widget](/docs/{{docsPrefix}}user-guide/ui/widget-library/#alarm-widge
     ]
 ```
 
-For [RPC](/docs/{{docsPrefix}}user-guide/ui/widget-library/#rpc-control-widget) or [Static](/docs/{{docsPrefix}}user-guide/ui/widget-library/#static) widget types, subscription object is optional and does not contain necessary information.
+[RPC](/docs/{{docsPrefix}}user-guide/ui/widget-library/#rpc-control-widget) 或 [Static](/docs/{{docsPrefix}}user-guide/ui/widget-library/#static) 部件类型中，订阅对象为可选且不包含必要信息。
 
 #### Timewindow functions
 
-Object with timewindow functions ([TimewindowFunctions](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L45)) used to manage widget data time frame. Can be used by [Time-series](/docs/{{docsPrefix}}user-guide/ui/widget-library/#time-series) or [Alarm](/docs/{{docsPrefix}}user-guide/ui/widget-library/#alarm-widget) widgets. Path: **widgetContext.dashboard**.
+用于管理部件数据时间范围的 timewindow 函数对象 ([TimewindowFunctions](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L45))。适用于 [Time-series](/docs/{{docsPrefix}}user-guide/ui/widget-library/#time-series) 或 [Alarm](/docs/{{docsPrefix}}user-guide/ui/widget-library/#alarm-widget) 部件。路径：**widgetContext.dashboard**。
 
 | **Function**                                        | **Description**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
-| ``` onUpdateTimewindow(startTimeMs, endTimeMs) ```  | This function can be used to update current subscription time frame to historical one identified by **startTimeMs** and **endTimeMs** arguments. |
-| ``` onResetTimewindow() ```                         | Resets subscription time frame to default defined by widget timewindow component or dashboard timewindow depending on widget settings. |
+| ``` onUpdateTimewindow(startTimeMs, endTimeMs) ```  | 可将当前订阅时间范围更新为 **startTimeMs** 与 **endTimeMs** 指定的历史时间段。 |
+| ``` onResetTimewindow() ```                         | 将订阅时间范围重置为默认值，默认由部件 timewindow 组件或 dashboard timewindow 根据部件设置决定。 |
 
 
 #### Control API
 
-The Control API ([RpcApi](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L74)) provides API functions for the [Control widgets](/docs/{{docsPrefix}}user-guide/ui/widget-library/#rpc-control-widget). Path: **widgetContext.controlApi**.
+Control API ([RpcApi](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L74)) 为 [Control widgets](/docs/{{docsPrefix}}user-guide/ui/widget-library/#rpc-control-widget) 提供 API 函数。路径：**widgetContext.controlApi**。
 
 | **Function**                                        | **Description**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
-| ``` sendOneWayCommand(method, params, timeout) ```  | Sends one way (without response) RPC command to the device. Returns command execution promise. **method** - RPC method name, string, **params** - RPC method params, custom json object, **timeout** - maximum delay in milliseconds to wait until response/acknowledgement is received.  |
-| ``` sendTwoWayCommand(method, params, timeout) ```  | Sends two way (with response) RPC command to the device. Returns command execution promise with response body in success callback. |
-| ``` completedCommand() ```                          | Stops the RPC execution for the device. |
+| ``` sendOneWayCommand(method, params, timeout) ```  | 向设备发送单向（无响应）RPC 命令。返回命令执行 promise。**method** - RPC 方法名（字符串），**params** - RPC 方法参数（自定义 json 对象），**timeout** - 等待响应/确认的最大毫秒数。  |
+| ``` sendTwoWayCommand(method, params, timeout) ```  | 向设备发送双向（有响应）RPC 命令。返回命令执行 promise，成功回调中包含响应体。 |
+| ``` completedCommand() ```                          | 停止设备的 RPC 执行。 |
 
 #### Actions API
 
-Set of API functions ([WidgetActionsApi](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L86)) to work with user defined actions. Path: **widgetContext.actionsApi**.
+处理用户自定义动作的 API 函数集 ([WidgetActionsApi](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L86))。路径：**widgetContext.actionsApi**。
 
 | **Function**                                                          | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ``` getActionDescriptors(actionSourceId) ```                          | Returns the list of action descriptors for provided **actionSourceId**.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ``` handleWidgetAction($event, descriptor, entityId, entityName) ```  | Handles action produced by particular action source. **$event** - event object associated with action, **descriptor** - action descriptor, **entityId** and **entityName** - current entity id and name provided by action source if available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ``` getActiveEntityInfo() ```                                         | Returns information about the first found entity in the widget.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ``` openDashboardStateInSeparateDialog(targetDashboardStateId, params?, dialogTitle?, hideDashboardToolbar?, dialogWidth?, dialogHeight?) ``` | Open the dashboard state in a separate dialog using **stateId**. The parameter **targetDashboardStateId** refers to the ID of the state that will be opened in this separate dialog. The **params** - contains information about state entity and additional info. The **dialogTitle** sets the title for the separate dialog. The **hideDashboardToolbar** parameter determines the visibility of the dashboard toolbar. **dialogWidth** and **dialogHeight** define the width and height of the separate dialog, respectively.                                                                                                                                                                                                              |
-| ``` openDashboardStateInPopover($event, targetDashboardStateId, params?, hideDashboardToolbar?, preferredPlacement?, hideOnClickOutside?, popoverWidth?, popoverHeight?, popoverStyle?) ``` | Opens dashboard state in the pop-over window by **stateId**. The **$event** - event object associated with the action. The **targetDashboardStateId** refers to the id of the state that will be open in pop-over. The **params** - contains information about state entity and additional info. The **hideDashboardToolbar** parameter determines the visibility of the dashboard toolbar. The **referredPlacement** determines the position for opening the pop-over. The **hideOnClickOutside** parameter, when enabled, ensures the pop-over closes upon an outside click.  The **popoverStyle** sets the style of pop-over window. **popoverWidth** and **popoverHeight** define the width and height of the separate dialog, respectively. |
+| ``` getActionDescriptors(actionSourceId) ```                          | 返回指定 **actionSourceId** 的动作描述符列表。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ``` handleWidgetAction($event, descriptor, entityId, entityName) ```  | 处理特定动作源产生的动作。**$event** - 关联的事件对象，**descriptor** - 动作描述符，**entityId** 和 **entityName** - 动作源提供的当前实体 id 与名称（如有）。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ``` getActiveEntityInfo() ```                                         | 返回部件中首个实体的信息。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ``` openDashboardStateInSeparateDialog(targetDashboardStateId, params?, dialogTitle?, hideDashboardToolbar?, dialogWidth?, dialogHeight?) ``` | 在独立对话框中打开 dashboard 状态。**targetDashboardStateId** - 要打开的状态 ID，**params** - 状态实体及附加信息，**dialogTitle** - 对话框标题，**hideDashboardToolbar** - 是否隐藏 dashboard 工具栏，**dialogWidth** 与 **dialogHeight** - 对话框宽高。                                                                                                                                                                                                              |
+| ``` openDashboardStateInPopover($event, targetDashboardStateId, params?, hideDashboardToolbar?, preferredPlacement?, hideOnClickOutside?, popoverWidth?, popoverHeight?, popoverStyle?) ``` | 在弹出窗口中打开 dashboard 状态。**$event** - 关联的事件对象，**targetDashboardStateId** - 弹出窗口中的状态 id，**params** - 状态实体及附加信息，**hideDashboardToolbar** - 是否隐藏 dashboard 工具栏，**preferredPlacement** - 弹出位置，**hideOnClickOutside** - 点击外部是否关闭，**popoverStyle** - 弹出窗口样式，**popoverWidth** 与 **popoverHeight** - 弹出窗口宽高。 |
 
 #### Widget Subscription API
 
-Set of API functions ([WidgetSubscriptionApi](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L66)) to work with custom subscriptions. Path: **widgetContext.subscriptionApi**.
+处理自定义订阅的 API 函数集 ([WidgetSubscriptionApi](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L66))。路径：**widgetContext.subscriptionApi**。
 
 | **Function**                                                          | **Description**                                                                                                                                                                                                                                                                                                                                |
 |-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ``` createSubscription(options, subscribe?) ```                          | Creates subscription to the data. The **options** - contain information regarding the subscription, **subscribe** - controls the arrival of updated data.                                                                                                                                                                                      |
-| ``` createSubscriptionFromInfo(type, subscriptionsInfo, options, useDefaultComponents, subscribe) ```  | Creates subscription to the data. The **type** - type of widget, the **subscriptionsInfo** - describes the data for a subscription, **options** - contain information regarding the subscription, **useDefaultComponents** - if enabled, the default subscription settings will be used, **subscribe** - controls the arrival of updated data. |
-| ``` removeSubscription(id) ```                                         | Removes subscription. The **id** parameter refers id of subscription.                                                                                                                                                                                                                                                                          |
+| ``` createSubscription(options, subscribe?) ```                          | 创建数据订阅。**options** - 订阅信息，**subscribe** - 控制是否接收更新数据。                                                                                                                                                                                      |
+| ``` createSubscriptionFromInfo(type, subscriptionsInfo, options, useDefaultComponents, subscribe) ```  | 创建数据订阅。**type** - 部件类型，**subscriptionsInfo** - 订阅数据描述，**options** - 订阅信息，**useDefaultComponents** - 是否使用默认订阅设置，**subscribe** - 控制是否接收更新数据。 |
+| ``` removeSubscription(id) ```                                         | 移除订阅。**id** - 订阅 ID。                                                                                                                                                                                                                                                                          |
 
 
 #### State Controller
 
-Reference to Dashboard state controller ([IStateController](https://github.com/thingsboard/thingsboard/blob/v3.4/ui-ngx/src/app/core/api/widget-api.models.ts#L151)), providing API to manage current dashboard state. Path: **widgetContext.dashboard.stateController**.
+Dashboard 状态控制器引用 ([IStateController](https://github.com/thingsboard/thingsboard/blob/v3.4/ui-ngx/src/app/core/api/widget-api.models.ts#L151))，提供管理当前 dashboard 状态的 API。路径：**widgetContext.dashboard.stateController**。
 
 | **Function**                                        | **Description**                                                                                                                                                                                                                                                                                                   |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ``` openState(id, params, openRightLayout) ```      | Navigates to new dashboard state. **id** - id of the target dashboard state, **params** - object with state parameters to be used by the new state, **openRightLayout** - optional boolean argument that forces the right dashboard layout to open if present in mobile view mode.                                              |
-| ``` updateState(id, params, openRightLayout) ```    | Updates current dashboard state. **id** - optional id of the target dashboard state to replace current state id, **params** - object with state parameters to update current state parameters, **openRightLayout** - optional boolean argument to force open right dashboard layout if present in mobile view mode. |
-| ``` resetState() ```                                | Resets current dashboard state.                                                                                                                                                                                                                                                                                   |                                               
-| ``` getStateId() ```                                | Returns current dashboard state id.                                                                                                                                                                                                                                                                               |
-| ``` getStateIndex() ```                             | Returns the depth of nesting of the state.                                                                                                                                                                                                                                                                        |
-| ``` getStateIdAtIndex(index) ```                    | Returns **stateId** by index.                                                                                                                                                                                                                                                                                     |
-| ``` getCurrentStateName() ```                       | Returns **name** of current state.                                                                                                                                                                                                                                                                                |
-| ``` getStateParams() ```                            | Returns current dashboard state parameters.                                                                                                                                                                                                                                                                       |
-| ``` getEntityId(entityParamName) ```                | Returns **entityId** by state entity parameter name. **entityParamName** - state entity parameter name.                                                                                                                                                                                                           |
-| ``` getStateParamsByStateId(id) ```                 | Returns state parameters for particular dashboard state identified by **id**.                                                                                                                                                                                                                                     |
-| ``` openRightLayout() ```                           | Opens right layout of the current state (in mobile mode).                                                                                                                                                                                                                                                         |
-| ``` preserveState() ```                             | Saves state parameters into **preservedState**.                                                                                                                                                                                                                         |
-| ``` cleanupPreservedStates() ```                    | Clears the **preservedState**.                                                                                                                                                                                                                                                                                       |
+| ``` openState(id, params, openRightLayout) ```      | 导航到新 dashboard 状态。**id** - 目标状态 id，**params** - 新状态使用的状态参数对象，**openRightLayout** - 可选，移动端下强制打开右侧布局。                                              |
+| ``` updateState(id, params, openRightLayout) ```    | 更新当前 dashboard 状态。**id** - 可选，替换当前状态的目标状态 id，**params** - 要更新的状态参数对象，**openRightLayout** - 可选，移动端下强制打开右侧布局。 | 
+| ``` resetState() ```                                | 重置当前 dashboard 状态。                                                                                                                                                                                                                                                                                   |                                               
+| ``` getStateId() ```                                | 返回当前 dashboard 状态 id。                                                                                                                                                                                                                                                                               |
+| ``` getStateIndex() ```                             | 返回状态嵌套深度。                                                                                                                                                                                                                                                                        |
+| ``` getStateIdAtIndex(index) ```                    | 按索引返回 **stateId**。                                                                                                                                                                                                                                                                                     |
+| ``` getCurrentStateName() ```                       | 返回当前状态的 **name**。                                                                                                                                                                                                                                                                                |
+| ``` getStateParams() ```                            | 返回当前 dashboard 状态参数。                                                                                                                                                                                                                                                                       |
+| ``` getEntityId(entityParamName) ```                | 按状态实体参数名返回 **entityId**。**entityParamName** - 状态实体参数名。                                                                                                                                                                                                           |
+| ``` getStateParamsByStateId(id) ```                 | 返回指定 **id** 的 dashboard 状态参数。                                                                                                                                                                                                                                     |
+| ``` openRightLayout() ```                           | 打开当前状态的右侧布局（移动端模式）。                                                                                                                                                                                                                                                         |
+| ``` preserveState() ```                             | 将状态参数保存到 **preservedState**。                                                                                                                                                                                                                         |
+| ``` cleanupPreservedStates() ```                    | 清空 **preservedState**。                                                                                                                                                                                                                                                                                       |
 
 #### Broadcast Service
 
-The Broadcast Service ([BroadcastService](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/services/broadcast.service.ts#L25)) is used for data exchange between widgets at the UI level.
+Broadcast Service ([BroadcastService](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/services/broadcast.service.ts#L25)) 用于部件间的 UI 级数据交换。
 
 | **Function**                                        | **Description**                                                                                                                                                                                                                                    |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ``` broadcast(name, args) ```      | Sends data to subscribers. **name** - unique identifier, **argc** - data that you want to send.                                                                                                                                                    |
-| ``` on(name, listener) ```    | Subscribe to data using a unique identifier and process it accordingly. Multiple subscribers can be added. The **name** serves as the unique identifier for subscriptions, while **listener** is the function that will process the received data. |
+| ``` broadcast(name, args) ```      | 向订阅者发送数据。**name** - 唯一标识符，**args** - 要发送的数据。                                                                                                                                                    |
+| ``` on(name, listener) ```    | 使用唯一标识符订阅数据并处理。可添加多个订阅者。**name** 为订阅的唯一标识符，**listener** 为处理接收数据的函数。 |
 
-For example, consider sending data from Widget 1 to Widget 2.
+例如，将数据从部件 1 发送到部件 2：
 
 ![image](/images/user-guide/contribution/widgets/broadcast-service-start.png)
 
-In Widget 1 you must send data using broadcast(...) function:
+在部件 1 中需使用 broadcast(...) 发送数据：
 ```
 self.onInit = function() {
     ...
@@ -250,7 +250,7 @@ self.onInit = function() {
 }
 ```
 
-In Widget 2 you must subscribe on data using on(...) function:
+在部件 2 中需使用 on(...) 订阅数据：
 ```
 self.onInit = function() {
     ...
@@ -265,13 +265,13 @@ self.onInit = function() {
 }
 ```
 
-as a result on Widget 2 you can see your data:
+结果在部件 2 中可看到数据：
 
 ![image](/images/user-guide/contribution/widgets/broadcast-service-finish.png)
 
 #### Type parameters object
 
-Object [WidgetTypeParameters](https://github.com/thingsboard/thingsboard/blob/5a16da51b5d755e18c5d8088e88336f07e4766ea/ui-ngx/src/app/shared/models/widget.models.ts#L170) describing widget datasource parameters. It has the following properties:
+描述部件 datasource 参数的 [WidgetTypeParameters](https://github.com/thingsboard/thingsboard/blob/5a16da51b5d755e18c5d8088e88336f07e4766ea/ui-ngx/src/app/shared/models/widget.models.ts#L170) 对象，具有以下属性：
 
 ```javascript
     return {
@@ -291,7 +291,7 @@ Object [WidgetTypeParameters](https://github.com/thingsboard/thingsboard/blob/5a
 
 #### Action sources object
 
-Map describing available widget action sources ([WidgetActionSource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L118)) to which user actions can be assigned. It has the following structure:
+描述可用于分配用户动作的部件动作源映射 ([WidgetActionSource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L118))，结构如下：
 
 ```javascript
    return {
@@ -304,18 +304,18 @@ Map describing available widget action sources ([WidgetActionSource](https://git
 
 ### Creating simple widgets
 
-The tutorials below show how to create minimal widgets of each type.
-In order to minimize the amount of code, the Angular framework will be used, on which ThingsBoard UI is actually based.
-By the way, you can always use pure JavaScript or jQuery API in your widget code.
+以下教程展示如何创建各类部件的最简实现。
+为精简代码，将使用 ThingsBoard UI 基于的 Angular 框架。
+你也可在部件代码中使用纯 JavaScript 或 jQuery API。
 
 #### Latest Values widget
 
 In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
-Click the **Latest Values** button on the **Select widget type** pop-up.
-The **Widget Editor** will open, pre-populated with the content of the default **Latest Values** template widget.
+在 **Select widget type** 弹窗中点击 **Latest Values**。
+**Widget Editor** 将打开，并预填默认 **Latest Values** 模板内容。
 
-- Clear content of the CSS tab of "Resources" section.
-- Put the following HTML code inside the HTML tab of "Resources" section:
+- 清空 "Resources" 区域中 CSS 选项卡的内容。
+- 将以下 HTML 代码放入 "Resources" 区域的 HTML 选项卡：
 
 ```html
   {% raw  %}<div fxFlex fxLayout="column" style="height: 100%;" fxLayoutAlign="center stretch">
@@ -328,7 +328,7 @@ The **Widget Editor** will open, pre-populated with the content of the default *
   </div>{% endraw %}
 ```
 
-- Put the following JavaScript code inside the "JavaScript" section:
+- 将以下 JavaScript 代码放入 "JavaScript" 区域：
 
 ```javascript
     self.onInit = function() {
@@ -340,18 +340,18 @@ The **Widget Editor** will open, pre-populated with the content of the default *
     }
 ```
 
-- Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+- 点击 **Widget Editor Toolbar** 中的 **Run** 按钮，在 **Widget preview** 区域查看结果。
 
 ![image](/images/user-guide/contribution/widgets/latest-values-widget-sample.png)
 
-In this example, the **data** property of [subscription](#subscription-object) is assigned to the **$scope** and becomes accessible within the HTML template.
-Inside the HTML, a special [***ngFor**](https://angular.io/api/common/NgForOf) structural angular directive is used in order to iterate over available dataKeys & datapoints then render latest values with their corresponding timestamps.
+此例将 [subscription](#subscription-object) 的 **data** 属性赋值给 **$scope**，从而在 HTML 模板中可访问。
+HTML 中使用 [***ngFor**](https://angular.io/api/common/NgForOf) 结构指令遍历 dataKeys 与 datapoints，渲染最新值及对应时间戳。
 
 #### Time-Series widget
 
 In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen, then click the “Create new widget type” button.
-Click the **Time-Series** button on the **Select widget type** pop-up.
-The **Widget Editor** will open, pre-populated with default **Time-Series** template widget content.
+在 **Select widget type** 弹窗中点击 **Time-Series**。
+**Widget Editor** 将打开，并预填默认 **Time-Series** 模板内容。
 
 - Replace content of the CSS tab in "Resources" section with the following one:
 
@@ -361,7 +361,7 @@ The **Widget Editor** will open, pre-populated with default **Time-Series** temp
 }
 ``` 
 
-- Put the following HTML code inside the HTML tab of "Resources" section:
+- 将以下 HTML 代码放入 "Resources" 区域的 HTML 选项卡：
 
 ```html
   {% raw  %}<mat-tab-group style="height: 100%;">
@@ -384,7 +384,7 @@ The **Widget Editor** will open, pre-populated with default **Time-Series** temp
   </mat-tab-group>{% endraw %}
 ```
 
-- Put the following JavaScript code inside the "JavaScript" section:
+- 将以下 JavaScript 代码放入 "JavaScript" 区域：
 
 ```javascript
 self.onInit = function() {
@@ -416,25 +416,25 @@ self.onDataUpdated = function() {
 }
 ```
 
-- Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+- 点击 **Widget Editor Toolbar** 中的 **Run** 按钮，在 **Widget preview** 区域查看结果。
 
 ![image](/images/user-guide/contribution/widgets/timeseries-widget-sample.png)
 
-In this example, the [subscription](#subscription-object) **datasources** and **data** properties are assigned to **$scope** and become accessible within the HTML template.
-The **$scope.datasourceData** property is introduced to map datasource specific dataKeys data by datasource index for flexible access within the HTML template.
-Inside the HTML, a special [***ngFor**](https://angular.io/api/common/NgForOf) structural angular directive is used in order to iterate over available datasources and render corresponding tabs.
-Inside each tab, the table is rendered using dataKeys obtained from **datasourceData** scope property accessed by datasource index.
-Each table renders columns by iterating over all **dataKeyData** objects and renders all available datapoints by iterating over **data** array of each **dataKeyData** to render timestamps and values.
-Note that in this code, **onDataUpdated** function is implemented with a call to **detectChanges** function necessary to perform new change detection cycle when new data is received.
+此例将 [subscription](#subscription-object) 的 **datasources** 与 **data** 属性赋值给 **$scope**，从而在 HTML 模板中可访问。
+引入 **$scope.datasourceData** 按 datasource 索引映射其 dataKeys 数据，便于在 HTML 中灵活访问。
+HTML 中使用 [***ngFor**](https://angular.io/api/common/NgForOf) 指令遍历 datasources 并渲染对应选项卡。
+每个选项卡根据 **datasourceData** 的 datasource 索引获取 dataKeys 渲染表格。
+表格列通过遍历 **dataKeyData** 渲染，数据点通过遍历各 **dataKeyData** 的 **data** 数组渲染时间戳与值。
+注意本代码中 **onDataUpdated** 调用了 **detectChanges**，以便新数据到达时执行变更检测。
 
 #### RPC (Control) widget
 
 In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
-Click the **Control Widget** button on the **Select widget type** popup.
-The **Widget Editor** will open, pre-populated with default **Control** template widget content.
+在 **Select widget type** 弹窗中点击 **Control Widget**。
+**Widget Editor** 将打开，并预填默认 **Control** 模板内容。
 
 - Clear content of the CSS tab of "Resources" section.
-- Put the following HTML code inside the HTML tab of "Resources" section:
+- 将以下 HTML 代码放入 "Resources" 区域的 HTML 选项卡：
 
 ```html
     {% raw  %}<form #rpcForm="ngForm" (submit)="sendCommand()">
@@ -465,7 +465,7 @@ The **Widget Editor** will open, pre-populated with default **Control** template
     </form>{% endraw %}
 ```
 
-- Put the following JSON content inside the "Settings schema" tab of **Settings schema section**:
+- 将以下 JSON 内容放入 **Settings schema section** 的 "Settings schema" 选项卡：
 
 ```json
 {
@@ -493,7 +493,7 @@ The **Widget Editor** will open, pre-populated with default **Control** template
 }
 ```
 
-- Put the following JavaScript code inside the "JavaScript" section:
+- 将以下 JavaScript 代码放入 "JavaScript" 区域：
 
 ```javascript
 self.onInit = function() {
@@ -533,85 +533,85 @@ self.onInit = function() {
 }
 ```
 
-- Fill **Widget title** field with widget type name, for ex. "My first control widget".
-- Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
-- Click dashboard edit button on the preview section to change the size of the resulting widget. Then click dashboard apply button. The final widget should look like the image below.
+- 在 **Widget title** 字段填写部件类型名称，例如 "My first control widget"。
+- 点击 **Widget Editor Toolbar** 中的 **Run** 按钮，在 **Widget preview** 区域查看结果。
+- 在预览区域点击 dashboard 编辑按钮调整部件尺寸，然后点击 dashboard 应用按钮。最终部件效果见下图。
 
 ![image](/images/user-guide/contribution/widgets/control-widget-sample.png)
 
-- Click the **Save** button on the **Widget Editor Toolbar** to save widget type.
+- 点击 **Widget Editor Toolbar** 中的 **Save** 按钮保存部件类型。
 
-To test how this widget performs RPC commands, we will need to place it in a dashboard then bind it to a device working with RPC commands. To do this, perform the following steps:
+要测试该部件的 RPC 功能，需将其放入 dashboard 并绑定到支持 RPC 的设备。步骤如下：
 
-- Login as Tenant administrator.
-- Navigate to **Devices** and create new device with some name, for ex. "My RPC Device".
-- Open device details and click "Copy Access Token" button to copy device access token to clipboard.
-- Download [mqtt-js-rpc-from-server.sh](/docs/{{docsPrefix}}reference/resources/mqtt-js-rpc-from-server.sh) and [mqtt-js-rpc-from-server.js](/docs/{{docsPrefix}}reference/resources/mqtt-js-rpc-from-server.js). Place these files in a folder.
-  Edit **mqtt-js-rpc-from-server.sh** - replace **$ACCESS_TOKEN** with your device access token from the clipboard. Then, install mqtt client library.
-- Run **mqtt-js-rpc-from-server.sh** script. You should see a "connected" message in the console.
-- Navigate to **Dashboards** and create a new dashboard with some name, for ex. "My first control dashboard". Open this dashboard.
-- Click dashboard "edit" button. In the dashboard edit mode, click the "Entity aliases" button located on the dashboard toolbar.
+- 以租户管理员身份登录。
+- 进入 **Devices** 创建新设备，例如命名 "My RPC Device"。
+- 打开设备详情，点击 "Copy Access Token" 复制设备访问令牌。
+- 下载 [mqtt-js-rpc-from-server.sh](/docs/{{docsPrefix}}reference/resources/mqtt-js-rpc-from-server.sh) 和 [mqtt-js-rpc-from-server.js](/docs/{{docsPrefix}}reference/resources/mqtt-js-rpc-from-server.js)，放在同一目录。
+  编辑 **mqtt-js-rpc-from-server.sh**，将 **$ACCESS_TOKEN** 替换为设备访问令牌，然后安装 mqtt 客户端库。
+- 运行 **mqtt-js-rpc-from-server.sh** 脚本，控制台应显示 "connected"。
+- 进入 **Dashboards** 创建新 dashboard，例如 "My first control dashboard"，并打开。
+- 点击 dashboard 的 "edit" 按钮。在编辑模式下，点击 dashboard 工具栏上的 "Entity aliases" 按钮。
 
 ![image](/images/user-guide/contribution/widgets/dashboard-toolbar-entity-aliases.png)
 
-- Inside **Entity aliases** pop-up click "Add alias".
-- Fill "Alias name" field, for ex. "My RPC Device Alias".
-- Select "Entity list" in "Filter type" field.
-- Choose "Device" in "Type" field.
-- Select your device in "Entity list" field. In this example "My RPC Device".
+- 在 **Entity aliases** 弹窗中点击 "Add alias"。
+- 填写 "Alias name" 字段，例如 "My RPC Device Alias"。
+- 在 "Filter type" 中选择 "Entity list"。
+- 在 "Type" 中选择 "Device"。
+- 在 "Entity list" 中选择设备，此例为 "My RPC Device"。
 
 ![image](/images/user-guide/contribution/widgets/add-rpc-device-alias.png)
 
-- Click "Add" and then "Save" in **Entity aliases**.
-- Click dashboard "+" button then click "Create new widget" button.
+- 在 **Entity aliases** 中点击 "Add" 再点击 "Save"。
+- 点击 dashboard 的 "+" 按钮，然后点击 "Create new widget" 按钮。
 
 ![image](/images/user-guide/contribution/widgets/dashboard-create-new-widget-button.png)
 
-- Then select **Widget Bundle** where your RPC widget was saved. Select "Control widget" tab.
-- Click your widget. In this example, "My first control widget".
-- From **Add Widget** pop-up, select your device alias in **Target device** section. In this example "My RPC Device Alias".
-- Click **Add**. Your Control widget will appear on the dashboard. Click the dashboard's **Apply changes** button to save the dashboard and exit editing mode.
-- Fill **RPC method** field with RPC method name. For ex. "TestMethod".
-- Fill **RPC params** field with RPC params. For ex. "{ param1: "value1" }".
-- Click **Send RPC command** button. You should see the following response in the widget.
+- 选择保存 RPC 部件的 **Widget Bundle**，并选择 "Control widget" 选项卡。
+- 点击你的部件，此例为 "My first control widget"。
+- 在 **Add Widget** 弹窗的 **Target device** 中选择设备别名，此例为 "My RPC Device Alias"。
+- 点击 **Add**。Control 部件将出现在 dashboard 上。点击 dashboard 的 **Apply changes** 保存并退出编辑。
+- 在 **RPC method** 填写 RPC 方法名，例如 "TestMethod"。
+- 在 **RPC params** 填写 RPC 参数，例如 "{ param1: "value1" }"。
+- 点击 **Send RPC command** 按钮，部件中将显示响应。
 
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-response-one-way.png)
 
-The following output should be printed in the device console:
+设备控制台将输出如下内容：
 
 ```bash
   request.topic: v1/devices/me/rpc/request/0
   request.body: {"method":"TestMethod","params":"{ param1: \"value1\" }"}
 ```
 
-In order to test "Two way" RPC command mode, we need to change the corresponding widget settings property. To do this, perform the following steps:
+要测试「Two way」RPC 模式，需修改对应的部件设置。步骤如下：
 
-- Click dashboard "edit" button. In dashboard edit mode, click **Edit widget** button located in the header of Control widget.
-- In the widget details, select "Advanced" tab and uncheck "Is One Way Command" checkbox.
+- 点击 dashboard 的 "edit" 按钮。在编辑模式下，点击 Control 部件顶部的 **Edit widget** 按钮。
+- 在部件详情中选择 "Advanced" 选项卡，取消勾选 "Is One Way Command"。
 
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-settings.png)
 
-- Click **Apply changes** button on the widget details header. Close details and click dashboard **Apply changes** button.
-- Fill widget fields with RPC method name and params like in previous steps.
-  Click **Send RPC command** button. You should see the following response in the widget.
+- 点击部件详情顶部的 **Apply changes**，关闭详情后再点击 dashboard 的 **Apply changes**。
+- 按前述步骤填写 RPC 方法名和参数。
+  点击 **Send RPC command** 按钮，部件中将显示响应。
 
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-response-two-way.png)
 
-- stop **mqtt-js-rpc-from-server.sh** script.
-  Click **Send RPC command** button. You should see the following response in the widget.
+- 停止 **mqtt-js-rpc-from-server.sh** 脚本。
+  点击 **Send RPC command** 按钮，部件中将显示如下响应。
 
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-response-timeout.png)
 
-In this example, **controlApi** is used to send RPC commands. Additionally, custom widget settings were introduced in order to configure RPC command mode and RPC request timeout.
-The response from the device is handled by **commandObservable**.  It has success and failed callbacks with corresponding response, or rejection objects containing information about request execution result.
+此例使用 **controlApi** 发送 RPC 命令，并引入自定义部件设置以配置 RPC 模式与 RPC 请求超时。
+设备响应由 **commandObservable** 处理，包含成功与失败回调，分别接收响应或包含请求执行结果的拒绝对象。
 
 #### Alarm widget
 
 In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
 Click the **Alarm Widget** button on the **Select widget type** popup.
-The **Widget Editor** will be opened, pre-populated with the content of the default **Alarm** template widget.
+**Widget Editor** 将打开，并预填默认 **Alarm** 模板内容。
 
-- Replace content of the CSS tab in "Resources" section with the following one:
+- 将 "Resources" 区域中 CSS 选项卡内容替换为以下内容：
 
 ```css
 .my-alarm-table th {
@@ -619,7 +619,7 @@ The **Widget Editor** will be opened, pre-populated with the content of the defa
 }
 ``` 
 
-- Put the following HTML code inside the HTML tab of "Resources" section:
+- 将以下 HTML 代码放入 "Resources" 区域的 HTML 选项卡：
 
 ```html
   {% raw  %}<div fxFlex fxLayout="column" style="height: 100%;">
@@ -642,7 +642,7 @@ The **Widget Editor** will be opened, pre-populated with the content of the defa
   </div>{% endraw %}
 ```
 
-- Put the following JSON content inside the "Settings schema" tab of **Settings schema section**:
+- 将以下 JSON 内容放入 **Settings schema section** 的 "Settings schema" 选项卡：
 
 ```json
 {
@@ -667,7 +667,7 @@ The **Widget Editor** will be opened, pre-populated with the content of the defa
 }
 ```
 
-- Put the following JavaScript code inside the "JavaScript" section:
+- 将以下 JavaScript 代码放入 "JavaScript" 区域：
 
 ```javascript
 self.onInit = function() {
@@ -725,25 +725,25 @@ self.onDataUpdated = function() {
 }
 ```
 
-- Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+- 点击 **Widget Editor Toolbar** 中的 **Run** 按钮，在 **Widget preview** 区域查看结果。
 
 ![image](/images/user-guide/contribution/widgets/alarm-widget-sample.png)
 
-In this example, the **alarmSource** and **alarms** properties of [subscription](#subscription-object) are assigned to **$scope** and become accessible within HTML template.
-Inside the HTML, a special [***ngFor**](https://angular.io/api/common/NgForOf) structural angular directive is used in order to iterate over available alarm **dataKeys** of **alarmSource** and render corresponding columns.
-The table rows are rendered by iterating over **alarms** array and corresponding cells rendered by iterating over **dataKeys**.
-The function **getAlarmValue** is fetching alarm value and formatting **createdTime** alarm property using a [DatePipe](https://angular.io/api/common/DatePipe) angular pipe accessible via **date** property of **ctx**.
-The function **getAlarmCellStyle** is used to assign custom cell styles for each alarm cell. In this example, we introduced new settings property called **alarmSeverityColorFunction** that contains function body returning color depending on alarm severity.
-Inside the **getAlarmCellStyle** function there is corresponding invocation of **alarmSeverityColorFunction** with severity value in order to get color for alarm severity cell.
-Note that in this code **onDataUpdated** function is implemented in order to update **alarms** property with latest alarms from subscription and invoke change detection using **detectChanges()** function.
+此例将 [subscription](#subscription-object) 的 **alarmSource** 与 **alarms** 赋值给 **$scope**，从而在 HTML 模板中可访问。
+HTML 中使用 [***ngFor**](https://angular.io/api/common/NgForOf) 指令遍历 **alarmSource** 的 dataKeys 渲染列。
+表格行通过遍历 **alarms** 数组渲染，单元格通过遍历 **dataKeys** 渲染。
+**getAlarmValue** 获取告警值，并通过 **ctx** 的 **date** 属性使用 [DatePipe](https://angular.io/api/common/DatePipe) 格式化 **createdTime**。
+**getAlarmCellStyle** 为告警单元格设置自定义样式。本例引入 **alarmSeverityColorFunction** 设置，根据告警级别返回颜色。
+**getAlarmCellStyle** 内调用 **alarmSeverityColorFunction** 获取告警级别单元格颜色。
+注意本代码中 **onDataUpdated** 用订阅的最新告警更新 **alarms**，并调用 **detectChanges()** 执行变更检测。
 
 #### Static widget
 
 In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
-Click the **Static Widget** button on the **Select widget type** pop-up.
-The **Widget Editor** will be opened pre-populated with the content of default **Static** template widget.
+在 **Select widget type** 弹窗中点击 **Static Widget**。
+**Widget Editor** 将打开，并预填默认 **Static** 模板内容。
 
-- Put the following HTML code inside the HTML tab of "Resources" section:
+- 将以下 HTML 代码放入 "Resources" 区域的 HTML 选项卡：
 
 ```html
   {% raw  %}<div fxFlex fxLayout="column" style="height: 100%;" fxLayoutAlign="space-around stretch">
@@ -752,7 +752,7 @@ The **Widget Editor** will be opened pre-populated with the content of default *
   </div>{% endraw %}
 ```
 
-- Put the following JSON content inside the "Settings schema" tab of **Settings schema section**:
+- 将以下 JSON 内容放入 **Settings schema section** 的 "Settings schema" 选项卡：
 
 ```json
 {
@@ -773,7 +773,7 @@ The **Widget Editor** will be opened pre-populated with the content of default *
 }
 ``` 
 
-- Put the following JavaScript code inside the "JavaScript" section:
+- 将以下 JavaScript 代码放入 "JavaScript" 区域：
 
 ```javascript
 self.onInit = function() {
@@ -789,11 +789,11 @@ self.onInit = function() {
 }
 ```
 
-- Click the **Run** button on the **Widget Editor Toolbar** to see the resulting **Widget preview** section.
+- 点击 **Widget Editor Toolbar** 中的 **Run** 按钮，在 **Widget preview** 区域查看结果。
 
 ![image](/images/user-guide/contribution/widgets/static-widget-sample.png)
 
-This is just a static HTML widget.  There is no subscription data and no special widget API was used.
-Only custom **showAlert** function was implemented showing an alert with the content of **alertContent** property of widget settings.
-You can switch to dashboard edit mode in **Widget preview** section and change value of **alertContent** by changing widget settings in the "Advanced" tab of widget details.
-Then you can see that the new alert content is displayed. 
+这是一个纯静态 HTML 部件，无订阅数据，也未使用特殊部件 API。
+仅实现自定义 **showAlert** 函数，用部件设置的 **alertContent** 显示弹窗。
+可在 **Widget preview** 区域切换到 dashboard 编辑模式，在部件详情的 "Advanced" 选项卡中修改 **alertContent**。
+修改后即可看到新的弹窗内容。 

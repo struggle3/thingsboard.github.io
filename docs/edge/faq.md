@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Frequently Asked Questions
-description: ThingsBoard Edge FAQs
+title: 常见问题
+description: ThingsBoard Edge常见问题
 
 ---
 

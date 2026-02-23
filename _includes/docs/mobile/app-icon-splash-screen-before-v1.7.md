@@ -6,53 +6,53 @@
 * TOC
 {:toc}
 
-### Splash Screen
+### 启动画面
 
-You cannot change the splash screen in pre-1.7.0 versions. It will default to your app's icon.
+1.7.0之前的版本无法更改启动画面。它将默认使用应用图标。
 
-### App Icon
+### 应用图标
 
-The Flutter app comes with a default launcher icon. To change it with your custom one, follow these instructions:
+Flutter应用带有默认启动图标。要使用自定义图标替换，请遵循以下说明：
 
-#### Step 1: Add flutter_launcher_icons Plugin
+#### 步骤1：添加flutter_launcher_icons插件
 
-Add the flutter_launcher_icons plugin to your project via command line:
+通过命令行将flutter_launcher_icons插件添加到项目：
 
 ```bash
 flutter pub add dev:flutter_launcher_icons
 ```
 {: .copy-code}
-#### Step 2: Replace Default Icon
+#### 步骤2：替换默认图标
 
-Replace `thingsboard.png` in the `assets/images` folder with your custom icon. We recommend using a 432×432 pixel image of your logo centered within the canvas.
+用您的自定义图标替换`assets/images`文件夹中的`thingsboard.png`。我们建议使用432×432像素的Logo图像，在画布内居中。
 
-#### Step 3: Run the Generator
+#### 步骤3：运行生成器
 
-Execute the generator to apply your new icon:
+执行生成器以应用新图标：
 
 ```bash
 flutter pub run flutter_launcher_icons
 ```
 {: .copy-code}
 
-#### Step 4: Update Notification Icon (Optional)
+#### 步骤4：更新通知图标（可选）
 
-If you have configured push notifications (see [push notifications setup guide](/docs/pe/mobile/getting-started/#step-2-optional-configure-push-notifications)), we recommend updating the notification icon as well.
+如果您已配置推送通知（参见[推送通知设置指南](/docs/{{docsPrefix}}mobile/getting-started/#step-2-optional-configure-push-notifications)），我们建议同时更新通知图标。
 
-1. Go to [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/icons-notification.html)
-2. Press "Image" and choose your logo
-3. Configure padding if needed
-4. Change the file name to "thingsboard"
-5. Press the download button to get an archive of the "res" folder
-6. Paste the contents to `android/app/src/main` and click "Replace" when prompted
+1. 访问[Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/icons-notification.html)
+2. 点击"Image"并选择您的Logo
+3. 根据需要配置padding
+4. 将文件名更改为"thingsboard"
+5. 点击下载按钮获取"res"文件夹的归档
+6. 将内容粘贴到`android/app/src/main`，出现提示时点击"Replace"
 
 <div style="display: flex; flex-direction: row;">
     <div style="display: flex; flex-direction: column; align-items: center;">
-        <img width="" src="/images/mobile/asset_studio.png" title="Android asset studio flow" alt="Android asset studio flow">
+        <img width="" src="/images/mobile/asset_studio.png" title="Android asset studio流程" alt="Android asset studio flow">
     </div>
 </div>
 
 {% capture pre_version_note %}
-**Note:** Pre-1.7.0 versions have limited customization options compared to newer versions. Consider upgrading to version 1.7.0+ for full branding capabilities.
+**注意：**1.7.0之前版本的自定义选项有限。建议升级到1.7.0+版本以获得完整品牌能力。
 {% endcapture %}
 {% include templates/info-banner.md content=pre_version_note %}

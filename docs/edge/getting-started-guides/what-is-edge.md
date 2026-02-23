@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: What is ThingsBoard Edge?
-description: ThingsBoard Edge features, FAQ
+title: 什么是ThingsBoard Edge？
+description: ThingsBoard Edge功能与常见问题
 redirect_from: "/docs/user-guide/edge-computing/"
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: Smart Waste Management with ThingsBoard for Cities & Industry
-description: Optimize waste collection across cities, industries, and campuses with ThingsBoard’s IoT platform — featuring real-time monitoring, smart alarms, and interactive dashboards for data-driven efficiency and sustainability.
+title: ThingsBoard 面向城市和工业的智慧废物管理
+description: 使用 ThingsBoard 物联网平台优化城市、工业和园区的废物收集——具有实时监测、智能警报和交互式仪表板，实现数据驱动的效率和可持续性。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -20,7 +20,7 @@ contactUsModal: "true"
                 <p class="text">As urban populations grow and sustainability standards tighten, waste management systems must evolve to be more efficient, scalable, and data-driven. Traditional methods — based on fixed collection schedules and manual checks —often result in overflows, resource waste, and high operational costs. ThingsBoard IoT Platform effectively addresses these challenges, offering powerful tools for real-time monitoring, automation, and optimization of waste operations.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_WasteManagement_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/7814f8a0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>            
+                <a id="UseCases_WasteManagement_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/7814f8a0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>            
             </div>
         </div>
         <div class="long">
@@ -37,7 +37,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="waste-management-solution-structure">
-    <h2>Solution structure of waste management</h2>
+    <h2>废物管理解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
@@ -55,7 +55,7 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Waste management dashboard structure</h2>
+        <h2>废物管理仪表板结构</h2>
         <p>
             The dashboard structure in the ThingsBoard waste management solution is modular and intuitive, combining high-level overviews with detailed sensor-level insights. It includes map-based bin tracking, alarm configuration panels, device management interfaces, and historical analytics — ensuring full operational visibility and control from a single interface.        
         </p>
@@ -68,7 +68,7 @@ contactUsModal: "true"
                         <h3>Dashboard overview and sensor states</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>This main dashboard view combines a real-time map with bin locations and a set of dynamic widgets showing battery status, fill levels, and device connectivity. Key metrics such as total bins, low battery alarms, and offline units are summarized for instant system awareness. This visual structure allows operators to monitor geographical distribution, detect anomalies at a glance, and make fast, informed decisions.</p>
+                        <p>This main dashboard view combines a real-time map with bin locations and a set of dynamic 部件 showing battery status, fill levels, and device connectivity. Key metrics such as total bins, low battery alarms, and offline units are summarized for instant system awareness. This visual structure allows operators to monitor geographical distribution, detect anomalies at a glance, and make fast, informed decisions.</p>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header">
-        <h2>Applications of waste management solution</h2>
+        <h2>废物管理解决方案的应用</h2>
         <p>This solution, built on ThingsBoard IoT platform, is highly adaptable and can meet the operational needs of multiple industries—offering real-time monitoring, flexible device integration, smart alarming, and powerful analytics. Here are five key sectors where it delivers value:</p>
     </div>
     <div class="applications-container-large">
@@ -195,11 +195,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of waste management</h2>
+        <h2>废物管理总结</h2>
         <p>ThingsBoard’s waste management solution addresses a critical urban and industrial challenge with precision, scalability, and real-time intelligence. From seamless sensor integration to customizable dashboards and proactive alarming, it empowers stakeholders to manage waste efficiently and sustainably. With IoT at its core, this solution lays the foundation for smarter, cleaner cities and optimized resource management.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -300,8 +300,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_WasteManagement_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/7814f8a0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>            
-                <a id="UseCases_WasteManagement_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_WasteManagement_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/7814f8a0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>            
+                <a id="UseCases_WasteManagement_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
 
             applyImageBg(block);

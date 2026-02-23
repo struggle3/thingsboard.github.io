@@ -1,19 +1,19 @@
-### Monitor the Thingsboard Java application
+### 监控ThingsBoard Java应用
 
-To monitor Thingsboard application we will use the [Visual VM](https://visualvm.github.io/)
-The JMX have been enabled in `docker-compose.yml` with this line
+我们将使用[Visual VM](https://visualvm.github.io/)监控ThingsBoard应用。
+`docker-compose.yml`中已通过以下配置启用JMX：
 
 ```bash
 JAVA_OPTS: " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.rmi.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1"
 ```
 
-Let's **forward JMX port** from Thingsboard instance to the local machine
+将JMX端口从ThingsBoard实例**转发**到本地机器：
 
 ```bash
 ssh -L 9999:127.0.0.1:9999 thingsboard 
 ```
 
-Now we can connect with VisualVM to the Thingsboard application and discover the internals
+现在可使用VisualVM连接ThingsBoard应用并查看内部状态
 
 ![Thingsboard JMX overview with VisualVM](/images/reference/performance-aws-instances/method/chart-examples/performance_test_thingsboard_jmx_visual_vm_overview.png "Thingsboard JMX overview with VisualVM")
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Generate New Metrics
-description: Generate new metrics using Trendz Metric Explorer
+title: 生成新指标
+description: 使用 Trendz Metric Explorer 生成新指标
 
 metric-definition:
   0:

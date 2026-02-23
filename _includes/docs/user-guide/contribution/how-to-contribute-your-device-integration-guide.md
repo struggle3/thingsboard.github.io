@@ -1,8 +1,7 @@
+本网站为开源项目，源代码存放于此 [仓库](https://github.com/thingsboard/thingsboard.github.io)。欢迎任何人参与贡献。
 
-Our website is open-sourced. You may find the code of in this [repo](https://github.com/thingsboard/thingsboard.github.io). Everyone can contribute to the website.
-
-* [Step 1] Fork this [repo](https://github.com/thingsboard/thingsboard.github.io).
-* [Step 2] Add new file into corresponding **device-library** folders
-* [Step 3] Push changes to your fork.
-* [Step 4] Create pull request.
-* [Step 5] Optional. You may notify us about your Pull Request (with Pull Request #) via [Contact us](/docs/contact-us/) form.
+* [步骤 1] Fork 此 [仓库](https://github.com/thingsboard/thingsboard.github.io)。
+* [步骤 2] 在对应的 **device-library** 目录下添加新文件。
+* [步骤 3] 将修改推送到你的 fork。
+* [步骤 4] 创建 Pull Request。
+* [步骤 5] 可选。可通过 [联系我们](/docs/contact-us/) 表单告知我们你的 Pull Request（附上 Pull Request 编号）。

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect AM308 Lorawan 9-IN-1 IAQ Sensor to ThingsBoard?"
+title: "如何将AM308 Lorawan 9-IN-1 IAQ Sensor连接到ThingsBoard？"
 redirect_to: "/device-library/paas/am308-sensor/"
 ---

@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Monolith setup using GCP infrastructure 
-description: ThingsBoard IoT platform monolith setup with Kubernetes in GKE
+title: 使用 GCP 基础设施的单体设置
+description: 使用 GKE 中的 Kubernetes 进行 ThingsBoard IoT 平台单体设置
 
 ---
 
@@ -12,20 +12,20 @@ description: ThingsBoard IoT platform monolith setup with Kubernetes in GKE
 * TOC
 {:toc}
 
-This guide will help you to set up ThingsBoard in monolith mode using [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine). 
+本指南将帮助您使用 [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) 以单体模式设置 ThingsBoard。
 
-## Prerequisites
+## 前置条件
 
 {% include templates/install/gcp/gke-prerequisites.md %}
 
-## Pull ThingsBoard PE images from docker hub
+## 从 Docker Hub 拉取 ThingsBoard PE 镜像
 
 {% assign checkoutMode = "monolith" %}
 {% include templates/install/dockerhub/checkout.md %}
 
-## Step 1. Clone ThingsBoard PE K8S scripts repository
+## 步骤 1. 克隆 ThingsBoard PE K8S 脚本仓库
 
-Clone the repository and change the working directory to GCP scripts.
+克隆仓库并将工作目录切换到 GCP 脚本目录。
 
 ```bash
 git clone -b release-{{ site.release.ce_full_ver }} https://github.com/thingsboard/thingsboard-pe-k8s.git --depth 1
@@ -33,56 +33,56 @@ cd thingsboard-pe-k8s/gcp/monolith
 ```
 {: .copy-code}
 
-## Step 2. Define environment variables
+## 步骤 2. 定义环境变量
 
 {% assign tbClusterName = "tb-pe" %}
 {% include templates/install/gcp/env-variables-monolith.md %}
 
-## Step 3. Configure and create GKE cluster
+## 步骤 3. 配置并创建 GKE 集群
 
 {% include templates/install/gcp/zonal-gke-cluster.md %}
 
-## Step 4. Update the context of kubectl
+## 步骤 4. 更新 kubectl 的上下文
 
 {% include templates/install/gcp/update-kubectl-zone.md %}
 
-## Step 5. Provision Databases
+## 步骤 5. 配置数据库
 
-### Step 5.1 Google Cloud SQL (PostgreSQL) Instance
+### 步骤 5.1 Google Cloud SQL (PostgreSQL) 实例
 
 {% assign tbDbName = "thingsboard" %}
 {% include templates/install/gcp/provision-postgresql.md %}
 
-### Step 5.2 Cassandra (optional)
+### 步骤 5.2 Cassandra（可选）
 
 {% include templates/install/gcp/configure-cassandra.md %}
 
-## Step 6. Configure license key
+## 步骤 6. 配置许可证密钥
 
 {% include templates/install/k8s-license-secret.md %}
 
-## Step 7. Installation
+## 步骤 7. 安装
 
 {% include templates/install/gcp/install.md %}
 
-## Step 8. Starting
+## 步骤 8. 启动
 
 {% include templates/install/gcp/start-monolith.md %}
 
-## Step 9. Configure Load Balancers
+## 步骤 9. 配置负载均衡器
 
-### 9.1 Configure HTTP(S) Load Balancer
+### 9.1 配置 HTTP(S) 负载均衡器
 
 {% include templates/install/gcp/configure-http.md %}
 
-#### Transparent Load Balancer
+#### 透明负载均衡器
 
-This type of the load balancer requires you to provision and maintain valid SSL certificate on your own.
-Follow the generic [HTTP over SSL](/docs/{{docsPrefix}}user-guide/ssl/http-over-ssl/#ssl-configuration-using-pem-certificates-file) guide
-to configure required environment variables in the *tb-node.yml* file.
+此类型负载均衡器需您自行配置并维护有效 SSL 证书。
+请按照通用 [HTTP over SSL](/docs/{{docsPrefix}}user-guide/ssl/http-over-ssl/#ssl-configuration-using-pem-certificates-file) 指南，
+在 *tb-node.yml* 文件中配置所需环境变量。
 
-Afterwards, setup TCP load balancer to forward traffic from 443 port to corresponding services port 8080.
-This version of setup does not support an automatic redirect of http port 80 to https port 443.
+然后，设置 TCP 负载均衡器，将 443 端口流量转发到对应服务的 8080 端口。
+此设置版本不支持将 http 80 端口自动重定向到 https 443 端口。
 
 ```bash
  kubectl apply -f receipts/transparent-http-load-balancer.yml.yml
@@ -90,47 +90,47 @@ This version of setup does not support an automatic redirect of http port 80 to 
 {: .copy-code}
 
 
-### 9.2. Configure MQTT Load Balancer (Optional)
+### 9.2. 配置 MQTT 负载均衡器（可选）
 
 {% assign tbServicesFile = "tb-node.yml" %}
 {% include templates/install/gcp/configure-mqtt.md %}
 
-### 9.3. Configure UDP Load Balancer (Optional)
+### 9.3. 配置 UDP 负载均衡器（可选）
 
 {% include templates/install/gcp/configure-udp.md %}
 
-### 9.4. Configure Edge Load Balancer (Optional)
+### 9.4. 配置 Edge 负载均衡器（可选）
 
 {% include templates/install/k8s-configure-edge-load-balancer.md %}
 
-## Step 10. Configure Trendz (Optional)
+## 步骤 10. 配置 Trendz（可选）
 
-### 10.1. Pull Trendz images from docker hub
+### 10.1. 从 Docker Hub 拉取 Trendz 镜像
 
 {% include templates/install/trendz/pull_trendz.md %}
 
-### 10.2. Create a Trendz database in the existing Google Cloud SQL (PostgreSQL) Instance
+### 10.2. 在现有 Google Cloud SQL (PostgreSQL) 实例中创建 Trendz 数据库
 
 {% include templates/install/trendz/gcp/k8s-trendz-db-creating.md %}
 
-### 10.3. Trendz starting
+### 10.3. 启动 Trendz
 
 {% include templates/install/trendz/k8s-trendz-starting.md %}
 
-## Step 11. Using
+## 步骤 11. 使用
 
 {% include templates/install/gcp/using.md %}
 
-## Upgrading
+## 升级
 
-### Upgrading to new ThingsBoard version
+### 升级到新版 ThingsBoard
 
 {% include templates/install/gcp/upgrading-monolith.md %}
 
-### Upgrading to new Trendz version (Optional)
+### 升级到新版 Trendz（可选）
 
 {% include templates/install/trendz/k8s-trendz-upgrading.md %}
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}

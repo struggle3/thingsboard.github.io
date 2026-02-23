@@ -1,6 +1,6 @@
-bigheader: "Getting Started"
-abstract: "Getting Started with TBMQ."
+bigheader: "入门"
+abstract: "TBMQ入门。"
 hidetoc: "true"
 toc:
-  - title: Getting Started
+  - title: 入门
     path: /docs/mqtt-broker/getting-started/

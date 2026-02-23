@@ -1,15 +1,15 @@
 {% capture edge-previousVersion %}
-These steps are applicable for Edge {{previousVersion}} version.
+以下步骤适用于Edge {{previousVersion}} 版本。
 {% endcapture %}
 {% include templates/info-banner.md content=edge-previousVersion %}
 
-Set the terminal in the directory which contains the "docker-compose.yml" file, and run the following command to stop and remove the currently running TB Edge container (if it's still running):
+将终端切换到包含 "docker-compose.yml" 文件的目录，运行以下命令停止并移除当前运行的TB Edge容器（若仍在运行）：
 ```
 docker compose stop mytbedge
 ```
 {: .copy-code}
 
-Modify the main docker compose file (docker-compose.yml) for **ThingsBoard Edge** and update the image version:
+修改 **ThingsBoard Edge** 的主docker compose文件（docker-compose.yml）并更新镜像版本：
 
 ```text
 sed -i 's|thingsboard/tb-edge:{{previousVersion}}|thingsboard/tb-edge:{{versionName}}|' docker-compose.yml
@@ -18,9 +18,8 @@ sed -i 's|thingsboard/tb-edge:{{previousVersion}}|thingsboard/tb-edge:{{versionN
 
 {% include templates/edge/install/info-patch-upgrade.md %}
 
-To start this docker compose, run the following command:
+要启动此docker compose，运行以下命令：
 ```
 docker compose up -d && docker compose logs -f mytbedge
 ```
 {: .copy-code}
-

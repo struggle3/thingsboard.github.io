@@ -2,7 +2,7 @@
 {:toc}
 
 In ThingsBoard, a **User** is an entity with credentials to access the platform.   
-Users in [ThingsBoard Professional Edition](https://thingsboard.io/products/thingsboard-pe/){:target="_blank"} benefit from an extended [access control model](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"} that enables the creation of flexible, multi-level organizational structures with fine-grained control over entities, resources, dashboards, and more.
+Users in [ThingsBoard专业版](https://thingsboard.io/products/thingsboard-pe/){:target="_blank"} benefit from an extended [access control model](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"} that enables the creation of flexible, multi-level organizational structures with fine-grained control over entities, resources, dashboards, and more.
 
 **Key characteristics of users:**
 - **Ownership**: Each user belongs to a specific [Tenant](/docs/{{docsPrefix}}user-guide/ui/tenants/){:target="_blank"} or [Customer](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"}.

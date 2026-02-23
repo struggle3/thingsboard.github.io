@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-gw
-title: Service RPC Methods
-description: Service RPC Methods
+title: 服务 RPC 方法
+description: 服务 RPC 方法
 
 ---
 
@@ -10,18 +10,18 @@ description: Service RPC Methods
 {:toc}
 
 
-This guide explains how to use RPC API in ThingsBoard IoT Gateway.  
+本指南说明如何在 ThingsBoard IoT Gateway 中使用 RPC API。  
 
-For the purpose of this tutorial, you need:  
-1. Locally installed instance of ThingsBoard platform (In case you are new with ThingsBoard [use this 'how to install' documentation](/docs/user-guide/install/installation-options/)).
-2. [Installed](/docs/iot-gateway/installation/) and [configured](/docs/iot-gateway/configuration/) ThingsBoard IoT Gateway. 
+本教程需要：  
+1. 本地安装的 ThingsBoard 平台实例（若为新用户请参考 [安装文档](/docs/user-guide/install/installation-options/)）。
+2. 已 [安装](/docs/iot-gateway/installation/) 并 [配置](/docs/iot-gateway/configuration/) ThingsBoard IoT Gateway。 
 
-## Step 1. Create a dashboard to use RPC API in ThingsBoard IoT Gateway
+## 步骤 1：创建用于 ThingsBoard IoT Gateway RPC API 的仪表板
 
-To use the debug terminal we have to add **RPC debug terminal** widget from **Control widget** bundle.<br>
-To do this we use following steps:
+要使用调试终端，需从**控制部件**包添加 **RPC 调试终端** 部件。<br>
+按以下步骤操作：
 
-  - Open **Dashboards** tab;
+  - 打开 **仪表板** 标签页；
   <br><br>
   ![](/images/gateway/service-rpc-methods-1.png)
 

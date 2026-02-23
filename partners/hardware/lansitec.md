@@ -1,9 +1,8 @@
 ---
 layout: hardware-partner
 hardware-partner: Lansitec
-description: Lansitec is an official ThingsBoard hardware partner. Learn about Lansitec products, supported use cases, and integration guides with the ThingsBoard IoT platform.
+description: Lansitec 是 ThingsBoard 官方硬件合作伙伴。了解 Lansitec 产品、支持的用例及与 ThingsBoard IoT 平台的集成指南。
 
 ---
-
 
 

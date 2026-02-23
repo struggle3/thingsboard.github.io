@@ -1,18 +1,18 @@
 ---
 layout: docwithnav-gw
-title: SNMP Connector Configuration
-description: SNMP monitoring support for ThingsBoard IoT Gateway
+title: SNMP 连接器配置
+description: ThingsBoard IoT Gateway 的 SNMP 监控支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to get familiar with SNMP Connector configuration for ThingsBoard IoT Gateway.  
-Use [general configuration guide](/docs/iot-gateway/configuration/) to enable this Connector.  
-The purpose of this Connector is to get data from SNMP manager objects and write some data to them.  
+本指南将帮助您熟悉 ThingsBoard IoT Gateway 的 SNMP 连接器配置。  
+请使用 [通用配置指南](/docs/iot-gateway/configuration/) 启用此连接器。  
+该连接器的用途是从 SNMP 管理器对象获取数据并向其写入数据。  
 
-This connector is useful when you have SNMP manager in your network and you would like to push the data to the ThingsBoard.    
+当您的网络中有 SNMP 管理器并希望将数据推送至 ThingsBoard 时，此连接器非常有用。    
 
 We will describe connector configuration file below.  
 

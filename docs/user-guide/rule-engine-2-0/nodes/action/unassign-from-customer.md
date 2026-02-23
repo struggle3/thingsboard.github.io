@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: unassign from customer
-description: Unassigns the message originator from a customer.
+title: 从客户取消分配
+description: 将消息 originator 从客户取消分配。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

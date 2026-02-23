@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect M5Stack Timer Camera X to ThingsBoard?
-category: Microcontrollers
+title: 如何将 M5Stack Timer Camera X 连接至 ThingsBoard？
+category: 微控制器
 chip: ESP32
 connectivity: [HTTP, MQTT, WIFI, Bluetooth]
 vendor: M5Stack

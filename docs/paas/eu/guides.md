@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-paas-eu
-title: Guides
+title: 指南
 notitle: "true"
 redirect_from: "/docs/paas/eu/user-guide/"
 ---

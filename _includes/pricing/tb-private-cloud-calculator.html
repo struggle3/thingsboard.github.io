@@ -4,18 +4,18 @@
     <div class="modal-content">
         <div class="modal-body">
             <div id="tbPcCloseBtn" class="close-button">
-                <img src="/images/pricing/close-icon.svg" alt="Close icon">
+                <img src="/images/pricing/close-icon.svg" alt="关闭">
             </div>
             <div class="card calculator">
                 <div class="calculator-header">
-                    <h2>Private Cloud plan calculator</h2>
+                    <h2>私有云套餐计价器</h2>
                     <div class="mode-tabs">
                         <button class="mode-tab active" data-mode="basic">Basic</button>
                         <button class="mode-tab" data-mode="advanced">
                             Advanced
                             <span class="tooltip">
                                 <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Enable multiple device profiles</span>
+                                <span class="tooltip-text">启用多设备配置</span>
                             </span>
                         </button>
                     </div>
@@ -25,20 +25,20 @@
                     </div>
                     <div class="input-group addons">
                         <p class="label">
-                            Add-ons
+                            附加模块
                             <span class="tooltip">
                                 <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Optional features to enhance your plan</span>
+                                <span class="tooltip-text">用于增强套餐的可选功能</span>
                             </span>
                         </p>
                         <div class="add-ons-grid">
                             <div class="addon-card" id="tbPcEdgeCard" data-addon="edgeComputing">
                                 <div class="addon-header">
                                     <span class="addon-title">
-                                        Edge Computing
+                                        边缘计算
                                         <span class="tooltip">
                                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Deploy edge computing instances for local data processing</span>
+                                            <span class="tooltip-text">部署边缘计算实例进行本地数据处理</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -46,9 +46,9 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description"><span id="tbPcEdgeIncludedText">10</span> Edge Computing instances are included.</p>
+                                <p class="addon-description"><span id="tbPcEdgeIncludedText">10</span> 个边缘计算实例已包含。</p>
                                 <div class="addon-counter hidden" data-addon-counter="edgeComputing">
-                                    <label>Edge Instances</label>
+                                    <label>边缘实例</label>
                                     <div class="stepper-control">
                                         <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease edge instances">−</button>
                                         <input type="number" value="10" min="1" id="tbPcEdgeInstances" aria-label="Edge instances count">
@@ -63,7 +63,7 @@
                                         Trendz Analytics
                                         <span class="tooltip">
                                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Advanced analytics and visualization for your IoT data</span>
+                                            <span class="tooltip-text">面向IoT数据的高级分析与可视化</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -71,16 +71,16 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description">Advanced analytics for your solution.</p>
+                                <p class="addon-description">面向您解决方案的高级分析。</p>
                             </div>
 
                             <div class="addon-card" id="tbPcMobileAppCard" data-addon="mobileApp">
                                 <div class="addon-header">
                                     <span class="addon-title">
-                                        White-labeled Mobile App
+                                        白标移动应用
                                         <span class="tooltip">
                                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Customizable mobile app branded for your company</span>
+                                            <span class="tooltip-text">可定制的、带有公司品牌的移动应用</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -88,16 +88,16 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description">Customizable mobile app for your end-users.</p>
+                                <p class="addon-description">面向终端用户的可定制移动应用。</p>
                             </div>
 
                             <div class="addon-card" id="tbPcDevQaCard" data-addon="devQaInstances">
                                 <div class="addon-header">
                                     <span class="addon-title">
-                                        Dev & QA Instances
+                                        开发与质量保证实例
                                         <span class="tooltip">
                                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Separate environments for development, testing, and CI/CD pipelines</span>
+                                            <span class="tooltip-text">用于开发、测试和CI/CD流程的独立环境</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -105,9 +105,9 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description">Environments for dev, test & CI/CD.</p>
+                                <p class="addon-description">用于开发、测试和CI/CD的环境。</p>
                                 <div class="addon-counter hidden" data-addon-counter="devQaInstances">
-                                    <label>Dev Instances</label>
+                                    <label>开发实例</label>
                                     <div class="stepper-control">
                                         <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease dev instances">−</button>
                                         <input type="number" value="1" min="1" id="tbPcDevInstances" aria-label="Dev instances count">
@@ -120,7 +120,7 @@
                 </div>
                 <div class="actions-container">
                     <div class="reset-container">
-                        <button id="tbPcResetBtn" class="button reset">Reset</button>
+                        <button id="tbPcResetBtn" class="button reset">重置</button>
                     </div>
                 </div>
             </div>
@@ -131,15 +131,15 @@
         <div class="modal-content">
             <div class="modal-wrapper">
                 <div class="modal-header">
-                    <h2>Upload sample to calculate data points</h2>
+                    <h2>上传示例以计算数据点</h2>
                     <div id="tbPcClosePayloadModalBtn" class="close-button">
-                        <img src="/images/pricing/close-icon.svg" alt="Close icon">
+                        <img src="/images/pricing/close-icon.svg" alt="关闭">
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="tbPcJsonInput">JSON value
+                    <label for="tbPcJsonInput">JSON值
                         <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                            <span class="tooltip-text">For simplicity, this editor supports only JSON format. While ThingsBoard supports other payload formats in real-world use cases, this calculator is designed to keep things easy and straightforward.</span>
+                            <span class="tooltip-text">为简化起见，此编辑器仅支持JSON格式。虽然ThingsBoard在实际使用中支持其他负载格式，但本计价器设计为简单直接。</span>
                         </span>
                     </label>
                     <textarea id="tbPcJsonInput" spellcheck="false"></textarea>
@@ -147,9 +147,9 @@
                 </div>
                 <div class="footer">
                     <div class="data-points">
-                        Data points per message: <span id="tbPcDataPointCount">0</span>
+                        每条消息的数据点：<span id="tbPcDataPointCount">0</span>
                     </div>
-                    <button class="button" id="tbPcApplyPayloadBtn">Apply payload</button>
+                    <button class="button" id="tbPcApplyPayloadBtn">应用负载</button>
                 </div>
             </div>
         </div>
@@ -230,14 +230,14 @@
     const tbPcDeviceProfileTemplate = `
     <div class="device-profile" data-profile-id="{PROFILE_ID}">
         <div class="wrapper">
-            <h3>Device profile {PROFILE_NUMBER}</h3>
-            <div class="remove-profile-btn hidden"><img src="/images/pricing/close-icon.svg" alt="Close icon"></div>
+            <h3>设备配置 {PROFILE_NUMBER}</h3>
+            <div class="remove-profile-btn hidden"><img src="/images/pricing/close-icon.svg" alt="关闭"></div>
             <div class="input-group">
                 <div class="input-label-group xs-row">
                     <label for="tbPcDevices-{PROFILE_ID}" class="label">
-                        Number of Devices
+                        设备数量
                         <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                            <span class="tooltip-text">The total number of IoT devices that will connect to ThingsBoard</span>
+                            <span class="tooltip-text">将连接到ThingsBoard的IoT设备总数</span>
                         </span>
                     </label>
                     <input id="tbPcDevices-{PROFILE_ID}" type="number" value="5000" min="0" class="input input-right" data-profile-input="devices">
@@ -257,16 +257,16 @@
             <div class="input-group">
                 <div class="input-label-group">
                     <label for="tbPcMessages-{PROFILE_ID}" class="label">
-                        Messages per Device
+                        每台设备的消息数
                         <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                            <span class="tooltip-text">How many messages each device sends in the selected time period</span>
+                            <span class="tooltip-text">所选时间周期内每台设备发送的消息数</span>
                         </span>
                     </label>
                     <div class="input-with-controls">
                         <select id="tbPcMessageUnit-{PROFILE_ID}" class="select" data-profile-select="messageUnit">
-                            <option value="minute">Per minute</option>
-                            <option value="hour" selected>Per hour</option>
-                            <option value="day">Per day</option>
+                            <option value="minute">每分钟</option>
+                            <option value="hour" selected>每小时</option>
+                            <option value="day">每天</option>
                         </select>
                         <div class="stepper-control">
                             <button type="button" class="stepper-btn minus" data-stepper="messages" data-action="decrement" aria-label="Decrease messages">−</button>
@@ -279,9 +279,9 @@
             <div class="input-group">
                 <div class="input-label-group">
                     <label for="tbPcDataPoints-{PROFILE_ID}" class="label">
-                        Data Points per Message
+                        每条消息的数据点
                         <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                            <span class="tooltip-text">How many data points are included in each message</span>
+                            <span class="tooltip-text">每条消息中包含的数据点数量</span>
                         </span>
                     </label>
                     <div class="input-with-controls">
@@ -297,9 +297,9 @@
             <div class="input-group">
                 <div class="input-label-group">
                     <label for="tbPcRetention-{PROFILE_ID}" class="label">
-                        Data Retention (Months)
+                        数据保留（月）
                         <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                            <span class="tooltip-text">How long you need to store your data</span>
+                            <span class="tooltip-text">您需要存储数据的时间</span>
                         </span>
                     </label>
                     <div class="input-with-controls">
@@ -316,7 +316,7 @@
             <div class="add-profile-btn">
                 <hr>
                 <img src="/images/pricing/pricing-plus-icon.svg" alt="Plus icon">
-                <span>Add device profile</span>
+                <span>添加设备配置</span>
                 <hr>
             </div>
         </div>
@@ -436,7 +436,7 @@
         const allProfiles = tbPcUi.profilesContainer.querySelectorAll('.device-profile');
         allProfiles.forEach((el, index) => {
             const h3 = el.querySelector('h3');
-            if (h3) h3.textContent = `Device profile ${index + 1}`;
+            if (h3) h3.textContent = `设备配置 ${index + 1}`;
 
             const removeBtn = el.querySelector('.remove-profile-btn');
             if (removeBtn) {
@@ -776,31 +776,31 @@
         tbPcUi.results.innerHTML = `
             <div class="card-header">
                 <div class="header-top">
-                    <h3>Calculation summary</h3>
+                    <h3>计算摘要</h3>
                     <div class="header-actions">
                         <div id="tbPcCopyBtn" class="icon-button" title="Copy summary">${copyIcon}<span class="tooltip-text">Copy calculation summary</span></div>
                         <div id="tbPcDownloadBtn" class="icon-button" title="Download">${downloadIcon}<span class="tooltip-text">Download summary</span></div>
                     </div>
                 </div>
                 <div class="optimal-plan-row">
-                    <span>Optimal plan:</span>
+                    <span>最优套餐：</span>
                     <span class="plan-link">${plan.name}</span>
                 </div>
             </div>
             <div class="results-scroll-container">
                 ${planDetailsHtml}
-                <div class="addons-separator"><span>Add-ons</span></div>
+                <div class="addons-separator"><span>附加模块</span></div>
                 ${addOnsSectionsHtml}
             </div>
             <div class="results-footer">
                 <div class="toggle-container">
                     <div class="billing-toggle">
-                        <span class="label-text ${!isAnnual ? 'selected' : ''}" id="tbPcLabelMonthly">Monthly</span>
+                        <span class="label-text ${!isAnnual ? 'selected' : ''}" id="tbPcLabelMonthly">月付</span>
                         <label class="switch">
                             <input type="checkbox" id="tbPcBillingSwitch" ${isAnnual ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
-                        <span class="label-text ${isAnnual ? 'selected' : ''}" id="tbPcLabelAnnual">Annual (Save 10%)</span>
+                        <span class="label-text ${isAnnual ? 'selected' : ''}" id="tbPcLabelAnnual">年付（省10%）</span>
                     </div>
                 </div>
                 <div class="results-total">
@@ -810,7 +810,7 @@
                         <span class="tooltip">${infoIcon}<span class="tooltip-text">${totalTooltip}</span></span>
                     </span>
                 </div>
-                <a id="tbPcContactUs" class="button" href="/docs/contact-us/">Contact Us</a>
+                <a id="tbPcContactUs" class="button" href="/docs/contact-us/">联系我们</a>
             </div>`;
 
         tbPcInitExpandable();
@@ -941,13 +941,13 @@
         tbPcUi.results.innerHTML = `
             <div class="card-header enterprise-header">
                 <div class="header-top">
-                    <h3>Deployment Summary</h3>
+                    <h3>部署摘要</h3>
                     <div class="header-actions">
                         <div id="tbPcCopyBtn" class="icon-button" title="Copy summary">${copyIcon}<span class="tooltip-text">Copy deployment summary</span></div>
                         <div id="tbPcDownloadBtn" class="icon-button" title="Download">${downloadIcon}<span class="tooltip-text">Download summary</span></div>
                     </div>
                 </div>
-                <h4 class="wrap">You are building at an impressive scale.</h4>
+                <h4 class="wrap">您正在构建令人瞩目的规模。</h4>
             </div>
             <div class="results-scroll-container">
                 <div class="results-section">
@@ -957,10 +957,10 @@
                         ${tbPcCreateItem('Estimated storage', `${formatNumber(totalStorageNeededInGB, 2)} GB`, null, true)}
                     </div>
                 </div>
-                <p class="contact-us-text enterprise-text">You have reached a tier where economies of scale apply. Let's talk about aligning our pricing structure with your specific rollout schedule and volume requirements.</p>
+                <p class="contact-us-text enterprise-text">您已达到规模经济适用的层级。让我们讨论如何根据您的具体部署计划和规模需求调整定价结构。</p>
             </div>
             <div class="results-footer">
-                <a id="tbPcContactUs" class="button" href="/docs/contact-us/">Get Enterprise Quote</a>
+                <a id="tbPcContactUs" class="button" href="/docs/contact-us/">获取企业报价</a>
             </div>`;
 
         tbPcUpdateEnterpriseClipboard(inputs, totalDataPointsPerMinute, totalDevices, totalStorageNeededInGB);
@@ -1309,7 +1309,7 @@
         } catch (error) {
             tbPcUi.dataPointCount.textContent = '0';
             tbPcUi.dataPointCount.parentElement.classList.remove('visible');
-            tbPcUi.errorMessage.textContent = 'Please enter a valid JSON value.';
+            tbPcUi.errorMessage.textContent = '请输入有效的JSON值。';
             tbPcUi.jsonInput.classList.add('error');
         }
     };

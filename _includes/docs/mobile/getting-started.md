@@ -10,46 +10,46 @@
 * TOC
 {:toc}
 
-Welcome! This guide walks you through creating and configuring your own {{appPrefix}} mobile application from scratch for your {{appPrefix}} instance.
+欢迎！本指南将带您从零开始为{{appPrefix}}实例创建和配置您自己的{{appPrefix}}移动应用。
 
-**Before you begin**, choose the mobile app version that matches your ThingsBoard platform using the [compatibility matrix](/docs/{% if docsPrefix == 'pe/' %}pe/{% endif %}mobile/#compatibility-table){:target="_blank"}. Using incompatible versions is the most common cause of sign‑in issues or unexpected behavior.
+**开始之前**，请使用[兼容性表](/docs/{% if docsPrefix == 'pe/' %}pe/{% endif %}mobile/#compatibility-table){:target="_blank"}选择与ThingsBoard平台匹配的移动应用版本。使用不兼容的版本是登录问题或意外行为的最常见原因。
 
-## Prerequisites
+## 前置条件
 
-- Access to a {{appPrefix}} instance. The easiest way is to use [ThingsBoard Cloud](https://thingsboard.io/installations/). Alternatively, install {{appPrefix}} using the official [installation guide](/docs/user-guide/install/{{docsPrefix}}installation-options/){:target="_blank"}.
-- Prepare the environment for building the {{appPrefix}} mobile application:
-  - [Install the Flutter SDK](https://flutter.dev/docs/get-started/install){:target="_blank"} version that corresponds to your app version (see the [compatibility matrix](/docs/{% if docsPrefix == 'pe/' %}pe/{% endif %}mobile/#compatibility-table){:target="_blank"}).
-  - (Recommended) [Configure your IDE (e.g., Visual Studio Code)](https://flutter.dev/docs/get-started/editor){:target="_blank"} for Flutter development.
-  - If you&#39;re new to Flutter, [review the "Write your first Flutter app" tutorial](https://flutter.dev/docs/get-started/test-drive){:target="_blank"}.
+- 可访问{{appPrefix}}实例。最简单的方式是使用[ThingsBoard Cloud](https://thingsboard.io/installations/)。或者，使用官方[安装指南](/docs/user-guide/install/{{docsPrefix}}installation-options/){:target="_blank"}安装{{appPrefix}}。
+- 准备构建{{appPrefix}}移动应用的环境：
+  - [安装Flutter SDK](https://flutter.dev/docs/get-started/install){:target="_blank"}，版本需与您的应用版本对应（参见[兼容性表](/docs/{% if docsPrefix == 'pe/' %}pe/{% endif %}mobile/#compatibility-table){:target="_blank"}）。
+  - （推荐）[为Flutter开发配置您的IDE（如Visual Studio Code）](https://flutter.dev/docs/get-started/editor){:target="_blank"}。
+  - 如果您是Flutter新手，请[查阅"编写您的第一个Flutter应用"教程](https://flutter.dev/docs/get-started/test-drive){:target="_blank"}。
 
-## Step 1: Create a bundle in the Mobile center
+## 步骤1：在移动中心创建bundle
 
-The [Mobile center](/docs/{{docsPrefix}}mobile-center/mobile-center/){:target="_blank"} is your control hub to create, configure, and manage mobile apps. 
-It lets you quickly launch a mobile app tailored to your {{appPrefix}} platform.
+[移动中心](/docs/{{docsPrefix}}mobile-center/mobile-center/){:target="_blank"}是创建、配置和管理移动应用的控制中心。
+它让您能够快速启动为{{appPrefix}}平台定制的移动应用。
 
 <br>
 
-<b><font size="4">Create a new bundle</font></b>
+<b><font size="4">创建新bundle</font></b>
 
-A [bundle](/docs/{{docsPrefix}}mobile-center/mobile-center/#bundle){:target="_blank"} contains both your Android and/or iOS app configurations — including [OAuth 2.0](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"} settings {% if docsPrefix == null %}and [layout](/docs/mobile-center/mobile-center/#layout){:target="_blank"} preferences{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}, [layout](/docs/pe/mobile-center/mobile-center/#layout){:target="_blank"} preferences, and [self registration](/docs/pe/mobile-center/mobile-center/#self-registration){:target="_blank"} options{% endif %} — all in one place for easier setup.
+[bundle](/docs/{{docsPrefix}}mobile-center/mobile-center/#bundle){:target="_blank"}包含您的Android和/或iOS应用配置——包括[OAuth 2.0](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"}设置{% if docsPrefix == null %}以及[布局](/docs/mobile-center/mobile-center/#layout){:target="_blank"}偏好{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}、[布局](/docs/pe/mobile-center/mobile-center/#layout){:target="_blank"}偏好和[自助注册](/docs/pe/mobile-center/mobile-center/#self-registration){:target="_blank"}选项{% endif %}——全部集中在一处，便于设置。
 
-Add a new bundle: 
-- Go to the "**Mobile center**" page.
-- On the "**Bundle**" tab, click the "**+ Add bundle**" button in the top-right corner.
+添加新bundle：
+- 进入"**移动中心**"页面。
+- 在"**Bundle**"选项卡中，点击右上角的"**+ 添加bundle**"按钮。
 
-The create bundle dialog opens.
+创建bundle对话框将打开。
 
 {% assign addNewBundleCE = '
     ===
         image: /images/mobile-center/add-new-bundle-1-ce.png,
-        title: Go to the "**Mobile center**" page → "**Bundle**" tab, then click "**+ Add bundle**" in the upper-right corner.
+        title: 进入"**移动中心**"页面 → "**Bundle**"选项卡，然后点击右上角的"**+ 添加bundle**"。
 '
 %}
 
 {% assign addNewBundlePE = '
     ===
         image: /images/mobile-center/add-new-bundle-1-pe.png,
-title: Go to the "**Mobile center**" page → "**Bundle**" tab, then click "**+ Add bundle**" in the upper-right corner.
+title: 进入"**移动中心**"页面 → "**Bundle**"选项卡，然后点击右上角的"**+ 添加bundle**"。
 '
 %}
 
@@ -59,55 +59,55 @@ title: Go to the "**Mobile center**" page → "**Bundle**" tab, then click "**+ 
 {% include images-gallery.liquid imageCollection=addNewBundleCE %}
 {% endif %}
 
-<br><b><font size="4">Basic settings</font></b>
+<br><b><font size="4">基本设置</font></b>
 
-- Enter a **bundle title**.
-- Click "**Create new**" next to your target mobile platform (**Android** or **iOS**).   
-  This opens the **Add application** dialog:
-  - Enter the **application package** name.
-  - An **Application Secret** will be generated automatically (you can also set your own).
-  - Set the **Published** application status – application is ready for release.
-  - (Optional) Specify **minimum** and **latest** app versions + release notes.
-  - Add **store information**:
-      - for **Android**: 
-        - **Google Play Store link**.
-        - **SHA256 certificate fingerprints**.
-      - for **iOS**: 
-        - **App Store link**.
-        - **App ID**.
-  - Click "**Add**" to save and continue.
+- 输入**bundle标题**。
+- 在目标移动平台（**Android**或**iOS**）旁点击"**创建新**"。
+  这将打开**添加应用**对话框：
+  - 输入**应用包**名称。
+  - **应用密钥**将自动生成（您也可以设置自己的）。
+  - 设置**已发布**应用状态——应用已准备好发布。
+  - （可选）指定**最低**和**最新**应用版本及发布说明。
+  - 添加**应用商店信息**：
+      - **Android**：
+        - **Google Play Store链接**。
+        - **SHA256证书指纹**。
+      - **iOS**：
+        - **App Store链接**。
+        - **App ID**。
+  - 点击"**添加**"保存并继续。
 
-- Then click "**Next**".
+- 然后点击"**下一步**"。
 
 {% assign addNewBundleCE2 = '
     ===
         image: /images/mobile/getting-started/add-new-bundle-2-ce.png,
-        title: Click "**Create new**" in the appropriate section (Android Application or iOS Application).
+        title: 在相应部分（Android Application或iOS Application）点击"**创建新**"。
     ===
         image: /images/mobile/getting-started/add-new-bundle-3-ce.png,
-        title: **Android Application**. Enter the **application package** name. Remember autogenerated "**Application Secret**" or input your own. Specify application statuses. Optionally, specify the minimum and latest application versions along with release notes for each. Specify store information: link to the ThingsBoard PE Mobile Application in the Google Play Store, and **SHA256 certificate fingerprints**. Click "**Add**".
+        title: **Android Application**。输入**应用包**名称。记住自动生成的"**应用密钥**"或输入您自己的。指定应用状态。可选：为每个应用指定最低和最新版本及发布说明。指定应用商店信息：Google Play Store中ThingsBoard PE移动应用的链接，以及**SHA256证书指纹**。点击"**添加**"。
     ===
         image: /images/mobile/getting-started/add-new-bundle-4-ce.png,
-        title: **iOS Application**. Enter the **application package** name. Remember autogenerated "**Application Secret**" or input your own. Specify application statuses. Optionally, specify the minimum and latest application versions along with release notes for each. Specify store information: link to the ThingsBoard PE Mobile Application in the App Store, and **App ID**. Click "**Add**".
+        title: **iOS Application**。输入**应用包**名称。记住自动生成的"**应用密钥**"或输入您自己的。指定应用状态。可选：为每个应用指定最低和最新版本及发布说明。指定应用商店信息：App Store中ThingsBoard PE移动应用的链接，以及**App ID**。点击"**添加**"。
     ===
         image: /images/mobile/getting-started/add-new-bundle-5-ce.png,
-        title: Click "**Next**".
+        title: 点击"**下一步**"。
 '
 %}
 
 {% assign addNewBundlePE2 = '
     ===
         image: /images/mobile/getting-started/add-new-bundle-2-pe.png,
-        title: Click "**Create new**" in the appropriate section (Android Application or iOS Application).
+        title: 在相应部分（Android Application或iOS Application）点击"**创建新**"。
     ===
         image: /images/mobile/getting-started/add-new-bundle-3-pe.png,
-        title: **Android Application**. Enter the **application package** name. Remember autogenerated "**Application Secret**" or input your own. Specify application statuses. Optionally, specify the minimum and latest application versions along with release notes for each. Specify store information: link to the ThingsBoard PE Mobile Application in the Google Play Store, and **SHA256 certificate fingerprints**. Click "**Add**". 
+        title: **Android Application**。输入**应用包**名称。记住自动生成的"**应用密钥**"或输入您自己的。指定应用状态。可选：为每个应用指定最低和最新版本及发布说明。指定应用商店信息：Google Play Store中ThingsBoard PE移动应用的链接，以及**SHA256证书指纹**。点击"**添加**"。
     ===
         image: /images/mobile/getting-started/add-new-bundle-4-pe.png,
-        title: **iOS Application**. Enter the **application package** name. Remember autogenerated "**Application Secret**" or input your own. Specify application statuses. Optionally, specify the minimum and latest application versions along with release notes for each. Specify store information: link to the ThingsBoard PE Mobile Application in the App Store, and **App ID**. Click "**Add**".
+        title: **iOS Application**。输入**应用包**名称。记住自动生成的"**应用密钥**"或输入您自己的。指定应用状态。可选：为每个应用指定最低和最新版本及发布说明。指定应用商店信息：App Store中ThingsBoard PE移动应用的链接，以及**App ID**。点击"**添加**"。
     ===
         image: /images/mobile/getting-started/add-new-bundle-5-pe.png,
-        title: Click "**Next**".
+        title: 点击"**下一步**"。
 '
 %}
 
@@ -117,38 +117,38 @@ title: Go to the "**Mobile center**" page → "**Bundle**" tab, then click "**+ 
 {% include images-gallery.liquid imageCollection=addNewBundleCE2 %}
 {% endif %}
 
-<br><b><font size="4">Optional: Authentication & Layout</font></b>
+<br><b><font size="4">可选：认证与布局</font></b>
 
-- **OAuth 2.0 providers** — Configure external [OAuth](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"} for the {{appPrefix}} mobile app if required. Click "**Next**" when done.
+- **OAuth 2.0提供方**——如需要，为{{appPrefix}}移动应用配置外部[OAuth](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"}。完成后点击"**下一步**"。
 
-- **Configure layout** — Customize the navigation menu for quick access to features and dashboards. Add menu items, set icons/labels, and reorder entries. Click "**Add**" to finish creating the package.
+- **配置布局**——自定义导航菜单以便快速访问功能和仪表板。添加菜单项、设置图标/标签并重新排序条目。点击"**添加**"完成bundle创建。
 
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-- **Self registration** - Customize the [self registration](/docs/{{docsPrefix}}mobile-center/mobile-center/#self-registration){:target="_blank"} page for your new customers.
+- **自助注册** - 为新客户自定义[自助注册](/docs/{{docsPrefix}}mobile-center/mobile-center/#self-registration){:target="_blank"}页面。
 {% endif %}
 
-Configure authentication in the {{appPrefix}} mobile app using external [OAuth 2.0](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"} providers, {% if docsPrefix == null %} and configure the [layout](/docs/{{docsPrefix}}mobile-center/mobile-center/#layout){:target="_blank"} for quick access to the features and dashboards you use most frequently{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}, configure the [layout](/docs/{{docsPrefix}}mobile-center/mobile-center/#layout){:target="_blank"} for quick access to the features and dashboards you use most frequently and customize the [self registration](/docs/{{docsPrefix}}mobile-center/mobile-center/#self-registration){:target="_blank"} page{% endif %} for your new customers.
+使用外部[OAuth 2.0](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"}提供方在{{appPrefix}}移动应用中配置认证，{% if docsPrefix == null %}并配置[布局](/docs/{{docsPrefix}}mobile-center/mobile-center/#layout){:target="_blank"}以便快速访问您最常使用的功能和仪表板{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}，配置[布局](/docs/{{docsPrefix}}mobile-center/mobile-center/#layout){:target="_blank"}以便快速访问您最常使用的功能和仪表板，并自定义新客户的[自助注册](/docs/{{docsPrefix}}mobile-center/mobile-center/#self-registration){:target="_blank"}页面{% endif %}。
 
 {% assign addNewBundleCE3 = '
     ===
         image: /images/mobile/getting-started/add-new-bundle-6-ce.png,
-        title: Configure authentication in the {{appPrefix}} mobile app using external **OAuth 2.0** providers. Then click "**Next**" to continue.
+        title: 使用外部**OAuth 2.0**提供方在{{appPrefix}}移动应用中配置认证。然后点击"**下一步**"继续。
     ===
         image: /images/mobile/getting-started/add-new-bundle-7-ce.png,
-        title: Configure the **layout** for quick access to the features and dashboards you use most often. Add new menu items, customize icons and labels, and reorganize the navigation menu of the ThingsBoard PE mobile app to fit your needs. Click "**Add**" to finalize adding the bundle.
+        title: 配置**布局**以便快速访问您最常使用的功能和仪表板。添加新菜单项、自定义图标和标签，并重新组织ThingsBoard PE移动应用的导航菜单以符合您的需求。点击"**添加**"完成bundle添加。
 '
 %}
 
 {% assign addNewBundlePE3 = '
     ===
         image: /images/mobile/getting-started/add-new-bundle-6-pe.png,
-        title: Configure authentication in the {{appPrefix}} mobile app using external **OAuth 2.0** providers. Then click "**Next**" to continue.
+        title: 使用外部**OAuth 2.0**提供方在{{appPrefix}}移动应用中配置认证。然后点击"**下一步**"继续。
     ===
         image: /images/mobile/getting-started/add-new-bundle-7-pe.png,
-        title: Configure the **layout** for quick access to the features and dashboards you use most often. Add new menu items, customize icons and labels, and reorganize the navigation menu of the ThingsBoard PE mobile app to fit your needs. Click "**Next**" to continue.
+        title: 配置**布局**以便快速访问您最常使用的功能和仪表板。添加新菜单项、自定义图标和标签，并重新组织ThingsBoard PE移动应用的导航菜单以符合您的需求。点击"**下一步**"继续。
     ===
         image: /images/mobile/getting-started/add-new-bundle-8-pe.png,
-        title: Customize the **self registration** page for your new customers. Click "**Add**" to finalize adding the bundle.
+        title: 为新客户自定义**自助注册**页面。点击"**添加**"完成bundle添加。
 '
 %}
 
@@ -158,32 +158,32 @@ Configure authentication in the {{appPrefix}} mobile app using external [OAuth 2
 {% include images-gallery.liquid imageCollection=addNewBundleCE3 %}
 {% endif %}
 
-Click "**Add**" to finalize adding the bundle.
+点击"**添加**"完成bundle添加。
 
-<br><b><font size="4">Configuration dialog</font></b>
+<br><b><font size="4">配置对话框</font></b>
 
-After adding the bundle, a step-by-step dialog appears to guide you through the remaining setup and deployment steps. 
-Follow it carefully to complete {{appPrefix}} mobile application configuration.
+添加bundle后，将出现分步对话框引导您完成剩余的设置和部署步骤。
+请仔细遵循以完成{{appPrefix}}移动应用配置。
 
 {% capture 1_7_config_tip %}
-**Available since {{appPrefix}} 4.2 and mobile app 1.7**
+**自{{appPrefix}} 4.2和移动应用1.7起可用**
 
-Starting with {{appPrefix}} 4.2 and mobile app 1.7, the app configuration flow has been significantly improved.
-You can now download a configuration file directly from the platform and place it in the root of app&#39;s codebase — no manual edits required.
+自{{appPrefix}} 4.2和移动应用1.7起，应用配置流程已显著改进。
+您现在可以直接从平台下载配置文件并将其置于应用代码库根目录——无需手动编辑。
 
-When using 1.7 app version with pre 4.2 platform version, config file must be created manually, please follow [this github ticket](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues/263#issuecomment-3103099009){:target="_blank"} for the instructions.
+使用1.7应用版本配合4.2之前平台版本时，必须手动创建配置文件，请参阅[此GitHub工单](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues/263#issuecomment-3103099009){:target="_blank"}获取说明。
 {% endcapture %}
 {% include templates/info-banner.md content=1_7_config_tip %}
 
-**Important:**   
-When building or running the app, include the Dart define flag:
+**重要：**
+构建或运行应用时，请包含Dart define标志：
 
 ```
 flutter run --dart-define-from-file configs.json
 ```
 {:.copy-code}
 
-You can maintain multiple configuration files by using different names. Pass the appropriate filename to `--dart-define-from-file` flag.
+您可以使用不同名称维护多个配置文件。将相应的文件名传给`--dart-define-from-file`标志。
 
 {% assign configurationDialogCE = '
     ===
@@ -204,110 +204,110 @@ You can maintain multiple configuration files by using different names. Pass the
 {% endif %}
 
 <br>
-Finnally, depending on your mobile platform (Android or iOS), you should see a result similar to the following:
+最后，根据您的移动平台（Android或iOS），您应看到类似以下的结果：
 
 <br>
 
 <div style="display: flex; flex-direction: row;">
     <div style="display: flex; flex-direction: column; align-items: center;">
-        <img width="" src="/images/mobile/{{docsPrefix}}android-app-login.png" title="Android login screen" alt="Android login screen example">
+        <img width="" src="/images/mobile/{{docsPrefix}}android-app-login.png" title="Android登录界面" alt="Android login screen example">
         <span style="margin-top: 16px; font-size: 90%; color: #6c757d;">Android</span>
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
-        <img width="" src="/images/mobile/{{docsPrefix}}ios-app-login.png" title="iOS login screen" alt="iOS login screen example">
+        <img width="" src="/images/mobile/{{docsPrefix}}ios-app-login.png" title="iOS登录界面" alt="iOS login screen example">
         <span style="margin-top: 16px; font-size: 90%; color: #6c757d;">iOS</span>
     </div>
 </div>
 
 {% capture run_tip %}
-**Tip:** On first launch on a physical device, startup can take a while. After that, use hot reload for quick updates.
+**提示：**在真机上首次启动可能需要一段时间。之后，可使用hot reload进行快速更新。
 
-If launching from the console with `flutter run`, press `r` to hot reload.
+如果使用`flutter run`从控制台启动，按`r`进行hot reload。
 {% endcapture %}
 {% include templates/info-banner.md content=run_tip %}
 
-## Step 2. [Optional] Configure push notifications
+## 步骤2.[可选]配置推送通知
 
-Our system leverages Firebase to send notifications from ThingsBoard instance directly to mobile application.
-This setup requires each platform tenant to configure Firebase specifically for their account to begin the distribution of notifications to their mobile app.
+我们的系统利用Firebase将ThingsBoard实例的通知直接发送到移动应用。
+此设置要求每个平台租户为其账户专门配置Firebase，才能开始向其移动应用分发通知。
 
-<br><font size="5">Step 2.1 Create Firebase project</font>
+<br><font size="5">步骤2.1 创建Firebase项目</font>
 
-Next, we will walk through step-by-step how to create a Firebase project, and within it, we will generate a private key. This key is required for securely connecting your ThingsBoard instance to Firebase services. 
+接下来，我们将逐步介绍如何创建Firebase项目，并在其中生成私钥。此密钥用于安全地将ThingsBoard实例连接到Firebase服务。
 
 {% capture difference %}
-**Please note:**
-for ThingsBoard CE, only the system administrator can configure mobile settings. For ThingsBoard PE - the tenant can use the system administrator&#39;s configuration or specify their own.
+**请注意：**
+ThingsBoard CE中，仅系统管理员可配置移动设置。ThingsBoard PE中，租户可使用系统管理员的配置或指定自己的配置。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-So let&#39;s get started:
+开始操作：
 
 {% assign firebaseProjectCE = '
     ===
         image: /images/mobile/pe/firebase-new-project-1-pe.png,
-        title: Sign in to your [Firebase](https://console.firebase.google.com/){:target="_blank"} account. Once you&#39;re in, click the "Create a project" button;
+        title: 登录您的[Firebase](https://console.firebase.google.com/){:target="_blank"}账户。登录后，点击"Create a project"按钮；
     ===
         image: /images/mobile/pe/firebase-new-project-2-pe.png,
-        title: Enter your desired project name in the field provided, then click "Continue";
+        title: 在提供的字段中输入您所需的项目名称，然后点击"Continue"；
     ===
         image: /images/mobile/pe/firebase-new-project-3-pe.png,
-        title: Next up is deciding on Google Analytics for your project. You have the option to keep it enabled or disable it if you prefer not to use it. Once you&#39;ve made your choice, click "Continue";
+        title: 接下来是决定是否为本项目启用Google Analytics。您可以选择启用或禁用。做出选择后，点击"Continue"；
     ===
         image: /images/mobile/pe/firebase-new-project-4-pe.png,
-        title: After setting up Google Analytics, confirm your project creation by clicking the "Create project" button;
+        title: 设置Google Analytics后，点击"Create project"按钮确认项目创建；
     ===
         image: /images/mobile/pe/firebase-new-project-5-pe.png,
-        title: Your Firebase project is now ready. Click "Continue" to open the Firebase project control panel;
+        title: 您的Firebase项目已准备就绪。点击"Continue"打开Firebase项目控制面板；
     ===
         image: /images/mobile/pe/firebase-new-project-6-pe.png,
-        title: In the menu on the left, go to "Project Overview" -> "Project settings" page;
+        title: 在左侧菜单中，进入"Project Overview" -> "Project settings"页面；
     ===
         image: /images/mobile/pe/firebase-new-project-7-pe.png,
-        title: In the "Project settings" page, switch over to the "Cloud Messaging" tab. Here, ensure the Firebase Cloud Messaging API is enabled to use messaging features;
+        title: 在"Project settings"页面中，切换到"Cloud Messaging"选项卡。此处确保启用Firebase Cloud Messaging API以使用消息功能；
     ===
         image: /images/mobile/pe/firebase-new-project-8-pe.png,
-        title: Head over to the "Service accounts" tab next. Within the "Admin SDK configuration snippet", select the "Java" section. Then, click on the "Generate new private key" button. This action will generate a private key for your service account - crucial for secure server communication;
+        title: 接下来进入"Service accounts"选项卡。在"Admin SDK configuration snippet"中，选择"Java"部分。然后，点击"Generate new private key"按钮。此操作将为您的服务账户生成私钥——对安全服务器通信至关重要；
     ===
         image: /images/mobile/pe/firebase-new-project-9-pe.png,
-        title: Confirm the generation of your private key by clicking on the "Generate key" button. Keep this key safe, as you&#39;ll need it for the ThingsBoard server-side operations;
+        title: 点击"Generate key"按钮确认私钥生成。请妥善保管此密钥，ThingsBoard服务器端操作需要用到；
     ===
         image: /images/mobile/pe/firebase-new-project-10-ce.png,
-        title: Sign in to ThingsBoard as a system administrator, open the "Settings" page and navigate to the "Notifications" tab. In the "Mobile settings" section, upload the private key file you generated in the Firebase project and click "Save" to finalize the configuration.
+        title: 以系统管理员身份登录ThingsBoard，打开"Settings"页面并导航至"Notifications"选项卡。在"Mobile settings"部分，上传您在Firebase项目中生成的私钥文件并点击"Save"完成配置。
 '
 %}
 
 {% assign firebaseProjectPE = '
     ===
         image: /images/mobile/pe/firebase-new-project-1-pe.png,
-        title: Sign in to your [Firebase](https://console.firebase.google.com/){:target="_blank"} account. Once you&#39;re in, click the "Create a project" button;
+        title: 登录您的[Firebase](https://console.firebase.google.com/){:target="_blank"}账户。登录后，点击"Create a project"按钮；
     ===
         image: /images/mobile/pe/firebase-new-project-2-pe.png,
-        title: Enter your desired project name in the field provided, then click "Continue";
+        title: 在提供的字段中输入您所需的项目名称，然后点击"Continue"；
     ===
         image: /images/mobile/pe/firebase-new-project-3-pe.png,
-        title: Next up is deciding on Google Analytics for your project. You have the option to keep it enabled or disable it if you prefer not to use it. Once you&#39;ve made your choice, click "Continue";
+        title: 接下来是决定是否为本项目启用Google Analytics。您可以选择启用或禁用。做出选择后，点击"Continue"；
     ===
         image: /images/mobile/pe/firebase-new-project-4-pe.png,
-        title: After setting up Google Analytics, confirm your project creation by clicking the "Create project" button;
+        title: 设置Google Analytics后，点击"Create project"按钮确认项目创建；
     ===
         image: /images/mobile/pe/firebase-new-project-5-pe.png,
-        title: Your Firebase project is now ready. Click "Continue" to open the Firebase project control panel;
+        title: 您的Firebase项目已准备就绪。点击"Continue"打开Firebase项目控制面板；
     ===
         image: /images/mobile/pe/firebase-new-project-6-pe.png,
-        title: In the menu on the left, go to "Project Overview" -> "Project settings" page;
+        title: 在左侧菜单中，进入"Project Overview" -> "Project settings"页面；
     ===
         image: /images/mobile/pe/firebase-new-project-7-pe.png,
-        title: In the "Project settings" page, switch over to the "Cloud Messaging" tab. Here, ensure the Firebase Cloud Messaging API is enabled to use messaging features;
+        title: 在"Project settings"页面中，切换到"Cloud Messaging"选项卡。此处确保启用Firebase Cloud Messaging API以使用消息功能；
     ===
         image: /images/mobile/pe/firebase-new-project-8-pe.png,
-        title: Head over to the "Service accounts" tab next. Within the "Admin SDK configuration snippet", select the "Java" section. Then, click on the "Generate new private key" button. This action will generate a private key for your service account - crucial for secure server communication;
+        title: 接下来进入"Service accounts"选项卡。在"Admin SDK configuration snippet"中，选择"Java"部分。然后，点击"Generate new private key"按钮。此操作将为您的服务账户生成私钥——对安全服务器通信至关重要；
     ===
         image: /images/mobile/pe/firebase-new-project-9-pe.png,
-        title: Confirm the generation of your private key by clicking on the "Generate key" button. Keep this key safe, as you&#39;ll need it for the ThingsBoard server-side operations;
+        title: 点击"Generate key"按钮确认私钥生成。请妥善保管此密钥，ThingsBoard服务器端操作需要用到；
     ===
         image: /images/mobile/pe/firebase-new-project-10-pe.png,
-        title: Sign in to your ThingsBoard instance and open the "Settings" page. Navigate to the "Notifications" tab, and uncheck the "Use system mobile settings" box (if you log in as a tenant) in the "Mobile settings" section. Here, upload the private key file you generated in the Firebase project and click "Save" to finalize the configuration.
+        title: 登录ThingsBoard实例并打开"Settings"页面。导航至"Notifications"选项卡，在"Mobile settings"部分取消勾选"Use system mobile settings"（若以租户身份登录）。在此处上传您在Firebase项目中生成的私钥文件并点击"Save"完成配置。
 '
 %}
 
@@ -317,106 +317,106 @@ So let&#39;s get started:
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=firebaseProjectCE %}
 {% endif %}
 
-<br><font size="5">Step 2.2 Add Firebase to your mobile application</font>
+<br><font size="5">步骤2.2 将Firebase添加到移动应用</font>
 
-To integrate Firebase into the mobile application, you&#39;ll need to complete the **initial two steps** outlined in the ["Add Firebase to your Flutter app"](https://firebase.google.com/docs/flutter/setup) guide available at Firebase's official documentation.
+要将Firebase集成到移动应用中，您需要完成Firebase官方文档中["Add Firebase to your Flutter app"](https://firebase.google.com/docs/flutter/setup)指南概述的**前两个步骤**。
 
-<br><font size="4">[Only for IOS] Apple app configuration</font>
+<br><font size="4">[仅限iOS] Apple应用配置</font>
 
-Upload **APNs authentication key** to Firebase.
+将**APNs认证密钥**上传到Firebase。
 
-- First, create APNs authentication key in the [Apple Developer Member Center](https://developer.apple.com/membercenter/index.action){:target="_blank"} using [Apple&#39;s official documentation](https://developer.apple.com/help/account/manage-keys/create-a-private-key/){:target="_blank"};
-- Inside your [Firebase](https://console.firebase.google.com/){:target="_blank"} project, go to the "Cloud Messaging" tab of the "Project Settings" page. Scroll down and found "Apple app configuration" section;
-- In "APNs authentication key" click the "Upload" button;
-- Add APNs authentication key and enter "Key ID" and "Team ID" in the corresponding fields;
-- Then click "Upload" button.
+- 首先，使用[Apple官方文档](https://developer.apple.com/help/account/manage-keys/create-a-private-key/){:target="_blank"}在[Apple Developer Member Center](https://developer.apple.com/membercenter/index.action){:target="_blank"}创建APNs认证密钥；
+- 在您的[Firebase](https://console.firebase.google.com/){:target="_blank"}项目中，进入"Project Settings"页面的"Cloud Messaging"选项卡。向下滚动找到"Apple app configuration"部分；
+- 在"APNs authentication key"中点击"Upload"按钮；
+- 添加APNs认证密钥并在相应字段中输入"Key ID"和"Team ID"；
+- 然后点击"Upload"按钮。
 
 {% assign APNsAuthenticationKey = '
     ===
         image: /images/mobile/apple-app-configuration-1.png,
-        title: Inside your [Firebase](https://console.firebase.google.com/){:target="_blank"} project, go to the "Cloud Messaging" tab of the "Project Settings" page. Scroll down and found "Apple app configuration" section;
+        title: 在您的[Firebase](https://console.firebase.google.com/){:target="_blank"}项目中，进入"Project Settings"页面的"Cloud Messaging"选项卡。向下滚动找到"Apple app configuration"部分；
     ===
         image: /images/mobile/apple-app-configuration-2.png,
-        title: In "APNs authentication key" section, click the "Upload" button;
+        title: 在"APNs authentication key"部分，点击"Upload"按钮；
     ===
         image: /images/mobile/apple-app-configuration-3.png,
-        title: Create "APNs authentication key" in the [Apple Developer Member Center](https://developer.apple.com/membercenter/index.action){:target="_blank"} using [Apple&#39;s official documentation](https://developer.apple.com/help/account/manage-keys/create-a-private-key/){:target="_blank"}. Now add this key and enter "Key ID" and "Team ID" in the corresponding fields. Then click "Upload" button;
+        title: 使用[Apple官方文档](https://developer.apple.com/help/account/manage-keys/create-a-private-key/){:target="_blank"}在[Apple Developer Member Center](https://developer.apple.com/membercenter/index.action){:target="_blank"}创建"APNs authentication key"。现在添加此密钥并在相应字段中输入"Key ID"和"Team ID"。然后点击"Upload"按钮；
     ===
         image: /images/mobile/apple-app-configuration-4.png,
-        title: APNs authentication key is uploaded.
+        title: APNs认证密钥已上传。
 '
 %}
 
-The APNs authentication key is uploaded.
+APNs认证密钥已上传。
 
 {% include images-gallery.liquid imageCollection=APNsAuthenticationKey %}
 
-<br><font size="5">Step 2.3 Check project configuration</font>
+<br><font size="5">步骤2.3 检查项目配置</font>
 
-After successfully completing these steps, make sure that your project contains the following file:
+成功完成这些步骤后，请确保您的项目包含以下文件：
 
-- If your ThingsBoard mobile application is intended for iOS:
+- 如果ThingsBoard移动应用面向iOS：
 
 ```text
 ios/Runner/GoogleService-Info.plist
 ```
 
-- If your ThingsBoard mobile application is intended for Android:
+- 如果ThingsBoard移动应用面向Android：
 
 ```text
 android/app/google-services.json
 ```
 {% capture difference %}
-**Please note:**
-if the **{{appProject}}** project is currently running, please stop it and proceed with a rebuild.
+**请注意：**
+如果**{{appProject}}**项目当前正在运行，请停止它并进行重新构建。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To confirm that Firebase has been integrated properly, run your application. 
+要确认Firebase已正确集成，请运行您的应用。
 
 ```
 flutter run
 ```
 {:.copy-code}
 
-If everything is configured correctly, the notifications menu in your mobile application should be active, as shown in the screenshot below.
+如果一切配置正确，您移动应用中的通知菜单应处于激活状态，如下方截屏所示。
 
 <br><object width="30%" data="/images/mobile/{{docsPrefix}}mobile-notifications.png"></object>
 
-Learn more about **notifications** and how to configure them [here](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}.
+了解更多关于**通知**及如何配置[此处](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}。
 
-## Step 3. [Optional] Build and release mobile application
+## 步骤3.[可选]构建并发布移动应用
 
-If you need to **build and release** {{appPrefix}} mobile application for iOS or Android, please refer to [this guide](/docs/{{docsPrefix}}mobile/release/){:target="_blank"}.
+如需为iOS或Android**构建并发布**{{appPrefix}}移动应用，请参阅[本指南](/docs/{{docsPrefix}}mobile/release/){:target="_blank"}。
 
-## Troubleshooting
+## 故障排除
 
-If you're running into issues while building or running your mobile application, here's a detailed guide to help you resolve the most common problems.
+如果在构建或运行移动应用时遇到问题，以下是帮助您解决最常见问题的详细指南。
 
-### App won&#39;t build
+### 应用无法构建
 
-{{appPrefix}} mobile app supports specific Flutter versions. Our release isn&#39;t always aligned with Flutter&#39;s official releases, so a newer Flutter version may not yet be compatible.
+{{appPrefix}}移动应用支持特定的Flutter版本。我们的版本发布与Flutter官方发布并不总是同步，因此较新的Flutter版本可能尚不兼容。
 
-> Always use the exact Flutter version specified for your app version. Otherwise, builds might fail or behave unexpectedly.
+> 务必使用为您的应用版本指定的确切Flutter版本。否则，构建可能失败或出现意外行为。
 
-<b><font size="4">How to check the required Flutter version?</font></b>
+<b><font size="4">如何检查所需的Flutter版本？</font></b>
 
 {% if docsPrefix == null %}
-1. Check the release notes at the following [link](https://github.com/thingsboard/flutter_thingsboard_app/releases){:target="_blank"}.
+1. 查看以下[链接](https://github.com/thingsboard/flutter_thingsboard_app/releases){:target="_blank"}的发布说明。
 {% endif %}
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-1. Check the release notes at the following [link](https://github.com/thingsboard/flutter_thingsboard_pe_app/releases){:target="_blank"}.
+1. 查看以下[链接](https://github.com/thingsboard/flutter_thingsboard_pe_app/releases){:target="_blank"}的发布说明。
 {% endif %}
 
-Example:
+示例：
 
 <object width="70%" data="/images/mobile/getting-started/check-flutter-version.png"></object>
 
 <br>
 
-**2. Check the `.fvmrc` file in the project root:**
+**2. 检查项目根目录的`.fvmrc`文件：**
 
-You&#39;ll find a file like this:
+您将找到类似这样的文件：
 
 ```json
 {
@@ -424,31 +424,31 @@ You&#39;ll find a file like this:
 }
 ```
 
-That means we&#39;re currently using Flutter 3.24.4.
+这表示我们当前使用Flutter 3.24.4。
 
-<br><b><font size="4">Installing the correct flutter version</font></b>
+<br><b><font size="4">安装正确的Flutter版本</font></b>
 
-**Option 1**: Use [FVM](https://fvm.app/){:target="_blank"} (Flutter version manager) **[Recommended]**
+**选项1**：使用[FVM](https://fvm.app/){:target="_blank"}（Flutter版本管理器）**[推荐]**
 
-**What is FVM?**
+**什么是FVM？**
 
-FVM helps you manage multiple Flutter versions across projects. It lets you manage multiple versions of Flutter and easily switch between them per project. 
-This is super useful when testing new Flutter releases or contributing to different projects.
+FVM帮助您跨项目管理多个Flutter版本。它让您能够管理多个Flutter版本并轻松按项目切换。
+在测试新Flutter版本或为不同项目贡献代码时非常有用。
 
-To install FVM follow the [official installation guide](https://fvm.app/documentation/getting-started/installation){:target="_blank"}.
+按照[官方安装指南](https://fvm.app/documentation/getting-started/installation){:target="_blank"}安装FVM。
 
-Usage: Use Flutter commands prefixed with `fvm`, like this:
+用法：使用带`fvm`前缀的Flutter命令，例如：
 
-Examples:
+示例：
 
 ```bash
 fvm flutter run
 fvm flutter build apk
 ```
 
-**Option 2**: Manually set the global Flutter version **[Not recommended]**
+**选项2**：手动设置全局Flutter版本 **[不推荐]**
 
-If you only work on one project, you can manually set the global Flutter version:
+如果您只在一个项目上工作，可以手动设置全局Flutter版本：
 
 ```bash
 cd ~/dev/flutter
@@ -456,82 +456,82 @@ git checkout 3.24.4
 ```
 {:.copy-code}
 
-### Warning "Push notifications are not configured"
+### 警告"推送通知未配置"
 
-If you see a warning like:
+如果您看到如下警告：
 
-> "**Push notifications are not configured**"
+> "**推送通知未配置**"
 
-This usually means Firebase wasn&#39;t set up correctly.
+这通常意味着Firebase未正确设置。
 
-**Fix:**
+**修复：**
 
-> **Note:** You must have completed [Step 2](/docs/mobile/getting-started/#step-2-optional-configure-push-notifications){:target="_blank"} in the setup guide first.
+> **注意：**您必须首先完成设置指南中的[步骤2](/docs/mobile/getting-started/#step-2-optional-configure-push-notifications){:target="_blank"}。
 
-<b>1.</b> Delete the file: `lib/firebase_options.dart`
-<br><b>2.</b> Re-run the FlutterFire CLI:
+<b>1.</b> 删除文件：`lib/firebase_options.dart`
+<br><b>2.</b> 重新运行FlutterFire CLI：
 
 ```bash
 flutterfire configure
 ```
 {:.copy-code}
 
-<b>3.</b> Ensure the `firebase_options.dart` file is regenerated and contains configuration for Android and iOS, or both.
+<b>3.</b> 确保`firebase_options.dart`文件已重新生成并包含Android和iOS或两者的配置。
 
-### Dashboard not loads
+### 仪表板无法加载
 
-The mobile app doesn&#39;t really load the dashboard itself — the ThingsBoard platform handles all the real loading.
-The mobile app simply opens a WebView, but the app and the platform must be able to communicate with each other.
+移动应用并非真正自行加载仪表板——ThingsBoard平台处理所有实际加载。
+移动应用仅打开WebView，但应用和平台必须能够相互通信。
 
-**First, check the log**. Look for this log message:
+**首先，检查日志**。查找此日志消息：
 
 ```bash
 Invoked tbMobileReadyHandler
 ```
 
-- **If it&#39;s missing, the platform isn&#39;t signaling the app that it&#39;s ready:** In that case, open an issue in the [ThingsBoard platform repository](https://github.com/thingsboard/thingsboard){:target="_blank"}.
+- **如果未找到，表示平台未向应用发出就绪信号：**此情况下，请在[ThingsBoard平台仓库](https://github.com/thingsboard/thingsboard){:target="_blank"}提交issue。
 
-- **If you see the log but the dashboard still won&#39;t load:**{% if docsPrefix == null %}In that case, open an issue in the [CE mobile repository](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"}.{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}In that case, open an issue in the [PE mobile repository](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues){:target="_blank"}.{% endif %}
+- **如果您看到日志但仪表板仍无法加载：**{% if docsPrefix == null %}此情况下，请在[CE移动仓库](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"}提交issue。{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}此情况下，请在[PE移动仓库](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues){:target="_blank"}提交issue。{% endif %}
 
-*Be as detailed as possible and include credentials to your instance privately via ThingsBoard Support (never post publicly).*
+*请尽可能详细，并通过ThingsBoard Support私下提供实例凭据（切勿公开发布）。*
 
-### Can&#39;t sign in?
+### 无法登录？
 
-[Check the compatibility matrix](/docs/{{docsPrefix}}/mobile/){:target="_blank"} between your platform and mobile app versions. Mismatches here are the most common cause of sign-in issues.
+[检查](/docs/{{docsPrefix}}/mobile/){:target="_blank"}您的平台和移动应用版本之间的兼容性表。版本不匹配是登录问题的最常见原因。
 
-If versions are aligned and you&#39;re still stuck:
+如果版本已对齐但您仍然无法登录：
 {% if docsPrefix == null %}
-- [Open a GitHub issue](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"}.
+- [提交GitHub issue](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"}。
 {% endif %}
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-- [Open a GitHub issue](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues){:target="_blank"}.
+- [提交GitHub issue](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues){:target="_blank"}。
 {% endif %}
-- Include:
-  - Platform version 
-  - Mobile app version 
-  - Logs/screenshots 
-  - Device details (OS, version)
+- 包含：
+  - 平台版本
+  - 移动应用版本
+  - 日志/截屏
+  - 设备详情（OS、版本）
 
-There&#39;s a compatibility matrix between the TB platform and mobile app versions: [Check it here](/docs/{{docsPrefix}}/mobile/){:target="_blank"}
+TB平台与移动应用版本之间存在兼容性表：[在此查看](/docs/{{docsPrefix}}/mobile/){:target="_blank"}
 
-It&#39;s the most common reason for sign-in issues.
+这是登录问题的最常见原因。
 
-If your versions are aligned and it still doesn&#39;t work — [open a GitHub issue](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"} and include all the relevant details.
+如果您的版本已对齐但仍无法工作——[提交GitHub issue](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"}并包含所有相关详情。
 
-### Anything else?
+### 其他问题？
 
-These are the most frequent issues — but if you&#39;re facing something new:
+以上是最常见的问题——但如果您遇到新情况：
 
 {% if docsPrefix == null %}
-[Open a GitHub issue](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"}. Include all the context you can (screenshots, logs, versions, platform setup, etc.)
+[提交GitHub issue](https://github.com/thingsboard/flutter_thingsboard_app/issues){:target="_blank"}。尽可能包含所有上下文（截屏、日志、版本、平台设置等）。
 {% endif %}
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-[Open a GitHub issue](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues){:target="_blank"}. Include all the context you can (screenshots, logs, versions, platform setup, etc.)
+[提交GitHub issue](https://github.com/thingsboard/flutter_thingsboard_pe_app/issues){:target="_blank"}。尽可能包含所有上下文（截屏、日志、版本、平台设置等）。
 {% endif %}
 
-We&#39;ll do our best to help!
+我们将尽力帮助您！
 
-## Next steps
+## 后续步骤
 
-- [Customize your app](/docs/{{docsPrefix}}mobile/customization){:target="_blank"} - Learn how to customize your {{appPrefix}} Mobile Application to meet your requirements.
-- [Build and release {{appPrefix}} Mobile Application](/docs/{{docsPrefix}}mobile/release){:target="_blank"} - Learn how to build release and publish your version of {{appPrefix}} Mobile Application to Google Play or App Store.
+- [自定义应用](/docs/{{docsPrefix}}mobile/customization){:target="_blank"} - 了解如何自定义{{appPrefix}}移动应用以满足您的需求。
+- [构建并发布{{appPrefix}}移动应用](/docs/{{docsPrefix}}mobile/release){:target="_blank"} - 了解如何构建、发布并将您的{{appPrefix}}移动应用版本发布到Google Play或App Store。

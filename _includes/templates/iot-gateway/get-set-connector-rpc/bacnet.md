@@ -1,18 +1,18 @@
-### GET method
+### GET 方法
 
-With the GET method you can read some data from the FTP device.
+使用 GET 方法可从 BACnet 设备读取数据。
 
 ```bash
 get objectType=<objectType>;objectId=<objectId>;propertyId=<propertyId>;
 ```
 
-Where:
-- `<objectType>` - the type of the object to read;
-- `<objectId>` - the ID of the object to read;
-- `<propertyId>` - the ID of the property to read.
+其中：
+- `<objectType>` - 要读取的对象类型；
+- `<objectId>` - 要读取的对象 ID；
+- `<propertyId>` - 要读取的属性 ID。
 
-For example, in our case, we know that we can read the value of the room light level from the BACnet device.
-To read the value of the room light level, run this query:
+例如，本示例中可从 BACnet 设备读取房间光照度值。
+要读取房间光照度值，请运行以下查询：
 
 ```bash
 get objectType=analogValue;objectId=1;propertyId=presentValue;
@@ -28,26 +28,26 @@ get objectType=analogValue;objectId=1;propertyId=presentValue;
 ![image](/images/gateway/get-set-connector-rpc/bacnet-get-set-rpc-1.png)
 {: refdef}
 
-# SET method
+# SET 方法
 
-With the SET method you can write data to the BACnet device.
+使用 SET 方法可向 BACnet 设备写入数据。
 
 ```bash
 set objectType=<objectType>;objectId=<objectId>;propertyId=<propertyId>;priority=<priority>;value=<value>;
 ```
 
-Where:
-- `<objectType>` - the type of the object to read;
-- `<objectId>` - the ID of the object to read;
-- `<propertyId>` - the ID of the property to read;
-- `<priority>` - the priority of the value to write (optional);
-- `<value>` - the value to write (optional, should be an integer from 1 to 16).
+其中：
+- `<objectType>` - 要写入的对象类型；
+- `<objectId>` - 要写入的对象 ID；
+- `<propertyId>` - 要写入的属性 ID；
+- `<priority>` - 要写入值的优先级（可选）；
+- `<value>` - 要写入的值（可选，1 到 16 的整数）。
 
-If value is none, BACnet connector will send relinquish command with Null value.
-Also, SET RPC should contain value or priority, or both.
+若 value 为空，BACnet connector 将发送带 Null 值的 relinquish 命令。
+SET RPC 应包含 value 或 priority，或两者兼有。
 
-For example, in our case, we know that we can set the value of the room light level to the BACnet device.
-To set the value of the room light level, run the following query:
+例如，本示例中可将房间光照度值设置到 BACnet 设备。
+要设置房间光照度值，请运行以下查询：
 
 ```bash
 set objectType=analogValue;objectId=1;propertyId=presentValue;value=30.9;
@@ -63,8 +63,7 @@ set objectType=analogValue;objectId=1;propertyId=presentValue;value=30.9;
 ![image](/images/gateway/get-set-connector-rpc/bacnet-get-set-rpc-2.png)
 {: refdef}
 
-Also, let's check the value of the room light level after setting it using the GET method. To do this, simply
-run the GET RPC method, described above:
+使用 GET 方法检查设置后的房间光照度值。只需运行上述 GET RPC 方法即可：
 
 ```bash
 get objectType=analogValue;objectId=1;propertyId=presentValue;

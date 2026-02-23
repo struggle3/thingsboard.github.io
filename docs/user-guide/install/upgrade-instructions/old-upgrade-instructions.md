@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Old Upgrade instructions
-description: ThingsBoard IoT platform upgrade instructions
+title: 旧版升级说明
+description: ThingsBoardIoT平台升级说明
 hidetoc: "true"
 
 ---

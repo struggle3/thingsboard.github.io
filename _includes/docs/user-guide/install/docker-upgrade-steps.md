@@ -1,8 +1,8 @@
 {% assign current_version = include.version %}
 
-1. Change the version of the `thingsboard/tb-node` in the `docker-compose.yml` file to the **{{ current_version }}**.
+1. 将`docker-compose.yml`中`thingsboard/tb-node`的版本改为**{{ current_version }}**。
 
-2. Execute the following commands:
+2. 执行以下命令：
 
 {% if include.skipUpgrade %}
 

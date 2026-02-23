@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
 title: Apache Pulsar integration
-description: Apache Pulsar integration guide
+description: Apache Pulsar 集成指南
 redirect_to: "/docs/user-guide/integrations/"
 
 ---

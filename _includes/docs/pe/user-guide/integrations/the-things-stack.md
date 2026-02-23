@@ -9,12 +9,12 @@
 {:toc}
 
 
-## Overview
-TheThingsStack is LoRaWAN network designed for connecting your devices using LoRaWAN stack. 
-After integrating TheThingsStack with Thingsboard, you can connect, communicate, process and visualize data from devices in the Thingsboard IoT platform.
+## 概述
+TheThingsStack是用于通过LoRaWAN栈连接设备的LoRaWAN网络。
+将TheThingsStack与ThingsBoard集成后，可在ThingsBoard IoT平台中连接、通信、处理和可视化设备数据。
 
 
-## The Things Stack Community setup
+## The Things Stack Community配置
 
 ### Register Application
 The first step is to create an **application** in TheThingsStack console. Go to [console](https://console.thethingsnetwork.org/){:target="_blank"}, open 

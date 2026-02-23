@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Notification center
-description: IoT alarm notifications
+title: 通知中心
+description: IoT 告警通知
 
 notification-center-send-notification-1:
     0:

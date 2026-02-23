@@ -1,32 +1,30 @@
-Sends a [Remote Procedure Call (RPC)](/docs/{{docsPrefix}}user-guide/rpc){:target="_blank"} to a device. The device's response is returned as the outgoing message data and routed to either the
-`Success` connection (if successful) or the `Failure` connection (if an error occurs).
+向设备发送 [Remote Procedure Call (RPC)](/docs/{{docsPrefix}}user-guide/rpc){:target="_blank"}。设备响应作为传出消息数据返回，并路由至 `Success` 连接（成功时）或 `Failure` 连接（错误时）。
 
-## Configuration
+## 配置
 
-- **Timeout in seconds** - Specifies the maximum time (in seconds) to wait for a response from the device before the RPC times out. The default value is 60 seconds. This
-  timeout is used when no explicit expiration time is provided in the message metadata.
+- **Timeout in seconds（超时秒数）** - 指定在 RPC 超时前等待设备响应的最大时间（秒）。默认值为 60 秒。当消息元数据中未提供显式过期时间时使用此超时。
 
-### Optional parameters from message
+### 来自消息的可选参数
 
-The node also processes the following optional parameters from the incoming message:
+节点还处理传入消息中的以下可选参数：
 
-**From message metadata:**
+**来自消息元数据：**
 
-- **oneway** (boolean) - Determines if a response is expected (default: `false`).
-- **persistent** (boolean) - Indicates if the request should be persisted (default: `false`).
-- **requestUUID** (string) - Unique identifier for the request, used internally for request tracking and database persistence. Generates a time-based UUID if not present.
-- **originServiceId** (string) - Identifies the originating service, used to route the response to the correct service.
-- **expirationTime** (long) - Request expiration timestamp in milliseconds, or calculates based on the configured timeout if not present.
-- **retries** (integer) - Number of retry attempts.
+- **oneway**（boolean）- 是否期望响应（默认：`false`）。
+- **persistent**（boolean）- 请求是否应持久化（默认：`false`）。
+- **requestUUID**（string）- 请求的唯一标识符，用于内部请求跟踪和数据库持久化。若不存在则生成基于时间的 UUID。
+- **originServiceId**（string）- 标识发起服务，用于将响应路由到正确的服务。
+- **expirationTime**（long）- 请求过期时间戳（毫秒），若不存在则根据配置的超时计算。
+- **retries**（integer）- 重试次数。
 
-**From message data:**
+**来自消息数据：**
 
-- **requestId** (integer) - Request identifier, or generates a random integer if not present. Used to match a response to its original request.
-- **additionalInfo** (JSON) - Additional request information.
+- **requestId**（integer）- 请求标识符，若不存在则生成随机整数。用于将响应与原始请求匹配。
+- **additionalInfo**（JSON）- 附加请求信息。
 
-**Message type handling:**
+**消息类型处理：**
 
-- If the message type is `RPC_CALL_FROM_SERVER_TO_DEVICE`, the request is treated as REST API originated, and the response should be returned to that REST API call.
+- 若消息类型为 `RPC_CALL_FROM_SERVER_TO_DEVICE`，请求视为 REST API 发起，响应应返回给该 REST API 调用。
 
 ### JSON Schema
 
@@ -49,37 +47,36 @@ The node also processes the following optional parameters from the incoming mess
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node validates that the message **originator** is a `DEVICE` entity type and that the message data contains the required **method** and **params** fields. If any validation
-   fails, processing fails.
-2. The node collects optional parameters from the message data and metadata and constructs the RPC.
-3. The node sends the RPC to the originator device.
-4. When a response is received:
-    - **If successful**: The response data is forwarded via the `Success` connection
-    - **If failed**: An error message containing the error name is forwarded via the `Failure` connection
-5. The original message is acknowledged immediately after sending the RPC, regardless of the response.
+1. 节点验证消息 **发起者** 为 `DEVICE` 实体类型，且消息数据包含必需的 **method** 和 **params** 字段。若任一项验证失败，处理失败。
+2. 节点从消息数据和元数据收集可选参数并构建 RPC。
+3. 节点向发起者设备发送 RPC。
+4. 收到响应时：
+    - **成功时**：响应数据经 `Success` 连接转发
+    - **失败时**：包含错误名称的错误消息经 `Failure` 连接转发
+5. 无论响应如何，原始消息在发送 RPC 后立即被确认。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The device responded successfully to the RPC. The outgoing message data contains the response from the device.
+    - 设备成功响应 RPC。传出消息数据包含设备响应。
 - `Failure`
-    - An error occurred during processing, such as:
-        - The originator is not a `DEVICE`
-        - The required `method` field is missing from the message data
-        - The required `params` field is missing from the message data
-        - The device failed to respond or returned an error
+    - 处理过程中发生错误，例如：
+        - 发起者不是 `DEVICE`
+        - 消息数据中缺少必需的 `method` 字段
+        - 消息数据中缺少必需的 `params` 字段
+        - 设备未能响应或返回错误
 
-## Examples
+## 示例
 
-### Example 1 — Simple RPC with response
+### 示例 1 — 带响应的简单 RPC
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-Data:
+数据：
 
 ```json
 {
@@ -91,7 +88,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -99,9 +96,9 @@ Data:
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -109,20 +106,19 @@ Data:
 }
 ```
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The RPC request "setGpio" is sent to the device with parameters specifying pin 7 should be set to value 1. The device acknowledges the command and responds with a success
-confirmation.
+RPC 请求「setGpio」发送给设备，参数指定将 pin 7 设为 1。设备确认命令并以成功确认响应。
 
-### Example 2 — One-way RPC request
+### 示例 2 — 单向 RPC 请求
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-Data:
+数据：
 
 ```json
 {
@@ -131,7 +127,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -139,7 +135,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -147,17 +143,16 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message metadata is an empty JSON, other message fields are the same. Routed via the `Success` connection.
+传出消息元数据为空 JSON，其他消息字段相同。经 `Success` 连接路由。
 
-Data: 
+数据：
 
 ```json
 {}
 ```
 
-**Result**
+**结果**
 
-The one-way RPC request "reboot" is sent to the device. Since this is a one-way call (indicated by the `oneway` metadata), the node does not wait for a detailed response from the
-device.
+单向 RPC 请求「reboot」发送给设备。由于这是单向调用（由 `oneway` 元数据表示），节点不等待设备详细响应。

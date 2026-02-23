@@ -1,7 +1,7 @@
 ![image](/images/user-guide/integrations/downlink-converter-example-java.png)
 
 
-The full source code of javascript function used in converter:
+converter 中使用的 JavaScript 函数完整源码：
 
 ```shell
 // Encode downlink data from incoming Rule Engine message

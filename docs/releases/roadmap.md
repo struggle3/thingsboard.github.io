@@ -1,24 +1,24 @@
 ---
 layout: docwithnav
-title: ThingsBoard Roadmap
-description: ThingsBoard architecture
+title: ThingsBoard 路线图
+description: ThingsBoard 产品路线图
 
 ---
 
-The product roadmap listed below covers only main features and does not cover small improvements and bug fixes.
+下述产品路线图仅涵盖主要功能，不包含小改进和 bug 修复。
 
 ## ThingsBoard CE
 
 ### v4.3
 
-* Ability to disable tenants;
-* Geofencing Calculated Field;
-* Support of revocable API keys instead of JWT tokens for programmatic REST API access;
+* 支持禁用租户；
+* Geofencing 计算字段；
+* 支持使用可撤销的 API key 替代 JWT token 进行编程式 REST API 访问；
 
-See active development in progress [here](https://github.com/thingsboard/thingsboard/tree/{{ site.release.branch_major_next }}) and work on latest release bug fixes [here](https://github.com/thingsboard/thingsboard/tree/master).
+进行中的开发参见[此处](https://github.com/thingsboard/thingsboard/tree/{{ site.release.branch_major_next }})，最新版本 bug 修复参见[此处](https://github.com/thingsboard/thingsboard/tree/master)。
 
-### Upcoming releases
+### 即将发布的版本
 
-* Improvements to IoT Gateway;
-* Ability to save dashboard parameters (time intervals, etc) per user;
-* JavaScript Device/Gateway SDK;
+* IoT Gateway 改进；
+* 支持 per user 保存 dashboard 参数（时间范围等）；
+* JavaScript Device/Gateway SDK；

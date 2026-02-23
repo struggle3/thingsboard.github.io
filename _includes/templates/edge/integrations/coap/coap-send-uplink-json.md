@@ -1,30 +1,30 @@
-Send the uplink message:
+发送上行消息：
 
 ```shell
 echo -e -n '{"deviceName": "SN-001", "deviceType": "default", "temperature": 25.7, "humidity": 69}' | coap-client -m post $YOUR_COAP_ENDPOINT_URL -t application/json -f-
 ```
 {: .copy-code}
-* Replace **`$YOUR_COAP_ENDPOINT_URL`** with the corresponding value.
+* 请将 **`$YOUR_COAP_ENDPOINT_URL`** 替换为对应值。
 
 ![image](/images/pe/edge/integrations/coap/terminal-coap-json-payload-1-edge.webp)
 
-To view the uplink message:
-* Go to the **Integrations center > Integrations** section and click on the integration
-* On the **"Integration details"** page select the **"Events"** tab.
-* Check the status of the uplink message. If the configuration is correct, the status will display as **"OK"**.
+查看上行消息：
+* 进入 **Integrations center > Integrations**（集成中心 > 集成）部分并点击该集成
+* 在 **「Integration details」**（集成详情）页面选择 **「Events」**（事件）选项卡
+* 检查上行消息状态。若配置正确，状态将显示为 **「OK」**。
 
 {% include images-gallery.html imageCollection="events-json" %}
 
-After the message is sent, a new device is created.
-To view the created device and its data:
-* Go to the **Entities > Devices** section and click on the device
-* On the **"Device details"** page select the **"Latest telemetry"** tab.
+消息发送后，将创建新设备。
+查看创建的设备及其数据：
+* 进入 **Entities > Devices**（实体 > 设备）部分并点击该设备
+* 在 **「Device details」**（设备详情）页面选择 **「Latest telemetry」**（最新遥测）选项卡。
 
 {% include images-gallery.html imageCollection="device-json" %}
 
-The received data can be viewed in the **Uplink converter**:
-* Go to the **Integrations center > Data converters** section and click the **Uplink converter**.
-* On the **“Data converter details”** page, select the **“Events”** tab.
-* View the message details in the **“In”** and **“Out”** columns.
+接收到的数据可在 **Uplink converter**（上行转换器）中查看：
+* 进入 **Integrations center > Data converters**（集成中心 > 数据转换器）部分并点击 **Uplink converter**
+* 在 **「Data converter details」**（数据转换器详情）页面，选择 **「Events」**（事件）选项卡
+* 在 **「In」** 和 **「Out」** 列中查看消息详情。
 
 {% include images-gallery.html imageCollection="coap-converter-json-events" %}

@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect ioTracker Multi-sensor tracker to ThingsBoard?
-category: Other devices
+title: 如何将 ioTracker Multi-sensor tracker 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: ioThings
 hasIntegrationDeviceConfiguration: true

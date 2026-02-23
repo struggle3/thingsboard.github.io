@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: White labeling
-description:
+title: 白标
+description: 配置公司或产品 Logo、配色及品牌化
 redirect_from: "/docs/user-guide/white-labeling/"
 
 white-labeling-default:

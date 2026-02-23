@@ -1,77 +1,77 @@
-- title: Community Edition
-  fulltitle: ThingsBoard Community Edition
-  description: ThingsBoard Documentation
+- title: 社区版
+  fulltitle: ThingsBoard社区版
+  description: ThingsBoard文档
   tag: ce
   icon: /images/thingsboard-cm-icon.svg
   path: /docs/
   guides: /docs/guides/
   getStarted: /docs/getting-started-guides/helloworld/
   docsPrefix: /docs/
-- title: Professional Edition
+- title: 专业版
   fulltitle: ThingsBoard Professional Edition
-  description: ThingsBoard Documentation
+  description: ThingsBoard文档
   tag: pe
   icon: /images/thingsboard-p-icon.svg
   path: /docs/pe/
   guides: /docs/pe/guides/
   getStarted: /docs/pe/getting-started-guides/helloworld/
   docsPrefix: /docs/pe/
-- title: Cloud
+- title: 云平台
   fulltitle: ThingsBoard Cloud
-  description: ThingsBoard Documentation
+  description: ThingsBoard文档
   tag: paas
   icon: /images/thingsboard-c-icon.svg
   path: /docs/paas/
   guides: /docs/paas/guides/
   getStarted: /docs/paas/getting-started-guides/helloworld/
   docsPrefix: /docs/paas/
-- title: Edge
+- title: 边缘
   fulltitle: ThingsBoard Edge
-  description: ThingsBoard Edge Documentation
+  description: ThingsBoard Edge文档
   tag: edge
   icon: /images/thingsboard-e-icon.svg
   path: /docs/edge/
   docsPrefix: /docs/edge/
-- title: PE Edge
+- title: PE边缘
   fulltitle: ThingsBoard PE Edge
-  description: ThingsBoard PE Edge Documentation
+  description: ThingsBoard PE Edge文档
   tag: edge-pe
   icon: /images/thingsboard-e-icon.svg
   path: /docs/pe/edge/
   docsPrefix: /docs/pe/edge/
-- title: IoT Gateway
+- title: IoT网关
   fulltitle: ThingsBoard IoT Gateway
-  description: ThingsBoard Documentation
+  description: ThingsBoard文档
   tag: gw
   icon: /images/gateway-icon.svg
   path: /docs/iot-gateway/
   docsPrefix: /docs/iot-gateway/
   getStarted: /docs/iot-gateway/getting-started/
-- title: License Server
+- title: 许可证服务器
   fulltitle: ThingsBoard License Server
-  description: ThingsBoard Documentation
+  description: ThingsBoard文档
   tag: license
   icon: /images/license-icon.svg
   path: /products/license-server/
 - title: Trendz Analytics
   fulltitle: Trendz Analytics
-  description: Trendz Documentation
+  description: Trendz文档
   tag: trendz
   icon: /images/trendz-icon.svg
   path: /docs/trendz/
   docsPrefix: /docs/trendz/
   getStarted: /docs/trendz/getting-started/
-- title: Mobile Application
+- title: 移动应用
   fulltitle: ThingsBoard Mobile Application
-  description: Mobile Application Documentation
+  description: 移动应用文档
   tag: mobile
   icon: /images/tb-mobile-icon.svg
   path: /docs/mobile/
   docsPrefix: /docs/mobile/
   getStarted: /docs/mobile/getting-started/
-- title: PE Mobile Application
+- title: PE移动应用
   fulltitle: ThingsBoard PE Mobile Application
-  description: PE Mobile Application Documentation
+  description: PE移动应用文档
   tag: mobile-pe
   icon: /images/tb-pe-mobile-icon.svg
   path: /docs/pe/mobile/
@@ -79,7 +79,7 @@
   getStarted: /docs/pe/mobile/getting-started/
 - title: MQTT Broker
   fulltitle: MQTT Broker
-  description: MQTT Broker Documentation
+  description: MQTT Broker文档
   tag: mqtt-broker
   icon: /images/tbmq-icon.svg
   path: /docs/mqtt-broker/
@@ -87,7 +87,7 @@
   getStarted: /docs/mqtt-broker/getting-started/
 - title: PE MQTT Broker
   fulltitle: PE MQTT Broker
-  description: PE MQTT Broker Documentation
+  description: PE MQTT Broker文档
   tag: mqtt-broker-pe
   icon: /images/tbmq-icon.svg
   path: /docs/pe/mqtt-broker/

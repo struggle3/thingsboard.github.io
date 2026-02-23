@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Quality of Service
-description: TBMQ QoS guide
+title: 服务质量
+description: TBMQ 服务质量（QoS）指南
 
 ---
 

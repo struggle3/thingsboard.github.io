@@ -1,14 +1,14 @@
-This subsection contains the configuration for RPC requests from ThingsBoard platform instance.
+此小节包含来自 ThingsBoard 平台实例的 RPC 请求配置。
 
-| **Parameter** | **Default value** | **Description**                                                                                       |
+| **参数** | **默认值** | **说明**                                                                                       |
 |:--------------|:------------------|-------------------------------------------------------------------------------------------------------|
-| method        | **multiply**      | Name of method on OPC-UA server.                                                                      |
-| arguments     |                   | Arguments for the method (if this parameter doesn't exist, arguments will be taken from RPC request). |
-| ... type      | **integer**       | Type of the argument.                                                                                 |
-| .. value      | **2**             | Value of the argument.                                                                                |
+| method        | **multiply**      | OPC-UA 服务器上的方法名。                                                                      |
+| arguments     |                   | 方法的参数（若此参数不存在，参数将从 RPC 请求中获取）。 |
+| ... type      | **integer**       | 参数类型。                                                                                 |
+| .. value      | **2**             | 参数值。                                                                                |
 | ---           |                   |                                                                                                       |
 
-This part of configuration will look like this:  
+配置的此部分将如下所示：  
 
 ```json
 "rpc_methods": [

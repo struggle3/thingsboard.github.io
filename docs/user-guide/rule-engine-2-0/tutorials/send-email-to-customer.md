@@ -1,17 +1,17 @@
 ---
 layout: docwithnav
-title: Send email to Customer
-description: Send Email Workflow
+title: 向客户发送邮件
+description: 邮件发送流程
 
 ---
 
-This tutorial is to show you how to send an email to the customer using the Rule Engine.
+本教程演示如何使用 Rule Engine 向客户发送邮件。
 
 * TOC
 {:toc}
 
 {% capture difference %}
-**Note:** this tutorial is based on the [send email on alarm](/docs/user-guide/rule-engine-2-0/tutorials/send-email/#use-case) tutorial and it's use case. We will reuse the rule chains from the above-mentioned tutorial and will add a few more rule nodes to send email to the customer of the assigned device.
+**说明：** 本教程基于 [send email on alarm](/docs/user-guide/rule-engine-2-0/tutorials/send-email/#use-case) 教程及其使用场景。我们将复用前述教程的 rule chains，并添加若干 rule 节点以向所分配设备的客户发送邮件。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -217,7 +217,7 @@ Lets post temperature = 99. Mail should be sent:
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":99}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 
-**you need to replace $ACCESS_TOKEN with actual device token**
+**you need to replace$ACCESS_TOKENwith actual device token**
 {% endhighlight %}
 
 You should understand that message won't be sent to the email when the alarm was updated, only in the case when alarm will be created.

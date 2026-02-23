@@ -3,17 +3,16 @@
 * TOC
 {:toc}
 
-Huawei OceanConnect Integration allows to stream data from OceanConnect platform to ThingsBoard and converts binary device payloads to the ThingsBoard format.
+华为OceanConnect集成可从OceanConnect平台向ThingsBoard流式传输数据，并将二进制设备负载转换为ThingsBoard格式。
 
 
  ![image](/images/user-guide/integrations/ocean-connect-integration.svg)
 
-Configuration steps:
+配置步骤：
   
- - Create new Integration of type "OceanConnect"
+ - 创建类型为「OceanConnect」的新集成
  
 ![image](/images/user-guide/integrations/oceanconnect.png) 
 
- - Copy HTTP endpoint URL from the auto-generated field in the form (highlighted with red)
- - Review official OceanConnect [documentation](https://support.huawei.com/enterprise/en/cloud-computing/oceanconnect-platform-pid-22559503)
-  to learn how to provision the endpoint URL from the previous step 
+ - 从表单中自动生成的字段复制HTTP endpoint URL（红色高亮）
+ - 查阅OceanConnect官方[文档](https://support.huawei.com/enterprise/en/cloud-computing/oceanconnect-platform-pid-22559503)了解如何配置上一步的endpoint URL 

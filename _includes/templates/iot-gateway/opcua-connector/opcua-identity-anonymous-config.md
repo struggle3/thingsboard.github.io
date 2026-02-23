@@ -1,11 +1,11 @@
-This option of identity subsection is the simplest.
+此 identity 小节选项最简单。
 
-| **Parameter** | **Default value** | **Description**                    |
+| **参数** | **默认值** | **说明**                    |
 |:--------------|:------------------|------------------------------------|
-| type          | **anonymous**     | Type of identity on OPC-UA server. |
+| type          | **anonymous**     | OPC-UA 服务器上的 identity 类型。 |
 | ---           |                   |                                    |
 
-This part of configuration will look like this:  
+配置的此部分将如下所示：  
 
 ```json
     "identity": {

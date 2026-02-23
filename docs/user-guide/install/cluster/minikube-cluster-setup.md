@@ -187,7 +187,7 @@ See [Upgrade Instructions](/docs/user-guide/install/{{docsPrefix}}upgrade-instru
 
 ### Migration to Professional Edition
 
-You can also migrate from Community Edition (CE) to Professional Edition (PE) using `./k8s-upgrade-tb.sh` script:
+You can also migrate from Community Edition (CE)to Professional Edition (PE) using `./k8s-upgrade-tb.sh` script:
 
 1. Upgrade to the latest CE version.
 

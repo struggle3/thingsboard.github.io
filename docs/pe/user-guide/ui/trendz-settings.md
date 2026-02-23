@@ -1,76 +1,76 @@
 ---
 layout: docwithnav-pe
-title: Trendz settings
-description: ThingsBoard IoT platform Trendz settings
+title: Trendz 设置
+description: ThingsBoard IoT 平台 Trendz 设置
 
 trendz-settings:
   0:
     image: /images/user-guide/ui/trendz/trendz-settings.png
-    title: 'Trendz settings page.'
+    title: 'Trendz设置页面。'
 
 trendz-settings-sync-status:
   0:
     image: /images/user-guide/ui/trendz/trendz-settings-sync-status-1.png
-    title: 'If Trendz synchronization is successful, you will see: <b>Synchronization completed successfully</b>.'
+    title: '若Trendz同步成功，您将看到：<b>Synchronization completed successfully</b>（同步已成功完成）。'
   1:
     image: /images/user-guide/ui/trendz/trendz-settings-sync-status-2.png
-    title: 'If there are issues, an error message with explanations will be displayed.'
+    title: '若有问题，将显示包含说明的错误消息。'
 
 ---
 
 * TOC
 {:toc}
 
-On the **Trendz Settings** page, you can configure the connection to the [Trendz Analytics add-on](/docs/trendz/what-is-trendz).
+在**Trendz设置**页面，您可以配置与[Trendz Analytics附加组件](/docs/trendz/what-is-trendz)的连接。
 
-## Prerequisites
+## 前提条件
 
-* Trendz addon should be activated for ThingsBoard instance on which you want to use Trendz. You can find out how to activate it [here](/docs/trendz/activation/self-managed).
-* Trendz should be installed and accessible from ThingsBoard. You can find out how to install Trendz [here](/docs/trendz/install/installation-options).
+* 需为要使用Trendz的ThingsBoard实例激活Trendz附加组件。激活方法请见[此处](/docs/trendz/activation/self-managed)。
+* Trendz需已安装且可从ThingsBoard访问。安装方法请见[此处](/docs/trendz/install/installation-options)。
 
-## How to Access
+## 如何访问
 
-* Log in to ThingsBoard as a System Administrator.
-* Click **Trendz settings** tab in the left menu.
+* 以系统管理员身份登录ThingsBoard。
+* 点击左侧菜单中的**Trendz settings**选项卡。
 
 {% include images-gallery.html imageCollection="trendz-settings" %}
 
-## Trendz Configuration
+## Trendz配置
 
-Here you can set up **Trendz Configuration**:
-* **Trendz Internal URL** - URL used by ThingsBoard to communicate with Trendz.
-* **ThingsBoard Internal URL** - URL used by Trendz to communicate with ThingsBoard.
+在此可设置**Trendz配置**：
+* **Trendz Internal URL** - ThingsBoard用于与Trendz通信的URL。
+* **ThingsBoard Internal URL** - Trendz用于与ThingsBoard通信的URL。
 
-### Examples
+### 示例
 
-Url examples for different installation types:
+不同安装类型的URL示例：
 
-* **Ubuntu / Windows / CentOS / RHEL (Trendz and ThingsBoard installed on the same machine)**:
+* **Ubuntu / Windows / CentOS / RHEL（Trendz和ThingsBoard安装在同一台机器）**：
   - Trendz Internal URL - `http://localhost:8888` 
   - ThingsBoard Internal URL - `http://localhost:8080`
 
-* **Docker (Trendz and ThingsBoard are in the same docker compose files)**:
+* **Docker（Trendz和ThingsBoard在同一docker compose文件中）**：
   - Trendz Internal URL - `http://trendz:8888`
   - ThingsBoard Internal URL - `http://thingsboard-pe:8080`
 
-* **Kubernetes (ThingsBoard and Trendz are in the same cluster)**:
+* **Kubernetes（ThingsBoard和Trendz在同一集群中）**：
   - Trendz Internal URL - `http://trendz-app:8888`
   - ThingsBoard Internal URL - `http://tb-node:8080`
 
-If Trendz and ThingsBoard are unreachable for each other in the private network, you can use your public URLs. For example, if ThingsBoard and Trendz under the same domain **mydomain**:
+若Trendz和ThingsBoard在私有网络中无法相互访问，可使用公共URL。例如，若ThingsBoard和Trendz在同一域**mydomain**下：
   - Trendz Internal URL - `https://mydomain`
   - ThingsBoard Internal URL - `https://mydomain`
 
-## Actions
+## 操作
 
-You can do the next **Actions** on this page:
+在此页面可执行以下**操作**：
 
-* **Save Configuration** - Saves the URLs entered in the text boxes for Trendz and ThingsBoard.
-* **Retry Discovery** - Initiates synchronization with Trendz using the **saved configuration**.
-* **Retry Healthcheck** - (Visible only if Trendz is synced with ThingsBoard) Checks if the Trendz sync contains any errors at the current moment.
+* **Save Configuration** - 保存Trendz和ThingsBoard的URL配置。
+* **Retry Discovery** - 使用**已保存的配置**启动与Trendz的同步。
+* **Retry Healthcheck** - （仅当Trendz已与ThingsBoard同步时可见）检查Trendz同步当前是否存在错误。
 
-You can check sync result in the header of this page: 
-* If Trendz synchronization is successful, you will see: **Synchronization completed successfully**.
-* If there are issues, an error message with explanations will be displayed.
+您可在页面标题处查看同步结果：
+* 若Trendz同步成功，将显示：**Synchronization completed successfully**。
+* 若有问题，将显示包含说明的错误消息。
 
 {% include images-gallery.html imageCollection="trendz-settings-sync-status" %}

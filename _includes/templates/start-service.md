@@ -1,22 +1,21 @@
-
-Execute the following command to start ThingsBoard:
+执行以下命令启动 ThingsBoard：
 
 ```bash
 sudo service thingsboard start
 ```
 {: .copy-code}
  
-Once started, you will be able to open Web UI using the following link:
+启动后，可通过以下链接访问 Web UI：
 
 ```bash
 http://localhost:8080/
 ```
 {: .copy-code}
 
-The following default credentials are available if you have specified *--loadDemo* during execution of the installation script:
+若在运行安装脚本时指定了 *--loadDemo*，可使用以下默认凭证：
 
-- **System Administrator**: sysadmin@thingsboard.org / sysadmin
-- **Tenant Administrator**: tenant@thingsboard.org / tenant
-- **Customer User**: customer@thingsboard.org / customer
+- **System Administrator**：sysadmin@thingsboard.org / sysadmin
+- **Tenant Administrator**：tenant@thingsboard.org / tenant
+- **Customer User**：customer@thingsboard.org / customer
 
-You can always change passwords for each account in account profile page.
+可随时在账户资料页面修改各账户密码。

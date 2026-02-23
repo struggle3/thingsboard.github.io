@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
 title: Get device parameters using SigFox integration
-description: SigFox integration guide
+description: SigFox 集成指南
 
 ---
 {% assign docsPrefix = "pe/" %}

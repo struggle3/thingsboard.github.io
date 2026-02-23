@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: SCADA Oil and gas drilling system
-description: Drilling system solution with ThingsBoard IoT platform
+title: SCADA 油气钻井系统
+description: 基于 ThingsBoard 物联网平台的钻井系统解决方案
 notitle: "true"
 includeAdvantages: "true"
 contactUsModal: "true"
@@ -10,7 +10,7 @@ contactUsModal: "true"
 
 {% include usecase-nav.html usecase="scada-oil-and-gas-drilling-system" %}
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">SCADA Oil & gas drilling system</h1>
+<h1 class="usecase-title">SCADA 油气钻井系统</h1>
 <section class="scada-about">
     <div class="about-text">
         <div class="short">
@@ -18,7 +18,7 @@ contactUsModal: "true"
                 <p class="text">SCADA (Supervisory Control and Data Acquisition) and the ThingsBoard platform play a crucial role in automating oil and gas drilling processes.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_DrillingSystem_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/febfdb90-3170-11f0-858a-67efd1bc8a87?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
+                <a id="UseCases_DrillingSystem_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/febfdb90-3170-11f0-858a-67efd1bc8a87?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
             </div>
         </div>
         <div class="long">
@@ -35,7 +35,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="scada-solution-structure addedBanner">
-    <h2>Solution structure</h2>
+    <h2>解决方案结构</h2>
     <div class="scheme">
         <img id="schemeSVG" loading="lazy" data-src="/images/usecases/scada-drilling-system/scada-drilling-solution-structure.svg"  alt="SCADA oil and gas drilling solution structure">
     </div>
@@ -62,14 +62,14 @@ contactUsModal: "true"
         </div>
         <div class="use-cases-solution-structure-card">
             <h3>IoT dashboards</h3>
-            <p>Visualize your SCADA data with ThingsBoard’s real-time IoT dashboards. Design interactive views using SCADA symbols, customizable widgets, and dynamic updates to monitor and control processes seamlessly.</p>
+            <p>Visualize your SCADA data with ThingsBoard’s real-time IoT dashboards. Design interactive views using SCADA symbols, customizable 部件, and dynamic updates to monitor and control processes seamlessly.</p>
         </div>
     </div>
 </section>
 
 <section class="scada-key-functions">
     <div class="header-selector">
-        <h2>Key functions of SCADA systems</h2>
+        <h2>SCADA 系统的关键功能</h2>
     </div>
     <div class="high-performance active">
         <div class="scada-key-function-block">
@@ -144,7 +144,7 @@ contactUsModal: "true"
 </section>
 
 <section class="dashboard-structure">
-    <h2>Dashboard structure</h2>
+    <h2>仪表板结构</h2>
     <div class="dashboard-structure-block">
         <div class="menu">
             <div class="expansion-block">
@@ -242,7 +242,7 @@ contactUsModal: "true"
 </section>
 
 <section class="applications">
-    <h2>Applications of SCADA systems</h2>
+    <h2>SCADA 系统的应用</h2>
     <div class="applications-container-large">
         <div class="text-row-top">
             <div class="text-block">
@@ -406,8 +406,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_ScadaDrilling_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/febfdb90-3170-11f0-858a-67efd1bc8a87?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
-                <a id="UseCases_ScadaDrilling_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_ScadaDrilling_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/febfdb90-3170-11f0-858a-67efd1bc8a87?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
+                <a id="UseCases_ScadaDrilling_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
     
             return block;

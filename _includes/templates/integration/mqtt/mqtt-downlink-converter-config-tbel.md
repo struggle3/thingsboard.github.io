@@ -1,4 +1,4 @@
-Now copy & paste the following script to the Encoder function section:
+请将以下脚本复制并粘贴到 Encoder function 区域：
 
 ```javascript
 // Encode downlink data from incoming Rule Engine message

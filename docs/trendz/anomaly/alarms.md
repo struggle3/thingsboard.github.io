@@ -1,79 +1,75 @@
 ---
 layout: docwithnav-trendz
-title: Anomaly-Driven Alarm Creation
-description: How to configure alarms triggered by anomaly detection, including alarm types, severities, and behaviors.
-
+title: 异常驱动的告警创建
+description: 如何配置由异常检测触发的告警，包括告警类型、严重程度及行为。
 ---
 
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Trendz supports automatic creation of alarms based on detected anomalies. This feature allows users to react to abnormal 
-behavior in real time by integrating with ThingsBoard's native alarm system. Alarms can be created during both 
-**Refresh** and **Reprocess** tasks, depending on your configuration.
+Trendz 支持根据检测到的异常自动创建告警。此功能可将异常行为与 ThingsBoard 原生告警系统集成，使用户能实时响应异常。告警可在**刷新**和**重新处理**任务中创建，具体取决于您的配置。
 
-## Enabling Alarm Creation
+## 启用告警创建
 
-To set up alarm generation during anomaly detection, use one or both of the following options:
+要为异常检测配置告警生成，可使用以下一个或多个选项：
 
-### Enable Alarms in Anomaly Refresh
+### 在异常刷新中启用告警
 
-To enable alarm creation:
+启用告警创建：
 
-- Go to the **Jobs** tab.
-- Enable the **Enable Anomaly Alarms Creation** toggle in the refresh settings.
+- 进入**作业**标签页。
+- 在刷新设置中启用 **Enable Anomaly Alarms Creation** 开关。
 
-Once enabled, alarms will be automatically created for all newly detected anomalies during the refresh process.
+启用后，刷新过程中将为所有新检测到的异常自动创建告警。
 
-**Read more about refresh configuration [here](/docs/trendz/anomaly/refresh-reprocess#anomaly-refresh).**
+**更多刷新配置详见[此处](/docs/trendz/anomaly/refresh-reprocess#anomaly-refresh)。**
 
-### Enable Alarms in Anomaly Reprocess
+### 在异常重新处理中启用告警
 
-You can also generate alarms during anomaly reprocessing:
+也可在异常重新处理时生成告警：
 
-- Go to the **Tasks** tab.
-- Click **Run Reprocess Task**.
-- Enable the **Enable Anomaly Creation Toggle**.
+- 进入**任务**标签页。
+- 点击 **Run Reprocess Task**。
+- 启用 **Enable Anomaly Creation Toggle**。
 
-Alarms will be created for anomalies found within the selected time range and items during reprocess.
+重新处理过程中，将为选定时间范围和设备内发现的异常创建告警。
 
-**Read more about reprocess configuration [here](/docs/trendz/anomaly/refresh-reprocess#anomaly-reprocess).**
+**更多重新处理配置详见[此处](/docs/trendz/anomaly/refresh-reprocess#anomaly-reprocess)。**
 
-## Alarm Behavior and Lifecycle
+## 告警行为与生命周期
 
-Here’s how alarm behavior works in Trendz:
+Trendz 中告警行为如下：
 
-- **One anomaly = one alarm**  
-  Each anomaly is associated with exactly one alarm.
+- **一个异常 = 一个告警**  
+  每个异常对应恰好一个告警。
 
-- **One active alarm per device at a time**  
-  While multiple alarms can exist for a single device, only one alarm per device can be active at a time.
+- **每个设备同时仅有一个活动告警**  
+  同一设备可存在多条告警，但同一时间仅能有一条为活动状态。
 
-- **Alarm status**
-    - If the linked anomaly is still active → the alarm remains **active**.
-    - If the anomaly is no longer active → the alarm is **cleared**.
+- **告警状态**
+    - 若关联异常仍为活动状态 → 告警保持**活动**。
+    - 若异常已结束 → 告警**清除**。
 
-- **Alarm severity and type**
-  - The **severity** level of the alarm is configured in the **Input** tab, after model build.  
-    Trendz generates default score thresholds for severity levels (e.g., CRITICAL, MAJOR, etc.).
-  - The **alarm type** is also configurable in the **Input** tab.
+- **告警严重程度与类型**
+  - 告警**严重程度**在**输入**标签页的模型构建后配置。  
+    Trendz 会为各级严重程度（如 CRITICAL、MAJOR 等）生成默认分数阈值。
+  - **告警类型**也可在**输入**标签页配置。
 
-- **Threshold rule**  
-  If the anomaly score is **lower than the lowest defined threshold**, **no alarm will be created** for that anomaly.
+- **阈值规则**  
+  若异常分数**低于最低定义阈值**，则**不会**为该异常创建告警。
 
-- **Alarm deletion or clearing on anomaly deletion**  
-  If an anomaly is removed (e.g., during reprocess or model rebuild), the linked alarm will either be cleared or deleted 
-  depending on the **ALARM BEHAVIOR ON ANOMALY DELETION** setting in the model.
+- **异常删除时的告警删除或清除**  
+  若异常被删除（如重新处理或模型重建时），关联告警将根据模型中的 **ALARM BEHAVIOR ON ANOMALY DELETION** 设置被清除或删除。
 
-## Best Practices
+## 最佳实践
 
-To avoid unnecessary alarms and ensure effective monitoring:
+为避免无效告警并保证有效监控：
 
-1. **Enable alarm creation only if you're confident the model detects real anomalies**, not expected or typical behavior.
-2. **Adjust thresholds** according to your organization’s alarm policy and operational needs.
-3. **Be careful with alarms to avoid alarm storms** — a poorly tuned model or overly sensitive thresholds can generate too many alarms, leading to noise and alert fatigue.
+1. **仅在确信模型检测到真实异常（非常规行为）时启用告警创建**。
+2. **根据组织的告警策略和运维需求调整阈值**。
+3. **谨慎设置告警以防告警风暴** — 模型未调优或阈值过于敏感可能导致大量告警，造成噪音和告警疲劳。
 
 ## Next Steps
 

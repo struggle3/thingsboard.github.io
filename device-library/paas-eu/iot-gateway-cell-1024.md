@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect IoT Gateway Cell 1024 to ThingsBoard?
-category: Other devices
+title: 如何将 IoT Gateway Cell 1024 连接至 ThingsBoard？
+category: 其他设备
 chip: ARM Cortex-A53
 connectivity: [Ethernet, WIFI, Bluetooth, SIGFOX, 4G, 5G]
 vendor: EXXN

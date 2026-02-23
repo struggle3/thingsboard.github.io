@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Subscriptions
-description: Subscriptions management
+title: 订阅
+description: 订阅管理
 
 subscription-session:
   0:
     image: /images/mqtt-broker/user-guide/ui/subscription-session-1.png
-    title: 'Open Subscriptions page and click on the icon button "Session details".'
+    title: '打开订阅页面，点击「Session details」图标按钮。'
   1:
     image: /images/mqtt-broker/user-guide/ui/subscription-session-3.png
-    title: 'Add, edit or remove subscriptions.'
+    title: '添加、编辑或删除订阅。'
   2:
     image: /images/mqtt-broker/user-guide/ui/subscription-session-4.png
     title: 'For this subscription, for example, we changed "Retain as Published" to true and "Subscription Identifier" to 1.'

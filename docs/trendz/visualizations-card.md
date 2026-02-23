@@ -3,14 +3,14 @@ layout: docwithnav-trendz
 assignees:
 - vparomskiy
 title: Card
-description: Trendz Card
+description: Trendz Card 视图
 ---
 
 * TOC
 {:toc}
 
 
-Card widget allows visualizing the single important metrics and monitors its dynamics.
+Card部件用于展示单一重要指标并监测其变化。
 
 ## Video Tutorial
 
@@ -25,41 +25,40 @@ Card widget allows visualizing the single important metrics and monitors its dyn
 
 ## Simple Card
 
-For creating simple Card view:
+创建简单Card视图：
 
-* drag and drop the field that you would like to monitor in the **Main Value** column;
-* select required aggregation type
+* 将需监测的字段拖放到**Main Value**列
+* 选择所需聚合类型
 
 ![image](/images/trendz/card-simple.png)
 
 
 ## Compare with other value
 
-We can compare main value with another one. For example we have required amount of products that should be produced, saved as telemetry of the device.
-And we ant compare it with how many products already produced.
+可将主值与另一值对比。例如设备telemetry中保存了应生产的产品数量，
+可与已生产数量对比。
 
-* Add the value for comparison in the **Compared value** column;
+* 在**Compared value**列添加对比值
 
 ![image](/images/trendz/card-compare.png)
 
 
-The compared value will present the difference between these two figures in percentage.
+对比值以百分比展示两者的差值。
 
 ## Compare with previous interval
 
-We can also compare current value with the previous interval. If we want show how much coffee beans consumed in
-this month compared to the previous month:
+也可将当前值与上一时间间隔对比。若要展示本月咖啡豆消耗相较上月的变化：
 
-* For the field in the **Compared value** section enable **Local Date**
-* Select **Prev Month** time range
-* For the main view time range set **This Month**
+* 在**Compared value**区域的字段上启用**Local Date**
+* 选择**Prev Month**时间范围
+* 主视图时间范围设为**This Month**
 
 ![image](/images/trendz/card-local-config.png)
 
 
-The compared value will present the difference between these two figures in percentage.
+对比值以百分比展示两者的差值。
 
 ## Card title
 
-While creating the card you can give it a meaningful name for quick navigation.
-To do that, open the setting section in the right bottom corner and add Name in the Title section.
+创建Card时可为其命名以便快速导航。
+打开右下角setting区域，在Title中填写名称。

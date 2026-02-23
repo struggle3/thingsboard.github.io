@@ -1,16 +1,16 @@
-The following commands will install Apache Cassandra and its command-line tools:
+以下命令将安装 Apache Cassandra 及其命令行工具：
 
 ```bash
-# Add Cassandra repository
+# 添加 Cassandra 软件源
 echo "deb [signed-by=/etc/apt/keyrings/apache-cassandra.asc] https://debian.cassandra.apache.org 50x main" | sudo tee /etc/apt/sources.list.d/cassandra.sources.list
 sudo curl -o /etc/apt/keyrings/apache-cassandra.asc https://downloads.apache.org/cassandra/KEYS
 sudo apt-get update
-# Cassandra installation
+# 安装 Cassandra
 sudo apt-get install -y cassandra cassandra-tools
 ```
 {: .copy-code}
 
-To verify that Cassandra is running correctly, use the following commands to check both the node status and the system service state:
+要验证 Cassandra 是否正常运行，请使用以下命令检查节点状态和系统服务状态：
 
 ```bash
 nodetool status
@@ -18,7 +18,7 @@ sudo systemctl status cassandra.service
 ```
 {: .copy-code}
 
-The status column in the output should report `UN` which stands for "Up/Normal"; you may need to wait a few moments for Cassandra to initialize. Example output:
+输出中的 status 列应显示 `UN`（表示 "Up/Normal"）；您可能需要等待片刻让 Cassandra 完成初始化。示例输出：
 
 ```
 $ nodetool status
@@ -43,5 +43,5 @@ $ sudo systemctl status cassandra.service
 ...
 ```
 
-You can use Astra DB Cloud instead of installing your own Cassandra.
-See how to [connect ThingsBoard to Astra DB](/docs/user-guide/install/pe/cassandra-cloud-astra-db/)
+您可以使用 Astra DB Cloud 替代自建 Cassandra。
+参见[将 ThingsBoard 连接至 Astra DB](/docs/user-guide/install/pe/cassandra-cloud-astra-db/) 的说明。

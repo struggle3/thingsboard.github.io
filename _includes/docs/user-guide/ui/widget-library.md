@@ -1,86 +1,65 @@
 * TOC
 {:toc}
 
-All [IoT Dashboards](/docs/{{docsPrefix}}user-guide/dashboards/) are constructed using **ThingsBoard widgets** defined in the Widget Library.
+所有[IoT 仪表板](/docs/{{docsPrefix}}user-guide/dashboards/)均由部件库中定义的 **ThingsBoard 部件**构成。
 
-A widget is an element that displays a specific type of information or functionality on a dashboard.
-Widgets are used to display data and visualize information obtained from devices connected to the ThingsBoard platform, remote device control, alarms management, and display static custom HTML content.
+部件是用于在仪表板上显示特定类型信息或功能的元素。部件用于展示数据、可视化连接至 ThingsBoard 平台的设备信息、远程设备控制、告警管理以及显示静态自定义 HTML 内容。
 
-## Widget Types
+## 部件类型
 
-According to the provided features, each widget definition represents a specific widget type.
-There are five widget types:
+根据所提供的功能，每种部件定义代表一种特定的部件类型。共有五种部件类型：
 
- - [Latest values;](#latest-values)
- - [Time series;](#time-series)
- - [Control widget;](#control-widget)
- - [Alarm widget;](#alarm-widget)
- - [Static widget.](#static)
+ - [最新值](#latest-values)；
+ - [时序](#time-series)；
+ - [控制部件](#control-widget)；
+ - [告警部件](#alarm-widget)；
+ - [静态部件](#static)。
 
 {% include images-gallery.html imageCollection="wl-dashboard-widgets" preview="false" %}
  
-Each widget type has its own specific data source configuration to visualize data. Types of available data sources depend on widget type:
+每种部件类型都有其特定的数据源配置以可视化数据。可用数据源类型取决于部件类型：
 
- - **Alarm source** - this data source type, used primarily in Alarm widgets, requires a source entity to display related alarms and their corresponding fields;
- - **Alarms count** - this data source type is used in latest values widgets. You need to specify the target entity;
- - **Device** - this data source type is used in both time-series and latest values widgets. Basically, you need to specify the target device, and the time series key, or the attribute name, or entity field;
- - **Entities count** - this data source type is used in latest values widgets. You need to specify the target entity;
- - **Entity** - this data source type is used in both time-series and latest values widgets. Basically, you need to select the target entity by specifying an [entity alias](/docs/{{docsPrefix}}user-guide/ui/aliases/), and the time series key, or the attribute name;
- - **Function** - this data source type is used in both time series and latest values widgets for debugging. Basically, you can specify a JavaScript function that will simulate data from a device in order to set up visualization.
+ - **告警源** - 此数据源类型主要用于告警部件，需要源实体来显示相关告警及其对应字段；
+ - **告警数量** - 此数据源类型用于最新值部件。需指定目标实体；
+ - **设备** - 此数据源类型用于时序和最新值部件。通常需指定目标设备以及时序键、属性名或实体字段；
+ - **实体数量** - 此数据源类型用于最新值部件。需指定目标实体；
+ - **实体** - 此数据源类型用于时序和最新值部件。通常需通过指定[实体别名](/docs/{{docsPrefix}}user-guide/ui/aliases/)选择目标实体，以及时序键、属性名；
+ - **函数** - 此数据源类型用于时序和最新值部件的调试。通常可指定用于模拟设备数据的 JavaScript 函数以设置可视化。
 
-### Latest values
+### 最新值
 
-The Latest values widget type is designed to showcase the latest values of a specific entity attribute or time series data point (e.g., any Gauge Widget or Entities Table widget).
-This type of widget uses values of entity attribute(s) or time series as a data source.
-Digital Gauge in the example is displays the current temperature value.
+最新值部件类型用于展示特定实体属性或时序数据点的最新值（例如任意表盘部件或实体表部件）。此类型部件以实体属性或时序的值为数据源。示例中数字表盘显示当前温度值。
  
 {% include images-gallery.html imageCollection="wl-latest-values-datasource" %}
 
-### Time series
+### 时序
 
-The Time series widget type displays historical values for the selected period of time, or the latest values in the certain time window (e.g., Timeseries Line Chart or Timeseries Bar Chart).
-This widget type uses only the values of entity time series as a data source.
-In order to specify the time frame of displayed values, _Time window_ settings are used.
-The time window can be specified on the dashboard page or via widget details. It can be either _Realtime_ - the dynamically changed time frame for a certain latest interval, or _History_ - a fixed historical time frame.
-All these settings are part of Timeseries widget configuration.
-In the example, the "Timeseries Line Chart" displays the speed value of the device in real-time.
+时序部件类型显示所选时间段内的历史值，或在特定时间窗口内的最新值（例如时序折线图或时序柱状图）。此部件类型仅以实体时序的值为数据源。要指定显示值的时间范围，需使用_时间窗口_设置。时间窗口可在仪表板页面或部件详情中指定，可为_实时_（特定最新区间的动态变化时间范围）或_历史_（固定的历史时间范围）。这些设置均为时序部件配置的一部分。示例中“时序折线图”实时显示设备的速度值。
 
 {% include images-gallery.html imageCollection="wl-timeseries" %}
 
-### Control widget
+### 控制部件
 
-The Control widget allows sending RPC commands to devices, it handles and visualizes replies from the device (e.g., Raspberry Pi GPIO Control).
-The RPC widgets are configured by specifying the target device as the target endpoint for RPC commands.
-In the example, the “Basic GPIO Control” widget sends GPIO switch commands and detects the current GPIO switch status.
+控制部件允许向设备发送 RPC 命令，并处理与显示设备回复（例如 Raspberry Pi GPIO 控制）。RPC 部件通过将目标设备指定为 RPC 命令的目标端点进行配置。示例中“基本 GPIO 控制”部件发送 GPIO 开关命令并检测当前 GPIO 开关状态。
 
 {% include images-gallery.html imageCollection="wl-control-widget" %}
 
-### Alarm Widget
+### 告警部件
 
-The Alarm Widget type displays alarms related to the specified entity in the certain time window (e.g., Alarms table).
-To configure the Alarm widget, you designate an entity as the alarm source and define the corresponding alarm fields.
-As the _Timeseries widgets_, Alarm widgets have the _time window_ configuration to specify the time frame of the displayed alarms.
-Additionally, the configuration includes parameters such as "Alarm status", "Alarm severity", and "Alarm type".
-The “Alarm status” parameter shows the status of the alarms being fetched.
-The "Alarm severity" parameter shows the frequency of alarm fetches in seconds.
-The "Alarm Type" parameter helps identify the primary source of the alarm.
-For instance, "HighTemperature" and "LowHumidity" represent two different alarms.
-In this context, the "Alarms table" widget displays the latest alarm for the device in real-time.
+告警部件类型在特定时间窗口内显示与指定实体相关的告警（例如告警表）。配置告警部件时，需将某实体指定为告警源并定义相应的告警字段。与_时序部件_类似，告警部件具有_time window_配置以指定显示的告警时间范围。此外，配置还包括“告警状态”“告警严重程度”“告警类型”等参数。“告警状态”参数显示正在获取的告警状态。“告警严重程度”参数显示告警获取频率（秒）。“告警类型”参数有助于识别告警的主要来源。例如，“HighTemperature”和“LowHumidity”代表两种不同的告警。本例中“告警表”部件实时显示设备的最新告警。
 
 {% include images-gallery.html imageCollection="wl-alarms" %}
 
-### Static
+### 静态
 
-The Static widget type displays static customizable HTML content (e.g., HTML card).
-Static widgets don’t use any data sources and are usually configured by specifying static HTML content and, optionally, CSS styles.
-An example of a Static widget is the “HTML card” that displays the specified HTML content.
+静态部件类型显示静态可自定义的 HTML 内容（例如 HTML 卡片）。静态部件不使用任何数据源，通常通过指定静态 HTML 内容及可选的 CSS 样式进行配置。静态部件示例为“HTML 卡片”，显示指定的 HTML 内容。
 
 {% include images-gallery.html imageCollection="wl-static" %}
 
 <details>
 
 <summary>
-<b>An example of a CSS style function to adjust an HTML card style.</b>
+<b>用于调整 HTML 卡片样式的 CSS 样式函数示例。</b>
 </summary>
 
 {% highlight ruby %}
@@ -101,7 +80,7 @@ justify-content: center;
 <details>
 
 <summary>
-<b>An example of an HTML code for specifying card content.</b>
+<b>用于指定卡片内容的 HTML 代码示例。</b>
 </summary>
 
 {% highlight ruby %}
@@ -111,325 +90,306 @@ justify-content: center;
 
 </details>
  
-## Widgets Library (Bundles)
+## 部件库（捆绑包）
 
-Widgets are grouped into widget bundles according to their purposes.
-Some widgets can be found in multiple packages simultaneously. For example, the Alarm Count widget can be both found in the Alarm widgets bundle and the Count widgets bundle.
+部件按用途分组到部件捆绑包中。部分部件可同时出现在多个包中。例如，告警数量部件既可在告警部件捆绑包中找到，也可在计数部件捆绑包中找到。
 
-There are system-level and tenant-level widget bundles. Initial ThingsBoard installation comes with a basic set of system-level widget bundles.
+存在系统级和租户级部件捆绑包。初始 ThingsBoard 安装随附一套基础的系统级部件捆绑包。
 
-The system-level bundles can be managed by a **System administrator** and are available for use by any tenant in the system.
-The tenant-level bundles can be managed by a **Tenant administrator** and are available for use only by this tenant and his customers.
-You can always implement and add your widgets by following this [guide](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/).
+系统级捆绑包可由**系统管理员**管理，系统内任意租户均可使用。租户级捆绑包可由**租户管理员**管理，仅供该租户及其客户使用。您可按照此[指南](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/)始终实现并添加自己的部件。
 
-To find the widget you need among all the widget bundles, you can use the search function.
+若要在所有部件捆绑包中查找所需部件，可使用搜索功能。
 
 {% include images-gallery.html imageCollection="wl-bundle" %}
 
-You can also find the widget you need by its name on the "Widgets" tab. Here, all available widgets are listed by default in alphabetical order.
+您也可以在“Widgets”选项卡中按名称查找部件。此处默认按字母顺序列出所有可用部件。
 
 {% include images-gallery.html imageCollection="wl" %}
 
-### Air quality
+### 空气质量
 
-This widgets bundle includes widgets for visualizing air quality data.
+此部件捆绑包包含用于可视化空气质量数据的部件。
 
 {% include images-gallery.html imageCollection="wl-air-quality" %}
 
-### Alarm widgets
+### 告警部件
 
-The Alarm widgets bundle is useful for visualization of alarms for specific entities, both in real-time and history modes.
+告警部件捆绑包用于可视化特定实体的告警，支持实时和历史模式。
 
 {% include images-gallery.html imageCollection="wl-alarm-bundle" %}
 
-### Analog gauges
+### 模拟表盘
 
-The Analog Gauges widgets bundle is useful for visualization of temperature, humidity, speed, and other integer or float values.
+模拟表盘部件捆绑包用于可视化温度、湿度、速度及其他整数或浮点值。
 
 {% include images-gallery.html imageCollection="wl-analog-gauges-bundle" %}
 
-### Buttons
+### 按钮
 
-The Buttons bundle allows you to organize navigation between dashboard states, send RPC commands to devices, and update device attributes or time-series data.
+按钮捆绑包可用于在仪表板状态间导航、向设备发送 RPC 命令、更新设备属性或时序数据。
 
 {% include images-gallery.html imageCollection="wl-buttons-bundle" %}
 
-### Cards
+### 卡片
 
-The Cards bundle is useful for visualization of time series data or attributes in table or card widgets.
+卡片捆绑包用于在表或卡片部件中可视化时序数据或属性。
 
 {% include images-gallery.html imageCollection="wl-cards-bundle" %}
 
-### Charts
+### 图表
 
-The Charts bundle is useful for visualization of historical or real-time data with a time window.
+图表捆绑包用于在时间窗口内可视化历史或实时数据。
 
 {% include images-gallery.html imageCollection="wl-charts-bundle" %}
 
-### Control widgets
+### 控制部件
 
-The Control widgets bundle is useful for visualization of the current state and sending RPC commands to target devices.
+控制部件捆绑包用于可视化当前状态并向目标设备发送 RPC 命令。
 
 {% include images-gallery.html imageCollection="wl-control-bundle" %}
 
-### Count widgets
+### 计数部件
 
-The Counter widgets bundle is useful for counting and visualizing the current number of alarms and entities based on the selected filter.
+计数部件捆绑包用于根据所选筛选器统计并可视化当前告警和实体数量。
 
 {% include images-gallery.html imageCollection="wl-count-bundle" %}
 
-### Date
+### 日期
 
-The Date widgets bundle is useful for changing the data range for other widgets on the dashboard.
+日期部件捆绑包用于更改仪表板上其他部件的数据范围。
 
 {% include images-gallery.html imageCollection="wl-date-bundle" %}
 
-### Digital gauges
+### 数字表盘
 
-The Digital Gauges bundle is useful for visualization of temperature, humidity, speed and other integer or float values.
+数字表盘捆绑包用于可视化温度、湿度、速度及其他整数或浮点值。
 
 {% include images-gallery.html imageCollection="wl-digital-bundle" %}
 
-### Edge widgets
+### Edge 部件
 
-The Edge widgets bundle is useful for an overview of entities related to the specified ThingsBoard Edge instance.
+Edge 部件捆绑包用于概览与指定 ThingsBoard Edge 实例相关的实体。
 
 {% include images-gallery.html imageCollection="wl-edge-widgets-bundle" %}
 
-### Entity admin widgets
+### 实体管理部件
 
-The Entity admin widgets are templates of complex widgets that allow listing and creating/updating/deleting devices and assets.
+实体管理部件是复杂部件的模板，用于列出及创建/更新/删除设备和资产。
 
 {% include images-gallery.html imageCollection="wl-entity-admin-bundle" %}
 
-### Entity widgets
+### 实体部件
 
-The Entity admin widgets display a list of entities with their data, counting entities, and display the hierarchy of entities based on their relations.
+实体管理部件显示实体列表及其数据、实体计数，并基于关系显示实体层次结构。
 
 {% include images-gallery.html imageCollection="wl-entity-bundle" %}
 
-### Files
+### 文件
 
 {% capture difference %}
-**Available only in PE and PaaS.**
+**仅适用于 PE 和 PaaS。**
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-The Files widgets display a list of files or PDF reports as a table. Allows to download and delete the file.
+文件部件以表的形式显示文件或 PDF 报告列表。支持下载和删除文件。
 
 {% include images-gallery.html imageCollection="wl-files-bundle" %}
 
-### Gateway widgets
+### 网关部件
 
-The Gateway widgets bundle is useful for managing extensions.
+网关部件捆绑包用于管理扩展。
 
 {% include images-gallery.html imageCollection="wl-gateway-bundle" %}
 
-### General high-performance SCADA symbols
+### 通用高性能 SCADA 符号
 
-This bundle contains high-performance SCADA widgets for broad industrial monitoring and control. It covers elements ranging from panels and gauges to mechanical assets and site facilities. 
-Use it to assemble clean, high-contrast HMI screens that convey status at a glance across mixed-equipment dashboards.
+此捆绑包包含用于广泛工业监控和控制的高性能 SCADA 部件。涵盖从面板、表盘到机械资产和现场设施等元素。用于组装清晰、高对比的 HMI 界面，在混合设备仪表板上快速传达状态。
 
 {% include images-gallery.html imageCollection="wl-scada-hp-general-symbols" %}
 
-### GPIO widgets
+### GPIO 部件
 
-The GPIO widgets bundle is useful for visualization and controlling GPIO state for target devices.
+GPIO 部件捆绑包用于可视化和控制目标设备的 GPIO 状态。
 
 {% include images-gallery.html imageCollection="wl-gpio" %}
 
-### High-performance SCADA energy system
+### 高性能 SCADA 能源系统
 
-This bundle contains high-performance SCADA symbols that cover the complete electrical flow — from renewable generation (solar, wind) and backup generators through storage, conversion, protection, metering, and low/high-voltage distribution to residential and industrial consumers. 
-It is ideal for building interactive dashboards that visualize production, quality, and consumption across modern energy infrastructures.
+此捆绑包包含覆盖完整电力流的高性能 SCADA 符号——从可再生能源发电（太阳能、风能）和备用发电机，经过存储、转换、保护、计量，以及高/低压配电直至住宅和工业用户。适于构建可视化现代能源基础设施生产、质量和消费的交互式仪表板。
 
 {% include images-gallery.html imageCollection="wl-scada-hp-energy-system" %}
 
-### High-performance SCADA fluid system
+### 高性能 SCADA 流体系统
 
-This high-performance symbol bundle is focused on fluid-handling processes in oil-and-gas, chemical, and water-treatment domains. 
-It spans drilling and well-control components, pumps and pipelines, separators, heat-exchange units, turbines, and related equipment—ideal for flow diagrams, production dashboards, and process-safety views.
+此高性能符号捆绑包聚焦石油天然气、化工和水处理领域的流体处理工艺。涵盖钻井和井控组件、泵和管道、分离器、热交换单元、涡轮及相关设备——适用于流程图、生产仪表板和工艺安全视图。
 
 {% include images-gallery.html imageCollection="wl-scada-hp-fluid-system" %}
 
-### High-performance SCADA oil & gas
+### 高性能 SCADA 石油天然气
 
-The bundle of high-performance SCADA symbols designed for upstream and early-stage processing workflows in the oil and gas sector.
-It covers drilling and well-control equipment, artificial lift and drive units, surface gathering lines, separator trains, heat exchange, and power generation assets — everything needed to visualize the complete flow from wellhead to initial treatment in a clean High-performance SCADA style.
-Perfect for real-time dashboards that track drilling progress, production efficiency, and safety barriers across both onshore and offshore installations.
+专为石油天然气领域上游和早期处理流程设计的高性能 SCADA 符号捆绑包。涵盖钻井和井控设备、人工举升和驱动单元、地面集输管线、分离器组、热交换和发电资产——可视化井口至初步处理的完整流程所需的一切，采用清晰的高性能 SCADA 风格。适用于实时跟踪陆上和海上装置钻井进度、生产效率和安全屏障的仪表板。
 
 {% include images-gallery.html imageCollection="wl-scada-hp-fluid-oil-and-gas" %}
 
-### Home page widgets
+### 首页部件
 
-The Home page widgets bundle is useful for customizing and displaying quick links to the platform's UI components, documentation, or any other resources on the home page, displaying statistics about the number of entities and API usege, etc.
+首页部件捆绑包用于在首页自定义和显示指向平台 UI 组件、文档或任何其他资源的快速链接，显示实体数量和 API 使用等统计信息。
 
 {% include images-gallery.html imageCollection="wl-home" %}
 
-### HTML widgets
+### HTML 部件
 
-The HTML widgets bundle is useful for injecting custom HTML code. Or for displaying configurable HTML with the ability to inject values from the selected data source.
+HTML 部件捆绑包用于注入自定义 HTML 代码，或用于显示可配置的 HTML 并支持从所选数据源注入值。
 
 {% include images-gallery.html imageCollection="wl-html" %}
 
-### Indoor Environment
+### 室内环境
 
-The Indoor Environment widget bundle is effective in visualizing data related to indoor environments.
+室内环境部件捆绑包用于可视化室内环境相关数据。
 
 {% include images-gallery.html imageCollection="wl-indoor-environment-bundle" %}
 
-### Industrial widgets
+### 工业部件
 
-The Industrial widgets bundle is useful for displaying industrial telemetry data.
+工业部件捆绑包用于显示工业遥测数据。
 
 {% include images-gallery.html imageCollection="wl-industrial-bundle" %}
 
-### Input widgets
+### 输入部件
 
-The Input widgets bundle is useful for modifying the attributes of an entity.
+输入部件捆绑包用于修改实体的属性。
 
 {% include images-gallery.html imageCollection="wl-input-bundle" %}
 
-### Liquid level
+### 液位
 
-The Liquid level widgets bundle includes widgets for visualizing the level of liquid inside the tank.
+液位部件捆绑包包含用于可视化罐内液位的部件。
 
 {% include images-gallery.html imageCollection="wl-liquid-level-bundle" %}
 
-### Maps
+### 地图
 
-The Map widgets bundle is useful for visualizing the geographic location of devices and tracking device routes in both real-time and history modes.
+地图部件捆绑包用于在实时和历史模式下可视化设备地理位置并跟踪设备路线。
 
 {% include images-gallery.html imageCollection="wl-maps-bundle" %}
 
-### Navigation widgets
+### 导航部件
 
-The Navigation widgets bundle is useful for defining the home dashboard of the user.
+导航部件捆绑包用于定义用户的首页仪表板。
 
 {% include images-gallery.html imageCollection="wl-navigation-bundle" %}
 
-### Outdoor Environment
+### 室外环境
 
-The Outdoor Environment widget bundle is effective in visualizing data related to outdoor environments.
+室外环境部件捆绑包用于可视化室外环境相关数据。
 
 {% include images-gallery.html imageCollection="wl-outdoor-environment-bundle" %}
 
-### SCADA symbols
+### SCADA 符号
 
-Use for uploading SVG symbols to your SCADA dashboard.
+用于向 SCADA 仪表板上传 SVG 符号。
 
 {% include images-gallery.html imageCollection="wl-scada-symbols-bundle" %}
 
-### Scheduling
+### 调度
 
 {% capture difference %}
-**Available only in PE and PaaS.**
+**仅适用于 PE 和 PaaS。**
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-The Scheduling widgets bundle is useful for [scheduling](/docs/{{docsPrefix}}user-guide/scheduler/) various types of events with flexible schedule configuration.  
+调度部件捆绑包用于通过灵活的调度配置[调度](/docs/{{docsPrefix}}user-guide/scheduler/)各类事件。
 
 {% include images-gallery.html imageCollection="wl-scheduling-bundle" %}
 
-### Status indicators
+### 状态指示器
 
-The Status indicators widgets bundle includes widgets for visualizing battery level, signal strength, and progress bar.
+状态指示器部件捆绑包包含用于可视化电量、信号强度和进度条的部件。
 
 {% include images-gallery.html imageCollection="wl-status-indicators-bundle" %}
 
-### Tables
+### 表格
 
-The Tables widgets bundle is useful when you need to display a list of entities, a list of alarm signals, and time series data for one or several entities.
-Additionally, this widget bundle showcases Persistent RPC requests, which are based on entity alias. 
-It can also be filtered optionally and supports pagination for enhanced usability.
+表格部件捆绑包用于显示实体列表、告警信号列表以及一个或多个实体的时序数据。此外，此部件捆绑包展示基于实体别名的持久化 RPC 请求。支持可选筛选和分页以提升可用性。
 
 {% include images-gallery.html imageCollection="wl-tables-bundle" %}
 
-### Traditional SCADA fluid system
+### 传统 SCADA 流体系统
 
-This bundle of SCADA symbols in a traditional design style covers the essentials for many industrial diagrams. 
-It packs straight and elbow pipes, tees, drains, flow & level meters, pumps, filters, valves, tanks of various shapes, pools, and other core components - everything you need to assemble piping, hydraulic, and other process-control schematics with ease.
+此传统设计风格的 SCADA 符号捆绑包涵盖多种工业图所需的核心内容。包含直管、弯管、三通、排放口、流量和液位计、泵、过滤器、阀门、各种形状储罐、水池及其他核心组件——组装管道、液压及其他过程控制 schematic 所需的一切。
 
 {% include images-gallery.html imageCollection="wl-scada-traditional-fluid-system" %}
 
-## Operations with Widget
+## 部件操作
 
-### Adding Widget
+### 添加部件
 
-When a system administrator adds a new widget, it automatically becomes a system widget.
-This means that only the administrator has the privilege to modify, or delete the widget.
-Tenant administrators can also create widgets, but they are granted permission to modify only the widgets they have created.
-You can always implement and add your widgets by following this [guide](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/).
+系统管理员添加新部件后，该部件将自动成为系统部件。即仅管理员有权修改或删除该部件。租户管理员也可创建部件，但仅有权修改其创建的部件。您可按照此[指南](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/)始终实现并添加自己的部件。
 
-To add a new widget, you should:
+添加新部件的步骤：
 
 {% include images-gallery.html imageCollection="add-widget" showListImageTitles="true" %}
 
-### Exporting Widget
+### 导出部件
 
-You can export a specific type of widget from a widget bundle in JSON format, and import it in the same or different ThingsBoard instance.
+您可将部件捆绑包中的特定类型部件以 JSON 格式导出，并在相同或不同的 ThingsBoard 实例中导入。
 
-In order to export a widget type, you should go to the Widgets Library page, navigate to the "Widgets" tab and click the export button on the particular widget card. The widget configuration file will be saved in JSON format on your computer.
+要导出部件类型，请前往部件库页面，在“Widgets”选项卡中点击具体部件卡片上的导出按钮。部件配置文件将以 JSON 格式保存到您的计算机。
 
 {% include images-gallery.html imageCollection="export-widget" %}
 
-### Importing Widget
+### 导入部件
 
-Please note that only system administrators can modify system (default) widgets. This includes the ability to edit, delete, add, or import widgets within the bundle.
-When a system administrator creates a new widget bundle, it's set as a system-level item for tenants, preventing them from modifying it.
-Nevertheless, tenants can add their own widgets. In this case, they have full rights to manage created widget types inside the bundle.
+请注意，仅系统管理员可修改系统（默认）部件。包括在捆绑包内编辑、删除、添加或导入部件的能力。系统管理员创建新部件捆绑包时，将设置为租户的系统级项，阻止租户对其进行修改。不过，租户可添加自己的部件。此种情况下，他们拥有对捆绑包内所创建部件类型的完全管理权限。
 
-To import a widget, you should:
+导入部件的步骤：
 
 {% include images-gallery.html imageCollection="import-widget" showListImageTitles="true" %}
 
-### Deleting Widget
+### 删除部件
 
-The system administrator or tenant administrator can delete a widget type using one of the following ways:
+系统管理员或租户管理员可通过以下任一方式删除部件类型：
 
-First way:
+第一种方式：
 
 {% include images-gallery.html imageCollection="delete-widget-1" showListImageTitles="true" %}
 
-Second way:
+第二种方式：
 
 {% include images-gallery.html imageCollection="delete-widget-2" showListImageTitles="true" %}
 
-## Operations with Widgets Bundle
+## 部件捆绑包操作
 
-### Adding Widgets Bundle
+### 添加部件捆绑包
 
-When a system administrator adds a new widgets bundle, it automatically becomes a system widgets bundle.
-It means that only they can delete, edit, and add widget to the bundle. 
-Tenant administrators can create widget bundles as well. In this case, they have permission to modify already created bundles.
-You can always implement and add your widgets by following this [guide](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/).
+系统管理员添加新部件捆绑包后，该捆绑包将自动成为系统部件捆绑包。即仅他们可删除、编辑捆绑包并向其添加部件。租户管理员也可创建部件捆绑包。此种情况下，他们有权修改已创建的捆绑包。您可按照此[指南](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/)始终实现并添加自己的部件。
 
-To add a new widgets bundle, you should:
+添加新部件捆绑包的步骤：
 
 {% include images-gallery.html imageCollection="wl-add-widgets-bundle" showListImageTitles="true" %}
 
-### Exporting Widgets Bundle 
+### 导出部件捆绑包
 
-You can export a widgets bundle in JSON format, and import it in the same or different ThingsBoard instance.
+您可将部件捆绑包以 JSON 格式导出，并在相同或不同的 ThingsBoard 实例中导入。
 
-In order to export widgets bundle, you should:
+导出部件捆绑包的步骤：
 
 {% include images-gallery.html imageCollection="export-widgets-bundle" showListImageTitles="true" %}
 
-### Importing Widgets Bundle
+### 导入部件捆绑包
 
-To import a widgets bundle, you should: 
+导入部件捆绑包的步骤：
 
 {% include images-gallery.html imageCollection="import-widgets-bundle" showListImageTitles="true" %}
 
-### Deleting Widgets Bundle
+### 删除部件捆绑包
 
-The system administrator or tenant administrator can delete a widgets bundle using one of the following ways:
+系统管理员或租户管理员可通过以下任一方式删除部件捆绑包：
 
-First way:
+第一种方式：
 
 {% include images-gallery.html imageCollection="delete-widgets-bundle-1" showListImageTitles="true" %}
 
-Second way:
+第二种方式：
 
 {% include images-gallery.html imageCollection="delete-widgets-bundle-2" showListImageTitles="true" %}

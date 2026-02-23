@@ -2,171 +2,168 @@
 * TOC
 {:toc}
 
-Quality of Service (QoS) levels are one of the critical features of MQTT, which sets the rules for message delivery. 
-This feature is pivotal in the design of robust and reliable communication systems, particularly in the realm of the Internet of Things (IoT), 
-enhancing its interaction between the broker and connected clients.
+服务质量(QoS)级别是 MQTT 的关键特性之一，定义了消息投递的规则。
+该特性在设计与 broker 和连接客户端交互的稳健可靠通信系统中至关重要，尤其在物联网(IoT)领域。
 
-Here's a list of challenges that the Quality of Service feature in MQTT helps to tackle:
+以下列举 QoS 特性在 MQTT 中帮助解决的主要挑战：
 
-* **Network reliability**: MQTT relies on the TCP, a data transportation protocol. TCP does not guarantee that the packets will be delivered in case of poor network conditions. QoS 1 and QoS 2 levels handle this problem by ensuring that the messages are delivered according to the requirement.
-* **System crashes**: If either the publisher or the subscriber crashes after the message is sent but before it can be processed, QoS ensures that the messages aren't lost.
-* **Preventing duplicates**: QoS 2 is designed to ensure that the message is delivered to the receiver only once.
-* **Avoiding overloading the subscriber**: With QoS 1 and QoS 2, the publisher will not send further messages to a client if it is not acknowledging the receipt of previous messages.
-* **Persisting messages**: MQTT includes the ability to persist QoS 1 and QoS 2 messages for a client that is currently disconnected. The next time the client connects, these missed messages are sent out.
+* **网络可靠性**：MQTT 依赖 TCP 作为数据传输协议。在恶劣网络条件下，TCP 无法保证数据包必定送达。QoS 1 和 QoS 2 通过按需求确保消息投递来应对此问题。
+* **系统崩溃**：若发布者或订阅者在消息发送后、处理前崩溃，QoS 可避免消息丢失。
+* **防止重复**：QoS 2 设计为确保消息仅被投递给接收者一次。
+* **避免订阅者过载**：在 QoS 1 和 QoS 2 下，若客户端未确认前序消息的接收，发布者将不再继续向其发送新消息。
+* **消息持久化**：MQTT 支持为当前离线的客户端持久化 QoS 1 和 QoS 2 消息。客户端下次连接时，这些遗漏的消息会被投递。
 
-## QoS levels
+## QoS 级别
 
-MQTT defines three levels of Quality of Service:
+MQTT 定义了三个服务质量级别：
 
-1. **QoS 0 - At Most Once** (default). Used for non-critical data where speed is more important than reliability.
-2. **QoS 1 - Al Least Once**. Used for important data where occasional duplicates are manageable.
-3. **QoS 2 - Exactly Once**. Used for critical data where neither loss nor duplication can be tolerated.
+1. **QoS 0 - 至多一次**（默认）。用于非关键数据，速度优先于可靠性。
+2. **QoS 1 - 至少一次**。用于重要数据，偶尔重复可接受。
+3. **QoS 2 - 恰好一次**。用于关键数据，不允许丢失或重复。
 
-### QoS 0 - At Most Once
+### QoS 0 - 至多一次
 
 ![image](/images/mqtt-broker/user-guide/tbmq-qos0.png)
 
-In this default method the message can be delivered either one time or not delivered. The duplicate messages are impossible.
+在此默认模式下，消息可能投递一次也可能不投递。不会出现重复消息。
 
-**Requires one message**: 
-1. Sender sends **PUBLISH (1)** packet.
+**需要一条消息**： 
+1. 发送方发送 **PUBLISH (1)** 报文。
 
-After the message is sent the sender removes it from the message queue. That’s why this mode is sometimes called **"fire and forget"**. 
-The sender does not expect an acknowledgment (confirmation), like in the QoS 1, from the receiver that the message has been delivered.
+消息发送后，发送方将其从消息队列移除。 因此该模式有时称为 **「发射即忘」**。
+与 QoS 1 不同，发送方不期望接收方对消息已送达进行确认。
 
-QoS 0 requires **minimal network usage** and subsequently has the fastest performance (minimal delay) due to no overhead of acknowledgments.
+QoS 0 需要**最少的网络占用**，因无确认开销而具备最快性能（最低延迟）。
 
-At the same time QoS 0 has the **lowest reliability** as there is no guarantee of message delivery. So it is not suitable for critical data where every message must be received.
+同时 QoS 0 具有**最低可靠性**，无法保证消息投递。因此不适合必须收到每条消息的关键数据。
 
-### QoS 1 - Al Least Once
+### QoS 1 - 至少一次
 
 ![image](/images/mqtt-broker/user-guide/tbmq-qos1.png)
 
-The messages are delivered at least once, ensuring that the receiver gets the message, but it does not guarantee that it will be delivered only once.
+消息至少投递一次，确保接收方收到，但不保证只投递一次。
 
-**Requires two messages**:
-1. The sender sends **PUBLISH (1)** packet.
-2. The receiver responds with **PUBACK (2)** packet.
+**需要两条消息**：
+1. 发送方发送 **PUBLISH (1)** 报文。
+2. 接收方回复 **PUBACK (2)** 报文。
 
-The duplicate messages are possible due to scenarios with unstable connection, for example:
-1. The sender sends a PUBLISH packet, but the receiver does not get it. So the sender will try to send duplicates of PUBLISH packets again and again. When the sender gets confirmation from the receiver (PUBACK packet), the message will be removed from the queue.
-2. The sender sends a PUBLISH packet, the receiver gets it and sends back the PUBACK packet, but it is lost on its way back. So the sender does not know if the receiver got it. So it will produce another copy of the message until it is acknowledged.
+在不稳定连接场景下可能出现重复消息，例如：
+1. 发送方发出 PUBLISH 报文，但接收方未收到。发送方会反复重发 PUBLISH。收到接收方的 PUBACK 确认后，消息才从队列移除。
+2. 发送方发出 PUBLISH，接收方收到并回复 PUBACK，但回复在途中丢失。发送方无法得知接收方是否收到，会继续重发直到收到确认。
 
-The use of QoS 1 ensures that important data is not lost due to transmission issues, but it also means that any failure to acknowledge receipt will result in duplicate messages. 
+使用 QoS 1 能确保重要数据不会因传输问题丢失，但也意味着任何未确认都会导致重复消息。 
 
-### QoS 2 - Exactly Once
+### QoS 2 - 恰好一次
 
 ![image](/images/mqtt-broker/user-guide/tbmq-qos2.png)
 
-The messages are delivered exactly once, ensuring that neither duplication nor loss occurs.
+消息恰好投递一次，既无重复也无丢失。
 
-**Requires 4 messages**:
-1. The sender sends **PUBLISH (1)** packet.
-2. The receiver responds with **PUBREC (2)** packet.
-3. The sender gets a PUBREC packet and sends **PUBREL (3)** packet with important details as packet ID that is a key for guaranteeing that a message is sent exactly once.
-4. The receiver gets PUBREL packet and responds with **PUBCOMP (4)** packet.
+**需要 4 条消息**：
+1. 发送方发送 **PUBLISH (1)** 报文。
+2. 接收方回复 **PUBREC (2)** 报文。
+3. 发送方收到 PUBREC 后发送 **PUBREL (3)** 报文，包含报文 ID 等用于保证恰好一次投递的关键信息。
+4. 接收方收到 PUBREL 后回复 **PUBCOMP (4)** 报文。
 
-Only after the sender gets PUBCOMP packet, it will be allowed to retransmit the PUBLISH packet or send a new message with the same Packet ID.
+只有收到 PUBCOMP 后，发送方才能重传 PUBLISH 或发送具有相同 Packet ID 的新消息。
 
-The guarantee of exactly once message delivery by using four-step handshake process between sender and receiver has its price - **slowest performance and highest network usage**.
+通过发送方与接收方间的四步握手保证恰好一次投递，代价是**最慢性能和最高网络占用**。
 
-## Which QoS to use? IoT use cases
+## 如何选择 QoS？IoT 用例
 
-Below are some common scenarios to consider when selecting the appropriate QoS for your IoT system.
+以下为 IoT 系统中选择合适 QoS 时需考虑的一些常见场景。
 
-### QoS 0 - At Most Once
+### QoS 0 - 至多一次
 
-Suitable for applications where speed is more important than reliability or occasional message loss (due to the different reasons as network Instability, unexpected client disconnection, 
-broker overload etc) is acceptable, such as non-critical sensor data.
-1. **Environmental Sensor Data**
-   * Use Case: Temperature sensors in a greenhouse send periodic updates to a monitoring system.
-   * Reason to use: Occasional data loss is acceptable because subsequent readings will provide the latest state.
-4. **Non-Critical Notifications**
-   * Use Case: A smart light system sends status updates to a central server.
-   * Reason to use: If a message is lost, the next update will correct the state, and immediate consistency is not crucial.
+适用于速度优先于可靠性或偶发消息丢失（如网络不稳定、客户端意外断开、broker 过载等）可接受的场景，如非关键传感器数据。
+1. **环境传感器数据**
+   * 用例：温室的温度传感器向监控系统发送周期性更新。
+   * 使用原因：偶发数据丢失可接受，因为后续读数会提供最新状态。
+4. **非关键通知**
+   * 用例：智能灯系统向中心服务器发送状态更新。
+   * 使用原因：若消息丢失，下次更新会纠正状态，即时一致性不是关键。
 
-### QoS 1 - Al Least Once
+### QoS 1 - 至少一次
 
-Suitable for applications where data loss is unacceptable, but duplicates can be managed.
-1. **Telemetry Data from Vehicles**
-   * Use Case: A vehicle sends telemetry data (e.g., location, speed, fuel level) to a fleet management system.
-     If the vehicle experiences a temporary network disconnection or if the acknowledgment from the broker is delayed or lost, the vehicle's MQTT client will resend the telemetry data. This results in the fleet management system receiving the same data multiple times.
-   * Reason to use: Ensures that important data is received at least once, even if duplicates occur.
-4. **Home Security Alerts**
-   * Use Case: A home security system sends alerts (e.g., motion detected, door opened) to the homeowner's smartphone app.
-     When the MQTT broker fails to send an acknowledgment due to network latency or interruptions, the security system will retransmit the alert. Consequently, the homeowner might receive multiple notifications for the same event.
-   * Reason to use: Important alerts must reach the app, even if duplicates need to be handled.
+适用于数据丢失不可接受但可处理重复的场景。
+1. **车辆遥测数据**
+   * 用例：车辆向车队管理系统发送遥测数据（如位置、速度、油量）。
+     若车辆遭遇短暂断网或 broker 的确认延迟/丢失，车辆 MQTT 客户端会重发遥测数据，导致车队管理系统收到多次相同数据。
+   * 使用原因：确保重要数据至少被接收一次，即使出现重复。
+4. **家庭安防告警**
+   * 用例：家庭安防系统向户主手机应用发送告警（如检测到移动、门被打开）。
+     当 broker 因网络延迟或中断未能发送确认时，安防系统会重发告警，户主可能收到同一事件的多次通知。
+   * 使用原因：重要告警必须送达应用，即使需要处理重复。
 
-### QoS 2 - Exactly Once
+### QoS 2 - 恰好一次
 
-Best for critical applications where message duplication or loss is unacceptable, such as financial transactions or critical commands.
-1. **Financial Transactions**
-   * Use Case: A payment system sends transaction details between terminals and a central server.
-   * Reason to use: Ensures that each transaction is processed exactly once to prevent duplicates or losses.
-4. **Industrial Automation Commands**
-   * Use Case: Commands sent to industrial machinery for precise control and operations.
-   * Reason to use: Critical commands must be executed exactly once to avoid errors or accidents.
+最适合消息重复或丢失不可接受的关键应用，如金融交易或关键指令。
+1. **金融交易**
+   * 用例：支付系统在终端与中心服务器间发送交易详情。
+   * 使用原因：确保每笔交易恰好处理一次，防止重复或丢失。
+4. **工业自动化指令**
+   * 用例：发送至工业机械以进行精确控制与操作的指令。
+   * 使用原因：关键指令必须恰好执行一次，避免错误或事故。
 
-### Comparison table
+### 对比表
 
 <table>
   <thead>
       <tr>
           <td></td>
-          <td><b>Performance</b></td>
-          <td><b>Will message be delivered</b></td>
-          <td><b>Duplicates</b></td>
-          <td><b>Packets</b></td>
+          <td><b>性能</b></td>
+          <td><b>消息是否投递</b></td>
+          <td><b>重复</b></td>
+          <td><b>报文</b></td>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>QoS 0 - At Most Once</td>
-          <td>Fastets</td>
-          <td>Maybe</td>
-          <td>Impossible</td>
+          <td>QoS 0 - 至多一次</td>
+          <td>最快</td>
+          <td>可能</td>
+          <td>不可能</td>
           <td>1. PUBLISH</td>
       </tr>
       <tr>
-          <td>QoS 1 - Al Least Once</td>
-          <td>Normal</td>
-          <td>Yes</td>
-          <td>Possible</td>
+          <td>QoS 1 - 至少一次</td>
+          <td>一般</td>
+          <td>是</td>
+          <td>可能</td>
           <td>1. PUBLISH<br>2. PUBACK</td>
       </tr>
       <tr>
-          <td>QoS 2 - Exactly Once</td>
-          <td>Slowest</td>
-          <td>Yes</td>
-          <td>Impossible</td>
+          <td>QoS 2 - 恰好一次</td>
+          <td>最慢</td>
+          <td>是</td>
+          <td>不可能</td>
           <td>1. PUBLISH<br>2. PUBREC<br>3. PUBREL<br>4. PUBCOMP</td>
       </tr>
   </tbody>
 </table>
 
-## Downgrade
+## 降级
 
-In MQTT communication in order to understand each other publisher and subscriber must use the same Quality of Service. 
-But QoS of the published message and QoS of the subscribing client may differ.
+在 MQTT 通信中，发布者与订阅者必须使用相同的服务质量才能正确理解彼此。
+但发布消息的 QoS 与订阅客户端的 QoS 可能不同。
 
-There is a simple rule for cases when QoS differs - **the lowest QoS will be used**, regardless of which side, sender or receiver, it is. 
-For example, Client A has published a message with QoS 1. Meanwhile, Client B is subscribed to the same topic with QoS 2. As a result, the message will be delivered with a QoS level of 1.
+QoS 不同时适用一条简单规则：**采用较低的 QoS**，无论该 QoS 来自发送方还是接收方。
+例如，客户端 A 以 QoS 1 发布消息，而客户端 B 以 QoS 2 订阅同一主题，则消息将以 QoS 1 投递。
 
-## Queuing messages and session persistence
+## 消息排队与会话持久化
 
-In the MQTT protocol, the message queue behavior depends on the selected Quality of Service that directly affects the delivery and storage of messages.
+在 MQTT 协议中，消息队列行为取决于所选的服务质量，直接影响消息的投递与存储。
 
-If the **session is clean** (clean session is set to true), regardless of the selected QoS the broker will not store any information for the client and the session ends when the client disconnects.
-This means any queues or unacknowledged messages are lost.
+若**会话为清洁会话**（clean session 设为 true），无论所选 QoS 如何，broker 都不会为客户端存储任何信息，会话在客户端断开时结束。
+任何排队或未确认的消息都会丢失。
 
-If the **session is persistent** (clean session flag set to false) and selected **QoS 1** or **QoS 2**, the broker will queue any messages for 
-disconnected clients which have a subscription for the topic on which the message was published. 
-The queued message is sent to the client after it reconnects. The broker ensures that messages are delivered in the order they were published, even after the client reconnects.
+若**会话为持久会话**（clean session 标志设为 false）且选择了 **QoS 1** 或 **QoS 2**，broker 会为已断开的、且订阅了消息发布主题的客户端排队消息。
+排队的消息在客户端重连后发送。broker 保证消息按发布顺序投递，即使客户端重连后亦然。
 
-Upon **reconnection**, clients must be prepared to process potentially large bursts of queued messages, which can impact performance and require efficient message handling logic. 
-Each message must be acknowledged by the client to remove it from the queue. 
-After reconnection, if the client had received some messages before going offline, there might be duplicates upon reconnecting. 
-The client needs to handle these duplicates appropriately.
+**重连时**，客户端须能处理可能大量涌入的排队消息，这可能影响性能并需要高效的消息处理逻辑。
+每条消息须由客户端确认才能从队列移除。
+重连后，若客户端离线前已收到部分消息，重连时可能收到重复消息。
+客户端需妥善处理这些重复。
 
-Please note, for **QoS 0** the broker does not queue messages.
+请注意，对于 **QoS 0**，broker 不排队消息。
 

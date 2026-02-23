@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Installing ThingsBoard Edge using Docker (Windows)
-description: Installing ThingsBoard Edge using Docker (Windows)
+title: 使用 Docker 安装 ThingsBoard Edge（Windows）
+description: 使用 Docker 安装 ThingsBoard Edge（Windows）
 ---
 
 * TOC

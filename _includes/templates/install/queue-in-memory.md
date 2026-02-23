@@ -1,1 +1,1 @@
-**In Memory** queue is built in and enabled by default. No additional configuration is required.
+**In Memory** 队列已内置且默认启用，无需额外配置。

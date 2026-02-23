@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mobile
-title: Getting started with ThingsBoard Mobile Application
-description: ThingsBoard Mobile Application - starting point for your IoT mobile product
+title: ThingsBoard移动应用快速入门
+description: ThingsBoard移动应用 - 您的IoT移动应用的起点
 
 ---
 

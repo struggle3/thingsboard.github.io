@@ -2,19 +2,19 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Since ThingsBoard 3.4.2, the Tenant administrator is able to configure common settings for multiple assets using Asset Profiles.
-Each Asset has one and only profile at a single point in time.
-Experienced ThingsBoard users can notice that the asset type has been deprecated in favor of the Asset Profile.
-The update script will automatically create Asset Profiles based on unique Asset Types and assign them to the appropriate assets.
+自 ThingsBoard 3.4.2 起，租户管理员可使用资产 Profile 为多个资产配置通用设置。
+每个资产在任一时间点有且仅有一个 Profile。
+熟悉 ThingsBoard 的用户可注意到，资产类型已被弃用，由资产 Profile 取代。
+更新脚本将根据唯一资产类型自动创建资产 Profile，并将其分配给相应资产。
 
-Asset Profile allows you to select the [Rule Chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain) and [Queue](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/) to be used by the [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview) for processing of the asset data.
-Let's take a look at the settings available in the asset profile.
+资产 Profile 允许选择 [Rule Chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain) 和 [Queue](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/)，供 [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview) 处理资产数据。
+下面介绍资产 Profile 中的可用设置。
 
-## Create Asset Profile
+## 创建资产 Profile
 
-To create an asset profile, go to the Asset Profiles on the Profiles tab and click on the plus button to add a new asset profile.
+要创建资产 Profile，请进入 Profiles 选项卡下的 Asset Profiles，点击加号按钮添加新的资产 Profile。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/asset-profile/asset-profile-add-1-ce.png)
@@ -23,17 +23,17 @@ To create an asset profile, go to the Asset Profiles on the Profiles tab and cli
 ![image](/images/user-guide/asset-profile/asset-profile-add-1-pe.png)
 {% endif %}
 
-## Asset Profile settings
+## 资产 Profile 设置
 
 ### Rule Chain
 
-By default, the [Root Rule Chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain) processes all incoming messages and events for any asset.
-However, the more different asset types you have, the more complex your Root Rule Chain may become.
-Many platform users create their Root Rule Chain for the sole purpose of sending messages to specific rule chains depending on the asset type.
+默认情况下，[Root Rule Chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain) 处理任意资产的所有传入消息和事件。
+但是，资产类型越多，Root Rule Chain 可能越复杂。
+许多平台用户创建 Root Rule Chain 的唯一目的是根据资产类型将消息发送到特定 Rule Chain。
 
-To avoid this painful and mundane activity, since ThingsBoard 3.4.2, you can specify a custom Rule Chain for your assets.
-The new Rule Chain will receive asset attributes updates, and asset lifecycle(Created/Updated/Deleted) events.
-This setting is available in the Asset Profile details.
+为避免这一繁琐工作，自 ThingsBoard 3.4.2 起，可为资产指定自定义 Rule Chain。
+新 Rule Chain 将接收资产属性更新以及资产生命周期（创建/更新/删除）事件。
+此设置在资产 Profile 详情中可用。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/asset-profile/asset-profile-rule-chain-1-ce.png)
@@ -51,14 +51,14 @@ This setting is available in the Asset Profile details.
 
 ### Queue
 
-By default, the [Main](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/) queue will be used to store all incoming events from any asset.
-The API layer will submit messages to this queue and Rule Engine will poll the queue for new messages.
-However, for multiple use cases, you might want to use different queues for different assets.
-For example, you might want to isolate data processing for urgent asset data and other assets or devices.
-This way, even if your system has a peak load produced by millions of water meters, whenever the important asset configuration changes will be processed without delay.
-Separation of the queues also allows you to customize different [submit](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-submit-strategy) and [processing](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-processing-strategy) strategies.
+默认情况下，[Main](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/) 队列将用于存储来自任意资产的所有传入事件。
+API 层将消息提交到此队列，Rule Engine 将轮询队列获取新消息。
+但在多种用例中，您可能希望为不同资产使用不同队列。
+例如，您可能希望将紧急资产数据与其他资产或设备的数据处理隔离。
+这样，即使系统面临数百万水表产生的高峰负载，重要资产配置的变更也能及时处理。
+队列分离还允许为不同队列自定义 [submit](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-submit-strategy) 和 [processing](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-processing-strategy) 策略。
 
-This setting is available when you create an Asset Profile and in the Asset Profile details.
+此设置在创建资产 Profile 时及资产 Profile 详情中可用。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/asset-profile/asset-profile-queue-1-ce.png)
@@ -75,37 +75,37 @@ This setting is available when you create an Asset Profile and in the Asset Prof
 ![image](/images/user-guide/asset-profile/asset-profile-queue-2-pe.png)
 {% endif %}
 
-## Asset profile details
+## 资产 Profile 详情
 
-Clicking an asset profile opens a detailed view where you can access and manage all aspects of that profile.
+点击资产 Profile 将打开详细视图，可在其中访问和管理该 Profile 的各个方面。
 
 {% include images-gallery.html imageCollection="asset-profile-details-page" %}
 
-<b><font size="3">Details</font></b>   
-This tab contains the core configuration of the asset profile — general settings that define behavior and default parameters for all assets using this profile. Here you can configure the profile name, default dashboard, default rule chain, visual settings, and metadata that apply to all associated assets.
+<b><font size="3">Details（详情）</font></b>
+此选项卡包含资产 Profile 的核心配置——定义使用此 Profile 的所有资产的行为和默认参数的通用设置。在此可配置 Profile 名称、默认仪表板、默认 Rule Chain、可视化设置及应用于所有关联资产的元数据。
 
-<b><font size="3">Calculated fields</font></b>   
-Displays fields whose values are automatically computed using formulas based on asset attributes or telemetry. Calculated fields defined at the profile level are inherited by all assets using this profile, enabling consistent generation of derived metrics without modifying data sources.
+<b><font size="3">Calculated fields（计算字段）</font></b>
+显示使用基于资产属性或遥测的公式自动计算值的字段。在 Profile 级别定义的计算字段由使用此 Profile 的所有资产继承，使派生指标无需修改数据源即可一致生成。
 
-<b><font size="3">Alarm rules</font></b>   
-Contains alarm rules configured for the asset profile. These rules define:
+<b><font size="3">Alarm rules（告警规则）</font></b>
+包含为资产 Profile 配置的告警规则。这些规则定义：
 
-- trigger conditions
-- severity levels
-- alarm creation and clearing logic
-- propagation and optional automated actions
+- 触发条件
+- 严重性级别
+- 告警创建和清除逻辑
+- 传播及可选的自动化操作
 
-All assets assigned to this profile follow the same alarm logic, simplifying monitoring and management.
+分配到此 Profile 的所有资产遵循相同告警逻辑，简化监控和管理。
 
-<b><font size="3">Audit log</font></b>   
-Shows a list of all user actions related to this asset profile — configuration changes, rule updates, and other modifications. Useful for traceability, compliance, and reviewing history of changes at the profile level.
+<b><font size="3">Audit log（审计日志）</font></b>
+显示与此资产 Profile 相关的所有用户操作列表——配置更改、规则更新及其他修改。有助于可追溯性、合规性及在 Profile 级别审查变更历史。
 
-<b><font size="3">Version control</font></b>   
-Provides Git-based versioning features for the asset profile. You can export, commit, and restore profile configurations, allowing structured change management, backups, and collaboration.
+<b><font size="3">Version control（版本控制）</font></b>
+提供资产 Profile 的基于 Git 的版本管理功能。可导出、提交和恢复 Profile 配置，支持结构化变更管理、备份和协作。
 
-## Related guides
+## 相关指南
 
-You can use the following links to check out the related guides:
+可通过以下链接查看相关指南：
 
 {% if docsPrefix == null %}
  - [Rule Chains](/docs/{{peDocsPrefix}}user-guide/ui/rule-chains/)
@@ -127,7 +127,7 @@ You can use the following links to check out the related guides:
 
 <hr>
 
-## Your feedback
+## 您的反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 上为 ThingsBoard 加星，帮助我们传播。
+如有任何问题，请[联系我们](/docs/contact-us/){:target="_blank"}。

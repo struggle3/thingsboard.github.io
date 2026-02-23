@@ -1,5 +1,5 @@
 
-Example of HTML
+HTML示例
 ```html
 <table class="main" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; box-sizing: border-box; border-radius: 3px; width: 100%; background-color: #f6f6f6; margin: 0px auto;" cellspacing="0" cellpadding="0" bgcolor="#f6f6f6">
     <tbody>
@@ -9,11 +9,11 @@ Example of HTML
                 <tbody>
                 <tr style="box-sizing: border-box; margin: 0px;">
                     <td class="content-block" style="color: #348eda; box-sizing: border-box; border-radius: 6px; vertical-align: top; margin: 0px; padding: 0px 0px 20px; width: 839px;" valign="top">
-                        <h2>Test message using 'to email' rule node</h2>
+                        <h2>使用 'to email' rule node 的测试消息</h2>
                     </td>
                 </tr>
                 <tr style="box-sizing: border-box; margin: 0px;">
-                    <td class="content-block" style="box-sizing: border-box; vertical-align: top; margin: 0px; padding: 0px 0px 20px; width: 600px;" valign="top"><span style="color: #000000;">This email is indicating that your outgoing mail settings were set up correctly.</span></td>
+                    <td class="content-block" style="box-sizing: border-box; vertical-align: top; margin: 0px; padding: 0px 0px 20px; width: 600px;" valign="top"><span style="color: #000000;">此邮件表明您的发件配置已正确设置。</span></td>
                 </tr>
                 <tr style="box-sizing: border-box; margin: 0px;">
                     <td class="content-block" style="box-sizing: border-box; vertical-align: top; margin: 0px; padding: 0px 0px 20px; width: 600px;" valign="top"><span style="color: #000000;">&mdash; The ThingsBoard :)</span></td>

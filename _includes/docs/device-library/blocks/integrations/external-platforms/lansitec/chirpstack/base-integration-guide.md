@@ -2,39 +2,39 @@
 {% assign deviceNameInPath = page.deviceImageFileName | split: "." | first %}
 {% assign converterFilePath = "/docs/device-library/blocks/integrations/external-platforms/" | append: vendorLowerCase | append: "/chirpstack/" | append: deviceNameInPath | append: "-uplink-converter.md" %}
 
-### Add a gateway on the Chirpstack
+### 在 ChirpStack 上添加网关
 
-We need to add a gateway on the [Chirpstack](https://chirpstack.io/){:target="_blank"}.
+我们需要在 [ChirpStack](https://chirpstack.io/){:target="_blank"} 上添加网关。
 
-To add a gateway, follow next steps:
+要添加网关，请按以下步骤操作：
 
 {% assign gateway = '
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/gateway-1.png,
-        title: Login to Chirpstack server. Go to the "**Gateways**" page and click on the "**Add gateway**" button.
+        title: 登录 ChirpStack 服务器。进入「**网关**」页面，点击「**添加网关**」按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/gateway-2.png,
-        title: Fill **name**, **Gateway ID** (It will be different, you can find it on the gateway control panel) with your data, scroll down and click on the "**Submit**" button.
+        title: 填写 **名称**、**网关 ID**（根据您的网关而定，可在网关控制面板上查看），向下滚动并点击「**提交**」按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/gateway-3.png,
-        title: The gateway is added. In gateways tab you can see its status.
+        title: 网关已添加。在网关选项卡中可查看其状态。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=gateway %}
 
-### Add device profile on the Chirpstack
+### 在 ChirpStack 上添加设备配置文件
 
 {% assign deviceProfiles = '
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/device-profiles-1.png,
-        title: Login to Chirpstack server. Go to the "**Device profiles**" page and click on **Add device profile** button.
+        title: 登录 ChirpStack 服务器。进入「**设备配置文件**」页面，点击 **添加设备配置文件** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/device-profiles-2.png,
-        title: Fill in the required fields.
+        title: 填写必填字段。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/device-profiles-3.png,
-        title: Go to the **Codec** tab, select **JavaScript functions** from the **Payload codec** dropdown menu, and paste the decoder function. Then click the **Submit** button.
+        title: 进入 **Codec** 选项卡，在 **Payload codec** 下拉菜单中选择 **JavaScript functions**，粘贴解码器函数。然后点击 **提交** 按钮。
 '
 %}
 
@@ -42,67 +42,67 @@ To add a gateway, follow next steps:
 
 {% include {{ converterFilePath }} %}
 
-### Add a device on the Chirpstack
+### 在 ChirpStack 上添加设备
 
 {% assign application = '
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/application-1.png,
-        title: Go to the **Applications** page and click on **Add application** button.
+        title: 进入 **应用** 页面，点击 **添加应用** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/application-2.png,
-        title: Enter name and click **Submit** button.
+        title: 输入名称并点击 **提交** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/application-3.png,
-        title: Click **Add device**.
+        title: 点击 **添加设备**。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/application-4.png,
-        title: Fill in the required fields with your device information and specify the previously created device profile.
+        title: 使用设备信息填写必填字段，并指定之前创建设备配置文件。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/application-5.png,
-        title: Go to the **Variables** tab, enter the value for **ThingsBoardAccessToken**, and click the **Submit** button.
+        title: 进入 **Variables** 选项卡，输入 **ThingsBoardAccessToken** 的值，点击 **提交** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/application-6.png,
-        title: Put your **Application key** to the field and click on **Submit** button to save the device.
+        title: 将 **应用密钥** 填入对应字段，点击 **提交** 按钮保存设备。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=application %}
 
-### Configure application integration with ThingsBoard
+### 配置应用与 ThingsBoard 的集成
 
 {% assign thingsboard = '
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/thingsboard-1.png,
-        title: Go to the **Integrations** page, find and select the **ThingsBoard**.
+        title: 进入 **集成** 页面，找到并选择 **ThingsBoard**。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/thingsboard-2.png,
-        title: Enter **the URL of your ThingsBoard server** and click **Submit** button.
+        title: 输入 **ThingsBoard 服务器 URL**，点击 **提交** 按钮。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=thingsboard %}
 
-### Create device on ThingsBoard
+### 在 ThingsBoard 上创建设备
 
 {% assign devices = '
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/devices-1.png,
-        title: Go to the **Devices** page.
+        title: 进入 **设备** 页面。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/devices-2.png,
-        title: Click on **Add device** button.
+        title: 点击 **添加设备** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/devices-3.png,
-        title: Fill in the device name and click the **Next: Credentials** button.
+        title: 填写设备名称并点击 **下一步：凭证** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/devices-4.png,
-        title: Enter the device **Access token** (previously copied **Device EUI** value) and click the **Add** button.
+        title: 输入设备 **访问令牌**（先前复制的 **Device EUI** 值）并点击 **添加** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/devices-5.png,
-        title: Click on the device to open device information window.
+        title: 点击设备打开设备信息窗口。
     ===
         image: /images/devices-library/ready-to-go-devices/lansitec-lorawan/devices-6.png,
-        title: Go to the **Latest telemetry** tab to view device reported data.
+        title: 进入 **最新遥测数据** 选项卡查看设备上报的数据。
 '
 %}
 

@@ -1,31 +1,29 @@
-### Configure GCP tools
+### 配置 GCP 工具
 
-See [before you begin](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-zonal-cluster#before_you_begin)
-guide for more info.
+更多信息请参阅 [开始前准备](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-zonal-cluster#before_you_begin) 指南。
 
-Create a new Google Cloud Platform project (recommended) or choose existing one. Make sure you have selected correct
-project by executing the following command:
+创建新的 Google Cloud Platform 项目（推荐）或选择现有项目。执行以下命令确保已选择正确项目：
 
 ```bash
 gcloud init
 ```
 {: .copy-code}
 
-### Enable GKE service
+### 启用 GKE 服务
 
 ```bash
 gcloud services enable container.googleapis.com
 ```
 {: .copy-code}
 
-### Define environment variables
+### 定义环境变量
 
 {% include templates/mqtt-broker/install/helm/gcp/define-env-variables.md %}
 
-### Configure and create GKE cluster
+### 配置并创建 GKE 集群
 
 {% include templates/install/gcp/regional-gke-cluster.md %}
 
-### Update the context of kubectl
+### 更新 kubectl 上下文
 
 {% include templates/install/gcp/update-kubectl-zone.md %}

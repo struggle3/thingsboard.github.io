@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Installing ThingsBoard Edge on Raspberry Pi
-description: Installing ThingsBoard Edge on Raspberry Pi
+title: 在 Raspberry Pi 上安装 ThingsBoard Edge
+description: 在 Raspberry Pi 上安装 ThingsBoard Edge
 
 ---
 

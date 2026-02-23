@@ -1,12 +1,12 @@
-#### Server
-Stop the currently running **ThingsBoard** container before making any changes. Then, edit the docker compose file:
+#### 服务器
+在进行任何更改前先停止当前运行的 **ThingsBoard** 容器。然后编辑 docker compose 文件：
 
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following lines to the **"environment"** block in the YAML file:
+在 YAML 文件的 **"environment"** 块中添加以下内容：
 ```yml
     environment:
       - EDGES_RPC_CLIENT_MAX_KEEP_ALIVE_TIME_SEC=1
@@ -17,14 +17,14 @@ Add the following lines to the **"environment"** block in the YAML file:
 
 #### Edge
 
-Stop the currently running. **TB Edge container** before making any changes. Then, edit the docker compose file:
+在进行任何更改前先停止当前运行的 **TB Edge 容器**。然后编辑 docker compose 文件：
 
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following lines to the **"environment"** block in the YAML file:
+在 YAML 文件的 **"environment"** 块中添加以下内容：
 ```yml
     environment:
       - CLOUD_RPC_KEEP_ALIVE_TIME_SEC=30
@@ -32,4 +32,4 @@ Add the following lines to the **"environment"** block in the YAML file:
 ```
 {: .copy-code}
 
-Once all the changes have been made, start the **ThingsBoard** and **TB Edge docker containers**.
+完成所有更改后，启动 **ThingsBoard** 和 **TB Edge** Docker 容器。

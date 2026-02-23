@@ -1,18 +1,18 @@
-Execute the following command to pull the image:
+执行以下命令拉取镜像：
 
 ```bash
 docker pull thingsboard/tb-pe-coap-integration:{{ site.release.pe_full_ver }}
 ```
 {: .copy-code}
 
-Execute the following command to create volume for the integration logs (_799 is the user id of ThingsBoard non-root docker user_):
+执行以下命令创建集成日志卷（_799 为 ThingsBoard 非 root Docker 用户的用户 ID_）：
 
 ```bash
 mkdir -p ~/.tb-pe-coap-integration-logs && sudo chown -R 799:799 ~/.tb-pe-coap-integration-logs
 ```
 {: .copy-code}
 
-Execute the following command to run the integration:
+执行以下命令运行集成：
 
 ```bash
 docker run -it -p 5683:5683/udp -v ~/.tb-pe-coap-integration-logs:/var/log/tb-coap-integration  \
@@ -22,43 +22,43 @@ docker run -it -p 5683:5683/udp -v ~/.tb-pe-coap-integration-logs:/var/log/tb-co
 ```
 {: .copy-code}
 
-Where: 
+参数说明：
 
-- **mytbedge:** The host name of the ThingsBoard Edge service.
-- **9090:** The integration port. It is configured by the INTEGRATIONS_RPC_PORT environment variable in the **tb-edge.yml** file.
-- **YOUR_ROUTING_KEY:** Replace it with the actual **integration routing key** obtained in [Step 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"}.
-- **YOUR_SECRET:** Replace it with the actual **integration secret** obtained in [Step 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"}.
-- **docker run:** The command to run this container.
-- **-it:** Attaches a terminal session with current ThingsBoard remote integration process output.
-- **-p 5683:5683/udp:** Connect a local udp port 5683 to exposed internal 5683 udp port for the integration.
-- **-v ~/.tb-pe-coap-integration-logs:/var/log/tb-coap-integration:** Mounts the host's dir **~/.tb-pe-coap-integration-logs** to ThingsBoard remote integration logs directory.
-- **--name tb-pe-coap-integration:** The friendly local name of this machine.
-- **--network edge_docker_default:** The network name in which the **mytbedge** service operates.
-- **--restart always:** The command automatically starts ThingsBoard Integration if the system reboots and restarts in case of failure.
-- **thingsboard/tb-pe-coap-integration:{{ site.release.pe_full_ver }}:** The docker image.
+- **mytbedge：** ThingsBoard Edge 服务的主机名。
+- **9090：** 集成端口，由 **tb-edge.yml** 文件中的 INTEGRATIONS_RPC_PORT 环境变量配置。
+- **YOUR_ROUTING_KEY：** 替换为 [步骤 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"} 中获取的实际**集成路由密钥**。
+- **YOUR_SECRET：** 替换为 [步骤 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"} 中获取的实际**集成密钥**。
+- **docker run：** 运行此容器的命令。
+- **-it：** 附加终端会话以查看当前 ThingsBoard 远程集成进程输出。
+- **-p 5683:5683/udp：** 将本地 UDP 端口 5683 映射到集成的内部 UDP 端口 5683。
+- **-v ~/.tb-pe-coap-integration-logs:/var/log/tb-coap-integration：** 将主机目录 **~/.tb-pe-coap-integration-logs** 挂载到 ThingsBoard 远程集成日志目录。
+- **--name tb-pe-coap-integration：** 容器的本地友好名称。
+- **--network edge_docker_default：** **mytbedge** 服务所在的网络名称。
+- **--restart always：** 系统重启或故障后自动启动 ThingsBoard 集成。
+- **thingsboard/tb-pe-coap-integration:{{ site.release.pe_full_ver }}：** Docker 镜像。
 
-After executing this command, you can open the logs located here: **~/.tb-pe-coap-integration-logs**.
-Look for **INFO** log messages that show the latest integration configuration received from the server.
+执行此命令后，可打开位于 **~/.tb-pe-coap-integration-logs** 的日志。
+查找显示从服务器接收的最新集成配置的 **INFO** 日志消息。
 
-To keep the container running in the background but detach from the session terminal, press the key sequence **Ctrl+p** followed by **Ctrl+q**.
+要保持容器在后台运行并脱离当前终端会话，请按 **Ctrl+p** 后按 **Ctrl+q**。
 
-#### Reattaching, stop and start commands
+#### 重新附加、停止和启动命令
 
-To reattach to the terminal (to see ThingsBoard remote integration logs), run:
+要重新连接到终端（查看 ThingsBoard 远程集成日志）请运行：
 
 ```
 docker attach tb-pe-coap-integration
 ```
 {: .copy-code}
 
-To stop the container:
+停止容器：
 
 ```
 docker stop tb-pe-coap-integration
 ```
 {: .copy-code}
 
-To start the container:
+启动容器：
 
 ```
 docker start tb-pe-coap-integration

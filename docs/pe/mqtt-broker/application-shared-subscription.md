@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Application Shared Subscription Entity
-description: Application shared subscription entities management
+title: 应用共享订阅实体
+description: 应用共享订阅实体管理
 
 ---
 

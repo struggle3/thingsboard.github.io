@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: The Things Stack Community integration
-description: The Things Stack Community integration guide
+title: The Things Stack Community 集成
+description: The Things Stack Community 集成指南
 
 api_key_access:
     0:

@@ -2,7 +2,8 @@
 layout: docwithnav
 assignees:
 - ikulikov
-title: Custom subscriptions
+title: 自定义订阅
+description: 部件自定义订阅配置与实体过滤
 
 ---
 

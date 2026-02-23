@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Raspberry Pi Zero W to ThingsBoard?"
+title: "如何将Raspberry Pi Zero W连接到ThingsBoard？"
 redirect_to: "/device-library/paas/raspberry-pi-zero-w/"
 ---

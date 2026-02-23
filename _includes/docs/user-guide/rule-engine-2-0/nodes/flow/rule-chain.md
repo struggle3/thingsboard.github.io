@@ -1,28 +1,27 @@
-Transfers the incoming message to another rule chain for processing. The message is forwarded to the input node of the target rule chain.
+将入站消息转移至另一规则链进行处理。消息转发至目标规则链的输入节点。
 
-## Configuration
+## 配置
 
 ### Rule chain
 
-The target rule chain to which the incoming message will be forwarded.
+入站消息将转发至的目标规则链。
 
-Select the rule chain from the dropdown list of available rule chains in your tenant. The message will be sent to the input node of the selected rule chain.
+从租户内可用规则链的下拉列表中选择规则链。消息将发送至所选规则链的输入节点。
 
-When **Forward message to the originator's default rule chain** is enabled, this rule chain serves as a fallback if the originator's default rule chain cannot be determined.
+启用**Forward message to the originator's default rule chain**时，若无法确定来源实体的默认规则链，该规则链将作为回退。
 
 ### Forward message to the originator's default rule chain
 
-When enabled, the node attempts to dynamically determine the target rule chain based on the message originator's default rule chain configuration.
+启用后，节点尝试根据消息来源实体的默认规则链配置动态确定目标规则链。
 
-This feature works for the following originator types:
+该功能适用于以下来源实体类型：
 
-- **Device** – Uses the default rule chain configured in the device's profile
-- **Asset** – Uses the default rule chain configured in the asset's profile
+- **Device** — 使用设备配置中配置的默认规则链
+- **Asset** — 使用资产配置中配置的默认规则链
 
-If the originator is a different entity type or the default rule chain cannot be determined, the node falls back to the rule chain specified in the **Rule chain** configuration
-parameter.
+若来源实体为其他类型或无法确定默认规则链，节点回退到**Rule chain**配置参数中指定的规则链。
 
-When disabled, all messages are forwarded to the rule chain specified in the configuration, regardless of the originator type.
+禁用后，所有消息均转发至配置中指定的规则链，与来源实体类型无关。
 
 ### JSON Schema
 
@@ -50,19 +49,18 @@ When disabled, all messages are forwarded to the rule chain specified in the con
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node determines the target rule chain:
-    - If **Forward message to the originator's default rule chain** is **disabled**, the configured rule chain is always used.
-    - If **Forward message to the originator's default rule chain** is **enabled**:
-        - For **Device** originators: The default rule chain from the device's profile is retrieved.
-        - For **Asset** originators: The default rule chain from the asset's profile is retrieved.
-        - For other originator types or if the default rule chain cannot be determined: The configured rule chain is used as a fallback.
-2. The message is forwarded to the input node of the target rule chain.
-3. The message proceeds through the target rule chain according to its configuration.
-4. Output connections from the target rule chain's output nodes determine the final message routing.
+1. 节点确定目标规则链：
+    - 若**Forward message to the originator's default rule chain**为**禁用**，始终使用配置的规则链。
+    - 若**Forward message to the originator's default rule chain**为**启用**：
+        - 对于 **Device** 来源实体：获取设备配置中的默认规则链。
+        - 对于 **Asset** 来源实体：获取资产配置中的默认规则链。
+        - 对于其他来源实体类型或无法确定默认规则链时：使用配置的规则链作为回退。
+2. 消息转发至目标规则链的输入节点。
+3. 消息根据目标规则链的配置继续处理。
+4. 目标规则链中输出节点的输出连接决定最终消息路由。
 
-## Output connections
+## 输出连接
 
-The output connections are determined by the output nodes in the target rule chain, not by this node itself. The message follows the connection types configured in the target rule
-chain's output nodes.
+输出连接由目标规则链中的输出节点决定，而非本节点。消息遵循目标规则链输出节点中配置的连接类型。

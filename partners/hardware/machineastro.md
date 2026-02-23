@@ -1,6 +1,6 @@
 ---
 layout: hardware-partner
 hardware-partner: MachineAstro Pvt Ltd
-description: MachineAstro provides AI-powered predictive maintenance and energy analytics solutions. Our VIBit wireless vibration & temperature sensors enable real-time machine condition monitoring. The iEdge360 platform delivers 400+ fault diagnostics, anomaly detection, and energy insights. Our AI video analytics ensures workplace safety with fire, smoke, and PPE compliance monitoring.
+description: MachineAstro 提供 AI 驱动的预测性维护和能源分析解决方案。我们的 VIBit 无线振动与温度传感器可实现实时设备状态监测。iEdge360 平台提供 400+ 故障诊断、异常检测和能源洞察。我们的 AI 视频分析确保工作场所安全，支持火焰、烟雾及 PPE 合规性监测。
 
 ---

@@ -1,4 +1,4 @@
-Run the following commands to verify that you can pull the images from the Docker hub.
+运行以下命令以验证可从 Docker Hub 拉取镜像：
 
 ```bash
 docker pull thingsboard/trendz:{{ site.release.trendz_ver }}

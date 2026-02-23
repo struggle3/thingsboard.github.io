@@ -1,39 +1,38 @@
-Your PC must be on the same network as the Gateway: 192.168.8.XXX. If that’s not the case, change the 
-IP address of your PC.
+您的 PC 必须与网关处于同一网络：192.168.8.XXX。若非如此，请修改您 PC 的 IP 地址。
 
 {% capture infoWired %}
 <body>
   <p>
-    <b style="color:red">WARNING:</b>
-    <span style="color:black">Don’t use an IP address already taken by a device on your network!</span>
+    <b style="color:red">警告：</b>
+    <span style="color:black">请勿使用您网络中已被其他设备占用的 IP 地址！</span>
   </p>
 </body>
 {% endcapture %}
 {% include templates/warn-banner.md content=infoWired %}
 
-**For Windows:**
-1. Go to **“Control Panel”** > **“Network and Internet”** > **“Network and Sharing Center”**, then click **“Ethernet”** (May have different names);
-2. Go to **“Properties”** > **“Internet Protocol Version 4(TCP/IPv4)”** and select **“Use the following IP address”**, then assign a static IP manually within the same subnet of the gateway;
-3. Go to the **ACE-GTW-MQTT** web interface with your browser by entering its IP address: 192.168.8.1.
-4. Enter the username and password.
+**Windows：**
+1. 进入 **「控制面板」** > **「网络和 Internet」** > **「网络和共享中心」**，然后点击 **「Ethernet」**（名称可能不同）；
+2. 进入 **「属性」** > **「Internet 协议版本 4(TCP/IPv4)」**，选择 **「使用下面的 IP 地址」**，然后手动分配与网关同一子网内的静态 IP；
+3. 使用浏览器输入 IP 地址 192.168.8.1 访问 **ACE-GTW-MQTT** Web 界面；
+4. 输入用户名和密码。
 
 ![](/images/devices-library/ready-to-go-devices/ace-iot-gateway/wired-connection.png)
 <br><br>
 
-**For macOS:**
-1. Go to **“System Settings“** > **“Network“**, then click **“USB 10/100/1000 LAN”** (May have different names);
-2. Go to **“Details...”** > **“TCP/IP“** and select **“Manually”**, then assign a static IP manually within the same subnet of the gateway;
-3. Go to the **ACE-GTW-MQTT** web interface with your browser by entering its IP address: 192.168.8.1.
-4. Enter the username and password.
+**macOS：**
+1. 进入 **「系统设置」** > **「网络」**，然后点击 **「USB 10/100/1000 LAN」**（名称可能不同）；
+2. 进入 **「详细信息...」** > **「TCP/IP」**，选择 **「手动」**，然后手动分配与网关同一子网内的静态 IP；
+3. 使用浏览器输入 IP 地址 192.168.8.1 访问 **ACE-GTW-MQTT** Web 界面；
+4. 输入用户名和密码。
 
 ![](/images/devices-library/ready-to-go-devices/ace-iot-gateway/ace-macos-ip.png)
 <br><br>
 
-**For Ubuntu Linux**:
-1. Go to **“Settings“** > **“Network“**, then click **“Wired Settings”** (May have different names);
-2. Go to **“IPv4”** and select **“Manually”**, then assign a static IP manually within the same subnet of the gateway;
-3. Go to the **ACE-GTW-MQTT** web interface with your browser by entering its IP address: 192.168.8.1.
-4. Enter the username and password.
+**Ubuntu Linux：**
+1. 进入 **「设置」** > **「网络」**，然后点击 **「有线设置」**（名称可能不同）；
+2. 进入 **「IPv4」**，选择 **「手动」**，然后手动分配与网关同一子网内的静态 IP；
+3. 使用浏览器输入 IP 地址 192.168.8.1 访问 **ACE-GTW-MQTT** Web 界面；
+4. 输入用户名和密码。
 
 ![](/images/devices-library/ready-to-go-devices/ace-iot-gateway/ace-linux-ip.png)
 <br><br>

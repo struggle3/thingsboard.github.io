@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: IoT Solution templates
-description: ThingsBoard IoT Solution templates overview
+title: IoT 解决方案模板
+description: ThingsBoard IoT 解决方案模板概览
 
 
 open-solution-templates-page:

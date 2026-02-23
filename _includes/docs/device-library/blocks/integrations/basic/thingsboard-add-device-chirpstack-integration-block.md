@@ -1,28 +1,28 @@
-### Add a device on the Chirpstack
+### 在 ChirpStack 上添加设备
 
-We need to add a device on the [Chirpstack](https://chirpstack.io){: target="_blank"}.
+我们需要在 [ChirpStack](https://chirpstack.io){: target="_blank"} 上添加设备。
 
-To add a device, you can follow next steps:
+要添加设备，请按以下步骤操作：
 
 {% assign addDeviceSteps = '
     ===
         image: /images/devices-library/basic/integrations/chirpstack/main-page.png,
-        title: Login to Chirpstack server.
+        title: 登录 ChirpStack 服务器。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/add-device-profile.png,
-        title: Go to the **Device profiles** page and click on **Add device profile** button.
+        title: 进入**设备配置文件**页面，点击**添加设备配置文件**按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/create-device-profile.png,
-        title: Fill the fields and click on **Submit** button.
+        title: 填写字段并点击**提交**按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/create-device-step-0.png,
-        title: Go to the **Applications** page, click on your application and press **Add device** button.
+        title: 进入**应用**页面，点击您的应用后按**添加设备**按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/create-device-step-1.png,
-        title: Fill parameters with values from the device configuration. Then choose previously created device profile and click on **Submit** button.
+        title: 使用设备配置中的值填写参数。然后选择之前创建设备配置文件并点击**提交**按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/create-device-step-2.png,
-        title: Put your **Application key** to the field and click on **Submit** button to save the device.
+        title: 将**应用密钥**填入相应字段并点击**提交**按钮保存设备。
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addDeviceSteps %}

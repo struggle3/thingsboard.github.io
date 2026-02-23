@@ -1,11 +1,10 @@
-ThingsBoard supports securing the connection between the platform and edge instances by running the gRPC connection over TLS/SSL.
+ThingsBoard支持通过TLS/SSL上的gRPC连接保护平台与Edge实例间的连接。
 
-We will use HAProxy as the termination point for the TLS connection between the edges and the platform.
+我们将使用HAProxy作为Edge与平台间TLS连接的终止点。
 
-First, we need to change the default binding port for edge connectivity of the platform to port 7071. 
-This allows us to configure HAProxy to listen on the default 7070 port and forward connections to the 7071 port on the platform.
+首先，需将平台Edge连接默认绑定端口改为7071。这样可将HAProxy配置为监听默认7070端口，并将连接转发至平台的7071端口。
 
-Please execute the following command to update the edge bind port on the platform:
+请执行以下命令更新平台上的Edge绑定端口：
 
 ```bash
 sudo sh -c 'cat <<EOL >> /etc/thingsboard/conf/thingsboard.conf
@@ -15,14 +14,14 @@ EOL'
 ```
 {: .copy-code}
 
-To apply the changes, the ThingsBoard platform must be restarted:
+应用变更后需重启ThingsBoard平台：
 
 ```bash
 sudo systemctl restart thingsboard
 ```
 {: .copy-code}
 
-Next, add the TLS configuration for HAProxy by executing the following command to update its config file:
+接下来，执行以下命令将TLS配置添加到HAProxy配置文件：
 
 ```bash
 sudo sh -c 'cat <<EOL >> /etc/haproxy/haproxy.cfg

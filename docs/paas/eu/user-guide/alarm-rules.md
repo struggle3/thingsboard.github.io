@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Alarm rules
-description: Creating alarm rules
+title: 告警规则
+description: 创建告警规则
 
 step-1-add-alarm-rule-1:
     0:

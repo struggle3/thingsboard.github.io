@@ -1,17 +1,17 @@
 ---
 layout: docwithnav
-title: Register of a mokosmart LoRaWAN device and Gateway in ThingsBoard
+title: 在 ThingsBoard 中注册 Mokosmart LoRaWAN 设备和网关
 
 ---
 
 * TOC
 {:toc}
 
-The purpose of this guide is to outline how to register mokosmart LoRaWAN end devices and gateway in ThingsBoard. This document is applicable to all the end point LoRaWan product of mokosmart.
+本指南说明如何在 ThingsBoard 中注册 Mokosmart LoRaWAN 终端设备和网关。本文档适用于所有 Mokosmart LoRaWAN 终端产品。
 
-## Add Gateway
+## 添加网关
 
-### Add Gateway on TTN
+### 在 TTN 上添加网关
 
 **Step 1**: Power on gateway, and connect to gateway WIFI, access to the Web GUI, get the gateway ID on the "FUNCTAION-Server Access" page of Web GUI.
 
@@ -71,11 +71,11 @@ The purpose of this guide is to outline how to register mokosmart LoRaWAN end de
 <br>
 
 {% capture difference %}
-**Note**: When registering the gateway, please choose the gateway frequency band carefully and make sure the frequency band of the device and the gateway are the same.
+**注意**：注册网关时，请仔细选择网关频段，并确保设备与网关的频段一致。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Create Application on TTN
+### 在 TTN 上创建应用
 
 **Step 1**: Open your console and click on the "Create an application".
 
@@ -101,9 +101,9 @@ The purpose of this guide is to outline how to register mokosmart LoRaWAN end de
 
 <br>
 
-### Create Integration in ThingsBoard
+### 在 ThingsBoard 中创建集成
 
-- Go to the "**Integrations**" page of the "**Integrations center**" section. Click "**plus**" icon in the upper right corner to add new integration. Select "**The Things Stack Community**" as the integration type. Then, click "**Next**".
+- 进入「**集成中心**」的「**Integrations**」页面。点击右上角「**+**」图标添加新集成。选择「**The Things Stack Community**」作为集成类型。然后点击「**Next**」。
 
 ![image](/images/samples/moko-smart/create-integration-in-thingsboard-1.png)
 
@@ -203,7 +203,7 @@ return result;
 
 ![image](/images/samples/moko-smart/create-integration-in-thingsboard-4.png)
 
-## Add Device
+## 添加设备
 
 **Step 1**: 
 - Go to the application console - "End devices" page;
@@ -256,14 +256,14 @@ And you can also check the live data, if there is payload uploaded means the dev
 
 ![image](/images/samples/moko-smart/add-device-7.png)
 
-## Add Dashboard
+## 添加仪表板
 
-A dashboard in ThingsBoard allows users to visualize and monitor data collected from IoT devices. Let's create a dashboard and add two widgets to it:
+ThingsBoard 中的仪表板允许用户可视化并监控从物联网设备收集的数据。让我们创建一个仪表板并添加两个部件：
 
-- The first widget will show the device's battery level.
-- The second widget will display the device's location on a map.
+- 第一个部件显示设备电量。
+- 第二个部件在地图上显示设备位置。
 
-### Add Dashboard
+### 添加仪表板
 
 {% assign addindDashboard = '
     ===
@@ -274,7 +274,7 @@ A dashboard in ThingsBoard allows users to visualize and monitor data collected 
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addindDashboard %}
 
-### Add Battery level widget
+### 添加电量部件
 
 {% assign addingBatteryLevelWidget = '
     ===
@@ -297,7 +297,7 @@ A dashboard in ThingsBoard allows users to visualize and monitor data collected 
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addingBatteryLevelWidget %}
 
-### Add Map widget
+### 添加地图部件
 
 {% assign addingMapWidget = '
     ===
@@ -323,6 +323,6 @@ A dashboard in ThingsBoard allows users to visualize and monitor data collected 
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addingMapWidget %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "HardwareSamples" %}{% include templates/guides-banner.md %}

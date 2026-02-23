@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect Micro Bluetooth Gateway to ThingsBoard?"
+title: "如何将Micro Bluetooth Gateway连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/micro-bluetooth-gateway/"
 ---

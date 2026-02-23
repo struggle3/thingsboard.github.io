@@ -1,13 +1,13 @@
 * TOC
 {:toc}
 
-This guide will help you to setup TBMQ in microservices mode in GKE.
+本指南将帮助您在 GKE 中以微服务模式部署 TBMQ。
 
-## Prerequisites
+## 前置条件
 
 {% include templates/install/gcp/gke-prerequisites.md %}
 
-## Step 1. Clone TBMQ K8S scripts repository
+## 步骤 1. 克隆 TBMQ K8S 脚本仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -15,37 +15,37 @@ cd tbmq/k8s/gcp
 ```
 {: .copy-code}
 
-## Step 2. Define environment variables
+## 步骤 2. 定义环境变量
 
 {% assign tbClusterName = "tbmq-cluster" %}
 {% assign tbDbClusterName = "tbmq-db" %}
 {% include templates/mqtt-broker/install/gcp/env-variables.md %}
 
-## Step 3. Configure and create GKE cluster
+## 步骤 3. 配置并创建 GKE 集群
 
 {% include templates/install/gcp/regional-gke-cluster.md %}
 
-## Step 4. Update the context of kubectl
+## 步骤 4. 更新 kubectl 上下文
 
 {% include templates/install/gcp/update-kubectl-region.md %}
 
-## Step 5. Provision Google Cloud SQL (PostgreSQL) Instance
+## 步骤 5. 配置 Google Cloud SQL (PostgreSQL) 实例
 
 {% assign tbDbName = "thingsboard_mqtt_broker" %}
 {% include templates/install/gcp/provision-postgresql.md %}
 
-#### 5.5 Edit database settings
+#### 5.5 编辑数据库设置
 
-Replace **YOUR_DB_IP_ADDRESS**, **YOUR_DB_PASSWORD** and **YOUR_DB_NAME** with the correct values:
+将 **YOUR_DB_IP_ADDRESS**、**YOUR_DB_PASSWORD** 和 **YOUR_DB_NAME** 替换为正确的值：
 
 ```bash
 nano tb-broker-db-configmap.yml
 ```
 {: .copy-code}
 
-## Step 6. Create Namespace
+## 步骤 6. 创建 Namespace
 
-Let's create a dedicated namespace for our TBMQ cluster deployment to ensure better resource isolation and management.
+为 TBMQ 集群部署创建专用命名空间，以确保更好的资源隔离和管理。
 
 ```bash
 kubectl apply -f tb-broker-namespace.yml
@@ -53,21 +53,19 @@ kubectl config set-context $(kubectl config current-context) --namespace=thingsb
 ```
 {: .copy-code}
 
-## Step 7. Provision Redis cluster
+## 步骤 7. 配置 Redis 集群
 
-We recommend deploying Bitnami Redis Cluster from Helm. For that, review the `redis` folder.
+我们建议使用 Helm 部署 Bitnami Redis Cluster。请查看 `redis` 文件夹。
 
 ```bash
 ls redis/
 ```
 {: .copy-code}
 
-You can find there _default-values-redis.yml_ file -
-default values downloaded from [Bitnami artifactHub](https://artifacthub.io/packages/helm/bitnami/redis-cluster).
-And _values-redis.yml_ file with modified values.
-We recommend keeping the first file untouched and making changes to the second one only. This way the upgrade process to the next version will go more smoothly as it will be possible to see diff.
+您可以找到 _default-values-redis.yml_ 文件（从 [Bitnami artifactHub](https://artifacthub.io/packages/helm/bitnami/redis-cluster) 下载的默认值）和带有修改值的 _values-redis.yml_ 文件。
+我们建议保持第一个文件不变，仅修改第二个文件。这样，升级到下一版本的过程会更顺利，因为可以查看 diff。
 
-To add the Bitnami helm repo:
+添加 Bitnami Helm 仓库：
 
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -75,14 +73,14 @@ helm repo update
 ```
 {: .copy-code}
 
-To install Bitnami Redis cluster, execute the following command:
+安装 Bitnami Redis 集群，执行以下命令：
 
 ```bash
 helm install redis -f redis/values-redis.yml bitnami/redis-cluster --version 10.2.5
 ```
 {: .copy-code}
 
-Once deployed, you should see the information about deployment state, followed by the command to get your REDIS_PASSWORD:
+部署完成后，您将看到部署状态信息，随后是获取 REDIS_PASSWORD 的命令：
 
 ```text
 NAME: redis
@@ -94,21 +92,21 @@ TEST SUITE: None
 NOTES:
 CHART NAME: redis-cluster
 CHART VERSION: 10.2.5
-APP VERSION: 7.2.5** Please be patient while the chart is being deployed **
+APP VERSION: 7.2.5** 请在图表部署期间耐心等待 **
 
 
-To get your password run:
+获取密码请运行：
     export REDIS_PASSWORD=$(kubectl get secret --namespace "thingsboard-mqtt-broker" redis-redis-cluster -o jsonpath="{.data.redis-password}" | base64 -d)
 ```
 
-Let's modify this command to print the password to the terminal:
+修改此命令以在终端打印密码：
 
 ```bash
 echo $(kubectl get secret --namespace "thingsboard-mqtt-broker" redis-redis-cluster -o jsonpath="{.data.redis-password}" | base64 -d)
 ```
 {: .copy-code}
 
-You need to copy the output and paste it into the _tb-broker-cache-configmap.yml_ file, replacing `YOUR_REDIS_PASSWORD`.
+您需要复制输出并将其粘贴到 _tb-broker-cache-configmap.yml_ 文件中，替换 `YOUR_REDIS_PASSWORD`。
 
 ```bash
 nano tb-broker-cache-configmap.yml
@@ -117,130 +115,130 @@ nano tb-broker-cache-configmap.yml
 
 {% capture redis-nodes %}
 
-The value of `REDIS_NODES` in _tb-broker-cache-configmap.yml_ is set to `"redis-redis-cluster-headless:6379"` by default.
-The host name is based on the release name (redis) and the default naming conventions of the Bitnami chart.
-If you modify the `nameOverride` or `fullnameOverride` fields in your Redis values file, or change the release name during installation,
-you must update this value accordingly to match the actual headless service name created by the chart.
+_tb-broker-cache-configmap.yml_ 中 `REDIS_NODES` 的值默认为 `"redis-redis-cluster-headless:6379"`。
+主机名基于 release 名称 (redis) 和 Bitnami 图表的默认命名约定。
+如果您在 Redis values 文件中修改了 `nameOverride` 或 `fullnameOverride` 字段，或在安装期间更改了 release 名称，
+则必须相应地更新此值以匹配图表创建的实际 headless 服务名称。
 
 {% endcapture %}
 {% include templates/info-banner.md content=redis-nodes %}
 
-## Step 8. Installation
+## 步骤 8. 安装
 
 {% include templates/mqtt-broker/install/gcp/install.md %}
 
 {% capture aws-rds %}
 
-Otherwise, please check if you set the PostgreSQL URL and PostgreSQL password in the `tb-broker-db-configmap.yml` correctly.
+否则，请检查您是否在 `tb-broker-db-configmap.yml` 中正确设置了 PostgreSQL URL 和 PostgreSQL 密码。
 
 {% endcapture %}
 {% include templates/info-banner.md content=aws-rds %}
 
-## Step 9. Provision Kafka
+## 步骤 9. 配置 Kafka
 
 {% include templates/mqtt-broker/install/cluster-common/provision-kafka.md %}
 
-## Step 10. Starting
+## 步骤 10. 启动
 
-Execute the following command to deploy the broker:
+执行以下命令部署 broker：
 
 ```bash
 ./k8s-deploy-tbmq.sh
 ```
 {: .copy-code}
 
-After a few minutes, you may execute the next command to check the state of all pods.
+几分钟后，您可以执行下一个命令检查所有 pod 的状态。
 
 ```bash
 kubectl get pods
 ```
 {: .copy-code}
 
-If everything went fine, you should be able to see `tb-broker-0` and `tb-broker-1` pods. Every pod should be in the `READY` state.
+如果一切正常，您应该能看到 `tb-broker-0` 和 `tb-broker-1` pod。每个 pod 应处于 `READY` 状态。
 
-## Step 11. Configure Load Balancers
+## 步骤 11. 配置负载均衡器
 
-### 11.1 Configure HTTP(S) Load Balancer
+### 11.1 配置 HTTP(S) 负载均衡器
 
-Configure HTTP(S) Load Balancer to access web interface of your TBMQ instance. Basically, you have 2 possible configuration options:
+配置 HTTP(S) 负载均衡器以访问 TBMQ 实例的 Web 界面。基本上，您有两种配置选项：
 
-* http - Load Balancer without HTTPS support. Recommended for **development**. The only advantage is simple configuration and minimum costs. May be good option for development server but definitely not suitable for production.
-* https - Load Balancer with HTTPS support. Recommended for **production**. Acts as an SSL termination point. You may easily configure it to issue and maintain a valid SSL certificate. Automatically redirects all non-secure (HTTP) traffic to secure (HTTPS) port.
+* http - 不支持 HTTPS 的负载均衡器。推荐用于**开发**。唯一优点是配置简单、成本最低。可能适合开发服务器，但绝对不适合生产环境。
+* https - 支持 HTTPS 的负载均衡器。推荐用于**生产**。作为 SSL 终止点。您可以轻松配置它来颁发和维护有效的 SSL 证书。自动将所有非安全 (HTTP) 流量重定向到安全 (HTTPS) 端口。
 
-See links/instructions below on how to configure each of the suggested options.
+请参阅以下链接/说明了解如何配置每种建议选项。
 
-#### HTTP Load Balancer
+#### HTTP 负载均衡器
 
-Execute the following command to deploy plain http load balancer:
+执行以下命令部署纯 http 负载均衡器：
 
 ```bash
 kubectl apply -f receipts/http-load-balancer.yml
 ```
 {: .copy-code}
 
-The process of load balancer provisioning may take some time. You may periodically check the status of the load balancer using the following command:
+负载均衡器配置过程可能需要一些时间。您可以使用以下命令定期检查负载均衡器状态：
 
 ```bash
 kubectl get ingress
 ```
 {: .copy-code}
 
-Once provisioned, you should see similar output:
+配置完成后，您应该看到类似输出：
 
 ```text
 NAME                          CLASS    HOSTS   ADDRESS         PORTS   AGE
 tb-broker-http-loadbalancer   <none>   *       34.111.24.134   80      7m25s
 ```
 
-#### HTTPS Load Balancer
+#### HTTPS 负载均衡器
 
 {% assign staticIP = "tbmq-http-lb-address" %}
-The process of configuring the load balancer using Google-managed SSL certificates is described on the official [documentation page](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs).
-The instructions below are extracted from the official documentation. Make sure you read [prerequisites](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs#prerequisites) carefully before proceeding.
+使用 Google 托管 SSL 证书配置负载均衡器的过程在官方[文档页面](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs)中有描述。
+以下说明摘自官方文档。在继续之前，请务必仔细阅读[前置条件](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs#prerequisites)。
 
 ```bash
 gcloud compute addresses create {{staticIP}} --global
 ```
 {: .copy-code}
 
-Replace the *PUT_YOUR_DOMAIN_HERE* with valid domain name in the *https-load-balancer.yml* file:
+在 *https-load-balancer.yml* 文件中将 *PUT_YOUR_DOMAIN_HERE* 替换为有效域名：
 
 ```bash
 nano receipts/https-load-balancer.yml
 ```
 {: .copy-code}
 
-Execute the following command to deploy secure http load balancer:
+执行以下命令部署安全 http 负载均衡器：
 
 ```bash
  kubectl apply -f receipts/https-load-balancer.yml
 ```
 {: .copy-code}
 
-The process of load balancer provisioning may take some time. You may periodically check the status of the load balancer using the following command:
+负载均衡器配置过程可能需要一些时间。您可以使用以下命令定期检查负载均衡器状态：
 
 ```bash
 kubectl get ingress
 ```
 {: .copy-code}
 
-Once provisioned, you should see similar output:
+配置完成后，您应该看到类似输出：
 
 ```text
 NAME                           CLASS    HOSTS   ADDRESS         PORTS   AGE
 tb-broker-https-loadbalancer   gce      *       34.111.24.134   80      7m25s
 ```
 
-Now, **assign the domain name** you have used to the load balancer IP address (the one you see instead of 34.111.24.134 in the command output).
+现在，**将您使用的域名**分配给负载均衡器 IP 地址（命令输出中 34.111.24.134 的替代地址）。
 
-Check that the domain name is configured correctly using dig:
+使用 dig 检查域名配置是否正确：
 
 ```bash
 dig YOUR_DOMAIN_NAME
 ```
 {: .copy-code}
 
-Sample output:
+示例输出：
 
 ```text
 
@@ -265,34 +263,34 @@ YOUR_DOMAIN_NAME. 36 IN	A	34.111.24.134
 
 ```
 
-Once assigned, wait for the Google-managed certificate to finish provisioning. This might take up to 60 minutes. You can check the status of the certificate using the following command:
+分配后，等待 Google 托管证书完成配置。这可能需要长达 60 分钟。您可以使用以下命令检查证书状态：
 
 ```bash
 kubectl describe managedcertificate managed-cert
 ```
 {: .copy-code}
 
-Certificate will be eventually provisioned if you have configured domain records properly.
-Once provisioned, you may use your domain name to access Web UI (over https).
+如果您正确配置了域名记录，证书最终会被配置完成。
+配置完成后，您可以使用域名通过 https 访问 Web UI。
 
-### 11.2 Configure MQTT Load Balancer
+### 11.2 配置 MQTT 负载均衡器
 
-Configure MQTT load balancer to be able to use MQTT protocol to connect devices.
+配置 MQTT 负载均衡器以便使用 MQTT 协议连接设备。
 
-Create TCP load balancer using following command:
+使用以下命令创建 TCP 负载均衡器：
 
 ```bash
 kubectl apply -f receipts/mqtt-load-balancer.yml
 ```
 {: .copy-code}
 
-The load balancer will forward all TCP traffic for ports 1883 and 8883.
+负载均衡器将转发端口 1883 和 8883 的所有 TCP 流量。
 
 #### MQTT over SSL
 
-Follow [this guide](https://thingsboard.io/docs/user-guide/mqtt-over-ssl/) to create a .pem file with the SSL certificate. Store the file as _server.pem_ in the working directory.
+按照[本指南](https://thingsboard.io/docs/user-guide/mqtt-over-ssl/)创建带 SSL 证书的 .pem 文件。将文件保存为工作目录中的 _server.pem_。
 
-You’ll need to create a config-map with your PEM file, you can do it by calling command:
+您需要创建带有 PEM 文件的 config-map，可以通过调用以下命令完成：
 
 ```bash
 kubectl create configmap tbmq-mqtts-config \
@@ -302,117 +300,117 @@ kubectl create configmap tbmq-mqtts-config \
 ```
 {: .copy-code}
 
-* where **YOUR_PEM_FILENAME** is the name of your **server certificate file**.
-* where **YOUR_PEM_KEY_FILENAME** is the name of your **server certificate private key file**.
+* 其中 **YOUR_PEM_FILENAME** 是您的**服务器证书文件**名称。
+* 其中 **YOUR_PEM_KEY_FILENAME** 是您的**服务器证书私钥文件**名称。
 
-Then, uncomment all sections in the ‘tb-broker.yml’ file that are marked with “Uncomment the following lines to enable two-way MQTTS”.
+然后，取消注释 'tb-broker.yml' 文件中标记为"Uncomment the following lines to enable two-way MQTTS"的所有部分。
 
-Execute command to apply changes:
+执行命令应用更改：
 
 ```bash
 kubectl apply -f tb-broker.yml
 ```
 {: .copy-code}
 
-## Step 12. Validate the setup
+## 步骤 12. 验证配置
 
-Now you can open TBMQ web interface in your browser using DNS name of the load balancer.
+现在您可以在浏览器中使用负载均衡器的 DNS 名称打开 TBMQ Web 界面。
 
-You can get DNS name of the load-balancers using the next command:
+您可以使用以下命令获取负载均衡器的 DNS 名称：
 
 ```bash
 kubectl get ingress
 ```
 {: .copy-code}
 
-You should see the similar picture:
+您应该看到类似画面：
 
 ```text
 NAME                          CLASS    HOSTS   ADDRESS         PORTS   AGE
 tb-broker-http-loadbalancer   <none>   *       34.111.24.134   80      3d1h
 ```
 
-Use `ADDRESS` field of the tb-broker-http-loadbalancer to connect to the cluster.
+使用 tb-broker-http-loadbalancer 的 `ADDRESS` 字段连接到集群。
 
 {% include templates/mqtt-broker/login.md %}
 
-### Validate MQTT access
+### 验证 MQTT 访问
 
-To connect to the cluster via MQTT you will need to get corresponding service IP. You can do this with the command:
+要通过 MQTT 连接到集群，您需要获取相应的服务 IP。您可以使用以下命令执行此操作：
 
 ```bash
 kubectl get services
 ```
 {: .copy-code}
 
-You should see the similar picture:
+您应该看到类似画面：
 
 ```text
 NAME                          TYPE           CLUSTER-IP       EXTERNAL-IP              PORT(S)                         AGE
 tb-broker-mqtt-loadbalancer   LoadBalancer   10.100.119.170   *******                  1883:30308/TCP,8883:31609/TCP   6m58s
 ```
 
-Use `EXTERNAL-IP` field of the load-balancer to connect to the cluster via MQTT protocol.
+使用负载均衡器的 `EXTERNAL-IP` 字段通过 MQTT 协议连接到集群。
 
-### Troubleshooting
+### 故障排除
 
-In case of any issues you can examine service logs for errors. For example to see TBMQ logs execute the following command:
+如有任何问题，您可以检查服务日志以查找错误。例如，要查看 TBMQ 日志，执行以下命令：
 
 ```bash
 kubectl logs -f tb-broker-0
 ```
 {: .copy-code}
 
-Use the next command to see the state of all statefulsets.
+使用以下命令查看所有 statefulset 的状态。
 ```bash
 kubectl get statefulsets
 ```
 {: .copy-code}
 
-See [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) command reference for more details.
+有关更多详细信息，请参阅 [kubectl 速查表](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)命令参考。
 
-## Upgrading
+## 升级
 
 {% include templates/mqtt-broker/upgrade/upgrading.md %}
 
-### Backup and restore (Optional)
+### 备份和恢复（可选）
 
-While backing up your PostgreSQL database is highly recommended, it is optional before proceeding with the upgrade.
-For further guidance, follow the [next instructions](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-backup-restore).
+强烈建议备份 PostgreSQL 数据库，但在进行升级之前这是可选的。
+有关进一步指导，请遵循[以下说明](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-backup-restore)。
 
-### Upgrade to 2.2.0
+### 升级到 2.2.0
 
-In this release, the MQTT authentication mechanism was migrated from YAML/env configuration into the database.
-During upgrade, TBMQ needs to know which authentication providers are enabled in your deployment.
-This information is provided through environment variables passed to the **upgrade pod**.
+在此版本中，MQTT 认证机制已从 YAML/env 配置迁移到数据库。
+升级期间，TBMQ 需要了解部署中启用了哪些认证提供程序。
+此信息通过传递给 **upgrade pod** 的环境变量提供。
 
-The upgrade script requires a file named **`database-setup.yml`** that explicitly defines these variables.
-Environment variables from your `tb-broker.yml` file are not applied during the upgrade — only the values in `database-setup.yml` will be used.
+升级脚本需要一个名为 **`database-setup.yml`** 的文件，该文件明确定义这些变量。
+您的 `tb-broker.yml` 文件中的环境变量在升级期间不会应用——仅使用 `database-setup.yml` 中的值。
 
-> **Tips**
-> If you use only Basic authentication, set `SECURITY_MQTT_SSL_ENABLED=false`.
-> If you use only X.509 authentication, set `SECURITY_MQTT_BASIC_ENABLED=false` and `SECURITY_MQTT_SSL_ENABLED=true`.
+> **提示**
+> 如果仅使用 Basic 认证，请设置 `SECURITY_MQTT_SSL_ENABLED=false`。
+> 如果仅使用 X.509 认证，请设置 `SECURITY_MQTT_BASIC_ENABLED=false` 和 `SECURITY_MQTT_SSL_ENABLED=true`。
 
-**Supported variables**
+**支持的变量**
 
 * `SECURITY_MQTT_BASIC_ENABLED` (`true|false`)
 * `SECURITY_MQTT_SSL_ENABLED` (`true|false`)
-* `SECURITY_MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT` (`true|false`) — usually `false`.
+* `SECURITY_MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT` (`true|false`) — 通常为 `false`。
 
-Once the file is prepared and the values verified, proceed with the [upgrade process](#run-upgrade).
+准备好文件并验证值后，继续[升级过程](#run-upgrade)。
 
-### Upgrade to 2.1.0
+### 升级到 2.1.0
 
 {% include templates/mqtt-broker/upgrade/update-to-2.1.0-release-cluster.md %}
 
-### Upgrade to 2.0.0
+### 升级到 2.0.0
 
-For the TBMQ v2.0.0 upgrade, if you haven't installed Redis yet, please follow [step 7](#step-7-provision-redis-cluster) to complete the installation.
-Only then you can proceed with the [upgrade](#run-upgrade).
+对于 TBMQ v2.0.0 升级，如果您尚未安装 Redis，请按照[步骤 7](#step-7-provision-redis-cluster) 完成安装。
+然后才能继续[升级](#run-upgrade)。
 
-### Run upgrade
+### 执行升级
 
-In case you would like to upgrade, please pull the recent changes from the latest release branch:
+如果您想升级，请从最新 release 分支拉取最新更改：
 
 ```bash
 git pull origin {{ site.release.broker_branch }}
@@ -421,11 +419,11 @@ git pull origin {{ site.release.broker_branch }}
 
 {% include templates/mqtt-broker/upgrade/upgrade-to-custom-release.md %}
 
-**Note**: Make sure custom changes of yours if available are not lost during the merge process.
+**注意**：确保您的自定义更改（如有）在合并过程中不会丢失。
 
 {% include templates/mqtt-broker/install/upgrade-hint.md %}
 
-After that, execute the following command:
+之后，执行以下命令：
 
 {% capture tabspec %}tbmq-upgrade
 tbmq-upgrade-without-from-version,Since v2.1.0,shell,resources/upgrade-options/k8s-upgrade-tbmq-without-from-version.sh,/docs/mqtt-broker/install/cluster/resources/upgrade-options/k8s-upgrade-tbmq-without-from-version.sh
@@ -434,29 +432,29 @@ tbmq-upgrade-with-from-version,Before v2.1.0,markdown,resources/upgrade-options/
 
 {% include templates/mqtt-broker/upgrade/stop-tbmq-pods-before-upgrade.md %}
 
-## Cluster deletion
+## 删除集群
 
-Execute the following command to delete TBMQ nodes:
+执行以下命令删除 TBMQ 节点：
 
 ```bash
 ./k8s-delete-tbmq.sh
 ```
 {: .copy-code}
 
-Execute the following command to delete all TBMQ nodes and configmaps, load balancers, etc.:
+执行以下命令删除所有 TBMQ 节点和 configmap、负载均衡器等：
 
 ```bash
 ./k8s-delete-all.sh
 ```
 {: .copy-code}
 
-Execute the following command to delete the GKE cluster:
+执行以下命令删除 GKE 集群：
 
 ```bash
 gcloud container clusters delete $TB_CLUSTER_NAME --region=$GCP_REGION
 ```
 {: .copy-code}
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/mqtt-broker-guides-banner.md %}

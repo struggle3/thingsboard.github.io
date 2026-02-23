@@ -1,24 +1,24 @@
-ThingsBoard service is running on Java 17. Follow this instructions to install OpenJDK 17.
+ThingsBoard 服务运行于 Java 17。请按以下说明安装 OpenJDK 17。
 
- * Visit [Open JDK Download Page](https://adoptium.net). Go to "Other platforms and versions", select "Operating System" as "Windows", "Architecture" as "x64", "Version" as "17 - LTS" and download **JDK .msi** package. 
- * Run the downloaded MSI package and follow the instructions. 
- Make sure you have selected "**Add to PATH**" and "**Set JAVA_HOME variable**" options to "Will be installed on local hard drive" state.
- * Visit [PostgreSQL JDBC Download Page](https://jdbc.postgresql.org/download/) to download PostgreSQL JDBC Driver. Choose the latest available option.
- * Create the folder **C:\Program Files\JDBC** and copy downloaded file there. Then, add a new global variable - run PowerShell as an administrator and execute the following command. Do not forget to change "postgresql-42.2.18.jar" in the command to match the downloaded version.
+ * 访问 [Open JDK 下载页](https://adoptium.net)。进入 "Other platforms and versions"，选择 "Operating System" 为 "Windows"、"Architecture" 为 "x64"、"Version" 为 "17 - LTS"，下载 **JDK .msi** 安装包。
+ * 运行下载的 MSI 安装包并按照提示操作。
+ 确保将 "**Add to PATH**" 和 "**Set JAVA_HOME variable**" 选项设为 "Will be installed on local hard drive"。
+ * 访问 [PostgreSQL JDBC 下载页](https://jdbc.postgresql.org/download/) 下载 PostgreSQL JDBC Driver。选择最新可用版本。
+ * 创建文件夹 **C:\Program Files\JDBC** 并将下载的文件复制到其中。然后添加新的全局变量——以管理员身份运行 PowerShell 并执行以下命令。请勿忘记将命令中的 "postgresql-42.2.18.jar" 替换为下载的版本名称。
  ```powershell
 [System.Environment]::SetEnvironmentVariable("CLASSPATH", '.;"C:\Program Files\JDBC\postgresql-42.2.18.jar"', [System.EnvironmentVariableTarget]::Machine)
 ```
 {: .copy-code}
 
 
-You can check the installation using the following command (using Command Prompt):
+可使用以下命令（在命令提示符中）检查安装：
 
 ```bash
 java -version
 ```
 {: .copy-code}
 
-Expected command output is:
+预期命令输出为：
 
 ```text
 C:\Users\User>java -version

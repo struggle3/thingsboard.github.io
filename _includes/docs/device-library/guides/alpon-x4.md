@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://sixfab.com/product/alpon-x4" %}
 {% assign thingsboardHost = "https://" | append: {{hostName}} %}
 
@@ -7,12 +7,12 @@
 
 Its rugged design operates from -20°C to +60°C, supports flexible power options like USB-PD Type-C, 9-30V DC, and optional PoE+, and offers DIN Rail or Wall Mount for easy deployment. Certified by CE, FCC, Verizon, AT&T, and more, it’s built for global scalability. The ALPON X4 powers industrial automation with PLC and Modbus, enables smart home and remote monitoring via ThingsBoard, supports digital signage, and optimizes energy efficiency for versatile IoT solutions.
 
-## Prerequisites
+## 前置条件
 
 To continue with this guide, you will need the following:
 
 - [Sixfab Connect Account](https://connect.sixfab.com){: target="_blank"}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 - **ALPON X4 Device**: Registered and activated on Sixfab Connect with an active internet connection. Refer to the [ALPON X4 Getting Started page](https://docs.sixfab.com/docs/alpon-x4-getting-started){: target="_blank"} setup instructions for details.
 - **Basic Knowledge**: Familiarity with IoT concepts, containerized applications, and ThingsBoard dashboards.
@@ -229,15 +229,14 @@ docker build --platform=linux/arm64 -t thingsboard-mqtt-alpon-x4:latest .
 5. Click the “+ Deploy” button to start the container.
 ![Deployment Configuration 2](/images/devices-library/ready-to-go-devices/alpon-x4/11.png)
 
-## Check Data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 Verify that telemetry data is received and displayed in ThingsBoard:
 1. Log in to your ThingsBoard instance.
 2. Navigate to **Entities > Devices** and select your ALPON X4 device.
 3. Go to the **Latest Telemetry** tab to view the temperature and humidity data sent.
 ![Check Data on ThingsBoard 1](/images/devices-library/ready-to-go-devices/alpon-x4/12.png)
 
-## Conclusion
+## 总结
 
 This guide demonstrated how to integrate the ALPON X4 with ThingsBoard using MQTT for real-time data collection and device control. By following the steps, you created a device in ThingsBoard, deployed an MQTT client on Sixfab Connect, and verified telemetry data.
 

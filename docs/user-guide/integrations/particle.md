@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Particle Integration
-description: Particle Integration Guide
+title: Particle 集成
+description: Particle 集成指南
 ---
 
 {% assign docsPrefix = "pe/" %}

@@ -1,21 +1,18 @@
 {% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}
-**ThingsBoard Edge** allows you to send [Remote Procedure Calls (RPCs)](/docs/{{peDocsPrefix}}user-guide/rpc/#server-side-rpc){: target="_blank"}
+**ThingsBoard Edge** 支持发送[远程过程调用 (RPC)](/docs/{{peDocsPrefix}}user-guide/rpc/#server-side-rpc){: target="_blank"}
 {% else %} 
-**ThingsBoard** allows you to send [Remote Procedure Calls (RPCs)](/docs/{{page.docsPrefix}}user-guide/rpc/#server-side-rpc){: target="_blank"}
-{% endif %} from server-side applications to devices and vice versa. 
-This feature enables you to send commands to/from devices and receive the results of command execution.
+**ThingsBoard** 支持发送[远程过程调用 (RPC)](/docs/{{page.docsPrefix}}user-guide/rpc/#server-side-rpc){: target="_blank"}
+{% endif %}，可在服务端应用与设备之间双向通信。
+该功能支持向设备发送/接收命令并获取执行结果。
 
-In this guide, we will configure an RPC command to get telemetry data from OrangePI immediately. If you are 
-using the imported dashboard, there's no need for additional configuration, as the dashboard already includes the following widget:
+本指南将配置 RPC 命令以立即从 OrangePI 获取遥测数据。若使用导入的仪表板，则无需额外配置，仪表板已包含以下部件：
 
 ![one-way-rpc-widget](/images/devices-library/basic/single-board-computers/one-way-rpc-widget.png)
 
 
-💡 If you're creating a new dashboard, you can use the **“RPC Button”** widget for one-way RPC communication, which is located in the **“Control widgets”** bundle.
+💡 若您创建新仪表板，可使用**「RPC 按钮」**部件进行单向 RPC 通信，该部件位于**「控制部件」**组合中。
 
-Now, we are ready to write the code. First, create an `rpc_callback` function that will be 
-triggered when the device receives an RPC request from the server. As in the example with shared attributes, we also need to bind our RPC callback function 
-to the subscriber within the `main` function.
+下面编写代码。 首先创建 `rpc_callback` 函数，在设备收到服务端 RPC 请求时触发。与共享属性示例类似，需在 `main` 中将该回调绑定到订阅者。
 
 ```python
 client = None
@@ -45,12 +42,12 @@ def main():
     ...
 ```
 
-When you click the **RPC button**, the device will immediately send telemetry (CPU %, Processes number, etc.). 
-You can see this reflected in your dashboard, as shown in the chart below.
+点击 **RPC 按钮** 后，设备将立即发送遥测（CPU 占比、进程数等）。
+可在仪表板的图表中看到更新。
 
 ![timeseries-rpc-widget](/images/devices-library/basic/single-board-computers/timeseries-rpc-widget.png)
 
-Also, if you did everything right, you should see the following console output:
+若操作正确，控制台将输出：
 
 ```python
 {'method': 'getTelemetry', 'params': {}}

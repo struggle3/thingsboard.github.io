@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Working with alarms
-description: IoT device alarm management using ThingsBoard alarms feature
+title: 告警管理
+description: 使用 ThingsBoard 告警功能管理 IoT 设备告警
 
 alarm-type:
     0:

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Image gallery
-description: Image gallery
+title: 图片库
+description: 图片库
 
 upload-image-1:
     0:

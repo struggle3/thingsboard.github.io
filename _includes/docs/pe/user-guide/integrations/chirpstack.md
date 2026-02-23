@@ -3,14 +3,14 @@
 * TOC 
 {:toc}
 
-The ChirpStack open-source LoRaWAN Network Server stack provides open-source components for LoRaWAN networks. After integrating ChirpStack with ThingsBoard, you can connect, communicate, process and visualize data from devices in the ThingsBoard IoT platform.
+ChirpStack开源LoRaWAN网络服务器栈为LoRaWAN网络提供开源组件。将ChirpStack与ThingsBoard集成后，可在ThingsBoard IoT平台中连接、通信、处理和可视化设备数据。
 
-## Prerequisites
+## 前置条件
 
-To receive data, you need to have a configured instance of the ChirpStack Network Server stack. In this guide, we’ll use a local instance installed via Docker compose.   
-[Click here to learn how to install the ChirpStack Network Server using Docker Compose](https://www.chirpstack.io/project/guides/docker-compose/){:target="_blank"}.
+要接收数据，需具备已配置的ChirpStack 网络服务器栈实例。本指南使用通过Docker Compose 安装的本地实例。   
+[点击此处了解如何使用Docker Compose 安装ChirpStack网络服务器](https://www.chirpstack.io/project/guides/docker-compose/){:target="_blank"}。
 
-Additionally, you must connect your device to the network. You can find detailed instructions in the [official ChirpStack device connection guide](https://www.chirpstack.io/project/guides/connect-device/){:target="_blank"}.
+此外，需将设备连接到网络。可在[ChirpStack官方设备连接指南](https://www.chirpstack.io/project/guides/connect-device/){:target="_blank"}中找到详细说明。
 
 ## Create ChirpStack integration
 

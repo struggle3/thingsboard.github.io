@@ -1,10 +1,10 @@
-## Prerequisites
+## 前提条件
 
-Install Docker [for CentOS](https://docs.docker.com/engine/install/centos/).
+安装 Docker [CentOS 版本](https://docs.docker.com/engine/install/centos/)。
 
 {% include templates/install/docker-install-note.md %}
 
-Create docker compose file
+创建 docker compose 文件
 ```bash
 cat <<EOT >> tb-web-report.yml
 version: '3.0'
@@ -21,7 +21,7 @@ EOT
 ```
 {: .copy-code}
 
-Create .env file for tb-web-report container
+为 tb-web-report 容器创建 .env 文件
 ```bash
 cat <<EOT >> tb-web-report.env
 HTTP_BIND_ADDRESS=0.0.0.0
@@ -38,15 +38,15 @@ EOT
 ```
 {: .copy-code}
 
-Start WebReport service in docker
+在 Docker 中启动 WebReport 服务
 ```bash
 docker compose -f tb-web-report.yml up -d
 ```
 {: .copy-code}
 
-## Troubleshoot container
+## 容器故障排查
 
-Read logs from the container
+从容器读取日志
 
 ```bash
 docker logs -f tb-web-report

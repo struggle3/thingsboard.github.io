@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Container Tracker to ThingsBoard?"
+title: "如何将Container Tracker连接到ThingsBoard？"
 redirect_to: "/device-library/ce/container-tracker/"
 ---

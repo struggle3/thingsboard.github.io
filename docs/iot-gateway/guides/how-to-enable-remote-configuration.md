@@ -1,51 +1,48 @@
 ---
 layout: docwithnav-gw
-title: IoT Gateway Remote Configuration
-description:  IoT Gateway Remote Configuration
+title: IoT Gateway 远程配置
+description: IoT Gateway 远程配置
 
 ---
 
 * TOC
 {:toc}
 
-Remote Configuration is a powerful feature of ThingsBoard IoT Gateway that allows you to manage and configure your 
-gateway directly from the ThingsBoard web interface. This feature is especially useful for managing multiple 
-gateways or when physical access to the gateway is limited.
+远程配置（Remote Configuration）是 ThingsBoard IoT Gateway 的强力功能，允许您直接从 ThingsBoard  Web 界面管理和配置网关。该功能在管理多台网关或无法现场接触网关时特别有用。
 
-For purpose of this guide, we will use following things:
-1. Locally installed instance of ThingsBoard platform (How to install you can [read here](/docs/user-guide/install/installation-options/)).
-2. ThingsBoard IoT Gateway (How to install you can [read here](/docs/iot-gateway/installation/)).
+本指南将使用以下环境：
+1. 本地安装的 ThingsBoard 平台实例（安装方法见 [此处](/docs/user-guide/install/installation-options/)）。
+2. ThingsBoard IoT Gateway（安装方法见 [此处](/docs/iot-gateway/installation/)）。
 
 {% capture info %}
 <div>
   <p>
-    <b style="color:red">WARNING:</b>
-    <span style="color:black">If you've previously configured the gateway, create a backup, as the new remote configuration will overwrite existing settings files.  
-    <br>For those who used a gateway version earlier than 3.4, the gateway will automatically generate a new configuration file in JSON format.</span>
+    <b style="color:red">警告：</b>
+    <span style="color:black">若您曾配置过网关，请先创建备份，因为新的远程配置将覆盖现有设置文件。  
+    <br>对于使用 3.4 之前版本的网关，网关将自动生成新的 JSON 格式配置文件。</span>
   </p>
 </div>
 {% endcapture %}
 {% include templates/warn-banner.md content=info %}
 
-## Gateway List
+## 网关列表
 
-In order to remotely manage gateways, you need to go to the "**Entities**" > "**Gateways**" tab on the side menu of 
-the ThingsBoard.
+要远程管理网关，需在 ThingsBoard 侧边菜单中进入「**实体**」>「**网关**」标签页。
 
-Gateway list page displays all your gateways and all the necessary details about them, namely:
-- Date and time of creation.
-- Name of the gateway.
-- Status (Active/Inactive).
-- Number of enabled connectors.
-- Gateway version.
+网关列表页显示所有网关及其必要信息，包括：
+- 创建日期与时间。
+- 网关名称。
+- 状态（在线/离线）。
+- 已启用连接器数量。
+- 网关版本。
 
-And also navigation elements:
-- **Launch command** - when clicked, a modal window opens with a command to launch the gateway.
-- **Gateway configuration** - when clicked, a modal window with general gateway settings opens.
-- **Connectors** - when clicked, a page for managing and configuring connectors opens.
-- **Delete gateway** - when clicked, a gateway deletion confirmation modal window opens.
+以及以下导航元素：
+- **启动命令** — 点击后弹出包含启动网关命令的对话框。
+- **网关配置** — 点击后弹出通用网关设置对话框。
+- **连接器** — 点击后进入连接器管理与配置页面。
+- **删除网关** — 点击后弹出网关删除确认对话框。
 
-On this page, you can create a new gateway, as well as sort them according to the parameters described above.
+在此页面可创建新网关，也可按上述参数进行排序。
 
 ![](/images/gateway/dashboard/gateway-dashboard-list.png)
 

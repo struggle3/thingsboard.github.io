@@ -1,7 +1,7 @@
-Please select **Handler Type** as **HEX**.
+请将 **Handler Type** 选择为 **HEX**。
 
 ![image](/images/user-guide/integrations/udp/handler-configuration-hex.png)
 
-Click "**Add**" to finish adding integration.
+点击「**Add**」完成 integration 添加。
 
 ![image](/images/user-guide/integrations/udp/udp-integration-setup-4-hex-pe.png)

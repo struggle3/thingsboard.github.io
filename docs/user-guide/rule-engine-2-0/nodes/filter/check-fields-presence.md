@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: check fields presence
-description: Routes messages based on whether specified fields are present in the message data or metadata.
+description: 根据指定字段是否存在于消息 data 或 metadata 中来路由消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -2,178 +2,177 @@
 * TOC
 {:toc}
 
-An **MQTT session** is a core concept that enables reliable communication between MQTT clients and the MQTT Broker, even when network connections are unstable. This is especially important in IoT environments, where devices may disconnect and reconnect due to power-saving modes, connectivity issues, or network changes.
+**MQTT 会话**是核心概念，使 MQTT 客户端与 MQTT Broker 之间即使在不稳定网络中也能可靠通信。在 IoT 环境中尤其重要，因为设备可能因省电模式、连接问题或网络变化而断开并重连。
 
-An MQTT session stores state related to the interaction between a **client** and the **Broker**. This state can be reused when the client reconnects, allowing communication to continue without reinitializing everything from scratch.
+MQTT 会话存储 **客户端** 与 **Broker** 之间的交互相关状态。客户端重连时可复用该状态，使通信得以继续而无需从头重新初始化。
 
-Think of an MQTT session like a hotel reservation.
-- A **persistent** session is like a “booked room”: even if you go out for dinner (disconnect), your luggage (subscriptions and missed messages) stays in the room waiting for your return.
-- A **non-persistent** session is like a “walk-in”: if you leave the lobby, the hotel forgets you were ever there.
+可将 MQTT 会话类比为酒店预订。
+- **持久**会话就像「预订房间」：即使外出用餐（断开），行李（订阅和未送达消息）仍留在房间等你回来。
+- **非持久**会话就像「临时入住」：离开大堂后，酒店不会保留你的任何信息。
 
-## Persistent Session
+## 持久会话
 
-A persistent session preserves the session state after the client disconnects, allowing subscriptions and queued messages to be restored when the client reconnects.
+持久会话在客户端断开后保留会话状态，客户端重连时可恢复订阅和排队消息。
 
-- Messages are retained only while the session is active. If the session expires before reconnection, any queued messages are discarded.
-- This mode improves reliability but introduces additional acknowledgments and storage, increasing overall system complexity.
-- A persistent session requires a **fixed Client ID**, which allows the Broker to correctly restore the session state.
-- **Offline message delivery works only for persistent sessions** and requires both the publisher and subscriber to use **QoS 1** or **QoS 2**. For applications where message loss is unacceptable, always combine persistent sessions with **QoS 1** or **QoS 2** ([QoS documentation](/docs/{{docsPrefix}}mqtt-broker/user-guide/qos/)).
+- 消息仅在会话活跃期间保留。若会话在重连前过期，任何排队消息将被丢弃。
+- 此模式提高可靠性，但引入额外的确认和存储，增加系统复杂度。
+- 持久会话需要 **固定 Client ID**，以便 Broker 正确恢复会话状态。
+- **离线消息投递仅适用于持久会话**，且发布者和订阅者均需使用 **QoS 1** 或 **QoS 2**。对于不可接受消息丢失的应用，始终将持久会话与 **QoS 1** 或 **QoS 2** 结合使用（[QoS 文档](/docs/{{docsPrefix}}mqtt-broker/user-guide/qos/)）。
 
-The following **information may be stored as part of a persistent session** and removed when the Session expires or is explicitly cleared:
+以下 **信息可作为持久会话的一部分存储**，并在会话过期或显式清除时移除：
 
-- The existence of the Session and the associated **Client ID**
-- Active **subscriptions**, including Topic Filters and Subscription Identifiers
-- **Queued messages** waiting to be delivered to the Client (QoS 1 and QoS 2)
-- **In-flight messages** that were sent but not fully acknowledged (QoS 1 and QoS 2)
-- QoS 2 messages received from the Client but not yet fully acknowledged
-- The configured **Will Message** and **Will Delay Interval**
-- The **Session Expiry Interval** and calculated session expiration time
-- Internal delivery state required to correctly resume message flow after reconnect
+- 会话及其关联的 **Client ID** 的存在
+- 活跃 **订阅**，包括 Topic Filter 和 Subscription Identifier
+- 等待投递给客户端的 **排队消息**（QoS 1 和 QoS 2）
+- 已发送但未完全确认的 **传输中消息**（QoS 1 和 QoS 2）
+- 从客户端接收但尚未完全确认的 QoS 2 消息
+- 配置的 **Will Message** 和 **Will Delay Interval**
+- **Session Expiry Interval** 及计算出的会话过期时间
+- 重连后正确恢复消息流所需的内部投递状态
 
-## Non-Persistent Session
+## 非持久会话
 
-A non-persistent (clean) session always starts with a fresh state. The Broker does not retain any session state when the client disconnects.
+非持久（clean）会话始终以全新状态开始。客户端断开时，Broker 不保留任何会话状态。
 
-- Subscriptions are not preserved and must be recreated on every connection.
-- Messages published while the client is offline are not stored or delivered later.
-- This mode has minimal overhead, as it does not require message acknowledgments or session storage.
-- Clean sessions are typically used with **QoS 0** (they can also be used with higher QoS levels), where low latency and simplicity are more important than guaranteed delivery.
+- 订阅不被保留，每次连接时必须重新创建。
+- 客户端离线期间发布的消息不会被存储或事后投递。
+- 此模式开销最小，不需要消息确认或会话存储。
+- Clean 会话通常与 **QoS 0** 一起使用（也可用于更高 QoS），在低延迟和简单性比保证投递更重要时适用。
 
-## How the Broker Indicates an Existing Session
+## Broker 如何表示现有会话
 
-When a Client connects, the Broker informs it whether a previous session already exists by setting the **Session Present** flag in the **CONNACK** packet.
+客户端连接时，Broker 通过 **CONNACK** 包中的 **Session Present** 标志告知是否存在先前的会话。
 
-- **Session Present = true**. Indicates that the Broker has found an existing session for the given **Client ID** and has resumed it. Subscriptions and any stored session state are available to the Client.
-- **Session Present = false**. Indicates that no existing session was found and a new session has been created. The Client must subscribe again if needed.
+- **Session Present = true**。表示 Broker 已找到给定 **Client ID** 的现有会话并已恢复。订阅及所有存储的会话状态可供客户端使用。
+- **Session Present = false**。表示未找到现有会话，已创建新会话。客户端需在需要时重新订阅。
 
-This flag is especially important for Clients using **persistent sessions**, as it allows them to determine whether they are resuming a previous session or starting from a clean state.
+该标志对使用 **持久会话** 的客户端尤其重要，使其能够判断是恢复先前会话还是从全新状态开始。
 
-## Session Configuration in MQTT v3.x and MQTT v5.0
+## MQTT v3.x 与 MQTT v5.0 的会话配置
 
-Session management was significantly improved in **MQTT version 5.0** compared to **MQTT version 3.x**. While MQTT v3.x provides only basic control over session persistence, MQTT v5.0 introduces more flexible and explicit mechanisms that are better suited for modern IoT systems, especially for unstable networks and large numbers of clients.
+相比 **MQTT v3.x**，**MQTT v5.0** 改进了会话管理。MQTT v3.x 仅提供基本会话持久性控制，MQTT v5.0 引入更灵活、显式的机制，更适合现代 IoT 系统，尤其是不稳定网络和大规模客户端场景。
 
-The key change is that MQTT v5.0 replaces the single **Clean Session** flag with two separate properties: **Clean Start** and **Session Expiry Interval**. This allows clients to precisely control *when* a session starts fresh and *how long* the Broker should keep session data after a disconnect.
+关键变化是 MQTT v5.0 用两个独立属性 **Clean Start** 和 **Session Expiry Interval** 取代单一的 **Clean Session** 标志，使客户端能精确控制会话 *何时* 以全新状态开始，以及 Broker 在断开后 *应保留* 会话数据 *多长时间*。
 
 <table>
   <thead>
     <tr>
-      <td style="width: 20%"><b>Session Type</b></td>
-      <td style="width: 20%"><b>MQTT v3.x<br>Configuration</b></td>
-      <td style="width: 25%"><b>MQTT v5.0<br>Configuration</b></td>
-      <td style="width: 35%"><b>Explanation</b></td>
+      <td style="width: 20%"><b>会话类型</b></td>
+      <td style="width: 20%"><b>MQTT v3.x<br>配置</b></td>
+      <td style="width: 25%"><b>MQTT v5.0<br>配置</b></td>
+      <td style="width: 35%"><b>说明</b></td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><b>Non-persistent session</b></td>
+      <td><b>非持久会话</b></td>
       <td>Clean Session = 1</td>
       <td>
         Clean Start = 1<br>
         Session Expiry Interval = 0
       </td>
       <td>
-        A new session is always created. No subscriptions or messages are stored.
-        Messages published while the Client is offline are lost.
-        Suitable for simple, real-time data where persistence is not required.
+        始终创建新会话。不存储订阅或消息。
+        客户端离线期间发布的消息会丢失。
+        适用于无需持久化的简单实时数据。
       </td>
     </tr>
     <tr>
-      <td><b>Persistent session</b></td>
+      <td><b>持久会话</b></td>
       <td>Clean Session = 0</td>
       <td>
         Session Expiry Interval &gt; 0<br>
-        <b>or</b><br>
+        <b>或</b><br>
         Clean Start = 0<br>
         Session Expiry Interval = 0
       </td>
       <td>
-        Session state is preserved across disconnects for a defined period.
-        The maximum Session Expiry Interval in MQTT v5.0 is <b>4,294,967,295 seconds</b> (~136 years).
-        Subscriptions and queued messages are restored on reconnect.
-        Suitable for intermittent connectivity with controlled resource usage.
+        在断开后的一段时间内保留会话状态。
+        MQTT v5.0 中 Session Expiry Interval 最大为 <b>4,294,967,295 秒</b>（约 136 年）。
+        重连时恢复订阅和排队消息。
+        适用于间歇性连接且需控制资源使用的场景。
       </td>
     </tr>
   </tbody>
 </table>
 
-> If the Session Expiry Interval is not specified, it defaults to 0. The value is expressed in seconds.
-> Clean Start is a boolean flag, equivalent to Clean Session, where a value of 0 means false and a value of 1 means true.
+> 若未指定 Session Expiry Interval，则默认为 0。单位为秒。
+> Clean Start 为布尔标志，等价于 Clean Session，0 表示 false，1 表示 true。
 
-For details on viewing and managing MQTT sessions in the TBMQ UI, see the [documentation](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/sessions/).
+关于在 TBMQ UI 中查看和管理 MQTT 会话的详情，请参阅 [文档](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/sessions/)。
 
-## Session State Management in TBMQ
+## TBMQ 中的会话状态管理
 
-TBMQ is designed to operate at scale in environments with highly diverse MQTT traffic patterns, ranging from lightweight IoT devices to high-throughput backend applications. 
-Session state in TBMQ is not managed in isolation. Its lifecycle, persistence, and resource impact are influenced by how a client connects, how much data it produces or consumes, and how reliably messages must be delivered. 
+TBMQ 设计用于在流量模式高度多样的环境中大规模运行，涵盖从轻量级 IoT 设备到高吞吐量后端应用。
+TBMQ 中的会话状态并非孤立管理。其生命周期、持久性及资源影响受客户端连接方式、产生的数据量、消费的数据量以及消息投递可靠性要求的影响。
 
-### Client Types and Session Behavior
+### 客户端类型与会话行为
 
-TBMQ improves scalability and reliability by classifying clients into two types: **DEVICE** and **APPLICATION**. 
-Each [Client Type](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/) has distinct traffic patterns and usage expectations, allowing TBMQ to apply tailored session persistence and message delivery strategies for efficient resource usage.
+TBMQ 通过将客户端分为 **DEVICE** 和 **APPLICATION** 两类来提升可扩展性和可靠性。
+每种 [客户端类型](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/) 具有不同的流量模式和预期用途，使 TBMQ 能为不同客户端类型采用定制的会话持久化和消息投递策略以高效使用资源。
 
 <table>
   <thead>
     <tr>
-      <td style="width: 15%"><b>Client Type</b></td>
-      <td style="width: 20%"><b>Session Type</b></td>
-      <td style="width: 35%"><b>Typical Use Case</b></td>
-      <td style="width: 30%"><b>Persistence Details</b></td>
+      <td style="width: 15%"><b>客户端类型</b></td>
+      <td style="width: 20%"><b>会话类型</b></td>
+      <td style="width: 35%"><b>典型用例</b></td>
+      <td style="width: 30%"><b>持久性详情</b></td>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>DEVICE</td>
-      <td>Non-persistent</td>
+      <td>非持久</td>
       <td>
-        Simple environmental monitoring.<br>
-        Example: temperature sensor publishing every minute using QoS 0.
+        简单环境监测。<br>
+        示例：每分钟使用 QoS 0 发布一次的温度传感器。
       </td>
       <td>
-        No session storage. Messages are dropped on disconnect. The device must re-subscribe after reconnect. TBMQ skips messages if the device is too slow, preventing broker overload.
+        无会话存储。断开时消息丢弃。设备重连后须重新订阅。若设备过慢，TBMQ 会跳过消息，防止 broker 过载。
       </td>
     </tr>
     <tr>
       <td>DEVICE</td>
-      <td>Persistent</td>
+      <td>持久</td>
       <td>
-        Command delivery and configuration updates.<br>
-        Example: firmware update commands over unstable mobile networks.
+        命令投递和配置更新。<br>
+        示例：在不稳定移动网络上的固件更新命令。
       </td>
       <td>
-        Messages are queued while offline. TBMQ limits stored messages per DEVICE session to <b>65,535</b> and removes stale messages using a configurable TTL.
-      </td>
-    </tr>
-    <tr>
-      <td>APPLICATION</td>
-      <td>Non-persistent</td>
-      <td>
-        Generally not recommended for data processing applications.
-      </td>
-      <td>
-        Messages may be lost during disconnects. TBMQ shows a warning to administrators about the risk of data loss.
+        离线时消息排队。TBMQ 将每个 DEVICE 会话存储的消息数限制为 <b>65,535</b>，并使用可配置 TTL 移除过期消息。
       </td>
     </tr>
     <tr>
       <td>APPLICATION</td>
-      <td>Persistent</td>
+      <td>非持久</td>
       <td>
-        Enterprise backend and analytics systems.<br>
-        Example: consuming telemetry from thousands of devices.
+        通常不建议用于数据处理应用。
       </td>
       <td>
-        Designed for very high throughput. Supports shared subscriptions with efficient load balancing across multiple application instances.
+        断开期间可能丢失消息。TBMQ 向管理员显示数据丢失风险警告。
+      </td>
+    </tr>
+    <tr>
+      <td>APPLICATION</td>
+      <td>持久</td>
+      <td>
+        企业后端和分析系统。<br>
+        示例：消费数千台设备的遥测数据。
+      </td>
+      <td>
+        专为极高吞吐量设计。支持共享订阅，可在多个应用实例间高效负载均衡。
       </td>
     </tr>
   </tbody>
 </table>
 
-### Session Configuration Parameters
+### 会话配置参数
 
-The configuration parameters (see [Configuration properties](/docs/{{docsPrefix}}mqtt-broker/install/config/)) control how TBMQ handles 
-**persistent sessions** and **session expiration**. They define limits and cleanup rules that affect message retention, buffering behavior, and the lifetime of inactive client sessions.
+配置参数（参见 [Configuration properties](/docs/{{docsPrefix}}mqtt-broker/install/config/)）控制 TBMQ 如何处理 **持久会话** 和 **会话过期**。它们定义影响消息保留、缓冲行为和非活跃客户端会话生命周期的限制与清理规则。
 
-- The `client-session-expiry` parameters control how long inactive sessions are allowed to exist and how expired sessions are periodically cleaned up, preventing unused session state from accumulating in the system.
-- The `persistent-session` parameters regulate how messages are stored and delivered for persistent **DEVICE** and **APPLICATION** clients, influencing memory usage, throughput, and delivery latency.
+- `client-session-expiry` 参数控制非活跃会话允许存在的时间以及过期会话的定期清理，防止未使用的会话状态在系统中累积。
+- `persistent-session` 参数调节持久 **DEVICE** 和 **APPLICATION** 客户端的消息存储和投递，影响内存使用、吞吐量和投递延迟。
 
 ```yaml
 client-session-expiry:
@@ -208,41 +207,41 @@ persistent-session:
       buffered-msg-count: "${MQTT_APP_BUFFERED_MSG_COUNT:10}"
 ```
 
-## Message Expiry Interval and Session State
+## Message Expiry Interval 与会话状态
 
-The **Message Expiry Interval** (MQTT v5.0) defines how long a published message remains valid before it is discarded by the Broker. 
-It applies to individual messages and is independent of the Client’s connection state.
+**Message Expiry Interval**（MQTT v5.0）定义已发布消息在 Broker 将其丢弃前保持有效的时间。
+它适用于每条消息，与客户端连接状态无关。
 
-The Message Expiry Interval starts counting down **as soon as the Broker receives the message**. 
-The message remains eligible for delivery only while its expiry interval has not elapsed. 
-Once the interval expires, the message is discarded and will not be delivered, even if the Session still exists.
+Message Expiry Interval 在 **Broker 收到消息后** 立即开始倒计时。
+消息仅在未超过其过期时间间隔时才符合投递条件。
+一旦间隔过期，消息将被丢弃且不再投递，即使会话仍然存在。
 
-For **persistent sessions**, Message Expiry Interval plays a critical role in offline message queuing:
-- Messages with **QoS 1 or QoS 2** may be queued while the Client is offline.
-- If a queued message **expires before the Client reconnects**, it is removed from the session queue.
-- This prevents delivery of outdated data and limits long-lived message accumulation in persistent sessions.
+对于 **持久会话**，Message Expiry Interval 在离线消息排队中起关键作用：
+- **QoS 1 或 QoS 2** 的消息可在客户端离线时排队。
+- 若排队消息在 **客户端重连前** 已过期，将从会话队列中移除。
+- 这可防止投递过时数据，并限制持久会话中的长期消息累积。
 
-For **non-persistent sessions**, Message Expiry Interval has limited practical effect:
-- Messages are delivered only while the Client is connected.
-- If the Client is offline, messages are not queued, regardless of the expiry setting.
+对于 **非持久会话**，Message Expiry Interval 的实际作用有限：
+- 仅在客户端连接时投递消息。
+- 客户端离线时，无论过期设置如何，消息都不会排队。
 
-**Message Expiry Interval** and **Session Expiry Interval** serve different purposes:
-- **Message Expiry Interval** controls how long an individual message is valid.
-- **Session Expiry Interval** controls how long the Session State is retained after disconnect.
+**Message Expiry Interval** 和 **Session Expiry Interval** 用途不同：
+- **Message Expiry Interval** 控制单条消息的有效期。
+- **Session Expiry Interval** 控制断开后会话状态的保留时间。
 
-A message is delivered only if the Session still exists **and** the Message Expiry Interval has not expired.
+消息仅当会话仍存在 **且** Message Expiry Interval 尚未过期时才会被投递。
 
-## Demonstrating a Persistent Session
+## 演示持久会话
 
-This example shows how a **persistent session** works in practice using the TBMQ [**WebSocket Client**](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/websocket-client/).
-You will see that messages published while a Client is offline are **not lost** and are delivered when the Client reconnects.
+本示例展示 **持久会话** 在实际中的工作方式，使用 TBMQ [**WebSocket Client**](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/websocket-client/)。
+您将看到，客户端离线期间发布的消息 **不会丢失**，并在客户端重连时投递。
 
-The screenshots below demonstrate a simple IoT-style scenario:
-1. One Client subscribes to a topic using a persistent session.
-2. The Client then disconnects.
-3. Another Client publishes messages to the same topic.
-4. When the first Client reconnects, it receives the messages that were published while it was offline.
+以下截图演示简单的 IoT 风格场景：
+1. 一客户端使用持久会话订阅某主题。
+2. 该客户端随后断开。
+3. 另一客户端向同一主题发布消息。
+4. 当第一客户端重连时，会收到其离线期间发布的消息。
 
-This behavior is possible only because the session is **persistent** and messages are delivered using **QoS 1** or **QoS 2**.
+此行为仅因会话为 **持久** 且消息使用 **QoS 1** 或 **QoS 2** 投递而成为可能。
 
 {% include images-gallery.html imageCollection="persistent-session-demo" %}

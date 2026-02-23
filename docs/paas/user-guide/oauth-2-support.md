@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
 title: OAuth 2.0
-description: OAuth 2.0
+description: OAuth 2.0 支持
 
 google-credentials-for-oauth-1:
     0:

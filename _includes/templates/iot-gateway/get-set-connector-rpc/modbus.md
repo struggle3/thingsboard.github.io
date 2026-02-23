@@ -1,25 +1,25 @@
-### GET method
+### GET 方法
 
-With the GET method you can read the values of Modbus slave registers.
+使用 GET 方法可读取 Modbus 从站寄存器的值。
 
 ```bash
 get type=<type>;functionCode=<functionCode>;objectsCount=<objectsCount>;address=<address>;
 ```
 
-Where:
-- `<type>` - the type of the value to read;
-- `<functionCode>` - the Modbus function code;
-- `<objectsCount>` - the number of objects to read;
-- `<address>` - the address of the register to read.
+其中：
+- `<type>` - 要读取的值类型；
+- `<functionCode>` - Modbus 功能码；
+- `<objectsCount>` - 要读取的对象数量；
+- `<address>` - 要读取的寄存器地址。
 
-For example, in our case, we know that we can read 16-bit integer values from the Modbus slave with the address 1, 
-which contains the outdoor temperature. To read the value of the register with the address 1, run this query:
+例如，本示例中可从地址为 1 的 Modbus 从站读取 16 位整数值（室外温度）。
+要读取地址 1 的寄存器值，请运行以下查询：
 
 ```bash
 get type=16int;functionCode=3;objectsCount=1;address=1;
 ```
 
-**Response:**
+**响应：**
 
 ```json
 {"result":{"value":13}}
@@ -29,29 +29,29 @@ get type=16int;functionCode=3;objectsCount=1;address=1;
 ![image](/images/gateway/get-set-connector-rpc/modbus-get-set-rpc-1.png)
 {: refdef}
 
-### SET method
+### SET 方法
 
-With the SET method you can write values to Modbus slave registers.
+使用 SET 方法可向 Modbus 从站寄存器写入值。
 
 ```bash
 set type=<type>;functionCode=<functionCode>;objectsCount=<objectsCount>;address=<address>;value=<value>;
 ```
 
-Where:
-- `<type>` - the type of the value to write;
-- `<functionCode>` - the Modbus function code;
-- `<objectsCount>` - the number of objects to write;
-- `<address>` - the address of the register to write;
-- `<value>` - the value to write.
+其中：
+- `<type>` - 要写入的值类型；
+- `<functionCode>` - Modbus 功能码；
+- `<objectsCount>` - 要写入的对象数量；
+- `<address>` - 要写入的寄存器地址；
+- `<value>` - 要写入的值。
 
-For example, in our case, we know that we can write 16-bit integer values to the Modbus slave with the address 2 
-that contains room light level. To write the value of the register with the address 2, run the following query:
+例如，本示例中可向地址为 2 的 Modbus 从站（房间光照度）写入 16 位整数值。
+要写入地址 2 的寄存器值，请运行以下查询：
 
 ```bash
 set type=16int;functionCode=6;objectsCount=1;address=2;value=80;
 ```
 
-**Response:**
+**响应：**
 
 ```json
 {"result":{"value":"80"}}
@@ -61,13 +61,13 @@ set type=16int;functionCode=6;objectsCount=1;address=2;value=80;
 ![image](/images/gateway/get-set-connector-rpc/modbus-get-set-rpc-2.png)
 {: refdef}
 
-Let's check the result. To read the value of the register with the address 2, run this query:
+检查结果。要读取地址 2 的寄存器值，请运行以下查询：
 
 ```bash
 get type=16int;functionCode=3;objectsCount=1;address=2;
 ```
 
-**Response:**
+**响应：**
 
 ```json
 {"result":{"value":80}}
@@ -77,4 +77,4 @@ get type=16int;functionCode=3;objectsCount=1;address=2;
 ![image](/images/gateway/get-set-connector-rpc/modbus-get-set-rpc-3.png)
 {: refdef}
 
-As you can see, the value has been successfully written.
+可见值已成功写入。

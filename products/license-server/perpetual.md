@@ -2,21 +2,21 @@
 layout: docwithnav-license
 assignees:
 - ashvayka
-title: Perpetual fallback license
-description: Definition of perpetual license and its advantages
+title: 永久备用许可证
+description: 永久许可证的定义及其优势
 
 ---
 
-**Perpetual fallback licenses**  
+**永久备用许可证**  
  
-License Server allows to purchase perpetual fallback licenses. 
-A perpetual fallback license is a license that allows you to use a specific version of software without an active subscription for it. 
-When purchasing perpetual fallback license, you get one year of software updates included to eternal usage of ThingsBoard PE. After the first year the customer can continue using the platform and purchase software updates for subsequent year for the discount fee.
+许可证服务器支持购买永久备用许可证。
+永久备用许可证允许您在无需为其支付有效订阅的情况下使用软件特定版本。
+购买永久备用许可证时，您可获得一年的软件更新，以实现 ThingsBoard PE 的永久使用。第一年后，客户可继续使用平台，并以折扣价购买后续年份的软件更新。
 
-Single perpetual fallback license covers single ThingsBoard PE instance (server process). 
-So, if you like to run ThingsBoard PE in a HA mode, you will need at least two licenses. 
+单个永久备用许可证涵盖单个 ThingsBoard PE 实例（服务器进程）。
+因此，若要以 HA 模式运行 ThingsBoard PE，您至少需要两个许可证。
 
-In order to purchase the Perpetual license the customer may register on License portal and then follow simple steps: 
-- Go to ***Perpetual*** — ***Choose a product*** — Input ***Billing info*** — ***Create***
+要购买永久许可证，客户可在许可证门户注册，然后按以下步骤操作：
+- 前往 ***永久*** — ***选择产品*** — 输入 ***账单信息*** — ***创建***
 
-or choose exact product from [pricing](/pricing/). Once you press ***Get your license*** button you will be routed to the License portal authentication/registration or directly to ***Billing info*** step if you are already logged in on the License portal.
+或从[定价](/pricing/)中选择具体产品。点击 ***获取您的许可证*** 按钮后，您将被引导至许可证门户的认证/注册页面，或若您已登录许可证门户，则直接进入 ***账单信息*** 步骤。

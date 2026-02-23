@@ -1,12 +1,12 @@
 
 ```javascript
-// Decode an uplink message from a buffer
-// payload - array of bytes
-// metadata - key/value object
+// 从缓冲区解码上行消息
+// payload - 字节数组
+// metadata - key/value 对象
 
-/** Decoder **/
+/** 解码器 **/
 
-// decode payload to JSON
+// 将 payload 解码为 JSON
 var data = decodeToJson(payload);
 
 var deviceName = data.?bizData.?devId != null ? data.?bizData.?devId : data.?devId;
@@ -39,7 +39,7 @@ var result = {
     deviceName: deviceName,
 };
 
-/** Helper functions 'decodeToString' and 'decodeToJson' are already built-in **/
+/** 辅助函数 'decodeToString' 和 'decodeToJson' 已内置 **/
 
 return result;
 ```

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: change owner
-description: Changes the ownership of the message originator to a specified tenant or customer.
+description: 将消息 originator 的所有权更改为指定的 tenant 或 customer。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard using Docker (Windows)
-description: Installing ThingsBoard IoT Platform using Docker (Windows)
+title: 使用 Docker 安装 ThingsBoard（Windows）
+description: 使用 Docker 安装 ThingsBoardIoT平台（Windows）
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Cluster Setup
-description: Detailed instructions on how to set up ThingsBoard Edge in a cluster
+title: Edge 集群部署
+description: 如何以集群方式部署 ThingsBoard Edge 的详细说明
 
 ---
 {% assign docsPrefix = "pe/edge/" %}

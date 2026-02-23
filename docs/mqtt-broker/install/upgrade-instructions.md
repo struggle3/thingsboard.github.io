@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Upgrade instructions
-description: TBMQ upgrade instructions
+title: 升级说明
+description: TBMQ 升级说明
 notitle: "true"
 ---
 

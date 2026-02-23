@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Building from sources
-description: Building ThingsBoard IoT platform from sources
+title: 从源码构建
+description: 从源码构建 ThingsBoardIoT平台
 
 ---
 

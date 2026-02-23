@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: aggregate latest
-description: Periodically aggregates child entities attributes or latest time series for specified set of parent entities.
+title: aggregate latest（聚合最新）
+description: 定期聚合指定 parent entity 集合下子 entity 的 attribute 或最新 time series。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

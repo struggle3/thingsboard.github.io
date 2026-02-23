@@ -1,17 +1,15 @@
+TBMQ API 由两部分组成：MQTT 客户端 API 和服务端 API。
 
-TBMQ API consists of two main parts: MQTT client API and server-side API.
+MQTT 客户端 API 可查阅以下页面：
 
-MQTT client API can be reviewed with the following pages:
+* [**MQTT Pub**](https://mosquitto.org/man/mosquitto_pub-1.html) - 发布消息。
+* [**MQTT Sub**](https://mosquitto.org/man/mosquitto_sub-1.html) - 订阅主题。
 
-* [**MQTT Pub**](https://mosquitto.org/man/mosquitto_pub-1.html) - publish messages.
-* [**MQTT Sub**](https://mosquitto.org/man/mosquitto_sub-1.html) - subscribe to topics.
+服务端 API 以 REST API 形式提供：
 
-Server-side API is available as REST API:
+* [**Administration REST API**](/docs/{{docsPrefix}}mqtt-broker/rest-api) - 服务端核心 API。
+* [**Admin User Management**](/docs/{{docsPrefix}}mqtt-broker/user-management/) - 用户管理的服务端 API。
+* [**MQTT Client Credentials Management**](/docs/{{docsPrefix}}mqtt-broker/mqtt-client-credentials-management/) - MQTT 客户端凭证管理的服务端 API。
+* [**Application Shared Subscriptions Management**](/docs/{{docsPrefix}}mqtt-broker/application-shared-subscription/) - 应用共享订阅管理的服务端 API。
 
-* [**Administration REST API**](/docs/{{docsPrefix}}mqtt-broker/rest-api) - The server-side core APIs.
-* [**Admin User Management**](/docs/{{docsPrefix}}mqtt-broker/user-management/) - The server-side APIs for User management.
-* [**MQTT Client Credentials Management**](/docs/{{docsPrefix}}mqtt-broker/mqtt-client-credentials-management/) - The server-side APIs for MQTT client credentials management.
-* [**Application Shared Subscriptions Management**](/docs/{{docsPrefix}}mqtt-broker/application-shared-subscription/) - The server-side APIs for Application Shared Subscriptions management.
-
-These APIs offer a comprehensive set of tools and functionalities to manage and interact with TBMQ, 
-empowering users to administer, control, and customize their MQTT-based applications effectively.
+上述 API 提供管理 TBMQ 及与其交互的完整工具和功能，便于用户高效管理、控制及自定义基于 MQTT 的应用。

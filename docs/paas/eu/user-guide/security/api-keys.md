@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: API keys
-description: Managing API keys
+title: API 密钥
+description: 管理 API 密钥
 redirect_from: "docs/paas/eu/user-guide/ui/api-keys"
 
 creating-api-key-for-our-account:

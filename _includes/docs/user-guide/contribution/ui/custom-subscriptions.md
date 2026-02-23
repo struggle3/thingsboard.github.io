@@ -1,82 +1,82 @@
 * TOC
 {:toc}
 
-During widget development, there might be instances where the default subscription functionality doesn't suffice. In such scenarios, a **custom subscription** can be employed.
-Typically, **custom subscriptions** are used with **static** widget types, as they don't have default subscription logic.
+在部件开发中，默认订阅功能可能不满足需求。此时可使用 **自定义订阅**。
+通常 **自定义订阅** 与 **static** 部件类型配合使用，因其没有默认订阅逻辑。
 
-### Main information
+### 基本信息
 
-For creating custom subscriptions you have to use function **createSubscription** from [Widget Subscription API]( /docs/{{docsPrefix}}user-guide/contribution/widgets-development/#widget-subscription-api ):
+创建自定义订阅需使用 [部件订阅 API](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/#widget-subscription-api) 中的 **createSubscription** 函数：
 
 ```javascript
 widgetContext.createSubscription(options);
 ```
 
-The object [options](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L240) contain comprehensive information regarding the subscription and include the following fields:
+[options](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L240) 对象包含订阅的完整信息，包含以下字段：
 
-| **Field**                                      | **Type**                                                                                                                                                               | **Description**                                                                                                                                                                                |
+| **字段**                                      | **类型**                                                                                                                                                               | **说明**                                                                                                                                                                                |
 |------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ```type```                                     | [widgetType](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L46)                  | Sets subscription type.                                                                                                                                                                        |
-| ```datasources```                              | Array<[Datasource](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L369)>          | Contains information about the data to be subscribed to.                                                                                                                                       |
-| ```alarmSource```                              | [Datasource](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L369)                 | Contains information about the alarms to be subscribed to.                                                                                                                                     |
-| ```datasourcesOptional```                      | Boolean                                                                                                                                                                | Sets whether the **datasources** are optional. For **static** widget type always true.                                                                                                         |
-| ```hasDataPageLink```                          | Boolean                                                                                                                                                                | Sets whether pageLink is used for subscribing.                                                                                                                                                 |
-| ```singleEntity```                             | Boolean                                                                                                                                                                | Determines if data will be retrieved only from the first found entity.                                                                                                                         |
-| ```pageSize```                                 | Number                                                                                                                                                                 | Determines the number of entities displayed on a page.                                                                                                                                         |
-| ```warnOnPageDataOverflow```                   | Boolean                                                                                                                                                                | Activates warning about overflow page data.                                                                                                                                                    |
-| ```useDashboardTimewindow```                   | Boolean                                                                                                                                                                | If active, the subscription will be used time window from **dashboardTimewindow**, otherwise will be used **timeWindowConfig** (using to change time window in **time-series** subscriptions). |
-| ```dashboardTimewindow```                      | [Timewindow](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/time/time.models.ts#L96)               | Contains the dashboard timewindow.                                                                                                                                                             |
-| ```timeWindowConfig```                         | [Timewindow](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/time/time.models.ts#L96)               | Sets the **custom** timewindow.                                                                                                                                                                |
-| ```legendConfig```                             | [LegendConfig](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L271)               | Sets params of legend.                                                                                                                                                                         |
-| ```decimals```                                 | Number                                                                                                                                                                 | Sets number of digits after floating point for **all** keys.                                                                                                                                   |
-| ```units```                                    | String                                                                                                                                                                 | Sets special symbol to show next to value for **all** keys.                                                                                                                                    |
-| ```callbacks```                                | [WidgetSubscriptionCallbacks](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L223) | The set of callbacks used in the subscription life cycle.                                                                                                                                      |
+| ```type```                                     | [widgetType](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L46)                  | 设置订阅类型。                                                                                                                                                                        |
+| ```datasources```                              | Array<[Datasource](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L369)>          | 包含要订阅的数据信息。                                                                                                                                       |
+| ```alarmSource```                              | [Datasource](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L369)                 | 包含要订阅的 alarms 信息。                                                                                                                                     |
+| ```datasourcesOptional```                      | Boolean                                                                                                                                                                | 设置 **datasources** 是否可选。**static** 部件类型始终为 true。                                                                                                         |
+| ```hasDataPageLink```                          | Boolean                                                                                                                                                                | 设置是否使用 pageLink 进行订阅。                                                                                                                                                 |
+| ```singleEntity```                             | Boolean                                                                                                                                                                | 决定是否仅从第一个找到的实体获取数据。                                                                                                                         |
+| ```pageSize```                                 | Number                                                                                                                                                                 | 设置每页显示的实体数。                                                                                                                                         |
+| ```warnOnPageDataOverflow```                   | Boolean                                                                                                                                                                | 启用页面数据溢出警告。                                                                                                                                                    |
+| ```useDashboardTimewindow```                   | Boolean                                                                                                                                                                | 若启用，订阅使用 **dashboardTimewindow** 的时间窗口，否则使用 **timeWindowConfig**（用于 **time-series** 订阅中修改时间窗口）。 |
+| ```dashboardTimewindow```                      | [Timewindow](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/time/time.models.ts#L96)               | 包含 dashboard 的 timewindow。                                                                                                                                                             |
+| ```timeWindowConfig```                         | [Timewindow](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/time/time.models.ts#L96)               | 设置**自定义** timewindow。                                                                                                                                                                |
+| ```legendConfig```                             | [LegendConfig](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L271)               | 设置图例参数。                                                                                                                                                                         |
+| ```decimals```                                 | Number                                                                                                                                                                 | 设置**所有** key 的小数位数。                                                                                                                                   |
+| ```units```                                    | String                                                                                                                                                                 | 设置**所有** key 数值旁显示的单位符号。                                                                                                                                    |
+| ```callbacks```                                | [WidgetSubscriptionCallbacks](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/core/api/widget-api.models.ts#L223) | 订阅生命周期中使用的回调集合。                                                                                                                                      |
 
 ##### Datasources
 
-The **Datasources** object describes what data you want to subscribe to.
-The main functions are:
+**Datasources** 对象描述要订阅的数据。
+主要功能包括：
 
-- Description of the keys that you want to subscribe to.
-- Specifying the entities you need to extract data from.
-- Filtering entities based on specific keys and values.
+- 描述要订阅的 keys；
+- 指定要提取数据的实体；
+- 根据指定 keys 和 values 过滤实体。
 
-The [datasource](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L369) object includes the subsequent fields:
+[datasource](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L369) 对象包含以下字段：
 
-| **Field**                                      | **Type**                                                                                                                                                            | **Description**                                                                                                                          |
+| **字段**                                      | **类型**                                                                                                                                                            | **说明**                                                                                                                          |
 |------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| ```type```                                     | [DatasourceType](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L351)/any      | Sets type of datasource.                                                                                                                 |
-| ```aliasName```                                | String                                                                                                                                                              | Name of datasource.                                                                                                                      |
-| ```dataKeys```                                 | Array<[DataKey](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L334)>          | Describes the keys to be subscribed to.                                                                                                  |
-| ```latestDataKeys```                           | Array<[DataKey](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L334)>          | Use this in case you have **time-series** subscription and at the same time, you want to subscribe to the **latest** data for some keys. |
-| ```pageLink```                                 | [EntityDataPageLink](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/query/query.models.ts#L709) | Sets pageLink for datasource.                                                                                                            |
-| ```keyFilters```                               | Array<[KeyFilter](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/query/query.models.ts#L379)>   | Filters the data to be subscribed to by the value of the keys. You can find all information about key filters [here](#key-filters).      |
-| ```entityFilter```                             | [EntityFilter](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/query/query.models.ts#L695)       | Filters the data to be subscribed to by entities params. You can find all information about entity filters [here](#entity-filters).      |
+| ```type```                                     | [DatasourceType](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L351)/any      | 设置 datasource 类型。                                                                                                                 |
+| ```aliasName```                                | String                                                                                                                                                              | Datasource 名称。                                                                                                                      |
+| ```dataKeys```                                 | Array<[DataKey](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L334)>          | 描述要订阅的 keys。                                                                                                  |
+| ```latestDataKeys```                           | Array<[DataKey](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/widget.models.ts#L334)>          | 若为 **time-series** 订阅且需同时订阅部分 keys 的 **latest** 数据时使用。 |
+| ```pageLink```                                 | [EntityDataPageLink](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/query/query.models.ts#L709) | 设置 datasource 的 pageLink。                                                                                                            |
+| ```keyFilters```                               | Array<[KeyFilter](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/query/query.models.ts#L379)>   | 按 keys 的值过滤要订阅的数据。Key filters 详情见 [此处](#key-filters)。      |
+| ```entityFilter```                             | [EntityFilter](https://github.com/thingsboard/thingsboard/blob/{{ site.release.wd_examples_commit }}/ui-ngx/src/app/shared/models/query/query.models.ts#L695)       | 按实体参数过滤要订阅的数据。Entity filters 详情见 [此处](#entity-filters)。      |
 
 ##### Callbacks
 
-**Callbacks** object has a set of functions that are called at different stages of the subscription life cycle. It has the following fields:
+**Callbacks** 对象包含在订阅生命周期不同阶段调用的回调函数，包含以下字段：
 
-| **Function**                                   | **Description**                                                             |
+| **函数**                                   | **说明**                                                             |
 |------------------------------------------------|-----------------------------------------------------------------------------|
-| ```onDataUpdated```                            | Called after updating data.  |
-| ```onLatestDataUpdated```                      | Called only in time-series subscription after updating data from **latestDataKeys**. |
-| ```onDataUpdateError```                        | Called after an error in updating data. |
-| ```onLatestDataUpdateError```                  | Called only in time-series subscription after error in updating data from **latestDataKeys**. |
-| ```legendDataUpdated```                        | Called after updating legend data. |
-| ```timeWindowUpdated```                        | Called after updating **timewindow**. |
-| ```dataLoading```                              | Called after loading data. |
-| ```rpcStateChanged```                          | Called after changing RPC state. |
-| ```onRpcSuccess```                             | Called exclusively in the RPC subscription after a successful RPC. |
-| ```onRpcFailed```                              | Called exclusively in the RPC subscription after a failed RPC. |
+| ```onDataUpdated```                            | 数据更新后调用。  |
+| ```onLatestDataUpdated```                      | 仅在 time-series 订阅中，**latestDataKeys** 数据更新后调用。 |
+| ```onDataUpdateError```                        | 数据更新出错后调用。 |
+| ```onLatestDataUpdateError```                  | 仅在 time-series 订阅中，**latestDataKeys** 数据更新出错后调用。 |
+| ```legendDataUpdated```                        | 图例数据更新后调用。 |
+| ```timeWindowUpdated```                        | **timewindow** 更新后调用。 |
+| ```dataLoading```                              | 数据加载后调用。 |
+| ```rpcStateChanged```                          | RPC 状态变更后调用。 |
+| ```onRpcSuccess```                             | 仅在 RPC 订阅中，RPC 成功后调用。 |
+| ```onRpcFailed```                              | 仅在 RPC 订阅中，RPC 失败后调用。 |
 
 ##### Entity Filters
 
-The entity filter is an important part of creating custom subscriptions as it defines the entities from which your subscription extracts information. The Entity Filter body depends on the **type** parameter. Let's delve into the available entity filter types, which, in essence, align with the existing dashboard aliases.
+实体过滤器是创建自定义订阅的重要部分，用于定义订阅提取信息的实体。Entity Filter 内容取决于 **type** 参数。下面介绍可用的实体过滤器类型，它们本质上与现有 dashboard aliases 一致。
 
 - **Single Entity**
 
-Allows to filter only one entity based on the id. For example, this entity filter selects certain device:
+根据 id 仅过滤一个实体。例如，此实体过滤器选择特定 device：
 ```javascript
 {
     type: "singleEntity",
@@ -89,7 +89,7 @@ Allows to filter only one entity based on the id. For example, this entity filte
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
 - **Group Entities Filter**
 
-Allows to filter multiple entities of the same type using the entity group type and id. For example, this entity filter selects all devices that belong to the group  **e52b0020-2a7a-11ec-94eb-213c95f54092**:
+根据 entity group 类型和 id 过滤多个同类实体。例如，此实体过滤器选择属于 group **e52b0020-2a7a-11ec-94eb-213c95f54092** 的所有 devices：
 ```javascript
 {
     type: "entityGroup",
@@ -101,7 +101,7 @@ Allows to filter multiple entities of the same type using the entity group type 
 
 - **Entity List Filter**
 
-Allows to filter entities of the same type using their ids. For example, this entity filter selects two devices:
+根据 ids 过滤多个同类实体。例如，此实体过滤器选择两台 devices：
 ```javascript
 {
     type: "entityList", 
@@ -115,7 +115,7 @@ Allows to filter entities of the same type using their ids. For example, this en
 
 - **Entity Name Filter**
 
-Allows to filter entities of the same type using the **starts with** expression on entity name. For example, this entity filter selects all devices with names starting with **Air Quality**:
+根据实体名称的 **starts with** 表达式过滤同类实体。例如，此实体过滤器选择名称以 **Air Quality** 开头的所有 devices：
 ```javascript
 {
     type: "entityName",
@@ -126,7 +126,7 @@ Allows to filter entities of the same type using the **starts with** expression 
 
 - **Entity Type Filter**
 
-Allows to filter entities based on their type (CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, etc). For example, this entity filter selects all tenant customers:
+根据实体类型（CUSTOMER、USER、DASHBOARD、ASSET、DEVICE 等）过滤。例如，此实体过滤器选择租户下所有 customers：
 ```javascript
 {
     type: "entityType",
@@ -137,7 +137,7 @@ Allows to filter entities based on their type (CUSTOMER, USER, DASHBOARD, ASSET,
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
 - **Group List Filter**
 
-Return multiple groups of the same type using specified ids. For example, this entity filter selects 2 device groups (if they are present in the system) with ids  **e52b0020-2a7a-11ec-94eb-213c95f54092** and  **e52b0020-2a7a-11ec-94eb-213c95f54093**:
+根据指定 id 返回多个同类型实体组。例如，此实体过滤器选择 id 为 **e52b0020-2a7a-11ec-94eb-213c95f54092** 和 **e52b0020-2a7a-11ec-94eb-213c95f54093** 的两个设备组（若系统中存在）：
 ```javascript
 {
     type: "entityGroupList",
@@ -148,7 +148,7 @@ Return multiple groups of the same type using specified ids. For example, this e
 
 - **Group Name Filter**
 
-Allows to filter entity groups based on their type and the **starts with** expression on their name. For example, this entity filter selects all devices with names starting with **CAT**:
+按实体组类型及名称 **starts with** 表达式过滤。例如，此实体过滤器选择名称以 **CAT** 开头的所有设备：
 ```javascript
 {
     type: "entityGroupName",
@@ -159,7 +159,7 @@ Allows to filter entity groups based on their type and the **starts with** expre
 
 - **Entities by Group Name Filter**
 
-Allows to filter entities that belong to group based on the entity type and the group name. Optional parameter **ownerId** allows you to specify the owner of the group (Tenant or Customer, current user owner by default). For example, this entity filter selects all devices that belong to **Water Meters** group:
+按实体类型与组名称过滤属于该组的实体。可选参数 **ownerId** 可指定组所有者（Tenant 或 Customer，默认当前用户）。例如，此实体过滤器选择属于 **Water Meters** 组的所有设备：
 ```javascript
 {
     type: "entitiesByGroupName",
@@ -168,7 +168,7 @@ Allows to filter entities that belong to group based on the entity type and the 
 }
 ```
 
-Another example, this entity filter selects all devices that belong to **Water Meters** group which in turn belongs to (sub-)Customer with id **e52b0020-2a7a-11ec-94eb-213c95f54093**:
+另一示例，此实体过滤器选择属于 **Water Meters** 组的全部设备，且该组属于 id 为 **e52b0020-2a7a-11ec-94eb-213c95f54093** 的（子）Customer：
 ```javascript
 {
     type: "entitiesByGroupName",
@@ -180,7 +180,7 @@ Another example, this entity filter selects all devices that belong to **Water M
 
 - **Entity owner Filter**
 
-Allows to fetch owner (Tenant or Customer) of the specified entity. For example, this entity filter selects owner of the device with id **e52b0020-2a7a-11ec-94eb-213c95f54093**:
+获取指定实体的所有者（Tenant 或 Customer）。例如，此实体过滤器选择 id 为 **e52b0020-2a7a-11ec-94eb-213c95f54093** 的设备的所有者：
 ```javascript
 {
     type: "stateEntityOwner",
@@ -194,7 +194,7 @@ Allows to fetch owner (Tenant or Customer) of the specified entity. For example,
 
 - **Asset Type Filter**
 
-Allows to filter assets based on their type and the **'starts with'** expression over their name. For example, this entity filter selects all 'charging station' assets with name that start with 'Tesla':
+按 asset 类型及名称的 **'starts with'** 表达式过滤。例如，此实体过滤器选择名称以 'Tesla' 开头的所有 'charging station' 类型 asset：
 ```javascript
 {
      type: "assetType", 
@@ -206,7 +206,7 @@ Allows to filter assets based on their type and the **'starts with'** expression
 
 - **Device Type Filter**
 
-Allows to filter devices based on their type and the **'starts with'** expression over their name. For example, this entity filter selects all 'Temperature Sensor' devices with name that start with 'ABC':
+按设备类型及名称的 **'starts with'** 表达式过滤。例如，此实体过滤器选择名称以 'ABC' 开头的所有 'Temperature Sensor' 设备：
 ```javascript
 {
      type: "deviceType",
@@ -218,7 +218,7 @@ Allows to filter devices based on their type and the **'starts with'** expressio
 
 - **Entity View Filter**
 
-Allows to filter entity views based on their type and the **'starts with'** expression over their name. For example, this entity filter selects all 'Concrete Mixer' entity views with name that start with 'CAT':
+按 entity view 类型及名称的 **'starts with'** 表达式过滤。例如，此实体过滤器选择名称以 'CAT' 开头的所有 'Concrete Mixer' 类型 entity view：
 ```javascript
 {
      type: "entityViewType",
@@ -230,7 +230,7 @@ Allows to filter entity views based on their type and the **'starts with'** expr
 
 - **Edge Type Filter**
 
-Allows to filter edge instances based on their type and the **'starts with'** expression over their name. For example, this entity filter selects all 'Factory' edge instances with name that start with 'Nevada':
+按 edge 实例类型及名称的 **'starts with'** 表达式过滤。例如，此实体过滤器选择名称以 'Nevada' 开头的所有 'Factory' 类型 edge 实例：
 ```javascript
 {
      type: "edgeType",
@@ -242,7 +242,7 @@ Allows to filter edge instances based on their type and the **'starts with'** ex
 
 - **Api Usage Filter**
 
-Allows to query for Api Usage based on optional customer id. If the customer id is not set, returns current tenant API usage. For example, this entity filter selects the **Api Usage** entity for customer with id **e6501f30-2a7a-11ec-94eb-213c95f54092**:
+按可选 customer id 查询 Api Usage。未设置 customer id 时返回当前租户 API 使用量。例如，此实体过滤器选择 id 为 **e6501f30-2a7a-11ec-94eb-213c95f54092** 的 customer 的 **Api Usage** 实体：
 ```javascript
 {
     type: "apiUsageState",
@@ -255,9 +255,9 @@ Allows to query for Api Usage based on optional customer id. If the customer id 
 
 - **Relations Query Filter**
 
-Allows to filter entities that are related to the provided root entity. Possible direction values are **TO** and **FROM**. The **maxLevel** defines how many relation levels should the query search recursively. Assuming the **maxLevel > 1**, the **fetchLastLevelOnly** defines either to return all related entities or only entities that are on the last level of relations. The filter objects(inside **filters** array) allows you to define the relation type and set of acceptable entity types to search for. The relation query calculates all related entities, even if they are filtered using different relation types, and then extracts only those that match the filters.
+过滤与指定根实体相关的实体。**direction** 可为 **TO** 或 **FROM**。**maxLevel** 定义递归搜索的关系层级数。若 **maxLevel > 1**，**fetchLastLevelOnly** 决定是返回所有相关实体还是仅返回最后一级。**filters** 数组中可定义关系类型及可接受的实体类型集合。关系查询计算所有相关实体，再只保留符合 filters 的实体。
 
-For example, this entity filter selects all devices and assets that are related to the asset with id **e51de0c0-2a7a-11ec-94eb-213c95f54092**:
+例如，此实体过滤器选择与 id 为 **e51de0c0-2a7a-11ec-94eb-213c95f54092** 的 asset 相关的所有设备与 asset：
 ```javascript
 {
     type: "relationsQuery",
@@ -282,9 +282,9 @@ For example, this entity filter selects all devices and assets that are related 
 
 - **Asset Search Query**
 
-Allows to filter assets that are related to the provided root entity. Filters related assets based on the relation type and set of asset types. Possible direction values are **TO** and **FROM**. The **maxLevel** defines how many relation levels should the query search recursively. Assuming the **maxLevel > 1**, the **fetchLastLevelOnly** defines either to return all related entities or only entities that are on the last level of relations. The **relationType** defines the type of the relation to search for. The **assetTypes** defines the type of the asset to search for. The relation query calculates all related entities, even if they are filtered using different relation types, and then extracts only assets that match **relationType** and **assetTypes** conditions.
+过滤与指定根实体相关的 asset。按关系类型与 asset 类型集合过滤。**direction** 可为 **TO** 或 **FROM**。**maxLevel** 定义递归搜索层级。若 **maxLevel > 1**，**fetchLastLevelOnly** 决定返回范围。**relationType** 与 **assetTypes** 分别指定要搜索的关系类型和 asset 类型。关系查询计算所有相关实体，再仅保留符合 **relationType** 和 **assetTypes** 的 asset。
 
-For example, this entity filter selects **Charging station** assets that are related to the asset with id **e51de0c0-2a7a-11ec-94eb-213c95f54092** using **Contains** relation:
+例如，此实体过滤器通过 **Contains** 关系选择与 id 为 **e51de0c0-2a7a-11ec-94eb-213c95f54092** 的 asset 相关的 **Charging station** asset：
 
 ```javascript
 {
@@ -305,9 +305,9 @@ For example, this entity filter selects **Charging station** assets that are rel
 
 - **Device Search Query**
 
-Allows to filter devices that are related to the provided root entity. Filters related devices based on the relation type and set of device types. Possible direction values are **TO** and **FROM**. The **maxLevel** defines how many relation levels should the query search recursively. Assuming the **maxLevel > 1**, the **fetchLastLevelOnly** defines either to return all related entities or only entities that are on the last level of relations. The **relationType** defines the type of the relation to search for. The **deviceTypes** defines the type of the device to search for. The relation query calculates all related entities, even if they are filtered using different relation types, and then extracts only devices that match **relationType** and **deviceTypes** conditions.
+过滤与指定根实体相关的设备。按关系类型与设备类型集合过滤。**direction** 可为 **TO** 或 **FROM**。**maxLevel** 与 **fetchLastLevelOnly** 同上。**relationType** 与 **deviceTypes** 分别指定要搜索的关系类型与设备类型。关系查询计算相关实体后，仅保留符合 **relationType** 和 **deviceTypes** 的设备。
 
-For example, this entity filter selects **Charging port** and **Air Quality Sensor** devices that are related to the asset with id **e52b0020-2a7a-11ec-94eb-213c95f54092** using **Contains** relation:
+例如，此实体过滤器通过 **Contains** 关系选择与 id 为 **e52b0020-2a7a-11ec-94eb-213c95f54092** 的 asset 相关的 **Charging port** 和 **Air Quality Sensor** 设备：
 ```javascript
 {
     type: "deviceSearchQuery",
@@ -328,9 +328,9 @@ For example, this entity filter selects **Charging port** and **Air Quality Sens
 
 - **Entity View Query**
 
-Allows to filter entity views that are related to the provided root entity. Filters related entity views based on the relation type and set of entity view types. Possible direction values are **TO** and **FROM**. The **maxLevel** defines how many relation levels should the query search recursively. Assuming the **maxLevel > 1**, the **fetchLastLevelOnly** defines either to return all related entities or only entities that are on the last level of relations. The **relationType** defines the type of the relation to search for. The **entityViewTypes** defines the type of the entity view to search for. The relation query calculates all related entities, even if they are filtered using different relation types, and then extracts only devices that match **relationType** and **deviceTypes** conditions.
+过滤与指定根实体相关的 entity view。按关系类型与 entity view 类型集合过滤。**direction**、**maxLevel**、**fetchLastLevelOnly**、**relationType** 含义同上。**entityViewTypes** 指定要搜索的 entity view 类型。关系查询计算相关实体后，仅保留符合 **relationType** 和 **entityViewTypes** 的 entity view。
 
-For example, this entity filter selects **Concrete mixer** entity views that are related to the asset with id **e52b0020-2a7a-11ec-94eb-213c95f54092** using **Contains** relation:
+例如，此实体过滤器通过 **Contains** 关系选择与 id 为 **e52b0020-2a7a-11ec-94eb-213c95f54092** 的 asset 相关的 **Concrete mixer** 类型 entity view：
 ```javascript
 {
     type: "entityViewSearchQuery",
@@ -350,9 +350,9 @@ For example, this entity filter selects **Concrete mixer** entity views that are
 
 - **Edge Search Query**
 
-Allows to filter edge instances that are related to the provided root entity. Filters related edge instances based on the relation type and set of edge types. Possible direction values are **TO** and **FROM**. The **maxLevel** defines how many relation levels should the query search recursively. Assuming the **maxLevel > 1**, the **fetchLastLevelOnly** defines either to return all related entities or only entities that are on the last level of relations. The **relationType** defines the type of the relation to search for. The **edgeTypes** defines the type of the edge to search for. The relation query calculates all related entities, even if they are filtered using different relation types, and then extracts only edge instances that match **relationType** and **edgeTypes** conditions.
+过滤与指定根实体相关的 edge 实例。按关系类型与 edge 类型集合过滤。**direction**、**maxLevel**、**fetchLastLevelOnly** 同上。**relationType** 与 **edgeTypes** 分别指定要搜索的关系类型与 edge 类型。关系查询计算相关实体后，仅保留符合 **relationType** 和 **edgeTypes** 的 edge 实例。
 
-For example, this entity filter selects **Factory** edge instances that are related to the asset with id **e52b0020-2a7a-11ec-94eb-213c95f54092** using **Contains** relation:
+例如，此实体过滤器通过 **Contains** 关系选择与 id 为 **e52b0020-2a7a-11ec-94eb-213c95f54092** 的 asset 相关的 **Factory** 类型 edge 实例：
 ```javascript
 {
     type: "edgeSearchQuery",
@@ -372,7 +372,7 @@ For example, this entity filter selects **Factory** edge instances that are rela
 
 - **Scheduler Event Query**
 
-Allows to filter schedulers based on entity and scheduler event type. For example, this entity filter selects all schedulers with event type **Light switch scheduler** and related to the device with id **e01d2630-d710-11ef-a015-9bbc9baea46f**.
+按实体与 scheduler 事件类型过滤 scheduler。例如，此实体过滤器选择事件类型为 **Light switch scheduler**、且与 id 为 **e01d2630-d710-11ef-a015-9bbc9baea46f** 的设备相关的所有 scheduler。
 
 ```javascript
 {
@@ -387,7 +387,7 @@ Allows to filter schedulers based on entity and scheduler event type. For exampl
 
 ##### Key Filters
 
-Key Filter allows you to define complex logical expressions over entity field, attribute, or latest time series value. The filter is defined using **key**, **valueType**, and **predicate** objects. The Single Entity Query may have zero, one, or multiple predicates. If multiple filters are defined, they are evaluated using logical **AND**. The example below checks that temperature of the entity is above 20 degrees:
+Key Filter 允许在实体字段、attribute 或最新 time series 值上定义复杂逻辑表达式。过滤器由 **key**、**valueType** 和 **predicate** 对象定义。Single Entity Query 可包含零个、一个或多个 predicates。若定义多个过滤器，将按逻辑 **AND** 求值。以下示例检查实体温度是否高于 20 度：
 
 ```javascript
 {
@@ -407,23 +407,23 @@ Key Filter allows you to define complex logical expressions over entity field, a
 }
 ```
 
-Now let's review **key**, **valueType** and **predicate** objects in detail.
+下面详细介绍 **key**、**valueType** 和 **predicate** 对象。
 
-- **Key object**
+- **Key 对象**
 
-Filter Key defines either entity field, attribute, or telemetry. It is a JSON object that consists of the key name and type. The following filter key types are supported:
+Filter Key 定义实体字段、attribute 或 telemetry。其为由 key 名称和类型组成的 JSON 对象。支持的 filter key 类型如下：
 
-| **Type**                        | **Description**                                                                                                              |
+| **Type**                        | **说明**                                                                                                              |
 |-------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| ```CLIENT_ATTRIBUTE```           | Used for client attributes.                                                                                                  |
-| ```SHARED_ATTRIBUTE```     | Used for shared attributes.                                                                                                  |
-| ```SERVER_ATTRIBUTE```       | Used for server attributes.                                                                                                  |
-| ```ATTRIBUTE``` | Used for any of the above.                                                                                                   |
-| ```TIME_SERIES```       | Used for time-series values.                                                                                                 |
-| ```ENTITY_FIELD```       | Used for accessing entity fields like **name**, **label**, **etc**. The list of available fields depends on the entity type. |
-| ```ALARM_FIELD```             | Similar to entity field, but is used in alarm queries only.                                                                  |
+| ```CLIENT_ATTRIBUTE```           | 用于 client attributes。                                                                                                  |
+| ```SHARED_ATTRIBUTE```     | 用于 shared attributes。                                                                                                  |
+| ```SERVER_ATTRIBUTE```       | 用于 server attributes。                                                                                                  |
+| ```ATTRIBUTE``` | 用于上述任意类型。                                                                                                   |
+| ```TIME_SERIES```       | 用于 time-series 值。                                                                                                 |
+| ```ENTITY_FIELD```       | 用于访问实体字段如 **name**、**label** 等。可用字段列表取决于实体类型。 |
+| ```ALARM_FIELD```             | 类似 entity field，但仅用于 alarm 查询。                                                                  |
 
-Object example:
+对象示例：
 ```javascript
 {
      type: "SERVER_ATTRIBUTE",
@@ -433,20 +433,20 @@ Object example:
 
 - **Value Type**
 
-Provides a hint about the data type of the entity field that is defined in the filter key. The value type impacts the list of possible operations that you may use in the corresponding predicate. For example, you may use **STARTS_WITH** or **END_WITH**, but you can't use **GREATER_OR_EQUAL** for string values. The following filter value types and corresponding predicate operations are supported:
+提示 filter key 中定义的实体字段数据类型。value type 影响 predicate 中可用的操作列表。例如可使用 **STARTS_WITH** 或 **ENDS_WITH**，但不能对字符串使用 **GREATER_OR_EQUAL**。支持的 filter value 类型及对应 predicate 操作如下：
 
-| **Type**                        | **Description**                                                                                                                                                         |
+| **类型**                        | **说明**                                                                                                                                                         |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ```STRING```           | Used to filter any **String** or **JSON** values. Operations: **EQUAL**, **NOT_EQUAL**, **STARTS_WITH**, **ENDS_WITH**, **CONTAINS**, **NOT_CONTAINS**.                 |
-| ```NUMERIC```     | Used for **Long** and **Double** values. Operations: **EQUAL**, **NOT_EQUAL**, **GREATER**, **LESS**, **GREATER_OR_EQUAL**, **LESS_OR_EQUAL**.                          |
-| ```BOOLEAN```       | Used for **Boolean** values. Operations: **EQUAL**, **NOT_EQUAL**.                                                                                                      |
-| ```DATE_TIME``` | Similar to numeric, transforms value to milliseconds since epoch. Operations: **EQUAL**, **NOT_EQUAL**, **GREATER**, **LESS**, **GREATER_OR_EQUAL**, **LESS_OR_EQUAL**. |
+| ```STRING```           | 用于过滤 **String** 或 **JSON** 值。操作：**EQUAL**、**NOT_EQUAL**、**STARTS_WITH**、**ENDS_WITH**、**CONTAINS**、**NOT_CONTAINS**。                 |
+| ```NUMERIC```     | 用于 **Long** 和 **Double** 值。操作：**EQUAL**、**NOT_EQUAL**、**GREATER**、**LESS**、**GREATER_OR_EQUAL**、**LESS_OR_EQUAL**。                          |
+| ```BOOLEAN```       | 用于 **Boolean** 值。操作：**EQUAL**、**NOT_EQUAL**。                                                                                                      |
+| ```DATE_TIME``` | 类似 numeric，将值转换为自纪元的毫秒数。操作：**EQUAL**、**NOT_EQUAL**、**GREATER**、**LESS**、**GREATER_OR_EQUAL**、**LESS_OR_EQUAL**。 |
 
-- **Predicate object**
+- **Predicate 对象**
 
-Filter Predicate defines the logical expression to evaluate. The list of available operations depends on the filter value type, see above. The platform supports 4 predicate types: **STRING**, **NUMERIC**, **BOOLEAN**, and **COMPLEX**. The last one allows combining multiple operations over one filter key.
+Filter Predicate 定义要求值的逻辑表达式。可用操作列表取决于 filter value 类型，见上文。平台支持 4 种 predicate 类型：**STRING**、**NUMERIC**、**BOOLEAN** 和 **COMPLEX**。后者可在同一 filter key 上组合多个操作。
 
-Simple predicate example to check **value < 100**:
+检查 **value < 100** 的简单 predicate 示例：
 
 ```javascript
 {
@@ -459,7 +459,7 @@ Simple predicate example to check **value < 100**:
 }
 ```
 
-Complex predicate example, to check **value < 10 or value > 20**:
+检查 **value < 10 或 value > 20** 的复合 predicate 示例：
 ```javascript
 {
     type: "COMPLEX", 
@@ -485,7 +485,7 @@ Complex predicate example, to check **value < 10 or value > 20**:
 }
 ```
 
-More complex predicate example, to check **value < 10 or (value > 50 && value < 60)**:
+检查 **value < 10 或 (value > 50 && value < 60)** 的更复杂 predicate 示例：
 ```javascript
 {
     type: "COMPLEX", 
@@ -525,7 +525,7 @@ More complex predicate example, to check **value < 10 or (value > 50 && value < 
 }
 ```
 
-You may also want to replace hardcoded values (for example, temperature > 20) with the more a dynamic expression (for example, temperature > value of the tenant attribute with key **temperatureThreshold**). It is possible to use **dynamicValue** to define attribute of the tenant, customer or user that is performing the API call. See example below:
+可将硬编码值（如 temperature > 20）替换为动态表达式（如 temperature > tenant 属性 **temperatureThreshold** 的值）。可使用 **dynamicValue** 定义执行 API 调用的 tenant、customer 或 user 的属性。示例如下：
 ```javascript
 {
     operation: "GREATER",
@@ -540,22 +540,22 @@ You may also want to replace hardcoded values (for example, temperature > 20) wi
 }
 ```
 
-Note that you may use **CURRENT_USER**, **CURRENT_CUSTOMER** and **CURRENT_TENANT** as a **sourceType**. The **defaultValue** is used when the attribute with such a name is not defined for the chosen source.
+**sourceType** 可使用 **CURRENT_USER**、**CURRENT_CUSTOMER** 或 **CURRENT_TENANT**。当选定源上未定义对应属性时，使用 **defaultValue**。
 
-Available for users with **TENANT_ADMIN** or **CUSTOMER_USER** authority.
+仅对 **TENANT_ADMIN** 或 **CUSTOMER_USER** 权限用户可用。
 
 {% capture difference %}
-Entities filtering is based on the **"latest"** value of the attribute or time series key. Don't use this feature to **"filter out"** historical time series values.
+实体过滤基于 attribute 或 time series key 的**「最新」**值。请勿将此功能用于**「过滤」**历史 time series 值。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-#### Examples
+#### 示例
 
-Below is a set of typical custom subscription examples.
+以下为常见的自定义订阅示例。
 
-##### Subscription for counting
+##### 计数订阅
 
-Let's create a custom subscription for the number of devices in the system, and the number of active devices:
+创建用于统计系统中设备总数及活跃设备数的自定义订阅：
 
 ```javascript
 ...
@@ -645,14 +645,14 @@ self.onDataUpdated = function() {
 ...
 ```
 
-As a result, a subscription will be created to count devices in the system and count active devices (**the widget is illustrative**):
+结果将创建用于统计系统设备总数和活跃设备数的订阅（**部件为示意**）：
 
 ![image](/images/user-guide/contribution/widgets/count-subscription.png)
 
 
-##### Subscription for attributes/telemetry
+##### 属性/遥测订阅
 
-Let's create a custom subscription to the latest **temperature** key value for active devices:
+创建针对活跃设备最新 **temperature** 键值的自定义订阅：
 ```javascript
 ...
 self.onInit = function() {
@@ -732,12 +732,13 @@ self.onDataUpdated = function() {
 ...
 ```
 
-As a result a subscription to the **temperature** and **active** keys will be created **only** for active devices (**the widget is illustrative**):
+结果将**仅**为活跃设备创建对 **temperature** 和 **active** 键的订阅（**部件为示意**）：
 
 ![image](/images/user-guide/contribution/widgets/attributes-telemetry-subscription.png)
 
-##### Subscription with PageLink
-Let's create a custom subscription to the latest **temperature** key value that is **greater** than 30 with two entities on the page:
+##### 带 PageLink 的订阅
+
+创建自定义订阅：获取 **temperature** 大于 30 的设备的 **temperature** 最新值，每页显示 2 个实体：
 
 ```javascript
 ...
@@ -832,13 +833,13 @@ function subscribeForPaginatedData(pageLink) {
 ...
 ```
 
-As a result, a subscription to the **temperature** and **active** keys will be created using PageLink (**the widget is illustrative**):
+结果将使用 PageLink 创建对 **temperature** 和 **active** 键的订阅（**部件为示意**）：
 
 ![image](/images/user-guide/contribution/widgets/page-link-subscription.png)
 
-##### Subscription for telemetry time series
+##### 遥测时序订阅
 
-Let's create a custom subscription to the time-series of **temperature** key from **Thermostat T2** device:
+创建从 **Thermostat T2** 设备订阅 **temperature** 键 time-series 的自定义订阅：
 
 ```javascript
 ...
@@ -908,13 +909,13 @@ self.onDataUpdated = function() {
 ...
 ```
 
-As a result, a subscription to the **temperature** telemetry time-series will be created (**the widget is illustrative**):
+结果将创建对 **temperature** 遥测 time-series 的订阅（**部件为示意**）：
 
 ![image](/images/user-guide/contribution/widgets/timeseries-subscrition.png)
 
 
-##### Subscription for alarms
-Let’s create a custom subscription to the alarms from **thermostat** type devices
+##### 告警订阅
+Let’s 创建从 **thermostat** 类型设备订阅告警的自定义订阅：
 
 ```javascript
 ...
@@ -1000,17 +1001,17 @@ self.onDataUpdated = function() {
 ...
 ```
 
-As a result, a subscription to the thermostat's alarms will be created (**the widget is illustrative**):
+结果将创建对 thermostat 告警的订阅（**部件为示意**）：
 
 ![image](/images/user-guide/contribution/widgets/alarm-subscription.png)
 
-##### Subscription with post-processing
+##### 带后处理的订阅
 
-Custom subscription supports the ability to post-process incoming data. Next example will be based on [Subscription for attributes/telemetry](#subscription-for-attributestelemetry)
+自定义订阅支持对传入数据进行后处理。以下示例基于 [属性/遥测订阅](#subscription-for-attributestelemetry)。
 
-Sometimes there is a need to provide the user with the ability to modify the incoming data. Imagine the following situation: a device sends weight telemetry in kilograms, but we also want to give the user the ability to convert this value. In this case, we could use the post-processing feature.
+有时需要允许用户修改传入数据。例如：设备以千克发送重量遥测，但希望用户能转换该值，此时可使用后处理功能。
 
-First of all, we need to create a custom setting schema that will contain user's function that will convert weight telemetry. We will use a simple schema that contains JavaScript field:
+首先需创建包含用户转换重量遥测函数的自定义 setting schema。使用包含 JavaScript 字段的简单 schema：
 ```
 {
     "schema":{
@@ -1033,7 +1034,7 @@ First of all, we need to create a custom setting schema that will contain user's
 ```
 ![image](/images/user-guide/contribution/widgets/post-processing-function.png)
 
-Now let's create a custom subscription. For clarity, we will add two fields: one contains the original value and the second one contains the processed value:
+接下来创建自定义订阅。为清晰起见，添加两个字段：一个包含原始值，另一个包含处理后的值：
 ```javascript
 ...
 self.onInit = function() {
@@ -1120,8 +1121,8 @@ self.onDataUpdated = function() {
 }
 ...
 ```
-The subscription is ready now let's convert weight telemetry from kilograms into grams:
+订阅已就绪，现将重量遥测从千克转换为克：
 ![image](/images/user-guide/contribution/widgets/post-processing-function-example.png)
 ![image](/images/user-guide/contribution/widgets/post-processing-subscription.png)
 
-As you can see, despite subscribing to the same key twice, the output shows different values because one of them was additionally transformed using the post-processing function.
+尽管对同一 key 订阅了两次，输出仍显示不同值，因为其中一个经过了后处理函数的转换。

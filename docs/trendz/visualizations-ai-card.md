@@ -3,37 +3,38 @@ layout: docwithnav-trendz
 assignees:
 - vparomskiy
 title: AI Card
+description: Trendz AI Card 视图类型
 ---
 
 * TOC
 {:toc}
 
-The AI Card provides a comprehensive view of cumulative telemetry data over a selected time range, enriched with forecasting and an AI-generated summary. This visualization is ideal for monitoring energy consumption, sales metrics, equipment performance, or any cumulative measurements where understanding both historical trends and future projections is critical.
+AI Card在选择时间范围内展示累计telemetry数据全貌，包含预测和AI生成的摘要。适用于监测能耗、销售指标、设备性能或任何需要同时理解历史趋势与未来预测的累计指标。
 
-Key Features:
-* **Cumulative Telemetry:** The chart displays cumulative values, where each data point represents the sum of the current and all previous readings within the selected period.
-* **Forecasting:** The card includes a predicted trend for the upcoming period, helping you anticipate future values based on historical patterns.
-* **AI Summary:** An automatically generated interpretation of the data provides quick insights without manual analysis.
+主要特性：
+* **Cumulative Telemetry：** chart展示累计值，每个数据点代表所选 period 内当前及之前所有读数的总和。
+* **Forecasting：** 卡片包含下一 period 的预测趋势，基于历史模式预判未来数值。
+* **AI Summary：** 自动生成的数据解读，无需手工分析即可获得洞察。
 
 ## Base AI Card
 
-Follow these steps to create a Base AI Card:
+按以下步骤创建Base AI Card：
 
-**Step 1: Select Your Telemetry Field.** Choose the specific telemetry field you wish to analyze (e.g., energy consumption, temperature, sales volume).
+**Step 1: 选择Telemetry字段。** 选择要分析的telemetry字段（如能耗、温度、销量）。
 
-**Step 2: Configure the Value Column.** Drag and drop your selected telemetry field into the Value column.
+**Step 2: 配置Value列。** 将所选telemetry字段拖放到Value列。
 
-**Step 3: Choose Your Time Range.** Select the desired time range for analysis. The system uses this range to determine what data to display and what period to predict. *Example:* If today is October 27th and you select the *This Month* time range, the chart will show real data for the first 27 days and a prediction for the remaining 4 days (October 28th, 29th, 30th, and 31st).
+**Step 3: 选择时间范围。** 选择分析的时间范围。系统据此确定展示的数据和预测 period。*示例：* 若今天是10月27日且选择*This Month*，chart将显示前27天的真实数据及剩余4天（10月28–31日）的预测。
 
-**Step 4: Build the Report.** Once your telemetry and time range are configured, click the Build Report button to generate the card.
+**Step 4: Build the Report。** 配置好telemetry和时间范围后，点击Build Report按钮生成卡片。
 
-The AI Card presents the next key elements (numbered in the screenshot):
-1. **Current Cumulative Value:** The total cumulative value for the selected time range, including the predicted data. This value is color-coded based on performance thresholds
-2. **Difference from Previous Period:** Shows both the absolute change and percentage difference of the Current Cumulative Value compared to the equivalent previous period.
-3. **Historical Data (Solid Line):** Represents actual cumulative telemetry data recorded up to the current day.
-4. **Predicted Data (Dashed Line):** Extends past the current date to show the forecasted trend for the remainder of your selected period.
-5. **Previous Period Trend Area (Shaded Region):** Displays the cumulative trend from the previous equivalent period, providing a visual baseline for comparison against current data
-6. **AI Summary:** An automatically generated interpretation based on analysis of the previous period, current data, and predictions. The summary is created using your selected AI prompt.
+AI Card包含以下关键元素（截图中编号）：
+1. **Current Cumulative Value：** 所选时间范围内的总累计值（含预测数据）。根据性能阈值着色
+2. **Difference from Previous Period：** 与上一等价 period 相比，当前累计值的绝对变化和百分比变化
+3. **Historical Data（实线）：** 截至当日的实际累计telemetry数据
+4. **Predicted Data（虚线）：** 超出当前日期，展示所选 period 剩余部分的预测趋势
+5. **Previous Period Trend Area（阴影区）：** 上一等价 period 的累计趋势，作为与当前数据对比的视觉基线
+6. **AI Summary：** 基于上一 period、当前数据和预测自动生成的解读。使用所选AI prompt生成。
 ![image](/images/trendz/base-ai-card.png)
 
 ## AI Card Configuration
@@ -42,64 +43,64 @@ The AI Card presents the next key elements (numbered in the screenshot):
 
 **Prediction Method**
 
-The AI Card uses **Fourier Transformation** as the default prediction method, but you can easily switch to alternative approaches based on your data characteristics.
+AI Card默认使用**Fourier Transformation**作为预测方法，可根据数据特性切换为其他方法。
 
-To change the prediction method:
-1. Click on the telemetry field in the Value column to open settings
-2. Navigate to the Prediction section
-3. Select your desired method from the available options
+修改预测方法：
+1. 点击Value列中的telemetry字段打开settings
+2. 进入Prediction区域
+3. 从可用选项中选择所需方法
    
 ![image](/images/trendz/ai-card-prediction.png)
 
 **Prediction Time Range**
 
-The AI Card's primary goal is to provide complete analysis (historical plus predicted data) for a specific period.
+AI Card的主要目标是为特定 period 提供完整分析（历史数据+预测数据）。
 
-We recommend using predefined ranges such as *This Month* or *This Year* to ensure the combined real and predicted data covers a meaningful, easy-to-interpret period. But you can select any custom time range. 
-The system generates predictions specifically for all dates within that range that fall after the current timestamp.
+建议使用预定义范围如*This Month*或*This Year*，以便真实数据与预测数据覆盖易于解读的 period。也可选择任意自定义时间范围。
+系统仅对当前时间戳之后、该范围内的日期生成预测。
 
-Example Scenarios:
-* **This Month range:** Combines actual data from the start of the month through today with predictions for the remaining days
-* **Custom range (Oct 1 - Nov 15):** If today is October 27th, shows actual data for Oct 1-27 and predictions for Oct 28 - Nov 15
+示例场景：
+* **This Month范围：** 从月初到当天的真实数据，加上剩余天数的预测
+* **自定义范围（10月1日–11月15日）：** 若今天为10月27日，显示10月1–27日的真实数据和10月28日–11月15日的预测
 
 ### AI Summary Configuration
 
-The AI Summary feature provides automatically generated interpretation of your cumulative telemetry data and trends. You control both the feature's visibility and the analysis approach.
+AI Summary根据累计telemetry数据和趋势自动生成解读。可控制其可见性和分析方式。
 
-If you prefer not to use AI features on the card:
+若不希望卡片使用AI功能：
 
-1. Navigate to **Chart settings → AI Assistant menu**
-2. Uncheck **Show AI summary**
+1. 进入**Chart settings → AI Assistant菜单**
+2. 取消勾选**Show AI summary**
 
-The AI prompt determines the focus and content of your generated summary, so you can select the prompt that in the best way interprets your data:
-1. Go to **Chart settings → AI Assistant menu**
-2. Select your desired prompt from the **Prompt** dropdown
+AI prompt决定生成摘要的重点和内容，因此可选最能解读数据的prompt：
+1. 进入**Chart settings → AI Assistant菜单**
+2. 从**Prompt**下拉选择所需prompt
 
-You can create custom prompts tailored to your specific use cases. Learn more in the [Trendz AI Prompts Overview](/docs/trendz/ai-assistance-prompts)
+可创建针对用例的自定义prompt。详见[Trendz AI Prompts Overview](/docs/trendz/ai-assistance-prompts)
 
 ![image](/images/trendz/ai-card-summary.png)
 
 ### Value Color Threshold Logic
 
-The AI Card uses color-coding to provide immediate visual feedback on the current cumulative value's performance relative to the previous period.
+AI Card使用颜色编码对当前累计值相对上一 period 的表现提供即时视觉反馈。
 
-The current cumulative value displayed at the top of the card changes color based on the magnitude of change compared to the previous period:
+卡片顶部的当前累计值根据与上一 period 相比的变化幅度着色：
 
-* **Blue (Normal Performance):** The value appears in blue when the absolute percentage change is within the threshold range (10% by default). This indicates stable, expected performance.
+* **Blue（正常表现）：** 当绝对百分比变化在阈值范围内（默认10%）时显示蓝色，表示稳定、符合预期。
 
 ![image](/images/trendz/ai-card-threshold-normal.png)
 
-* **Red (Significant Deviation):** The value appears in red when the absolute percentage change exceeds the threshold (more than 10% by default). This signals a significant deviation or performance shift requiring attention.
+* **Red（显著偏离）：** 当绝对百分比变化超过阈值（默认>10%）时显示红色，提示需要关注的显著偏离或表现变化。
 
 ![image](/images/trendz/ai-card-threshold-deviation.png)
 
 **Customizing the Threshold**
 
-You can adjust the sensitivity of the color-coding system through the **Value Color Logic** setting:
-* Default: Uses the standard 10% threshold for all color calculations.
-* Custom: Allows you to set a specific threshold percentage that matches your performance monitoring needs.
-  * Example: Set to 5% for more sensitive deviation alerts
-  * Example: Set to 20% for less frequent alerts on larger changes only
-* Unset: Disables color-coding entirely. The current cumulative value displays without color highlighting, regardless of the percentage difference.
+可通过**Value Color Logic**设置调整颜色编码的敏感度：
+* Default：使用标准10%阈值进行所有颜色计算
+* Custom：设置符合监测需求的特定阈值百分比
+  * 示例：设为5%以获得更敏感的偏离告警
+  * 示例：设为20%以仅在较大变化时告警
+* Unset：完全禁用颜色编码。无论百分比差值如何，当前累计值均不以颜色高亮显示。
 
 ![image](/images/trendz/ai-card-threshold-config.png)

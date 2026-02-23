@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
   - vparomskiy
-title: Analyze building energy usage and emissions tracking
-description: How to optimize energy usage in the building and reduce carbon emissions
+title: 建筑能耗与排放分析追踪
+description: 优化建筑能耗并降低碳排放
 
 energy-analytic-dashboard:
   0:
@@ -102,46 +102,46 @@ building_energy_dashboard:
 
 ## Introduction
 
-In today's competitive business landscape, companies are always looking for ways to reduce costs, improve their bottom line and implement sustainable business practices.
-One of the most significant expenses for many businesses is energy consumption, particularly those that operate out of large buildings.
-However, without accurate data on energy usage, identifying areas for improvement can be challenging. This includes tracking elements such as carbon emission accounting, an increasingly important aspect of sustainable operations.
-In this article, we will describe how to gain insights into energy usage patterns, identify areas for improvement, and implement measures to reduce costs, improve sustainability, 
-and integrate carbon emission accounting into everyday business practices.
+当今竞争环境中，企业持续寻求降低成本、提高利润并践行可持续经营。
+对许多企业而言，能源消耗是主要支出之一，尤其是大型建筑运营。
+然而没有准确的能耗数据，很难找到改进空间。这包括碳核算等日益重要的可持续运营要素。
+本文将说明如何获取能耗模式洞察、找到改进点，并通过措施降低成本、提高可持续性，
+将碳核算融入日常经营。
 
-**Task definition** - create an analytic dashboard to analyze energy consumption sources in the building and identify areas for improvement.
+**任务定义** - 创建分析dashboard，分析建筑能耗来源并识别改进空间。
 
 {% include images-gallery.html imageCollection="energy-analytic-dashboard" %}
 
 ### Implementation plan
-* Create a table with energy consumption data breakdown by source (HVAC, lighting, plug loads, elevators, etc.)
-* Create similar table but with breakdown by areas inside a building (offices, meeting rooms, kitchen, storage, etc.)
-* Stacked bar chart to compare energy consumption by source.
-* Stacked bar chart to compare current and previous year with monthly breakdown.
-* Calculate carbon emissions in a building
-* Create ThingsBoard dashboard to visualize data with filtering options
+* 创建按来源（HVAC、照明、插座负载、电梯等）拆分的能耗表格
+* 创建按建筑内区域（办公室、会议室、厨房、仓储等）拆分的类似表格
+* stacked bar chart对比按来源的能耗
+* stacked bar chart 对比当月与上月、按月拆分
+* 计算建筑碳排
+* 创建带过滤选项的ThingsBoard dashboard以可视化数据
 
 ## Getting started:
 
 ### Prerequisites
-Energy meters already installed in the building and connected to ThingsBoard via MQTT API. To simplify data aggregation and analysis, each meter has 2 attributes:
-* `sourceType` - name of energy consumption source (HVAC, lighting, plug loads, elevators, etc.). There are multiple meters with the same source.
-* `area` - name of the area where it is installed  (office, meeting room, hall kitchen, etc.). There are multiple meters in the area.
+建筑内已安装能量表并通过MQTT API连接至ThingsBoard。为简化数据聚合和分析，每块表有2个attribute：
+* `sourceType` - 能耗来源名称（HVAC、照明、插座负载、电梯等）。同来源可有多个表
+* `area` - 安装区域（办公室、会议室、大厅、厨房等）。同区域可有多个表
 
-Energy meters has relations to the Building asset. Each building has relation to the Customer. Such relations simplify data aggregation and analysis on different levels - we can track metrics for specific building or for all buildings of specific customer.
+能量表与Building asset关联。每栋建筑与Customer关联。这些关系便于在不同层级聚合分析——可跟踪特定建筑或某customer所有建筑的指标。
 
 ### Step 1: Table with energy consumption by source
-We have many different energy consumption sources in the building. To understand energy usage structure we will compute following metrics for each consumption source type:
+建筑内有多类能耗来源。为理解能耗结构，计算各来源类型的以下指标：
 
-* Energy consumed in kWh
-* Price in USD
-* CO2 emissions in kg
+* 能耗（kWh）
+* 价格（USD）
+* CO2排放（kg）
 
-This table report should be able to show data for any building and any time range. Also user should be able to filter data by source type, area and building. Let's get started:
+该表格需支持任意建筑、任意时间范围。用户可按来源类型、区域和建筑过滤。开始配置：
 
-* Create table view in Trendz
-* Add `energyMeter.sourceType` into columns section - it allows to split readings from energy meters by source type of the meter.
-* Add `energyMeter.usageKWH` into columns section with aggregation `SUM` - this field shows total energy usage for each source.
-* Add calculated field with label **Price**, set unit to `$` and decimals to `2`. Here is a code to calculate total price for each source based on the energy price in the building:
+* 在Trendz创建table视图
+* 在columns区域添加`energyMeter.sourceType`——按表的来源类型拆分读数
+* 在columns区域添加`energyMeter.usageKWH`，聚合选`SUM`——显示各来源总能耗
+* 添加计算字段，label为**Price**，unit设为`$`，decimals为`2`。按建筑 energy price 计算各来源总价：
 
 ```javascript
 var price = uniq(building.energyPrice);
@@ -150,7 +150,7 @@ var totalUsage = sum(energyMeter.usageKWH);
 return totalUsage * price;
 ```
 
-* Add calculated field with label **CO2 emissions**, set unit to `kg CO2e` and decimals to `1`
+* 添加计算字段，label为**CO2 emissions**，unit为`kg CO2e`，decimals为`1`
 
 ```javascript
 var emissionConversionFactor = 0.21233;
@@ -159,72 +159,72 @@ var totalUsage = sum(energyMeter.usageKWH);
 return totalUsage * emissionConversionFactor;
 ```
 
-To make it easier to end users to understand the report lets sort it descending by default and add filter options:
+便于理解报告，设置默认降序排列并添加过滤：
 
-* Add `energyMeter.sourceType` into filters section
-* Add `energyMeter.area` into filters section
-* Add `building` into filters section
-* Open view settings, `General` section and configure default sorting
-  * Click on `Sort order`
-  * Enable descending sorting
-  * Sort column - `usageKWH`
-* Set default time range - this month
-* Save report with the name **Energy consumption by source**
+* 在filters区域添加`energyMeter.sourceType`
+* 在filters区域添加`energyMeter.area`
+* 在filters区域添加`building`
+* 打开view settings的`General`区域，配置默认排序
+  * 点击`Sort order`
+  * 启用降序
+  * Sort column——`usageKWH`
+* 默认时间范围——this month
+* 以名称**Energy consumption by source**保存报告
 
-Report is ready, latter we will add it to the dashboard.
+报告完成后，后续将添加到dashboard。
 
 {% include images-gallery.html imageCollection="energy-consumption-by-source-table" %}
 
 ### Step 2: Table with energy consumption by area
-Similar table report can be created, but in this case we will focus on areas instead of source types. For making that we should repeat the same steps as in the previous table report. 
-The only difference is to use `energyMeter.area` instead of `energyMeter.sourceType` field. Save view with the following name - **Energy consumption by area**. 
+可创建类似表格，但按区域而非来源类型。步骤与上一步相同。
+唯一区别是使用`energyMeter.area`替代`energyMeter.sourceType`。以名称**Energy consumption by area**保存视图。
 
 {% include images-gallery.html imageCollection="energy-consumption-by-areas-table" %}
 
 ### Step 3: Compare energy usage by source type
-Tables created in previous steps are usefull to get exact numbers about energy usage. But they are not ideal for quick compare of different consumption sources. To make it easier to compare energy usage by source type we will create a stacked bar chart.
+前两步表格适合获取精确能耗数字，但不便于快速对比不同来源。为便于按来源类型对比能耗，创建stacked bar chart。
 
-* Create bar chart in Trendz
-* Add `energyMeter.sourceType` into X-axis section
-* Add `energyMeter.usageKWH` into Y-axis section
-* Add `building` into filters section
-* Set default time range - this month
-* Open view settings, `General` section and configure default sorting
-  * Click on `Sort order`
-  * Enable descending sorting
-  * Sort column - `usageKWH`
-* Make bar chart horizontal by enabling `Horizontal Bar` checkbox in view settings
-* Save report with the name **Bar: energy use compare by sources**
+* 在Trendz创建bar chart
+* 在X-axis区域添加`energyMeter.sourceType`
+* 在Y-axis区域添加`energyMeter.usageKWH`
+* 在filters区域添加`building`
+* 默认时间范围——this month
+* 打开view settings的`General`区域，配置默认排序
+  * 点击`Sort order`
+  * 启用降序
+  * Sort column——`usageKWH`
+* 在view settings中勾选`Horizontal Bar`使bar chart水平
+* 以名称**Bar: energy use compare by sources**保存
 
-With such visualization it would be much quicker and easier understand top consumers in the system.
+该可视化可更快理解系统主要消耗来源。
 
 {% include images-gallery.html imageCollection="energy-compare-sources-bar" %}
 
 ### Step 4: Compare current and previous year energy usage with monthly breakdown
-To better understand year over year and month over month dynamic of energy usage we will create a bar chart that will show monthly consumption. Also we will split it into multiple series to compare monthly energy consumption in different years.
-Here is a description how to do that:
+为更好理解同比、环比能耗变化，创建按月展示能耗的bar chart。并按年份拆分为多个series以对比不同年份的月度能耗。
+配置如下：
 
-* Create bar chart in Trendz
-* Add `Date` field with type `MONTH` into X-axis section - it allows to split data by months
-* Add `energyMeter.usageKWH` into Y-axis section
-* Add `Date` field with type `YEAR` into Series section - it allows to split data by year
-* Add `energyMeter.sourceType` into filters section
-* Add `energyMeter.area` into filters section
-* Add `building` into filters section
-* Set default time range - last 3 years
-* Save report with the name **Bar: compare year-to-year energy usage**
+* 在Trendz创建bar chart
+* 在X-axis区域添加类型为`MONTH`的`Date`字段——按月拆分数据
+* 在Y-axis区域添加`energyMeter.usageKWH`
+* 在Series区域添加类型为`YEAR`的`Date`字段——按年拆分
+* 在filters区域添加`energyMeter.sourceType`
+* 在filters区域添加`energyMeter.area`
+* 在filters区域添加`building`
+* 默认时间范围——last 3 years
+* 以名称**Bar: compare year-to-year energy usage**保存
 
-Such visualization allows to quickly identify months with high energy consumption and compare it with previous year to understand year to year dynamic.
+该可视化便于快速定位高能耗月份，并与上年对比了解同比变化。
 
 {% include images-gallery.html imageCollection="energy-compare-time-ranges" %}
 
 
 ### Step 5: Calculate carbon emissions and show dynamic over last 6 months
-Final card should show overall CO2 footprint of the building to simplify carbon emission accounting. Showing only 1 metric is not interesting because it does not describe the whole picture. Since we work on energy usage analysis let's add additional insights to this card.
-First one would be a comparison with the previous time period. Second one would be a dynamic of carbon emissions over the last 6 months as a sparkline chart.
+最终卡片需展示建筑整体CO2 footprint以简化碳核算。单一指标不足以说明全貌。既然做能耗分析，为该卡片增加洞察：
+一是与上一时间段的对比；二是过去6个月碳排变化的小型chart。
 
-* Create `Card with line chart` view in Trendz
-* Add calculated field with label **CO2 emissions**, set unit to `kg CO2e` and decimals to `1`
+* 在Trendz创建`Card with line chart`视图
+* 添加计算字段，label为**CO2 emissions**，unit为`kg CO2e`，decimals为`1`
 
 ```javascript
 var emissionConversionFactor = 0.21233;
@@ -233,58 +233,58 @@ var totalUsage = sum(energyMeter.usageKWH);
 return totalUsage * emissionConversionFactor;
 ```
 
-* Set default time range to this month
+* 默认时间范围——this month
 
-Now we have card with CO2 emissions for the current month and with daily breakdown which would highlight abnormal behaviour and trend line. Now let's enable comparison:
+此时卡片已有当月CO2排放及日明细，可突出异常和趋势。启用对比：
 
-* Open `General` view settings 
-* Set checkbox `Enable comparison` to `true`
-* Set card title to **CO2 emissions**
-* Save view with name **Card: CO2 emissions insights**
+* 打开`General` view settings
+* 勾选`Enable comparison`为`true`
+* 卡片标题设为**CO2 emissions**
+* 以名称**Card: CO2 emissions insights**保存
 
-Now our card has comparison of CO2 emissions. Value that we see is in percent compared to the previous time period. By default, value is green if it is higher than previous period and red if it is lower. 
-But we can reverse color schema by enabling `Reverse compariosn colors` in view settings.
+卡片现在显示CO2排放对比。数值为相对上一时间段的百分比。默认：高于上一时段为绿色，低于为红色。
+可在view settings中启用`Reverse compariosn colors`反转颜色方案。
 
 {% include images-gallery.html imageCollection="co2_emission_card_with_trend" %}
 
 ### Step 6: Create energy consumption analytic dashboard in ThingsBoard
-In final step we will connect all views that we created into 1 interactive dashboard for our users. That dashboard can be shared with all our customers and it will show only data that is relevant to the user. They would be able to use filters to select buildings, 
-consumption sources and areas. We begin with adding all Trendz views that we created on one dashboard in ThingsBoard:
+最后一步将此前创建的所有视图整合到一个交互式dashboard供用户使用。该dashboard可与所有customers共享，仅显示与用户相关的数据。
+用户可使用过滤器选择建筑、能耗来源和区域。首先将所有Trendz视图添加到ThingsBoard的dashboard：
 
-* In ThingsBoard create dashboard with name **Energy consumption report**
-* In Trendz: for each widget that we created in previous steps:
-  * Click on `Share to ThingsBoard` button and copy `Add on Dashboard`.
-  * Select **Energy consumption report** dashboard.
-  * Enable **Create alias** checkbox.
-  * Select `Building` as a filter.
-* Return to ThingsBoard **Energy consumption report** dashboard and tune dashboard layout.
+* 在ThingsBoard创建名为**Energy consumption report**的dashboard
+* 在Trendz：对前几步创建的每个部件：
+  * 点击`Share to ThingsBoard`，复制`Add on Dashboard`
+  * 选择**Energy consumption report** dashboard
+  * 勾选**Create alias**
+  * Filter选择`Building`
+* 返回ThingsBoard **Energy consumption report** dashboard并调整布局
 
-Then we would create dashboard aliases that will be used to filter data in the dashboard.
+然后创建用于dashboard过滤的aliases：
 
-* Create new alias **All buildings** - this alias would hold all buildings that are visible to the user.
-  * Filter type - **Asset type**
-  * Asset type - **Building**
-* Create new alias **Selected entity** - this alias would hold an Entity that user clicked on.
-  * Filter type - **Entity from dashboard state**
-  * State entity parameter name - `selectedEntity`
+* 创建新alias **All buildings**——保存用户可见的所有建筑
+  * Filter type——**Asset type**
+  * Asset type——**Building**
+* 创建新alias **Selected entity**——保存用户点击的实体
+  * Filter type——**Entity from dashboard state**
+  * State entity parameter name——`selectedEntity`
 
-Finally, we have to add hierarchy widget that will show all buildings/floors/areas in the hotel and allow user to select specific area. Once user would click on entity - **Filtered areas** alias will refresh and load all areas for the selected entity.
-After that all Trendz widgets on the dashboard would be updated because they use **Filtered areas** alias as a datasource. As a result user will see occupancy data for the selected areas.
+最后添加用于显示所有建筑/楼层/区域的hierarchy部件，供用户选择特定区域。用户点击实体后，**Filtered areas** alias会刷新并加载所选实体的所有区域。
+之后dashboard上所有Trendz部件会更新，因其以**Filtered areas** alias为数据源。用户将看到所选区域的能耗数据。
 
-* Add ThingsBoard table widget `Cards` -> `Entities table` to the dashboard. It will show all buildings that are visible for the user.
-  * Set datasource alias to **All buildings**
-  * Latest data key - **Name**
-* Add `On row click` action for entity table widget. It will update `selectedEntity` parameter in the dashboard state.
-  * Action type - `Update current dashboard state`
-  * State entity parameter name - `selectedEntity`
-* For all Trendz widgets on the dashboard set datasource alias to `selectedEntity`.
-* Save dashboard.
+* 在dashboard添加ThingsBoard table部件`Cards` -> `Entities table`，显示用户可见的所有建筑
+  * 数据源alias设为**All buildings**
+  * Latest data key——**Name**
+* 为entity table部件添加`On row click` action，更新dashboard state中的`selectedEntity`参数
+  * Action type——`Update current dashboard state`
+  * State entity parameter name——`selectedEntity`
+* 所有dashboard上的Trendz部件的数据源alias设为`selectedEntity`
+* 保存dashboard
 
 {% include images-gallery.html imageCollection="building_energy_dashboard" %}
 
 ## Summary
-Reducing energy consumption and carbon emissions is crucial for businesses looking to improve their bottom line and sustainability. 
-To achieve this, gaining insights into energy usage patterns and identifying areas for improvement is essential. 
-By following the implementation plan outlined in this article, businesses can create an analytic dashboard to visualize their energy consumption data by source and areas inside the building, 
-compare current and previous years with monthly breakdown, and compute CO2 emissions. These steps can help businesses reduce costs, improve sustainability, 
-and contribute to a more sustainable future. By taking a proactive approach to energy consumption, businesses can position themselves for long-term success in a competitive business landscape.
+降低能耗和碳排对追求提高利润和可持续性的企业至关重要。
+为此，获取能耗模式洞察、找到改进空间必不可少。
+按本文实施计划，企业可创建分析dashboard，按建筑内来源和区域可视化能耗数据，
+按月对比当年与上年，并计算CO2排放。这些步骤有助于降低成本、提高可持续性，
+并为更可持续的未来做出贡献。以主动方式管理能耗，有助于在竞争中取得长期成功。

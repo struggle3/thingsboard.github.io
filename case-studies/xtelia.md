@@ -1,22 +1,22 @@
 ---
 layout: case-studies
-title: Smart City Parking - X-TELIA Scales Fast with ThingsBoard
+title: 智慧城市停车 - X-TELIA 借助 ThingsBoard 快速扩展
 notitle: "true"
 customTitle: "true"
-description: Discover how X-TELIA partnered with ThingsBoard to deliver a smart signage system using solar LoRaWAN™ “No Parking” signs and real-time dashboards.
+description: 了解 X-TELIA 如何与 ThingsBoard 合作，基于太阳能 LoRaWAN™「禁止停车」标牌与实时仪表盘交付智慧标牌系统。
 ---
 
 <div class="case-study-page-wrapper">
     <section class="case-study-hero">
         <div class="card">
             <div class="text">
-                <p class="category">SMART CITY</p>
-                <h1>Smart signage at scale: X-TELIA deploys LoRaWAN™ parking management with ThingsBoard</h1>
+                <p class="category">智慧城市</p>
+                <h1>规模化智慧标牌：X-TELIA 基于 ThingsBoard 部署 LoRaWAN™ 停车管理</h1>
                 <div class="image inner" style="background-image: url('/images/case-studies/x-telia.webp')">
                     <img src="/images/case-studies/x-telia.svg" title="X-TELIA" alt="X-TELIA logo" width="126" height="56">
                 </div>
-                <p>X-TELIA is a global leader in the design and manufacturing of LoRaWAN® IoT solutions. With a mission to simplify IoT deployments, X-TELIA provides end-to-end wireless solutions that include high-performance gateways, sensors, and network infrastructure. Their products are known for their carrier-grade reliability, scalability, and efficiency, supporting diverse use cases from smart cities to industrial IoT.</p>
-                <p>Their portfolio includes smart parking, street lighting, air quality monitoring, asset tracking, and other mission-critical applications. Through a unique combination of infrastructure ownership, integration capabilities, and vertical-specific expertise, X-TELIA plays a pivotal role in accelerating the adoption of IoT across Canada.</p>
+                <p>X-TELIA 是 LoRaWAN® IoT 方案设计与制造的全球领先者。以简化IoT部署为使命，X-TELIA 提供包含高性能网关、传感器与网络基础设施的端到端无线方案。其产品以运营商级可靠性、可扩展性与效率著称，支持从智慧城市到工业IoT的多种应用。</p>
+                <p>产品组合涵盖智慧停车、路灯、空气质量监测、资产追踪及其他关键应用。凭借基础设施自有、集成能力与垂直领域专长的独特结合，X-TELIA 在推动加拿大IoT普及方面扮演关键角色。</p>
             </div>
             <div class="image large" style="background-image: url('/images/case-studies/x-telia.webp')">
                 <img src="/images/case-studies/x-telia.svg" title="X-TELIA" alt="X-TELIA logo" width="126" height="56">
@@ -28,232 +28,232 @@ description: Discover how X-TELIA partnered with ThingsBoard to deliver a smart 
             <p>
                 {% include number-animation.html startNum = 1 targetNum = 976 %}K+
             </p>
-            <p>access points</p>
+            <p>接入点</p>
         </div>
         <div class="block">
             <p>
                 {% include number-animation.html startNum = 1 targetNum = 4 %}M+
             </p>
-            <p>messages/day</p>
+            <p>消息/天</p>
         </div>
         <div class="block">
             <p>
                 {% include number-animation.html startNum = 0 targetNum = 800 %}+
             </p>
-            <p>types of sensors</p>
+            <p>传感器类型</p>
         </div>
     </section>
     <section class="authored-quote">
-        <img src="/images/case-studies/eric-bourbeau.webp" title="Président fondateur & Founder and CEO" alt="Eric Bourbeau" width="658" height="424">
+        <img src="/images/case-studies/eric-bourbeau.webp" title="创始总裁兼CEO" alt="Eric Bourbeau" width="658" height="424">
         <div class="text">
             <h2>X-TELIA</h2>
-            <p class="quote">“We were looking for a robust and scalable IoT platform to help us deploy leading edge LoRaWAN™-based IoT projects. <br> We landed a contract to deploy a city-wide network of solar/wireless variable message “No Parking” signs to manage on-street parking for snow removal operations. The deadline to develop, test and deploy the overall solution was very tight and included penalties for late delivery...<a target="_blank" href="/industries/smart-buildings/?company=xtelia">read more</a></p>
+            <p class="quote">“我们正在寻找一款稳健、可扩展的物联网平台，以部署基于 LoRaWAN™ 的前沿IoT项目。<br>我们拿下一份合同，部署全市范围的太阳能/无线可变「禁止停车」标牌，用于除雪期间的路侧停车管理。从开发、测试到部署整体方案的交期非常紧，且包含延迟交付的罚则……<a target="_blank" href="/industries/smart-buildings/?company=xtelia">阅读更多</a></p>
             <p class="author">Eric Bourbeau</p>
-            <p class="title">Président fondateur & Founder and CEO</p>
+            <p class="title">创始总裁兼CEO</p>
         </div>
     </section>
     <section class="problem">
         <div class="title-block">
-            <h2>What problem did they face?</h2>
-            <p>X-TELIA secured a contract to deploy a city-wide system of solar-powered, wireless “No Parking” signs to manage on-street parking during snow removal operations. The entire solution—from network communication to control dashboards—had to be developed, tested, and deployed under a tight timeline, with financial penalties for late delivery.</p>
+            <h2>他们面临哪些问题？</h2>
+            <p>X-TELIA 拿下一份合同，部署全市范围的太阳能、无线「禁止停车」标牌系统，用于除雪期间的路侧停车管理。从网络通信到控制仪表盘，整套方案需在紧张时限内完成开发、测试与部署，延迟交付将面临经济罚则。</p>
         </div>
         <div class="cards-row">
             <div class="card">
-                <h3>Challenges</h3>
+                <h3>挑战</h3>
                 <ul>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Extremely short delivery window with contractual penalties for delays</p>
+                        <p>交付窗口极短，延迟将承担合同罚则</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Need for reliable integration between X-TELIA's LoRaWAN™ network and a robust IoT platform</p>
+                        <p>X-TELIA 的 LoRaWAN™ 网络与稳健物联网平台之间需可靠集成</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Real-time control and monitoring of dynamic “No Parking” signage</p>
+                        <p>动态「禁止停车」标牌的实时控制与监控</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Rapid development of a user-friendly dashboard interface</p>
+                        <p>用户友好的仪表盘界面快速开发</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Smooth deployment and testing of the production-ready platform</p>
+                        <p>生产就绪平台的顺利部署与测试</p>
                     </li>
                 </ul>
             </div>
             <div class="card">
-                <h3>Key results</h3>
+                <h3>主要成果</h3>
                 <ul>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Developed a robust MQTT-based protocol between X-TELIA's network and ThingsBoard</p>
+                        <p>在 X-TELIA 网络与 ThingsBoard 间建立了基于 MQTT 的稳健协议</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Designed and implemented a custom dashboard widget for controlling signage</p>
+                        <p>设计并实现了用于控制标牌的定制仪表盘部件</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Successfully deployed a ThingsBoard PE instance tailored for the use case</p>
+                        <p>成功部署针对该应用场景定制的 ThingsBoard PE 实例</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Delivered the full solution on time, avoiding any contractual penalties</p>
+                        <p>按时交付完整方案，避免任何合同罚则</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Gained confidence in the platform and team, paving the way for future projects</p>
+                        <p>对平台与团队建立信心，为后续项目铺平道路</p>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
     <section class="tb-power mb">
-        <h2>How ThingsBoard powers X-TELIA?</h2>
+        <h2>ThingsBoard 如何赋能 X-TELIA？</h2>
         <div class="block">
             <div class="text">
-                <h3>Seamless MQTT integration</h3>
-                <p>ThingsBoard engineers collaborated directly with X-TELIA’s developers to build a resilient MQTT-based communication protocol. This enabled fast, real-time data exchange between the LoRaWAN™ infrastructure and the IoT platform.</p>
+                <h3>无缝 MQTT 集成</h3>
+                <p>ThingsBoard 工程师与 X-TELIA 开发人员直接协作，构建了基于 MQTT 的 resilient 通信协议，实现 LoRaWAN™ 基础设施与物联网平台之间的快速、实时数据交换。</p>
             </div>
-            <img src="/images/case-studies/x-telia-1.webp" title="Seamless MQTT integration" alt="Seamless MQTT integration" width="450" height="240">
+            <img src="/images/case-studies/x-telia-1.webp" title="无缝 MQTT 集成" alt="无缝 MQTT 集成" width="450" height="240">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Custom widget development</h3>
-                <p>The ThingsBoard team created a purpose-built dashboard widget for intuitive signage control. This allowed operators to activate or deactivate “No Parking” signs across the city with a single click and full visibility.</p>
+                <h3>定制部件开发</h3>
+                <p>ThingsBoard 团队为直观的标牌控制开发了专用仪表盘部件。操作人员可一键在全市范围内启用或关闭「禁止停车」标牌，并拥有完整可见性。</p>
             </div>
-            <img src="/images/case-studies/x-telia-2.webp" title="Custom widget development" alt="Custom widget development" width="450" height="240">
+            <img src="/images/case-studies/x-telia-2.webp" title="定制部件开发" alt="定制部件开发" width="450" height="240">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Turnkey PE instance deployment</h3>
-                <p>ThingsBoard Professional Edition was deployed under tight deadlines with production-grade reliability. Its scalable architecture allowed rapid deployment without compromising stability or performance.</p>
+                <h3>开箱即用的 PE 实例部署</h3>
+                <p>ThingsBoard 专业版在紧张时限内以生产级可靠性完成部署。其可扩展架构在保证稳定与性能的前提下支持快速部署。</p>
             </div>
-            <img src="/images/case-studies/x-telia-3.webp" title="Turnkey PE instance deployment" alt="Turnkey PE instance deployment" width="450" height="240">
+            <img src="/images/case-studies/x-telia-3.webp" title="开箱即用的 PE 实例部署" alt="开箱即用的 PE 实例部署" width="450" height="240">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Expert technical support</h3>
-                <p>Throughout the project, the ThingsBoard team provided high-touch technical assistance. Their dedication and close cooperation were key to the successful and timely launch of the solution.</p>
+                <h3>专家级技术支持</h3>
+                <p>项目全程，ThingsBoard 团队提供高触达的技术支持。其专注与紧密协作是方案成功、按时上线的重要保障。</p>
             </div>
-            <img src="/images/case-studies/x-telia-4.webp" title="Expert technical support" alt="Expert technical support" width="450" height="240">
+            <img src="/images/case-studies/x-telia-4.webp" title="专家级技术支持" alt="专家级技术支持" width="450" height="240">
         </div>
     </section>
-    {% include contact-us-banner.liquid linkLabel='Use cases' link='/iot-use-cases/' %}
+    {% include contact-us-banner.liquid linkLabel='应用场景' link='/iot-use-cases/' %}
     <section class="tb-help">
-        <h2>How ThingsBoard helps smart city solutions improve operations with IoT?</h2>
+        <h2>ThingsBoard 如何帮助智慧城市方案用IoT改善运营？</h2>
         <div class="block">
             <div class="text">
-                <h3>Smart street lighting</h3>
-                <p>Street lighting is one of the most energy-consuming services in a city. Smart lighting systems connected via ThingsBoard can reduce energy consumption, maintenance costs, and carbon emissions while improving public safety.</p>
-                <p>How It Works:</p>
+                <h3>智慧路灯</h3>
+                <p>路灯是城市中能耗最高的服务之一。通过 ThingsBoard 连接的智慧照明系统可降低能耗、维护成本与碳排放，同时提升公共安全。</p>
+                <p>运作方式：</p>
                 <ul>
-                    <li><p>IoT-enabled streetlights report status, brightness, energy usage, and faults.</p></li>
-                    <li><p>Light levels are automatically adjusted based on ambient light, schedules, or motion detection.</p></li>
-                    <li><p>Faulty units trigger automatic alerts to maintenance crews.</p></li>
+                    <li><p>支持IoT的路灯上报状态、亮度、能耗与故障。</p></li>
+                    <li><p>根据环境光、计划或运动检测自动调节亮度。</p></li>
+                    <li><p>故障单元自动向维护人员告警。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/maps-widgets.webp" title="Thingsboard maps widgets widget" alt="Thingsboard maps widgets widget" width="776" height="776">
-                <img src="/images/case-studies/hp-scada-energy.webp" title="Thingsboard HP SCADA energy widgets" alt="Thingsboard HP SCADA energy widgets" width="388" height="388">
+                <img src="/images/case-studies/maps-widgets.webp" title="ThingsBoard 地图部件" alt="ThingsBoard 地图部件" width="776" height="776">
+                <img src="/images/case-studies/hp-scada-energy.webp" title="ThingsBoard HP SCADA 能源部件" alt="ThingsBoard HP SCADA 能源部件" width="388" height="388">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Smart waste management</h3>
-                <p>Efficient waste collection is critical to sanitation, fuel savings, and environmental health. ThingsBoard helps cities deploy smart bins that signal when they’re full and optimize collection routes.</p>
-                <p>How It Works:</p>
+                <h3>智慧垃圾管理</h3>
+                <p>高效的垃圾清运对卫生、节油和环境卫生至关重要。ThingsBoard 帮助城市部署智慧垃圾桶，在满溢时发出信号并优化清运路线。</p>
+                <p>运作方式：</p>
                 <ul>
-                    <li><p>Ultrasonic or weight sensors detect bin fill levels.</p></li>
-                    <li><p>ThingsBoard triggers alerts when bins reach thresholds.</p></li>
-                    <li><p>Integrates with route optimization software to improve collection efficiency.</p></li>
+                    <li><p>超声波或重量传感器检测桶内填充量。</p></li>
+                    <li><p>达到阈值时 ThingsBoard 触发告警。</p></li>
+                    <li><p>与路线优化软件集成，提升清运效率。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/time-series-chart.webp" title="Thingsboard time series chart widget" alt="Thingsboard time series chart widget" width="776" height="776">
-                <img src="/images/case-studies/hp-scada-energy.webp" title="Thingsboard HP SCADA energy widgets" alt="Thingsboard HP SCADA energy widgets" width="388" height="388">
+                <img src="/images/case-studies/time-series-chart.webp" title="ThingsBoard 时序图部件" alt="ThingsBoard 时序图部件" width="776" height="776">
+                <img src="/images/case-studies/hp-scada-energy.webp" title="ThingsBoard HP SCADA 能源部件" alt="ThingsBoard HP SCADA 能源部件" width="388" height="388">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Traffic & Parking Management</h3>
-                <p>Urban mobility depends on efficient traffic and parking systems. ThingsBoard supports real-time tracking of vehicle movement, traffic density, and parking space availability.</p>
-                <p>How It Works:</p>
+                <h3>交通与停车管理</h3>
+                <p>城市出行依赖高效的交通与停车系统。ThingsBoard 支持对车辆移动、交通密度与停车位可用性的实时追踪。</p>
+                <p>运作方式：</p>
                 <ul>
-                    <li><p>Connect road sensors, ANPR cameras, and parking spot detectors.</p></li>
-                    <li><p>Monitor live traffic flow, parking occupancy, and violations.</p></li>
-                    <li><p>Use real-time data to optimize signals, guide drivers, and reduce congestion.</p></li>
+                    <li><p>连接道路传感器、ANPR 摄像头与停车位检测器。</p></li>
+                    <li><p>监控实时交通流、停车占用与违规。</p></li>
+                    <li><p>用实时数据优化信号、引导驾驶员、缓解拥堵。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/entities-table-3.webp" title="Thingsboard entities table widget" alt="Thingsboard entities table widget" width="776" height="776">
-                <img src="/images/case-studies/parking-status-widget.webp" title="Thingsboard parking-status-widget" alt="Thingsboard parking-status-widget" width="582" height="582">
+                <img src="/images/case-studies/entities-table-3.webp" title="ThingsBoard 实体表部件" alt="ThingsBoard 实体表部件" width="776" height="776">
+                <img src="/images/case-studies/parking-status-widget.webp" title="ThingsBoard 停车状态部件" alt="ThingsBoard 停车状态部件" width="582" height="582">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Environmental & air quality monitoring</h3>
-                <p>To create healthier urban spaces, cities must monitor air quality, noise, and weather conditions. ThingsBoard provides real-time visibility and long-term trend analysis for environmental health.</p>
-                <p>How It Works:</p>
+                <h3>环境与空气质量监测</h3>
+                <p>为营造更健康的城市空间，城市需监测空气质量、噪声与气象。ThingsBoard 为环境健康提供实时可见性与长期趋势分析。</p>
+                <p>运作方式：</p>
                 <ul>
-                    <li><p>IoT stations monitor CO₂, PM2.5, NO₂, temperature, humidity, and noise.</p></li>
-                    <li><p>Dashboards display live readings and issue alerts for dangerous thresholds.</p></li>
-                    <li><p>City planners use historical data for regulatory compliance and policy planning.</p></li>
+                    <li><p>IoT 站点监测 CO₂、PM2.5、NO₂、温湿度与噪声。</p></li>
+                    <li><p>仪表盘展示实时读数并对危险阈值告警。</p></li>
+                    <li><p>城市规划者用历史数据满足合规与政策规划。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/digital_gauges.webp" title="Thingsboard digital gauges widgets" alt="Thingsboard digital gauges widgets" width="776" height="776">
-                <img src="/images/case-studies/hp-curcuit-breaker.webp" title="Thingsboard HP curcuit breaker widget" alt="Thingsboard HP curcuit breaker widget" width="582" height="582">
+                <img src="/images/case-studies/digital_gauges.webp" title="ThingsBoard 数字表盘部件" alt="ThingsBoard 数字表盘部件" width="776" height="776">
+                <img src="/images/case-studies/hp-curcuit-breaker.webp" title="ThingsBoard HP 断路器部件" alt="ThingsBoard HP 断路器部件" width="582" height="582">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Smart water & utility management</h3>
-                <p>Water is a critical resource. ThingsBoard supports remote monitoring of water infrastructure, helping cities reduce leakage, improve billing accuracy, and conserve resources.</p>
-                <p>How It Works:</p>
+                <h3>智慧水务与公用事业管理</h3>
+                <p>水是关键资源。ThingsBoard 支持对水务基础设施的远程监控，帮助城市减少泄漏、提高计费准确性并节约资源。</p>
+                <p>运作方式：</p>
                 <ul>
-                    <li><p>IoT meters track flow rate, pressure, consumption, and quality.</p></li>
-                    <li><p>Rule Engine detects anomalies such as pipe bursts, backflow, or tampering.</p></li>
-                    <li><p>SCADA dashboards allow operators to control pumps and valves remotely.</p></li>
+                    <li><p>IoT 表计追踪流量、压力、用量与水质。</p></li>
+                    <li><p>规则引擎检测管道爆裂、回流或篡改等异常。</p></li>
+                    <li><p>SCADA 仪表盘支持运维人员远程控制泵与阀门。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/bar-chart.webp" title="Thingsboard bar chart widget" alt="Thingsboard bar chart widget" width="776" height="776">
-                <img src="/images/case-studies/hp-centrifugal-pump.webp" title="Thingsboard HP centrifugal-pump widget" alt="Thingsboard HP centrifugal-pump widget" width="776" height="776">
+                <img src="/images/case-studies/bar-chart.webp" title="ThingsBoard 柱状图部件" alt="ThingsBoard 柱状图部件" width="776" height="776">
+                <img src="/images/case-studies/hp-centrifugal-pump.webp" title="ThingsBoard HP 离心泵部件" alt="ThingsBoard HP 离心泵部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Public safety & emergency response</h3>
-                <p>Cities need real-time situational awareness for emergencies, disasters, and security threats. ThingsBoard enables centralized alerting and device coordination for public safety operations.</p>
-                <p>How It Works:</p>
+                <h3>公共安全与应急响应</h3>
+                <p>城市需要对紧急事件、灾害与安全威胁的实时态势感知。ThingsBoard 为公共安全运营提供集中告警与设备协同。</p>
+                <p>运作方式：</p>
                 <ul>
-                    <li><p>Connect fire sensors, panic buttons, CCTV, public alarms.</p></li>
-                    <li><p>Real-time alerts are sent to emergency teams.</p></li>
-                    <li><p>Visual dashboards support faster decision-making during incidents.</p></li>
+                    <li><p>连接火灾传感器、紧急按钮、CCTV、公共报警。</p></li>
+                    <li><p>实时告警发送至应急队伍。</p></li>
+                    <li><p>可视化仪表盘支持事件中更快决策。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/notification-widget.webp" title="Thingsboard notification widget" alt="Thingsboard notification widget" width="776" height="776">
-                <img src="/images/case-studies/map-widget.webp" title="Thingsboard map widget" alt="Thingsboard map widget" width="582" height="582">
+                <img src="/images/case-studies/notification-widget.webp" title="ThingsBoard 通知部件" alt="ThingsBoard 通知部件" width="776" height="776">
+                <img src="/images/case-studies/map-widget.webp" title="ThingsBoard 地图部件" alt="ThingsBoard 地图部件" width="582" height="582">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Citizen & building engagement</h3>
-                <p>Cities can offer interactive dashboards and services to residents, businesses, and building operators—built on the same ThingsBoard backend.</p>
-                <p>How It Works:</p>
+                <h3>市民与楼宇参与</h3>
+                <p>城市可基于同一 ThingsBoard 后端，为居民、企业与楼宇运营方提供交互式仪表盘与服务。</p>
+                <p>运作方式：</p>
                 <ul>
-                    <li><p>Each building or stakeholder can access custom dashboards with relevant data.</p></li>
-                    <li><p>Citizens get real-time updates on air quality, energy use, or transit delays.</p></li>
-                    <li><p>Multi-tenant support keeps data isolated and secure.</p></li>
+                    <li><p>每栋楼或干系人可访问包含相关数据的定制仪表盘。</p></li>
+                    <li><p>市民获取空气质量、能耗或交通延误的实时更新。</p></li>
+                    <li><p>多租户支持保证数据隔离与安全。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/hierarchy-widget.webp" title="Thingsboard hierarchy widget" alt="Thingsboard hierarchy widget" width="776" height="776">
-                <img src="/images/case-studies/roles-table.webp" title="Thingsboard roles table widget" alt="Thingsboard roles table widget" width="776" height="776">
+                <img src="/images/case-studies/hierarchy-widget.webp" title="ThingsBoard 层级部件" alt="ThingsBoard 层级部件" width="776" height="776">
+                <img src="/images/case-studies/roles-table.webp" title="ThingsBoard 角色表部件" alt="ThingsBoard 角色表部件" width="776" height="776">
             </div>
         </div>
         {% include services-banner.liquid %}
@@ -267,7 +267,7 @@ description: Discover how X-TELIA partnered with ThingsBoard to deliver a smart 
                 </div>
             </div>
         </div>
-        <p>Real stories, real impact — share your experience with ThingsBoard!</p>
-        <a id="CaseStudy_Xtelia_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">Contact us</a>
+        <p>真实故事，真实影响——分享您与 ThingsBoard 的经验！</p>
+        <a id="CaseStudy_Xtelia_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">联系我们</a>
     </section>
 </div>

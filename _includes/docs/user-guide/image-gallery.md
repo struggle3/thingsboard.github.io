@@ -4,9 +4,9 @@
 {% assign sinceVersion = "3.6.2" %}
 {% include templates/since.md %}
 
-The Image gallery serves as a centralized repository for storing and managing images. 
-This is an important resource for improving the visual appeal and functionality of widgets, dashboards, devices, and asset profiles in a mobile application. 
-Users can easily upload, organize, and select images to customize their interface and user experience, ensuring an integrity and branded look across the platform.
+Image gallery 作为集中存储和管理图片的仓库。
+是提升移动应用中部件、仪表板、设备和资产配置文件视觉效果与功能的重要资源。
+用户可方便地上传、整理和选择图片以定制界面与体验，确保平台整体风格统一、品牌一致。
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
 ![image](/images/user-guide/image-gallery/image-gallery-pe.png)
@@ -16,155 +16,155 @@ Users can easily upload, organize, and select images to customize their interfac
 {% endif %}
 
 {% unless docsPrefix contains 'paas/' %}
-## Cache configuration
+## 缓存配置
 
-Our image API uses *ETags* to optimize caching, ensuring images are only downloaded when they have changed, thus saving bandwidth.
-By default, we do not apply Cache-Control headers, relying on the efficiency of ETags.
-However, you can customize caching behavior through environment variables: 
+图片 API 使用 *ETags* 优化缓存，仅在图片发生变化时重新下载，从而节省带宽。
+默认不设置 Cache-Control 头，依赖 ETags 的效率。
+可通过以下环境变量自定义缓存行为： 
 
-- *CACHE_SPECS_IMAGE_ETAGS_TTL* - image ETags cache TTL. The default value is 44640 minutes, after which the cache will be deleted;
+- *CACHE_SPECS_IMAGE_ETAGS_TTL* - 图片 ETags 缓存 TTL。默认 44640 分钟，此后缓存将被删除；
 
-- *CACHE_SPECS_IMAGE_ETAGS_MAX_SIZE* - maximum cache size, in bytes. 0 means the cache is disabled;
+- *CACHE_SPECS_IMAGE_ETAGS_MAX_SIZE* - 最大缓存大小（字节）。0 表示禁用缓存；
 
-- *CACHE_SPECS_IMAGE_SYSTEM_BROWSER_TTL* - browser cache TTL for system images, in minutes. Default value is 0 minutes - the cache is disabled;
+- *CACHE_SPECS_IMAGE_SYSTEM_BROWSER_TTL* - 系统图片浏览器缓存 TTL（分钟）。默认 0 分钟，表示禁用缓存；
 
-- *CACHE_SPECS_IMAGE_TENANT_BROWSER_TTL* - browser cache TTL for tenant images, in minutes. Default value is 0 minutes - the cache is disabled.
+- *CACHE_SPECS_IMAGE_TENANT_BROWSER_TTL* - 租户图片浏览器缓存 TTL（分钟）。默认 0 分钟，表示禁用缓存。
 
-These configurations control the Time To Live (TTL) for your system and tenant images in a user's browser cache.
-Setting a longer TTL improves load time for repeated visits and reduces server load, while a shorter TTL ensures users receive more frequent content updates.
-Adjust these settings based on the update frequency of your images. How to do it, read [here](/docs/user-guide/install/{{docsPrefix}}how-to-change-config/).
+这些配置控制系统和租户图片在用户浏览器缓存中的生存时间 (TTL)。
+较长的 TTL 可提高重复访问的加载速度并降低服务器负载，较短的 TTL 可让用户更频繁获得内容更新。
+可根据图片更新频率调整。具体方法见[此处](/docs/user-guide/install/{{docsPrefix}}how-to-change-config/)。
 
-Additionally, the system administrator can set restrictions on the maximum size of a single image and the total size of images by configuring [tenant profiles](/docs/{{docsPrefix}}user-guide/tenant-profiles/#files-limits).
-Values are specified in bytes.
+此外，系统管理员可通过配置[租户配置文件](/docs/{{docsPrefix}}user-guide/tenant-profiles/#files-limits)限制单张图片最大尺寸及图片总大小。
+单位为字节。
 {% endunless %}
 
-## Add image
+## 添加图片
 
-Add your images to the Image gallery serves in [image file format](#upload-image) (PNG, JPEG, GIF, etc.) or [JSON file format](#import-image-from-json).
+可按[图片文件格式](#upload-image)（PNG、JPEG、GIF 等）或 [JSON 文件格式](#import-image-from-json) 将图片添加到 Image gallery。
 
-### Upload image
+### 上传图片
 
-To upload new image in **image file format**, follow these steps:
+以**图片文件格式**上传新图片，请按以下步骤操作：
 
 {% include images-gallery.html imageCollection="upload-image-1" showListImageTitles="true" %}
 
-### Import image from JSON
+### 从 JSON 导入图片
 
-To import your images in **JSON file format**, follow these steps:
+以 **JSON 文件格式**导入图片，请按以下步骤操作：
 
 {% include images-gallery.html imageCollection="upload-image-2" showListImageTitles="true" %}
 
-## System images
+## 系统图片
 
-The image gallery contains system images that you can also use to design your dashboards, widgets, etc. By default, only your images are displayed in the image list.
-To display your and system images, enable the Enable System Images option.
+Image gallery 包含系统图片，也可用于设计仪表板、部件等。默认情况下，图片列表中仅显示您的图片。
+要同时显示您和系统图片，请启用 Enable System Images 选项。
 
 {% include images-gallery.html imageCollection="include-system-images" %}
 
 {% capture difference %}
-**Please note:**
-Only the system administrator can delete, rename or update system images.
+**请注意：**
+仅系统管理员可删除、重命名或更新系统图片。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Change the image view mode
+## 切换图片视图模式
 
-You can view images in one of two modes: list or grid.
-To change the image viewing mode, simply select the mode that suits you in the top left corner of the Image gallery window.
+可在列表或网格两种模式下查看图片。
+要切换视图模式，在 Image gallery 窗口左上角选择所需模式即可。
 
 {% include images-gallery.html imageCollection="image-viewing-mode" %}
 
-## Image operations
+## 图片操作
 
-You can [download](#download-image), [export to JSON](#export-image-to-json), [edit](#edit-image), [embed](#embed-image), and [delete](#delete-image) image using the corresponding icon opposite the image's name.
-Let's take a closer look at each operation.
+可通过图片名称旁对应图标进行[下载](#download-image)、[导出为 JSON](#export-image-to-json)、[编辑](#edit-image)、[嵌入](#embed-image)和[删除](#delete-image)操作。
+以下逐项说明。
 
-### Download image
+### 下载图片
 
-Downloading an image in image file format can be done in two ways, depending on the selected image viewing format:
+根据当前图片查看格式，可通过两种方式下载图片文件：
 
-- If you're using the list view of images, click the "Download image" icon next to the image name that you want to export.
-- If you're using the grid view, hover your mouse pointer over the image you want to export and click the "Download image" icon.
+- 使用列表视图时，点击要导出的图片名称旁的 "Download image" 图标。
+- 使用网格视图时，将鼠标悬停在要导出的图片上，点击 "Download image" 图标。
 
-The image in image file format will be saved to your PC.
+图片将以图片文件格式保存到您的电脑。
 
 {% include images-gallery.html imageCollection="download-image-1" %}
 
-### Export image to JSON
+### 导出图片为 JSON
 
-Exporting an image to JSON can be done in two ways, depending on the selected image viewing format:
+根据当前图片查看格式，可通过两种方式导出为 JSON：
 
-- If you're using the list view of images, click the "Export image to JSON" icon next to the image name that you want to download.
-- If you're using the grid view, hover your mouse pointer over the image you want to download and click the "Export image to JSON" icon.
+- 使用列表视图时，点击要导出的图片名称旁的 "Export image to JSON" 图标。
+- 使用网格视图时，将鼠标悬停在要导出的图片上，点击 "Export image to JSON" 图标。
 
-The image in JSON format will be saved to your PC.
+图片将以 JSON 格式保存到您的电脑。
 
 {% include images-gallery.html imageCollection="export-image-1" %}
 
-### Embed image
+### 嵌入图片
 
-After you've added an image to the Image gallery, you can embed this image into HTML card widgets, in HTML section in the widget editor, in cell content functions, in custom actions, etc.
+将图片添加到 Image gallery 后，可嵌入到 HTML 卡片部件、部件编辑器的 HTML 区域、单元格内容函数、自定义操作等。
 
-Images provided at the system level are available to all users using the platform, while tenant images may only be available to specific tenants.
-Each image on the ThingsBoard platform has a unique URL that allows you to download the image both with and without authentication.
+系统级图片对所有平台用户可见，租户级图片可能仅对特定租户可见。
+ThingsBoard 平台上每张图片都有唯一 URL，支持带认证和不带认证下载。
 
-Using the code snippet provided below, you can embed the image into components that operate based on plain HTML, without authentication. For example, in *HTML Card* widget, cell content functions, etc.
+使用下列代码片段可将图片嵌入基于纯 HTML 的组件，无需认证。例如在 *HTML Card* 部件、单元格内容函数等中：
 
 ```java
 <img src="relative link to the image" alt="text description of the image" />
 ```
 
-To embed your image into an Angular HTML template, for example in the *Markdown/HTML Card* widget or HTML section in the widget editor, use the following code snippet:
+若要将图片嵌入 Angular HTML 模板，例如在 *Markdown/HTML Card* 部件或部件编辑器的 HTML 区域中，请使用：
 
 ```java
 <img [src]="'image URL' | image | async" />
 ```
 
-This specific method ensures that the authentication headers is automatically adds in the image request, allowing the same image URL to return different images for different users.
+此方式会在图片请求中自动添加认证头，使同一图片 URL 可为不同用户返回不同图片。
 
 <br>
-To obtain a link to the image for further embedding, follow these steps.
+获取用于嵌入的图片链接，请按以下步骤操作。
 
-- Go to the "Image gallery" page in the "Resources" section;
-- Click the "Embed image" of the corresponding image that you want to embed (if you’re using the grid view, hover your mouse pointer over the image you want to embed and click the "Embed image" icon);
-- Select the code snippet for the Angular HTML template or for the components based on plain HTML, and copy the corresponding unique link for this image.
+- 进入 "Resources" 下的 "Image gallery" 页面；
+- 点击要嵌入图片的 "Embed image" 图标（使用网格视图时，将鼠标悬停在图片上后点击 "Embed image" 图标）；
+- 选择 Angular HTML 模板或纯 HTML 组件的代码片段，并复制该图片的对应唯一链接。
 
 {% include images-gallery.html imageCollection="embed-image" %}
 
-### Edit image
+### 编辑图片
 
-To open editing an image window, click the "Edit image" icon next to the image name that you want to edit (if you're using the grid view, hover your mouse pointer over the image you want to edit and click the "Edit image" icon).
-An editing window will open. In this window you can change the name, download, export it to JSON, embed, and also [update the image](#update-image).
+点击要编辑的图片名称旁的 "Edit image" 图标（使用网格视图时，将鼠标悬停在图片上后点击 "Edit image" 图标）可打开编辑窗口。
+在窗口中可修改名称、下载、导出为 JSON、嵌入，也可[更新图片](#update-image)。
 
 {% include images-gallery.html imageCollection="edit-image-1" %}
 
-To change the name of the image, enter a new name and click the "Save" icon in the "Edit image" window.
+若要修改图片名称，在 "Edit image" 窗口中输入新名称并点击 "Save" 图标。
 
 {% include images-gallery.html imageCollection="edit-image-2" %}
 
-#### Update image
+#### 更新图片
 
-Updating the image can be useful, for example, when one picture serves as the background for multiple dashboards. 
-This allows you to make changes just once, and all dashboards using that image will automatically receive the updated version, saving you the effort of editing each dashboard individually.
+更新图片适用于例如一张图片用作多个仪表板背景的场景。
+只需修改一次，所有使用该图片的仪表板会自动获得更新，无需逐个编辑。
 
-To update the image, click the "Update image" button in the editing window. Select a new image or simply drag it to the "Update image" window and click "Update". 
+要更新图片，在编辑窗口中点击 "Update image" 按钮。选择新图片或将其拖拽到 "Update image" 窗口，然后点击 "Update"。
 
 {% include images-gallery.html imageCollection="update-image-1" %}
 
-### Delete image
+### 删除图片
 
-To delete an image from the image list, follow these steps:
+从图片列表中删除图片，请按以下步骤操作：
 
 {% include images-gallery.html imageCollection="delete-image-1" showListImageTitles="true" %}
 
-To delete an image that is displayed as an image grid, follow these steps:
+删除以网格显示的图片，请按以下步骤操作：
 
 {% include images-gallery.html imageCollection="delete-image-2" showListImageTitles="true" %}
 
-You can also delete multiple images (only via the image list view) at once:
+也可一次删除多张图片（仅可通过列表视图）：
 
 {% include images-gallery.html imageCollection="delete-image-3" showListImageTitles="true" %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}

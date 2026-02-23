@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-paas-eu
-title: Self-registration
+title: 自助注册
 description:
 ---
 

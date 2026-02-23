@@ -1,35 +1,35 @@
 {% capture patch_restrictions %}
-If you are upgrading from **{{minorVersion}}**, you **MUST** run the script below. However, if you are upgrading from version **{{mainteneceVersion}}**,
-**DO NOT** run the upgrade script; proceed directly to starting the Edge service.
+若从 **{{minorVersion}}** 升级，**必须**运行以下脚本。若从 **{{mainteneceVersion}}** 版本升级，
+**请勿**运行升级脚本，直接启动Edge服务即可。
 {% endcapture -%}
 
 {% include templates/warn-banner.md content=patch_restrictions %}
 
 {% if page.url contains 'centos' or page.url contains 'ubuntu' %}
 
-Upgrade the **ThingsBoard Edge** service:
+升级 **ThingsBoard Edge** 服务：
 ```bash
 sudo /usr/share/tb-edge/bin/install/upgrade.sh 
 ```
 {: .copy-code}
 
 {% elsif page.url contains 'windows' %}
-Upgrade the **ThingsBoard Edge** service:
+升级 **ThingsBoard Edge** 服务：
 ```bash
 C:\tb-edge>upgrade.bat 
 ```
 {: .copy-code}
-**Note:** The upgrade script must be run with Administrator privileges.
+**注意：** 必须以管理员权限运行升级脚本。
 
 {% elsif docsPrefix == "pe/edge/" and page.url contains 'docker' %}
-Upgrade the **ThingsBoard Edge** service:
+升级 **ThingsBoard Edge** 服务：
 ```bash
 docker compose run mytbedge upgrade-tb-edge-pe.sh
 ```
 {: .copy-code}
 
 {% elsif docsPrefix == "edge/" and page.url contains 'docker' %}
-Upgrade the **ThingsBoard Edge** service:
+升级 **ThingsBoard Edge** 服务：
 ```bash
 docker compose run mytbedge upgrade-tb-edge.sh
 ```

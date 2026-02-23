@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: How To Activate Self-Hosted Trendz
-description: How To Activate Self-Hosted Trendz
+title: 如何激活自托管 Trendz
+description: 如何激活自托管 Trendz
 
 login:
   0:
@@ -42,49 +42,49 @@ pricing:
 * TOC
 {:toc}
 
-This section describes how to activate Trendz for a ThingsBoard self-hosted environment via the License Portal.
+本节介绍如何通过 License Portal 为 ThingsBoard 自托管环境激活 Trendz。
 
-## Activation Steps
+## 激活步骤
 
-### Step 1. Log in to the License Portal
+### 步骤 1：登录 License Portal
 
-* Open the [ThingsBoard License Portal](https://license.thingsboard.io/login).
-* Sign in with your ThingsBoard account as a sysadmin.
-* Go to the **Subscriptions** tab or **Perpetual licenses** tab (depends on your subscription type).
+* 打开 [ThingsBoard License Portal](https://license.thingsboard.io/login)
+* 使用 ThingsBoard 系统管理员账号登录
+* 进入「**Subscriptions**」或「**Perpetual licenses**」标签（视订阅类型而定）
 
 {% include images-gallery.html imageCollection="login" %}
 
-### Step 2. Select Instance and Enable Trendz Add-on
+### 步骤 2：选择实例并启用 Trendz 插件
 
-* In the list of licensed installations, select the ThingsBoard instance for which you want to enable Trendz.
-* Click on it to open the instance profile.
-* Click **Manage Add-ons**.
-* Scroll down and enable the **Trendz Analytics** checkbox.
-* Click **Next** in the lower right corner.
+* 在已授权安装列表中，选择要启用 Trendz 的 ThingsBoard 实例
+* 点击实例打开实例配置
+* 点击「**Manage Add-ons**」
+* 向下滚动并勾选「**Trendz Analytics**」
+* 点击右下角「**Next**」
 
 {% include images-gallery.html imageCollection="enable" %}
 
-### Step 3. Review Summary and Complete Payment
+### 步骤 3：查看摘要并完成支付
 
-* On the Summary screen, verify the selected plan and full price.
-* If everything is correct, click **Update** and complete the payment.
+* 在摘要页面确认所选方案和总价
+* 若无误，点击「**Update**」并完成支付
 
 {% include images-gallery.html imageCollection="complete-payment" %}
 
-### Step 4. Restart ThingsBoard
+### 步骤 4：重启 ThingsBoard
 
-Finally, it's necessary to restart ThingsBoard service, to fetch the newest subscription information.
+最后，需重启 ThingsBoard 服务以获取最新订阅信息。
 
-## Pricing
+## 定价
 
-You can find out up-to-date prices on Trendz add-on in the [pricing page](/pricing/?section=thingsboard-pe-options&product=thingsboard-pe).
+可在 [定价页面](/pricing/?section=thingsboard-pe-options&product=thingsboard-pe) 查看 Trendz 插件最新价格。
 
 {% include images-gallery.html imageCollection="pricing" %}
 
-If you have any questions about anything, just **[contact us](/docs/contact-us)** - our team will help you find the best solution tailored to your requirements.
+如有任何问题，请**[联系我们](/docs/contact-us)**，我们的团队将帮您找到最适合的解决方案。
 
-## Next Steps
+## 下一步
 
-* Follow our [Installation guide](/docs/trendz/install/installation-options) to install Trendz on your environment.
-* Follow our [Getting Started guide](/docs/trendz/getting-started) to explore all Trendz capabilities.
-* Visit our [Documentation](/docs/trendz) to explore all Trendz capabilities and features.
+* 遵循 [安装指南](/docs/trendz/install/installation-options) 在您的环境中安装 Trendz
+* 遵循 [入门指南](/docs/trendz/getting-started) 了解 Trendz 功能
+* 访问 [文档](/docs/trendz) 了解 Trendz 功能与特性

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Tuya Integration
-description: Tuya Integration Guide
+title: Tuya 集成
+description: Tuya 集成指南
 
 tuya-application-add-device:
     0:
@@ -24,16 +24,16 @@ tuya-application-add-device:
 tuya-enable-rules-environment:
     0:
         image: /images/user-guide/integrations/tuya/tuya-enable-rules-environment-1-pe.png
-        title: 'Navigate to the "Message Service" tab. Click the "Create Messaging Rules" button;'
+        title: '进入 "Message Service" 选项卡。点击 "Create Messaging Rules" 按钮；'
     1:
         image: /images/user-guide/integrations/tuya/tuya-enable-rules-environment-2-pe.png
-        title: 'Click the "Add Message Filtering Rule" button;'
+        title: '点击 "Add Message Filtering Rule" 按钮；'
     2:
         image: /images/user-guide/integrations/tuya/tuya-enable-rules-environment-3-pe.png
-        title: 'Select "statusReport" and click "Release Rule" button;'
+        title: '选择 "statusReport" 并点击 "Release Rule" 按钮；'
     3:
         image: /images/user-guide/integrations/tuya/tuya-enable-rules-environment-5-pe.png
-        title: 'Enable the messaging rule.'
+        title: '启用 messaging rule。'
 
 ---
 {% assign docsPrefix = "pe/" %}

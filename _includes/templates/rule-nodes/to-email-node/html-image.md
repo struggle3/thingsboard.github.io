@@ -1,6 +1,6 @@
-To send an image, you just need to specify the name of the image with the file extension.
+发送图片时，只需指定带扩展名的图片文件名即可。
 
-Example of HTML with image
+带图片的HTML示例
 ```html
 <img src="cid:tb.example.png" alt="Example image">
 ```

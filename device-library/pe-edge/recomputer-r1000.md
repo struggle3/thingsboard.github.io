@@ -1,8 +1,8 @@
 ---
 docsTag: "edge-pe"
 layout: device
-title: How to install ThingsBoard Edge on reComputer R1000?
-category: Other devices
+title: 如何在 reComputer R1000 上安装 ThingsBoard Edge？
+category: 其他设备
 connectivity: [LoRaWAN, Ethernet, WIFI, Bluetooth, 4G]
 chip: R1000
 vendor: Seeed Studio

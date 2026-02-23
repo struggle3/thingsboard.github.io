@@ -1,18 +1,18 @@
 * TOC
 {:toc}
 
-## Troubleshooting instruments and tips
+## 故障排查工具与技巧
 
-### MessagePack Processing Log
+### MessagePack 处理日志
 
-To enable logging for the slowest and most frequently called rule nodes, 
-[update your logging configuration](#enable-certain-logs) with the following **logger**:
+若要记录最慢与调用最频繁的规则节点日志，
+请在[日志配置](#enable-certain-logs)中加入以下 **logger**：
 
 ```bash
 <logger name="org.thingsboard.server.service.queue.TbMsgPackProcessingContext" level="DEBUG" />
 ```
 
-After this, you can find the following messages in your [logs](#logs):
+配置后，可在[日志](#logs)中查看如下信息：
 
 ```bash
 2021-03-24 17:01:21,023 [tb-rule-engine-consumer-24-thread-3] DEBUG o.t.s.s.q.TbMsgPackProcessingContext - Top Rule Nodes by max execution time:
@@ -26,17 +26,17 @@ After this, you can find the following messages in your [logs](#logs):
 2021-03-24 17:01:21,028 [tb-rule-engine-consumer-24-thread-3] INFO  o.t.s.s.q.TbMsgPackProcessingContext - [Main][3f6debf0-8cc0-11eb-bcd9-d343878c0c7f] execution count: 1. [RuleChain: Thermostat|RuleNode: Message Type Switch(3f6debf0-8cc0-11eb-bcd9-d343878c0c7f)]
 ```
 
-## Logs
+## 日志
 
-### Read logs
+### 查看日志
 
-Regardless of the deployment type, ThingsBoard Edge logs are stored in the following directory:
+无论采用何种部署方式，ThingsBoard Edge 日志均存放在以下目录：
 
 ```bash
 /var/log/tb-edge
 ```
 
-Different deployment tools provide different ways to view logs:
+不同部署工具查看日志的方式不同：
 
 {% capture contenttogglespecdeploymenttype %}
 Standalone Deployment%,%standalone%,%templates/edge/troubleshooting/logs/view-logs/standalone-view-logs.md%br%
@@ -45,17 +45,17 @@ Docker-Compose Deployment%,%docker-compose%,%templates/edge/troubleshooting/logs
 {% include content-toggle.liquid content-toggle-id="deploymentType" toggle-spec=contenttogglespecdeploymenttype %}
 
 
-### Enable specific logs
+### 启用特定日志 {#enable-certain-logs}
 
-ThingsBoard provides the ability to enable/disable logging for specific parts of the system, depending on the information you need for troubleshooting.
+ThingsBoard 支持按需启用或禁用系统特定部分的日志。
 
-You can do this by modifying the `logback.xml` file. Like the logs themselves, the file is stored in the following directory:
+可通过修改 `logback.xml` 实现。该文件与日志本身存放在同一目录：
 
 ```bash
 /usr/share/tb-edge/conf
 ```
 
-Here's an example of the `logback.xml` configuration:
+`logback.xml` 配置示例：
 
 ```bash
 <!DOCTYPE configuration>
@@ -105,92 +105,92 @@ Docker-Compose Deployment%,%docker-compose%,%templates/edge/troubleshooting/logs
 
 {% include content-toggle.liquid content-toggle-id="deploymentType2" toggle-spec=contenttogglespecdeploymenttype2 %}
 
-## Metrics
+## 指标
 
-You can enable Prometheus metrics by setting the following environment variables in the configuration file:
-* set `METRICS_ENABLED` to `true`
-* set `METRICS_ENDPOINTS_EXPOSE` to `prometheus` 
+可在配置文件中设置以下环境变量以启用 Prometheus 指标：
+* 将 `METRICS_ENABLED` 设为 `true`
+* 将 `METRICS_ENDPOINTS_EXPOSE` 设为 `prometheus` 
 
-These metrics are exposed at the path: `https://<yourhostname>/actuator/prometheus` which can be scraped by prometheus (no authentication is required).
+指标路径为：`https://<yourhostname>/actuator/prometheus`，可由 Prometheus 抓取（无需认证）。
 
-## Prometheus metrics
+## Prometheus 指标
 
-Some internal state metrics can be exposed by the **Spring Boot Actuator** using **Prometheus**.
+**Spring Boot Actuator** 可通过 **Prometheus** 暴露部分内部状态指标。
 
-Here is the list of stats that **ThingsBoard** pushes to **Prometheus**:
+**ThingsBoard** 推送至 **Prometheus** 的统计项如下：
 
-### tb-edge metrics:
+### tb-edge 指标：
 
-- **attributes_queue_${index_of_queue}** (statsNames - **totalMsgs, failedMsgs, successfulMsgs**): The stats that represent **attribute writes** to the database.  
-  _Note that several queues (threads) are used to persist attributes for maximum performance._
-- **ruleEngine_${name_of_queue}** (statsNames - **totalMsgs, failedMsgs, successfulMsgs, tmpFailed, failedIterations, successfulIterations, timeoutMsgs, tmpTimeout**):
-  The stats that represent message processing in the Rule Engine. They are persisted for each queue (e.g. Main, HighPriority, SequentialByOriginator etc).
-  Descriptions of some metrics:
-    - **tmpFailed**: The number of messages that failed and got reprocessed later.
-    - **tmpTimeout**: The number of messages that timed out and got reprocessed later.
-    - **timeoutMsgs**: The number of messages that timed out and were discarded.
-    - **failedIterations**: The iterations of processing message packs where at least one message wasn't processed successfully.
-- **ruleEngine_${name_of_queue}_seconds** (for each present **tenantId**): The stats that represent the time it took to process messages in different queues.
-- **core** (statsNames - **totalMsgs, toDevRpc, coreNfs, sessionEvents, subInfo, subToAttr, subToRpc, deviceState, getAttr, claimDevice, subMsgs**):
-  The stats that represent the processing of internal system messages.
-  Descriptions of some metrics:
-    - **toDevRpc**: The number of processed RPC responses from Transport services.
-    - **sessionEvents**: The number of session events from Transport services.
-    - **subInfo**: The number of subscription infos from Transport services.
-    - **subToAttr**: The number of subscribes to attribute updates from Transport services.
-    - **subToRpc**: The number of subscribes to RPC from Transport services.
-    - **getAttr**: The number of 'get attributes' requests from Transport services.
-    - **claimDevice**: The number of device claims from Transport services.
-    - **deviceState**: The number of processed changes to Device State.
-    - **subMsgs**: The number of processed subscriptions.
-    - **coreNfs**: The number of processed specific 'system' messages.
-- **jsInvoke** (statsNames - **requests, responses, failures**): The stats that represent the number of total, successful and failed requests to the JS executors.
-- **attributes_cache** (results - **hit, miss**): The stats that represent the number of attribute requests that went to the cache.
-
-
-### transport metrics:
-- **transport** (statsNames - **totalMsgs, failedMsgs, successfulMsgs**): The stats that represent the number of requests received by Transport from Core.
-- **ruleEngine_producer** (statsNames - **totalMsgs, failedMsgs, successfulMsgs**): The stats that represent the number of messages pushed from Transport to the Rule Engine.
-- **core_producer<** (statsNames - **totalMsgs, failedMsgs, successfulMsgs**): The stats that represent the number of messages pushed from Transport to the ThingsBoard node device actor.
-- **transport_producer** (statsNames - **totalMsgs, failedMsgs, successfulMsgs**): The stats that represent the number of requests from Transport to the Core.
+- **attributes_queue_${index_of_queue}**（statsNames - **totalMsgs, failedMsgs, successfulMsgs**）：表示**属性写入**数据库的统计。  
+  _注意：为提高性能，使用多个队列（线程）持久化属性。_
+- **ruleEngine_${name_of_queue}**（statsNames - **totalMsgs, failedMsgs, successfulMsgs, tmpFailed, failedIterations, successfulIterations, timeoutMsgs, tmpTimeout**）：
+  表示规则引擎中的消息处理统计，按队列（如 Main、HighPriority、SequentialByOriginator 等）持久化。
+  部分指标说明：
+    - **tmpFailed**：失败并稍后重试的消息数。
+    - **tmpTimeout**：超时并稍后重试的消息数。
+    - **timeoutMsgs**：超时被丢弃的消息数。
+    - **failedIterations**：至少有一条消息未成功处理的消息包处理迭代数。
+- **ruleEngine_${name_of_queue}_seconds**（针对每个 **tenantId**）：表示各队列处理消息的耗时统计。
+- **core**（statsNames - **totalMsgs, toDevRpc, coreNfs, sessionEvents, subInfo, subToAttr, subToRpc, deviceState, getAttr, claimDevice, subMsgs**）：
+  表示内部系统消息的处理统计。
+  部分指标说明：
+    - **toDevRpc**：Transport 服务处理过的 RPC 响应数。
+    - **sessionEvents**：Transport 服务的会话事件数。
+    - **subInfo**：Transport 服务的订阅信息数。
+    - **subToAttr**：Transport 服务对属性更新的订阅数。
+    - **subToRpc**：Transport 服务对 RPC 的订阅数。
+    - **getAttr**：Transport 服务的「获取属性」请求数。
+    - **claimDevice**：Transport 服务的设备认领数。
+    - **deviceState**：设备状态变更处理数。
+    - **subMsgs**：已处理的订阅消息数。
+    - **coreNfs**：已处理的特定「系统」消息数。
+- **jsInvoke**（statsNames - **requests, responses, failures**）：表示 JS 执行器总请求数、成功数与失败数。
+- **attributes_cache**（results - **hit, miss**）：表示命中缓存与未命中缓存的属性请求数。
 
 
-### PostgreSQL-specific metrics:
-- **ts_latest_queue_${index_of_queue}** (statsNames - **totalMsgs, failedMsgs, successfulMsgs**): The stats that represent the **latest telemetry** writes to the database.  
-  Note that multiple queues (threads) are used to ensure maximum performance.
-- **ts_queue_${index_of_queue}**(statsNames - **totalMsgs, failedMsgs, successfulMsgs**): The stats that represent the **telemetry** writes to the database.  
-  Note that multiple queues (threads) are used to ensure maximum performance.
+### transport 指标：
+- **transport**（statsNames - **totalMsgs, failedMsgs, successfulMsgs**）：表示 Transport 从 Core 接收的请求数。
+- **ruleEngine_producer**（statsNames - **totalMsgs, failedMsgs, successfulMsgs**）：表示从 Transport 推送到规则引擎的消息数。
+- **core_producer**（statsNames - **totalMsgs, failedMsgs, successfulMsgs**）：表示从 Transport 推送到 ThingsBoard 节点设备 actor 的消息数。
+- **transport_producer**（statsNames - **totalMsgs, failedMsgs, successfulMsgs**）：表示从 Transport 到 Core 的请求数。
 
-## Edge randomly disconnects from Cloud
 
-If an Edge instance repeatedly disconnects without an obvious reason but reconnects to the cloud within a few seconds, the most likely cause is **unstable network connectivity between the Edge and the Cloud.** 
-This may happen due to very low bandwidth or intermittent packet loss on the network.
+### PostgreSQL 相关指标：
+- **ts_latest_queue_${index_of_queue}**（statsNames - **totalMsgs, failedMsgs, successfulMsgs**）：表示**最新遥测**写入数据库的统计。  
+  注意：为提高性能，使用多个队列（线程）。
+- **ts_queue_${index_of_queue}**（statsNames - **totalMsgs, failedMsgs, successfulMsgs**）：表示**遥测**写入数据库的统计。  
+  注意：为提高性能，使用多个队列（线程）。
 
-One option is to **diagnose your network** using external tools and resolve any identified issues. 
+## Edge 随机断开与云端连接
 
-If that is not possible, you can **adjust the gRPC connection parameters between Edge and Cloud** by increasing certain timeouts. 
-This helps reduce unexpected disconnects during temporary network disruptions.
+若 Edge 实例无明显原因反复断开，数秒内又重连，最可能的原因是 **Edge 与云端之间的网络不稳定**。
+可能由带宽不足或网络间歇性丢包导致。
 
-**On the ThingsBoard Server (Cloud):**
+一种做法是使用外部工具**诊断网络**并解决发现的问题。
 
-* **EDGES_RPC_CLIENT_MAX_KEEP_ALIVE_TIME_SEC:** A minimum allowed interval between client keepalive pings. This prevents clients from sending pings too frequently, which can be a nuisance to the server. Potentially, this could be a denial-of-service attack vector if abused. If a client sends pings more frequently than this interval, the server can terminate the connection. **1 second by default**.
+若无法排查网络，可**增大部分超时**调整 Edge 与云端之间的 gRPC 连接参数。
+有助于在临时网络波动时减少意外断开。
 
-* **EDGES_RPC_KEEP_ALIVE_TIME_SEC:** The time of inactivity (no read operations on the connection) after which the server sends a keepalive ping to the client. This is used to ensure that the connection is still alive and to prevent network intermediaries from dropping connections due to inactivity. It's a way for the server to proactively check if the client is still responsive. **10 seconds by default.**
+**在 ThingsBoard Server（云端）：**
 
-* **EDGES_RPC_KEEP_ALIVE_TIMEOUT_SEC:** The maximum amount of time that the server waits for a response to its keepalive ping. If the ping is not acknowledged within this time frame, the server considers the connection dead and may close it. This timeout helps detect unresponsive clients.<br> **5 seconds by default.**
+* **EDGES_RPC_CLIENT_MAX_KEEP_ALIVE_TIME_SEC**：客户端 keepalive ping 之间的最小允许间隔。防止客户端发送过于频繁的 ping，避免对服务器造成负担；滥用可能成为拒绝服务攻击向量。若客户端在此间隔内发送更频繁的 ping，服务器可终止连接。**默认 1 秒**。
+
+* **EDGES_RPC_KEEP_ALIVE_TIME_SEC**：连接无活动（无读操作）多长时间后，服务器向客户端发送 keepalive ping。用于确认连接仍存活，并防止中间网络设备因空闲而断开连接。服务器主动检查客户端是否仍响应的方式。**默认 10 秒**。
+
+* **EDGES_RPC_KEEP_ALIVE_TIMEOUT_SEC**：服务器等待 keepalive ping 响应的最长时间。若在此时间内未收到确认，服务器将认为连接已断开并可能关闭。该超时用于检测无响应客户端。<br>**默认 5 秒**。
 
 Read more about **Edge parameters for Cloud** [here](/docs/{{peDocsPrefix}}user-guide/install/config/#edges-parameters){:target="_blank"}
 
-**On the ThingsBoard Edge (gRPC client):**
+**在 ThingsBoard Edge（gRPC 客户端）：**
 
-* **CLOUD_RPC_KEEP_ALIVE_TIME_SEC:** The amount of time in seconds that the client waits in an idle state (with no read operations on the connection) before sending a keepalive ping to the server. This setting is crucial for ensuring that the connection remains alive during periods of inactivity and helps prevent the server from closing the connection due to a timeout. It's used to probe the server periodically to check if it is still responsive and maintain the connection through potential network devices that might drop inactive connections (like NATs and load balancers). **10 seconds by default.**
+* **CLOUD_RPC_KEEP_ALIVE_TIME_SEC**：客户端在空闲（无读操作）多少秒后向服务器发送 keepalive ping。该设置对保持空闲期连接存活、防止服务器因超时关闭连接至关重要。用于定期探测服务器是否仍响应，并通过可能因空闲而断连的网络设备（如 NAT、负载均衡器）维持连接。**默认 10 秒**。
 
-* **CLOUD_RPC_KEEP_ALIVE_TIMEOUT_SEC:** Specifies how long the client will wait for a response to its keepalive ping. If the ping isn't acknowledged within this timeframe, the client assumes that the connection is dead or unreachable. This timeout is essential for detecting when the server side might have issues or when there might be network failures preventing communication. If the server does not respond to a keepalive ping within this period, the client will consider the connection as lost and may attempt to reconnect or take other recovery actions. **5 seconds by default.**
+* **CLOUD_RPC_KEEP_ALIVE_TIMEOUT_SEC**：客户端等待 keepalive ping 响应的最长时长。若在此时间内未收到确认，客户端将认为连接已断开或不可达。该超时用于检测服务器或网络故障。若服务器在此时间内无响应，客户端将视为连接丢失，可能会尝试重连或执行其他恢复操作。**默认 5 秒**。
 
 Read more about **Cloud configuration for Edge** [here](/docs/{{docsPrefix}}user-guide/install/config/#cloud-configuration){:target="_blank"}
 
 {% capture infoWired %}
-**WARNING:**{: style="color:red"}  
+**警告：**{: style="color:red"}  
 [gRPC](https://grpc.io/docs/guides/keepalive/){:target="_blank"} advises against enabling keepalive without calls and recommends that clients avoid configuring their keepalive much below **one minute**.
 
 **Scale‑safe starting points:**
@@ -200,45 +200,44 @@ Read more about **Cloud configuration for Edge** [here](/docs/{{docsPrefix}}user
 {% endcapture %}
 {% include templates/warn-banner.md content=infoWired %}
 
-### How to apply
+### 如何应用
 
 {% capture how-to-apply %}
 Docker%,%dockerKeepalive%,%templates/edge/troubleshooting/docker-keepalive.md%br%
 Ubuntu%,%ubuntuKeepalive%,%templates/edge/troubleshooting/ubuntu-keepalive.md%br%{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="how-to-apply" toggle-spec=how-to-apply %}
 
-## Monitoring message statistics
+## 监控消息统计
 
 {% assign sinceVersion = "4.2" %}
 {% include templates/edge/since-edge.md %}
 
-To diagnose and resolve issues with message delivery between the Cloud and Edge, you can monitor the state of **uplink** (Edge → Cloud) 
-and **downlink** (Cloud → Edge) message flows.
+为诊断和解决 Cloud 与 Edge 间消息传递问题，可监控 **uplink**（Edge → Cloud）和 **downlink**（Cloud → Edge）消息流。
 
-* [Download](https://github.com/thingsboard/thingsboard-edge/releases/download/v4.2/uplink_downlink_edge_stats.json) the preconfigured Edge dashboard. 
-* Import the dashboard to your **Cloud**:
-  * Go to the **Dashboards** section.
-  * Click the **"+"** button, select the **"Import dashboard"** option and browse for the `.json` file on your computer. Click the **"Import"** button to proceed.
+* [下载](https://github.com/thingsboard/thingsboard-edge/releases/download/v4.2/uplink_downlink_edge_stats.json)预配置的 Edge 仪表板。
+* 将仪表板导入**云端**：
+  * 进入 **仪表板** 部分。
+  * 点击 **"+"** 按钮，选择 **"导入仪表板"**，浏览本地 `.json` 文件并点击 **"导入"** 完成。
 
 {% include images-gallery.html imageCollection="how-to-import-dashboard" %}
 
-### The telemetry keys for statistics monitoring
+### 统计监控的遥测键
 
-ThingsBoard Edge exposes a set of telemetry keys that allow you to monitor message statistics between Edge and Cloud.
+ThingsBoard Edge 暴露一组遥测键，用于监控 Edge 与 Cloud 间的消息统计。
 
 #### Uplink
-* **uplinkMsgsAdded:** The number of messages added to the queue.
-* **uplinkMsgsPushed:** The number of messages successfully sent to the Cloud.
-* **uplinkMsgsPermanentlyFailed:** The number of permanently failed messages.
-* **uplinkMsgsTmpFailed:** The number of temporarily failed messages (e.g., due to network issues).
-* **uplinkMsgsLag:** The number of messages remaining in the queue (lag).
+* **uplinkMsgsAdded**：加入队列的消息数。
+* **uplinkMsgsPushed**：成功发送到 Cloud 的消息数。
+* **uplinkMsgsPermanentlyFailed**：永久失败的消息数。
+* **uplinkMsgsTmpFailed**：暂时失败的消息数（如因网络问题）。
+* **uplinkMsgsLag**：队列中剩余的消息数（滞后量）。
 
 #### Downlink
-* **downlinkMsgsAdded:** The number of messages added to the queue.
-* **downlinkMsgsPushed:** The number of messages successfully sent to the Cloud.
-* **downlinkMsgsPermanentlyFailed:** The number of permanently failed messages.
-* **downlinkMsgsTmpFailed:** The number of temporarily failed messages (e.g., due to network issues).
-* **downlinkMsgsLag:** The number of messages remaining in the queue (lag).
+* **downlinkMsgsAdded**：加入队列的消息数。
+* **downlinkMsgsPushed**：成功发送到 Cloud 的消息数。
+* **downlinkMsgsPermanentlyFailed**：永久失败的消息数。
+* **downlinkMsgsTmpFailed**：暂时失败的消息数（如因网络问题）。
+* **downlinkMsgsLag**：队列中剩余的消息数（滞后量）。
 
 
 ## Getting help

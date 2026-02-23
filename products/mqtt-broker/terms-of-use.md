@@ -1,57 +1,57 @@
 ---
 layout: plain
-title: TBMQ Terms of Use
-description: TBMQ Terms of Use
+title: TBMQ 使用条款
+description: TBMQ 使用条款
 
 ---
 
 <br>
-<p style="text-align: center; font-size: 1.5em; font-weight: bold;">TERMS OF USE</p>
+<p style="text-align: center; font-size: 1.5em; font-weight: bold;">使用条款</p>
 
-<h2>PLEASE READ THESE TERMS AND CONDITIONS</h2>
-<p style="font-size: 0.8em; color: grey">As of February 4, 2026</p>
-
-<br>
-
-<p> <b>1. Service Description</b> </p>
-<p> 1.1 This MQTT broker service (the <b>"Service"</b>) is powered by TBMQ (ThingsBoard MQTT Broker) and is provided free of charge for testing, prototyping, and educational purposes.</p>
+<h2>请阅读下列条款和条件</h2>
+<p style="font-size: 0.8em; color: grey">自 2026 年 2 月 4 日起生效</p>
 
 <br>
-<p> <b>2. Acceptance of Terms</b> </p>
-<p> 2.1 By connecting to or using this Service, you agree to be bound by these Terms of Use and acknowledge that you have read and understood our <a target="_blank" href="/products/mqtt-broker/privacy-policy/">Privacy Policy</a>. You consent to the collection and processing of data as outlined therein. If you do not agree, please discontinue use immediately.</p>
+
+<p> <b>1. 服务说明</b> </p>
+<p> 1.1 本 MQTT 代理服务（以下简称<b>「服务」</b>）由 TBMQ（ThingsBoard MQTT Broker）提供支持，免费用于测试、原型开发和教育目的。</p>
 
 <br>
-<p> <b>3. No Warranty & "As-Is" Provision</b> </p>
-<p> 3.1 This Service is provided "AS IS" and "AS AVAILABLE" without any warranty of any kind.</p>
-
-<p> 3.2 <b>No Uptime Commitment:</b> We do not guarantee continuous availability. The Service may be rebooted, updated, or taken offline at any time without notice. Claims whatsoever are not acceptable.</p>
-
-<p> 3.3 <b>No Delivery Guarantees:</b> We do not guarantee the delivery, persistence, or order of messages. Messages may be lost, discarded, or deleted during maintenance or periods of high load, although we do our best to prevent these occurrences.</p>
-
-<p> 3.4 <b>Not for Production:</b> This Service is strictly prohibited for use without limitation in mission-critical, commercial production, or life-safety systems.</p>
+<p> <b>2. 条款接受</b> </p>
+<p> 2.1 连接或使用本服务即表示您同意受本使用条款的约束，并确认已阅读并理解我们的<a target="_blank" href="/products/mqtt-broker/privacy-policy/">隐私政策</a>。您同意按照其中所述收集和处理数据。如不同意，请立即停止使用。</p>
 
 <br>
-<p> <b>4. Data Privacy & Security</b> </p>
-<p> 4.1 Any data sent to this broker is deemed public. Do not transmit sensitive, confidential, or personally identifiable information (PII).</p>
+<p> <b>3. 无保证与「原样」条款</b> </p>
+<p> 3.1 本服务「按原样」和「按可用性」提供，不提供任何形式的保证。</p>
 
-<p> 4.2 We do not guarantee the storage of retained messages or persistent sessions. Data may be wiped periodically to reset the environment, although we do our best to prevent these occurrences.</p>
+<p> 3.2 <b>无可用性承诺：</b> 我们不保证持续可用。服务可随时在不另行通知的情况下重启、更新或下线。任何索赔均不予接受。</p>
 
-<br>
-<p> <b>5. Usage Restrictions</b> </p>
-<p> 5.1 You agree not to use the Service to perform stress testing, load testing, or "Denial of Service" (DoS) attacks that degrade performance for other users.</p>
+<p> 3.3 <b>无投递保证：</b> 我们不保证消息的投递、持久化或顺序。消息可能在维护或高负载期间丢失、丢弃或删除，尽管我们尽力防止此类情况。</p>
 
-<p> 5.2 You cannot transmit illegal, harmful, or malicious content.</p>
-
-<p> 5.3 You are not allowed to connect an excessive number of clients or publish at rates that unreasonably burden the infrastructure.</p>
+<p> 3.4 <b>非生产用途：</b> 本服务严禁用于（包括但不限于）任务关键、商业生产或生命安全系统。</p>
 
 <br>
-<p> <b>6. Termination</b> </p>
-<p> 6.1 We reserve the right to block specific IP addresses, device or application Client IDs, or users at our sole discretion if we detect abuse or violations of these Terms.</p>
+<p> <b>4. 数据隐私与安全</b> </p>
+<p> 4.1 发送至本代理的任何数据均视为公开。请勿传输敏感、机密或个人可识别信息（PII）。</p>
+
+<p> 4.2 我们不保证保留消息或持久会话的存储。数据可能会定期擦除以重置环境，尽管我们尽力防止此类情况。</p>
 
 <br>
-<p> <b>7. Limitation of Liability</b> </p>
-<p> 7.1 To the maximum extent permitted by law, the provider of this Service shall not be liable for any direct, indirect, incidental, or consequential damages (including loss of data or profits) arising from the use or inability to use this Service.</p>
+<p> <b>5. 使用限制</b> </p>
+<p> 5.1 您同意不使用本服务进行压力测试、负载测试或影响其他用户性能的「拒绝服务」（DoS）攻击。</p>
+
+<p> 5.2 您不得传输非法、有害或恶意内容。</p>
+
+<p> 5.3 您不得连接过多客户端或以不合理加重基础设施负担的速率发布消息。</p>
 
 <br>
-<p> <b>8. Contact</b> </p>
-<p> 8.1 For inquiries regarding this Service, please contact: <a href="mailto:info@thingsboard.io">info@thingsboard.io</a>.</p>
+<p> <b>6. 终止</b> </p>
+<p> 6.1 如我们检测到滥用或违反本条款，我们保留自行决定屏蔽特定 IP 地址、设备或应用客户端 ID 或用户的权利。</p>
+
+<br>
+<p> <b>7. 责任限制</b> </p>
+<p> 7.1 在法律允许的最大范围内，本服务提供商不对因使用或无法使用本服务而产生的任何直接、间接、附带或后果性损害（包括数据或利润损失）承担责任。</p>
+
+<br>
+<p> <b>8. 联系方式</b> </p>
+<p> 8.1 有关本服务的咨询，请联系：<a href="mailto:info@thingsboard.io">info@thingsboard.io</a>。</p>

@@ -1,15 +1,14 @@
+我们将使用专用于向ThingsBoard发送遥测的[性能测试工具](https://github.com/thingsboard/performance-tests/#running)。
+该工具还会创建设备、仪表板等实体。
 
-We will use special [performance-test tool](https://github.com/thingsboard/performance-tests/#running) that is designed to send telemetry to ThingsBoard.
-This tool also creates entities like devices, dashboards, etc.
+#### 步骤1：启动EC2实例
 
-#### Step 1. Launch EC2 instance.
+在与目标ThingsBoard服务器[部署](/docs/reference/performance/setup-aws-instances/)位置相同的VPC中启动实例。
+确保测试实例可访问ThingsBoard实例的8080和1883端口。
 
-Launch the instance in the same VPC where your target ThingsBoard server is [deployed](/docs/reference/performance/setup-aws-instances/).
-Make sure ThingsBoard instance ports 8080 and 1883 are accessible from the test instance.
+#### 步骤2：配置实例的SSH访问
 
-#### Step 2. Setup SSH to the instance.
-
-Optionally, setup SSH private keys to access the instances. It is convenient to put your `PEM` key file to the `~/.ssh/aws.pem` and set up `~/.ssh/config` like:
+（可选）配置SSH私钥以访问实例。建议将`PEM`密钥文件放到`~/.ssh/aws.pem`并设置`~/.ssh/config`，例如：
 ```bash
 Host pt
  Hostname 34.242.159.12
@@ -21,16 +20,16 @@ Host pt
 {: .copy-code}
 
 
-To connect Performance test instance use this command
+连接性能测试实例时使用以下命令
 ```bash
 ssh pt
 ```
 
-#### Step 3. Install Docker and Docker-compose.
+#### 步骤3：安装Docker和Docker Compose
 
-We are going use docker and docker-compose to run performance tests under non-root users. 
-To save the setup time and make the environment the same all the time we provide an all-in-one setup script below.  
-Login with ssh and run the commands both on Thingsboard and Performance test instances:
+我们将使用docker和docker-compose以非root用户运行性能测试。 
+为节省配置时间并保持环境一致，以下提供一体化安装脚本。  
+通过SSH登录，在ThingsBoard和性能测试实例上均执行以下命令：
 
 ```bash
 sudo apt update
@@ -47,9 +46,9 @@ docker run hello-world
 {: .copy-code}
 
 
-### Step 4. Run the performance test
+### 步骤4：运行性能测试
 
-The command is similar to the one listed below. Don't forget to replace the value of TB_INTERNAL_IP with the private IP address of your target ThingsBoard instance.
+命令与以下类似。请勿忘记将TB_INTERNAL_IP替换为目标ThingsBoard实例的私有IP地址。
 
 ```bash
 # Put your ThingsBoard private IP address here, assuming both ThingsBoard and performance tests EC2 instances are in same VPC.

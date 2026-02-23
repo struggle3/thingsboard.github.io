@@ -1,41 +1,34 @@
-Pushes the incoming message from cloud to edge by converting it into an edge event and storing it in the edge queue. The message is routed to either the `Success` connection (if
-the edge event is successfully pushed to persistent storage) or the `Failure` connection (if an error occurs during processing or the message type is unsupported).
+通过将传入消息转换为 edge event 并存储到 edge queue，将消息从云端推送到 Edge。消息路由至 `Success` 连接（edge event 成功推送到持久存储时）或 `Failure` 连接（处理期间发生错误或消息类型不支持时）。
 
-## Usage
+## 用法
 
-This node enables selective synchronization of data from cloud to edge instances. It is designed for scenarios where automatic synchronization of all data would be
-resource-intensive or unnecessary. For example, edge instances typically don't need the full historical telemetry from all devices - they only need specific data relevant to their
-local operations. Using this node, you can explicitly control which messages are synchronized to which edges, avoiding the overhead of transferring large volumes of data that won't
-be used.
+此节点支持 selective 将数据从云端同步到 Edge 实例。适用于自动同步全部数据会消耗大量资源或不必要的场景。例如 Edge 实例通常不需要所有设备的完整历史遥测——只需与本地操作相关的特定数据。使用此节点可显式控制哪些消息同步到哪些 Edge，避免传输不会使用的大量数据。
 
-The typical workflow for pushing messages to edge follows these steps:
+将消息推送到 Edge 的典型流程如下：
 
-1. A message arrives at the "push to edge" node containing data that needs to be synchronized to edge instances (telemetry, attributes, alarms, etc.).
+1. 消息到达「push to edge」节点，包含需要同步到 Edge 实例的数据（遥测、属性、告警等）。
 
-2. The node converts the message into an edge event based on the message type and stores it in persistent storage (edge queue).
+2. 节点根据消息类型将消息转换为 edge event，并存储到持久存储（edge queue）。
 
-3. The edge instance retrieves pending edge events from the queue for synchronization.
+3. Edge 实例从队列检索待处理的 edge events 以进行同步。
 
-4. If the edge event is successfully pushed to persistent storage, the message is routed via the `Success` connection. If an error occurs, it's routed via the `Failure` connection.
+4. 若 edge event 成功推送到持久存储，消息经 `Success` 连接路由。若发生错误，经 `Failure` 连接路由。
 
 {% capture async_note %}
-**Asynchronous processing:** The `Success` connection indicates that the edge event was successfully pushed to persistent storage, not that it was delivered to the edge. The actual
-delivery to the edge happens asynchronously.
+**异步处理**：`Success` 连接表示 edge event 已成功推送到持久存储，而非已投递到 Edge。实际投递到 Edge 是异步进行的。
 {% endcapture %}
 {% include templates/warn-banner.md content=async_note %}
 
 {% capture originator_note %}
-**Message originator requirements:** The message originator must either be assigned to a particular edge instance or be an `EDGE` entity itself. If the originator is an `EDGE`
-entity, the event is pushed only to that edge. If the originator is another entity type (e.g., `DEVICE`, `ASSET`), the event is pushed to all edges that the entity is assigned to.
+**消息发起者要求**：消息发起者必须已分配给特定 Edge 实例，或为 `EDGE` 实体本身。若发起者为 `EDGE` 实体，事件仅推送到该 Edge。若发起者为其他实体类型（如 `DEVICE`、`ASSET`），事件推送到实体分配到的所有 Edge。
 {% endcapture %}
 {% include templates/info-banner.md content=originator_note %}
 
-## Configuration
+## 配置
 
-The configuration specifies the default attribute scope for attribute-related messages.
+配置指定属性相关消息的默认属性作用域。
 
-- **Attributes scope** - The default scope for attributes (`SERVER_SCOPE`, `CLIENT_SCOPE`, or `SHARED_SCOPE`). This value can be dynamically overridden by including a `scope` key
-  in the message metadata.
+- **Attributes scope（属性作用域）** - 属性的默认作用域（`SERVER_SCOPE`、`CLIENT_SCOPE` 或 `SHARED_SCOPE`）。可通过在消息元数据中包含 `scope` 键动态覆盖此值。
 
 ### JSON Schema
 
@@ -63,60 +56,60 @@ The configuration specifies the default attribute scope for attribute-related me
 ```
 {: .copy-code.expandable-3 }
 
-## Supported message types
+## 支持的消息类型
 
-The node supports the following message types:
+节点支持以下消息类型：
 
-- `POST_TELEMETRY_REQUEST` - Time series data posted to the device
-- `POST_ATTRIBUTES_REQUEST` - Attribute data posted to the device
-- `ATTRIBUTES_UPDATED` - Device attributes have been updated
-- `ATTRIBUTES_DELETED` - Device attributes have been deleted
-- `TIMESERIES_UPDATED` - Time series data has been updated
-- `ALARM` - Alarm created, updated, or cleared
-- `ALARM_ACK` - Alarm acknowledged
-- `ALARM_CLEAR` - Alarm cleared
-- `CONNECT_EVENT` - Device connected
-- `DISCONNECT_EVENT` - Device disconnected
-- `ACTIVITY_EVENT` - Device activity detected
-- `INACTIVITY_EVENT` - Device inactivity detected
-- `TO_SERVER_RPC_REQUEST` - RPC request from device to server
+- `POST_TELEMETRY_REQUEST` - 发布给设备的时序数据
+- `POST_ATTRIBUTES_REQUEST` - 发布给设备的属性数据
+- `ATTRIBUTES_UPDATED` - 设备属性已更新
+- `ATTRIBUTES_DELETED` - 设备属性已删除
+- `TIMESERIES_UPDATED` - 时序数据已更新
+- `ALARM` - 告警创建、更新或清除
+- `ALARM_ACK` - 告警已确认
+- `ALARM_CLEAR` - 告警已清除
+- `CONNECT_EVENT` - 设备已连接
+- `DISCONNECT_EVENT` - 设备已断开
+- `ACTIVITY_EVENT` - 检测到设备活动
+- `INACTIVITY_EVENT` - 检测到设备非活动
+- `TO_SERVER_RPC_REQUEST` - 设备到服务器的 RPC 请求
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node validates that the message type is supported. If not, the message is routed via the `Failure` connection.
+1. 节点验证消息类型是否受支持。若不受支持，消息经 `Failure` 连接路由。
 
-2. Based on the message type, the node builds an appropriate edge event.
+2. 根据消息类型，节点构建适当的 edge event。
 
-3. If the message originator is an `EDGE` entity:
-    - The edge event is pushed to persistent storage for that specific edge instance
+3. 若消息发起者为 `EDGE` 实体：
+    - 将 edge event 推送到该特定 Edge 实例的持久存储
 
-4. If the message originator is another entity type:
-    - The node finds all edges that the originator entity is assigned to
-    - The edge event is pushed to persistent storage for each edge
-    - If the entity is not assigned to any edges, the message is acknowledged without further processing
+4. 若消息发起者为其他实体类型：
+    - 节点查找发起者实体分配到的所有 Edge
+    - 为每个 Edge 将 edge event 推送到持久存储
+    - 若实体未分配给任何 Edge，消息被确认且不进行进一步处理
 
-5. The message is routed via the `Success` connection if all edge events are successfully pushed to persistent storage, or via the `Failure` connection if any error occurs.
+5. 若所有 edge events 成功推送到持久存储，消息经 `Success` 连接路由；若发生任何错误，经 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The edge event(s) were successfully pushed to persistent storage. The outgoing message is the same as the incoming message.
+    - edge event(s) 已成功推送到持久存储。传出消息与传入消息相同。
 - `Failure`
-    - An error occurred during processing, such as:
-        - Unsupported message type
-        - Unexpected error
+    - 处理过程中发生错误，例如：
+        - 不支持的消息类型
+        - 意外错误
 
-## Examples
+## 示例
 
-### Example 1 — Push device telemetry to edge
+### 示例 1 — 将设备遥测推送到 Edge
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-Type: `POST_TELEMETRY_REQUEST`.
+类型：`POST_TELEMETRY_REQUEST`。
 
-Data:
+数据：
 
 ```json
 {
@@ -125,7 +118,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -133,7 +126,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -141,11 +134,11 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is the same as the incoming message. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-An edge event is created and pushed to persistent storage for all edges that originator device is assigned to. The edge event contains the telemetry data and timestamp.
-When the edge instances retrieve this event, they will process it accordingly.
+创建 edge event 并推送到发起者设备分配到的所有 Edge 的持久存储。edge event 包含遥测数据和时间戳。
+Edge 实例检索此事件时将相应处理。

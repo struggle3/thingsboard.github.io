@@ -1,13 +1,13 @@
 
-[Apache Kafka](https://kafka.apache.org/){: target="_blank"} is an open source stream processing software platform.
+[Apache Kafka](https://kafka.apache.org/){: target="_blank"} 是开源流处理软件平台。
 
-Create the **docker compose file** 
+创建 **docker compose 文件** 
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following configuration lines to the file:
+将以下配置行添加到文件：
 ```
 version: '3.8'
 services:

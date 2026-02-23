@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
 title: OAuth 2.0
-description: OAuth 2.0
+description: OAuth 2.0 支持
 
 adding-domain-1:
     0:

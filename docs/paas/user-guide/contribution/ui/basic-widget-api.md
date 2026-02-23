@@ -2,7 +2,7 @@
 layout: docwithnav-paas
 assignees:
 - ikulikov
-title: Basic widget API
+title: 基础部件 API
 
 ---
 

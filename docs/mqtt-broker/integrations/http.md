@@ -1,45 +1,45 @@
 ---
 layout: docwithnav-mqtt-broker
-title: HTTP Integration
-description: TBMQ HTTP integration guide
+title: HTTP 集成
+description: TBMQ HTTP 集成指南
 
 tb-endpoint-url:
   0:
     image: /images/mqtt-broker/user-guide/ui/tb-endpoint-url-1.png
-    title: 'In your ThingsBoard Cloud instance navigate to the "Integrations" page and opne HTTP integration details. Then enable debug mode and copy "HTTP endpoint URL".'
+    title: '在 ThingsBoard Cloud 实例中进入「集成」页面并打开 HTTP 集成详情，启用调试模式并复制「HTTP endpoint URL」。'
     
 add-http-integration:
   0:
     image: /images/mqtt-broker/user-guide/ui/add-http-integration-1.png
-    title: 'Navigate to the "Integrations" page, and click "plus" icon to add a new integration.'
+    title: '进入「集成」页面，点击「+」图标添加新集成。'
   1:
     image: /images/mqtt-broker/user-guide/ui/add-http-integration-2.png
-    title: 'Select "HTTP" as the integration type and click "Next".'
+    title: '选择「HTTP」作为集成类型并点击「Next」。'
   2:
     image: /images/mqtt-broker/user-guide/ui/add-http-integration-3.png
-    title: 'Click "Next" to subscribe to the default topic "tbmq/#".'
+    title: '点击「Next」订阅默认主题「tbmq/#」。'
   3:
     image: /images/mqtt-broker/user-guide/ui/add-http-integration-4.png
-    title: 'In the field "Endpoint URL" paste the URL from the HTTP integration of your ThingsBoard Cloud.'
+    title: '在「Endpoint URL」字段中粘贴来自 ThingsBoard Cloud HTTP 集成的 URL。'
   4:
     image: /images/mqtt-broker/user-guide/ui/add-http-integration-5.png
-    title: 'Open "Advanced settings", set "Payload content type" as JSON, and click "Add".'
+    title: '打开「高级设置」，将「Payload content type」设为 JSON，点击「Add」。'
 
 send-uplink-message:
   0:
     image: /images/mqtt-broker/user-guide/ui/send-uplink-message-1.png
-    title: 'Navigate to the "WebSocket Client" page, select working connection, then click "Connect".'
+    title: '进入「WebSocket 客户端」页面，选择可用连接后点击「Connect」。'
   1:
     image: /images/mqtt-broker/user-guide/ui/send-uplink-message-2.png
-    title: 'Set topic name as "tbmq/http-integration", and click "Send" to publish message.'
+    title: '将主题名设为「tbmq/http-integration」，点击「Send」发布消息。'
     
 http-integration-result:
   0:
     image: /images/mqtt-broker/user-guide/ui/http-integration-result-1.png
-    title: 'Open ThingsBoard Cloud HTTP integration details page.'
+    title: '打开 ThingsBoard Cloud HTTP 集成详情页。'
   1:
     image: /images/mqtt-broker/user-guide/ui/http-integration-result-2.png
-    title: 'Go to the "Events" tab, the message from the TBMQ HTTP integration should be available in the table (if the debug mode was enabled when message was published).'
+    title: '进入「Events」标签页，TBMQ HTTP 集成的消息应出现在表格中（若在发布消息时已开启调试模式）。'
 
 ---
 

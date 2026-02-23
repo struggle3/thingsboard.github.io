@@ -1,8 +1,8 @@
-To add new configuration for connection to server, navigate to the "Configuration" tab.
+要添加新的服务器连接配置，请进入「配置」选项卡。
 
 ![image](/images/gateway/modbus-connector/add-new-server-connection-advanced-1-ce.png)
 
-Due to the nature of preferred way of communication between Modbus master there are 2 options how to configure this part: if using TCP, UDP or via Serial port.
+根据 Modbus 主站偏好的通信方式，有两种配置选项：使用 TCP、UDP 或串口。
 
 {% capture modbusMasterConnectionsUDPTCPSerial %}
 TCP<small></small>%,%tcp%,%templates/iot-gateway/modbus-connector/tcp-master-connections-section-advanced.md%br%

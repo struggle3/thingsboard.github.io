@@ -1,7 +1,6 @@
-**Certificate-based authentication** uses TLS so the gateway and broker verify each other.
-Set the **Path to CA certificate file** to your CA certificate (to trust the broker), **Path to client certificate file** 
-to the gateway’s client certificate, and **Path to private key file** to its private key (so the broker can authenticate the gateway). 
-Use the broker’s TLS port (typically 8883) for encrypted, production-grade security.
+**基于证书的认证**使用 TLS，使网关和 broker 相互验证。
+将**CA 证书文件路径**设为 CA 证书（用于信任 broker），**客户端证书文件路径**设为网关的客户端证书，**私钥文件路径**设为其私钥（以便 broker 认证网关）。
+使用 broker 的 TLS 端口（通常为 8883）以获得加密的生产级安全。
 
 {% assign securityBasic = '
     ===

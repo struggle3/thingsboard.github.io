@@ -1,4 +1,4 @@
-Open the Docker Compose file with ThingsBoard services:
+打开包含 ThingsBoard 服务的 Docker Compose 文件：
 
 ```text
 sudo nano docker-compose.yml
@@ -6,19 +6,19 @@ sudo nano docker-compose.yml
 
 {: .copy-code}
 
-Make sure that:
+确认文件中包含以下内容：
 
-* the following services are present in the file:
+* 以下服务：
     * trendz
     * trendz-python-executor
     * trendz-postgres
-* the following volumes are present in the file:
+* 以下卷：
     * trendz-conf
     * trendz-data
     * trendz-python-executor-conf
     * trendz-python-executor-data
     * trendz-postgres-data
 
-If any of them are missing, update your Docker Compose file according to the [ThingsBoard Docker installation instructions](/docs/user-guide/install/pe/docker#step-2-choose-thingsboard-queue-service).
+若有缺失，请按 [ThingsBoard Docker 安装说明](/docs/user-guide/install/pe/docker#step-2-choose-thingsboard-queue-service) 更新 Docker Compose 文件。
 
-Your Docker Compose file should be similar to the one shown in the instructions.
+Docker Compose 文件应与说明中示例一致。

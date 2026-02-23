@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Trendz Release Notes
-description: ThingsBoard Trendz Analytics Release Notes
+title: Trendz 发布说明
+description: ThingsBoard Trendz Analytics 发布说明
 
 ---
 

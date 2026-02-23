@@ -1,27 +1,27 @@
 ---
 layout: docwithnav-gw
-title: How to enable remote logging feature on ThingsBoard IoT Gateway
-description: How to enable remote logging feature on ThingsBoard IoT Gateway
+title: 如何在 ThingsBoard IoT Gateway 上启用远程日志功能
+description: 如何在 ThingsBoard IoT Gateway 上启用远程日志功能
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to enable remote logging and read logs from ThingsBoard IoT Gateway on your ThingsBoard platform instance.  
+本指南将帮助您在 ThingsBoard 平台实例上启用远程日志功能并读取 ThingsBoard IoT Gateway 的日志。  
 
-For purpose of this guide, we will use following things:
-1. Locally installed instance of ThingsBoard platform (How to install you can [read here](/docs/user-guide/install/installation-options/)).
-2. ThingsBoard IoT Gateway (How to install you can [read here](/docs/iot-gateway/installation/)).
+本指南将使用以下环境：
+1. 本地安装的 ThingsBoard 平台实例（安装方法见 [此处](/docs/user-guide/install/installation-options/)）。
+2. ThingsBoard IoT Gateway（安装方法见 [此处](/docs/iot-gateway/installation/)）。
 
-## Step 1. Remote logging activation and setting the logging level
+## 步骤 1：启用远程日志并设置日志级别
 
-To activate and set logging level, please follow next steps:  
+要启用并设置日志级别，请按以下步骤操作：  
    
- - Open the gateway device details in the WEB UI.  
- - Go to a tab "**Attributes**".  
- - Select **Shared Attributes** from an **Entity attribute** scope list.  
- - Click "**+**" button (add new attribute).  
+ - 在 Web 界面中打开网关设备详情。  
+ - 进入「**属性**」标签页。  
+ - 在**实体属性**范围列表中选择**共享属性**。  
+ - 点击「**+**」按钮（添加新属性）。  
  <br>
   ![](/images/gateway/add-shared-attributes-gateway.png)
  - In "Add attribute" window fill fields with the following values: 

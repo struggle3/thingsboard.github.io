@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: MQTT Client Credentials
-description: Create/Update/Delete MQTT Client Credentials
+title: MQTT 客户端凭证
+description: 创建/更新/删除 MQTT 客户端凭证
 
 ---
 

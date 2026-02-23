@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: ThingsBoard Architecture
-description: ThingsBoard IoT Platform architecture
+title: ThingsBoard 架构
+description: ThingsBoard 物联网平台架构
 redirect_from: "/docs/user-guide/rule-engine-2-0/architecture/"
 
 ---
@@ -9,103 +9,103 @@ redirect_from: "/docs/user-guide/rule-engine-2-0/architecture/"
 * TOC
 {:toc}
 
-ThingsBoard is designed to distribute workload across multiple nodes without a single point of failure.
-Each ThingsBoard node is identical and can handle request from both device and server-side applications.
+ThingsBoard 被设计为将工作负载分布到多个节点，且无单点故障。
+每个 ThingsBoard 节点都相同，可处理来自设备和服务器端应用的请求。
  
-## High-level overview
+## 高层概览
 
  ![image](/images/reference/architecture-in-brief.svg)
 
-#### Device Connectivity
+#### 设备连接
 
-ThingsBoard supports [**MQTT**](/docs/reference/mqtt-api/), [**LwM2M**](/docs/reference/lwm2m-api/) , [**CoAP**](/docs/reference/coap-api/) and [**HTTP**](/docs/reference/http-api/) protocols for device connectivity.
-It is possible to plugin support of different protocols or customize existing implementations.
+ThingsBoard 支持 [**MQTT**](/docs/reference/mqtt-api/)、[**LwM2M**](/docs/reference/lwm2m-api/)、[**CoAP**](/docs/reference/coap-api/) 和 [**HTTP**](/docs/reference/http-api/) 作为设备连接协议。
+可插件化支持不同协议或自定义现有实现。
 
 #### Rule Engine
 
-ThingsBoard [Rule Engine](/docs/user-guide/rule-engine/) allows to process messages from devices and trigger configurable processing modules called Plugins.
+ThingsBoard [Rule Engine](/docs/user-guide/rule-engine/) 用于处理来自设备的消息并触发可配置的处理模块（Plugins）。
 
-#### Core Services
+#### 核心服务
 
-ThingsBoard contains set of core services that allow managing the following entities:
+ThingsBoard 包含一套核心服务，可管理以下实体：
 
- * Devices and their credentials
- * Rule Chains and Rule Nodes
- * Tenants and customers
- * Widgets and Dashboard
- * Alarms and Events
+ * 设备及其凭据
+ * Rule Chain 与 Rule Node
+ * 租户与客户
+ * 部件与 Dashboard
+ * 告警与事件
  
-Rules are able to invoke a certain subset of this APIs. For example, a rule can create an alarm for certain device.
+规则可以调用这些 API 的特定子集。例如，规则可为某设备创建告警。
 
-#### Server-side API Gateway
+#### 服务端 API 网关
 
-Every ThingsBoard server provides REST API for registered users. 
-System Telemetry service allows to manage attributes and fetch timeseries data using websockets and REST API.
-System RPC service provides REST API to push custom commands to devices.
-Learn more about ThingsBoard REST APIs [here](/docs/reference/rest-api/)
+每个 ThingsBoard 服务器为注册用户提供 REST API。
+System Telemetry 服务可通过 WebSocket 和 REST API 管理属性和获取时序数据。
+System RPC 服务提供 REST API 向设备下发自定义命令。
+更多 ThingsBoard REST API 信息请参见[此处](/docs/reference/rest-api/)。
 
-## Actor model
+## Actor 模型
 
-[Actor model](https://en.wikipedia.org/wiki/Actor_model) enables high performance concurrent processing of messages from devices as long as server-side API calls.
-ThingsBoard uses own Actor System implementation (sharpened for our use cases) with following actor hierarchies.
+[Actor model](https://en.wikipedia.org/wiki/Actor_model) 支持高并发处理来自设备的消息以及服务端 API 调用。
+ThingsBoard 使用自研 Actor System 实现（针对使用场景优化），具有以下 Actor 层级：
 
  ![image](/images/reference/actor-system-hierarchies.svg)
 
-The brief description of each actor's functionality is listed below:
+各 Actor 功能简述如下：
 
- * **App Actor** - responsible for management of tenant actors. 
- An instance of this actor is always present in memory.
- * **Tenant Actor** - responsible for management of tenant device & rule chain actors. 
- An instance of this actor is always present in memory.
- * **Device Actor** - maintain state of the device: active sessions, subscriptions, pending RPC commands, etc. 
- Caches current device attributes in memory for performance reasons.
- An actor is created when the first message from the device is processed. The actor is stopped when there is no messages from devices for a certain time.
- * **Rule Chain Actor** - process incoming messages and dispatches them to rule node actors. 
- An instance of this actor is always present in memory.
- * **Rule Node Actor** - process incoming messages, and report results back to rule chain actor. 
- An instance of this actor is always present in memory.
+ * **App Actor** - 负责管理租户 Actor。
+ 该 Actor 实例始终常驻内存。
+ * **Tenant Actor** - 负责管理租户设备及 Rule Chain Actor。
+ 该 Actor 实例始终常驻内存。
+ * **Device Actor** - 维护设备状态：活跃会话、订阅、待处理 RPC 命令等。
+ 出于性能考虑在内存中缓存当前设备属性。
+ 当处理到来自设备的首条消息时创建 Actor；当一定时间内无设备消息时停止该 Actor。
+ * **Rule Chain Actor** - 处理收到的消息并分发给 Rule Node Actor。
+ 该 Actor 实例始终常驻内存。
+ * **Rule Node Actor** - 处理收到的消息，并将结果回报给 Rule Chain Actor。
+ 该 Actor 实例始终常驻内存。
  
-## Clustering mode
+## 集群模式
 
 ###### Service Discovery
 
-ThingsBoard uses Zookeeper for service discovery.
-All ThingsBoard nodes are identical and registered as ephemeral in Zookeeper. Apache Curator [path cache receipt](http://curator.apache.org/curator-recipes/path-cache.html) is used to keep track of all available sibling nodes.
+ThingsBoard 使用 Zookeeper 进行服务发现。
+所有 ThingsBoard 节点相同，并在 Zookeeper 中注册为临时节点。使用 Apache Curator [path cache receipt](http://curator.apache.org/curator-recipes/path-cache.html) 跟踪所有可用兄弟节点。
 
 ###### Consistent Hashing
 
-ThingsBoard adopts [consistent hashing](https://en.wikipedia.org/wiki/Consistent_hashing) to ensure scalability and availability.
-Message from Device A that is received on a particular node may be forwarded to the other node based on the hash of the device ID.
-Although this introduces certain networking overhead, it allows to process all messages from a particular device using corresponding device actor on a determined server, which introduces the following advantages:
+ThingsBoard 采用 [consistent hashing](https://en.wikipedia.org/wiki/Consistent_hashing) 来保证可扩展性与高可用。
+设备 A 在某节点收到的消息可能根据设备 ID 的哈希被转发到其他节点。
+尽管这会带来一定网络开销，但能确保同一设备的所有消息在特定服务器上由对应的 Device Actor 处理，具有以下优势：
 
- * improve cache hit rate. Device attributes and other device related data are fetched by device actor on a specific server.
- * avoid race conditions. All messages for a particular device are processed on a determined server.
- * allows targeting server-side api calls based on the device id.
+ * 提高缓存命中率。设备属性和其它设备相关数据由特定服务器上的 Device Actor 获取。
+ * 避免竞态条件。特定设备的所有消息在确定的服务器上处理。
+ * 可根据设备 ID 将服务端 API 调用路由到目标服务器。
    
-The illustration below demonstrates how ThingsBoard handles RPC request to Device D1.
-In this case, the request arrives at Server A, but D1 is connected using MQTT to Server C. 
-In the worst-case scenario, D1 Device Actor will be located on another server B that obviously does not match either A or C.
+下图演示 ThingsBoard 如何处理发往设备 D1 的 RPC 请求。
+在此场景中，请求到达服务器 A，而 D1 通过 MQTT 连接到服务器 C。
+在最坏情况下，D1 的 Device Actor 可能位于另一台服务器 B 上，与 A 和 C 都不一致。
 
  ![image](/images/reference/cluster-mode-rpc-request.svg)
 
-## Security
+## 安全
 
-### Transport encryption
+### 传输加密
 
-As a system administrator, you are able to configure ThingsBoard to use secure sockets layer for HTTP(s) and MQTT transports.
-DTLS for CoAP is not supported yet.
+作为系统管理员，可配置 ThingsBoard 在 HTTP(s) 和 MQTT 传输上使用安全套接层。
+CoAP 的 DTLS 尚未支持。
 
-### Device authentication
+### 设备认证
 
-ThingsBoard is designed to support many types of device credentials.
-Current release provides support of token based credentials for all [protocols](/docs/reference/protocols/) 
-and support of X.509 certificate based credentials for MQTT protocol. See [MQTT over SSL](/docs/user-guide/mqtt-over-ssl/) guide for more details.
+ThingsBoard 设计为支持多种设备凭据类型。
+当前版本为所有 [协议](/docs/reference/protocols/) 提供基于 Token 的凭据支持，
+并为 MQTT 协议提供基于 X.509 证书的凭据支持。详见 [MQTT over SSL](/docs/user-guide/mqtt-over-ssl/) 指南。
 
-## Third-party tools
+## 第三方工具
 
-ThingsBoard uses following main third-party projects:
+ThingsBoard 使用以下主要第三方项目：
  
- * Zookeeper - for services coordination
- * Cassandra - as a scalable and reliable database
- * Kafka (or RabbitMQ, AWS SQS, Azure Event Hub, Google PubSub) - as a scalable message queue
+ * Zookeeper - 用于服务协调
+ * Cassandra - 作为可扩展且可靠的数据库
+ * Kafka（或 RabbitMQ、AWS SQS、Azure Event Hub、Google PubSub）- 作为可扩展消息队列
 

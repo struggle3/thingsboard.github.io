@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: duplicate to group
-description: Duplicates an incoming message to every entity within a specified entity group.
+description: 将入站消息复制到指定 entity 分组中的每个 entity。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -1,16 +1,15 @@
-Every telemetry and attribute parameter has `GET` and `SET` RPC methods out of the box, so you don’t need to configure 
-them manually.
+每个遥测和属性参数都自带 `GET` 和 `SET` RPC 方法，无需手动配置。
 
-As an example, we will use ThingsBoard Modbus Demo Server, which can be run using Docker and the following command:
+我们以 ThingsBoard Modbus 演示服务器为例，可使用 Docker 运行以下命令：
 
 ```bash
 docker run -it -p 5021:5021 thingsboard/tb-gw-modbus-server:latest
 ```
 {:.copy-code}
 
-The server available at `0.0.0.0:5021`. The server has the following structure:
+服务器在 `0.0.0.0:5021` 可用。服务器结构如下：
 
-| Variable Name  | Register Type   | Data Type  | Address    |
+| 变量名  | 寄存器类型   | 数据类型  | 地址    |
 |:---------------|:----------------|------------|:-----------|
 | Temperature    | Holding         | 16int      | 0          |
 | Humidity       | Holding         | 16int      | 1          |
@@ -19,9 +18,7 @@ The server available at `0.0.0.0:5021`. The server has the following structure:
 | Relay          | Coil            | bits       | 1          |
 | -------------- | --------------- | ---------- | ---------- |
 
-We are interested in register `1`, which is a coil register. We will use this register to set the value of the
-telemetry parameter. The register is of type `bits`, so we will use `bits` type for the telemetry parameter. The 
-configuration for this telemetry will look like this:
+我们关注寄存器 `1`，这是一个线圈寄存器。我们将使用此寄存器设置遥测参数的值。该寄存器类型为 `bits`，因此遥测参数也使用 `bits` 类型。该遥测的配置如下：
 
 ```json
 {
@@ -34,14 +31,13 @@ configuration for this telemetry will look like this:
 }
 ```
 
-Let’s check the value of the relay register using the reserved `get` method. To get the current value of relay 
-register, run the query in RPC debug terminal:
+让我们使用保留的 `get` 方法检查继电器寄存器的值。要获取继电器寄存器的当前值，在 RPC 调试终端运行以下查询：
 
 ```bash
 get type=bits;functionCode=1;objectsCount=1;address=1;
 ```
 
-Response:
+响应：
 
 ```json
 {"result":{"value":false}}
@@ -49,38 +45,36 @@ Response:
 
 ![image](/images/gateway/modbus-connector/examples/reserved-rpc-result-1.png)
 
-So, the `get` method returns the current value of the relay register, and we can see that the relay is off.
+因此，`get` 方法返回继电器寄存器的当前值，可以看到继电器处于关闭状态。
 
 {% capture difference %}
-The RPC Debug Terminal is used only for example purpose, so you can use any other widget that supports RPC calls.
+RPC 调试终端仅用于示例演示，您也可以使用任何支持 RPC 调用的其他部件。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To set the value of the relay register and turn it on, run the query:
+要设置继电器寄存器的值并打开继电器，请运行以下查询：
 
 ```bash
 set type=bits;functionCode=5;objectsCount=1;address=1;value=1;
 ```
 
-Response:
+响应：
 
 ```json
 {"result":{"value":"1"}}
 ```
 
-And as you can see, from the screenshot below, the relay telemetry value has changed to `1`:
+如下方截图所示，继电器遥测值已变为 `1`：
 
 ![image](/images/gateway/modbus-connector/examples/reserved-rpc-result-2.png)
 
-Also, let’s check the value of the relay telemetry again: it is `true` 
-now because, in the Modbus connector, booleans come from integers — `0` = `false`, `1` = `true` 
-(any non-zero is `true`) — so a register value of `1` is reported as `true`.
+再次检查继电器遥测的值：现在为 `true`，因为在 Modbus 连接器中，布尔值由整数转换而来——`0` = `false`，`1` = `true`（任意非零为 `true`）——因此寄存器值 `1` 会被报告为 `true`。
 
 ```bash
 get type=bits;functionCode=3;objectsCount=1;address=1;
 ```
 
-Response:
+响应：
 
 ```json
 {"result":{"value":true}}
@@ -88,7 +82,7 @@ Response:
 
 ![image](/images/gateway/modbus-connector/examples/reserved-rpc-result-3.png)
 
-Full configuration for Modbus connector for the examples above will look like this:
+上述示例的 Modbus 连接器完整配置如下：
 
 ```json
 {

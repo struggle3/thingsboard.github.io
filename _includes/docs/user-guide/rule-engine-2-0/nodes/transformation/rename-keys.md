@@ -1,17 +1,17 @@
-Renames keys in the incoming message or its metadata based on a configured mapping.
+根据配置的映射，重命名入站消息或其 metadata 中的键。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Rename keys in** — specifies where the renaming should happen. Can be either:
-    * *Message* — rename keys inside the message **data**.
-    * *Message metadata* — rename keys inside the **metadata**.
-* **Message keys mapping** — defines how to rename keys. Each mapping contains:
-    * **Current key name** — the name of the existing key.
-    * **New key name** — the name the key will be changed to.
+* **重命名键的位置** — 指定重命名发生的位置。可为：
+    * *Message* — 在消息 **data** 内重命名键。
+    * *Message metadata* — 在 **metadata** 内重命名键。
+* **Message keys mapping** — 定义如何重命名键。每个映射包含：
+    * **当前键名** — 现有键的名称。
+    * **新键名** — 键将要改成的名称。
 
-If the current key does not exist, the mapping is skipped.
+若当前键不存在，则跳过该映射。
 
 ### JSON Schema
 
@@ -46,31 +46,31 @@ If the current key does not exist, the mapping is skipped.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Determine whether to rename keys in message **data** or **metadata**, based on the configuration.
-2. For each mapping:
-    * If the key exists in the selected source:
-        * Copy the value to the new key.
-        * Remove the old key.
-3. If at least one key was renamed:
-    * Create a new message with the updated data or metadata.
-4. If no keys were renamed:
-    * Pass the original message unchanged.
-5. If an unexpected error occurs, route the message via `Failure`.
+1. 根据配置确定在消息 **data** 还是 **metadata** 中重命名键。
+2. 对每个映射：
+    * 若键在所选源中存在：
+        * 将值复制到新键。
+        * 删除旧键。
+3. 若至少重命名一个键：
+    * 创建包含更新后 data 或 metadata 的新消息。
+4. 若无键被重命名：
+    * 原样透传原始消息。
+5. 若发生意外错误，经 `Failure` 路由消息。
 
-## Output connections
+## 输出连接
 
-* `Success`:
-    * if processing completes without exceptions (even if no keys were renamed).
-* `Failure`:
-    * if an unexpected error occurs during processing.
+* `Success`：
+    * 处理正常完成（即使未重命名任何键）时。
+* `Failure`：
+    * 处理过程中发生意外错误时。
 
-## Examples
+## 示例
 
-### Example 1 — Rename a key in message data
+### 示例 1 — 重命名消息 data 中的键
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -80,7 +80,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -91,7 +91,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -101,15 +101,15 @@ Data:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** key `temperatureCelsius` is renamed to `temperature` in the message data.
+**说明：** 消息 data 中的键 `temperatureCelsius` 被重命名为 `temperature`。
 
 ---
 
-### Example 2 — Rename a key in message metadata
+### 示例 2 — 重命名消息 metadata 中的键
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -119,7 +119,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -130,7 +130,7 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Metadata:
 
@@ -140,15 +140,15 @@ Metadata:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** key `deviceModel` is renamed to `model` in metadata.
+**说明：** metadata 中的键 `deviceModel` 被重命名为 `model`。
 
 ---
 
-### Example 3 — Key not present → no changes
+### 示例 3 — 键不存在 → 无更改
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -158,7 +158,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -169,7 +169,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -179,13 +179,13 @@ Data:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** no matching keys found in message data; original message is passed through.
+**说明：** 消息 data 中无匹配键；原始消息原样透传。
 
-### Example 4 — Misconfiguration causes key overwrite
+### 示例 4 — 配置错误导致键覆盖
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -196,7 +196,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -207,7 +207,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -217,16 +217,15 @@ Data:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** the key `temperatureCelsius` is renamed to temperature. The original `temperature` key is overwritten with the new value `21.5`.
-This behavior reflects the configured mapping and is not treated as an error.
+**说明：** 键 `temperatureCelsius` 被重命名为 `temperature`。原有的 `temperature` 键被新值 `21.5` 覆盖。此行为反映配置的映射，不作为错误处理。
 
 ---
 
-### Example 5 — Rename multiple keys (one key not found → skipped)
+### 示例 5 — 重命名多个键（一个键未找到 → 跳过）
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -237,7 +236,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -250,7 +249,7 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
 ```json
 {
@@ -259,7 +258,7 @@ Metadata:
 }
 ```
 
-**Explanation:**
-* `deviceName` is renamed to `name`
-* `deviceType` is renamed to `type`
-* `firmwareVersion` does not exist in the metadata and is skipped without error
+**说明：**
+* `deviceName` 重命名为 `name`
+* `deviceType` 重命名为 `type`
+* `firmwareVersion` 在 metadata 中不存在，跳过且无错误

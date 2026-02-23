@@ -10,95 +10,95 @@
 * TOC
 {:toc}
 
-ThingsBoard provides a powerful REST API that allows you to manage all platform entities, perform integrations, automate device provisioning, and build custom applications. 
-To simplify API exploration and testing, ThingsBoard includes built-in interactive documentation powered by [Swagger UI](https://swagger.io/){:target="_blank"}.
+ThingsBoard 提供强大的 REST API，可管理所有平台实体、执行集成、实现设备自动 provisioning 并构建自定义应用。
+为便于 API 探索与测试，ThingsBoard 内置由 [Swagger UI](https://swagger.io/){:target="_blank"} 驱动的交互式文档。
 
 ## Swagger UI
 
-Swagger UI is an interactive tool that lets you:
-- browse all available REST API endpoints
-- inspect request and response schemas
-- test API calls directly in the browser
-- authenticate and run API requests as a specific user
+Swagger UI 是交互式工具，可用来：
+- 浏览所有可用的 REST API 端点
+- 查看请求与响应 schema
+- 在浏览器中直接测试 API 调用
+- 以指定用户身份认证并执行 API 请求
 
-This makes it ideal for development, debugging, and API exploration.
+适用于开发、调试和 API 探索。
 
-## Where to find Swagger UI?
+## 在哪里找到 Swagger UI？
 
 {% if docsPrefix == null or docsPrefix == "pe/" %}
-Every ThingsBoard instance hosts its own Swagger UI page at:
+每个 ThingsBoard 实例在其地址下提供 Swagger UI 页面：
 
 ```text
 http://$THINGSBOARD_HOST:PORT/swagger-ui.html
 ```
 {: .copy-code}
 
-&#42; Replace **$THINGSBOARD_HOST:PORT** with the address of your ThingsBoard deployment.
+&#42; 将 **$THINGSBOARD_HOST:PORT** 替换为你的 ThingsBoard 部署地址。
 {% endif %}
 
 {% if docsPrefix == "pe/" %}
-The easiest way to get your account is to use [ThingsBoard Cloud](https://{{hostName}}/signup){:target="_blank"} server.
+获取账号的最简便方式是使用 [ThingsBoard Cloud](https://{{hostName}}/signup){:target="_blank"} 服务器。
 {% endif %}
 
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-Every [{{hostName}}](https://{{host}}/){:target="_blank"} instance has its own Swagger UI page.   
-Browse ThingsBoard Cloud REST API documentation by clicking the button below:
+每个 [{{hostName}}](https://{{host}}/){:target="_blank"} 实例都有独立的 Swagger UI 页面。   
+点击下方按钮浏览 ThingsBoard Cloud REST API 文档：
 
 <br>
 <p><a href="https://{{host}}/swagger-ui.html" target="_blank" class="n-button add-device">{{hostName}} REST API</a></p>
 {% endif %} 
 
-## Authentication in Swagger UI
+## Swagger UI 中的认证
 
-<b><font size="3">Automatic authentication</font></b>
+<b><font size="3">自动认证</font></b>
 
-If you are already logged in through the main ThingsBoard UI, Swagger UI automatically uses your authenticated session.
+若已通过主 ThingsBoard UI 登录，Swagger UI 将自动使用当前会话。
 
-<b><font size="3">Manual authentication</font></b>
+<b><font size="3">手动认证</font></b>
 
-You can authenticate or authorize as a different user using the **Authorize** button in the top-right corner of Swagger UI.
+可通过 Swagger UI 右上角的 **Authorize** 按钮以其他用户身份认证或授权。
 
-Steps:
-- Open **Swagger UI**
-- Click **Authorize**
-- Enter your **username** and **password**, `or` paste your **API key** In the **API key form (apiKey)** section.
-- Click **Authorize**
+步骤：
+- 打开 **Swagger UI**
+- 点击 **Authorize**
+- 输入 **username** 与 **password**，或在 **API key 表单 (apiKey)** 中粘贴 **API key**
+- 点击 **Authorize**
 
-**Note:** Only one authentication method should be used at a time.   
-If both are authorized, **JWT takes priority**.
+**注意：** 同一时间只能使用一种认证方式。   
+若两种均已授权，**JWT 优先**。
 
 {% include images-gallery.html imageCollection="swagger-ui" %}
 
-### API key authentication
+### API key 认证
 
 {% assign sinceVersion = "4.3" %}
 {% include templates/since.md %}
 
-API keys provide a simpler, automation-friendly alternative to JWT authentication.
-- **No login required:** You don&#39;t need to exchange passwords or manage token refresh loops
-- **Long-lived:** They stay active indefinitely or until the expiration date you choose
-- **Revocable:** You can easily disable a specific key
+API key 是比 JWT 更简单、更适合自动化的认证方式。
+- **无需登录：** 不用交换密码或管理 token 刷新循环
+- **长期有效：** 可持续有效或使用你设定的过期时间
+- **可撤销：** 可随时禁用指定 key
 
 {% capture difference %}
-**Note:** Use the **API keys** tab in the ThingsBoard UI to create and manage them.
-For more details, see the [full documentation](/docs/{{ docsPrefix }}user-guide/security/api-keys/){: target="_blank"}.
+**注意：** 使用 ThingsBoard UI 中的 **API keys** 标签创建和管理。
+详见 [完整文档](/docs/{{ docsPrefix }}user-guide/security/api-keys/){: target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Using API keys
+使用 API key
 
-To authenticate via the API key, include it in the X-Authorization header with the "**ApiKey**" prefix:
+通过 API key 认证时，需在 X-Authorization 请求头中以 "**ApiKey**" 前缀携带：
 
 ```text
 X-Authorization: ApiKey $YOUR_API_KEY_VALUE
 ```
 {: .copy-code}
 
-&#42; Replace **$YOUR_API_KEY_VALUE** with the API key.
+&#42; 将 **$YOUR_API_KEY_VALUE** 替换为你的 API key。
 
-**Important:** API keys should only be used over HTTPS.
+**重要：** API key 应仅在 HTTPS 下使用。
 
-Example (curl)
+示例 (curl)
 
 ```text
 curl -X GET --header 'Accept: application/json' \
@@ -108,30 +108,30 @@ curl -X GET --header 'Accept: application/json' \
 
 <hr>
 
-### JWT authentication (deprecated)
+### JWT 认证（已弃用）
 
-ThingsBoard uses [JWT](https://jwt.io/){:target="_blank"} tokens to authenticate API requests.
+ThingsBoard 使用 [JWT](https://jwt.io/){:target="_blank"} token 进行 API 请求认证。
 
-When you log in, your username and password are exchanged for two tokens:
-- **Access Token (JWT)** - A short-lived token used for API requests.
-- **Refresh Token** - When the Access Token expires, the Refresh Token allows obtaining a new Access Token without re-authentication.
+登录时，用户名和密码会换取两个 token：
+- **Access Token (JWT)** - 用于 API 请求的短期 token
+- **Refresh Token** - Access Token 过期时，可用 Refresh Token 获取新的 Access Token 而无需重新登录
 
-**Default expiration times**
-- **Access Token** is valid for **2.5 hours**.
-- **Refresh Token** is valid for **1 week**.
+**默认过期时间**
+- **Access Token** 有效期为 **2.5 小时**
+- **Refresh Token** 有效期为 **1 周**
 
 {% if docsPrefix == "pe/" or docsPrefix == null %}
-Expiration times are [configurable](/docs/user-guide/install/{{docsPrefix}}config/){:target="_blank"} in system settings:
+过期时间可在系统设置中 [配置](/docs/user-guide/install/{{docsPrefix}}config/){:target="_blank"}：
 - <span class="code-light">JWT_TOKEN_EXPIRATION_TIME</span>
 - <span class="code-light">JWT_REFRESH_TOKEN_EXPIRATION_TIME</span>
   {% endif %}
 
 <hr>
 
-<b><font size="4">How to obtain a JWT token?</font></b>
+<b><font size="4">如何获取 JWT token？</font></b>
 
 {% if docsPrefix == null or docsPrefix == "pe/" %}
-To obtain a JWT token for the user "tenant@thingsboard.org" with password "tenant" on "$THINGSBOARD_URL" (actual ThingsBoard server address), execute the following command:
+在 "$THINGSBOARD_URL"（实际 ThingsBoard 服务器地址）上，为用户 "tenant@thingsboard.org" 与密码 "tenant" 获取 JWT token，执行以下命令：
 
 ```text
 curl -X POST --header 'Content-Type: application/json' \
@@ -142,7 +142,7 @@ curl -X POST --header 'Content-Type: application/json' \
 {: .copy-code}
 {% endif %}
 {% if docsPrefix == "paas/" %}
-To obtain a JWT token for the user "your_user@company.com" with password "secret", execute the following command:
+为用户 "your_user@company.com" 与密码 "secret" 获取 JWT token，执行以下命令：
 
 ```text
 curl -X POST --header 'Content-Type: application/json' \
@@ -153,7 +153,7 @@ curl -X POST --header 'Content-Type: application/json' \
 {: .copy-code}
 {% endif %}
 {% if docsPrefix == "paas/eu/" %}
-To obtain a JWT token for the user "your_user@company.com" with password "secret", execute the following command:
+为用户 "your_user@company.com" 与密码 "secret" 获取 JWT token，执行以下命令：
 
 ```text
 curl -X POST --header 'Content-Type: application/json' \
@@ -164,25 +164,25 @@ curl -X POST --header 'Content-Type: application/json' \
 {: .copy-code}
 {% endif %}
 
-Response:
+响应：
 
 ```json
 {"token":"$YOUR_JWT_TOKEN", "refreshToken":"$YOUR_JWT_REFRESH_TOKEN"}
 ```
 {: .copy-code}
 
-Once authenticated, use the obtained JWT token in the X-Authorization header for all API requests:
+认证后，在所有 API 请求的 X-Authorization 请求头中携带获取到的 JWT token：
 
 ```text
 X-Authorization: Bearer $YOUR_JWT_TOKEN
 ```
 {: .copy-code}
 
-## Additional tools
+## 附加工具
 
-For easier integration with the ThingsBoard API, you can use ThingsBoard team client libraries:
+为便于与 ThingsBoard API 集成，可使用 ThingsBoard 官方的客户端库：
 
-- [Java REST API Client](/docs/{{docsPrefix}}reference/rest-client/){:target="_blank"} – client library written in Java to simplify consumption of the REST API.
-- [Python REST API Client](/docs/{{docsPrefix}}reference/python-rest-client/){:target="_blank"} – client library written in Python to simplify the consumption of the REST API.
+- [Java REST API Client](/docs/{{docsPrefix}}reference/rest-client/){:target="_blank"} – Java 客户端库，简化 REST API 调用
+- [Python REST API Client](/docs/{{docsPrefix}}reference/python-rest-client/){:target="_blank"} – Python 客户端库，简化 REST API 调用
 
-These clients allow you to create devices, assets, users, and other entities, as well as manage their relationships within ThingsBoard.
+这些客户端可用于创建设备、资产、用户等实体，并管理其在 ThingsBoard 中的关系。

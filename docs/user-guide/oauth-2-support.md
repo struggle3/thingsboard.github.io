@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: OAuth 2.0
-description: OAuth 2.0
+description: OAuth 2.0 认证
 
 google-credentials-for-oauth-1:
     0:

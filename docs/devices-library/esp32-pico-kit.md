@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect ESP32 PICO KIT to ThingsBoard?"
+title: "如何将ESP32 PICO KIT连接到ThingsBoard？"
 redirect_to: "/device-library/ce/esp32-pico-kit/"
 ---

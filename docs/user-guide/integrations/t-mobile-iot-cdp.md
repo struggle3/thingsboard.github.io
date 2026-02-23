@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
 title: T-Mobile – IoT CDP integration
-description: T-Mobile – IoT CDP integration guide
+description: T-Mobile IoT CDP 集成指南
 redirect_to: "/docs/user-guide/integrations/"
 ---
 

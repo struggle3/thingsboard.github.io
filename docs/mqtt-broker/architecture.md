@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: TBMQ architecture
-description: TBMQ architecture
+title: TBMQ 架构
+description: TBMQ 架构
 
 ---
 

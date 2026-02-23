@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Udoo x86 Ultra to ThingsBoard?"
+title: "如何将Udoo x86 Ultra连接到ThingsBoard？"
 redirect_to: "/device-library/ce/udoo-x86-ultra/"
 ---

@@ -1,6 +1,6 @@
 ---
 layout: partner-program
-title: Hardware Partner Program
+title: 硬件合作伙伴计划
 description:
 ---
 
@@ -10,12 +10,12 @@ description:
 
 <div id="partner-intro">
   <p>
-    ThingsBoard helps you to sell your devices by enabling interactive visualization and control of your device behavior for specific IoT use case. As a hardware manufacturer, you benefit from marketing exposure to thousands of system integrator companies that use the ThingsBoard platform as a basis for their solutions.
+    ThingsBoard 通过为特定物联网应用场景提供设备行为的交互式可视化和控制，帮助您销售设备。作为硬件制造商，您可以从面向数千家以 ThingsBoard 平台为基础构建解决方案的系统集成商公司的营销曝光中受益。
   </p>
 </div>
 
 <section id="partners-matrix">
-	<h2>Hardware Partner programs</h2>
+	<h2>硬件合作伙伴计划</h2>
 	<main>
     <div id="backg-partners-matrix">
       <div class="silver"><div class="coln"><div class="head"></div></div></div>
@@ -33,171 +33,171 @@ description:
       </thead>
       <tbody>
         <tr>
-          <th>Partner name and logo on ThingsBoard website</th>
+          <th>在 ThingsBoard 网站展示合作伙伴名称和 logo</th>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Online tutorial how to connect and use your devices with ThingsBoard prepared by Partner</th>
+          <th>由合作伙伴准备的如何将设备与 ThingsBoard 连接和使用的在线教程</th>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Online tutorial how to connect and use your devices with ThingsBoard prepared by ThingsBoard</th>
-          <td>optional *</td>
+          <th>由 ThingsBoard 准备的如何将设备与 ThingsBoard 连接和使用的在线教程</th>
+          <td>可选 *</td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Ability to use ThingsBoard Connected logo on partner website</th>
-          <td><img src="/images/pe/checked.svg" alt="checked"></td>
-          <td><img src="/images/pe/checked.svg" alt="checked"></td>
-          <td><img src="/images/pe/checked.svg" alt="checked"></td>
-        </tr>
-        <tr>
-          <th>Joint online demo of end-to-end use case</th>
+          <th>可在合作伙伴网站使用 ThingsBoard Connected 徽标</th>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Social Media Blogging</th>
+          <th>端到端应用场景的联合在线演示</th>
+          <td><img src="/images/pe/checked.svg" alt="checked"></td>
+          <td><img src="/images/pe/checked.svg" alt="checked"></td>
+          <td><img src="/images/pe/checked.svg" alt="checked"></td>
+        </tr>
+        <tr>
+          <th>社交媒体博客</th>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Joint webinars</th>
+          <th>联合网络研讨会</th>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Success stories</th>
+          <th>成功案例</th>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Technical Support</th>
-          <td>optional *</td>
-          <td>optional *</td>
-          <td>optional *</td>
+          <th>技术支持</th>
+          <td>可选 *</td>
+          <td>可选 *</td>
+          <td>可选 *</td>
         </tr>
         <tr>
-          <th>ThingsBoard Roadmap and early-access to pre-release features</th>
+          <th>ThingsBoard 路线图及预发布功能的抢先体验</th>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>      
         <tr>
-          <th>ThingsBoard Trainings</th>
+          <th>ThingsBoard 培训</th>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>    
         <tr>
-          <th>ThingsBoard Cluster and Infrastructure planning for production workloads</th>
+          <th>生产工作负载的 ThingsBoard 集群和基础设施规划</th>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked"></td>
         </tr>
         <tr>
-          <th>Demo Portal Account</th>
+          <th>演示门户账户</th>
           <td><img src="/images/pe/checked.svg" alt="checked">**</td>
           <td><img src="/images/pe/checked.svg" alt="checked">**</td>
           <td><img src="/images/pe/checked.svg" alt="checked">**</td>
         </tr>
         <tr>
-          <th>White-labeling</th>
+          <th>白标</th>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/unchecked.svg" alt="unchecked"></td>
           <td><img src="/images/pe/checked.svg" alt="checked">***</td>
         </tr>
         <tr>
-          <th>Demo dashboard development by ThingsBoard</th>
-          <td>optional*</td>
-          <td>5 hours</td>
-          <td>20 hours</td>
+          <th>由 ThingsBoard 开发演示仪表板</th>
+          <td>可选*</td>
+          <td>5 小时</td>
+          <td>20 小时</td>
         </tr>
         <tr class="table-price">
           <th></th>
-          <td>Free</td>
-          <td>$500 <p class="period">/ year</p></td>
-          <td>$2000 <p class="period">/ year</p></td>
+          <td>免费</td>
+          <td>$500 <p class="period">/ 年</p></td>
+          <td>$2000 <p class="period">/ 年</p></td>
         </tr>
         <tr>
           <th> </th>
-          <td><a href="/partners/hardware/apply/?program=silver" class="button">Apply</a></td>
-          <td><a href="/partners/hardware/apply/?program=gold" class="button">Apply</a></td>
-          <td><a href="/partners/hardware/apply/?program=platinum" class="button">Apply</a></td>
+          <td><a href="/partners/hardware/apply/?program=silver" class="button">申请</a></td>
+          <td><a href="/partners/hardware/apply/?program=gold" class="button">申请</a></td>
+          <td><a href="/partners/hardware/apply/?program=platinum" class="button">申请</a></td>
         </tr>
       </tbody>
     </table>
 	</main>
   <p class="table-description">
-    * - Additional fees may apply
-    <br>** - Tenant administrator account on ThingsBoard PE instance deployed in the cloud and dedicated to PoCs and Sales demos (partner.thingsboard.io)
-    <br>*** - Custom logos, color schemes, login pages, translations and domains on a system, tenant and customer levels
+    * - 可能收取额外费用
+    <br>** - 在云端部署、专用于 PoC 和销售演示的 ThingsBoard PE 实例上的租户管理员账户（partner.thingsboard.io）
+    <br>*** - 在系统、租户和客户级别自定义 logo、配色方案、登录页面、翻译和域名
   </p>
 </section>
 
 <div class="container faq-content">
-  <h2 id="faq" class="text-center">Frequently asked questions</h2>
+  <h2 id="faq" class="text-center">常见问题</h2>
   <div id="FAQ" class="pi-accordion">
-    <h3>Business</h3>
-    <div class="item" data-tag="h4" data-title="Who is eligible to become a Hardware Partner?">
+    <h3>业务</h3>
+    <div class="item" data-tag="h4" data-title="谁有资格成为硬件合作伙伴？">
       <div class="container">
         <p>
-          We welcome hardware manufacturers and hardware reseller companies to become ThingsBoard Partners. 
+          我们欢迎硬件制造商和硬件经销商公司成为 ThingsBoard 合作伙伴。
         </p>
       </div>
     </div>
-    <div class="item" data-tag="h4" data-title="Why should I become a Hardware Partner?">
+    <div class="item" data-tag="h4" data-title="为什么我要成为硬件合作伙伴？">
       <div class="container">
         <p>
-          You will be listed on ThingsBoard website and become visible to exisiting and new ThingsBoard users which drives new business opportunities. Becides, you will get access to ThingsBoard Partner Portal where you can connect your device to the cloud and use this portal for demonstration and sales purposes.
+          您将列在 ThingsBoard 网站上，对现有和新的 ThingsBoard 用户可见，从而获得新的商业机会。此外，您还可以访问 ThingsBoard 合作伙伴门户，将设备连接到云端，并将该门户用于演示和销售目的。
         </p>
       </div>
     </div>
-    <div class="item" data-tag="h4" data-title="Are there fees to becoming a Hardware Partner?">
+    <div class="item" data-tag="h4" data-title="成为硬件合作伙伴是否收取费用？">
       <div class="container">
         <p>
-          There are three different partnership levels listed above. Silver Partnership does not require any fees but assumes you have basic ThingsBoard knowledge and will prepare the online tutorial and demo dashboard on your own. Gold and Platinum Partnership levels introduce yearly fees and thus include our support services and help with preparing online tutorials and dashboards.
+          上述有三种不同的合作伙伴级别。白银合作伙伴不收取任何费用，但要求您具备基础的 ThingsBoard 知识并自行准备在线教程和演示仪表板。黄金和铂金合作伙伴级别收取年费，因此包括我们的支持服务以及协助准备在线教程和仪表板。
         </p>
       </div>
     </div>
-    <h3>Technical</h3>
-    <div class="item" data-tag="h4" data-title="How can I enable free trial?">
+    <h3>技术</h3>
+    <div class="item" data-tag="h4" data-title="如何启用免费试用？">
       <div class="container">
         <p>
-          See the following <a href="/docs/getting-started-guides/connectivity/" target="blank">connectivity diagram</a> to get started and contact us if you have any questions.
+          请参阅以下 <a href="/docs/getting-started-guides/connectivity/" target="blank">连接图</a> 入门，如有任何问题请联系我们。
         </p>
       </div>
     </div>
-    <div class="item" data-tag="h4" data-title="What if my device uses custom TCP or UDP based protocol instead of HTTP or MQTT?">
+    <div class="item" data-tag="h4" data-title="如果我的设备使用自定义 TCP 或 UDP 协议而非 HTTP 或 MQTT 怎么办？">
       <div class="container">
         <p>
-          Please contact us and supply your company info, numbers of devices produced and technical documentation about your protocol and we will provide multiple options how to connect your device.
+          请联系我们并提供您的公司信息、设备产量以及有关您协议的技术文档，我们将提供多种连接您设备的方案。
         </p>
       </div>
     </div>
-    <div class="item" data-tag="h4" data-title="How to connect my LoRaWAN device?">
+    <div class="item" data-tag="h4" data-title="如何连接我的 LoRaWAN 设备？">
       <div class="container">
         <p>
-          ThingsBoard supports <a href="/docs/user-guide/integrations/" target="blank">integrations</a> with popular LoRaWAN network servers like <a href="/docs/user-guide/integrations/thingpark/" target="blank">Actility ThingPark</a> and <a href="/docs/user-guide/integrations/ttn/" target="blank">TheThingsNetwork</a>.
-          You can also use some generic integrations like <a href="/docs/user-guide/integrations/http/" target="blank">HTTP</a> or <a href="/docs/user-guide/integrations/mqtt/" target="blank">MQTT</a>.
-          Once you stream data from your device to ThingsBoard, one will need to create a data converter to parse binary payload and extract meaningful information from the payload.
-          We will be able to assist you and answer possible questions, or even create the converters for you.
+          ThingsBoard 支持与流行 LoRaWAN 网络服务器的 <a href="/docs/user-guide/integrations/" target="blank">集成</a>，如 <a href="/docs/user-guide/integrations/thingpark/" target="blank">Actility ThingPark</a> 和 <a href="/docs/user-guide/integrations/ttn/" target="blank">TheThingsNetwork</a>。
+          您也可以使用一些通用集成，如 <a href="/docs/user-guide/integrations/http/" target="blank">HTTP</a> 或 <a href="/docs/user-guide/integrations/mqtt/" target="blank">MQTT</a>。
+          一旦您将设备数据流传输到 ThingsBoard，需要创建数据转换器来解析二进制有效载荷并提取有意义的信息。
+          我们能够协助您并回答可能的问题，甚至为您创建转换器。
         </p>
       </div>
     </div>
-    <div class="item" data-tag="h4" data-title="How to connect my Sigfox device?">
+    <div class="item" data-tag="h4" data-title="如何连接我的 Sigfox 设备？">
       <div class="container">
         <p>
-          ThingsBoard supports <a href="/docs/user-guide/integrations/sigfox/" target="blank">Sigfox</a> integration. Once you stream data from your Sigfox backend to ThingsBoard, one will need to create a data converter to parse binary payload and extract meaningful information from the payload. We will be able to assist you and answer possible questions, or even create the converters for you.
+          ThingsBoard 支持 <a href="/docs/user-guide/integrations/sigfox/" target="blank">Sigfox</a> 集成。一旦您将 Sigfox 后端的数据流传输到 ThingsBoard，需要创建数据转换器来解析二进制有效载荷并提取有意义的信息。我们能够协助您并回答可能的问题，甚至为您创建转换器。
         </p>
       </div>
     </div>

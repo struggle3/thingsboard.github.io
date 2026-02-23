@@ -1,26 +1,25 @@
-ThingsBoard service is running on Java 17. Follow this instructions to install OpenJDK 17:
+ThingsBoard 服务运行在 Java 17 上。请按以下说明安装 OpenJDK 17：
 
 ```bash
 sudo dnf install java-17-openjdk-headless
 ```
 {: .copy-code}
 
-Please don't forget to configure your operating system to use OpenJDK 17 by default. 
-You can configure which version is the default using the following command:
+请勿忘记将您的操作系统配置为默认使用 OpenJDK 17。您可以使用以下命令配置默认版本：
 
 ```bash
 sudo update-alternatives --config java
 ```
 {: .copy-code}
 
-You can check the installation using the following command:
+您可以使用以下命令检查安装：
 
 ```bash
 java -version
 ```
 {: .copy-code}
 
-Expected command output is:
+预期命令输出为：
 
 ```text
 openjdk version "17.x.xx"

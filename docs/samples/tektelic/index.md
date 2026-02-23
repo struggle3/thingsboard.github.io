@@ -1,15 +1,15 @@
 ---
 layout: docwithnav
-title: Connect Tektelic LoRaWAN sensors using TEKTELIC KONA Core Network Server
-description: Learn how to get data from Tektelic LoRaWAN sensors at ThingsBoard
+title: 使用 TEKTELIC KONA Core 网络服务器连接 Tektelic LoRaWAN 传感器
+description: 了解如何在 ThingsBoard 获取 Tektelic LoRaWAN 传感器数据
 
 ---
 
 * TOC
 {:toc}
 
-[Tektelic](https://tektelic.com) is a premier supplier of LoRaWAN® IoT Gateways, Sensors and custom applications.
-This guide describes how to stream data from TEKTELIC KONA Core Network Server to ThingsBoard.
+[Tektelic](https://tektelic.com) 是 LoRaWAN® 物联网网关、传感器和定制应用的优质供应商。
+本指南介绍如何将数据从 TEKTELIC KONA Core 网络服务器流式传输到 ThingsBoard。
 
 ## Prerequisites
  A gateway and a sensor that is designed to work in EU868 frequency band will be used.

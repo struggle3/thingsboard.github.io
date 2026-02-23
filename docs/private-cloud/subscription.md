@@ -2,8 +2,8 @@
 layout: common
 assignees:
 - ashvayka
-title: ThingsBoard Private Cloud subscription plans definition
-description: Entity, API and Rate Limits for the ThingsBoard Private Cloud offering
+title: ThingsBoard Private Cloud 订阅方案定义
+description: ThingsBoard Private Cloud 的实体、API 和速率限制
 
 ---
 
@@ -11,11 +11,11 @@ description: Entity, API and Rate Limits for the ThingsBoard Private Cloud offer
 * TOC
 {:toc}
 
-ThingsBoard Private Cloud provides subscription plans based on the **pay-as-you-go** model. 
-Main characteristics of the subscription plan are the number of connected devices and amount of messages they produce. 
-However, to keep the environment safe, we introduce certain Entity, [API](/docs/pe/user-guide/tenant-profiles/#api-limits--usage) and [Rate limits](/docs/pe/user-guide/tenant-profiles/#rate-limits).
+ThingsBoard Private Cloud 基于**按需付费**模型提供订阅方案。  
+订阅方案的主要参数为连接的设备数量及其产生的消息量。  
+为保障环境安全，我们对实体、[API](/docs/pe/user-guide/tenant-profiles/#api-limits--usage) 和[速率限制](/docs/pe/user-guide/tenant-profiles/#rate-limits)设置了相应限制。
 
-## Additional Features
+## 附加功能
 
 <table>
     <thead>
@@ -29,49 +29,49 @@ However, to keep the environment safe, we introduce certain Entity, [API](/docs/
     </thead>
     <tbody>
         <tr>
-            <td>Data & configuration migration</td>
+            <td>数据与配置迁移</td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
         </tr>
         <tr>
-            <td>Automatic backups</td>
+            <td>自动备份</td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
         </tr>
         <tr>
-            <td>24/7 Monitoring</td>
+            <td>24/7 监控</td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
         </tr>
         <tr>
-            <td>Support</td>
+            <td>支持</td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
         </tr>
         <tr>
-            <td>Custom data retention policies</td>
+            <td>自定义数据保留策略</td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
         </tr>
         <tr>
-            <td>Geo-region deployment choice</td>
+            <td>地理区域部署选择</td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
         </tr>
         <tr>
-            <td>Maintenance window picking</td>
+            <td>维护窗口选择</td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
@@ -99,8 +99,8 @@ However, to keep the environment safe, we introduce certain Entity, [API](/docs/
             <td><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></td>
         </tr>
         <tr>
-            <td>Architecture reviews and consults</td>
-            <td><a href="/docs/contact-us/?subject=Private%20Cloud&message=Architecture%20reviews%20and%20consults">Upon request</a></td>
+            <td>架构评审与咨询</td>
+            <td><a href="/docs/contact-us/?subject=Private%20Cloud&message=Architecture%20reviews%20and%20consults">按需提供</a></td>
             <td><a href="/docs/contact-us/?subject=Private%20Cloud&message=Architecture%20reviews%20and%20consults">Upon request</a></td>
             <td><a href="/docs/contact-us/?subject=Private%20Cloud&message=Architecture%20reviews%20and%20consults">Upon request</a></td>
             <td><a href="/docs/contact-us/?subject=Private%20Cloud&message=Architecture%20reviews%20and%20consults"><img src="/images/pricing/pricing-checkmark-icon.svg" alt="Checkmark icon" title="Option included in plan"></a></td>
@@ -108,18 +108,18 @@ However, to keep the environment safe, we introduce certain Entity, [API](/docs/
     </tbody>
 </table>
 
-## Entity Limits
+## 实体限制
 
-Please see table below to compare the entity limits of the subscription plans.
+请参阅下表对比各订阅方案的实体限制。
 
 <table>
 	<thead>
 		<tr>
-			<td><b>Parameter name</b></td>
+			<td><b>参数名称</b></td>
 			<td><b>Launch</b></td>
 			<td><b>Growth</b></td>
 			<td><b>Scale</b></td>
-			<td><b>Description</b></td>
+			<td><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -128,311 +128,309 @@ Please see table below to compare the entity limits of the subscription plans.
 			<td>5,000</td>
 			<td>25,000</td>
 			<td>50,000</td>
-			<td>Maximum number of devices</td>
+			<td>设备数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Assets</b></td>
 			<td>5,000</td>
 			<td>25,000</td>
 			<td>50,000</td>
-			<td>Maximum number of assets</td>
+			<td>资产数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Customers</b></td>
 			<td>5,000</td>
 			<td>25,000</td>
 			<td>50,000</td>
-			<td>Maximum number of customers</td>
+			<td>客户数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Users</b></td>
 			<td>5,000</td>
 			<td>25,000</td>
 			<td>50,000</td>
-			<td>Maximum number of users</td>
+			<td>用户数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Dashboards</b></td>
 			<td>1,000</td>
 			<td>5,000</td>
 			<td>10,000</td>
-			<td>Maximum number of scheduler events</td>
+			<td>仪表板数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Scheduler Events</b></td>
 			<td>1,000</td>
 			<td>5,000</td>
 			<td>10,000</td>
-			<td>Maximum number of scheduler events</td>
+			<td>调度事件数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Integrations</b></td>
 			<td>30</td>
 			<td>50</td>
 			<td>100</td>
-			<td>Maximum number of integrations</td>
+			<td>集成数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Converters</b></td>
 			<td>100</td>
 			<td>200</td>
 			<td>400</td>
-			<td>Maximum number of integrations</td>
+			<td>转换器数量上限</td>
 		</tr>
 		<tr>
 			<td><b>Rule Chains</b></td>
 			<td>50</td>
 			<td>100</td>
 			<td>150</td>
-			<td>Maximum number of rule chains</td>
+			<td>规则链数量上限</td>
 		</tr>
 	</tbody>
 </table>
 
-## API Limits
+## API 限制
 
-Please see table below to compare the API limits of the subscription plans. The values are monthly API limits, unless stated otherwise.
+请参阅下表对比各订阅方案的 API 限制。除另有说明外，数值为月度 API 限制。
 
 <table>
 	<thead>
 		<tr>
-			<td><b>Parameter name</b></td>
+			<td><b>参数名称</b></td>
 			<td><b>Launch</b></td>
 			<td><b>Growth</b></td>
 			<td><b>Scale</b></td>
-			<td><b>Description</b></td>
+			<td><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
         <tr>
-            <td>Transport messages</td>
+            <td>传输消息</td>
             <td>1B</td>
             <td>5B</td>
             <td>25B</td>
-            <td>Total number of messages received by any of the Transports (MQTT, HTTP, CoAP, etc) or Integrations</td>
+            <td>任意传输（MQTT、HTTP、CoAP 等）或集成接收的消息总数</td>
         </tr>
         <tr>
-            <td>Transport data points</td>
+            <td>传输数据点</td>
             <td>1B</td>
             <td>5B</td>
             <td>25B</td>
-            <td>Total number of key-value pairs that your telemetry or attribute transport messages contain</td>
+            <td>遥测或属性传输消息包含的键值对总数</td>
         </tr>
 		<tr>
-			<td><b>Rule Engine executions</b></td>
+			<td><b>Rule Engine 执行次数</b></td>
 			<td>5B</td>
 			<td>25B</td>
 			<td>125B</td>
-			<td>Total number of any execution of the rule node.
-Processing of a single telemetry message may cause multiple Rule Engine executions.
-The platform will also count periodic messages produced by Generator nodes, etc.</td>
+			<td>规则节点执行总次数。单条遥测消息处理可能触发多次 Rule Engine 执行。平台也会计入 Generator 节点等产生的周期性消息。</td>
 		</tr>
 		<tr>
-			<td><b>TBEL executions</b></td>
+			<td><b>TBEL 执行次数</b></td>
 			<td>10B</td>
 			<td>50B</td>
 			<td>250B</td>
-			<td>Total number of any execution of user defined functions written using TBEL. For example, processing of the “Script” filter or transformation node, invocation of the data converter, etc.</td>
+			<td>使用 TBEL 编写的用户自定义函数执行总次数。例如 Script 过滤器或转换节点处理、数据转换器调用等。</td>
 		</tr>
 		<tr>
-			<td><b>JavaScript executions</b></td>
+			<td><b>JavaScript 执行次数</b></td>
 			<td>200M</td>
 			<td>1B</td>
 			<td>5B</td>
-			<td>Total number of any execution of user defined functions written using JS. For example, processing of the “Script” filter or transformation node, invocation of the data converter, etc.</td>
+			<td>使用 JS 编写的用户自定义函数执行总次数。 例如 Script 过滤器或转换节点处理、数据转换器调用等。</td>
 		</tr>
 		<tr>
-			<td><b>Default storage TTL</b></td>
-			<td>365 days</td>
-			<td>365 days</td>
-			<td>365 days</td>
-			<td>How many days to store telemetry in the database by default. Configurable upon request.</td>
+			<td><b>默认存储 TTL</b></td>
+			<td>365 天</td>
+			<td>365 天</td>
+			<td>365 天</td>
+			<td>遥测默认在数据库中保留天数。可应要求配置。</td>
 		</tr>
 		<tr>
-			<td><b>Default alarms TTL</b></td>
-			<td>365 days</td>
-			<td>365 days</td>
-			<td>365 days</td>
-			<td>How many days to store alarms in the database by default. Configurable upon request.</td>
+			<td><b>默认告警 TTL</b></td>
+			<td>365 天</td>
+			<td>365 天</td>
+			<td>365 天</td>
+			<td>告警默认在数据库中保留天数。可应要求配置。</td>
 		</tr>
 		<tr>
-			<td><b>Default RPC TTL</b></td>
-			<td>1 week</td>
-			<td>1 week</td>
-			<td>1 week</td>
-			<td>How many days to store persistent RPC in the database by default. Configurable upon request.</td>
+			<td><b>默认 RPC TTL</b></td>
+			<td>1 周</td>
+			<td>1 周</td>
+			<td>1 周</td>
+			<td>持久化 RPC 默认在数据库中保留天数。可应要求配置。</td>
 		</tr>
 		<tr>
-			<td><b>Default notifications TTL</b></td>
-			<td>1 week</td>
-			<td>1 week</td>
-			<td>1 week</td>
-			<td>How many days to store notifications in the database by default. Configurable upon request.</td>
+			<td><b>默认通知 TTL</b></td>
+			<td>1 周</td>
+			<td>1 周</td>
+			<td>1 周</td>
+			<td>通知默认在数据库中保留天数。可应要求配置。</td>
 		</tr>
 		<tr>
-			<td><b>Default debug event TTL </b></td>
-			<td>1 week</td>
-			<td>1 week</td>
-			<td>1 week</td>
-			<td>How many days to store debug events in the database by default. Configurable upon request.</td>
+			<td><b>默认调试事件 TTL</b></td>
+			<td>1 周</td>
+			<td>1 周</td>
+			<td>1 周</td>
+			<td>调试事件默认在数据库中保留天数。可应要求配置。</td>
 		</tr>
 		<tr>
-			<td><b>New Alarms per month</b></td>
+			<td><b>每月新增告警</b></td>
 			<td>50K</td>
 			<td>75K</td>
 			<td>100K</td>
-			<td>Total number of alarms created per month.</td>
+			<td>每月创建的告警总数。</td>
 		</tr>
 		<tr>
-			<td><b>Rule Engine executions per message</b></td>
+			<td><b>每条消息 Rule Engine 执行次数</b></td>
 			<td>20</td>
 			<td>20</td>
 			<td>20</td>
-			<td>Maximum number of rule node executions to process single message.</td>
+			<td>处理单条消息的最大规则节点执行次数。</td>
 		</tr>
 		<tr>
-			<td><b>Calculated fields per entity</b></td>
+			<td><b>每实体计算字段数</b></td>
 			<td>5</td>
 			<td>5</td>
 			<td>5</td>
-			<td>Number of calculated fields per entity.</td>
+			<td>每实体的计算字段数量。</td>
 		</tr>
 		<tr>
-			<td><b>Arguments per calculated field</b></td>
+			<td><b>每计算字段参数数</b></td>
 			<td>10</td>
 			<td>10</td>
 			<td>10</td>
-			<td>Maximum number of arguments that may be used in the calculated field.</td>
+			<td>计算字段中可使用参数的最大数量。</td>
 		</tr>
 		<tr>
-			<td><b>Data points in rolling argument</b></td>
+			<td><b>滚动参数数据点数</b></td>
 			<td>1000</td>
 			<td>1000</td>
 			<td>1000</td>
-			<td>Maximum number of data points to be stored as part of the calculated field's rolling argument.</td>
+			<td>作为计算字段滚动参数存储的最大数据点数。</td>
 		</tr>
 	</tbody>
 </table>
 
-where "**K**" means 1 thousand, "**M**" means 1 million, "**B**" means 1 billion.
+其中「**K**」表示千，「**M**」表示百万，「**B**」表示十亿。
 
-## Rate Limits
+## 速率限制
 
 <table>
 	<thead>
 		<tr>
-			<td><b>Parameter name</b></td>
+			<td><b>参数名称</b></td>
 			<td><b>Launch</b></td>
 			<td><b>Growth</b></td>
 			<td><b>Scale</b></td>
-            <td><b>Description</b></td>
+            <td><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>All messages</b></td>
+			<td><b>所有消息</b></td>
 			<td>Up to <b>2K</b> per second, not exceeding <b>25K</b> per minute and capped at <b>1.2M</b> per hour</td>
 			<td>Up to <b>10K</b> per second, not exceeding <b>125K</b> per minute and capped at <b>6M</b> per hour</td>
 			<td>Up to <b>20K</b> per second, not exceeding <b>600K</b> per minute and capped at <b>30M</b> per hour</td>
-			<td>Total number of messages received by any of the transports or integrations for all devices</td>
+			<td>所有设备通过任意传输或集成接收的消息总数</td>
 		</tr>
 		<tr>
-			<td><b>All data points</b></td>
+			<td><b>所有数据点</b></td>
 			<td>Up to <b>2K</b> per second, not exceeding <b>25K</b> per minute and capped at <b>1.2M</b> per hour</td>
 			<td>Up to <b>10K</b> per second, not exceeding <b>125K</b> per minute and capped at <b>6M</b> per hour</td>
 			<td>Up to <b>20K</b> per second, not exceeding <b>600K</b> per minute and capped at <b>30M</b> per hour</td>
-			<td>Total number of data points received by any of the transports or integrations for all devices</td>
+			<td>所有设备通过任意传输或集成接收的数据点总数</td>
 		</tr>
 		<tr>
-			<td><b>Messages per device</b></td>
+			<td><b>每设备消息数</b></td>
 			<td>Up to <b>200</b> per second, not exceeding <b>6K</b> per minute and capped at <b>20K</b> per hour</td>
 			<td>Up to <b>200</b> per second, not exceeding <b>6K</b> per minute and capped at <b>20K</b> per hour</td>
 			<td>Up to <b>200</b> per second, not exceeding <b>6K</b> per minute and capped at <b>20K</b> per hour</td>
-			<td>Total number of messages received by any of the transports or integrations for each device separately</td>
+			<td>单个设备通过任意传输或集成接收的消息总数</td>
 		</tr>
 		<tr>
-			<td><b>Data points per device</b></td>
+			<td><b>每设备数据点数</b></td>
 			<td>Up to <b>200</b> per second, not exceeding <b>6K</b> per minute and capped at <b>20K</b> per hour</td>
 			<td>Up to <b>200</b> per second, not exceeding <b>6K</b> per minute and capped at <b>20K</b> per hour</td>
 			<td>Up to <b>200</b> per second, not exceeding <b>6K</b> per minute and capped at <b>20K</b> per hour</td>
-			<td>Total number of data points received by any of the transports or integrations for each device separately</td>
+			<td>单个设备通过任意传输或集成接收的数据点总数</td>
 		</tr>
 		<tr>
-			<td><b>All REST requests</b></td>
+			<td><b>所有 REST 请求</b></td>
 			<td>Up to <b>100</b> per second, not exceeding <b>2,000</b> per minute </td>
 			<td>Up to <b>100</b> per second, not exceeding <b>3,000</b> per minute </td>
 			<td>Up to <b>100</b> per second, not exceeding <b>4,000</b> per minute </td>
-			<td>Total number of REST API calls received by any of the users</td>
+			<td>任意用户接收的 REST API 调用总数</td>
 		</tr>
 		<tr>
-			<td><b>REST requests for customer</b></td>
+			<td><b>客户 REST 请求</b></td>
 			<td>Up to <b>50</b> per second, not exceeding <b>1,000</b> per minute </td>
 			<td>Up to <b>50</b> per second, not exceeding <b>1,000</b> per minute </td>
 			<td>Up to <b>50</b> per second, not exceeding <b>1,000</b> per minute </td>
-			<td>Total number of REST API calls received by any of the users belong to the particular customer</td>
+			<td>属于特定客户端的用户接收的 REST API 调用总数</td>
 		</tr>
         <tr>
-            <td>WebSocket updates per session</td>
+            <td>每会话 WebSocket 更新</td>
             <td>Up to <b>1K</b> per second,<br>not exceeding <b>10K</b> per minute</td>
             <td>Up to <b>1K</b> per second,<br>not exceeding <b>10K</b> per minute</td>
             <td>Up to <b>1K</b> per second,<br>not exceeding <b>10K</b> per minute</td>
-            <td>Total number of messages received by particular WebSocket session</td>
+            <td>特定 WebSocket 会话接收的消息总数</td>
         </tr>
         <tr>
-            <td>WebSocket sessions</td>
+            <td>WebSocket 会话</td>
             <td>1K</td>
             <td>5K</td>
             <td>10K</td>
-            <td>Maximum number of concurrent WebSocket sessions</td>
+            <td>并发 WebSocket 会话最大数量</td>
         </tr>
         <tr>
-            <td>WebSocket subscriptions</td>
+            <td>WebSocket 订阅</td>
             <td>10K</td>
             <td>50K</td>
             <td>100K</td>
-            <td>Maximum number of active subscriptions for all WebSocket sessions</td>
+            <td>所有 WebSocket 会话的活跃订阅最大数量</td>
         </tr>
         <tr>
-            <td>WebSocket sessions per customer</td>
+            <td>每客户 WebSocket 会话</td>
             <td>500</td>
             <td>500</td>
             <td>500</td>
-            <td>Maximum number of active WebSocket sessions per сustomer</td>
+            <td>每客户端的活跃 WebSocket 会话最大数量</td>
         </tr>
         <tr>
-            <td>WebSocket subscriptions per customer</td>
+            <td>每客户 WebSocket 订阅</td>
             <td>5K</td>
             <td>5K</td>
             <td>5K</td>
-            <td>Maximum number of WebSocket subscriptions per сustomer</td>
+            <td>每客户端的 WebSocket 订阅最大数量</td>
         </tr>
         <tr>
-            <td>WebSocket Sessions per user</td>
+            <td>每用户 WebSocket 会话</td>
             <td>100</td>
             <td>100</td>
             <td>100</td>
-            <td>Maximum number of WebSocket sessions per user</td>
+            <td>每用户的 WebSocket 会话最大数量</td>
         </tr>
         <tr>
-            <td>WebSocket subscriptions per user</td>
+            <td>每用户 WebSocket 订阅</td>
             <td>1K</td>
             <td>1K</td>
             <td>1K</td>
-            <td>Maximum number of WebSocket subscriptions per user</td>
+            <td>每用户的 WebSocket 订阅最大数量</td>
         </tr>
         <tr>
-            <td>WebSocket queue size per session</td>
+            <td>每会话 WebSocket 队列大小</td>
             <td>500</td>
             <td>500</td>
             <td>500</td>
-            <td>Maximum size of in-transit messages queue per session</td>
+            <td>每会话传输中消息队列的最大大小</td>
         </tr>
 		<tr>
-			<td><b>Telemetry queries</b></td>
+			<td><b>遥测查询</b></td>
 			<td>Up to <b>20K</b> per 10 seconds, not exceeding <b>60K</b> per minute </td>
 			<td>Up to <b>20K</b> per 10 seconds, not exceeding <b>60K</b> per minute </td>
 			<td>Up to <b>20K</b> per 10 seconds, not exceeding <b>60K</b> per minute </td>
-            <td>Total number of telemetry queries received by any of the users WebSocket sessions or REST API calls</td>
+            <td>任意用户的 WebSocket 会话或 REST API 调用接收的遥测查询总数</td>
 		</tr>
 	</tbody>
 </table>

@@ -1,31 +1,29 @@
-Prepares an incoming message for email dispatch. Based on the configuration and the incoming message, this node modifies the incoming message to correctly describe an email. The
-prepared message is then sent via the `Success` connection and is intended to be routed to a **send email** node, which handles the actual email dispatch.
+根据配置和入站消息，将入站消息转换为适合邮件发送的格式。准备好的消息经 `Success` 连接发送，并应路由至**发送邮件**节点进行实际投递。
 
-## Configuration
+## 配置
 
-### Email sender
+### 发件人
 
-- **From** - the sender's email address.
+- **From** — 发件人邮箱地址。
 
-### Recipients
+### 收件人
 
-- **To** - a comma-separated list of primary recipient email addresses.
-- **Cc** - a comma-separated list of carbon copy recipients.
-- **Bcc** - a comma-separated list of blind carbon copy recipients.
+- **To** — 主要收件人邮箱地址，逗号分隔。
+- **Cc** — 抄送收件人邮箱地址，逗号分隔。
+- **Bcc** — 密送收件人邮箱地址，逗号分隔。
 
-### Message subject and content
+### 邮件主题与内容
 
-- **Subject** - the subject line of the email.
-- **Mail body type** - determines how the email body is treated.
-    - *Plain text* - the body is sent as simple, unformatted text.
-    - *HTML* - the body is rendered as HTML, allowing for formatting, links, and images.
-    - *Use body type template* - the body type (HTML or plain text) is determined at runtime based on a template.
-        - **Body type template** - a template (e.g., `${useHtml}`) that should resolve to either `"true"` (for HTML) or `"false"` (for Plain text) based on the incoming message
-          data or metadata.
-- **Body** - the main content of the email.
+- **Subject** — 邮件主题行。
+- **Mail body type** — 决定邮件正文的处理方式。
+    - *Plain text* — 正文以纯文本发送，无格式。
+    - *HTML* — 正文以 HTML 渲染，支持格式、链接和图片。
+    - *Use body type template* — 正文类型（HTML 或纯文本）在运行时根据模板确定。
+        - **Body type template** — 模板（如 `${useHtml}`），应根据入站消息 data 或 metadata 解析为 `"true"`（HTML）或 `"false"`（纯文本）。
+- **Body** — 邮件正文内容。
 
 {% capture templatization_support_note %}
-**Note:** All input fields support templatization.
+**注意：** 所有输入字段均支持模板。
 {% endcapture %}
 {% include templates/info-banner.md content=templatization_support_note %}
 
@@ -87,43 +85,36 @@ prepared message is then sent via the `Success` connection and is intended to be
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node receives an incoming message.
-2. It processes all configured template fields (`From`, `To`, `Cc`, `Bcc`, `Subject`, `Body`, `Body type template`) by substituting templates with corresponding
-   values.
-3. **Special patterns** are processed in the `Subject` and `Body` fields:
-    - **Date Formatting** - you can insert the current date and time using the pattern `%d{...}`, where the content inside the braces is a Java `SimpleDateFormat` pattern (e.g.,
-      `Device Alert at %d{yyyy-MM-dd HH:mm:ss}`). The date used is the timestamp of when the message is processed.
-    - **Timezone** - The date formatting can be made timezone-aware. If the incoming message metadata contains a key named `emailTimezone` with a valid timezone ID (e.g.,
-      `Europe/Kyiv` or `America/New_York`), that timezone will be applied. Otherwise, the server's default timezone is used.
-4. The node checks the incoming message metadata for specific keys to include **attachments** or **embedded images**:
-    - `attachments` - a comma-separated string of file UUIDs (these are Blob Entity IDs from the system). Each file will be attached to the email.
-    - `reports` - a comma-separated string of report UUIDs. The system will attach the corresponding report files.
-    - `images` - a JSON string representing a map of Content-IDs (CIDs) to data URLs (e.g., `{"logo": "data:image/png;base64,..."}`). This allows you to embed images directly
-      within
-      an HTML email body using `<img src="cid:logo">`.
-5. After processing, the node constructs a message with the type `SEND_EMAIL`. The data of this new message is a JSON object containing all the email details (from, to,
-   subject, body, etc.).
-6. This new `SEND_EMAIL` message is routed via `Success` connection.
+1. 节点接收入站消息。
+2. 通过替换模板为对应值，处理所有已配置的模板字段（`From`、`To`、`Cc`、`Bcc`、`Subject`、`Body`、`Body type template`）。
+3. 在 `Subject` 和 `Body` 字段中处理**特殊模式**：
+    - **日期格式** — 可使用模式 `%d{...}` 插入当前日期时间，花括号内为 Java `SimpleDateFormat` 模式（如 `Device Alert at %d{yyyy-MM-dd HH:mm:ss}`）。使用的日期为消息处理时的时间戳。
+    - **时区** — 日期格式可支持时区。若入站消息 metadata 包含名为 `emailTimezone` 的键且为有效时区 ID（如 `Europe/Kyiv` 或 `America/New_York`），将应用该时区。否则使用服务器默认时区。
+4. 节点检查入站消息 metadata 中的特定键以包含**附件**或**内嵌图片**：
+    - `attachments` — 文件 UUID 的逗号分隔字符串（系统 Blob Entity ID）。每个文件将作为邮件附件。
+    - `reports` — 报告 UUID 的逗号分隔字符串。系统将附加对应的报告文件。
+    - `images` — 表示 Content-ID（CID）到 data URL 映射的 JSON 字符串（如 `{"logo": "data:image/png;base64,..."}`）。可在 HTML 邮件正文中使用 `<img src="cid:logo">` 内嵌图片。
+5. 处理完成后，节点构建类型为 `SEND_EMAIL` 的消息。该新消息的 data 是包含所有邮件详情（from、to、subject、body 等）的 JSON 对象。
+6. 该新 `SEND_EMAIL` 消息经 `Success` 连接路由。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - A transformed message with type `SEND_EMAIL` is sent through this connection.
-- `Failure`:
-    - The original message is sent if an error occurs during transformation.
+- `Success`：
+    - 转换后的类型为 `SEND_EMAIL` 的消息经此连接发送。
+- `Failure`：
+    - 转换过程中发生错误时发送原始消息。
 
-## Examples
+## 示例
 
-### Example 1: Preparing alarm email
+### 示例 1：准备告警邮件
 
-This example shows how to configure the node to prepare a basic alarm email when a device's temperature reading is too high.
+本示例展示当设备温度读数过高时，如何配置节点以准备基本告警邮件。
 
-**Scenario**: A device sends a message with a temperature reading. If the temperature is high, `High Temperature` alarm is created using "create alarm" node.
-Message about alarm creation is then routed to "to email" node.
+**场景**：设备发送带温度读数的消息。若温度过高，使用「创建告警」节点创建 `High Temperature` 告警。告警创建相关消息随后路由至「to email」节点。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -179,7 +170,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -193,9 +184,9 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-A message with type `SEND_EMAIL` is sent via the `Success` chain. Its data is a JSON object representing the email to be sent:
+经 `Success` 链发送类型为 `SEND_EMAIL` 的消息。其 data 为表示待发送邮件的 JSON 对象：
 
 ```json
 {
@@ -212,7 +203,4 @@ A message with type `SEND_EMAIL` is sent via the `Success` chain. Its data is a 
 }
 ```
 
-**Explanation**: The node uses substitution patterns to dynamically build the email. The subject is created by taking `${deviceType}` and `${deviceName}` from the message metadata.
-The body is constructed using values from the message data, specifically `$[details.temperatureValue]` and `$[details.temperatureThreshold]`.
-As you can see in the outgoing message, these placeholders are replaced with their corresponding values from the incoming message, resulting in a fully formed email ready for
-dispatch.
+**说明**：节点使用替换模式动态构建邮件。主题通过从消息 metadata 取 `${deviceType}` 和 `${deviceName}` 生成。正文使用消息 data 中的值构建，特别是 `$[details.temperatureValue]` 和 `$[details.temperatureThreshold]`。如出站消息所示，这些占位符被入站消息中的对应值替换，形成可发送的完整邮件。

@@ -1,7 +1,6 @@
+ThingsBoard API 由两部分组成：设备 API 和服务端 API。
 
-ThingsBoard API consists of two main parts: device API and server-side API.
-
-Device API is grouped by supported communication protocols:
+设备 API 按支持的通信协议分组：
 
 * [**MQTT API**](/docs/{{docsPrefix}}reference/mqtt-api)
 {% if docsPrefix != "edge/" and docsPrefix != "pe/edge/" %}
@@ -12,25 +11,24 @@ Device API is grouped by supported communication protocols:
 * [**LWM2M API**](/docs/{{docsPrefix}}reference/lwm2m-api)
 * [**SNMP API**](/docs/{{docsPrefix}}reference/snmp-api)
 
-[**Gateway MQTT API**](/docs/{{docsPrefix}}reference/gateway-mqtt-api) allows you to connect **existing** devices to the platform using **[ThingsBoard Gateway](/docs/iot-gateway/what-is-iot-gateway/)**
-or implement your own gateway.
+[**Gateway MQTT API**](/docs/{{docsPrefix}}reference/gateway-mqtt-api) 可通过 **[ThingsBoard Gateway](/docs/iot-gateway/what-is-iot-gateway/)** 将**既有**设备接入平台，或实现自有网关。
 
 {% if docsPrefix != "edge/" and docsPrefix != "pe/edge/" %}
 
-Server-side API is available as REST API:
+服务端 API 以 REST API 形式提供：
 
-* [**Administration REST API**](/docs/{{docsPrefix}}reference/rest-api) - The server-side core APIs.
-* [**Attributes query API**](/docs/{{docsPrefix}}user-guide/attributes/#data-query-api) - The server-side APIs provided by [Telemetry Service](/docs/{{docsPrefix}}user-guide/attributes/).
-* [**Timeseries query API**](/docs/{{docsPrefix}}user-guide/telemetry/#data-query-api) - The server-side APIs provided by [Telemetry Service](/docs/{{docsPrefix}}user-guide/telemetry/).
-* [**RPC API**](/docs/{{docsPrefix}}user-guide/rpc/#server-side-rpc-api) - The server-side APIs provided by [RPC Service](/docs/{{docsPrefix}}user-guide/rpc/).
+* [**Administration REST API**](/docs/{{docsPrefix}}reference/rest-api) - 服务端核心 API。
+* [**Attributes query API**](/docs/{{docsPrefix}}user-guide/attributes/#data-query-api) - [Telemetry Service](/docs/{{docsPrefix}}user-guide/attributes/) 提供的服务端 API。
+* [**Timeseries query API**](/docs/{{docsPrefix}}user-guide/telemetry/#data-query-api) - [Telemetry Service](/docs/{{docsPrefix}}user-guide/telemetry/) 提供的服务端 API。
+* [**RPC API**](/docs/{{docsPrefix}}user-guide/rpc/#server-side-rpc-api) - [RPC Service](/docs/{{docsPrefix}}user-guide/rpc/) 提供的服务端 API。
 * [**REST Client**](/docs/{{docsPrefix}}reference/rest-client)
 * [**Python REST Client**](/docs/{{docsPrefix}}reference/python-rest-client)
 * [**Dart API Client**](/docs/{{docsPrefix}}reference/dart-client)
 
-Software development kits:
+软件开发套件：
 
-* [**Python Client SDK**](/docs/{{docsPrefix}}reference/python-client-sdk) - Software development kit for client-side integration of your Python projects.
-* [**MicroPython Client SDK**](/docs/reference/micropython-client-sdk) - Software development kit for client-side integration of your MicroPython projects.
-* [**CircuitPython Client SDK**](/docs/reference/circuitpython-client-sdk) - Software development kit for client-side integration of your CircuitPython projects.
+* [**Python Client SDK**](/docs/{{docsPrefix}}reference/python-client-sdk) - 用于 Python 项目客户端集成的软件开发套件。
+* [**MicroPython Client SDK**](/docs/reference/micropython-client-sdk) - 用于 MicroPython 项目客户端集成的软件开发套件。
+* [**CircuitPython Client SDK**](/docs/reference/circuitpython-client-sdk) - 用于 CircuitPython 项目客户端集成的软件开发套件。
 
 {% endif %}

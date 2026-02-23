@@ -1,60 +1,50 @@
 * TOC
 {:toc}
 
-This guide will help you to get familiar with ThingsBoard configuration files and parameters. We **recommend** to
-configure ThingsBoard using environment variables. This way you do not need to merge the configuration files when new
-platform release arrives. List of available configuration parameters and corresponding environment variables is
-located {% if docsPrefix == null %}[here](/docs/user-guide/install/config/){% endif %}{% if docsPrefix == "pe/" %}[here](/docs/user-guide/install/pe/config/){% endif %}.
+本指南帮助您熟悉 ThingsBoard 配置文件与参数。我们**建议**使用环境变量配置 ThingsBoard，这样在新平台版本发布时无需合并配置文件。可用配置参数及对应环境变量列表位于 {% if docsPrefix == null %}[此处](/docs/user-guide/install/config/){% endif %}{% if docsPrefix == "pe/" %}[此处](/docs/user-guide/install/pe/config/){% endif %}。
 
-## How to change configuration parameters?
+## 如何修改配置参数？
 
-### Monolithic deployment on Linux
+### Linux 单体部署
 
-If ThingsBoard is installed on **Linux** as a **monolithic application**, you may specify the environment variables in
-the thingsboard.conf file:
+若 ThingsBoard 在 **Linux** 上以**单体应用**形式安装，可在 thingsboard.conf 中指定环境变量：
 
 ```bash
 sudo nano /usr/share/thingsboard/conf/thingsboard.conf
 ```
 
-Use simple example below to add new environment variable 'HTTP_BIND_PORT' with value '8081'.
+参考以下简单示例，添加新环境变量 'HTTP_BIND_PORT'，值为 '8081'。
 
 ```bash
 ...
 export HTTP_BIND_PORT=8081
 ```
 
-### Monolithic deployment on Windows
+### Windows 单体部署
 
-If ThingsBoard is installed on **Windows** as a **monolithic application**, you may specify the environment variables in
-the thingsboard.yml file located in the following directory:
+若 ThingsBoard 在 **Windows** 上以**单体应用**形式安装，可在以下目录的 thingsboard.yml 中指定环境变量：
 
 ```bash
 YOUR_INSTALL_DIR/conf
 ```
 
-The configuration file is written in YAML.
+配置文件采用 YAML 格式。
 
-All configuration parameters have corresponding environment variable name and default value. In order to change
-configuration parameter you can simply change it's default value. For example:
+所有配置参数都有对应的环境变量名和默认值。要修改配置参数，只需修改其默认值即可。例如：
 
 ```bash
 server:
   address: "${HTTP_BIND_ADDRESS:0.0.0.0}"
 ```
 
-In this case, *'HTTP_BIND_ADDRESS'* is environment variable name and *'0.0.0.0'* is a default value.
+本例中，*'HTTP_BIND_ADDRESS'* 为环境变量名，*'0.0.0.0'* 为默认值。
 
-### Docker based deployment
+### Docker 部署
 
-If ThingsBoard is installed in a docker compose environment, you may edit the scripts and add environment variables for
-the corresponding containers.
-See [docker documentation](https://docs.docker.com/compose/environment-variables/#/the-envfile-configuration-option) for
-more details.
+若 ThingsBoard 在 docker compose 环境中安装，可编辑脚本并为对应容器添加环境变量。
+详见 [Docker 文档](https://docs.docker.com/compose/environment-variables/#/the-envfile-configuration-option)。
 
-### K8S based deployment
+### K8S 部署
 
-If ThingsBoard is installed in a K8S environment, you may edit the scripts and add environment variables for the
-corresponding deployments/stateful sets.
-See [K8S documentation](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)
-for more details.
+若 ThingsBoard 在 K8S 环境中安装，可编辑脚本并为对应 deployment/stateful set 添加环境变量。
+详见 [K8S 文档](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。

@@ -1,29 +1,29 @@
-- title: Filter nodes
-  description: Filter and route messages based on different conditions
+- title: 过滤节点
+  description: 根据不同条件过滤和路由消息
   img: /images/nodes/node-filter.svg
   link: /docs/user-guide/rule-engine-2-0/nodes/filter/
-- title: Enrichment nodes
-  description: Enrich messages with information stored in DB
+- title: 丰富节点
+  description: 用数据库中存储的信息丰富消息
   img: /images/nodes/node-enrichment.svg
   link: /docs/user-guide/rule-engine-2-0/nodes/enrichment/
-- title: Transformation nodes
-  description: Modify existing messages or create new ones
+- title: 转换节点
+  description: 修改现有消息或创建新消息
   img: /images/nodes/node-transform.svg
   link: /docs/user-guide/rule-engine-2-0/nodes/transformation/
-- title: Action nodes
-  description: Perform various actions based on configuration and message
+- title: 动作节点
+  description: 根据配置和消息执行各类操作
   img: /images/nodes/node-action.svg
   link: /docs/user-guide/rule-engine-2-0/nodes/action/
-- title: External nodes
-  description: Interact with external systems
+- title: 外部节点
+  description: 与外部系统交互
   img: /images/nodes/node-external.svg
   link: /docs/user-guide/rule-engine-2-0/nodes/external/
-- title: Flow nodes
-  description: Control message flow
+- title: 流控节点
+  description: 控制消息流
   img: /images/nodes/node-flow.svg
   link: /docs/user-guide/rule-engine-2-0/nodes/flow/
-- title: Analytics nodes
-  description: Aggregate data
+- title: 分析节点
+  description: 聚合数据
   img: /images/nodes/node-analytics.svg
   link: /docs/user-guide/rule-engine-2-0/nodes/analytics/
   pe-only: true

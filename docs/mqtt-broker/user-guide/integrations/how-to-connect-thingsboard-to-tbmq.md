@@ -2,13 +2,13 @@
 layout: docwithnav-mqtt-broker
 assignees:
 - stitenko
-title: Integration with ThingsBoard
-description: Integration guide of TBMQ with ThingsBoard
+title: 与 ThingsBoard 集成
+description: TBMQ 与 ThingsBoard 集成指南
 
 create-client-credentials:
     0:
         image: /images/mqtt-broker/user-guide/integrations/how-to-connect-tbqm-to-thingsboard/tbmq-add-client-credentials-1-pe.png
-        title: 'Navigate to "Credentials" tab, click on the "plus" icon in the top right corner of the table;'
+        title: '进入「凭证」标签页，点击表格右上角「+」图标；'
     1:
         image: /images/mqtt-broker/user-guide/integrations/how-to-connect-tbqm-to-thingsboard/tbmq-add-client-credentials-2-pe.png
         title: 'Input client credentials name, select client type. Enable "Basic" authentication type.'

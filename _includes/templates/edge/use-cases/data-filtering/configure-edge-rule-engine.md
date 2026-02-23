@@ -1,20 +1,20 @@
-We will update “Edge Root Rule Chain” that will be saving on the edge 10 sensor readings. In the rule chain we add rule node that transforms incoming messages and pushes to the cloud message only with distance readings. Here is the final configuration of the edge root rule chain:
+我们将更新「Edge Root Rule Chain」，使其在 Edge 上保存 10 个传感器读数。在规则链中添加规则节点，用于转换传入消息，仅将包含 distance 读数的消息推送至云端。以下是 Edge root 规则链的最终配置：
 
 {% include images-gallery.html imageCollection="rootRuleChainPreview" %}
 
-In the next steps, we will create a [TBEL](https://thingsboard.io/docs/user-guide/tbel/) node to filter data. The [TBEL](https://thingsboard.io/docs/user-guide/tbel/) script language node will create an empty object *newMsg*, 
-add a property named “distance” with the corresponding value from the “In-vehicle monitoring system”, and then send the *newMsg* object as a new message.
+下一步将创建 [TBEL](https://thingsboard.io/docs/user-guide/tbel/) 节点进行数据过滤。[TBEL](https://thingsboard.io/docs/user-guide/tbel/) 脚本语言节点将创建空对象 *newMsg*，
+添加名为「distance」的属性，其值来自「In-vehicle monitoring system」，然后将 *newMsg* 作为新消息发送。
 
 {% highlight javascript %}
 var newMsg = {};
 newMsg.distance = msg.distance;
 return { msg: newMsg, metadata: metadata, msgType: msgType }; {% endhighlight %}
 
-Here are the steps to update the default Edge "Root Rule Chain" with the provided rule chain:
+以下为使用所提供的规则链更新默认 Edge「Root Rule Chain」的步骤：
 
 {% include images-gallery.html imageCollection="updateRootRuleChain" showListImageTitles="true" %}
 
-Now let's open ThingsBoard **Edge** UI to see updated Root Rule Chain:
+现在打开 ThingsBoard **Edge** UI 查看更新后的 Root Rule Chain：
 
 {% include images-gallery.html imageCollection="updateRootRuleChainEdge" showListImageTitles="true" %}
 

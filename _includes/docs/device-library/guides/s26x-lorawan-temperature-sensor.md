@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.ezurio.com/iot-devices/lorawan-iot-devices/rs26x-sensor" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -10,7 +10,7 @@
   '
   %}
 
-## Introduction
+## 概述
 
 [The Sentrius™ RS26x]({{deviceVendorLink}}){: target="_blank"} s a battery powered IP67 temperature sensor platform that delivers HACCP level temperature monitoring with real time alerting for your food safety compliance. In addition to ensuring product safety, these intelligent devices avoid inventory loss, improve facility efficiency and save you time and money in automated day to day operations.  
 
@@ -18,14 +18,14 @@ They are available in two variants: One with an internal temperature sensor, and
 
 {% assign feature = "Platform Integrations" %}{% include templates/pe-feature-banner.md %}
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前，需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Device connection
+## 设备连接
 
 Please follow the official RS26x Getting Started Guide: [Connecting RS26x to The Things Stack v3](https://www.ezurio.com/documentation/quick-start-guide-connecting-rs26x-to-the-things-stack-v3){: target="_blank"} and the official [RS26x User Guide](https://www.ezurio.com/documentation/user-guide-rs26x-series){: target="_blank"} to configure the sensor properly and connect it to The Things Stack.
 
@@ -101,7 +101,7 @@ Log in to **ThingsBoard** by following [this link](https://thingsboard.io/instal
 
 ## Adding the Data Converter
 
-The first thing to add would be the uplink data converter to convert the incoming data from TTN into a usable format for Thingsboard dashboard widgets.  
+The first thing to add would be the uplink data converter to convert the incoming data from TTN into a usable format for Thingsboard dashboard 部件。  
 
 - Navigate to **Data converter** in the **Integrations center**.  
 
@@ -181,11 +181,11 @@ Navigate to Dashboard and click "**+**".
 
 ![image](/images/devices-library/ready-to-go-devices/s26x-lorawan/image-20250917-133720.png)
 
-This opens a new, empty dashboard where you can start adding widgets.
+This opens a new, empty dashboard where you can start adding 部件。
 
 ![image](/images/devices-library/ready-to-go-devices/s26x-lorawan/image-20250917-133818.png)
 
-Go to **Cards** widgets bundle and select a **Simple Value and chart card** widget.
+Go to **Cards** 部件 bundle and select a **Simple Value and chart card** 部件。
 
 ![image](/images/devices-library/ready-to-go-devices/s26x-lorawan/image-20250917-133852.png)
 
@@ -193,16 +193,16 @@ Select our device as data source and the data key should be temperature. Feel fr
 
 ![image](/images/devices-library/ready-to-go-devices/s26x-lorawan/image-20250917-152017.png)
 
-You can now adjust the widget size or explore the advanced settings, for example, to add an extra decimal place.
+You can now adjust the 部件 size or explore the advanced settings, for example, to add an extra decimal place.
 
-Try adding other widgets showing other telemetry data like RSSI, SNR or the used spreading factor as indication of the link quality.
+Try adding other 部件 showing other telemetry data like RSSI, SNR or the used spreading factor as indication of the link quality.
 
 ![image](/images/devices-library/ready-to-go-devices/s26x-lorawan/image-20251110-103326.png)
 
-## Conclusion
+## 总结
 
 Now you can easily connect your RS26x LoRaWAN temperature sensor and start sending data to **ThingsBoard**.  
 
-To go further, explore the [ThingsBoard documentation](https://thingsboard.io/docs/pe/){:target="_blank"} to learn more about key features, such as creating more [dashboards](https://thingsboard.io/docs/pe/user-guide/dashboards/){:target="_blank"} and leveragin additional widgets to visualize your telemetry, or setting up [alarm rules](https://thingsboard.io/docs/pe/user-guide/alarm-rules/){:target="_blank"} to monitor device behavior in real time.
+To go further, explore the [ThingsBoard documentation](https://thingsboard.io/docs/pe/){:target="_blank"} to learn more about key features, such as creating more [dashboards](https://thingsboard.io/docs/pe/user-guide/dashboards/){:target="_blank"} and leveragin additional 部件 to visualize your telemetry, or setting up [alarm rules](https://thingsboard.io/docs/pe/user-guide/alarm-rules/){:target="_blank"} to monitor device behavior in real time.
 
 {% include add-device-banner.liquid %}

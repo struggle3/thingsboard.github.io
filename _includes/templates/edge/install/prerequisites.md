@@ -4,9 +4,9 @@
 {% assign appPrefix = "Community Edition" %}
 {% endif %}
 
-## Prerequisites
+## 前置条件
 
-To start running **ThingsBoard {{appPrefix}} Edge**, you will need an active **ThingsBoard {{appPrefix}} account** that supports **Edge** functionality.
+要运行 **ThingsBoard {{appPrefix}} Edge**，需具备支持 **Edge** 功能的活跃 **ThingsBoard {{appPrefix}} 账号**。
 
 {% if docsPrefix == 'pe/edge/' %}
 {% include templates/edge/obtain-pe-cloud.md %}
@@ -16,37 +16,37 @@ To start running **ThingsBoard {{appPrefix}} Edge**, you will need an active **T
 
 {% include templates/edge/install/hardware-requirements.md %}
 
-### Deploying a New Edge Instance
+### 部署新 Edge 实例
 
-To create a new **Edge**:
+要创建新的 **Edge**：
 
 {% if docsPrefix == 'pe/edge/' %}
 {% assign addEdge = '
     ===
         image: /images/pe/edge/installation-add-edge-item-1.png,
-        title: Sign in to your **ThingsBoard PE** instance and navigate to the **Edge Management > Instances** section. Click the **"+"** icon in the top right corner and select the **"Add new edge"** option.
+        title: 登录 **ThingsBoard PE** 实例，进入 **Edge Management > Instances** 区域。点击右上角 **"+"** 图标并选择 **"Add new edge"**。
     ===
         image: /images/pe/edge/installation-add-edge-item-2.png,
-        title: Enter a name for the Edge you are creating. For example, "My New Edge". **If needed**, update the **cloud endpoint**. 
-* If the **Edge** runs in a [Docker container](https://docs.docker.com/get-started/docker-overview/){:target="_blank"}, **do not** use “localhost” as the endpoint. Instead, use the **IP address** of the machine where **ThingsBoard PE** is hosted and accessible by the Edge container. For example, http://10.7.2.143:8080.
-* If you are using the **ThingsBoard Cloud**, there’s no need to change this setting — keep it as is.
-* Click the **"Add"** button to confirm the addition of the **Edge instance**. 
+        title: 输入要创建的 Edge 名称，如 "My New Edge"。**如需要**，更新 **cloud endpoint**。 
+* 若 **Edge** 运行在 [Docker 容器](https://docs.docker.com/get-started/docker-overview/){:target="_blank"}中，**不要**使用 "localhost" 作为endpoint，应使用 **ThingsBoard PE** 所在且 Edge 容器可访问的机器 **IP 地址**，如 http://10.7.2.143:8080。
+* 若使用 **ThingsBoard Cloud**，则无需修改此设置。
+* 点击 **"Add"** 按钮以确认添加 **Edge instance**。 
 
     ===
         image: /images/pe/edge/installation-add-edge-item-3.png,
-        title: Your new **Edge** is created and will appear at the top of the list, as entries are sorted by creation time by default.
+        title: 新 **Edge** 已创建，将出现在列表顶部（默认按创建时间排序）。
 '%}
 {% else %}
 {% assign addEdge = '
     ===
         image: /images/edge/installation-add-edge-item-1.png,
-        title: Sign in to your **ThingsBoard CE** instance and navigate to the **Edge Management > Instances** section. Click the **"+"** icon in the top right corner and select the **"Add new edge"** option.
+        title: 登录 **ThingsBoard CE** 实例，进入 **Edge Management > Instances** 区域。点击右上角 **"+"** 图标并选择 **"Add new edge"**。
     ===
         image: /images/edge/installation-add-edge-item-2.png,
-        title: Enter a name for the Edge you are creating. For example, "My New Edge". Click the **"Add"** button to confirm the addition of the **Edge instance**.
+        title: 输入要创建的 Edge 名称，如 "My New Edge"。点击 **"Add"** 按钮以确认添加 **Edge instance**。
     ===
         image: /images/edge/installation-add-edge-item-3.png,
-        title: Your new **Edge** is created and will appear at the top of the list, as entries are sorted by creation time by default.
+        title: 新 **Edge** 已创建，将出现在列表顶部（默认按创建时间排序）。
 '%}
 {% endif %}
 

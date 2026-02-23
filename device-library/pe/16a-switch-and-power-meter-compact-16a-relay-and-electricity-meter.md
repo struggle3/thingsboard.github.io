@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect 16A Switch & Power Meter compact 16A relay and electricity meter to ThingsBoard?
-category: Other devices
+title: 如何将 16A Switch & Power Meter compact 16A relay and electricity meter 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: MClimate
 hasIntegrationDeviceConfiguration: true

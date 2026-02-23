@@ -1,14 +1,14 @@
-The "attributeUpdates" configuration allows you to set up the format of the corresponding attribute data that will be sent to the BACnet device.
+"attributeUpdates" 配置用于设置将发送到 BACnet 设备的对应属性数据格式。
 
-| **Parameter** | **Description**                                    |
+| **参数** | **描述**                                    |
 |---------------|----------------------------------------------------|
-| key           | Name of the shared attribute on platform instance. |
-| objectType    | Object type in the BACnet device.                  |
-| objectId      | Object id in the BACnet device.                    |
-| propertyId    | Property id in the BACnet device.                  |
+| key           | 平台实例上的共享属性名称。 |
+| objectType    | BACnet 设备中的对象类型。                  |
+| objectId      | BACnet 设备中的对象 ID。                    |
+| propertyId    | BACnet 设备中的属性 ID。                  |
 | ---           | ---                                                |
 
-This subsection in configuration file looks like:
+配置文件中该子节示例如下：
 
 ```json
 "attributeUpdates": [

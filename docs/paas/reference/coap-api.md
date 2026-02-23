@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: CoAP Device API Reference 
-description: Supported CoAP API Reference for IoT Devices
+title: CoAP 设备 API 参考
+description: IoT 设备支持的 CoAP API 参考
 redirect_from: "/docs/paas/reference/coap-api"
 
 server-side-rpc:

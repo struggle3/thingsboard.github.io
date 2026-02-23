@@ -1,101 +1,101 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-**ThingsBoard** offers two distinct deployment options: **ThingsBoard Edge** and **ThingsBoard Cloud**.
+**ThingsBoard** 提供两种不同的部署选项：**ThingsBoard Edge** 和 **ThingsBoard Cloud**。
 
-**ThingsBoard Edge** is designed specifically for local, distributed data processing, enabling data analysis and management directly at the source of data generation. This approach allows for local processing, storage, and immediate response to critical situations, even without a continuous connection to the central server. For more information, see the [What is ThingsBoard Edge](/docs/{{docsPrefix}}getting-started-guides/what-is-edge/){: target="_blank"} article.
+**ThingsBoard Edge** 专为本地分布式数据处理而设计，可在数据产生源头直接进行数据分析与管理。这种方式支持本地处理、存储以及对关键情况的即时响应，即使无需与中央服务器保持持续连接。更多信息，请参阅 [什么是 ThingsBoard Edge](/docs/{{docsPrefix}}getting-started-guides/what-is-edge/){: target="_blank"} 文章。
 
-In contrast, **ThingsBoard Cloud** is a fully managed, scalable, and fault-tolerant platform hosted in the cloud. The devices connected to the cloud transfer data over the internet. It is perfect for centralized data collection, processing, and management. For more information, see the [What is ThingsBoard](/docs/{{docsPrefix}}getting-started-guides/what-is-edge/){: target="_blank"} article.
+相比之下，**ThingsBoard Cloud** 是托管于云端的全托管、可扩展且具备容错能力的平台。连接到云端的设备通过互联网传输数据，适用于集中式数据采集、处理和管理。更多信息，请参阅 [What is ThingsBoard](/docs/{{docsPrefix}}getting-started-guides/what-is-edge/){: target="_blank"} 文章。
 
-### The Key Differences Between Edge and Cloud 
+### Edge 与 Cloud 的主要区别
 
-Although **Edge is designed similarly to Cloud**, the main difference lies **in the location of data processing**:
-* **Edge** stores and processes data **locally** on the edge device.
-* **Cloud** stores and processes data **centrally** in the cloud.
+尽管 **Edge 的设计与 Cloud 相似**，主要区别在于 **数据处理的部署位置**：
+* **Edge** 在边缘设备上 **本地** 存储和处理数据。
+* **Cloud** 在云端 **集中** 存储和处理数据。
 
-**Connectivity requirements** also differ: 
-* Devices connected to the **Edge** can operate over a local area network (LAN) **without requiring cloud connectivity**.
-* Devices connected to the **Cloud** are **require internet connectivity** to communicate with the platform.
+**连接要求** 也有所不同：
+* 连接到 **Edge** 的设备可在局域网（LAN）内运行，**无需云端连接**。
+* 连接到 **Cloud** 的设备需要 **互联网连接** 才能与平台通信。
 
-**Cluster deployment** refers to the deployment in a distributed architecture, where multiple nodes (instances) work together to ensure scalability, fault tolerance, and high availability.
-* The older versions of **Edge do not support cluster deployment**. It is designed to operate, process and analyze data locally before synchronizing with the central ThingsBoard server.
-* Starting with release 4.0 **Edge supports clustering**. Multiple Edge nodes can be clustered to provide high availability. If one node fails, the others can seamlessly continue to handle workloads. 
-* **Cloud supports cluster deployment** and is crucial for handling large-scale IoT applications with numerous devices and high data throughput.
+**集群部署** 指在分布式架构中的部署方式，多个节点（实例）协同工作，以实现可扩展性、容错性和高可用性。
+* 早期版本的 **Edge 不支持集群部署**。其设计为在本地运行、处理和分析数据后再与中央 ThingsBoard 服务器同步。
+* 从 4.0 版本起 **Edge 支持集群**。多个 Edge 节点可组成集群以实现高可用性。若一个节点故障，其他节点可无缝继续处理工作负载。
+* **Cloud 支持集群部署**，对处理大规模物联网应用（设备众多、数据吞吐量高）至关重要。
 
-## Synchronization Architecture
+## 同步架构
 
-**ThingsBoard Edge** and **ThingsBoard Cloud** communicate using the [gRPC (Remote Procedure Call) protocol](https://grpc.io/){: target="_blank"}. This communication channel allows for efficient data synchronization between edge devices and the cloud server, enabling a seamless flow of messages while minimizing overhead and latency.
+**ThingsBoard Edge** 与 **ThingsBoard Cloud** 通过 [gRPC（远程过程调用）协议](https://grpc.io/){: target="_blank"} 通信。该通信通道支持边缘设备与云端服务器之间的高效数据同步，实现无缝消息流，同时最大限度地降低开销和延迟。
 
-To optimize this process, messages are serialized using [Protocol Buffers (ProtoBuf)](https://github.com/protocolbuffers/protobuf){: target="_blank"}.
+为优化此过程，消息使用 [Protocol Buffers (ProtoBuf)](https://github.com/protocolbuffers/protobuf){: target="_blank"} 进行序列化。
 
-All messages sent from **ThingsBoard Edge** to **ThingsBoard Cloud** are stored in a local **PostgreSQL** table **(cloud_event table)** prior to transmission. Starting with the **3.9 release**, these events can be stored in **Kafka topics** (in case Kafka is used as a queue). This allows **ThingsBoard Edge** to operate without connectivity to the Cloud. Once a connection is established, all messages in the local **cloud_event/ts_cloud_event tables (or Kafka topic)** are sent to the **Cloud** and marked as successfully transferred.
+从 **ThingsBoard Edge** 发送到 **ThingsBoard Cloud** 的所有消息在传输前会先存储在本地 **PostgreSQL** 表 **（cloud_event 表）** 中。从 **3.9 版本**起，这些事件可存储在 **Kafka 主题** 中（当使用 Kafka 作为队列时）。这样 **ThingsBoard Edge** 可在无法连接 Cloud 时继续运行。连接建立后，本地 **cloud_event/ts_cloud_event 表（或 Kafka 主题）** 中的所有消息将发送到 **Cloud**，并标记为已成功传输。
 
-To view the list of messages transferred from the **Cloud** to the **Edge**, go to the **Edge management > Instances** section of your Cloud (Server), click on the **Edge** and select the **"Downlinks"** tab:
+要查看从 **Cloud** 传输到 **Edge** 的消息列表，请进入 Cloud（Server）的 **Edge management > Instances** 区域，点击 **Edge** 并选择 **"Downlinks"** 选项卡：
 
 {% include images-gallery.html imageCollection="downlinks" %}
 
-### Force Synchronization Procedure
+### 强制同步流程
 
-During a network outage, or some other communication problem **ThingsBoard Edge** could become out of sync from the **Cloud**. The Edge instance continues operating independently, collecting telemetry data, processing device events, and applying local rules. However, this data and state changes does not reach the Cloud, leading to inconsistencies.
+在网络中断或其他通信故障期间，**ThingsBoard Edge** 可能与 **Cloud** 不同步。Edge 实例会继续独立运行，收集遥测数据、处理设备事件并应用本地规则。然而，这些数据和状态变更无法到达 Cloud，导致不一致。
 
-To ensure that both the **ThingsBoard Edge** and **Cloud** are aligned to deliver accurate and efficient IoT functionality, the synchronisation process can be forced.
+为确保 **ThingsBoard Edge** 与 **Cloud** 保持一致，以提供准确高效的物联网功能，可强制执行同步流程。
 
-To force synchronization procedure, go to the **Edge management > Instances** section of your Cloud (Server), click on the **Edge** and then, click the **"Sync Edge"** button:
+要强制执行同步，请进入 Cloud（Server）的 **Edge management > Instances** 区域，点击 **Edge**，然后点击 **"Sync Edge"** 按钮：
 
 {% include images-gallery.html imageCollection="forceSync" %}
 
-## Entities Management
+## 实体管理
 
-Most entities can be created on the **Edge** instance, except for **Customers**, and **Users**, entities. To enable the use of these entities on the **Edge**, these entities must be **assigned** to the **Edge** prior to use.
+除 **Customers** 和 **Users** 外，大多数实体可在 **Edge** 实例上创建。要在 **Edge** 上使用这些实体，必须先将其 **分配** 给 **Edge**。
 
-To **assign** specific entities to the **Edge**, log in to your **Cloud** and navigate to the **Edge management > Instances** section:
+要 **分配** 特定实体到 **Edge**，请登录 **Cloud** 并进入 **Edge management > Instances** 区域：
 
 {% include images-gallery.html imageCollection="instancesSection" showListImageTitles="true" %}
 
-Once an entity has been assigned to a specific **Edge**, it will be pushed to the **Edge event queue**. 
-If the **connection** between the Edge and the Cloud is **active**, the assigned entity will be created on the Edge **instantly**. 
-If the Edge instance is **not connected** to the **Cloud**, the entity will be created **once the connection is established**.
+实体被分配到特定 **Edge** 后，将推送到 **Edge 事件队列**。
+若 Edge 与 Cloud 的 **连接** 处于 **活动** 状态，分配的实体将在 Edge 上 **立即** 创建。
+若 Edge 实例 **未连接** 到 **Cloud**，实体将在 **连接建立后** 创建。
 
-### Edge Details
+### Edge 详情
 
-Additional information about the Edge and the latest events can be found on the **"Edge Details"** page.
-Go the **Edge management > Instances** section and click on the Edge: 
-* The **"Details"** tab contains general information, such as **Edge ID**, **Edge key** and **Edge secret**. You also can **assign entities** and **force synchronization** on this tab.
-* The **"Attributes"** tab displays the latest attributes published to the server. 
-* The **"Latest telemetry"** tab displays the most recent telemetry records from your Edge.
-* The **"Alarms"** tab displays the list of alarms.
-* The **"Events"** tab displays various events related to the Edge. 
-* The **"Downlinks"** tab displays the list of messages transferred from the Cloud to the Edge.
-* The **"Relations"** tab displays the records of other entities connected to the Edge.
-* The **"Audit logs"** tab displays audit records to track user actions.
+有关 Edge 及最新事件的更多信息可在 **"Edge Details"** 页面查看。
+进入 **Edge management > Instances** 区域并点击 Edge：
+* **"Details"** 选项卡包含一般信息，如 **Edge ID**、**Edge key** 和 **Edge secret**。您还可在此选项卡上 **分配实体** 并 **强制同步**。
+* **"Attributes"** 选项卡显示发布到服务器的最新属性。
+* **"Latest telemetry"** 选项卡显示 Edge 的最新遥测记录。
+* **"Alarms"** 选项卡显示告警列表。
+* **"Events"** 选项卡显示与 Edge 相关的各类事件。
+* **"Downlinks"** 选项卡显示从 Cloud 传输到 Edge 的消息列表。
+* **"Relations"** 选项卡显示与 Edge 关联的其他实体记录。
+* **"Audit logs"** 选项卡显示用于追踪用户操作的审计记录。
 
 {% include images-gallery.html imageCollection="edgeDetails" %}
 
-### Edge Status Page
+### Edge 状态页
 
-Basic information about the Edge configuration is provided on the Edge instance itself. To view this information, log in to your **Edge instance** and go to the **Edge > Status** section
+Edge 实例本身提供 Edge 配置的基本信息。要查看此信息，请登录 **Edge 实例** 并进入 **Edge > Status** 区域
 
 {% include images-gallery.html imageCollection="edgeStatus" showListImageTitles="true" %}
 
-### Cloud Events
+### Cloud 事件
 
-The **Cloud Events** page shows events that ThingsBoard Edge pushes to the Cloud. To view this information, log in to your **Edge instance** and go to the **Edge > Cloud events** section. The following information is displayed:
+**Cloud Events** 页面显示 ThingsBoard Edge 推送到 Cloud 的事件。要查看此信息，请登录 **Edge 实例** 并进入 **Edge > Cloud events** 区域。将显示以下信息：
 
-* **Created time:** The date and time the event is created and pushed to the Cloud. Displayed in a format YYYY-MM-DD H:Min:Sec.
-* **Action:** The action pushed to the Cloud. Possible actions: Added, Deleted, Updated, Attributes Updated, Attributes Deleted, Timeseries Deleted, Timeseries Updated, RPC Call, Credentials Updated, Relation Add or Update, Relation Deleted, Relations Deleted, Alarm Ack, Alarm Clear, Attributes Request, Rule Chain Metadata Request, Relation Request, Credential Request.
-* **Entity type:** The entity that created the event.
-* **Entity ID:** The identification code of the entity.
-* **Status:** Defines if the event has been pushed to the Cloud. 
-  * **Deployed:** The event was pushed to the ThingsBoard server.
-  * **Pending:** The event is created on the ThingsBoard Edge, stored to the local database and will be pushed to the Cloud as soon as connection is restored.
-* **Data:** Click to view the detailed information that was pushed to the Cloud.
+* **Created time：** 事件创建并推送到 Cloud 的日期和时间。格式为 YYYY-MM-DD H:Min:Sec。
+* **Action：** 推送到 Cloud 的操作。可能包括：Added、Deleted、Updated、Attributes Updated、Attributes Deleted、Timeseries Deleted、Timeseries Updated、RPC Call、Credentials Updated、Relation Add or Update、Relation Deleted、Relations Deleted、Alarm Ack、Alarm Clear、Attributes Request、Rule Chain Metadata Request、Relation Request、Credential Request。
+* **Entity type：** 创建事件的实体类型。
+* **Entity ID：** 实体的标识代码。
+* **Status：** 定义事件是否已推送到 Cloud。
+  * **Deployed：** 事件已推送到 ThingsBoard 服务器。
+  * **Pending：** 事件已在 ThingsBoard Edge 上创建，已保存到本地数据库，将在连接恢复后尽快推送到 Cloud。
+* **Data：** 点击查看推送到 Cloud 的详细信息。
 
 {% include images-gallery.html imageCollection="cloudEvenets" %}
 
-By default, events are displayed for the last day. To set a different time period, click the **"Time window"** button at the top of the page.
+默认情况下，事件显示最近一天的数据。要设置不同的时间范围，请点击页面顶部的 **"Time window"** 按钮。
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

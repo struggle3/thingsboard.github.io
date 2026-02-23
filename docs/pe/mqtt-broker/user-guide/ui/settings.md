@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Settings
-description: Settings management
+title: 设置
+description: 设置管理
 
 settings-password-policy:
   0:

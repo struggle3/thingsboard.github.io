@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Working with alarms
-description: IoT device alarm management using ThingsBoard alarms feature
+title: 告警管理
+description: 使用 ThingsBoard 告警功能管理 IoT 设备告警
 redirect_from: "/docs/samples/alarms/basic-rules/"
 
 alarm-type:
@@ -17,15 +17,15 @@ alarm-severity:
 find-alarms:
     0:
         image: /images/user-guide/alarms/find-alarms-1-ce.png
-        title: 'To view alarms use the "Alarms" page in the left menu. Here you will see all reminders in list form, as well as the following information: creation time, source, alarm type, severity, to whom assigned, and status of the alarm.'
+        title: '在左侧菜单中进入「Alarms」页面可查看所有告警。列表形式展示：创建时间、来源、告警类型、严重程度、指派对象及告警状态。'
     1:
         image: /images/user-guide/alarms/find-alarms-2-ce.png
-        title: 'To view alarm details, click on the ellipsis (...) in the "Details" column of the alarm you want to view.'
+        title: '查看告警详情时，请点击该告警所在行「Details」列中的省略号（…）。'
 
 find-alarm-for-specific-device:
     0:
         image: /images/user-guide/alarms/find-alarm-for-specific-device-ce.png
-        title: 'Go to the relevant entity&#39;s page to find reminders for a specific entity. In our case, these are the "Devices" page. Click on the needed entity (device) to open its details. Navigate to the "Alarms" tab.'
+        title: '要查看某实体的告警，请进入对应实体页面（例如「Devices」），点击目标实体打开详情，再切换到「Alarms」选项卡。'
     
 notification-about-alarm:
     0:
@@ -34,52 +34,52 @@ notification-about-alarm:
 assignee-alarm-1:
     0:
         image: /images/user-guide/alarms/assign-alarm-to-user-3-ce.png
-        title: 'Go to the "Alarms" page and specify the user in the "Assignee" column of the desired alarm.'
+        title: '在「Alarms」页面中，在目标告警的「Assignee」列中指定用户。'
     1:
         image: /images/user-guide/alarms/assign-alarm-to-user-4-ce.png
-        title: 'Go to the "Dashboards" page with Alarms table widget. Specify the user in the "Assignee" column of the desired alarm;'
+        title: '在包含 Alarms table 部件的「Dashboards」页面中，在目标告警的「Assignee」列中指定用户；'
     2:
         image: /images/user-guide/alarms/assign-alarm-to-user-1-ce.png
-        title: 'Navigate to the "Alarms" tab of the entity details window selected entity and specify the user in the "Assignee" column.'
+        title: '在实体详情窗口的「Alarms」选项卡中，在目标告警的「Assignee」列中指定用户。'
 
 assignee-alarm-2:
     0:
         image: /images/user-guide/alarms/assign-alarm-to-user-2-ce.png
-        title: 'When an alarm is assigned to the user, they will receive a notification about it.'
+        title: '告警被指派给某用户后，该用户会收到相应通知。'
 
 acknowledge-alarm:
     0:
         image: /images/user-guide/alarms/acknowledge-alarm-1-ce.png
-        title: 'Click on the "Acknowledge" icon in the Alarm table widget.'
+        title: '在 Alarms table 部件中点击「Acknowledge」图标。'
     1:
         image: /images/user-guide/alarms/acknowledge-alarm-2-ce.png
-        title: 'Click on the "Acknowledge" button in the alarm details window.'
+        title: '在告警详情窗口中点击「Acknowledge」按钮。'
 
 clear-alarm:
     0:
         image: /images/user-guide/alarms/clear-alarm-1-ce.png
-        title: 'Click on the "Clear" icon in the Alarms table widget.'
+        title: '在 Alarms table 部件中点击「Clear」图标。'
     1:
         image: /images/user-guide/alarms/clear-alarm-2-ce.png
-        title: 'Click on the "Clear" button in the alarms details window.'
+        title: '在告警详情窗口中点击「Clear」按钮。'
 
 alarm-comments-1:
     0:
         image: /images/user-guide/alarms/alarm-comments-1-ce.png
-        title: 'To find alarm comments and leave your own, open the details of the selected alarm.'
+        title: '查看告警评论或添加评论，请打开目标告警的详情。'
     1:
         image: /images/user-guide/alarms/alarm-comments-2-ce.png
-        title: 'Here you can view system comments, comments from other users, and leave your own.'
+        title: '在此可查看系统评论、其他用户评论，并可添加自己的评论。'
 
 visualize-alarms-on-dashboard-1:
     0:
         image: /images/user-guide/alarms/visualize-alarms-on-dashboard-1-ce.png
-        title: 'The "Alarms table" widget allows you to conveniently display alarms for selected entities based on a defined time window and filters.'
+        title: '「Alarms table」部件可按时间范围和筛选条件，为选定实体显示告警。'
 
 visualize-alarms-on-dashboard-2:
     0:
         image: /images/user-guide/alarms/visualize-alarms-on-dashboard-2-ce.png
-        title: 'The "Alarm count" widget displays the number of alarms based on the selected filters. In this case, the number of active alarms is displayed.'
+        title: '「Alarm count」部件根据所选筛选条件显示告警数量，本图所示为活动告警的数量。'
 
 propagation-settings:
     0:
@@ -88,53 +88,53 @@ propagation-settings:
 relations-to-asset:
     0:
         image: /images/user-guide/alarms/propagation-1-ce.png
-        title: 'To find devices related to Office A, go to the "Assets" page, click on the needed asset and navigate to the "Relations" tab in the asset details window. The following devices relations to the Office A: Thermometer A1, Thermometer B1, Thermometer B2, and Thermometer C3.'
+        title: '查找与 Office A 相关的设备：进入「Assets」页面，点击目标资产，在资产详情窗口中切换到「Relations」选项卡。与 Office A 关联的设备示例：Thermometer A1、Thermometer B1、Thermometer B2、Thermometer C3。'
 
 alarm-creation-time-simple:
     0:
         image: /images/user-guide/alarms/alarm-creation-time-simple-ce.png
-        title: 'If the threshold value is exceeded, an alarm is created immediately.'
+        title: '一旦超过阈值，立即创建告警。'
 
 alarm-creation-time-duration:
     0:
         image: /images/user-guide/alarms/alarm-creation-time-duration-ce.png
-        title: 'An alarm will be created if the duration of exceeding the threshold value exceeds the specified value.'
+        title: '当超过阈值的持续时间达到设定值时才创建告警。'
 
 alarm-creation-time-repeating:
     0:
         image: /images/user-guide/alarms/alarm-creation-time-repeating-ce.png
-        title: 'An alarm will be created if the threshold value is exceeded the specified number of times.'
+        title: '当超过阈值的次数达到设定值时才创建告警。'
 
 propagate-alarm-to-related-entities:
     0:
         image: /images/user-guide/alarms/propagation-5-ce.png
-        title: 'In the alarm rule settings of the device profile, tick "Propagate alarm to related entities".'
+        title: '在设备配置文件的告警规则设置中，勾选「Propagate alarm to related entities」。'
     
 propagate-alias:
     0:
         image: /images/user-guide/alarms/propagation-2-ce.png
-        title: 'Create an alias that will filter the selected asset - "Office A".'
+        title: '创建一个筛选目标资产「Office A」的别名。'
 
 add-alarms-widget:
     0:
         image: /images/user-guide/alarms/propagation-3-ce.png
-        title: 'Add the Alarms table widget. Specify the previously created alias as the alarm source. Be sure to activate the "Search propagated alarms" option to search for propagated alarms.'
+        title: '添加 Alarms table 部件，将之前创建的别名设为告警来源，并启用「Search propagated alarms」以搜索传播的告警。'
     1:
         image: /images/user-guide/alarms/propagation-4-ce.png
-        title: 'The alarm Table widget has been added.'
+        title: 'Alarms table 部件已添加完成。'
 
 propagate-send-telemetry:
     0:
         image: /images/user-guide/alarms/propagation-6-ce.png
-        title: 'Send telemetry to one of the devices that exceeds the threshold value specified in the alarm rule to trigger an alarm.'
+        title: '向某设备发送超过告警规则阈值的 telemetry，以触发告警。'
 
 propagate-alarm-created:
     0:
         image: /images/user-guide/alarms/propagation-7-ce.png
-        title: 'An alarm has been created on the device, and thanks to our settings, the alarm has propagated to the related asset.'
+        title: '设备上已创建告警，根据设置，告警已传播到相关资产。'
     1:
         image: /images/user-guide/alarms/propagation-8-ce.png
-        title: 'You can also see the created alarm on the "Alarms" tab in the asset details window.'
+        title: '也可在资产详情窗口的「Alarms」选项卡中查看已创建的告警。'
 
 ---
 

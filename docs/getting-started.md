@@ -1,11 +1,11 @@
 ---
 layout: docwithnav
-title: Getting Started
-description: Getting started with ThingsBoard
+title: 快速入门
+description: ThingsBoard 快速入门指南
 notitle: "true"
 ---
 
-<div class="getting-started-title">Choose your version</div>
+<div class="getting-started-title">选择版本</div>
 <div class="getting-started-content row justify-content-center">
     <a class="getting-started-card col-md-6 col-lg-6 col-xl-6 mb-4" href="/docs/getting-started-guides/helloworld/">
         <div class="getting-started-square">

@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Working with IoT device attributes
-description: IoT device management using ThingsBoard attributes feature 
+title: IoT 设备属性
+description: 使用 ThingsBoard 属性功能管理 IoT 设备 
 server-side-attrs-ui:
     0:
         image: /images/user-guide/attributes/add-server-side-pe-src.png

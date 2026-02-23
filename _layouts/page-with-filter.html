@@ -17,21 +17,21 @@
             <div class="filter-button">
                 <img src="/images/filter-icon.svg" alt="Filter icon">
                 <span>
-                    Filters
+                    过滤
                 </span>
             </div>
             <div class="search-crisps desktop">
                 <div class="search-crisps-clear-btn pagination-render-trigger">
-                    Clear all
+                    清除
                     <img src="/images/s-close-icon.svg" class="search-crisps-clear-btn-close" alt="Close icon">
                 </div>
                 <div class="search-crisps-toggle-btn" style="display: none;">
-                    <span class="toggle-label">Hide</span>
+                    <span class="toggle-label">隐藏</span>
                     <i class="fas fa-chevron-up" style="color: #2A7DEC"></i>
                 </div>
             </div>
             <div class="search-item">
-                <input type="text" id="searchCompanyInput" placeholder="Find..." />
+                <input type="text" id="searchCompanyInput" placeholder="查找..." />
                 <span class="searchButton">
                     <img class="searchButtonIcon" src="/images/search.svg" alt="Search icon">
                     <img class="searchButtonCloseIcon" src="/images/s-close-icon.svg" alt="Search close icon">
@@ -421,7 +421,7 @@
         const apply = (collapse) => {
             if (collapse) {
                 crisps.forEach((c, idx) => c.classList.toggle('hidden', idx >= MAX_VISIBLE_CRISPS));
-                if (toggleLabel) toggleLabel.textContent = 'Show more';
+                if (toggleLabel) toggleLabel.textContent = '显示更多';
                 if (toggleIcon) toggleIcon.style.transform = 'rotate(180deg) translateY(50%)';
                 setExpanded(container, false);
                 toggleBtn?.setAttribute('data-collapsed', 'true');

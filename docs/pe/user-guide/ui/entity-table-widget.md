@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka 
-title: Entities Table Widget
-description: Advanced Settings of the Entities Table Widget
+title: 实体表部件
+description: 实体表部件高级设置
 
 add-widget:
     0:
@@ -11,31 +11,31 @@ add-widget:
         title: 'Enter dashboard edit mode by clicking the pencil icon in the lower right corner of the screen.'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-1-pe.png
-        title: 'Click the big sign in the middle of the screen or the plus icon ("Add new widget") in the lower right corner of the screen. From the drop-up menu, select Create new widget.'
+        title: '点击屏幕中央的大图标或右下角的加号图标（"添加新部件"）。从弹出菜单中选择创建新部件。'
     2:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-2-pe.png
-        title: 'In the widgets bundle selection dialog window, choose Cards.'
+        title: '在部件包选择对话框中，选择 Cards。'
     3:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-3-pe.png
-        title: 'From the Cards bundle, select the Entities table widget.'
+        title: '从 Cards 包中选择实体表部件。'
     4:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-4-pe.png
-        title: 'Click Add to attach a datasource to your widget to specify entity from which we will receive telemetry data.'
+        title: '点击 Add 为部件添加数据源，以指定获取遥测数据的实体。'
     5:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-5-pe.png
-        title: 'If you have added an alias before, select it from the drop-down menu. If not, click "Create a new one!".'
+        title: '若已添加别名，从下拉菜单选择；否则点击 "Create a new one!"。'
     6:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-6-pe.png
-        title: 'You can learn how to add an alias and aliases types  by following the link below the screenshots section. After configuring the alias settings, click Add.'
+        title: '可按截图下方的链接学习如何添加别名及别名类型。配置别名设置后，点击 Add。'
     7:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-7-pe.png
-        title: 'Add telemetry from the drop-down menu to be displayed on the widget.'
+        title: '从下拉菜单添加要在部件上显示的遥测。'
     8:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-8-pe.png
-        title: 'When you are done configuring datasource, click Add.'
+        title: '完成数据源配置后，点击 Add。'
     9:
         image: /images/user-guide/ui/widgets/entitywidget/add-widget-9-pe.png
-        title: 'Drag the edges of the widget to adjust its size and save all applied changes by clicking the checkmark in the lower right corner of the screen.'
+        title: '拖动部件边缘调整大小，点击屏幕右下角的勾选标记保存所有更改。'
 
 entity-edit:
     0:
@@ -44,54 +44,54 @@ entity-edit:
 entity-title:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/entity-title-pe.png
-        title: 'You are able to change Title setting, its tooltip and customize title style. In addition, you can add an icon and adjust its settings.'
+        title: '可修改标题设置、工具提示并自定义标题样式。此外可添加图标并调整其设置。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/entity-title-1-pe.png
-        title: 'After setting up all preferred configurations, apply the changes by clicking the checkmark in the upper right corner of the screen.'
+        title: '完成所有配置后，点击屏幕右上角的勾选标记应用更改。'
     2:
         image: /images/user-guide/ui/widgets/entitywidget/entity-title-2-pe.png
-        title: 'As you can see, the title style has been changed, and the custom has been added icon next to it. To save all applied changes, click the checkmark in the lower right corner of the screen.'
+        title: '标题样式已修改，并已添加自定义图标。点击屏幕右下角的勾选标记保存所有更改。'
 
 entity-style:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/entity-style-pe.png
-        title: 'In the widget style field, enter the function to customize the appearance of the widget.'
+        title: '在部件样式字段中输入函数以自定义部件外观。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/entity-style-1-pe.png
-        title: 'You can manually adjust the background and text colors by clicking the corresponding circles and moving sliders to select the color you want.
-                Enter the preferred value in the padding and margin lines.
-                After configuring the desired options, click the checkmark in the upper right corner of the screen.'
+        title: '可通过点击对应圆圈并移动滑块手动调整背景和文字颜色。
+                在 padding 和 margin 行输入首选值。
+                配置完成后，点击屏幕右上角的勾选标记。'
     2:
         image: /images/user-guide/ui/widgets/entitywidget/entity-style-2-pe.png
-        title: 'As you can see, the appearance of the widget has changed. To save all applied changes, click the checkmark in the lower right corner of the screen.'
+        title: '部件外观已更改。点击屏幕右下角的勾选标记保存所有更改。'
 
 entity-digits:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/entity-digits-pe.png
-        title: 'Enter the desired symbol to be shown next to the value. Enter the number of the digits to be displayed after the floating point number.
-                Apply the changes by clicking the checkmark in the upper right corner of the screen.'
+        title: '输入要显示在值旁边的符号。输入小数点后要显示的位数。
+                点击屏幕右上角的勾选标记应用更改。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/entity-digits-1-pe.png
-        title: 'As you can see, the special symbol has been added, and the number of digits has been changed.'
+        title: '已添加特殊符号，小数位数已更改。'
 
 enter-advanced-mode:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/enter-edit-pe.png
-        title: 'Click the pencil icon ("Enter edit mode") in the lower right corner of the screen.'
+        title: '点击屏幕右下角的铅笔图标（"进入编辑模式"）。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/enter-edit-1-pe.png
         title: 'Click the pencil icon (“Edit widget”) in the upper right corner of the Entity Table widget itself.'
     2:
         image: /images/user-guide/ui/widgets/entitywidget/enter-edit-2-pe.png
-        title: 'Move to the Advanced cell.'
+        title: '切换到 Advanced 单元格。'
 
 entities-table-title:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/table-widgetname-advncd-pe.png
-        title: 'Enter the desired title in the title bar. Click the orange checkmark in the upper right corner.'
+        title: '在标题栏输入所需标题。点击右上角的橙色勾选标记。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/table-widgetname-advncd-1-pe.png
-        title: 'The title of the widget has been changed.'
+        title: '部件标题已修改。'
 
 checkboxes: 
     0:
@@ -100,10 +100,10 @@ checkboxes:
 entity-column-title:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/entity-column-title-pe.png
-        title: 'Enter the new title in the corresponding line.'
+        title: '在对应行输入新标题。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/entity-column-title-1-pe.png
-        title: 'Click the orange checkmark in the upper right corner to apply changes. An entity column title has been changed.'
+        title: '点击右上角橙色勾选标记应用更改。实体列标题已修改。'
 
 entity-label-column:
     0:
@@ -118,10 +118,10 @@ paggination-off:
 page-size:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/page-size-pe.png
-        title: 'Enter the numbers manually or use the arrows at the end of the line.'
+        title: '手动输入数字或使用行末箭头。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/page-size-1-pe.png
-        title: 'Click the orange checkmark in the upper right corner to apply the changes. The page will now have the desired number of items as shown in our table widget.'
+        title: '点击右上角橙色勾选标记应用更改。表格部件每页将显示所设数量的条目。'
 
 sortingorder-name:
     0:
@@ -130,13 +130,13 @@ sortingorder-name:
 sorting-data:
     0:
         image: /images/user-guide/ui/widgets/entitywidget/sorting-data-pe.png
-        title: 'As was mentioned, the default sort order is ascending.'
+        title: '如前所述，默认排序为升序。'
     1:
         image: /images/user-guide/ui/widgets/entitywidget/sorting-data-1-pe.png
         title: 'Type the “-” (minus) symbol in front of the data key name in the Default sort order line. Click the orange checkmark in the upper right corner to apply the changes'
     2:
         image: /images/user-guide/ui/widgets/entitywidget/sorting-data-2-pe.png
-        title: 'Now, the telemetry data is sorted in the descending order we needed.'
+        title: '遥测数据已按所需降序排列。'
 
 saving-changes:
     0:

@@ -1,10 +1,10 @@
-The **entities** can also be created on the **Server** and then assigned to the **Edge instance**. 
-This approach simplifies the management of entities across multiple **Edge instances**.
+**实体**也可以在**Server**上创建，然后分配给**Edge实例**。
+此方式可简化多个**Edge实例**之间的实体管理。
 
-To assign entities to the **Edge**, log in to your **{{currentThingsBoardVersion}} Server** at **SERVER_URL** and create an **entity**, for example, a dashboard. 
+要将实体分配给**Edge**，请登录**SERVER_URL**处的**{{currentThingsBoardVersion}} Server**并创建**实体**，例如仪表盘。
 
 {% include images-gallery.html imageCollection="step5Server" showListImageTitles="true" %}
 
-To confirm that assigned entity is available on the **Edge**, open the **EDGE_URL** and go to the corresponding entity section:
+要确认已分配实体在**Edge**上可用，请打开**EDGE_URL**并进入相应实体部分：
 
 {% include images-gallery.html imageCollection="step5Edge" showListImageTitles="true" %}

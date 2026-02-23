@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: HTTP Integration
-description: TBMQ HTTP integration guide
+title: HTTP 集成
+description: TBMQ HTTP 集成指南
 
 tb-endpoint-url:
   0:

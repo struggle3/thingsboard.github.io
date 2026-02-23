@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
   - ashvayka
-title: Installing ThingsBoard Trendz Analytics using Docker (Linux or Mac OS)
-description: Installing ThingsBoard Trendz Analytics using Docker (Linux or Mac OS)
+title: 使用 Docker 安装 ThingsBoard Trendz Analytics（Linux 或 Mac OS）
+description: 使用 Docker 在 Linux 或 Mac OS 上安装 ThingsBoard Trendz Analytics
 
 trendz-settings:
   0:
@@ -38,7 +38,7 @@ trendz-sync:
 {:toc}
 
 
-This guide will help you to install and start Trendz Analytics using Docker on Linux or Mac OS.
+本指南帮助您使用Docker在Linux或Mac OS上安装并启动Trendz Analytics。
 
 ## Prerequisites
 
@@ -49,9 +49,9 @@ This guide will help you to install and start Trendz Analytics using Docker on L
 
 ### Step 1. Docker Compose setup
 
-Trendz can be run either in the same Docker Compose file as ThingsBoard or in a separate Docker Compose file.
+Trendz可与ThingsBoard共用同一Docker Compose文件，或使用独立的Docker Compose文件运行。
 
-For small and medium installations, we recommend installing Trendz in the same Docker Compose file as ThingsBoard.
+中小型安装建议Trendz与ThingsBoard共用同一Docker Compose文件。
 
 {% capture contenttogglespec %}
 The same Docker Compose file with ThingsBoard%,%theSameFile%,%templates/trendz/install/docker-compose-the-same-file-linux.md%br%
@@ -77,29 +77,29 @@ Separate Docker Compose file%,%separateFile%,%templates/trendz/install/docker-co
 ## Upgrade Trendz Service
 
 {% capture upgrade_version_by_version%}
-**Note, that you can upgrade Trendz from any version to the latest at once (for example, 1.2.0 -> {{ site.release.trendz_ver }} ,etc).**
+**注意：可从任意版本直接升级到最新版（如 1.2.0 -> {{ site.release.trendz_ver }} 等）。**
 {% endcapture %}
 {% include templates/info-banner.md content=upgrade_version_by_version %}
 
-Below is an example of how to upgrade from any Trendz version to {{ site.release.trendz_ver }}
+以下为从任意Trendz版本升级到{{ site.release.trendz_ver }}的示例
 
-* Create a dump of your database:
+* 创建数据库备份：
 
 ```bash
 docker compose exec trendz-postgres sh -c "pg_dump -U postgres trendz > /var/lib/postgresql/data/trendz_dump"
 ```
 {: .copy-code}
 
-When a new Trendz release is available, follow these steps to update your installation without losing data:
+当有新Trendz版本发布时，按以下步骤更新安装并保留数据：
 
 {% capture old_manifests_info %}
-**If you are upgrading using previous version of deployment files, make sure to follow steps described in this [instruction](/docs/trendz/install/old-docker-migrate/) first.**
+**若使用旧版部署文件升级，请先按[本说明](/docs/trendz/install/old-docker-migrate/)执行相应步骤。**
 {% endcapture %}
 {% include templates/warn-banner.md content=old_manifests_info %}
 
-1. Change the version of the `thingsboard/trendz` and `thingsboard/trendz-python-executor` in the `docker-compose.yml` file to the {{ site.release.trendz_ver }}.
+1. 将`docker-compose.yml`中`thingsboard/trendz`和`thingsboard/trendz-python-executor`的版本改为{{ site.release.trendz_ver }}。
 
-2. Execute the following commands:
+2. 执行以下命令：
 
 ```bash
 docker pull thingsboard/trendz:{{ site.release.trendz_ver }}

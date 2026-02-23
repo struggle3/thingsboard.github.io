@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Rock Pi 4 Model B to ThingsBoard?"
+title: "如何将Rock Pi 4 Model B连接到ThingsBoard？"
 redirect_to: "/device-library/paas/rock-pi-4-model-b/"
 ---

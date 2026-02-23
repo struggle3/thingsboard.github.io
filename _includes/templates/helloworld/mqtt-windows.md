@@ -1,53 +1,53 @@
-Use the instructions listed below to download, install, setup and run mosquitto_pub in Windows:
+按以下说明在 Windows 上下载、安装、配置并运行 mosquitto_pub：
 
-1. Download and Install Eclipse Mosquitto. Visit [Mosquitto's official download page](https://mosquitto.org/download/) and choose the appropriate Windows installer (32-bit or 64-bit depending on your system).
-2. Once downloaded, run the installer and follow the instructions. This will install Mosquitto on your Windows machine. By default, Mosquitto is installed in 'C:\Program Files\mosquitto';
-3. Update the System's "Path" variable. The executables 'mosquitto_pub.exe' and 'mosquitto_sub.exe' are located in the directory where you installed the Mosquitto. You need to add this directory to your system's "Path" environment variable so that Windows can find these executables regardless of the current directory.
+1. 下载并安装 Eclipse Mosquitto。访问 [Mosquitto 官方下载页](https://mosquitto.org/download/)并选择对应的 Windows 安装包（32 位或 64 位视系统而定）。
+2. 下载完成后运行安装程序并按提示操作。将在本机安装 Mosquitto，默认安装路径为「C:\Program Files\mosquitto」；
+3. 更新系统「Path」变量。可执行文件「mosquitto_pub.exe」和「mosquitto_sub.exe」位于 Mosquitto 的安装目录。需将该目录添加到系统「Path」环境变量，以便 Windows 在任何当前目录下都能找到这些可执行文件。
 
-To add the Mosquitto directory to the "Path" variable, follow these steps:
+将 Mosquitto 目录添加到「Path」变量的步骤如下：
 
 {% assign mosquitto-windows = '
     ===
         image: /images/helloworld/getting-started-pe/mosquitto-windows-1.png,
-        title: Press the Win + X, then select "System". Then click on the "System" page;
+        title: 按 Win + X，选择「System」。然后点击「System」页面；
     ===
         image: /images/helloworld/getting-started-pe/mosquitto-windows-2.png,
-        title: Navigate to the "About" section, then click "Advanced system settings";
+        title: 进入「About」区域，点击「Advanced system settings」；
     ===
         image: /images/helloworld/getting-started-pe/mosquitto-windows-3.png,
-        title: In the "System Properties" pop-up window, click "Environment Variables" button on the "Advanced" tab;
+        title: 在「System Properties」弹窗中，点击「Advanced」选项卡下的「Environment Variables」按钮；
     ===
         image: /images/helloworld/getting-started-pe/mosquitto-windows-4.png,
-        title: In the "Environment Variables" pop-up window, select the "Path", then click on the "Edit" button;
+        title: 在「Environment Variables」弹窗中，选择「Path」，点击「Edit」按钮；
     === 
         image: /images/helloworld/getting-started-pe/mosquitto-windows-5.png,
-        title: In the "Edit environment variable" pop-up window click on the "New" button and add the path to the directory containing &#39;mosquitto_pub.exe&#39; and &#39;mosquitto_sub.exe&#39; (&#39;C:\Program Files\mosquitto&#39; by default). Click "OK" button;
+        title: 在「Edit environment variable」弹窗中点击「New」按钮，添加包含 mosquitto_pub.exe 和 mosquitto_sub.exe 的目录路径（默认「C:\Program Files\mosquitto」）。点击「OK」；
     === 
         image: /images/helloworld/getting-started-pe/mosquitto-windows-6.png,
-        title: Click "OK" button to save changes in the environment variables;
+        title: 点击「OK」保存环境变量修改；
     ===
         image: /images/helloworld/getting-started-pe/mosquitto-windows-7.png,
-        title: Finally, click "OK" button to apply all changes in the system properties.
+        title: 最后点击「OK」应用系统属性中的全部更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=mosquitto-windows %}
 
-Open the Terminal and replace $THINGSBOARD_HOST_NAME and $ACCESS_TOKEN with corresponding values.
+打开终端，将$THINGSBOARD_HOST_NAME和$ACCESS_TOKEN替换为对应值。
 
 ```bash
 mosquitto_pub -d -q 1 -h "$THINGSBOARD_HOST_NAME" -p "1883" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -m {"temperature":25}
 ```
 {: .copy-code}
 
-For example, $THINGSBOARD_HOST_NAME reference ThingsBoard Cloud (North America), $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME 为 ThingsBoard Cloud（北美），$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 mosquitto_pub -d -q 1 -h "mqtt.thingsboard.cloud" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
 ```
 {: .copy-code}
 
-For example, $THINGSBOARD_HOST_NAME reference ThingsBoard Cloud (Europe), $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME 为 ThingsBoard Cloud（欧洲），$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 mosquitto_pub -d -q 1 -h "mqtt.eu.thingsboard.cloud" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
@@ -55,14 +55,14 @@ mosquitto_pub -d -q 1 -h "mqtt.eu.thingsboard.cloud" -p "1883" -t "v1/devices/me
 {: .copy-code}
 
 
-For example, $THINGSBOARD_HOST_NAME reference your local installation, $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME 为本地部署，$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 mosquitto_pub -d -q 1 -h "localhost" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
 ```
 {: .copy-code}
 
-Successful output should look similar to this one:
+成功输出应类似如下：
 
 ```text
 Client mosqpub|xxx sending CONNECT
@@ -73,7 +73,6 @@ Client mosqpub|xxx sending DISCONNECT
 ```
 
 {% capture difference %}
-**Note:** Since ThingsBoard 3.2, you are able to use basic MQTT credentials (combination of client id, username and password)
-and customize **topic names** and **payload type** using Device Profile. See more info [here](/docs/user-guide/device-profiles/#mqtt-transport-type).
+**注意：** 自 ThingsBoard 3.2 起，可使用基本 MQTT 凭据（client id、username 和 password 组合），并通过设备配置集自定义 **topic 名称**和 **payload 类型**。详见[此处](/docs/user-guide/device-profiles/#mqtt-transport-type)。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}

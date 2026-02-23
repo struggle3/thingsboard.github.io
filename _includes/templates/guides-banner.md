@@ -1,21 +1,21 @@
 {% if currentGuide != "GettingStartedGuides" %}
-- [Getting started guides](/docs/guides/#AnchorIDGettingStartedGuides) - These guides provide quick overview of main ThingsBoard features. Designed to be completed in 15-30 minutes.
+- [快速入门指南](/docs/guides/#AnchorIDGettingStartedGuides) - 快速了解ThingsBoard主要功能，约15-30分钟完成。
 {% endif %}
 {% if currentGuide != "ConnectYourDevice" %}
-- [Connect your device](/docs/guides/#AnchorIDConnectYourDevice) - Learn how to connect devices based on your connectivity technology or solution.
+- [连接设备](/docs/guides/#AnchorIDConnectYourDevice) - 根据连接技术或方案学习如何连接设备。
 {% endif %}
 {% if currentGuide != "DataVisualization" %}
-- [Data visualization](/docs/guides/#AnchorIDDataVisualization) - These guides contain instructions on how to configure complex ThingsBoard dashboards.
+- [数据可视化](/docs/guides/#AnchorIDDataVisualization) - 配置ThingsBoard复杂仪表盘的说明。
 {% endif %}
 {% if currentGuide != "DataProcessing" %}
-- [Data processing & actions](/docs/guides#AnchorIDDataProcessing) - Learn how to use ThingsBoard Rule Engine.
+- [数据处理与操作](/docs/guides#AnchorIDDataProcessing) - 学习使用ThingsBoard规则引擎。
 {% endif %}
 {% if currentGuide != "DataAnalytics" %}
-- [IoT Data analytics](/docs/guides/#AnchorIDDataAnalytics) - Learn how to use rule engine to perform basic analytics tasks.
+- [IoT数据分析](/docs/guides/#AnchorIDDataAnalytics) - 学习使用规则引擎执行基本分析任务。
 {% endif %}
 {% if currentGuide != "AdvancedFeatures" %}
-- [Advanced features](/docs/guides/#AnchorIDAdvancedFeatures) - Learn about advanced ThingsBoard features.
+- [高级功能](/docs/guides/#AnchorIDAdvancedFeatures) - 了解ThingsBoard高级功能。
 {% endif %}
 {% if currentGuide != "Contribution" %}
-- [Contribution and Development](/docs/guides/#AnchorIDContribution) - Learn about contribution and development in ThingsBoard.
+- [贡献与开发](/docs/guides/#AnchorIDContribution) - 了解ThingsBoard贡献与开发。
 {% endif %}

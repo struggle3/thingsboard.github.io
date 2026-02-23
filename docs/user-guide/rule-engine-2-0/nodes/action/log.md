@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: log
-description: Executes a user-defined script to transform message data, metadata, and type into a custom formatted string and logs that string to the ThingsBoard log file.
+description: 执行用户自定义脚本，将消息数据、metadata 和类型转换为自定义格式字符串，并写入 ThingsBoard 日志。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

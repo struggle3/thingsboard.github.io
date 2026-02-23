@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Widgets Library
-description: ThingsBoard Dashboard Widgets Library
+title: 部件库
+description: ThingsBoard 仪表板部件库
 wl-dashboard-widgets:
     0:
         image: /images/user-guide/ui/widgets/widget-library/wl-dashboard-widgets-ce.png

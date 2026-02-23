@@ -1,11 +1,11 @@
-View last logs in runtime:
- 
+实时查看最新日志：
+
 ```bash
 tail -f /var/log/thingsboard/thingsboard.log
 ```
 
-You can use <b>grep</b> command to show only the output with desired string in it. 
-For example you can use the following command in order to check if there are any errors on the backend side:
+可使用 <b>grep</b> 命令仅显示包含指定字符串的输出。
+例如，可用以下命令检查后端是否存在错误：
 
 ```bash
 cat /var/log/thingsboard/thingsboard.log | grep ERROR

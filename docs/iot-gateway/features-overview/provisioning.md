@@ -1,19 +1,19 @@
 ---
 layout: docwithnav-gw
-title: Device Provisioning
-description: Learn how to use ThingsBoard IoT Gateway's device provisioning feature to automatically register and obtain credentials from the platform.
+title: 设备预配
+description: 了解如何使用 ThingsBoard IoT Gateway 的设备预配功能在平台上自动注册并获取凭证。
 ---
 
 * TOC
 {:toc}
 
-The **ThingsBoard IoT Gateway** supports the [device provisioning](https://thingsboard.io/docs/user-guide/device-provisioning/){:target="_blank"} feature, allowing it to **automatically register itself** on the ThingsBoard platform and obtain credentials without manual setup.
+**ThingsBoard IoT Gateway** 支持 [设备预配](https://thingsboard.io/docs/user-guide/device-provisioning/){:target="_blank"} 功能，可在 ThingsBoard 平台上**自动注册**并获取凭证，无需手动配置。
 
-This is especially useful for:  
-- **Device manufacturers** — enabling mass deployment with minimal configuration.
-- **System integrators** — simplifying field installation and avoiding per‑device manual setup.
+特别适用于：  
+- **设备厂商** — 以最少配置实现批量部署。
+- **系统集成商** — 简化现场安装，避免逐台设备手动配置。
 
-Once provisioned, the gateway uses the received credentials to connect to the platform and operate as a standard ThingsBoard device.  
+预配完成后，网关使用获取的凭证连接平台并作为标准 ThingsBoard 设备运行。  
 
 ---
 

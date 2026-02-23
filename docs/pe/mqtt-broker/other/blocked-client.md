@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Blocked Clients
-description: TBMQ Blocked Clients description
+title: 已封锁客户端
+description: TBMQ 已封锁客户端说明
 
 ---
 

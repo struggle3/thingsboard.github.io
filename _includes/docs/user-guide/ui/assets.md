@@ -1,23 +1,23 @@
 * TOC
 {:toc}
 
-**Asset** is an abstract entity in the IoT system of ThingsBoard that represents any physical object, space, or organizational unit. 
-Examples include a building, room, production area, field, streetlight, substation, or vehicle.
+**资产**是ThingsBoard物联网系统中的抽象实体，代表任何物理对象、空间或组织单位。
+示例包括：建筑、房间、生产区域、场地、路灯、变电站或车辆。
 
-**Key characteristics of an asset:**
-- **Does not generate telemetry** on its own but can be associated with devices that do.
-- **Can have its own attributes**, such as location, type, or responsible personnel.
-- **Used for grouping** devices and other entities.
-- **Can be part of a hierarchy**, e.g., Substation &#10230; Line &#10230; Streetlight.
-- **Participates in ThingsBoard business logic**, such as rule chains, alarms, and dashboards.
+**资产的主要特征：**
+- **本身不产生遥测数据**，但可与产生遥测的设备关联。
+- **可有自身属性**，如位置、类型或负责人。
+- **用于分组**设备及其他实体。
+- **可参与层级结构**，例如：变电站 &#10230; 线路 &#10230; 路灯。
+- **参与ThingsBoard业务逻辑**，如规则链、告警和仪表板。
 
-Assets help logically and efficiently structure your IoT project, making it easier to manage and scale.
+资产有助于以逻辑化、高效的方式组织物联网项目，便于管理和扩展。
 
-> ThingsBoard supports asset management functions via both the web UI and the [REST API](/docs/{{docsPrefix}}reference/rest-api/){:target="_blank"}.
+> ThingsBoard支持通过Web界面和[REST API](/docs/{{docsPrefix}}reference/rest-api/){:target="_blank"}进行资产管理。
 
-<br><b><font size="4">Practical video course 🎥</font></b>
+<br><b><font size="4">实践视频课程 🎥</font></b>
 
-Watch this practical video course to learn how to configure and manage ThingsBoard dashboards, resources, and devices, and how to use them in real-world scenarios.
+观看本实践视频课程，了解如何配置和管理ThingsBoard仪表板、资源和设备，以及如何在实际场景中使用它们。
 
 &nbsp;
 <div id="video">  
@@ -26,65 +26,65 @@ Watch this practical video course to learn how to configure and manage ThingsBoa
     </div>
 </div>
 
-## How to create, edit, and delete asset
+## 如何创建、编辑和删除资产
 
-Tenant administrators and users with appropriate [permissions](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"} can create, edit, or delete assets in ThingsBoard.
+租户管理员及具有相应[权限](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}的用户可在ThingsBoard中创建、编辑或删除资产。
 
-### Creating asset
+### 创建资产
 
-To create a new asset:
-- Navigate to **Entities** &#10230; **Assets**. {% unless docsPrefix == null %}By default, you will see the "**All**" asset group.{% endunless %}
-- Click the "**+**" icon in the upper-right corner and select "**Add new asset**" from drop-down menu.
-- In the asset creation form, fill in the required fields:
-  - **Name** – a unique name for the asset.
-  - **[Asset profile](/docs/{{docsPrefix}}user-guide/asset-profiles/){:target="_blank"}** – by default, the profile is set to "**default**", but you can choose a different profile if needed.
+创建新资产：
+- 进入 **实体** &#10230; **资产**。{% unless docsPrefix == null %}默认显示「**全部**」资产组。{% endunless %}
+- 点击右上角的「**+**」图标，在下拉菜单中选择「**添加新资产**」。
+- 在资产创建表单中填写必填项：
+  - **名称**——资产的唯一名称。
+  - **[资产配置文件](/docs/{{docsPrefix}}user-guide/asset-profiles/){:target="_blank"}**——默认使用「**default**」配置，可按需选择其他配置。
     {% if (docsPrefix == "pe/") or (docsPrefix == "paas/") or (docsPrefix == "paas/eu/") %}
-  - **Owner and groups:** Helps with organization and access control.
-    - **Owner**: Select the owner from the dropdown list. The asset will be created at that owner’s level. By default, the field is pre-filled with the Customer or Tenant name based on where you add the asset. You can change it before confirming adding.
-    - **Groups**: Optional field. Add the asset to existing asset groups or create a new one at the selected owner level. Note: every asset is automatically added to the "**All**" group of that owner.      
+  - **所有者和分组**：便于组织和访问控制。
+    - **所有者**：从下拉列表中选择所有者。资产将在该 owner’s level. By default, the field is pre-filled with the Customer or Tenant name based on where you add the asset. You can change it before confirming adding.
+    - **分组**：可选。将资产加入现有资产组或在所选所有者级别创建新分组。注：每个资产会自动加入该所有者的「**全部**」组。      
   {% endif %}
-- Optional fields such as **Label** or **Description** can be filled in if needed.
-- Click "**Add**".
+- **Label**、**Description**等可选字段可按需填写。
+- 点击「**添加**」。
 
-The asset has been successfully created and is now available in the list.
+资产创建成功后会在列表中显示。
 
 {% include images-gallery.html imageCollection="creating-asset" %}
 
 {% unless docsPrefix == null %}
-### Creating asset group
+### 创建资产组
 
-Assets can belong to one or multiple [groups](/docs/{{docsPrefix}}user-guide/groups/){:target="_blank"}, which helps organize and manage them effectively.
+资产可属于一个或多个[分组](/docs/{{docsPrefix}}user-guide/groups/){:target="_blank"}，便于组织和管理。
 
-To create a new asset group:
-- From the **Assets** screen, go to the **"Group" tab**.
-- Click the "**+**" icon in the upper-right corner.
-- Enter the **name** of the new asset group.
-- (Optional) Configure **shared access** to this group for your customers, if needed.
-- Click "**Add**" to create the group.
+创建新资产组的步骤：
+- 在**资产**页面进入**分组**标签。
+- 点击右上角的「**+**」图标。
+- 输入新资产组的**名称**。
+- （可选）按需为客户配置对此分组的**共享访问**。
+- 点击「**添加**」创建分组。
 
 {% include images-gallery.html imageCollection="creating-asset-group" %}
 
-### Managing asset groups. How to add, move, remove
+### 管理资产组：添加、移动、移除
 
-From the Assets page, you can add assets to groups, move them between groups, or remove them from a group.
+在资产页面可向分组添加资产、在分组间移动资产或从分组移除资产。
 
-The "**All**" asset group always contains all assets at the selected owner level (Tenant or Customer).
+「**全部**」资产组始终包含所选所有者级别（租户或客户）下的全部资产。
 
-**Add a single asset to groups:**
-- Open the [asset details](#asset-details) ➜ click Manage owner and groups.
-- In the dialog, adjust Owner if necessary and select groups to add or remove the asset from.
-- Click **Save**.
+**向分组添加单个资产：**
+- 打开[资产详情](#asset-details)➜点击管理所有者和分组。
+- 在对话框中按需调整所有者，选择要添加或移除资产的分组。
+- 点击**保存**。
 
-**Add multiple assets to one group:**
-- On the **Groups** tab, open any asset group (e.g., "**All**").
-- Select assets using the checkboxes (on the left of their names).
-- Click the "**Add to group**" (plus-in-circle icon) in the top-right.
-- In **Add to group** window, choose **Select existing entity group** or **Create new entity group**.
-- Select an existing or create a new asset group.
-- Click **Add** to confirm adding the assets to the group.
+**向一个分组添加多个资产：**
+- 在**分组**标签页打开任意资产组（如「**全部**」）。
+- 通过名称左侧的复选框勾选资产。
+- 点击右上角的「**添加到分组**」（加号圆圈图标）。
+- 在**添加到分组**窗口选择**选择现有实体组**或**创建新实体组**。
+- 选择已有分组或创建新资产组。
+- 点击**添加**确认将资产加入分组。
 
 {% capture multiple %}
-**Note:** This adds assets to the chosen group without removing them from other groups.
+**注意**：此操作会将资产加入所选分组，但不会从其他分组移除。
 {% endcapture %}
 {% include templates/info-banner.md content=multiple %}
 
@@ -103,33 +103,33 @@ This action removes assets from the current group and adds them to the selected 
 - Confirm removal.
 
 {% capture difference %}
-**Note:** Assets are not deleted; they remain in the owner’s "**All**" assets group.
+**注意**：资产不会被删除，仍保留在所有者’s 「**全部**」资产组中。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% endunless %}
 
-### Editing asset
+### 编辑资产
 
-To edit an existing asset:
-- In the **Assets** list, locate and click on the desired asset.
-- Click the "**pencil**" (✏️ **Edit**) icon on the right.
-- In the edit window, you can modify the following fields:
-  - **Name**
-  - **Label**
-  - **Asset profile**
-  - **Description**
-- After making the necessary changes, click "**Apply changes**" to save.
+编辑现有资产：
+- 在**资产**列表中定位并点击目标资产。
+- 点击右侧的「**铅笔**」（✏️ **编辑**）图标。
+- 在编辑窗口中可修改以下字段：
+  - **名称**
+  - **标签**
+  - **资产配置文件**
+  - **描述**
+- 修改完成后点击「**应用更改**」保存。
 
 {% include images-gallery.html imageCollection="editing-asset" %}
 
-### Deleting asset
+### 删除资产
 
-To delete an asset{% unless docsPrefix == null %} or asset group{% endunless %}:
+删除资产{% unless docsPrefix == null %} or asset group{% endunless %}:
 
 {% include images-gallery.html imageCollection="deleting-asset" showListImageTitles="true" %}
 
-> **Note**: Deleting an asset **does not delete** the devices or other entities linked to it, but it **will break all existing relations** (such as links to devices, alarms, dashboards, etc.).
+> **注意**：删除资产**不会删除**与其关联的设备或其他实体，但**会断开所有现有关系**（如与设备、告警、仪表板等的关联）。
 
 {% if docsPrefix == null %}
 ## Make asset public

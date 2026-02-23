@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Industrial Raspberry Pi EG500 to ThingsBoard?"
+title: "如何将Industrial Raspberry Pi EG500连接到ThingsBoard？"
 redirect_to: "/device-library/paas/raspberry-pi-cm4/"
 ---

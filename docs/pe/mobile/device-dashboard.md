@@ -1,14 +1,14 @@
 ---
 layout: docwithnav-mobile-pe
-title: Configure device details dashboards in ThingsBoard PE Mobile Application
+title: 在ThingsBoard PE移动应用中配置设备详情仪表板
 
 device-dashboard:
  0:
   image: /images/mobile/pe/device-dashboard-1.png
-  title: 'Select desired dashboard in the <b>Mobile dashboard</b> field'
+  title: '在<b>移动仪表板</b>字段中选择所需仪表板'
  1:
   image: /images/mobile/pe/device-dashboard-2.png
-  title: 'Select desired dashboard in the <b>Mobile dashboard</b> field'
+  title: '在<b>移动仪表板</b>字段中选择所需仪表板'
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Integrations
-description: Edge Integrations Documentation
+title: Edge 集成
+description: Edge 集成文档
 converterTemplateCreation:
     0:
         image: /images/pe/edge/integrations/create-converter-step-1.webp

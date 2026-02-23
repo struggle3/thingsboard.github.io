@@ -1,27 +1,27 @@
 {% capture postgresql-info %}
-ThingsBoard team recommends to use PostgreSQL for development and production environments with reasonable load (< 5000 msg/sec).
-Many cloud vendors support managed PostgreSQL servers which is a cost-effective solution for most of ThingsBoard instances.
+ThingsBoard 团队建议在负载合理（< 5000 条消息/秒）的开发和生产环境中使用 PostgreSQL。
+许多云服务商提供托管 PostgreSQL 服务，对大多数 ThingsBoard 实例而言是成本效益较高的解决方案。
 {% endcapture %}
 {% include templates/info-banner.md content=postgresql-info %}
 
-##### PostgreSQL Installation
+##### PostgreSQL 安装
 
-Download the installation file (PostgreSQL 15 or newer releases) [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows) and follow the installation instructions.
+从此处[下载](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)安装文件（PostgreSQL 15 或更新版本）并按照安装说明操作。
 
-During PostgreSQL installation, you will be prompted for superuser (postgres) password.
-Don't forget this password. It will be used later. For simplicity, we will substitute it with "postgres".
+在 PostgreSQL 安装过程中，系统会提示您输入超级用户 (postgres) 密码。
+请勿忘记此密码，后续将使用。为简便起见，我们将用 "postgres" 代替。
 
-##### Create ThingsBoard Database
+##### 创建 ThingsBoard 数据库
 
-Once installed, launch the "pgAdmin" software and login as superuser (postgres). 
-Open your server and create database "thingsboard" with owner "postgres".
+安装完成后，启动 "pgAdmin" 软件并以超级用户 (postgres) 登录。  
+打开服务器并创建数据库 "thingsboard"，所有者设置为 "postgres"。
 
-##### ThingsBoard Configuration
+##### ThingsBoard 配置
 
-In case you have specified the PostgreSQL superuser password as "postgres", you can skip this step. 
+若您已将 PostgreSQL 超级用户密码设为 "postgres"，可跳过此步骤。 
 
-Open the Notepad or other editor as administrator user (right click on the app icon and select "Run as administrator").  
-Open the following file for editing (select "All Files" instead of "Text Documents" in file choosing dialog, the encoding is UTF-8):
+以管理员身份打开记事本或其他编辑器（右键点击应用图标并选择“以管理员身份运行”）。  
+打开以下文件进行编辑（在文件选择对话框中选择“所有文件”而非“文本文档”，编码为 UTF-8）：
 
 ```text 
 C:\Program Files (x86)\thingsboard\conf\thingsboard.yml
@@ -29,7 +29,7 @@ C:\Program Files (x86)\thingsboard\conf\thingsboard.yml
 {: .copy-code}
 
 
-and locate "# SQL DAO Configuration" block. Don't forget to replace "postgres" with your real postgres user password:
+并找到 "# SQL DAO Configuration" 配置块。请勿忘记将 "postgres" 替换为您的实际 postgres 用户密码：
 
 ```yml
 # SQL DAO Configuration
@@ -52,7 +52,7 @@ spring:
 ``` 
 {: .copy-code}
 
-locate "SQL_POSTGRES_TS_KV_PARTITIONING" parameter in order to override the default value for timestamp key-value storage partitioning size:
+找到 "SQL_POSTGRES_TS_KV_PARTITIONING" 参数以覆盖时间戳键值存储分区大小的默认值：
 
 ```yml
     sql:

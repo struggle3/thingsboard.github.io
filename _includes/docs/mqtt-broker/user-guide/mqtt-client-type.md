@@ -2,16 +2,16 @@
 * TOC
 {:toc}
 
-In TBMQ, two distinct types of clients are supported: **DEVICE** and **APPLICATION**. 
-This classification is designed to optimize message processing, reliability, and resource usage based on the typical usage patterns observed in real-world IoT deployments.
-It reflects our extensive experience in the IoT ecosystem, where most clients naturally fall into one of these two primary categories.
+TBMQ 支持两类客户端：**DEVICE** 和 **APPLICATION**。
+该分类根据实际 IoT 部署中的典型使用模式，用于优化消息处理、可靠性与资源利用。
+结合我们在 IoT 生态中的经验，大多数客户端均可归入其中一类。
 
-* DEVICE clients are primarily engaged in publishing a significant volume of messages while subscribing to a limited number of topics with relatively low message rates. 
-These clients are typically associated with IoT devices or sensors that frequently transmit data to TBMQ.
+* DEVICE 客户端主要大量发布消息，仅订阅少量主题且消息率较低。
+通常对应频繁向 TBMQ 发送数据的 IoT 设备或传感器。
 
-* APPLICATION clients specialize in subscribing to topics with high message rates. 
-They often require messages to be persisted when the client is offline with later delivery, ensuring the availability of crucial data. 
-APPLICATION clients are commonly utilized for real-time analytics, data processing, or other application-level functionalities.
+* APPLICATION 客户端侧重于订阅高消息率主题。
+常在离线时需持久化消息以便后续投递，保证关键数据可用。
+APPLICATION 客户端常用于实时分析、数据处理或其他应用层功能。
 
 > For example, a temperature sensor publishing readings every second would typically be a DEVICE client, while a cloud analytics service subscribing to aggregated data across thousands of sensors would be an APPLICATION client.
 

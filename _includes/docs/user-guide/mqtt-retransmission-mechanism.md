@@ -1,19 +1,19 @@
-ThingsBoard's internal MQTT client includes a retransmission mechanism designed to improve reliability for message types that require acknowledgment.  
-This mechanism applies specifically to the following MQTT message types:
-- **PUBLISH** (only for QoS 1 or 2)
+ThingsBoard 内置 MQTT 客户端包含重传机制，用于提高需要确认的消息类型的可靠性。
+该机制适用于以下 MQTT 消息类型：
+- **PUBLISH**（仅 QoS 1 或 2）
 - **SUBSCRIBE**
 - **UNSUBSCRIBE**
-- **PUBREL** (only for QoS 2)
+- **PUBREL**（仅 QoS 2）
 
-When one of these messages is sent, the client waits for an acknowledgment within a configurable delay period.  
-If no acknowledgment is received, the message is retransmitted. The delay between retransmissions follows an **exponential backoff** strategy, starting from an initial delay and doubling with each attempt.  
-A **jitter factor** introduces random variance into the delay to help prevent synchronized retries.
+发送上述任一类消息后，客户端会在可配置的延迟内等待确认。
+若未收到确认，将重传消息。重传间隔采用**指数退避**策略，从初始延迟开始，每次翻倍。
+**抖动因子**会在延迟中加入随机波动，以减少集中重试。
 
-For example, if the retransmission configuration is set to **three attempts**, with an **initial delay of 5,000 ms** and a **jitter factor of 0.15**, the retransmission attempts would be scheduled at approximately **5,000 ms**, **10,000 ms**, and **20,000 ms**, each adjusted by ±15% jitter.  
-If no acknowledgment is received after the final attempt, the system waits through the next scheduled delay—based on exponential backoff with jitter—before finally considering the message **undeliverable and dropping it**.
+例如，若将重传配置为**三次尝试**、**初始延迟 5,000 ms**、**抖动因子 0.15**，则重传大约会在 **5,000 ms**、**10,000 ms** 和 **20,000 ms** 触发，每次延迟会因 ±15% 抖动而略有变化。
+若最后一次尝试后仍未收到确认，系统会按指数退避加抖动计算下一次延迟，在等待完成后将消息视为**无法送达**并丢弃。
 
 {% if include.show-yml-config == true %}
-You can configure retransmission parameters globally in the `thingsboard.yml` file. These settings affect **all MQTT clients** on the platform:
+可在 `thingsboard.yml` 中全局配置重传参数，这些设置影响平台上的**所有 MQTT 客户端**：
 
 ```yaml
 mqtt:

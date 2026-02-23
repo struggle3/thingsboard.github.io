@@ -1,11 +1,11 @@
-For **ThingsBoard Edge** service, create a docker compose file:
+为 **ThingsBoard Edge** 服务创建 docker compose 文件：
 
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following configuration lines to the **yml file**:
+在 **yml 文件** 中添加以下配置内容：
 
 ```
 version: '3.8'

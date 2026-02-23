@@ -1,57 +1,53 @@
-Sends the incoming message data as a reply to a REST API call to the rule engine. The reply is routed back to the originating service and request based on metadata attributes. The
-message is routed to either the `Success` connection (if successful) or the `Failure` connection (if an error occurs).
+将传入消息数据作为对 Rule Engine 的 REST API 调用的回复发送。回复根据元数据属性路由回发起服务和请求。
+消息路由至 `Success` 连接（成功时）或 `Failure` 连接（错误时）。
 
-## Usage
+## 用法
 
-### Making REST API calls to the rule engine
+### 向 Rule Engine 发起 REST API 调用
 
-To submit a message to the rule engine via REST API, use one of the following POST endpoints:
+要通过 REST API 向 Rule Engine 提交消息，使用以下 POST 端点之一：
 
-- `POST /api/rule-engine/` — Push a message to the rule engine.
-- `POST /api/rule-engine/{entityType}/{entityId}` — Push a message associated with a specific entity (e.g., device, asset).
-- `POST /api/rule-engine/{entityType}/{entityId}/{timeout}` — Push an entity message with a custom timeout value (in milliseconds).
-- `POST /api/rule-engine/{entityType}/{entityId}/{queueName}/{timeout}` — Push an entity message to a specific queue with a custom timeout value.
+- `POST /api/rule-engine/` — 将消息推送到 Rule Engine。
+- `POST /api/rule-engine/{entityType}/{entityId}` — 将消息推送到特定实体（如设备、资产）。
+- `POST /api/rule-engine/{entityType}/{entityId}/{timeout}` — 使用自定义超时值（毫秒）推送实体消息。
+- `POST /api/rule-engine/{entityType}/{entityId}/{queueName}/{timeout}` — 将实体消息推送到特定队列并指定自定义超时值。
 
-The request body should contain the message payload in JSON format. 
-When no entity is specified in the endpoint, the message originator will be the user making the request. 
-When an entity is specified, the message originator will be that entity. 
-The platform will automatically add the service ID and request ID to the message metadata, which are required for routing the reply back to the calling client.
+请求体应以 JSON 格式包含消息 payload。
+当端点中未指定实体时，消息发起者为发起请求的用户。
+当指定实体时，消息发起者为该实体。
+平台会自动将服务 ID 和请求 ID 添加到消息元数据，用于将回复路由回调用客户端。
 
-### Workflow
+### 流程
 
-The typical workflow for handling REST API calls to the rule engine and sending replies follows these steps:
+处理 Rule Engine REST API 调用并发送回复的典型流程如下：
 
-1. When an external system or user sends a REST API call to submit a message to the ThingsBoard rule engine, a rule engine message of type `REST_API_REQUEST` is automatically created. 
-   The message data contains the payload from the API call, and the metadata includes the service ID and request ID needed for routing the reply back as an HTTP response.
+1. 当外部系统或用户发送 REST API 调用向 ThingsBoard Rule Engine 提交消息时，会自动创建类型为 `REST_API_REQUEST` 的 Rule Engine 消息。
+   消息数据包含 API 调用的 payload，元数据包含将回复作为 HTTP 响应路由回所需的服务 ID 和请求 ID。
 
-2. In your rule chain, process this message to prepare the response. This may involve enriching the message with additional data, transforming the payload, calling external
-   systems, or any other business logic required to generate the appropriate reply.
+2. 在 Rule Chain 中处理该消息以准备响应。可能涉及用附加数据丰富消息、转换 payload、调用外部系统或生成适当回复所需的任何其他业务逻辑。
 
-3. Once the response is ready in the message data, route the message to the "rest call reply" node. The node will use the metadata to send the reply back to the originating
-   service, which will return it as the HTTP response to the initial REST API call.
+3. 一旦消息数据中准备好响应，将消息路由至「rest call reply」节点。节点将使用元数据将回复发送回发起服务，作为对初始 REST API 调用的 HTTP 响应返回。
 
-4. **Important**: Ensure that the `serviceId` and `requestId` metadata attributes are preserved throughout your message processing. If these values are lost or overwritten, the reply
-   cannot be routed back and the API call will time out.
+4. **重要**：确保在消息处理过程中保留 `serviceId` 和 `requestId` 元数据属性。若这些值丢失或被覆盖，回复无法路由回，API 调用将超时。
 
 {% capture timeout_warning %}
-**Timeout handling:** If the REST API call times out before receiving a reply, the platform will respond with `408 REQUEST TIMEOUT`. 
-This can occur even when the "rest call reply" node is present in your rule chain if a failure happens in an earlier node and prevents the message from reaching the reply node. 
-When such timeout requests are made from a browser, the browser may silently retry the call, causing multiple rule engine executions for the same request. 
-To avoid this issue, ensure that your rule chain handles errors appropriately and that the reply is returned before the timeout occurs. 
-Set a sufficient timeout value on the original REST API call to allow for complete processing.
+**超时处理**：若 REST API 调用在收到回复前超时，平台将返回 `408 REQUEST TIMEOUT`。
+若 Rule Chain 中较早节点发生故障并阻止消息到达回复节点，即使存在「rest call reply」节点也可能发生此情况。
+从浏览器发起此类超时请求时，浏览器可能会静默重试调用，导致同一请求的多次 Rule Engine 执行。
+为避免此问题，请确保 Rule Chain 适当处理错误，且回复在超时前返回。
+在原始 REST API 调用上设置足够的超时值，以允许完整处理。
 {% endcapture %}
 {% include templates/warn-banner.md content=timeout_warning %}
 
-## Configuration
+## 配置
 
-The configuration parameters specify the metadata key names used to identify the service and request for sending a reply back.
+配置参数指定用于识别服务和请求的元数据键名，以便发送回复。
 
-- **Service Id** - Metadata key name for the service identifier. The default value is `serviceId`. This identifies the originating service that should receive the reply.
-- **Request Id** - Metadata key name for the request identifier. The default value is `requestUUID`. This identifies the specific REST API request being replied to.
+- **Service Id** - 服务标识符的元数据键名。默认值为 `serviceId`。标识应接收回复的发起服务。
+- **Request Id** - 请求标识符的元数据键名。默认值为 `requestUUID`。标识要回复的具体 REST API 请求。
 
 {% capture reasonable_defaults_note %}
-While these parameters can be customized for advanced use cases, the defaults work well for most scenarios and typically don't need to be changed. The REST API message already
-contains the routing parameters (service ID and request ID) in the metadata.
+这些参数可为高级用例自定义，但默认值在大多数场景下工作良好，通常无需更改。REST API 消息的元数据中已包含路由参数（服务 ID 和请求 ID）。
 {% endcapture %}
 {% include templates/info-banner.md content=reasonable_defaults_note %}
 
@@ -81,34 +77,34 @@ contains the routing parameters (service ID and request ID) in the metadata.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node extracts the service ID and request ID from the message metadata using the configured key names. If the request ID is missing, processing fails.
-2. The node validates that the service ID is present in the metadata. If missing, processing fails.
-3. The node validates that the message data (reply body) is not empty. If empty, processing fails.
-4. The node sends the reply back to the originating REST API call as an HTTP response.
-5. When processing completes successfully, the message is forwarded via the `Success` connection.
+1. 节点使用配置的键名从消息元数据中提取服务 ID 和请求 ID。若请求 ID 缺失，处理失败。
+2. 节点验证元数据中存在服务 ID。若缺失，处理失败。
+3. 节点验证消息数据（回复体）非空。若为空，处理失败。
+4. 节点将回复作为 HTTP 响应发送回发起的 REST API 调用。
+5. 成功完成处理后，消息经 `Success` 连接转发。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The REST API reply was sent successfully. The outgoing message is the same as the incoming message.
+    - REST API 回复已成功发送。传出消息与传入消息相同。
 - `Failure`
-    - An error occurred during processing, such as:
-        - The request ID is missing from the metadata
-        - The service ID is missing from the metadata
-        - The message data (reply body) is empty
-        - Failed to parse the request ID as a UUID
+    - 处理过程中发生错误，例如：
+        - 元数据中缺少请求 ID
+        - 元数据中缺少服务 ID
+        - 消息数据（回复体）为空
+        - 无法将请求 ID 解析为 UUID
 
-## Examples
+## 示例
 
-### Example 1 — Simple REST API reply
+### 示例 1 — 简单 REST API 回复
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-Data:
+数据：
 
 ```json
 {
@@ -119,7 +115,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -128,7 +124,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -137,12 +133,12 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is the same as the incoming message. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-User made a REST API call to the rule engine to trigger downloading a data file from an external FTP server. 
-The rule chain processed this request by connecting to the FTP server, downloading the file, processing the records, and preparing a response with the operation results. 
-The "rest api reply" node sends this data back as the HTTP response body to the original REST API call made to service `monolith` with request ID `a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6`.
+用户向 Rule Engine 发起 REST API 调用以触发电外部 FTP 服务器下载数据文件。
+Rule Chain 通过连接 FTP 服务器、下载文件、处理记录并准备包含操作结果的响应来处理该请求。
+「rest api reply」节点将此数据作为 HTTP 响应体发送回对服务 `monolith`、请求 ID `a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6` 的原始 REST API 调用。

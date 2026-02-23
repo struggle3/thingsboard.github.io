@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Custom python models
-description: Custom python models description
+title: 自定义 Python 模型
+description: 自定义 Python 模型说明
 ---
 
 

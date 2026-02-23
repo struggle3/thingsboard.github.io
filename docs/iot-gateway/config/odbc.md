@@ -1,16 +1,16 @@
 ---
 layout: docwithnav-gw
-title: ODBC Connector Configuration
-description: ODBC support for ThingsBoard IoT Gateway
+title: ODBC 连接器配置
+description: ThingsBoard IoT Gateway 的 ODBC 支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you get familiar with ODBC connector configuration for ThingsBoard IoT Gateway.
-Use [general configuration](/docs/iot-gateway/configuration/) to enable this connector.
-We will describe the connector configuration file below.
+本指南将帮助您熟悉 ThingsBoard IoT Gateway 的 ODBC 连接器配置。
+请使用 [通用配置](/docs/iot-gateway/configuration/) 启用此连接器。
+下面将说明连接器配置文件。
 
 <b>Example of ODBC Connector config file.</b>
 

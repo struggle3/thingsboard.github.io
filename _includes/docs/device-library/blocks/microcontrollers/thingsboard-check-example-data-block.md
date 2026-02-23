@@ -1,5 +1,5 @@
 
-The Check and control device data dashboard structure:  
+检查并控制设备数据仪表板结构：  
 
 {% assign generalViewOfDashboardPath = "/images/devices-library/basic/microcontrollers/dashboard/thingsboard-general-view-of-example-dashboard.png" %}
 
@@ -12,22 +12,22 @@ The Check and control device data dashboard structure:
 {% assign checkDataDashboard='
     ===
         image: /images/devices-library/paas/thingsboard-open-dashboard-click-on-row.png,
-        title: To check the data from our device we need to open the imported dashboard by clicking on it in the table.
+        title: 点击表格中的仪表板以打开导入的仪表板，查看设备数据。
     ===
         image: ' | append: generalViewOfDashboardPath | append: ',
-        title: The view of checking data and controlling our device dashboard.
+        title: 检查数据和控制设备的仪表板视图。
     ===
         image: /images/devices-library/basic/microcontrollers/dashboard/thingsboard-example-dashboard-device-attributes.png,
-        title: Received attributes from device.
+        title: 从设备接收的属性。
     ===
         image: /images/devices-library/basic/microcontrollers/dashboard/thingsboard-example-dashboard-device-info.png,
-        title: Device information from the ThingsBoard server.
+        title: ThingsBoard 服务器上的设备信息。
     ===
         image: /images/devices-library/basic/microcontrollers/dashboard/thingsboard-example-dashboard-led-mode-history.png,
-        title: Widget to see the history of LED mode changes.
+        title: 查看 LED 模式变化历史的部件。
     ===
         image: /images/devices-library/basic/microcontrollers/dashboard/thingsboard-example-dashboard-temperature-history.png,
-        title: Widget to see the history of our emulated temperature.
+        title: 查看模拟温度历史的部件。
 '
 %}
 

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect WeMos D1 R2 to ThingsBoard?"
+title: "如何将WeMos D1 R2连接到ThingsBoard？"
 redirect_to: "/device-library/paas/wemos-d1-r2/"
 ---

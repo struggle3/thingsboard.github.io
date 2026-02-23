@@ -1,23 +1,23 @@
 ---
 layout: docwithnav
-title: Temperature upload over MQTT using Nettra RTU
-description: ThingsBoard IoT Platform sample for temperature upload over MQTT using Nettra RTU
+title: 使用 Nettra RTU 通过 MQTT 上传温度
+description: ThingsBoard 物联网平台示例：使用 Nettra RTU 通过 MQTT 上传温度
 hidetoc: "true"
 ---
 
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-This guide contains step-by-step instructions on how to connect your Nettra RTU device to ThingsBoard Community Edition through ethernet, using as sample, one of the many applications that the Nettra RTU has. In particular, this sample application will allow you to monitor temperature using ThingsBoard web UI to display the data coming from the sensor. 
+本指南包含分步说明，介绍如何通过以太网将 Nettra RTU 设备连接到 ThingsBoard 社区版，并以 Nettra RTU 众多应用之一为例。本示例应用将允许您使用 ThingsBoard Web UI 监控并显示来自传感器的温度数据。
 
 ### Nettra RTU
-[Nettra RTU](https://nettra.tech) called **"RTU+"** is a powerful IoT electronic device that has digital and analog inputs and outputs, as well as several integrated communication interfaces as modem, ethernet, 802.15.4, RS485, RS232 and GPS. It is an ideal product to implement monitoring, acquisition and control applications over a distributed data network. 
+[Nettra RTU](https://nettra.tech) 又称 **RTU+**，是一款功能强大的物联网电子设备，具有数字和模拟输入输出，以及多种集成通信接口（调制解调器、以太网、802.15.4、RS485、RS232 和 GPS）。它是实现分布式数据网络上监控、采集和控制应用的理想产品。
 
-The RTU+ is easly configurable via a [RTU+ Configuration Interface](https://nettra.tech). To adapt the RTU+ to each application, it runs a fully customizable script, accessible and editable from the Configuration Interface. In this guide we will provide one as an example quite simple and easy to understand.
+RTU+ 可通过 [RTU+ 配置界面](https://nettra.tech) 轻松配置。为适应各应用场景，RTU+ 运行完全可自定义的脚本，可从配置界面访问和编辑。本指南将提供一个简单易懂的示例。
 
-Once you complete this sample/tutorial, you will see your sensor data on a dashboard like the following on the right.
+完成本示例/教程后，您将在仪表板中看到传感器数据，如下图所示。
 <br><br>
 ![image](/images/samples/nettrartu+/nettrartu+.png)   ![image](/images/samples/nettrartu+/rtu_temp_sensor/dashboard.png)
 

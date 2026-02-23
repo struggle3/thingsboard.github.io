@@ -1,6 +1,6 @@
-Once **Edge** is installed, you’ll be able to access the interface via [http://localhost:18080](http://localhost:18080){:target="_blank"}. 
-This URL will be referred to as **EDGE_URL** throughout the rest of this tutorial.
+**Edge**安装完成后，您可通过 [http://localhost:18080](http://localhost:18080){:target="_blank"} 访问界面。
+在本教程后续内容中，该URL将称为 **EDGE_URL**。
 
-To log in, use the same credentials as **SERVER_URL**:
-* **Username:** tenant@thingsboard.org
-* **Password:** tenant
+请使用与 **SERVER_URL** 相同的凭据登录：
+* **用户名：** tenant@thingsboard.org
+* **密码：** tenant

@@ -3,18 +3,18 @@
 * TOC
 {:toc}
 
-Customizing menu in ThingsBoard allows you to tailor the navigation menu to your needs, providing quick access to the most frequently used functions and dashboards.
-You can add new and show/hide existing menu items.
+在 ThingsBoard 中自定义菜单可根据需求调整导航菜单，快速访问最常用的功能和仪表板。
+您可以添加新菜单项、显示或隐藏现有项。
 
-Menu customization options:
+菜单自定义选项：
 
-- **Adding new menu items**: You can add new items to the menu, including links to specific dashboards, or external web pages;
+- **添加新菜单项**：可为菜单添加新项，包括链接到指定仪表板或外部网页；
 
-- **Changing icons and names**: You can customize the icons and names for each menu item to better reflect their functionality and value to the user;
+- **修改图标和名称**：可为每个菜单项自定义图标和名称，更好体现其功能与价值；
 
-- **Reorganizing the menu**: You can drag and rearrange the order of items in the menu, optimizing the interface according to your workflows;
+- **调整菜单顺序**：可拖拽并重排菜单项顺序，按工作流优化界面；
 
-- **Personalized settings**: The menu can be customized individually for each tenant, customer, or their users, providing an additional level of personalization.
+- **个性化设置**：可为每个租户、客户或其用户单独自定义菜单，提供更高层级的个性化。
 
 &nbsp;
 <div id="video">  
@@ -23,32 +23,32 @@ Menu customization options:
     </div>
 </div>
 
-## Add custom menu
+## 添加自定义菜单
 
-Before adding a custom menu in ThingsBoard, it is important to define the scope of its application, depending on who the end user is: Tenant or Customer.
+在 ThingsBoard 中添加自定义菜单前，需先根据最终用户（租户或客户）确定其适用范围。
 
-Tenant scope options:
-- *Not assigned* - indicates that the custom menu is not assigned to any tenant user. This option is convenient to use during the menu setup stage and can be assigned to the required tenant user afterward;
-- *All tenant users* - selecting this option means that the menu will be accessible to all users at the tenant level;
-- *Users list* - this option allows you to create a list of users who will have access to this menu.
+租户范围选项：
+- *未分配* - 表示自定义菜单未分配给任何租户用户。适用于菜单配置阶段，之后可分配给所需租户用户；
+- *所有租户用户* - 选择此项表示租户级所有用户均可访问该菜单；
+- *用户列表* - 可创建有权访问该菜单的用户列表。
 
-Customer scope options:
-- *Not assigned* - indicates that the custom menu is not assigned to any customer or customer user. This option is convenient to use during the menu setup stage and can be assigned to the required customer or customer user afterward;
-- *All customer users* - selecting this option applies the custom menu to all of your customers and their users;
-- *Users list* - this option allows you to apply the custom menu to a specific customer user or a list of customer users;
-- *Customers list* - this option allows you to apply the custom menu to a specific customer or a list of customers and their users.
+客户范围选项：
+- *未分配* - 表示自定义菜单未分配给任何客户或客户用户。适用于菜单配置阶段，之后可分配给所需客户或客户用户；
+- *所有客户用户* - 选择此项可将自定义菜单应用到所有客户及其用户；
+- *用户列表* - 可将自定义菜单应用到指定客户用户或客户用户列表；
+- *客户列表* - 可将自定义菜单应用到指定客户或客户列表及其用户。
 
-**Add new custom menu**
+**添加新自定义菜单**
 
-To add new custom menu, follow these steps:
+添加新自定义菜单的步骤：
 
-- Go to the "Custom menu" tab of the "White labeling" page, and click the "plus" icon;
-- In new window, enter custom menu name;
-- Select scope: Tenant or Customer;
-- Specify to whom exactly you are assigning this custom menu;
-- After all settings, click "Add";
+- 前往「白标」页面的「自定义菜单」选项卡，点击「加号」图标；
+- 在新窗口中输入自定义菜单名称；
+- 选择范围：租户或客户；
+- 指定将此自定义菜单分配给谁；
+- 完成所有设置后点击「添加」；
 
-Custom menu added.
+自定义菜单已添加。
 
 {% assign addCustomMenu = '
     ===
@@ -65,29 +65,29 @@ Custom menu added.
 
 {% include images-gallery.liquid imageCollection=addCustomMenu %}
 
-## Custom menu configuration
+## 自定义菜单配置
 
-### Add new menu item
+### 添加新菜单项
 
-You can add a new menu item that will link to a specific dashboard or an external webpage, such as a documentation page.
+可添加链接到指定仪表板或外部网页（如文档页）的菜单项。
 
 {% capture difference %}
-**Please note:**
+**请注意：**
 <br>
-Before using a URL in your project, ensure that the page allows embedding in an iframe.
-To do this, check the value of the [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options){:target="_blank"} HTTP header. If the header is set to DENY or SAMEORIGIN, it means the page cannot be embedded in an iframe on other domains or is restricted to the same domain. If your domain needs to be allowed for embedding, it must be explicitly listed in the header.
-It is recommended to check whether your domain is included among the allowed domains in the header or in the Content Security Policy (CSP) to avoid potential issues with displaying the page in an iframe.
+在项目中使用 URL 前，请确认该页面允许在 iframe 中嵌入。
+可检查 [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options){:target="_blank"} HTTP 头的取值。若为 DENY 或 SAMEORIGIN，表示该页面无法在其他域的 iframe 中嵌入或仅限同域。若需将您的域名列入可嵌入列表，必须在响应头中明确指定。
+建议检查域名是否在响应头或内容安全策略 (CSP) 的允许列表中，以避免页面在 iframe 中显示时出现异常。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To add new menu item, follow these steps:
+添加新菜单项步骤：
 
-- Click the "Add custom menu item" button at the bottom of the page;
-- Enter the name for your menu item. Leave the item type as "Link". Now, specify the action: open a dashboard or a URL. Click "Add";
-- The new menu item will be added to the bottom of the list. Drag the new item up or down by holding it from the left corner;
-- Apply changes to the menu by clicking the "Save" button.
+- 点击页面底部的「添加自定义菜单项」按钮；
+- 输入菜单项名称。保持项类型为「链接」，指定操作：打开仪表板或 URL，点击「添加」；
+- 新菜单项将添加至列表底部。从左侧拖拽可调整上下顺序；
+- 点击「保存」应用菜单更改。
 
-Clicking on the new menu item will open the specified dashboard or webpage (depending on what you have set in the settings).
+点击新菜单项将打开指定仪表板或网页（以设置中配置为准）。
 
 {% assign addNewMenuItem = '
     ===
@@ -114,14 +114,14 @@ Clicking on the new menu item will open the specified dashboard or webpage (depe
 {% include images-gallery.liquid imageCollection=addNewMenuItem %}
 
 <br>
-Alternatively, you can add a new item between existing ones:
+也可在现有项之间插入新项：
 
-- Hover your mouse pointer between two menu items and click "Add custom menu item";
-- Enter the name for your menu item. Leave the item type as "Link". Now, specify the action: open a dashboard or a URL. Click "Add";
-- A new menu item is added between existing menu items;
-- Apply changes to the menu by clicking the "Save" button.
+- 将鼠标悬停在两个菜单项之间，点击「添加自定义菜单项」；
+- 输入菜单项名称，保持项类型为「链接」，指定操作：打开仪表板或 URL，点击「添加」；
+- 新菜单项将插入到现有项之间；
+- 点击「保存」应用菜单更改。
 
-Now, click on the new menu item. You will navigate to the specified dashboard.
+点击新菜单项即可进入指定仪表板。
 
 {% assign addCustomMenuItemBetweenExistingItems = '
     ===
@@ -144,20 +144,20 @@ Now, click on the new menu item. You will navigate to the specified dashboard.
 
 {% include images-gallery.liquid imageCollection=addCustomMenuItemBetweenExistingItems %}
 
-#### Adding subitem
+#### 添加子项
 
-You can place several menu items into one section. For example, devices, assets, and entity views are located in the "Entities" section.
+可将多个菜单项归入一个分组。例如，「实体」分组包含设备、资产和实体视图。
 
-As an example, let's add one section and place two subitems within it.
+示例：添加一个分组并在其中放置两个子项。
 
-- First, let's add a section. Start adding a new menu item. Name it "My dashboards", select the "Section" item type, and click "Add";
-- Custom item with "Section" type added. The "+ Add subitem" button appeared under the section "My dashboards". Click it to add a subitem to this section;
-- Enter "Dashboard A" as menu item name, and specify the dashboard;
-- Subitem added. As you can see, it is located in the "My dashboards" section by hierarchy;
-- Add another one menu item. Name it "Dashboard B" and specify your second dashboard. Save the changes;
+- 先添加分组。添加新菜单项，命名为「我的仪表板」，选择「分组」类型，点击「添加」；
+- 已添加「分组」类型的自定义项。「我的仪表板」分组下出现「+ 添加子项」按钮，点击为该分组添加子项；
+- 输入菜单项名称「仪表板 A」，指定对应仪表板；
+- 子项已添加，已按层级归属于「我的仪表板」分组；
+- 再添加一个菜单项，命名为「仪表板 B」并指定第二个仪表板，保存更改；
 
-In the left menu, a section called "My dashboards" has appeared. Click on it to expand. Inside, you will find two menu subitems that link to your dashboards. Click on the "Dashboard A" menu item. The corresponding dashboard will open.
-Now click on the "Dashboard B" menu item to navigate to the second dashboard.
+左侧菜单中会出现名为「我的仪表板」的分组，点击展开后可见两个指向仪表板的子项。点击「仪表板 A」菜单项可打开对应仪表板。
+再点击「仪表板 B」菜单项可进入第二个仪表板。
 
 {% assign addSubitem = '
     ===
@@ -189,9 +189,9 @@ Now click on the "Dashboard B" menu item to navigate to the second dashboard.
 
 {% include images-gallery.liquid imageCollection=addSubitem %}
 
-### Edit menu item
+### 编辑菜单项
 
-To edit menu item, click the "pencil" icon in the row of the menu item you want to edit. Make the necessary changes, click "Apply", and then save changes. The item configuration has been changed.
+编辑菜单项时，点击要编辑的菜单项行中的「铅笔」图标。完成修改后点击「应用」并保存，菜单项配置即已更新。
 
 {% assign editMenuItem = '
     ===
@@ -209,14 +209,14 @@ To edit menu item, click the "pencil" icon in the row of the menu item you want 
 {% include images-gallery.liquid imageCollection=editMenuItem %}
 
 {% capture difference %}
-**Please note:**
-You can change the action only for custom menu item.
+**请注意：**
+只能为自定义菜单项修改操作。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Reset to default menu
+### 恢复默认菜单
 
-You can reset all your changes to the default state by pressing the "Reset to default menu" button, and click "Save" to apply changes.
+可点击「恢复默认菜单」按钮将所有更改重置为默认状态，然后点击「保存」应用更改。
 
 {% assign resetToDefaultMenu = '
     ===
@@ -233,9 +233,9 @@ You can reset all your changes to the default state by pressing the "Reset to de
 
 {% include images-gallery.liquid imageCollection=resetToDefaultMenu %}
 
-### Reset menu item back to default
+### 将菜单项恢复为默认
 
-You can reset a menu item to its default state by clicking the "broom" icon in the row of the menu item, and click "Save" to apply changes.
+可点击菜单项行中的「扫帚」图标将该项恢复为默认，然后点击「保存」应用更改。
 
 {% assign resetMenuItemBackToDefault = '
     ===
@@ -252,9 +252,9 @@ You can reset a menu item to its default state by clicking the "broom" icon in t
 
 {% include images-gallery.liquid imageCollection=resetMenuItemBackToDefault %}
 
-### Hide existing menu items
+### 隐藏现有菜单项
 
-To hide menu items in the ThingsBoard user interface, switch the "Hidden/Visible" toggle to "Hidden" in the row of the menu item you want to hide.
+若要在 ThingsBoard 用户界面中隐藏菜单项，在该菜单项行中将「隐藏/可见」开关切换为「隐藏」。
 
 {% assign hideExistingMenuItems = '
     ===
@@ -268,12 +268,12 @@ To hide menu items in the ThingsBoard user interface, switch the "Hidden/Visible
 
 {% include images-gallery.liquid imageCollection=hideExistingMenuItems %}
 
-To display the hidden menu item again, switch the "Hidden/Visible" toggle to "Visible" and save the changes.
+若要再次显示已隐藏的菜单项，将该菜单项行的「隐藏/可见」开关切换为「可见」并保存。
 
 <br>
-*Hide all menu items*
+*隐藏所有菜单项*
 
-If you want to start configuring the menu from scratch, you can hide all menu items by clicking the "Hide all menu items" button at the top of the window. 
+若要从零开始配置菜单，可点击窗口顶部的「隐藏所有菜单项」按钮以隐藏所有菜单项。 
 
 {% assign hideAllMenuItems = '
     ===
@@ -288,14 +288,14 @@ If you want to start configuring the menu from scratch, you can hide all menu it
 {% include images-gallery.liquid imageCollection=hideAllMenuItems %}
 
 {% capture difference %}
-**Please note:**
-The only menu item you cannot hide is "Home".
+**请注意：**
+唯一无法隐藏的菜单项是「首页」。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-*Show hidden items*
+*显示隐藏项*
 
-By default, hidden menu items are displayed in the custom menu config window. To hide them, toggle the "Show hidden items" switch to "Off".
+默认情况下，自定义菜单配置窗口中会显示隐藏的菜单项。要隐藏它们，可将「显示隐藏项」开关设为「关闭」。
 
 {% assign showHiddenItems = '
     ===
@@ -309,9 +309,9 @@ By default, hidden menu items are displayed in the custom menu config window. To
 
 {% include images-gallery.liquid imageCollection=showHiddenItems %}
 
-### Delete menu item
+### 删除菜单项
 
-To delete the custom menu item, click the "trash" icon in the row of the menu item you want to remove. Then save the changes.
+删除自定义菜单项时，点击要移除的菜单项行中的「垃圾桶」图标，然后保存更改。
 
 {% assign deleteMenuItem = '
     ===
@@ -326,14 +326,14 @@ To delete the custom menu item, click the "trash" icon in the row of the menu it
 {% include images-gallery.liquid imageCollection=deleteMenuItem %}
 
 {% capture difference %}
-**Please note:**
-You can delete only custom item. Default items cannot be deleted, only [hidden](#hide-existing-menu-items).
+**请注意：**
+只能删除自定义项。默认项不可删除，只能[隐藏](#hide-existing-menu-items)。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Edit custom menu name
+## 编辑自定义菜单名称
 
-To edit the custom menu name, click the "pencil" icon in the row of this custom menu. Change the name and click "Save".
+编辑自定义菜单名称时，点击该自定义菜单行中的「铅笔」图标，修改名称后点击「保存」。
 
 {% assign editName = '
     ===
@@ -350,9 +350,9 @@ To edit the custom menu name, click the "pencil" icon in the row of this custom 
 
 {% include images-gallery.liquid imageCollection=editName %}
 
-## Manage custom menu assignees
+## 管理自定义菜单分配对象
 
-To manage the users assigned to this custom menu, click the corresponding icon in the row of this user menu. From the dropdown menu, change the assignee type and save changes. Assignee type changed.
+管理分配到此自定义菜单的用户时，点击该用户菜单行中的对应图标，从下拉菜单中更改分配类型并保存。分配类型已更新。
 
 {% assign manageCustomMenuAssignees = '
     ===
@@ -369,9 +369,9 @@ To manage the users assigned to this custom menu, click the corresponding icon i
 
 {% include images-gallery.liquid imageCollection=manageCustomMenuAssignees %}
 
-## Delete custom menu
+## 删除自定义菜单
 
-To delete custom menu, click the corresponding icon in the row of this user menu, and confirm the deletion by clicking "Yes".
+删除自定义菜单时，点击该用户菜单行中的对应图标，点击「是」确认删除。
 
 {% assign deleteCustomMenu = '
     ===
@@ -385,6 +385,6 @@ To delete custom menu, click the corresponding icon in the row of this user menu
 
 {% include images-gallery.liquid imageCollection=deleteCustomMenu %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}

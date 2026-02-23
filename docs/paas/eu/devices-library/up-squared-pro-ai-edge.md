@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect UP Squared Pro AI Edge to ThingsBoard?"
+title: "如何将UP Squared Pro AI Edge连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/up-squared-pro-ai-edge/"
 ---

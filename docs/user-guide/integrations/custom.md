@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Custom Integration
-description: Custom integration guide 
+title: Custom 集成
+description: Custom 集成指南 
 
 ---
 {% assign docsPrefix = "pe/" %}

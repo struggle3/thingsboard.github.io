@@ -1,46 +1,46 @@
-### Step 1. Stop and Remove Existing Containers
+### 步骤 1：停止并移除现有容器
 
-First, stop the currently running Gateway containers:
+首先，停止当前运行的 Gateway 容器：
 
 ```bash
 docker compose down
 ```
 {: .copy-code}
 
-This will gracefully shut down the gateway and remove the containers, without deleting any volumes or configuration data.
+该操作将正常关闭网关并移除容器，不会删除任何卷或配置数据。
 
-### Step 2. Pull the Latest Gateway Image
+### 步骤 2：拉取最新 Gateway 镜像
 
-Fetch the latest version of the ThingsBoard IoT Gateway Docker image:
+拉取 ThingsBoard IoT Gateway Docker 镜像的最新版本：
 
 ```bash
 docker pull thingsboard/tb-gateway
 ```
 {: .copy-code}
 
-### Step 3. Start the Updated Gateway
+### 步骤 3：启动更新后的 Gateway
 
-Recreate and start the containers with the updated image:
+使用更新后的镜像重新创建并启动容器：
 
 ```bash
 docker compose up -d
 ```
 {: .copy-code}
 
-The `-d` flag runs the containers in detached mode.
+`-d` 参数表示在后台模式运行容器。
 
-### Step 4. Verify the Upgrade
+### 步骤 4：验证升级
 
-To ensure the upgrade was successful, check the Gateway logs by running:
+为确保升级成功，可通过以下命令查看 Gateway 日志：
 
 ```bash
 docker compose logs -f
 ```
 {: .copy-code}
 
-This will display the logs in real-time, allowing you to confirm that the Gateway is running correctly with the new version.
+将实时显示日志，便于确认 Gateway 是否已正确运行新版本。
 
-### Notes
+### 说明
 
-- This method is compatible with any version of the Gateway as long as your `docker-compose.yml` and volume mappings are correctly configured.
-- To automate future upgrades, consider version pinning or tagging in your Compose file and keeping track of official image changelogs.
+- 只要 `docker-compose.yml` 和卷映射配置正确，此方法适用于任意版本的 Gateway。
+- 为实现后续自动升级，可考虑在 Compose 文件中进行版本固定或标签标记，并关注官方镜像变更日志。

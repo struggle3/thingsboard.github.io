@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: twilio sms
-description: Sends incoming message data as SMS to specified phone numbers via Twilio.
+description: 通过 Twilio 将入站消息数据以短信形式发送到指定电话号码。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

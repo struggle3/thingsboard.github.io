@@ -1,10 +1,10 @@
-Checks the incoming message type against the configured set of message types. If the type is in the set, the message is routed via `True`; otherwise, via `False`.
+将入站消息类型与配置的消息类型集合进行比对。若类型在集合中，消息经 `True` 路由；否则经 `False` 路由。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Select message types** — required. A set of message types to check against; at least one must be specified.
+* **选择消息类型** — 必填。用于比对的消息类型集合；至少需指定一个。
 
 ### JSON Schema
 
@@ -32,31 +32,31 @@ Checks the incoming message type against the configured set of message types. If
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Determine the incoming message **type**.
-2. Check whether the type is in the configured set.
-    1. If it is, route the message to downstream nodes via `True`.
-    2. If it is not, route the message to downstream nodes via `False`.
+1. 确定入站消息的**类型**。
+2. 检查类型是否在配置的集合中。
+    1. 若在，则通过 `True` 将消息路由至下游节点。
+    2. 若不在，则通过 `False` 将消息路由至下游节点。
 
-## Output connections
+## 输出连接
 
-* `True`:
-    * If the incoming message type matches any of the message types configured for the node.
-* `False`:
-    * If the incoming message type does not match any of the message types configured for the node.
-* `Failure`:
-    * If an unexpected error occurred during message processing.
+* `True`：
+    * 当入站消息类型匹配节点配置的任一消息类型时。
+* `False`：
+    * 当入站消息类型不匹配节点配置的任一消息类型时。
+* `Failure`：
+    * 消息处理过程中发生意外错误时。
 
-## Examples
+## 示例
 
-### Example 1 — Message type matches → `True`
+### 示例 1 — 消息类型匹配 → `True`
 
-**Incoming message**
+**入站消息**
 
-Message type is `POST_TELEMETRY_REQUEST`.
+消息类型为 `POST_TELEMETRY_REQUEST`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -67,27 +67,27 @@ Message type is `POST_TELEMETRY_REQUEST`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-The message type is in the configured set.
+消息类型在配置的集合中。
 
 ---
 
-### Example 2 — Message type does not match → `False`
+### 示例 2 — 消息类型不匹配 → `False`
 
-**Incoming message**
+**入站消息**
 
-Message type is `POST_TELEMETRY_REQUEST`.
+消息类型为 `POST_TELEMETRY_REQUEST`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -98,14 +98,14 @@ Message type is `POST_TELEMETRY_REQUEST`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`False`** 路由。
 
-**Explanation**
+**说明**
 
-The message type is not in the configured set.
+消息类型不在配置的集合中。

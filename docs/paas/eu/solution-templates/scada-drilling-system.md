@@ -2,16 +2,16 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: SCADA Oil & Gas Drilling system
-description: SCADA Oil & Gas Drilling system overview
+title: SCADA 油气钻井系统
+description: SCADA 油气钻井系统概览
 
 go-to-drilling-solution-templates-page-1:
     0:
         image: /images/solutions/scada-drilling-system/go-to-drilling-solution-templates-page-1-pe.png
-        title: 'Go to the "Solution templates" page. Find "SCADA Oil & Gas Drilling system" and click "Install" to start the installation process.'
+        title: '进入「解决方案模板」页面，找到「SCADA Oil & Gas Drilling system」并点击「Install」开始安装。'
     1:
         image: /images/solutions/scada-drilling-system/drilling-solution-instruction-1-pe.png
-        title: 'Configuration instructions for this solution will be provided — follow the steps as instructed.'
+        title: '将提供该解决方案的配置说明，请按步骤操作。'
     2:
         image: /images/solutions/scada-drilling-system/go-to-drilling-dashboard-1-pe.png
         title: 'Once done, click "Close" to complete the setup and proceed to the dashboard.'

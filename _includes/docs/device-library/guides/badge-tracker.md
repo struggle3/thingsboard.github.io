@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.lansitec.com/products/lorawan-smart-badge-tracker" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -14,14 +14,14 @@ Combining GNSS, Bluetooth 5.0, and LoRaWAN technology, this sleek device provide
 The built-in 3-axis accelerometer intelligently detects movement or falls, conserving battery when the device is idle and alerting you to unauthorized or emergency situations.<br>
 With a maximum of five months standby time and no additional network fees, the Badge Tracker offers a cost-effective, high-precision solution for securing sensitive areas, optimizing resource usage, and improving operational workflows.<br><br><br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
 Only ThingsBoard Cloud works when using direct communication from this device to ThingsBoard via MQTT.
 

@@ -1,10 +1,10 @@
 ---
 layout: common
-title: Why Top Energy Companies Trust ThingsBoard – Customers Feedback
+title: 顶尖能源企业为何选择 ThingsBoard——客户反馈
 notitle: "true"
 customTitle: "true"
 contactUsModal: "true"
-description: Explore real success stories from smart energy companies using ThingsBoard for energy monitoring, infrastructure control, and IoT integration. 
+description: 了解智慧能源企业使用 ThingsBoard 进行能源监控、基础设施控制与物联网集成的真实成功案例。
 
 ---
 

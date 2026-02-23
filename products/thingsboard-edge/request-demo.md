@@ -5,19 +5,19 @@ hidetoc: "true"
 
 ---
 
-<h4 class="text-center pt-2 pb-2" style="width: 100%">ThingsBoard Edge Demo Request</h4>
+<h4 class="text-center pt-2 pb-2" style="width: 100%">ThingsBoard Edge 演示申请</h4>
 <div style="display: flex;">
     <div style="width: 50%; margin: 30px 10px 0;">
         <div class="pricing-square-description">
-            <p>Connect devices to ThingsBoard Edge and start processing data locally without internet connection:</p>
+            <p>将设备连接至 ThingsBoard Edge，在无网络连接的情况下开始本地处理数据：</p>
         </div>
         <ul>
-            <li class="pricing-square-item">Operate with local devices without connection to cloud</li>
-            <li class="pricing-square-item">Monitor local events/time series data with real-time dashboard</li>
-            <li class="pricing-square-item">Push to cloud only subset of filtered data from edge devices</li>
-            <li class="pricing-square-item">React to critical local situations on site without connection to cloud</li>
-            <li class="pricing-square-item">Update thousands of edge configurations in a single click</li>
-            <li class="pricing-square-item">Store data locally from devices without connection to cloud and push to cloud once connection is restored</li>
+            <li class="pricing-square-item">在无云连接的情况下与本地设备协同工作</li>
+            <li class="pricing-square-item">使用实时仪表板监控本地事件/时序数据</li>
+            <li class="pricing-square-item">仅将过滤后的边缘设备数据子集推送至云端</li>
+            <li class="pricing-square-item">在无云连接的情况下现场响应关键本地情况</li>
+            <li class="pricing-square-item">一键更新数千个边缘配置</li>
+            <li class="pricing-square-item">在无云连接时本地存储设备数据，连接恢复后推送至云端</li>
         </ul>
     </div>
     <div style="width: 50%; margin: 0 10px 0;">

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect ESP-EYE to ThingsBoard?"
+title: "如何将ESP-EYE连接到ThingsBoard？"
 redirect_to: "/device-library/paas/esp-eye/"
 ---

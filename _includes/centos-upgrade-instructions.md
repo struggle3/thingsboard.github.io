@@ -42,9 +42,9 @@
 {%- assign prev_minor = prev_parts[1] -%}
 
 {% if patch_status == "true" %}
-### Upgrading {{ platform }} to latest {{ base_version }} ({{ current_version }})
+### 将 {{ platform }} 升级到最新 {{ base_version }}（{{ current_version }}）
 {% else %}
-### Upgrading {{ platform }} to {{ current_version }}
+### 将 {{ platform }} 升级到 {{ current_version }}
 {% endif %}
 
 {%- if x_status == "true" -%}
@@ -69,17 +69,17 @@
 {%- endif -%}
 
 {% capture difference %}
-**NOTE:**
+**注意：**
 {% if curr_major > "4" or (curr_major == "4" and curr_minor >= "2") %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version }}{% if patch_status == "true" %} or any {{ base_version }} patch{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version }}{% if patch_status == "true" %} 或任意 {{ base_version }} 补丁{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version }}**]({{ prev_version_href }})。
 {% else %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} and ThingsBoard version {{ v | strip }}{% endfor %}{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version_label }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} 和 ThingsBoard 版本 {{ v | strip }}{% endfor %}{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version_label }}**]({{ prev_version_href }})。
 {% endif %}
 {%- if docsPrefix == "pe/" -%}
 <br>
-[**Prepare**](#prepare-for-upgrading-thingsboard) for upgrading ThingsBoard.
+升级 ThingsBoard 前请先[**准备**](#prepare-for-upgrading-thingsboard)。
 {%- endif -%}
 {% endcapture %}
 
@@ -106,7 +106,7 @@ In order to upgrade to {{ current_version_with_platform | upcase }} you need to 
 {%- endif -%}
 
 {% if current_version == "3.8" and docsPrefix != "pe/" %}
-#### Install PostgreSQL contrib package (For CentOS only)
+#### 安装 PostgreSQL contrib 包（仅 CentOS）
 
 ```bash
 sudo dnf install -y postgresql16-contrib
@@ -120,7 +120,7 @@ sudo dnf install -y postgresql16-contrib
 {% include templates/install/tb-350-update.md %}
 {% endif %}
 
-#### ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} package download
+#### 下载 ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} 安装包
 
 {% if docsPrefix == "pe/" %}
 ```bash
@@ -134,9 +134,9 @@ wget https://github.com/thingsboard/thingsboard/releases/download/v{{ current_ve
 {: .copy-code}
 {% endif %}
 
-#### ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} service upgrade
+#### ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} 服务升级
 
-* Stop ThingsBoard service if it is running.
+* 若 ThingsBoard 服务正在运行，请先停止。
 
 ```bash
 sudo service thingsboard stop
@@ -144,7 +144,7 @@ sudo service thingsboard stop
 {: .copy-code}
 
 {% if docsPrefix == "pe/" %}
-* Install Thingsboard Web Report component as described [here](/docs/user-guide/install/pe/rhel/#step-9-install-thingsboard-webreport-component).
+* 按[此处](/docs/user-guide/install/pe/rhel/#step-9-install-thingsboard-webreport-component)所述安装 ThingsBoard Web Report 组件。
 {% endif %}
 
 ```bash
@@ -153,18 +153,18 @@ sudo rpm -Uvh thingsboard-{{ current_version_with_platform }}.rpm
 {: .copy-code}
 
 {% capture difference %}
-**NOTE:**
+**注意：**
 <br>
-Package installer may ask you to merge your ThingsBoard configuration. It is preferred to use merge option to make sure that all your previous parameters will not be overwritten.
+安装包可能会提示合并 ThingsBoard 配置。建议选择合并选项，以确保先前参数不会被覆盖。
 {% endcapture %}
 
 {% capture update_note %}
 {% assign base_version_parts = base_version | split: "." %}
 {% assign patch_part = base_version_parts[2] %}
 {% if patch_status == "true" %}
-If you are upgrading from {{ previous_version }}, you **must** run the script below. However, if you are upgrading from version {{ family | append: "." | append: patch_part | append: ".x" }}, **DO NOT** run the upgrade script; proceed directly to starting the service.
+若从 {{ previous_version }} 升级，则**必须**运行下方脚本。若从 {{ family | append: "." | append: patch_part | append: ".x" }} 版本升级，则**不要**运行升级脚本，直接启动服务即可。
 {% else %}
-If you are upgrading from version {{ previous_version }}, you must run the script below
+若从 {{ previous_version }} 版本升级，必须运行下方脚本
 {% endif %}
 {% endcapture %}
 
@@ -183,12 +183,12 @@ sudo /usr/share/thingsboard/bin/install/upgrade.sh{% if manual_version_upgrade =
 {{ update_script }}
 {% endif %}
 
-#### Start the service
+#### 启动服务
 {% if current_version == "3.7" %}
 {% capture cassandra-370 %}
-**In case Cassandra is installed**, ensure that a proper **JAVA_HOME** parameter is set for *cassandra.in.sh* include file. As of 3.7.0 release, latest stable Cassandra version does not support Java 17 yet.
+**若已安装 Cassandra**，请确保为 *cassandra.in.sh* 包含文件设置正确的 **JAVA_HOME** 参数。截至 3.7.0 版本，最新稳定版 Cassandra 尚不支持 Java 17。
 
-In case action is required, you can refer to *"you will need to install Java..."* section of [**Cassandra installation guide**](/docs/user-guide/install/rhel/?rhelThingsboardDatabase=hybrid#cassandra-installation).
+如需操作，可参考 [**Cassandra 安装指南**](/docs/user-guide/install/rhel/?rhelThingsboardDatabase=hybrid#cassandra-installation) 中的 *"you will need to install Java..."* 部分。
 {% endcapture %}
 {% include templates/info-banner.md content=cassandra-370 %}
 {% endif %}
@@ -200,7 +200,7 @@ sudo service thingsboard start
 
 {% if current_version == "3.4.2" %}
 {% capture default-jwt %}
-Update the JWT signing key if you use the default one "thingsboardDefaultSigningKey" on production environments. See [JWT security settings](/docs/user-guide/ui/security-settings/#jwt-security-settings) for details.
+若在生产环境中使用默认 JWT 签名密钥 "thingsboardDefaultSigningKey"，请更新。详见 [JWT 安全设置](/docs/user-guide/ui/security-settings/#jwt-security-settings)。
 {% endcapture %}
 {% include templates/info-banner.md content=default-jwt %}
 {% endif %}

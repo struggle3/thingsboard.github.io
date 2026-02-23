@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Chart Widgets
-description: ThingsBoard Chart Widgets management
+title: 图表部件
+description: ThingsBoard图表部件管理
 
 charts-addwidget:
     0:

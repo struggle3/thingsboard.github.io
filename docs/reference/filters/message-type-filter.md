@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Message Type Filter
+title: 消息类型过滤器
 
 ---
 

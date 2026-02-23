@@ -4,119 +4,119 @@
 {% assign sinceVersion = "3.8.0" %}
 {% include templates/since.md %}
 
-In ThingsBoard, SCADA symbols are crafted using [SVG](https://en.wikipedia.org/wiki/SVG){:target="_blank"} (Scalable Vector Graphics), 
-which enables seamless scaling across different screen sizes due to their vector nature. 
-Our engineers have enhanced the SVG format to support interactivity in these symbols. 
-This guide will walk you through the steps to create your own interactive SCADA symbol using a sample SVG file.
+ThingsBoard 中的 SCADA symbol 使用 [SVG](https://en.wikipedia.org/wiki/SVG){:target="_blank"}（Scalable Vector Graphics）制作，
+其矢量特性便于在不同屏幕尺寸下无缝缩放。
+我们的工程师扩展了 SVG 格式以支持 symbol 的交互性。
+本指南将带您使用示例 SVG 文件创建自己的交互式 SCADA symbol。
 
 ## Prerequisites
 
-To effectively follow this guide, ensure you have:
+要顺利跟随本指南，请确保已：
 
-* Completed the [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"} guide;
-* Reviewed the [SCADA Dashboards](/docs/{{docsPrefix}}user-guide/scada/){:target="_blank"} documentation;
-* Acquired a basic understanding of [SVG](https://www.w3schools.com/graphics/svg_intro.asp){:target="_blank"}.
+* 完成 [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"} 指南；
+* 阅读 [SCADA Dashboards](/docs/{{docsPrefix}}user-guide/scada/){:target="_blank"} 文档；
+* 对 [SVG](https://www.w3schools.com/graphics/svg_intro.asp){:target="_blank"} 有基本了解。
 
-Having experience with [SVG.js](https://svgjs.dev/) will be beneficial for tackling advanced scenarios.
+具备 [SVG.js](https://svgjs.dev/) 经验有助于应对高级场景。
 
 ## Key concepts
 
-We will often use the following definitions:
+我们常用以下定义：
 
-- **Developer** - a person responsible for defining the SCADA symbol;
-- **End user** - a person who integrates the SCADA symbol into the dashboard.
+- **Developer** - 负责定义 SCADA symbol 的人员；
+- **End user** - 将 SCADA symbol 集成到 dashboard 的人员。
 
-Creating a SCADA symbol in ThingsBoard involves an SVG file along with several concepts:
+在 ThingsBoard 中创建 SCADA symbol 涉及 SVG 文件及以下概念：
 
-- **Tags**: These are custom labels assigned to shapes within the SVG file. Tags are utilized to specify render functions and `onClick` actions for SVG elements;
+- **Tags**：SVG 文件中为形状分配的自定义标签。Tag 用于指定 SVG 元素的 render 函数和 `onClick` 操作；
 
-- **Behavior**: this concept outlines how a SCADA symbol receives data from the platform and what actions it triggers on devices or dashboards;
+- **Behavior**：描述 SCADA symbol 如何从平台接收数据，以及其在 device 或 dashboard 上触发的操作；
 
-- **Properties**: These are configuration elements designed for end users. These properties allow for customization of the widget's appearance;
+- **Properties**：供最终用户使用的配置项。这些 property 用于自定义部件外观；
 
-- **State Render Function**: A JavaScript function responsible for rendering the SVG element.
+- **State Render Function**：负责渲染 SVG 元素的 JavaScript 函数。
 
-- **On Click Action**: A JavaScript function that defines the logic of the onClick handler.
+- **On Click Action**：定义 onClick 处理逻辑的 JavaScript 函数。
 
-- **[ScadaSymbolContext](#scadasymbolcontext)**: A specialized JavaScript object that contains references to tags, behavior items, properties, and helper API functions.
+- **[ScadaSymbolContext](#scadasymbolcontext)**：包含 tag、behavior item、property 及辅助 API 函数引用的 JavaScript 对象。
 
 ## Sample SVG file
 
-Assume we want to transform the SVG file shown below into an interactive SCADA symbol:
+假设我们要将下方 SVG 文件转换为交互式 SCADA symbol：
 
 <img src="/images/user-guide/scada/fan.svg" alt="FAN SVG" width="300" height="300">
 
-*Figure: Static SVG image including a fan, text label, and two buttons.*
+*图：包含风扇、文本标签和两个按钮的静态 SVG 图像。*
 
-This SVG image is static, containing a fan, text label, and two buttons. 
-Our goal is to convert it into an interactive widget that reflects the state of our fan and updates in real time.
+该 SVG 图像为静态，包含风扇、文本标签和两个按钮。
+目标是将其实时反映风扇状态并更新的交互式部件。
 
-**Task formalization:**
+**任务定义：**
 
-- **Buttons**: 
-  - These should issue commands to the target device, updating the state of the fan engine;
-  - Button labels and colors must be configurable by end users.
-- **Fan Appearance**:
-  - The fan should rotate when the engine is 'On' and stop when the engine is "Off";
-  - Colors for both "On" and "Off" states should be configurable separately.
-- **Text Label**: 
-  - Display the fan's rotation speed. Hide this label when the engine is "Off";
-  - The label should be customizable by end users, including options to show/hide, set font, color, and display units.
+- **Buttons**： 
+  - 向目标 device 发送命令，更新风扇状态；
+  - 按钮文本和颜色需可由最终用户配置。
+- **Fan Appearance**：
+  - 引擎为 "On" 时风扇旋转，"Off" 时停止；
+  - "On" 与 "Off" 状态的颜色可分别配置。
+- **Text Label**： 
+  - 显示风扇转速。引擎为 "Off" 时隐藏该标签；
+  - 标签可由最终用户自定义，包括显示/隐藏、字体、颜色和单位。
 
-Next, we will outline the steps to achieve this functionality.
+下面我们按步骤实现上述功能。
 
 ## Step 1: Upload the SVG file
 
-- Right-click on the SVG file shown below and select "Save image as" to save the file to your PC:
+- 右键点击下方 SVG 文件，选择 "Save image as" 将其保存到电脑：
 
 <img src="/images/user-guide/scada/fan.svg" alt="FAN SVG" width="300" height="300">
 
-- Navigate to the "Resources" page of the "SCADA symbols" section and click the "Upload SCADA symbol" button;
-- Drop the `fan.svg` file in the appropriate field, or upload it from a folder on your computer, rename it to "Fan", and click "Upload".
+- 进入 "SCADA symbols" 的 "Resources" 页面，点击 "Upload SCADA symbol" 按钮；
+- 将 `fan.svg` 文件拖入相应区域，或从电脑文件夹上传，重命名为 "Fan"，点击 "Upload"。
 
 {% include images-gallery.html imageCollection="upload-svg-file-1" %}
 
 ## Step 2: Explore the SCADA editor
 
-Once you upload your SCADA symbol, you'll be directed to the SCADA symbol editor. The editor is split into two panels:
-- **Left panel** displays your uploaded SVG file;
-- **Right panel** contains multiple tabs such as "General", "Tags", "Behavior", and "Properties".
+上传 SCADA symbol 后，将进入 SCADA symbol 编辑器。编辑器分为两栏：
+- **Left panel** 显示已上传的 SVG 文件；
+- **Right panel** 包含 "General"、"Tags"、"Behavior"、"Properties" 等标签。
 
 {% include images-gallery.html imageCollection="explore-scada-editor-1" %}
 
 ### SCADA editor actions
 
-- **Create Widget** - this button allows you to quickly create a widget based on your SCADA symbol. Any major changes to the SCADA symbol will automatically reflect in the widget library, except for fields like title, description, and search tags, which are copied at the moment you create the widget.
+- **Create Widget** - 该按钮可根据 SCADA symbol 快速创建部件。SCADA symbol 的重大变更会自动反映到部件库，但 title、description、search tags 等在创建部件时被复制，不会自动更新。
 
-- **Apply** and **Decline** - these buttons allow you to save or discard changes to the symbol.
+- **Apply** 和 **Decline** - 用于保存或放弃对 symbol 的更改。
 
-- **Preview** - enables you to check the widget's behavior from the end-user's perspective. The left panel will render the SVG, while the right panel shows the configuration page of the widget. Use the **Back** button to exit preview mode.
+- **Preview** - 从最终用户视角检查部件行为。左侧渲染 SVG，右侧显示部件配置页。使用 **Back** 按钮退出预览模式。
 
 {% include images-gallery.html imageCollection="scada-editor-actions-1" %}
 
-As a simple exercise, populate the description and search tags, then click "Apply".
+作为简单练习，填写描述和搜索标签，然后点击 "Apply"。
 
 {% include images-gallery.html imageCollection="scada-editor-actions-2" %}
 
 ### Widget size and aspect ratio
 
-Notice the widget size in columns and rows, which hints at how the SCADA layout should place the widget. 
-This setting impacts the aspect ratio of the widget and should ideally match the aspect ratio of your SVG. 
-Complex aspect ratios like 17:43 are not recommended. Good examples include 1:1, 1:2, 2:1, etc.
+注意部件以列和行表示的尺寸，这会影响 SCADA layout 如何放置部件。
+该设置影响部件的宽高比，理想情况下应与 SVG 的宽高比一致。
+不建议使用 17:43 等复杂宽高比。推荐示例有 1:1、1:2、2:1 等。
 
 {% include images-gallery.html imageCollection="widget-size-and-aspect-ratio-1" %}
 
 ## Step 3: Tags
 
-Tags are custom labels assigned to shapes within the SVG file. 
-They are used to specify render functions and `onClick` actions for SVG elements.
-You can assign the same tag to multiple SVG elements to streamline interaction and functionality across similar components.
+Tag 是赋予 SVG 文件中形状的自定义标签。
+用于为 SVG 元素指定 render 函数和 `onClick` 操作。
+可将同一 tag 分配给多个 SVG 元素，以简化相似组件的交互与功能。
 
 ### Tags definition via editor
 
-To define a tag, select the corresponding SVG element in the left panel of the editor and click the "+Add tag" button. Now, name the tag. It is recommended to name tags in `camelCase` to facilitate their reference in render functions.
+要定义 tag，在编辑器左侧选中对应 SVG 元素，点击 "+Add tag" 按钮，然后命名 tag。建议使用 `camelCase` 命名，便于在 render 函数中引用。
 
-For our use case, it's necessary to tag almost every element within the SVG to ensure full interactivity. Below is a list of the tags to be defined:
+本例中需为 SVG 内几乎所有元素添加 tag 以实现完整交互。需定义的 tag 如下：
 
 - **onButton** - tag for the "*group*" element to define the `onClick` action for the "On" button;
 - **onButtonBackground** - tag for the "*rect*" element to control the background color of the "On" button;
@@ -129,18 +129,18 @@ For our use case, it's necessary to tag almost every element within the SVG to e
 
 {% include images-gallery.html imageCollection="tags-definition-via-editor-1" %}
 
-The table in "Tags" tab allows you to quickly access each tag and define both the state render function and the `onClick` action.
+"Tags" 标签中的表格可快速访问每个 tag，并定义 state render function 和 `onClick` 操作。
 
 ### Tags definition via XML
 
-While the UI editor suffices for simple SCADA symbols, complex SVG file structures might require a different approach.
-For elements obscured by gradients or complex shapes, it's useful to switch to XML editor mode.
-You can find this option in the top-right corner of the left panel in the editor.
-Here, you can define tags using the `tb:tag` syntax directly within the XML structure.
+对简单 SCADA symbol，UI 编辑器即可；复杂 SVG 结构可能需要 XML 方式。
+对于被渐变或复杂形状遮挡的元素，可切换到 XML 编辑器模式。
+该选项位于编辑器左侧面板右上角。
+可在 XML 结构中直接使用 `tb:tag` 语法定义 tag。
 
-Let's add tags to the "On" button elements:
+为 "On" 按钮元素添加 tag：
 
-- Navigate to the "XML" editor mode and replace this XML code:
+- 进入 "XML" 编辑器模式，将以下 XML 替换为：
 
 ```xml
 <g transform="matrix(1.61104 0 0 1.60957 -72.338 -20.652)">
@@ -163,14 +163,14 @@ to this one:
 ```
 {: .copy-code}
 
-- Return to the "SVG" editor mode. You will see the tags added to the "On" button element.
+- 返回 "SVG" 编辑器模式。您将看到 tag 已添加到 "On" 按钮元素。
 
 {% include images-gallery.html imageCollection="add-tags-to-on-button-1" %}
 
 <br>
-Below is the XML code that will add all the necessary tags for this example.
+以下 XML 代码将为本示例添加所有必要的 tag。
 
-- Copy this XML code:
+- 复制该 XML 代码：
 
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:tb="https://thingsboard.io/svg" width="100" height="100" version="1.1" viewBox="0 0 100 100">
@@ -185,9 +185,9 @@ Below is the XML code that will add all the necessary tags for this example.
 ```
 {: .copy-code}
 
-- Navigate to the "XML" editor mode; 
-- Paste the copied code in the corresponding window;
-- Return to the "SVG" editor mode. You can see the defined tags. Afterward, apply the changes.
+- 进入 "XML" 编辑器模式； 
+- 在对应窗口粘贴复制的代码；
+- 返回 "SVG" 编辑器模式。您可看到已定义的 tag。随后应用更改。
 
 {% include images-gallery.html imageCollection="tags-definition-via-xml-1" %}
 
@@ -195,7 +195,7 @@ Below is the XML code that will add all the necessary tags for this example.
 
 ### Operations with tags
 
-You can update the tag, add a state rendering function, and assign an on click action, or delete the tag using the appropriate tag icon.
+您可更新 tag、添加 state rendering function、分配 on click action，或使用相应 tag 图标删除 tag。
 
 **Update tag**
 

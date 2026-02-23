@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: ThingsBoard Smart Metering for Cities, Industry & Business
-description: Explore how ThingsBoard enables powerful IoT smart metering solutions with real-time dashboards, protocol support, and multi-industry applications.
+title: ThingsBoard 面向城市、工业和企业的智能计量
+description: 了解 ThingsBoard 如何通过实时仪表板、协议支持和多行业应用实现强大的物联网智能计量解决方案。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -12,7 +12,7 @@ contactUsModal: "true"
 {% include usecase-nav.html usecase="smart-metering" %}
 
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">IoT smart metering solution</h1>
+<h1 class="usecase-title">物联网智能计量解决方案</h1>
 <section class="smart-metering-about">
     <div class="about-text">
         <div class="short">
@@ -20,7 +20,7 @@ contactUsModal: "true"
                 <p class="text">In today's world of growing urban infrastructure, energy efficiency and water management have become top priorities. Smart metering solutions powered by the ThingsBoard IoT platform offer a transformative approach to utility monitoring, enabling stakeholders to access accurate, real-time insights into consumption patterns.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_SmartMetering_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" class="button gtm_button">View live demo</a>            </div>
+                <a id="UseCases_SmartMetering_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" class="button gtm_button">查看实时演示</a>            </div>
             </div>
         <div class="long">
             <p>With enhanced visibility, municipalities, facilities managers, and utility providers can make faster, data-driven decisions that optimize resource use, reduce waste, and lower operational costs. ThingsBoard plays an important role in this evolution by offering flexible, open-source tools to collect, process, and visualize telemetry data across distributed assets such as meters, sensors, and edge devices. Its modular architecture and rich feature set enable seamless integration of diverse devices, ensuring reliable real-time monitoring and control of utility infrastructure.</p>
@@ -36,7 +36,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="smart-metering-solution-structure">
-    <h2>Solution structure of smart metering</h2>
+    <h2>智能计量解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
@@ -45,7 +45,7 @@ contactUsModal: "true"
         </div>
         <div class="long">
             <p>Smart meters transmit electricity, water, and temperature data to ThingsBoard via lightweight, efficient protocols. The platform processes this data through its rule engine, enabling alarms, storage, or forwarding.</p>
-            <p>Telemetry is securely stored and visualized on customizable dashboards. Built-in widgets help display trends, real-time usage, and alarms — forming a scalable, reliable system from device to dashboard.</p>
+            <p>Telemetry is securely stored and visualized on customizable dashboards. Built-in 部件 help display trends, real-time usage, and alarms — forming a scalable, reliable system from device to dashboard.</p>
         </div>
     </div>
     <div class="scheme">
@@ -55,7 +55,7 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Smart metering dashboard structure</h2>
+        <h2>智能计量仪表板结构</h2>
         <p>
             The ThingsBoard smart metering dashboard is structured hierarchically for clear navigation across different locations and asset levels. Each level is designed to provide intuitive, real-time visualization of data, ensuring stakeholders can act quickly and effectively.
         </p>
@@ -138,7 +138,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header">
-        <h2>Applications of IoT smart metering solution</h2>
+        <h2>物联网智能计量解决方案的应用</h2>
         <p>A similar IoT-based monitoring and management solution, like IoT smart metering, can be adapted and applied in various industries and domains. Here are some of them:</p>
     </div>
     <div class="applications-container-large">
@@ -215,11 +215,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of smart metering</h2>
+        <h2>智能计量总结</h2>
         <p>IoT smart metering with ThingsBoard provides a scalable, flexible way to monitor utilities. Through sensor integration and protocol support, data is collected and visualized across districts, buildings, and apartments. ThingsBoard enables tracking of energy use, alarms, and temperature trends—helping users make timely decisions and meet sustainability goals across industries. With ThingsBoard, organizations can build future-ready smart metering systems that scale, adapt, and drive sustainable impact.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -317,8 +317,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_SmartMetering_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" class="button gtm_button">View live demo</a>
-                <a id="UseCases_SmartMetering_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_SmartMetering_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" class="button gtm_button">查看实时演示</a>
+                <a id="UseCases_SmartMetering_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
     
             return block;

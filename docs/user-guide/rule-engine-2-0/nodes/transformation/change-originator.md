@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: change originator
-description: Changes the originator of a message to a different entity such as its customer, tenant, related entity, alarm originator, or an entity found by name pattern.
+description: 将消息的 originator 更改为不同的 entity，如 customer、tenant、相关 entity、alarm originator 或按名称模式查找的 entity。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -1,57 +1,57 @@
-The system includes the 14 operational devices:
+系统包含14台运行设备：
 
-**Heat pump**
+**热泵**
 
-The heat pump controls the pool temperature and operates automatically based on predefined temperature settings. This behavior is managed within the Swimming Pool Device Rule Chain to ensure efficient energy usage and precise temperature regulation. Depending on the temperature readings, the heat pump will automatically:
-* turn off if the pool temperature exceeds the target set on the heat pump, or if the outdoor temperature is above the defined threshold.
-* turn on if both the pool temperature and outdoor temperature fall below their respective target values.
+热泵控制泳池温度，并依据预设温度自动运行。该行为由Swimming Pool Device Rule Chain管理，以实现节能和精确温控。根据温度读数，热泵会自动：
+* 在泳池温度超过热泵目标温度，或室外温度高于设定阈值时关闭。
+* 在泳池温度与室外温度均低于各自目标值时开启。
 
 ![image](/images/solutions/swimming_pool_scada_system/scada-devices/heat-pump.png)
 
-The following settings are available for the heat pump:
+热泵可配置以下选项：
 
-- Turn On/Off heat pump;
-- Changing current temperature;
-- Setting status warnings;
-- Enabling critical state animations;
-- Propeller Speed Adjustment: Adjust the propeller speed depending on the temperature or other device parameters.
+- 开启/关闭热泵；
+- 修改当前温度；
+- 设置状态告警；
+- 启用严重状态动画；
+- 桨叶转速调节：根据温度或其他设备参数调整桨叶转速。
 
 <br>
 
-**Water pump**
+**水泵**
 
-Manage the circulation of water throughout the pool by turning the pump on or off.
+通过开关水泵管理泳池内水循环。
 
 ![image](/images/solutions/swimming_pool_scada_system/scada-devices/water-pump.png)
 
 <br>
 
-**pH filter**
+**pH滤器**
 
-Ensure the water pH levels are within optimal ranges by managing the filtration and chemical treatment process. Pressing the pH filter will open the pH filter diagram in a popup window.
+管理过滤与加药流程，使水pH保持在最佳范围。点击pH滤器可在弹窗中打开pH滤器图。
 
 ![image](/images/solutions/swimming_pool_scada_system/scada-devices/ph-filter.png)
 
 <br>
 
-**Sand filter**
+**砂滤器**
 
-Allow for efficient debris removal from the pool. The filter supports multiple functions, including filtration, wasting, backwashing, recirculation and rinsing, all of which can be controlled remotely via the SCADA system.
+用于从泳池中高效清除杂物。砂滤器支持多种模式：filtration、wasting、backwashing、recirculation、rinsing，均可通过SCADA系统远程控制。
 
 ![image](/images/solutions/swimming_pool_scada_system/scada-devices/sand-filter.png)
 
 <br>
 
-**Water level meter**
+**水位计**
 
-Measure the water level in the pool, providing critical data to maintain optimal water levels and detect potential leaks.
+测量泳池水位，提供维持适宜水位和检测渗漏所需数据。
 
 ![image](/images/solutions/swimming_pool_scada_system/scada-devices/water-level-meter.png)
 
 <br>
 
-**Valves**
+**阀门**
 
-Allow for precise control of water flow between different sections of the pool system. Pressing the valve will open or close it.
+精确控制泳池系统各区域之间的水流。点击阀门可开启或关闭。
 
 ![image](/images/solutions/swimming_pool_scada_system/scada-devices/valve.png)

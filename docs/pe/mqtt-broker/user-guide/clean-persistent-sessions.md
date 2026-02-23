@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Non-Persistent and Persistent Sessions
-description: Explaining MQTT sessions.
+title: 非持久化与持久化会话
+description: MQTT 会话说明。
 
 persistent-session-demo:
   0:

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect ESP32 Pico Kit to ThingsBoard?"
+title: "如何将ESP32 Pico Kit连接到ThingsBoard？"
 redirect_to: "/device-library/paas/esp32-pico-kit/"
 ---

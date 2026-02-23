@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Deploy TBMQ Cluster on GCP with Kubernetes
-description: TBMQ microservices setup with Kubernetes in GCP GKE
+title: 在 GCP 上使用 Kubernetes 部署 TBMQ 集群
+description: 在 GCP GKE 中使用 Kubernetes 配置 TBMQ 微服务
 
 ---
 

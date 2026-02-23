@@ -1,9 +1,8 @@
-Acknowledges the incoming message and forwards it to the next node in the rule chain. This node
-explicitly [marks the message as successfully processed](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#message-processing-result){:target="_blank"}.
+确认入站消息并将其转发至规则链中的下一节点。该节点会显式[将消息标记为已成功处理](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#message-processing-result){:target="_blank"}。
 
-## Configuration
+## 配置
 
-This node requires no configuration.
+该节点无需配置。
 
 ### JSON Schema
 
@@ -18,13 +17,13 @@ This node requires no configuration.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node receives the incoming message.
-2. The message is immediately acknowledged.
-3. The message is forwarded to the next nodes via the `Success` connection.
+1. 节点接收入站消息。
+2. 消息立即被确认。
+3. 消息经 `Success` 连接转发至下一节点。
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The message was successfully acknowledged and forwarded.
+    - 消息已成功确认并转发。

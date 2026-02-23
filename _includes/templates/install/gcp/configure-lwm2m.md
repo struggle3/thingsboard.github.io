@@ -1,21 +1,21 @@
-Configure LwM2M load balancer if you plan to use LwM2M protocol to connect devices.
+若计划使用 LwM2M 协议连接设备，请配置 LwM2M 负载均衡器。
 
-Create LwM2M UDP load balancer using following command:
+使用以下命令创建 LwM2M UDP 负载均衡器：
 
 ```bash
 kubectl apply -f receipts/lwm2m-load-balancer.yml
 ```
 {: .copy-code}
 
-The load balancer will forward all UDP traffic for the following ports:
+负载均衡器将转发以下端口的全部 UDP 流量：
 
- * 5685 - LwM2M server non-secure port.
- * 5686 - LwM2M server secure DTLS port.
- * 5687 - LwM2M bootstrap server DTLS port.
- * 5688 - LwM2M bootstrap server secure DTLS port.
+ * 5685 - LwM2M 服务器非安全端口
+ * 5686 - LwM2M 服务器安全 DTLS 端口
+ * 5687 - LwM2M 引导服务器 DTLS 端口
+ * 5688 - LwM2M 引导服务器安全 DTLS 端口
 
 #### LwM2M over DTLS
 
-This type of the load balancer requires you to provision and maintain valid SSL certificate on your own.
-Follow the generic [LwM2M over DTLS](/docs/{{docsPrefix}}user-guide/ssl/lwm2m-over-dtls/) guide
-to configure required environment variables in the *{{tbServicesFile}}* file.
+此类负载均衡器需要您自行准备和维护有效 SSL 证书。
+请参阅通用 [LwM2M over DTLS](/docs/{{docsPrefix}}user-guide/ssl/lwm2m-over-dtls/) 指南，
+在 *{{tbServicesFile}}* 文件中配置所需环境变量。

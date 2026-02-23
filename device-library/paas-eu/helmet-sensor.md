@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Helmet Sensor to ThingsBoard?
-category: Other devices
+title: 如何将 Helmet Sensor 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [Bluetooth, LoRaWAN]
 vendor: Lansitec
 deviceImageFileName: helmet-sensor.png

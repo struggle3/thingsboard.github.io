@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: User management
-description: UI user management
+title: 用户管理
+description: 界面用户管理
 
 add-user-broker:
     0:

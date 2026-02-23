@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Temperature and Humidity Sensor to ThingsBoard?
-category: Other devices
+title: 如何将 Temperature and Humidity Sensor 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: Lansitec
 deviceImageFileName: temperature-humidity-sensor.png

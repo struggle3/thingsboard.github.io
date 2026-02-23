@@ -2,157 +2,157 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: SCADA symbols development guide
-description: SCADA symbols development guide
+title: SCADA symbols 开发指南
+description: SCADA 符号开发指南
 
 upload-svg-file-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/upload-svg-file-1-ce.png
-        title: 'Navigate to the "Resources" page of the "SCADA symbols" section and click the "Upload SCADA symbol" button;'
+        title: '进入 "SCADA symbols" 的 "Resources" 页面，点击 "Upload SCADA symbol" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/upload-svg-file-2-ce.png
-        title: 'Drop the "fan.svg" file in the appropriate field, or upload it from a folder on your computer, rename it to "Fan", and click "Upload".'
+        title: '将 "fan.svg" 文件拖入相应区域，或从电脑文件夹上传，重命名为 "Fan"，点击 "Upload"。'
 
 explore-scada-editor-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/explore-scada-editor-1-ce.png
-        title: 'The SCADA symbol editor is split into two panels: the left panel displays your uploaded SVG file, the right panel contains multiple tabs such as "General", "Tags", "Behavior", and "Properties".'
+        title: 'SCADA symbol 编辑器分为两栏：左侧显示已上传的 SVG 文件，右侧包含 "General"、"Tags"、"Behavior"、"Properties" 等标签。'
 
 explore-scada-editor-2:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/explore-scada-editor-2-ce.png
-        title: 'Populate the description and search tags, then click "Apply".'
+        title: '填写描述和搜索标签，然后点击 "Apply"。'
 
 scada-editor-actions-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/scada-editor-actions-1-ce.png
-        title: 'Populate the description and search tags, then click "Apply".'
+        title: '填写描述和搜索标签，然后点击 "Apply"。'
 
 scada-editor-actions-2:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/scada-editor-actions-2-ce.png
-        title: 'SCADA editor actions.'
+        title: 'SCADA 编辑器操作。'
 
 widget-size-and-aspect-ratio-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/widget-size-and-aspect-ratio-1-ce.png
-        title: 'The "Widget size" setting impacts the aspect ratio of the widget and should ideally match the aspect ratio of your SVG.'
+        title: '"Widget size" 设置影响部件的宽高比，理想情况下应与 SVG 的宽高比一致。'
 
 tags-definition-via-editor-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/tags-definition-via-editor-1-ce.png
-        title: 'Go to the "Tags" tab. Now click the desired SVG element on the left panel of the editor and click the "+Add tag" button;'
+        title: '进入 "Tags" 标签。在编辑器左侧点击目标 SVG 元素，点击 "+Add tag" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/tags-definition-via-editor-2-ce.png
-        title: 'Enter a tag name and click the "Apply" icon;'
+        title: '输入 tag 名称并点击 "Apply" 图标；'
     2:
         image: /images/user-guide/scada/symbols-dev-guide/tags-definition-via-editor-3-ce.png
-        title: 'Tag added;'
+        title: 'Tag 已添加；'
     3:
         image: /images/user-guide/scada/symbols-dev-guide/tags-definition-via-editor-4-ce.png
-        title: 'Define all other tags.'
+        title: '定义其他所有 tag。'
 
 operations-with-tag-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/operations-with-tag-1-ce.png
-        title: 'Hover over the tag and click the "Update tag" icon;'
+        title: '将鼠标悬停在 tag 上，点击 "Update tag" 图标；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/operations-with-tag-2-ce.png
-        title: 'Change the tag name and click "Apply".'
+        title: '修改 tag 名称并点击 "Apply"。'
 
 operations-with-tag-2:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/operations-with-tag-3-ce.png
-        title: 'Hover over the tag and click the "Tag settings" icon;'
+        title: '将鼠标悬停在 tag 上，点击 "Tag settings" 图标；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/operations-with-tag-4-ce.png
-        title: 'In the pop-up menu, there are two types of functions you may assign to each tag: "State render function" and "On click action". We will discuss these in more detail in the "Tag configuration" section.'
+        title: '弹出菜单中可为每个 tag 分配两类函数："State render function" 和 "On click action"。我们将在 "Tag configuration" 小节中详细说明。'
 
 operations-with-tag-3:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/operations-with-tag-5-ce.png
-        title: 'Hover over the tag and click the "Remove tag" icon;'
+        title: '将鼠标悬停在 tag 上，点击 "Remove tag" 图标；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/operations-with-tag-6-ce.png
-        title: 'Confirm deleting the tag in the dialog box.'
+        title: '在对话框中确认删除 tag。'
 
 add-tags-to-on-button-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/add-tags-to-on-button-1-ce.png
-        title: 'Switch to "XML" editor mode and highlight the XML code as shown in the screenshot;'
+        title: '切换到 "XML" 编辑器模式，按截图所示选中 XML 代码；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/add-tags-to-on-button-2-ce.png
-        title: 'Paste the XML code copied from the documentation;'
+        title: '粘贴从文档复制的 XML 代码；'
     2:
         image: /images/user-guide/scada/symbols-dev-guide/add-tags-to-on-button-3-ce.png
-        title: 'Return to the "SVG" editor mode. You will see the tags added to the "On" button element.'
+        title: '返回 "SVG" 编辑器模式。您将看到 tag 已添加到 "On" 按钮元素。'
 
 tags-definition-via-xml-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/tags-definition-via-xml-1-ce.png
-        title: 'Navigate to the "XML" editor mode;'
+        title: '进入 "XML" 编辑器模式；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/tags-definition-via-xml-2-ce.png
-        title: 'Add the XML code in the corresponding window;'
+        title: '在对应窗口中添加 XML 代码；'
     2:
         image: /images/user-guide/scada/symbols-dev-guide/tags-definition-via-xml-3-ce.png
-        title: 'Return to the "SVG" editor mode. You can see the defined tags. After, apply changes.'
+        title: '返回 "SVG" 编辑器模式。您可看到已定义的 tag。随后应用更改。'
 
 behavior-scada-developer-end-user-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/behavior-scada-developer-end-user-configuration-1-ce.png
-        title: 'The list of behavior items configured by the SCADA developer;'
+        title: 'SCADA 开发者配置的行为项列表；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/behavior-scada-developer-end-user-configuration-2-ce.png
-        title: 'The list of the elements in the widget configuration of the end-user.'
+        title: '最终用户部件配置中的元素列表。'
 
 add-behavior-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/add-behavior-1-ce.png
-        title: 'Navigate to the "Behavior" tab and click the "Add behavior" button;'
+        title: '进入 "Behavior" 标签，点击 "Add behavior" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/add-behavior-2-ce.png
-        title: 'Fill in the required fields and click "Add".'
+        title: '填写必填字段并点击 "Add"。'
 
 types-of-behavior-parameters-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/types-of-behavior-parameters-1-ce.png
-        title: 'The list of behavior parameters is specific to the chosen SCADA symbol and is entirely controlled by the symbol&#39;s author. There are three types of behavior parameters: "Value", "Action", and "Widget action".'
+        title: '行为参数列表由所选 SCADA symbol 决定，完全由 symbol 作者控制。行为参数有三种类型："Value"、"Action" 和 "Widget action"。'
 
 five-types-of-actions-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/five-types-of-actions-1-ce.png
-        title: 'The "Do nothing" action type utilizes a constant value defined by the user.'
+        title: '"Do nothing" action 类型使用用户定义的常量。'
 
 five-types-of-actions-2:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/five-types-of-actions-2-ce.png
-        title: 'The "Execute RPC" action type sends a command to the target device to retrieve the value. The value is resolved once at the widget&#39;s creation.'
+        title: '"Execute RPC" action 类型向目标 device 发送命令以获取值。该值在创建部件时解析一次。'
 
 five-types-of-actions-3:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/five-types-of-actions-3-ce.png
-        title: 'The "Get attribute" action type subscribes to a target entity&#39;s attribute value, updating the widget when this attribute changes.'
+        title: '"Get attribute" action 类型订阅目标实体的 attribute 值，attribute 变更时部件会更新。'
 
 five-types-of-actions-4:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/five-types-of-actions-4-ce.png
-        title: 'The "Get time series" action type subscribes to a target entity&#39;s time series field, updating the widget with new data arrivals.'
+        title: '"Get time series" action 类型订阅目标实体的 time series 字段，新数据到达时部件会更新。'
 
 five-types-of-actions-5:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/five-types-of-actions-5-ce.png
-        title: 'The "Get alarm status" action type subscribes to the alarm state field of the target entity, updating the widget status according to the alarm type.'
+        title: '"Get alarm status" action 类型订阅目标实体的 alarm 状态字段，根据 alarm 类型更新部件状态。'
 
 five-types-of-actions-6:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/five-types-of-actions-6-ce.png
-        title: 'The "Get dashboard state" action type uses the current dashboard state&#39;s name, beneficial in specific scenarios unrelated to the device&#39;s state.'
+        title: '"Get dashboard state" action 类型使用当前 dashboard 状态的名称，适用于与 device 状态无关的特定场景。'
 
 value-types-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/value-types-1-ce.png
-        title: '"Value" and "Action" behavior items come in various types including "String", "Integer", "Double", "Boolean", and "JSON". Each type has its own specific configuration parameters.'
+        title: '"Value" 和 "Action" 行为项有多种类型，包括 "String"、"Integer"、"Double"、"Boolean" 和 "JSON"。每种类型有各自的配置参数。'
 
 add-fan-on-behavior-1:
     0:
@@ -191,7 +191,7 @@ three-types-of-actions-for-interacting-with-target-entity-3:
 widget-action-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/widget-action-1-ce.png
-        title: 'Widget action behavior items are designed to trigger actions related to the current dashboard widget rather than the target device. Possible widget actions are detailed in the "Widget Actions" documentation.'
+        title: 'Widget action 行为项用于触发与当前 dashboard 部件相关的操作，而非目标 device。可能的 widget action 详见 "Widget Actions" 文档。'
 
 add-on-btn-click-behavior-1:
     0:
@@ -220,18 +220,18 @@ widget-action-2:
 properties-scada-developer-end-user-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/properties-scada-developer-end-user-configuration-1-ce.png
-        title: 'The list of properties configured by the SCADA developer;'
+        title: 'SCADA 开发者配置的 property 列表；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/properties-scada-developer-end-user-configuration-2-ce.png
-        title: 'The list of properties in the widget configuration of the end-user.'
+        title: '最终用户部件配置中的 property 列表。'
 
 add-properties-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/add-properties-1-ce.png
-        title: 'Navigate to the "Property" tab and click the "Add property" button;'
+        title: '进入 "Property" 标签，点击 "Add property" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/add-properties-2-ce.png
-        title: 'Fill in the required fields and click "Add".'
+        title: '填写必填字段并点击 "Add"。'
   
 add-on-btn-label-1:
     0:
@@ -305,7 +305,7 @@ add-rotation-speed-color-1:
 configured-properties-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/configured-properties-1-ce.png
-        title: 'List of configured properties should look like this.'
+        title: '已配置的 property 列表应如上所示。'
 
 state-render-function-1:
     0:
@@ -326,72 +326,72 @@ on-click-action-1:
 on-button-text-tag-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-text-tag-configuration-1-ce.png
-        title: 'Go to the "Tag settings" of the "onButtonText" tag and click "+ Add" button of a "State rendering function";'
+        title: '进入 "onButtonText" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-text-tag-configuration-2-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 
 off-button-text-tag-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-text-tag-configuration-1-ce.png
-        title: 'Go to the "Tag settings" of the "offButtonText" tag and click "+ Add" button of a "State rendering function";'
+        title: '进入 "offButtonText" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-text-tag-configuration-2-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 on-button-background-tag-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-background-tag-configuration-1-ce.png
-        title: 'Go to the "Tag settings" of the "onButtonBackground" tag and click "+ Add" button of a "State rendering function";'
+        title: '进入 "onButtonBackground" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-background-tag-configuration-2-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 off-button-background-tag-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-background-tag-configuration-1-ce.png
-        title: 'Go to the "Tag settings" of the "offButtonBackground" tag and click "+ Add" button of a "State rendering function";'
+        title: '进入 "offButtonBackground" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-background-tag-configuration-2-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 on-button-tag-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-tag-configuration-1-ce.png
-        title: 'Go to the "Tag settings" of the "onButton" tag and click "+ Add" button of a "State rendering function";'
+        title: '进入 "onButton" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-tag-configuration-2-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 on-button-tag-configuration-2:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-tag-configuration-3-ce.png
-        title: 'Go to the "Tag settings" of the "onButton" tag and click "+ Add" button of a "On click action";'
+        title: '进入 "onButton" tag 的 "Tag settings"，点击 "On click action" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/on-button-tag-configuration-4-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 off-button-tag-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-tag-configuration-1-ce.png
-        title: 'Go to the "Tag settings" of the "offButton" tag and click "+ Add" button of a "State rendering function";'
+        title: '进入 "offButton" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-tag-configuration-2-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 off-button-tag-configuration-2:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-tag-configuration-3-ce.png
-        title: 'Go to the "Tag settings" of the "offButton" tag and click "+ Add" button of an "On click action";'
+        title: '进入 "offButton" tag 的 "Tag settings"，点击 "On click action" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/off-button-tag-configuration-4-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 rotation-speed-text-tag-configuration-1:
     0:
       image: /images/user-guide/scada/symbols-dev-guide/rotation-speed-text-tag-configuration-1-ce.png
-      title: 'Go to the "Tag settings" of the "rotationSpeedText" tag and click "+ Add" button of a "State rendering function";'
+      title: '进入 "rotationSpeedText" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
       image: /images/user-guide/scada/symbols-dev-guide/rotation-speed-text-tag-configuration-2-ce.png
       title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
@@ -399,69 +399,69 @@ rotation-speed-text-tag-configuration-1:
 fan-tag-configuration-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/fan-tag-configuration-1-ce.png
-        title: 'Go to the "Tag settings" of the "fan" tag and click "+ Add" button of a "State rendering function";'
+        title: '进入 "fan" tag 的 "Tag settings"，点击 "State rendering function" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/fan-tag-configuration-2-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 fan-tag-configuration-2:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/fan-tag-configuration-3-ce.png
-        title: 'Go to the "Tag settings" of the "fan" tag and click "+ Add" button of an "On click action";'
+        title: '进入 "fan" tag 的 "Tag settings"，点击 "On click action" 的 "+ Add" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/fan-tag-configuration-4-ce.png
-        title: 'Paste the previously copied function from the documentation into the appropriate window. Click "Apply".'
+        title: '将文档中复制的函数粘贴到相应窗口。点击 "Apply"。'
 
 preview-mode-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/preview-mode-1-ce.png
-        title: 'To enter preview mode, click the "Preview" button on the right side of the window;'
+        title: '要进入预览模式，点击窗口右侧的 "Preview" 按钮；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/preview-mode-2-ce.png
-        title: 'The SVG will be displayed on the left panel, and the widget configuration will appear on the right. Let&#39;s test the behavior of our widget. Press the green "On" button;'
+        title: 'SVG 显示在左侧面板，部件配置显示在右侧。测试部件行为：按下绿色 "On" 按钮；'
     2:
         image: /images/user-guide/scada/symbols-dev-guide/preview-mode-3-ce.png
-        title: 'The color of the button should change to gray, the fan will change color from red to green and start spinning. Below the fan, the RPM (revolutions per minute) will be displayed. Meanwhile, the "Off" button will become active and change its color from gray to red. Press it;'
+        title: '按钮颜色应变灰，风扇会由红变绿并开始旋转。风扇下方将显示 RPM。此时 "Off" 按钮将激活并由灰变红。点击它；'
     3:
         image: /images/user-guide/scada/symbols-dev-guide/preview-mode-4-ce.png
-        title: 'The fan should stop, the "Off" button will become unclickable again, and its color will return to gray.'
+        title: '风扇应停止，"Off" 按钮将再次不可点击，颜色恢复为灰色。'
 
 create-widget-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/create-widget-1-ce.png
-        title: 'Click the "Create widget" button in the upper right corner.'
+        title: '点击右上角的 "Create widget" 按钮。'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/create-widget-2-ce.png
-        title: 'In the new window, enter the name of the future widget and specify an existing widget bundle or create a new one. We will create a new one. Enter the desired name for it and click "Create new widget bundle";'
+        title: '在新窗口中输入部件名称，指定已有 widget bundle 或创建新的。我们将创建新的。输入名称后点击 "Create new widget bundle"；'
     2:
         image: /images/user-guide/scada/symbols-dev-guide/create-widget-3-ce.png
-        title: 'Optionally, add a preview image for the widget bundle and click "Add";'
+        title: '（可选）为 widget bundle 添加预览图片并点击 "Add"；'
     3:
         image: /images/user-guide/scada/symbols-dev-guide/create-widget-4-ce.png
-        title: 'Confirm the widget creation by pressing the "Create" button.'
+        title: '点击 "Create" 按钮确认创建部件。'
 
 test-widget-on-dashboard-1:
     0:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-1-ce.png
-        title: 'Create a new dashboard and open it. Navigate to the "Layouts" panel. Then, change the layout from "Default" to "SCADA". Click "Save";'
+        title: '创建并打开新 dashboard。进入 "Layouts" 面板，将 layout 从 "Default" 改为 "SCADA"。点击 "Save"；'
     1:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-2-ce.png
-        title: 'Now, click the "Add widget" button at the top of the screen or click the large "Add new widget" icon in the center of the screen;'
+        title: '点击屏幕顶部的 "Add widget" 按钮或中央的 "Add new widget" 大图标；'
     2:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-3-ce.png
-        title: 'Find the "My SCADA widgets" widget bundle and click on it;'
+        title: '找到 "My SCADA widgets" widget bundle 并点击；'
     3:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-4-ce.png
-        title: 'Click on the "Fan" widget to add it to the dashboard;'
+        title: '点击 "Fan" 部件以将其添加到 dashboard；'
     4:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-5-ce.png
-        title: 'Specify the target device (use any device), and click "Add";'
+        title: '指定目标 device（使用任意 device），点击 "Add"；'
     5:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-6-ce.png
-        title: 'Widget added. Click "Save" to save the changes to the dashboard;'
+        title: '部件已添加。点击 "Save" 保存 dashboard 更改；'
     6:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-7-ce.png
-        title: 'Click the green "On" button. The button will become unclickable, its color should change to gray, the fan will change color from red to green and start spinning. The fan&#39;s RPM value will display beneath it;'
+        title: '点击绿色 "On" 按钮。按钮将不可点击、颜色变灰，风扇由红变绿并开始旋转，RPM 显示在下方；'
     7:
         image: /images/user-guide/scada/symbols-dev-guide/test-widget-on-dashboard-8-ce.png
         title: 'Meanwhile, the "Off" button will become active and change its color from gray to red. Press it. The fan should stop, the “Off” button will become unclickable, and its color will turn gray again.'
@@ -469,7 +469,7 @@ test-widget-on-dashboard-1:
 download-scada-symbol-1:
   0:
     image: /images/user-guide/scada/symbols-dev-guide/download-scada-symbol-1-ce.png
-    title: 'You can download the SCADA symbol with all settings. To do this, click the "Download SCADA symbol" button on the left panel of the SCADA symbol editor. The SVG file will be saved to your PC.'
+    title: '您可下载包含所有设置的 SCADA symbol。点击 SCADA symbol 编辑器左侧的 "Download SCADA symbol" 按钮。SVG 文件将保存到您的电脑。'
 
 ---
 

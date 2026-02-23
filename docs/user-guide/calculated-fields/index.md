@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Calculated fields
-description: Calculated fields
+title: 计算字段
+description: 将原始数据实时转换为可执行洞察的计算字段
 
 create-new-calculated-field:
     0:

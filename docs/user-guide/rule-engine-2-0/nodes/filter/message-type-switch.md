@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: message type switch
-description: Routes messages to different connections based on the message type.
+description: 根据消息类型将消息路由到不同连接。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

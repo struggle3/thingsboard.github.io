@@ -1,6 +1,6 @@
 ![image](/images/user-guide/integrations/uplink-converter-example-java.png)
 
-The full source code of javascript function used in converter:
+converter 中使用的 JavaScript 函数完整源码：
 
 ```shell
 // decode payload to JSON

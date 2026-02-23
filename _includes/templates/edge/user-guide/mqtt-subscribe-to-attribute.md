@@ -1,29 +1,29 @@
-**MQTT** is a lightweight protocol commonly used for IoT communication. 
+**MQTT** 是一种轻量级协议，常用于 IoT 通信。
 
-To facilitate communication with **ThingsBoard Edge** using **MQTT**, we recommend installing the [MQTT Broker](/docs/{{peDocsPrefix}}reference/mqtt-api/?connectdevice=mqtt-linux#mqtt-connect){: target="_blank"}. This allows the device to **publish** telemetry or attribute messages and **subscribe** to topics for attribute updates.
+要与 **ThingsBoard Edge** 通过 **MQTT** 通信，建议安装 [MQTT Broker](/docs/{{peDocsPrefix}}reference/mqtt-api/?connectdevice=mqtt-linux#mqtt-connect){: target="_blank"}。这样设备即可 **发布** 遥测或属性消息，并 **订阅** 属性更新主题。
 
-#### Subscribe to the Changes in Shared Device Attributes
+#### 订阅共享设备属性变更
 
-To subscribe to shared device attribute changes, send the SUBSCRIBE message:
+要订阅共享设备属性变更，发送 SUBSCRIBE 消息：
 ```bash
-mosquitto_sub -d -h $THINGSBOARD_HOST_NAME -t "v1/devices/me/attributes" -u "$ACCESS_TOKEN"
+mosquitto_sub -d -h$THINGSBOARD_HOST_NAME-t "v1/devices/me/attributes" -u "$ACCESS_TOKEN"
 ```
 {: .copy-code}
 
-* **v1/devices/me/attributes:** This is a topic on ThingsBoard Edge. It allows the device to listen for any updates related to its attributes from the cloud.
-* Replace the **$THINGSBOARD_HOST_NAME** with the actual hostname or IP address of your ThingsBoard Edge instance. 
+* **v1/devices/me/attributes** ThingsBoard Edge 上的主题，用于设备监听来自云端与其属性相关的任何更新。
+* 将 **$THINGSBOARD_HOST_NAME** 替换为 ThingsBoard Edge 实例的实际主机名或 IP 地址。
     
 {% assign accessTokenPE = '
   ===
     image: /images/pe/edge/config/subscribe-to-attribute/9-copy-access-token-pe.webp,
-    title: Replace the **$ACCESS_TOKEN** with the actual access token of the device. To find the device access token, go to the **Entities > Devices** section and click on the device. On the **"Device details"** page, you can copy the token by clicking the **"Copy access token"** button.
+    title: 将 **$ACCESS_TOKEN** 替换为设备的实际访问令牌。要查找设备访问令牌，请进入 **实体 > 设备** 部分并点击该设备。在 **「设备详情」** 页面，点击 **「复制访问令牌」** 按钮即可复制令牌。
 '
 %}
 
 {% assign accessTokenCE = '
   ===
     image: /images/edge/config/subscribe-to-attribute/9-copy-access-token.webp,
-    title: Replace the **$ACCESS_TOKEN** with the actual access token of the device. To find the device access token, go to the **Entities > Devices** section and click on the device. On the **"Device details"** page, you can copy the token by clicking the **"Copy access token"** button.
+    title: 将 **$ACCESS_TOKEN** 替换为设备的实际访问令牌。要查找设备访问令牌，请进入 **实体 > 设备** 部分并点击该设备。在 **「设备详情」** 页面，点击 **「复制访问令牌」** 按钮即可复制令牌。
 '
 %}
 
@@ -33,25 +33,25 @@ mosquitto_sub -d -h $THINGSBOARD_HOST_NAME -t "v1/devices/me/attributes" -u "$AC
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=accessTokenCE %}
 {% endif %}
 
-#### Publish Time-Series or Attribute Message.
+#### 发布时序数据或属性消息
 
-To publish client-side device attributes to the **ThingsBoard Edge**, send a PUBLISH message. 
+要向 **ThingsBoard Edge** 发布客户端设备属性，发送 PUBLISH 消息。
 
-You can publish the telemetry data:
+可发布遥测数据：
 
 ```bash
-mosquitto_pub -d -h $THINGSBOARD_HOST_NAME -t "v1/devices/me/attributes" -u "$ACCESS_TOKEN" -m "{"attribute1": "value1", "attribute2": true}"
+mosquitto_pub -d -h$THINGSBOARD_HOST_NAME-t "v1/devices/me/attributes" -u "$ACCESS_TOKEN" -m "{"attribute1": "value1", "attribute2": true}"
 ```
 {: .copy-code}
 
-* **v1/devices/me/attributes:** The topic to which the telemetry data is published.
-* **$THINGSBOARD_HOST_NAME:** The actual hostname or IP address of your ThingsBoard Edge instance
-* **$ACCESS_TOKEN:** The actual access token of the device.
-* **{"attribute1": "value1", "attribute2": true}** The telemetry data.
+* **v1/devices/me/attributes** 遥测数据发布到的主题。
+* **$THINGSBOARD_HOST_NAME** ThingsBoard Edge 实例的实际主机名或 IP 地址
+* **$ACCESS_TOKEN** 设备的实际访问令牌
+* **{"attribute1": "value1", "attribute2": true}** 遥测数据
 
-You can also publish client-side attributes update using data from [**new-attributes-values.json**](/docs/reference/resources/new-attributes-values.json){: target="_blank"} file:
+也可使用 [**new-attributes-values.json**](/docs/reference/resources/new-attributes-values.json){: target="_blank"} 文件中的数据发布客户端属性更新：
 
 ```bash
-mosquitto_pub -d -h $THINGSBOARD_HOST_NAME -t "v1/devices/me/attributes" -u "$ACCESS_TOKEN" -f "new-attributes-values.json"
+mosquitto_pub -d -h$THINGSBOARD_HOST_NAME-t "v1/devices/me/attributes" -u "$ACCESS_TOKEN" -f "new-attributes-values.json"
 ```
 {: .copy-code}

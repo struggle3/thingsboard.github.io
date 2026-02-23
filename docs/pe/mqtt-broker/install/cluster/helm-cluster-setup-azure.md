@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Deploy TBMQ PE Cluster on AKS with Helm
-description: Deploy TBMQ PE Cluster on AKS with Helm
+title: 使用 Helm 在 AKS 上部署 TBMQ PE 集群
+description: 使用 Helm 在 AKS 上部署 TBMQ PE 集群
 
 ---
 

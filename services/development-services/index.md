@@ -1,8 +1,8 @@
 ---
 layout: development-services
-title: "Custom IoT Development  |  3X Faster Delivery & Fixed Cost"
+title: "定制物联网开发  |  3 倍交付速度 & 固定成本"
 notitle: "true"
-description: "Get your IoT development services 3X faster and 2X lower TCO. We guarantee high-quality, scalable solutions with deep IoT expertise. Ensure project predictability."
+description: "以 3 倍速度、2 倍更低总拥有成本获得物联网开发服务。我们保证高质量、可扩展的解决方案，具备深厚的物联网专业能力。确保项目可预测性。"
 ---
 
 <section class="hero light-text">
@@ -11,40 +11,40 @@ description: "Get your IoT development services 3X faster and 2X lower TCO. We g
     <div class="hero-container">
         <div class="text">
             <div id="hero-content">
-                <h1 class="cdu-title">IoT Development Services</h1>
-                <h2 class="cdu-sub-title">3X faster delivery, 2X lower cost of ownership: accelerate your IoT solution development</h2>
+                <h1 class="cdu-title">物联网开发服务</h1>
+                <h2 class="cdu-sub-title">3 倍交付速度、2 倍更低拥有成本：加速您的物联网解决方案开发</h2>
             </div>
             <div class="request-consultation-container">
-                <button id="Serv_DevServ_GetInTouch" onclick="onContactUsClick(0)" class="cdu-button anchor-button gtm_button request-consultation button">Accelerate my solution delivery</button>
+                <button id="Serv_DevServ_GetInTouch" onclick="onContactUsClick(0)" class="cdu-button anchor-button gtm_button request-consultation button">加速我的解决方案交付</button>
             </div>
         </div>
         <div class="hero-images">
-            <img class="main" loading="lazy" src="/images/development-services/hero-1.webp" title="ThingsBoard Trendz widgets" alt="ThingsBoard Trendz widgets image">
-            <img class="top" loading="lazy" src="/images/development-services/hero-2.webp" title="ThingsBoard Trendz widgets" alt="ThingsBoard Trendz widgets image">
-            <img class="right" loading="lazy" src="/images/development-services/hero-3.webp" title="ThingsBoard Trendz widgets" alt="ThingsBoard Trendz widgets image">
-            <img class="bottom" loading="lazy" src="/images/development-services/hero-4.webp" title="ThingsBoard Trendz widgets" alt="ThingsBoard Trendz widgets image">
+            <img class="main" loading="lazy" src="/images/development-services/hero-1.webp" title="ThingsBoard Trendz 部件" alt="ThingsBoard Trendz 部件图像">
+            <img class="top" loading="lazy" src="/images/development-services/hero-2.webp" title="ThingsBoard Trendz 部件" alt="ThingsBoard Trendz 部件图像">
+            <img class="right" loading="lazy" src="/images/development-services/hero-3.webp" title="ThingsBoard Trendz 部件" alt="ThingsBoard Trendz 部件图像">
+            <img class="bottom" loading="lazy" src="/images/development-services/hero-4.webp" title="ThingsBoard Trendz 部件" alt="ThingsBoard Trendz 部件图像">
         </div>
     </div>
     <div class="statistics">
         <div class="block">
             <p>{% include number-animation.html startNum = 1 targetNum = 9 %}</p>
-            <p>years in IoT domain</p>
+            <p>年物联网行业经验</p>
         </div>
         <div class="block">
             <p>{% include number-animation.html startNum = 1 targetNum = 112 %}</p>
-            <p>countries</p>
+            <p>个国家</p>
         </div>
         <div class="block">
             <p>{% include number-animation.html startNum = 1 targetNum = 326 %}+</p>
-            <p>delivered projects</p>
+            <p>个交付项目</p>
         </div>
         <div class="block">
             <p>{% include number-animation.html startNum = 1 targetNum = 94 %}%</p>
-            <p>success rate</p>
+            <p>成功率</p>
         </div>
         <div class="block">
             <p>{% include number-animation.html startNum = 1 targetNum = 65 %}%</p>
-            <p>clients engage us again</p>
+            <p>客户再次选择我们</p>
         </div>
     </div>
 </section>
@@ -53,52 +53,52 @@ description: "Get your IoT development services 3X faster and 2X lower TCO. We g
     <div class="development-services-container">
         <section class="custom-solutions">
             <div class="custom-solutions-wrapper">
-                <h2>Custom IoT solutions: concepts made real</h2>
+                <h2>定制物联网解决方案：将概念化为现实</h2>
                 <div class="custom-solution-container">
                     <div class="cards">
                         <div class="expansion-panel">
                             <div class="expansion-header">
-                                <h3 class="expansion-title">Fleet tracking</h3>
+                                <h3 class="expansion-title">车队追踪</h3>
                             </div>
                             <div class="expansion-content">
                                 <div class="expansion-buttons">
-                                    <div class="tag">Logistics</div>
-                                    <div class="tag">Automotive</div>
-                                    <div class="tag">Delivery</div>
-                                    <div class="tag">Connected vehicle</div>
+                                    <div class="tag">物流</div>
+                                    <div class="tag">汽车</div>
+                                    <div class="tag">配送</div>
+                                    <div class="tag">互联车辆</div>
                                 </div>
-                                <div class="expansion-text"><span>47+ successful projects</span>Fleet tracking addresses the core challenge of managing vehicles effectively. Real-time visibility in a combination with geofence rules brings clarity to asset locations and ensures route efficiency, whether we are tracking e-bikes or heavy-duty trucks. By adding driver accountability and reporting, we transform complex operational data into a clear path for improved service and real cost savings.</div>
+                                <div class="expansion-text"><span>47+ 成功项目</span>车队追踪解决有效管理车辆的核心挑战。实时可视性与电子围栏规则相结合，清晰展示资产位置并确保路线效率，无论追踪电动自行车还是重型卡车。通过增加驾驶员问责和报告，我们将复杂的运营数据转化为改进服务和实际节省成本的清晰路径。</div>
                                 <div class="images"></div>
                             </div>
                         </div>
                         <div class="expansion-panel">
                             <div class="expansion-header">
-                                <h3 class="expansion-title">Energy monitoring</h3>
+                                <h3 class="expansion-title">能源监控</h3>
                             </div>
                             <div class="expansion-content">
                                 <div class="expansion-buttons">
-                                    <div class="tag">Manufacturing</div>
-                                    <div class="tag">Retail</div>
-                                    <div class="tag">Utilities</div>
-                                    <div class="tag">Industry</div>
+                                    <div class="tag">制造</div>
+                                    <div class="tag">零售</div>
+                                    <div class="tag">公用事业</div>
+                                    <div class="tag">工业</div>
                                 </div>
-                                <div class="expansion-text"><span>48+ successful projects</span>Energy monitoring system provides clarity on your real-time energy usage, enabling smart energy management by highlighting hidden inefficiencies and anomalies. Tailored dashboards, alerts, and analytics help businesses reduce costs, improve transparency, and meet energy efficiency goals — from industrial operations to commercial buildings.</div>
+                                <div class="expansion-text"><span>48+ 成功项目</span>能源监控系统清晰展示实时能源使用情况，通过突出隐藏的低效和异常实现智能能源管理。定制仪表板、告警和分析帮助企业降低成本、提高透明度并实现能源效率目标——从工业运营到商业建筑。</div>
                                 <div class="images"></div>
                             </div>
                         </div>
                         <div class="expansion-panel">
                             <div class="expansion-header">
-                                <h3 class="expansion-title">Asset tracking</h3>
+                                <h3 class="expansion-title">资产追踪</h3>
                             </div>
                             <div class="expansion-content">
                                 <div class="expansion-buttons">
-                                    <div class="tag">Manufacturing</div>
-                                    <div class="tag">Logistics</div>
-                                    <div class="tag">Construction</div>
-                                    <div class="tag">Agriculture</div>
-                                    <div class="tag">Retail</div>
+                                    <div class="tag">制造</div>
+                                    <div class="tag">物流</div>
+                                    <div class="tag">建筑</div>
+                                    <div class="tag">农业</div>
+                                    <div class="tag">零售</div>
                                 </div>
-                                <div class="expansion-text"><span>44+ successful projects</span>A custom IoT asset tracking system enables real-time monitoring of tools, equipment, or goods across multiple locations. With location data, usage history, and alerts available in one asset tracking platform, businesses can improve visibility, reduce losses, and automate asset tracking and management processes — whether in warehouses, factories, or on remote sites.</div>
+                                <div class="expansion-text"><span>44+ 成功项目</span>定制物联网资产追踪系统支持跨多地实时监控工具、设备或货物。在一个资产追踪平台上整合位置数据、使用历史和告警，企业可提高可见性、减少损失并自动化资产追踪和管理流程——无论是仓库、工厂还是偏远站点。</div>
                                 <div class="images"></div>
                             </div>
                         </div>
@@ -108,51 +108,51 @@ description: "Get your IoT development services 3X faster and 2X lower TCO. We g
                             </div>
                             <div class="expansion-content">
                                 <div class="expansion-buttons">
-                                    <div class="tag">Manufacturing</div>
-                                    <div class="tag">Utilities</div>
-                                    <div class="tag">Oil & Gas</div>
-                                    <div class="tag">Water Management</div>
-                                    <div class="tag">Energy</div>
+                                    <div class="tag">制造</div>
+                                    <div class="tag">公用事业</div>
+                                    <div class="tag">石油天然气</div>
+                                    <div class="tag">水务管理</div>
+                                    <div class="tag">能源</div>
                                 </div>
-                                <div class="expansion-text"><span>38+ successful projects</span>SCADA IoT solutions provide real-time visibility into industrial operations, seamlessly integrating existing equipment through IT/OT integration. Typically configured with digital twin capabilities, they detect issues early, automate alerts, and simplify remote control. This proactive approach helps teams quickly respond and minimize operational disruptions.</div>
+                                <div class="expansion-text"><span>38+ 成功项目</span>SCADA 物联网解决方案提供工业运营的实时可视化，通过 IT/OT 集成无缝整合现有设备。通常配置数字孪生能力，可及早发现问题、自动告警并简化远程控制。这种主动方法帮助团队快速响应，最大限度减少运营中断。</div>
                                 <div class="images"></div>
                             </div>
                         </div>
                         <div class="expansion-panel">
                             <div class="expansion-header">
-                                <h3 class="expansion-title">Smart Metering</h3>
+                                <h3 class="expansion-title">智能计量</h3>
                             </div>
                             <div class="expansion-content">
                                 <div class="expansion-buttons">
-                                    <div class="tag">Manufacturing</div>
-                                    <div class="tag">Real Estate</div>
-                                    <div class="tag">Utilities</div>
-                                    <div class="tag">Smart Cities</div>
-                                    <div class="tag">Energy</div>
+                                    <div class="tag">制造</div>
+                                    <div class="tag">房地产</div>
+                                    <div class="tag">公用事业</div>
+                                    <div class="tag">智慧城市</div>
+                                    <div class="tag">能源</div>
                                 </div>
-                                <div class="expansion-text"><span>33+ successful projects</span>Smart metering transforms utility management by automating the collection of electricity, water, and gas consumption data, converting it into actionable, real-time insights. It automates invoicing workflows and delivers precise usage metrics for transparent, reliable billing. With anomaly detection for leaks or unusual usage patterns, facility managers can effectively minimize losses and significantly enhance sustainability efforts.</div>
+                                <div class="expansion-text"><span>33+ 成功项目</span>智能计量通过自动化采集电、水、气消耗数据并将其转化为可操作的实时洞察，改变公用事业管理。它自动化发票工作流，提供精确用量指标实现透明可靠的计费。通过泄漏或异常用量模式的异常检测，设施管理者可有效减少损失并显著增强可持续性。</div>
                                 <div class="images"></div>
                             </div>
                         </div>
                         <div class="expansion-panel">
                             <div class="expansion-header">
-                                <h3 class="expansion-title">Tank level</h3>
+                                <h3 class="expansion-title">储罐液位</h3>
                             </div>
                             <div class="expansion-content">
                                 <div class="expansion-buttons">
-                                    <div class="tag">Oil & Gas</div>
-                                    <div class="tag">Agriculture</div>
-                                    <div class="tag">Manufacturing</div>
-                                    <div class="tag">Utilities</div>
-                                    <div class="tag">Water Management</div>
+                                    <div class="tag">石油天然气</div>
+                                    <div class="tag">农业</div>
+                                    <div class="tag">制造</div>
+                                    <div class="tag">公用事业</div>
+                                    <div class="tag">水务管理</div>
                                 </div>
-                                <div class="expansion-text"><span>31+ successful projects</span>An IoT tank level monitoring system enables accurate, real-time tracking of liquid levels in fuel, water, or chemical tanks. Remote access, automated alerts, and refill optimization reduce manual checks, prevent overflows, and help detect leaks early.</div>
+                                <div class="expansion-text"><span>31+ 成功项目</span>物联网储罐液位监控系统支持燃料、水或化学品储罐液位的准确实时追踪。远程访问、自动告警和补液优化减少人工检查、防止溢出并及早发现泄漏。</div>
                                 <div class="images"></div>
                             </div>
                         </div>
                         <div class="expansion-panel">
                             <div class="expansion-header">
-                                <h3 class="expansion-title">Cold chain</h3>
+                                <h3 class="expansion-title">冷链</h3>
                             </div>
                             <div class="expansion-content">
                                 <div class="expansion-buttons">
@@ -160,7 +160,7 @@ description: "Get your IoT development services 3X faster and 2X lower TCO. We g
                                     <div class="tag">Logistics</div>
                                     <div class="tag">Retail</div>
                                 </div>
-                                <div class="expansion-text"><span>45+ successful projects</span>Cold chain monitoring systems deliver real-time visibility of temperature-sensitive products by tracking environmental conditions from storage through shipment, ensuring quality and compliance. They automate logging of critical parameters into live dashboards and audit-ready historical reports. With proactive alerts, time-to-threshold forecasts, and automated compliance reports, managers can intervene early to prevent spoilage.</div>
+                                <div class="expansion-text"><span>45+ 成功项目</span>冷链监控系统通过从仓储到运输全程追踪环境条件，提供温敏产品的实时可视性，确保质量和合规。将关键参数自动记录到实时仪表板和可审计的历史报告中。通过主动告警、阈值时间预测和自动合规报告，管理者可及早干预防止变质。</div>
                                 <div class="images"></div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ description: "Get your IoT development services 3X faster and 2X lower TCO. We g
             </div>
         </section>
         <section class="our-customers">
-            <span class="title">WE CREATED SOLUTIONS FOR:</span>
+            <span class="title">我们为以下客户创建了解决方案：</span>
             <div style="width: 90vw; overflow: hidden">
                 <div class="customer-logos">
                     <div class="logo">

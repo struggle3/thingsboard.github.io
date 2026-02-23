@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: "Scaling P2P Messaging to 1M Msg/sec with Persistent MQTT Clients"
-description: 1M msg/sec throughput One-to-one messaging utilizing persistent DEVICE clients as subscribers
+title: "使用持久化 MQTT 客户端将 P2P 消息扩展至 100 万条/秒"
+description: 使用持久化 DEVICE 客户端作为订阅者实现 100 万条/秒吞吐量的一对一消息
 
 tbmq-p2p-test-aws-infrastructure:
   0:

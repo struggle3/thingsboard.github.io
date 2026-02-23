@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: generator
-description: Generates messages at configurable time intervals using a custom script function.
+description: 使用自定义脚本函数在可配置时间间隔生成消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

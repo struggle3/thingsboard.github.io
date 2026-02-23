@@ -1,15 +1,15 @@
-Before creation AKS cluster we need to create Azure Resource Group - a logical group in which Azure resources are deployed and managed. We can create this via Azure [portal](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal)
-or we can use Azure CLI tool.
+创建 AKS 集群之前，需要先创建 Azure 资源组——用于部署和管理 Azure 资源的逻辑组。可通过 Azure [门户](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal)创建，
+也可以使用 Azure CLI 工具。
 ```
 az group create --name MyResourceGroup --location YOUR_LOCATION
 ```
 {: .copy-code}
 
 
-See more info about `az group` operations [here](https://docs.microsoft.com/en-us/cli/azure/group)
+有关 `az group` 操作的更多信息请参阅[此处](https://docs.microsoft.com/en-us/cli/azure/group)
 
-If you need to delete group you can use:
- 
+如需删除组可使用：
+
 ```
 az group delete -n MyResourceGroup
 ```

@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Micro Bluetooth Gateway to ThingsBoard?
-category: Other devices
+title: 如何将 Micro Bluetooth Gateway 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: Lansitec
 deviceImageFileName: micro-bluetooth-gateway.png

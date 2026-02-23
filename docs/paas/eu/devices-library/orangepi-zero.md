@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect OrangePI Zero to ThingsBoard?"
+title: "如何将OrangePI Zero连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/orangepi-zero/"
 ---

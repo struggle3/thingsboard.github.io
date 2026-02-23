@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: TBMQ Professional Edition
-description: PE TBMQ - learn about the platform and get your IoT projects running on TBMQ
+title: TBMQ 专业版
+description: TBMQ PE - 了解平台并让您的 IoT 项目在 TBMQ 上运行
 ---
 
 {% assign docsPrefix = "pe/" %}

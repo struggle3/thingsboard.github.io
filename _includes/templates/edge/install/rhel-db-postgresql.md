@@ -1,10 +1,10 @@
 {% capture postgresql-info %}
-The ThingsBoard team recommends using **PostgreSQL** for development and production environments with **moderate load (less than 5000 msg/sec)**.
-Many cloud providers offer managed **PostgreSQL** services, making it a cost-effective solution for most ThingsBoard deployments.
+ThingsBoard 团队建议在 **中等负载（低于 5000 msg/sec）** 的开发和生产环境中使用 **PostgreSQL**。
+多数云服务商提供托管 **PostgreSQL** 服务，对大多数 ThingsBoard 部署来说性价比较高。
 {% endcapture %}
 {% include templates/info-banner.md content=postgresql-info %}
 
-ThingsBoard Edge uses **PostgreSQL** database as a local storage.
+**ThingsBoard Edge** 使用 **PostgreSQL** 作为本地存储。
 
 {% include templates/edge/install/postgres-install-rhel.md %}
 

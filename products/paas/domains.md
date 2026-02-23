@@ -2,48 +2,47 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Managing domain
-description: Domain managing through ThingsBoard Cloud
+title: 管理域名
+description: 通过 ThingsBoard Cloud 管理域名
 registerDomain:
     0:
         image: /images/user-guide/domain/domain-register-step-1.png
-        title: 'Go to the "Settings" page, then navigate to the "Domain" tab. On the "Domain" tab click on the "Register domain" button;'
+        title: '进入「设置」页面，然后导航至「域名」选项卡。在「域名」选项卡上点击「注册域名」按钮；'
     1:
         image: /images/user-guide/domain/domain-register-step-2.png
-        title: 'Enter valid domain name in the input field and click on the "Register" button;'
+        title: '在输入框中输入有效域名，然后点击「注册」按钮；'
     2:
         image: /images/user-guide/domain/domain-register-step-3.png
-        title: 'You will be prompted a reminder about the CNAME;'
+        title: '您将看到有关 CNAME 的提示；'
     3:
         image: /images/user-guide/domain/domain-register-step-4.png
-        title: 'Click on the "I&#39;ve added CNAME records" button. Once you confirm the canonical name is in place, the domain verification and certificate provisioning will start. Be patient, this process can take a while;'
+        title: '点击「我已添加 CNAME 记录」按钮。确认规范名称生效后，域名验证和证书配置将开始。请耐心等待，此过程可能需要一段时间；'
     4:
         image: /images/user-guide/domain/domain-register-step-5.png
-        title: 'If succeeded, you will see your domain name on the "Domain" tab.'
+        title: '成功后，您将在「域名」选项卡上看到您的域名。'
 
 white-labeling:
     0:
         image: /images/user-guide/domain/domain-white-labeling-1.png
-        title: 'Go to the "White Labeling" page, then navigate to the "Login" tab. Enter the domain name and the base URL in the corresponding fields. Don&#39;t forget to check the box "Prohibit to use hostname from the client request headers". Then save all changes;'
+        title: '进入「白标」页面，然后导航至「登录」选项卡。在相应字段中输入域名和基础 URL。请勿忘记勾选「禁止使用客户端请求头中的主机名」复选框。然后保存所有更改；'
     1:
         image: /images/user-guide/domain/domain-login-1.png
-        title: 'Now you can use your domain name to access ThingsBoard Cloud Web UI and services. Try to login by entering the chosen domain name in the browser address line.'
+        title: '现在您可以使用您的域名访问 ThingsBoard Cloud Web UI 和服务。尝试在浏览器地址栏中输入所选域名进行登录。'
 
 domainDetails:
     0:
         image: /images/user-guide/domain/domain-details-step-1.png
-        title: 'To view a registered domain details click "Domain details" button on the "Domain" tab;'
+        title: '要查看已注册域名详情，请点击「域名」选项卡上的「域名详情」按钮；'
     1:
         image: /images/user-guide/domain/domain-details-step-2.png
-        title: 'ThingsBoard Cloud will automatically renew the certificate earlier than 30 days before it expires, no action is required from your part unless you change or delete the domain CNAME record.'
+        title: 'ThingsBoard Cloud 会在证书到期前 30 天自动续期，除非您更改或删除域名 CNAME 记录，否则无需您执行任何操作。'
 
 deleteDomain:
     0:
         image: /images/user-guide/domain/domain-delete-step-1.png
-        title: 'To delete a registered domain click "Delete" button on the "Domain" tab;'
+        title: '要删除已注册域名，请点击「域名」选项卡上的「删除」按钮；'
     1:
         image: /images/user-guide/domain/domain-delete-step-2.png
-        title: 'In the confirmation dialog, click "Yes" if you are sure you want to delete the domain.'
+        title: '在确认对话框中，如确定要删除域名，请点击「是」。'
 
 ---
-

@@ -2,93 +2,80 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Cache settings
-description: Trendz Cache settings 
+title: 缓存设置
+description: Trendz 缓存设置
 ---
 
 * TOC
 {:toc}
 
-Trendz has many built-in optimization mechanisms for improving report generation time. Most of them work out of the box 
-and do not require any configuration. But some of those mechanisms should be enabled explicitly by the administrator.
+Trendz 有许多内置优化机制，用于缩短报告生成时间。大多数机制开箱即用，无需任何配置。但部分机制需由管理员显式启用。
 
-## Trendz cache levels
+## Trendz 缓存级别
 
-Trendz supports 2 cache levels - `View Report` cache and `Metrics long term cache`. To explain the difference between them 
-we first need to understand how reports are generated in Trendz:
+Trendz 支持 2 个缓存级别——`View Report` 缓存和 `Metrics long term cache`。要理解它们之间的区别，首先需了解 Trendz 中报告的生成方式：
 
-1. User creates View configuration, adds required fields, and press Build Report.
-2. Trendz generates a query execution plan based on view configuration. Query plan contains fields load order and aggregation strategy.
-3. System loads required items (devices\assets) based on the query plan and configured filters.
-4. System loads field values for each item and aggregates them.
-5. In the final step, View Report is generated and passed to UI for visualization.
+1. 用户创建 View 配置，添加所需字段，然后点击 Build Report。
+2. Trendz 根据 view 配置生成查询执行计划。查询计划包含字段加载顺序和聚合策略。
+3. 系统根据查询计划和配置的筛选器加载所需项（设备\资产）。
+4. 系统为每项加载字段值并聚合。
+5. 最后一步，生成 View Report 并传递到 UI 进行可视化。
 
-Most of the time is spent on item loading and data loading (Step 3 & Step 4). By caching intermediate results on those steps we can increase system performance.
+大部分时间花在项加载和数据加载（步骤 3 和 4）。通过在这些步骤缓存中间结果，可提升系统性能。
 
-`View Report cache` - if the query plan is not changed we can return cached View Report without loading data from ThignsBoard.
-`Metrics long term cache` - in cases when data can be grouped by fixed intervals, like Hour or Date, we can load already computed\aggregated field 
-value from cache instead of reloading data from ThingsBoard. 
+`View Report cache` - 若查询计划未更改，可直接返回缓存的 View Report，而无需从 ThingsBoard 加载数据。
+`Metrics long term cache` - 当数据可按固定间隔（如小时或日期）分组时，可从缓存加载已计算\聚合的字段值，而非从 ThingsBoard 重新加载。
 
 ## Metrics long term cache
 
-For enabling this type of cache - open view settings, navigate to **Caching settings** and enable checkbox **Enable caching**.
+要启用此类型缓存——打开 view settings，导航至 **Caching settings** 并勾选 **Enable caching**。
 
-When cache is enabled - the system will store aggregated item field data in cache. It can be telemetry, state or calculated field.
-If field value is already in cache - system will reuse it. If it is not there yet, system will load data directly from ThingsBoard and save it in the cache.
+启用缓存后，系统会将聚合的项字段数据存储在缓存中。可以是遥测、状态或计算字段。若字段值已在缓存中，系统将复用。若尚未存在，系统将从 ThingsBoard 直接加载并保存到缓存。
 
-This cache does not connected to specific visualization and can be reused in case when the same field used in multiple views. 
+此缓存不与特定可视化绑定，当同一字段在多个视图中使用时可以复用。
 
-### Cache intervals
+### 缓存间隔
 
-Trendz cache contains aggregated field data for specific time intervals. User can define what time interval used for data caching.
+Trendz 缓存包含特定时间间隔的聚合字段数据。用户可定义用于数据缓存的时间间隔。
 
-**Full Date** - telemetry data aggregated by day. We will have 1 value in cache for each day.
-**Full Hour** - telemetry data aggregated by hour. We will have 1 value in cache for each hour.
+**Full Date** - 遥测数据按天聚合。每天在缓存中有一个值。
+**Full Hour** - 遥测数据按小时聚合。每小时在缓存中有一个值。
 
-What time unit to select depends on requirements, but in most cases it should be fine to aggregate by Day. 
-The only option when Hour aggregation can be useful - final report has HOUR dimension. For example, it may be a weekly heatmap because it has 
-HOUR field in X axis. 
+选择何种时间单位取决于需求，但多数情况下按天聚合即可。按小时聚合仅在最终报告具有 HOUR 维度时有用。例如，周热力图因 X 轴有 HOUR 字段而可能需要。
 
-### Scheduled cache refresh
+### 计划缓存刷新
 
-By default, the cache is initialized/updated only when the Build Report button is pressed. It may be critical when a heavy 
-report is generated on a daily\weekly basis and the user loads it for the first time. In this case, there would be no values 
-in cache yet, the system will load data directly from ThingsBoard and as a result - the user will wait few minutes while the report is ready.
+默认情况下，缓存仅在按下 Build Report 按钮时初始化/更新。当用户首次加载每日\每周生成的重型报告时，这可能至关重要。此时缓存中可能尚无值，系统将直接从 ThingsBoard 加载数据，导致用户需等待数分钟才能看到报告。
 
-We can trigger periodic cache refresh in the background. In this case, when report required we can be sure that all values already loaded 
-in cache and user will not wait for raw report generation.
+我们可以在后台触发定期缓存刷新。这样，当需要报告时，可以确保所有值已加载到缓存中，用户无需等待原始报告生成。
 
-* Open View settings
-* Navigate to **Caching** section
-* Enable checkbox **Auto refresh**
-* Select refresh interval. For example every day.
-* Save changes
+* 打开 View settings
+* 导航至 **Caching** 部分
+* 勾选 **Auto refresh**
+* 选择刷新间隔。例如每天。
+* 保存更改
 
-During cache refresh in the background, Trendz will make requests to the ThingsBoard. All such requests should be authenticated and signed with JWT token.
-For enabling such authentication, administrator should define login\password pair in Trendz configuration file - `ADMIN_LOGIN` and `ADMIN_PASSWORD`. 
-Without this step scheduled cache refresh would not work and cache would be refreshed only when user request report from the UI or Rest API.
+后台缓存刷新时，Trendz 将向 ThingsBoard 发送请求。所有此类请求需经身份验证并使用 JWT token 签名。要启用此类身份验证，管理员应在 Trendz 配置文件中定义 login\password 对——`ADMIN_LOGIN` 和 `ADMIN_PASSWORD`。若不执行此步骤，计划缓存刷新将无法工作，缓存仅在用户通过 UI 或 Rest API 请求报告时刷新。
 
-### Clear cache
+### 清除缓存
 
-You can clear long term cache if required. It may be useful if you re-import or change historical data in ThingsBoard. 
+如需可清除长期缓存。若在 ThingsBoard 中重新导入或更改历史数据，此功能可能有用。
 
-* Click on System settings icon in bottom left corner
-* Open Settings
-* Press **Clear cache** button in **Caching** section 
+* 点击左下角的 System settings 图标
+* 打开 Settings
+* 在 **Caching** 部分点击 **Clear cache** 按钮
 
 ## View Report cache
 
-In some cases, we can reuse the already computed View Report instead of computing it from scratch. This feature is helpful 
-when a view is added on the dashboard with multiple states and users actively navigate between them. Each time when the 
-state opened - UI will request View Report from the server
+某些情况下，可以复用已计算的 View Report，而无需从头计算。当具有多状态的仪表板中添加了视图且用户在不同状态间主动切换时，此功能很有帮助。每次打开状态时，UI 将向服务器请求 View Report。
 
-Here are conditions that we should check before taking cached Report:
+在使用缓存 Report 之前，应检查以下条件：
 
-* Query plan not changed.
-* Time range not changed.
-* Existing View Report not expired.
- 
-For enabling this type of cache:
+* 查询计划未更改。
+* 时间范围未更改。
+* 现有 View Report 未过期。
 
-* Enable it in system settings - `cache.report.enabled` - by default it is enabled.
-* In View Settings -> Caching -> set checkbox **Cache Report** - by default it is enabled.
+要启用此类型缓存：
+
+* 在系统设置中启用——`cache.report.enabled` - 默认已启用。
+* 在 View Settings -> Caching -> 勾选 **Cache Report** - 默认已启用。

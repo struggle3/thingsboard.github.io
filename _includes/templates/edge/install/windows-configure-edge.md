@@ -4,19 +4,19 @@
 {% assign appPrefix = "ThingsBoard" %}
 {% endif %}
 
-Open the Notepad or other editor as administrator user (right click on the app icon and select "Run as administrator").  
-Open the following file for editing (select "All Files" instead of "Text Documents" in file choosing dialog, the encoding is UTF-8):
+以管理员身份打开记事本或其他编辑器（右键点击应用图标并选择「以管理员身份运行」）。  
+打开以下文件进行编辑（在文件选择对话框中选「所有文件」而非「文本文档」，编码为 UTF-8）：
 
 ```text 
 C:\Program Files (x86)\tb-edge\conf\tb-edge.yml
 ``` 
 {: .copy-code}
 
-#### Database configuration
+#### 数据库配置
 
-In the file "tb-edge.yml" from the previous step locate "# SQL DAO Configuration" block. 
+在上一步的 "tb-edge.yml" 文件中找到 "# SQL DAO Configuration" 段落。  
 
-Don't forget to **replace YOUR_POSTGRES_PASSWORD_HERE** with your real postgres user password:
+请将 **YOUR_POSTGRES_PASSWORD_HERE** 替换为实际的 postgres 用户密码：
 
 ```yml
 # SQL DAO Configuration
@@ -34,21 +34,20 @@ spring:
     username: "${SPRING_DATASOURCE_USERNAME:postgres}"
     password: "${SPRING_DATASOURCE_PASSWORD:YOUR_POSTGRES_PASSWORD_HERE}"
 ``` 
-#### Configure cloud connectivity
+#### 配置云端连接
 
 {% include templates/edge/install/copy-edge-credentials.md %}
 
-Locate "# Cloud configuration" block and replace **PUT_YOUR_EDGE_KEY_HERE** and **PUT_YOUR_EDGE_SECRET_HERE** with Edge **key and secret** respectively. 
+找到 "# Cloud configuration" 段落，将 **PUT_YOUR_EDGE_KEY_HERE** 和 **PUT_YOUR_EDGE_SECRET_HERE** 分别替换为 Edge 的 **key 和 secret**。  
 
-Please replace **PUT_YOUR_CLOUD_IP** with an IP address of the machine where {{appPrefix}} version is running:
+将 **PUT_YOUR_CLOUD_IP** 替换为运行 {{appPrefix}} 的机器 IP 地址：
 {% if docsPrefix == 'pe/edge/' %}
-* Use **thingsboard.cloud** in case you are connecting edge to [**ThingsBoard Cloud**](https://thingsboard.cloud/signup).
+* 若 Edge 连接到 [**ThingsBoard Cloud**](https://thingsboard.cloud/signup)，请使用 **thingsboard.cloud**。
 
-**NOTE**: **thingsboard.cloud** uses SSL protocol for edge communication. 
-Please change **CLOUD_RPC_SSL_ENABLED** to **true** as well.
+**注意：** **thingsboard.cloud** 在 Edge 通信中使用 SSL 协议。请同时将 **CLOUD_RPC_SSL_ENABLED** 设为 **true**。
 {% endif %}
-* Use **localhost** in case edge is running on the same machine where cloud instance is running. 
-* Use **X.X.X.X** IP address in case edge is connecting to the cloud instance in the same network or in the docker.
+* Edge 与 cloud 实例在同一台机器上运行时使用 **localhost**。  
+* Edge 连接同一网络或 Docker 内的 cloud 实例时使用 **X.X.X.X** IP 地址。
 
 {% if docsPrefix == 'pe/edge/' %}
 ```yml
@@ -59,7 +58,7 @@ cloud:
     rpc:
       host: "${CLOUD_RPC_HOST:PUT_YOUR_CLOUD_IP}"
       ssl:
-        # Set to 'true' if using thingsboard.cloud or if you have configured a TLS connection on your Server; set to 'false' otherwise.
+        # 若使用 thingsboard.cloud 或已在 Server 上配置 TLS 连接，则设为 'true'；否则设为 'false'。
         enabled: "${CLOUD_RPC_SSL_ENABLED:true/false}" 
 ```
 {% else %}
@@ -74,9 +73,9 @@ cloud:
 {% endif %}
 
 {% capture local-deployment %}
-If ThingsBoard Edge is set to run on the same machine where the **{{appPrefix}}** server is operating, you need to update additional configuration parameters to prevent port collision between the ThingsBoard server and ThingsBoard Edge.
+若 ThingsBoard Edge 与 **{{appPrefix}}** 服务器运行在同一台机器上，需调整以下配置参数以避免端口冲突。
 
-Please locate and change next parameters in ThingsBoard Edge configuration file (**C:\Program Files (x86)\tb-edge\conf\tb-edge.yml**):
+请在 ThingsBoard Edge 配置文件（**C:\Program Files (x86)\tb-edge\conf\tb-edge.yml**）中定位并修改以下参数：
 <br>
 <br>**...**
 <br>**port: "${HTTP_BIND_PORT:18080}"**
@@ -85,13 +84,13 @@ Please locate and change next parameters in ThingsBoard Edge configuration file 
 <br>**...**
 <br>**bind_port: "${COAP_BIND_PORT:15683}"**
 <br>**...**
-<br>**bind_port: "${LWM2M_ENABLED:false}"**
+<br>**LWM2M_ENABLED: false**
 <br>**...**
 {% if docsPrefix == 'pe/edge/' %}
 <br>**bind_port: "${INTEGRATIONS_RPC_PORT:19090}"**
 <br>**...**
 {% endif %}
-Ensure that the ports listed above (18080, 11883, 15683) are not being used by any other application.
+确保以上端口（18080、11883、15683）未被其他应用占用。
 
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}

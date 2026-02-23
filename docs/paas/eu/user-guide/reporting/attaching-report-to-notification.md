@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Attaching report to notification
-description: How to attach report to a notification
+title: 将报表附加到通知
+description: 如何将报表附加到通知
 
 reporting-getting-started-save-report-1:
     0:

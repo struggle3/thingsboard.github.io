@@ -2,88 +2,88 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Mail server configuration
-description: ThingsBoard IoT platform mail settings
+title: 邮件服务器配置
+description: ThingsBoard IoT 平台邮件设置
 
 mail-server-configuration-1:
     0:
         image: /images/user-guide/ui/mail/mail-server-configuration-1-pe.png
-        title: 'Go to the "Mail server" tab of the "Settings" page. If you are logged in as a sysadmin, you will be taken directly to the mail server settings. If you are logged in as a tenant administrator, uncheck the "Use System Mail Server Settings" option to configure your own mail server settings;'
+        title: '进入"Settings"页面的"Mail server"选项卡。若以系统管理员身份登录，将直接进入邮件服务器设置。若以租户管理员身份登录，请取消勾选"Use System Mail Server Settings"以配置您自己的邮件服务器；'
     1:
         image: /images/user-guide/ui/mail/mail-server-configuration-2-pe.png
-        title: 'Fill in the "Mail From" field, select an SMTP provider, and proceed to the connection settings: choose the SMTP protocol, specify host and port of the SMTP server, and set the timeout;'
+        title: '填写"Mail From"字段，选择SMTP提供商，然后进行连接设置：选择SMTP协议、指定SMTP服务器的主机和端口、设置超时；'
     2:
         image: /images/user-guide/ui/mail/mail-server-configuration-3-pe.png
-        title: 'Optionally, enable TLS and Proxy;'
+        title: '可选：启用TLS和Proxy；'
     3:
         image: /images/user-guide/ui/mail/mail-server-configuration-4-pe.png
-        title: 'Enter credentials for SMTP authentication. Use either the "Basic" or "OAuth 2.0" authentication method. Now, you can send a test email to verify the settings. Finally, click "Save" to complete the mail server configuration.'
+        title: '输入SMTP身份验证凭据。使用"Basic"或"OAuth 2.0"认证方式。此时可发送测试邮件以验证设置。最后点击"Save"完成邮件服务器配置。'
 
 sendgrid-configuration:
     0:
         image: /images/user-guide/ui/mail/sendgrid-welcome.png
-        title: 'Once you create your account, you will be forwarded to the welcome page. Click "Start" button;'
+        title: '创建账户后将跳转至欢迎页。点击"Start"按钮；'
     1:
         image: /images/user-guide/ui/mail/sendgrid-smtp-relay.png
-        title: 'Go to the "Email API" section -> "Integration Guide" page and choose a setup method - "SMTP Relay";'
+        title: '进入"Email API"部分->"Integration Guide"页面，选择设置方法-"SMTP Relay"；'
     2:
         image: /images/user-guide/ui/mail/sendgrid-token.png
-        title: 'Create an API key: enter the API key name and generate it.'
+        title: '创建API密钥：输入API密钥名称并生成。'
 
 gmail-generate-an-app-password:
     0:
         image: /images/user-guide/ui/mail/gmail-generate-an-app-password-1.png
-        title: 'Go to your Google Account and navigate to the "Security" page. Then select "2-Step Verification" tab;'
+        title: '进入您的Google账户，导航至"Security"页面。然后选择"2-Step Verification"选项卡；'
     1:
         image: /images/user-guide/ui/mail/gmail-generate-an-app-password-2.png
-        title: 'At the bottom of the page, select "App passwords";'
+        title: '在页面底部选择"App passwords"；'
     2:
         image: /images/user-guide/ui/mail/gmail-generate-an-app-password-3.png
-        title: 'Click on the "Select app" and select "Other" app in the drop-down menu;'
+        title: '点击"Select app"并在下拉菜单中选择"Other"应用；'
     3:
         image: /images/user-guide/ui/mail/gmail-generate-an-app-password-4.png
-        title: 'Enter app name and click "Generate" button;'
+        title: '输入应用名称并点击"Generate"按钮；'
     4:
         image: /images/user-guide/ui/mail/gmail-generate-an-app-password-5.png
-        title: 'Copy and save app password.'
+        title: '复制并保存应用密码。'
 
 create-gmail-project:
     0:
         image: /images/user-guide/ui/mail/gmail-with-oauth2-1-pe.png
-        title: 'Input “Project name” and “Location”. Then click “Create”. New project is created.'
+        title: '输入"Project name"和"Location"。然后点击"Create"。新项目已创建。'
 
 create-gmail-credentials:
     0:
         image: /images/user-guide/ui/mail/gmail-with-oauth2-2-pe.png
-        title: 'Select created project and navigate to the "APIs & Services" page;'
+        title: '选择已创建的项目并导航至"APIs & Services"页面；'
     1:
         image: /images/user-guide/ui/mail/gmail-with-oauth2-3-pe.png
-        title: 'Click on the "Credentials" tab, then click on the "Create Credentials" button and select "OAuth client ID";'
+        title: '点击"Credentials"选项卡，然后点击"Create Credentials"按钮并选择"OAuth client ID"；'
     2:
         image: /images/user-guide/ui/mail/gmail-with-oauth2-4-pe.png
-        title: 'In a "Create OAuth client ID" window select application type - "Web application" and input the name of your OAuth2 client. Then, in the "Authorized redirect URIs" section, click the "+ Add URI" button and paste the previously copied "Redirect URI template". Click "Create";'
+        title: '在"Create OAuth client ID"窗口中选择应用类型-"Web application"并输入OAuth2客户端名称。然后在"Authorized redirect URIs"部分点击"+ Add URI"按钮并粘贴之前复制的"Redirect URI template"。点击"Create"；'
     3:
         image: /images/user-guide/ui/mail/gmail-with-oauth2-5-pe.png
-        title: 'Save created client ID and client secret for future steps.'
+        title: '保存创建的client ID和client secret以备后续步骤使用。'
 
 microsoft-azure-with-oauth2:
     0:
         image: /images/user-guide/ui/mail/azure-create-application-1.png
-        title: 'Sign in to the Azure portal and select Microsoft Entra ID;'
+        title: '登录Azure门户并选择Microsoft Entra ID；'
     1:
         image: /images/user-guide/ui/mail/microsoft-azure-copy-user-principal-name-1-pe.png
-        title: 'Select microsoft user and copy user principal name.'
+        title: '选择Microsoft用户并复制用户主体名称。'
 
 azure-portal:
     0:
         image: /images/user-guide/ui/mail/azure-create-application-2.png
-        title: 'Under the "Manage" section select the "App registrations" page, and click the "New registration" button;'
+        title: '在"Manage"部分选择"App registrations"页面，点击"New registration"按钮；'
     1:
         image: /images/user-guide/ui/mail/azure-create-application-3.png
-        title: 'Enter a name for your application and paste the previously copied "Redirect URI template". Click the "Register" button;'
+        title: '输入应用程序名称并粘贴之前复制的"Redirect URI template"。点击"Register"按钮；'
     2:
         image: /images/user-guide/ui/mail/microsoft-azure-with-oauth2-4-pe.png
-        title: 'After application is created you can find "Client ID" and "Directory (tenant) ID" on "Overview" page. Save them for future steps.'
+        title: '应用创建后可在"Overview"页面找到"Client ID"和"Directory (tenant) ID"。保存以供后续步骤使用。'
 
 azure-portal-2:
     0:
@@ -99,19 +99,19 @@ azure-portal-2:
 add-api-permissions:
     0:
         image: /images/user-guide/ui/mail/microsoft-azure-with-oauth2-api-permissions-1-pe.png
-        title: 'In the Azure portal go to “API permissions” page and click “Add a permission” button;'
+        title: '在Azure门户中进入"API permissions"页面，点击"Add a permission"按钮；'
     1:
         image: /images/user-guide/ui/mail/microsoft-azure-with-oauth2-api-permissions-2-pe.png
-        title: 'Select an API - "Microsoft Graph";'
+        title: '选择API-"Microsoft Graph"；'
     2:
         image: /images/user-guide/ui/mail/microsoft-azure-with-oauth2-api-permissions-3-pe.png
-        title: 'Select type of permissions - "Delegated permissions";'
+        title: '选择权限类型-"Delegated permissions"；'
     3:
         image: /images/user-guide/ui/mail/microsoft-azure-with-oauth2-api-permissions-4-pe.png
-        title: 'Search and check the box “SMTP.Send” permission. Then click “Add permissions” button;'
+        title: '搜索并勾选"SMTP.Send"权限。然后点击"Add permissions"按钮；'
     4:
         image: /images/user-guide/ui/mail/microsoft-azure-with-oauth2-api-permissions-5-pe.png
-        title: 'Permissions is updated.'
+        title: '权限已更新。'
 
 ---
 

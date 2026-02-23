@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Azure Event Hub Integration
-description: Azure Event Hub Integration Guide 
+title: Azure Event Hub 集成
+description: Azure Event Hub 集成指南
 
 create_eventhub: 
     0: 

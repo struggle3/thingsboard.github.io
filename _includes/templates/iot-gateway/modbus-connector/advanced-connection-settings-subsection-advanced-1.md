@@ -1,23 +1,23 @@
-You can configure additional settings like: TLS connection, polling time, byte order and word order, and other. The table below describes the parameters for this purpose:
+您可配置其他设置，如：TLS 连接、轮询时间、字节序和字序等。下表描述了相关参数：
 
-| **Parameter**             | **Default value**  | **Description**                                                               |
+| **参数**             | **默认值**  | **描述**                                                               |
 |:--------------------------|:-------------------|-------------------------------------------------------------------------------
-| timeout                   | **35**             | Timeout in seconds for connecting to Modbus server                            |
-| byteOrder                 | **LITTLE**         | Order of bytes to read                                                        |
-| wordOrder                 | **LITTLE**         | The order of words when reading several registers                             |
-| retries                   | **true**           | Retrying sending data to the master. The values can be either: true or false  |
-| retriesOnEmpty            | **true**           | Retrying sending data to the master if it is empty                            |
-| retriesOnInvalid          | **true**           | Retrying sending data to the master if it is failed                           |
-| pollPeriod                | **5000**           | Period in milliseconds to check the attributes and the telemetry on the slave |
-| connectAttemptTimeMs      | **5000**           | A waiting period in milliseconds before connecting to the master              |
-| connectAttemptCount       | **5**              | The number of connection attempts made through the ThingsBoard gateway        |
-| waitAfterFailedAttemptsMs | **300000**         | A waiting period in milliseconds before trying to send data to the master     |
+| timeout                   | **35**             | 连接 Modbus 服务器的超时时间（秒）                            |
+| byteOrder                 | **LITTLE**         | 字节读取顺序                                                        |
+| wordOrder                 | **LITTLE**         | 读取多个寄存器时的字顺序                             |
+| retries                   | **true**           | 是否重试向主站发送数据。可选值：true 或 false  |
+| retriesOnEmpty            | **true**           | 数据为空时是否重试向主站发送                            |
+| retriesOnInvalid          | **true**           | 发送失败时是否重试向主站发送                           |
+| pollPeriod                | **5000**           | 检查从站属性和遥测的周期（毫秒） |
+| connectAttemptTimeMs      | **5000**           | 连接主站前的等待时间（毫秒）              |
+| connectAttemptCount       | **5**              | 通过 ThingsBoard 网关进行的连接尝试次数        |
+| waitAfterFailedAttemptsMs | **300000**         | 再次尝试向主站发送数据前的等待时间（毫秒）     |
 | ---                       
 
 ![image](/images/gateway/modbus-connector/advanced-connection-settings-advanced-1-ce.png)
 
 <br>
-Example:
+示例：
 
 ```json
 "master": {

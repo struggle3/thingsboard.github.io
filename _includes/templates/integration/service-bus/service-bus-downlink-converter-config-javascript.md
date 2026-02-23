@@ -1,9 +1,9 @@
-You can use our example of downlink converter or write your own according to your configuration:
+您可以使用我们的下行转换器示例，或根据您的配置编写自己的转换器：
 
 ```javascript
-// Encode downlink data from incoming Rule Engine message
-// msg - JSON message payload downlink message json
-// Result object with encoded downlink payload
+// 将传入的规则引擎消息编码为下行数据
+// msg - 下行消息的 JSON 消息 payload
+// 包含编码后下行 payload 的结果对象
 var result = {
     contentType: "JSON",
     data: JSON.stringify(msg),

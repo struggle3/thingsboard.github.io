@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - nick
-title: LwM2M Device API Reference
-description: Supported LwM2M API Reference for IoT Devices
+title: LwM2M 设备 API 参考
+description: 支持的 IoT 设备 LwM2M API 参考
 
 upload-models:
     0:

@@ -2,8 +2,7 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: What is ThingsBoard Cloud?
-description: Features and advantages of ThingsBoard Cloud
+title: 什么是 ThingsBoard Cloud？
+description: ThingsBoard Cloud 的功能与优势
 
 ---
-

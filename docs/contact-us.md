@@ -1,6 +1,6 @@
 ---
 layout: common
-title: Contact us
+title: 联系我们
 notitle: "true"
 ---
 <script>
@@ -82,11 +82,11 @@ notitle: "true"
     function validateContactForm(form) {
         let isValid = true;
         const fieldsToValidate = [
-            { name: 'firstName', prettyName: 'First Name', type: 'text', id: 'firstName' },
-            { name: 'lastName', prettyName: 'Last Name', type: 'text', id: 'lastName' },
-            { name: 'email', prettyName: 'Email Address', type: 'email', id: 'email' },
-            { name: 'company', prettyName: 'Company', type: 'text', id: 'company' },
-            { name: 'message', prettyName: 'Message', type: 'textarea', id: 'message' }
+            { name: 'firstName', prettyName: '名', type: 'text', id: 'firstName' },
+            { name: 'lastName', prettyName: '姓', type: 'text', id: 'lastName' },
+            { name: 'email', prettyName: '电子邮箱', type: 'email', id: 'email' },
+            { name: 'company', prettyName: '公司', type: 'text', id: 'company' },
+            { name: 'message', prettyName: '留言', type: 'textarea', id: 'message' }
         ];
 
         fieldsToValidate.forEach(fieldSpec => {
@@ -102,9 +102,9 @@ notitle: "true"
             let errorMessageText = '';
 
             if (value === '') {
-                errorMessageText = `${fieldSpec.prettyName} is required.`;
+                errorMessageText = `${fieldSpec.prettyName}为必填项。`;
             } else if (fieldSpec.type === 'email' && !isValidEmailFormat(value)) {
-                errorMessageText = `Please enter a valid ${fieldSpec.prettyName.toLowerCase()}.`;
+                errorMessageText = `请输入有效的${fieldSpec.prettyName}。`;
             }
 
             if (errorMessageText) {
@@ -143,57 +143,57 @@ notitle: "true"
     });
 </script>
 <form id="ContactUs" method="post" class="contact-form gtm_form" onsubmit="return validateContactForm(this)" novalidate>
-    <h1 class="contact-us-title">Contact Us</h1>
+    <h1 class="contact-us-title">联系我们</h1>
     <fieldset>
         <div class="form-section">
             <div class="form-element">
                 <label for="firstName">
-                   <input class="form-control" value="" placeholder="John" name="firstName" id="firstName" type="text" size="40" maxlength="50" aria-invalid="false">
-                    <p>First Name</p>
+                   <input class="form-control" value="" placeholder="张" name="firstName" id="firstName" type="text" size="40" maxlength="50" aria-invalid="false">
+                    <p>名</p>
                 </label>
             </div>
             <div class="form-element">
                 <label for="lastName">
-                    <input class="form-control" value="" placeholder="Doe" name="lastName" id="lastName" type="text" size="40" maxlength="50" aria-invalid="false">
-                    <p>Last Name</p>
+                    <input class="form-control" value="" placeholder="三" name="lastName" id="lastName" type="text" size="40" maxlength="50" aria-invalid="false">
+                    <p>姓</p>
                 </label>
             </div>
             <div class="form-element">
                 <label for="email">
-                    <input class="form-control" value="" placeholder="john@example.com" name="email" id="email" type="email" size="40" maxlength="80" aria-invalid="false">
-                    <p>Email Address</p>
+                    <input class="form-control" value="" placeholder="zhangsan@example.com" name="email" id="email" type="email" size="40" maxlength="80" aria-invalid="false">
+                    <p>电子邮箱</p>
                 </label>
             </div>
             <div class="form-element">
                 <label for="company">
-                    <input class="form-control" value="" placeholder="My Company Inc." name="company" id="company" type="text" size="40" maxlength="80" aria-invalid="false">
-                    <p>Company</p>
+                    <input class="form-control" value="" placeholder="我的公司" name="company" id="company" type="text" size="40" maxlength="80" aria-invalid="false">
+                    <p>公司</p>
                 </label>
             </div>
             <div class="form-element">
                 <label for="subject" class="select-label">
                     <select class="form-control select" name="subject">
-                        <option value="" disabled selected>Select Subject</option>
-                        <option value="Technical Support">Technical Support</option>
-                        <option value="ThingsBoard Products">ThingsBoard Products</option>
-                        <option value="Private Cloud">Private Cloud</option>
-                        <option value="Deployment Options">Deployment Options</option>
-                        <option value="Custom Development Service">Custom Development Service</option>
-                        <option value="Training">Training</option>
-                        <option value="Professional Services">Professional Services</option>
-                        <option value="Partnership">Partnership</option>
-                        <option value="Press or Analyst Inquiry">Press or Analyst Inquiry</option>
-                        <option value="General Feedback">General Feedback</option>
+                        <option value="" disabled selected>选择主题</option>
+                        <option value="Technical Support">技术支持</option>
+                        <option value="ThingsBoard Products">ThingsBoard产品</option>
+                        <option value="Private Cloud">私有云</option>
+                        <option value="Deployment Options">部署方案</option>
+                        <option value="Custom Development Service">定制开发服务</option>
+                        <option value="Training">培训</option>
+                        <option value="Professional Services">专业服务</option>
+                        <option value="Partnership">合作伙伴</option>
+                        <option value="Press or Analyst Inquiry">媒体或分析师咨询</option>
+                        <option value="General Feedback">一般反馈</option>
                         <option value="TBMQ">TBMQ</option>
-                        <option value="Other">Other</option>
+                        <option value="Other">其他</option>
                     </select>
-                    <p>Subject</p>
+                    <p>主题</p>
                 </label>
             </div>
             <div class="form-element">
                 <label for="message">
-                    <textarea class="form-control text-area" placeholder="Enter Message" name="message" id="message" cols="50" rows="4" maxlength="3000" aria-invalid="false"></textarea>
-                    <p class="text-area-label">Message</p>
+                    <textarea class="form-control text-area" placeholder="请输入留言内容" name="message" id="message" cols="50" rows="4" maxlength="3000" aria-invalid="false"></textarea>
+                    <p class="text-area-label">留言</p>
                 </label>
             </div>
             <input type="hidden" name="utm_source" id="utm_source">
@@ -210,7 +210,7 @@ notitle: "true"
             <input type="text" name="_gotcha" style="display:none">
         </div>
         <div class="submit-button-container">
-             <input class="button" value="Submit" type="submit">
+             <input class="button" value="提交" type="submit">
         </div>
     </fieldset>
 </form>
@@ -220,13 +220,13 @@ notitle: "true"
         let params = new URLSearchParams(window.location.search);
          if (params.has('pcorder')) {
             const titleEl = document.querySelector('.contact-us-title');
-            titleEl.innerText = 'Get Your Private IoT Platform';
+            titleEl.innerText = '获取您的私有IoT平台';
             titleEl.style.fontSize = '40px';
             document.querySelector('.select-label').parentElement.style.display = 'none';
         }
          if (params.has('tbmqorder')) {
             const titleEl = document.querySelector('.contact-us-title');
-            titleEl.innerText = 'Get Your Private MQTT Broker';
+            titleEl.innerText = '获取您的私有MQTT Broker';
             titleEl.style.fontSize = '40px';
             document.querySelector('.select-label').parentElement.style.display = 'none';
         }

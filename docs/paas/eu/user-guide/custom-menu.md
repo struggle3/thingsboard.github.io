@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Custom Menu
-description:  
+title: 自定义菜单
+description: 自定义菜单配置
 ---
 
 {% assign docsPrefix = "paas/eu/" %}

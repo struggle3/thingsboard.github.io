@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Subreport
-description: Subreport overview
+title: 子报告
+description: 子报告概览
 redirect_from: "/docs/user-guide/reporting/subreport/"
 
 subreport-builder:

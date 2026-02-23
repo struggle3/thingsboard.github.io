@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard CE on CentOS/RHEL
-description: Installing ThingsBoard CE on CentOS/RHEL
+title: 在 CentOS/RHEL 上安装 ThingsBoard CE
+description: 在 CentOS/RHEL 上安装 ThingsBoard CE
 
 ---
 

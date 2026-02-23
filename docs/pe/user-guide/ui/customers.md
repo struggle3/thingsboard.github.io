@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Customers
-description: ThingsBoard Customers management
+title: 客户
+description: ThingsBoard 客户管理
 
 customer-add-new-pe:
     0:

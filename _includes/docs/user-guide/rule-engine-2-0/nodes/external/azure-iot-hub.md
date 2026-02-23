@@ -1,39 +1,36 @@
-Publishes messages to [Azure IoT Hub](https://azure.microsoft.com/en-us/products/iot-hub) with QoS 1 (at least once) using
-the [MQTT protocol](https://learn.microsoft.com/en-us/azure/iot/iot-mqtt-connect-to-iot-hub#sending-device-to-cloud-messages) over secure TLS connection. Supports dynamic topic
-patterns populated with data from incoming
-messages and multiple authentication methods including SAS tokens and certificate-based authentication.
+使用 [MQTT 协议](https://learn.microsoft.com/en-us/azure/iot/iot-mqtt-connect-to-iot-hub#sending-device-to-cloud-messages)通过安全 TLS 连接，以 QoS 1（至少一次）向 [Azure IoT Hub](https://azure.microsoft.com/en-us/products/iot-hub) 发布消息。支持基于入站消息动态构建 topic 模式，及包括 SAS 令牌和证书认证在内的多种认证方式。
 
-## Configuration
+## 配置
 
 ### Topic
 
-Specifies the Azure IoT Hub topic where messages will be published. Supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/).
+指定发布消息的 Azure IoT Hub 主题。支持 [templatization](/docs/{{docsPrefix}}user-guide/templatization/)。
 
 ### Hostname
 
-The hostname of your Azure IoT Hub in the format `<iot-hub-name>.azure-devices.net`.
+Azure IoT Hub 的主机名，格式为 `<iot-hub-name>.azure-devices.net`。
 
 {% capture port_note %}
-**Note**: The port is fixed at 8883 (Azure IoT Hub standard MQTT port).
+**注意**：端口固定为 8883（Azure IoT Hub 标准 MQTT 端口）。
 {% endcapture %}
 {% include templates/info-banner.md content=port_note %}
 
 {% capture connection_behavior_note %}
-**Note**: All connections to Azure IoT Hub use the following fixed settings: SSL enabled, clean session enabled, QoS 1 (at least once), and no retained messages.
+**注意**：与 Azure IoT Hub 的所有连接均使用以下固定设置：启用 SSL、启用 clean session、QoS 1（至少一次）、无保留消息。
 {% endcapture %}
 {% include templates/info-banner.md content=connection_behavior_note %}
 
 ### Device ID
 
-The device identifier for connecting to Azure IoT Hub. This field is required and must match a device ID registered in your Azure IoT Hub.
+连接 Azure IoT Hub 的设备标识符。该字段必填，须与 Azure IoT Hub 中注册的设备 ID 匹配。
 
 ### Protocol version
 
-The MQTT protocol version used for the connection. Only **MQTT 3.1.1** is supported.
+连接使用的 MQTT 协议版本。仅支持 **MQTT 3.1.1**。
 
-### Credentials
+### Credentials（凭据）
 
-Authentication credentials for connecting to Azure IoT Hub. The node supports two credential types:
+连接 Azure IoT Hub 的认证凭据。节点支持两种凭据类型：
 
 #### SAS Token (Shared Access Signature)
 
@@ -48,8 +45,7 @@ most common authentication method for Azure IoT Hub.
   Global Root G2 certificate.
 
 {% capture sas_credentials_note %}
-**Note**: The SAS key and CA certificate file can be uploaded directly or referenced from [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} for enhanced
-security.
+**注意**：SAS 密钥和 CA 证书文件可直接上传，或从 [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} 引用以增强安全性。
 {% endcapture %}
 {% include templates/info-banner.md content=sas_credentials_note %}
 
@@ -66,7 +62,7 @@ This provides enhanced security through certificate-based mutual [TLS authentica
 - **Private key password** – Optional password if the private key file is encrypted.
 
 {% capture cert_credentials_note %}
-**Note**: Certificate and key files can be uploaded directly or referenced from [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} for enhanced security.
+**注意**：证书和密钥文件可直接上传，或从 [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} 引用以增强安全性。
 {% endcapture %}
 {% include templates/info-banner.md content=cert_credentials_note %}
 
@@ -81,7 +77,7 @@ The Azure IoT Hub node operates exclusively in **Singleton mode**. This means:
 - This prevents conflicts with Azure IoT Hub's device connection policies
 
 {% capture singleton_note %}
-**Note**: Singleton mode cannot be disabled for the Azure IoT Hub node. This is a platform requirement to ensure proper device identity management with Azure IoT Hub.
+**注意**：Azure IoT Hub 节点的 Singleton 模式不可禁用。这是平台要求，以确保与 Azure IoT Hub 正确进行设备身份管理。
 {% endcapture %}
 {% include templates/info-banner.md content=singleton_note %}
 
@@ -245,14 +241,14 @@ mqtt:
 ```
 {: .copy-code.expandable-3 }
 
-## Rule node initialization
+## 规则节点初始化
 
-When the rule node is initialized, it establishes a secure connection to Azure IoT Hub. If no CA certificate is provided, the node automatically uses the DigiCert Global Root G2
+规则节点初始化时会建立与 Azure IoT Hub 的安全连接。 If no CA certificate is provided, the node automatically uses the DigiCert Global Root G2
 certificate. Once the connection is established, it remains open for the lifetime of the rule node, ready to publish messages to Azure IoT Hub.
 
-## Message processing
+## 消息处理
 
-For each incoming message, the node performs the following steps:
+对每条入站消息，节点执行以下步骤：
 
 1. If **Force acknowledgement** is enabled, the incoming message is acknowledged immediately and a copy is created.
 2. The node processes the **Topic** pattern, replacing templates with values from the incoming message data and metadata to construct the final Azure IoT Hub topic.
@@ -263,32 +259,32 @@ For each incoming message, the node performs the following steps:
     - On success, the original message (or the message copy if force acknowledgement is enabled) is forwarded via the `Success` connection.
     - On failure, error details are added to the message metadata under the `error` key, and the message is forwarded via the `Failure` connection.
 
-## Rule node shutdown
+## 规则节点关闭
 
-When the rule node is shut down, it disconnects from Azure IoT Hub and releases all associated resources.
+规则节点关闭时会断开与 Azure IoT Hub 的连接并释放相关资源。
 
-Shutdown occurs in the following scenarios:
+关闭发生在以下场景：
 
-- **Rule node configuration is updated** – The node is destroyed and then re-initialized with the new configuration.
-- **Rule node is deleted** – The node is destroyed without re-initialization.
+- **Rule node configuration is updated** — 节点被销毁并使用新配置重新初始化。
+- **Rule node is deleted** — 节点被销毁且不重新初始化。
 
 {% capture shutdown_note %}
-**Note**: The shutdown process is not executed if the rule engine instance crashes or is forcibly terminated (e.g., SIGTERM, SIGKILL).
+**注意**：若规则引擎实例崩溃或被强制终止（如 SIGTERM、SIGKILL），不会执行关闭流程。
 {% endcapture %}
 {% include templates/info-banner.md content=shutdown_note %}
 
-## Outgoing message format
+## 出站消息格式
 
-**On success**:
+**成功时**：
 
-- The message is forwarded unchanged via the `Success` connection
+- 消息原样经 `Success` 连接转发
 
-**On failure**:
+**失败时**：
 
-- Error details are added to the message metadata under the `error` key in the format: `ExceptionClass: error message`
-- All other message properties remain unchanged
+- 在消息 metadata 的 `error` 键下添加错误详情，格式为：`ExceptionClass: error message`
+- 其他消息属性保持不变
 
-## Output connections
+## 输出连接
 
 - **Success**
     - The message was successfully published to Azure IoT Hub.
@@ -297,18 +293,17 @@ Shutdown occurs in the following scenarios:
     - The publish operation failed.
     - An unexpected error occurred during processing.
 
-## Examples
+## 示例
 
-### Example 1 — Publishing device telemetry to Azure IoT Hub using SAS token
+### 示例 1 — 使用 SAS 令牌向 Azure IoT Hub 发布设备 telemetry
 
-A temperature sensor sends telemetry data that needs to be forwarded to Azure IoT Hub. The device is registered in Azure IoT Hub and uses SAS token authentication. Force
-acknowledgement is disabled.
+温度传感器发送需转发到 Azure IoT Hub 的 telemetry 数据。设备已在 Azure IoT Hub 注册并使用 SAS 令牌认证。强制确认已禁用。
 
-**Incoming message**
+**入站消息**
 
-Originator: `DEVICE` (Temperature Sensor)
+Originator：`DEVICE`（Temperature Sensor）
 
-Metadata:
+Metadata：
 
 ```json
 {
@@ -328,7 +323,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -346,14 +341,13 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is the same as the incoming message. Since force acknowledgement is disabled, the original incoming message is passed to the next node after successful
-publish.
+出站消息与入站消息相同。因强制确认已禁用，发布成功后原始入站消息传递至下一节点。
 
-**Result**
+**结果**
 
-The node automatically:
+节点自动执行：
 
 1. Constructs the MQTT username: `my-company-hub.azure-devices.net/temp-sensor-001/?api-version=2020-09-30`
 2. Generates a SAS token from the provided SAS key

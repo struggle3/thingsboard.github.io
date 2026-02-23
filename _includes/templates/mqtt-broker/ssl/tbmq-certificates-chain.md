@@ -1,26 +1,26 @@
 
-#### Step 1. Prepare your server and client certificate chain
+#### 步骤 1. 准备服务器与 Client 证书链
 
-Follow the [MQTT over SSL](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/) guide to provision server certificate if you are hosting your own TBMQ instance.
+若自托管 TBMQ，请按 [MQTT over SSL](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/) 指南配置服务器证书。
 
-Once provisioned, you should prepare a CA root certificate in pem format. This certificate will be used by MQTT clients to validate the server certificate.
-Save the CA root certificate to your working directory as "**ca.pem**".
+配置完成后，准备 pem 格式的 CA root 证书。MQTT 客户端将使用该证书校验服务器证书。
+将 CA root 证书保存到工作目录，命名为 "**ca.pem**"。
 
-#### Step 2. Generate Client certificate chain
+#### Step 2. 生成 Client 证书链
 
-We should generate a certificate chain with **reasonable** Common Names (CNs). We will use the intermediate certificate to sign certificates for our devices.
-For example, the certificate chain CNs might be the following: 
+需生成具有合理 Common Names (CN) 的证书链。将使用中间证书为设备签发证书。
+例如，证书链 CN 可如下：
 
- * Root certificate CN: company-name.com;
- * Intermediate certificate: device-group-name.company-name.com;
- * Device certificate: device-name.device-group-name.company-name.com;
+ * Root 证书 CN: company-name.com；
+ * Intermediate 证书: device-group-name.company-name.com；
+ * Device 证书: device-name.device-group-name.company-name.com；
 
-Use the following commands to generate the self-signed private keys, certificate signing requests, and x509 certificates
-for each chain level. The commands are based on the **OpenSSL** tool, which is most likely already installed on your workstation:
+使用以下命令为各级链生成自签名私钥、证书签发请求和 x509 证书。
+命令基于 **OpenSSL** 工具，工作机通常已安装：
 
-**Step 2.1** Generate root certificate 
+**步骤 2.1** 生成 root 证书 
 
-Generate the Root certificate and private key, use the following command. Don't forget to put the correct CN when prompted:
+生成 Root 证书和私钥，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl req -x509 -newkey rsa:4096 -keyout rootKey.pem -out rootCert.pem -sha256 -days 365 -nodes
@@ -29,7 +29,7 @@ openssl req -x509 -newkey rsa:4096 -keyout rootKey.pem -out rootCert.pem -sha256
 
 <details>
 <summary>
-Sample output, referencing *company.com* as CN
+示例输出，CN 为 *company.com*
 </summary>
 {% highlight text %}
 Generating a RSA private key
@@ -53,9 +53,9 @@ Email Address []:
 </details>
 <br>
 
-**Step 2.2** Generate intermediate certificate 
+**步骤 2.2** 生成 intermediate 证书 
 
-To generate the intermediate key and certificate request, use the following command. Don't forget to put the correct CN when prompted:
+生成 intermediate 密钥和证书请求，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl req -new -newkey rsa:4096 -keyout intermediateKey.pem -out intermediate.csr -sha256 -nodes
@@ -64,7 +64,7 @@ openssl req -new -newkey rsa:4096 -keyout intermediateKey.pem -out intermediate.
 
 <details>
 <summary>
-Sample output, referencing *group.company.com* as CN
+示例输出，CN 为 *group.company.com*
 </summary>
 {% highlight text %}
 Generating a RSA private key
@@ -93,7 +93,7 @@ An optional company name []:
 </details>
 <br>
 
-To generate the intermediate certificate, use the following command.
+生成 intermediate 证书，使用以下命令：
 
 ```bash
 openssl x509 -req -in intermediate.csr -out intermediateCert.pem -CA rootCert.pem -CAkey rootKey.pem -days 365 -sha256 -CAcreateserial -extfile <(echo "basicConstraints=CA:TRUE,pathlen:0")
@@ -102,7 +102,7 @@ openssl x509 -req -in intermediate.csr -out intermediateCert.pem -CA rootCert.pe
 
 <details>
 <summary>
-Sample output
+示例输出
 </summary>
 {% highlight text %}
 Signature ok
@@ -112,9 +112,9 @@ Getting CA Private Key
 </details>
 <br>
 
-**Step 2.3** Generate device certificate 
+**步骤 2.3** 生成 device 证书 
 
-To generate the device key and certificate request, use the following command. Don't forget to put the correct CN when prompted:
+生成 device 密钥和证书请求，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl req -new -newkey rsa:4096 -keyout deviceKey.pem -out device.csr -sha256 -nodes
@@ -123,7 +123,7 @@ openssl req -new -newkey rsa:4096 -keyout deviceKey.pem -out device.csr -sha256 
 
 <details>
 <summary>
-Sample output, referencing <i>device123.group.company.com</i> as CN
+示例输出，CN 为 <i>device123.group.company.com</i>
 </summary>
 {% highlight text %}
 Generating a RSA private key
@@ -152,7 +152,7 @@ An optional company name []:
 </details>
 <br>
 
-To generate the device certificate, use the following command.
+生成 device 证书，使用以下命令：
 
 ```bash
 openssl x509 -req -in device.csr -out deviceCert.pem -CA intermediateCert.pem -CAkey intermediateKey.pem -days 365 -sha256 -CAcreateserial
@@ -161,7 +161,7 @@ openssl x509 -req -in device.csr -out deviceCert.pem -CA intermediateCert.pem -C
 
 <details>
 <summary>
-Sample output
+示例输出
 </summary>
 {% highlight text %}
 Signature ok
@@ -171,33 +171,32 @@ Getting CA Private Key
 </details>
 <br>
 
-Finally, you need to concatenate certificates into a chain starting from the device certificate till the root.
+最后，需将证书自 device 证书至 root 依次拼接为链：
 
 ```bash
 cat deviceCert.pem intermediateCert.pem rootCert.pem > chain.pem
 ```
 {: .copy-code}
 
-The output of the commands will be private keys and certificates for each level of chain. In the next steps
-we will use device key file *deviceKey.pem* and a chain of certificates *chain.pem*.
+命令将输出各级链的私钥和证书。后续步骤将使用 device 私钥文件 *deviceKey.pem* 和证书链 *chain.pem*。
 
-#### Step 3. Provision Intermediate Public Key in MQTT Client Credentials
+#### 步骤 3. 在 MQTT Client Credentials 中配置 Intermediate 公钥
 
-Go to **TBMQ Web UI -> Authentication -> Credentials -> Create new or update exising one**.
-Select **X.509 Certificate Chain** type, insert the CN of *intermediateCert.pem* file.
+进入 **TBMQ Web UI -> Authentication -> Credentials -> Create new or update exising one**。
+选择 **X.509 Certificate Chain** 类型，粘贴 *intermediateCert.pem* 的 CN。
 
-#### Step 4. Trust the certificate
+#### 步骤 4. 信任证书
 
-For the MQTT client to establish a secure TLS connection, the CA (Certificate Authority) that signed its certificate must be trusted.
-If the certificate is issued by a well-known public CA, it is already trusted by default.
-If both TBMQ and the clients use certificates issued by the same CA, no additional configuration is required.
-If it is another private or internal CA, you must add the CA certificate (`rootCert.pem`) to the Java truststore used by TBMQ.
+MQTT 客户端建立安全 TLS 连接前，签发其证书的 CA (Certificate Authority) 必须被信任。
+若证书由知名公共 CA 签发，默认已受信任。
+若 TBMQ 与 clients 均使用同一 CA 签发的证书，无需额外配置。
+若为其他私有或内部 CA，需将 CA 证书 (`rootCert.pem`) 添加到 TBMQ 使用的 Java truststore。
 
-Run the [following command](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/#adding-certificate-into-java-truststore) to import the CA certificate into the truststore.
+执行[以下命令](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/#adding-certificate-into-java-truststore)将 CA 证书导入 truststore。
 
-#### Step 5. Test the connection
+#### 步骤 5. 测试连接
 
-Execute the following command to upload temperature readings to TBMQ using secure channel:
+执行以下命令，通过安全通道向 TBMQ 上报温度数据：
 
 ```bash
 mosquitto_pub --cafile ca.pem -d -q 1 -h "YOUR_TBMQ_HOST" -p "8883" \
@@ -205,7 +204,7 @@ mosquitto_pub --cafile ca.pem -d -q 1 -h "YOUR_TBMQ_HOST" -p "8883" \
 ```
 {: .copy-code}
 
-Similar command for the [self-signed](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/#self-signed-certificates-generation) server certificate:
+[自签名](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/#self-signed-certificates-generation) 服务器证书的类似命令：
 
 ```bash
 mosquitto_pub --insecure --cafile server.pem -d -q 1 -h "YOUR_TBMQ_HOST" -p "8883" \
@@ -213,4 +212,4 @@ mosquitto_pub --insecure --cafile server.pem -d -q 1 -h "YOUR_TBMQ_HOST" -p "888
 ```
 {: .copy-code}
 
-Don't forget to replace **YOUR_TBMQ_HOST** with the host of your TBMQ instance.
+请将 **YOUR_TBMQ_HOST** 替换为您的 TBMQ 实例 host。

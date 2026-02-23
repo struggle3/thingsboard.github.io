@@ -1,73 +1,73 @@
 * TOC
 {:toc}
 
-TBMQ provides flexible configuration options for its listeners, supporting TCP, SSL/TLS, and MQTT over WebSockets protocols.
+TBMQ 为监听器提供灵活配置选项，支持 TCP、SSL/TLS 和 MQTT over WebSockets 协议。
 
 ### TCP Listener
 
-By default, TBMQ has the TCP listener enabled on port `1883`.
-However, if you wish to disable the TCP listener, you can set the `LISTENER_TCP_ENABLED` environment variable to `false`.
+默认情况下，TBMQ 在端口 `1883` 启用 TCP 监听器。
+若需禁用 TCP 监听器，可将 `LISTENER_TCP_ENABLED` 环境变量设为 `false`。
 
-Furthermore, if you need to change the host address that the broker is binding to or the port it is listening to, 
-you can modify the `LISTENER_TCP_BIND_ADDRESS` and `LISTENER_TCP_BIND_PORT` variables, respectively. 
-This gives you the flexibility to configure the broker to listen on a specific network interface and port of your choice.
+此外，若需修改 broker 绑定的主机地址或监听端口，
+可分别修改 `LISTENER_TCP_BIND_ADDRESS` 和 `LISTENER_TCP_BIND_PORT` 变量。
+这可灵活配置 broker 在指定网络接口和端口上监听。
 
-By adjusting these environment variables, you can customize the TCP listening behavior of TBMQ to suit your specific requirements.
+通过调整这些环境变量，可根据需求自定义 TBMQ 的 TCP 监听行为。
 
 ### TLS Listener
 
-To enable the SSL/TLS listener, set the `LISTENER_SSL_ENABLED` environment variable to `true`. By default, the broker is listening on the `8883` port.
-To change the host and/or port that the broker is listening to, update the `LISTENER_SSL_BIND_ADDRESS` and `LISTENER_SSL_BIND_PORT` variables, respectively.
+启用 SSL/TLS 监听器：将 `LISTENER_SSL_ENABLED` 环境变量设为 `true`。默认 broker 在 `8883` 端口监听。
+修改 broker 监听的主机和/或端口：分别更新 `LISTENER_SSL_BIND_ADDRESS` 和 `LISTENER_SSL_BIND_PORT` 变量。
 
-Choose the type of credentials you want to use by setting the `LISTENER_SSL_CREDENTIALS_TYPE` parameter. Currently, the supported options are `PEM` and `KEYSTORE`.
-Note that you can find a list of all available properties in the [configuration documentation](/docs/{{docsPrefix}}mqtt-broker/install/config/).
+通过设置 `LISTENER_SSL_CREDENTIALS_TYPE` 参数选择凭据类型。当前支持 `PEM` 和 `KEYSTORE`。
+所有可用属性列表见[配置文档](/docs/{{docsPrefix}}mqtt-broker/install/config/)。
 
-If you choose KeyStore as the credentials type, you need to configure the following:
-- Set `LISTENER_SSL_KEY_STORE` variable to the path to your `.jks` file with the server certificate chain.
-- Set `LISTENER_SSL_KEY_STORE_PASSWORD` variable to the password used to access the key store.
-- Set `LISTENER_SSL_KEY_PASSWORD` variable to the password for the server certificate.
+若选择 KeyStore 作为凭据类型，需配置：
+- 将 `LISTENER_SSL_KEY_STORE` 变量设为包含服务器证书链的 `.jks` 文件路径。
+- 将 `LISTENER_SSL_KEY_STORE_PASSWORD` 变量设为访问密钥库的密码。
+- 将 `LISTENER_SSL_KEY_PASSWORD` 变量设为服务器证书的密码。
 
-If you choose Pem as the credentials type, you need to configure the following:
-- Set `LISTENER_SSL_PEM_CERT` variable to the path of your server certificate file.
-- Set `LISTENER_SSL_PEM_KEY` variable to the path of your server certificate private key file.
-- Set `LISTENER_SSL_PEM_KEY_PASSWORD` variable to the password of your server certificate private key.
+若选择 Pem 作为凭据类型，需配置：
+- 将 `LISTENER_SSL_PEM_CERT` 变量设为服务器证书文件路径。
+- 将 `LISTENER_SSL_PEM_KEY` 变量设为服务器证书私钥文件路径。
+- 将 `LISTENER_SSL_PEM_KEY_PASSWORD` 变量设为服务器证书私钥的密码。
 
-If you require two-way TLS, you also need to configure the TrustStore by adding the trusted certificates/chains to the configured KeyStore/PEM files.
-For more information about configuration possibilities and certificate generation, please review the following security [pages](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/).
+若需双向 TLS，还需通过向已配置的 KeyStore/PEM 文件添加受信任证书/链来配置 TrustStore。
+有关配置可能性和证书生成的更多信息，请参阅以下 security [页面](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/)。
 
 ### WS Listener
 
-By default, TBMQ has the WebSocket listener enabled on port `8084`.
-However, in case you want to disable the WS listener, you can set the `LISTENER_WS_ENABLED` environment variable to `false`.
+默认情况下，TBMQ 在端口 `8084` 启用 WebSocket 监听器。
+若需禁用 WS 监听器，可将 `LISTENER_WS_ENABLED` 环境变量设为 `false`。
 
-Additionally, if you need to change the host address that the broker is binding to or the port it is listening to,
-you can modify the `LISTENER_WS_BIND_ADDRESS` and `LISTENER_WS_BIND_PORT` variables, respectively.
+此外，若需修改 broker 绑定的主机地址或监听端口，
+可分别修改 `LISTENER_WS_BIND_ADDRESS` 和 `LISTENER_WS_BIND_PORT` 变量。
 
-WS listener is configured to negotiate via all MQTT versions by default, i.e. `WS_NETTY_SUB_PROTOCOLS` is set to `mqttv3.1,mqtt`.
-The subprotocol setting `mqtt` represents MQTT 3.1.1 and MQTT 5.
+WS 监听器默认配置为协商所有 MQTT 版本，即 `WS_NETTY_SUB_PROTOCOLS` 设为 `mqttv3.1,mqtt`。
+子协议设置 `mqtt` 表示 MQTT 3.1.1 和 MQTT 5。
 
 ### WSS Listener
 
-To enable the WebSocket Secure listener, set the `LISTENER_WSS_ENABLED` environment variable to `true`. By default, the broker is listening on the `8085` port.
-To change the host and/or port that the broker is listening to, update the `LISTENER_WSS_BIND_ADDRESS` and `LISTENER_WSS_BIND_PORT` variables, respectively.
+启用 WebSocket Secure 监听器：将 `LISTENER_WSS_ENABLED` 环境变量设为 `true`。默认 broker 在 `8085` 端口监听。
+修改 broker 监听的主机和/或端口：分别更新 `LISTENER_WSS_BIND_ADDRESS` 和 `LISTENER_WSS_BIND_PORT` 变量。
 
-Choose the type of credentials you want to use by setting the `LISTENER_WSS_CREDENTIALS_TYPE` parameter. 
-Supported options are the same as for [TLS](#tls-listener) listener.
+通过设置 `LISTENER_WSS_CREDENTIALS_TYPE` 参数选择凭据类型。
+支持选项与 [TLS](#tls-listener) 监听器相同。
 
-If you choose KeyStore as the credentials type, you need to configure the following:
-- Set `LISTENER_WSS_KEY_STORE` variable to the path to your `.jks` file with the server certificate chain.
-- Set `LISTENER_WSS_KEY_STORE_PASSWORD` variable to the password used to access the key store.
-- Set `LISTENER_WSS_KEY_PASSWORD` variable to the password for the server certificate.
+若选择 KeyStore 作为凭据类型，需配置：
+- 将 `LISTENER_WSS_KEY_STORE` 变量设为包含服务器证书链的 `.jks` 文件路径。
+- 将 `LISTENER_WSS_KEY_STORE_PASSWORD` 变量设为访问密钥库的密码。
+- 将 `LISTENER_WSS_KEY_PASSWORD` 变量设为服务器证书的密码。
 
-If you choose Pem as the credentials type, you need to configure the following:
-- Set `LISTENER_WSS_PEM_CERT` variable to the path of your server certificate file.
-- Set `LISTENER_WSS_PEM_KEY` variable to the path of your server certificate private key file.
-- Set `LISTENER_WSS_PEM_KEY_PASSWORD` variable to the password of your server certificate private key.
+若选择 Pem 作为凭据类型，需配置：
+- 将 `LISTENER_WSS_PEM_CERT` 变量设为服务器证书文件路径。
+- 将 `LISTENER_WSS_PEM_KEY` 变量设为服务器证书私钥文件路径。
+- 将 `LISTENER_WSS_PEM_KEY_PASSWORD` 变量设为服务器证书私钥的密码。
 
-Do not forget to configure the TrustStore by adding the trusted certificates/chains if you require two-way TLS.
-WSS listener is set to the same negotiation subprotocols as [WS](#ws-listener) listener. If you need to change this default behavior, update `WSS_NETTY_SUB_PROTOCOLS` parameter appropriately.
+若需双向 TLS，请勿忘记配置 TrustStore，添加受信任证书/链。
+WSS 监听器与 [WS](#ws-listener) 监听器使用相同的协商子协议。若需修改此默认行为，请适当更新 `WSS_NETTY_SUB_PROTOCOLS` 参数。
 
 ### Next steps
 
-- [**Connectivity settings**](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/settings/#connectivity) - Learn how to configure hosts and ports in the TBMQ UI for use in different protocol-based features.
+- [**Connectivity settings**](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/settings/#connectivity) - 了解如何为基于不同协议的功能在 TBMQ UI 中配置 hosts 和 ports。
 {% assign currentGuide = "SecurityGuide" %}{% include templates/mqtt-broker-guides-banner.md %}

@@ -1,9 +1,9 @@
 {% capture products_compatibility %}
-**Compatibility check before upgrading**
+**升级前兼容性检查**
 
-If you are using Edge together with ThingsBoard, verify that your target ThingsBoard version is compatible with the currently installed Edge version. Upgrade it if required to ensure compatibility.
+若同时使用 Edge 与 ThingsBoard，请确认目标 ThingsBoard 版本与当前安装的 Edge 版本兼容。如需确保兼容性，请进行升级。
 
-- **Edge:** [Releases table](/docs/edge/releases/releases-table/)  
+- **Edge：** [发布版本表](/docs/edge/releases/releases-table/)  
 
 {% endcapture %}
 {% include templates/warn-banner.md content=products_compatibility %}

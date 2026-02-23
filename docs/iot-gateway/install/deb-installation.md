@@ -1,48 +1,49 @@
 ---
 layout: docwithnav-gw
-title: Install ThingsBoard IoT Gateway as package.
+title: 以软件包方式安装 ThingsBoard IoT Gateway
+description: 在 Ubuntu 22.04 LTS / 24.04 LTS 上安装 ThingsBoard IoT Gateway
 redirect_from: 
  - "/docs/iot-gateway/install/rpi/"
 ---
 
-This guide will help you to install ThingsBoard IoT Gateway on Ubuntu 22.04 LTS / 24.04 LTS.
+本指南介绍如何在 Ubuntu 22.04 LTS / 24.04 LTS 上安装 ThingsBoard IoT Gateway。
 
-## Prerequisites
+## 前置条件
 
-- The minimum system requirements match official [minimum requirements](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html#system-requirements) for the OS; 
-- Install [Python](https://www.python.org){:target="_blank"} version 3.7 or higher.
+- 系统最低要求符合该 OS 的官方[最低要求](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html#system-requirements)； 
+- 安装 [Python](https://www.python.org){:target="_blank"} 3.7 或更高版本。
 
-## Step 1. Download the deb file
+## 步骤 1：下载 deb 文件
 
-Download installation package.
+下载安装包。
 
 ```bash
 wget https://github.com/thingsboard/thingsboard-gateway/releases/latest/download/python3-thingsboard-gateway.deb
 ```
 {: .copy-code}
 
-## Step 2. Install the gateway using apt
+## 步骤 2：使用 apt 安装网关
 
-Install ThingsBoard IoT Gateway as package and run it as daemon uses the following command:<br><br>
+以软件包方式安装 ThingsBoard IoT Gateway 并作为 daemon 运行，执行以下命令：<br><br>
 
 ```bash
 sudo apt install ./python3-thingsboard-gateway.deb -y
 ```
 {: .copy-code}
 
-The deb package will automatically install the necessary libraries for the IOT Gateway to work:  
+deb 包将自动安装 IoT Gateway 所需的库：  
 
-1. System libraries: *libffi-dev, libglib2.0-dev, libxml2-dev, libxslt-dev, libssl-dev, zlib1g-dev, python3-dev, python3-pip*.  
-2. Python modules: *importlib, importlib-metadata, jsonschema, pymodbus, lxml, jsonpath-rw, paho-mqtt, pyserial, PyYAML, simplejson, pyrsistent*.  
+1. 系统库：*libffi-dev, libglib2.0-dev, libxml2-dev, libxslt-dev, libssl-dev, zlib1g-dev, python3-dev, python3-pip*。  
+2. Python 模块：*importlib, importlib-metadata, jsonschema, pymodbus, lxml, jsonpath-rw, paho-mqtt, pyserial, PyYAML, simplejson, pyrsistent*。  
 
-## Step 3. Check gateway status 
+## 步骤 3：检查网关状态 
 
 ```bash
 systemctl status thingsboard-gateway
 ```
 {: .copy-code}
 
-You may notice some errors in the output. However, it is expected, since gateway is not configured to connect to ThingsBoard yet:
+输出中可能出现报错，属正常现象，因网关尚未配置连接 ThingsBoard：
 
 ```text
 ... python3[7563]: ''2019-12-26 09:31:15' - ERROR - mqtt_connector - 181 - Default Broker connection FAIL with error 5 not authorised!'
@@ -51,38 +52,33 @@ You may notice some errors in the output. However, it is expected, since gateway
 ... python3[7563]: ''2019-12-26 09:31:17' - DEBUG - tb_client - 78 - connecting to ThingsBoard'
 ```
 
-## Step 4. Configure the gateway 
+## 步骤 4：配置网关
 
-Now you can go to [**configuration guide**](/docs/iot-gateway/configuration/) to configure the gateway. In order for the changes to be saved, we need to restart the gateway.
+参考 [**配置指南**](/docs/iot-gateway/configuration/) 配置网关。配置生效需重启网关。
 
 ```bash
 systemctl restart thingsboard-gateway
 ```
 {: .copy-code}
 
-## Offline Build Version
+## 离线构建版本
 
-The Offline Build is a special variant of the ThingsBoard Gateway package designed for installation and execution without 
-internet access. Also, the offline build allows you to use any connector without installing dependencies in runtime. 
-It contains all necessary dependencies bundled in advance, including:
-- A prebuilt Python virtual environment.
-- All required Python packages.
-- The application wheel (`.whl`).
+离线构建是 ThingsBoard Gateway 软件包的特殊变体，专为无互联网环境下的安装与运行设计。离线构建无需在运行时安装依赖即可使用任意 connector，已预打包全部依赖，包括：
+- 预构建的 Python 虚拟环境。
+- 所有必需的 Python 包。
+- 应用 wheel（`.whl`）。
 
-This ensures seamless deployment in air-gapped, offline, or restricted-network environments.
+适用于隔离、离线或受限网络环境下的部署。
 
-### Example of usage
+### 使用场景示例
 
-A company runs all their infrastructure inside a private datacenter. Their ThingsBoard Gateway needs to connect to 
-OPC-UA and MQTT sources inside the network but cannot access the internet due to strict firewall rules.
+某公司全部基础设施部署在私有数据中心。其 ThingsBoard Gateway 需连接网络内的 OPC-UA 和 MQTT 源，但因严格防火墙规则无法访问互联网。
 
-### Prerequisites
+### 前置条件
 
-The Offline Build requires the same prerequisites as the standard package installation, and also it's important to have 
-installed **Python 3.11**. If a Python version is incompatible, the installation gracefully exits with instructions 
-for installing the correct Python version.
+离线构建需满足与标准包安装相同的前置条件，且需安装 **Python 3.11**。若 Python 版本不兼容，安装程序会退出并提示如何安装正确版本。
 
-For installing a right Python version, you can use the following commands:
+安装正确 Python 版本可执行：
 
 ```bash
 sudo add-apt-repository ppa:deadsnakes/ppa -y
@@ -91,45 +87,45 @@ sudo apt-get install -y python3.11 python3.11-venv
 ```
 {: .copy-code}
 
-### Installation
+### 安装
 
-#### Step 1. Download the deb file
+#### 步骤 1：下载 deb 文件
 
-Download installation package.
+下载安装包。
 
 ```bash
 wget https://github.com/thingsboard/thingsboard-gateway/releases/latest/download/python3.11-thingsboard-gateway-offline.deb
 ```
 {: .copy-code}
 
-#### Step 2. Install the gateway using apt
+#### 步骤 2：使用 apt 安装网关
 
-Install ThingsBoard IoT Gateway as package and run it as daemon uses the following command:<br><br>
+以软件包方式安装 ThingsBoard IoT Gateway 并作为 daemon 运行，执行以下命令：<br><br>
 
 ```bash
 sudo apt install ./python3.11-thingsboard-gateway-offline.deb -y
 ```
 {: .copy-code}
 
-#### Step 3. Check gateway status 
+#### 步骤 3：检查网关状态 
 
 ```bash
 systemctl status thingsboard-gateway
 ```
 {: .copy-code}
 
-### Troubleshooting
+### 故障排查
 
-- **Wrong Python version**
+- **Python 版本错误**
 
-  The installer will show a detailed guide for installing the required version.
-- **Need to remove installed ThingsBoard IoT Gateway after fixing Python**
+  安装程序会提示如何安装所需版本的详细说明。
+- **修复 Python 后需卸载已安装的 ThingsBoard IoT Gateway**
 
-  When the required Python version is installed, remove the previously installed Gateway package using:
+  安装正确 Python 版本后，使用以下命令卸载之前安装的 Gateway 包：
 
   ```bash
   sudo dpkg --purge python3-thingsboard-gateway
   ```
   {: .copy-code}
 
-  Then, you can install the Offline Build package as described above.
+  然后按上文所述安装离线构建包。

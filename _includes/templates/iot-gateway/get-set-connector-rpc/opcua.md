@@ -1,6 +1,5 @@
-Every telemetry and attribute parameter has **GET** and **SET** RPC methods out of the box, so you don't need to configure
-them manually.
-For example, if you have a telemetry parameter:
+每个遥测和属性参数开箱即用 **GET** 和 **SET** RPC 方法，无需手动配置。
+例如，若有如下遥测参数：
 ```json
 "timeseries": [
   {
@@ -10,19 +9,19 @@ For example, if you have a telemetry parameter:
 ]
 ```
 
-To get the current value of temperature telemetry, run the query:
+要获取温度遥测的当前值，请运行以下查询：
 
 ```bash
 get ns=3;i=1001;
 ```
 {: .copy-code}
 
-Response:
+响应：
 ```json
 {"result":  25.34}
 ```
 
-To set temperature telemetry value, run the query:
+要设置温度遥测值，请运行以下查询：
 
 ```bash
 set ns=3;i=1001; 23
@@ -33,14 +32,14 @@ set ns=3;i=1001; 23
 ![image](/images/gateway/gateway-opc-ua-rpc-1.png)
 {: refdef}
 <br>
-To set new value (T3000) for **"model"** attribute, run this query:
+要为 **"model"** 属性设置新值（T3000），请运行以下查询：
 
 ```bash
 set ns=3;i=1008; T3000;
 ```
 {: .copy-code}
 
-Response:
+响应：
 ```json
 {"success":"true","code": 200}
 ```

@@ -2,73 +2,73 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: View Collections
-description: View Collections 
+title: 视图集合
+description: 视图集合说明 
 ---
 
 * TOC
 {:toc}
 
-Collections are individual folders designed to enhance navigation and restrict access rights and  visibility among users of different ranks, providing a more convenient way to organize and manage views.
+Collections是独立文件夹，用于改善导航、按用户等级限制访问和可见性，提供更便捷的视图组织和管理方式。
 
 ## Collections types
 
-* **Your collections (root)** : This is the default common folder that is consistently available for all users and cannot be deleted. It serves as the root directory for creating all other subcollections.
-* **Subcollections** : These are all the folders that have been created within the root collection. Subcollections can be nested inside one another without any limitation on the level of nesting.
-* **Favourites** : These are lists of frequently used views that you have personally selected to facilitate faster access. To choose a collection, all you need to do is click on the star icon located in the views table.
+* **Your collections (root)**：默认公共文件夹，对所有用户始终可用且不可删除。作为创建所有其他子collections的根目录。
+* **Subcollections**：在root collection内创建的所有文件夹。Subcollections可相互嵌套，嵌套层数不限。
+* **Favourites**：您个人收藏的常用视图列表，便于快速访问。选择collection只需点击视图表中的星标图标。
 
 ![image](/images/trendz/view_collections_1.png)
 
 ## Permissions and Visibility between users
-There are three types of permissions on collections and visualization:
+Collections和可视化有三种权限类型：
 
-* **Full permissions (read, write, and run)** : This means the user can make changes to the visualization or collection (save it). Only the owner (creator) has full rights, meaning that even a tenant cannot modify visualizations created by other users (customers, subcostomers or users).
-* ** Limited permissions (read and run)**: In this case, the user can view and interact with the visualization or collection, but cannot save any changes. Limited rights are granted to users with higher rank who are not the owners. In other words, the tenant, for example, can view all the visualizations created by customers, utilize them, and customize them, but he is unable to save any changes. This restriction also applies to collections.
-* **No permissions** : The user will not see the visualization within their collections. Users of the same rank have limited visibility rights, ensuring privacy and data separation. For example, a customer will not have access to the folders and visualizations of another customer, a subcustomer will not have access to another subcustomer's data, and a user will not have access to other users' data.
+* **Full permissions (read, write, and run)**：用户可修改可视化或collection（保存）。仅创建者拥有完整权限，即tenant也无法修改其他用户（customers、subcostomers或users）创建的可视化。
+* ** Limited permissions (read and run)**：用户可查看并交互使用可视化或collection，但无法保存任何修改。此权限授予非创建者的更高级别用户。例如tenant可查看customers创建的所有可视化、使用和 customize，但无法保存修改。该限制同样适用于collections。
+* **No permissions**：用户在其collections中看不到该可视化。同级别用户 visibility 受限，确保隐私和数据隔离。例如customer无法访问另一customer的文件夹和可视化，subcustomer无法访问另一subcustomer的数据，user无法访问其他user的数据。
 
-To view the collections and visualizations of users of a lower rank, you can enable this option by clicking on the "Show subcustomers collections and views" button.
+要查看低级别用户的collections和可视化，可点击"Show subcustomers collections and views"按钮启用。
 
 ![image](/images/trendz/view_collections_2.png)
 
-**The outcome is as follows:**
-Users of a higher rank have access to view all collections and visualizations of lower-ranked users, but only the user who created the visualization or collection can save changes.
-Users with the same rank cannot see each other's collections or visualizations.
+**结果如下：**
+更高级别用户可查看所有低级别用户的collections和可视化，但仅创建者可保存修改。
+同级别用户彼此不可见collections和可视化。
 
 ## Collection and view management
 
 ### Creation
-A new collection is created by pressing the "Add new" button on the previously created collection, within which the new one will appear.
+在已有collection上点击"Add new"按钮即可创建新collection，新collection将出现在其下。
 
 ![image](/images/trendz/view_collections_3.png)
 
-When creating a new visualization, it is not automatically associated with any collection until it is saved. During the initial save process, you will be prompted to choose the collection in which you want to save the visualization.
+创建新可视化时不会自动关联任何collection，直至保存。首次保存时会提示选择要保存到的collection。
 
 ![image](/images/trendz/view_collections_4.png)
 
 ### Sorting
-Collections can be sorted either by name or by date. By default, the sorting is based on the collection names. 
-To switch to sorting by date, simply click on the "Sort by date" button located next to the name of the root collection. 
-The sort order is not preserved. After reloading the page, it will be changed back to default.
+Collections可按名称或日期排序。默认按collection名称。
+切换为按日期排序：点击root collection旁的"Sort by date"按钮。
+排序顺序不持久，刷新页面后恢复默认。
 
 ![image](/images/trendz/view_collections_5.png)
 
 ### Editing
-A previously created collection (except for the root one) can be renamed. To do this, click on the "Change name" button.
+已创建的collection（除root外）可重命名。点击"Change name"按钮。
 
 ![image](/images/trendz/view_collections_6.png)
 
-You can perform various actions on a visualization, such as renaming it, moving it to another collection, or making a copy of it. 
-These options, along with the deletion feature, are accessible through a menu. To access the menu, click on the button with three dots located in the visualization table.
+可对可视化执行重命名、移到其他collection、复制等操作。
+这些选项及删除功能通过菜单访问。点击可视化表中三圆点按钮打开菜单。
 
 ![image](/images/trendz/view_collections_7.png)
 
-Additionally, you have the option to perform bulk actions on multiple visualizations, such as moving them to another collection or deleting them.
+还可对多个可视化执行批量操作，如移到其他collection或删除。
 
 ![image](/images/trendz/view_collections_8.png)
 
 ### Deletion
-To ensure data integrity, it is not possible to delete a collection that still contains at least one visualization or non-empty subcollection. 
-In order to delete a collection, you must first remove or move all the visualizations within it to another collection.
+为保证数据完整性，包含至少一个可视化或非空subcollection的collection无法删除。
+要删除collection，必须先将其中所有可视化移除或移到其他collection。
 
 ![image](/images/trendz/view_collections_9.png)
 

@@ -21,53 +21,53 @@
 {%- assign platform_hash = "#upgrading-trendz-analytics-to-" -%}
 
 {% capture difference %}
-**NOTE:**
+**注意：**
 <br>
-[**Prepare**](#prepare-for-upgrading-trendz-analytics) for upgrading Trendz Analytics.
+升级 Trendz Analytics 前请先[**准备**](#prepare-for-upgrading-trendz-analytics)。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% capture tb_haproxy_note %}
-**NOTE:**
+**注意：**
 <br>
-If you are using Trendz behind **HAProxy**, make sure that the paths **`/trendz/`** and **`/apiTrendz/`** are routed to the Trendz backend instead of **`/trendz`** and **`/apiTrendz`**.
+若 Trendz 部署在 **HAProxy** 之后，请确保将 **`/trendz/`** 和 **`/apiTrendz/`** 路径路由到 Trendz 后端，而非 **`/trendz`** 和 **`/apiTrendz`**。
 <br>
-Additionally, we highly recommend adding Trendz to the **ThingsBoard HAProxy configuration** so that Trendz is accessible from the **same domain as ThingsBoard**.
+建议将 Trendz 加入 **ThingsBoard HAProxy 配置**，使 Trendz 可通过 **与 ThingsBoard 相同的域名**访问。
 {% endcapture %}
 {% include templates/warn-banner.md content=tb_haproxy_note %}
 
-#### Trendz Analytics package download
+#### 下载 Trendz Analytics 安装包
 
 ```bash
 wget https://dist.thingsboard.io/trendz-{{ current_version }}.deb
 ```
 {: .copy-code}
 
-#### Trendz Analytics service upgrade
+#### 升级 Trendz Analytics 服务
 
-* Install latest Trendz Analytics service 
+* 安装最新 Trendz Analytics 服务 
 
 ```bash
 sudo dpkg -i trendz-{{ current_version }}.deb
 ```
 {: .copy-code}
 
-**NOTE:** Package installer will ask you to merge your Trendz configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.
+**注意：** 安装包会询问是否合并 Trendz 配置，建议选择 **merge option** 以保留原有参数。
 
-Execute regular upgrade script:
+执行常规升级脚本：
 
 ```bash
 sudo /usr/share/trendz/bin/install/upgrade.sh
 ```
 {: .copy-code}
 
-#### Start the service
+#### 启动服务
 
 ```bash
 sudo service trendz start
 ```
 {: .copy-code}
 
-#### Sync Trendz with ThingsBoard
+#### 同步 Trendz 与 ThingsBoard
 
-After upgrade, it's necessary to sync Trendz with ThingsBoard. You can find out how to do it [here](/docs/trendz/install/ubuntu#step-6-sync-thingsboard-with-trendz).
+升级后需将 Trendz 与 ThingsBoard 同步。操作步骤见[此处](/docs/trendz/install/ubuntu#step-6-sync-thingsboard-with-trendz)。

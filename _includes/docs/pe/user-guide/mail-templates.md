@@ -3,32 +3,32 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-ThingsBoard uses mail templates to send email notifications to users when certain events occur.
-For example, a message about activating an account or resetting a password.
+ThingsBoard 使用邮件模板在特定事件发生时向用户发送邮件通知。
+例如，账户激活或密码重置的邮件。
 
 {% capture difference %}
-**NOTE**
+**注意**
 <br>
-To send messages via Email, a tenant administrator should be configured [outgoing mail server](/docs/user-guide/ui/mail-settings/).
+要通过 Email 发送消息，租户管理员需配置[发件服务器](/docs/user-guide/ui/mail-settings/)。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-ThingsBoard provides default system mail message templates with sample content, which can be customized individually from the list.
+ThingsBoard 提供带示例内容的默认系统邮件模板，可从列表中单独自定义。
 
-To do this, following steps:
- - Go to the "**White Labeling**" page -> "**Mail Templates**" tab;
+操作步骤：
+ - 前往「**白标**」页面 ->「**邮件模板**」选项卡；
 
 ![image](/images/user-guide/white-labeling/mail-templates-1.png)
 
- - Uncheck "**Use System Mail Templates**" box; 
- - Select **mail template** from the drop-down list, that you want to edit;
- - Edit **mail subject** and **mail body**; 
- - Save changes.
+ - 取消勾选「**使用系统邮件模板**」； 
+ - 从下拉列表选择要编辑的**邮件模板**；
+ - 编辑**邮件主题**和**邮件正文**； 
+ - 保存更改。
 
 ![image](/images/user-guide/white-labeling/mail-templates-2.png)
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}

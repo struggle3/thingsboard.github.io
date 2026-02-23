@@ -1,21 +1,21 @@
-You can detach from session terminal using `Ctrl-p` `Ctrl-q` key sequence - the container will keep running in the background.
+可使用 `Ctrl-p` `Ctrl-q` 组合键从终端会话中分离，容器将在后台继续运行。
 
-In case of any issues, you can examine service logs for errors.
-For example, to see Trendz container logs, execute the following command:
+若遇问题，可查看服务日志排查错误。
+例如，查看 Trendz 容器日志可执行：
 
 ```
 docker compose logs -f trendz
 ```
 {: .copy-code}
 
-To stop the container:
+停止容器：
 
 ```
 docker compose stop trendz
 ```
 {: .copy-code}
 
-To start the container:
+启动容器：
 
 ```
 docker compose start trendz

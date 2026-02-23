@@ -8,41 +8,41 @@
 * TOC
 {:toc}
 
-[CoAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol){:target="_blank"} is a lightweight, UDP-based protocol designed for constrained IoT devices.
-Although it follows a request–response model similar to HTTP, CoAP is optimized for low-power and low-bandwidth networks.   
-You can find more information about CoAP [here](https://tools.ietf.org/html/rfc7252){:target="_blank"}.
+[CoAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol){:target="_blank"}是一种面向受限物联网设备的轻量级、基于UDP的协议。
+虽采用类似HTTP的请求-响应模型，CoAP针对低功耗、低带宽网络进行了优化。   
+更多CoAP信息请见[此处](https://tools.ietf.org/html/rfc7252){:target="_blank"}。
 
-CoAP Observe [Option](https://tools.ietf.org/html/rfc7641){:target="_blank"} allows subscription to resources and receiving notifications on resource change.
+CoAP Observe [选项](https://tools.ietf.org/html/rfc7641){:target="_blank"}支持订阅资源并在资源变更时接收通知。
 
-ThingsBoard server nodes act as a CoAP Server that supports both regular and observe requests.
+ThingsBoard服务节点充当CoAP服务器，同时支持常规和Observe请求。
 
 <hr>
 
-## Client libraries setup
+## 客户端库配置
 
-Many CoAP client libraries are available for different platforms and languages.
+不同平台和语言有多种CoAP客户端库可用。
 
-The examples in this guide are based on [CoAP cli](https://www.npmjs.com/package/coap-cli){:target="_blank"}, a command-line CoAP client.
+本指南示例基于命令行CoAP客户端[CoAP cli](https://www.npmjs.com/package/coap-cli){:target="_blank"}。
 
-**Install CoAP CLI (Linux/macOS)**
+**安装CoAP CLI（Linux/macOS）**
 ```bash
 npm install coap-cli -g
 ```
 {: .copy-code}
 
 {% capture difference %}
-**Note**: CoAP CLI does not support query parameters. If your use case requires query parameters, use [coap-client](https://manpages.ubuntu.com/manpages/focal/man5/coap-client.5.html){:target="_blank"} instead.
+**注意**：CoAP CLI不支持查询参数。若需查询参数，请使用[coap-client](https://manpages.ubuntu.com/manpages/focal/man5/coap-client.5.html){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**Install coap-client**
+**安装coap-client**
 - **Ubuntu 20.04+** 
   ```bash
   sudo apt install libcoap2-bin
   ```
   {: .copy-code}
 
-- for **Ubuntu 18.04**
+- **Ubuntu 18.04** 
   ```bash
   sudo apt install libcoap1-bin
   ```
@@ -50,44 +50,44 @@ npm install coap-cli -g
 
 <hr>
 
-## Authentication methods
+## 认证方式
 
-ThingsBoard supports two authentication mechanisms to secure COAP connections.
+ThingsBoard支持两种认证方式以保护CoAP连接。
 
-**Supported methods**:
-- [Access token](/docs/{{docsPrefix}}user-guide/ssl/coap-access-token/){:target="_blank"}. Uses a unique device access token included as a path parameter in each CoAP request.
-- [X.509 certificates](/docs/{{docsPrefix}}user-guide/ssl/coap-x509-certificates/){:target="_blank"}. Uses digital certificates to authenticate devices and establish secure communication based on **public key infrastructure (PKI)**.
+**支持的方式**：
+- [Access token](/docs/{{docsPrefix}}user-guide/ssl/coap-access-token/){:target="_blank"}。每次CoAP请求的路径参数中包含唯一设备访问令牌。
+- [X.509 certificates](/docs/{{docsPrefix}}user-guide/ssl/coap-x509-certificates/){:target="_blank"}。使用数字证书认证设备，基于**公钥基础设施（PKI）**建立安全通信。
 
-> The examples in this guide use **access token–based authentication**.
+> 本指南示例采用**基于access token的认证**。
 
-**Possible error codes and their reasons:**
-- **4.00 Bad Request** - Invalid URL, parameters, or payload
-- **4.01 Unauthorized** - Invalid **access token**
-- **4.04 Not Found** - Requested resource does not exist
+**错误码及原因**：
+- **4.00 Bad Request** - URL、参数或载荷无效
+- **4.01 Unauthorized** - **access token**无效
+- **4.04 Not Found** - 请求的资源不存在
 
 <hr>
 
 {% include templates/api/key-value-format.md %}
 
-However, it is also possible to send data via [Protocol Buffers](https://developers.google.com/protocol-buffers){:target="_blank"}.
-Please refer to the [CoAP transport type](/docs/{{docsPrefix}}user-guide/device-profiles/#coap-transport-type){:target="_blank"} configuration section in device profile article for more details.
+也可通过[Protocol Buffers](https://developers.google.com/protocol-buffers){:target="_blank"}发送数据。
+详见设备配置文档中的[CoAP传输类型](/docs/{{docsPrefix}}user-guide/device-profiles/#coap-transport-type){:target="_blank"}配置章节。
 
-Using custom binary format or some serialization framework is also possible. See [protocol customization](#protocol-customization) for more details.
+也可使用自定义二进制格式或序列化框架。详见[协议自定义](#protocol-customization)。
 
 <hr>
 
-## Telemetry upload API
+## 遥测上传 API
 
-In order to publish telemetry data to ThingsBoard server node, send POST request.
+向ThingsBoard服务节点发布遥测数据时，发送POST请求。
 
-First, select the authentication method:
+首先选择认证方式：
 
 {% capture coapAuthenticationCredentials %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/telemetry-upload-api-access-token.md%br%
 X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/telemetry-upload-api-certificate.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="coapAuthenticationCredentials" toggle-spec=coapAuthenticationCredentials %}
 
-The simplest supported data formats are:
+支持的最简数据格式为：
 
 ```json
 {"key1":"value1", "key2":"value2"}
@@ -100,35 +100,35 @@ or
 ```
 
 {% capture difference %}
-**Please note** 
+**请注意** 
 <br>
-that in this case, the server-side timestamp will be assigned to uploaded data!
+在此情况下，将使用服务器端时间戳作为上传数据的时间戳！
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-In case your device is able to get the client-side timestamp, you can use following format:
+若设备能获取客户端时间戳，可使用以下格式：
 
 ```json
 {"ts":1451649600512, "values":{"key1":"value1", "key2":"value2"}}
 ```
 
-Where **1451649600512** is a [unix timestamp](https://en.wikipedia.org/wiki/Unix_time){:target="_blank"} with milliseconds precision. For example, the value '1451649600512' corresponds to 'Fri, 01 Jan 2016 12:00:00.512 GMT'.
+其中 **1451649600512** 为毫秒精度的[Unix时间戳](https://en.wikipedia.org/wiki/Unix_time){:target="_blank"}。例如 '1451649600512' 对应 'Fri, 01 Jan 2016 12:00:00.512 GMT'。
 
-<br><b><font size="3">Examples</font></b>   
-Below are examples of commands for publishing different types of telemetry data.
+<br><b><font size="3">示例</font></b>   
+以下为发布不同类型遥测数据的命令示例。
 
-> ⚠️ Don&#39;t forget to replace {% unless docsPrefix contains "paas/" %}   
-&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请勿忘记替换 {% unless docsPrefix contains "paas/" %}   
+&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 为您的ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}主机名或IP地址。   
+&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> 为您的设备访问令牌。
 
-**Example 1**.   
-Publish data as an object without timestamp (server-side timestamp will be used) using data from [telemetry-data-as-object.json](/docs/reference/resources/telemetry-data-as-object.json){:target="_blank" download="telemetry-data-as-object.json"} file.
+**示例1**。   
+以对象形式发布无时间戳数据（将使用服务器端时间戳），数据来自[telemetry-data-as-object.json](/docs/reference/resources/telemetry-data-as-object.json){:target="_blank" download="telemetry-data-as-object.json"}文件。
 
 {% capture tabspec %}coap-telemetry-upload
-A,Execute the command:,shell,resources/coap-telemetry.sh,/docs/reference/resources/coap-telemetry.sh{% endcapture %}
+A,执行命令：,shell,resources/coap-telemetry.sh,/docs/reference/resources/coap-telemetry.sh{% endcapture %}
 {% include tabs.html %}
 
-The content of the JSON file:
+JSON文件内容：
 
 ```json
 {
@@ -145,28 +145,28 @@ The content of the JSON file:
 ```
 {: .copy-code}
 
-**Example 2**.   
-Publish data as an array of objects without timestamp (server-side timestamp will be used) using data from [telemetry-data-as-array.json](/docs/reference/resources/telemetry-data-as-array.json){:target="_blank" download="telemetry-data-as-array.json"} file.
+**示例2**。   
+以对象数组形式发布无时间戳数据（将使用服务器端时间戳），数据来自[telemetry-data-as-array.json](/docs/reference/resources/telemetry-data-as-array.json){:target="_blank" download="telemetry-data-as-array.json"}文件。
 
 {% capture tabspec %}coap-telemetry-upload-data-as-array
-A,Execute the command:,shell,resources/coap-telemetry-data-as-array.sh,/docs/reference/resources/coap-telemetry-data-as-array.sh{% endcapture %}
+A,执行命令：,shell,resources/coap-telemetry-data-as-array.sh,/docs/reference/resources/coap-telemetry-data-as-array.sh{% endcapture %}
 {% include tabs.html %}
 
-The content of the JSON file:
+JSON文件内容：
 
 ```json
 [{"key1":"value1"}, {"key2":true}]
 ```
 {: .copy-code}
 
-**Example 3**.   
-Publish data as an object with timestamp (telemetry timestamp will be used) using data from [telemetry-data-with-ts.json](/docs/reference/resources/telemetry-data-with-ts.json){:target="_blank" download="telemetry-data-with-ts.json"} file.
+**示例3**。   
+以带时间戳的对象形式发布数据（将使用遥测时间戳），数据来自[telemetry-data-with-ts.json](/docs/reference/resources/telemetry-data-with-ts.json){:target="_blank" download="telemetry-data-with-ts.json"}文件。
 
 {% capture tabspec %}coap-telemetry-upload-data-with-ts
-A,Execute the command:,shell,resources/coap-telemetry-data-with-ts.sh,/docs/reference/resources/coap-telemetry-data-with-ts.sh{% endcapture %}
+A,执行命令：,shell,resources/coap-telemetry-data-with-ts.sh,/docs/reference/resources/coap-telemetry-data-with-ts.sh{% endcapture %}
 {% include tabs.html %}
 
-The content of the JSON file:
+JSON文件内容：
 
 ```json
 {
@@ -192,19 +192,19 @@ The content of the JSON file:
 
 ## Attributes API
 
-ThingsBoard attributes API allows devices to
+ThingsBoard属性API允许设备
 
-* Upload [client-side](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes to the server.
-* Request [client-side](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} and [shared](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes from the server.
-* Subscribe to [shared](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes from the server.
+* 将[客户端](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性上传至服务器。
+* 从服务器请求[客户端](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}和[共享](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
+* 订阅服务器的[共享](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
 
 <hr>
 
-### Publish attribute update to the server
+### 向服务器发布属性更新
 
-In order to publish client-side device attributes to ThingsBoard server node, send POST request.
+为将客户端设备属性发布至ThingsBoard服务节点，发送POST请求。
 
-First, select the authentication method:
+首先选择认证方式：
 
 {% capture coapPublishAttributeUpdate %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/publish-attribute-update-access-token.md%br%
@@ -213,45 +213,45 @@ X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/publish-attr
 
 <hr>
 
-### Request attribute values from the server
+### 从服务器请求属性值
 
-In order to request client-side or shared device attributes to ThingsBoard server node, send GET request.
+为从ThingsBoard服务节点请求客户端或共享设备属性，发送GET请求。
 
-First, select the authentication method:
+首先选择认证方式：
 
 {% capture coapRequestAttributeValues %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/request-attribute-values-access-token.md%br%
 X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/request-attribute-values-certificate.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="coapRequestAttributeValues" toggle-spec=coapRequestAttributeValues %}
 
-Result:
+结果：
 
 ```shell
 {"client":{"attribute1":"value1","attribute2":true}}
 ```
 
 {% capture difference %}
-**Please note:**
+**请注意：**
 <br>
-the intersection of client-side and shared device attribute keys is a bad practice! 
-However, it is still possible to have same keys for client, shared or even server-side attributes.
+客户端与共享设备属性键存在交集是不佳实践！ 
+但仍可为client、shared甚至server-side属性使用相同键。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 <hr>
 
-### Subscribe to attribute updates from the server
+### 订阅来自服务器的属性更新
 
-In order to subscribe to shared device attribute changes, send GET request with Observe option.
+为订阅共享设备属性变更，发送带Observe选项的GET请求。
 
-First, select the authentication method:
+首先选择认证方式：
 
 {% capture coapSubscribeToAttributeUpdates %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/subscribe-to-attribute-updates-access-token.md%br%
 X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/subscribe-to-attribute-updates-certificate.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="coapSubscribeToAttributeUpdates" toggle-spec=coapSubscribeToAttributeUpdates %}
 
-Result:
+结果：
 
 ```shell
 {"client":{"attribute1":"value1","attribute2":true}}
@@ -269,9 +269,9 @@ Result:
 
 ### Server-side RPC
 
-In order to subscribe to RPC commands from the server, send GET request with observe flag.
+为订阅来自服务器的RPC命令，发送带observe标志的GET请求。
 
-First, select the authentication method:
+首先选择认证方式：
 
 {% capture coapServerSideRPC %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/server-side-rpc-access-token.md%br%
@@ -282,9 +282,9 @@ X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/server-side-
 
 ### Client-side RPC
 
-In order to send RPC commands to the server, send POST request.
+为向服务器发送RPC命令，发送POST请求。
 
-First, select the authentication method:
+首先选择认证方式：
 
 {% capture coapClientSideRPC %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/client-side-rpc-access-token.md%br%
@@ -295,29 +295,29 @@ X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/client-side-
 
 ## Claiming devices
 
-The Device Claiming feature allows end users to securely associate a device with their account after the device has been deployed and connected to ThingsBoard.
-For a detailed explanation of the device claiming workflow and supported scenarios, refer to the {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[Claiming devices](/docs/{{docsPrefix}}user-guide/claiming-devices){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[Claiming devices](/docs/user-guide/claiming-devices){:target="_blank"}{% endif %} documentation.
+设备认领功能允许最终用户在设备部署并连接至ThingsBoard后，安全地将设备关联到其账户。
+设备认领流程及支持场景的详细说明请参见{% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[认领设备](/docs/{{docsPrefix}}user-guide/claiming-devices){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[认领设备](/docs/user-guide/claiming-devices){:target="_blank"}{% endif %}文档。
 
-In order to initiate claiming device, send POST request.
+为启动设备认领，发送POST请求。
 
-First, select the authentication method:
+首先选择认证方式：
 
 {% capture coapClaimingDevices %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/claiming-devices-access-token.md%br%
 X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/claiming-devices-certificate.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="coapClaimingDevices" toggle-spec=coapClaimingDevices %}
 
-The supported data format is:
+支持的数据格式为：
 
 ```json
 {"secretKey":"value", "durationMs":60000}
 ```
 
 {% capture difference %}
-**Please note** 
+**请注意** 
 <br>
-that the above fields are optional. In case the **secretKey** is not specified, the empty string as a default value is used.
-In case the **durationMs** is not specified, the system parameter **device.claim.duration** is used (in the file **/etc/thingsboard/conf/thingsboard.yml**).
+上述字段均为可选。**secretKey**未指定时，默认使用空字符串。
+**durationMs**未指定时，使用系统参数**device.claim.duration**（位于**/etc/thingsboard/conf/thingsboard.yml**）。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -325,11 +325,11 @@ In case the **durationMs** is not specified, the system parameter **device.claim
 
 ## Device provisioning
 
-Device provisioning allows devices to be registered dynamically without manual creation in the ThingsBoard UI.
-For a detailed explanation of the provisioning process and supported scenarios, refer to the {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[Device provisioning](/docs/{{docsPrefix}}user-guide/device-provisioning){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[Device provisioning](/docs/user-guide/device-provisioning){:target="_blank"}{% endif %} documentation.
+设备预配置支持设备动态注册，无需在ThingsBoard界面手动创建。
+预配置流程及支持场景的详细说明请参见{% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[设备预配置](/docs/{{docsPrefix}}user-guide/device-provisioning){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[设备预配置](/docs/user-guide/device-provisioning){:target="_blank"}{% endif %}文档。
 
-**Provisioning request**   
-To initiate device provisioning, send POST request to the following URL:
+**预配置请求**   
+为启动设备预配置，向以下URL发送POST请求：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 ```shell
@@ -337,7 +337,7 @@ coap://{{HOST_NAME}}/api/v1/provision
 ```
 {: .copy-code}
 
-Where **{{HOST_NAME}}** is your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.
+其中 **{{HOST_NAME}}** 为您的ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}主机名或IP地址。
 
 {% endif %}
 {% if docsPrefix contains "paas/" %}
@@ -349,8 +349,8 @@ coap://{{coapHostName}}/api/v1/provision
 
 {% endif %}
 
-**Request Payload**   
-The provisioning request must use the following JSON format:
+**请求载荷**   
+预配置请求须使用以下JSON格式：
 
 ```json
 {
@@ -360,18 +360,18 @@ The provisioning request must use the following JSON format:
 }
 ```
 
-**Payload fields**
-- **deviceName** — the name of the device to be provisioned.
-- **provisionDeviceKey** — the provisioning key configured in ThingsBoard.
-- **provisionDeviceSecret** — the provisioning secret associated with the provisioning key.
+**载荷字段**
+- **deviceName** — 待预配置设备的名称。
+- **provisionDeviceKey** — ThingsBoard中配置的预配置密钥。
+- **provisionDeviceSecret** — 与预配置密钥关联的预配置密钥。
 
-If the provided credentials are valid, ThingsBoard automatically creates the device (if it does not already exist) and returns the device credentials, allowing the device to start communicating with the platform.
+若提供的凭据有效，ThingsBoard将自动创建设备（若不存在）并返回设备凭据，使设备可与平台通信。
 
 <hr>
 
 ## Firmware API
 
-Select the authentication method:
+选择认证方式：
 
 {% capture coapFirmwareAPI %}
 Access token<small></small>%,%accesstoken%,%templates/api/coap/firmware-api-access-token.md%br%
@@ -380,12 +380,12 @@ X.509 Certificate<small></small>%,%certificate%,%templates/api/coap/firmware-api
 
 <hr>
 
-## Protocol customization
+## 协议自定义
 
-CoAP transport can be fully customized for specific use-case by changing the corresponding [module](https://github.com/thingsboard/thingsboard/tree/master/transport/coap){:target="_blank"}.
+可通过修改对应[模块](https://github.com/thingsboard/thingsboard/tree/master/transport/coap){:target="_blank"}，针对特定用例完全自定义CoAP传输。
 
 <hr>
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

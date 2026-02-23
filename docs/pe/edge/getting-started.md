@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Getting Started with ThingsBoard PE Edge
-description: Getting Started with ThingsBoard PE Edge
+title: ThingsBoard PE Edge 入门
+description: ThingsBoard PE Edge 入门
 
 step1:
     0:

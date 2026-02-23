@@ -1,11 +1,11 @@
-| **Parameter**           | **Default value** | **Description**                                                                                        |
+| **参数**           | **默认值** | **说明**                                                                                        |
 |:------------------------|:------------------|--------------------------------------------------------------------------------------------------------|
-| type                    | **shared**        | The type of requested attribute, can be either “shared” or “client”.                                   |
-| requestExpression       | **${[0:3]==atr}** | The expression that is used to determine if the request from the device is "Attribute Request" or not. |
-| attributeNameExpression | **[3:]**          | The expression that is used to get the name of the requested attribute from the received data.         |
+| type                    | **shared**        | 请求的 attribute 类型，可为 "shared" 或 "client"。                                   |
+| requestExpression       | **${[0:3]==atr}** | 用于判断来自设备的 request 是否为 "Attribute Request" 的表达式。 |
+| attributeNameExpression | **[3:]**          | 用于从接收数据中获取所请求 attribute 名称的表达式。         |
 | ---                     |                   |                                                                                                        |
 
-Configuration of this subsection looks like this:
+本小节配置如下所示：
 
 ```json
 "attributeRequests": [
@@ -17,9 +17,7 @@ Configuration of this subsection looks like this:
 ]
 ```
 
-Additionally, you can request multiple attributes at once. Simply add one more slice expression to 
-attributeNameExpression parameter. For example, if we want to request two shared attributes in a single request, our config 
-will look like this:
+此外，可一次请求多个 attribute。只需在 attributeNameExpression 参数中再添加一个切片表达式。例如，若要在一次 request 中请求两个 shared attribute，配置如下：
 
 ```json
 "attributeRequests": [
@@ -31,7 +29,7 @@ will look like this:
 ]
 ```
 
-This means that we have to send the following message to request two shared attributes:
+即需发送以下消息以请求两个 shared attribute：
 `atr sharedAttribute sharedAttribute1`
 
 ![image](/images/gateway/socket-connector/socket-subsection-attribute-request-advanced-1-ce.png)

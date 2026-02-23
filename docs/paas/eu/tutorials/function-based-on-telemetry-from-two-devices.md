@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Data function based on telemetry from 2 devices
-description: Data function based on telemetry from 2 devices using the Calculated fields feature
+title: 基于两台设备遥测的数据函数
+description: 使用计算字段功能实现基于两台设备遥测的数据函数
 
 adding-asset:
     0:

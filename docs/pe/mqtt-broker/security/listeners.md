@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: MQTT Listeners
-description: MQTT Listeners
+title: MQTT 监听器
+description: MQTT 监听器
 
 settings-connectivity-settings:
   0:

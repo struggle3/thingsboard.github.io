@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.lansitec.com/products/lorawan-micro-bluetooth-gateway/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -11,14 +11,14 @@
 
 [Micro Bluetooth Gateway]({{deviceVendorLink}}){:target="_blank"} is designed based on LoRaWAN and Bluetooth 5.0 technology. It receives nearby [beacon](https://www.lansitec.com/products/bluetooth-beacon/){:target="_blank"} information and forwards it to a LoRaWAN gateway. It is powered by 8000mAh industrial battery with a standby time as long as 6 years (Bluetooth receive duration is 60s in every one hour LoRa report interval).
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
 Only ThingsBoard Cloud works when using direct communication from this device to ThingsBoard via MQTT.
 

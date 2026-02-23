@@ -1,39 +1,38 @@
-To add new time series or attribute key, follow these steps:
+添加新的 time series 或 attribute key 时，请按以下步骤操作：
 
 {% assign attrAndTimeseries = '
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-3-ce.png,
-        title: Click the “**pencil**” icon in the “**Attributes**” section to add new attribute key;
+        title: 点击"**Attributes**"部分的"**铅笔**"图标以添加新 attribute key；
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-4-ce.png,
-        title: Click on "**Add attribute**" in the opened window;
+        title: 在打开窗口中点击"**Add attribute**"；
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-5-ce.png,
-        title: Enter the "**Key**" field, select the "**Type**" (It could be one of the following `string`, `boolean`, `integer`, `double` or `Raw` if the **Payload type** `Bytes`.), enter "**Value**" and click "**Apply**" button;
+        title: 填写"**Key**"字段，选择"**Type**"（可为 `string`、`boolean`、`integer`、`double`，若 **Payload type** 为 `Bytes` 则可为 `Raw`），填写"**Value**"并点击"**Apply**"；
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-6-ce.png,
-        title: Now click on the “**pencil**” icon in the “**Time series**” section to add new time series key;
+        title: 点击"**Time series**"部分的"**铅笔**"图标以添加新 time series key；
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-7-ce.png,
-        title: Click on "**Add time series**" in the opened window;
+        title: 在打开窗口中点击"**Add time series**"；
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-8-ce.png,
-        title: Enter the "**Key**" field, select the "**Type**" (It could be one of the following `string`, `boolean`, `integer`, `double` or `Raw` if the **Payload type** `Bytes`.), enter "**Value**" and click "**Apply**" button.
+        title: 填写"**Key**"字段，选择"**Type**"（可为 `string`、`boolean`、`integer`、`double`，若 **Payload type** 为 `Bytes` 则可为 `Raw`），填写"**Value**"并点击"**Apply**"。
     '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=attrAndTimeseries %}
 
-You can enable a specific report strategy for each time series or attribute. This strategy defines how often  
-data is sent to the ThingsBoard server. The following strategies are available:
+可为每个 time series 或 attribute 启用特定的上报策略。该策略定义数据发送到 ThingsBoard 服务器的频率。可用策略如下：
 
-- **On report period** - sends data to ThingsBoard after the report period;
-- **On value change** - sends data to ThingsBoard when the value changes;
-- **On value change or report period** - sends data to ThingsBoard when the value changes or after the report period;
-- **On received** - sends data to ThingsBoard after receiving data from the device (default strategy).
+- **On report period（按上报周期）** - 在上报周期后向 ThingsBoard 发送数据；
+- **On value change（按值变化）** - 值变化时向 ThingsBoard 发送数据；
+- **On value change or report period（按值变化或上报周期）** - 值变化或到达上报周期时向 ThingsBoard 发送数据；
+- **On received（按接收）** - 从设备接收数据后向 ThingsBoard 发送数据（默认策略）。
 
 {% capture difference %}
-Additional information about the report strategy can be found [here](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}.
+更多关于 report strategy 的信息请参见[此处](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 

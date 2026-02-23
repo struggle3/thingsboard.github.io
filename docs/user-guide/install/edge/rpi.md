@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Installing ThingsBoard Edge on Raspberry Pi
-description: Installing ThingsBoard Edge on Raspberry Pi
+title: 在 Raspberry Pi 上安装 ThingsBoard Edge
+description: 在 Raspberry Pi 上安装 ThingsBoard Edge
 
 ---
 
@@ -12,70 +12,70 @@ description: Installing ThingsBoard Edge on Raspberry Pi
 
 {% assign docsPrefix = "edge/" %}
 
-This guide provides step-by-step instructions for installing **ThingsBoard Edge** on **RaspberryPi**.
+本指南介绍在 **Raspberry Pi** 上安装 **ThingsBoard Edge** 的步骤。
 
 {% include templates/edge/install/prerequisites.md %}
 
-## Step 1. Install Java 17 (OpenJDK)
+## 步骤 1：安装 Java 17（OpenJDK）
 
 {% include templates/install/ubuntu-java-install.md %}
 
-## Step 2. ThingsBoard Edge Service Installation
+## 步骤 2：安装 ThingsBoard Edge 服务
 
-Download the installation package.
+下载安装包。
 
 ```bash
 wget https://github.com/thingsboard/thingsboard-edge/releases/download/{{ site.release.edge_tag }}/tb-edge-{{ site.release.edge_ver }}.deb
 ```
 {: .copy-code}
 
-Go to the download repository and install ThingsBoard Edge service
+进入下载目录并安装 ThingsBoard Edge 服务
 
 ```bash
 sudo dpkg -i tb-edge-{{ site.release.edge_ver }}.deb
 ```
 {: .copy-code}
 
-## Step 3. Configure ThingsBoard Edge Database
+## 步骤 3：配置 ThingsBoard Edge 数据库
 
 {% include templates/edge/install/rpi-db-rpi-postgresql.md %}
 
-## Step 4. The Queue Service
+## 步骤 4：Queue 服务
 
-By default, **ThingsBoard Edge** uses the built-in queue implementation, which requires no additional configuration.
+默认情况下，**ThingsBoard Edge** 使用内置 queue 实现，无需额外配置。
 
-It is useful for development or proof-of-concept (PoC) environments, but is not recommended for production or any type of clustered deployment due to limited scalability.
+适用于开发或概念验证（PoC）环境，因可扩展性有限，不建议用于生产或集群部署。
 
-## Step 5. [Optional] Memory Update for Slow Machines
+## 步骤 5：[可选] 低性能设备内存优化
 
 {% include templates/edge/install/memory-on-slow-edge-machines.md %} 
 
-## Step 6. Run Installation Script
+## 步骤 6：运行安装脚本
 
 {% include templates/edge/install/run-edge-install.md %} 
 
-## Step 7. Restart ThingsBoard Edge Service
+## 步骤 7：重启 ThingsBoard Edge 服务
 
 ```bash
 sudo service tb-edge restart
 ```
 {: .copy-code}
 
-## Step 8. Open ThingsBoard Edge UI
+## 步骤 8：打开 ThingsBoard Edge UI
 
 {% include templates/edge/install/open-edge-ui.md %}
 
-* Or replace **localhost** with your **actual Raspberry Pi's local IP**
+* 或将 **localhost** 替换为 **Raspberry Pi 的实际本地 IP**
 
-## Troubleshooting
+## 故障排除
 
-**ThingsBoard Edge** logs stored in the following directory:
+**ThingsBoard Edge** 日志位于以下目录：
 
 ```bash
 /var/log/tb-edge
 ```
 
-You can issue the following command in order to check if there are any errors on the service side:
+检查服务端错误可运行以下命令：
 
 ```bash
 cat /var/log/tb-edge/tb-edge.log | grep ERROR
@@ -84,6 +84,6 @@ cat /var/log/tb-edge/tb-edge.log | grep ERROR
 
 {% include templates/edge/install/edge-service-commands.md %}
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/install/next-steps.md %}

@@ -1,15 +1,15 @@
-In order to add new attribute update, follow these steps:
+要添加新的 attribute 更新，请按以下步骤操作：
 
 {% assign attrUpdates = '
     ===
         image: /images/gateway/opc-ua-connector/opc-ua-gateway-configuring-11-ce.png,
-        title: Click the “**pencil**” icon in the “**Attribute updates**” section to add new attribute update;
+        title: 在 "**Attribute updates**" 部分点击 "**pencil**"（铅笔）图标以添加新的 attribute 更新；
     ===
         image: /images/gateway/opc-ua-connector/opc-ua-gateway-configuring-12-ce.png,
-        title: Click on "**Add attribute update**" in the opened window;
+        title: 在打开的窗口中点击 "**Add attribute update**"（添加 attribute 更新）；
     ===
         image: /images/gateway/opc-ua-connector/opc-ua-gateway-configuring-13-ce.png,
-        title: Enter the "**Key**" field, select the "**Type**" (can be [path](#path-types), [identifier](#identifier-types) or constant), enter "**Value**" and click "**Apply**" button.
+        title: 填写 "**Key**" 字段，选择 "**Type**"（可为 [path](#path-types)、[identifier](#identifier-types) 或 constant），填写 "**Value**" 并点击 "**Apply**" 按钮。
     '
 %}
 

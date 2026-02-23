@@ -8,36 +8,34 @@
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-alarms-count.png)
 
-Count alarms when receives input message about new alarm. The input message may be 'ALARM', 'ALARM_ACK', 'ALARM_CLEAR', or 'ENTITY_CREATED' and 'ENTITY_UPDATED' message about the alarm. 
-Executes count query based on the alarm count mappings and the originator of the message (device, asset, etc.) 
+收到新 alarm 的输入消息时统计 alarm 数量。输入消息可为 `ALARM`、`ALARM_ACK`、`ALARM_CLEAR`，或 alarm 的 `ENTITY_CREATED`、`ENTITY_UPDATED` 消息。
+根据 alarm 统计映射和消息 originator（设备、Asset 等）执行 count 查询。
 
-Result of alarms count then set to specified target timeseries attribute of the entity.
+统计结果写入实体的指定目标时序属性。
 
-Message of type **POST_TELEMETRY_REQUEST** is generated for each entity and alarms count result.
+为每个实体及其 alarm 统计结果生成类型为 **POST_TELEMETRY_REQUEST** 的消息。
 
-Configuration:
+配置：
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-alarms-count-config-new.png)
 
-- **Count alarms for propagation entities** - if enabled, will count alarms not only for originator of the alarm, but also for all propagated entities.
-- **Alarms count mappings** - table of mapping configurations specifying rules used to count alarms.
+- **Count alarms for propagation entities** — 启用时，不仅统计 alarm originator，还统计所有传播实体的 alarm。
+- **Alarms count mappings** — 映射配置表，指定 alarm 统计规则。
 
-Mapping Configuration:
+映射配置：
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-alarms-count-mapping-config.png)
 
-- **Target telemetry** - name of the target telemetry key of the entity used to store alarms count result.
-- **Status filter** - list of allowed alarm statuses used to filter alarms. If not specified alarms with any status will be selected.
-- **Severity filter** - list of allowed alarm severities used to filter alarms. If not specified alarms with any severity will be selected.
-- **Type filter** - list of allowed alarm types used to filter alarms. If not specified alarms with any type will be selected.
-- **Specify interval** - if checked only alarms created during specified interval will be selected otherwise alarms will be selected for the entire time.
+- **Target telemetry** — 实体用于存储 alarm 统计结果的目标 telemetry key 名。
+- **Status filter** — 用于过滤 alarm 的允许状态列表。未指定时选择任意状态的 alarm。
+- **Severity filter** — 用于过滤 alarm 的允许严重程度列表。未指定时选择任意严重程度的 alarm。
+- **Type filter** — 用于过滤 alarm 的允许类型列表。未指定时选择任意类型的 alarm。
+- **Specify interval** — 勾选后仅选择指定 interval 内创建的 alarm，否则选择全部时间内的 alarm。
 
-For each selected entity node will generate and forward via **Success** chain new messages of type **POST_TELEMETRY_REQUEST**
-and json body containing target telemetry with alarms count value.
-In case when alarms count for some entity will fail node will generate failure message
-with failure reason and entity as originator. Failure message is forwarded via **Failure** chain.
+对每个所选实体，节点生成新消息（类型 **POST_TELEMETRY_REQUEST**，json body 含目标 telemetry 及 alarm 统计值）并通过 **Success** 链转发。
+若某实体 alarm 统计失败，节点生成失败消息（含失败原因，originator 为实体）并通过 **Failure** 链转发。
 
-**Since TB Version 3.3.3** you can select the queue name:
+**Since TB Version 3.3.3** 可选择队列名：
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-queue-name.png)
 

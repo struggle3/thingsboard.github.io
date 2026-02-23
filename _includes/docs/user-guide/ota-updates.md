@@ -1,64 +1,60 @@
 * TOC 
 {:toc}
 
-## Overview
+## 概述
 
-Since ThingsBoard 3.3, ThingsBoard allows you to upload and distribute over-the-air(OTA) updates to devices. 
-As a tenant administrator, you may upload firmware or software packages to the OTA repository. 
-Once uploaded, you may assign them to [Device Profile](/docs/{{docsPrefix}}user-guide/device-profiles/) or [Device](/docs/{{docsPrefix}}user-guide/ui/devices/). 
-ThingsBoard will notify devices about the available update and provide a protocol-specific API to download the firmware. 
-The platform tracks status of the update and stores history of the updates. 
-As a platform user, you may monitor the update process using the dashboard.
+自 ThingsBoard 3.3 起，支持向设备上传和分发 OTA（空中升级）更新。
+租户管理员可将固件或软件包上传到 OTA 仓库，上传后可分配到 [设备配置](/docs/{{docsPrefix}}user-guide/device-profiles/) 或 [设备](/docs/{{docsPrefix}}user-guide/ui/devices/)。
+ThingsBoard 会通知设备有可用更新，并经由协议专用 API 提供固件下载。
+平台会记录更新状态和更新历史，用户可通过仪表盘监控更新进度。
 <br>
 <object data="/images/user-guide/firmware/firmware-anim3.svg"></object>
 <br>
 
-## Provision OTA package to ThingsBoard repository
+## 将 OTA 包上传到 ThingsBoard 仓库
 
-Navigate to the "OTA Updates" menu item to list and upload OTA update packages. Each package consist of:
+进入「OTA Updates」菜单项以列表显示并上传 OTA 更新包。每个包包含：
 
-* Title - the name of your package. You can use different names for production and debug firmware/software. 
-* Version - the version of your package. Combination of the title and version must be unique in scope of a tenant.
-* Device Profile - each package is compatible with one device profile. We track compatibility to prevent accidental updates of devices with incompatible firmware/software. 
-  Link to a device profile means that device that use this profile *may* be updated to the current package. 
-  However, the update is not triggered, until the user or script [assigns](#assign-ota-package-to-device-profile) the package to the device profile or device.
-* Type - can be either *Firmware* or *Software*.    
-* Checksum algorithm - optional parameter, it is a short name of the checksum algorithm to use. 
-* Checksum - optional parameter, it's a value of the file checksum. If no checksum provided by the user, server will use SHA-256 algorithm automatically.
-* Description - optional text description of the firmware. 
+* **标题** —— 包名称。可为生产版与调试版固件/软件使用不同名称。
+* **版本** —— 包版本。标题与版本的组合在租户内须唯一。
+* **设备配置** —— 每个包与一个设备配置兼容。平台会校验兼容性，避免为设备安装不兼容的固件/软件。关联设备配置表示使用该配置的设备*可以*更新到此包，但需用户或脚本将包[分配到](#assign-ota-package-to-device-profile)设备配置或设备后才触发更新。
+* **类型** —— 可选 *Firmware* 或 *Software*。
+* **校验和算法** —— 可选，所用校验和算法的简称。
+* **校验和** —— 可选，文件校验和值。若未提供，服务器会自动使用 SHA-256。
+* **描述** —— 可选，固件文本说明。 
 
 {% include images-gallery.html imageCollection="createFirmware" %}
 
-You can browse the provisioned packages as well as search them by title. Also, you are able to download and delete packages.
-To open package details, click the table row. Package details allow you to copy package ID and checksum. 
-Also, [Audit logs](/docs/{{docsPrefix}}user-guide/audit-log/) track information about users who provisioned the firmware.
+可浏览已上传的包并按标题搜索，也可下载或删除包。
+点击表格行可打开包详情，详情中可复制包 ID 和校验和。
+[审计日志](/docs/{{docsPrefix}}user-guide/audit-log/)会记录上传固件的用户信息。
 
 {% include images-gallery.html imageCollection="listFirmware" %}
 
-All actions listed are also available via [REST API](/docs/{{docsPrefix}}reference/rest-api/).
+上述操作均可通过 [REST API](/docs/{{docsPrefix}}reference/rest-api/) 完成。
 
-## Firmware vs Software
+## Firmware 与 Software
 
-There is a very minor difference between FOTA and SOTA implementation inside ThingsBoard core. Many use-cases and applications will need to use FOTA only. 
-However, [LwM2M](/docs/{{docsPrefix}}reference/lwm2m-api/) devices process FOTA and SOTA updates differently. 
+ThingsBoard 核心中 FOTA 与 SOTA 的实现差异很小，多数用例仅需 FOTA。
+但 [LwM2M](/docs/{{docsPrefix}}reference/lwm2m-api/) 设备对 FOTA 和 SOTA 更新的处理方式不同。 
 
-## Assign OTA package to device profile
+## 将 OTA 包分配到设备配置
 
-You may assign firmware/software to the device profile to automatically distribute the package to all devices that share the same profile. See screenshots below.
+可将固件/软件分配到设备配置，以自动分发给使用该配置的所有设备。见下方截图。
 
 {% include images-gallery.html imageCollection="fw-deviceprofile" %}
 
-The device profile details will let you choose only compatible OTA update packages (see [provisioning](#provision-ota-package-to-thingsboard-repository) for more info).
-Device profile may be used by thousands of devices. Assignment of the firmware/software triggers the [update process](#update-process).
+设备配置详情中仅可选择兼容的 OTA 更新包（详见[上传](#provision-ota-package-to-thingsboard-repository)）。
+一个设备配置可能被数千台设备使用。分配固件/软件会触发[更新流程](#update-process)。
 
 
-## Assign OTA package to device
+## 将 OTA 包分配到设备
 
-You may also assign firmware/software to specific device. See screenshots below.
+也可将固件/软件分配到特定设备。见下方截图。
 
 {% include images-gallery.html imageCollection="deviceFirmware" %}
 
-The firmware version assigned to the device will automatically overwrite firmware version that is assigned to the device profile. 
+分配到设备的固件版本会自动覆盖设备配置上的固件版本。 
 
 For example, let's assume you have Devices D1 and D2 that has Profile P1:
 
@@ -68,16 +64,16 @@ For example, let's assume you have Devices D1 and D2 that has Profile P1:
 So, D2 will be updated to F3, while D1 will continue to use F2.
 
 
-Customers may choose available firmware and assign it to the devices that belong to them. However, customers can't provision or manage firmware packages.
+客户可为所属设备选择并分配可用固件，但不能上传或管理固件包。
 
 {% capture delete_restrictions %}
-Deletion of the firmware packages that is assigned to at least one device or device profile is prohibited.
+禁止删除已分配给至少一个设备或设备配置的固件包。
 {% endcapture %}
 {% include templates/info-banner.md content=delete_restrictions %}
 
-## Update process
+## 更新流程
 
-Assignment of the firmware/software to the device or device profile triggers the update process.
+将固件/软件分配到设备或设备配置会触发更新流程。
 ThingsBoard tracks the progress of the update and persists it to the device attributes.
 
 Update progress may have one of the following states. The state of the update is stored as an attribute of the device and is used to visualize the update process on the [dashboard](#dashboard).

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Anomaly Model Properties
-description: How to train anomaly models using historical data. Covers segmentation, preprocessing, and the "Build" task
+title: 异常模型属性
+description: 如何使用历史数据训练异常模型。涵盖分段、预处理及 "Build" 任务
 
 general-settings:
   0:

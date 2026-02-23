@@ -1,22 +1,22 @@
-### GET method
+### GET 方法
 
-With the GET method you can read some data from the FTP server.
+使用 GET 方法可从 FTP 服务器读取数据。
 
 ```bash
 get filePath=<filePath>;
 ```
 
-Where:
-- `<filePath>` - the path to the file on the FTP server.
+其中：
+- `<filePath>` - FTP 服务器上的文件路径。
 
-For example, in our case, we know that **light_level.txt** file stores the room light level on the FTP server. 
-To read the value of the room light level, run the following query:
+例如，本示例中 **light_level.txt** 文件在 FTP 服务器上存储房间光照度。
+要读取房间光照度值，请运行以下查询：
 
 ```bash
 get filePath=./light_level.txt;
 ```
 
-**Response:**
+**响应：**
 
 ```json
 {"result":  30}
@@ -26,26 +26,26 @@ get filePath=./light_level.txt;
 ![image](/images/gateway/get-set-connector-rpc/ftp-get-set-rpc-1.png)
 {: refdef}
 
-### SET method
+### SET 方法
 
-With the SET method you can write data to the FTP server.
+使用 SET 方法可向 FTP 服务器写入数据。
 
 ```bash
 set filePath=<filePath>;value=<value>;
 ```
 
-Where:
-- `<filePath>` - the path to the file on the FTP server;
-- `<value>` - the value to write.
+其中：
+- `<filePath>` - FTP 服务器上的文件路径；
+- `<value>` - 要写入的值。
 
-For example, in our case, we know that **light_level.txt** file stores the room light level on the FTP server.
-To write the value of the room light level, run the following query:
+例如，本示例中 **light_level.txt** 文件在 FTP 服务器上存储房间光照度。
+要写入房间光照度值，请运行以下查询：
 
 ```bash
 set filePath=./light_level.txt;value=80;
 ```
 
-**Response:**
+**响应：**
 
 ```json
 {"result":  "{\"success\": true}"}
@@ -55,14 +55,13 @@ set filePath=./light_level.txt;value=80;
 ![image](/images/gateway/get-set-connector-rpc/ftp-get-set-rpc-2.png)
 {: refdef}
 
-Also, let's check the value of the room light level after setting it using the GET method. To do this, simply 
-run the GET RPC method, described above:
+使用 GET 方法检查设置后的房间光照度值。只需运行上述 GET RPC 方法即可：
 
 ```bash
 get filePath=./light_level.txt;
 ```
 
-**Response:**
+**响应：**
 
 ```json
 {"result":  80}

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: CoAP Integration
-description: CoAP Integration Guide
+title: CoAP 集成
+description: CoAP 集成指南
 
 add-integration:
     0:

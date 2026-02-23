@@ -1,19 +1,19 @@
-This option of identity subsection is the safest.
+此 identity 小节选项最安全。
 
-| **Parameter** | **Default value**                             | **Description**                                                           |
+| **参数** | **默认值**                             | **说明**                                                           |
 |:-|:-|-
-| type          | **cert.PEM**                                  | Type of identity on OPC-UA server.                                        |
-| caCert        | **/etc/thingsboard-gateway/ca.pem**           | Path to the CA certificate.                                               |
-| privateKey    | **/etc/thingsboard-gateway/private_key.pem**  | Path to the private key.                                                  |
-| cert          | **/etc/thingsboard-gateway/cert.pem**         | Path to the certificate file.                                             |
-| mode          | **SignAndEncrypt**                            | Security mode, there are 2 options -- **Sign** and **SignAndEncrypt**.    |  
-| username      | **user**                                      | Username for logging into the OPC-UA server.                              |
-| password      | **5Tr0nG?@$sW0rD**                            | Password for logging into the OPC-UA server.                              |
+| type          | **cert.PEM**                                  | OPC-UA 服务器上的 identity 类型。                                        |
+| caCert        | **/etc/thingsboard-gateway/ca.pem**           | CA 证书的路径。                                               |
+| privateKey    | **/etc/thingsboard-gateway/private_key.pem**  | 私钥的路径。                                                  |
+| cert          | **/etc/thingsboard-gateway/cert.pem**         | 证书文件的路径。                                             |
+| mode          | **SignAndEncrypt**                            | 安全模式，有两个选项：**Sign** 和 **SignAndEncrypt**。    |  
+| username      | **user**                                      | 登录 OPC-UA 服务器的用户名。                              |
+| password      | **5Tr0nG?@$sW0rD**                            | 登录 OPC-UA 服务器的密码。                              |
 |---
 
-***Optionally, you can provide the username/password pair.***
+***可选地，可提供用户名/密码对。***
 
-This part of configuration will look like:  
+配置的此部分将如下所示：  
 
 ```json
     "identity": {

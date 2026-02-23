@@ -1,10 +1,10 @@
-Routes incoming messages based on the originator entity type. The message is forwarded through the output connection whose label exactly matches the entity type’s **normal name**.
+根据来源实体类型路由入站消息。消息经其标签与实体类型**规范名称**完全匹配的输出连接转发。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-There are no available configuration fields.
+无可配置字段。
 
 ### JSON Schema
 
@@ -19,96 +19,96 @@ There are no available configuration fields.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Determines the incoming message’s originator entity type and looks up its normal name.
-2. Routes the message to downstream nodes using the connection with a label that **exactly matches** the normal name.
+1. 确定入站消息的来源实体类型并查找其规范名称。
+2. 使用标签与规范名称**完全匹配**的连接将消息路由至下游节点。
 
-## Output connections
+## 输出连接
 
-* Normal name of the originator entity type
-    * Used for all messages; the message is routed via the connection whose label exactly matches the normal name.
-* `Failure`:
-    * If an unexpected error occurred during message processing.
+* 来源实体类型的规范名称
+    * 适用于所有消息；消息经标签与规范名称完全匹配的连接路由。
+* `Failure`：
+    * 消息处理过程中发生意外错误时。
 
-## Examples
+## 示例
 
-The examples below show only the **relevant** fields of the incoming message. Unless explicitly stated otherwise, other message fields may have any values.
+以下示例仅展示入站消息的**相关**字段。除非另有说明，其他消息字段可为任意值。
 
 ---
 
-### Example 1 — Originator entity type is a `DEVICE` → routed via **`Device`**
+### 示例 1 — 来源实体类型为 `DEVICE` → 经 **`Device`** 路由
 
-**Incoming message**
+**入站消息**
 
-Originator entity type is a `DEVICE`.
+来源实体类型为 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`Device`**.
+经 **`Device`** 路由。
 
-**Explanation**
+**说明**
 
-For `DEVICE`, the normal name is `Device`. The node routes the message via the connection with that exact label.
+`DEVICE` 的规范名称为 `Device`。节点通过具有该标签的连接路由消息。
 
 ---
 
-### Example 2 — Originator entity type is an `ENTITY_VIEW` → routed via **`Entity View`**
+### 示例 2 — 来源实体类型为 `ENTITY_VIEW` → 经 **`Entity View`** 路由
 
-**Incoming message**
+**入站消息**
 
-Originator entity type is an `ENTITY_VIEW`.
+来源实体类型为 `ENTITY_VIEW`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`Entity View`**.
+经 **`Entity View`** 路由。
 
-**Explanation**
+**说明**
 
-For `ENTITY_VIEW`, the normal name is `Entity View`. The node routes the message via the connection with that exact label.
+`ENTITY_VIEW` 的规范名称为 `Entity View`。节点通过具有该标签的连接路由消息。
 
 ---
 
-### Example 3 — Originator entity type is an `AI_MODEL` → routed via **`AI model`**
+### 示例 3 — 来源实体类型为 `AI_MODEL` → 经 **`AI model`** 路由
 
-**Incoming message**
+**入站消息**
 
-Originator entity type is an `AI_MODEL`.
+来源实体类型为 `AI_MODEL`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`AI model`**.
+经 **`AI model`** 路由。
 
-**Explanation**
+**说明**
 
-For `AI_MODEL`, the normal name is `AI model`. The node routes the message via the connection with that exact label.
+`AI_MODEL` 的规范名称为 `AI model`。节点通过具有该标签的连接路由消息。

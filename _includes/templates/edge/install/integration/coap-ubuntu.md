@@ -1,25 +1,25 @@
-Download the installation package:
+下载安装包：
 
 ```bash
 wget https://dist.thingsboard.io/tb-coap-integration-{{ site.release.pe_ver }}.deb
 ```
 {: .copy-code}
 
-Install the integration as a service:
+以服务方式安装集成：
 
 ```bash
 sudo dpkg -i tb-coap-integration-{{ site.release.pe_ver }}.deb
 ```
 {: .copy-code}
 
-Open the file for editing:
+打开配置文件进行编辑：
 
 ```bash 
 sudo nano /etc/tb-coap-integration/conf/tb-coap-integration.conf
 ``` 
 {: .copy-code}
 
-Locate the following configuration block:
+找到如下配置块：
 
 ```bash
 # UNCOMMENT NEXT LINES AND PUT YOUR CONNECTION PARAMETERS:
@@ -29,12 +29,12 @@ Locate the following configuration block:
 # export INTEGRATION_SECRET=YOUR_INTEGRATION_SECRET
 ```
 
-Enter your configuration parameters:
+填入配置参数：
 
-- **RPC_HOST:** Use the Edge instance’s IP address, or **localhost** if it's running on the same machine.
-- **9090:** The integration port. It is configured by the INTEGRATIONS_RPC_PORT environment variable in the tb-edge.yml file.
-- **YOUR_ROUTING_KEY:** Replace it with the actual **integration routing key** obtained in [Step 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"}.
-- **YOUR_SECRET:** Replace it with the actual **integration secret** obtained in [Step 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"}.
+- **RPC_HOST：** 使用 Edge 实例的 IP 地址，若在同一台机器运行则使用 **localhost**。
+- **9090：** 集成端口，由 tb-edge.yml 中的 INTEGRATIONS_RPC_PORT 环境变量配置。
+- **YOUR_ROUTING_KEY：** 替换为 [步骤 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"} 中获取的 **集成路由密钥**。
+- **YOUR_SECRET：** 替换为 [步骤 3](/docs/pe/edge/user-guide/integrations/remote-integrations/#step-3-save-remote-integration-credentials){: target="_blank"} 中获取的 **集成密钥**。
 
 Make sure to **uncomment** the export statement.
 
@@ -55,16 +55,16 @@ sudo service tb-coap-integration start
 ```
 {: .copy-code}
 
-#### Advanced configuration
+#### 高级配置
 
-You can find and update additional configuration parameters in the **tb-coap-integration.conf** file.
+可在 **tb-coap-integration.conf** 中查看并修改更多配置参数。
 
-To open the file for editing, use the following command:
+使用以下命令编辑文件：
 
 ```bash 
 sudo nano /etc/tb-coap-integration/conf/tb-coap-integration.conf
 ``` 
 {: .copy-code} 
 
-After updating the configuration, you can check the logs in **/var/log/tb-coap-integration/** to verify that the integration is running correctly.
-Look for **INFO** log messages that show the latest integration configuration received from the server.
+修改配置后，可在 **/var/log/tb-coap-integration/** 下查看日志以验证集成是否正常运行。
+可查找 **INFO** 级别日志，确认已收到服务器下发的集成配置。

@@ -1,8 +1,8 @@
 ---
 layout: iot-article
-title: ᐉ IoT Monitoring Dashboard
+title: IoT 监控仪表盘
 notitle: "true"
-description: "IoT Monitoring Dashboard ✔ IoT control panel ⚫ ThingsBoard ➤ Provides the ability to create and manage dashboards ✔ with a plenty of widgets"
+description: "IoT 监控仪表盘 ✔ IoT 控制面板 ⚫ ThingsBoard ➤ 支持创建与管理仪表盘 ✔ 提供丰富部件"
 redirect_from: "/docs/services/monitoring-dashboard/"
 ---
 
@@ -10,161 +10,161 @@ redirect_from: "/docs/services/monitoring-dashboard/"
 <div id="header-block" class="block-wrapper wrapper-main-color">
     <div class="block-content">
         <div class="text-wrapper">
-            <span class="read-info">11 minutes read</span>
-            <h1>IoT Monitoring Dashboard</h1>
-            <div class="text-content medium-margin">In the dynamic landscape of digitization and the Internet of Things (IoT), the importance of data management and monitoring is quite reasonable. In this regard, the IoT monitoring dashboard is a tool that not only simplifies the visualization of large amounts of data but also makes it more efficient and informative.</div>
-            <div class="text-content"><span class="bold">In the ThingsBoard platform the dashboards</span> are an integral part of the user interface for IoT apps, offering solutions for the rapid development, management, and scaling of IoT projects.</div>
+            <span class="read-info">阅读约 11 分钟</span>
+            <h1>IoT 监控仪表盘</h1>
+            <div class="text-content medium-margin">在数字化与物联网(IoT)的发展中，数据管理与监控的重要性不言而喻。IoT 监控仪表盘不仅能简化海量数据的可视化，还能让展示更高效、更有信息量。</div>
+            <div class="text-content"><span class="bold">在 ThingsBoard 平台中，仪表盘</span>是IoT应用用户界面的核心组成部分，为IoT项目的快速开发、管理与扩展提供支撑。</div>
         </div>
-        <img class="image" srcset="/images/iot-articles/monitoring_dashboard_1_1090x742.webp 1090w, /images/iot-articles/monitoring_dashboard_1_2180x1484.webp 2180w" sizes="(max-width: 1920px) 1090px, (min-width: 1921px) 2180px" src="/images/iot-articles/monitoring_dashboard_1_1090x742.webp" alt="IoT energy management office monitoring"/>
+        <img class="image" srcset="/images/iot-articles/monitoring_dashboard_1_1090x742.webp 1090w, /images/iot-articles/monitoring_dashboard_1_2180x1484.webp 2180w" sizes="(max-width: 1920px) 1090px, (min-width: 1921px) 2180px" src="/images/iot-articles/monitoring_dashboard_1_1090x742.webp" alt="IoT 能源管理办公监控"/>
         <div class="text-wrapper">
-            <h2>How IoT monitoring system works?</h2>
-            <div class="text-content small-margin">First step is to select devices that can collect and report required measurements. They selected based on properties of the iot monitoring system or process that should be monitored.</div>
-            <div class="text-content medium-margin">Next step is to connect iot devices to the monitoring application using one of supported protocols - MQTT, HTTP, LoraWAN, OPC-UA, CoAP, LwM2M and others. Full list of supported protocols available in <a class="article-link" href="/docs/pe/api/">ThingsBoard API reference</a> or on our <a class="article-link" href="/docs/pe/guides/#AnchorIDConnectYourDevice">connectivity guides</a>.</div>
-            <div class="text-content medium-margin">Once device connected and reports data to the platform, incoming telemetry saved in the database, we can build real time and historical monitoring dashboards using <a class="article-link" href="/docs/pe/guides/#AnchorIDDataVisualization">IoT dashboard development guide</a>.</div>
-            <div class="text-content medium-margin">Dashboard should have drill down navigation to start from the high-level system overview and go to lover levels to understand current system state and analyze historical data</div>
-            <h2>What is End-to-End IoT Performance Visibility?</h2>
-            <div class="text-content small-margin">IoT monitoring solution gives end to end visibility of remote system. It means that all aspects of system behavior, including current, historical and future are available for operators in real time from remote locations. With this data operators can understand system better, optimize it, perform root cause analysis and prevent potential bottlenecks. Data from IoT sensors used to monitor system in realtime. Analysis of data trends using ML/AI models identifies and highlight components that might fail or require maintenance. For sites where safety and security compliance is critical, real time iot alerts and data logging ensure safety and regulation compliance.</div>
-            <h2>IoT Monitoring Tools</h2>
-            <h3>What types of devices are used for data collection</h3>
-            <div class="text-content small-margin">We can split iot devices into few categories based on their characteristics:</div>
+            <h2>IoT 监控系统如何工作？</h2>
+            <div class="text-content small-margin">第一步是选择能采集并上报所需数据的设备，根据待监控的IoT监控系统或流程的特性进行选择。</div>
+            <div class="text-content medium-margin">下一步是使用所支持的协议之一（如MQTT、HTTP、LoRaWAN、OPC-UA、CoAP、LwM2M 等）将IoT设备接入监控应用。完整协议列表见<a class="article-link" href="/docs/pe/api/">ThingsBoard API 参考</a>或<a class="article-link" href="/docs/pe/guides/#AnchorIDConnectYourDevice">连接指南</a>。</div>
+            <div class="text-content medium-margin">设备接入并向平台上报数据后，遥测会写入数据库，即可根据<a class="article-link" href="/docs/pe/guides/#AnchorIDDataVisualization">IoT 仪表盘开发指南</a>构建实时与历史监控仪表盘。</div>
+            <div class="text-content medium-margin">仪表盘应支持钻取导航：从系统总览逐级下钻，了解当前状态并分析历史数据。</div>
+            <h2>什么是端到端 IoT 性能可见性？</h2>
+            <div class="text-content small-margin">IoT 监控方案提供远程系统的端到端可见性，即系统行为的当前、历史与预测等各方面均可被运维人员远程实时掌握。借助这些数据，运维可更好理解与优化系统、做根因分析并预防潜在瓶颈。来自IoT传感器的数据用于实时监控系统；结合ML/AI模型的数据趋势分析可识别并突出可能故障或需维护的部件。在安全与合规要求高的场景下，实时IoT告警与数据记录可保障安全与合规。</div>
+            <h2>IoT 监控工具</h2>
+            <h3>数据采集常用设备类型</h3>
+            <div class="text-content small-margin">按特性可将IoT设备分为几类：</div>
             <ul class="list">
-                <li><span class="bold-text">Power source:</span> it can be devices with internal batteries and in this case we need to think about energy effectiveness to reduce battery replacement frequencies. We can do that by selecting energy efficient networking and communication protocols, data update frequency and payload size. Opposite to that there big device category that uses external power sources (grid, renewable energy, etc). Relatively new and small category - Passive IoT devices that do not require energy source to transfer data from sensor to iot system. Most common technologies in this domain are RFID tags and NFC.</li>
-                <li><span class="bold-text">Connectivity type:</span> long range low power devices can send data for long distances and consume really small amount of energy  (LPWAN - LoraWAN, NB-IoT, etc). Wireless connectivity - it includes short range coverage network (BLE, Bluetooth, WiFi, ZigBee, etc) and country-wide coverage (4G/5G, satellite, etc). Wired connection - used when devices communicate with IoT system via wire (Ethernet, Modbus, OPC-UA and others)</li>
+                <li><span class="bold-text">供电方式：</span>可为内置电池设备，此时需考虑能效以降低换电池频率，可通过选用低功耗网络与通信协议、数据上报频率与载荷大小等实现。另一大类为外接电源（电网、可再生能源等）。还有较新的小类——无源IoT设备，无需电源即可将传感器数据传到IoT系统，常见技术包括RFID与NFC。</li>
+                <li><span class="bold-text">连接类型：</span>远距离低功耗设备可长距离传输且耗能很少（LPWAN 如 LoRaWAN、NB-IoT 等）；无线还包括短距（BLE、Bluetooth、WiFi、ZigBee 等）与广域（4G/5G、卫星等）；有线则通过网线或工业总线（Ethernet、Modbus、OPC-UA 等）与IoT系统通信。</li>
             </ul>
-            <div class="text-content small-margin">There are other categorization options, for example by device functions - sensors, actuators, controllers or by industry - Industrial equipment, smart home, healthcare, automotive, energy management, logistic.</div>
-            <h3>What type of data IoT devices usually collect?</h3>
-            <div class="text-content small-margin">In general, IoT device and sensors collect and measure physical characteristic of environment or objects they monitor. Also, IoT devices can report state of the system, process or hardware they control. Depends on business domain, Energy management/BEMS - energy consumption, voltage and other electric characteristic. In Industrial IoT monitoring it can be data from PLCs and sensors installed on equipment and factory floor - vibration, pressure, status code, errors, production pace, etc. It can also be temperature, humidity, occupancy, lighting, battery level, rssi and much more. If we are talking about gateways and edge services that are part of IoT system, we can monitor RAM, CPU and disk usage of those systems as well as network parameters.</div>
-            <h3>3 ways of telemetry collection</h3>
+            <div class="text-content small-margin">还可按设备功能（传感器、执行器、控制器）或行业（工业设备、智能家居、医疗、汽车、能源管理、物流等）分类。</div>
+            <h3>IoT 设备通常采集哪些数据？</h3>
+            <div class="text-content small-margin">一般而言，IoT设备与传感器采集并测量所监控环境或对象的物理量，也可上报其控制的系统、流程或硬件的状态。依业务领域不同：能源管理/BEMS 为能耗、电压等电气量；工业IoT监控可为PLC与现场设备上的传感器数据（振动、压力、状态码、故障、生产节奏等），以及温度、湿度、占用、照明、电池电量、RSSI 等。若涉及网关与边缘服务，还可监控其RAM、CPU、磁盘及网络参数。</div>
+            <h3>遥测采集的三种方式</h3>
             <ul class="list">
-                <li><span class="bold-text">Option 1:</span> IoT Devices has multiple built-in sensors and they report this telemetry with predefined frequency (temperature, humidity, pressure, etc).</li>
-                <li><span class="bold-text">Option 2:</span> Data loggers do not have built-in sensors but know where and how to take data that needs to be monitored. For example, they can collect data via modbus, analog ports, CAN, etc.</li>
-                <li><span class="bold-text">Option 3:</span> PLCs - controllers installed in various equipment to control and monitor it. They can collect and report required telemetry, status change or notify about events.</li>
+                <li><span class="bold-text">方式一：</span>IoT设备内置多类传感器，按设定频率上报遥测（温度、湿度、压力等）。</li>
+                <li><span class="bold-text">方式二：</span>数据采集器无内置传感器，但知道从何处、以何种方式获取待监控数据，例如通过Modbus、模拟口、CAN 等采集。</li>
+                <li><span class="bold-text">方式三：</span>PLC——安装在各类设备中用于控制与监控的控制器，可采集并上报所需遥测、状态变化或事件通知。</li>
             </ul>
-            <h3>IoT data visualization and notification</h3>
-            <div class="text-content small-margin">Large IoT solutions, where thousands devices are connected it is not possible to monitor and tack each device individually. Business want to be notified when some devices required attention. For example user want to receive notification when battery level is critical and set a threshold equal to 3.1V. In this case IoT application would compare current battery level with threshold value and send an alert with configured notification channel to responsible user. Thingsboard supports such case with notification center and configurable alarm rules.</div>
-            <h2>What is edge computing?</h2>
-            <div class="text-content small-margin">Edge computing used to speedup data processing by transferring processing logic from central cloud to the edge closer to the data collection devices. Also, less amount of data transferred from devices to the cloud decrease system costs and pressure on network. ThingsBoard has edge product (https://thingsboard.io/products/thingsboard-edge/) it allows to provision, configure and control multiple edge installations. ThingsBoard cloud act like a central configuration point, where user define processing logic, data retention policy, workflows, visualization dashboards and deploy it on edge systems. On the edge ThingsBoard communicate with local devices/sensors process their data and report required portion of it to the cloud.</div>
-            <h2>IoT security monitoring detailed explanation</h2>
-            <div class="text-content medium-margin">There are 3 vectors how to secure IoT applications:</div>
+            <h3>IoT 数据可视化与通知</h3>
+            <div class="text-content small-margin">在连接成千上万设备的大型IoT方案中，无法逐台监控每台设备。业务方希望在设备需要关注时收到通知，例如在电池电量低于 3.1V 时收到告警。此时IoT应用将当前电量与阈值比较，并通过配置的通知渠道向责任人发送告警。ThingsBoard 通过通知中心与可配置告警规则支持此类场景。</div>
+            <h2>什么是边缘计算？</h2>
+            <div class="text-content small-margin">边缘计算将处理逻辑从中心云下放到靠近数据采集设备的边缘，以加速数据处理；同时减少设备到云的数据传输，降低系统成本与网络压力。ThingsBoard 提供边缘产品（https://thingsboard.io/products/thingsboard-edge/），可对多套边缘部署进行配置、下发与控制。ThingsBoard 云作为集中配置点，用户在此定义处理逻辑、数据保留策略、工作流与可视化仪表盘，并下发到边缘。边缘侧 ThingsBoard 与本地设备/传感器通信、处理数据，并将所需部分上报至云。</div>
+            <h2>IoT 安全监控说明</h2>
+            <div class="text-content medium-margin">保障IoT应用安全可从三个维度入手：</div>
             <ul class="list">
-                <li>Physical security - prevent unauthorised users to get physical access to the IoT device and change its configuration or inject malfunctions inside it.</li>
-                <li>Man-in-the-Middle (MitM) Attacks - to prevent external cyberattack on IoT infrastructure exploiting software vulnerabilities we need to secure communication channels with encryption and perform regular firmware and software updates to close security gaps that attackers might exploit.</li>
-                <li>Configure user role based access control with clear defined permissions and secured authentication mechanism. It includes configurable data visibility and permissions for application users, audit logs, user session management, multifactor authorization and password protection.</li>
+                <li>物理安全：防止未授权用户接触IoT设备并篡改配置或注入故障。</li>
+                <li>中间人(MitM)攻击防护：为防止利用软件漏洞对IoT基础设施的外部攻击，需对通信通道加密，并定期更新固件与软件以修补可被利用的安全缺口。</li>
+                <li>配置基于角色的访问控制，明确权限与认证机制，包括应用用户的数据可见性与权限、审计日志、会话管理、多因素认证与密码策略。</li>
             </ul>
-            <h2>Basics of an IoT Device Management Dashboard</h2>
-            <div class="text-content small-margin">An Internet of Things dashboard as the command center for your connected devices, providing a visual representation of data and facilitating seamless control. It is also known as an IoT control panel.</div>
-            <h3 class="small-padding">The key components of an IoT platform dashboard include:</h3>
+            <h2>IoT 设备管理仪表盘基础</h2>
+            <div class="text-content small-margin">物联网仪表盘作为联网设备的指挥中心，以可视化方式呈现数据并便于控制，也称IoT控制面板。</div>
+            <h3 class="small-padding">IoT 平台仪表盘的主要组成部分包括：</h3>
             <ul class="list">
-                <li>Widgets: These are the building blocks, representing individual pieces of information.</li>
-                <li>Data sources: IoT sensor dashboard pull data from diverse sources such as gateways and cloud services. This data is then processed and visualized through widgets.</li>
-                <li>User controls: These interactive elements allow users to interact with the dashboard, triggering actions like sending commands to devices or adjusting settings.</li>
-                <li>Alerts: A good IoT dashboard platform provides users with alerts that help in identifying any anomalies or issues in real-time.</li>
+                <li>部件：作为基本单元，呈现单项信息。</li>
+                <li>数据源：IoT 传感器仪表盘从网关、云服务等多种源拉取数据，经部件处理与展示。</li>
+                <li>用户控件：交互元素使用户可与仪表盘互动，如向设备下发命令或调整设置。</li>
+                <li>告警：良好的IoT仪表盘平台提供实时告警，帮助发现异常与问题。</li>
             </ul>
-            <div class="text-content">These components work together to ensure that the dashboard is providing valuable insights from the data. Based on the visualized data, enterprises can build their strategy and vision.</div>
-            <h2>The Importance of IoT Monitoring Dashboards</h2>
-            <div class="text-content medium-margin">IoT monitoring dashboards play a pivotal role in enhancing operational efficiency, optimizing resource utilization, and enabling data-driven decision-making. Here are five compelling reasons why integrating IoT dashboards is essential:</div>
+            <div class="text-content">这些部分协同工作，使仪表盘从数据中提供有价值洞察，企业可基于可视化数据制定策略与规划。</div>
+            <h2>IoT 监控仪表盘的重要性</h2>
+            <div class="text-content medium-margin">IoT 监控仪表盘在提升运营效率、优化资源利用与支撑数据驱动决策方面至关重要。以下是集成IoT仪表盘的五个重要原因：</div>
             <ul class="list">
-                <li>Real-Time insights. IoT data dashboards provide online visibility into the performance of connected devices and processes, enabling timely responses to critical events and preventing potential failures.</li>
-                <li>Data-driven decision-making. By aggregating and analyzing data from various sources, IoT data dashboards empower businesses to make data-driven decisions.</li>
-                <li>Efficient resource management. Enhanced Productivity: The use of IoT dashboards leads to reduced downtime and improved operational efficiency.</li>
-                <li>Unveiling of business opportunities. Enterprises can compare real-time data with historical data to identify new opportunities for growth and development.</li>
-                <li>Cost savings. By monitoring energy usage and device performance, businesses can optimize their operations and reduce costs.</li>
+                <li>实时洞察：IoT 数据仪表盘提供联网设备与流程的在线可见性，便于对关键事件及时响应并预防潜在故障。</li>
+                <li>数据驱动决策：通过汇聚与分析多源数据，IoT 数据仪表盘支持企业做出数据驱动决策。</li>
+                <li>高效资源管理：采用IoT仪表盘可减少停机、提升运营效率。</li>
+                <li>发现业务机会：企业可对比实时与历史数据，发现新的增长与拓展机会。</li>
+                <li>成本节约：通过监控能耗与设备表现，企业可优化运营、降低成本。</li>
             </ul>
-            <h2 class="line-height-small">An Indispensable IoT Control Panel: Features You Will Approve</h2>
-            <div class="text-content medium-margin">ThingsBoard solution templates are a powerful feature of the ThingsBoard IoT platform that can significantly reduce the time-to-market for your IoT products. Here, we delve into the key characteristics that make it a cornerstone for IoT deployments:</div>
+            <h2 class="line-height-small">不可或缺的IoT控制面板：您会认可的特性</h2>
+            <div class="text-content medium-margin">ThingsBoard 解决方案模板是平台的重要功能，可显著缩短IoT产品的上市时间。以下为其成为IoT部署基石的主要特点：</div>
             <ul class="list">
-                <li>ThingsBoard's IoT control panel boasts an intuitive, user-friendly interface.</li>
-                <li>Our IoT sensor dashboard empowers users with robust <a class="article-link" href="/device-management/">iot device management</a> functionalities.</li>
-                <li>Tailoring the dashboard to your specific needs is a breeze with ThingsBoard.</li>
-                <li>ThingsBoard's control panel incorporates a powerful rule engine that enables automated actions based on predefined conditions.</li>
-                <li>Our IoT device dashboard provides comprehensive tools for data analysis and visualization.</li>
-                <li>Security is paramount in IoT deployments, so we offer robust access control features, ensuring that only authorized personnel have access to sensitive information and critical functionalities.</li>
+                <li>ThingsBoard 的IoT控制面板界面直观易用。</li>
+                <li>我们的IoT传感器仪表盘提供强大的<a class="article-link" href="/device-management/">IoT 设备管理</a>能力。</li>
+                <li>使用 ThingsBoard 可轻松按需定制仪表盘。</li>
+                <li>ThingsBoard 控制面板内置规则引擎，可根据预定义条件执行自动化动作。</li>
+                <li>我们的IoT设备仪表盘提供完善的数据分析与可视化工具。</li>
+                <li>安全在IoT部署中至关重要，我们提供细粒度访问控制，确保仅授权人员可访问敏感信息与关键功能。</li>
             </ul>
-            <div class="text-content">For a detailed overview of ThingsBoard's Solution Templates, you can refer to the <a class="article-link" href="/docs/pe/solution-templates/overview/">IoT Solution templates overview</a>.</div>
-            <h2>IoT Monitoring Dashboard Makes Your Business Goals Achievable</h2>
-            <div class="text-content medium-margin">Achieving tangible business objectives requires a strategic approach. An IoT dashboard app serves as a linchpin in this endeavor, offering practical solutions to common challenges encountered during IoT implementation:</div>
+            <div class="text-content">如需了解 ThingsBoard 解决方案模板的详细概览，请参阅<a class="article-link" href="/docs/pe/solution-templates/overview/">IoT 解决方案模板概览</a>。</div>
+            <h2>IoT 监控仪表盘助您达成业务目标</h2>
+            <div class="text-content medium-margin">实现可衡量的业务目标需要策略支撑。IoT 仪表盘应用是其中的关键，为IoT落地中的常见挑战提供实用方案：</div>
         </div>
     </div>
 </div>
 <div class="details-cards-block-wrapper">
     <div class="details-cards-block">
         <div class="details-card">
-            <span class="header">Proactive issue resolution</span>
-            <span class="content">enables proactive maintenance, allowing businesses to address issues before they impact operations.</span>
+            <span class="header">主动问题处理</span>
+            <span class="content">支持预防性维护，在问题影响运营前予以解决。</span>
         </div>
         <div class="details-card">
-            <span class="header">Scalability and future-proofing</span>
-            <span class="content">ensures scalability, allowing businesses to seamlessly integrate new devices and technologies as they evolve.</span>
+            <span class="header">可扩展与面向未来</span>
+            <span class="content">保证可扩展性，便于随技术演进无缝接入新设备与技术。</span>
         </div>
         <div class="details-card">
-            <span class="header">Global market access</span>
-            <span class="content">break down geographical barriers, allowing businesses to offer their products and services globally.</span>
+            <span class="header">全球市场触达</span>
+            <span class="content">打破地域限制，支持企业向全球提供产品与服务。</span>
         </div>
     </div>
 </div>
 <div class="block-wrapper wrapper-main-color medium-padding">
     <div class="block-content">
         <div class="text-wrapper">
-            <div class="text-content">By addressing these common business challenges, an IoT dashboard not only makes your business goals achievable but also gives you a competitive edge in the market.</div>
-            <h2>IoT Dashboard Examples</h2>
-            <div class="text-content medium-margin">IoT dashboards are versatile and can be tailored to meet the specific needs of various industries and applications. Here are some general IoT dashboard examples:</div>
-            <h3 class="small-padding">Equipment Monitoring Dashboard:</h3>
-            <div class="text-content medium-margin">This type of dashboard visualizes sensor data, allowing the manufacturing and facility management department to grasp the operation status of the entire plant, the equipment of each production line, and faulty equipment in real-time.</div>
+            <div class="text-content">通过应对这些常见业务挑战，IoT 仪表盘不仅使业务目标可达成，还能在市场中赢得竞争优势。</div>
+            <h2>IoT 仪表盘示例</h2>
+            <div class="text-content medium-margin">IoT 仪表盘用途广泛，可针对不同行业与应用定制。以下为常见示例：</div>
+            <h3 class="small-padding">设备监控仪表盘：</h3>
+            <div class="text-content medium-margin">此类仪表盘将传感器数据可视化，便于制造与设施管理部门实时掌握全厂运行状态、各产线设备及故障设备情况。</div>
         </div>
         <img class="image" srcset="/images/iot-articles/monitoring_dashboard_2_1090x681.webp 1090w, /images/iot-articles/monitoring_dashboard_2_2180x1362.webp 2180w" sizes="(max-width: 1920px) 1090px, (min-width: 1921px) 2180px" src="/images/iot-articles/monitoring_dashboard_2_1090x681.webp" alt="IoT energy management office monitoring"/>
         <div class="text-wrapper">
-            <h3 class="small-padding">Power Consumption Dashboard:</h3>
-            <div class="text-content">In buildings such as factories and warehouses, a power consumption dashboard can be used to monitor energy usage. It can issue a warning message when consumption is close to a preset value, enabling appropriate and effective power-saving measures.</div>
+            <h3 class="small-padding">用电量仪表盘：</h3>
+            <div class="text-content">在工厂、仓库等建筑中，可用用电量仪表盘监控能耗；当接近预设值时发出告警，便于采取有效节电措施。</div>
         </div>
         <img class="image" srcset="/images/iot-articles/monitoring_dashboard_3_1090x658.webp 1090w, /images/iot-articles/monitoring_dashboard_3_2180x1316.webp 2180w" sizes="(max-width: 1920px) 1090px, (min-width: 1921px) 2180px" src="/images/iot-articles/monitoring_dashboard_3_1090x658.webp" alt="IoT energy management office monitoring"/>
         <div class="text-wrapper">
-            <h3 class="small-padding">Predictive Management Dashboard:</h3>
-            <div class="text-content">This dashboard monitors whether the actual production results of each production line align with the original plan. It thoroughly analyzes the reasons for any gaps and uses them for improvement in all aspects of the next production stage.</div>
+            <h3 class="small-padding">预测管理仪表盘：</h3>
+            <div class="text-content">该仪表盘监控各产线实际产量与计划的符合度，深入分析偏差原因并用于下一阶段全方位改进。</div>
         </div>
         <img class="image" srcset="/images/iot-articles/monitoring_dashboard_4_1090x672.webp 1090w, /images/iot-articles/monitoring_dashboard_4_2180x1344.webp 2180w" sizes="(max-width: 1920px) 1090px, (min-width: 1921px) 2180px" src="/images/iot-articles/monitoring_dashboard_4_1090x672.webp" alt="IoT energy management office monitoring"/>
         <div class="text-wrapper">
-            <h2>How to Use the ThingsBoard Dashboard</h2>
-            <div class="sub-title">To use the ThingsBoard IoT dashboard open-source, you can follow these steps:</div>
+            <h2>如何使用 ThingsBoard 仪表盘</h2>
+            <div class="sub-title">使用 ThingsBoard 开源IoT仪表盘可按以下步骤操作：</div>
             <ul class="list">
-                <li>Login to your ThingsBoard instance and navigate to the “Entities” section.</li>
-                <li>Click on the “+” icon in the top right corner of the table and then select "Add new dashboard".</li>
-                <li>Input a name for your IoT web dashboard. No other changes are required at this time.</li>
-                <li>After creating the dashboard IoT for free, you can start adding widgets to it.</li>
-                <li>Each widget can be configured to display data from one or more devices. You can choose the type of data to display, the format of the data, and other settings.</li>
-                <li>Once you have added and configured all your widgets, don’t forget to save your dashboard.</li>
+                <li>登录 ThingsBoard 实例并进入 「实体」部分。</li>
+                <li>点击表格右上角「+」图标，选择「添加新仪表盘」。</li>
+                <li>为IoT Web 仪表盘输入名称，此处无需其他修改。</li>
+                <li>免费创建仪表盘后，即可开始添加部件。</li>
+                <li>每个部件可配置为展示一个或多个设备的数据，包括数据类型、展示格式等。</li>
+                <li>添加并配置完所有部件后，请保存仪表盘。</li>
             </ul>
-            <div class="text-content">For a more detailed guide on how to use the dashboard for IoT devices, you can refer to our <a class="article-link" href="/docs/pe/user-guide/dashboards/">Working with IoT dashboards</a> guide.</div>
-            <h2>ThingsBoard IoT Dashboard in Action (Case Studies)</h2>
+            <div class="text-content">更详细的IoT设备仪表盘使用说明请参阅<a class="article-link" href="/docs/pe/user-guide/dashboards/">使用 IoT 仪表盘</a>指南。</div>
+            <h2>ThingsBoard IoT 仪表盘实践（案例）</h2>
         </div>
         <div class="definitions-block">
             <div class="definitions-list">
                 <div class="definitions-list-item one-to-one-and-half align-start">
-                    <div class="term bold padding-top">Asset Management</div>
-                    <div class="definition">By implementing ThingsBoard's IoT Dashboard, the facility gained real-time visibility into machine performance and production metrics. Predictive maintenance alerts ensured timely repairs, reducing downtime.</div>
+                    <div class="term bold padding-top">资产管理</div>
+                    <div class="definition">引入 ThingsBoard IoT 仪表盘后，该设施获得了设备性能与生产指标的实时可见性，预测性维护告警保障及时维修，减少停机。</div>
                 </div>
                 <div class="definitions-list-item one-to-one-and-half align-start">
-                    <div class="term bold">Enhancing Retail Customer Experience</div>
-                    <div class="definition">ThingsBoard's IoT Dashboard tracked foot traffic, analyzed customer behavior, and monitored inventory levels. Insights gained led to strategic product placements and personalized marketing efforts.</div>
+                    <div class="term bold">提升零售客户体验</div>
+                    <div class="definition">ThingsBoard IoT 仪表盘追踪客流、分析客户行为并监控库存，所得洞察支撑选品与个性化营销。</div>
                 </div>
                 <div class="definitions-list-item one-to-one-and-half align-start">
-                    <div class="term bold padding-top">Device Connectivity & Data Collection</div>
-                    <div class="definition">With ThingsBoard's IoT Dashboard, the provider gained real-time monitoring of device performance and proactive alerts for potential issues.</div>
+                    <div class="term bold padding-top">设备连接与数据采集</div>
+                    <div class="definition">通过 ThingsBoard IoT 仪表盘，该供应商实现了设备性能的实时监控与潜在问题的主动告警。</div>
                 </div>
                 <div class="definitions-list-item one-to-one-and-half align-start">
-                    <div class="term bold">Optimizing Agriculture Practices</div>
-                    <div class="definition">Using ThingsBoard's IoT Dashboard, the farm monitored soil moisture, temperature, and crop health. Data-driven irrigation and fertilization strategies were implemented.</div>
+                    <div class="term bold">优化农业实践</div>
+                    <div class="definition">农场使用 ThingsBoard IoT 仪表盘监控土壤湿度、温度与作物状况，并实施数据驱动的灌溉与施肥策略。</div>
                 </div>
             </div>
         </div>
         <div class="text-wrapper">
-            <h2>Mobile app for remote iot visualize data online</h2>
-            <div class="text-content medium-margin">Mobile native app gives fast and intuitive access to the monitored system and allows to quickly find required info or react on potential issues. Mobile monitoring application gives more control by enabling input from mobile camera for scaning qr-codes/bar codes, for example for quick navigation to monitoring page of required device. Also, GPS info from mobile device improve experience for location tracking cases when user can see nearest devices/systems and their state. ThingsBoard has flutter mobile SDK for creating native applications fast. Dashboard layout can be configured differently for PC and mobile devices, ThingsBoard widgets and dashboard are mobile friendly and adaptive, so you can reuse same monitoring dashboard for web-based monitoring and from mobile application.</div>
-            <h2>IoT Monitoring Software Integration with 3-rd party systems</h2>
-            <div class="text-content medium-margin">Integration of IT and OT systems of the company is important aspect operational effectiveness. Metrics and signals collected form IoT sensors can be integrated with other customer systems to improve operational visibility and automated processes. For example monitoring application that collects data from IoT energy meters can be integrated with the company financial systems to automatically generate invoices or build cost reports. In industrial domain data from vibration and ultrasonic sensors used to generate alerts for maintenance team. In that case once alert generated, 3rd party system that is responsible for company incident management automatically notified about alert and maintenance tam can react accordingly. Our platform support bidirectional integration with external systems using different communication channels and API. Most common are Rest API, MQTT and via message broker.</div>
-            <h2>Wrapping Up</h2>
-            <div class="text-content medium-margin">When it comes to IoT management, ThingsBoard strives to be a leader among IoT solutions. With a seasoned team at the helm, we have crafted the best IoT dashboard that effortlessly transforms complex challenges into intuitive solutions.</div>
-            <div class="text-content medium-margin">Our user-friendly free IoT dashboard software makes it easy to navigate the intricacies of IoT. By offering a range of powerful tools, we help businesses unlock the full potential of their connected ecosystems.</div>
-            <div class="text-content">We offer a refreshing approach that combines cutting-edge technology with user-friendly design. With ThingsBoard, you’re not just choosing an IoT platform; you’re choosing a partner dedicated to helping you achieve your business goals.</div>
+            <h2>移动端远程在线查看 IoT 数据</h2>
+            <div class="text-content medium-margin">原生移动应用提供对监控系统的快速直观访问，便于快速查找所需信息或响应潜在问题。移动监控应用支持摄像头扫描二维码/条形码，例如快速跳转到指定设备的监控页；移动设备GPS也可提升位置追踪场景下的体验，用户可查看附近设备/系统及状态。ThingsBoard 提供 Flutter 移动 SDK 以快速构建原生应用。仪表盘布局可为PC与移动端分别配置，ThingsBoard 部件与仪表盘适配移动端，同一监控仪表盘可在Web与移动应用中复用。</div>
+            <h2>IoT 监控软件与第三方系统集成</h2>
+            <div class="text-content medium-margin">企业IT与OT系统的集成是运营效率的重要一环。来自IoT传感器的指标与信号可与客户其他系统集成，提升运营可见性与自动化流程。例如，从IoT电表采集数据的监控应用可与财务系统集成，自动生成账单或成本报表；工业场景中振动与超声波传感器数据可生成维护告警，告警产生后由负责事件管理的第三方系统自动接收，维护团队据此响应。本平台支持通过不同通信通道与API与外部系统双向集成，常用方式包括 REST API、MQTT 及消息代理。</div>
+            <h2>总结</h2>
+            <div class="text-content medium-margin">在IoT管理领域，ThingsBoard 致力于成为IoT解决方案的领先者。我们凭借成熟团队，打造了能够将复杂挑战转化为直观方案的IoT仪表盘。</div>
+            <div class="text-content medium-margin">我们易用的免费IoT仪表盘软件让您轻松应对IoT的复杂性，通过一系列强大工具帮助企业释放联网生态的全部潜力。</div>
+            <div class="text-content">我们以前沿技术与易用设计相结合。选择 ThingsBoard，不仅是选择IoT平台，更是选择一位致力于助您实现业务目标的伙伴。</div>
         </div>
     </div>
 </div>
@@ -172,27 +172,27 @@ redirect_from: "/docs/services/monitoring-dashboard/"
     <div class="block-content">
         <div class="contact-us-content">
             <div class="info">
-                <div class="title">Ready to launch your unique product?</div>
-                <div class="text">Leave us your name and email and we will get back to you within 2 business days</div>
+                <div class="title">准备发布您的独特产品？</div>
+                <div class="text">留下姓名与邮箱，我们将在 2 个工作日内回复</div>
             </div>
             <form id="Serv_MonitDash_ReadyToLaunch" class="contact-form gtm_form readyToLaunchForm" method="post" onsubmit="return validateContactForm(this)">
                 <fieldset>
                     <div class="form-section">
                         <div class="form-element">
                             <label for="name">
-                                <input id="name" class="contact-us-form-control" value="" placeholder="Your Name" name="name" type="text" size="40" maxlength="50">
-                                <p>Name*</p>
+                                <input id="name" class="contact-us-form-control" value="" placeholder="您的姓名" name="name" type="text" size="40" maxlength="50">
+                                <p>姓名*</p>
                             </label>
                         </div>
                         <div class="form-element">
                             <label for="email">
-                                <input id="email" class="contact-us-form-control" value="" placeholder="Enter Email" name="email" type="email" size="40" maxlength="80">
-                                <p>Email Address*</p>
+                                <input id="email" class="contact-us-form-control" value="" placeholder="请输入邮箱" name="email" type="email" size="40" maxlength="80">
+                                <p>邮箱地址*</p>
                             </label>
                         </div>
                     </div>
                     <div class="submit-button-container">
-                        <input class="contact-us-button" value="Submit" type="submit">
+                        <input class="contact-us-button" value="提交" type="submit">
                     </div>
                 </fieldset>
             </form>

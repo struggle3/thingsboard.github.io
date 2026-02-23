@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Installing ThingsBoard PE on Windows
-description: Installing ThingsBoard on Windows
+title: 在 Windows 上安装 ThingsBoard PE
+description: 在 Windows 上安装 ThingsBoard PE
 
 ---
 

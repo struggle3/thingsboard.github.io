@@ -1,66 +1,64 @@
-RPC to Device allows you to execute an OPC-UA server method on a specific device.
-It is important to note that the method you are calling must be defined on the OPC-UA server.
+RPC 到设备允许在特定设备上执行 OPC-UA 服务器的方法。
+需注意，调用的方法必须在 OPC-UA 服务器上已定义。
 
-As an example, we will use ThingsBoard OPC-UA Demo Server, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard OPC-UA 演示服务器，可通过 Docker 及以下命令运行：
 ```bash
 docker run -it -p 4840:4840 thingsboard/tb-gw-opcua-server:latest
 ```
 
-The server has the following endpoint URL: `opc.tcp://0.0.0.0:4840/freeopcua/server/`.
+服务器端点 URL 为：`opc.tcp://0.0.0.0:4840/freeopcua/server/`。
 
-#### Example: Multiplying Numbers
+#### 示例：乘法运算
 
-We are interested in "**multiply**" method node which will multiply two numbers that we will pass as arguments.
-To call this method, first we need to configure the OPC-UA connector to support RPC calls. For this purpose, follow 
-these steps:
+我们关注 "**multiply**" 方法节点，该方法将我们传入的两个数字相乘。
+要调用该方法，需先配置 OPC-UA 连接器以支持 RPC 调用。按以下步骤操作：
 
 {% assign rpcToDevice = '
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-1.png,
-        title: Go to "**Entities**" → "**Gateways**" in the right sidebar and select your gateway.
+        title: 在右侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/opc-ua-connector/examples/attribute-updates-relative-path-1.png,
-        title: Select the created OPC-UA connector, click on the "**Data mapping**" tab. Make sure you have configured and connected device (if you do not know how to do it, see [Getting Started](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"} guide or [Connection settings](/docs/iot-gateway/config/opc-ua/#connection-settings) and [Data mapping](/docs/iot-gateway/config/opc-ua/#data-mapping) sections of this guide). Click on the "**Pencil**" icon on a device you want to configure RPC method for.
+        title: 选择已创建的 OPC-UA 连接器，点击“**数据映射**”标签。请确保已配置并连接设备（若不清楚如何操作，请参阅[入门指南](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"}或本指南的[连接设置](/docs/iot-gateway/config/opc-ua/#connection-settings)和[数据映射](/docs/iot-gateway/config/opc-ua/#data-mapping)）。点击要配置 RPC 方法的设备旁的“**铅笔**”图标。
     ===
         image: /images/gateway/opc-ua-connector/examples/rpc-to-device-1.png,
-        title: Scroll down to the "**RPC methods**" section and click on the "**Pencil**" icon to edit the RPC methods.
+        title: 向下滚动至“**RPC 方法**”部分，点击“**铅笔**”图标编辑 RPC 方法。
     ===
         image: /images/gateway/opc-ua-connector/examples/rpc-to-device-2.png,
-        title: Click on the "Add method" button. In our case, we will add the `multiply` method, so fill in the "**Method**" field with `multiply` and in the "**Arguments**" field, enter the arguments that the method accepts, in our case it is two numbers, feel free to enter any numbers.
+        title: 点击“添加方法”按钮。此处添加 `multiply` 方法，故在“**方法**”中填 `multiply`，在“**参数**”中填该方法接受的参数，此处为两个数字，可填任意数字。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-relative-path-9.png,
-        title: Remember to save your changes by clicking the "**Apply**" button.
+        title: 记得点击“**应用**”按钮保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=rpcToDevice %}
 
-We are done with configuration, so let's check how to call the method. In the RPC Debug Terminal widget, run the 
-following command:
+配置完成后，在 RPC 调试终端部件中执行以下命令调用方法：
 
 ```bash
 multiply
 ```
 
-In this case, the method will be called with the arguments that we specified in the configuration (default arguments). 
-As you remember, in our case, we enter 5 and 4, so the result is:
+此情况下，将使用配置中的参数（默认参数）调用方法。
+此处参数为 5 和 4，结果为：
 
 ![image](/images/gateway/opc-ua-connector/examples/result-device-overview-5.png)
 
-Also, we can pass arguments to the method directly from the RPC Debug Terminal widget using the following command:
+也可在 RPC 调试终端部件中直接传入参数调用方法：
 
 ```bash
 multiply [3,4]
 ```
 
-Response:
+响应：
 
 ![image](/images/gateway/opc-ua-connector/examples/result-device-overview-6.png)
 
-Full configuration for OPC-UA connector for the example above will look like this:
+上述示例的 OPC-UA 连接器完整配置如下：
 
 ```json
 {

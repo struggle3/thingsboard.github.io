@@ -6,16 +6,16 @@
 {% assign base_version_parts = base_version | split: "." %}
 {% assign patch_part = base_version_parts[2] %}
 {% if patch_status == "true" %}
-If you are upgrading from {{ previous_version }}, you **must** run the script below. However, if you are upgrading from version {{ family | append: "." | append: patch_part | append: ".x" }}, **DO NOT** run the upgrade script; proceed directly to starting the service.
+若从{{ previous_version }}升级，**必须**执行下方脚本。但若从{{ family | append: "." | append: patch_part | append: ".x" }}版本升级，**请勿**执行升级脚本，直接启动服务即可。
 {% else %}
-If you are upgrading from version {{ previous_version }}, you must run the script below
+若从{{ previous_version }}版本升级，必须执行下方脚本
 {% endif %}
 {% endcapture %}
 
 
-1. Change the version of the `thingsboard/tb-node` in the `docker-compose.yml` file to the **{{ current_version }}**.
+1. 将`docker-compose.yml`中`thingsboard/tb-node`的版本改为**{{ current_version }}**。
 
-2. Execute the following commands:
+2. 执行以下命令：
 
 ```bash
 docker pull thingsboard/tb-node:{{ current_version }}

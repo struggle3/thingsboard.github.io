@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: Dart API Client
-description: ThingsBoard API client library for Dart developers
+description: 面向 Dart 开发者的 ThingsBoard API 客户端库
 
 ---
 {% assign dartClientVer = site.release.ce_dart_client_ver %}

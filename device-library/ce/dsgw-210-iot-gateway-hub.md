@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect DSGW-210 Smart Gateway Hub to ThingsBoard?
-category: Other devices
+title: 如何将 DSGW-210 Smart Gateway Hub 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [Bluetooth, Zigbee, LTE, WIFI, Ethernet]
 vendor: Dusun
 hasIntegrationDeviceConfiguration: true

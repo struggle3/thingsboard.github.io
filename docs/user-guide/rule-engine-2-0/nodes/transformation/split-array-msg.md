@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: split array msg
-description: Splits an incoming message with JSON array data into multiple separate messages, creating one new message for each array element.
+description: 将包含 JSON 数组数据的入站消息拆分为多条独立消息，为每个数组元素创建一条新消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -17,18 +17,18 @@
 * TOC 
 {:toc}
 
-MQTT Based Authentication is available for devices that connect using MQTT. To do this, you need to change the device credential type from "Access token" to "MQTT Basic".
-Basic MQTT credentials consist of the optional client id, username and password. See [MQTT API](/docs/{{docsPrefix}}reference/mqtt-api/) for more details.
+使用 MQTT 连接的设备可采用 MQTT 认证。需将设备凭证类型从「Access token」改为「MQTT Basic」。
+Basic MQTT 凭证包含可选的 client id、username 和 password。详见 [MQTT API](/docs/{{docsPrefix}}reference/mqtt-api/)。
 
-Next, we will explore how to change the device credentials and how clients can connect to the device using these credentials.
-Let's consider several options:
+下面说明如何修改设备凭证以及客户端如何用这些凭证连接设备。
+可选方案包括：
 
-## Authentication based on Client ID only. 
+## 仅基于 Client ID 的认证
 
-To enable this, only the client ID needs to be populated in the device credentials. MQTT clients will be able to connect if they specify correct client ID.
+启用此方式时，只需在设备凭证中填写 client ID。MQTT 客户端在指定正确 client ID 后即可连接。
 
-Let's review a simple command to publish telemetry readings using only MQTT client ID to the ThingsBoard{{CLOUD}}.
-The command is using plain MQTT without TLS:
+以下示例命令仅使用 MQTT client ID 向 ThingsBoard{{CLOUD}} 发布 telemetry 读数。
+命令使用 plain MQTT，不启用 TLS：
 
 {% if (docsPrefix == "pe/") or (docsPrefix == null) %}
 ```bash
@@ -43,35 +43,35 @@ mosquitto_pub -d -q 1 -h "{{mqttHostName}}" -p "1883" -t "v1/devices/me/telemetr
 {: .copy-code}
 {% endif %}
 
-where:
+其中：
 
 {{YOUR_TB_HOST}}
-* **YOUR_CLIENT_ID** with your client id.
+* **YOUR_CLIENT_ID** 替换为您的 client id。
 
 <br>
-ThingsBoard offers a convenient "Check Connectivity" feature that automatically generates a command based on your host and the device credentials you provide. All you have to do is copy and run it.
+ThingsBoard 提供「Check Connectivity」功能，会根据 host 和您提供的设备凭证自动生成命令，您只需复制并执行即可。
 
-Let's publish telemetry readings using only MQTT client ID. First, change the credential type for your device from "Access token" to "MQTT Basic":
+以下示例仅使用 MQTT client ID 发布 telemetry。首先，将设备凭证类型从「Access token」改为「MQTT Basic」：
 
 {% include images-gallery.html showListImageTitles="true" imageCollection="client-id-only-1" %}
 
-After changing device credentials, use the "Check connectivity" feature to post telemetry:
+修改设备凭证后，使用「Check connectivity」功能发布 telemetry：
 
-- Click "Check connectivity" button to open the corresponding window;
-- In the opened window, select your operating system;
-- Install the necessary client tools using the command from the guide;
-- Copy and run command to publish telemetry;
+- 点击「Check connectivity」按钮打开对应窗口；
+- 在弹出窗口中选择操作系统；
+- 按指南命令安装客户端工具；
+- 复制并执行发布 telemetry 的命令；
 
-Once you have successfully executed the command, you should see the published "temperature" readings.
+命令执行成功后，应能看到已发布的 temperature 读数。
 
 {% include images-gallery.html imageCollection="client-id-only-2" %}
 
-## Authentication based on Username and Password. 
+## 基于 Username 和 Password 的认证
 
-For this purpose, only the username and password need to be populated in the credentials form.
-MQTT Clients will be able to connect if they specify correct username and password.
+只需在凭证表单中填写 username 和 password。
+MQTT 客户端在指定正确的 username 和 password 后即可连接。
 
-Let's review a simple command to publish telemetry readings using MQTT client username and password to the ThingsBoard{{CLOUD}}. The command is using plain MQTT without TLS:
+以下示例命令使用 MQTT client username 和 password 向 ThingsBoard{{CLOUD}} 发布 telemetry 读数。命令使用 plain MQTT，不启用 TLS：
 
 {% if (docsPrefix == "pe/") or (docsPrefix == null) %}
 ```bash
@@ -86,34 +86,34 @@ mosquitto_pub -d -q 1 -h "{{mqttHostName}}" -p "1883" -t "v1/devices/me/telemetr
 {: .copy-code}
 {% endif %}
 
-where:
+其中：
 
 {{YOUR_TB_HOST}}
- * **YOUR_CLIENT_USERNAME**, **YOUR_CLIENT_PASSWORD** with your client username and password.
+* **YOUR_CLIENT_USERNAME**、**YOUR_CLIENT_PASSWORD** 替换为您的 client username 和 password。
 
 <br>
-In the "Check Connectivity", you'll find an auto-generated command based on your host and device credentials that you've provided. All you have to do is copy and run it.
+「Check Connectivity」会根据您提供的 host 和设备凭证自动生成命令，您只需复制并执行即可。
 
-Let's publish telemetry readings using the MQTT client username and password. First, change the credential type for your device from "Access token" to "MQTT Basic":
+以下示例使用 MQTT client username 和 password 发布 telemetry。首先，将设备凭证类型从「Access token」改为「MQTT Basic」：
 
 {% include images-gallery.html showListImageTitles="true" imageCollection="username-and-password-1" %}
 
-After changing device credentials, use the "Check connectivity" feature to post telemetry:
+修改设备凭证后，使用「Check connectivity」功能发布 telemetry：
 
-- Click "Check connectivity" button to open the corresponding window;
-- In the opened window, select your operating system;
-- Install the necessary client tools using the command from the guide;
-- Copy and run command to publish telemetry;
+- 点击「Check connectivity」按钮打开对应窗口；
+- 在弹出窗口中选择操作系统；
+- 按指南命令安装客户端工具；
+- 复制并执行发布 telemetry 的命令；
 
-Once you have successfully executed the command, you should see the published "temperature" readings.
+命令执行成功后，应能看到已发布的 temperature 读数。
 
 {% include images-gallery.html imageCollection="username-and-password-2" %}
 
-## Authentication based on Client ID, Username and Password. 
+## 基于 Client ID、Username 和 Password 的认证
 
-For this option, you should populate Client ID, Username and Password. MQTT Clients will be able to connect if they specify correct combination of client ID, username and password.
+在此选项中，需填写 Client ID、Username 和 Password。MQTT 客户端在指定正确的 client ID、username 和 password 组合后可连接。
 
-Let's review a simple command to publish telemetry readings using MQTT client ID, username and password to the ThingsBoard{{CLOUD}}. The command is using plain MQTT without TLS:
+以下示例命令使用 MQTT client ID、username 和 password 向 ThingsBoard{{CLOUD}} 发布 telemetry 读数。命令使用 plain MQTT，不启用 TLS：
 
 {% if (docsPrefix == "pe/") or (docsPrefix == null) %}
 ```bash
@@ -128,55 +128,55 @@ mosquitto_pub -d -q 1 -h "{{mqttHostName}}" -p "1883" -t "v1/devices/me/telemetr
 {: .copy-code}
 {% endif %}
 
-where:
+其中：
 
 {{YOUR_TB_HOST}}
-* **YOUR_CLIENT_ID** with your client id;
-* **YOUR_CLIENT_USERNAME**, **YOUR_CLIENT_PASSWORD** with your client username and password.
+* **YOUR_CLIENT_ID** 替换为您的 client id；
+* **YOUR_CLIENT_USERNAME**、**YOUR_CLIENT_PASSWORD** 替换为您的 client username 和 password。
 
 <br>
-In the "Check Connectivity", you'll find an auto-generated command based on your host and device credentials that you've provided. All you have to do is copy and run it.
+「Check Connectivity」会根据您提供的 host 和设备凭证自动生成命令，您只需复制并执行即可。
 
-Let's publish telemetry readings using the MQTT client ID, username and password. First, change the credential type for your device from "Access token" to "MQTT Basic":
+以下示例使用 MQTT client ID、username 和 password 发布 telemetry。首先，将设备凭证类型从「Access token」改为「MQTT Basic」：
 
 {% include images-gallery.html showListImageTitles="true" imageCollection="client-id-username-and-password-1" %}
 
-After changing device credentials, use the "Check connectivity" feature to post telemetry:
+修改设备凭证后，使用「Check connectivity」功能发布 telemetry：
 
-- Click "Check connectivity" button to open the corresponding window;
-- In the opened window, select your operating system;
-- Install the necessary client tools using the command from the guide;
-- Copy and run command to publish telemetry;
- 
-Once you have successfully executed the command, you should see the published "temperature" readings.
+- 点击「Check connectivity」按钮打开对应窗口；
+- 在弹出窗口中选择操作系统；
+- 按指南命令安装客户端工具；
+- 复制并执行发布 telemetry 的命令；
+
+命令执行成功后，应能看到已发布的 temperature 读数。
 
 {% include images-gallery.html imageCollection="client-id-username-and-password-2" %}
 
-## MQTTS (MQTT over TLS)
+## MQTTS（MQTT over TLS）
 
-One-way SSL authentication is a standard authentication mode, where your client device verifies the identity of a server using server certificate. {% unless (docsPrefix == "pe/") or (docsPrefix == null) %}This certificate will be used by MQTT client to validate the server certificate.{% endunless %}
+单向 SSL 认证是标准模式，客户端通过服务器证书验证服务器身份。{% unless (docsPrefix == "pe/") or (docsPrefix == null) %}该证书用于 MQTT 客户端验证服务器证书。{% endunless %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix == null) %}
-Follow the [MQTT over SSL](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/) guide to provision server certificate for your own ThingsBoard instance. This certificate will be used by MQTT client to validate the server certificate.
+按 [MQTT over SSL](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/) 指南为自有 ThingsBoard 实例配置服务器证书。该证书用于 MQTT 客户端验证服务器证书。
 
-Once provisioned, use "Check connectivity" feature to download the CA root certificate to your working directory and publish telemetry. But first, change the credential type for your device from "Access token" to "MQTT Basic":
+配置完成后，使用「Check connectivity」下载 CA 根证书到工作目录并发布 telemetry。首先，将设备凭证类型从「Access token」改为「MQTT Basic」：
 {% endif %}
 {% if docsPrefix contains "paas/" %}
-Use "Check connectivity" feature to download the CA root certificate and publish telemetry. But first, change the credential type for your device from "Access token" to "MQTT Basic":
+使用「Check connectivity」下载 CA 根证书并发布 telemetry。首先，将设备凭证类型从「Access token」改为「MQTT Basic」：
 {% endif %}
 
 {% include images-gallery.html showListImageTitles="true" imageCollection="mqtts-options-1" %}
 
-- Now, click "Check connectivity" button. In the opened window, select your operating system and install the necessary client tools using the command from the guide;
-- Switch to the "MQTTs" protocol. Copy and run the first command to download the valid CA certificate;
-- Copy and run the second command from your working directory (where you saved the certificate) to publish telemetry. This command uses the *{{PEM_CERTIFICATE}}* certificate to establish a secure connection with the ThingsBoard{{CLOUD}} and the device credentials you specified for its authentication.
+- 点击「Check connectivity」按钮。在弹出窗口中选择操作系统，并按指南命令安装客户端工具；
+- 切换到「MQTTs」协议。复制并执行第一条命令下载有效 CA 证书；
+- 从工作目录（证书保存位置）复制并执行第二条命令发布 telemetry。该命令使用 *{{PEM_CERTIFICATE}}* 证书与 ThingsBoard{{CLOUD}} 建立安全连接，并使用您为设备配置的凭证进行认证。
 
-Once you have successfully executed the command, you should see the published "temperature" readings.
+命令执行成功后，应能看到已发布的 temperature 读数。
 
 {% include images-gallery.html imageCollection="mqtts-options-2" %}
 
 <br>
-Example of a generated command to publish telemetry using the *{{PEM_CERTIFICATE}}* certificate, {% unless docsPrefix contains 'paas/' %}host of your ThingsBoard instance (YOUR_TB_HOST),{% endunless %} client id (YOUR_CLIENT_ID), and client username and password (YOUR_CLIENT_USERNAME / YOUR_CLIENT_PASSWORD) of the selected device:
+以下为使用 *{{PEM_CERTIFICATE}}* 证书、{% unless docsPrefix contains 'paas/' %}ThingsBoard 实例 host (YOUR_TB_HOST)、{% endunless %}client id (YOUR_CLIENT_ID) 以及所选设备的 client username 和 password (YOUR_CLIENT_USERNAME / YOUR_CLIENT_PASSWORD) 发布 telemetry 的示例命令：
 
 {% if (docsPrefix == "pe/") or (docsPrefix == null) %}
 ```bash

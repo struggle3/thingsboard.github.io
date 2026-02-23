@@ -3,17 +3,16 @@
 * TOC 
 {:toc}
 
-[Loriot](https://loriot.io/){:target="_blank"} is LoRaWAN network designed for connecting your devices using LoRaWAN stack. After integrating LORIOT with the
-ThingsBoard, you can connect, communicate, process and visualize data from devices in the ThingsBoard IoT platform.
+[Loriot](https://loriot.io/){:target="_blank"}是用于通过LoRaWAN栈连接设备的LoRaWAN网络。将LORIOT与ThingsBoard集成后，可在ThingsBoard IoT平台中连接、通信、处理和可视化设备数据。
 
-## Register an account on Loriot
+## 在Loriot注册账户
 
-Here&#39;s how to get started with Loriot:
+以下为Loriot入门步骤：
 
-- Visit the [Loriot](https://loriot.io/){:target="_blank"} website.
-- Choose a service package — for example, select the **Community Public Network Server**.
-- Pick your preferred region and country.
-- Complete the registration process and log in to your Loriot account.
+- 访问[Loriot](https://loriot.io/){:target="_blank"}网站。
+- 选择服务套餐——例如选择**Community Public Network Server**。
+- 选择您偏好的区域和国家。
+- 完成注册并登录Loriot账户。
 
 {% include images-gallery.html imageCollection="create-loriot-account" %}
 

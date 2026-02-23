@@ -3,66 +3,66 @@
 {:toc}
 
 
-The [PROXY Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) is a simple protocol used to safely transport connection information such as the client's IP address across multiple layers of proxies or load balancers.
+[PROXY Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) 是一种简单协议，用于在多层代理或负载均衡器之间安全传输连接信息（如客户端 IP 地址）。
 
-TBMQ supports both **PROXY Protocol v1** and **v2**, enabling it to receive and process the real client IP and port, 
-which is critical for accurate auditing, rate limiting, access control, and understanding the actual source of client connections.
+TBMQ 同时支持 **PROXY Protocol v1** 和 **v2**，可接收并处理真实的客户端 IP 和端口，
+这对于准确审计、限流、访问控制及理解客户端连接的实际来源至关重要。
 
-- **PROXY Protocol v1**: A human-readable ASCII-based format that prepends connection metadata (e.g., IP addresses and ports) to the TCP stream.
-- **PROXY Protocol v2**: A more efficient binary format that provides the same information as v1 but with enhanced protocol support and better performance in high-throughput environments.
+- **PROXY Protocol v1**：人可读的基于 ASCII 的格式，在 TCP 流前添加连接元数据（如 IP 地址和端口）。
+- **PROXY Protocol v2**：更高效的二进制格式，提供与 v1 相同的信息，但支持更多协议且在高吞吐量环境下性能更好。
 
-By using PROXY Protocol, TBMQ can log, filter, and apply policies based on the real IP address of clients, which is otherwise masked by the proxy or load balancer.
+使用 PROXY Protocol，TBMQ 可根据客户端真实 IP 地址记录、过滤并应用策略，否则该地址会被代理或负载均衡器遮蔽。
 
-## How does the PROXY protocol work?
+## PROXY Protocol 工作原理
 
-The PROXY Protocol appends **meta-information** about the original client connection at the very start of the TCP stream. 
-This metadata is sent by the proxy or load balancer **before** any protocol-specific data, such as the MQTT CONNECT packet or the TLS handshake.
+PROXY Protocol 在 TCP 流的开头追加有关原始客户端连接的 **元信息**。
+此元数据由代理或负载均衡器在任意协议特定数据（如 MQTT CONNECT 包或 TLS 握手）**之前** 发送。
 
 ![image](/images/mqtt-broker/other/proxy-protocol.png)
 
-When a client connects to TBMQ through a proxy that supports PROXY Protocol, the connection flow is as follows:
+当客户端通过支持 PROXY Protocol 的代理连接 TBMQ 时，连接流程如下：
 
-1. The proxy accepts the TCP connection from the client.
-2. The proxy immediately sends a **PROXY Protocol header** containing:
-    - The client's **source IP** and **port**.
-    - The proxy's **destination IP** and **port**.
-    - The **protocol type** (TCP over IPv4 or IPv6).
-3. TBMQ, with PROXY Protocol enabled, reads this header first, extracts the real client information, and then continues processing the application data:
-    - For plain MQTT/WS connections: TBMQ processes the MQTT CONNECT packet next.
-    - For TLS-secured MQTT/WS connections: TBMQ proceeds with the **TLS handshake** after parsing the header.
+1. 代理接受客户端的 TCP 连接。
+2. 代理立即发送包含以下内容的 **PROXY Protocol 头**：
+    - 客户端的 **源 IP** 和 **端口**。
+    - 代理的 **目标 IP** 和 **端口**。
+    - **协议类型**（TCP over IPv4 或 IPv6）。
+3. 启用 PROXY Protocol 的 TBMQ 首先读取此头，提取真实客户端信息，然后继续处理应用数据：
+    - 对于明文 MQTT/WS 连接：TBMQ 随后处理 MQTT CONNECT 包。
+    - 对于 TLS 加密的 MQTT/WS 连接：TBMQ 解析头后继续进行 **TLS 握手**。
 
-- In **PROXY Protocol v1**, this header is sent in **ASCII** format, e.g.:
+- 在 **PROXY Protocol v1** 中，此头以 **ASCII** 格式发送，例如：
   ```
   PROXY TCP4 192.0.2.1 198.51.100.1 12345 1883\r\n
   ```
-- In **PROXY Protocol v2**, the header is in a **binary** format, more compact and efficient for high-performance systems.
+- 在 **PROXY Protocol v2** 中，头为 **二进制** 格式，更紧凑，适合高性能系统。
 
-This means TBMQ treats the very first bytes of every incoming connection as PROXY Protocol data, before interpreting it as an MQTT connection.
+这意味着 TBMQ 将每条传入连接的前几个字节视为 PROXY Protocol 数据，然后才解释为 MQTT 连接。
 
-## When to use the protocol?
+## 何时使用该协议？
 
-You should enable the PROXY Protocol in TBMQ when:
+在以下情况下应在 TBMQ 中启用 PROXY Protocol：
 
-- TBMQ is deployed **behind a load balancer** or **reverse proxy** (e.g., HAProxy, AWS NLB, NGINX) that supports the PROXY Protocol.
-- You need to capture the **real IP address** of clients for:
-    - Accurate **logging** of client connection details.
-    - Applying **IP-based security policies** and **rate limiting**.
-    - Detailed **auditing** and **analytics** based on the true client origin.
+- TBMQ 部署在支持 PROXY Protocol 的 **负载均衡器** 或 **反向代理**（如 HAProxy、AWS NLB、NGINX）**之后**。
+- 需要捕获客户端的 **真实 IP 地址**，用于：
+    - 准确 **记录** 客户端连接详情。
+    - 应用 **基于 IP 的安全策略** 和 **限流**。
+    - 基于真实客户端来源的详细 **审计** 和 **分析**。
 
-TBMQ stores the client IP address as part of the **client session information**.
-This IP address is also used in the **Unauthorized Clients** feature, where TBMQ tracks connection attempts from clients that fail authentication.
-Having the correct IP address helps in identifying the source of unauthorized access attempts and improving security monitoring.
+TBMQ 将客户端 IP 地址作为 **客户端会话信息** 的一部分存储。
+此 IP 地址也用于 **Unauthorized Clients** 功能，TBMQ 在其中跟踪认证失败的客户端的连接尝试。
+拥有正确的 IP 地址有助于识别未授权访问尝试的来源并改进安全监控。
 
-Without PROXY Protocol, TBMQ will only see the IP of the proxy or load balancer, making it impossible to distinguish between individual clients behind the proxy.
-Enabling PROXY Protocol ensures TBMQ receives the actual client IP and port at connection time.
+若不使用 PROXY Protocol，TBMQ 只能看到代理或负载均衡器的 IP，无法区分代理后的各客户端。
+启用 PROXY Protocol 可确保 TBMQ 在连接时收到实际客户端 IP 和端口。
 
-> **Important**: Do **not** enable PROXY Protocol unless your proxy is properly configured to send PROXY Protocol headers. When enabled, TBMQ expects the PROXY Protocol header at the beginning of each TCP connection.
+> **重要**：除非代理已正确配置为发送 PROXY Protocol 头，否则 **不要** 启用 PROXY Protocol。启用后，TBMQ 期望每条 TCP 连接开头都有 PROXY Protocol 头。
 
-## How to enable the protocol?
+## 如何启用该协议？
 
-To enable PROXY Protocol support in TBMQ, you need to update the configuration settings for MQTT listeners. 
+要在 TBMQ 中启用 PROXY Protocol 支持，需更新 MQTT 监听器配置。
 
-- **Before TBMQ v2.3**: The PROXY Protocol setting applies **globally** to all MQTT listeners in TBMQ and **cannot** be configured per listener.
+- **TBMQ v2.3 之前**：PROXY Protocol 设置 **全局** 应用于 TBMQ 中所有 MQTT 监听器，**无法** 为每个监听器单独配置。
 
 ```yaml
 # MQTT listeners parameters
@@ -72,11 +72,11 @@ listener:
   proxy_enabled: "${MQTT_PROXY_PROTOCOL_ENABLED:false}"
 ```
 
-Set the environment variable `MQTT_PROXY_PROTOCOL_ENABLED` to "**true**".
+将环境变量 `MQTT_PROXY_PROTOCOL_ENABLED` 设为 "**true**"。
 
-- **Since TBMQ v2.3**: In addition to the global setting, you can also configure PROXY Protocol **per MQTT listener**.
-  Per-listener settings are unset by default and inherit the global value.
-  If explicitly set, the per-listener value overrides the global one.
+- **TBMQ v2.3 起**：除全局设置外，还可 **按 MQTT 监听器** 配置 PROXY Protocol。
+  按监听器设置默认为未设置，继承全局值。
+  若显式设置，按监听器值将覆盖全局值。
 
 ```yaml
 # MQTT listeners parameters
@@ -108,46 +108,46 @@ listener:
     proxy_enabled: "${MQTT_WSS_PROXY_PROTOCOL_ENABLED:}"
 ```
 
-**Example**
+**示例**
 
 ```yaml
-MQTT_PROXY_PROTOCOL_ENABLED=true        # PROXY protocol is globally enabled
-MQTT_TCP_PROXY_PROTOCOL_ENABLED=false   # MQTT TCP listener explicitly disable PROXY protocol -> disabled
-MQTT_SSL_PROXY_PROTOCOL_ENABLED=        # TLS listener has PROXY protocol setting unset thus it inherits global setting -> enabled
+MQTT_PROXY_PROTOCOL_ENABLED=true        # PROXY protocol 全局启用
+MQTT_TCP_PROXY_PROTOCOL_ENABLED=false   # MQTT TCP 监听器显式禁用 PROXY protocol -> 禁用
+MQTT_SSL_PROXY_PROTOCOL_ENABLED=        # TLS 监听器 PROXY protocol 设置未设置，继承全局设置 -> 启用
 ```
 
-**Important Notes:**
+**重要说明：**
 
-- When `proxy_enabled` is set to `true`, TBMQ automatically supports both **PROXY Protocol v1 and v2**.
-- This setting ensures that TBMQ correctly interprets the PROXY Protocol headers sent at the start of each TCP connection, **before** any MQTT or TLS-specific data.
+- 当 `proxy_enabled` 设为 `true` 时，TBMQ 自动支持 **PROXY Protocol v1 和 v2**。
+- 此设置确保 TBMQ 正确解析每条 TCP 连接开头发送的 PROXY Protocol 头，在任意 MQTT 或 TLS 特定数据 **之前**。
 
 ### HAProxy
 
-To forward the real client IP to TBMQ using PROXY Protocol, configure **HAProxy** as follows:
+要使用 PROXY Protocol 将真实客户端 IP 转发给 TBMQ，按如下配置 **HAProxy**：
 
 ```text
 server tbmq1 192.168.1.100:1883 send-proxy
 ```
 
-- `send-proxy`: Instructs HAProxy to send PROXY Protocol v1 headers to TBMQ.
-- Replace `192.168.1.100:1883` with your TBMQ broker’s IP and port.
+- `send-proxy`：指示 HAProxy 向 TBMQ 发送 PROXY Protocol v1 头。
+- 将 `192.168.1.100:1883` 替换为您的 TBMQ broker 的 IP 和端口。
 
-To use PROXY Protocol v2, change to:
+要使用 PROXY Protocol v2，改为：
 
 ```text
 server tbmq1 192.168.1.100:1883 send-proxy-v2
 ```
 
-- `send-proxy-v2`: Sends PROXY Protocol v2 headers to TBMQ.
+- `send-proxy-v2`：向 TBMQ 发送 PROXY Protocol v2 头。
 
-You can find the full HAProxy configuration guide for enabling PROXY Protocol [here](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/proxying-essentials/client-ip-preservation/enable-proxy-protocol/).
+可在此处查找启用 PROXY Protocol 的完整 HAProxy 配置指南 [here](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/proxying-essentials/client-ip-preservation/enable-proxy-protocol/)。
 
 ### AWS Network Load Balancer (NLB)
 
-To use PROXY Protocol with **AWS NLB**, enable **PROXY Protocol v2**:
+要配合 **AWS NLB** 使用 PROXY Protocol，需启用 **PROXY Protocol v2**：
 
-1. Ensure your NLB is **TCP** or **TLS** type.
-2. Enable PROXY Protocol v2 using the AWS CLI:
+1. 确保 NLB 为 **TCP** 或 **TLS** 类型。
+2. 使用 AWS CLI 启用 PROXY Protocol v2：
 
 ```bash
 aws elbv2 modify-target-group-attributes \
@@ -156,39 +156,39 @@ aws elbv2 modify-target-group-attributes \
 ```
 {: .copy-code}
 
-> **Note**: AWS NLB only supports **PROXY Protocol v2**.
+> **注意**：AWS NLB 仅支持 **PROXY Protocol v2**。
 
-Alternatively, to enable **PROXY Protocol v2** with AWS NLB in a Kubernetes environment, add the following annotation to your Service definition:
+或者，在 Kubernetes 环境中配合 AWS NLB 启用 **PROXY Protocol v2**，在 Service 定义中添加以下 annotation：
 
 ```yaml
 service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 ```
 {: .copy-code}
 
-- The `*` enables **PROXY Protocol v2** for all source IPs.
+- `*` 为所有源 IP 启用 **PROXY Protocol v2**。
 
-See official [AWS documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/nlb/#protocols) for more details.
+详见官方 [AWS 文档](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/nlb/#protocols)。
 
-### Other Load Balancers
+### 其他负载均衡器
 
-You are not limited to HAProxy or AWS NLB — any load balancer that supports the PROXY Protocol can be used with TBMQ.
-Examples include **Google Cloud Load Balancer**, **Azure Load Balancer**, **NGINX**, or other reverse proxies.
+不仅限于 HAProxy 或 AWS NLB——任何支持 PROXY Protocol 的负载均衡器均可与 TBMQ 配合使用。
+例如 **Google Cloud Load Balancer**、**Azure Load Balancer**、**NGINX** 或其他反向代理。
 
-The setup steps are straightforward:
+配置步骤简单：
 
-1. Enable PROXY Protocol on your chosen load balancer according to its **official documentation**.
-2. Enable PROXY Protocol on the TBMQ side (globally or per-listener, depending on your version).
+1. 根据所选负载均衡器的 **官方文档** 在其上启用 PROXY Protocol。
+2. 在 TBMQ 端启用 PROXY Protocol（全局或按监听器，取决于您的版本）。
 
-Once both sides are properly configured, TBMQ will correctly interpret the PROXY Protocol headers and capture the real client IP and port, regardless of which load balancer you use.
+双方正确配置后，TBMQ 将正确解析 PROXY Protocol 头并捕获真实客户端 IP 和端口，无论使用哪种负载均衡器。
 
-## Considerations
+## 注意事项
 
-* If PROXY Protocol is enabled in TBMQ but not used by your proxy/load balancer, TBMQ will fail to interpret the initial bytes, potentially rejecting the connection.
-* If PROXY Protocol is disabled in TBMQ but enabled on your proxy/load balancer, TBMQ will misinterpret the PROXY Protocol header as part of the MQTT or TLS data, leading to connection errors or protocol parsing failures.
-* Ensure all connections to TBMQ are routed through a properly configured proxy when PROXY Protocol support is enabled.
-* PROXY Protocol should only be enabled if TBMQ is deployed behind a trusted proxy, as it allows the proxy to define client IPs.
+* 若 TBMQ 启用了 PROXY Protocol 但代理/负载均衡器未使用，TBMQ 将无法解析初始字节，可能拒绝连接。
+* 若 TBMQ 禁用了 PROXY Protocol 但代理/负载均衡器启用，TBMQ 会将 PROXY Protocol 头误解为 MQTT 或 TLS 数据的一部分，导致连接错误或协议解析失败。
+* 启用 PROXY Protocol 支持时，确保所有到 TBMQ 的连接均通过正确配置的代理。
+* 仅当 TBMQ 部署在受信任代理之后时才应启用 PROXY Protocol，因协议允许代理定义客户端 IP。
 
-> **Note:** TBMQ is not protocol-agnostic regarding PROXY Protocol support. 
-> When PROXY Protocol is enabled, all connections must include the PROXY header. 
-> Mixing connections with and without the PROXY header on the same listener is not supported.
-> Future releases may introduce more flexible handling to support mixed connection types.
+> **注意**：TBMQ 对 PROXY Protocol 支持并非协议无关。
+> 启用 PROXY Protocol 时，所有连接必须包含 PROXY 头。
+> 不支持在同一监听器上混用带和不带 PROXY 头的连接。
+> 未来版本可能引入更灵活的处理以支持混合连接类型。

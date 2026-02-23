@@ -1,37 +1,36 @@
-View all pods of the cluster:
+查看集群所有 pods：
 
 ```bash
 kubectl get pods
 ```
 
-View last logs for the desired pod:
- 
+查看指定 pod 的最新日志：
+
 ```bash
 kubectl logs -f POD_NAME
 ```
 
-To view ThingsBoard node logs use command:
+查看 ThingsBoard 节点日志：
 
 ```bash
 kubectl logs -f tb-node-0
 ```
 
-You can use <b>grep</b> command to show only the output with desired string in it. 
-For example you can use the following command in order to check if there are any errors on the backend side:
+可使用 <b>grep</b> 命令仅显示包含指定字符串的输出。
+例如，可用以下命令检查后端是否存在错误：
 
 ```bash
 kubectl logs -f tb-node-0 | grep ERROR
 ```
 
-If you have multiple nodes you could redirect logs from all nodes to files on you machine and then analyze them: 
+若有多节点，可将各节点日志重定向到本地文件再分析：
 
 ```bash
 kubectl logs -f tb-node-0 > tb-node-0.log
 kubectl logs -f tb-node-1 > tb-node-1.log
 ```
 
-
-**Note:** you can always log into the ThingsBoard container and view logs there:
+**注意：** 可随时进入 ThingsBoard 容器内查看日志：
 
 ```bash
 kubectl exec -it tb-node-0 -- bash

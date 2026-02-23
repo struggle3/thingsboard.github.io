@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Managing domain
-description: Domain managing through ThingsBoard
+title: 域名管理
+description: 通过 ThingsBoard 管理域名
 
 register-domain:
     0:

@@ -1,31 +1,31 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Basic Authentication
-description: Basic Authentication
+title: Basic 认证
+description: Basic 认证
 
 security-authentication-basic:
   0:
     image: /images/mqtt-broker/features/security-authentication-basic-1.png
-    title: 'Copy Basic credentials ID.'
+    title: '复制 Basic 凭据 ID。'
   1:
     image: /images/mqtt-broker/features/security-authentication-basic-2.png
-    title: 'Basic authentication credentials params: Client ID, Username and Password.'
+    title: 'Basic 认证凭据参数：Client ID、Username 和 Password。'
 
 security-authorization-basic:
   0:
     image: /images/mqtt-broker/features/security-authorization-basic-1.png
-    title: 'Examples of rule patterns that permit publishing to topics starting with "country/" and subscribing to topics starting with "city/".'
+    title: '允许向以 "country/" 开头的主题发布并订阅以 "city/" 开头的主题的规则示例。'
 
 authentication-provider-control:
   0:
     image: /images/mqtt-broker/security/auth-providers/provider-home-switch.png
-    title: 'Go to the Broker Settings card on the Home page to switch authentication providers.'
+    title: '在首页的 Broker 设置卡片中切换认证提供者。'
   1:
     image: /images/mqtt-broker/security/auth-providers/provider-table-switch.png
     title: 'On the Authentication > Providers page, use the switch button in the table’s right column to enable or disable providers.'
   2:
     image: /images/mqtt-broker/security/auth-providers/basic-overview.png
-    title: 'Open the Authentication > Providers page, select the Basic row, and click the "Edit" button to configure the provider.'
+    title: '打开认证 > 提供者页面，选择 Basic 行，点击「编辑」按钮配置提供者。'
 
 tbmq-client-id-username-and-password:
   0:

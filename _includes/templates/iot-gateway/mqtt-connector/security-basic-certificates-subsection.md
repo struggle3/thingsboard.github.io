@@ -1,11 +1,11 @@
-The table below describes the parameters required to configure authorization on MQTT broker.
+下表描述了在 MQTT broker 上配置授权所需的参数。
 
-| **Parameter**     | **Default value**                            | **Description**            |
+| **参数**     | **默认值**                            | **说明**            |
 |:------------------|:---------------------------------------------|----------------------------
-| type              | **certificates**                             | Type of authorization.     |
-| pathToCACert      | **/etc/thingsboard-gateway/ca.pem**          | Path to CA file.           |
-| pathToPrivateKey  | **/etc/thingsboard-gateway/privateKey.pem**  | Path to private key file.  |
-| pathToClientCert  | **/etc/thingsboard-gateway/certificate.pem** | Path to certificate file.  |
+| type              | **certificates**                             | 授权类型。     |
+| pathToCACert      | **/etc/thingsboard-gateway/ca.pem**          | CA 文件路径。           |
+| pathToPrivateKey  | **/etc/thingsboard-gateway/privateKey.pem**  | 私钥文件路径。  |
+| pathToClientCert  | **/etc/thingsboard-gateway/certificate.pem** | 证书文件路径。  |
 | ---               
 
 ![image](/images/gateway/mqtt-connector/security-basic-certificates-subsection-1-ce.png)

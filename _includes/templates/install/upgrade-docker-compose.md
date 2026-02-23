@@ -1,6 +1,6 @@
-If you update your volumes, or merge your deploy files with GitHub repository files, do not forget to inspect your host volumes - like log folders or etc - using provided check and (if needed) create scripts - they are explained [at the beginning of "Running" step](#create-and-check-required-host-volumes).
+若你更新卷或合并部署文件与 GitHub 仓库文件，请勿忘记使用提供的检查和（如需要）创建脚本来检查主机卷（如日志目录等），相关说明见[「Running」步骤开头的](#create-and-check-required-host-volumes)。
 
-In case when database upgrade is needed, edit .env file to set "TB_VERSION" to target version (e.g. set it to {{ site.release.ce_full_ver }} if you are upgrading to the latest). Then, execute the following commands:
+若需升级数据库，编辑 .env 文件，将「TB_VERSION」设为目标版本（例如升级到最新版本时设为 {{ site.release.ce_full_ver }}）。然后执行以下命令：
 
 ```bash
 ./docker-stop-services.sh
@@ -9,25 +9,25 @@ In case when database upgrade is needed, edit .env file to set "TB_VERSION" to t
 ```
 {: .copy-code}
 
-Note, that you have to upgrade versions one by one (for example 4.0.0 -> 4.0.1 -> 4.1.0 etc).
+注意，需按版本逐个升级（例如 4.0.0 -> 4.0.1 -> 4.1.0 等）。
 
 {% capture from-version-note %}
-<code style="color:black">"--fromVersion"</code> flag is required for earlier upgrade versions (prior to 3.9.1), for example:
+较早版本（3.9.1 之前）的升级需使用 <code style="color:black">"--fromVersion"</code> 参数，例如：
 
 `# upgrading to v3.9.0...`<br>
 `./docker-upgrade-tb.sh --fromVersion=3.8.1`
 
-See [Upgrade Instructions](/docs/user-guide/install/{{docsPrefix}}upgrade-instructions) for valid <code style="color:black">"fromVersion"</code> values.
+有效的 <code style="color:black">"fromVersion"</code> 值请参阅 [升级说明](/docs/user-guide/install/{{docsPrefix}}upgrade-instructions)。
 {% endcapture %}
 {% include templates/info-banner.md content=from-version-note %}
 
-### Migration to Professional Edition
+### 迁移至专业版
 
-You can also migrate from Community Edition (CE) to Professional Edition (PE) using `docker-upgrade-tb.sh` script:
+也可使用 `docker-upgrade-tb.sh` 脚本从社区版（CE）迁移至专业版（PE）：
 
-1. Upgrade to the latest CE version.
-2. Merge your configuration with [the latest PE Docker Compose scripts](https://github.com/thingsboard/thingsboard-pe-docker-compose/tree/release-{{ site.release.ce_ver }}). Do not forget to [configure the license key](/docs/user-guide/install/pe/cluster/docker-compose-setup/#step-3-obtain-your-license-key).
-3. Run the following upgrade script to migrate database data from CE to PE:
+1. 先升级至最新 CE 版本。
+2. 将配置与[最新 PE Docker Compose 脚本](https://github.com/thingsboard/thingsboard-pe-docker-compose/tree/release-{{ site.release.ce_ver }})合并。勿忘[配置许可证密钥](/docs/user-guide/install/pe/cluster/docker-compose-setup/#step-3-obtain-your-license-key)。
+3. 运行以下升级脚本以将数据库从 CE 迁移至 PE：
 ```bash
 ./docker-upgrade-tb.sh --fromVersion=CE
 ```

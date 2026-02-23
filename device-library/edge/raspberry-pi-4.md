@@ -1,7 +1,7 @@
 ---
 layout: device
 title: How to install ThingsBoard Edge on Raspberry Pi 4?
-category: Single-board computers
+category: 单板计算机
 chip: Broadcom BCM2711
 connectivity: [HTTP, MQTT, WIFI, BLE]
 vendor: Raspberry

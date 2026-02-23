@@ -2,7 +2,7 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Lesson 5. Share dashboard with customers
+title: 第 5 课：与客户共享仪表板
 
 dashboard-lesson-5:
     0:

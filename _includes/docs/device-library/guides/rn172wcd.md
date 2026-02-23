@@ -1,5 +1,5 @@
 
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://en.radionode365.com/kr/product/product_view.php?idx=111&part_idx=1" %}
 {% assign officialManualLink = "/docs/devices-library/resources/manuals/rn172wcd-user-manual-v1.01.pdf" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
@@ -9,21 +9,22 @@
   '
   %}
 
-## Introduction
+## 概述
 
-The [RN172WCD]({{deviceVendorLink}}){: target="_blank"} by RADIONODE is a versatile Wi-Fi sensor data transmitter designed for real-time environmental monitoring in industrial, commercial, and laboratory settings.   
-It supports a wide range of UA series sensors, including gas detectors (CO₂, O₂, NH₃, etc.), thermal sensors (PT100, thermocouples), and analog transmitters (4–20 mA, 0–1 V), enabling flexible deployment across various applications.   
-With Wi-Fi (IEEE 802.11 b/g), MODBUS TCP, and HTTP/HTTPS connectivity, the device seamlessly transmits data to cloud platforms like Radionode365, local servers, or PLCs for centralized monitoring. Additional features include a built-in buzzer, dual-color LED indicators, and a 4-digit display for real-time readings and alerts.   
-The RN172WCD also supports remote configuration via Telnet and offers robust alarm functionalities, including SMS and voice call notifications, making it an ideal solution for safety-critical environments such as gas monitoring, HVAC systems, and industrial automation.
+RADIONODE 出品的 [RN172WCD]({{deviceVendorLink}}){: target="_blank"} 是一款多功能 Wi-Fi 传感器数据发射器，用于工业、商业及实验室环境的实时监测。  
+支持多种 UA 系列传感器，包括气体检测（CO₂、O₂、NH₃ 等）、温度传感器（PT100、热电偶）及模拟变送器（4–20 mA、0–1 V），可灵活部署于各类应用。  
+通过 Wi-Fi（IEEE 802.11 b/g）、MODBUS TCP 和 HTTP/HTTPS，可无缝将数据传送至 Radionode365 等云平台、本地服务器或 PLC 集中监控。  
+内置蜂鸣器、双色 LED 指示及 4 位数码管，用于实时读数与告警。  
+RN172WCD 支持通过 Telnet 远程配置，具备 SMS 与语音告警等告警功能，适用于气体监测、HVAC 系统、工业自动化等安全关键场景。
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 For simplicity, we will create the device manually using the UI.
 - Log in to your ThingsBoard instance and navigate to **Entities**. Then open the **Devices** page.
@@ -292,8 +293,7 @@ return decodePayload(payload, metadata);
 
 ![image](/images/devices-library/ready-to-go-devices/rn172wcd/rn172wcd-8.png)
 
-## Connect device to ThingsBoard
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 - Download the [RadioNode terminal program](https://en.radionode365.com/kr/customer/download.php?cate=32){:target="_blank"}
 - Run the RadioNode terminal program
 - Enter the password radionode114 and enter the console menu.
@@ -319,15 +319,14 @@ This means the data will be sent to the custom server V2.<br>
 
 Go to the "4. HTTP Destination Setup" menu and select "A. Set Host URL:thingsboard.cloud" Select "D.Set HTTP DATAIN : endpoint from the integration", "E.Set HTTP TIMESTAMP:endpoint from the integration", "F.Set HTTP BACKUPIN :endpoint from the integration".
 
-## Check data on ThingsBoard 
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 Once the device is connected, On the devices page you can check the latest telemetry.
 
 ![image](/images/devices-library/ready-to-go-devices/rn172wcd/rn172wcd-14.png)
 
 ## Setting up the Dashboard
 
-Now configure the dashboard by adding the necessary widgets.
+Now configure the dashboard by adding the necessary 部件。
 
 - Go to the **Dashboards** page and press the **+** button to create a new Dashboard.
 
@@ -337,15 +336,15 @@ Now configure the dashboard by adding the necessary widgets.
 
 ![image](/images/devices-library/ready-to-go-devices/rn172wcd/rn172wcd-16.png)
 
-After creation, the dashboard will open automatically, and you can start adding widgets right away. Click **Add widget**.
+After creation, the dashboard will open automatically, and you can start adding 部件 right away. Click **添加部件**.
 
 ![image](/images/devices-library/ready-to-go-devices/rn172wcd/rn172wcd-17.png)
 
-ThingsBoard provides many widget options to choose from. For example, select a **Time series chart** from the **Charts** widget bundle to visualize data from your device.
+ThingsBoard provides many 部件 options to choose from. For example, select a **Time series chart** from the **Charts** 部件 bundle to visualize data from your device.
 
 ![image](/images/devices-library/ready-to-go-devices/rn172wcd/rn172wcd-18.png)
 
-- In the widget settings, you can define the display [time window](/docs/{{docsPrefix}}user-guide/widgets/#widget-time-window){:target="_blank"}. 
+- 在部件设置中，可配置展示的[时间窗口](/docs/{{docsPrefix}}user-guide/widgets/#widget-time-window){:target="_blank"}。 
 - In the **Datasource** field, specify your device whose data you want to display. If you need to add another data series, click **Add series**.   
 - Once configured, click **Add**. Don&#39;t forget to save the dashboard.
 

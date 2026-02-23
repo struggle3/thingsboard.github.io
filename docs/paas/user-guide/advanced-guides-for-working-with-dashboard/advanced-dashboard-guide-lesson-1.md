@@ -2,7 +2,7 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Lesson 1. Visualizing assets data using OpenStreet Map and Entities table widgets
+title: 第 1 课：使用 OpenStreet Map 和实体表部件可视化资产数据
 
 adding-assets-1:
     0:

@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Swimming Pool SCADA system template
-description: Swimming Pool SCADA system template overview
+title: 游泳池 SCADA 系统模板
+description: 游泳池 SCADA 系统模板概览
 
 go-to-solution-templates-page-1:
     0:

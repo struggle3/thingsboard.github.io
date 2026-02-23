@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect ODROID-XU4 to ThingsBoard?"
+title: "如何将ODROID-XU4连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/odroid-xu4/"
 ---

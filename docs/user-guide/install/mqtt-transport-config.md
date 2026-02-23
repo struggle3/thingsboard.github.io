@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - vparomskiy
-title: MQTT transport parameters
-description: ThingsBoard configuration parameters and environment variables
+title: MQTT 传输参数
+description: ThingsBoard MQTT 配置参数与环境变量
 
 ---
 

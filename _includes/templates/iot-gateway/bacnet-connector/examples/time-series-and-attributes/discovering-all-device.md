@@ -1,11 +1,8 @@
-There are situations when there are many devices with the same list of objects, the values of which need to be read.
-Copying the configuration for each device is not very convenient, so the BACnet connector allows you to automatically
-find all devices on the network and connect them with the same configuration. To do this, you need to specify the host
-and port of the device, as well as set templates for the device name and device profile.
+当网络中有许多设备具有相同的对象列表且需要读取其值时，为每个设备复制配置并不方便。BACnet 连接器允许您自动查找网络上的所有设备，并使用相同配置连接它们。为此，您需要指定设备的 host 和 port，以及设备名称和设备配置文件的模板。
 
-Let's look at an example of how to properly configure automatic device discovery. 
+让我们看一个如何正确配置自动设备发现的示例。
 
-Suppose we have two devices with the same list of objects:
+假设我们有两台具有相同对象列表的设备：
 
 | Object Type  | Object ID | Property ID   | Key         |
 |--------------|-----------|---------------|-------------|
@@ -15,7 +12,7 @@ Suppose we have two devices with the same list of objects:
 | Analog Input | 3         | Present Value | pressure    |
 | ---          |           |               |             |
 
-To configure automatic device discovery, use the following BACnet connector configuration:
+要配置自动设备发现，请使用以下 BACnet 连接器配置：
 
 ```json
 {
@@ -76,21 +73,13 @@ To configure automatic device discovery, use the following BACnet connector conf
 ```
 {:.copy-code}
 
-Below are the main parameters that you can use to properly configure automatic device detection. Let's take a closer 
-look at them:
+以下为主要参数，用于正确配置自动设备检测。我们来详细了解：
 
-- `host` - you need to specify `*`, this is done so that the connector accepts all IAm messages from all devices on the
-  network.
-- `port` - you need to specify `*`, this is done so that the connector accepts all IAm messages from all devices on the
-  network.
-- `deviceNameExpression` - This is a template for the device name. `${objectName}` is used to match the device name to
-  the object name in the BACnet network.
-- `deviceProfileExpression` - This is a template for a device profile. In our case, we use `default` because all devices
-  have the same type.
+- `host` - 需指定为 `*`，以便连接器接受来自网络上所有设备的所有 IAm 消息。
+- `port` - 需指定为 `*`，以便连接器接受来自网络上所有设备的所有 IAm 消息。
+- `deviceNameExpression` - 设备名称的模板。使用 `${objectName}` 将设备名称与 BACnet 网络中的对象名称匹配。
+- `deviceProfileExpression` - 设备配置文件的模板。本例中我们使用 `default`，因为所有设备类型相同。
 
-After saving the changes and starting the connector, it will send a WhoIs query to the network and start receiving IAm 
-messages from all devices. After receiving the IAm message, the connector will automatically create a device for each 
-device found with the specified templates and start reading data from the objects. The screenshot below shows what the 
-device list looks like after automatic discovery:
+保存更改并启动连接器后，它将向网络发送 WhoIs 查询并开始接收来自所有设备的 IAm 消息。收到 IAm 消息后，连接器将为每个发现的设备使用指定模板自动创建设备，并开始从对象读取数据。下方截图显示自动发现后的设备列表：
 
 ![image](/images/gateway/bacnet-connector/examples/discovered-devices-overview.png)

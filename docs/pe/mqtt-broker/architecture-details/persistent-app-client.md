@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Architecture for Persistent APPLICATION clients
-description: Architecture Overview for Persistent APPLICATION clients
+title: 持久化 APPLICATION 客户端的架构
+description: 持久化 APPLICATION 客户端的架构概览
 
 ---
 

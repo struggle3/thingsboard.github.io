@@ -1,47 +1,47 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-The ThingsBoard **Over-the-Air (OTA) Update** feature is a powerful way to remotely manage device firmware or software, reducing the need for manual updates and enabling rapid deployment of enhancements or fixes.
+ThingsBoard **Over-the-Air (OTA) 更新** 功能是一种强大的远程管理设备固件或软件的方式，可减少手动更新需求并支持快速部署增强或修复。
 
-The **Edge OTA Update** feature is designed similarly to the **Platform (Cloud) OTA Update**. As a result, the **Edge OTA Update** packages can be deployed in both Device and Device Profile configurations in the same manner as **Platform** Device and Device Profile configurations.
-Please refer to the [Platform OTA Updates documentation](/docs/{{cloudDocsPrefix}}user-guide/ota-updates/){: target="_blank"} for a general understanding of the **OTA Update** feature.
+**Edge OTA 更新** 功能与 **Platform (Cloud) OTA 更新** 设计相似。因此，**Edge OTA 更新** 包可按与 **Platform** Device 和 Device Profile 配置相同的方式，在 Device 和 Device Profile 配置中部署。
+请参阅 [Platform OTA Updates documentation](/docs/{{cloudDocsPrefix}}user-guide/ota-updates/){: target="_blank"} 以了解 **OTA 更新** 功能。
 
-## Provisioning OTA Packages to the ThingsBoard Repository
+## 将 OTA 包配置到 ThingsBoard 仓库
 
-All **OTA firmware and software packages** are created on the Platform and **automatically propagated** to each **Edge** instance connected to it. No additional actions are required from the Tenant administrator or User.
+所有 **OTA 固件和软件包** 均在 Platform 上创建，并 **自动传播** 到每个连接到此 Platform 的 **Edge** 实例。无需租户管理员或用户执行额外操作。
 
 {% capture local-deployment %}
-**Please note!** <br>
-The **OTA Update packages** are created on the **ThingsBoard Platform**. It is **not possible to create, modify, or delete** the OTA Update packages on the **Edge** instance.
+**请注意！** <br>
+**OTA 更新包** 在 **ThingsBoard Platform** 上创建。**无法** 在 **Edge** 实例上创建、修改或删除 OTA 更新包。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 {% include images-gallery.html imageCollection="cannot-edit-on-edge" %}
 
-### Create the OTA Update Package
+### 创建 OTA 更新包
 
-To create the **OTA update** package on your **ThingsBoard Platform**, navigate to the **Advanced features > OTA updates** section and click the **"+"** icon.
-In the pop-up window, fill in the following fields:
-* **Title:** Enter the firmware package name.
-* **Version:** Enter the firmware package update version number.
-* **Version tag:** The field is populated with the relevant information automatically. If a custom tag is entered, it should match the package version reported by the device in question _(optional)_.
-* **Device profile:** Select the device profile.
-* **Package Type:** Select the package type _(Firmware or Software)_.
-* **"Upload binary file"/"Use external URL" radiobutton:** Select the file package source. Depending on the selected option, the following will occur: 
-  * **Package file:** Drag-n-drop the package file or browse to it on your computer.
-  * **Direct URL:** Enter a direct URL to download the file.
-* Click the **"Add"** button. _Please note: once the package is uploaded, the title, version, device profile, and package type cannot be modified_.
-* Verify that firmware package has been successfully uploaded.
+要在 **ThingsBoard Platform** 上创建 **OTA 更新** 包，请进入 **Advanced features > OTA updates** 区域并点击 **"+"** 图标。
+在弹出窗口中填写以下字段：
+* **Title：** 输入固件包名称。
+* **Version：** 输入固件包更新版本号。
+* **Version tag：** 该字段将自动填入相关信息。若输入自定义 tag，应与设备报告的包版本匹配（_可选_）。
+* **Device profile：** 选择设备配置文件。
+* **Package Type：** 选择包类型（_Firmware 或 Software_）。
+* **"Upload binary file"/"Use external URL" radiobutton：** 选择文件包来源。根据所选选项：
+  * **Package file：** 拖放包文件或从电脑浏览选择。
+  * **Direct URL：** 输入文件的直接下载 URL。
+* 点击 **"Add"** 按钮。_请注意：包上传后，title、version、device profile 和 package type 无法修改_。
+* 确认固件包已成功上传。
 
 {% include images-gallery.html imageCollection="createFirmware" %}
 
-### Verify the OTA Update Package on the Edge Instance
+### 在 Edge 实例上验证 OTA 更新包
 
-Log in to the **ThingsBoard Edge** instance using your credentials and navigate to the **Advanced features > OTA updates** section. This is to confirm that the firmware package has been **successfully provisioned** on the **Edge** instance.
-  
+使用您的凭据登录 **ThingsBoard Edge** 实例，并进入 **Advanced features > OTA updates** 区域。以确认固件包已在 **Edge** 实例上 **成功配置**。
+
 {% include images-gallery.html imageCollection="verifyFirmware" %}
 
-## Next steps
+## 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

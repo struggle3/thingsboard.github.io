@@ -1,14 +1,14 @@
-Protects sensitive KNX messages on any medium (e.g., TP, RF, or IP).
+保护任意介质（如 TP、RF 或 IP）上的敏感 KNX 消息。
 
-These parameters are available for configuration in the "**security**" subsection:
+这些参数可在 "**security**" 子节中配置：
 
-| **Parameter**     | **Description**                                            |
+| **参数**     | **说明**                                            |
 |:------------------|------------------------------------------------------------|
-| knxkeys_file_path | Full path to the knxkeys file including the file name.     |
-| knxkeys_password  | Password to decrypt the knxkeys file.                      |
+| knxkeys_file_path | knxkeys 文件的完整路径（包含文件名）。     |
+| knxkeys_password  | 用于解密 knxkeys 文件的密码。                      |
 | :--------------   | ---------------------------------------------------------- |
 
-This subsection in the configuration file looks like:
+配置文件中此子节如下所示：
 
 ```json
 "security": {

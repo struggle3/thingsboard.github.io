@@ -1,53 +1,53 @@
 * TOC
 {:toc}
 
-ThingsBoard supports OAuth 2.0–based authentication to provide **Single Sign-On** (**SSO**) for your customers and integrate with external identity providers.
+ThingsBoard 支持基于 OAuth 2.0 的认证，为客户提供**单点登录** (**SSO**)，并与外部身份提供商集成。
 
-Using OAuth 2.0, you can allow users to log in using their existing accounts from external platforms and automatically provision tenants, customers, or sub-customers.
+使用 OAuth 2.0，您可以让用户使用外部平台的现有账号登录，并自动创建 tenant、customer 或 sub-customer。
 
-ThingsBoard is compatible with most OAuth 2.0 providers, including [Google](#login-with-google), [Facebook](https://developers.facebook.com/docs/facebook-login/web#logindialog){:target="_blank"}, [Github](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app){:target="_blank"}, [Auth0](#login-with-auth0), [Keycloak](#login-with-keycloak), [Okta](#login-with-okta), [Azure](#login-with-azure), etc.
+ThingsBoard 兼容大多数 OAuth 2.0 提供商，包括 [Google](#login-with-google)、[Facebook](https://developers.facebook.com/docs/facebook-login/web#logindialog){:target="_blank"}、[Github](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app){:target="_blank"}、[Auth0](#login-with-auth0)、[Keycloak](#login-with-keycloak)、[Okta](#login-with-okta)、[Azure](#login-with-azure) 等。
 
-## OAuth 2.0 authentication flow
+## OAuth 2.0 认证流程
 
-ThingsBoard supports the Authorization Code grant type for OAuth 2.0 authentication. The authentication flow works as follows:
-1. A user opens the ThingsBoard login page and selects an external provider (for example, Google or Keycloak). 
+ThingsBoard 支持 OAuth 2.0 的 Authorization Code 授权类型。认证流程如下：
+1. 用户打开 ThingsBoard 登录页面 并选择外部提供商（例如 Google 或 Keycloak）。 
 2. The user is redirected to the provider’s login page to authenticate. 
-3. After successful login, the provider redirects the user back to ThingsBoard using the configured redirect URI. 
-4. ThingsBoard extracts the authorization code from the redirect URL and exchanges it for an access token. 
-5. ThingsBoard retrieves the external user information and converts it into a ThingsBoard user using the configured mapper ([Basic](#basic-mapper){:target="_blank"} or [Custom](#custom-mapper){:target="_blank"}). 
-6. After the mapping step is completed, the standard ThingsBoard authorization flow is applied.
+3. 登录成功后，提供商使用配置的重定向 URI 将用户重定向回 ThingsBoard。 
+4. ThingsBoard 从重定向 URL 中提取授权码，并将其兑换为访问令牌。 
+5. ThingsBoard 获取外部用户信息，并使用配置的 mapper ([Basic](#basic-mapper){:target="_blank"} or [Custom](#custom-mapper){:target="_blank"}). 
+6. 映射步骤完成后，应用标准 ThingsBoard 授权流程。
 
-This process allows ThingsBoard to automatically determine the correct tenant, customer, and user permissions based on identity provider attributes.
+该流程使 ThingsBoard 能够根据身份提供商属性自动确定正确的 tenant、customer 和用户权限。
 
-## Setting up authentication via an external provider
+## 通过外部提供商配置认证
 
-To enable OAuth 2.0 authentication through an external provider, you must configure two components:
-- **OAuth 2.0 client** – stores provider credentials, endpoints, scopes, and mapping rules.
-- **Domain configuration** – defines which OAuth clients are available for a specific ThingsBoard domain.
+要启用通过外部提供商的 OAuth 2.0 认证，您必须配置两个组件：
+- **OAuth 2.0 客户端** – 存储提供商凭证、端点、scope 和映射规则。
+- **域配置** – 定义特定 ThingsBoard 域可用的 OAuth 客户端。
 
-The general setup process includes:
-1. Create an OAuth 2.0 client in the external provider and obtain the **Client ID** and **Client Secret**. 
-2. Add a corresponding OAuth 2.0 client in ThingsBoard and configure all required endpoints, scopes, and mapper settings. 
-3. Assign the OAuth 2.0 client to a domain in ThingsBoard. 
-4. Verify the login flow using the new **Login with ...** option on the ThingsBoard login page.
+一般配置流程包括：
+1. 在外部提供商创建 OAuth 2.0 客户端并获取 **Client ID** 和 **Client Secret**。 
+2. 在 ThingsBoard 中添加对应的 OAuth 2.0 客户端，并配置所有必需的端点、scope 和 mapper 设置。 
+3. 在 ThingsBoard 中将 OAuth 2.0 客户端分配给域。 
+4. 使用 ThingsBoard 登录页面上的新 **使用 ... 登录** 选项验证登录流程。
 
-### Add OAuth 2.0 client
+### 添加 OAuth 2.0 客户端
 
-ThingsBoard allows you to configure OAuth 2.0 clients that can be used to authenticate users via external identity providers such as Google, GitHub, Apple, Facebook, Keycloak, Auth0, Okta, Azure AD, and others.
+ThingsBoard 允许您配置 OAuth 2.0 客户端，用于通过 Google、GitHub、Apple、Facebook、Keycloak、Auth0、Okta、Azure AD 等外部身份提供商对用户进行认证。
 
-An OAuth 2.0 client stores all required information for authentication, including:
-- client credentials (Client ID / Client Secret)
-- OAuth endpoints (Authorization, Token, UserInfo, JWKS)
-- required scopes
-- user mapping rules (mapper configuration)
+OAuth 2.0 客户端存储认证所需的全部信息，包括：
+- 客户端凭证（Client ID / Client Secret）
+- OAuth 端点（Authorization、Token、UserInfo、JWKS）
+- 必需的 scope
+- 用户映射规则（mapper 配置）
 
-Once an OAuth 2.0 client is created, it can be assigned to one or more domains.
+OAuth 2.0 客户端创建后，可分配给一个或多个域。
 
-<b><font size="4">To add a new OAuth 2.0 client:</font></b>
-- Log in to ThingsBoard.
-- Navigate to **Security &#8702; OAuth 2.0**.
-- Open the **OAuth 2.0 clients** tab.
-- Click the **+** (**plus**) icon.
+<b><font size="4">添加新的 OAuth 2.0 客户端：</font></b>
+- 登录 ThingsBoard。
+- 导航至 **Security &#8702; OAuth 2.0**。
+- 打开 **OAuth 2.0 客户端** 选项卡。
+- 点击 **+**（加号）图标。
 
 This will open the **Add OAuth 2.0 client** dialog window.
 

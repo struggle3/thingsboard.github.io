@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: gps geofencing filter
-description: Routes messages based on whether GPS coordinates fall within a configured geofence boundary.
+description: 根据 GPS 坐标是否位于配置的 geofence 边界内来路由消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

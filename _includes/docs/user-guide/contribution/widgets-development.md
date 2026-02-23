@@ -1,102 +1,101 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-**ThingsBoard widgets** are additional UI modules that seamlessly integrate into any [IoT Dashboard](/docs/{{docsPrefix}}user-guide/dashboards/).  They provide end-user functions such as data visualization, remote device control, alarms management, and display of static custom HTML content.
-Each widget definition represents a specific [Widget Type](/docs/{{docsPrefix}}user-guide/ui/widget-library/#widget-types)  based on the provided features.
+**ThingsBoard 部件**为可无缝集成到任意 [IoT Dashboard](/docs/{{docsPrefix}}user-guide/dashboards/) 的额外 UI 模块。提供数据可视化、远程设备控制、告警管理及静态自定义 HTML 等内容展示等终端用户功能。
+每个部件定义根据所提供的功能代表特定的 [Widget Type](/docs/{{docsPrefix}}user-guide/ui/widget-library/#widget-types)。
 
-## Creating new widget definition
+## 创建新部件定义
 
-In order to create a new widget definition, navigate to "Widget Library" and open existing "Widgets Bundle" or create a new one.  In the "Widgets Bundle" view, click the “+” button at the top-right part of the screen and then click the "Create new widget" button.
+要创建新部件定义，进入「Widget Library」并打开现有「Widgets Bundle」或新建一个。在「Widgets Bundle」视图中，点击屏幕右上角的「+」按钮，然后点击「Create new widget」按钮。
 
 ![image](/images/user-guide/contribution/widgets/create-new-widget-type.png)
 
-"Select widget type" window should appear with select options corresponding to the [widget type](/docs/{{docsPrefix}}user-guide/ui/widget-library/#widget-types) you intend to develop.
+将出现 "Select widget type" 窗口，选项对应你要开发的 [部件类型](/docs/{{docsPrefix}}user-guide/ui/widget-library/#widget-types)。
 
 ![image](/images/user-guide/contribution/widgets/select-widget-type.png)
 
-After that, the pre-populated "Widget Editor" page will open with starter widget template according to previously selected widget type.
+随后会打开预填充的 "Widget Editor" 页面，根据所选部件类型提供初始模板。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor.png)
 
-### Widget Editor overview
+### Widget Editor 概览
 
-Widget Editor view is a mini IDE designed to develop custom widget definitions.
-It consists of [top toolbar](#widget-editor-toolbar) and four main sections:
+Widget Editor 视图是用于开发自定义部件定义的迷你 IDE。
+包含 [顶部工具栏](#widget-editor-toolbar) 和四个主要区域：
 
  - [Resources/HTML/CSS](#resourceshtmlcss-section)    
  - [JavaScript](#javascript-section) 
  - [Settings schema](#settings-schema-section) 
  - [Widget preview](#widget-preview-section)
 
-#### Widget Editor Toolbar
+#### Widget Editor 工具栏
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-toolbar.png)
 
-Widget Editor Toolbar consists of the following items:
+工具栏包含以下项：
 
- - **Widget Title** field - used to specify title of the widget definition
- - **Widget Type** selector -  used to specify [type](/docs/{{docsPrefix}}user-guide/contribution/ui/widget-library/#widget-types) of the widget definition
- - **Run** button - used to run widget code and view result in **Widget preview** section
- - **Undo** button - reverts all editor sections to latest saved state
- - **Save** button - saves widget definition
- - **Save as** button - allows to save a new copy of widget definition by specifying new widget type name and target **Widgets Bundle**
+ - **Widget Title** 字段 - 指定部件定义标题
+ - **Widget Type** 选择器 - 指定部件定义的 [类型](/docs/{{docsPrefix}}user-guide/ui/widget-library/#widget-types)
+ - **Run** 按钮 - 运行部件代码并在 **Widget preview** 区域查看结果
+ - **Undo** 按钮 - 将各编辑区还原到最近保存状态
+ - **Save** 按钮 - 保存部件定义
+ - **Save as** 按钮 - 指定新部件类型名和目标 **Widgets Bundle** 以保存副本
  
-#### Resources/HTML/CSS section
+#### Resources/HTML/CSS section（资源/HTML/CSS 区域）
 
-This section consists of three tabs:
+本区域包含三个选项卡：
 
-
-The first **Resources** tab is used to specify external JavaScript/CSS resources used by the widget.
+第一个 **Resources** 选项卡用于指定部件使用的外部 JavaScript/CSS 资源。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-resources.png)
 
-Second **HTML** tab contains the widget's HTML code *(Note: some widgets create HTML content dynamically, thus their initial HTML content can be empty).*
+第二个 **HTML** 选项卡包含部件的 HTML 代码*（注：部分部件动态生成 HTML，因此初始 HTML 可能为空）。*
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-html.png)
 
-Third **CSS** tab contains widget specific CSS style definitions. 
+第三个 **CSS** 选项卡包含部件专用的 CSS 样式定义。 
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-css.png)
 
-#### JavaScript section
+#### JavaScript section（JavaScript 区域）
 
-This section contains all widget related JavaScript code according to the [Widget API](#basic-widget-api).  
+本区域包含根据 [Widget API](#basic-widget-api) 编写的全部部件相关 JavaScript 代码。  
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-javascript.png)
 
-#### Settings schema section
+#### Settings schema section（设置 schema 区域）
 
-This section consists of two tabs:
+本区域包含两个选项卡：
 
-The first tab, **Settings schema**, is used to specify the JSON schema of widget settings for automatically generating a UI form using the react-schema-form [builder](http://networknt.github.io/react-schema-form/). 
-This generated UI form is displayed in the **Advanced** mode in the **Appearance** tab of widget settings. 
-The Settings Object serialized by this schema, is used to store specific widget settings and is accessible from the widget's JavaScript code.
+第一个 **Settings schema** 选项卡用于指定部件设置的 JSON schema，以通过 react-schema-form [builder](http://networknt.github.io/react-schema-form/) 自动生成 UI 表单。
+生成的 UI 表单显示在部件设置 **Appearance** 选项卡的 **Advanced** 模式中。
+此 schema 序列化的 Settings 对象用于存储特定部件设置，并可从部件 JavaScript 代码访问。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-settings-schema.png)
  
-The second tab, **Data key settings schema**, is used to specify JSON schema of data key settings for automatically generating a UI form using the react-schema-form [builder](http://networknt.github.io/react-schema-form/). 
-This generated UI form is displayed in **Advanced** tab of the **Data key configuration** dialog.
-The Settings Object serialized by this schema is used to store specific settings for each data key of the datasource defined in the widget. 
-These settings are accessible from widget's JavaScript code.
+第二个 **Data key settings schema** 选项卡用于指定 data key 设置的 JSON schema，以通过 react-schema-form [builder](http://networknt.github.io/react-schema-form/) 自动生成 UI 表单。
+生成的 UI 表单显示在 **Data key configuration** 对话框的 **Advanced** 选项卡中。
+此 schema 序列化的 Settings 对象用于存储部件中定义的数据源各 data key 的特定设置。
+这些设置可从部件 JavaScript 代码访问。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-datakey-settings-schema.png)
 
-The third tab, **Latest data key settings schema**, is used to specify JSON schema of the latest data key for automatically generating a UI form using the react-schema-form [builder](http://networknt.github.io/react-schema-form/).
-The **Latest data key settings schema** is available only for **Time series** widgets.
-This generated UI form is displayed in **Advanced** tab of the **Data key configuration** dialog of the Latest keys.
-The Settings Object serialized by this schema is used to store specific settings for each data key of the datasource defined in the widget.
-These settings are accessible from widget JavaScript code.
+第三个 **Latest data key settings schema** 选项卡用于指定 Latest data key 的 JSON schema，以通过 react-schema-form [builder](http://networknt.github.io/react-schema-form/) 自动生成 UI 表单。
+**Latest data key settings schema** 仅对 **Time series** 部件可用。
+生成的 UI 表单显示在 Latest keys 的 **Data key configuration** 对话框的 **Advanced** 选项卡中。
+此 schema 序列化的 Settings 对象用于存储部件中定义的数据源各 data key 的特定设置。
+这些设置可从部件 JavaScript 代码访问。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-latest-datakey-setting-schema.png)
 
-Starting from v3.4, auto-generated advanced widget settings JSON forms are replaced with [Angular components](https://github.com/thingsboard/thingsboard/pull/6545).
-When creating new settings schemas for custom widgets, don't forget to remove components from **Widget Settings** tab.
+自 v3.4 起，自动生成的高级部件设置 JSON 表单已由 [Angular components](https://github.com/thingsboard/thingsboard/pull/6545) 替代。
+为自定义部件创建新设置 schema 时，别忘了从 **Widget Settings** 选项卡中移除 components。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-widget-settings-selectors.png)
 
-Here is the basic example of the **settings schema**:
+以下是 **settings schema** 的基础示例：
 
 ```
    {
@@ -141,16 +140,16 @@ Here is the basic example of the **settings schema**:
    }
 ```
 
-Here is the result of applying **settings schema**, will be visible in **Appearance** tab of the widget settings:
+应用 **settings schema** 后的结果将显示在部件设置的 **Appearance** 选项卡中：
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-schema-example.png)
 
 
-The **schema** property supports types such as **Number**, **Boolean**, **String** and **Object**.
-In the **form** array, every property can be specified as an **input**, **checkbox**, **dropdown**, **functional field**(JS, HTML, CSS), **image selection**, **color picker**, or an **array of properties**. 
-Fields can be displayed conditionally and grouped in logical blocks.
+**schema** 属性支持 **Number**、**Boolean**、**String**、**Object** 等类型。
+在 **form** 数组中，每个属性可指定为 **input**、**checkbox**、**dropdown**、**functional field**（JS、HTML、CSS）、**image selection**、**color picker** 或 **array of properties**。
+字段可按条件显示并分组到逻辑块中。
 
-Here is the complex example of the custom **settings schema**:
+以下是自定义 **settings schema** 的复杂示例：
 
 ```
 {
@@ -260,31 +259,31 @@ Here is the complex example of the custom **settings schema**:
 }
 ```
 
-The result of applying custom **settings schema** to the widget:
+将自定义 **settings schema** 应用到部件后的效果：
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-appearence-example.png)
 
 
-#### Widget preview section
+#### Widget preview section（部件预览区域）
 
-This section is used to preview and test widget definitions.
-It is presented as a mini dashboard containing one widget instantiated from the current widget definition.
-It has most of the functionality provided by a typical ThingsBoard dashboard, with some limitations.
-For example, "Function" can only be selected as datasource type in widget datasources section for debugging purposes.    
+本区域用于预览和测试部件定义。
+以包含一个从当前部件定义实例化的部件的迷你 dashboard 形式呈现。
+具备典型 ThingsBoard dashboard 的大部分功能，但有若干限制。
+例如，调试时在部件数据源区域仅能选择「Function」作为 datasource 类型。    
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-preview.png)
 
 {% if (docsPrefix == "pe/") or (docsPrefix == "paas/") %}
-## Troubleshooting
+## 故障排除
 
-### Empty web report
-Sometimes, while working with reports, you may encounter the following problem:
-Heavy widgets may not load in time before the web report begins to be generated. As a result, the report will be empty(because, at the time of creation, data is not present on the dashboard):
+### 空 Web 报告
+使用报告时，可能遇到以下问题：
+在 Web 报告开始生成前，重型部件可能尚未加载完成，导致报告为空（因生成时 dashboard 上尚无数据）：
 ![image](/images/user-guide/contribution/widgets/web-report-error.png)
 
-To resolve this problem report service contains a special feature that allows us to inform it that the widget was loaded.
+为解决此问题，报告服务提供一项特殊功能，用于通知部件已加载。
 
-First of all, we need to inform the reporting service that we have a widget to wait for. We will do this via widget's ```self.onInit```:
+首先需通知报告服务有待加载的部件，可通过部件 ```self.onInit``` 实现：
 ```javascript
 self.onInit = function () {
    ...
@@ -294,7 +293,8 @@ self.onInit = function () {
 };
 ```
 
-Now, the report service will wait until widget sends information about its loading status or the waiting timeout expires. We will inform the report service about the successful loading of widget inside ```self.onDataUpdated```:
+报告服务将等待部件发送加载状态信息，或直到等待超时。
+在 ```self.onDataUpdated``` 中通知报告服务部件已成功加载：
 ```javascript
 self.onDataUpdated = function () {
     ...data is ready
@@ -304,21 +304,21 @@ self.onDataUpdated = function () {
 };
 ```
 
-Service will start generating a report only when all widgets on a dashboard that are marked as ```onWaitForWidget()``` will send ```onWidgetLoaded(${widgetUuid})``` or when the timeout for widgets waiting will expire.
+仅当 dashboard 上所有标记为 ```onWaitForWidget()``` 的部件均已发送 ```onWidgetLoaded(${widgetUuid})```，或部件等待超时后，报告服务才会开始生成报告。
 {% endif %}
 
 
-## Widget code debugging tips
+## 部件代码调试技巧
 
-The most simple method of debugging is Web console output.
-Just place [**console.log(...)**](https://developer.mozilla.org/en-US/docs/Web/API/Console/log) function inside any part of widget JavaScript code.
-Then click **Run** button to restart widget code and observe debug information in the Web console.
+最简单的调试方式为使用 Web 控制台输出。
+在部件 JavaScript 代码任意位置放入 [**console.log(...)**](https://developer.mozilla.org/en-US/docs/Web/API/Console/log) 函数。
+然后点击 **Run** 按钮重启部件代码，在 Web 控制台查看调试信息。
 
-Another and most effective method of debugging is to invoke browser debugger.
-Put [**debugger;**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) statement into the place of widget code you are interested in and then click **Run** button to restart widget code.
-Browser debugger (if enabled) will automatically pause code execution at the debugger statement and you will be able to analyze script execution using browser debugging tools.
+另一种更有效的调试方式为调用浏览器调试器。
+在要关注的部件代码处放入 [**debugger;**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) 语句，然后点击 **Run** 按钮重启部件代码。
+浏览器调试器（若已启用）将在 debugger 语句处自动暂停执行，可使用浏览器调试工具分析脚本执行。
 
 
-### Next steps
+### 下一步
 
 {% assign currentGuide = "Contribution" %}{% include templates/multi-project-guides-banner.md %}

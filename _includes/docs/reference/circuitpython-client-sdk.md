@@ -1,67 +1,57 @@
 * TOC
 {:toc}
 
-### Overview
+### 概述
 
-The [CircuitPython Client SDK](https://github.com/thingsboard/CircuitPython_thingsboard-client-sdk) is a software
-development kit for client-side integration of your CircuitPython projects. [CircuitPython](https://circuitpython.org/) 
-is a simplified version of MicroPython designed to be easy to use on microcontrollers. 
-It allows you to connect your CircuitPython devices to ThingsBoard using MQTT protocol and send telemetry data, 
-attributes, and receive RPC calls. It provides a clean, developer-friendly API for connecting 
-to ThingsBoard and exchanging data, making it easier to integrate CircuitPython devices with the platform.
+[CircuitPython Client SDK](https://github.com/thingsboard/CircuitPython_thingsboard-client-sdk)是用于CircuitPython项目客户端集成的软件开发套件。[CircuitPython](https://circuitpython.org/)是面向微控制器的简化版MicroPython。
+它允许您使用MQTT协议将CircuitPython设备连接到ThingsBoard，发送遥测数据、属性并接收RPC调用。提供简洁、易用的API，便于将CircuitPython设备与平台集成。
 
-CircuitPython Client SDK supports the following features:
+CircuitPython Client SDK支持以下功能：
 
-- Connecting to ThingsBoard using MQTT protocol.
-- Sending attributes to ThingsBoard.
-- Sending telemetry data to ThingsBoard.
-- Receiving RPC calls from ThingsBoard.
-- Request client and shared attributes from ThingsBoard.
-- Subscribing to attribute updates from ThingsBoard.
-- Device claiming.
+- 使用MQTT协议连接ThingsBoard。
+- 向ThingsBoard发送属性。
+- 向ThingsBoard发送遥测数据。
+- 从ThingsBoard接收RPC调用。
+- 从ThingsBoard请求客户端和共享属性。
+- 订阅ThingsBoard的属性更新。
+- 设备认领。
 
-### Installation
+### 安装
 
-First you need to have a CircuitPython compatible device and set up your development environment. You can follow the
-[CircuitPython getting started guide](https://learn.adafruit.com/welcome-to-circuitpython) to get everything ready.
-To install the CircuitPython Client SDK, you can use the 
-[circup](https://learn.adafruit.com/keep-your-circuitpython-libraries-on-devices-up-to-date-with-circup/overview) package manager. 
-Run the following command in your terminal:
+首先需具备CircuitPython兼容设备并配置开发环境。可参考[CircuitPython入门指南](https://learn.adafruit.com/welcome-to-circuitpython)完成准备工作。
+要安装CircuitPython Client SDK，可使用[circup](https://learn.adafruit.com/keep-your-circuitpython-libraries-on-devices-up-to-date-with-circup/overview)包管理器。
+在终端中运行以下命令：
 
 ```bash
 circup install thingsboard-circuitpython-client-sdk
 ```
 {: .copy-code}
 
-In case you are having issues with `circup install` command, you can 
-try to install it using [Web-Workflow](https://adafruit-playground.com/u/tyeth/pages/using-circup-with-web-workflow):
+若`circup install`命令出现问题，可尝试使用[Web-Workflow](https://adafruit-playground.com/u/tyeth/pages/using-circup-with-web-workflow)安装：
 
 ```bash
 circup --host <your_device_ip> --password <your_password> install thingsboard-circuitpython-client-sdk
 ```
 {: .copy-code}
 
-### Methods
+### 方法
 
-#### Introduction
+#### 简介
 
-The CircuitPython Client SDK has a `TBDeviceMqttClient` class that provides methods for connecting to ThingsBoard and
-sending data.
+CircuitPython Client SDK提供`TBDeviceMqttClient`类，用于连接ThingsBoard并发送数据。
 
-This class is designed to be simple to use and easy to understand for developers who are new to CircuitPython or
-ThingsBoard.
+该类设计简洁，便于 CircuitPython 或 ThingsBoard 新手使用。
 
 #### connect
 
-Connects to ThingsBoard using MQTT protocol. This method should be called before sending any data to ThingsBoard.
-Credentials for connecting to ThingsBoard should be provided when creating an instance of the `TBDeviceMqttClient` 
-class. When you call the `connect` method, `self.connected` property of the client will be set to `True`.
+使用MQTT协议连接ThingsBoard。在向ThingsBoard发送任何数据前需调用此方法。
+创建`TBDeviceMqttClient`实例时需提供连接凭证。调用`connect`方法后，客户端的`self.connected`属性将设为`True`。
 
-**Method Syntax**
+**方法语法**
 
 `client.connect()`
 
-**Example usage**
+**使用示例**
 
 ```python
 # Default connecting
@@ -74,17 +64,14 @@ response = client.connect()
 
 #### disconnect
 
-Disconnects from ThingsBoard. This method can be called after connecting to ThingsBoard. It is recommended to call 
-this method when you no longer need to send data to ThingsBoard or when you want to free up resources. After calling 
-this method, you will need to call the [connect](/docs/reference/circuitpython-client-sdk/#connect) method again to send 
-data to ThingsBoard. When you call the `disconnect` method, `self.connected` property of the client will be set 
-to `False`.
+断开与ThingsBoard的连接。连接后即可调用此方法。建议在不再需要向ThingsBoard发送数据或需释放资源时调用。
+调用此方法后，需再次调用[connect](/docs/reference/circuitpython-client-sdk/#connect)才能向ThingsBoard发送数据。调用`disconnect`后，客户端的`self.connected`属性将设为`False`。
 
-**Method Syntax**
+**方法语法**
 
 `client.disconnect()`
 
-**Example usage**
+**使用示例**
 
 ```python
 client.connect()
@@ -97,21 +84,20 @@ client.disconnect()
 
 #### send_attributes
 
-Sends attributes to ThingsBoard. This method can be called after connecting to ThingsBoard. Method supports sending
-attributes in key-value pairs.
+向ThingsBoard发送属性。连接后即可调用。支持以键值对形式发送属性。
 
-**Method Syntax**
+**方法语法**
 
 `client.send_attributes(data)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Description**                                                 |
 |:--------------|:----------------------------------------------------------------|
-| data          | (Required) Data that will be sent as attributes to ThingsBoard. |
+| data          | （必填）将作为属性发送至ThingsBoard的数据。 |
 | ---           |                                                                 |
 
-**Example usage**
+**使用示例**
 
 ```python
 attributes = {"sensorModel": "DHT-22", "attribute_2": "value"}
@@ -121,22 +107,20 @@ client.send_attributes(attributes)
 
 #### send_telemetry
 
-Sends telemetry data to ThingsBoard. This method can be called after connecting to ThingsBoard. Method supports 
-sending telemetry data in different formats, key-value pairs, and lists. Also, it supports sending telemetry data 
-grouped by timestamp, which is useful for sending historical data to ThingsBoard.
+向ThingsBoard发送遥测数据。连接后即可调用。支持以键值对、列表等多种格式发送遥测。也支持按时间戳分组发送，便于发送历史数据。
 
-**Method Syntax**
+**方法语法**
 
 `client.send_telemetry(data)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Description**                                                  |
 |:--------------|:-----------------------------------------------------------------|
-| data          | (Required) Data that will be sent as a telemetry to ThingsBoard. |
+| data          | （必填）将作为遥测发送至ThingsBoard的数据。 |
 | ---           |                                                                  |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Sending telemetry data in dictionary format
@@ -153,26 +137,22 @@ client.send_telemetry(telemetry)
 
 #### request_attributes
 
-Requests client and shared attributes from ThingsBoard. This method can be called after connecting to ThingsBoard.
-Method supports requesting both client and shared attributes. You can specify which attributes you want to request by 
-providing a list of attribute keys. If requested attributes are received from ThingsBoard, the provided callback 
-function will be called with the result. If requested attributes are not found on ThingsBoard, the callback function 
-will be called with empty result.
+从ThingsBoard请求客户端和共享属性。连接后即可调用。支持同时请求两种属性。可通过属性键列表指定要请求的属性。收到请求的属性后，将调用提供的回调函数并传入结果；若未找到，则传入空结果。
 
-**Method Syntax**
+**方法语法**
 
 `client.request_attributes(client_keys=None, shared_keys=None, callback=None)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Description**                                                                                                                                                                                                                                                       |
 |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| client_keys   | (Optional) List of client attribute keys to request from ThingsBoard.                                                                                                                                                                                                 |
-| shared_keys   | (Optional) List of shared attribute keys to request from ThingsBoard.                                                                                                                                                                                                 |
-| callback      | (Optional) Callback function that will be called when the requested attributes are received from ThingsBoard. The callback function should accept two arguments: `result` and `exception`, which will contain the requested attributes.                               |
+| client_keys   | （可选）要从ThingsBoard请求的客户端属性键列表。                                                                                                                                                                                                 |
+| shared_keys   | （可选）要从ThingsBoard请求的共享属性键列表。                                                                                                                                                                                                 |
+| callback      | （可选）收到请求属性时调用的回调函数，应接受`result`和`exception`两个参数。                               |
 | ---           |                                                                                                                                                                                                                                                                       |
 
-**Example usage**
+**使用示例**
 
 ```python
 def on_attributes_change(result, exception=None):
@@ -205,11 +185,11 @@ the [Device claiming](/docs/user-guide/claiming-devices/) section of the documen
 
 | **Arguments** | **Description**                                                                                                                                                            |
 |:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| secret_key    | (Required) Secret key that will be used to claim the device on ThingsBoard.                                                                                                |
-| duration_ms   | (Optional) Duration in milliseconds for which the claim code will be valid. If not provided, the claim code will be valid indefinitely until it is used to claim a device. |
+| secret_key    | （必填）在ThingsBoard上用于认领设备的密钥。                                                                                                |
+| duration_ms   | （可选）认领码有效时长（毫秒）。不提供则有效期为无限，直至被用于认领设备。 |
 | ---           |                                                                                                                                                                            |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Claiming a device with a claim code that will be valid indefinitely until it is used to claim a device
@@ -222,26 +202,23 @@ client.claim_device("my_claim_code", duration_ms=60000)
 
 #### subscribe_to_attribute
 
-Subscribes to attribute updates from ThingsBoard. You can specify which shared attribute you want to subscribe to by 
-providing an attribute key. If subscribed attribute value is updated, the provided callback function will be 
-called with the corresponding attribute value.
+订阅ThingsBoard的属性更新。通过属性键指定要订阅的共享属性。订阅的属性值更新时，将调用提供的回调并传入新值。
 
-Method will return a subscription ID that can be used to unsubscribe from attribute updates using 
-the [unsubscribe_from_attribute](/docs/reference/circuitpython-client-sdk/#unsubscribe_from_attribute) method.
+方法返回订阅ID，可用于[unsubscribe_from_attribute](/docs/reference/circuitpython-client-sdk/#unsubscribe_from_attribute)取消订阅。
 
-**Method Syntax**
+**方法语法**
 
 `client.subscribe_to_attribute(key, callback)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Description**                                                                                                                                                                                                        |
 |:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| key           | (Required) Shared attribute key to subscribe to for updates from ThingsBoard.                                                                                                                                          |
-| callback      | (Required) A user-defined function triggered whenever a subscribed attribute is updated on ThingsBoard. The callback must accept two parameters: result (the updated data dictionary) and *args (additional metadata). |
+| key           | （必填）要订阅的ThingsBoard共享属性键。                                                                                                                                          |
+| callback      | （必填）订阅属性在ThingsBoard上更新时触发的回调，须接受 result 和 *args 两个参数。 |
 | ---           |                                                                                                                                                                                                                        |
 
-**Example usage**
+**使用示例**
 
 ```python
 def callback(result, *args):
@@ -255,24 +232,22 @@ sub_id = client.subscribe_to_attribute("frequency", callback)
 
 #### subscribe_to_all_attributes
 
-Subscribes to all shared attribute updates from ThingsBoard. Whenever any shared attribute is modified on the server, 
-the SDK triggers the designated callback function, passing the updated data as the result.
+订阅ThingsBoard全部共享属性更新。服务端任意共享属性修改时，SDK会触发指定回调并传入更新后的数据。
 
-Method will return a subscription ID that can be used to unsubscribe from attribute updates using 
-the [unsubscribe_from_attribute](/docs/reference/circuitpython-client-sdk/#unsubscribe_from_attribute) method.
+方法返回订阅ID，可用于[unsubscribe_from_attribute](/docs/reference/circuitpython-client-sdk/#unsubscribe_from_attribute)取消订阅。
 
-**Method Syntax**
+**方法语法**
 
 `client.subscribe_to_all_attributes(callback)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Description**                                                                                                                                                                               |
 |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| callback      | (Required) Triggers when any shared attribute change is pushed from the server. The callback receives a result object containing the modified key-value pairs and *args for extended context. |
+| callback      | （必填）服务端推送共享属性变更时触发，回调接收包含修改后键值对的result对象及*args。 |
 | ---           |                                                                                                                                                                                               |
 
-**Example usage**
+**使用示例**
 
 ```python
 def callback(result, *args):
@@ -285,23 +260,20 @@ sub_id = client.subscribe_to_all_attributes(callback)
 
 #### unsubscribe_from_attribute
 
-Terminates an existing subscription for shared attribute updates. This method requires the `subscription_id` returned 
-by the original call to [subscribe_to_attribute](/docs/reference/circuitpython-client-sdk/#subscribe_to_attribute) or 
-[subscribe_to_all_attributes](/docs/reference/circuitpython-client-sdk/#subscribe_to_all_attributes). Once unsubscribed, 
-the associated callback will no longer trigger upon server-side changes.
+终止共享属性更新的现有订阅。需传入[subscribe_to_attribute](/docs/reference/circuitpython-client-sdk/#subscribe_to_attribute)或[subscribe_to_all_attributes](/docs/reference/circuitpython-client-sdk/#subscribe_to_all_attributes)返回的`subscription_id`。取消后，相关回调在服务端变更时不再触发。
 
-**Method Syntax**
+**方法语法**
 
 `client.unsubscribe_from_attribute(subscription_id)`
 
-**Arguments**
+**参数**
 
 | **Arguments**   | **Description**                                                                                                                                                                                                                                                                                     |
 |:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| subscription_id | (Required) Subscription ID returned when subscribing to attribute updates using the [subscribe_to_attribute](/docs/reference/circuitpython-client-sdk/#subscribe_to_attribute) or [subscribe_to_all_attributes](/docs/reference/circuitpython-client-sdk/#subscribe_to_all_attributes) methods.         |
+| subscription_id | （必填）通过subscribe_to_attribute或subscribe_to_all_attributes订阅时返回的订阅ID。         |
 | ---             |                                                                                                                                                                                                                                                                                                     |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Subscribing to attribute updates
@@ -317,25 +289,23 @@ client.unsubscribe_from_attribute(sub_id)
 
 #### set_server_side_rpc_request_handler
 
-Configures a handler for [Remote Procedure Call](/docs/user-guide/rpc/) requests initiated from ThingsBoard. This 
-method should be invoked after establishing a connection. When a request is received, the SDK executes the designated 
-handler, passing the following arguments:
+配置处理ThingsBoard发起的[远程过程调用](/docs/user-guide/rpc/)请求的处理器。应在建立连接后调用。收到请求时，SDK执行指定处理器并传入：
 
-- `request_id` - a unique identifier for the specific RPC request, required for sending a response.
-- `request_body` - a dictionary containing the command details, typically including the method name and params.
+- `request_id` - RPC请求的唯一标识符，用于发送响应。
+- `request_body` - 包含命令详情的字典，通常含方法名和 params。
 
-**Method Syntax**
+**方法语法**
 
 `client.set_server_side_rpc_request_handler(handler)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Description**                                                                                                                                                                                                         |
 |:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| handler       | Defines the logic to execute when ThingsBoard initiates a remote command. The function receives two parameters: request_id, representing the transaction ID, and request_body, containing the specific request payload. |
+| handler       | 定义 ThingsBoard 发起远程命令时执行的逻辑，函数接收 request_id 和 request_body 两个参数。 |
 | ---           |                                                                                                                                                                                                                         |
 
-**Example usage**
+**使用示例**
 
 ```python
 def handler(request_id, request_body):
@@ -364,7 +334,7 @@ call this method may result in `request timeout` errors on the ThingsBoard dashb
 | response      | (Required) Data that will be sent as a reply to the received RPC.               |
 | ---           |                                                                                 |
 
-**Example usage**
+**使用示例**
 
 ```python
 def handler(request_id, request_body):
@@ -394,7 +364,7 @@ call this method may result in `request timeout` errors on the ThingsBoard dashb
 | response      | (Required) Data that will be sent as a reply to the received RPC.               |
 | ---           |                                                                                 |
 
-**Example usage**
+**使用示例**
 
 ```python
 def handler(request_id, request_body):
@@ -421,13 +391,9 @@ In this section, we’ll cover the core concepts of the CircuitPython Client SDK
 
 Let's review these concepts of the CircuitPython Client SDK:
 
-#### Connecting to ThingsBoard
+#### 连接ThingsBoard
 
-To connect to ThingsBoard using the CircuitPython Client SDK, instantiate the `TBDeviceMqttClient` class by providing 
-your server credentials: host, port, and access token. Once the client is initialized, invoke the 
-[connect()](/docs/reference/circuitpython-client-sdk/#connect) method to establish the MQTT session. After a successful 
-connection, the device is ready to transmit telemetry or subscribe to updates. We recommend the following minimal code 
-snippet to use:
+使用CircuitPython Client SDK连接ThingsBoard时，实例化`TBDeviceMqttClient`并传入服务器凭证：host、port和access token。初始化后调用[connect()](/docs/reference/circuitpython-client-sdk/#connect)建立MQTT会话。连接成功后即可发送遥测或订阅更新。推荐使用以下最小代码：
 
 ```python
 import time
@@ -456,31 +422,27 @@ while True:
 ```
 {: .copy-code}
 
-Before communicating with the ThingsBoard, make sure your device is connected to the network. The above code assumes that the Wi-Fi connection is already established.
-More about how you can establish Wi-Fi connection can be found in the [Networking in CircuitPython](https://learn.adafruit.com/networking-in-circuitpython/networking-with-the-wifi-module).
+与ThingsBoard通信前，请确保设备已接入网络。上述代码假设Wi-Fi已连接。
+Wi-Fi连接方法详见[CircuitPython网络](https://learn.adafruit.com/networking-in-circuitpython/networking-with-the-wifi-module)。
 
-- First we make sure that Wi-Fi is connected and print the device's IP address. This is important because the MQTT client needs an active network connection to communicate with ThingsBoard.
-- The `TBDeviceMqttClient` is the primary class. It requires ThingsBoard host and a unique Access Token generated in the
-  ThingsBoard device page.
-- We create the MQTT client instance using these connection settings, so the SDK knows where to connect and how to identify the device.
-- After calling client.connect(), we add a short delay to give the connection time to stabilize on some boards.
+- 首先确认Wi-Fi已连接并打印设备IP，MQTT客户端需要有效网络连接才能与ThingsBoard通信。
+- `TBDeviceMqttClient`是主类，需要ThingsBoard host和在设备页面生成的唯一Access Token。
+- 使用这些连接设置创建MQTT客户端实例，SDK据此确定连接地址和设备标识。
+- 调用client.connect()后，可加短暂延迟，使部分板卡的连接更稳定。
 
-#### The Non-Blocking Loop
+#### 非阻塞循环
 
-The most critical part of the SDK implementation is the main loop. In CircuitPython, using `time.sleep()` 
-helps reduce CPU usage while waiting for events, but it also pauses your code. 
-To keep the device responsive to incoming MQTT messages, you should regularly poll the client.
+SDK实现中最关键的是主循环。在CircuitPython中，`time.sleep()`在等待事件时可降低CPU占用，但会阻塞代码。
+要让设备持续处理传入的MQTT消息，需定期轮询客户端。
 
-`client.check_for_msg()` method is the "heartbeat" of your communication:
+`client.check_for_msg()`是通信的“心跳”：
 
-- It checks the MQTT buffer for incoming messages.
-- It processes any received messages and triggers the appropriate callbacks (for example, RPC requests or attribute updates).
+- 检查MQTT缓冲区中的传入消息。
+- 处理收到的消息并触发相应回调（如RPC请求或属性更新）。
 
-#### Telemetry, Attributes and Data Flow
+#### 遥测、属性与数据流
 
-The SDK provides methods to send telemetry data to ThingsBoard. You can use the [send_telemetry()](/docs/reference/circuitpython-client-sdk/#send_telemetry) method to send
-data in various formats, including key-value pairs and lists. The SDK also supports sending telemetry data grouped by 
-timestamp, which is useful for sending historical data to ThingsBoard.
+SDK提供向ThingsBoard发送遥测的方法，可使用[send_telemetry()](/docs/reference/circuitpython-client-sdk/#send_telemetry)以键值对、列表等格式发送。SDK也支持按时间戳分组发送，便于发送历史数据。
 
 ```python
 # Main loop (non-blocking)
@@ -493,14 +455,12 @@ while True:
 ```
 {: .copy-code}
 
-By placing this inside the main loop, the device continuously streams its state. Because we use a non-blocking approach,
-the device can simultaneously send telemetry and receive RPC commands without one interrupting the other.
+将其置于主循环后，设备将持续上报状态。采用非阻塞方式，设备可同时发送遥测和接收RPC命令，互不阻塞。
 
-#### Attributes requests
+#### 属性请求
 
-The SDK provides methods to work with device attributes in ThingsBoard. You can use the 
-[request_attributes()](/docs/reference/circuitpython-client-sdk/#request_attributes) method to request client and/or shared attributes by key. 
-When ThingsBoard responds, the SDK calls your callback function with the received data (or an error).
+SDK提供操作ThingsBoard设备属性的方法，可使用[request_attributes()](/docs/reference/circuitpython-client-sdk/#request_attributes)按键请求客户端和/或共享属性。
+ThingsBoard响应后，SDK会调用回调并传入收到数据（或错误）。
 
 ```python
 TIMEOUT = 20  # how long we keep pumping MQTT loop (seconds)
@@ -525,19 +485,16 @@ while time.monotonic() < deadline:
 ```
 {: .copy-code}
 
-By placing this polling logic inside your main loop, the device remains responsive: it can request/receive attributes 
-and still handle other MQTT events (such as RPC calls) without blocking the whole application.
+在主循环中加入轮询逻辑，设备可保持响应：既能请求/接收属性，又能处理其他MQTT事件（如RPC调用）而不阻塞整个应用。
 
-- We define a callback (`on_attributes_change`) that will be triggered when the attributes response arrives.
-- We send an attributes request for specific keys ("atr1", "atr2"). The SDK publishes a request message and waits for the response from ThingsBoard.
-- The loop runs only for a limited time (`TIMEOUT`) using `time.monotonic(`), so the device does not wait forever if no response is received.
+- 定义回调`on_attributes_change`，在收到属性响应时触发。
+- 对指定键（"atr1"、"atr2"）发起属性请求，SDK发布请求并等待ThingsBoard响应。
+- 使用`time.monotonic()`控制循环在`TIMEOUT`内运行，若未收到响应不会无限等待。
 
-#### Attributes updates
+#### 属性更新
 
-The SDK provides methods to subscribe to attribute updates. You can use the 
-[subscribe_to_attribute()](/docs/reference/circuitpython-client-sdk/#subscribe_to_attribute) method to 
-subscribe to updates of a client and/or shared attribute by key.
-When ThingsBoard publishes an update for that attribute, the SDK calls your callback function with the received data (or an error).
+SDK提供订阅属性更新的方法，可使用[subscribe_to_attribute()](/docs/reference/circuitpython-client-sdk/#subscribe_to_attribute)按键订阅客户端和/或共享属性的更新。
+ThingsBoard发布该属性更新时，SDK将调用回调并传入收到的数据（或错误）。
 
 ```python
 TIMEOUT = 20  # how long we keep pumping MQTT loop (seconds)
@@ -560,21 +517,15 @@ while time.monotonic() < deadline:
 ```
 {: .copy-code}
 
-By placing this polling logic inside your main loop, the device remains responsive: it can request/receive attributes 
-and still handle other MQTT events (such as RPC calls) without blocking the whole application.
+在主循环中加入轮询逻辑，设备可保持响应：既能请求/接收属性，又能处理其他MQTT事件（如RPC调用）而不阻塞整个应用。
 
-- We define a callback (`callback`) that will be triggered each time a subscribed attribute update arrives.
-- We subscribe to updates for a single attribute key (for example, a shared attribute "frequency"). The method may return a subscription id that can be used later to manage the subscription.
-- The loop runs only for a limited time (`TIMEOUT`) using `time.monotonic()`, so the example does not run forever.
+- 定义回调`callback`，每次收到订阅属性更新时触发。
+- 订阅单个属性键（如共享属性"frequency"）的更新，方法可能返回后续用于管理订阅的subscription id。
+- 使用`time.monotonic()`限制循环在`TIMEOUT`内运行，示例不会无限执行。
 
-#### Handling Server-Side RPC
+#### 处理服务端RPC
 
-[Remote Procedure Calls](/docs/user-guide/rpc/) allow ThingsBoard to send commands to your device 
-(e.g., "Turn on the LED" or "Reset"). To handle these commands, you need to set a handler function using
-the [set_server_side_rpc_request_handler](/docs/reference/circuitpython-client-sdk/#set_server_side_rpc_request_handler)
-method. This handler will be called whenever a server-side RPC request is received from ThingsBoard. The handler
-function should accept two arguments: `request_id` and `request_body`, which will contain the ID of the received RPC
-request and the data of the received RPC request, respectively.
+[远程过程调用](/docs/user-guide/rpc/)允许ThingsBoard向设备发送命令（如“打开LED”或“重置”）。要处理这些命令，需通过[set_server_side_rpc_request_handler](/docs/reference/circuitpython-client-sdk/#set_server_side_rpc_request_handler)设置处理器。收到服务端RPC请求时，该处理器会被调用，并传入`request_id`和`request_body`（分别对应请求ID和请求数据）。
 
 ```python
 # This callback will be called when an RPC request is received from ThingsBoard.
@@ -595,36 +546,27 @@ while True:
 ```
 {: .copy-code}
 
-In the SDK, we don't "wait" for a command, instead we provide a callback function (`on_server_side_rpc_request`):
+SDK不会“等待”命令，而是通过回调`on_server_side_rpc_request`处理：
 
-- Tells the client which function to run when a RPC arrives using [set_server_side_rpc_request_handler()](/docs/reference/circuitpython-client-sdk/#set_server_side_rpc_request_handler).
-- When a RPC arrives, the SDK automatically passes the `request_id` (used for the reply) and the `request_body` to your function.
-- The [send_rpc_reply()](/docs/reference/circuitpython-client-sdk/#send_rpc_reply) informs the server that the RPC was received and processed
-  successfully.
+- 使用[set_server_side_rpc_request_handler()](/docs/reference/circuitpython-client-sdk/#set_server_side_rpc_request_handler)指定收到RPC时执行的函数。
+- 收到RPC时，SDK自动将`request_id`（用于回复）和`request_body`传入处理器。
+- [send_rpc_reply()](/docs/reference/circuitpython-client-sdk/#send_rpc_reply)告知服务器RPC已收到并处理成功。
 
-### Examples
+### 示例
 
-You can find more examples of using the CircuitPython Client SDK in
-the [examples](https://github.com/thingsboard/CircuitPython_thingsboard-client-sdk/tree/main/examples) directory of the
-[thingsboard-circuitpython-client-sdk](https://github.com/thingsboard/CircuitPython_thingsboard-client-sdk) repository on
-GitHub.
+更多CircuitPython Client SDK使用示例见GitHub上[thingsboard-circuitpython-client-sdk](https://github.com/thingsboard/CircuitPython_thingsboard-client-sdk)仓库的[examples](https://github.com/thingsboard/CircuitPython_thingsboard-client-sdk/tree/main/examples)目录。
 
-### Troubleshooting
+### 故障排除
 
-- **Low memory, unstable SDK behavior**
+- **内存不足、SDK不稳定**
 
-  This usually happens when the board has limited RAM for CircuitPython, or when your application (and its dependencies)
-  uses too much memory.
-  Try reducing memory usage in your code (for example, avoid large allocations and keep imports minimal). We also
-  recommend reading this guide:
-  [CircuitPython memory saving](https://github.com/kmatch98/CircuitPython_memory_saving).
+  常见于板子CircuitPython可用RAM有限，或应用及其依赖占用内存过多。
+  可尝试减少代码内存占用（如避免大块分配、精简import）。建议阅读[CircuitPython内存优化](https://github.com/kmatch98/CircuitPython_memory_saving)指南。
 
-- **Errors with circup installation**
+- **circup安装错误**
 
-  On some boards, `circup install` may fail when using a USB/serial workflow. In this case, you can install
-  libraries using [Web-Workflow](https://adafruit-playground.com/u/tyeth/pages/using-circup-with-web-workflow) instead.
-  This method lets you target the device directly over the network by specifying the device IP (host) and Web Workflow
-  password, which often resolves upload/permission issues.
+  部分板子在使用USB/串口工作流时`circup install`可能失败。此时可改用[Web-Workflow](https://adafruit-playground.com/u/tyeth/pages/using-circup-with-web-workflow)安装库。
+  该方法通过指定设备IP（host）和Web Workflow密码，直接在网络上目标设备安装，常可解决上传/权限问题。
 
   ```bash
   circup --host <your_device_ip> --password <your_password> install thingsboard-circuitpython-client-sdk

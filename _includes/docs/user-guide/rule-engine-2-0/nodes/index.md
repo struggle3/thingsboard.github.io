@@ -1,3 +1,3 @@
 <p class="rule-node-description">
-Rule Node is a basic component of Rule Engine that process single incoming message at a time and produce one or more outgoing messages. Rule Node is a main logical unit of the Rule Engine. Rule Node can filter, enrich, transform incoming messages, perform action or communicate with external systems.
+规则节点是规则引擎的基本组件，每次处理一条入站消息并产生一条或多条出站消息。规则节点是规则引擎的主要逻辑单元，可对入站消息进行过滤、丰富、转换，执行操作或与外部系统通信。
 </p>

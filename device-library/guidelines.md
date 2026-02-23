@@ -1,6 +1,6 @@
 ---
 layout: device
-title: How to add your device to Device Library?
+title: 如何将您的设备添加到设备库？
 breadcrumbs: "true"
 breadcrumbs-steps: "1"
 device-card: "false"

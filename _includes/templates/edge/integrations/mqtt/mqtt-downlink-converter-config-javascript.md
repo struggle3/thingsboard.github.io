@@ -1,18 +1,18 @@
-Now copy & paste the following script to the Encoder function section:
+现将以下脚本复制并粘贴到 Encoder 函数部分：
 
 ```javascript
 /** Encoder **/
 
-// Result object with encoded downlink payload
+// 包含编码后下行 payload 的结果对象
 var result = {
 
-        // downlink data content type: JSON, TEXT or BINARY (base64 format)
+        // 下行数据内容类型：JSON、TEXT 或 BINARY（base64 格式）
         contentType: "JSON",
 
-        // downlink data
+        // 下行数据
         data: JSON.stringify(msg),
 
-        // Optional metadata object presented in key/value format
+        // 可选的 metadata 对象，以键/值格式表示
         metadata: {
             topic: 'tb-edge/mqtt-integration-tutorial/sensors/'+metadata['originatorName']+'/rx'
         }

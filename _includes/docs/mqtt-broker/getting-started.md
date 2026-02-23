@@ -3,25 +3,25 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-The goal of this tutorial is to showcase the fundamental usage of <a target="_blank" href="/products/mqtt-broker/">TBMQ</a>. 
-Through this tutorial, you will gain knowledge and proficiency in the following areas:
+本教程旨在演示 <a target="_blank" href="/products/mqtt-broker/">TBMQ</a> 的基本用法。
+通过本教程，您将掌握以下能力：
 
-* Establishing connections between MQTT clients and the broker.
-* Publishing MQTT messages.
-* Subscribing to topics to receive published messages.
-* Configuring authentication and authorization mechanisms for MQTT clients.
+* 建立 MQTT 客户端与 broker 之间的连接。
+* 发布 MQTT 消息。
+* 订阅 topic 以接收已发布的消息。
+* 配置 MQTT 客户端的认证和授权机制。
 
-For more comprehensive information regarding the architecture of TBMQ, navigate to the following [document](/docs/{{docsPrefix}}mqtt-broker/architecture/).
-This resource provides detailed insights into the underlying structure and design principles of the broker.
+有关 TBMQ 架构的更多信息，请参阅以下[文档](/docs/{{docsPrefix}}mqtt-broker/architecture/)。
+该文档详细介绍了 broker 的内部结构和设计原理。
 
-## Try Live Demo
+## 试用在线演示
 
-The fastest way to get started with TBMQ is to use our free public MQTT broker at [demo.tbmq.io](https://demo.tbmq.io){:target="_blank"}.
-This sandbox environment allows you to explore TBMQ features without any installation.
+使用我们在 [demo.tbmq.io](https://demo.tbmq.io){:target="_blank"} 提供的免费公共 MQTT broker 是快速上手 TBMQ 的最便捷方式。
+该沙箱环境让您无需安装即可体验 TBMQ 功能。
 
-**MQTT connection details:**
+**MQTT 连接信息：**
 
 | Parameter | Value           |
 |-----------|-----------------|
@@ -29,23 +29,23 @@ This sandbox environment allows you to explore TBMQ features without any install
 | TCP Port  | 1883            |
 | TLS Port  | 8883            |
 | Username  | demo            |
-| Password  | *(leave empty)* |
+| Password  | *(留空)* |
 
-You can start publishing and subscribing to topics immediately using these credentials.
-To access the TBMQ UI and explore sessions, subscriptions, and other features, [sign up](https://demo.tbmq.io/signup){:target="_blank"} for a free account.
+使用上述凭据，您可以立即开始发布和订阅 topic。
+要访问 TBMQ UI 并查看会话、订阅和其他功能，请[注册](https://demo.tbmq.io/signup){:target="_blank"}免费账户。
 
 {% capture demo_note %}
-The demo instance provides read-only access to the UI. You can observe all sessions, subscriptions, and broker statistics, but cannot modify configurations.
-If you prefer to run TBMQ locally with full administrative access, proceed to the [Install TBMQ locally](#install-tbmq-{{tbmqSuffixLc}}-locally) section.
+演示实例提供只读 UI 访问。您可以查看所有会话、订阅和 broker 统计数据，但无法修改配置。
+如需在本地运行具有完整管理权限的 TBMQ，请前往[本地安装 TBMQ](#install-tbmq-{{tbmqSuffixLc}}-locally) 部分。
 {% endcapture %}
 {% include templates/info-banner.md content=demo_note %}
 
-## Install TBMQ {{tbmqSuffix}} locally
+## 本地安装 TBMQ {{tbmqSuffix}}
 
-For full control over your TBMQ {{tbmqSuffix}} instance, you can install it locally.
-For detailed instructions on different platforms, see the [Installation options](/docs/{{docsPrefix}}mqtt-broker/install/installation-options) documentation.
+要完全掌控 TBMQ {{tbmqSuffix}} 实例，您可以在本地安装。
+不同平台的详细说明请参阅[安装选项](/docs/{{docsPrefix}}mqtt-broker/install/installation-options)文档。
 
-Follow the instructions below for a quick local installation.
+请按以下步骤进行快速本地安装。
 
 {% capture contenttogglespec %}
 Linux & Mac OS%,%linuxmacos%,%templates/mqtt-broker/install/linux-macos/linux-macos.md%br%
@@ -55,15 +55,14 @@ Windows%,%windows%,%templates/mqtt-broker/install/windows/windows.md{% endcaptur
 
 {% if docsPrefix == "pe/" %}
 
-Before proceeding, make sure you’ve selected your subscription plan or chosen to purchase a perpetual license.
-If you haven’t done this yet, please visit the [Pricing page](/pricing/?section=tbmq-options){: target="_blank"} to compare available options
-and obtain your license key.
+在继续之前，请确保已选择订阅计划或购买永久许可证。
+如尚未操作，请访问[定价页面](/pricing/?section=tbmq-options){: target="_blank"}对比可选方案，并获取您的许可证密钥。
 
 {% capture replace_tbmq_license_secret %}
-Update your `docker-compose.yml` file with the license secret you obtained earlier.
-Open the file, find the **TBMQ_LICENSE_SECRET** environment variable,
-and replace **YOUR_LICENSE_KEY_HERE** with your actual license secret.
-After updating the file, restart TBMQ by running the following command.
+请用您之前获取的许可证密钥更新 `docker-compose.yml` 文件。
+打开文件，找到 **TBMQ_LICENSE_SECRET** 环境变量，
+并将 **YOUR_LICENSE_KEY_HERE** 替换为您的实际许可证密钥。
+更新文件后，运行以下命令重启 TBMQ。
 {% endcapture %}
 {% include templates/warn-banner.md content=replace_tbmq_license_secret %}
  
@@ -74,8 +73,8 @@ After updating the file, restart TBMQ by running the following command.
 
 {% endif %}
 
-Once the installation process is complete for local deployment, you can access TBMQ UI by visiting the following URL: **http://localhost:8083**. 
-Wait patiently until the services are up and running. To log in, utilize the following default credentials.
+本地部署安装完成后，您可通过以下 URL 访问 TBMQ UI：**http://localhost:8083**。
+请耐心等待服务启动。登录时使用以下默认凭据。
 
 **Username:**
 ```text
@@ -89,44 +88,44 @@ sysadmin
 ```
 {: .copy-code}
 
-## Configure client authentication & authorization
+## 配置客户端认证与授权
 
 {% capture auth_note %}
-If you are using the [demo instance](https://demo.tbmq.io){:target="_blank"}, skip this section. Demo credentials are pre-configured and ready to use.
+如使用[演示实例](https://demo.tbmq.io){:target="_blank"}，请跳过本节。演示凭据已预配置并可直接使用。
 {% endcapture %}
 {% include templates/info-banner.md content=auth_note %}
 
-To secure the connection to the broker, [enable Basic authentication](/docs/{{docsPrefix}}mqtt-broker/security/authentication/basic/).
+为保护与 broker 的连接，请[启用 Basic 认证](/docs/{{docsPrefix}}mqtt-broker/security/authentication/basic/)。
 
-Once Basic authentication is enabled, create MQTT Client Credentials of type `Basic` to authenticate connecting clients:
+启用 Basic 认证后，创建类型为 `Basic` 的 MQTT Client Credentials 以验证连接客户端：
 
-* Navigate to _Authentication_ - _Credentials_ tab, click "+" in the top right corner of the table.
-* Input credentials name. For example, "Getting Started Credentials".
-* Input "username" and "password" with chosen values. For example, use `username` and `password` values respectively.
-* Authorization rules are set to allow publishing/subscribing to any topic by default.
-* Click "Add" to save credentials.
+* 进入 _Authentication_ - _Credentials_ 选项卡，点击表格右上角的 "+"。
+* 输入凭据名称。例如 "Getting Started Credentials"。
+* 输入 "username" 和 "password" 的值。例如分别使用 `username` 和 `password`。
+* 授权规则默认允许发布/订阅任意 topic。
+* 点击 "Add" 保存凭据。
 
 {% include images-gallery.html imageCollection="broker-mqtt-creds-creation" %}
 
-For additional authentication methods, refer to the [security guide](/docs/{{docsPrefix}}mqtt-broker/security/overview/).
+其他认证方式请参阅[安全指南](/docs/{{docsPrefix}}mqtt-broker/security/overview/)。
 
-## Publishing and Subscribing to Topics
+## 发布和订阅 Topic
 
-Now, let's publish messages and subscribe to topics to observe the flow of messages.
-This tutorial uses [Mosquitto](https://mosquitto.org/) clients. See the documentation for [mosquitto_pub](https://mosquitto.org/man/mosquitto_pub-1.html) and [mosquitto_sub](https://mosquitto.org/man/mosquitto_sub-1.html) for more details.
+下面演示如何发布消息并订阅 topic 以观察消息流转。
+本教程使用 [Mosquitto](https://mosquitto.org/) 客户端。更多详情请参阅 [mosquitto_pub](https://mosquitto.org/man/mosquitto_pub-1.html) 和 [mosquitto_sub](https://mosquitto.org/man/mosquitto_sub-1.html) 文档。
 
 {% capture pubsubtogglespec %}
-Demo Instance<small>demo.tbmq.io</small>%,%demo%,%templates/mqtt-broker/getting-started/pub-sub-demo.md%br%
-Local Deployment<small>localhost</small>%,%local%,%templates/mqtt-broker/getting-started/pub-sub-local.md{% endcapture %}
+演示实例<small>demo.tbmq.io</small>%,%demo%,%templates/mqtt-broker/getting-started/pub-sub-demo.md%br%
+本地部署<small>localhost</small>%,%local%,%templates/mqtt-broker/getting-started/pub-sub-local.md{% endcapture %}
 
 {% include content-toggle.html content-toggle-id="pubSubCommand" toggle-spec=pubsubtogglespec %}
 
-##### Result
+##### 结果
 
-You should see the published message received by the subscribed client:
+订阅客户端应能收到已发布的消息：
 
 ![image](/images/mqtt-broker/getting-started/broker-pub-sub.png)
 
-## Next Steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuide" %}{% include templates/mqtt-broker-guides-banner.md %}

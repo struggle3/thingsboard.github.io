@@ -1,9 +1,8 @@
 ---
 layout: hardware-partner
 hardware-partner: Teltonika Networks
-description: Teltonika is an official ThingsBoard hardware partner. Learn about Teltonika products, supported use cases, and integration guides with the ThingsBoard IoT platform.
+description: Teltonika 是 ThingsBoard 官方硬件合作伙伴。了解 Teltonika 产品、支持的应用场景及与 ThingsBoard 物联网平台的集成指南。
 
 ---
-
 
 

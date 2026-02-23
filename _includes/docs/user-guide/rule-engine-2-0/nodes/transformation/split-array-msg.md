@@ -1,8 +1,8 @@
-Splits a message whose data is a JSON array into multiple separate messages, one for each element in the array.
+将 data 为 JSON 数组的消息拆分为多条独立消息，为数组中每个元素生成一条新消息。
 
-## Configuration
+## 配置
 
-This node has no configuration options.
+该节点无可配置选项。
 
 ### JSON Schema
 
@@ -17,28 +17,28 @@ This node has no configuration options.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node inspects the data of the incoming message to verify it is a JSON array.
-2. If the data is not a JSON array, the processing fails, and the original message is routed to the `Failure` chain.
-3. If the data is a JSON array, the node processes it as follows:
-    - If the array is **empty**, the original message is simply acknowledged, and no new messages are generated.
-    - If the array contains **one or more elements**, a new message is created for **each element**.
-4. Each new message has the array element as its data. The originator, message type, and metadata are all copied from the original incoming message.
-5. All newly created messages are sent out via the `Success` chain. The original message is acknowledged once all split messages have been successfully enqueued.
+1. 节点检查入站消息的 data，确认其为 JSON 数组。
+2. 若 data 不是 JSON 数组，处理失败，原始消息经 `Failure` 链路由。
+3. 若 data 为 JSON 数组，节点按以下方式处理：
+    - 若数组**为空**，仅确认原始消息，不生成新消息。
+    - 若数组包含**一个或多个元素**，为**每个元素**创建一条新消息。
+4. 每条新消息以数组元素作为其 data。来源实体、消息类型和 metadata 均从原始入站消息复制。
+5. 所有新消息经 `Success` 链发送。所有拆分消息成功入队后确认原始消息。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - New messages (one for each element in the source array) are sent through this chain.
-- `Failure`:
-    - If the incoming message data is not a JSON array.
+- `Success`：
+    - 新消息（源数组中每个元素一条）经此链发送。
+- `Failure`：
+    - 入站消息 data 不是 JSON 数组时。
 
-## Examples
+## 示例
 
-### Example 1 — Split an array of objects
+### 示例 1 — 拆分对象数组
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -49,41 +49,41 @@ Data:
 ]
 ```
 
-**Outgoing messages**
+**出站消息**
 
-Two new messages are created and sent via the `Success` chain:
+经 `Success` 链创建并发送两条新消息：
 
 1. Message 1:
     - Data: `{"sensor": "A", "temperature": 22.5}`
 2. Message 2:
     - Data: `{"sensor": "B", "temperature": 23.1}`
 
-**Explanation**: The original message containing an array of two objects is split into two separate messages. Each new message's data is one of the objects from the original array.
+**说明**：包含两个对象的原始消息被拆分为两条独立消息。每条新消息的 data 为原始数组中的一个对象。
 
 -----
 
-### Example 2 — Input is an empty array
+### 示例 2 — 输入为空数组
 
-**Incoming message**
+**入站消息**
 
 Data: `[]`
 
-**Outgoing messages**
+**出站消息**
 
-No new messages are created. The original message is acknowledged.
+不生成新消息。原始消息被确认。
 
-**Explanation**: The incoming message data is an empty array. The node processes it successfully by acknowledging without producing any output messages.
+**说明**：入站消息 data 为空数组。节点成功处理，仅确认不产生任何输出消息。
 
 -----
 
-### Example 3 — Input is not an array
+### 示例 3 — 输入不是数组
 
-**Incoming message**
+**入站消息**
 
 Data: `{"status": "error", "code": 500}`
 
-**Outgoing messages**
+**出站消息**
 
-The original message is routed to the `Failure` chain. No new messages are created.
+原始消息经 `Failure` 链路由。不生成新消息。
 
-**Explanation**: The incoming message data is a JSON object, not an array. The node cannot process it, so it fails.
+**说明**：入站消息 data 为 JSON 对象而非数组。节点无法处理，故失败。

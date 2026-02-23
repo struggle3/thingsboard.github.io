@@ -1,16 +1,16 @@
 ---
 layout: docwithnav
-title: A Guide to Connecting ADAM-6717 to ThingsBoard Cloud Unlocking Seamless IoT Connectivity
-description: A Guide to Connecting ADAM-6717 to ThingsBoard Cloud Unlocking Seamless IoT Connectivity
+title: ADAM-6717 连接 ThingsBoard Cloud 指南——实现无缝物联网连接
+description: 将 ADAM-6717 连接到 ThingsBoard Cloud 的完整指南，实现无缝物联网连接
 ---
 
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-In this comprehensive guide, we will walk you through the process of establishing a seamless connection between the ADAM-6717 and ThingsBoard Cloud. 
-By following these step-by-step instructions, you will be able to integrate and leverage the powerful capabilities of ThingsBoard Cloud with your ADAM-6717 module
+本综合指南将指导您完成 ADAM-6717 与 ThingsBoard Cloud 之间的无缝连接配置。
+按照以下分步说明，您将能够将 ThingsBoard Cloud 的强大能力与 ADAM-6717 模块集成。
 
 ## Step 1: Creating a New Device on the ThingsBoard Cloud Platform
 

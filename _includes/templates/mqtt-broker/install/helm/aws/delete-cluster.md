@@ -1,4 +1,4 @@
-Execute the following command to delete the EKS cluster:
+执行以下命令删除 EKS 集群：
 
 ```bash
 eksctl delete cluster -r us-east-1 -n tbmq -w
@@ -7,7 +7,7 @@ eksctl delete cluster -r us-east-1 -n tbmq -w
 
 {% capture delete-cluster %}
 
-Make sure to update the cluster name `-n` and region `-r` if your configuration uses different values.
+若配置使用了不同值，请确保更新集群名称 `-n` 和区域 `-r`。
 
 {% endcapture %}
 {% include templates/info-banner.md content=delete-cluster %}

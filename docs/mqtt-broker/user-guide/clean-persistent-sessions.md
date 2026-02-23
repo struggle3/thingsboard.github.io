@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Non-Persistent and Persistent Sessions
-description: Explaining MQTT sessions.
+title: 非持久化与持久化会话
+description: MQTT 会话说明。
 
 persistent-session-demo:
   0:
     image: /images/mqtt-broker/user-guide/ui/persistent-session-demo-1.png
-    title: 'In a WebSocket Client connection: enable persistent session (disable Clean Start), set a Session Expiry Interval greater than zero, and click "Connect".'
+    title: '在 WebSocket 客户端连接中：启用持久化会话（关闭 Clean Start），将 Session Expiry Interval 设为大于 0，点击「Connect」。'
   1:
     image: /images/mqtt-broker/user-guide/ui/persistent-session-demo-2.png
-    title: 'Add a subscription to a topic "session/persistent" with QoS 1.'
+    title: '添加对主题「session/persistent」的订阅，QoS 1。'
   2:
     image: /images/mqtt-broker/user-guide/ui/persistent-session-demo-3.png
     title: 'Click the "Disconnect" button.'

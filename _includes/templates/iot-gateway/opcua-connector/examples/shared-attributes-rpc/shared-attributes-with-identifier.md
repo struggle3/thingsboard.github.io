@@ -1,59 +1,54 @@
-Attribute updates allow you to update node values in the OPC-UA server. 
-You can add new attribute updates in the "**Attribute updates**" section of the device configuration page.
+属性更新允许更新 OPC-UA 服务器中的节点值。
+可在设备配置页的“**属性更新**”部分添加新的属性更新。
 
-As an example, we will use Prosys OPC-UA Simulation Server, which is available at `opc.tcp://0.0.0.0:53530/OPCUA/SimulationServer`.
-The server has the following structure:
+以下示例使用 Prosys OPC-UA 仿真服务器，地址为 `opc.tcp://0.0.0.0:53530/OPCUA/SimulationServer`。
+服务器结构如下：
 
 ![image](/images/gateway/opc-ua-connector/examples/opc-ua-server-structure-overview-4.png)
 
-### Example: Text Message Editing (Identifier)
+### 示例：文本消息编辑（标识符）
 
-We are interested in node "**TextMessage**", we added this node as a telemetry parameter with the key `text_message`. 
-We used telemetry so that later it would be convenient for us to see if the value we changed using the attribute update  
-has changed. You, also, can add this telemetry datapoint to the device configuration or use the reserved `get` method 
-to check the value of the node.
+我们关注节点 "**TextMessage**"，以键 `text_message` 将其添加为遥测参数。
+使用遥测便于后续通过属性更新查看值是否已变更。
+您也可在设备配置中添加该遥测数据点，或使用保留 `get` 方法检查节点值。
 
-Let's add an attribute update to our configuration. For this purpose, follow these steps:
-- Go to "**Entities**" → "**Gateways**" in the right sidebar.
-- Select your gateway.
-- Click on the "**Connectors**" tab.
-- Select the OPC-UA connector and click on the "**Data mapping**" tab.
-- Make sure you have configured and connected device (if you don't know how to do it, see Getting Started guide or 
-  Connection settings and Data mapping sections of this guide). Click on the "**Pencil**" icon on a device you want to 
-  configure attribute updates for.
-- Scroll down to the "**Attribute updates**" section and click on the "**Pencil**" icon to edit the attribute updates.
-- Click on the "**Add attribute update**" button. In our case, we will add `text_message` attribute update, so the "**Key**" 
-  field, enter `text_message`, select the "**Type**" as **Identifier**, and in the "**Value**" field enter 
-  `${ns=2;i=1005}`. This is an identifier of the OPC-UA server node we want to update.
-- Remember to save your changes by clicking the "**Apply**" button.
+按以下步骤添加属性更新配置：
+- 进入“**实体**”→“**网关**”（右侧边栏）。
+- 选择您的网关。
+- 点击“**连接器**”标签。
+- 选择 OPC-UA 连接器并点击“**数据映射**”标签。
+- 请确保已配置并连接设备（若不清楚如何操作，请参阅入门指南或连接设置与数据映射部分）。点击要配置属性更新的设备旁的“**铅笔**”图标。
+- 向下滚动至“**属性更新**”部分，点击“**铅笔**”图标编辑属性更新。
+- 点击“**添加属性更新**”按钮。此处添加 `text_message` 属性更新，故在“**键**”中填 `text_message`，“**类型**”选 **Identifier**，“**值**”填
+  `${ns=2;i=1005}`。这是要更新的 OPC-UA 服务器节点的标识符。
+- 记得点击“**应用**”按钮保存更改。
 
 {% assign attributeUpdatesIdentifier = '
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-1.png,
-        title: Go to "**Entities**" → "**Gateways**" in the right sidebar and select your gateway.
+        title: 在右侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/opc-ua-connector/examples/attribute-updates-relative-path-1.png,
-        title: Select the created OPC-UA connector, click on the "**Data mapping**" tab. Make sure you have configured and connected device (if you do not know how to do it, see [Getting Started](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"} guide or [Connection settings](/docs/iot-gateway/config/opc-ua/#connection-settings) and [Data mapping](/docs/iot-gateway/config/opc-ua/#data-mapping) sections of this guide). Click on the "**Pencil**" icon on a device you want to configure attribute updates for.
+        title: 选择已创建的 OPC-UA 连接器，点击“**数据映射**”标签。请确保已配置并连接设备（若不清楚如何操作，请参阅[入门指南](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"}或本指南的[连接设置](/docs/iot-gateway/config/opc-ua/#connection-settings)和[数据映射](/docs/iot-gateway/config/opc-ua/#data-mapping)）。点击要配置属性更新的设备旁的“**铅笔**”图标。
     ===
         image: /images/gateway/opc-ua-connector/examples/attribute-updates-identifier-1.png,
-        title: Scroll down to the "**Attribute updates**" section and click on the "**Pencil**" icon to edit the attribute updates.
+        title: 向下滚动至“**属性更新**”部分，点击“**铅笔**”图标编辑属性更新。
     ===
         image: /images/gateway/opc-ua-connector/examples/attribute-updates-identifier-2.png,
-        title: Click on the "**Add attribute update**" button. In our case, we will add `text_message` attribute update, so the "**Key**" field, enter `text_message`, select the "**Type**" as **Identifier**, and in the "**Value**" field enter `${ns=2;i=1005}`. This is an identifier of the OPC-UA server node we want to update.
+        title: 点击“**添加属性更新**”按钮。此处添加 `text_message` 属性更新，故在“**键**”中填 `text_message`，“**类型**”选 **Identifier**，“**值**”填 `${ns=2;i=1005}`。这是要更新的 OPC-UA 服务器节点的标识符。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-relative-path-9.png,
-        title: Remember to save your changes by clicking the "**Apply**" button.
+        title: 记得点击“**应用**”按钮保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=attributeUpdatesIdentifier %}
 
-Now we can check if the attribute update works. Go to "**Devices**" → select a created device → "**Attributes**" tab → 
-select "**Shared attributes**" → click on the "**+**" icon and add `text_message` attribute with type "**String**" set 
-it to "**Hello from Gateway!**".
+可以检查属性更新是否生效。进入“**设备**”→选择已创建设备→“**属性**”标签→
+选择“**共享属性**”→点击“**+**”图标，添加 `text_message` 属性，类型为“**字符串**”，值设为“**Hello from Gateway!**”。
 
 {% assign attributeUpdatesIdentifier2 = '
     ===
@@ -65,16 +60,14 @@ it to "**Hello from Gateway!**".
 
 {% include images-gallery.liquid showListImageTitles="false" imageCollection=attributeUpdatesIdentifier2 %}
 
-Now, let's check the value of the text message node. In the selected device, go to the "**Last telemetry**" tab and check the 
-value of the `text_message` telemetry. It should be `Hello from Gateway!` since we set the shared attribute to `Hello from Gateway!`.
+在所选设备的“**最新遥测**”标签中检查文本消息节点的值。因共享属性已设为 `Hello from Gateway!`，`text_message` 遥测值应为 `Hello from Gateway!`。
 
 ![image](/images/gateway/opc-ua-connector/examples/result-device-overview-4.png)
 
-Try to change the value of the `text_message` shared attribute to `Hello from <your_name>!`. After a few seconds, 
-you should see that the `text_message` telemetry value has changed to `Hello from <your_name>!`, which means that the 
-attribute update worked correctly.
+尝试将 `text_message` 共享属性的值改为 `Hello from <your_name>!`。几秒后，
+`text_message` 遥测值应变为 `Hello from <your_name>!`，说明属性更新已正确生效。
 
-Full configuration for OPC-UA connector for the examples above will look like this:
+上述示例的 OPC-UA 连接器完整配置如下：
 
 ```json
 {

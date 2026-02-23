@@ -2,61 +2,61 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Working with IoT dashboards
-description: IoT dashboards using ThingsBoard
+title: 使用 IoT 仪表板
+description: 使用 ThingsBoard 的 IoT 仪表板
 redirect_from: "/docs/pe/user-guide/ui/dashboards/"
 
 creating-dashboard:
     0:
         image: /images/user-guide/dashboards/overview/create-dashboard-1-pe.png
-        title: 'Login to your ThingsBoard instance and navigate to the "Dashboards" page through the main menu on the left of the screen. By default, you navigate to the dashboard group "All";'
+        title: '登录 ThingsBoard 实例，通过屏幕左侧主菜单进入「仪表板」页面。默认进入仪表板组「全部」；'
     1:
         image: /images/user-guide/dashboards/overview/create-dashboard-2-pe.png
-        title: 'Click the "+" sign in the upper right corner of the screen, and select "Create new dashboard" from the drop-down menu;'
+        title: '点击屏幕右上角「+」按钮，从下拉菜单中选择「创建新仪表板」；'
     2:
         image: /images/user-guide/dashboards/overview/create-dashboard-3-pe.png
-        title: 'In the opened dialog, it is necessary to enter a dashboard title, description is optional. Click "Add";'
+        title: '在打开的对话框中输入仪表板标题，描述为可选。点击「添加」；'
     3:
         image: /images/user-guide/dashboards/overview/create-dashboard-4-pe.png
-        title: 'Once you have created the dashboard, it will be automatically opened. Save it by clicking the "Save" button in the upper right corner.'
+        title: '创建仪表板后将自动打开。点击右上角「保存」按钮保存。'
     4:
         image: /images/user-guide/dashboards/overview/create-dashboard-4-1-pe.png
-        title: 'Your first dashboard has been successfully created. As you continue to add new dashboards, they will appear at the top of the list. This default sort is based on the creation timestamp.'
+        title: '首个仪表板已创建成功。后续添加的仪表板将出现在列表顶部，默认按创建时间戳排序。'
 
 creating-dashboard-2:
     0:
         image: /images/user-guide/dashboards/overview/create-dashboard-5-pe.png
-        title: 'In the "Add Dashboard" dialog, enter the dashboard title, and then click "Next: Owner and groups";'
+        title: '在「添加仪表板」对话框中输入仪表板标题，然后点击「下一步：所有者与分组」；'
     1:
         image: /images/user-guide/dashboards/overview/create-dashboard-6-pe.png
-        title: 'Change the owner and select an existing dashboard group or create a new one, then click "Add";'
+        title: '更改所有者，选择现有仪表板组或新建一组，然后点击「添加」；'
     2:
         image: /images/user-guide/dashboards/overview/create-dashboard-7-pe.png
-        title: 'The created dashboard is located in the "Sensors" dashboard&#39;s group and belongs to Customer A.'
+        title: '创建的仪表板位于「Sensors」仪表板组，归属于客户 A。'
 
 creating-dashboard-3:
     0:
         image: /images/user-guide/dashboards/overview/create-dashboard-8-pe.png
-        title: 'By default, the list of dashboards displays all dashboards, including those of your customers. To view only your dashboards, toggle the "Include customer entities" option.'
+        title: '默认情况下，仪表板列表显示所有仪表板，包括客户仪表板。若仅查看自己的仪表板，请切换「包含客户实体」选项。'
 
 import-dashboard:
     0:
         image: /images/user-guide/dashboards/managing-dashboard/import-dashboard-1-pe.png
-        title: 'Go to the "Dashboards" page and click on the "+" button in the upper right corner of the page and select "Import dashboard" from the drop-down menu;'
+        title: '进入「仪表板」页面，点击右上角「+」按钮，从下拉菜单中选择「导入仪表板」；'
     1:
         image: /images/user-guide/dashboards/managing-dashboard/import-dashboard-2-pe.png
-        title: 'In the import dashboard window, upload the dashboard configuration JSON file and click "Import";'
+        title: '在导入仪表板窗口中上传仪表板配置 JSON 文件并点击「导入」；'
     2:
         image: /images/user-guide/dashboards/managing-dashboard/import-dashboard-3-pe.png
-        title: 'You have imported a dashboard. Open it;'
+        title: '仪表板已导入。打开它；'
     3:
         image: /images/user-guide/dashboards/managing-dashboard/import-dashboard-4-pe.png
-        title: 'As you can see, your dashboard has been imported along with all of its widgets.'
+        title: '如您所见，仪表板及其所有部件已一并导入。'
 
 export-dashboard:
     0:
         image: /images/user-guide/dashboards/managing-dashboard/export-dashboard-1-pe.png
-        title: 'To export a dashboard, go to the "Dashboards" page. Opposite the name of the dashboard in the list, click on the “Export dashboard” button. The configuration file in JSON format with all settings on the control panel will be saved on your PC.'
+        title: '要导出仪表板，请进入「仪表板」页面。 在列表中仪表板名称旁点击 “导出仪表板” 按钮。包含控制面板所有设置的 JSON 格式配置文件将保存到您的电脑。'
 
 dashboard-manage-owner-and-groups:
     0:
@@ -190,12 +190,12 @@ add-new-widget:
 dashboard-toolbar-export:
     0:
         image: /images/user-guide/dashboards/overview/dashboard-toolbar-export-1-pe.png
-        title: 'Go to the "Dashboards" page, open the dashboard and click the "Export dashboard" button in the upper right corner of the screen and select "Export JSON configuration".'
+        title: 'Go to the "Dashboards" page, open the dashboard and click the 「导出仪表板」 button in the upper right corner of the screen and select "Export JSON configuration".'
 
 pro-export:
     0:
         image: /images/user-guide/dashboards/overview/dashboard-toolbar-export-png-pdf-1-pe.png
-        title: 'Go to the "Dashboards" page, open the dashboard and click the "Export dashboard" button in the upper right corner of the screen. Choose from several additional formats: PDF, PNG or JPEG, and click on it;'
+        title: 'Go to the "Dashboards" page, open the dashboard and click the 「导出仪表板」 button in the upper right corner of the screen. Choose from several additional formats: PDF, PNG or JPEG, and click on it;'
     1:
         image: /images/user-guide/dashboards/overview/pdf-export.png
         title: 'The dashboard that was exported as PNG.'

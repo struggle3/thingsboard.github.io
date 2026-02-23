@@ -1,22 +1,22 @@
-| **Parameter** | **Default value**                                                                    | **Description**                                                                                                 |
+| **参数** | **默认值**                                                                    | **说明**                                                                                                 |
 |:--------------|:-------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| key           | **temperature °C**                                                                   | Tag, that will be interpreted as telemetry for ThingsBoard platform instance.                                   |
-| type          | **path**                                                                             | Source of the value (can be [path](#path-types), [identifier](#identifier-types) or constant).                  |
-| value         | **${Root\\\\.Objects\\\\.Device1\\\\.TemperatureAndHumiditySensor\\\\.Temperature}** | Name of the variable in the OPC-UA object is used for looking up the value within a specific variable. ** \* ** |
+| key           | **temperature °C**                                                                   | 将被解释为 ThingsBoard 平台实例 telemetry 的标签。                                   |
+| type          | **path**                                                                             | 值的来源（可为 [path](#path-types)、[identifier](#identifier-types) 或 constant）。                  |
+| value         | **${Root\\\\.Objects\\\\.Device1\\\\.TemperatureAndHumiditySensor\\\\.Temperature}** | OPC-UA 对象中用于在特定变量中查找值的变量名。** \* ** |
 | ---           |                                                                                      |                                                                                                                 |
 
 {% capture difference %}
-All rules below apply in the same way to attributes configuration.
+以下规则同样适用于 attribute 配置。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-** \* ** You can input some expressions for search here, like:
-1. Full path to node - **${Root\\\\.Objects\\\\.Device1\\\\.TemperatureAndHumiditySensor\\\\.Temperature}**
-2. Relative path from device object - **${TemperatureAndHumiditySensor\\.Temperature}** 
-3. Some regular expressions to search for - **${Root\\\\.Objects\\\\.Device\\\\d\*\\\\.TemperatureAndHumiditySensor\\\\.Temperature}**
-4. Namespace identifier and node identifier - **${ns=2;i=5}**
+** \* ** 此处可输入搜索表达式，例如：
+1. 节点完整路径 - **${Root\\\\.Objects\\\\.Device1\\\\.TemperatureAndHumiditySensor\\\\.Temperature}**
+2. 设备对象的相对路径 - **${TemperatureAndHumiditySensor\\.Temperature}** 
+3. 用于搜索的正则表达式 - **${Root\\\\.Objects\\\\.Device\\\\d\*\\\\.TemperatureAndHumiditySensor\\\\.Temperature}**
+4. 命名空间标识符和节点标识符 - **${ns=2;i=5}**
 
-This part of the configuration will look like this:  
+配置的此部分将如下所示：  
 
 ```json
         "timeseries": [
@@ -28,16 +28,16 @@ This part of the configuration will look like this:
 ```
 
 <br>
-**Let's look at an example.**
+**来看一个示例。**
 
-Replace the "path" value with the "NodeId" value. This is a relative path from device object or Display Name identifier taken from our test server.
+将 "path" 的值替换为 "NodeId" 的值。这是从设备对象或测试服务器 Display Name 标识符得到的相对路径。
 <br>
 
 {:refdef: style="text-align: left;"}
 ![image](/images/gateway/opc-ua-simulation-server-4.png)
 {: refdef}
 
-In this example, the **timeseries** section would look like this:
+在此示例中，**timeseries** 部分如下所示：
 
 ```json
         "timeseries": [
@@ -60,7 +60,7 @@ In this example, the **timeseries** section would look like this:
 ![image](/images/gateway/opc-ua-connector/opc-ua-subsection-time-series-advanced-1-ce.png)
 {: refdef}
 
-You should be able to see the telemetry you have sent to ThingsBoard in the **Latest telemetry** section of your device:
+您应能在设备 **Latest telemetry**（最新遥测）部分看到已发送到 ThingsBoard 的 telemetry：
 
 {:refdef: style="text-align: left;"}
 ![image](/images/gateway/gateway-opc-ua-attributes-3.png)

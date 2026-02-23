@@ -1,18 +1,18 @@
-Stop the **ThingsBoard Edge** service (if it's still running):
+停止 **ThingsBoard Edge** 服务（若仍在运行）：
 
 ```bash
 sudo systemctl stop tb-edge
 ```
 {: .copy-code}
 
-To restore the **PostgreSQL database** from a backup file, run the following command: 
+若要从备份文件恢复 **PostgreSQL** 数据库，执行以下命令：
 
 ```bash
  sudo -u postgres psql tb_edge < tb_edge.sql.bak
  ```
 {: .copy-code}
 
-Start the **ThingsBoard Edge** service:
+启动 **ThingsBoard Edge** 服务：
 
 ```bash
 sudo systemctl start tb-edge

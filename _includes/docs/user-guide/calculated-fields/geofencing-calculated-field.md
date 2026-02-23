@@ -1,10 +1,10 @@
 * TOC
 {:toc}
 
-The **Geofencing** calculated field monitors entity movement in real time by evaluating incoming GPS coordinates against configured geofence zones.   
-It lets you express spatial logic through configuration and automatically detect whether an entity (vehicle, container, tracker, etc.) is located inside specific areas such as restricted zones, parking lots, or operational boundaries.
+**Geofencing**（地理围栏）计算字段通过将传入的 GPS 坐标与已配置的地理围栏区域比对，实时监控实体移动。
+可通过配置表达空间逻辑，自动检测实体（车辆、集装箱、追踪器等）是否位于特定区域（如禁入区、停车场或作业边界）内。
 
-Use Geofencing calculated fields when you need to:
+在以下场景使用 Geofencing 计算字段：
 - Track presence status in operational zones (e.g., “Is the truck inside the warehouse perimeter?”).
 - Detect entry/exit transitions and record boundary-crossing events (ENTERED / LEFT).
 - Monitor multiple independent zones at the same time (e.g., Safe Area + Restricted Area).
@@ -36,15 +36,15 @@ For each zone group, the field produces consistent output keys (&lt;zoneGroupNam
 
 <hr>
 
-### Entity coordinates
+### 实体坐标
 
-Map the incoming telemetry keys that represent the entity&#39;s GPS position.
-- **Latitude time series key** — e.g., <span class="code-light">latitude</span> or <span class="code-light">lat</span>
-- **Longitude time series key** — e.g., <span class="code-light">longitude</span> or <span class="code-light">lng</span>
+映射表示实体 GPS 位置的传入遥测 key。
+- **Latitude time series key** — 如 <span class="code-light">latitude</span> 或 <span class="code-light">lat</span>
+- **Longitude time series key** — 如 <span class="code-light">longitude</span> 或 <span class="code-light">lng</span>
 
-> **Requirements**
-- Values must be numeric.
-- If either coordinate is missing or invalid, the calculation is skipped.
+> **要求**
+- 值须为数字。
+- 若任一坐标缺失或无效，则跳过计算。
 
 {% assign geofencingEntityCoordinates = '
     ===
@@ -57,15 +57,15 @@ Map the incoming telemetry keys that represent the entity&#39;s GPS position.
 
 <hr>
 
-### Geofencing zone groups
+### 地理围栏区域组
 
-A **Zone Group** is a logical container that bundles one or more physical zones (polygons/circles) into a single evaluation.
+**Zone Group** 是将一个或多个物理区域（多边形/圆）捆绑为一次评估的逻辑容器。
 
-The calculated field checks all zones within the group and determines the entity&#39;s state:
-- **INSIDE** - the entity is inside **at least one** zone in the group
-- **OUTSIDE** - the entity is not located inside **any** zone in the group.
+计算字段检查组内所有 zones 并确定实体状态：
+- **INSIDE** — 实体位于组内**至少一个** zone 内
+- **OUTSIDE** — 实体不在组内**任何** zone 内
 
-Click **Add zone group** to configure a new group.
+点击 **Add zone group** 配置新组。
 
 {% assign geofencingZoneGroupsAdd = '
     ===
@@ -665,7 +665,7 @@ Track two independent conditions for each truck simultaneously:
 - **Service area** — whether the truck is currently **INSIDE/OUTSIDE** its assigned service zone.
 - **Restricted area** — detect if the truck **ENTERED/LEFT** any no-go zone.
 
-This example uses two Zone Groups inside a single Geofencing calculated field. Both groups discover zones dynamically через Fleet relations, but use different relation types to separate logic:
+This example uses two Zone Groups inside a single Geofencing calculated field. 两组均通过 Fleet 关系动态发现 zones, but use different relation types to separate logic:
 - <span class="code-light">serviceArea</span> group: **UP** to fleet (Contains) → **DOWN** to zone (FleetToAllowedZone)
 - <span class="code-light">restrictedArea</span> group: **UP** to fleet (Contains) → **DOWN** to zone (FleetToRestrictedZone)
 
@@ -841,7 +841,7 @@ As you move truck markers across zone boundaries:
 
 <hr>
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎为 ThingsBoard 在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 加星。
+如有疑问，请 [联系我们](/docs/contact-us/){:target="_blank"}。

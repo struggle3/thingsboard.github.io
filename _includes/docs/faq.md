@@ -136,120 +136,120 @@ function resetLoadMore(categoryId) {
 }
 </script>
 
-<h2>Open Source IoT Platform</h2>
+<h2>开源IoT平台</h2>
 
 <div class="tb-faq-wrapper">
     <div class="tb-faq-sections">
         <div class="tb-faq-tabs">
-            <div class="tb-faq-tab active" onclick="switchTbFaqTab('general')">General</div>
+            <div class="tb-faq-tab active" onclick="switchTbFaqTab('general')">通用</div>
             {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-            <div class="tb-faq-tab" onclick="switchTbFaqTab('private-cloud')">Private Cloud</div>
-            <div class="tb-faq-tab" onclick="switchTbFaqTab('addons')">ThingsBoard Add-ons</div>
+            <div class="tb-faq-tab" onclick="switchTbFaqTab('private-cloud')">私有云</div>
+            <div class="tb-faq-tab" onclick="switchTbFaqTab('addons')">ThingsBoard 插件</div>
             {% endif %}
-            <div class="tb-faq-tab" onclick="switchTbFaqTab('ai')">AI Capabilities</div>
-            <div class="tb-faq-tab" onclick="switchTbFaqTab('deployment')">Deployments & Limits</div>
-            <div class="tb-faq-tab" onclick="switchTbFaqTab('security')">Security & Compliance</div>
-            <div class="tb-faq-tab" onclick="switchTbFaqTab('support')">Support & Assistance</div>
+            <div class="tb-faq-tab" onclick="switchTbFaqTab('ai')">AI 能力</div>
+            <div class="tb-faq-tab" onclick="switchTbFaqTab('deployment')">部署与限制</div>
+            <div class="tb-faq-tab" onclick="switchTbFaqTab('security')">安全与合规</div>
+            <div class="tb-faq-tab" onclick="switchTbFaqTab('support')">支持与帮助</div>
         </div>
         <div class="tb-faq-answers">
             <div id="tb-faq-cat-general" class="tb-faq-category active">
                 <div class="tb-faq-question">
                     {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/"%}
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is ThingsBoard Cloud?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard Cloud是什么？</div>
                     {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is ThingsBoard Professional Edition?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard Professional Edition是什么？</div>
                     {% else %}
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is ThingsBoard Community Edition?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard Community Edition是什么？</div>
                     {% endif %}
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard is an IoT platform for <b>data collection, processing, visualization, and device management</b>. It enables you to accelerate development and lower costs by providing out-of-the-box components and APIs while maintaining full control over your solution and data.</p>
+                        <p>ThingsBoard 是面向<b>数据采集、处理、可视化及设备管理</b>的IoT平台。通过开箱即用组件和 API 加速开发、降低成本，同时保持对方案和数据的完全掌控。</p>
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/"%}
-                        <p>ThingsBoard Cloud is a <b>fully managed, scalable, and fault-tolerant Platform-as-a-Service (PaaS)</b> for your IoT applications. It offers all the advanced features of the Professional Edition without the overhead of manual installation, maintenance, or infrastructure updates, allowing you to focus entirely on building your solution.</p>
-                        <p>Learn more about the platform's architecture in our <a href="/docs/{{docsPrefix}}getting-started-guides/what-is-thingsboard/" target="_blank">What is ThingsBoard?</a> guide, or jump straight to the <a href="/docs/{{docsPrefix}}getting-started-guides/helloworld/" target="_blank">Getting Started Guide</a> to build your first project.</p>
+                        <p>ThingsBoard Cloud 是面向 IoT 应用的<b>全托管、可扩展、高容错 Platform-as-a-Service (PaaS)</b>。提供 Professional Edition 全部高级功能，无需手工安装、维护或基础设施更新，可专注于构建方案。</p>
+                        <p>详见<a href="/docs/{{docsPrefix}}getting-started-guides/what-is-thingsboard/" target="_blank">ThingsBoard是什么</a>了解平台架构，或直接参阅<a href="/docs/{{docsPrefix}}getting-started-guides/helloworld/" target="_blank">快速入门指南</a>搭建首个项目。</p>
                         {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>ThingsBoard Professional Edition (PE) is an enterprise-grade IoT platform designed for <b>production-ready deployments</b>. It adds critical business features such as white-labeling, advanced security, multi-customer management, and official technical support, making it ideal for businesses requiring a reliable, professionally backed solution.</p>
-                        <p>Learn more about the platform's architecture in our <a href="/docs/{{docsPrefix}}getting-started-guides/what-is-thingsboard/" target="_blank">What is ThingsBoard?</a> guide, or jump straight to the <a href="/docs/getting-started-guides/helloworld-pe/" target="_blank">Getting Started Guide</a> to build your first project.</p>
+                        <p>ThingsBoard Professional Edition (PE) 是企业级IoT平台，面向<b>生产就绪部署</b>。提供白标、高级安全、多客户管理及官方技术支持等关键功能，适合需要可靠、专业支持的企业。</p>
+                        <p>详见<a href="/docs/{{docsPrefix}}getting-started-guides/what-is-thingsboard/" target="_blank">ThingsBoard是什么</a>了解架构，或参阅<a href="/docs/getting-started-guides/helloworld-pe/" target="_blank">快速入门指南</a>搭建首个项目。</p>
                         {% else %}
-                        <p>ThingsBoard Community Edition (CE) is a <b>free, open-source IoT platform</b> for collecting, storing, and analyzing data from IoT devices. It is designed for developers and organizations that want full control over their own IoT infrastructure and source code without any licensing fees.</p>
-                        <p>Learn more about the platform's architecture in our <a href="/docs/{{docsPrefix}}getting-started-guides/what-is-thingsboard/" target="_blank">What is ThingsBoard?</a> guide, or jump straight to the <a href="/docs/getting-started-guides/helloworld/" target="_blank">Getting Started Guide</a> to build your first project.</p>
+                        <p>ThingsBoard社区版(CE)是<b>免费开源IoT平台</b>，用于采集、存储和分析 IoT 设备数据。面向希望完全掌控自身 IoT 基础设施和源码、无许可费用的开发者和组织。</p>
+                        <p>详见<a href="/docs/{{docsPrefix}}getting-started-guides/what-is-thingsboard/" target="_blank">ThingsBoard是什么</a>了解架构，或参阅<a href="/docs/getting-started-guides/helloworld/" target="_blank">快速入门指南</a>搭建首个项目。</p>
                        {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
                     {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Is ThingsBoard Professional Edition free?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard Professional Edition免费吗？</div>
                     {% else %}
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Is ThingsBoard Community Edition free?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard社区版免费吗？</div>
                     {% endif %}
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" %}
-                        <p>You can start with the Free plan. But higher plans require <b>a paid subscription</b>.</p>
+                        <p>可从免费计划开始，更高级计划需<b>付费订阅</b>。</p>
                         {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>No, Professional Edition requires <b>a paid subscription</b>.</p>
+                        <p>否，Professional Edition需<b>付费订阅</b>。</p>
                         {% else %}
-                        <p>Yes, it <b>is completely free</b>, with no licensing fees or hidden costs.</p>
+                        <p>是，<b>完全免费</b>，无许可费或隐性成本。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What's the difference between Community and Professional Edition?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Community Edition与Professional Edition有何区别？</div>
                     <div class="tb-faq-answer">
-                        <p><b>Community Edition (CE)</b> is a free, open-source platform suitable for development, testing, and production use without licensing costs. It includes essential features for IoT device management, data collection, visualization, and rule processing.</p>
-                        <p><b>Professional Edition (PE)</b> includes all CE features and offers advanced capabilities such as <a href="/docs/pe/user-guide/white-labeling/" target="_blank">white-labeling</a>, <a href="/docs/pe/user-guide/rbac/" target="_blank">role-based access control (RBAC)</a>, <a href="/docs/user-guide/integrations/" target="_blank">platform integrations</a>, <a href="/docs/pe/solution-templates/overview/" target="_blank">solution templates</a>, <a href="/docs/pe/user-guide/scheduler/" target="_blank">scheduler</a>, and enterprise support.</p>
-                        <p>See the <a href="/products/thingsboard-pe/" target="_blank">PE product page</a> for a detailed <b>feature comparison table</b>.</p>
+                        <p><b>Community Edition (CE)</b> 为免费开源平台，适用于开发、测试和生产，无许可费。具备 IoT 设备管理、数据采集、可视化及规则处理等核心功能。</p>
+                        <p><b>Professional Edition (PE)</b> 涵盖 CE 全部功能，并增加<a href="/docs/pe/user-guide/white-labeling/" target="_blank">白标</a>、<a href="/docs/pe/user-guide/rbac/" target="_blank">基于角色的访问控制 (RBAC)</a>、<a href="/docs/user-guide/integrations/" target="_blank">平台集成</a>、<a href="/docs/pe/solution-templates/overview/" target="_blank">方案模板</a>、<a href="/docs/pe/user-guide/scheduler/" target="_blank">调度器</a>及企业支持。</p>
+                        <p>详见<a href="/products/thingsboard-pe/" target="_blank">PE 产品页</a>的<b>功能对比表</b>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How do I get started with ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">如何开始使用 ThingsBoard？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/"%}
-                        <p>Sign up for <a href="https://thingsboard.cloud/signup" target="_blank">ThingsBoard Cloud</a> for immediate access.</p>
+                        <p>注册<a href="https://thingsboard.cloud/signup" target="_blank">ThingsBoard Cloud</a>即可使用。</p>
                         {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Sign up for <a href="https://thingsboard.cloud/signup" target="_blank">ThingsBoard Cloud</a> for immediate access or follow our <a href="/docs/pe/user-guide/install/installation-options/" target="_blank">installation guide</a> to deploy PE on your own infrastructure.</p>
+                        <p>注册<a href="https://thingsboard.cloud/signup" target="_blank">ThingsBoard Cloud</a>或按<a href="/docs/pe/user-guide/install/installation-options/" target="_blank">安装指南</a>在自有基础设施上部署 PE。</p>
                         {% else %}
-                        <p>Install ThingsBoard CE locally by following our <a href="/docs/user-guide/install/installation-options/" target="_blank">installation guide</a>.</p>
+                        <p>按<a href="/docs/user-guide/install/installation-options/" target="_blank">安装指南</a>在本地安装 ThingsBoard CE。</p>
                         {% endif %}
-                        <p>To connect your first device and build dashboards, explore the <a href="/docs/{{docsPrefix}}getting-started-guides/helloworld/" target="_blank">Getting Started Guide</a>.</p>
+                        <p>连接首个设备并构建仪表盘，请参阅<a href="/docs/{{docsPrefix}}getting-started-guides/helloworld/" target="_blank">快速入门指南</a>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Are there API rate limits?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">是否有 API 速率限制？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" %}
-                        <p>Yes. Each ThingsBoard Cloud plan includes specific usage quotas and API rate limits. Please refer to the <a href="/docs/{{docsPrefix}}subscriptions/" target="_blank">Subscription Plans</a> page for detailed information on these limits.</p>
+                        <p>有。各 ThingsBoard Cloud 计划包含特定用量配额和 API 速率限制。详见<a href="/docs/{{docsPrefix}}subscriptions/" target="_blank">订阅计划</a>页。</p>
                         {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>The Professional Edition software does not impose built-in API rate limits. However, actual throughput and performance are determined by the capacity of your self-managed infrastructure.</p>
+                        <p>Professional Edition 软件无内置 API 速率限制。实际吞吐量和性能取决于自托管基础设施能力。</p>
                         {% else %}
-                        <p>ThingsBoard Community Edition does not have built-in API rate limits; however, system performance and request handling are subject to the limitations of the infrastructure on which it is hosted.</p>
+                        <p>ThingsBoard社区版无内置 API 速率限制；系统性能与请求处理受所托管基础设施限制。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Are there device limits?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">是否有设备数量限制？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" %}
-                        <p>Limits depend on your selected subscription plan. ThingsBoard Cloud plans range from 5 devices (Maker) up to 1,000 devices (Business). For <b>Business</b> plans, you can purchase additional device capacity as needed.</p>
+                        <p>限制取决于所选订阅计划。ThingsBoard Cloud 计划从 5 台设备（Maker）到 1,000 台设备（Business）不等。<b>Business</b> 计划可按需购买额外设备容量。</p>
                         {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Device limits are determined by your license type. Self-managed Professional Edition subscriptions typically range from 10 devices (Maker) to 1,000 devices (Business). <b>Business</b> licenses allow for the purchase of additional device packs.</p>
+                        <p>设备限制由许可类型决定。自托管 Professional Edition 订阅通常为 10 台（Maker）至 1,000 台（Business）设备。<b>Business</b> 许可可购买额外设备包。</p>
                         {% else %}
-                        <p>No, the Community Edition does not impose programmatic device limits. The number of devices you can connect is only limited by your server's hardware resources.</p>
+                        <p>Community Edition无设备限制可连接设备数仅受服务器硬件资源限制。</p>
                         {% endif %}
                         {% unless docsPrefix contains 'paas/' %}
-                        <p>The ThingsBoard platform is designed to be <b>horizontally scalable</b>. By utilizing a <a href="https://en.wikipedia.org/wiki/Consistent_hashing" target="_blank">consistent-hashing</a> load balancing algorithm between cluster nodes, the system ensures high availability and performance. Actual capacity depends on your specific usage scenarios and data throughput requirements.</p>
-                        <p>For instance, even a cluster of commodity hardware can support <a href="/docs/{{docsPrefix}}reference/iot-platform-deployment-scenarios/#1-million-smart-meters-tco" target="_blank">several million</a> devices connected via MQTT.</p>
+<p>ThingsBoard平台设计为<b>水平可扩展</b>。通过在集群节点间使用<a href="https://en.wikipedia.org/wiki/Consistent_hashing" target="_blank">一致性哈希</a>负载均衡算法，保障高可用与性能。实际容量取决于使用场景及数据吞吐需求。</p>
+        <p>例如，普通硬件集群也可通过 MQTT 支持<a href="/docs/{{docsPrefix}}reference/iot-platform-deployment-scenarios/#1-million-smart-meters-tco" target="_blank">数百万</a>设备。</p>
                         {% endunless %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How to connect my device?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">如何连接设备？</div>
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard provides <a href="/docs/{{docsPrefix}}reference/mqtt-api" target="_blank">MQTT</a>, <a href="/docs/{{docsPrefix}}reference/coap-api" target="_blank">CoAP</a>, <a href="/docs/{{docsPrefix}}reference/http-api" target="_blank">HTTP</a>, and <a href="/docs/{{docsPrefix}}reference/lwm2m-api" target="_blank">LwM2M</a> protocols support. <b>Existing</b> devices may be connected to the platform using <b><a href="/docs/iot-gateway/what-is-iot-gateway/" target="_blank">ThingsBoard Gateway</a></b>. You can find more information on the <a href="/docs/{{docsPrefix}}reference/protocols/" target="_blank">connectivity</a> page.</p>
+                        <p>ThingsBoard 支持 <a href="/docs/{{docsPrefix}}reference/mqtt-api" target="_blank">MQTT</a>、<a href="/docs/{{docsPrefix}}reference/coap-api" target="_blank">CoAP</a>、<a href="/docs/{{docsPrefix}}reference/http-api" target="_blank">HTTP</a> 和 <a href="/docs/{{docsPrefix}}reference/lwm2m-api" target="_blank">LwM2M</a>。<b>现有</b>设备可通过<b><a href="/docs/iot-gateway/what-is-iot-gateway/" target="_blank">ThingsBoard Gateway</a></b>连接平台。更多见<a href="/docs/{{docsPrefix}}reference/protocols/" target="_blank">连接</a>页。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Do I need to use an SDK?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">必须使用 SDK 吗？</div>
                     <div class="tb-faq-answer">
-                        <p>No, many IoT devices cannot afford the overhead of embedding a third-party SDK. ThingsBoard provides a simple API over common IoT protocols, allowing you to choose any client-side library you prefer or use your own. Some useful references include:</p>
+                        <p>否。许多 IoT 设备难以嵌入第三方 SDK。ThingsBoard 通过常见 IoT 协议提供简易 API，可选择任意客户端库或自研。参考：</p>
                         <ul>
                             <li><a href="https://github.com/mqtt/mqtt.github.io/wiki/libraries" target="_blank">List of MQTT client-side libraries</a></li>
                             <li><a href="https://libcoap.net/" target="_blank">C-implementation for CoAP</a></li>
@@ -258,586 +258,586 @@ function resetLoadMore(categoryId) {
                 </div>
                 {% unless docsPrefix contains 'paas/' %}
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Where can I host ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 可部署在哪里？</div>
                     <div class="tb-faq-answer">
-                        <p>You can host ThingsBoard in the cloud, on-premises, or locally on your laptop, PC, or even a Raspberry Pi. We recommend getting started with a Docker installation:</p>
+                        <p>可将 ThingsBoard 部署在云端、本地机房或笔记本、PC 甚至树莓派上。建议以 Docker 安装开始：</p>
                         <ul>
                             <li><a href="/docs/user-guide/install/{{docsPrefix}}docker/" target="_blank">Linux & macOS</a></li>
                             <li><a href="/docs/user-guide/install/{{docsPrefix}}docker-windows/" target="_blank">Windows</a></li>
                         </ul>
-                        <p>You can also take a look at the <a href="/docs/user-guide/install/{{docsPrefix}}cluster-setup/" target="_blank">cluster setup</a> guide.</p>
+                        <p>也可参阅<a href="/docs/user-guide/install/{{docsPrefix}}cluster-setup/" target="_blank">集群搭建</a>指南。</p>
                     </div>
                 </div>
                 {% endunless %}
                 {% unless page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I use Community Edition for commercial projects?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">可将 Community Edition 用于商业项目吗？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes. CE is licensed under <a href="https://github.com/thingsboard/thingsboard/blob/master/LICENSE" target="_blank">Apache 2.0</a>, allowing commercial use without restrictions. You can build, sell, and deploy commercial products on CE.</p>
+                        <p>可以。CE 采用 <a href="https://github.com/thingsboard/thingsboard/blob/master/LICENSE" target="_blank">Apache 2.0</a> 许可，商业使用无限制。可在 CE 上构建、销售和部署商业产品。</p>
                     </div>
                 </div>
                 {% endunless %}
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I migrate from CE to PE?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">可从 CE 迁移到 PE 吗？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, you can migrate from ThingsBoard Community Edition to Professional Edition <b>without losing telemetry data and/or configurations</b>. The upgrade process preserves your existing setup, ensuring a seamless transition.</p>
-                        <p>However, please note that <b>any custom modifications</b> made directly to the source code of the Community Edition <b>will be removed</b> during the upgrade process.</p>
-                        <p>See the <a href="/docs/pe/user-guide/install/upgrade-instructions/upgrade-from-ce/" target="_blank">ThingsBoard instructions for upgrading from Community Edition</a>. Back up your data before starting.</p>
+                        <p>可以。从 ThingsBoard社区版迁移至 Professional Edition <b>不会丢失遥测数据及配置</b>。升级会保留现有设置，实现平滑过渡。</p>
+                        <p>请注意：对 Community Edition 源码的<b>任何自定义修改</b>在升级过程中<b>将被移除</b>。</p>
+                        <p>见<a href="/docs/pe/user-guide/install/upgrade-instructions/upgrade-from-ce/" target="_blank">从 CE 升级说明</a>。升级前请备份数据。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How can I check which version of ThingsBoard I’m currently using?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">如何查看当前使用的 ThingsBoard 版本？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" %}
-                        <p>ThingsBoard Cloud is a fully managed platform that is regularly updated to the latest version by the ThingsBoard team, so you don't need to worry about maintenance or upgrades.</p>
+                        <p>ThingsBoard Cloud 为全托管平台，由 ThingsBoard 团队定期更新至最新版本，您无需关心维护或升级。</p>
                         {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>There are several ways to check the platform version in ThingsBoard Professional Edition. The easiest way is to log in as SysAdmin. On the home page, you will find a widget in the bottom-left corner of the screen displaying the current platform version and indicating whether an upgrade is available.</p>
-                        <p>Alternatively, if you don’t have access to the SysAdmin account, open <a href="/docs/{{docsPrefix}}user-guide/white-labeling/" target="_blank">White-Labeling</a> tab from the side menu. Enable the <b>Show platform name and version</b> option to see the current version of the platform.</p>
+                        <p>ThingsBoard Professional Edition 中可通过多种方式查看平台版本。最简单的方式是以 SysAdmin 身份登录，在首页屏幕左下角会有一个部件显示当前平台版本及是否有可用升级。</p>
+                        <p>若无 SysAdmin 账户权限，可从侧边栏打开 <a href="/docs/{{docsPrefix}}user-guide/white-labeling/" target="_blank">白标</a>选项卡，启用<b>显示平台名称和版本</b>即可查看当前版本。</p>
                         {% else %}
-                        <p>The easiest way is to log in as SysAdmin. On the home page, you will find a widget in the bottom-left corner of the screen showing the current platform version and whether an upgrade is available.</p>
+                        <p>最简单的方式是以 SysAdmin 身份登录，在首页屏幕左下角会有一个部件显示当前平台版本及是否有可用升级。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I integrate with third-party systems?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否与第三方系统集成？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Yes, through REST APIs, Rule Engine, and Platform Integrations (PE-only feature with 30+ built-in connectors for OPC-UA, LoRaWAN networks, cloud platforms, etc.).</p>
+                        <p>可以，通过 REST API、规则引擎以及平台集成（PE 独有，含 30+ 内置连接器，支持 OPC-UA、LoRaWAN 网络、云平台等）。</p>
                         {% else %}
-                        <p>Yes, you can integrate ThingsBoard Community Edition with third-party systems through REST APIs or Rule Engine.</p>
+                        <p>可以，可通过 REST API 或规则引擎将 ThingsBoard 社区版与第三方系统集成。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support white-labeling?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 是否支持白标？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Yes, white-labeling is available starting from the <b>Pilot</b> plan and above.</p>
+                        <p>支持，白标自<b>Pilot</b>计划及以上可用。</p>
                         {% else %}
-                        <p>No, white-labeling is available only in the Professional Edition.</p>
+                        <p>不支持，白标仅在 Professional Edition 中提供。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I replace the default ThingsBoard logo in the menu?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否替换菜单中的默认 ThingsBoard logo？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" %}
-                        <p>In the ThingsBoard Cloud, all branding can be configured directly from the user interface using the built-in <a href="/docs/{{docsPrefix}}user-guide/white-labeling/#customize-thingsboard-web-interface" target="_blank">White-Labeling</a> module.</p>
-                        <p>Here’s what you can do in just a few clicks:</p>
+                        <p>在 ThingsBoard Cloud 中，所有品牌可在用户界面中通过内置 <a href="/docs/{{docsPrefix}}user-guide/white-labeling/#customize-thingsboard-web-interface" target="_blank">白标</a>模块直接配置。</p>
+                        <p>您只需几步即可完成：</p>
                         <ul>
-                            <li>Replace the ThingsBoard logo and favicon with your own corporate visuals;</li>
-                            <li>Customize login and system pages to greet users with your brand from the start;</li>
-                            <li>Adjust color schemes and styles (primary, accent colors, logo size, CSS tweaks) to match your identity;</li>
-                            <li>Preview changes live before applying them;</li>
-                            <li>Configure custom domain: map your own domain name (e.g., portal.company.com) so users access the platform via your branded URL.</li>
+                            <li>用自有企业视觉替换 ThingsBoard logo 和 favicon；</li>
+                            <li>自定义登录页和系统页，从首次访问起展示您的品牌；</li>
+                            <li>调整配色与样式（主色、强调色、logo 尺寸、CSS 微调）以贴合品牌形象；</li>
+                            <li>应用前实时预览更改；</li>
+                            <li>配置自定义域名：映射自有域名（如 portal.company.com），使用户通过您的品牌 URL 访问平台。</li>
                         </ul>
-                        <p>And it doesn’t stop at the logo. With ThingsBoard Cloud you can:</p>
+                        <p>不仅限于 logo。使用 ThingsBoard Cloud 您还可以：</p>
                         <ul>
-                            <li>Set up custom <a href="/docs/{{docsPrefix}}user-guide/mail-templates/" target="_blank">email templates</a>, so all platform notifications reflect your brand;</li>
-                            <li>Add <a href="/docs/{{docsPrefix}}user-guide/custom-translation/" target="_blank">custom translations</a>, ensuring the platform “speaks” your users’ language;</li>
-                            <li>Create <a href="/docs/{{docsPrefix}}user-guide/custom-menu/" target="_blank">custom menus</a>, adapting navigation to your business workflows.</li>
+                            <li>设置自定义<a href="/docs/{{docsPrefix}}user-guide/mail-templates/" target="_blank">邮件模板</a>，使平台通知体现您的品牌；</li>
+                            <li>添加<a href="/docs/{{docsPrefix}}user-guide/custom-translation/" target="_blank">自定义翻译</a>，让平台 “说”用户的语言；</li>
+                            <li>创建<a href="/docs/{{docsPrefix}}user-guide/custom-menu/" target="_blank">自定义菜单</a>，使导航适配业务工作流。</li>
                         </ul>
-                        <p>This gives you a fully branded platform: your users see your logo, your colors, your emails, and even your tailored menus.</p>
+                        <p>从而获得完全品牌化的平台：用户看到的是您的 logo、配色、邮件和定制菜单。</p>
                         {% elsif page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>In the Professional Edition, all branding can be configured directly from the user interface using the built-in <a href="/docs/{{docsPrefix}}user-guide/white-labeling/#customize-thingsboard-web-interface" target="_blank">White-Labeling</a> module.</p>
-                        <p>Here’s what you can do in just a few clicks:</p>
+                        <p>在 Professional Edition 中，所有品牌可在用户界面中通过内置 <a href="/docs/{{docsPrefix}}user-guide/white-labeling/#customize-thingsboard-web-interface" target="_blank">白标</a>模块直接配置。</p>
+                        <p>您只需几步即可完成：</p>
                         <ul>
-                            <li>Replace the ThingsBoard logo and favicon with your own corporate visuals;</li>
-                            <li>Customize login and system pages to greet users with your brand from the start;</li>
-                            <li>Adjust color schemes and styles (primary, accent colors, logo size, CSS tweaks) to match your identity;</li>
-                            <li>Preview changes live before applying them;</li>
-                            <li>Configure custom domains: map your own domain name (e.g., portal.company.com) so users access the platform via your branded URL.</li>
+                            <li>用自有企业视觉替换 ThingsBoard logo 和 favicon；</li>
+                            <li>自定义登录页和系统页，从首次访问起展示您的品牌；</li>
+                            <li>调整配色与样式（主色、强调色、logo 尺寸、CSS 微调）以贴合品牌形象；</li>
+                            <li>应用前实时预览更改；</li>
+                            <li>配置自定义域名：映射自有域名（如 portal.company.com），使用户通过您的品牌 URL 访问平台。</li>
                         </ul>
-                        <p>And it doesn’t stop at the logo. With PE you can:</p>
+                        <p>不仅限于 logo。使用 PE 您还可以：</p>
                         <ul>
-                            <li>Set up custom <a href="/docs/{{docsPrefix}}user-guide/mail-templates/" target="_blank">email templates</a>, so all platform notifications reflect your brand;</li>
-                            <li>Add <a href="/docs/{{docsPrefix}}user-guide/custom-translation/" target="_blank">custom translations</a>, ensuring the platform “speaks” your users’ language;</li>
-                            <li>Create <a href="/docs/{{docsPrefix}}user-guide/custom-menu/" target="_blank">custom menus</a>, adapting navigation to your business workflows.</li>
+                            <li>设置自定义<a href="/docs/{{docsPrefix}}user-guide/mail-templates/" target="_blank">邮件模板</a>，使平台通知体现您的品牌；</li>
+                            <li>添加<a href="/docs/{{docsPrefix}}user-guide/custom-translation/" target="_blank">自定义翻译</a>，让平台 “说”用户的语言；</li>
+                            <li>创建<a href="/docs/{{docsPrefix}}user-guide/custom-menu/" target="_blank">自定义菜单</a>，使导航适配业务工作流。</li>
                         </ul>
-                        <p>This gives you a fully branded platform: your users see your logo, your colors, your emails, and even your tailored menus.</p>
+                        <p>从而获得完全品牌化的平台：用户看到的是您的 logo、配色、邮件和定制菜单。</p>
                         {% else %}
-                        <p>The Community Edition does not include a built-in white-labeling feature. However, it is technically possible to replace the default ThingsBoard logo by modifying the source code and rebuilding the platform. This requires development expertise and familiarity with ThingsBoard’s codebase. Please note that such changes will need to be reapplied after each upgrade of the platform.</p>
-                        <p>If you need a more streamlined and configurable option, we recommend considering the Professional Edition. With Professional Edition, you can effortlessly upload your own logo and favicon, customize login and system pages, adjust colors and branding palettes, and even tailor <a href="/docs/pe/user-guide/mail-templates/" target="_blank">email templates</a>, <a href="/docs/pe/user-guide/custom-translation/" target="_blank">translations</a>, and <a href="/docs/pe/user-guide/custom-menu/" target="_blank">custom menus</a> - all directly from the user interface, without touching the code. This empowers your organization to deliver a fully branded, professional-grade experience to your customers and tenants in just a few clicks.</p>
-                        <p>More details: <a href="/docs/pe/user-guide/white-labeling/#customize-thingsboard-web-interface" target="_blank">PE White-Labeling Guide</a>.</p>
+                        <p>Community Edition 不包含内置白标功能。但技术上可通过修改源码并重新构建平台来替换默认 ThingsBoard logo，需具备开发能力并熟悉 ThingsBoard 代码库；每次平台升级后此类修改需重新应用。</p>
+                        <p>若需更简便、可配置的方案，建议考虑 Professional Edition。使用 PE 可直接在界面中上传自有 logo 和 favicon、自定义登录与系统页、调整配色与品牌调色板，并可定制<a href="/docs/pe/user-guide/mail-templates/" target="_blank">邮件模板</a>、<a href="/docs/pe/user-guide/custom-translation/" target="_blank">翻译</a>和<a href="/docs/pe/user-guide/custom-menu/" target="_blank">自定义菜单</a>，无需改代码，即可为客户和租户提供完全品牌化的专业体验。</p>
+                        <p>更多说明见<a href="/docs/pe/user-guide/white-labeling/#customize-thingsboard-web-interface" target="_blank">PE 白标指南</a>。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I try Professional Edition before purchasing?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">购买前能否试用 Professional Edition？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, use the <b>Free plan</b>. This includes access to all PE features for evaluation, including add-ons - Edge computing and Trendz.</p>
+                        <p>可以，使用<b>免费计划</b>即可。该计划包含所有 PE 功能的评估权限，包括插件：Edge 计算与 Trendz。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Where can I find the source code?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">在哪里可以找到源码？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Professional Edition is proprietary software. Source code is not publicly available.</p>
+                        <p>Professional Edition 为专有软件，源码不对外公开。</p>
                         {% else %}
-                        <p>The source code is available on <a href="https://github.com/thingsboard/thingsboard" target="_blank">GitHub</a>. You can fork, modify, and contribute to the project under the <a href="https://github.com/thingsboard/thingsboard/blob/master/LICENSE" target="_blank">Apache 2.0 license</a>. It is free for both personal and commercial usage, and you can deploy it anywhere.</p>
+                        <p>源码托管于 <a href="https://github.com/thingsboard/thingsboard" target="_blank">GitHub</a>，您可在 <a href="https://github.com/thingsboard/thingsboard/blob/master/LICENSE" target="_blank">Apache 2.0 许可</a>下 fork、修改和贡献，个人与商业使用均免费，可部署于任意环境。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I contribute to ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否为 ThingsBoard 做贡献？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Professional Edition is closed-source and does not accept external contributions.</p>
+                        <p>Professional Edition 为闭源软件，不接受外部贡献。</p>
                         {% else %}
-                        <p>Yes! Pull requests and contributions are welcome on <a href="https://github.com/thingsboard/thingsboard/" target="_blank">GitHub</a>.</p>
+                        <p>可以。欢迎在 <a href="https://github.com/thingsboard/thingsboard/" target="_blank">GitHub</a> 上提交 Pull Request 或参与贡献。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-load-more" onclick="loadMoreTbFaq(this)">
-                    <div class="title">Load more FAQ</div>
+                    <div class="title">加载更多 FAQ</div>
                 </div>
             </div>
             {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
             <div id="tb-faq-cat-addons" class="tb-faq-category">
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is a ThingsBoard Add-on?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">什么是 ThingsBoard 插件？</div>
                     <div class="tb-faq-answer">
-                        <p>Add-ons are complementary <b>products that extend</b> ThingsBoard Professional Edition capabilities. They integrate seamlessly with your ThingsBoard instance and require a PE subscription to use. Add-ons include <b>ThingsBoard PE Edge</b> (edge computing), and <b>Trendz Analytics</b> (advanced analytics/AI).</p>
+                        <p>插件是<b>扩展</b> ThingsBoard Professional Edition 能力的互补产品，与您的 ThingsBoard 实例无缝集成，需 PE 订阅方可使用。插件包括 <b>ThingsBoard PE Edge</b>（边缘计算）和 <b>Trendz Analytics</b>（高级分析/AI）。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What add-ons are available for ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 有哪些插件？</div>
                     <div class="tb-faq-answer">
-                        <p><a href="/docs/pe/edge/getting-started-guides/what-is-edge/" target="_blank">ThingsBoard PE Edge</a> and <a href="/docs/trendz/what-is-trendz/" target="_blank">Trendz Analytics.</a></p>
+                        <p><a href="/docs/pe/edge/getting-started-guides/what-is-edge/" target="_blank">ThingsBoard PE Edge</a> 与 <a href="/docs/trendz/what-is-trendz/" target="_blank">Trendz Analytics</a>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is ThingsBoard Edge?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">什么是 ThingsBoard Edge？</div>
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard Edge is an <b>edge computing solution</b> that runs locally at remote sites, processing data with reduced latency while maintaining sync with your central ThingsBoard server. It operates offline and automatically syncs when connectivity returns.</p>
-                        <p>Edge Professional Edition, included as an add-on to ThingsBoard PE subscriptions, adds enterprise features such as white-labeling, solution templates, platform integrations, scheduler, and customer hierarchy management to edge computing core capabilities.</p>
-                        <p>The number of included Edge instances <b>depends on your subscription plan</b>. Additional instances can be purchased separately. Check your plan details or <a href="/docs/contact-us/" target="_blank">contact us</a> for specifics.</p>
-                        <p>See <a href="/docs/pe/edge/" target="_blank">Edge documentation</a> for setup and configuration details.</p>
+                        <p>ThingsBoard Edge 是一种<b>边缘计算方案</b>，在远端现场本地运行，以更低延迟处理数据并与中心 ThingsBoard 服务器保持同步，支持离线运行并在恢复连接后自动同步。</p>
+                        <p>Edge Professional Edition 作为 ThingsBoard PE 订阅的插件提供，在边缘计算核心能力之上增加白标、方案模板、平台集成、调度器及客户层级管理等企业功能。</p>
+                        <p>所含 Edge 实例数量<b>取决于订阅计划</b>，额外实例可单独购买。详情请查看您的计划或<a href="/docs/contact-us/" target="_blank">联系我们</a>。</p>
+                        <p>设置与配置详见 <a href="/docs/pe/edge/" target="_blank">Edge 文档</a>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is Trendz Analytics?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">什么是 Trendz Analytics？</div>
                     <div class="tb-faq-answer">
-                        <p>Trendz Analytics is an <b>advanced analytics platform</b> for ThingsBoard PE that brings anomaly detection, predictive analytics, calculated fields, an AI assistant, Metric Explorer, and rich visualizations into one unified workspace.</p>
-                        <p>It enables you to analyze IoT data, detect issues, and predict outcomes — all seamlessly integrated with your ThingsBoard environment.</p>
-                        <p>See <a href="/docs/trendz/" target="_blank">Trendz documentation</a> for more information.</p>
+                        <p>Trendz Analytics 是面向 ThingsBoard PE 的<b>高级分析平台</b>，将异常检测、预测分析、计算字段、AI 助手、Metric Explorer 与丰富可视化整合于统一工作区。</p>
+                        <p>支持分析 IoT 数据、发现异常并预测结果，与 ThingsBoard 环境无缝集成。</p>
+                        <p>更多信息见 <a href="/docs/trendz/" target="_blank">Trendz 文档</a>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I use Edge and/or Trendz add-ons with ThingsBoard Community Edition?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否在 ThingsBoard Community Edition 上使用 Edge 和/或 Trendz 插件？</div>
                     <div class="tb-faq-answer">
                         <ul>
-                            <li><b>Edge:</b> No. Edge edition must match your ThingsBoard Server edition. PE Edge connects to ThingsBoard PE Server. However, you can use <b>CE Edge</b> with ThingsBoard CE Server. It's free and open-source as well as ThingsBoard CE.</li>
-                            <li><b>Trendz Analytics:</b> No, Trendz requires ThingsBoard Professional Edition.</li>
+                            <li><b>Edge：</b>不能。Edge 版本须与 ThingsBoard Server 版本一致，PE Edge 连接 ThingsBoard PE Server。但可使用 <b>CE Edge</b> 配合 ThingsBoard CE Server，CE Edge 与 ThingsBoard CE 一样免费开源。</li>
+                            <li><b>Trendz Analytics：</b>不能，Trendz 需要 ThingsBoard Professional Edition。</li>
                         </ul>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I use Edge and/or Trendz without ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否在没有 ThingsBoard 的情况下使用 Edge 和/或 Trendz？</div>
                     <div class="tb-faq-answer">
-                        <p>No, they are both designed to complement the capabilities of ThingsBoard, not to function as standalone solutions. Neither can operate independently:</p>
+                        <p>不能。二者均用于增强 ThingsBoard 能力，不能作为独立方案运行：</p>
                         <ul>
-                            <li><b>PE Edge:</b> Requires connection to sync with ThingsBoard PE Server (Cloud, Private Cloud, or self-managed).</li>
-                            <li><b>Trendz Analytics:</b> Requires ThingsBoard PE as its data source. </li>
+                            <li><b>PE Edge：</b>需连接并与 ThingsBoard PE Server（Cloud、Private Cloud 或自托管）同步。</li>
+                            <li><b>Trendz Analytics：</b>需以 ThingsBoard PE 为数据源。</li>
                         </ul>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I try add-ons before purchasing?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">购买前能否试用插件？</div>
                     <div class="tb-faq-answer">
-                        <p>You can start with the <b>Free</b> plan, which is limited in terms of the number of devices, but which has Edge Computing and Trendz add-ons permanently enabled. This allows you to try out the add-on features free of charge.</p>
-                        <p>For larger deployments, you can upgrade to paid plans with higher device limits and additional features.</p>
+                        <p>可从<b>免费</b>计划开始，该计划在设备数量上有限制，但永久启用 Edge 计算与 Trendz 插件，可免费体验插件功能。</p>
+                        <p>更大规模部署可升级至付费计划，获得更高设备上限与更多功能。</p>
                     </div>
                 </div>
                 <div class="tb-faq-load-more" onclick="loadMoreTbFaq(this)">
-                    <div class="title">Load more FAQ</div>
+                    <div class="title">加载更多 FAQ</div>
                 </div>
             </div>
             <div id="tb-faq-cat-private-cloud" class="tb-faq-category">
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is ThingsBoard Private Cloud?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">什么是 ThingsBoard 私有云？</div>
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard Private Cloud is a <b>fully managed, isolated ThingsBoard Professional Edition cluster</b> that our team deploys and operates for you.</p>
-                        <p>We provision the infrastructure, keep the platform patched and monitored 24×7, run automated backups, and provide an SLA-backed uptime guarantee (99%-99.99%, depending on plan). During onboarding, you choose the region that best fits your compliance or latency requirements - EU, North America, or APAC.</p>
-                        <p><b>All environments are hosted in ISO 27001/PCI-DSS-certified data centers.</b> Your engineers can stay focused on building IoT applications instead of managing DevOps.</p>
+                        <p>ThingsBoard 私有云是由我们团队为您部署和运维的<b>全托管、隔离的 ThingsBoard Professional Edition 集群</b>。</p>
+                        <p>我们提供基础设施、7×24 补丁与监控、自动备份，并提供 SLA 保障的可用性（99%–99.99%，依计划而定）。入驻时可选择符合合规或延迟要求的区域：欧盟、北美或亚太。</p>
+                        <p><b>所有环境均托管于通过 ISO 27001/PCI-DSS 认证的数据中心。</b>工程师可专注于构建 IoT 应用，无需管理 DevOps。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How is Private Cloud different from ThingsBoard Cloud?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">私有云与 ThingsBoard Cloud 有何不同？</div>
                     <div class="tb-faq-answer">
-                        <p>Private Cloud provides a dedicated, isolated environment for your organization, whereas ThingsBoard Cloud is a shared multi-tenant SaaS platform.</p>
-                        <p>Private Cloud offers <b>enhanced security, custom SLAs</b>, and <b>infrastructure isolation</b> for compliance-sensitive industries.</p>
+                        <p>私有云为您的组织提供专属、隔离环境，ThingsBoard Cloud 则为共享多租户 SaaS 平台。</p>
+                        <p>私有云为合规敏感行业提供<b>更强安全、定制 SLA</b>与<b>基础设施隔离</b>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What are the benefits of Private Cloud versus self-hosting?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">私有云相比自托管有哪些优势？</div>
                     <div class="tb-faq-answer">
-                        <p>Private Cloud eliminates operational complexity:</p>
+                        <p>私有云降低运维复杂度：</p>
                         <ul>
-                        <li><b>Zero DevOps overhead</b>: No infrastructure management or DevOps required.</li> 
-                        <li><b>Guaranteed availability</b>: 99.9-99.99% uptime SLA with service credits.</li> 
-                        <li><b>Faster time-to-market</b>: Deployed in 1-2 hours vs. weeks for self-hosting.</li>
-                        <li><b>Scalability</b>: Kubernetes infrastructure grows with your traffic.</li> 
-                        <li><b>Predictable cost</b>: One monthly fee replaces infrastructure and staffing expenses.</li>
+                        <li><b>零 DevOps 负担</b>：无需自行管理基础设施或 DevOps。</li> 
+                        <li><b>可用性保障</b>：99.9–99.99% 可用性 SLA，含服务抵扣。</li> 
+                        <li><b>更快上线</b>：1–2 小时即可部署，自托管则需数周。</li>
+                        <li><b>可扩展</b>：Kubernetes 基础设施随流量扩展。</li> 
+                        <li><b>成本可预期</b>：单一月费替代基础设施与人力成本。</li>
                         </ul>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What is "uptime" and how do you calculate it?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">什么是“可用时间”以及如何计算？</div>
                     <div class="tb-faq-answer">
-                        <p>Uptime measures platform availability as a percentage of time services are operational during the billing month.</p>
-                        <p><b>Formula:</b> Uptime (%) = ((Total Time – Downtime) / Total Time) × 100.</p>
-                        <p>Scheduled maintenance, security patches, and issues caused by customer configurations are excluded from downtime calculations.</p>
+                        <p>可用时间按计费月内服务正常运行时间占比衡量。</p>
+                        <p><b>公式：</b>可用时间 (%) = ((总时间 – 停机时间) / 总时间) × 100。</p>
+                        <p>计划内维护、安全补丁及客户配置导致的问题不计入停机时间。</p>
                         </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I choose where Private Cloud is hosted?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否选择私有云托管区域？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, Private Cloud can be deployed in your preferred AWS, Azure, or GCP region to meet data residency and latency requirements.</p>
+                        <p>可以，私有云可部署在您选择的 AWS、Azure 或 GCP 区域，以满足数据属地与延迟要求。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Who manages Private Cloud infrastructure?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">谁负责管理私有云基础设施？</div>
                     <div class="tb-faq-answer">
-                        <p><b>ThingsBoard team manages all infrastructure, updates, monitoring, and maintenance</b>. You focus on your IoT application while we handle platform operations.</p>
+                        <p><b>ThingsBoard 团队负责全部基础设施、更新、监控与维护</b>。您专注 IoT 应用，我们负责平台运维。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What support is included with Private Cloud?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">私有云包含哪些支持？</div>
                     <div class="tb-faq-answer">
-                        <p>Private Cloud includes <b>priority support, dedicated success management, and custom SLA options</b>. Support levels are defined in your service agreement.</p>
+                        <p>私有云包含<b>优先支持、专属成功管理与定制 SLA 选项</b>，支持级别在服务协议中约定。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I customize Private Cloud configuration?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否自定义私有云配置？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, Private Cloud supports custom configurations including white-labeling, custom domains, and infrastructure scaling to match your requirements.</p>
+                        <p>可以，私有云支持白标、自定义域名及按需扩展基础设施等自定义配置。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Is Private Cloud compliant with security standards?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">私有云是否符合安全标准？</div>
                     <div class="tb-faq-answer">
-                        <p>Private Cloud is designed to support compliance requirements including <b>GDPR, HIPAA, and ISO 27001</b>. Specific compliance certifications depend on your deployment configuration and service agreement.</p>
+                        <p>私有云设计支持<b>GDPR、HIPAA 与 ISO 27001</b>等合规要求，具体认证取决于部署配置与服务协议。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How do I get started with Private Cloud?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">如何开始使用私有云？</div>
                     <div class="tb-faq-answer">
-                        <p><a href="/docs/contact-us/" target="_blank">Contact us</a> to discuss your requirements. We'll help you design the right Private Cloud configuration for your use case.</p>
+                        <p><a href="/docs/contact-us/" target="_blank">联系我们</a>沟通需求，我们将协助设计适合您场景的私有云配置。</p>
                     </div>
                 </div>
                 <div class="tb-faq-load-more" onclick="loadMoreTbFaq(this)">
-                    <div class="title">Load more FAQ</div>
+                    <div class="title">加载更多 FAQ</div>
                 </div>
             </div>
             {% endif %}
             <div id="tb-faq-cat-ai" class="tb-faq-category">
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support AI integration?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 是否支持 AI 集成？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, ThingsBoard includes an <a href="/docs/user-guide/rule-engine-2-0/nodes/external/ai-request/" target="_blank">AI Request node</a> in the Rule Engine that allows integration with AI services like OpenAI, Azure OpenAI, and custom AI endpoints.</p>
+                        <p>支持。ThingsBoard 规则引擎提供<a href="/docs/user-guide/rule-engine-2-0/nodes/external/ai-request/" target="_blank">AI Request 节点</a>，可与 OpenAI、Azure OpenAI 及自定义 AI 端点集成。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I use AI for predictive maintenance?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否用 AI 做预测性维护？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, ThingsBoard includes built-in AI integration capabilities. You can use the <a href="/docs/user-guide/rule-engine-2-0/nodes/external/ai-request/" target="_blank">AI Request node</a> to send telemetry data to machine learning models for predictive analytics, anomaly detection, and maintenance scheduling.</p>
-                        <p>See the predictive maintenance example for implementation details.</p>
+                        <p>可以。ThingsBoard 具备内置 AI 集成能力，可使用<a href="/docs/user-guide/rule-engine-2-0/nodes/external/ai-request/" target="_blank">AI Request 节点</a>将遥测数据发送给机器学习模型，用于预测分析、异常检测与维护排程。</p>
+                        <p>实现细节见预测性维护示例。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Which AI providers are supported?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">支持哪些 AI 服务商？</div>
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard supports a variety of AI providers, including, but not limited to, OpenAI, Azure OpenAI, and custom API endpoints. Check the <a href="/docs/{{docsPrefix}}samples/analytics/ai-models/" target="_blank">AI models</a> page for more details.</p>
+                        <p>ThingsBoard 支持多种 AI 服务商，包括但不限于 OpenAI、Azure OpenAI 及自定义 API 端点。详见<a href="/docs/{{docsPrefix}}samples/analytics/ai-models/" target="_blank">AI 模型</a>页。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I train custom ML models with ThingsBoard data?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否用 ThingsBoard 数据训练自定义 ML 模型？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, export historical telemetry via <a href="/docs/{{docsPrefix}}api/" target="_blank">REST API</a> or <a href="/docs/pe/user-guide/csv-xls-data-export/" target="_blank">data export features (PE)</a> to train models externally. Deploy trained models as API endpoints and integrate them using the <a href="/docs/user-guide/rule-engine-2-0/nodes/external/ai-request/" target="_blank">AI Request node</a>.</p>
+                        <p>可以。通过<a href="/docs/{{docsPrefix}}api/" target="_blank">REST API</a>或<a href="/docs/pe/user-guide/csv-xls-data-export/" target="_blank">数据导出功能 (PE)</a>导出历史遥测并在外部训练模型，将训练好的模型部署为 API 端点后，用<a href="/docs/user-guide/rule-engine-2-0/nodes/external/ai-request/" target="_blank">AI Request 节点</a>集成。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Are there examples of AI use cases?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">是否有 AI 用例示例？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, see documentation for examples including <a href="/docs/{{docsPrefix}}samples/analytics/ai-predictive-maintenance/" target="_blank">anomaly detection</a>, and <a href="/docs/{{docsPrefix}}samples/analytics/ai-models/" target="_blank">natural language processing</a>.</p>
+                        <p>有，文档中有示例，包括<a href="/docs/{{docsPrefix}}samples/analytics/ai-predictive-maintenance/" target="_blank">异常检测</a>与<a href="/docs/{{docsPrefix}}samples/analytics/ai-models/" target="_blank">自然语言处理</a>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Do I need a separate AI subscription?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">是否需要单独的 AI 订阅？</div>
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard integration is included, but you need subscriptions to external AI services (OpenAI, Azure, etc.) if using those providers. Custom AI endpoints are entirely under your control.</p>
+                        <p>ThingsBoard 集成已包含，若使用 OpenAI、Azure 等外部 AI 服务则需单独订阅；自定义 AI 端点完全由您掌控。</p>
                     </div>
                 </div>
             </div>
             <div id="tb-faq-cat-deployment" class="tb-faq-category">
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Where can I install ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard可以安装在哪里？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Professional Edition offers three deployment options:</p>
+                        <p>Professional Edition 提供三种部署方式：</p>
                         <ul>
-                        <li><b>ThingsBoard Cloud:</b> Fully managed SaaS (North America or EU regions).</li>
-                        <li><b>Private Cloud:</b> Dedicated managed instance in your choice of a region.</li>
-                        <li><b>Self-managed:</b> On your infrastructure—on-premise or cloud (AWS, Azure, GCP, DigitalOcean), Docker, or Kubernetes.</li>
+                        <li><b>ThingsBoard Cloud：</b>全托管SaaS（北美或欧盟区域）。</li>
+                        <li><b>私有云：</b>在您选择的区域内的专属托管实例。</li>
+                        <li><b>自托管：</b>在自有基础设施上（本地或云：AWS、Azure、GCP、DigitalOcean），支持Docker或Kubernetes。</li>
                         </ul>
                         {% else %}
-                        <p>Community Edition can be installed on:</p>
+                        <p>Community Edition可安装于：</p>
                         <ul>
-                        <li><b>On-premise</b> servers or virtual machines. Docker and Kubernetes deployments are supported.</li>
-                        <li><b>Cloud platforms:</b> AWS, Microsoft Azure, DigitalOcean, Google Cloud Platform.</li>
+                        <li><b>本地</b>服务器或虚拟机，支持 Docker与Kubernetes部署。</li>
+                        <li><b>云平台：</b>AWS、Microsoft Azure、DigitalOcean、Google Cloud Platform。</li>
                         </ul>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support clustering?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard是否支持集群？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, clustering is supported in all deployment options.</p>
+                        <p>支持，所有部署方式均支持集群。</p>
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>See <a href="/docs/user-guide/install/pe/cluster-setup/" target="_blank">cluster setup guide</a> for configuration details.</p>
+                        <p>配置详见<a href="/docs/user-guide/install/pe/cluster-setup/" target="_blank">集群搭建指南</a>。</p>
                         {% else %}
-                        <p>See <a href="/docs/user-guide/install/cluster-setup/" target="_blank">cluster setup guide</a> for configuration details.</p>
+                        <p>配置详见<a href="/docs/user-guide/install/cluster-setup/" target="_blank">集群搭建指南</a>。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What are the hardware requirements?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">硬件要求是什么？</div>
                     <div class="tb-faq-answer">
-                        <p><b>Minimum:</b> 2 CPU cores, 4GB RAM for testing.</p>
-                        <p><b>Recommended for production:</b> 8+ CPU cores, 16GB+ RAM. Requirements scale with device count and message volume.</p>
+                        <p><b>最低：</b>2 核 CPU、4GB 内存用于测试。</p>
+                        <p><b>生产建议：</b>8+ 核 CPU、16GB+ 内存随设备数与消息量扩展。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How many devices can ThingsBoard handle?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard可支持多少设备？</div>
                     <div class="tb-faq-answer">
                     {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Device capacity is determined by your specific deployment and subscription tier:</p>
+                        <p>设备容量由具体部署与订阅档位决定：</p>
                         <ul>
-                            <li><b>ThingsBoard Cloud</b>: Usage is governed by your plan (e.g., 5 devices for Free, up to 1,000 for Business). Additional device capacity can be added to <b>Business</b> plans.</li>
-                            <li><b>Private Cloud</b>: Tailored for high-scale needs, with typical allocations ranging from 5,000 to over 100,000+ devices.</li>
-                            <li><b>Self-managed (PE)</b>: Licensing limits apply (e.g., 10 devices for Maker, up to 1,000 for Business). Like the Cloud version, <b>Business</b> licenses support purchasing additional device packs.</li>
+                            <li><b>ThingsBoard Cloud：</b>按计划限定（如免费5台Business最多1000 台），<b>Business</b> 计划可增购设备容量。</li>
+                            <li><b>私有云：</b>面向大规模，典型为5000至 100000+ 台设备。</li>
+                            <li><b>自托管 (PE)：</b>受许可限制（如Maker10台Business最多1000台），<b>Business</b>许可可购买额外设备包。</li>
                         </ul>
                     {% else %}
-                        <p>There are <b>no programmatic software limits</b> on the number of devices in the Community Edition. The capacity of your system depends entirely on your hardware resources, database configuration, and deployment architecture (standalone vs. cluster).</p>
-                        <p>A single modern server can typically handle tens of thousands of devices, while <b>clustered deployments</b> can scale to support millions of concurrent connections.</p>
+                        <p>Community Edition 在设备数量上<b>无软件层面限制</b>，实际容量完全取决于硬件、数据库配置与部署架构（单机或集群）。</p>
+                        <p>单台现代服务器通常可支撑数万设备，<b>集群部署</b>可扩展至数百万并发连接。</p>
                     {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Where does ThingsBoard store data?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard数据存储在哪里？</div>
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard supports two database approaches:</p>
+                        <p>ThingsBoard支持两种数据库方案：</p>
                         <ul>
-                        <li><b>Pure SQL</b>: PostgreSQL database which is default and recommended for development and production environments with a reasonable load (< 5000 msg/sec).</li>
-                        <li><b>Hybrid database</b>: PostgreSQL + Cassandra for 1M+ devices in production or high data ingestion rate (> 5000 msg/sec). </li>
+                        <li><b>纯 SQL：</b>PostgreSQL默认且推荐用于负载适中（&lt; 5000 条/秒）的开发与生产环境。</li>
+                        <li><b>混合数据库：</b>PostgreSQL + Cassandra适用于生产环境100万+设备或高写入（&gt; 5000 条/秒）。</li>
                         </ul>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support multi-tenancy?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard是否支持多租户？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Yes, ThingsBoard Cloud supports multi-tenancy, with each <b>tenant requiring its own subscription</b>.</p>
-                        <p>Within a tenant, a customer hierarchy can be established, allowing tenant administrators to manage multiple customers under a single subscription. This structure provides sufficient flexibility and access control for most use cases, ensuring a well-organized and efficient management model.</p>
-                        <p>ThingsBoard Self-managed subscription offers multi-tenancy within a single plan.</p>
+                        <p>支持。ThingsBoard Cloud支持多租户，每个<b>租户需单独订阅</b>。</p>
+                        <p>租户内可建立客户层级，租户管理员可在同一订阅下管理多个客户，兼顾灵活性与访问控制。</p>
+                        <p>ThingsBoard自托管订阅在同一计划内支持多租户。</p>
                         {% else %}
-                        <p>Yes, the ThingsBoard Community Edition supports multi-tenancy out of the box.</p>
+                        <p>支持，ThingsBoard社区版开箱即支持多租户。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support OTA (Over-the-Air) firmware updates?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard是否支持 OTA（空中）固件更新？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, ThingsBoard supports OTA (Over-the-Air) firmware updates.</p>
+                        <p>支持ThingsBoard支持 OTA（Over-the-Air）固件更新。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Do you charge for API requests?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">API请求是否收费？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>API charges depend on your deployment type:</p>
+                        <p>是否收费取决于部署类型：</p>
                         <ul>
-                        <li><b>ThingsBoard Cloud & Private Cloud</b>: API requests are included in your subscription with no additional charges.</li>
-                        <li><b>Self-managed</b>: No charges or programmatic limits on API requests.</li>
+                        <li><b>ThingsBoard Cloud与私有云：</b>API请求包含在订阅内无额外费用。</li>
+                        <li><b>自托管：</b>不收取API费用也无程序化限制。</li>
                         </ul>
                         {% else %}
-                        <p>No. Community Edition has no charges or limits on API requests. However, performance depends on your server capacity and infrastructure.</p>
+                        <p>不收费。Community Edition对API请求不收费且无限制，性能取决于服务器与基础设施。</p>
                         {% endif %}
                     </div>
                 </div>
                 {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" %}
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What happens if I exceed my plan's API limits?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">超出计划的API限制会怎样？</div>
                     <div class="tb-faq-answer">
-                        <p>API access may be throttled until the next billing cycle, or you can upgrade to a higher plan.</p>
+                        <p>API 访问可能被限流直至下一计费周期，或可升级到更高档计划。</p>
                     </div>
                 </div>
                 {% endif %}
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Is there a mobile app for ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 有移动端应用吗？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Yes. Professional Edition offers <a href="/products/mobile-pe/" target="_blank">PE Mobile Application</a> - an advanced mobile app with enterprise features and white-labeling.</p>
+                        <p>有。Professional Edition提供<a href="/products/mobile-pe/" target="_blank">PE移动应用</a>，具备企业功能与白标。</p>
                         {% else %}
-                        <p>Yes. ThingsBoard <a href="/products/mobile/" target="_blank">Mobile Application</a> is free and open-source (Apache 2.0 license). It's available for iOS and Android and works with ThingsBoard CE Server.</p>
+                        <p>有。ThingsBoard <a href="/products/mobile/" target="_blank">移动应用</a>免费开源（Apache 2.0 许可），支持iOS与Android可与ThingsBoard CE Server配合使用。</p>
                         {% endif %}
                     </div>
                 </div>
                 {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What happens to my data if I cancel my subscription?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">取消订阅后数据会怎样？</div>
                     <div class="tb-faq-answer">
-                        <p>Data handling upon cancellation depends on your deployment model:</p>
+                        <p>取消后数据处理取决于部署模式：</p>
                         <ul>
-                            <li><b>ThingsBoard Cloud & Private Cloud</b>: Following cancellation, your data will be permanently deleted from our servers.</li>
-                            <li><b>Self-managed (PE)</b>: Since the platform is hosted on your own infrastructure, all data remains stored in your environment. You retain full ownership and control over the data and may decide whether to keep, export, or delete it.</li>
+                            <li><b>ThingsBoard Cloud 与私有云：</b>取消后，您的数据将从我们的服务器永久删除。</li>
+                            <li><b>自托管 (PE)：</b>平台在您自有基础设施上，所有数据仍保留在您的环境中，您拥有完全所有权并可选择保留、导出或删除。</li>
                         </ul>
                     </div>
                 </div>
                 {% endif %}
                 <div class="tb-faq-load-more" onclick="loadMoreTbFaq(this)">
-                    <div class="title">Load more FAQ</div>
+                    <div class="title">加载更多</div>
                 </div>
             </div>
             <div id="tb-faq-cat-security" class="tb-faq-category">
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Is my ThingsBoard instance secure?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">我的ThingsBoard实例是否安全？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Security depends on a deployment type:</p>
+                        <p>安全性取决于部署类型：</p>
                         <ul>
-                        <li><b>Cloud/Private Cloud</b> deployments are hosted in ISO 27001/SOC 2 compliant infrastructure.</li>
-                        <li><b>Self-managed</b> security depends on your infrastructure setup. It requires you to manage infrastructure security, network configuration, and SSL/TLS setup.</li>
+                        <li><b>Cloud/私有云</b>部署于符合ISO27001/SOC2的基础设施。</li>
+                        <li><b>自托管</b>安全取决于您的基础设施配置，需自行管理基础设施安全、网络与SSL/TLS。</li>
                         </ul>
                         {% else %}
-                        <p>Yes, but security depends on your deployment setup and infrastructure.</p>
+                        <p>可以做到安全但取决于您的部署与基础设施配置。</p>
                         {% endif %}
-                        <p>ThingsBoard provides device authentication, encrypted communication (SSL/TLS), role-based access control, and audit logging.</p>
+                        <p>ThingsBoard提供设备认证、加密通信（SSL/TLS）、基于角色的访问控制与审计日志。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support encryption?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 是否支持加密？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Yes, transport encryption (TLS/SSL) is supported. Additional encryption features may depend on your subscription plan and deployment type.</p>
-                        <p>For data-at-rest encryption, configure database-level encryption. See <a href="/docs/pe/user-guide/ui/security-settings/" target="_blank">security documentation</a> for setup instructions.</p>
+                        <p>支持传输加密（TLS/SSL）更多加密能力可能取决于订阅与部署类型。</p>
+                        <p>静态数据加密需在数据库层配置详见<a href="/docs/pe/user-guide/ui/security-settings/" target="_blank">安全文档</a>。</p>
                         {% else %}
-                        <p>Yes, the Community Edition includes transport encryption (TLS/SSL).</p>
-                        <p>For data-at-rest encryption, configure database-level encryption. See <a href="/docs/user-guide/ui/security-settings/" target="_blank">security documentation</a> for setup instructions.</p>
+                        <p>支持，Community Edition包含传输加密（TLS/SSL）。</p>
+                        <p>静态数据加密需在数据库层配置，详见<a href="/docs/user-guide/ui/security-settings/" target="_blank">安全文档</a>。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support SSO/OAuth?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 是否支持 SSO/OAuth？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Yes, SSO and OAuth are supported with additional enterprise features in PE.</p>
-                        <p>See <a href="/docs/pe/user-guide/ui/security-settings/" target="_blank">security documentation</a> for setup instructions.</p>
+                        <p>支持，PE 中提供 SSO 与 OAuth 及更多企业功能。</p>
+                        <p>配置说明见<a href="/docs/pe/user-guide/ui/security-settings/" target="_blank">安全文档</a>。</p>
                         {% else %}
-                        <p>Yes, the Community Edition includes SSO (Single Sign-On) and OAuth functionality.</p>
-                        <p>See <a href="/docs/user-guide/ui/security-settings/" target="_blank">security documentation</a> for setup instructions.</p>
+                        <p>支持，Community Edition 包含 SSO（单点登录）与 OAuth。</p>
+                        <p>配置说明见<a href="/docs/user-guide/ui/security-settings/" target="_blank">安全文档</a>。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I store ThingsBoard data in my preferred region?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否在指定区域存储 ThingsBoard 数据？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
                         <ul>
-                        <li><b>Cloud:</b> Your data is stored in either North America or the EU, depending on the cloud region (US or European) you choose.</li>
-                        <li><b>Private Cloud/Self-managed:</b> Yes, you have full control over data storage location.</li>
+                        <li><b>Cloud：</b>数据存储在北美或欧盟，取决于您选择的云区域（美国或欧洲）。</li>
+                        <li><b>私有云/自托管：</b>可以，您可完全控制数据存储位置。</li>
                         </ul>
                         {% else %}
-                        <p>Yes, you have full control over where your data is stored.</p>
+                        <p>可以，数据存储位置完全由您控制。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How are devices authenticated?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">设备如何认证？</div>
                     <div class="tb-faq-answer">
-                        <p>ThingsBoard supports multiple authentication methods: access tokens, X.509 certificates, and username/password. Each device receives unique credentials. See <a href="/docs/{{docsPrefix}}user-guide/device-credentials/" target="_blank">device authentication options</a> available.</p>
+                        <p>ThingsBoard 支持多种认证方式：访问令牌、X.509 证书及用户名/密码，每台设备具有独立凭证。详见<a href="/docs/{{docsPrefix}}user-guide/device-credentials/" target="_blank">设备认证选项</a>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Does ThingsBoard support role-based access control (RBAC)?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 是否支持基于角色的访问控制 (RBAC)？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Yes, ThingsBoard supports <a href="/docs/pe/user-guide/rbac/" target="_blank">RBAC</a>.</p>
-                        <p>Professional Edition includes advanced RBAC with custom roles, hierarchical permissions, and group-based access control.</p>
+                        <p>支持，ThingsBoard 提供 <a href="/docs/pe/user-guide/rbac/" target="_blank">RBAC</a>。</p>
+                        <p>Professional Edition 提供高级 RBAC：自定义角色、层级权限与基于组的访问控制。</p>
                         {% else %}
-                        <p>Community Edition supports a <b>straight-forward security model</b> with three main roles: System administrator, Tenant administrator, and Customer user. A system administrator is able to manage tenants, while a tenant administrator manages devices, dashboards, customers, and other entities that belong to a particular tenant. Customer user is able to view dashboards and control devices that are assigned to a specific customer.</p>
+                        <p>Community Edition 采用<b>简明安全模型</b>，含三种主要角色：系统管理员、租户管理员与客户用户。系统管理员管理租户；租户管理员管理该租户下的设备、仪表盘、客户等实体；客户用户可查看仪表盘并控制分配给该客户的设备。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Is ThingsBoard compliant with regulations (GDPR, etc.)?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 是否符合法规（如 GDPR）？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
                         <ul>
-                        <li><b>Cloud:</b> Infrastructure is ISO 27001/SOC 2 compliant.</li>
-                        <li><b>Private Cloud:</b> GDPR compliance depends on how you configure and use the platform.</li>
-                        <li><b>Self-managed:</b> Compliance depends on your infrastructure and practices.</li>
+                        <li><b>Cloud：</b>基础设施符合ISO27001/SOC2。</li>
+                        <li><b>私有云：</b>GDPR合规取决于您如何配置与使用平台。</li>
+                        <li><b>自托管：</b>合规取决于您的基础设施与实践。</li>
                         </ul>
                         {% else %}
-                        <p>Compliance depends on your hosting environment and data security practices.</p>
+                        <p>合规取决于您的托管环境与数据安全实践。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I integrate with external authentication providers?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否与外部认证提供商集成？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, ThingsBoard supports OAuth2, LDAP, and SAML integration.</p>
+                        <p>可以，ThingsBoard支持OAuth2、LDAP与SAML集成。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question tb-faq-hidden">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Are there audit logs?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">是否有审计日志？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, ThingsBoard logs user actions.</p>
+                        <p>有ThingsBoard会记录用户操作。</p>
                     </div>
                 </div>
                 <div class="tb-faq-load-more" onclick="loadMoreTbFaq(this)">
-                    <div class="title">Load more FAQ</div>
+                    <div class="title">加载更多</div>
                 </div>
             </div>
             <div id="tb-faq-cat-support" class="tb-faq-category">
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">What support is available for ThingsBoard?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">ThingsBoard 有哪些支持？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Starting from version 4.2, we offer <a href="/docs/pe/releases/release-policy/" target="_blank">Long-Term Support (LTS)</a> versions for production users with extended security updates and stability improvements.</p>
-                        <p>You can always <a href="/docs/contact-us/" target="_blank">contact us</a> with any questions. Community support is available to all users.</p>
+                        <p>自 4.2 版本起，我们为生产用户提供<a href="/docs/pe/releases/release-policy/" target="_blank">长期支持 (LTS)</a>版本含扩展安全更新与稳定性改进。</p>
+                        <p>如有问题可随时<a href="/docs/contact-us/" target="_blank">联系我们</a>，社区支持面向所有用户。</p>
                         {% else %}
-                        <p>The ThingsBoard team does not provide dedicated support for Community Edition users. Support is community-driven through <a href="https://github.com/thingsboard/thingsboard" target="_blank">GitHub</a> (report issues, contribute), <a href="https://stackoverflow.com/questions/tagged/thingsboard" target="_blank">Stack Overflow</a> (developer questions), <a href="/docs/{{docsPrefix}}" target="_blank">Documentation</a> (guides and tutorials), <a href="https://www.youtube.com/thingsboard" target="_blank">Youtube channel</a> (tutorials).</p>
+                        <p>ThingsBoard团队不为Community Edition用户提供专属支持。支持以社区形式通过 <a href="https://github.com/thingsboard/thingsboard" target="_blank">GitHub</a>（问题反馈与贡献）、<a href="https://stackoverflow.com/questions/tagged/thingsboard" target="_blank">Stack Overflow</a>（开发问题）、<a href="/docs/{{docsPrefix}}" target="_blank">文档</a>（指南与教程）、<a href="https://www.youtube.com/thingsboard" target="_blank">YouTube 频道</a>（视频教程）获取。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Do you offer professional services?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">是否提供专业服务？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, ThingsBoard offers consulting, <a href="/services/development-services/" target="_blank">custom development</a>, <a href="/services/trainings/" target="_blank">learning resources</a>, and deployment assistance. <a href="/docs/contact-us/" target="_blank">Contact us</a> to discuss your requirements.</p>
+                        <p>提供。ThingsBoard提供咨询、<a href="/services/development-services/" target="_blank">定制开发</a>、<a href="/services/trainings/" target="_blank">学习资源</a>与部署支持。<a href="/docs/contact-us/" target="_blank">联系我们</a>沟通需求。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">How do I report a bug?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">如何反馈Bug？</div>
                     <div class="tb-faq-answer">
                         {% if page.docsPrefix contains "paas/" or docsPrefix contains "paas/" or page.docsPrefix == "pe/" or docsPrefix == "pe/" %}
-                        <p>Report via Support Portal (for paying customers) or Report bugs on <a href="https://github.com/thingsboard/thingsboard/issues" target="_blank">GitHub</a>. Include detailed reproduction steps, logs, and system information.</p>
+                        <p>付费用户可通过 Support Portal 反馈，或在 <a href="https://github.com/thingsboard/thingsboard/issues" target="_blank">GitHub</a>提交。请提供复现步骤、日志与系统信息。</p>
                         {% else %}
-                        <p>Report bugs on <a href="https://github.com/thingsboard/thingsboard/issues" target="_blank">GitHub Issues</a>. Include detailed reproduction steps, logs, and system information. Community members and maintainers will investigate.</p>
+                        <p>请在 <a href="https://github.com/thingsboard/thingsboard/issues" target="_blank">GitHub Issues</a>提交并附上复现步骤、日志与系统信息，社区成员与维护者会跟进。</p>
                         {% endif %}
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Are there training resources?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">是否有培训资源？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, comprehensive documentation, video tutorials, and sample projects are available. Professional services include custom training programs. See <a href="/services/trainings/" target="_blank">learning resources</a> for more.</p>
+                        <p>有提供完整文档、视频教程与示例项目，专业服务含定制培训<a href="/services/trainings/" target="_blank">学习资源</a>。</p>
                     </div>
                 </div>
                 <div class="tb-faq-question">
-                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">Can I get help with deployment?</div>
+                    <div class="tb-faq-question-title" onclick="toggleTbFaq(this)">能否获得部署方面的帮助？</div>
                     <div class="tb-faq-answer">
-                        <p>Yes, professional services include deployment assistance, architecture review, and production setup. <a href="/docs/contact-us/" target="_blank">Contact us</a> to discuss your deployment needs.</p>
+                        <p>可以专业服务包含部署支持、架构评审与生产环境搭建。<a href="/docs/contact-us/" target="_blank">联系我们</a>沟通部署需求。</p>
                     </div>
                 </div>
             </div>

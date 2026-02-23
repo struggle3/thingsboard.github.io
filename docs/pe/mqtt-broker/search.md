@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Search Results
+title: 搜索结果
 hidetoc: "true"
 ---
 

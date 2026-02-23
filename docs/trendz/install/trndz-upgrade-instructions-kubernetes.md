@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
 title: Kubernetes
-description: ThingsBoard Trendz Analytics upgrade instructions kubernetes
+description: ThingsBoard Trendz Analytics 在 Kubernetes 上的升级说明
 
 ---
 

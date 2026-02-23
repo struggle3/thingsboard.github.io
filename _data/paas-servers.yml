@@ -1,11 +1,11 @@
-- title: North America
-  description: N. Virginia
+- title: 北美
+  description: 弗吉尼亚北部
   tag: paas
   server: us
   path: /docs/paas/
   docsPrefix: /docs/paas/
-- title: Europe
-  description: Frankfurt
+- title: 欧洲
+  description: 法兰克福
   tag: paas-eu
   server: eu
   path: /docs/paas/eu/

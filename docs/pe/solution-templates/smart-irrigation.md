@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Smart Irrigation template
-description: Smart Irrigation template overview
+title: 智慧灌溉模板
+description: 智慧灌溉模板概览
 solution-highlights:
     0:
         image: /images/solutions/smart_irrigation/smart-irrigation-1.png

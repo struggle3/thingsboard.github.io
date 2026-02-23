@@ -1,38 +1,33 @@
 ---
 layout: docwithnav-gw
-title: How to enable remote shell feature on ThingsBoard IoT Gateway
-description: How to enable remote shell feature on ThingsBoard IoT Gateway
+title: 如何在 ThingsBoard IoT Gateway 上启用远程 Shell 功能
+description: 如何在 ThingsBoard IoT Gateway 上启用远程 Shell 功能
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to enable a remote shell feature and control the operating system with ThingsBoard IoT Gateway
-from your ThingsBoard platform instance. With this functionality, you can access the underlying machine, execute
-commands, and perform maintenance tasks directly from the platform. It provides a convenient way to monitor system
-health, troubleshoot issues, and automate administrative operations without needing direct physical access. Before
-proceeding, ensure that you have the necessary permissions and have configured your gateway according to the
-prerequisites outlined in this documentation.
+本指南将帮助您启用远程 Shell 功能，从 ThingsBoard 平台实例通过 ThingsBoard IoT Gateway 控制操作系统。启用后，您可以从平台直接访问底层机器、执行命令并执行维护任务，便于监控系统状态、排查问题并自动化管理操作，而无需现场物理访问。开始前请确保具备所需权限，并已按本文档前提条件配置网关。
 
 {% capture info %}
 <div>
   <p>
-    <b style="color:red">WARNING:</b>
-    <span style="color:black">This feature may introduce security vulnerabilities. It is strongly recommended to use SSL encryption when enabling it, and to keep it disabled unless required.</span>
+    <b style="color:red">警告：</b>
+    <span style="color:black">此功能可能带来安全风险。强烈建议启用时使用 SSL 加密，且仅在需要时启用。</span>
   </p>
 </div>
 {% endcapture %}
 {% include templates/warn-banner.md content=info %}
 
-## Prerequisites
+## 前提条件
 
-1. Ensure that the ThingsBoard server is up and running. The simplest approach is to use [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"}. Alternatively, you can install ThingsBoard manually by following the steps outlined in the [Installation Guide](/docs/user-guide/install/installation-options/).
-2. Installed and configured ThingsBoard IoT Gateway ([Installation guide](/docs/iot-gateway/installation/), [Getting Started](/docs/iot-gateway/getting-started/)).
+1. 确保 ThingsBoard 服务已运行。最简单的方式是使用 [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"}。也可参考 [安装指南](/docs/user-guide/install/installation-options/) 手动安装 ThingsBoard。
+2. 已安装并配置 ThingsBoard IoT Gateway（[安装指南](/docs/iot-gateway/installation/)、[快速入门](/docs/iot-gateway/getting-started/)）。
 
-## Step 1. Remote shell activation
+## 步骤 1：启用远程 Shell
 
-To enable the remote shell feature, configure the corresponding parameter in the Gateway UI using the following steps:
+要启用远程 Shell 功能，请在网关 UI 中按以下步骤配置对应参数：
 
 {% assign enableRemoteShell = '
     ===

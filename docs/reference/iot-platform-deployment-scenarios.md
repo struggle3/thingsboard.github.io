@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: ThingsBoard IoT Platform deployment scenarios
-description: Overview of deployment scenarios and tips
+title: ThingsBoard 物联网平台部署场景
+description: 部署场景概览与选型建议
 
 ---
 

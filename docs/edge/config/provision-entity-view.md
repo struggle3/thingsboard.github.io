@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Provision Entity View from cloud to edge
-description: Provision Entity View from cloud to edge
+title: 从云端向Edge配置实体视图
+description: 从云端向Edge配置实体视图
 
 edgeEntityViews:
     0:
@@ -12,14 +12,14 @@ edgeEntityViews:
 
 ![image](/images/coming-soon.jpg)
 
-#### Entity Views management
+#### 实体视图管理
 
-Please use 'Edge Entity Views' icon to navigate to entity views that are *'assigned'* to specific edge entity.
-User is able to assign to edge any entity views that he has access to.
+请使用“Edge实体视图”图标进入*已分配*给特定Edge实体的实体视图。
+用户可将自己有权限访问的任何实体视图分配给Edge。
 
 {% include images-gallery.html imageCollection="edgeEntityViews" %}
 
-### Next Steps
+### 下一步
 
 {% assign currentGuide = "ProvisionEntityViewFromCloudToEdge" %}
 {% assign docsPrefix = "edge/" %}

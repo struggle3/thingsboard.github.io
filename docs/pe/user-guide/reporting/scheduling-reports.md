@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Scheduling reports
-description: Scheduling reports guide
+title: 报表调度
+description: 报表调度指南
 redirect_from: "/docs/user-guide/reporting/scheduling-reports/"
 
 create-new-report-template:

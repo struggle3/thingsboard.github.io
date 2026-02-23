@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: related entity data
-description: Enriches messages by adding attributes, latest time series values, or entity fields from a related entity found through configurable relation queries (direction, type and entity filters).
+description: 通过添加从可配置 relation 查询（方向、类型、entity 过滤器）找到的相关 entity 的 attribute、最新 time series 值或 entity 字段来丰富消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

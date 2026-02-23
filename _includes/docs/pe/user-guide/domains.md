@@ -23,77 +23,77 @@
 {:toc}
 
 {% if docsPrefix == null or docsPrefix == "pe/" %}
-{{THINGSBOARD_WITH_URL}}{:target="_blank"} {% unless docsPrefix == null %}[White labeling](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"} feature{% endunless %} allows you to use a custom domain to provide secure user access.
-To achieve this, you need to configure an HAProxy Load Balancer and provide an SSL certificate. [This documentation](/docs/user-guide/install/pe/add-haproxy-ubuntu/){:target="_blank"} will help you do this.
-Once set up, you will be able to access the ThingsBoard platform through your custom domain using a secure (HTTPS) connection.
+{{THINGSBOARD_WITH_URL}}{:target="_blank"} {% unless docsPrefix == null %}[白标](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"} 功能{% endunless %}支持使用自定义域名提供安全访问。
+需配置 HAProxy 负载均衡器并配置 SSL 证书。[本文档](/docs/user-guide/install/pe/add-haproxy-ubuntu/){:target="_blank"}可协助完成配置。
+配置完成后，可通过自定义域名使用 HTTPS 安全访问 ThingsBoard 平台。
 {% endif %}
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-{{THINGSBOARD_WITH_URL}}{:target="_blank"} [White labeling](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"} feature allows you to use a custom domain to provide a personalized hostname for user access.
-When you register a valid domain, {{THINGSBOARD_URL}} automatically requests an SSL certificate and manages future certificate renewals.
-After domain registration, you will be able to access the platform via your domain name using a secure (HTTPS) connection. 
-This feature is primarily intended for Web UI access, so some services, such as MQTT or CoAP transports, may not be available through your custom domain name.
+{{THINGSBOARD_WITH_URL}}{:target="_blank"} [白标](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"} 功能支持使用自定义域名提供个性化主机名供用户访问。
+注册有效域名后，{{THINGSBOARD_URL}} 会自动申请 SSL 证书并负责后续续期。
+域名注册完成后，可通过域名使用 HTTPS 安全访问平台。 
+该功能主要用于 Web UI 访问，MQTT、CoAP 等传输服务可能无法通过自定义域名使用。
 {% endif %}
 
-## Domain registration
+## 域名注册
 
 {% capture domain_owner_note %}
-**Note**: You must be owner of the domain you are registering.
+**注意：** 您必须是所注册域名的所有者。
 {% endcapture %}
 {% include templates/info-banner.md content=domain_owner_note %}
 
-In order to use your own host name instead of **{{THINGSBOARD_HOST}}** you must register it first. To do this, follow these steps:
+要使用自己的主机名代替 **{{THINGSBOARD_HOST}}**，需先完成注册。请按以下步骤操作：
 
-First, on your DNS provider&#39;s website, you must add a canonical record for your domain to map it with eu.thingsboard.cloud{% if docsPrefix == "pe/" %}, and add **SSL certificate**{% endif %}. See [How to Create a CNAME Record For Your Domain](#how-to-create-a-cname-record) for details.
+首先，在 DNS 服务商网站上添加域名的规范记录，将其映射到 eu.thingsboard.cloud{% if docsPrefix == "pe/" %}，并添加 **SSL 证书**{% endif %}。详见[如何为域名创建 CNAME 记录](#how-to-create-a-cname-record)。
 
-Once done, you can start the procedure of adding a domain. 
+完成后即可开始添加域名的流程。 
 
-## Add domain
+## 添加域名
 
 {% capture domain_owner_note %}
-{% if docsPrefix == "pe/" %} Starting from ThingsBoard version 3.9.0, adding your own domain name is available at both the Tenant level and the Customer level.{% endif %}
-{% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}Registering your own domain name is available at both the Tenant level and the Customer level.{% endif %}
+{% if docsPrefix == "pe/" %} 自 ThingsBoard 3.9.0 起，可在租户级和客户级添加自有域名。{% endif %}
+{% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}可在租户级和客户级注册自有域名。{% endif %}
 {% endcapture %}
 {% include templates/info-banner.md content=domain_owner_note %}
 
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-- Log in to your {{THINGSBOARD_WITH_URL}}{:target="_blank"} account;
+- 登录您的 {{THINGSBOARD_WITH_URL}}{:target="_blank"} 账户；
 {% endif %}
 {% if docsPrefix == null %}
-- Log in to {{THINGSBOARD_WITH_URL}}{:target="_blank"} account as system administrator;
+- 以系统管理员身份登录 {{THINGSBOARD_WITH_URL}}{:target="_blank"} 账户；
 {% endif %}
 
 {% include images-gallery.html imageCollection="register-domain" showListImageTitles="true" %}
 
-## Log in with your chosen domain name
+## 使用所选域名登录
 
-Now you can use your domain name to access {{THINGSBOARD_URL}} web interface and services. Try to login by entering the chosen domain name in the browser address line.
+现在可以使用域名访问 {{THINGSBOARD_URL}} Web 界面和服务。在浏览器地址栏输入所选域名进行登录。
 
 {% include images-gallery.html imageCollection="login-with-domain" %}
 
-## Domain details
+## 域名详情
 
-To view details about a registered domain, simply click on it to open the domain details dialog.
-{% unless docsPrefix == 'pe/' %} This dialog provides information about registered domain CNAME record and issued "SSL certificate" details including current validity period (*Not before* and *Not after*).{% endunless %}
+查看已注册域名的详情时，点击该域名即可打开域名详情对话框。
+{% unless docsPrefix == 'pe/' %} 该对话框显示已注册域名的 CNAME 记录及已签发的「SSL 证书」详情，包括当前有效期（*Not before* 和 *Not after*）。{% endunless %}
 
 {% unless docsPrefix == 'pe/' %}
-The SSL certificate is valid for 90 days, but no need to worry — {{THINGSBOARD_URL}} will automatically renew it at least 30 days before it expires.
-No action is required on your part unless you change or delete the domain&#39;s CNAME record.
+SSL 证书有效期为 90 天，{{THINGSBOARD_URL}} 会在到期前至少 30 天自动续期。
+除非您修改或删除域名的 CNAME 记录，否则无需任何操作。
 {% endunless %}
 
 {% include images-gallery.html imageCollection="domain-details" %}
 
-## Delete domain
+## 删除域名
 
-To delete the {% unless docsPrefix == 'pe/' %}registered{% endunless %} domain click "trash" icon in the domain's row you want to delete. In the confirmation dialog, click "Yes" if you are sure you want to delete the domain.
+删除{% unless docsPrefix == 'pe/' %}已注册的{% endunless %}域名时，点击要删除域名行中的「trash」图标。在确认对话框中，若确认删除则点击「Yes」。
 
 {% include images-gallery.html imageCollection="delete-domain" %}
 
-Once confirmed, the domain information and associated SSL certificate will be deleted, and you will not be able to access {{THINGSBOARD_URL}} web interface and services using that domain.
-You can always re-register the same or a different domain using [Domain registration](#domain-registration) procedure.
+确认后，域名信息及关联的 SSL 证书将被删除，无法再通过该域名访问 {{THINGSBOARD_URL}} Web 界面和服务。
+可随时按[域名注册](#domain-registration)流程重新注册同一或不同域名。
 
-## How to Create a CNAME Record For Your Domain {#how-to-create-a-cname-record}
+## 如何为域名创建 CNAME 记录 {#how-to-create-a-cname-record}
 
-The procedure of adding CNAME record to DNS database depending on your DNS service Provider. Below is the list of instructions for some popular DNS providers:
+添加 CNAME 记录到 DNS 数据库的步骤因 DNS 服务商而异。以下为常用 DNS 服务商的说明链接：
 
 * [Amazon Route 53](https://aws.amazon.com/premiumsupport/knowledge-center/route-53-create-alias-records/){:target="_blank"}
 * [GoDaddy](https://www.godaddy.com/help/add-a-cname-record-19236){:target="_blank"}
@@ -108,28 +108,28 @@ The procedure of adding CNAME record to DNS database depending on your DNS servi
 * [Infoblox NIOS](https://docs.infoblox.com/display/BloxOneDDI/Creating+a+CNAME+Record){:target="_blank"}
 * [Namecheap](https://www.namecheap.com/support/knowledgebase/article.aspx/9646/2237/how-to-create-a-cname-record-for-your-domain){:target="_blank"}
 
-If none of the DNS providers listed above is the one you are using, try to find this information on the provider&#39;s website or by reaching out to their support team.
+若以上列表中没有您使用的 DNS 服务商，请在其官网查找或联系其技术支持。
 
-## Troubleshooting
+## 故障排查
 
-Firs of all you need to check if you have added CNAME to your domain correctly:
+首先确认域名的 CNAME 是否已正确添加：
 
-Use [Google Admin Toolbox](https://toolbox.googleapps.com/apps/dig/){:target="_blank"} or "dig" command if your OS system is Linux:
+若为 Linux 系统，可使用 [Google Admin Toolbox](https://toolbox.googleapps.com/apps/dig/){:target="_blank"} 或「dig」命令：
 ```bash
 dig $YOUR_DOMAIN_NAME any
 ```
 {: .copy-code}
 
-Replace $YOUR_DOMAIN_NAME with your domain value.
+将 $YOUR_DOMAIN_NAME 替换为您的域名。
 
-For example, $YOUR_DOMAIN_NAME is `mycompany.thingsboard.space`:
+例如，$YOUR_DOMAIN_NAME 为 `mycompany.thingsboard.space`：
 ```bash
 dig mycompany.thingsboard.space any
 ```
 
-The "dig" command in Linux is used to gather DNS information. It stands for Domain Information Groper, and it collects data about Domain Name Servers. The "dig" command is helpful for diagnosing DNS problems, but is also used to display DNS information.
+Linux 中的「dig」命令用于获取 DNS 信息，全称为 Domain Information Groper，可收集域名服务器相关数据。「dig」可用于诊断 DNS 问题，也可用于显示 DNS 信息。
 
-The output of "dig" command could vary duy to your domain setup.
+「dig」命令的输出会因域名配置而异。
 For example:
 ```bash
 $ dig mycompany.thingsboard.space any
@@ -154,9 +154,9 @@ mycompany.thingsboard.space. 3600 IN	HINFO	"RFC8482" ""
 ;; MSG SIZE  rcvd: 77
 ```
 
-This output shows that there are NO CNAME added to the mycompany.thingsboard.space domain ("ANSWER SECTION" block).
+该输出表明 mycompany.thingsboard.space 域名未添加 CNAME（「ANSWER SECTION」块）。
 
-Correct output should look like that:
+正确的输出示例：
 ```bash
 ...
 ;; ANSWER SECTION:
@@ -164,12 +164,12 @@ mycompany.thingsboard.space. 3600 IN	CNAME	eu.thingsboard.cloud
 ...
 ```
 
-If all the things are correct, but some issue still persists - please [contact us](https://thingsboard.io/docs/contact-us/){:target="_blank"} for further support.
+若配置无误但问题仍存在，请[联系我们](https://thingsboard.io/docs/contact-us/){:target="_blank"}获取支持。
 
-## Next step
+## 下一步
 
 {% if docsPrefix == null %}
 {% assign feature = "White labeling" %}{% include templates/pe-feature-banner.md %}
 {% endif %}
 
-Learn how to customize ThingsBoard login page and user interface, configure your company or product logo, and adjust the color scheme, navigate to the [White labeling](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"} section.
+了解如何自定义 ThingsBoard 登录页和用户界面、配置公司或产品 Logo、调整配色方案，请前往[白标](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"}章节。

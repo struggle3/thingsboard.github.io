@@ -1,6 +1,6 @@
 ### Device Configuration
 
-To connect and send data, we need to configure both the **device** and the **network server**.
+连接并发送数据前，需同时配置**设备**和**网络服务器**。
 
 First, let's configure the device and gather the necessary information for the network server. To add a device to the network server and receive data from it, you'll need these device parameters:
 

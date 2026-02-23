@@ -1,8 +1,8 @@
 {% if docsPrefix == "pe/" %}
-Use this command to send the message to the CoAP server that is hosted on **localhost**. Replace **$YOUR_COAP_ENDPOINT_URL** with corresponding values.
+使用以下命令向托管在 **localhost** 上的 CoAP 服务器发送消息。请将 **$YOUR_COAP_ENDPOINT_URL** 替换为实际值。
 {% endif %}
 {% if docsPrefix contains "paas/" %}
-Use this command to send the message to the CoAP server that is hosted on **int.{{hostName}}**. Replace **$YOUR_COAP_ENDPOINT_URL** with corresponding values.
+使用以下命令向托管在 **int.{{hostName}}** 上的 CoAP 服务器发送消息。请将 **$YOUR_COAP_ENDPOINT_URL** 替换为实际值。
 {% endif %}
 
 ```shell

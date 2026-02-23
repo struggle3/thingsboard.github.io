@@ -1,48 +1,48 @@
 * TOC
 {:toc}
 
-Script calculated fields use [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} (ThingsBoard Expression Language) to perform advanced, real-time computations on telemetry and attributes. Unlike Simple fields, Script fields support conditional logic, iteration over rolling time-series values, working with historical windows, and returning multiple results in a single execution.
+Script 计算字段使用 [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"}（ThingsBoard Expression Language）对遥测与属性执行高级实时计算。与 Simple 字段不同，Script 字段支持条件逻辑、对滚动时序值的迭代、历史窗口处理，以及单次执行返回多个结果。
 
-Use "Script" calculated fields when you need logic that goes beyond a single math expression, such as:
-- Multi-step calculations (e.g., dew point, air density, efficiency metrics)
-- Conditional rules (e.g., generate status flags based on multiple inputs)
-- Multi-output results (e.g., compute several derived values at once)
-- Event-like telemetry generation (e.g., produce anomaly records with timestamps)
-- Rolling analytics using historical windows (e.g., rolling average, trend detection, smoothing)
+在需要超越单一数学表达式的逻辑时使用「Script」计算字段，例如：
+- 多步计算（如露点、空气密度、效率指标）
+- 条件规则（如根据多个输入生成状态标志）
+- 多输出结果（如同时计算多个派生值）
+- 类事件遥测生成（如生成带时间戳的异常记录）
+- 基于历史窗口的滚动分析（如滚动平均、趋势检测、平滑）
 
 <hr>
 
-## Configuration
+## 配置
 
 {% assign calculatedFieldType = "**Script**" %}
 {% include /docs/user-guide/calculated-fields/blocks/creating-calculated-field.md %}
 
 <hr>
 
-### Arguments
+### 参数
 
-Arguments define which data sources and keys are passed into the script. For Script calculated fields, arguments can be [Latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"}, [Attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"}, or [time series rolling](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=timeSeriesRolling#arguments){:target="_blank"}).   
-The data source can be **Current entity**, another **Device/Asset**, the **Customer**, the **Current tenant**, or the **Current owner**.
+Arguments 定义传入脚本的数据源和 key。Script 计算字段的 arguments 可为 [Latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"}、[Attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} 或 [time series rolling](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=timeSeriesRolling#arguments){:target="_blank"}。   
+数据源可为 **Current entity**、另一 **Device/Asset**、**Customer**、**Current tenant** 或 **Current owner**。
 
-For details about argument types and parameters, see the [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} section in the Calculated fields documentation.
+参数类型与配置详见计算字段文档中的 [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} 章节。
 
 <hr>
 
-### Script
+### 脚本
 
 {% include docs/user-guide/calculated-fields/blocks/script-calculation.md %}
 
 <hr>
 
-### Output
+### 输出
 
-The calculation result is stored either as a [time series](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"} or an [attribute](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"}.   
+计算结果以 [time series](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"} 或 [attribute](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"} 形式存储。
 
-For more details about output types and processing strategies, see the [Output](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#output){:target="_blank"} section.
+输出类型与处理策略详见 [Output](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#output){:target="_blank"} 章节。
 
 <hr>
 
-## Examples
+## 示例
 
 To help you get started, here are three common configuration patterns applied to real-world scenarios.
 
@@ -414,7 +414,7 @@ This indicates the freezer is in a potentially critical state and may require at
 
 <hr>
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎为 ThingsBoard 在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 加星。
+如有疑问，请 [联系我们](/docs/contact-us/){:target="_blank"}。

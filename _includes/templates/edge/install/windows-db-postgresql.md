@@ -1,13 +1,13 @@
-ThingsBoard Edge uses PostgreSQL database as a local storage. 
+ThingsBoard Edge 使用 PostgreSQL 作为本地存储。
 
-#### PostgreSQL Installation
+#### PostgreSQL 安装
 
-Download the installation file (PostgreSQL 12.17 or newer releases) [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows) and follow the installation instructions.
+在此 [下载](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows) 安装文件（PostgreSQL 12.17 或更新版本）并按说明完成安装。
 
-During PostgreSQL installation, you will be prompted for superuser (postgres) password.
-Don't forget this password. It will be used later. For simplicity, we will substitute it with "postgres".
+安装 PostgreSQL 时会提示设置超级用户（postgres）密码。
+请牢记该密码，后续步骤会使用。为简化示例，此处假设密码为 "postgres"。
 
-#### Create ThingsBoard Edge Database
+#### 创建 ThingsBoard Edge 数据库
 
-Once installed, launch the "pgAdmin" software and login as superuser (postgres). 
-Open your server and create database **tb_edge** with owner "postgres".
+安装完成后，启动 "pgAdmin"，以超级用户（postgres）登录。
+打开服务器并创建数据库 **tb_edge**，所有者设为 "postgres"。

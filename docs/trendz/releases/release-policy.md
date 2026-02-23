@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Versioning and Release Policy
-description: Understand Trendz's version numbering, support periods, upgrade procedures, and recommended Docker tags for your environment.
+title: 版本与发布策略
+description: 了解 Trendz 版本号规则、支持周期、升级流程及推荐 Docker 标签。
 effective-url: '/docs/trendz/releases/release-policy/'
 ---
 

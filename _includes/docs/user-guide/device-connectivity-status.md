@@ -1,132 +1,129 @@
 * TOC
 {:toc}
 
-## Device connectivity events
+## 设备连接事件
 
-ThingsBoard Device State service is responsible for monitoring the device connectivity state and triggering the device connectivity events 
-that are pushed to the [**Rule Engine**](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/). As a platform user, you are able to define how to react to these events. 
+ThingsBoard 的 Device State 服务负责监控设备连接状态，并触发推送到 [**Rule Engine**](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/) 的设备连接事件。平台用户可定义如何响应这些事件。
 
-Supported events are:
+支持的事件包括：
 
- - **Connect event** - triggered when a device connects to ThingsBoard. Relevant in the case of session-based transports like MQTT.
- It is also triggered for HTTP transport, but in this case, it will be triggered on each HTTP request;
- - **Disconnect event** - triggered when the device disconnects from ThingsBoard. Relevant in the case of session-based transports like MQTT. 
- It is also triggered for HTTP transport, but in this case, it will be triggered on each HTTP request;
- - **Activity event** - triggered when an inactive device becomes active by pushing telemetry, attribute update, or an RPC command.
- - **Inactivity event** - triggered when a device was inactive for a certain period of time. 
- Please note that this event may be triggered even without disconnect event from the device. Typically, means that there were no activity events triggered for a while.
+ - **Connect 事件** - 当设备连接至 ThingsBoard 时触发。适用于 MQTT 等基于会话的传输。
+ 对于 HTTP 传输也会触发，但在该场景下会在每次 HTTP 请求时触发；
+ - **Disconnect 事件** - 当设备从 ThingsBoard 断开时触发。适用于 MQTT 等基于会话的传输。
+ 对于 HTTP 传输也会触发，但在该场景下会在每次 HTTP 请求时触发；
+ - **Activity 事件** - 当非活跃设备通过推送遥测、属性更新或 RPC 命令变为活跃时触发。
+ - **Inactivity 事件** - 当设备在一定时间内无活动时触发。
+ 请注意，即使设备未产生 disconnect 事件，也可能触发此事件。通常表示一段时间内未触发 activity 事件。
 
-Device State service is responsible for maintaining the following [server-side](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types) attributes:
+Device State 服务负责维护以下[服务端](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types)属性：
 
- - **active** - represents current device state, either true or false;
- - **lastConnectTime** - represents the last time device connected to ThingsBoard, number of milliseconds since January 1, 1970, 00:00:00 GMT;
- - **lastDisconnectTime** - represents the last time device disconnected from ThingsBoard, number of milliseconds since January 1, 1970, 00:00:00 GMT;
- - **lastActivityTime** - represents the last time device pushed telemetry, attribute update, or RPC command, number of milliseconds since January 1, 1970, 00:00:00 GMT;
- - **inactivityAlarmTime** - represents the last time inactivity event was triggered, number of milliseconds since January 1, 1970, 00:00:00 GMT.
+ - **active** - 表示设备当前状态，true 或 false；
+ - **lastConnectTime** - 表示设备上次连接 ThingsBoard 的时间，为自 1970 年 1 月 1 日 00:00:00 GMT 起的毫秒数；
+ - **lastDisconnectTime** - 表示设备上次从 ThingsBoard 断开的时间，为自 1970 年 1 月 1 日 00:00:00 GMT 起的毫秒数；
+ - **lastActivityTime** - 表示设备上次推送遥测、属性更新或执行 RPC 命令的时间，为自 1970 年 1 月 1 日 00:00:00 GMT 起的毫秒数；
+ - **inactivityAlarmTime** - 表示上次触发 inactivity 事件的时间，为自 1970 年 1 月 1 日 00:00:00 GMT 起的毫秒数。
 
-## Controlling how a platform manages activities
+## 控制平台如何管理活动
 
-Each device activity results in a number of actions performed by Device State service such as DB calls and internal bookkeeping.
-This provides useful information about the current device state, but at the same time impacts performance.
-For some use cases, precise monitoring of device state is not needed and users are willing to trade some degree of real time activity information for improved overall system performance.
+每次设备活动都会导致 Device State 服务执行一系列操作，如数据库调用和内部簿记。
+这可提供有价值的设备当前状态信息，同时也会影响性能。
+部分场景不需要精确监控设备状态，用户愿意以牺牲一定的实时活动信息换取整体系统性能提升。
 
-To cover this need, a platform provides activity reporting strategies feature to control how often and how many activities are reported to the Device State service.
-There are four strategies: **ALL**, **FIRST**, **LAST** and **FIRST_AND_LAST**. 
-We will go into more detail about what each strategy does, but first let's understand key concepts to make the most of this feature.
+为满足该需求，平台提供活动上报策略功能，用于控制向 Device State 服务上报活动的频率和数量。
+共有四种策略：**ALL**、**FIRST**、**LAST** 和 **FIRST_AND_LAST**。
+下文将逐一说明，首先了解核心概念以更好使用该功能。
 
-### What is an activity?
+### 什么是活动？
 
-An activity represents an event that indicates a device is actively performing actions or communicating with a platform.
-Some examples of activities: 
-- connecting to or disconnecting from a platform
-- pushing time-series or attributes data via integrations or transports
-- pushing RPC commands
-- subscribing to attribute updates
+活动表示表明设备正在执行操作或与平台通信的事件。
+活动示例包括：
+- 连接或断开平台
+- 通过 integration 或传输层推送时序或属性数据
+- 推送 RPC 命令
+- 订阅属性更新
 
-### Reporting an activity
+### 上报活动
 
-Reporting an activity means notifying Device State service that an activity has occurred. 
-Device State service then updates attributes and triggers connectivity events based on a type of activity.
+上报活动指通知 Device State 服务活动已发生。
+Device State 服务随后根据活动类型更新属性并触发连接事件。
 
-For example, if activity is a device connecting to a platform then Device State service, once activity is reported, 
-will update **lastConnectTime**, **lastActivityTime** attributes and trigger **Connect event**.
+例如，若活动为设备连接平台，一旦上报活动，Device State 服务将更新 **lastConnectTime**、**lastActivityTime** 属性并触发 **Connect 事件**。
 
-### Activity reporting period
+### 活动上报周期
 
-An activity reporting period is a set timeframe during which the system records activities.
-Time is divided into consecutive periods; this means as soon as one period finishes, the next one begins.
-The duration of a period is [configurable](#configuration).
+活动上报周期是指系统记录活动的时间段。
+时间被划分为连续周期；即一个周期结束后，下一个立即开始。
+周期时长可[配置](#configuration)。
 
-The very first reporting period begins when ThingsBoard starts.
-For example, if the system launches at the 15-second mark, that's also when the initial reporting period starts.
-If period duration is set to 15 seconds, this period will end at 30 seconds and the next one would start.
-This pattern repeats in a cycle while ThingsBoard is running.
+第一个上报周期在 ThingsBoard 启动时开始。
+例如，若系统在第 15 秒启动，初始上报周期也同时开始。
+若周期时长设为 15 秒，该周期将在第 30 秒结束，下一个周期随即开始。
+该模式在 ThingsBoard 运行期间循环重复。
 
 ![image](/images/user-guide/activity-reporting-periods.png)
 
-### First and last activity events
+### 首次与末次活动事件
 
-- **First event**: first activity received during a reporting period.
-- **Last event**: last activity received during a reporting period.
+- **First 事件**：上报周期内收到的首次活动。
+- **Last 事件**：上报周期内收到的末次活动。
 
 ![image](/images/user-guide/first-and-last-activity-events.png)
 
-> **Note**: If there is only one activity, then it is considered to be both first and last at the same time.
+> **注意**：若仅有一次活动，则同时视为 first 和 last。
 
 ![image](/images/user-guide/one-event-both-first-and-last.png)
 
-### Activity reporting strategies
+### 活动上报策略
 
-- **ALL**: all activities are reported to Device State service immediately.
+- **ALL**：所有活动立即上报给 Device State 服务。
 
 ![image](/images/user-guide/activity-strategy-all.png)
 
-- **FIRST**: only first activity is reported immediately to Device State service.
+- **FIRST**：仅首次活动立即上报给 Device State 服务。
 
 ![image](/images/user-guide/activity-strategy-first.png)
 
-> **Note**: Last activity will still be reported if there were no activities for a reporting period.
+> **注意**：若某上报周期内无活动，末次活动仍会上报。
 
 ![image](/images/user-guide/first-strategy-reporting-last-event.png)
 
-- **LAST**: only last activity is reported to Device State service. Activity is reported when reporting period ends.
+- **LAST**：仅末次活动上报给 Device State 服务。活动在上报周期结束时上报。
 
 ![image](/images/user-guide/activity-strategy-last.png)
 
-- **FIRST_AND_LAST**: both first and last activities are reported to Device State service.
-  First activity is reported immediately, last activity is reported when reporting period ends.
+- **FIRST_AND_LAST**：首次和末次活动均上报给 Device State 服务。
+  首次活动立即上报，末次活动在上报周期结束时上报。
 
 ![image](/images/user-guide/activity-strategy-first-and-last.png)
 
-## Configuration
+## 配置
 
-All configuration is done using global parameters defined in **thingsboard.yml** configuration file.
+所有配置均在 **thingsboard.yml** 中的全局参数完成。
 
-- **state.defaultInactivityTimeoutInSec** - period of time after which a device is considered inactive by Device State service if no activities were reported. Value is set in seconds.
-Default value is 600 seconds (10 minutes). A user can overwrite this parameter for an individual device by setting the **inactivityTimeout** server-side attribute (value is set in milliseconds).
+- **state.defaultInactivityTimeoutInSec** - 若无活动上报，Device State 服务将设备视为不活跃的超时时间（秒）。
+默认 600 秒（10 分钟）。可通过为设备设置 **inactivityTimeout** 服务端属性（单位毫秒）覆盖。
 
 {% capture difference %}
-**Please note:**
+**请注意：**
 <br>
-This parameter controls only how the core service detects a device’s connectivity status (the value is stored in **"active"** attribute of device); it does **not** affect the device session timeout.
-The device session inactivity timeout is configured separately via the **transport.sessions.inactivity_timeout** property.
+此参数仅控制核心服务如何判断设备连接状态（值保存在设备的 **"active"** 属性中）；**不会**影响设备会话超时。
+设备会话不活动超时由 **transport.sessions.inactivity_timeout** 属性单独配置。
 
-To avoid inconsistencies, we recommend keeping these two parameters in sync: the transport session inactivity timeout should be **greater than or equal to** the device inactivity timeout.
+为避免不一致，建议使二者保持同步：传输会话不活动超时应**大于或等于**设备不活动超时。
 
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-- **state.defaultStateCheckIntervalInSec** - interval for periodic checks of a device activity state, performed by a Device State service. Value is set in seconds. Default value is 60 seconds (1 minute).
-- **state.telemetryTtl** - time-to-live value for activity telemetry data. Value is set in milliseconds. Default value is 0 milliseconds (meaning time-to-live mechanism is disabled).
+- **state.defaultStateCheckIntervalInSec** - Device State 服务定期检查设备活动状态的间隔（秒）。默认 60 秒（1 分钟）。
+- **state.telemetryTtl** - 活动遥测数据的生存时间（毫秒）。默认 0 毫秒（表示禁用 TTL）。
 {% if docsPrefix == 'pe/' %}
-- **integrations.activity.reporting_strategy** - activity reporting strategy for integrations. Allowed values: ALL, FIRST, LAST, FIRST_AND_LAST. Default value is LAST.
-- **integrations.activity.reporting_period** - duration of a reporting period for integrations. Value is set in milliseconds. Default value is 3000 milliseconds (3 seconds).
+- **integrations.activity.reporting_strategy** - integration 的活动上报策略。允许值：ALL、FIRST、LAST、FIRST_AND_LAST。默认 LAST。
+- **integrations.activity.reporting_period** - integration 的上报周期时长（毫秒）。默认 3000 毫秒（3 秒）。
 {% endif %}
-- **transport.activity.reporting_strategy** - activity reporting strategy for transports. Allowed values: ALL, FIRST, LAST, FIRST_AND_LAST. Default value is LAST.
-- **transport.sessions.report_timeout** - duration of a reporting period for transports. Value is set in milliseconds. Default value is 3000 milliseconds (3 seconds).
-- **transport.sessions.inactivity_timeout** - defines how long the device transport session will be opened after the last message arrives from the device. Value is set in milliseconds. Default value is 60000 milliseconds (10 min).
+- **transport.activity.reporting_strategy** - 传输层的活动上报策略。允许值：ALL、FIRST、LAST、FIRST_AND_LAST。默认 LAST。
+- **transport.sessions.report_timeout** - 传输层上报周期时长（毫秒）。默认 3000 毫秒（3 秒）。
+- **transport.sessions.inactivity_timeout** - 自设备发送最后一条消息后，设备传输会话保持打开的时长（毫秒）。默认 60000 毫秒（10 分钟）。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}
-

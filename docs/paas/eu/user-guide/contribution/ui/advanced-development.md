@@ -2,7 +2,7 @@
 layout: docwithnav-paas-eu
 assignees:
 - ikulikov
-title: Advanced widget development
+title: 进阶部件开发
 
 
 add-js-module:

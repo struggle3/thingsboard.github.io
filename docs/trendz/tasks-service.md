@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Tasks 
-description: Task Service in Trendz
+title: 任务
+description: Trendz 任务服务
 ---
 
 * TOC

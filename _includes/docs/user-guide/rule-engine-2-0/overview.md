@@ -1,272 +1,269 @@
 * TOC
 {:toc}
 
-<b>Rule Engine</b> in ThingsBoard is the core data processing mechanism responsible for receiving, transforming, routing, and reacting to events and telemetry coming from devices and related assets.
+<b>规则引擎</b>是 ThingsBoard 中负责接收、转换、路由和响应来自设备及相关资产的事件与遥测数据的核心数据处理机制。
 
-Rule Engine built around three main components:
+规则引擎围绕三大组件构建：
 
-- [Message](#rule-engine-message) - any incoming event. It can be an incoming data from devices, device life-cycle event, REST API event, RPC request, etc.
-- [Rule node](#rule-node) - a function that is executed on an incoming message. There are many different Node types that can filter, transform or execute some action on incoming Message.
-- [Rule chain](#rule-chain) - nodes are connected with each other with relations, so the outbound message from rule node is sent to next connected rule nodes.
+- [消息](#rule-engine-message) — 任何入站事件。可以是设备入站数据、设备生命周期事件、REST API 事件、RPC 请求等。
+- [规则节点](#rule-node) — 对入站消息执行的函数。有多种不同类型的节点，可对入站消息进行过滤、转换或执行特定操作。
+- [规则链](#rule-chain) — 节点之间通过关系连接，规则节点的出站消息会发送到下游连接的规则节点。
 
-## Key characteristics
+## 主要特性
 
-- <b>Stream processing</b>. Incoming data (telemetry, attributes, RPC, events) is immediately processed by the Rule Engine, where it can be filtered, enriched, or transformed.
-- <b>Rule chain as a workflow</b>. Data processing is organized into <b>Rule chains</b> — workflows composed of individual <b>Rule nodes</b>. Each node performs a specific action such as filtering, saving data to a database, sending a notification, or calling an external API.
-- <b>Flexibility and Extensibility</b>. The Rule Engine supports both built-in nodes and custom logic via scripts (JavaScript or TBEL). It also allows integrations with external systems (HTTP, Kafka, MQTT).
-- <b>Integrations and Reactivity</b>. The Rule Engine can trigger business logic in response to events — for example, sending an email or SMS when a temperature threshold is exceeded, or integrating with external services and platforms.
+- <b>流式处理</b>。遥测、属性、RPC、事件等入站数据会被规则引擎立即处理，可进行过滤、丰富或转换。
+- <b>规则链即工作流</b>。数据处理被组织成<b>规则链</b> — 由若干<b>规则节点</b>组成的工作流。每个节点执行特定操作，如过滤、写入数据库、发送通知或调用外部 API。
+- <b>灵活性与可扩展性</b>。规则引擎支持内置节点及通过脚本（JavaScript 或 TBEL）实现的自定义逻辑，也可与外部系统（HTTP、Kafka、MQTT）集成。
+- <b>集成与响应</b>。规则引擎可根据事件触发业务逻辑，例如在超过温度阈值时发送邮件或短信，或与外部服务/平台集成。
 
-## Typical use cases
+## 典型用途
 
-Here are some common scenarios that can be configured using <b>ThingsBoard Rule Chains</b>:
-- <b>Data validation and transformation</b> – Validate and modify incoming telemetry or attributes before persisting them in the database.
-- <b>Telemetry aggregation</b> – Copy telemetry or attributes from devices to related assets to enable aggregation. For example, data from multiple devices can be combined into a related Asset for summary analytics.
-- <b>Alarm management</b> – Create, update, or clear alarms based on defined conditions.
-- <b>Device life-cycle monitoring</b> – Trigger actions when device state changes. For example, generate alerts when a device goes online or offline.
-- <b>Data enrichment</b> – Load additional context required for processing. For example, load temperature threshold value for a device that is defined in device&#39;s Customer or Tenant attribute.
-- <b>External system integration</b> – Trigger REST API calls to external applications and services.
-- <b>Notifications – Send email alerts when complex events occur, with the ability to include attributes from related entities in the email template.
-- <b>User personalization</b> – Take into account user preferences during event processing.
-- <b>Remote control</b> – Execute RPC calls to devices based on defined conditions.
-- <b>Big data / cloud integration</b> – Connect to external pipelines and platforms such as Kafka, Spark, or AWS services.
+以下是可通过<b>ThingsBoard 规则链</b>配置的常见场景：
+- <b>数据校验与转换</b> — 在持久化到数据库前校验并修改入站遥测或属性。
+- <b>遥测聚合</b> — 将遥测或属性从设备复制到关联资产以实现聚合。例如，可将多台设备的数据合并到关联资产中用于汇总分析。
+- <b>告警管理</b> — 根据定义的条件创建、更新或清除告警。
+- <b>设备生命周期监控</b> — 在设备状态变化时触发操作。例如，设备上线或离线时生成告警。
+- <b>数据丰富</b> — 加载处理所需的额外上下文。例如，从设备所属客户或租户属性中加载设备的温度阈值。
+- <b>外部系统集成</b> — 触发对外部应用和服务的 REST API 调用。
+- <b>通知</b> — 在复杂事件发生时发送邮件告警，可在邮件模板中包含关联实体的属性。
+- <b>用户个性化</b> — 在事件处理时考虑用户偏好。
+- <b>远程控制</b> — 根据定义的条件对设备执行 RPC 调用。
+- <b>大数据/云集成</b> — 连接 Kafka、Spark、AWS 等外部管道和平台。
 
-## Rule Engine message 
+## 规则引擎消息
 
-Rule Engine Message is a serializable, immutable data structure that represent various messages in the system. For example:
+规则引擎消息是一种可序列化、不可变的数据结构，用于表示系统中的各类消息。例如：
 
-  * Incoming [telemetry](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"}, [attribute update](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"} or [RPC call](/docs/{{docsPrefix}}user-guide/rpc/){:target="_blank"} from device;
-  * Entity life-cycle event: created, updated, deleted, assigned, unassigned, attributes updated;
-  * Device status event: connected, disconnected, active, inactive, etc;
-  * Other system events.
+  * 来自设备的入站[遥测](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"}、[属性更新](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"}或[RPC 调用](/docs/{{docsPrefix}}user-guide/rpc/){:target="_blank"}；
+  * 实体生命周期事件：创建、更新、删除、分配、取消分配、属性更新；
+  * 设备状态事件：连接、断开、活跃、不活跃等；
+  * 其他系统事件。
   
-Rule Engine Message contains the following information:
+规则引擎消息包含以下信息：
 
-  * Message ID: time based, universally unique identifier;
-  * Originator of the message: Device, Asset or other [Entity](/docs/{{docsPrefix}}user-guide/entities-and-relations/){:target="_blank"} identifier;
-  * Type of the message: "Post telemetry" or "Inactivity Event", etc;
-  * Payload of the message: JSON body with actual message payload;
-  * Metadata: List of key-value pairs with additional data about the message. 
+  * 消息 ID：基于时间的全局唯一标识符；
+  * 消息来源：设备、资产或其他[实体](/docs/{{docsPrefix}}user-guide/entities-and-relations/){:target="_blank"}标识符；
+  * 消息类型：如「发布遥测」或「不活跃事件」等；
+  * 消息负载：包含实际消息内容的 JSON 体；
+  * 元数据：与消息相关的键值对列表。 
 
-## Rule node
+## 规则节点
 
-Rule Node is a basic component of Rule Engine that process single incoming message at a time and produce one or more outgoing messages. 
-Rule Node is a main logical unit of the Rule Engine. Rule Node can filter, enrich, transform incoming messages, perform action or communicate with external systems.
+规则节点是规则引擎的基本组件，一次处理一条入站消息并产生一条或多条出站消息。
+规则节点是规则引擎的主要逻辑单元，可对入站消息进行过滤、丰富、转换，执行操作或与外部系统通信。
 
-## Rule node connection
+## 规则节点连接
 
-Rule Nodes may be connected to other rule nodes. Each relation has relation type, a label used to identify logical meaning of the relation. 
-When rule node produces the outgoing message it always specifies the relation type which is used to route message to next nodes.
+规则节点可与其他规则节点连接。每条关系都有关系类型，用于标识关系的逻辑含义。
+当规则节点产生出站消息时，会指定用于将消息路由到下游节点的关系类型。
  
-Typical rule node relations are "Success" and "Failure". 
-Rule nodes that represent logical operations may use "True" or "False". 
-Some specific rule nodes may use completely different relation types, for example: "Post Telemetry", "Attributes Updated", "Entity Created", etc.
+常见关系类型为「Success」和「Failure」。
+表示逻辑运算的规则节点可使用「True」或「False」。
+部分规则节点使用完全不同的关系类型，例如：「Post Telemetry」、「Attributes Updated」、「Entity Created」等。
 
-
-Some rule nodes support custom connection names. Just type your custom connection name and click the "Create a new one!" link:
+部分规则节点支持自定义连接名称。输入自定义连接名并点击「Create a new one!」链接即可：
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/custom-connection.png)
 
-All connection names are **case-sensitive**.
+所有连接名称**区分大小写**。
 
-## Rule chain
+## 规则链
 
-Rule Chain is a logical group of rule nodes and their relations. For example, the rule chain below will:
+规则链是规则节点及其关系的逻辑组合。例如，以下规则链将：
 
-  * save all telemetry messages to the database;
-  * raise "High Temperature Alarm" if temperature field in the message will be higher then 50 degrees;
-  * raise "Low Temperature Alarm" if temperature field in the message will be lower then -40 degrees;
-  * log failure to execute the temperature check scripts to console in case of logical or syntax error in the script. 
+  * 将所有遥测消息保存到数据库；
+  * 当消息中温度字段高于 50 度时触发「高温告警」；
+  * 当消息中温度字段低于 -40 度时触发「低温告警」；
+  * 当脚本存在逻辑或语法错误时，将温度检查脚本执行失败记录到控制台。
 
 ![image](/images/user-guide/rule-engine-2-0/rule-node-relations.png)
 
-Tenant administrator is able to define one **Root Rule Chain** and optionally multiple other rule chains. 
-Root rule chain handles all incoming messages and may forward them to other rule chains for additional processing.
-Other rule chains may also forward messages to different rule chains.
+租户管理员可定义一条**根规则链**，并可选择定义多条其他规则链。
+根规则链处理所有入站消息，并可将其转发到其他规则链进行后续处理。
+其他规则链也可将消息转发到不同规则链。
 
-For example, the rule chain below will:
+例如，以下规则链将：
 
-  * raise "High Temperature Alarm" if temperature field in the message will be higher then 50 degrees;
-  * clear "High Temperature Alarm" if temperature field in the message will be less then 50 degrees;
-  * forward events about "Created" and "Cleared" alarms to external rule chain that handles notifications to corresponding users.
+  * 当消息中温度高于 50 度时触发「高温告警」；
+  * 当消息中温度低于 50 度时清除「高温告警」；
+  * 将告警「创建」和「清除」事件转发到负责通知相应用户的外部规则链。
  
 ![image](/images/user-guide/rule-engine-2-0/rule-chain-references.png)
 
-## Message processing result
+## 消息处理结果
 
-There are three possible results of message processing: Success, Failure and Timeout.
-The message processing attempt is marked as "Success" when the last rule node in the processing chain successfully process the message.
-The message processing attempt is marked as "Failure" if one of the rule nodes produce "Failure" of message processing, 
-and there is no rule nodes to handle that failure. 
-The message processing attempt is marked as "Timeout" when overall time of processing exceed configurable threshold.
+消息处理有三种可能结果：Success（成功）、Failure（失败）、Timeout（超时）。
+当处理链中最后一个规则节点成功处理消息时，该次处理标记为「Success」。
+若某规则节点产生「Failure」且没有其他规则节点处理该失败，则标记为「Failure」。
+当总处理时间超过可配置阈值时，标记为「Timeout」。
 
-See diagram below and let's review the possible scenarios:
+下图展示了可能的场景：
 
 ![image](/images/user-guide/rule-engine-2-0/not-a-failure.png)
 
-If the "Transformation" script fails, the message is not marked as "Failed", because there is a "Save to DB" node connected with "Failure" relation.
-If the "Transformation" script is successful, it will be pushed to "External System" with the REST API call.
-If the external system is overloaded, the REST API call may "hang" for some time. 
-Let's assume the overall timeout for message pack processing is 20 seconds. Let's ignore Transformation script execution time because it is < 1ms.
-So, if the "External System" will reply within 20 seconds, the message will be successfully processed. 
-Similar, if "Save to DB" call will succeed, the message will be successfully processed. 
-However, if the external system will not reply within 20 seconds, the message processing attempt will be marked as "timed-out".
-Similar, if "Save to DB" call will fail, the message will be marked as failed.
+若「Transformation」脚本失败，消息不会标记为「Failed」，因为有通过「Failure」关系连接的「Save to DB」节点处理。
+若「Transformation」脚本成功，将通过 REST API 推送到「External System」。
+若外部系统过载，REST API 调用可能暂时阻塞。假设消息包处理总超时为 20 秒，忽略 Transformation 脚本执行时间（< 1ms）。
+若「External System」在 20 秒内响应，消息将被成功处理。
+同样，若「Save to DB」调用成功，消息也会被成功处理。
+若外部系统在 20 秒内未响应，该次处理将标记为「timed-out」。
+若「Save to DB」调用失败，消息将标记为失败。
 
-### Rule Engine queue
+### 规则引擎队列
 
-See new [documentation](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/){:target="_blank"}
+参见新版[文档](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/){:target="_blank"}
 
-#### Queue submit strategy
+#### 队列提交策略
 
-See new [documentation](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-submit-strategy){:target="_blank"}
+参见新版[文档](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-submit-strategy){:target="_blank"}
 
-#### Queue processing strategy
+#### 队列处理策略
 
-See new [documentation](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-processing-strategy){:target="_blank"}
+参见新版[文档](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#queue-processing-strategy){:target="_blank"}
 
-#### Default queues
+#### 默认队列
 
-See new [documentation](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#default-queues){:target="_blank"}
+参见新版[文档](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#default-queues){:target="_blank"}
 
-## Predefined message types
+## 预定义消息类型
 
-List of the predefined Message Types is presented in the following table:
+预定义消息类型列表如下：
 
 <table>
   <thead>
       <tr>
-          <td><b>Message Type</b></td><td><b>Display Name</b></td><td><b>Description</b></td><td><b>Message metadata</b></td><td><b>Message payload</b></td>
+          <td><b>消息类型</b></td><td><b>显示名称</b></td><td><b>描述</b></td><td><b>消息元数据</b></td><td><b>消息负载</b></td>
       </tr>
   </thead>
   <tbody>
       <tr>
           <td>POST_ATTRIBUTES_REQUEST</td>
-          <td><b>Post attributes</b></td>
-          <td>Request from device to publish <a href="/docs/{{docsPrefix}}user-guide/attributes/#attribute-types">client side</a> attributes (see <a href="/docs/{{docsPrefix}}reference/mqtt-api/#publish-attribute-update-to-the-server">attributes api</a> for reference)</td>
+          <td><b>发布属性</b></td>
+          <td>设备请求发布<a href="/docs/{{docsPrefix}}user-guide/attributes/#attribute-types">客户端</a>属性（参见 <a href="/docs/{{docsPrefix}}reference/mqtt-api/#publish-attribute-update-to-the-server">attributes api</a>）</td>
           <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type</td>
           <td>key/value json: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"currentState": "IDLE" <br> }</code></td>
       </tr>
       <tr>
           <td>POST_TELEMETRY_REQUEST</td>
-          <td><b>Post telemetry</b></td>
-          <td>Request from device to publish telemetry (see <a href="/docs/{{docsPrefix}}reference/mqtt-api/#telemetry-upload-api">telemetry upload api</a> for reference)</td>
+          <td><b>发布遥测</b></td>
+          <td>设备请求发布遥测（参见 <a href="/docs/{{docsPrefix}}reference/mqtt-api/#telemetry-upload-api">telemetry upload api</a>）</td>
           <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type,<br><b>ts</b> - timestamp (milliseconds)</td>
           <td>key/value json: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"temperature": 22.7 <br> }</code></td>
       </tr>
       <tr>
           <td>TO_SERVER_RPC_REQUEST</td>
-          <td><b>RPC Request from Device</b></td>
-          <td>RPC request from device (see <a href="/docs/{{docsPrefix}}reference/mqtt-api/#client-side-rpc">client side rpc</a> for reference)</td>
+          <td><b>来自设备的 RPC 请求</b></td>
+          <td>设备发起的 RPC 请求（参见 <a href="/docs/{{docsPrefix}}reference/mqtt-api/#client-side-rpc">client side rpc</a>）</td>
           <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type,<br><b>requestId</b> - RPC request Id provided by client</td>
           <td>json containing <b>method</b> and <b>params</b>: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"method": "getTime", <br>&nbsp;&nbsp;"params": { "param1": "val1" } <br> }</code></td>
       </tr>
       <tr>
           <td>RPC_CALL_FROM_SERVER_TO_DEVICE</td>
-          <td><b>RPC Request to Device</b></td>
-          <td>RPC request from server to device (see <a href="/docs/{{docsPrefix}}user-guide/rpc/#server-side-rpc-api">server side rpc api</a> for reference)</td>
-          <td><b>requestUUID</b> - internal request id used by sustem to identify reply target,<br><b>expirationTime</b> - time when request will be expired,<br><b>oneway</b> - specifies request type: <i>true</i> - without response, <i>false</i> - with response</td>
+          <td><b>下发至设备的 RPC 请求</b></td>
+          <td>服务端发往设备的 RPC 请求（参见 <a href="/docs/{{docsPrefix}}user-guide/rpc/#server-side-rpc-api">server side rpc api</a>）</td>
+          <td><b>requestUUID</b> - 系统用于识别回复目标的内部请求 ID，<br><b>expirationTime</b> - 请求过期时间，<br><b>oneway</b> - 指定请求类型：<i>true</i> - 无响应，<i>false</i> - 有响应</td>
           <td>json containing <b>method</b> and <b>params</b>: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"method": "getGpioStatus", <br>&nbsp;&nbsp;"params": { "param1": "val1" } <br> }</code></td>
       </tr>
       <tr>
           <td>ACTIVITY_EVENT</td>
-          <td><b>Activity Event</b></td>
-          <td>Event indicating that device becomes active</td>
+          <td><b>活跃事件</b></td>
+          <td>设备变为活跃状态时产生的事件</td>
           <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type</td>
           <td>json containing device activity information: <br> <code style="font-size: 12px;">{<br> &nbsp;&nbsp;"active": true,<br> &nbsp;&nbsp;"lastConnectTime": 1526979083267,<br> &nbsp;&nbsp;"lastActivityTime": 1526979083270,<br> &nbsp;&nbsp;"lastDisconnectTime": 1526978493963,<br> &nbsp;&nbsp;"lastInactivityAlarmTime": 1526978512339,<br> &nbsp;&nbsp;"inactivityTimeout": 10000<br>}</code></td>
-      </tr>code
+      </tr>
       <tr>
           <td>INACTIVITY_EVENT</td>
-          <td><b>Inactivity Event</b></td>
-          <td>Event indicating that device becomes inactive</td>
+          <td><b>不活跃事件</b></td>
+          <td>设备变为不活跃状态时产生的事件</td>
           <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type</td>
           <td>json containing device activity information, see <b>Activity Event</b> payload</td>
       </tr>
       <tr>
           <td>CONNECT_EVENT</td>
-          <td><b>Connect Event</b></td>
-          <td>Event produced when device is connected</td>
+          <td><b>连接事件</b></td>
+          <td>设备连接时产生的事件</td>
           <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type</td>
           <td>json containing device activity information, see <b>Activity Event</b> payload</td>
       </tr>
       <tr>
           <td>DISCONNECT_EVENT</td>
-          <td><b>Disconnect Event</b></td>
-          <td>Event produced when device is disconnected</td>
+          <td><b>断开事件</b></td>
+          <td>设备断开时产生的事件</td>
           <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type</td>
           <td>json containing device activity information, see <b>Activity Event</b> payload</td>
       </tr>
       <tr>
           <td>ENTITY_CREATED</td>
-          <td><b>Entity Created</b></td>
-          <td>Event produced when new entity was created in system</td>
+          <td><b>实体已创建</b></td>
+          <td>系统中创建新实体时产生的事件</td>
           <td><b>userName</b> - name of the user who created the entity,<br><b>userId</b> - the user Id</td>
           <td>json containing created entity details: <br> <code style="font-size: 12px;">{<br> &nbsp;&nbsp;"id": {<br> &nbsp;&nbsp;&nbsp;&nbsp;"entityType": "DEVICE",<br> &nbsp;&nbsp;&nbsp;&nbsp;"id": "efc4b9e0-5d0f-11e8-8559-37a7f8cdca74"<br> &nbsp;&nbsp;},<br> &nbsp;&nbsp;"createdTime": 1526918366334,<br> &nbsp;&nbsp;...<br> &nbsp;&nbsp;"name": "my-device",<br> &nbsp;&nbsp;"type": "temp-sensor"<br>}</code></td>
       </tr>
       <tr>
           <td>ENTITY_UPDATED</td>
-          <td><b>Entity Updated</b></td>
-          <td>Event produced when existing entity was updated</td>
+          <td><b>实体已更新</b></td>
+          <td>现有实体被更新时产生的事件</td>
           <td><b>userName</b> - name of the user who updated the entity,<br><b>userId</b> - the user Id</td>
           <td>json containing updated entity details, see <b>Entity Created</b> payload</td>
       </tr>
       <tr>
           <td>ENTITY_DELETED</td>
-          <td><b>Entity Deleted</b></td>
-          <td>Event produced when existing entity was deleted</td>
+          <td><b>实体已删除</b></td>
+          <td>现有实体被删除时产生的事件</td>
           <td><b>userName</b> - name of the user who deleted the entity,<br><b>userId</b> - the user Id</td>
           <td>json containing deleted entity details, see <b>Entity Created</b> payload</td>
       </tr>
       <tr>
           <td>ENTITY_ASSIGNED</td>
-          <td><b>Entity Assigned</b></td>
-          <td>Event produced when existing entity was assigned to customer</td>
+          <td><b>实体已分配</b></td>
+          <td>现有实体被分配给客户时产生的事件</td>
           <td><b>userName</b> - name of the user who performed assignment operation,<br><b>userId</b> - the user Id,<br><b>assignedCustomerName</b> - assigned customer name,<br><b>assignedCustomerId</b> - Id of assigned customer</td>
           <td>json containing assigned entity details, see <b>Entity Created</b> payload</td>
       </tr>
       <tr>
           <td>ENTITY_UNASSIGNED</td>
-          <td><b>Entity Unassigned</b></td>
-          <td>Event produced when existing entity was unassigned from customer</td>
+          <td><b>实体已取消分配</b></td>
+          <td>现有实体从客户处取消分配时产生的事件</td>
           <td><b>userName</b> - name of the user who performed unassignment operation,<br><b>userId</b> - the user Id,<br><b>unassignedCustomerName</b> - unassigned customer name,<br><b>unassignedCustomerId</b> - Id of unassigned customer</td>
           <td>json containing unassigned entity details, see <b>Entity Created</b> payload</td>
       </tr>
       <tr>
           <td>ADDED_TO_ENTITY_GROUP</td>
-          <td><b>Added to Group</b></td>
-          <td>Event produced when entity was added to <a href="/docs/{{docsPrefix}}user-guide/groups/">Entity Group</a>. This Message Type is specific to <a href="/products/thingsboard-pe/">ThingsBoard PE</a>.</td>
+          <td><b>已加入组</b></td>
+          <td>实体被加入<a href="/docs/{{docsPrefix}}user-guide/groups/">实体组</a>时产生的事件。该消息类型为 <a href="/products/thingsboard-pe/">ThingsBoard PE</a> 专有。</td>
           <td><b>userName</b> - name of the user who performed assignment operation,<br><b>userId</b> - the user Id,<br><b>addedToEntityGroupName</b> - entity group name,<br><b>addedToEntityGroupId</b> - Id of entity group</td>
           <td>empty json payload</td>
       </tr>
       <tr>
           <td>REMOVED_FROM_ENTITY_GROUP</td>
-          <td><b>Removed from Group</b></td>
-          <td>Event produced when entity was removed from <a href="/docs/{{docsPrefix}}user-guide/groups/">Entity Group</a>. This Message Type is specific to <a href="/products/thingsboard-pe/">ThingsBoard PE</a>.</td>
+          <td><b>已移出组</b></td>
+          <td>实体从<a href="/docs/{{docsPrefix}}user-guide/groups/">实体组</a>中移除时产生的事件。该消息类型为 <a href="/products/thingsboard-pe/">ThingsBoard PE</a> 专有。</td>
           <td><b>userName</b> - name of the user who performed unassignment operation,<br><b>userId</b> - the user Id,<br><b>removedFromEntityGroupName</b> - entity group name,<br><b>removedFromEntityGroupId</b> - Id of entity group</td>
           <td>empty json payload</td>
       </tr>
       <tr>
           <td>ATTRIBUTES_UPDATED</td>
-          <td><b>Attributes Updated</b></td>
-          <td>Event produced when entity attributes update was performed</td>
+          <td><b>属性已更新</b></td>
+          <td>执行实体属性更新时产生的事件</td>
           <td><b>userName</b> - name of the user who performed attributes update,<br><b>userId</b> - the user Id,<br><b>scope</b> - updated attributes scope (can be either <b>SERVER_SCOPE</b> or <b>SHARED_SCOPE</b>)</td>
           <td>key/value json with updated attributes: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"softwareVersion": "1.2.3" <br> }</code></td>
       </tr>
       <tr>
           <td>ATTRIBUTES_DELETED</td>
-          <td><b>Attributes Deleted</b></td>
-          <td>Event produced when some of entity attributes were deleted</td>
+          <td><b>属性已删除</b></td>
+          <td>实体部分属性被删除时产生的事件</td>
           <td><b>userName</b> - name of the user who deleted attributes,<br><b>userId</b> - the user Id,<br><b>scope</b> - deleted attributes scope (can be either <b>SERVER_SCOPE</b> or <b>SHARED_SCOPE</b>)</td>
           <td>json with <b>attributes</b> field containing list of deleted attributes keys: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"attributes": ["modelNumber", "serial"] <br> }</code></td>
       </tr>
       <tr>
         <td>ALARM</td>
-        <td><b>Alarm event</b></td>
-        <td>Event produced when an alarm was created, updated or deleted</td>
+        <td><b>告警事件</b></td>
+        <td>告警被创建、更新或删除时产生的事件</td>
         <td> 
             All fields from original Message Metadata
-            <br><b>isNewAlarm</b> - true if a new alram was just created
-            <br><b>isExistingAlarm</b> - true if an alarm is existing already
-            <br><b>isClearedAlarm</b> - true if an alarm was cleared
+            <br><b>isNewAlarm</b> - 若刚创建新告警则为 true
+            <br><b>isExistingAlarm</b> - 若告警已存在则为 true
+            <br><b>isClearedAlarm</b> - 若告警已清除则为 true
         </td>
         <td>json containing created alarm details: <br><code style="font-size: 12px;">
         {
@@ -297,8 +294,8 @@ List of the predefined Message Types is presented in the following table:
       </tr>
       <tr>
         <td>ALARM_ASSIGNED</td>
-        <td><b>Alarm Assigned</b></td>
-        <td>Event produced when an alarm was assigned to some user</td>
+        <td><b>告警已分配</b></td>
+        <td>告警被分配给某用户时产生的事件</td>
         <td> 
             All fields from original Message Metadata
             <br><b>entityName</b> - name of alarm
@@ -314,8 +311,8 @@ List of the predefined Message Types is presented in the following table:
       </tr>
       <tr>
         <td>ALARM_UNASSIGNED</td>
-        <td><b>Alarm Unassigned</b></td>
-        <td>Event produced when an alarm was unassigned from user</td>
+        <td><b>告警已取消分配</b></td>
+        <td>告警从用户处取消分配时产生的事件</td>
         <td> 
             All fields from original Message Metadata
             <br><b>entityName</b> - name of alarm
@@ -331,8 +328,8 @@ List of the predefined Message Types is presented in the following table:
       </tr>
       <tr>
         <td>COMMENT_CREATED</td>
-        <td><b>Comment Created</b></td>
-        <td>Event produced when an alarm comment was created</td>
+        <td><b>评论已创建</b></td>
+        <td>告警评论被创建时产生的事件</td>
         <td> 
             All fields from original Message Metadata
             <br><b>userId</b> - user id
@@ -347,8 +344,8 @@ List of the predefined Message Types is presented in the following table:
       </tr>
       <tr>
         <td>COMMENT_UPDATED</td>
-        <td><b>Comment Updated</b></td>
-        <td>Event produced when an alarm comment was updated</td>
+        <td><b>评论已更新</b></td>
+        <td>告警评论被更新时产生的事件</td>
         <td> 
             All fields from original Message Metadata
             <br><b>userId</b> - user id
@@ -363,211 +360,209 @@ List of the predefined Message Types is presented in the following table:
       </tr>
       <tr>
           <td>REST_API_REQUEST</td>
-          <td><b>REST API Request to Rule Engine</b></td>
-          <td>Event produced when user executes REST API call</td>
+          <td><b>发送至规则引擎的 REST API 请求</b></td>
+          <td>用户执行 REST API 调用时产生的事件</td>
           <td><b>requestUUID</b> - the unique request id,<br><b>expirationTime</b> - the expiration time of the request</td>
           <td>json with request payload</td>
       </tr>
    </tbody>
 </table>
  
-## Rule node types
+## 规则节点类型
 
-All available rule nodes are grouped in correspondence with their nature:
+所有可用规则节点按其性质分组：
 
-  * [**Filter nodes**](/docs/user-guide/rule-engine-2-0/nodes/filter/){:target="_blank"} are used for message filtering and routing
-  * [**Enrichment nodes**](/docs/user-guide/rule-engine-2-0/nodes/enrichment/){:target="_blank"} are used to enrich message with information stored in the database
-  * [**Transformation nodes**](/docs/user-guide/rule-engine-2-0/nodes/transformation/){:target="_blank"} are used for changing message fields such as originator, type, data, and metadata
-  * [**Action nodes**](/docs/user-guide/rule-engine-2-0/nodes/action/){:target="_blank"} are used to execute various actions based on the message
-  * [**External nodes**](/docs/user-guide/rule-engine-2-0/nodes/external/){:target="_blank"} are used to interact with external systems
-  * [**Flow nodes**](/docs/user-guide/rule-engine-2-0/nodes/flow/){:target="_blank"} are used to control message flow between rule chains and interact with queues
-  * [**Analytics nodes**](/docs/user-guide/rule-engine-2-0/nodes/analytics/){:target="_blank"} are used to aggregate data
+  * [**过滤节点**](/docs/user-guide/rule-engine-2-0/nodes/filter/){:target="_blank"} — 用于消息过滤与路由
+  * [**丰富节点**](/docs/user-guide/rule-engine-2-0/nodes/enrichment/){:target="_blank"} — 用数据库中的信息丰富消息
+  * [**转换节点**](/docs/user-guide/rule-engine-2-0/nodes/transformation/){:target="_blank"} — 修改消息字段，如来源、类型、数据和元数据
+  * [**动作节点**](/docs/user-guide/rule-engine-2-0/nodes/action/){:target="_blank"} — 根据消息执行各类操作
+  * [**外部节点**](/docs/user-guide/rule-engine-2-0/nodes/external/){:target="_blank"} — 与外部系统交互
+  * [**流控节点**](/docs/user-guide/rule-engine-2-0/nodes/flow/){:target="_blank"} — 控制规则链间消息流及与队列交互
+  * [**分析节点**](/docs/user-guide/rule-engine-2-0/nodes/analytics/){:target="_blank"} — 聚合数据
 
-## Configuration
+## 配置
 
-Each Rule Node may have specific configuration parameters that depend on the Rule Node Implementation. 
-For example, "Filter - script" rule node is configurable via custom JS function that process incoming data. 
-"External - send email" node configuration allows to specify mail server connection parameters.
+每个规则节点可有依赖其实现的特定配置参数。
+例如，「Filter - script」规则节点可通过处理入站数据的自定义 JS 函数配置。
+「External - send email」节点可配置邮件服务器连接参数。
   
-Rule Node configuration window may be opened by double-clicking on the node in the Rule Chain editor:    
+在规则链编辑器中双击节点可打开规则节点配置窗口：    
   
 ![image](/images/user-guide/rule-engine-2-0/rule-node-configuration.png)
 
-### Test script functions
+### 测试脚本函数
 
-Some rule nodes have specific UI feature that allow users to test TBEL/JS functions. 
-Once you click on the **Test Filter Function** you will see the JS Editor that allows you to substitute input parameters and verify the output of the function.
+部分规则节点提供用于测试 TBEL/JS 函数的 UI。
+点击 **Test Filter Function** 将打开 JS 编辑器，可替换输入参数并验证函数输出。
     
 ![image](/images/user-guide/rule-engine-2-0/rule-node-test-function.png)
 
-You can define:
+可配置：
 
-- **Message Type** in the top left field.
-- **Message payload** in the left Message section.
-- **Metadata** in right Metadata section.
-- Actual **TBEL/JS script** in Filter section.
+- 左上角字段的 **Message Type**。
+- 左侧 Message 区域的 **Message payload**。
+- 右侧 Metadata 区域的 **Metadata**。
+- Filter 区域中的实际 **TBEL/JS script**。
 
-After pressing **Test** output will be returned in right **Output** section.
+点击 **Test** 后，输出将在右侧 **Output** 区域显示。
 
-## Rule Engine statistics
+## 规则引擎统计
 
-ThingsBoard Team have prepared the "default" dashboard for Rule Engine statistics. 
-This dashboard is automatically loaded for each tenant. 
-You may access it by navigating to "Api Usage"->"View statistics" (see screen below).
+ThingsBoard 团队已准备规则引擎的「默认」仪表板。
+该仪表板会为每个租户自动加载。
+可通过「Api Usage」->「View statistics」访问（见下图）。
 
 {% include images-gallery.html imageCollection="open-statistics"  %}
 
-The statistics collection is enabled by default and is controlled via configuration properties.
+统计收集默认启用，由配置属性控制。
 
-You may notice insights about errors in processing and what causes them on the dashbaord below: 
+您可在下方仪表板中查看处理错误及其原因的洞察：
 
 {% include images-gallery.html imageCollection="view-statistics"  %}
 
-## Debugging
+## 调试
 
-ThingsBoard provides ability to review incoming and outgoing messages for each Rule Node.
-To enable debug, user need to ensure that "Debug mode" checkbox is selected in the main configuration window 
-(see first image in the [Configuration](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#configuration){:target="_blank"} section). 
+ThingsBoard 支持查看每个规则节点的入站和出站消息。
+要启用调试，需在主配置窗口中勾选「Debug mode」（见[配置](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#configuration){:target="_blank"}节首图）。
 
-Once debug is enabled, user is able to see incoming and outgoing messages info as long as corresponding relation types.
-See image below for a sample debug messages view:
+调试启用后，可查看入站、出站消息及对应关系类型。
+下图示例为调试消息视图：
   
 ![image](/images/user-guide/rule-engine-2-0/rule-node-debug.png)  
 
-## Managing rule chains
+## 管理规则链
 
-Rule chains page displays a table of configured tenant rule chains. From here, you can create, export/import, delete, and mark the rule chain as root.
+规则链页面展示已配置的租户规则链列表。可在此创建、导出/导入、删除规则链或将规则链设为根。
 
-### Create rule chain
+### 创建规则链
 
-To add a new rule chain, you should:
+要添加新规则链，请执行：
 
 {% include images-gallery.html imageCollection="create-rule-chain" showListImageTitles="true" %}
 
-### Import/Export
+### 导入/导出
 
-You are able to [export](#export-rule-chain) your rule chain to а JSON file and [import](#import-rule-chain) it to the same or another ThingsBoard instance.
+可将规则链[导出](#export-rule-chain)为 JSON 文件，并[导入](#import-rule-chain)到当前或其他 ThingsBoard 实例。
 
-#### Export rule chain
+#### 导出规则链
 
-In order to export rule chain, you should:
+要导出规则链，请执行：
 
-- Go to the "<b>Rule chains</b>" page.
-- Click the "<b>Export rule chain</b>" icon in the row of the desired rule chain. 
+- 进入「<b>规则链</b>」页面。
+- 点击目标规则链行的「<b>导出规则链</b>」图标。
  
-A JSON file containing the configuration of that rule chain will be saved to your computer.
+包含该规则链配置的 JSON 文件将保存到本地。
 
 {% include images-gallery.html imageCollection="export-rule-chain" %}
 
-#### Import rule chain
+#### 导入规则链
 
-To import rule chain from а JSON file, you should:
+要从 JSON 文件导入规则链，请执行：
 
 {% include images-gallery.html imageCollection="import-rule-chain" showListImageTitles="true" %}
 
 {% capture difference %}
-**Note 1:**
+**注意 1：**
 <br>
-All imported rule chain are **not root** rule chain.
+所有导入的规则链均**不是**根规则链。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% capture difference %}
-**Note 2:**
+**注意 2：**
 <br>
-If imported rule chain contains references to other rule chains (via **Rule Chain** node), then you will need to update those references before saving rule chain.
+若导入的规则链引用其他规则链（通过 **Rule Chain** 节点），保存前需更新这些引用。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Make rule chain root
+### 设为根规则链
 
-To make rule chain root, you should:
+要将规则链设为根，请执行：
 
 {% include images-gallery.html imageCollection="make-rule-chain-as-root" showListImageTitles="true" %}
 
-### Delete rule chain
+### 删除规则链
 
-You can delete a rule chain using one of the following ways:
+可通过以下任一方式删除规则链：
 
-First way:
+第一种方式：
 
 {% include images-gallery.html imageCollection="delete-rule-chain-1" showListImageTitles="true" %}
 
-Second way:
+第二种方式：
 
 {% include images-gallery.html imageCollection="delete-rule-chain-2" showListImageTitles="true" %}
 
-You can also delete multiple rule chains at once.
+也可一次删除多条规则链。
 
 {% include images-gallery.html imageCollection="delete-rule-chain-3" showListImageTitles="true" %}
 
 {% unless docsPrefix contains "paas/" %}
-## Architecture
+## 架构
 
-To learn more about internals of the Rule Engine, see [architecture](/docs/{{docsPrefix}}reference/){:target="_blank"} page.
+了解规则引擎内部实现，请参阅[架构](/docs/{{docsPrefix}}reference/){:target="_blank"}页面。
 
 {% endunless %}
-## Custom REST API calls to Rule Engine
+## 向规则引擎发送自定义 REST API 调用
 
 {% assign feature = "Custom Rule Engine REST API calls" %}{% include templates/pe-feature-banner.md %}
 
-ThingsBoard provides API to send custom REST API calls to the Rule Engine, process the payload of the request and return result of the processing in response body. 
-This is useful for a number of use cases. For example:
+ThingsBoard 提供将自定义 REST API 调用发送至规则引擎的 API，处理请求负载并在响应体中返回处理结果。
+适用于多种场景，例如：
  
- - extend existing REST API of the platform with custom API calls;
- - enrich REST API call with the attributes of device/asset/customer and forward to external system for complex processing;
- - provide custom API for your custom widgets.
+ - 通过自定义 API 扩展平台现有 REST API；
+ - 用设备/资产/客户属性丰富 REST API 调用并转发到外部系统做复杂处理；
+ - 为自定义部件提供自定义 API。
  
-To execute the REST API call, you may use rule-engine-controller [REST APIs](/docs/{{docsPrefix}}reference/rest-api/){:target="_blank"}: 
+要执行 REST API 调用，可使用 rule-engine-controller 的 [REST APIs](/docs/{{docsPrefix}}reference/rest-api/){:target="_blank"}： 
  
 ![image](/images/user-guide/rule-engine-2-0/rest-api.png) 
 
-> <b>Note</b>: the entity id you have specified in the call will be the originator of Rule Engine message. If you do not specify the entity id parameters, your user entity will become an originator of the message.
+> <b>注意</b>：调用中指定的实体 ID 将成为规则引擎消息的来源。若不指定实体 ID 参数，当前用户实体将作为消息来源。
 
-## Tutorials
+## 教程
 
-ThingsBoard authors have prepared several tutorials to help you get started with designing rule chains by example:
+ThingsBoard 提供若干教程，帮助通过示例设计规则链：
 
-  * [**Transform incoming messages from device**](/docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/){:target="_blank"} 
-  * [**Transform incoming messages using previous messages from device**](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/) {:target="_blank"}
-  * [**Create and clear alarms on incoming device messages**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/){:target="_blank"}
-  * [**Send emails to customer on device alarm**](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) {:target="_blank"}
-  * [**Send messages between related devices**](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/){:target="_blank"}
+  * [**转换来自设备的入站消息**](/docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/){:target="_blank"} 
+  * [**使用设备先前记录转换入站消息**](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/) {:target="_blank"}
+  * [**在入站设备消息时创建和清除告警**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/){:target="_blank"}
+  * [**设备告警时向客户发送邮件**](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) {:target="_blank"}
+  * [**在关联设备间发送消息**](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/){:target="_blank"}
   
-See more tutorials [here](/docs/{{docsPrefix}}guides/){:target="_blank"}.
+更多教程见[此处](/docs/{{docsPrefix}}guides/){:target="_blank"}。
 
 {% unless docsPrefix contains "paas/" %}
 
-## Troubleshooting
+## 故障排查
 
-If you are using Kafka queue for processing messages, ThingsBoard provides the ability to monitor if the rate of pushing messages to the Kafka is faster than rate of consuming and processing them (in such case you will have a growing latency for message processing).
-To enable this functionality, you need to ensure that Kafka consumer-stats are enabled (see <b>queue.kafka.consumer-stats</b> section of the [Configuration properties](/docs/user-guide/install/{{docsPrefix}}config/#thingsboard-core-settings){:target="_blank"})
+若使用 Kafka 队列处理消息，ThingsBoard 可监控消息推送到 Kafka 的速率是否高于消费与处理速率（若如此，消息处理延迟将增加）。
+要启用该功能，需开启 Kafka consumer-stats（参见[配置属性](/docs/user-guide/install/{{docsPrefix}}config/#thingsboard-core-settings){:target="_blank"}的 <b>queue.kafka.consumer-stats</b> 节）。
 
-Once Kafka consumer-stats are enabled, you will see logs (see [Troubleshooting](/docs/user-guide/troubleshooting/#logs){:target="_blank"}) about offset lag for consumer groups (there are consumer-group logs for tb-core, tb-rule-engine and all transport services).
+启用 Kafka consumer-stats 后，可在日志中看到消费组的 offset lag（见[故障排查](/docs/user-guide/troubleshooting/#logs){:target="_blank"}）（tb-core、tb-rule-engine 及所有传输服务均有消费组日志）。
 
-Here's an example of the log message:
+日志示例：
 
 ```bash
 2021-03-19 15:01:59,794 [kafka-consumer-stats-11-thread-1] INFO  o.t.s.q.k.TbKafkaConsumerStatsService - [re-Main-consumer] Topic partitions with lag: [[topic=[tb_rule_engine.main.0], partition=[0], committedOffset=[5413], endOffset=[5418], lag=[5]]].
 ```
 
-From this message we can see that there are 5 (5418 - 5413 = 5) messages pushed to the <b>Main</b> queue (<b>tb_rule_engine.main.0</b> Kafka topic) but not yet processed. 
+由此可知有 5 条（5418 - 5413 = 5）消息已推送到 <b>Main</b> 队列（<b>tb_rule_engine.main.0</b> Kafka 主题）但尚未处理。
 
-In general the logs have the following structure:
+日志一般结构如下：
 
 ```bash
 TIME [STATS_PRINTING_THREAD_NAME] INFO  o.t.s.q.k.TbKafkaConsumerStatsService - [CONSUMER_GROUP_NAME] Topic partitions with lag: [[topic=[KAFKA_TOPIC], partition=[KAFKA_TOPIC_PARTITION], committedOffset=[LAST_PROCESSED_MESSAGE_OFFSET], endOffset=[LAST_QUEUED_MESSAGE_OFFSET], lag=[LAG]],[topic=[ANOTHER_TOPIC], partition=[], committedOffset=[], endOffset=[], lag=[]],...].
 ```
 
-Where:
-- `CONSUMER_GROUP_NAME` - name of the consumer group which is processing messages (could be any of the rule-engine queues, core queue etc)
-- `KAFKA_TOPIC` - name of the exact Kafka topic
-- `KAFKA_TOPIC_PARTITION` - number of the topic's partition
-- `LAST_PROCESSED_MESSAGE_OFFSET` - the sequence number of the last message which was processed by the consumer (last acknowledged message in the Rule Engine etc)
-- `LAST_QUEUED_MESSAGE_OFFSET` - the sequence number of the last message that was successfully pushed to the Kafka topic
-- `LAG` - the amount of unprocessed messages
+其中：
+- `CONSUMER_GROUP_NAME` — 正在处理消息的消费组名称（可为规则引擎队列、core 队列等）
+- `KAFKA_TOPIC` — Kafka 主题名称
+- `KAFKA_TOPIC_PARTITION` — 主题分区号
+- `LAST_PROCESSED_MESSAGE_OFFSET` — 消费端已处理的最后一条消息序号（规则引擎中最后确认的消息等）
+- `LAST_QUEUED_MESSAGE_OFFSET` — 已成功推送到 Kafka 主题的最后一条消息序号
+- `LAG` — 未处理消息数量
 
-
-**NOTE:** Logs about consumer lag are printed only if there is a lag for this consumer group.
+**注意：**仅当该消费组存在 lag 时才会打印相关日志。
 
 {% endunless %}

@@ -2,19 +2,19 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Two-factor authentication
-description: Two-factor authentication using ThingsBoard
+title: 双因素认证
+description: 使用 ThingsBoard 进行双因素认证
 
 2fa-enforce-1:
     0:
         image: /images/user-guide/two-factor-authentication/2fa-enforce-1-pe.png
-        title: 'Log in as a System administrator.<br>- Navigate to <b>Security</b> &#8702; <b>Two-factor authentication</b> (1).<br>- Enable <b>Enforce two-factor authentication</b> (2).'
+        title: '以系统管理员身份登录。<br>- 进入 <b>安全</b> &#8702; <b>双因素认证</b>（1）。<br>- 启用 <b>强制双因素认证</b>（2）。'
     1:
         image: /images/user-guide/two-factor-authentication/2fa-enforce-2-pe.png
-        title: '- Select the user group for which 2FA should be enforced (3).'
+        title: '- 选择需要强制执行 2FA 的用户组（3）。'
     2:
         image: /images/user-guide/two-factor-authentication/2fa-enforce-3-pe.png
-        title: 'Click <b>Save</b> (4).'
+        title: '点击 <b>保存</b>（4）。'
 
 2fa-enforce-2:
     0:

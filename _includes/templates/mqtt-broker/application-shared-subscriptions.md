@@ -1,6 +1,5 @@
-
-The construction of the topic name is determined by mapping the MQTT topic filter to the corresponding Kafka topic. 
-This mapping is achieved by following a specific naming convention (MQTT topic filter -> Kafka topic).
+主题名称的构建方式是将 MQTT 主题过滤器映射到对应的 Kafka 主题。
+通过遵循特定的命名约定（MQTT 主题过滤器 -> Kafka 主题）实现该映射。
 
 ```
 test/topic -> tbmq.msg.app.shared.test.topic
@@ -8,23 +7,23 @@ test/# -> tbmq.msg.app.shared.test.mlw
 test/+ -> tbmq.msg.app.shared.test.slw
 ```
 
-where
-* `tbmq.msg.app.shared.` is added as a prefix
-* `/` is replaced by `.`
-* `#` is replaced by `mlw` (multi-lvl wildcard)
-* `+` is replaced by `slw` (single-lvl wildcard)
+其中
+* `tbmq.msg.app.shared.` 作为前缀添加
+* `/` 替换为 `.`
+* `#` 替换为 `mlw`（多级通配符）
+* `+` 替换为 `slw`（单级通配符）
 
-If the MQTT topic filter contains any special characters not mentioned earlier (other than alphanumeric characters), 
-the hash derived from the topic filter will be utilized to create the Kafka topic. 
-This approach ensures that the resulting Kafka topic remains valid and adheres to the necessary naming conventions.
+若 MQTT 主题过滤器包含上述未提及的任何特殊字符（除字母数字外），
+将使用主题过滤器派生的哈希创建 Kafka 主题。
+此方式可确保生成的 Kafka 主题有效且符合必要的命名约定。
 
 ```
 tbmq.msg.app.shared.$TOPIC_FILTER_HASH
 ```
 
-The behavior described above can be regulated by the `TB_APP_PERSISTED_MSG_SHARED_TOPIC_VALIDATION` property.
-By default, this variable is enabled, meaning that the validation process is active, ensuring proper topic creation.
-However, if you choose to disable this validation by setting the variable to _false_,
-the system will no longer create Kafka topics for shared subscriptions having topic filters with special characters, 
-resulting in a failure to create the corresponding topics.
-It's important to consider this when configuring your environment and handling topic filters with special characters.
+上述行为可通过 `TB_APP_PERSISTED_MSG_SHARED_TOPIC_VALIDATION` 属性进行调控。
+默认情况下该变量已启用，表示验证流程处于激活状态，确保正确创建主题。
+但若将该变量设为 _false_ 以禁用验证，
+系统将不再为包含特殊字符的共享订阅创建 Kafka 主题，
+导致无法创建对应主题。
+配置环境和处理包含特殊字符的主题过滤器时请务必注意这一点。

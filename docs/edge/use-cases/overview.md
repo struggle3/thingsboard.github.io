@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-edge
-title: ThingsBoard Edge Use Cases
+title: ThingsBoard Edge使用场景
 
 ---
 

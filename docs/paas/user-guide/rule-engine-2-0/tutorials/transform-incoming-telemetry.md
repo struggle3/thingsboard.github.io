@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: Transform incoming telemetry
-description: Transform incoming telemetry
+title: 转换入库遥测
+description: 转换入库遥测
 redirect_to: "/docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/"
 ---
 

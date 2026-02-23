@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Unauthorized clients
-description: Unauthorized clients management
+title: 未授权客户端
+description: 未授权客户端管理
 
 unauthorized-clients:
   0:

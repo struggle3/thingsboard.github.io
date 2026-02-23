@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect RN172plus series to ThingsBoard?
-category: Other devices
+title: 如何将 RN172plus series 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [Wi-Fi, MODBUS TCP, HTTP, HTTPS]
 vendor: Radionode
 deviceImageFileName: rn172wcd.png

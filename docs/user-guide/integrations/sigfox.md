@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: SigFox Integration
-description: SigFox integration guide
+title: SigFox 集成
+description: SigFox 集成指南
 
 ---
 {% assign docsPrefix = "pe/" %}

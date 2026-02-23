@@ -1,14 +1,10 @@
-There are situations when a BACnet device has a lot of objects, and you want to read all the objects of the device 
-without having to manually add each object to the connector configuration. Or maybe you don't know what objects are in 
-the device and want to read all the objects automatically. The BACnet connector supports this functionality and allows 
-you to read all the objects of the device by easily configuring just one parameter.
+当 BACnet 设备有许多对象，您希望读取设备的所有对象而无需在连接器配置中手动添加每个对象时，或当您不知道设备中有哪些对象并希望自动读取所有对象时，BACnet 连接器支持此功能，允许您通过轻松配置一个参数即可读取设备的所有对象。
 
-Let's look at an example of how to properly configure reading all device objects.
+让我们看一个如何正确配置读取所有设备对象的示例。
 
-In order to read all the device objects, you need to decide where exactly the values of these objects will be stored: 
-in `telemetry` or `attributes`. Depending on this, you need to put `*` in the corresponding section.
+要读取所有设备对象，您需要决定这些对象的值将存储在哪里：`telemetry` 或 `attributes`。根据此选择，需在相应部分放入 `*`。
 
-In our case, we will store all objects in time series, so the device configuration will look like this:
+在本例中，我们将把所有对象存储在时序中，因此设备配置如下：
 
 ```json
 {
@@ -44,11 +40,8 @@ In our case, we will store all objects in time series, so the device configurati
 ```
 {:.copy-code}
 
-As you can see from the configuration above, we have put `*` in the `timeseries` section, which means that all device 
-objects will be saved in the telemetry. In the `attributes` section, we have not put `*`, so the attributes will not 
-be read.
+从上述配置可以看出，我们在 `timeseries` 部分放入了 `*`，表示所有设备对象将保存到遥测中。在 `attributes` 部分我们没有放入 `*`，因此不会读取属性。
 
-After saving the changes and starting the connector, you can see that the corresponding device has been added to the 
-platform, and its telemetry has started to fill with all the device objects:
+保存更改并启动连接器后，您可以看到对应设备已添加到平台，其遥测开始填充所有设备对象：
 
 ![image](/images/gateway/bacnet-connector/examples/device-objects-overview.png)

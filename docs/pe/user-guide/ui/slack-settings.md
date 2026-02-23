@@ -2,46 +2,46 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Slack Settings
-description: ThingsBoard IoT platform Slack settings
+title: Slack 设置
+description: ThingsBoard IoT 平台 Slack 设置
 slackProviderSettings:
     0:
         image: /images/user-guide/ui/slack/create-slack-api-token-1.png
-        title: 'In "How to quickly get and use a Slack API token" page, scroll below and find "Create a pre-configured app";'
+        title: '在"How to quickly get and use a Slack API token"页面向下滚动，找到"Create a pre-configured app"；'
     1:
         image: /images/user-guide/ui/slack/create-slack-api-token-2.png
-        title: 'Click "Create app" button;'
+        title: '点击"Create app"按钮；'
     2:
         image: /images/user-guide/ui/slack/create-slack-api-token-3.png
-        title: 'In a new window, select your workspase from drop-down menu, then click "Next";'
+        title: '在新窗口中从下拉菜单中选择您的工作区，然后点击"Next"；'
     3:
         image: /images/user-guide/ui/slack/create-slack-api-token-4.png
-        title: 'Review summary and click "Create" button to create your app;'
+        title: '查看摘要并点击"Create"按钮创建应用；'
     4:
         image: /images/user-guide/ui/slack/create-slack-api-token-5.png
-        title: 'Welcome to your app`s configurations. Click "Go it";'
+        title: '欢迎使用应用配置。点击"Go it"；'
     5:
         image: /images/user-guide/ui/slack/create-slack-api-token-6.png
-        title: 'Next step - install your app to your Slack workspace. Click "Install to Workspace" button;'
+        title: '下一步——将应用安装到Slack工作区。点击"Install to Workspace"按钮；'
     6:
         image: /images/user-guide/ui/slack/create-slack-api-token-7.png
-        title: 'App is requesting permission to access your Slack workspace. Click "Allow";'
+        title: '应用正在请求访问Slack工作区的权限。点击"Allow"；'
     7:
         image: /images/user-guide/ui/slack/create-slack-api-token-8.png
-        title: 'Success! Your app is created. Now, navigate to "OAuth & Permissions" page;'
+        title: '成功！您的应用已创建。现在导航至"OAuth & Permissions"页面；'
     8:
         image: /images/user-guide/ui/slack/create-slack-api-token-9.png
-        title: 'Copy "Bot User OAuth Token". This is the "Slack API token" we need.'
+        title: '复制"Bot User OAuth Token"。这就是我们需要的"Slack API token"。'
 
 thingsboardSystemAdminSettings:
     0:
         image: /images/user-guide/ui/slack/add-slack-api-token-sysadmin-1-pe.png
-        title: 'Login to your ThingsBoard UI as a system administrator. Navigate to "Settings" page, "Notification" tab. In "Slack settings" window paste copied Slack API token to "Slack api token" row and click "Save".'
+        title: '以系统管理员身份登录ThingsBoard UI。导航至"Settings"页面、"Notification"选项卡。在"Slack settings"窗口中将复制的Slack API token粘贴到"Slack api token"行并点击"Save"。'
 
 thingsboardTenantAdminSettings:
     0:
         image: /images/user-guide/ui/slack/add-slack-api-token-tenant-admin-1-pe.png
-        title: 'Login to your ThingsBoard UI as a tenant administrator. Navigate to "Settings" page, "Notification" tab. In "Slack settings" window paste copied Slack API token to "Slack api token" row and click "Save".'
+        title: '以租户管理员身份登录ThingsBoard UI。导航至"Settings"页面、"Notification"选项卡。在"Slack settings"窗口中将复制的Slack API token粘贴到"Slack api token"行并点击"Save"。'
 
 
 

@@ -1,44 +1,43 @@
-To connect your device, you'll first need to get its credentials. 
-While {% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}**ThingsBoard Edge**{% else %}**ThingsBoard**{% endif %} supports a variety of device credentials, for this guide, 
-we will use the default auto-generated credentials, which is an access token.  
+连接设备前，需先获取其凭证。  
+{% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}**ThingsBoard Edge**{% else %}**ThingsBoard**{% endif %} 支持多种设备凭证类型，本指南使用默认自动生成的访问令牌（access token）。  
 
 {% assign provisionDeviceCE = '
     ===
         image: /images/helloworld/getting-started-ce/hello-world-2-1-connect-device-1-ce.png,
-        title: Click on the device row in the table to open device details.
+        title: 点击设备列表中的行以打开设备详情。
     ===
         image: /images/helloworld/getting-started-ce/hello-world-2-1-connect-device-2-ce.png,
-        title: Click "**Copy access token**". The token will be copied to your clipboard. Please save it in a safe place.
+        title: 点击「**复制访问令牌**」。令牌将复制到剪贴板，请妥善保存。
     '
 %}
 
 {% assign provisionDevicePE = '
     ===
         image: /images/helloworld/getting-started-pe/hello-world-2-1-connect-device-1-pe.png,
-        title: Click on the device row in the table to open device details.
+        title: 点击设备列表中的行以打开设备详情。
     ===
         image: /images/helloworld/getting-started-pe/hello-world-2-1-connect-device-2-pe.png,
-        title: Click "**Copy access token**". The token will be copied to your clipboard. Please save it in a safe place.
+        title: 点击「**复制访问令牌**」。令牌将复制到剪贴板，请妥善保存。
     '
 %}
 
 {% assign provisionDeviceEdgeCE = '
     ===
         image: /images/edge/config/general/connect-device-1-ce.webp,
-        title: Click on the device to open device details.
+        title: 点击设备以打开设备详情。
     ===
         image: /images/edge/config/general/connect-device-2-ce.webp,
-        title: Click **"Copy access token"**. The token will be copied to your clipboard. Please save it in a safe place.
+        title: 点击 **「复制访问令牌」**。令牌将复制到剪贴板，请妥善保存。
 '
 %}
 
 {% assign provisionDeviceEdgePE = '
     ===
         image: /images/edge/config/general/connect-device-1-pe.webp,
-        title: Click on the device to open device details.
+        title: 点击设备以打开设备详情。
     ===
         image: /images/edge/config/general/connect-device-2-pe.webp,
-        title: Click **"Copy access token"** button. The token will be copied to your clipboard. Please save it in a safe place.
+        title: 点击 **「复制访问令牌」** 按钮。令牌将复制到剪贴板，请妥善保存。
 '
 %}
 

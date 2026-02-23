@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Geofencing calculated field
-description: For evaluating real-time GPS coordinates against defined zones to track entity presence (INSIDE/OUTSIDE) and detect zone transition events (ENTERED/LEFT).
+title: 地理围栏计算字段
+description: 根据定义的区域评估实时GPS坐标，跟踪实体位置（INSIDE/OUTSIDE）并检测区域转换事件（ENTERED/LEFT）。
 breadcrumbs: "true"
 breadcrumbs-steps: "1"
 hidetoc: "true"

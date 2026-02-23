@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Asus Tinker Board S to ThingsBoard?
-category: Single-board computers
+title: 如何将 Asus Tinker Board S 连接至 ThingsBoard？
+category: 单板计算机
 chip: Rockchip RK3288-C
 connectivity: [HTTP, MQTT, WIFI, Bluetooth]
 vendor: ASUS

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect BeagleBone Green Wireless to ThingsBoard?"
+title: "如何将BeagleBone Green Wireless连接到ThingsBoard？"
 redirect_to: "/device-library/ce/beaglebone-green-wireless/"
 ---

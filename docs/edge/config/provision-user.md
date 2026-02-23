@@ -1,32 +1,32 @@
 ---
 layout: docwithnav-edge
-title: User Access management
-description: User Access management
+title: 用户访问管理
+description: 用户访问管理
 
 ---
 
 ![image](/images/coming-soon.jpg)
 
-### User Access management
+### 用户访问管理
 
-ThingsBoard Edge user access managements depends on the cloud version.
+ThingsBoard Edge 用户访问管理取决于云版本。
  
-#### ThingsBoard CE User Access management
-##### Tenant Administrator users
-Once ThingsBoard Edge connected to ThingsBoard CE cloud every tenant administrator user will be transferred to edge and any of these users will be able to login into ThingsBoard Edge UI.
+#### ThingsBoard CE 用户访问管理
+##### 租户管理员用户
+ThingsBoard Edge 连接至 ThingsBoard CE 云端后，每位租户管理员用户将同步至Edge，任一用户均可登录 ThingsBoard Edge UI。
 
-Tenant Administrator user is able to create or remove devices on the edge. 
+租户管理员用户可在Edge上创建或删除设备。 
 
-Tenant Administrator has **read** access to all other entities that are available on the edge.   
+租户管理员对Edge上可用的所有其他实体具有**只读**访问权限。   
 
-##### Customer users
-If **Edge** entity has been assigned to customer on the cloud then every customer user entity will be transferred to edge and any of these users will be able to login into ThingsBoard Edge UI.
+##### 客户用户
+若云端已将**Edge**实体分配给客户，则每位客户用户实体将同步至Edge，任一用户均可登录 ThingsBoard Edge UI。
 
-Customer user is able to view devices on the edge he has access to on the cloud. 
+客户用户可查看其在云端有权限访问的Edge设备。 
 
-Customer user has **read** access to all other entities that are assigned to edge and that he has access on the cloud.   
+客户用户对已分配至Edge且其在云端有权限访问的所有其他实体具有**只读**访问权限。   
 
-### Next Steps
+### 下一步
 
 {% assign currentGuide = "ProvisionUserFromCloudToEdge" %}
 {% assign docsPrefix = "edge/" %}

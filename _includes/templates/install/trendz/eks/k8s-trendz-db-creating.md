@@ -1,11 +1,11 @@
-Edit “trendz/trendz-secret.yml” and replace YOUR_RDS_ENDPOINT_URL and YOUR_RDS_PASSWORD and apply Kubernetes Job:
+编辑 “trendz/trendz-secret.yml” ，将 YOUR_RDS_ENDPOINT_URL 和 YOUR_RDS_PASSWORD 替换后执行 Kubernetes Job：
 ```text
 kubectl apply -f ./trendz/trendz-secret.yml
 kubectl apply -f ./trendz/trendz-create-db.yml
 ```
 {: .copy-code}
 
-You can see logs if you run the next command:
+执行以下命令可查看日志：
 ```text
 kubectl logs job/trendz-create-db -n thingsboard
 ```

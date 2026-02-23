@@ -1,14 +1,14 @@
-We recommend deploying Bitnami Kafka from Helm. For that, review the `kafka` folder.
+建议使用 Helm 部署 Bitnami Kafka。请先查看 `kafka` 目录。
 
 ```bash
 ls kafka/
 ```
 {: .copy-code}
 
-You can find there _default-values-kafka.yml_ file - default values downloaded from [Bitnami artifactHub](https://artifacthub.io/packages/helm/bitnami/kafka). And _values-kafka.yml_ file with modified values.
-We recommend keeping the first file untouched and making changes to the second one only. This way the upgrade process to the next version will go more smoothly as it will be possible to see diff.
+其中可找到 _default-values-kafka.yml_ 文件——从 [Bitnami artifactHub](https://artifacthub.io/packages/helm/bitnami/kafka) 下载的默认值。以及修改后的 _values-kafka.yml_ 文件。
+建议保持第一个文件不变，仅修改第二个文件。这样升级到下一版本时更容易通过 diff 看出变更。
 
-To add the Bitnami helm repo:
+添加 Bitnami helm 仓库：
 
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -16,11 +16,11 @@ helm repo update
 ```
 {: .copy-code}
 
-To install Bitnami Kafka execute the following command:
+安装 Bitnami Kafka 时执行以下命令：
 
 ```bash
 helm install kafka -f kafka/values-kafka.yml bitnami/kafka --version 29.3.4
 ```
 {: .copy-code}
 
-Wait up to several minutes until Kafka pods are up and running.
+等待几分钟直至 Kafka Pod 启动并运行。

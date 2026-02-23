@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-edge
-title: "How to install ThingsBoard Edge on Raspberry Pi 4?"
+title: "如何在Raspberry Pi 4上安装ThingsBoard Edge？"
 redirect_to: "/device-library/edge/raspberry-pi-4/"
 ---

@@ -1,95 +1,93 @@
-## Reserved RPC Methods
+## 保留 RPC 方法
 
-`GET` and `SET` RPC methods are out of the box, so you don’t need to configure them manually.
+`GET` 和 `SET` RPC 方法为开箱即用，无需手动配置。
 
-Suppose we have a device `SN-001` that tracks the light level of the room and is connected to ThingsBoard via an MQTT Gateway. 
-We want to send an RPC command to know the current state of the light level with two options: in the first case we want to get a response back, and in the second case we don't need a response.
-Additionally, we will update the room light level by sending a command without expecting a response.
+假设有设备 `SN-001` 监测室内光照，并通过 MQTT 网关连接至 ThingsBoard。
+我们需发送 RPC 命令获取当前光照状态，有两种情况：一种需要响应，另一种不需要响应。此外，还需通过发送命令更新室内光照，且不期望响应。
 
-As an example, we will use ThingsBoard MQTT Demo Broker, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard MQTT 演示代理，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 1884:1884 thingsboard/tb-gw-mqtt-broker:latest
 ```
 {:.copy-code}
 
-The broker available at `0.0.0.0:1884` and simulates a device that listens to the topic `data/get_light_level` for getting the current light level and responds on the topic `data/response`.
-It also listens to the topic `data/set_light_level` to update the light level value.
+代理运行于 `0.0.0.0:1884`，模拟的设备在主题 `data/get_light_level` 上监听获取当前光照，并在主题 `data/response` 上回复。
+该设备还在主题 `data/set_light_level` 上监听以更新光照值。
 
 {% capture difference %}
-**Please note:**
-The RPC Debug Terminal is used only for example purposes, so you can use any other widget that supports RPC calls.
-The custom MQTT publisher is used only to simulate the device behavior, but it is not applicable for real-production
-use cases.
+**请注意：**
+RPC 调试终端仅用于示例，您可使用任何支持 RPC 调用的其他部件。
+自定义 MQTT 发布器仅用于模拟设备行为，不适用于实际生产场景。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Example 1: Get current light level (Two Way RPC with response)
+### 示例 1：获取当前光照（双向 RPC 带响应）
 
-In the RPC Debug Terminal widget, run the following command to send a two-way RPC request:
+在 RPC 调试终端部件中执行以下命令发送双向 RPC 请求：
 
 ```bash
 get requestTopicExpression=data/get_light_level;responseTopicExpression=data/response;value=${params};
 ```
 {: .copy-code}
 
-The gateway will:
-1. Receive this RPC request
-2. Process the built-in "get" method
-3. Send a message to the topic `data/get_light_level` with the specified parameters
-4. Subscribe to the topic `data/response` to wait for a response
-5. Return the response to ThingsBoard when received
+网关将：
+1. 接收该 RPC 请求
+2. 处理内置 "get" 方法
+3. 向主题 `data/get_light_level` 发送带指定参数的消息
+4. 订阅主题 `data/response` 等待响应
+5. 收到响应后返回给 ThingsBoard
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-reserved-rpc-1.png)
 
-### Example 2: Get current light level with no response (One Way RPC)
+### 示例 2：获取当前光照（单向 RPC 无响应）
 
-In the RPC Debug Terminal widget, run the following command to send a one-way RPC request:
+在 RPC 调试终端部件中执行以下命令发送单向 RPC 请求：
 
 ```bash
 get requestTopicExpression=data/get_light_level;value=${params};
 ```
 {: .copy-code}
 
-The gateway will:
-1. Receive this RPC request
-2. Process the built-in "get" method
-3. Send a message to the topic `data/get_light_level` with the specified parameters
-4. Not wait for any response since no response topic was specified
+网关将：
+1. 接收该 RPC 请求
+2. 处理内置 "get" 方法
+3. 向主题 `data/get_light_level` 发送带指定参数的消息
+4. 因未指定响应主题而不等待响应
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-reserved-rpc-2.png)
 
-### Example 3: SET new light level (One Way RPC)
+### 示例 3：SET 新光照（单向 RPC）
 
-In the RPC Debug Terminal widget, run the following command to set a new light level value:
+在 RPC 调试终端部件中执行以下命令设置新的光照值：
 
 ```bash
 set requestTopicExpression=data/set_light_level;value=90;
 ```
 {: .copy-code}
 
-The gateway will:
-1. Receive this RPC request
-2. Process the built-in "set" method
-3. Send a message to the topic `data/set_light_level` with the value "90"
-4. Not wait for any response since no response topic was specified
+网关将：
+1. 接收该 RPC 请求
+2. 处理内置 "set" 方法
+3. 向主题 `data/set_light_level` 发送值 "90"
+4. 因未指定响应主题而不等待响应
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-reserved-rpc-3.png)
 
-### Example 4: Check updated light level (Two Way RPC with response)
+### 示例 4：检查更新后的光照（双向 RPC 带响应）
 
-After setting the new light level, you can verify the updated value by running:
+设置新光照后，可执行以下命令验证更新值：
 
 ```bash
 get requestTopicExpression=data/get_light_level;responseTopicExpression=data/response;value=${params};
 ```
 {: .copy-code}
 
-The gateway will process this request as in Example 1, and you should see the updated light level value in the response.
+网关将按示例 1 处理该请求，响应中应能看到更新后的光照值。
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-reserved-rpc-4.png)
 
-If you are using advanced configuration mode, you can use the following configuration:
+若使用高级配置模式，可使用以下配置：
 
 ```json
 {

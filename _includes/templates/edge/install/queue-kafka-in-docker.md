@@ -1,9 +1,9 @@
-#### Kafka Installation
+#### Kafka 安装
 
-[Apache Kafka](https://kafka.apache.org/){: target="_blank"} is an open source stream processing platform.
+[Apache Kafka](https://kafka.apache.org/){: target="_blank"} 是一个开源流处理平台。
 
-To install **Kafka in a [Docker container](https://docs.docker.com/engine/install/){: target="_blank"}**, run the command below.
-It creates **docker-compose-kafka.yml**, fills it with configuration lines, and starts the container.
+要在 [Docker 容器](https://docs.docker.com/engine/install/){: target="_blank"} 中安装 **Kafka**，请运行以下命令。
+该命令会创建 **docker-compose-kafka.yml**，填入配置内容，并启动容器。
 
 ```
 cat > docker-compose-kafka.yml <<EOF && docker compose -f docker-compose-kafka.yml up -d

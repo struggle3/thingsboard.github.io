@@ -1,25 +1,22 @@
-There are scenarios where the key names for time-series data and attributes need to be extracted directly from the 
-MQTT topic structure. This can be particularly useful when dealing with dynamic topics or when the topic structure 
-conveys important metadata. In this example, we will demonstrate how to configure the MQTT connector to extract key 
-names for both time-series data directly from the topic using regular expression.
+某些场景下，时序数据和属性的键名需要直接从 MQTT 主题结构中提取。这在处理动态主题或主题结构包含重要元数据时尤其有用。本示例演示如何配置 MQTT 连接器，用正则表达式从主题提取时序数据的键名。
 
-As an example, we will use ThingsBoard MQTT Demo Broker, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard MQTT 演示代理，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 1884:1884 thingsboard/tb-gw-mqtt-broker:latest
 ```
 {:.copy-code}
 
-The broker available at `0.0.0.0:1884` and publishes data to the topic `sensors/demo-device/{sensor-name}/value`. 
-The `{sensor-name}` part of the topic is dynamic and represents different sensors, such as `temperature` or `humidity`.
+代理运行于 `0.0.0.0:1884`，向主题 `sensors/demo-device/{sensor-name}/value` 发布数据。
+主题中的 `{sensor-name}` 为动态部分，代表不同传感器，如 `temperature` 或 `humidity`。
 
-So the topics will look like this:
-- `sensors/demo-device/temperature/value` with payload `{"value": 25.5}`
-- `sensors/demo-device/humidity/value` with payload `{"value": 60.2}`
+因此主题形式如下：
+- `sensors/demo-device/temperature/value`，负载为 `{"value": 25.5}`
+- `sensors/demo-device/humidity/value`，负载为 `{"value": 60.2}`
 
-We’ll map the `{sensor-name}` part of the topic to time-series data.
+我们将把主题中的 `{sensor-name}` 映射为时序数据。
 
-Copy and paste the following configuration into the MQTT connector advanced configuration mode:
+将以下配置复制粘贴到 MQTT 连接器高级配置模式中：
 ```json
 {
   "broker": {
@@ -67,15 +64,12 @@ Copy and paste the following configuration into the MQTT connector advanced conf
 ```
 {:.copy-code}
 
-Let's review the key parts of this configuration:
-- The `topicFilter` is set to `sensors/demo-device/+/value`, where the `+` wildcard captures the dynamic sensor name.
-- In the `timeseries` section, we use a regular expression in the `key` field to extract the sensor name from the 
-topic. The regex `(?<=sensors/demo-device/)(.*?)(?=/value)` captures the part of the topic 
-between `sensors/demo-device/` and `/value`.
-- The `keySource` is set to `topic`, indicating that the key name should be extracted from the topic.
-- The `value` field uses `${value}` to extract the actual sensor value from the JSON payload.
+配置要点如下：
+- `topicFilter` 设为 `sensors/demo-device/+/value`，`+` 通配符用于捕获动态传感器名。
+- 在 `timeseries` 部分，`key` 字段使用正则表达式从主题提取传感器名。正则 `(?<=sensors/demo-device/)(.*?)(?=/value)` 捕获 `sensors/demo-device/` 与 `/value` 之间的部分。
+- `keySource` 设为 `topic`，表示键名从主题提取。
+- `value` 字段使用 `${value}` 从 JSON 负载提取实际传感器值。
 
-After applying this configuration, the MQTT connector will extract the sensor name from the topic and use it as the 
-key name for both time-series data. So you will see that the corresponding time series are being updated correctly:
+应用该配置后，MQTT 连接器会从主题提取传感器名并用作时序数据的键名，您应能看到对应时序数据正确更新：
 
 ![image](/images/gateway/mqtt-connector/examples/time-series-key-name-from-topic-overview.png)

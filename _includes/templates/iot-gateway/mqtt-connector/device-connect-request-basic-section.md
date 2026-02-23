@@ -1,14 +1,12 @@
-In order to add new connect request mapping, follow these steps:
+要添加新的 connect request 映射，请按以下步骤操作：
 
 {% assign ConnectRequest = '
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-11-ce.png,
-        title: Click the “**Add mapping**” under “**Requests mapping**” section to add new connect request mapping.
+        title: 在 "**Requests mapping**" 部分点击 "**Add mapping**" 以添加新的 connect request 映射。
     ===
         image: /images/gateway/mqtt-connector/mqtt-gateway-configuring-12-ce.png,
-        title: Select "**Connect request**" in the **Request type** field, enter the "**Topic filter**", and select source 
-        type for **Name** and **Profile name** fields (`Message`, `Constant`, or `Topic`). Enter the corresponding 
-        value which can be [json path](/docs/iot-gateway/config/mqtt/#json-path), [regex](/docs/iot-gateway/config/mqtt/#regular-expressions), or constant value based on the selected source type.
+        title: 在 **Request type** 字段选择 "**Connect request**"，输入 "**Topic filter**"，并为 **Name** 和 **Profile name** 字段选择来源类型（`Message`、`Constant` 或 `Topic`）。根据所选来源类型输入对应的 [json path](/docs/iot-gateway/config/mqtt/#json-path)、[regex](/docs/iot-gateway/config/mqtt/#regular-expressions) 或常量值。
     '
 %}
 

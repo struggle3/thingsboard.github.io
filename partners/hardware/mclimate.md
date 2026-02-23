@@ -1,7 +1,7 @@
 ---
 layout: hardware-partner
 hardware-partner: MClimate
-description: Europe-based company specializing in the development of IoT hardware devices and software solutions that prioritize energy efficiency, air quality, and water loss prevention to make any building smart. Our goal is through partnerships with global entities, technology providers, end-users, and institutions, to retrofit buildings into sustainable places that enhance the well-being and health of their occupants. Moreover, we aid companies in measuring buildings'  data and achieving their ESG goals along the way. We bring best-in-class complete smart solutions in combination with operational excellence, fast response time, and reliable logistics to our partners. Our core philosophy revolves around fostering strong, transparent relationships with our partners and distributors based on our commitment to maintain the highest standards.
+description: 总部位于欧洲的公司，专注于开发以能效、空气质量和防漏水为核心的 IoT 硬件设备和软件解决方案，使任何建筑智能化。我们的目标是通过与全球实体、技术提供商、终端用户和机构的合作，将建筑改造为提升居住者福祉与健康的可持续场所。此外，我们帮助企业在收集建筑数据的同时实现其 ESG 目标。我们以卓越运营、快速响应和可靠物流为合作伙伴提供一流的完整智能解决方案。我们的核心理念是基于对最高标准的承诺，与合作伙伴和经销商建立牢固、透明的关系。
 
 ---
 

@@ -1,210 +1,196 @@
-Publishes messages to an external MQTT broker with QoS 1 (at least once) and configurable retention settings. Supports dynamic topic patterns populated with data from incoming
-messages and multiple authentication methods including TLS/SSL encryption.
+向外部 MQTT broker 发布消息，使用 QoS 1（至少一次）及可配置的保留设置。支持基于入站消息数据动态构建 topic 模式，及包括 TLS/SSL 加密在内的多种认证方式。
 
-## Configuration
+## 配置
 
 ### Topic pattern
 
-Specifies the MQTT topic where messages will be published. This field is required and supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/) to dynamically
-construct topic names based on incoming message data or metadata.
+指定发布消息的 MQTT 主题。该字段为必填，支持 [templatization](/docs/{{docsPrefix}}user-guide/templatization/) 以根据入站消息 data 或 metadata 动态构造主题名。
 
-### Connection settings
+### Connection settings（连接设置）
 
-- **Host** – The hostname or IP address of the MQTT broker. This field is required.
-- **Port** – The port number of the MQTT broker. This field is required.
-- **Connection timeout (sec)** – The maximum time in seconds to wait when establishing a connection to the MQTT broker before the connection attempt fails. This field is required.
+- **Host** — MQTT broker 的主机名或 IP 地址。该字段为必填。
+- **Port** — MQTT broker 的端口号。该字段为必填。
+- **Connection timeout (sec)** — 建立与 MQTT broker 连接时的最大等待时间（秒），超时则连接失败。该字段为必填。
 
 ### Client ID
 
-An optional identifier for the MQTT client. If left empty, the node automatically generates a Client ID using the format `netty-mqtt/` followed by 8 random alphanumeric characters.
+MQTT 客户端的可选标识符。若留空，节点将自动生成 Client ID，格式为 `netty-mqtt/` 后接 8 位随机字母数字字符。
 
-**Example of auto-generated Client ID:** `netty-mqtt/aB3dEf7G`
+**自动生成 Client ID 示例**：`netty-mqtt/aB3dEf7G`
 
-#### Singleton mode and cluster deployment
+#### Singleton mode and cluster deployment（单例模式与集群部署）
 
-The rule node can operate in two modes when the platform is running in a cluster (micro-services mode):
+平台以集群（微服务）模式运行时，规则节点可在两种模式下运行：
 
-- **Singleton mode enabled** (default) – The rule node is launched on only one rule engine instance, regardless of how many rule engine instances are running in the cluster. This
-  means there is only one MQTT client connection.
-- **Singleton mode disabled** – The rule node is launched on all rule engine instances. If there are three rule engine instances, three separate rule nodes are launched, creating
-  three MQTT client connections.
+- **Singleton mode enabled**（默认）— 无论集群中有多少规则引擎实例，规则节点仅在其中一个实例上启动，即只有一个 MQTT 客户端连接。
+- **Singleton mode disabled** — 规则节点在所有规则引擎实例上启动。若有三个规则引擎实例，则会启动三个规则节点，建立三个 MQTT 客户端连接。
 
-Singleton mode can be changed in the node configuration interface using the **Singleton/Disabled** toggle.
+可通过节点配置界面中的 **Singleton/Disabled** 开关切换单例模式。
 
-#### Multiple connections issue
+#### Multiple connections issue（多连接问题）
 
-Most MQTT brokers do not allow multiple simultaneous connections with the same Client ID. When multiple rule node instances run in a cluster and attempt to connect with the same
-configured Client ID, the broker rejects duplicate client connections, causing failures.
+大多数 MQTT broker 不允许同一 Client ID 建立多个并发连接。当集群中多个规则节点实例使用相同 Client ID 尝试连接时，broker 会拒绝重复的客户端连接，导致失败。
 
-#### Solving the multiple connections issue
+#### Solving the multiple connections issue（解决多连接问题）
 
-There are two ways to solve this issue:
+有两种解决方案：
 
-**Option 1: Enable Singleton mode** – This ensures only one rule node instance is launched in the cluster, creating only one client connection to the broker. Since there is only
-one client, no Client ID conflicts can occur.
+**Option 1: Enable Singleton mode** — 确保集群中仅启动一个规则节点实例，只建立一个 broker 客户端连接。由于仅有一个客户端，不会发生 Client ID 冲突。
 
-**Option 2: Enable Add Service ID as suffix to Client ID** – This allows multiple rule node instances to connect simultaneously. When enabled, the Service ID is automatically
-appended to the specified Client ID as a suffix. Since each rule engine instance has a unique Service ID, each rule node instance creates a client with a unique identifier.
+**Option 2: Enable Add Service ID as suffix to Client ID** — 允许多个规则节点实例同时连接。启用时，Service ID 会自动附加到指定的 Client ID 作为后缀。因每个规则引擎实例具有唯一 Service ID，每个规则节点实例会创建具有唯一标识符的客户端。
 
-**Example**: If Client ID is `my-client` and three rule engine instances have Service IDs `tb-rule-engine-1`, `tb-rule-engine-2`, and `tb-rule-engine-3`, the final Client IDs
-become:
+**示例**：若 Client ID 为 `my-client`，三个规则引擎实例的 Service ID 分别为 `tb-rule-engine-1`、`tb-rule-engine-2`、`tb-rule-engine-3`，最终 Client ID 为：
 
 - `my-client_tb-rule-engine-1`
 - `my-client_tb-rule-engine-2`
 - `my-client_tb-rule-engine-3`
 
-#### Client ID length restrictions
+#### Client ID length restrictions（Client ID 长度限制）
 
-The maximum allowed Client ID length depends on the protocol version:
+允许的最大 Client ID 长度取决于协议版本：
 
-- **MQTT 3.1**: Maximum 23 characters
-- **MQTT 3.1.1 and MQTT 5**: Maximum 256 characters
+- **MQTT 3.1**：最大 23 字符
+- **MQTT 3.1.1 和 MQTT 5**：最大 256 字符
 
-When using the **Add Service ID as suffix** setting, ensure the combined length of your Client ID and the Service ID suffix does not exceed these limits. If the generated Client ID
-exceeds the maximum length, the node will fail with an error.
+使用 **Add Service ID as suffix** 时，请确保 Client ID 与 Service ID 后缀的总长度不超过上述限制。若生成的 Client ID 超出最大长度，节点将报错失败。
 
-### Message settings
+### Message settings（消息设置）
 
 #### Parse to plain text
 
-Controls how the message data is processed before publishing:
+控制发布前如何处理消息 data：
 
-- **Disabled** (default) – The message data is published as-is.
-- **Enabled** – If the message data is a JSON-encoded string (wrapped in double quotes), the outer JSON encoding is removed.
+- **Disabled**（默认）— 消息 data 原样发布。
+- **Enabled** — 若消息 data 为 JSON 编码字符串（用双引号包裹），则移除外层 JSON 编码。
 
-**Example**:
+**示例**：
 
-Message data: `"\"Temperature is 25.5°C\""`
+消息 data：`"\"Temperature is 25.5°C\""`
 
-- Parse to plain text **OFF**: Publishes `"\"Temperature is 25.5°C\""` (with JSON encoding)
-- Parse to plain text **ON**: Publishes `"Temperature is 25.5°C"` (without outer quotes)
+- Parse to plain text **OFF**：发布 `"\"Temperature is 25.5°C\""`（带 JSON 编码）
+- Parse to plain text **ON**：发布 `"Temperature is 25.5°C"`（无外层引号）
 
 {% capture parse_note %}
-**Note**: This setting only affects JSON-encoded strings (strings wrapped in double quotes). Regular JSON objects like `{"temperature":25.5}` are published unchanged regardless of
-this setting.
+**注意**：此设置仅影响 JSON 编码的字符串（用双引号包裹的字符串）。普通 JSON 对象如 `{"temperature":25.5}` 无论如何设置均原样发布。
 {% endcapture %}
 {% include templates/info-banner.md content=parse_note %}
 
-#### Quality of Service
+#### Quality of Service（服务质量）
 
-All messages are published with **QoS 1 (AT_LEAST_ONCE)**. This guarantees that the message will be delivered to the broker at least once, though it may be delivered multiple times
-in case of network issues. The QoS level is not configurable.
+所有消息均以 **QoS 1 (AT_LEAST_ONCE)** 发布。这保证消息至少送达 broker 一次，网络异常时可能多次送达。QoS 等级不可配置。
 
-#### Retained
+#### Retained（保留）
 
-- **Disabled** (default) – The message is not retained by the broker.
-- **Enabled** – The broker stores the message and delivers it to future subscribers of the topic, even if they subscribe after the message was published.
+- **Disabled**（默认）— broker 不保留消息。
+- **Enabled** — broker 保留消息并向 topic 的后续订阅者投递，即使他们在消息发布后才订阅。
 
-Retained messages are useful for publishing device state or configuration that new subscribers should receive immediately upon subscription.
+保留消息适用于发布设备状态或配置，以便新订阅者订阅时立即收到。
 
-### Protocol version
+### Protocol version（协议版本）
 
-Select the MQTT protocol version to use for the connection. Available options:
+选择连接使用的 MQTT 协议版本。可用选项：
 
-- **MQTT 3.1** – Legacy version with 23-character Client ID limit
-- **MQTT 3.1.1** – Most widely supported version (default)
-- **MQTT 5** – Latest version with enhanced features
+- **MQTT 3.1** — 旧版，Client ID 限制 23 字符
+- **MQTT 3.1.1** — 最广泛支持的版本（默认）
+- **MQTT 5** — 最新版本，功能增强
 
 {% capture protocol_note %}
-**Note**: Ensure your MQTT broker supports the selected protocol version. Most modern brokers support MQTT 3.1.1 and MQTT 5.
+**注意**：请确认 MQTT broker 支持所选协议版本。大多数现代 broker 支持 MQTT 3.1.1 和 MQTT 5。
 {% endcapture %}
 {% include templates/info-banner.md content=protocol_note %}
 
-### Session settings
+### Session settings（会话设置）
 
 #### Clean session
 
-- **Enabled** (default) – The broker does not store any session state for the client. When the client reconnects, it starts with a clean state.
-- **Disabled** – The broker stores session state and undelivered QoS 1 and QoS 2 messages for the client. When the client reconnects, it can receive any messages that were queued
-  during disconnection.
+- **Enabled**（默认）— broker 不为客户端存储任何会话状态。客户端重连时从干净状态开始。
+- **Disabled** — broker 为客户端存储会话状态及未投递的 QoS 1、QoS 2 消息。客户端重连时可接收断开期间队列中的消息。
 
-For this rule node, clean session should typically remain enabled since the node only publishes messages and does not subscribe to any topics.
+因本规则节点仅发布消息且不订阅任何 topic，通常应保持 clean session 启用。
 
-### Security settings
+### Security settings（安全设置）
 
 #### Enable SSL
 
-- **Disabled** (default) – Connection uses plain TCP without encryption.
-- **Enabled** – Connection uses TLS/SSL encryption. When enabled, you must configure credentials.
+- **Disabled**（默认）— 连接使用明文 TCP，无加密。
+- **Enabled** — 连接使用 TLS/SSL 加密。启用时需配置凭据。
 
-### Credentials
+### Credentials（凭据）
 
-Authentication credentials for connecting to the MQTT broker. The available credential types are:
+连接 MQTT broker 的认证凭据。可用凭据类型：
 
-#### Anonymous
+#### Anonymous（匿名）
 
-No authentication is required. Use this when the MQTT broker allows anonymous connections.
+无需认证。当 MQTT broker 允许匿名连接时使用。
 
-#### Basic
+#### Basic（基本）
 
-Username and password authentication.
+用户名与密码认证。
 
-**Configuration**:
+**配置**：
 
-- **Username** – The username for MQTT broker authentication
-- **Password** – The password for MQTT broker authentication
+- **Username** — MQTT broker 认证用户名
+- **Password** — MQTT broker 认证密码
 
-#### PEM Certificate
+#### PEM Certificate（PEM 证书）
 
-Certificate-based authentication using PEM-encoded files. This provides the strongest security through mutual TLS authentication.
+使用 PEM 编码文件的证书认证。通过双向 TLS 提供最高安全级别。
 
-**Configuration**:
+**配置**：
 
-- **Server CA certificate file** – The Certificate Authority (CA) certificate that signed the broker's certificate. Used to verify the broker's identity.
-- **Client certificate file** – The client's public certificate. Sent to the broker for client authentication.
-- **Client private key file** – The client's private key corresponding to the client certificate.
-- **Private key password** – Optional password if the private key file is encrypted.
+- **Server CA certificate file** — 签署 broker 证书的 CA 证书，用于验证 broker 身份。
+- **Client certificate file** — 客户端公钥证书，发送给 broker 用于客户端认证。
+- **Client private key file** — 与客户端证书对应的客户端私钥。
+- **Private key password** — 私钥文件加密时的可选密码。
 
 {% capture cert_requirement_note %}
-**Note**: At minimum, a Server CA certificate file or a pair of Client certificate and Client private key files is required when using PEM credentials.
+**注意**：使用 PEM 凭据时，至少需提供 Server CA 证书文件，或同时提供 Client 证书与 Client 私钥文件。
 {% endcapture %}
 {% include templates/info-banner.md content=cert_requirement_note %}
 
 {% capture credentials_note %}
-**Note**: Certificate and key files can be uploaded directly or referenced from [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} for enhanced security.
+**注意**：证书和密钥文件可直接上传，或从 [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} 引用以增强安全性。
 {% endcapture %}
 {% include templates/info-banner.md content=credentials_note %}
 
-### Advanced settings
+### Advanced settings（高级设置）
 
-#### Force acknowledgement
+#### Force acknowledgement（强制确认）
 
-The force acknowledgement mechanism is controlled by the `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable. When this variable is set to `true`, it applies to all external
-nodes including this MQTT node.
+强制确认机制由环境变量 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 控制。该变量设为 `true` 时，适用于包括本 MQTT 节点在内的所有外部节点。
 
-**Behavior when force acknowledgement is enabled**:
+**启用强制确认时的行为**：
 
-- The incoming message is acknowledged immediately and a copy is created
-- The MQTT publish operation executes
-- Once the publish operation completes, the message copy is added to the queue for processing by the next node
-- This prevents message processing timeouts for slow MQTT brokers
+- 入站消息立即被确认并创建副本
+- 执行 MQTT 发布操作
+- 发布完成后，消息副本加入队列供下一节点处理
+- 可避免慢速 MQTT broker 导致的消息处理超时
 
-**Behavior when force acknowledgement is disabled** (default):
+**禁用强制确认时**（默认）：
 
-- The original incoming message is held until the MQTT publish operation completes
-- The message is then passed to the next node
+- 原始入站消息在 MQTT 发布完成前保持占用
+- 随后将消息传递至下一节点
 
-#### MQTT retransmission
+#### MQTT retransmission（MQTT 重传）
 
-The node uses the platform's internal MQTT client, which includes a retransmission mechanism to improve reliability for QoS 1 messages. When a PUBLISH message is sent, the client
-waits for an acknowledgment from the broker. If no acknowledgment is received within a configurable delay period, the message is retransmitted.
+节点使用平台内部 MQTT 客户端，包含重传机制以提高 QoS 1 消息的可靠性。发送 PUBLISH 消息后，客户端等待 broker 确认。若在可配置的延迟时间内未收到确认，则重传消息。
 
-The delay between retransmissions follows an exponential backoff strategy with jitter:
+重传间隔采用带抖动的指数退避策略：
 
-- The delay starts from an initial value and doubles with each retry attempt
-- A jitter factor introduces random variance (±percentage) to prevent synchronized retries across multiple clients
+- 延迟从初始值开始，每次重试翻倍
+- 抖动因子引入随机偏差（±百分比）以避免多客户端同步重试
 
-**Example**: With three maximum attempts, 5,000 ms initial delay, and 0.15 jitter factor, retransmissions occur at approximately:
+**示例**：最大尝试 3 次、初始延迟 5,000 ms、抖动因子 0.15 时，重传大致发生在：
 
-- 5,000 ms (±15%)
-- 10,000 ms (±15%)
-- 20,000 ms (±15%)
+- 5,000 ms（±15%）
+- 10,000 ms（±15%）
+- 20,000 ms（±15%）
 
-If no acknowledgment is received after all retry attempts, the message is dropped and routed via the `Failure` connection with an appropriate error message.
+若所有重试后仍未收到确认，消息将被丢弃并经 `Failure` 连接路由并附带适当错误信息。
 
-**Configuration**:
+**配置**：
 
-Retransmission parameters are configured globally in the `thingsboard.yml` file and apply to all MQTT clients on the platform:
+重传参数在 `thingsboard.yml` 中全局配置，适用于平台上所有 MQTT 客户端：
 
 ```yaml
 mqtt:
@@ -299,84 +285,83 @@ mqtt:
 ```
 {: .copy-code.expandable-3 }
 
-## Rule node initialization
+## 规则节点初始化
 
-When the rule node is initialized, it establishes a connection to the MQTT broker:
+规则节点初始化时会建立与 MQTT broker 的连接：
 
-1. The node connects to the broker at the configured **Host** and **Port** using the specified **Credentials**.
-2. The connection uses the configured **Protocol version** and **Clean session** settings.
-3. If **SSL** is enabled, a secure TLS connection is established.
-4. The connection must complete within the specified **Connection timeout** period, otherwise initialization fails.
+1. 节点使用配置的 **Credentials** 在 **Host** 和 **Port** 处连接 broker。
+2. 连接使用配置的 **Protocol version** 和 **Clean session** 设置。
+3. 若启用 **SSL**，建立 TLS 安全连接。
+4. 连接须在 **Connection timeout** 规定时间内完成，否则初始化失败。
 
-Once the connection is established, it remains open for the lifetime of the rule node, ready to publish messages.
+连接建立后，在规则节点生命周期内保持打开，随时可发布消息。
 
-## Message processing
+## 消息处理
 
-For each incoming message, the node performs the following steps:
+对每条入站消息，节点执行以下步骤：
 
-1. If **Force acknowledgement** is enabled, the incoming message is acknowledged immediately and a copy is created.
-2. The node processes the **Topic pattern**, replacing templates with values from the incoming message data and metadata to construct the final MQTT topic.
-3. If **Parse to plain text** is enabled, the message data is processed to remove outer JSON encoding.
-4. The node publishes the message payload to the MQTT broker:
-    - The message is published to the constructed topic with **QoS 1 (AT_LEAST_ONCE)**.
-    - The **Retained** flag is applied according to the configuration.
-5. When the publish operation completes:
-    - On success, the original message (or the message copy if force acknowledgement is enabled) is forwarded via the `Success` connection.
-    - On failure, error details are added to the message metadata under the `error` key, and the message is forwarded via the `Failure` connection.
+1. 若启用 **Force acknowledgement**，入站消息立即被确认并创建副本。
+2. 节点处理 **Topic pattern**，用入站消息 data 和 metadata 中的值替换模板，构建最终 MQTT topic。
+3. 若启用 **Parse to plain text**，处理消息 data 以移除外层 JSON 编码。
+4. 节点将消息 payload 发布到 MQTT broker：
+    - 消息以 **QoS 1 (AT_LEAST_ONCE)** 发布到构建的 topic。
+    - 按配置应用 **Retained** 标志。
+5. 发布操作完成时：
+    - 成功：原始消息（或启用强制确认时的消息副本）经 `Success` 连接转发。
+    - 失败：在消息 metadata 的 `error` 键下添加错误详情，消息经 `Failure` 连接转发。
 
-## Rule node shutdown
+## 规则节点关闭
 
-When the rule node is shut down, it disconnects from the MQTT broker and releases all associated resources.
+规则节点关闭时，会断开与 MQTT broker 的连接并释放相关资源。
 
-Shutdown occurs in the following scenarios:
+关闭发生在以下场景：
 
-- **Rule node configuration is updated** – The node is destroyed and then re-initialized with the new configuration.
-- **Rule node is deleted** – The node is destroyed without re-initialization.
+- **Rule node configuration is updated** — 节点被销毁并使用新配置重新初始化。
+- **Rule node is deleted** — 节点被销毁且不重新初始化。
 
 {% capture shutdown_note %}
-**Note**: The shutdown process is not executed if the rule engine instance crashes or is forcibly terminated (e.g., SIGTERM, SIGKILL).
+**注意**：若规则引擎实例崩溃或被强制终止（如 SIGTERM、SIGKILL），不会执行关闭流程。
 {% endcapture %}
 {% include templates/info-banner.md content=shutdown_note %}
 
-## Outgoing message format
+## 出站消息格式
 
-The outgoing message format depends on the **Force acknowledgement** setting:
+出站消息格式取决于 **Force acknowledgement** 设置：
 
-**When force acknowledgement is disabled** (default):
+**禁用强制确认时**（默认）：
 
-- The outgoing message is the original incoming message
-- The message data, metadata, originator, and type remain unchanged
+- 出站消息为原始入站消息
+- 消息 data、metadata、originator 和 type 保持不变
 
-**When force acknowledgement is enabled**:
+**启用强制确认时**：
 
-- The outgoing message is a copy of the original incoming message
-- The copy is a separate message instance but contains the same data, metadata, originator, and type
+- 出站消息为原始入站消息的副本
+- 副本为独立消息实例，但包含相同的 data、metadata、originator 和 type
 
-**On failure**:
+**失败时**：
 
-- Error details are added to the message metadata under the `error` key in the format: `ExceptionClass: error message`
-- All other message properties remain unchanged
+- 在消息 metadata 的 `error` 键下添加错误详情，格式为：`ExceptionClass: error message`
+- 其他消息属性保持不变
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The message was successfully published to the MQTT broker.
+    - 消息已成功发布到 MQTT broker。
 - **Failure**
-    - The publish operation failed due to network issues or broker errors.
-    - An unexpected error occurred during processing.
+    - 因网络问题或 broker 错误导致发布失败。
+    - 处理过程中发生意外错误。
 
-## Examples
+## 示例
 
-### Example 1 — Publishing telemetry to a cloud MQTT broker
+### 示例 1 — 向云 MQTT broker 发布 telemetry
 
-A temperature sensor sends telemetry data that needs to be forwarded to a cloud-based MQTT broker. Messages are published to topics organized by device type and name. Force
-acknowledgement is disabled.
+温度传感器发送需转发到云 MQTT broker 的 telemetry 数据。消息按设备类型和名称发布到对应 topic。强制确认已禁用。
 
-**Incoming message**
+**入站消息**
 
-Originator: `DEVICE` (Temperature Sensor)
+Originator：`DEVICE`（Temperature Sensor）
 
-Metadata:
+Metadata：
 
 ```json
 {
@@ -386,7 +371,7 @@ Metadata:
 }
 ```
 
-Data:
+Data：
 
 ```json
 {
@@ -395,7 +380,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -418,12 +403,10 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is the same as the incoming message. Since force acknowledgement is disabled, the original incoming message is passed to the next node after successful
-publish.
+出站消息与入站消息相同。因强制确认已禁用，发布成功后原始入站消息传递至下一节点。
 
-**Result**
+**结果**
 
-The message is published to topic `factory/sensors/temperature/sensor-warehouse-01` on the cloud MQTT broker using secure TLS connection with username/password authentication. The
-JSON payload is published as-is. The message is then routed via the `Success` connection.
+消息通过 TLS 安全连接和用户名/密码认证，发布到云 MQTT broker 的 topic `factory/sensors/temperature/sensor-warehouse-01`。JSON payload 原样发布。随后消息经 `Success` 连接路由。

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Interacting with Trendz Prompts
-description: Step-by-step guide to interact with Trendz Prompts.
+title: 与 Trendz Prompts 交互
+description: 与 Trendz Prompts 交互的分步指南。
 
 trendz-prompts-tab-access:
   0:

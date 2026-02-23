@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-gw
-title: How to connect OPC-UA device to ThingsBoard CE?
-description: Understand how to connect OPC-UA device to ThingsBoard CE using ThingsBoard IoT Gateway
+title: 如何将 OPC-UA 设备连接至 ThingsBoard CE？
+description: 了解如何使用 ThingsBoard IoT Gateway 将 OPC-UA 设备连接至 ThingsBoard CE
 redirect_from: "/docs/iot-gateway/guides/how-to-connect-opcua-server/"
 
 ---
@@ -9,45 +9,28 @@ redirect_from: "/docs/iot-gateway/guides/how-to-connect-opcua-server/"
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-In this guide, we will describe how to connect an OPC-UA device to ThingsBoard CE using ThingsBoard IoT Gateway. 
-Whether you are just starting with OPC-UA integration or looking to streamline your existing setup, this guide will 
-provide you with the essential knowledge to get up and running quickly.
+本指南将介绍如何使用 ThingsBoard IoT Gateway 将 OPC-UA 设备连接至 ThingsBoard CE。 
+无论您是刚接触 OPC-UA 集成，还是希望优化现有配置，本指南都将帮助您快速上手。
 
-**What is ThingsBoard IoT Gateway?**
+**什么是 ThingsBoard IoT Gateway？**
 
-The ThingsBoard IoT Gateway is an open-source solution that serves as a bridge between IoT devices connected to 
-legacy or third-party systems and the ThingsBoard platform. It enables seamless integration of devices that cannot 
-communicate with ThingsBoard directly, ensuring data can be collected, processed, and visualized in real time. With 
-the IoT Gateway, you can connect multiple devices, aggregate telemetry, and manage configurations centrally. It 
-supports flexible deployment scenarios, making it especially suitable for industrial automation, monitoring, and smart 
-energy systems where OPC-UA is widely used.
+ThingsBoard IoT Gateway 是一款开源方案，在接入既有或第三方系统的物联网设备与 ThingsBoard 平台之间架起桥梁。它让无法直接与 ThingsBoard 通信的设备得以无缝集成，确保数据可实时采集、处理与展示。借助 IoT Gateway，您可以连接多台设备、聚合遥测数据并集中管理配置。它支持灵活的部署场景，尤其适用于 OPC-UA 广泛使用的工业自动化、监控和智能能源系统。
 
-**What is OPC-UA?**
+**什么是 OPC-UA？**
 
-OPC Unified Architecture (OPC-UA) is a machine-to-machine communication protocol widely adopted in industrial 
-automation. It provides a platform-independent, secure, and reliable framework for exchanging data between devices, 
-servers, and applications. Unlike older OPC standards, OPC-UA supports modern technologies, allows structured data 
-modeling, and is designed for scalability across different platforms and networks. Its robustness and interoperability 
-make it a standard choice for industries that require consistent, real-time, and vendor-neutral communication.
+OPC 统一架构（OPC-UA）是工业自动化中广泛采用的机器对机器通信协议。它提供与平台无关、安全可靠的框架，用于设备、服务器与应用之间的数据交换。与旧版 OPC 标准不同，OPC-UA 支持现代技术、允许结构化数据建模，并为跨平台与跨网络的可扩展性设计。其稳定性与互操作性使其成为需要一致、实时、厂商中立通信的工业首选。
 
-**What will You Learn?**
+**您将学到什么？**
 
-In this guide, we will walk step by step through the process of integrating an OPC-UA device with ThingsBoard CE. You 
-will learn how to install and configure the ThingsBoard IoT Gateway, set up the OPC-UA connector, and establish a 
-connection to your OPC-UA server. We will also demonstrate how to map data points, send telemetry to ThingsBoard. 
-By the end of this guide, you will have a working setup that allows you to seamlessly monitor and analyze your OPC-UA 
-device data in ThingsBoard CE.
+本指南将分步骤说明如何将 OPC-UA 设备集成至 ThingsBoard CE。您将学会如何安装与配置 ThingsBoard IoT Gateway、设置 OPC-UA 连接器并建立与 OPC-UA 服务器的连接。我们还将演示如何映射数据点、向 ThingsBoard 发送遥测。完成本指南后，您将建立起可在 ThingsBoard CE 中无缝监控与分析 OPC-UA 设备数据的运行环境。
 
-## Prerequisites
+## 前提条件
 
-- Before initiating the Gateway setup, ensure that the ThingsBoard server is up and running. You can install ThingsBoard
-  CE manually by following the steps outlined in
-  the [Installation Guide](/docs/user-guide/install/installation-options/).
-- Before moving forward, ensure Docker is installed and properly configured on your machine. If you haven't installed
-  Docker yet, you can download it from the [official Docker website](https://docs.docker.com/engine/install/) and follow
-  their installation guide for your specific operating system.
+- 在配置网关前，请确保 ThingsBoard 服务已运行。您可参考
+  [安装指南](/docs/user-guide/install/installation-options/) 手动安装 ThingsBoard CE。
+- 继续前请确保本机已安装并正确配置 Docker。若尚未安装，可从 [Docker 官网](https://docs.docker.com/engine/install/) 下载并按您所用系统的安装指南完成安装。
 
 ## OPC-UA Server Structure Overview
 

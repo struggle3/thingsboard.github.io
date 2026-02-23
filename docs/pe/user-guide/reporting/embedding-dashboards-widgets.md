@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Embedding dashboards in a report
-description: How to embed existing dashboards in a report
+title: 在报告中嵌入仪表板
+description: 如何在报告中嵌入现有仪表板
 redirect_from: "/docs/user-guide/reporting/embedding-dashboards-widgets/"
 
 dashboard-component-example-1:

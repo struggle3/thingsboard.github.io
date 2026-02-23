@@ -1,12 +1,12 @@
 * TOC
 {:toc}
 
-##  Server common parameters
+## 服务器通用参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -14,25 +14,25 @@
 			<td>server.address</td>
 			<td>HTTP_BIND_ADDRESS</td>
 			<td>0.0.0.0</td>
-			<td> Server bind-address</td>
+			<td>服务器绑定地址</td>
 		</tr>
 		<tr>
 			<td>server.port</td>
 			<td>HTTP_BIND_PORT</td>
 			<td>8080</td>
-			<td> Server bind port</td>
+			<td>服务器绑定端口</td>
 		</tr>
 		<tr>
 			<td>server.forward_headers_strategy</td>
 			<td>HTTP_FORWARD_HEADERS_STRATEGY</td>
 			<td>framework</td>
-			<td> Server forward headers strategy. Required for SWAGGER UI when reverse proxy is used</td>
+			<td>服务器转发 headers 策略。使用反向代理时 SWAGGER UI 所需</td>
 		</tr>
 		<tr>
 			<td>server.ssl.enabled</td>
 			<td>SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable SSL support</td>
+			<td>启用/禁用 SSL 支持</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.type</td>
@@ -50,7 +50,7 @@
 			<td>server.ssl.credentials.pem.key_file</td>
 			<td>SSL_PEM_KEY</td>
 			<td>server_key.pem</td>
-			<td> Path to the server certificate private key file (optional). Required if the private key is not present in the server certificate file</td>
+			<td>服务器证书私钥文件路径（可选）。若服务器证书文件中不含私钥则为必填</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.pem.key_password</td>
@@ -62,31 +62,31 @@
 			<td>server.ssl.credentials.keystore.type</td>
 			<td>SSL_KEY_STORE_TYPE</td>
 			<td>PKCS12</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td>Key store 类型（JKS 或 PKCS12）</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.store_file</td>
 			<td>SSL_KEY_STORE</td>
 			<td>classpath:keystore/keystore.p12</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td>存放 SSL 证书的 key store 路径</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.store_password</td>
 			<td>SSL_KEY_STORE_PASSWORD</td>
 			<td>thingsboard</td>
-			<td> Password used to access the key store</td>
+			<td>访问 key store 的密码</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.key_alias</td>
 			<td>SSL_KEY_ALIAS</td>
 			<td>tomcat</td>
-			<td> Key alias</td>
+			<td>Key 别名</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.key_password</td>
 			<td>SSL_KEY_PASSWORD</td>
 			<td>thingsboard</td>
-			<td> Password used to access the key</td>
+			<td>访问 key 的密码</td>
 		</tr>
 		<tr>
 			<td>server.http.max_payload_size</td>
@@ -208,12 +208,12 @@
 </table>
 
 
-##  Cloud configuration
+## Cloud 配置
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -346,12 +346,12 @@
 </table>
 
 
-##  Application info parameters
+## 应用信息参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -365,12 +365,12 @@
 </table>
 
 
-##  Zookeeper connection parameters
+## Zookeeper 连接参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -422,12 +422,12 @@
 </table>
 
 
-##  Cluster parameters
+## 集群参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -447,12 +447,12 @@
 </table>
 
 
-##  Plugins configuration parameters
+## 插件配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -466,12 +466,12 @@
 </table>
 
 
-##  Security parameters
+## 安全参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -557,12 +557,12 @@
 </table>
 
 
-##  Mail settings parameters
+## 邮件设置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -582,12 +582,12 @@
 </table>
 
 
-##  Usage statistics parameters
+## 使用统计参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -637,12 +637,12 @@
 </table>
 
 
-##  UI settings parameters
+## UI 设置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -668,12 +668,12 @@
 </table>
 
 
-##  Database telemetry parameters
+## 数据库遥测参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -699,12 +699,12 @@
 </table>
 
 
-##  Cassandra driver configuration parameters
+## Cassandra 驱动配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1014,12 +1014,12 @@
 </table>
 
 
-##  SQL configuration parameters
+## SQL 配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1460,12 +1460,12 @@
 </table>
 
 
-##  Actor system parameters
+## Actor 系统参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1707,12 +1707,12 @@
 </table>
 
 
-##  Platform integrations parameters
+## 平台集成参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1774,7 +1774,7 @@
 			<td>integrations.rpc.ssl.enabled</td>
 			<td>INTEGRATIONS_RPC_SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable SSL support</td>
+			<td>启用/禁用 SSL 支持</td>
 		</tr>
 		<tr>
 			<td>integrations.rpc.ssl.cert</td>
@@ -1843,12 +1843,12 @@
 </table>
 
 
-##  Reports parameters
+## 报表参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1886,12 +1886,12 @@
 </table>
 
 
-##  Cache settings parameters
+## 缓存设置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2572,12 +2572,12 @@
 </table>
 
 
-##  Spring data parameters
+## Spring Data 参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2591,12 +2591,12 @@
 </table>
 
 
-##  Redis/Valkey configuration parameters
+## Redis/Valkey 配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2802,12 +2802,12 @@
 </table>
 
 
-##  Update version parameters
+## 更新版本参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2821,12 +2821,12 @@
 </table>
 
 
-##  Spring CORS configuration parameters
+## Spring CORS 配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2864,12 +2864,12 @@
 </table>
 
 
-##  General spring parameters
+## Spring 通用参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2943,12 +2943,12 @@
 </table>
 
 
-##  SQL DAO Configuration parameters
+## SQL DAO 配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3072,12 +3072,12 @@
 </table>
 
 
-##  Audit log parameters
+## 审计日志参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3281,12 +3281,12 @@
 </table>
 
 
-##  Device state parameters
+## 设备状态参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3342,12 +3342,12 @@
 </table>
 
 
-##  Tbel parameters
+## TBEL 参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3427,12 +3427,12 @@
 </table>
 
 
-##  JS parameters
+## JS 参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3554,12 +3554,12 @@
 </table>
 
 
-##  Transport configuration parameters
+## Transport 配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3754,7 +3754,7 @@
 			<td>transport.mqtt.ssl.enabled</td>
 			<td>MQTT_SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable SSL support</td>
+			<td>启用/禁用 SSL 支持</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.bind_address</td>
@@ -3802,19 +3802,19 @@
 			<td>transport.mqtt.ssl.credentials.keystore.type</td>
 			<td>MQTT_SSL_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td>Key store 类型（JKS 或 PKCS12）</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.keystore.store_file</td>
 			<td>MQTT_SSL_KEY_STORE</td>
 			<td>mqttserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td>存放 SSL 证书的 key store 路径</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.keystore.store_password</td>
 			<td>MQTT_SSL_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td>访问 key store 的密码</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.keystore.key_alias</td>
@@ -3954,31 +3954,31 @@
 			<td>transport.lwm2m.server.security.credentials.keystore.type</td>
 			<td>LWM2M_SERVER_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td>Key store 类型（JKS 或 PKCS12）</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.store_file</td>
 			<td>LWM2M_SERVER_KEY_STORE</td>
 			<td>lwm2mserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td>存放 SSL 证书的 key store 路径</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.store_password</td>
 			<td>LWM2M_SERVER_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td>访问 key store 的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.key_alias</td>
 			<td>LWM2M_SERVER_KEY_ALIAS</td>
 			<td>server</td>
-			<td> Key alias</td>
+			<td>Key 别名</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.key_password</td>
 			<td>LWM2M_SERVER_KEY_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key</td>
+			<td>访问 key 的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.skip_validity_check_for_client_cert</td>
@@ -4056,31 +4056,31 @@
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.type</td>
 			<td>LWM2M_BS_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td>Key store 类型（JKS 或 PKCS12）</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.store_file</td>
 			<td>LWM2M_BS_KEY_STORE</td>
 			<td>lwm2mserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td>存放 SSL 证书的 key store 路径</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.store_password</td>
 			<td>LWM2M_BS_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td>访问 key store 的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.key_alias</td>
 			<td>LWM2M_BS_KEY_ALIAS</td>
 			<td>bootstrap</td>
-			<td> Key alias</td>
+			<td>Key 别名</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.key_password</td>
 			<td>LWM2M_BS_KEY_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key</td>
+			<td>访问 key 的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.security.trust-credentials.enabled</td>
@@ -4104,7 +4104,7 @@
 			<td>transport.lwm2m.security.trust-credentials.keystore.type</td>
 			<td>LWM2M_TRUST_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td>Key store 类型（JKS 或 PKCS12）</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.security.trust-credentials.keystore.store_file</td>
@@ -4116,7 +4116,7 @@
 			<td>transport.lwm2m.security.trust-credentials.keystore.store_password</td>
 			<td>LWM2M_TRUST_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td>访问 key store 的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.security.recommended_ciphers</td>
@@ -4272,12 +4272,12 @@
 </table>
 
 
-##  CoAP server parameters
+## CoAP 服务器参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4397,31 +4397,31 @@
 			<td>coap.dtls.credentials.keystore.type</td>
 			<td>COAP_DTLS_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td>Key store 类型（JKS 或 PKCS12）</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.store_file</td>
 			<td>COAP_DTLS_KEY_STORE</td>
 			<td>coapserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td>存放 SSL 证书的 key store 路径</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.store_password</td>
 			<td>COAP_DTLS_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td>访问 key store 的密码</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.key_alias</td>
 			<td>COAP_DTLS_KEY_ALIAS</td>
 			<td>serveralias</td>
-			<td> Key alias</td>
+			<td>Key 别名</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.key_password</td>
 			<td>COAP_DTLS_KEY_PASSWORD</td>
 			<td>server_key_password</td>
-			<td> Password used to access the key</td>
+			<td>访问 key 的密码</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.x509.skip_validity_check_for_client_cert</td>
@@ -4445,12 +4445,12 @@
 </table>
 
 
-##  Device connectivity parameters
+## 设备连接参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4584,12 +4584,12 @@
 </table>
 
 
-##  Edges parameters
+## Edge 参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4633,7 +4633,7 @@
 			<td>edges.rpc.ssl.enabled</td>
 			<td>EDGES_RPC_SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable SSL support</td>
+			<td>启用/禁用 SSL 支持</td>
 		</tr>
 		<tr>
 			<td>edges.rpc.ssl.cert</td>
@@ -4711,12 +4711,12 @@
 </table>
 
 
-##  Spring doc common parameters
+## Spring Doc 通用参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4736,12 +4736,12 @@
 </table>
 
 
-##  Swagger common parameters
+## Swagger 通用参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4835,12 +4835,12 @@
 </table>
 
 
-##  Queue configuration parameters
+## 队列配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -6079,12 +6079,12 @@
 </table>
 
 
-##  Event configuration parameters
+## 事件配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -6116,12 +6116,12 @@
 </table>
 
 
-##  General service parameters
+## 通用服务参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -6166,12 +6166,12 @@
 </table>
 
 
-##  Metrics parameters
+## 指标参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -6203,12 +6203,12 @@
 </table>
 
 
-##  Version control parameters
+## Version Control 参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -6234,12 +6234,12 @@
 </table>
 
 
-##  Notification system parameters
+## 通知系统参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -6259,12 +6259,12 @@
 </table>
 
 
-##  General management parameters
+## 通用管理参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -6284,12 +6284,12 @@
 </table>
 
 
-##  Mobile application settings for Thingsboard mobile application
+## ThingsBoard 移动应用的移动应用设置
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Versioning and Release Policy
-description: Understand ThingsBoard's version numbering, support periods, upgrade procedures, and recommended Docker tags for your environment.
+title: 版本与发布策略
+description: 了解 ThingsBoard 版本编号、支持期限、升级流程及环境推荐 Docker 标签。
 
 ---
 

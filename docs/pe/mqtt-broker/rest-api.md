@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Administration REST API
-description: Administration REST API
+title: 管理 REST API
+description: 管理 REST API
 
 broker-swagger-ui:
     0:

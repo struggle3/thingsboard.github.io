@@ -2,13 +2,13 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Send email on alarm
-description: Send email Workflow
+title: 告警时发送邮件
+description: 告警时发送邮件工作流
 
 add-recipients:
     0:
         image: /images/tutorials/send-email/send-email-add-recipients-1-pe.png
-        title: 'Specify the notification recipients.'
+        title: '指定通知接收人。'
 
 add-template:
     0:

@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Access Token based authentication for MQTT
-description: ThingsBoard Access Token based authentication.
+title: 基于 Access Token 的 MQTT 认证
+description: ThingsBoard 基于 Access Token 的设备认证
 
 ---
 

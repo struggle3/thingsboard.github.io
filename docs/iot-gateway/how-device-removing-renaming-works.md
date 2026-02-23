@@ -1,29 +1,29 @@
 ---
 layout: docwithnav-gw
-title: Device Renaming/Removing Handling
-description: Device Renaming/Removing Handling
+title: 设备重命名/删除处理
+description: 设备重命名与删除处理机制
 
 ---
 
 
-If devices were provisioned using gateway API and later on the user with admin permissions renames or removes the device entity on ThingsBoard, the gateway will receive a notification about the change.  
+若设备通过 gateway API 完成供应，随后具备管理员权限的用户在 ThingsBoard 上重命名或删除该设备实体，网关将收到变更通知。
 
-This is mission critical for the gateway to keep up with actual device entity state.  
+对网关而言，这是与设备实体实际状态保持同步的关键机制。
 
-Before certain improvements, there might be cases when the gateway knew nothing about deleting or renaming of the device entity, so the physical device would sent data to non-existing endpoint.  
+在相关改进之前，可能出现网关对设备实体的删除或重命名一无所知，导致物理设备向已不存在的端点发送数据的情况。
 
-Starting TB v3.3.3 the platform resolves the issue using Persistent RPC to avoid above data loss scenarios. Below you may find more info on implementation of the solution.
+自 TB v3.3.3 起，平台通过 Persistent RPC 解决上述问题，避免数据丢失。以下为解决方案实现说明。
 
-1. Device renaming scenario    
-    Gateway uses a device entity name to report telemetry from connected devices. If the entity name was changed on ThingsBoard UI, end-user could encounter the re-provisioning of the device entity (by the gateway) with an old name. With to-gateway notification about renaming this is no more the case.  
+1. 设备重命名场景    
+    网关使用设备实体名称上报所连设备的遥测数据。若在 ThingsBoard 界面中修改了实体名称，终端用户可能遇到网关以旧名称重新供应设备实体的情况。有了面向网关的重命名通知，此问题已不复存在。
 
 
-2. Device removing scenario  
-    Deleting of the device entity on ThingsBoard UI caused a data loss as the gateway itself could not and cannot resolve the erasure properly. With "removed" notification sent to the gateway the latter initiates a new connect message on behalf of physical device, so the one is safe from data loss.  
+2. 设备删除场景  
+    在 ThingsBoard 界面删除设备实体会导致数据丢失，因为网关自身无法正确解析删除操作。向网关发送“已删除”通知后，网关会代表物理设备发起新的连接消息，从而避免数据丢失。
 
-RPC data examples to the gateway device:  
+下发至网关设备的 RPC 示例：  
 
-- Device renaming RPC:  
+- 设备重命名 RPC：  
 
     ```json
     {
@@ -32,7 +32,7 @@ RPC data examples to the gateway device:
     }
     ```
 
-- Device removal RPC:  
+- 设备删除 RPC：  
 
     ```json
     {
@@ -41,4 +41,4 @@ RPC data examples to the gateway device:
     }
     ```
 
-**ThingsBoard sets 1 day as a timeout for RPC.**  
+**ThingsBoard 将 RPC 超时时间设置为 1 天。**

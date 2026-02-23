@@ -1,6 +1,6 @@
-### 1M connection setup with Docker and Ubuntu
+### 使用Docker和Ubuntu的100万连接配置
 
-How to modify the docker file to handle more connections out of the box (optional)
+如何修改Docker文件以开箱即用地支持更多连接（可选）
 
 ```dockerfile
 FROM thingsboard/tb:latest
@@ -15,13 +15,13 @@ USER thingsboard
 ```
 {: .copy-code}
 
-Add lines to your limits.conf file.
+将以下行添加到limits.conf文件。
 
 cat | sudo tee -a /etc/security/limits.conf
 
 ```
 ## /etc/security/limits.conf
-## "nofile" mean "number of open files"
+## "nofile"表示"打开文件数"
 #<user>     <type>    <item>     <value>
 *           soft      nofile     1048576
 *           hard      nofile     1048576
@@ -29,31 +29,31 @@ root        soft      nofile     1048576
 root        hard      nofile     1048576
 ```
 
-Add lines to your sysctl.conf file.
+将以下行添加到sysctl.conf文件。
 
 cat | sudo tee -a /etc/sysctl.conf
 
 ```
 ## /etc/sysctl.conf
-## Increase outbound connections
+## 增加出站连接数
 net.ipv4.ip_local_port_range = 1024 65535
 
-## Increase inbound connections
-## 1M+ file descriptors
+## 增加入站连接数
+## 100万以上文件描述符
 fs.file-max = 1048576
 ```
 
-### m6a.2xlarge (8 vCPUs AMD EPYC 3rd, 32 GiB, EBS GP3) + Cassandra - 500k devices, 5k msg/sec, 15k tps
+### m6a.2xlarge（8 vCPU AMD EPYC 3rd、32 GiB、EBS GP3）+ Cassandra - 50万设备、5k条消息/秒、15k tps
 
-Architecture is 1 Thingsboard server + 20 client instances each supply 25k devices (500k in total).
+架构为1台ThingsBoard服务器 + 20台客户端实例，每台提供2.5万设备（共50万）。
 
-500k devices connected
+50万设备已连接
 
 ![](/images/reference/performance-aws-instances/method/m6a-2xlarge/500k-5k-15k/500k-is-connected-watsh-ss.png)
 
-### m6a.4xlarge (16 vCPUs AMD EPYC 3rd, 64 GiB, EBS GP3)- 500k devices, 10k msg, 30k tps - almost handle
+### m6a.4xlarge（16 vCPU AMD EPYC 3rd、64 GiB、EBS GP3）- 50万设备、10k条消息、30k tps - 几乎可承受
 
-Almost handle, but it's hard to handle 10k mps rate with 500k devices without further optimization. Work in progress!
+几乎可承受，但在50万设备下维持10k mps速率尚需进一步优化。持续改进中！
 
 ![](/images/reference/performance-aws-instances/method/m6a-4xlarge/500k-10k-30k/queue-stats.png)
 
@@ -63,11 +63,11 @@ Almost handle, but it's hard to handle 10k mps rate with 500k devices without fu
 
 ![](/images/reference/performance-aws-instances/method/m6a-4xlarge/500k-10k-30k/aws-storage-monitoring.png)
 
-### m6a.4xlarge (16 vCPUs AMD EPYC 3rd, 64 GiB, EBS GP3) + Cassandra - 1Million devices, 5k msg/sec, 15k tps
+### m6a.4xlarge（16 vCPU AMD EPYC 3rd、64 GiB、EBS GP3）+ Cassandra - 100万设备、5k条消息/秒、15k tps
 
-Architecture is 1 Thingsboard server + 32 clients instances each supply 31250 devices (1 million in total).
+架构为1台ThingsBoard服务器 + 32台客户端实例，每台提供31250台设备（共100万）。
 
-Prepare the instance `pt01` example. See the particular scripts that manages many instances at once
+准备`pt01`实例示例。参见同时管理多台实例的专用脚本
 
 ```bash
 ssh tb2 <<'ENDSSH'
@@ -112,9 +112,9 @@ nohup mvn spring-boot:run &
 ENDSSH
 ```
 
-Important: to handle more than 256k (limit depends on total memory size) TCP connections, please adjust the `conntrack_max` system parameter.
+重要：为处理超过256k（限制取决于总内存大小）的TCP连接，请调整`conntrack_max`系统参数。
 
-Run this once on `thingsboard` node to increase file descriptor and net filter limits. This is required to handle about 1M TCP connections.
+在`thingsboard`节点上运行一次以增加文件描述符和netfilter限制。处理约100万TCP连接需要此配置。
 
 ```bash
 ulimit -n 1048576
@@ -122,7 +122,7 @@ sudo sysctl -a | grep conntrack_max
 sudo sysctl -w net.netfilter.nf_conntrack_max=1048576
 ```
 
-scripts for managing 20-32 test instances
+管理20–32台测试实例的脚本
 
 _includes/docs/reference/performance-scripts/*.sh
 init-tests.sh
@@ -132,10 +132,10 @@ run-test.sh
 ssh-tests.sh
 test-ips.sh
 
-Here the docker-compose config
+docker-compose配置如下
 
 ```bash
-#1M (million) devices
+#100万设备
 version: '3.0'
 services:
   cassandra:
@@ -263,12 +263,12 @@ volumes: # to persist data between container restarts or being recreated
 ```
 {: .copy-code}
 
-How to forward JMX port with ssh for all Java application in this deployment.
+如何通过SSH为此部署中所有Java应用转发JMX端口。
 ```bash
 ssh -L 9999:127.0.0.1:9999 -L 1099:127.0.0.1:1099 -L 9199:127.0.0.1:9199 -L 7199:127.0.0.1:7199 thingsboard 
 ```
 
-Enable pg_stat_statements preload library for PostgreSQL
+为PostgreSQL启用pg_stat_statements预加载库
 ```bash
 #config before 
 docker exec -it ubuntu_postgres_1 tail /var/lib/postgresql/data/postgresql.conf
@@ -280,10 +280,10 @@ exit
 docker exec -it ubuntu_postgres_1 tail /var/lib/postgresql/data/postgresql.conf
 ```
 
-Check network connection count.
+检查网络连接数。
 `watch -n 1 ss -s`
 
-How to make a Java heap dump
+如何生成Java堆转储
 ```bash
 ssh thingsboard
 #docker exec -it ubuntu_tb_1 /bin/bash
@@ -294,11 +294,11 @@ docker exec -it ubuntu_tb_1 jmap -dump:live,format=b,file=/data/dump.hprof 8
 sudo mv /var/lib/docker/volumes/ubuntu_thingsboard-data/_data/dump.hprof ~
 sudo chown ubuntu:ubuntu ~/dump.hprof
 exit
-#copy with compression - much faster
+#带压缩复制，速度更快
 scp -C tb2:/home/ubuntu/dump.hprof ~
 ```
 
-Here the results for 1M devices!
+100万设备的测试结果如下！
 
 ![](/images/reference/performance-aws-instances/method/m6a-4xlarge/500k-10k-30k/queue-stats.png)
 
@@ -308,8 +308,8 @@ Here the results for 1M devices!
 
 ![](/images/reference/performance-aws-instances/method/m6a-4xlarge/500k-10k-30k/aws-storage-monitoring.png)
 
-Conclusion:
-1. We did it! Thingsboard has been demonstrated the code and design quality.
-2. It is too risky to go production with monolith with more than 100k devices on a single node.
-3. Never do such experiments on the production environment.
-4. This case helps to discover the bottlenecks and further improve performance.
+结论：
+1. 我们做到了！ThingsBoard展现了良好的代码与设计质量。
+2. 在单节点上以单体部署超过10万设备投入生产风险较高。
+3. 切勿在生产环境中进行此类实验。
+4. 本案例有助于发现瓶颈并进一步优化性能。

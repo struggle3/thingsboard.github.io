@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: TBMQ installation options
-description: TBMQ installation instructions for various operation systems
+title: TBMQ 安装选项
+description: TBMQ 各操作系统的安装说明
 notitle: "true"
 ---
 
@@ -10,7 +10,7 @@ notitle: "true"
        <div class="install-options-hero">
           <div class="container">
             <div class="install-options-hero-content">
-                <h1>TBMQ installation options</h1>
+                <h1>TBMQ 安装选项</h1>
             </div>
             <div class="deployment-container">
                 <div class="deployment-div">

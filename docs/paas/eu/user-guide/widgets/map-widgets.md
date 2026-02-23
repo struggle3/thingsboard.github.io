@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Map widgets
-description: Map widgets
+title: 地图部件
+description: 地图部件
 
 adding-map-widget:
     0:

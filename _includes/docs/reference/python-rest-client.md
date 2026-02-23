@@ -4,25 +4,24 @@
  
 ## Python REST Client
 
-The ThingsBoard Python REST API Client helps you interact with ThingsBoard REST API from your Python script.
-With Python Rest Client you can programmatically create assets, devices, customers, users and other entities and their relations in ThingsBoard.
+ThingsBoard Python REST API客户端可帮助您使用Python脚本与ThingsBoard REST API交互。
+使用Python REST客户端，您可以在ThingsBoard中以编程方式创建资产、设备、客户、用户及其他实体及其关联关系。
 
-Source code of the Python REST API Client you can find [here](https://github.com/thingsboard/python_tb_rest_client).
+Python REST API客户端源代码见[此处](https://github.com/thingsboard/python_tb_rest_client)。
 
-In order to install the ThingsBoard Python REST client, you should use the following command:
+要安装ThingsBoard Python REST客户端，请使用以下命令：
 
 ```bash
 pip3 install tb-rest-client
 ``` 
 {:.copy-code}
 
-## Python REST Client examples
+## Python REST Client示例
 
-### Basic usage
-You can find the example script **[here](https://github.com/thingsboard/python_tb_rest_client/blob/master/examples/example_application.py)**.
+### 基本用法
+示例脚本见**[此处](https://github.com/thingsboard/python_tb_rest_client/blob/master/examples/example_application.py)**。
 
-The example listened below shows basic usage of REST client, namely how to perform a login, create a new Asset and Device instances,
-and how to establish relationships with them.
+下方示例展示REST客户端的基本用法，即如何执行登录、创建新的Asset和Device实例，以及如何建立它们之间的关联关系。
 
 ```python
 import logging
@@ -85,11 +84,10 @@ if __name__ == '__main__':
     main()
 ```
 
-### API key authentication (from ThingsBoard 4.3+)
+### API密钥认证（自ThingsBoard 4.3+）
 
-The following code sample demonstrates how to use API key authentication with ThingsBoard REST API.
-Make sure you have created an API key for your user before running the example. Also, ensure to replace 
-`"YOUR_API_KEY_HERE"` with your actual API key value and the `url` variable with your ThingsBoard instance URL.
+以下代码示例演示如何配合ThingsBoard REST API使用API密钥认证。
+运行示例前请确保已为您的用户创建API密钥。同时请将`"YOUR_API_KEY_HERE"`替换为实际API密钥值，将`url`变量替换为您的ThingsBoard实例URL。
 
 ```python
 import logging
@@ -137,9 +135,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### Managing device
+### 管理设备
 
-The following code sample demonstrates basic concepts of device management API (add/get/delete device, get/save device attributes).
+以下代码示例演示设备管理API的基本概念（添加/获取/删除设备，获取/保存设备属性）。
 
 ```python
 import logging
@@ -195,9 +193,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### Fetch tenant devices
+### 获取租户设备
 
-The following code sample shows how to fetch tenant devices via page link.
+以下代码示例展示如何通过分页链接获取租户设备。
 
 ```python
 import logging
@@ -234,9 +232,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### Fetch tenant dashboards
+### 获取租户仪表板
 
-The following code sample shows how to fetch tenant dashboards via page link.
+以下代码示例展示如何通过分页链接获取租户仪表板。
 
 ```python
 import logging
@@ -272,9 +270,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### Count entities using Entity Data Query API
+### 使用Entity Data Query API统计实体数量
 
-The following code sample shows how to use Entity Data Query API to count the total number of devices.
+以下代码示例展示如何使用Entity Data Query API统计设备总数。
 
 ```python
 import logging
@@ -315,153 +313,153 @@ with RestClientCE(base_url=url) as rest_client:
         logging.exception(e)
 ```
 
-### Configure version control feature from console
+### 从控制台配置版本控制功能
 
-This feature is available in ThingsBoard 3.4+. 
-We have designed script, based on tb-rest-client library to make example how to use ability to configure ThingsBoard from your code.  
-The latest source code of the script is available [here](https://github.com/thingsboard/thingsboard-python-rest-client/blob/master/examples/configure_vcs_access.py).
-In this example we configure [version control feature](/docs/user-guide/version-control) on ThingsBoard.  
+该功能自ThingsBoard 3.4+可用。
+我们基于tb-rest-client库设计了脚本，作为从代码配置ThingsBoard的示例。
+脚本最新源代码见[此处](https://github.com/thingsboard/thingsboard-python-rest-client/blob/master/examples/configure_vcs_access.py)。
+本示例中我们在ThingsBoard上配置[版本控制功能](/docs/user-guide/version-control)。
 
-There are 2 possible ways to configure version control system (VCS):   
-1. Using access token/password of your VCS account.  
-2. Using private key.  
+配置版本控制系统（VCS）有两种方式：   
+1. 使用VCS账户的access token/密码。  
+2. 使用私钥。  
 
-#### Configuring version control system using access token or password  
+#### 使用access token或密码配置版本控制系统  
 
-To configure this feature we will need the command line arguments and data:  
+配置此功能需要以下命令行参数和数据：  
 
-| Command line argument | Description                                                                                          |
+| 命令行参数 | 说明                                                                                          |
 |-----------------------|------------------------------------------------------------------------------------------------------|
-| -H                    | **ThingsBoard host (Default: localhost)**                                                            |
-| -p                    | **ThingsBoard port (Default: 80)**                                                                   |
-| -U                    | **ThingsBoard user (email for login)**                                                               |
-| -P                    | **ThingsBoard user password**                                                                        |
-| -r                    | **Repository uri, link to your repository**                                                          |
-| -b                    | **Default branch (Default: main)**                                                                   |
-| -gu                   | **VCS username** (This parameter named GITHUB_USERNAME, but it can work with any VCS)                |
-| -gp                   | **VCS access token / password** (This parameter named GITHUB_PASSWORD, but it can work with any VCS) |
+| -H                    | **ThingsBoard主机（默认：localhost）**                                                            |
+| -p                    | **ThingsBoard端口（默认：80）**                                                                   |
+| -U                    | **ThingsBoard用户（登录邮箱）**                                                               |
+| -P                    | **ThingsBoard用户密码**                                                                        |
+| -r                    | **仓库URI，您的仓库链接**                                                          |
+| -b                    | **默认分支（默认：main）**                                                                   |
+| -gu                   | **VCS用户名**（此参数名为GITHUB_USERNAME，但可与任意VCS配合使用）                |
+| -gp                   | **VCS access token/密码**（此参数名为GITHUB_PASSWORD，但可与任意VCS配合使用） |
 
-*You always can get the full list of arguments by calling script with no arguments or with* **-h** *argument.*
+*可通过无参数或**-h**参数调用脚本获取完整参数列表。*
 
-To configure the version control feature we should have installed [tb-rest-client](#python-rest-client) python package and download the script:
+要配置版本控制功能，需先安装[tb-rest-client](#python-rest-client) Python包并下载脚本：
 
 ```bash
 wget https://github.com/thingsboard/thingsboard-python-rest-client/blob/master/examples/configure_vcs_access.py
 ```
 {:.copy-code}
 
-Now we can run the script and configure version control feature (Do not forget to put your values).  
+现在可运行脚本并配置版本控制功能（请勿忘记填入您的实际值）。  
 
 ```bash
 python3 configure_vcs_access.py -H YOUR_THINGSBOARD_HOST -p YOUR_THINGSBOARD_PORT -U YOUR_THINGSBOARD_USER_EMAIL -P YOUR_THINGSBOARD_USER_PASSWORD -r YOUR_REPOSITORY_URL -b DEFAULT_BRANCH -gu YOUR_VCS_USERNAME -gp YOUR_VCS_ACCESSTOKEN_OR_PASSWORD
 ```
 {:.copy-code}
 
-#### Configuring version control system using private key  
+#### 使用私钥配置版本控制系统  
 
-To configure this feature we will need next command line arguments and data:  
+配置此功能需要以下命令行参数和数据：  
 
-| Command line argument | Description                                                                           |
+| 命令行参数 | 说明                                                                           |
 |-----------------------|---------------------------------------------------------------------------------------|
-| -H                    | **ThingsBoard host (Default: localhost)**                                             |
-| -p                    | **ThingsBoard port (Default: 80)**                                                    |
-| -U                    | **ThingsBoard user (email for login)**                                                |
-| -P                    | **ThingsBoard user password**                                                         |
-| -r                    | **Repository uri, link to your repository**                                           |
-| -b                    | **Default branch (Default: main)**                                                    |
-| -gu                   | **VCS username** (This parameter named GITHUB_USERNAME, but it can work with any VCS) |
-| -pk                   | **Path to private key**                                                               |
-| -pkp                  | **Password for private key (If it was set)**                                          |
+| -H                    | **ThingsBoard主机（默认：localhost）**                                             |
+| -p                    | **ThingsBoard端口（默认：80）**                                                    |
+| -U                    | **ThingsBoard用户（登录邮箱）**                                                |
+| -P                    | **ThingsBoard用户密码**                                                         |
+| -r                    | **仓库URI，您的仓库链接**                                           |
+| -b                    | **默认分支（默认：main）**                                                    |
+| -gu                   | **VCS用户名**（此参数名为GITHUB_USERNAME，但可与任意VCS配合使用） |
+| -pk                   | **私钥路径**                                                               |
+| -pkp                  | **私钥密码（如已设置）**                                          |
 
-*You always can get the full list of arguments by calling script with no arguments or with* **-h** *argument.*
+*可通过无参数或**-h**参数调用脚本获取完整参数列表。*
 
-To configure the version control feature we should have installed [tb-rest-client](#python-rest-client) python package and download the script:
+要配置版本控制功能，需先安装[tb-rest-client](#python-rest-client) Python包并下载脚本：
 
 ```bash
 wget https://raw.githubusercontent.com/thingsboard/thingsboard-python-rest-client/master/examples/configure_vcs_access.py
 ```
 {:.copy-code}
 
-Now we can run the script and configure version control feature (Do not forget to put your values).  
+现在可运行脚本并配置版本控制功能（请勿忘记填入您的实际值）。  
 
 ```bash
 python3 configure_vcs_access.py -H YOUR_THINGSBOARD_HOST -p YOUR_THINGSBOARD_PORT -U YOUR_THINGSBOARD_USER_EMAIL -P YOUR_THINGSBOARD_USER_PASSWORD -r YOUR_REPOSITORY_URL -b DEFAULT_BRACH -gu YOUR_VCS_USERNAME -pk PATH_TO_YOUR_PRIVATE_KEY -pkp YOUR_PRIVATE_KEY_PASSWORD
 ```
 {:.copy-code}
 
-### Saving all entities to version control system
+### 将所有实体保存到版本控制系统
 
-You can use the following script, based on [tb-rest-client](#python-rest-client) to save current state of your entities to your repository on version control system.
+您可使用基于[tb-rest-client](#python-rest-client)的以下脚本，将实体当前状态保存到版本控制系统中的仓库。
 
-The latest source code you can find [here](https://github.com/thingsboard/thingsboard-python-rest-client/blob/master/examples/load_all_entities_to_vcs_ce.py).
+最新源代码见[此处](https://github.com/thingsboard/thingsboard-python-rest-client/blob/master/examples/load_all_entities_to_vcs_ce.py)。
 
 
-To save entities from command line we will use the following arguments and data:  
+从命令行保存实体时将使用以下参数和数据：  
 
-| Command line argument | Description                                                                                          |
+| 命令行参数 | 说明                                                                                          |
 |-----------------------|------------------------------------------------------------------------------------------------------|
-| -H                    | **ThingsBoard host (Default: localhost)**                                                            |
-| -p                    | **ThingsBoard port (Default: 80)**                                                                   |
-| -U                    | **ThingsBoard user (email for login)**                                                               |
-| -P                    | **ThingsBoard user password**                                                                        |
-| -b                    | **Default branch (Default: main)**                                                                   |
-| -N                    | **Version name (If not provided will be generated 5 random letters and numbers and used as a name)** |
-| --save_attributes     | **Optional, do we need to save attributes for target entities (Default: True)**                      |
-| --save_credentials    | **Optional, do we need to save credentials for target entities (Default: True)**                     |
-| --save_relations      | **Optional, do we need to save relations for target entities (Default: True)**                       |
-| --sync_strategy       | **Optional, Sync strategy for entities can be OVERWRITE and MERGE (Default: MERGE)**                 |
+| -H                    | **ThingsBoard主机（默认：localhost）**                                                            |
+| -p                    | **ThingsBoard端口（默认：80）**                                                                   |
+| -U                    | **ThingsBoard用户（登录邮箱）**                                                               |
+| -P                    | **ThingsBoard用户密码**                                                                        |
+| -b                    | **默认分支（默认：main）**                                                                   |
+| -N                    | **版本名称（如未提供将生成5位随机字母数字作为名称）** |
+| --save_attributes     | **可选，是否保存目标实体属性（默认：True）**                      |
+| --save_credentials    | **可选，是否保存目标实体凭证（默认：True）**                     |
+| --save_relations      | **可选，是否保存目标实体关联（默认：True）**                       |
+| --sync_strategy       | **可选，实体同步策略可为OVERWRITE和MERGE（默认：MERGE）**                 |
 
-*You always can get the full list of arguments by calling script with no arguments or with* **-h** *argument.*
+*可通过无参数或**-h**参数调用脚本获取完整参数列表。*
 
-Let's download the script:
+下载脚本：
 ```bash
 wget https://raw.githubusercontent.com/thingsboard/thingsboard-python-rest-client/master/examples/load_all_entities_to_vcs_ce.py
 ```
 
-Now we can run our script and save our entities to the repository on version control system, we will publish to default branch with default settings to show minimal required configuration:
+现在可运行脚本并将实体保存到版本控制系统的仓库，我们将使用默认设置发布到默认分支以展示最小所需配置：
 
 ```bash
 python3 load_all_entities_to_vcs_ce.py -H YOUR_THINGSBOARD_HOST -p YOUR_THINGSBOARD_PORT -U YOUR_THINGSBOARD_USER_EMAIL -P YOUR_THINGSBOARD_USER_PASSWORD
 ```
 
-In output message you will receive information about how many entities were saved.
+输出消息中将显示已保存的实体数量。
 
-### Loading all entities from version control system
+### 从版本控制系统加载所有实体
 
-You can use the following script, based on [tb-rest-client](#python-rest-client) to save current state of your entities to your repository on version control system.
+您可使用基于[tb-rest-client](#python-rest-client)的以下脚本，从版本控制系统仓库加载实体。
 
-The latest source code you can find [here](https://github.com/thingsboard/thingsboard-python-rest-client/blob/master/examples/load_all_entities_from_vcs_ce.py).
+最新源代码见[此处](https://github.com/thingsboard/thingsboard-python-rest-client/blob/master/examples/load_all_entities_from_vcs_ce.py)。
 
 
-To load entities from command line we will use the following arguments and data:  
+从命令行加载实体时将使用以下参数和数据：  
 
-| Command line argument | Description                                                                                                                            |
+| 命令行参数 | 说明                                                                                                                            |
 |-----------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| -H                    | **ThingsBoard host (Default: localhost)**                                                                                              |
-| -p                    | **ThingsBoard port (Default: 80)**                                                                                                     |
-| -U                    | **ThingsBoard user (email for login)**                                                                                                 |
-| -P                    | **ThingsBoard user password**                                                                                                          |
-| -b                    | **Default branch (Default: main)**                                                                                                     |
-| -N                    | **Version name (You can provide a part of the version name and script will propose you all find versions that include provided name)** |
-| --load_attributes     | **Optional, do we need to load attributes for target entities (Default: True)**                                                        |
-| --load_credentials    | **Optional, do we need to load credentials for target entities (Default: True)**                                                       |
-| --load_relations      | **Optional, do we need to load relations for target entities (Default: True)**                                                         |
-| --sync_strategy       | **Optional, Sync strategy for existing entities can be OVERWRITE and MERGE (Default: MERGE)**                                          |
+| -H                    | **ThingsBoard主机（默认：localhost）**                                                                                              |
+| -p                    | **ThingsBoard端口（默认：80）**                                                                                                     |
+| -U                    | **ThingsBoard用户（登录邮箱）**                                                                                                 |
+| -P                    | **ThingsBoard用户密码**                                                                                                          |
+| -b                    | **默认分支（默认：main）**                                                                                                     |
+| -N                    | **版本名称（可提供版本名部分，脚本将列出包含该名称的所有匹配版本）** |
+| --load_attributes     | **可选，是否加载目标实体属性（默认：True）**                                                        |
+| --load_credentials    | **可选，是否加载目标实体凭证（默认：True）**                                                       |
+| --load_relations      | **可选，是否加载目标实体关联（默认：True）**                                                         |
+| --sync_strategy       | **可选，现有实体同步策略可为OVERWRITE和MERGE（默认：MERGE）**                                          |
 
-*You always can get the full list of arguments by calling script with no arguments or with* **-h** *argument.*
+*可通过无参数或**-h**参数调用脚本获取完整参数列表。*
 
-Let's download the script:
+下载脚本：
 ```bash
 wget https://raw.githubusercontent.com/thingsboard/thingsboard-python-rest-client/master/examples/load_all_entities_from_vcs_ce.py
 ```
 
-Now we can run our script and restore entities version and state from the repository on version control system:
+现在可运行脚本，从版本控制系统仓库恢复实体的版本和状态：
 
 ```bash
 python3 load_all_entities_from_vcs_ce.py -H YOUR_THINGSBOARD_HOST -p YOUR_THINGSBOARD_PORT -U YOUR_THINGSBOARD_USER_EMAIL -P YOUR_THINGSBOARD_USER_PASSWORD -N YOUR_VERSION_NAME 
 ```
 
-In output you will receive information about how many entities were loaded.
+输出中将显示已加载的实体数量。
 
 
-**The Professional Edition Python REST Client example you can find [here](/docs/pe/reference/python-rest-client/#professional-edition-python-rest-client-example).**
+**专业版Python REST Client示例见[此处](/docs/pe/reference/python-rest-client/#professional-edition-python-rest-client-example)。**

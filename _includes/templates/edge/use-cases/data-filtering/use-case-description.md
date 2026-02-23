@@ -1,20 +1,20 @@
-This use case demonstrates how to configure an "in-vehicle IoT monitoring system" connected to ThingsBoard **Edge** platform. 
+本使用场景演示如何配置连接至 ThingsBoard **Edge** 平台的「车载 IoT 监控系统」。
 
-The goal is to collect data from various sensors, process it locally on the **Edge**, and selectively push relevant data (e.g., mileage readings) to the cloud. This setup ensures efficient tracking of the remaining mileage until the next oil change.
+目标是采集多类传感器数据，在 **Edge** 上本地处理，并选择性地将相关数据（如里程读数）推送到云端。该配置可高效追踪下次换油前的剩余里程。
 
-To achieve this, we will configure the "Edge Root Rule Chain" to process sensor readings locally on the ThingsBoard **Edge** platform. This setup will handle inputs from all 10 sensors and use a rule node to filter and forward only the distance readings (mileage) to the cloud.
+为此，将配置「Edge Root Rule Chain」在 ThingsBoard **Edge** 平台上本地处理传感器读数。该配置将处理全部 10 个传感器的输入，并使用规则节点过滤并仅将 distance（里程）读数转发至云端。
 
-The "in-vehicle monitoring system" includes 10 sensors:
-* Distance
-* Gas consumption
-* Vehicle speed
-* Engine temperature
-* Ambient temperature
-* Tire temperature
-* Pressure in each tire (4x)
+「车载 IoT 监控系统」包含 10 个传感器：
+* 里程
+* 燃油消耗
+* 车速
+* 发动机温度
+* 环境温度
+* 轮胎温度
+* 各轮胎气压（4x）
 
-ThingsBoard **Edge** has the following responsibilities:
-* Collecting readings from all 10 sensors
-* Sending only "distance" readings to the cloud
+ThingsBoard **Edge** 的职责包括：
+* 采集全部 10 个传感器的读数
+* 仅将「distance」读数发送至云端
 
-Please note that this is just a simple theoretical use case to demonstrate the capabilities of the platform. You can use this tutorial as a basis for much more complex scenarios.
+请注意，这仅为演示平台能力的简单理论场景。您可将本教程作为更复杂场景的基础。

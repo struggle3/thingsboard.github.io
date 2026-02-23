@@ -1,4 +1,4 @@
-You can use our example of downlink converter or write your own according to your configuration:
+可使用我们的 downlink converter 示例，或根据您的配置自行编写：
 
 ```javascript
 // Encode downlink data from incoming Rule Engine message

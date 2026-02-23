@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: save attributes
-description: Stores the incoming message data as attribute data of the message originator.
+title: 保存 attributes
+description: 将入站消息数据存储为消息 originator 的 attribute 数据。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

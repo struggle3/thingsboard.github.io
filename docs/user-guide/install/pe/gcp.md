@@ -2,9 +2,9 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: GCP cluster setup
+title: GCP 集群设置
 notitle: "true"
-description: ThingsBoard IoT platform  GCP cluster setup guide
+description: ThingsBoard IoT 平台 GCP 集群设置指南
 
 ---
 
@@ -13,10 +13,10 @@ description: ThingsBoard IoT platform  GCP cluster setup guide
        <div class="install-options-hero">
           <div class="container">
             <div class="install-options-hero-content">
-                <h1>ThingsBoard Setup options on GCP</h1>
+                <h1>GCP 上的 ThingsBoard 设置选项</h1>
                 <div class="install-options-description">
                     <p>
-                        You may deploy ThingsBoard IoT Platform using different tools and platforms
+                        您可使用不同的工具和平台部署 ThingsBoard IoT 平台
                     </p>
                 </div>
             </div>

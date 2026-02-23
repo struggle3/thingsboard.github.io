@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: aws sqs
-description: Publishes incoming message data to AWS Simple Queue Service (SQS) queue and returns response metadata in the outgoing message.
+description: 将入站消息数据发布到 AWS Simple Queue Service (SQS) 队列，并在出站消息中返回响应 metadata。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

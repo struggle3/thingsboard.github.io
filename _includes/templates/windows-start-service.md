@@ -1,19 +1,19 @@
-Now let's start the ThingsBoard service!
-Open the command prompt as an Administrator and execute the following command:
+现在启动 ThingsBoard 服务！
+以管理员身份打开命令提示符并执行以下命令：
 
 ```shell
 net start thingsboard
 ```
 {: .copy-code}
 
-Expected output:
+预期输出：
 
 ```text
 The ThingsBoard Server Application service is starting.
 The ThingsBoard Server Application service was started successfully.
 ```
 
-In order to restart the ThingsBoard service you can execute following commands:
+要重启 ThingsBoard 服务，可执行以下命令：
 
 ```shell
 net stop thingsboard
@@ -21,17 +21,17 @@ net start thingsboard
 ```
 {: .copy-code}
 
-Once started, you will be able to open Web UI using the following link:
+启动后，可通过以下链接打开 Web UI：
 
 ```bash
 http://localhost:8080/
 ```
 {: .copy-code}
 
-The following default credentials are available if you have specified *--loadDemo* during execution of the installation script:
+若在运行安装脚本时指定了 *--loadDemo*，可使用以下默认凭证：
 
-- **System Administrator**: sysadmin@thingsboard.org / sysadmin
-- **Tenant Administrator**: tenant@thingsboard.org / tenant
-- **Customer User**: customer@thingsboard.org / customer
+- **System Administrator**：sysadmin@thingsboard.org / sysadmin
+- **Tenant Administrator**：tenant@thingsboard.org / tenant
+- **Customer User**：customer@thingsboard.org / customer
 
-You can always change passwords for each account in account profile page.
+可随时在账户资料页面修改各账户密码。

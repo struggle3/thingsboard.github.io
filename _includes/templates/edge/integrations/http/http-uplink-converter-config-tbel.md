@@ -1,4 +1,4 @@
-Copy the following script:
+复制以下脚本：
 
 ```ruby
 // Decode an uplink message from a buffer
@@ -35,6 +35,6 @@ return result;
 ```
 {: .copy-code}
 
-Choose "Create new" and paste copied code to the Decoder function section. Click "Next";
+选择「创建新转换器」并将代码粘贴到 Decoder 函数区域，点击「下一步」；
 
 ![image](/images/pe/edge/integrations/http/add-http-integration-template-2-edge.png)

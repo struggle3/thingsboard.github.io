@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Propagation calculated field
-description: For complex calculations, TBEL is used. It enables advanced operations such as conditional statements, loops, and access to historical data.
+title: 传播计算字段
+description: 用于将计算值传播至关联实体。TBEL支持条件语句、循环及历史数据访问等高级操作。
 breadcrumbs: "true"
 breadcrumbs-steps: "1"
 hidetoc: "true"

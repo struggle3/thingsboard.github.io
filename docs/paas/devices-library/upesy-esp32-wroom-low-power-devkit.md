@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect uPesy ESP32 Wroom Low Power DevKit to ThingsBoard?"
+title: "如何将uPesy ESP32 Wroom Low Power DevKit连接到ThingsBoard？"
 redirect_to: "/device-library/paas/upesy-esp32-wroom-low-power-devkit/"
 ---

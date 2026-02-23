@@ -1,14 +1,13 @@
-Duplicates an incoming message to every entity belonging to an entity group that is dynamically resolved by its name and type.
+将入站消息复制到按名称和类型动态解析的实体组内的每个实体。
 
-## Configuration
+## 配置
 
-The node finds a target entity group by its name. The search logic depends on the configuration.
+节点按名称查找目标实体组。查找逻辑取决于配置。
 
-- **Type** - the entity type of the entities within the group (e.g., *Device*, *Asset*).
-- **Entity group name** - the name of the group to find. This field supports templates to dynamically extract the name from the message data or metadata (e.g., `${groupName}`).
-- **Search entity group on Tenant level only** - if enabled, the search is restricted to only those groups directly owned by the Tenant.
-- **Consider originator as a group owner** - if enabled, the search for the group starts from the message originator's level (if the originator is a Tenant or Customer). If
-  disabled, the search starts from the level of the originator's direct owner.
+- **Type** — 组内实体的实体类型（如 *Device*、*Asset*）。
+- **Entity group name** — 要查找的组名称。该字段支持模板，可从消息 data 或 metadata 动态提取名称（如 `${groupName}`）。
+- **Search entity group on Tenant level only** — 启用后，仅在租户直接拥有的组中查找。
+- **Consider originator as a group owner** — 启用后，从消息来源实体的层级开始查找组（若来源实体为 Tenant 或 Customer）。禁用时，从来源实体直接拥有者的层级开始查找。
 
 ### JSON Schema
 
@@ -55,41 +54,40 @@ The node finds a target entity group by its name. The search logic depends on th
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node resolves the **Group name** by processing the configured pattern against the incoming message data and metadata.
-2. It then determines the starting point for the group search based on the configuration flags and the message originator.
-    - If **Search entity group on Tenant level only** is enabled, it looks for the group under the Tenant only.
-    - If **Consider originator as a group owner** is enabled (and the originator is a Tenant or Customer), the search begins from the originator itself.
-    - Otherwise, the search begins from the direct owner of the message originator (e.g., a Customer that owns a Device).
-3. The node searches for an entity group matching the resolved name and configured type. If a group is not found at the starting level, the search moves up the ownership
-   hierarchy (e.g., from Customer to Tenant).
-4. If no matching group is found anywhere in the hierarchy, the processing fails.
-5. Once the group is found, the node fetches a list of all its member entities.
-6. For **each entity** in the group, a new message is created. This new message is a copy of the original, but its originator is set to the current entity from the group.
-7. All newly created messages are sent out via the `Success` chain. The original message is acknowledged once all duplicates have been successfully enqueued.
-8. If the target entity group is found but is empty, the processing fails and the original message is routed to the `Failure` chain.
+1. 节点通过处理入站消息 data 和 metadata 上的配置模式来解析**组名称**。
+2. 根据配置标志和消息来源实体确定组查找的起点。
+    - 若**Search entity group on Tenant level only**已启用，仅在 Tenant 下查找组。
+    - 若**Consider originator as a group owner**已启用（且来源实体为 Tenant 或 Customer），从来源实体本身开始查找。
+    - 否则，从消息来源实体的直接拥有者（如拥有设备的 Customer）层级开始查找。
+3. 节点查找与解析出的名称和配置类型匹配的实体组。若在起点层级未找到组，沿拥有层级向上查找（如从 Customer 到 Tenant）。
+4. 若在层级中任何地方都未找到匹配组，处理失败。
+5. 找到组后，节点获取其所有成员实体列表。
+6. 对组内**每个实体**创建一条新消息。该新消息为原始消息的副本，但将来源实体设为组中的当前实体。
+7. 所有新消息经 `Success` 链发送。所有副本成功入队后确认原始消息。
+8. 若找到目标实体组但为空，处理失败，原始消息经 `Failure` 链路由。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - New messages (one for each entity in the group) are sent through this chain.
-- `Failure`:
-    - If no entity group matching the name and type is found.
-    - If the found entity group is empty.
-    - If any other unexpected error occurs.
+- `Success`：
+    - 新消息（组内每个实体一条）经此链发送。
+- `Failure`：
+    - 未找到与名称和类型匹配的实体组时。
+    - 找到的实体组为空时。
+    - 发生其他意外错误时。
 
-## Examples
+## 示例
 
-### Example 1 — Search starting from originator's owner
+### 示例 1 — 从来源实体的拥有者开始查找
 
-**Incoming message**
+**入站消息**
 
 Originator: `Device A`
 
 Data: `{"command": "update_firmware"}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -100,37 +98,36 @@ Data: `{"command": "update_firmware"}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- A Tenant owns `Customer A`.
-- `Customer A` owns `Device A`.
-- `Customer A` also owns a device group named `Factory A Devices`, which contains two entities: `Device B` and `Device C`.
+- Tenant 拥有 `Customer A`。
+- `Customer A` 拥有 `Device A`。
+- `Customer A` 还拥有名为 `Factory A Devices` 的设备组，包含 `Device B` 和 `Device C`。
 
-**Outgoing messages**
+**出站消息**
 
-Two new messages are created and sent via the `Success` chain:
+经 `Success` 链创建并发送两条新消息：
 
-1. **Message 1**:
-    - **Originator**: `Device B`
-    - **Data**: `{"command": "update_firmware"}`
-2. **Message 2**:
-    - **Originator**: `Device C`
-    - **Data**: `{"command": "update_firmware"}`
+1. **Message 1**：
+    - **Originator**：`Device B`
+    - **Data**：`{"command": "update_firmware"}`
+2. **Message 2**：
+    - **Originator**：`Device C`
+    - **Data**：`{"command": "update_firmware"}`
 
-**Explanation**: Since `considerMessageOriginatorAsAGroupOwner` is `false`, the search starts from the owner of `Device A`, which is `Customer A`. It finds the group
-`Factory A Devices` under `Customer A` and duplicates the message to its members.
+**说明**：由于 `considerMessageOriginatorAsAGroupOwner` 为 `false`，查找从 `Device A` 的拥有者 `Customer A` 开始。在 `Customer A` 下找到组 `Factory A Devices`，将消息复制到其成员。
 
 -----
 
-### Example 2 — Hierarchical search (owner to tenant)
+### 示例 2 — 层级查找（拥有者到租户）
 
-**Incoming message**
+**入站消息**
 
 Originator: `Asset X`
 
 Data: `{"status": "maintenance_required"}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -141,38 +138,37 @@ Data: `{"status": "maintenance_required"}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- A Tenant owns `Customer B`.
-- `Customer B` owns `Asset X`.
-- `Customer B` does **not** own an asset group named `All Factory Assets`.
-- The **Tenant** owns an asset group named `All Factory Assets`, which contains `Asset Y` and `Asset Z`.
+- Tenant 拥有 `Customer B`。
+- `Customer B` 拥有 `Asset X`。
+- `Customer B` **未**拥有名为 `All Factory Assets` 的资产组。
+- **Tenant** 拥有名为 `All Factory Assets` 的资产组，包含 `Asset Y` 和 `Asset Z`。
 
-**Outgoing messages**
+**出站消息**
 
-Two new messages are created and sent via the `Success` chain:
+经 `Success` 链创建并发送两条新消息：
 
-1. **Message 1**:
-    - **Originator**: `Asset Y`
-    - **Data**: `{"status": "maintenance_required"}`
-2. **Message 2**:
-    - **Originator**: `Asset Z`
-    - **Data**: `{"status": "maintenance_required"}`
+1. **Message 1**：
+    - **Originator**：`Asset Y`
+    - **Data**：`{"status": "maintenance_required"}`
+2. **Message 2**：
+    - **Originator**：`Asset Z`
+    - **Data**：`{"status": "maintenance_required"}`
 
-**Explanation**: The search starts at the originator's owner, `Customer B`, but fails to find the group. It then automatically moves up the hierarchy to the Tenant, where it finds
-the group and duplicates the message to its members.
+**说明**：查找从来源实体的拥有者 `Customer B` 开始，但未找到组。随后沿层级自动上移到 Tenant，在 Tenant 找到组并将消息复制到其成员。
 
 -----
 
-### Example 3 — Search restricted to Tenant level
+### 示例 3 — 仅限 Tenant 层级查找
 
-**Incoming message**
+**入站消息**
 
 Originator: `Device A`
 
 Data: `{"command": "check_status"}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -183,23 +179,22 @@ Data: `{"command": "check_status"}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- A Tenant owns `Customer A`.
-- `Customer A` owns `Device A`.
-- `Customer A` owns a device group named `Building Monitors` that contains `Device B`.
-- The Tenant also owns a device group named `Building Monitors` that contains `Device C` and `Device D`.
+- Tenant 拥有 `Customer A`。
+- `Customer A` 拥有 `Device A`。
+- `Customer A` 拥有名为 `Building Monitors` 的设备组，包含 `Device B`。
+- Tenant 也拥有名为 `Building Monitors` 的设备组，包含 `Device C` 和 `Device D`。
 
-**Outgoing messages**
+**出站消息**
 
-Two new messages are created and sent via the `Success` chain:
+经 `Success` 链创建并发送两条新消息：
 
-1. **Message 1**:
-    - **Originator**: `Device C`
-    - **Data**: `{"command": "check_status"}`
-2. **Message 2**:
-    - **Originator**: `Device D`
-    - **Data**: `{"command": "check_status"}`
+1. **Message 1**：
+    - **Originator**：`Device C`
+    - **Data**：`{"command": "check_status"}`
+2. **Message 2**：
+    - **Originator**：`Device D`
+    - **Data**：`{"command": "check_status"}`
 
-**Explanation**: Because `searchEntityGroupForTenantOnly` is true, the search is restricted to the Tenant level. Even though a group with the same name exists under `Customer A` (the
-originator's owner), it is ignored. The node finds the group owned by the Tenant and duplicates the message to its members (`Device C` and `Device D`).
+**说明**：由于 `searchEntityGroupForTenantOnly` 为 true，查找仅限于 Tenant 层级。尽管在 `Customer A`（来源实体的拥有者）下存在同名组，也会被忽略。节点找到 Tenant 拥有的组并将消息复制到其成员（`Device C` 和 `Device D`）。

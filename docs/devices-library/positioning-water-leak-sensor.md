@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect AgroSense Positioning Water Leak Sensor to ThingsBoard?"
+title: "如何将AgroSense定位漏水传感器连接到ThingsBoard？"
 redirect_to: "/device-library/ce/positioning-water-leak-sensor/"
 ---

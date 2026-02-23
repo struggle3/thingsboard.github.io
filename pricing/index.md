@@ -1,7 +1,7 @@
 ---
 layout: pricing
-title: Pricing
-description: ThingsBoard Products Pricing
+title: 产品定价
+description: ThingsBoard产品定价
 defaultActivePricingSection: thingsboard-pe-options
 
 ---
@@ -1231,7 +1231,7 @@ defaultActivePricingSection: thingsboard-pe-options
                 <div id="faq-thingsboard-ce-general" class="pi-accordion active">
                     <div class="item" data-tag="h4" data-item-id="what-is-tb-ce" data-title="What is ThingsBoard Community Edition?">
                         <div class="container">
-                            <p>ThingsBoard Community Edition (CE) is the free and open-source version of the ThingsBoard - IoT platform for data collection, processing, visualization, and device management. ThingsBoard CE is available under the Apache 2.0 license.</p>
+                            <p>ThingsBoard社区版(CE)is the free and open-source version of the ThingsBoard - IoT platform for data collection, processing, visualization, and device management. ThingsBoard CE is available under the Apache 2.0 license.</p>
                         </div>
                     </div>
                     <div class="item" data-tag="h4" data-item-id="is-ce-free" data-title="Is the Community Edition free to use?">
@@ -1239,9 +1239,9 @@ defaultActivePricingSection: thingsboard-pe-options
                             <p>Yes, it is completely free, with no licensing fees or hidden costs.</p>
                         </div>
                     </div>
-                    <div class="item" data-tag="h4" data-item-id="ce-for-commercial" data-title="Can I use ThingsBoard Community Edition for commercial projects?">
+                    <div class="item" data-tag="h4" data-item-id="ce-for-commercial" data-title="Can I use ThingsBoard社区版for commercial projects?">
                         <div class="container">
-                            <p>Yes, ThingsBoard Community Edition can be used for commercial purposes. You can develop and deploy IoT solutions based on the Community Edition as part of your business operations. It is distributed under the Apache 2.0 license, which allows commercial use without the license or royalty fees.</p>
+                            <p>Yes, ThingsBoard社区版can be used for commercial purposes. You can develop and deploy IoT solutions based on the Community Edition as part of your business operations. It is distributed under the Apache 2.0 license, which allows commercial use without the license or royalty fees.</p>
                         </div>
                     </div>
                     <div class="item" data-tag="h4" data-item-id="ce-pe-difference" data-title="How does the Community Edition differ from Professional Edition?">
@@ -1256,7 +1256,7 @@ defaultActivePricingSection: thingsboard-pe-options
                     </div>
                     <div class="item" data-tag="h4" data-item-id="possible-migrate-ce-to-pe-sm" data-title="Is it possible to migrate from the Community Edition to the self-managed ThingsBoard Professional Edition?">
                         <div class="container">
-                            <p>Yes, you can upgrade from ThingsBoard Community Edition to Professional Edition without losing telemetry data and/or configurations. The upgrade process preserves your existing setup, ensuring a seamless transition. However, <b>please note</b> that any custom modifications made directly to the source code of the Community Edition will be removed during the upgrade process. For more information about the migration procedure, please <a target="_blank" href="/docs/contact-us/">contact us</a>.</p>
+                            <p>Yes, you can upgrade from ThingsBoard社区版to Professional Edition without losing telemetry data and/or configurations. The upgrade process preserves your existing setup, ensuring a seamless transition. However, <b>please note</b> that any custom modifications made directly to the source code of the Community Edition will be removed during the upgrade process. For more information about the migration procedure, please <a target="_blank" href="/docs/contact-us/">contact us</a>.</p>
                         </div>
                     </div>
                     <div class="load-more" onClick="loadMoreFaq(this)">
@@ -1311,7 +1311,7 @@ defaultActivePricingSection: thingsboard-pe-options
                     </div>
                     <div class="item" data-tag="h4" data-item-id="ce-multi-tenancy" data-title="Does the Community Edition support multi-tenancy?">
                         <div class="container">
-                            <p>Yes, the ThingsBoard Community Edition supports <a target="_blank" href="/docs/user-guide/ui/tenants/">multi-tenancy</a> out of the box.</p>
+                            <p>Yes, the ThingsBoard社区版supports <a target="_blank" href="/docs/user-guide/ui/tenants/">multi-tenancy</a> out of the box.</p>
                         </div>
                     </div>
                     <div class="load-more" onClick="loadMoreFaq(this)">
@@ -1348,7 +1348,7 @@ defaultActivePricingSection: thingsboard-pe-options
                     </div>
                     <div class="item" data-tag="h4" data-item-id="ce-third-party-systems" data-title="Can I integrate third-party systems with Community Edition?">
                         <div class="container">
-                            <p>Yes, you can integrate the ThingsBoard Community Edition with third-party systems through REST APIs or Rule Engine. Please note that the Professional Edition of the platform provides more integration option via <a target="_blank" href="/docs/user-guide/integrations/">platform integrations</a>.</p>
+                            <p>Yes, you can integrate the ThingsBoard社区版with third-party systems through REST APIs or Rule Engine. Please note that the Professional Edition of the platform provides more integration option via <a target="_blank" href="/docs/user-guide/integrations/">platform integrations</a>.</p>
                         </div>
                     </div>
                     <div class="item hidden" data-tag="h4" data-item-id="ce-automate-device-management-telemetry-processing" data-title="Can I automate device management and telemetry processing?">
@@ -1477,7 +1477,7 @@ defaultActivePricingSection: thingsboard-pe-options
                             <p>Yes, you have full control over where your data is stored.</p>
                         </div>
                     </div>
-                    <div class="item" data-tag="h4" data-item-id="ce-industry-standarts" data-title="Does ThingsBoard Community Edition comply with industry standards (GDPR, ISO, etc.)?">
+                    <div class="item" data-tag="h4" data-item-id="ce-industry-standarts" data-title="Does ThingsBoard社区版comply with industry standards (GDPR, ISO, etc.)?">
                         <div class="container">
                             <p>Compliance depends on your hosting environment and data security practices.</p>
                         </div>
@@ -1501,7 +1501,7 @@ defaultActivePricingSection: thingsboard-pe-options
                     </div>
                     <div class="item" data-tag="h4" data-item-id="edge-community-compatibility" data-title="What ThingsBoard Edge compatibility means?">
                         <div class="container">
-                            <p>ThingsBoard Edge Community Edition is able to connect only to ThingsBoard Community Edition server.<br>ThingsBoard Edge Professional Edition is able to connect only to ThingsBoard Professional Edition server (it can be ThingsBoard Cloud or on-premise instances).<br>ThingsBoard Edge Community Edition cannot be connected to ThingsBoard Professional Edition and vice versa.</p>
+                            <p>ThingsBoard Edge Community Edition is able to connect only to ThingsBoard社区版server.<br>ThingsBoard Edge Professional Edition is able to connect only to ThingsBoard Professional Edition server (it can be ThingsBoard Cloud or on-premise instances).<br>ThingsBoard Edge Community Edition cannot be connected to ThingsBoard Professional Edition and vice versa.</p>
                         </div>
                     </div>
                     <div class="item" data-tag="h4" data-item-id="edge-community-installation" data-title="How can I install ThingsBoard Edge Community Edition?">
@@ -3078,7 +3078,7 @@ defaultActivePricingSection: thingsboard-pe-options
                     </div>
                     <div class="item" data-tag="h4" data-item-id="trendz-payg-pe-vs-ce" data-title="Does Trendz work with both ThingsBoard PE and CE?">
                         <div class="container">
-                            <p>No, Trendz can be integrated with ThingsBoard Professional Edition (PE), but it is not available in ThingsBoard Community Edition (CE).</p>
+                            <p>No, Trendz can be integrated with ThingsBoard Professional Edition (PE), but it is not available in ThingsBoard社区版(CE).</p>
                         </div>
                     </div>
                     <div class="item" data-tag="h4" data-item-id="trendz-payg-license-types" data-title="Can ThingsBoard and Trendz Analytics have different license types?">
@@ -3480,7 +3480,7 @@ defaultActivePricingSection: thingsboard-pe-options
             <div class="answers">
                 <div id="faq-tbmq-ce-general" class="pi-accordion active">
                     <div class="item" data-tag="h4" data-item-id="what-is-tbmq-ce" data-title="What is TBMQ Community Edition?">
-                        <div class="container"><p>TBMQ Community Edition (CE) is the free and open-source version of the TBMQ - a highly scalable and fault-tolerant MQTT broker designed for efficient and reliable message routing between connected devices and applications using the MQTT protocol. TBMQ CE is available under the Apache 2.0 license.</p></div>
+                        <div class="container"><p>TBMQ Community Edition (CE)is the free and open-source version of the TBMQ - a highly scalable and fault-tolerant MQTT broker designed for efficient and reliable message routing between connected devices and applications using the MQTT protocol. TBMQ CE is available under the Apache 2.0 license.</p></div>
                     </div>
                     <div class="item" data-tag="h4" data-item-id="is-tbmq-ce-free" data-title="Is the Community Edition free to use?">
                         <div class="container"><p>Yes, it is completely free, with no licensing fees or hidden costs.</p></div>

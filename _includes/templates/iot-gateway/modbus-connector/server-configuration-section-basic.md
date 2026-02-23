@@ -1,5 +1,4 @@
-Due to the nature of preferred way of communication between Modbus master there are 3 options how to configure this 
-part: TCP, UDP or via Serial port.
+根据 Modbus master 之间的首选通信方式，此部分有三种配置选项：TCP、UDP 或 Serial 端口。
 
 ![image](/images/gateway/modbus-connector/server-slave-configuration-basic.png)
 

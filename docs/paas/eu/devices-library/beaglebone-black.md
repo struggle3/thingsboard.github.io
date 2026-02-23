@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect BeagleBone Black to ThingsBoard?"
+title: "如何将BeagleBone Black连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/beaglebone-black/"
 ---

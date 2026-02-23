@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Reporting overview
-description: Reporting overview
+title: 报告功能概览
+description: 报告功能概览
 redirect_from: "/docs/user-guide/reporting/reporting-key-concepts/"
 
 create-new-report-template:

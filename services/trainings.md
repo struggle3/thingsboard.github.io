@@ -1,8 +1,8 @@
 ---
 layout: trainings
-title: Training sessions
+title: 培训课程
 notitle: "true"
-description: ThingsBoard training sessions
+description: ThingsBoard 培训课程
 redirect_from: "docs/services/trainings/"
 ---
 
@@ -10,7 +10,7 @@ redirect_from: "docs/services/trainings/"
 <div class="trainings">
     <div class="trainings-hero trainings-wrapper">
         <div class="trainings-hero-top">
-            <h1 class="trainings-h1">ThingsBoard training sessions</h1>
+            <h1 class="trainings-h1">ThingsBoard 培训课程</h1>
             <div class="trainings-hero-top-images">
                 <img src="/images/trainings/thingsboard-home-page.png" class="trainings-hero-image" alt="Thingsboard dashboards and menus">
                 <img src="/images/trainings/thingsboard-tenant-list.png" class="trainings-hero-image-2" alt="Thingsboard tenant list">
@@ -22,41 +22,41 @@ redirect_from: "docs/services/trainings/"
         <div class="trainings-contact">
             <div class="contact">
                 <div class="contact-label">
-                    <span class="course-name">Training sessions</span>
-                    <p>Fast, informative, and engaging</p>
+                    <span class="course-name">培训课程</span>
+                    <p>快速、实用、引人入胜</p>
                 </div>
-                <a class="contact-us-button" href="/docs/contact-us/?subject=Training">Contact Us</a>
+                <a class="contact-us-button" href="/docs/contact-us/?subject=Training">联系我们</a>
             </div>
             <div class="contact-text">
                 <p class="description">
                     Our ThingsBoard training sessions are practical workshops led by experts from the ThingsBoard team, created especially for your company’s engineers. We offer fifteen 2-hour sessions that explain the basics of using ThingsBoard. Even though our documentation is detailed, these sessions focus on the most important points, helping you start IoT solution development quickly and easily.
                 </p>
             </div>
-            <a class="contact-us-button contact-us-button-hidden" href="/docs/contact-us/?subject=Training">Contact Us</a>
+            <a class="contact-us-button contact-us-button-hidden" href="/docs/contact-us/?subject=Training">联系我们</a>
         </div>
     </div>
     <div class="trainings-cards">
         <div class="trainings-wrapper">
             <div class="trainings-cards-wrapper">
                 <div class="trainings-card">
-                    <span class="course-name">Who is this for</span>
+                    <span class="course-name">适合人群</span>
                     <ul>
                         <li>
                             <img src="/images/trainings/icon_people.svg" alt="Users icon">
-                            <span>Teams of <b>up to 8 people</b> who need to learn at the same pace.</span>
+                            <span>需以相同节奏学习的<b>最多 8 人</b>团队。</span>
                         </li>
                         <li>
                             <img src="/images/trainings/icon_trophy.svg" alt="Trophy icon">
-                            <span>Individuals ready to get a <b>solid foundation and fully leverage</b> ThingsBoard.</span>
+                            <span>希望获得<b>扎实基础并充分利用</b> ThingsBoard 的个人。</span>
                         </li>
                         <li>
                             <img src="/images/trainings/icon_target-line.svg" alt="Target icon">
-                            <span>Those eager to quickly create <b>top-notch solutions</b>.</span>
+                            <span>渴望快速创建<b>一流解决方案</b>的人员。</span>
                         </li>
                     </ul>
                 </div>       
                 <div class="trainings-card">
-                    <span class="course-name">Primary goals of the training</span>
+                    <span class="course-name">培训主要目标</span>
                     <ul>
                         <li>
                             <img src="/images/trainings/icon_arrow-growth.svg" alt="Graph icon">
@@ -68,7 +68,7 @@ redirect_from: "docs/services/trainings/"
                         </li>
                         <li>
                             <img src="/images/trainings/akar-icons_reduce.svg" alt="Akar icons">
-                            <span>Reduce your <b>time-to-market</b> for IoT products or solutions.</span>
+                            <span>缩短物联网产品或解决方案的<b>上市时间</b>。</span>
                         </li>
                     </ul>
                 </div>
@@ -77,7 +77,7 @@ redirect_from: "docs/services/trainings/"
     </div>
     <div class="courses">
         <div class="trainings-wrapper">
-            <h2 class="trainings-h2">Training courses</h2>
+            <h2 class="trainings-h2">培训课程</h2>
             {% include courses.liquid %}
         </div>
     </div>
@@ -92,9 +92,9 @@ redirect_from: "docs/services/trainings/"
                         <span class="trainings-card-title" style="display: flex">
                             {% include number-animation.html startNum = 1 targetNum = 1200 %}+
                         </span>
-                        <span class="trainings-card-subtitle">Participants</span>
+                        <span class="trainings-card-subtitle">参与者</span>
                     </div>
-                    <p class="trainings-card-text">More than 1200 participants took part in ThingsBoard training sessions</p>
+                    <p class="trainings-card-text">超过 1200 名参与者参加了 ThingsBoard 培训课程</p>
                 </div>       
                 <div class="trainings-card">
                     <div class="trainings-card-icon">
@@ -104,16 +104,16 @@ redirect_from: "docs/services/trainings/"
                         <span class="trainings-card-title" style="display: flex">
                             {% include number-animation.html startNum = 1 targetNum = 200 %}+
                         </span>
-                        <span class="trainings-card-subtitle">Sessions</span>
+                        <span class="trainings-card-subtitle">场次</span>
                     </div>
-                    <p class="trainings-card-text">More than 200 sessions were organized for ThingsBoard clients</p>
+                    <p class="trainings-card-text">已为 ThingsBoard 客户组织超过 200 场培训</p>
                 </div>    
             </div>    
             <div class="trainings-card-contact-us">
                 <p>
-                    Professional training tailored for your needs. Get in touch and start learning!
+                    量身定制的专业培训。联系我们，开始学习！
                 </p>
-                <a class="contact-us-button" href="/docs/contact-us/?subject=Training">Contact Us</a>
+                <a class="contact-us-button" href="/docs/contact-us/?subject=Training">联系我们</a>
             </div>
         </div>
     </div>

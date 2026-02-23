@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Installing ThingsBoard Edge using Docker (Windows)
-description: Installing ThingsBoard Edge using Docker (Windows)
+title: 使用 Docker 安装 ThingsBoard Edge（Windows）
+description: 在 Windows 上使用 Docker 安装 ThingsBoard Edge
 ---
 
 * TOC
@@ -11,23 +11,23 @@ description: Installing ThingsBoard Edge using Docker (Windows)
 
 {% assign docsPrefix = "edge/" %}
 
-This guide provides step-by-step instructions for installing **ThingsBoard Edge** on **Windows** using **Docker**.
+本指南介绍在 **Windows** 上使用 **Docker** 安装 **ThingsBoard Edge** 的步骤。
 
 {% include templates/edge/install/prerequisites.md %}
 
-### Docker installation
+### Docker 安装
 
-- [Install Docker Toolbox for Windows](https://docker-docs.uclv.cu/toolbox/toolbox_install_windows/){:target="_blank"}
+- [安装 Docker Toolbox for Windows](https://docker-docs.uclv.cu/toolbox/toolbox_install_windows/){:target="_blank"}
 
-## Installation and Configuration
+## 安装与配置
 
-### Step 1. Running ThingsBoard Edge
+### 步骤 1：运行 ThingsBoard Edge
 
 {% include templates/edge/install/docker-images-location.md %}
 
-Windows users should use docker managed volume for ThingsBoard Edge DataBase. 
-Create docker volume (for ex. `mytb-edge-data`) before executing docker run command:
-Open "Docker Quickstart Terminal". Execute the following command to create docker volume:
+Windows 用户需为 ThingsBoard Edge 数据库使用 Docker 托管卷。
+在执行 docker run 命令前创建 Docker volume（例如 `mytb-edge-data`）：
+打开「Docker Quickstart Terminal」，执行以下命令创建 Docker volume：
 
 ``` 
 docker volume create mytb-edge-data
@@ -38,7 +38,7 @@ docker volume create mytb-edge-data-db
 
 {% include templates/edge/install/copy-edge-credentials.md %}
 
-Create docker compose file for ThingsBoard Edge service:
+为 ThingsBoard Edge 服务创建 docker-compose 文件：
 
 ```text
 docker-compose.yml
@@ -88,25 +88,25 @@ volumes:
 {% assign serviceName = "tbedge" %}
 {% include templates/install/docker/docker-compose-up.md %}
 
-Where:
-- `C:\Program Files\Oracle\VirtualBox` - path to your VirtualBox installation directory
+其中：
+- `C:\Program Files\Oracle\VirtualBox` - VirtualBox 安装目录
 
-### Step 2. Open ThingsBoard Edge UI
+### 步骤 2：打开 ThingsBoard Edge UI
 
 {% include templates/edge/install/open-edge-ui.md %}
 
-### Step 3. Detaching, stop and start commands
+### 步骤 3：分离、停止与启动命令
 
 {% assign serviceName = "tbedge" %}
 {% assign serviceFullName = "ThingsBoard Edge" %}
 {% include templates/install/docker/detaching-stop-start-commands.md %}
 
-## Troubleshooting
+## 故障排除
 
-### DNS issues
+### DNS 问题
 
 {% include templates/troubleshooting/dns-issues-windows.md %}
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/install/next-steps.md %}

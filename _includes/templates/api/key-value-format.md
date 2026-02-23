@@ -1,7 +1,7 @@
-## Key-value format
+## Key-value 格式
 
-By default, ThingsBoard supports key-value content in JSON. Key is always a string, while value can be either string, boolean, double, long or JSON.
-For example:
+默认情况下，ThingsBoard 支持 JSON 形式的 key-value 内容。Key 始终为字符串，value 可为 string、boolean、double、long 或 JSON。
+例如：
 
 ```json
 {

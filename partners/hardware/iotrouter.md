@@ -1,9 +1,8 @@
 ---
 layout: hardware-partner
 hardware-partner: Chengdu IOTRouter Tech. Co., Ltd.
-description: IOTRouter is an official ThingsBoard hardware partner. Learn about IOTRouter products, supported use cases, and integration guides with the ThingsBoard IoT platform.
+description: IOTRouter 是 ThingsBoard 官方硬件合作伙伴。了解 IOTRouter 产品、支持的用例及与 ThingsBoard IoT 平台的集成指南。
 
 ---
-
 
 

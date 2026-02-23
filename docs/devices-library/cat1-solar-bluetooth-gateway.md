@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Cat-1 Solar Bluetooth Gateway to ThingsBoard?"
+title: "如何将Cat-1 Solar Bluetooth网关连接到ThingsBoard？"
 redirect_to: "/device-library/ce/cat1-solar-bluetooth-gateway/"
 ---

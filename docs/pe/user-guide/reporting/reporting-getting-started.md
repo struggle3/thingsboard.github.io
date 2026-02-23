@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Getting started with Reporting
-description: Getting started with Reporting
+title: 报告功能入门
+description: 报告功能入门
 redirect_from: "/docs/user-guide/reporting/reporting-getting-started/"
 
 reporting-getting-started-create-template:

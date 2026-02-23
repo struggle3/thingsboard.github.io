@@ -1,5 +1,6 @@
-### Create new dashboard
-We will create a dashboard and add the most popular widgets. See the instructions below.
+### 创建新仪表盘
+
+我们将创建仪表盘并添加最常用的部件。请参见下方说明。
 
 
 {% assign creatingDashboardCE = '
@@ -34,11 +35,9 @@ We will create a dashboard and add the most popular widgets. See the instruction
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=creatingDashboardCE %}
 {% endif %}
 
-### Add Entity Alias
+### 添加实体别名
 
-Alias is a reference to a single entity or group of entities that are used in the widgets. An alias may be static or 
-dynamic. We will use the "Single entity" alias, referring to a single entity. In this case, "{{deviceName}}". It is possible to configure an alias that references multiple devices. For example, devices of a certain 
-type or related to a certain asset. You may learn more about different aliases here.
+别名是对部件中使用的单个实体或实体组的引用。别名可以是静态或动态的。我们将使用「单个实体」别名，引用单个实体，此处为「{{deviceName}}」。也可以配置引用多个设备的别名，例如某类型的设备或与某资产相关的设备。您可在此处了解更多关于不同别名的信息。
 
 {% assign creatingEntityAliasPE = '
     ===
@@ -90,5 +89,5 @@ type or related to a certain asset. You may learn more about different aliases h
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=creatingEntityAliasCE %}
 {% endif %}
 
-To add the new widget, we need to select it from the widget library. The widgets are grouped into widget bundles. 
-Each widget has a data source. It is how the widget “knows” what data to display.
+要添加新部件，我们需要从部件库中选择。部件按部件包分组。 
+每个部件都有数据源，数据源决定了部件显示的数据。

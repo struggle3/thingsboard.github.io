@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: rpc call request
-description: Sends a Remote Procedure Call (RPC) to a device, returning the device's response as outgoing message data.
+title: RPC call request
+description: 向设备发送 RPC，并将设备响应作为出站消息数据返回。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

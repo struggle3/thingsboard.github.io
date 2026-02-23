@@ -1,19 +1,19 @@
-### Add a gateway on the Chirpstack
+### 在 ChirpStack 上添加网关
 
-We need to add a gateway on the [Chirpstack](https://chirpstack.io){: target="_blank"}.   
+我们需要在 [ChirpStack](https://chirpstack.io){: target="_blank"} 上添加网关。
 
-To add a gateway, follow next steps:
+要添加网关，请按以下步骤操作：
 
 {% assign addGatewaySteps = '
     ===
         image: /images/devices-library/basic/integrations/chirpstack/gateways.png,
-        title: Login to Chirpstack server. Go to the "**Gateways**" page and click on the "**Add gateway**" button.
+        title: 登录 ChirpStack 服务器。进入「**网关**」页面，点击「**添加网关**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/add-gateway.png,
-        title: Fill **name**, **gateway EUI** (It will be different, you can find it on the gateway control panel) with your data, scroll down and click on the "**Submit**" button.
+        title: 填写 **名称**、**网关 EUI**（根据您的网关而定，可在网关控制面板上查看），向下滚动并点击「**提交**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/gateway-added-offline.png,
-        title: The gateway is added. In gateways tab you can see its status.
+        title: 网关已添加。在网关列表中可查看其状态。
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addGatewaySteps %}
@@ -26,37 +26,37 @@ To add a gateway, follow next steps:
 
 {% endif %}
 
-### Configure application on the Chirpstack
+### 在 ChirpStack 上配置应用
 
-Now we need to configure application on the Chirpstack. To do this please follow next steps:  
+现在需要在 ChirpStack 上配置应用。请按以下步骤操作：
 
 {% assign addIntegrationSteps = '
     ===
         image: /images/devices-library/basic/integrations/chirpstack/applications.png,
-        title: Go to the "**Applications**" page in the left menu and click on the "**Add application**" button.
+        title: 在左侧菜单中进入「**应用**」页面，点击「**添加应用**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/create-application.png,
-        title: Fill application name and click on the "**Submit**" button.
+        title: 填写应用名称并点击「**提交**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/api-keys.png,
-        title: Go to the **API keys** page in the left menu and click on the "**Add API key**" button.
+        title: 在左侧菜单中进入 **API 密钥** 页面，点击「**添加 API 密钥**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/create-api-key.png,
-        title: Put some name for the API key and click on the "**Submit**" button.
+        title: 为 API 密钥设置名称并点击「**提交**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/api-key-created.png,
-        title: Copy the created API key and save it, we will need it for integration on ThingsBoard.
+        title: 复制创建的 API 密钥并保存，稍后在 ThingsBoard 上配置集成时需要用到。
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addIntegrationSteps %}
 
-Now we can move to ThingsBoard to configure integration.  
+现在可以前往 ThingsBoard 配置集成。
 
-### Create integration in ThingsBoard
+### 在 ThingsBoard 中创建集成
 
-Next, we will create an integration with Chirpstack inside the ThingsBoard and configure the integration on Chirpstack.
+接下来，我们将在 ThingsBoard 中创建与 ChirpStack 的集成，并在 ChirpStack 上配置集成。
 
-At first, copy the code, we will need it to create the uplink converter:
+首先，复制以下代码，创建上行数据转换器时需要用到：
 
 {% capture converterCode %}
 var data = decodeToJson(payload);
@@ -159,38 +159,38 @@ return uplinkDataList;
 {% assign createChirpstackIntegration = '
     ===
         image: /images/devices-library/basic/integrations/chirpstack/1-create-integration.png,
-        title: Go to the "**Integration center**" section, "**Integrations**" page and click "**plus**" button to add new integration. Select type "**Chirpstack**". Then, click "**Next**".
+        title: 进入「**集成中心**」部分的「**集成**」页面，点击「**加号**」按钮添加新集成。选择类型「**Chirpstack**」。然后点击「**下一步**」。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/2-create-integration-uplink.png,
-        title: Paste the previously copied script to the Decoder function section. Click "**Next**".
+        title: 将先前复制的脚本粘贴到解码器函数区域。点击「**下一步**」。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/3-create-integration-downlink.png,
-        title: Leave the "**Downlink data converter**" field empty. Click on "**Skip**" button.
+        title: 将「**下行数据转换器**」字段留空。点击「**跳过**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/4-create-integration-configuration.png,
-        title: Put your "**Application server URL**" and "**API Key**" from Chirpstack and copy "**HTTP endpoint URL**", Click on "**Add**" button.
+        title: 填入 ChirpStack 的「**应用服务器 URL**」和「**API 密钥**」，并复制「**HTTP 端点 URL**」。点击「**添加**」按钮。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/application-integrations.png,
-        title: Now, open your Chirpstack, go to the "**Applications**" page -> Your application -> "**Integrations**" tab, Find and click on the **HTTP** tile.
+        title: 现在打开 ChirpStack，进入「**应用**」页面 -> 您的应用 ->「**集成**」选项卡，找到并点击 **HTTP** 磁贴。
     ===
         image: /images/devices-library/basic/integrations/chirpstack/create-application-integration.png,
-        title: Put "**HTTP URL endpoint**" into "**Event Endpoint URL(s)**" field and click on "**Submit**" button.
+        title: 将「**HTTP URL 端点**」填入「**Event Endpoint URL(s)**」字段，点击「**提交**」按钮。
 '
 %}
 
-To add integration follow the next steps:  
+请按以下步骤添加集成：
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=createChirpstackIntegration %} 
 
-Integration is created.
+集成已创建。
 
 <br>
-To check integration connection you can do the following:
+可按以下方式检查集成连接状态：
 
-- Click on integration row in the list;
-- Go to the "**Events**" tab;
-- Select "**Lifecycle events**" from **Event type** dropdown list.
+- 点击集成列表中的某一行；
+- 进入「**事件**」选项卡；
+- 在 **事件类型** 下拉列表中选择「**生命周期事件**」。
 
-If you see event **STARTED** and status **Success** it means that integration is successfully started and ready to receive messages.
+若看到 **STARTED** 事件且状态为 **Success**，则表示集成已成功启动，可以接收消息。
 
-![Check integration connection](/images/devices-library/basic/integrations/check-integration-started.png)
+![检查集成连接](/images/devices-library/basic/integrations/check-integration-started.png)

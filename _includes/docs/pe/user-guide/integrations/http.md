@@ -3,19 +3,19 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-HTTP Integration allows converting existing protocols and payload formats to ThingsBoard message format and is useful in several deployment scenarios: 
+HTTP 集成可将现有协议和负载格式转换为 ThingsBoard 消息格式，适用于多种部署场景： 
 
- - stream device and/or asset data from external system, IoT platform or connectivity provider back-end.
- - stream device and/or asset data from your custom application running in the cloud.
- - connect the existing device with custom HTTP based protocol to ThingsBoard.
+ - 从外部系统、IoT平台或连接提供商后端流式传输设备和/或资产数据。
+ - 从云上运行的自定义应用流式传输设备和/或资产数据。
+ - 将采用自定义基于HTTP协议的现有设备连接至ThingsBoard。
 
 <object width="100%" style="max-width: max-content;" data="/images/user-guide/integrations/http-integration.svg"></object>
 
-## Create Uplink Converter
+## 创建上行转换器
 
-Before creating the integration, you need to create an Uplink converter in Data converters. Uplink is necessary in order to convert the incoming data from the device into the required format for displaying them in ThingsBoard. 
+创建集成前，需在 Data converters 中创建上行转换器。上行转换器用于将设备入站数据转换为 ThingsBoard 展示所需的格式。 
 Click on the “plus” and on “Create new converter”. To view the events, enable Debug. 
 In the function decoder field, specify a script to parse and transform data.
 
@@ -29,11 +29,11 @@ JavaScript<small></small>%,%anonymous%,%templates/integration/http/http-uplink-c
 
 {% include content-toggle.liquid content-toggle-id="httpuplinkconverterconfig" toggle-spec=httpuplinkconverterconfig %}
 
-Now that the Uplink converter has been created, it is possible to create an integration.
+上行转换器创建完成后即可创建集成。
 
-## Create integration
+## 创建集成
 
-- Go to the "**Integrations center**" section -> "**Integrations**" page and click "plus" button to create new integration. Name it "**HTTP Integration**", select type '**HTTP**'. Click "Next";
+- 进入「**Integrations center**」->「**Integrations**」页面，点击「plus」创建新集成。命名为「**HTTP Integration**」，选择类型「**HTTP**」。点击「Next」；
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-add-integration-1-pe.png)
@@ -42,7 +42,7 @@ Now that the Uplink converter has been created, it is possible to create an inte
 ![image](/images/user-guide/integrations/http/add-integration-1-pe.png)
 {% endif %}
 
-- At this step, you can select a previously created or create a new upnlink converter right in this window. Select the previously created "**HTTP Uplink Converter**". Click "Next";
+- 在此步骤可选择已有或新建上行转换器。选择刚创建的「**HTTP Uplink Converter**」。点击「Next」；
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-add-integration-2-pe.png)
@@ -51,7 +51,7 @@ Now that the Uplink converter has been created, it is possible to create an inte
 ![image](/images/user-guide/integrations/http/add-integration-2-pe.png)
 {% endif %}
 
-- At the step of adding a downlink converter, you can also select a previously created or create a new downlink converter. But for now, leave the "Downlink data converter" field empty. Click "Skip";
+- 在添加下行转换器步骤中，也可选择已有或新建下行转换器。此处保持「Downlink data converter」为空。点击「Skip」；
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-add-integration-3-pe.png)
@@ -60,13 +60,13 @@ Now that the Uplink converter has been created, it is possible to create an inte
 ![image](/images/user-guide/integrations/http/add-integration-3-pe.png)
 {% endif %}
 
- - At this step, specify your '**Base URL**';
+ - 在此步骤指定「**Base URL**」；
 
- - Please note down '**HTTP endpoint URL**' we will use this value later;
+ - 记录「**HTTP endpoint URL**」，后续会用到；
 
- - In '**Advanced settings**' enable "**Replace response status from 'No-Content' to 'OK'**";
+ - 在「**Advanced settings**」中启用「**Replace response status from 'No-Content' to 'OK'**」；
 
- - Click "Add" button to save the Integration.
+ - 点击「Add」保存集成。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-add-integration-4-pe.png)
@@ -75,11 +75,11 @@ Now that the Uplink converter has been created, it is possible to create an inte
 ![image](/images/user-guide/integrations/http/add-integration-4-pe.png)
 {% endif %}
 
-## Send uplink message
+## 发送上行消息
 
-To send an uplink message, you need the previously copied '**HTTP endpoint URL**' from the integration.
+发送上行消息需要用到之前从集成中复制的「**HTTP endpoint URL**」。
 
-Use this command to send the message. Don't forget to replace `$DEVICE_NAME`, `$DEVICE_TYPE` and `$YOUR_HTTP_ENDPOINT_URL` with corresponding values.
+使用下列命令发送消息。请将 `$DEVICE_NAME`、`$DEVICE_TYPE` 和 `$YOUR_HTTP_ENDPOINT_URL` 替换为实际值。
 
 ```ruby
 curl -v -X POST -d "{\"deviceName\":\"$DEVICE_NAME\",\"deviceType\":\"$DEVICE_TYPE\",\"temperature\":33,\"model\":\"test\"}" $YOUR_HTTP_ENDPOINT_URL -H "Content-Type:application/json"
@@ -94,7 +94,7 @@ curl -v -X POST -d "{\"deviceName\":\"$DEVICE_NAME\",\"deviceType\":\"$DEVICE_TY
 {% endif %}
 
 <br>
-Go to the "**Events**" tab in your HTTP integration. If you have done everything correctly, you should see one event with the status 'OK'.
+进入 HTTP 集成的「**Events**」标签。若配置正确，应能看到一条状态为 'OK' 的事件。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-send-uplink-message-3-pe.png)
@@ -105,43 +105,43 @@ Go to the "**Events**" tab in your HTTP integration. If you have done everything
 
 {% if docsPrefix == "pe/" %}
 <br>
-When you sent the message, a new device was created. You should receive a notification about it. To view notification, click on the bell icon in the upper right corner of the screen. 
-The notification will contain an action button by clicking which you can go to the details of the new device. Click this button.
+发送消息后，新设备已被创建。您会收到相关通知。点击右上角铃铛图标查看通知。 
+通知中有操作按钮，点击可进入新设备详情。
 
 ![image](/images/user-guide/integrations/http/http-device-2-pe.png)
 
 <br>
-Here you will see information about the new device. As well as the telemetry which we sent from the device to the ThingsBoard.
+此处可看到新设备信息以及我们从设备发送到 ThingsBoard 的遥测数据。
 
 ![image](/images/user-guide/integrations/http/http-device-1-pe.png)
 
 <br>
-Learn more about **notifications** and how to configure them [here](/docs/{{docsPrefix}}user-guide/notifications/).
+了解**通知**及如何配置，请参阅[此处](/docs/{{docsPrefix}}user-guide/notifications/)。
 
 {% endif %}
 
 {% if docsPrefix contains "paas/" %}
 <br>
-The created device with data can be seen in the section "**Device groups**" -> "**All**".
+所创建设备及数据可在「**Device groups**」->「**All**」中查看。
 
 ![image](/images/user-guide/integrations/http/device-1-pe.png)
 
 {% endif %}
 
 {% capture difference %}
-**NOTE**
+**注意**
 <br>
-If the "Allow create devices or assets" checkbox is unchecked, when sending a message to the ThingsBoard with any parameters of the device (or asset), if such a device (asset) does not exist, then device (asset) will not be created.
+若未勾选「Allow create devices or assets」，发送包含设备（或资产）参数的消息到 ThingsBoard 时，若该设备（资产）不存在，则不会创建设备（资产）。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Also, sent and received data can be viewed in the Uplink converter. In the 'In' and 'Out' blocks of the "**Events**" tab.
+发送和接收的数据也可在上行转换器中查看，位于「**Events**」标签的「In」和「Out」块。
 
 {% include images-gallery.html imageCollection="send-uplink-1" %}
 
 <br>
-Use the [Dashboards](/docs/{{docsPrefix}}user-guide/dashboards/) to work with data. Dashboards are a modern format for collecting and visualizing data sets. Visibility of data presentation is achieved through a variety of widgets.  
-ThingsBoard has examples of several types of dashboards that you can use. Learn more about **Solution templates** [here](/docs/{{docsPrefix}}solution-templates/overview/).
+使用[Dashboards](/docs/{{docsPrefix}}user-guide/dashboards/)处理数据。仪表板是收集和展示数据集的现代化形式，通过各种部件呈现数据。  
+ThingsBoard 提供多种仪表板示例。了解更多**Solution templates**请参阅[此处](/docs/{{docsPrefix}}solution-templates/overview/)。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-solution-templates.png)
@@ -150,10 +150,10 @@ ThingsBoard has examples of several types of dashboards that you can use. Learn 
 ![image](/images/user-guide/integrations/http/solution-templates.png)
 {% endif %}
 
-### Enable security option
+### 启用安全选项
 
-If necessary, you can specify additional parameters, without which the data will not be included in the integration.
-To do this, check the Enable security checkbox and click on the Headers filter. Specify an arbitrary value and save the changes.
+如需，可指定额外参数，缺少这些参数的数据将不会被纳入集成。
+勾选 Enable security，点击 Headers filter，填写任意值并保存。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-enable-security-1-pe.png)
@@ -162,13 +162,13 @@ To do this, check the Enable security checkbox and click on the Headers filter. 
 ![image](/images/user-guide/integrations/http/security-1-pe.png)
 {% endif %}
 
-Once the Headers filter has been configured, it will also need to be specified in the uplink message as follows:
+Headers filter 配置后，上行消息中需加入如下头：
 
 ```ruby
 -H "test-header:secret"
 ```
 
-Use this command to send the message with enable security option. Don't forget to replace `$DEVICE_NAME`, `$DEVICE_TYPE`, `$YOUR_HTTP_ENDPOINT_URL` and `$VALUE` with corresponding values.
+使用下列命令发送启用安全选项的消息。请将 `$DEVICE_NAME`、`$DEVICE_TYPE`、`$YOUR_HTTP_ENDPOINT_URL` 和 `$VALUE` 替换为实际值。
 
 ```ruby
 curl -v -X POST -d "{\"deviceName\":\"$DEVICE_NAME\",\"deviceType\":\"$DEVICE_TYPE\",\"temperature\":33,\"model\":\"test\"}" $YOUR_HTTP_ENDPOINT_URL -H "Content-Type:application/json" -H "$VALUE"
@@ -182,9 +182,9 @@ curl -v -X POST -d "{\"deviceName\":\"$DEVICE_NAME\",\"deviceType\":\"$DEVICE_TY
 ![image](/images/user-guide/integrations/http/security-2-pe.png)
 {% endif %}
 
-## Downlink Converter
+## 下行转换器
 
-Create downlink converter in the "**Data converters**" page. To see events enable 'Debug mode'.
+在「**Data converters**」页面创建下行转换器。要查看事件请启用「Debug mode」。
 
 {% include templates/tbel-vs-js.md %}
 
@@ -193,7 +193,7 @@ TBEL<small>Recommended</small>%,%accessToken%,%templates/integration/http/http-d
 JavaScript<small></small>%,%anonymous%,%templates/integration/http/http-downlink-converter-config-javascript.md{% endcapture %}
 {% include content-toggle.html content-toggle-id="httpdownlinkconverterconfig" toggle-spec=httpdownlinkconverterconfig %}
 
-Now you need to add the created downlink converter to the integration.
+接下来需将刚创建的下行转换器添加到集成。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-add-downlink-converter-1-pe.png)
@@ -203,10 +203,10 @@ Now you need to add the created downlink converter to the integration.
 {% endif %}
 
 <br>
-To be able to send downlink over integration we need to modify a "**Root Rule chain**":
+要通过集成发送下行，需修改「**Root Rule chain**」：
 
-- Go to the "**Rule chains**" page and click on the "**Root Rule Chain**" to open it;
-- Create an '**integration downlink**' node. Specify your integration in its settings;
+- 进入「**Rule chains**」页面，点击「**Root Rule Chain**」打开；
+- 创建「**integration downlink**」节点，在其设置中指定您的集成；
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-downlink-rule-chain-1-pe.png)
@@ -215,7 +215,7 @@ To be able to send downlink over integration we need to modify a "**Root Rule ch
 ![image](/images/user-guide/integrations/http/downlink-rule-chain-1-pe.png)
 {% endif %}
 
-- Set the "**Attributes updated**" and "**Post attributes**" links from the '**message type switch**' node to the '**integration downlink**' node. Apply changes.
+- 将「**message type switch**」节点的「**Attributes updated**」和「**Post attributes**」连线到「**integration downlink**」节点。应用更改。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-downlink-rule-chain-2-pe.png)
@@ -225,10 +225,10 @@ To be able to send downlink over integration we need to modify a "**Root Rule ch
 {% endif %}
 
 <br>
-When the attribute is created or changes are made to the attribute, the downlink message will be sent to the integration.
+创建属性或修改属性时，下行消息将被发送到集成。
 
-To see this with an example, we go to the "**Devices**" page. Select your device and navigate to the "**Attributes**" tab. Select **Shared attributes** and click on the "plus" icon to create new attribute.
-Then set the attribute name, its value (for example, the key name is 'firmware', value: '01052020.v1.1') and save the data.
+示例：进入「**Devices**」页面，选择设备，进入「**Attributes**」标签。选择 **Shared attributes**，点击「plus」创建新属性。
+设置属性名和值（例如键名为 'firmware'，值为 '01052020.v1.1'）并保存。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-downlink-add-attribute-1-pe.png)
@@ -238,15 +238,15 @@ Then set the attribute name, its value (for example, the key name is 'firmware',
 {% endif %}
 
 <br>
-Send the uplink message again. We will receive a response from the ThingsBoard in the terminal:
+再次发送上行消息。终端中会收到 ThingsBoard 的响应：
 
 {% include images-gallery.html imageCollection="downlink-terminal" %}
 
-Received data and data that was sent can be viewed in the downlink converter. In the "In" block of the Events tab, we see what data entered and in the "Out" field, the message sent to the device is displayed:
+接收和发送的数据可在下行转换器查看。Events 标签的「In」块显示入站数据，「Out」字段显示发给设备的消息：
 
 {% include images-gallery.html imageCollection="downlink-message" %}
 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

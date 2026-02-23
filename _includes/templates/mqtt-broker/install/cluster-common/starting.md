@@ -1,15 +1,15 @@
-Execute the following command to deploy the broker:
+执行以下命令部署 broker：
 
 ```bash
 ./k8s-deploy-tbmq.sh
 ```
 {: .copy-code}
 
-After a few minutes, you may execute the next command to check the state of all pods.
+几分钟后，可执行以下命令检查所有 pod 状态。
 
 ```bash
 kubectl get pods
 ```
 {: .copy-code}
 
-If everything went fine, you should be able to see `tbmq-0` and `tbmq-1` pods. Every pod should be in the `READY` state.
+若一切正常，应能看到 `tbmq-0` 和 `tbmq-1` pod，且均处于 `READY` 状态。

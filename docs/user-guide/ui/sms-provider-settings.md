@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: SMS Provider Settings
-description: ThingsBoard IoT platform SMS provider settings
+title: SMS提供商设置
+description: ThingsBoard物联网平台SMS提供商设置
 smsProviderSettings:
     0:
         image: /images/user-guide/ui/sms/sms-provider-settings-step-2-ce.png

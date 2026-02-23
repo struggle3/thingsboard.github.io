@@ -1,73 +1,71 @@
 * TOC
 {:toc}
 
-Welcome to the second part of our tutorial series! 
-If you missed part one, we covered the basics, including getting familiar with assets and devices, adding a dashboard, and adding your first widget. 
-It's highly recommended that you check out lesson 1 if you haven't already.
+欢迎来到教程系列第二部分！
+若未完成第一部分，我们已介绍基础：熟悉 assets 和 devices、添加 dashboard 和第一个部件。
+强烈建议先完成 lesson 1。
 
 <br>
-<p><a href="/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-1/" class="button">Lesson 1. Visualizing assets data using OpenStreet Map and Entities table widgets</a></p>
+<p><a href="/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-1/" class="button">第1课：使用 OpenStreet Map 和实体表格部件可视化资产数据</a></p>
 
 <br>
 
-In this lesson, we'll continue to develop our project. We will add states for buildings and offices, and implement navigation between them.
-We will also continue adding widgets, including one that visualizes the placement of devices on the office plan. Let's get started.
+本课将继续开发项目。我们将为建筑和办公室添加 states，并实现它们之间的导航。
+还会继续添加部件，包括在 office 平面图上展示设备布局的部件。
 
 {% include default-carousel.liquid collectionMap = 'dashboard-lesson-2' nonActiveItemsVisibility=false %}
 
-## Adding building and office states
+## 添加建筑和办公室状态
 
-Dashboard [states](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"} allow you to create a multi-level hierarchy within your dashboard. Think of each state as a separate page. 
-For instance, each building, office, and device can have its own state. We already have a default ("Buildings") state that shows a list of buildings and their locations on a map.
+Dashboard [states](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"} 可在 dashboard 内创建多级层级结构，可将每个 state 视为独立页面。
+例如，每栋建筑、每间办公室和每台设备均可有各自的 state。我们已有默认 ("Buildings") state，用于在地图上展示建筑列表及位置。
 
-We need to add a few more states to our dashboard: "building", "office", and individual states for each device.
+需再添加若干 states："building"、"office" 以及每台设备的 state。
 
-In this lesson, we will focus on adding and configuring states for buildings and offices. Device states will be added in the next lesson.
+本课将重点添加和配置建筑、办公室的 states。设备 states 将在下节课添加。
 
-**Adding a state for a building**
+**为建筑添加 state**
 
-To add a new state, follow these steps:
+按以下步骤添加新 state：
 
 {% include images-gallery.html imageCollection="adding-building-state" showListImageTitles="true" %}
 
-**Adding a state for an office**
+**为办公室添加 state**
 
-Repeat the steps to add a state for the office:
+重复上述步骤为办公室添加 state：
 
 {% include images-gallery.html imageCollection="adding-office-state" showListImageTitles="true" %}
 
-Now that the new states have been added, let’s set up navigation between them and the default state. 
+新状态已添加， 接下来配置它们与默认状态之间的导航。 
 
-## Building's state
+## 建筑状态
 
-The state of the selected building will display complete information about it.
-You will be able to view details such as the building's address, contact information of the person responsible for leasing inquiries in this building, as well as a list of your offices in this building.
+所选建筑的 state 会展示该建筑的完整信息。
+可查看建筑地址、租赁负责人联系方式，以及该建筑内的办公室列表。
 
-Instead of creating separate dashboard settings for each building, we will configure a single "building" state.
-Each time you select a different building, the widgets will automatically fetch and display data related to that building, thanks to the "[Entity from dashboard state](/docs/{{docsPrefix}}user-guide/ui/aliases/#entity-from-dashboard-state){:target="_blank"}" alias.
+我们将只配置一个 "building" state，而不是为每栋建筑单独配置。
+得益于 "[Entity from dashboard state](/docs/{{docsPrefix}}user-guide/ui/aliases/#entity-from-dashboard-state){:target="_blank"}" alias，每次选择不同建筑时，部件会自动拉取并显示对应数据。
 
-Let's see how this works.
+### 默认 state 与建筑 state 之间的导航
 
-### Navigation between default and building states
-
-Navigation between states will be implemented using the action function.
-The [action](/docs/{{docsPrefix}}user-guide/ui/widget-actions){:target="_blank"} function can be used to transition to a new state of the dashboard, navigate between dashboards, link to an external resource represented by a URL, or perform other user-configurable actions.
+通过 action 函数实现 states 之间的导航。
+[action](/docs/{{docsPrefix}}user-guide/ui/widget-actions){:target="_blank"} 函数可用于切换到 dashboard 新 state、在 dashboards 间导航、跳转到 URL 表示的外部资源或执行其它用户可配置操作。
 
 <br>
-**Adding an action for the map widget**
+**为地图部件添加 action**
 
-We will add the ability to transition to the state of the selected building via a tooltip when clicking on the building marker in the [OpenStreet Map widget](/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-1/#openstreet-map-widget){:target="_blank"}.
-For this, use the "[Navigate to new dashboard state](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#navigate-to-new-dashboard-state){:target="_blank"}" action. Let's get started:
+我们将添加通过 tooltip 在 [OpenStreet Map 部件](/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-1/#openstreet-map-widget){:target="_blank"} 中点击建筑标记时切换到对应建筑 state 的能力。
+使用 "[Navigate to new dashboard state](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#navigate-to-new-dashboard-state){:target="_blank"}" action。开始操作：
 
-- While in dashboard editing mode, click on the "pencil" icon of the map widget to enter its editing mode;
-- Navigate to the "Actions" tab and click the "plus" icon to add an action;
-- Select "[Tooltip tag action](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#tooltip-tag-action){:target="_blank"}" as the action source, name it "building_details", set the action type to "Navigate to new dashboard state" and specify "building" state as "Target dashboard state". Click "Add";
+- 在 dashboard 编辑模式下，点击地图部件的"铅笔"图标进入其编辑模式；
+- 进入"Actions"选项卡并点击"plus"图标添加 action；
+- 选择 "[Tooltip tag action](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#tooltip-tag-action){:target="_blank"}" 作为 action 来源，命名为 "building_details"，将 action 类型设为 "Navigate to new dashboard state"，并指定 "building" state 为 "Target dashboard state"。点击"Add"；
 
-Now in the "Actions" window, you can see the configured action. All that's left is to add the "Details" line to the popup menu for transitioning to the new state.
+在"Actions"窗口中可见已配置的 action。接下来只需在弹出菜单中添加"Details"行以切换到新 state。
 
 {% include images-gallery.html imageCollection="map-widget-navigation-between-states-1" %}
 
-- Navigate to the "Appearance" tab, find the "Tooltip" section and add the following lines to the end of the existing tooltip before the `;` sign:
+- 进入"Appearance"选项卡，找到"Tooltip"区域，在 `;` 前将以下行添加到现有 tooltip 末尾：
 
 ```text
             +
@@ -77,7 +75,7 @@ Now in the "Actions" window, you can see the configured action. All that's left 
 ```
 {: .copy-code}
 
-Or replace the existing tooltip with the following one:
+或用以下 tooltip 替换现有 tooltip：
 
 ```js
 const address = data.address ? data.address : 'N/A';
@@ -107,11 +105,11 @@ return '<div style="display:flex;flex-direction:column;font-family:\'Roboto\';fo
 {:.copy-code.expandable-4}
 
 {% capture difference %}
-Ensure that the name of the created action matches the name specified in the function.
+确保创建的 action 名称与函数中指定的名称一致。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-- Save the changes to the widget and the dashboard;
+- 保存部件和 dashboard 的更改；
 
 {% include images-gallery.html imageCollection="map-widget-navigation-between-states-2" %}
 
@@ -120,17 +118,17 @@ Now, when you click on any building marker of the map widget, a tooltip with "De
 {% include images-gallery.html imageCollection="map-widget-navigation-between-states-3" %}
 
 <br>
-**Adding an action for the "Buildings list" widget**
+**为 "Buildings list" 部件添加 action**
 
-Now let's add the action for the "[Buildings list](/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-1/#adding-buildings-list-widget){:target="_blank"}" widget so that clicking on a building name takes you to its state.
+为 "[Buildings list](/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-1/#adding-buildings-list-widget){:target="_blank"}" 部件添加 action，使点击建筑名称时跳转到其 state。
 
 {% include images-gallery.html imageCollection="adding-action-buildings-list-widget" showListImageTitles="true" %}
 
-Transition to the "Building A" state by selecting the corresponding building in the "Buildings list" widget:
+在 "Buildings list" 部件中选择对应建筑以切换到 "Building A" state：
 
 {% include images-gallery.html imageCollection="navigation-between-states-1" showListImageTitles="true" %}
 
-To go to the "Building B" state:
+切换到 "Building B" state：
 
 {% include images-gallery.html imageCollection="navigation-between-states-2" showListImageTitles="true" %}
 
@@ -147,13 +145,13 @@ Now let's move on to adding widgets to the "building" state.
 
 The first widget we'll add to the "building" state is a card that displays information about the selected building. It will include the building's address, contact person, phone number, and email address.
 
-- Click the large "Add new widget" icon in the center of the screen;
-- Select the "Markdown/HTML Card" from the "Cards" widgets bundle;
-- Now we need to add an alias to define the entities from which the data will be extracted. In the "Alias" field, enter a name for it - "Selected entity", and click "Create a new one";
-- Specify a filter type - "Entity from dashboard state", and click the "Add"; 
-- Add data keys such as "address", "contactPerson", "email", and "phone";
-- Navigate to the "Appearance" tab. Turn on the "Use markdown/HTML value function" option;
-- Add the Markdown/HTML value function to the appropriate window by taking it from the documentation:
+- 点击屏幕中央大图标 "Add new widget"；
+- 从 "Cards" 部件包中选择 "Markdown/HTML Card"；
+- 添加 alias 以定义数据来源实体。在 "Alias" 字段输入 "Selected entity"，点击 "Create a new one"；
+- 指定 filter 类型为 "Entity from dashboard state"，点击 "Add"； 
+- 添加 data keys："address"、"contactPerson"、"email"、"phone"；
+- 进入 "Appearance" 选项卡，开启 "Use markdown/HTML value function"；
+- 从文档中复制 Markdown/HTML value 函数并粘贴到对应窗口：
 
 ```html
 if (data.length) {

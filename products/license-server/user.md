@@ -2,16 +2,16 @@
 layout: docwithnav-license
 assignees:
 - ashvayka
-title: User management via License portal
-description: Users in ThingsBoard License Server
+title: 通过许可证门户管理用户
+description: ThingsBoard 许可证服务器中的用户
 
 ---
 
 
-Single account on License server may create unlimited Users. Users page allows invite other users to your account. Each user within a single account have an access to both make new and edit existing subscription as long as managing the billing info. 
+许可证服务器上的单个账户可创建无限数量的用户。用户页面允许邀请其他用户加入您的账户。单个账户内的每位用户均可创建和编辑现有订阅以及管理账单信息。
 
-The way for creating a new user as same as any customer os user account in ThingsBoard PE. Press ***Add User*** , fill the required fields and send the ***Activation link*** to the user.    
+创建新用户的方式与 ThingsBoard PE 中创建任何客户或用户账户相同。点击 ***添加用户***，填写必填字段并向用户发送 ***激活链接***。    
 
  ![image](/images/license/users.png)     
 
-Within User management page you may log in as particular user or delete the user also.
+在用户管理页面，您可以以特定用户身份登录或删除该用户。

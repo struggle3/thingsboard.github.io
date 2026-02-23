@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect WeMos D1 Mini based on ESP-12F ESP8266 to ThingsBoard?
-category: Microcontrollers
+title: 如何将 WeMos D1 Mini based on ESP-12F ESP8266 连接至 ThingsBoard？
+category: 微控制器
 chip: ESP8266
 connectivity: HTTP, MQTT, WIFI
 vendor: WeMos

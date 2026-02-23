@@ -3,53 +3,53 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-White labeling lets you tailor your TBMQ instance to match your brand and preferences - especially useful for companies delivering IoT solutions to their customers.
+白标功能可让您根据品牌与偏好定制 TBMQ 实例，尤其适用于向客户提供 IoT 解决方案的企业。
 
-Set your company or product name, upload your logo, choose color palettes.
+可设置公司或产品名称、上传徽标并选择配色方案。
 
-## Customize TBMQ web interface
+## 自定义 TBMQ Web 界面
 
-To configure your company or product **logo** and **color scheme**, go to the "White labeling" page.
+进入“白标”页面配置公司或产品**徽标**及**配色方案**。
 
 {% include images-gallery.html imageCollection="white-labeling-default" %}
 
-In the "General" tab you can set or change the following options:
+在“通用”标签页中可设置或修改以下选项：
 
- - Application title - you can specify a custom page title, which is displayed in the browser tab;
- - Favicon (website icon) - you can change the default website icon to your own;
- - Logo - you can change the standard logo in the upper left corner to your company logo; 
- - Logo height - you can resize the logo;
+ - 应用标题：可自定义在浏览器标签页中显示的页面标题；
+ - Favicon（网站图标）：可将默认网站图标替换为自有图标；
+ - 徽标：可将左上角标准徽标替换为公司徽标； 
+ - 徽标高度：可调整徽标尺寸；
 
 ![image](/images/pe/mqtt-broker/user-guide/white-labeling/white-labeling-title-logo-favicon.png)
 
- - White labeling allows you to customize the color theme by adjusting the primary and accent palettes to match your desired UI design.
+ - 白标支持通过调整主色与强调色配色以匹配 UI 设计。
 
-    - Primary palette - you can customize the background color and font color by choosing one of the suggested UI design options or customizing an existing one;
-    - Accent palette - you can customize the color for some elements, for example, for a toggle;
+    - 主色配色：可从建议的 UI 设计中选取或自定义背景色与字体颜色；
+    - 强调色配色：可自定义部分元素颜色，如开关等；
 
     ![image](/images/pe/mqtt-broker/user-guide/white-labeling/primary-accent-palette.png)
 
- - Advanced CSS - you can stylize any elements of the TBMQ user interface as you wish. We will talk more about this functionality [below](#advanced-css);
- - Show/hide platform name and version - by checking this option, the name of the platform and its current version will be displayed in the lower left corner.
+ - 高级 CSS：可任意样式化 TBMQ 界面元素。详见[下文](#advanced-css)；
+ - 显示/隐藏平台名称和版本：勾选后，平台名称及当前版本将显示在左下角。
 
    ![image](/images/pe/mqtt-broker/user-guide/white-labeling/show-platform-name-and-version.png)
 
-The final look of the customized user interface:
+自定义界面的最终效果：
 
 ![image](/images/pe/mqtt-broker/user-guide/white-labeling/white-labeling-custom.png)
 
-### Advanced CSS
+### 高级 CSS
 
-Using CSS, you can stylize any elements of the TBMQ user interface as you wish. Such elements can be background, icons, fonts, etc.
+可通过 CSS 任意样式化 TBMQ 界面元素，如背景、图标、字体等。
 
-To use CSS in your UI design, do the following:
+在 UI 设计中使用 CSS，请按以下步骤操作：
 
 {% include images-gallery.html imageCollection="advanced-css" showListImageTitles="true" %}
 
 <br>
-CSS code example for customize icons color, scroll color and active button:
+自定义图标颜色、滚动条颜色及激活按钮的 CSS 示例：
 
 ```css
 /*icon color*/
@@ -77,24 +77,24 @@ ng-component::-webkit-scrollbar-thumb {
 ```
 {: .copy-code}
 
-Using the functionality described in this documentation, you can customize the appearance of the TBMQ UI according to your preferences.
+利用本文档描述的功能，可按照您的偏好自定义 TBMQ 界面外观。
 
-## Customize the login page
+## 自定义登录页
 
-On the "Login" tab, you can configure the TBMQ **login page**.
+在“登录”标签页中，可配置 TBMQ **登录页**。
 
-- Enter the registered domain name, or refer to [this documentation](/docs/pe/mqtt-broker/security/domains/#domain-registration){:target="_blank"} to learn how to register a new domain;
-- It is recommended to prevent usage of hostnames from headers of the request;
-- Enter a custom application title;
-- Replace the default website icon and logo with your own;
-- Define the primary and accent color palettes;
-- Set the page background color.
+- 输入已注册域名，或参阅[本文档](/docs/pe/mqtt-broker/security/domains/#domain-registration){:target="_blank"}了解如何注册新域名；
+- 建议禁止使用请求头中的主机名；
+- 输入自定义应用标题；
+- 将默认网站图标和徽标替换为自有图标；
+- 定义主色与强调色配色；
+- 设置页面背景色。
 
-Once done, save the changes.
+完成后保存更改。
 
 {% include images-gallery.html imageCollection="customize-login-page" %}
 
 <br>
-Now, use your custom domain name to access the TBMQ web interface login page and verify the result of your configuration.
+使用自定义域名访问 TBMQ Web 界面登录页，验证配置结果。
 
 {% include images-gallery.html imageCollection="verify-result-customize-login-page" %}

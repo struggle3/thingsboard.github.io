@@ -1,4 +1,4 @@
-**Decode function:**
+**解码函数：**
 
 ```javascript
 // Decode decodes an array of bytes into an object.

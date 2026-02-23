@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: originator fields
-description: Enriches messages by adding details (such as name, label, profile name, etc.) from the message originator.
+description: 通过添加消息 originator 的详情（如名称、标签、profile 名称等）来丰富消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

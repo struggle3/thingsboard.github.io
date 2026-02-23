@@ -4,33 +4,33 @@
 {% assign sinceVersion = "4.0.1" %}
 {% include templates/edge/since-edge.md %}
 
-### Overview
+### 概述
 
-**Edge clustering** refers to connecting and grouping multiple **Edge nodes** to work together at the **edge of the network**. 
-Clustering is useful for large-scale industrial IoT, smart cities, factories, or any scenario with thousands of devices in one region. 
+**Edge clustering（Edge 集群）** 指连接并分组多个 **Edge 节点** 以在 **网络边缘** 协同工作。
+集群适用于大规模工业物联网、智慧城市、工厂或单区域数千设备的场景。
 
-Edge-specific considerations:
-* All **Edge nodes** connect to the **same database**.
-* **Devices** can connect to any node based on load balancing.
-* **Edge nodes** share the workload and maintain local failover.
-* The **Edge Cluster** syncs aggregated data to **ThingsBoard Cloud**.
+Edge 特定注意事项：
+* 所有 **Edge 节点** 连接到 **同一数据库**。
+* **Devices** 可根据负载均衡连接到任意节点。
+* **Edge 节点** 共享工作负载并维护本地故障转移。
+* **Edge Cluster** 将聚合数据同步到 **ThingsBoard Cloud**。
 
 ![edge-cluster](/images/edge/config/edge-cluster.webp){: style="display: block; margin: auto; max-width: 600px; max-height: 600px"}
 
-For more details, see the [microservices architecture](/docs/reference/msa/){: target="_blank"} page.
+更多详情请参阅 [microservices architecture](/docs/reference/msa/){: target="_blank"} 页面。
 
-#### Prerequisites
+#### 前置条件
 
-**ThingsBoard** microservices run in a **Dockerized environment**. 
-Before starting, make sure that [Docker CE](https://docs.docker.com/install/){: target="_blank"} and [Docker Compose](https://docs.docker.com/compose/install/){: target="_blank"} are installed on your system.
+**ThingsBoard** 微服务在 **Docker 环境** 中运行。
+开始前，请确保系统已安装 [Docker CE](https://docs.docker.com/install/){: target="_blank"} 和 [Docker Compose](https://docs.docker.com/compose/install/){: target="_blank"}。
 
 {% include templates/install/docker-install.md %}
 
 {% include templates/install/docker-install-note.md %}
 
-### Step 1. Pull the ThingsBoard Edge image
+### 步骤 1. 拉取 ThingsBoard Edge 镜像
 
-[Log in](https://docs.docker.com/engine/reference/commandline/login/){: target="_blank"} to Docker Hub and use the command to pull the image:
+[登录](https://docs.docker.com/engine/reference/commandline/login/){: target="_blank"} Docker Hub 并使用命令拉取镜像：
 
 {% if docsPrefix == "pe/edge/" %}
 ```bash
@@ -48,7 +48,7 @@ docker pull thingsboard/tb-edge:{{ site.release.edge_full_ver }}
 {% endif %}
 
 {% if docsPrefix == "pe/edge/" %}
-### Step 2. Clone ThingsBoard PE Docker compose scripts
+### 步骤 2. 克隆 ThingsBoard PE Docker compose 脚本
 
 ```bash
 git clone -b release-4.0.0 https://github.com/thingsboard/thingsboard-edge-pe-docker-compose.git tb-edge-pe-docker-compose --depth 1
@@ -58,7 +58,7 @@ cd tb-edge-pe-docker-compose
 
 {% else %}
 
-### Step 2. Clone the ThingsBoard Edge CE repository
+### 步骤 2. 克隆 ThingsBoard Edge CE 仓库
 
 ```bash
 git clone -b release-4.0 https://github.com/thingsboard/thingsboard-edge.git --depth 1
@@ -68,21 +68,21 @@ cd thingsboard-edge/docker-edge
 
 {% endif %}
 
-### Step 3. Configure ThingsBoard Edge database and queue service
+### 步骤 3. 配置 ThingsBoard Edge 数据库和队列服务
 
-Before performing the initial installation, configure the type of database to be used with **ThingsBoard Edge**. To set the database type, change the value of the **DATABASE** variable in the **environment file (.env)** file.
+在执行初始安装前，配置 **ThingsBoard Edge** 使用的数据库类型。要设置数据库类型，请修改 **环境文件 (.env)** 中的 **DATABASE** 变量值。
 
-**ThingsBoard Edge** currently supports two messaging systems/brokers for storing the messages:
-* **In Memory** queue implementation is not suitable for any sort of cluster deployments.
-* **Kafka** is recommended for production deployments and used by default. This queue is used on most of the ThingsBoard production environments now.
+**ThingsBoard Edge** 目前支持两种用于存储消息的消息系统/代理：
+* **In Memory** 队列实现不适用于任何类型的集群部署。
+* **Kafka** 建议用于生产部署，且为默认使用。该队列现用于大多数 ThingsBoard 生产环境。
 
-To edit the **ThingsBoard Edge .env** file, run the following command:
+要编辑 **ThingsBoard Edge .env** 文件，请运行以下命令：
 ```bash
 nano .env
 ```
 {: .copy-code}
 
-Check the following lines:
+检查以下行：
 ```bash
 DATABASE=postgres
 TB_QUEUE_TYPE=kafka
@@ -93,7 +93,7 @@ CLOUD_RPC_HOST=PUT_YOUR_THINGSBOARD_SERVER_DOMAIN_OR_IP_HERE # e.g. thingsboard.
 ```
 {: .copy-code}
 
-View the full **.env** file:
+查看完整 **.env** 文件：
 ```liquid
 # redis or redis-cluster or redis-sentinel
 CACHE=redis
@@ -134,102 +134,101 @@ JAVA_OPTS="-Xmx2048M -Xms2048M -Xss384k -XX:+AlwaysPreTouch"
 ```
 {: .copy-code.expandable-7}
 
-* **CACHE:** Set the cache type:
-  * **redis:** Set the _redis_ value to use the Redis standalone cache (1 node - 1 master).
-  * **redis-cluster:** Set the _redis-cluster_ value to use the Redis cluster cache (6 nodes - 3 masters, 3 slaves).
-  * **redis-sentinel:** Set the _redis-sentinel_ value to use the Redis sentinel cache (3 nodes - 1 master, 1 slave, 1 sentinel).
-* **DATABASE:** Replace the _database_ value with:
-  * **postgres:** Set the _postgres_ value to use the **PostgreSQL** database.
-  * **hybrid:** Set the _hybrid_ value to use the **PostgreSQL** database for the entities database and **Cassandra** for the time-series database.
-* **TB_QUEUE_TYPE:** Use _kafka_ as the queue type. The _in-memory_ value is not valid for a cluster deployment.
-* **CLOUD_ROUTING_KEY:** Put your edge key.
-* **CLOUD_ROUTING_SECRET:** Put your edge secret.
-* **CLOUD_RPC_HOST:** Use _thingsboard.cloud_ / _eu.thingsboard.cloud_ if you connect **Edge** to the [ThingsBoard Cloud (North America)](https://thingsboard.cloud/signup){: target="_blank"}/[ThingsBoard Cloud (Europe)](https://eu.thingsboard.cloud/signup){: target="_blank"} correspondingly, or an **IP address** of the machine with the **ThingsBoard PE Platform**.
-* **MONITORING_ENABLED:** To start cluster monitoring with [Grafana](https://grafana.com/){: target="_blank"} and/or [Prometheus](https://prometheus.io/){: target="_blank"} services, set the variable to _true_. 
+* **CACHE：** 设置缓存类型：
+  * **redis：** 设置 _redis_ 以使用 Redis 单机缓存（1 节点 - 1 主节点）。
+  * **redis-cluster：** 设置 _redis-cluster_ 以使用 Redis 集群缓存（6 节点 - 3 主节点，3 从节点）。
+  * **redis-sentinel：** 设置 _redis-sentinel_ 以使用 Redis Sentinel 缓存（3 节点 - 1 主节点，1 从节点，1 哨兵）。
+* **DATABASE：** 将 _database_ 值替换为：
+  * **postgres：** 设置 _postgres_ 以使用 **PostgreSQL** 数据库。
+  * **hybrid：** 设置 _hybrid_ 以使用 **PostgreSQL** 作为实体数据库，**Cassandra** 作为时序数据库。
+* **TB_QUEUE_TYPE：** 使用 _kafka_ 作为队列类型。集群部署不支持 _in-memory_ 值。
+* **CLOUD_ROUTING_KEY：** 填入您的 Edge key。
+* **CLOUD_ROUTING_SECRET：** 填入您的 Edge secret。
+* **CLOUD_RPC_HOST：** 若将 **Edge** 连接到 [ThingsBoard Cloud (北美)](https://thingsboard.cloud/signup){: target="_blank"}/[ThingsBoard Cloud (欧洲)](https://eu.thingsboard.cloud/signup){: target="_blank"}，使用 _thingsboard.cloud_ / _eu.thingsboard.cloud_；若连接到 **ThingsBoard PE Platform** 的机器，则使用 **IP 地址**。
+* **MONITORING_ENABLED：** 要使用 [Grafana](https://grafana.com/){: target="_blank"} 和/或 [Prometheus](https://prometheus.io/){: target="_blank"} 服务启动集群监控，请将变量设为 _true_。
 
-  Learn how to **enable downlink messages monitoring** in this [article](/docs/{{docsPrefix}}user-guide/troubleshooting/#downlink-messages-from-cloud-to-edge){: target="_blank"}.
+  请在此[文章](/docs/{{docsPrefix}}user-guide/troubleshooting/#downlink-messages-from-cloud-to-edge){: target="_blank"}中了解如何 **启用下行消息监控**。
 
 {% capture monitoring %}
-Once deployed, you can reach **Prometheus** at [http://localhost:9090](http://localhost:9090){: target="_blank"} and **Grafana** at [http://localhost:3000](http://localhost:3000){: target="_blank"}.
-<br>The default credentials for local installation are:
-* **Login:** admin 
-* **Password:** foobar
+部署后，您可在 [http://localhost:9090](http://localhost:9090){: target="_blank"} 访问 **Prometheus**，在 [http://localhost:3000](http://localhost:3000){: target="_blank"} 访问 **Grafana**。
+<br>本地安装的默认凭据为：
+* **Login：** admin 
+* **Password：** foobar
 {% endcapture %}
 {% include templates/info-banner.md content=monitoring %}
 
-### Step 4. Create and check required host volumes
+### 步骤 4. 创建并检查所需主机卷
 
 {% include templates/install/docker/docker-compose-setup-volumes.md %}
 
-### Step 5. Install and run ThingsBoard Edge
+### 步骤 5. 安装并运行 ThingsBoard Edge
 
-To run the installation, execute the following command:
+要运行安装，请执行以下命令：
 ```bash 
 ./docker-install-tb.sh
 ```
 {: .copy-code}
 
-To start the service, execute the following command:
+要启动服务，请执行以下命令：
 ```bash 
 ./docker-start-services.sh
 ```
 {: .copy-code}
 
 {% capture install-and-run-edge %}
-It will take a few minutes to start the services. Once all services are successfully started, open the **ThingsBoard Edge** service
-at **```http://{your-host-ip}```** in the browser (_e.g., [http://localhost](http://localhost){: target="_blank"}_).
-To log in, use **the credentials** from the **ThingsBoard** account.
+服务启动需要几分钟。所有服务成功启动后，在浏览器中打开 **ThingsBoard Edge** 服务，地址为 **```http://{your-host-ip}```**（_例如 [http://localhost](http://localhost){: target="_blank"}_）。
+请使用 **ThingsBoard** 账户的 **凭据** 登录。
 {% endcapture %}
 {% include templates/info-banner.md content=install-and-run-edge %}
 
-Examine edge service logs for errors in case of any issues. To see **ThingsBoard Edge** node logs, execute the following command:
+如有问题，请检查 edge 服务日志中的错误。要查看 **ThingsBoard Edge** 节点日志，请执行以下命令：
 ```bash 
 docker-compose logs -f tb-edge1 tb-edge2 tb-edge3
 ```
 {: .copy-code}
 
-To see the state of all the containers, use:
+要查看所有容器的状态，请使用：
 ```bash
 docker-compose ps
 ```
 {: .copy-code}
 
-To inspect the logs of all running services, use:
+要检查所有运行中服务的日志，请使用：
 ```bash
 docker-compose logs -f
 ```
 {: .copy-code}
 
-See [docker-compose logs](https://docs.docker.com/compose/reference/logs/){: target="_blank"} command reference for details.
+详见 [docker-compose logs](https://docs.docker.com/compose/reference/logs/){: target="_blank"} 命令参考。
 
-#### Stop and remove docker containers
+#### 停止并移除 Docker 容器
 
-To stop the services, use:
+要停止服务，请使用：
 
 ```bash
 ./docker-stop-services.sh
 ```
 {: .copy-code}
 
-To stop and completely remove the deployed docker containers, run the command:
+要停止并完全移除已部署的 Docker 容器，请运行：
 
 ```bash
 ./docker-remove-services.sh
 ```
 {: .copy-code}
 
-### Upgrading
+### 升级
 
-To update a particular or all services (pull newer docker image and rebuild container):
+要更新特定或所有服务（拉取更新的 docker 镜像并重建容器）：
 ```bash
 ./docker-update-service.sh [SERVICE...]
 ```
 {: .copy-code}
 
-Where:
-* **[SERVICE...]:** The list of services to update (defined in docker-compose configurations). If not specified, all services will be updated.
+其中：
+* **[SERVICE...]：** 要更新的服务列表（在 docker-compose 配置中定义）。若未指定，将更新所有服务。
 
-To upgrade the database, run the following commands:
+要升级数据库，请运行以下命令：
 
 ```bash
 ./docker-stop-services.sh
@@ -238,17 +237,17 @@ To upgrade the database, run the following commands:
 ```
 {: .copy-code}
 
-### Generate certificate for HTTPS
-We use **HAproxy** to proxy traffic to containers, and for **Web UI** we use **80** and **443** ports by default. To use HTTPS with a valid certificate, run these commands:
+### 生成 HTTPS 证书
+我们使用 **HAproxy** 代理容器流量，Web UI 默认使用 **80** 和 **443** 端口。要使用有效证书启用 HTTPS，请运行以下命令：
 ```bash
 docker exec haproxy-certbot certbot-certonly --domain your_domain --email your_email
 docker exec haproxy-certbot haproxy-refresh
 ```
 {: .copy-code}
 
-Valid certificate will only be used if you visit Web UI by domain in URL. 
-If you are using IP address to access UI, this would use self-signed certificate.
+只有通过域名访问 Web UI 时才会使用有效证书。
+若使用 IP 地址访问 UI，将使用自签名证书。
 
-### Next steps
+### 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Entity Groups
-description: Entity Groups Guide
+title: 实体分组
+description: 实体分组指南
 redirect_from: "/docs/user-guide/groups/"
 
 create-entity-group-1:

@@ -1,13 +1,13 @@
-TBMQ v2.1.0 introduces enhancements, including a new Integration Executor microservice and bumped versions for third-party services.
+TBMQ v2.1.0 引入多项改进，包括新的 Integration Executor 微服务及第三方服务版本升级。
 
-#### Add Integration Executor microservice
+#### 添加 Integration Executor 微服务
 
-This release adds support for external integrations via the new [Integration Executor](/docs/{{docsPrefix}}mqtt-broker/integrations/) microservice.
+本版本通过新的 [Integration Executor](/docs/{{docsPrefix}}mqtt-broker/integrations/) 微服务支持外部集成。
 
 <br>
 <details markdown="1">
 <summary>
-Add the service definition and volume to your existing docker-compose.yml file
+在现有的 docker-compose.yml 中添加服务定义和 volume
 </summary>
 
 ```yaml
@@ -37,22 +37,22 @@ volumes:
 </details>
 <br>
 
-For the complete updated `docker-compose.yml`, see the [official example here](https://github.com/thingsboard/tbmq/blob/release-2.1.0/msa/tbmq/configs/docker-compose.yml).
+完整更新的 `docker-compose.yml` 请参阅 [官方示例](https://github.com/thingsboard/tbmq/blob/release-2.1.0/msa/tbmq/configs/docker-compose.yml)。
 
-Run the following command to create a Docker volume for Integration Executor logs:
+运行以下命令创建 Integration Executor 日志的 Docker volume：
 
 ```bash
 docker volume create tbmq-ie-logs
 ```
 {: .copy-code}
 
-After updating your configuration, start the service with:
+更新配置后，使用以下命令启动服务：
 
 ```bash
 docker compose up -d tbmq-integration-executor --no-deps
 ```
 {: .copy-code}
 
-#### Update third-party services
+#### 更新第三方服务
 
 {% include templates/mqtt-broker/upgrade/upgrade-third-parties-for-2.1.0-release.md %}

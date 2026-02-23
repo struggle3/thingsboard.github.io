@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: MQTT Gateway API Reference
-description: Supported MQTT Gateway API Reference for IoT Devices
+title: MQTT 网关 API 参考
+description: IoT 设备支持的 MQTT 网关 API 参考
 
 ---
 

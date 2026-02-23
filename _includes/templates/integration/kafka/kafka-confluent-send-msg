@@ -1,8 +1,8 @@
-You can simulate a message from the Confluent cloud to ThingsBoard, for this use the available Confluent functionality.
-Navigate to the topics in the cluster, the Messages tab, and select the **Produce a new message to this topic**.
+可使用 Confluent 提供的功能模拟从 Confluent cloud 向 ThingsBoard 发送消息。
+在 cluster 中进入 topics 的 Messages 选项卡，选择 **Produce a new message to this topic**。
 
 {% include images-gallery.html imageCollection="kafka_confluent_send_payload_to_tb" %}
 
-Result matches all keys, timestamps and values:
+结果匹配所有 key、时间戳和值：
 
 {% include images-gallery.html imageCollection="Kafka_integration_test_send_msg_result" %}

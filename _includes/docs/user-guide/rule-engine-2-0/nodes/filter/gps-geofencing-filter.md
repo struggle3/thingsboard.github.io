@@ -1,61 +1,59 @@
-Extracts latitude and longitude from the incoming message and checks whether the point lies **inside** a configured geofence (polygon or circle).
-If it matches, the message is routed via `True`; otherwise via `False`.
+从入站消息中提取经纬度，并检查该点是否位于配置的地理围栏（多边形或圆形）**内部**。
+若匹配，消息经 `True` 路由；否则经 `False` 路由。
 
-## Preconditions
+## 前置条件
 
-The incoming message **data** must be a valid JSON object. The configured coordinate keys must be present in the message (either in data or metadata; they may come from different
-sources), and their values must be **parseable as decimal numbers**.
+入站消息的 **data** 必须为有效 JSON 对象。配置的坐标键必须存在于消息中（可在 data 或 metadata 中，可来自不同来源），其值必须**可解析为十进制数**。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Latitude field name** — name of the key that contains the latitude of the point to check.
-* **Longitude field name** — name of the key that contains the longitude of the point to check.
-* **Perimeter type** — defines the shape of the geofence to check against. Can be either *Polygon* or *Circle*.
-* **Fetch perimeter information from metadata** — if enabled, the geofence is read from message **metadata**. If disabled, the node uses the perimeter defined in the static
-  configuration.
-* **Perimeter key name** — metadata key that stores the perimeter definition. Used only when **Fetch perimeter information from metadata** is enabled.
-  Behavior depends on configured **perimeter type**:
-    * If *Polygon*: the metadata key must contain a string representing a JSON array of coordinates that define the polygon.
-    * If *Circle*: the metadata key must contain a string representing a JSON object that defines the circle.
+* **纬度字段名** — 包含待检查点纬度的键名。
+* **经度字段名** — 包含待检查点经度的键名。
+* **围栏类型** — 定义用于比对的地理围栏形状。可为 *Polygon*（多边形）或 *Circle*（圆形）。
+* **从 metadata 获取围栏信息** — 启用后，从消息 **metadata** 读取围栏。禁用后，节点使用静态配置中定义的围栏。
+* **围栏键名** — 存储围栏定义的 metadata 键。仅在**从 metadata 获取围栏信息**启用时使用。
+  行为取决于配置的**围栏类型**：
+    * 若为 *Polygon*：metadata 键必须包含表示定义多边形的坐标 JSON 数组的字符串。
+    * 若为 *Circle*：metadata 键必须包含表示定义圆形的 JSON 对象的字符串。
 
-Field below are required when the **Perimeter type** is set to *Polygon* and **Fetch perimeter information from metadata** is disabled:
+当**围栏类型**为 *Polygon* 且**从 metadata 获取围栏信息**禁用时，以下字段必填：
 
-* **Polygon definition** — a string representing a JSON array of coordinates that define the polygon.
+* **多边形定义** — 表示定义多边形坐标的 JSON 数组的字符串。
 
-Fields below are required when the **Perimeter type** is set to *Circle* and **Fetch perimeter information from metadata** is disabled:
+当**围栏类型**为 *Circle* 且**从 metadata 获取围栏信息**禁用时，以下字段必填：
 
-* **Center latitude** — the latitude of the center point of the circular geofence.
-* **Center longitude** — the longitude of the center point of the circular geofence.
-* **Range** — the radius of the circle, representing how far from the center the geofence extends. Must be a positive number.
-* **Range units** — the unit of measurement used for the range. Can be one of the following: *Meter*, *Kilometer*, *Foot*, *Mile*, *Nautical mile*.
+* **中心纬度** — 圆形地理围栏中心点的纬度。
+* **中心经度** — 圆形地理围栏中心点的经度。
+* **半径** — 圆的半径，表示围栏距中心的延伸距离。必须为正数。
+* **半径单位** — 半径的计量单位。可为：*Meter*（米）、*Kilometer*（千米）、*Foot*（英尺）、*Mile*（英里）、*Nautical mile*（海里）。
 
-### Perimeter definition formats
+### 围栏定义格式
 
-#### Polygon definition formats
+#### 多边形定义格式
 
-Polygon definitions must be strings containing a valid JSON array of coordinates. Each coordinate is a two-element array: `[latitude, longitude]`.
+多边形定义必须为包含有效坐标 JSON 数组的字符串。每个坐标为两元素数组：`[latitude, longitude]`。
 
-**Single polygon**
+**单个多边形**
 
-A basic polygon must have at least three points (with the last point automatically closed to form a loop):
+基本多边形至少需三个点（最后一个点自动闭合形成环）：
 
 ```json
 [[48.195,24.645],[48.200,24.655],[48.205,24.645]]
 ```
 
-**Rectangle (two corners)**
+**矩形（两个对角点）**
 
-You can define a rectangle using only two diagonally opposite points — the node automatically computes the other corners:
+可使用仅两个对角点定义矩形，节点自动计算其余角点：
 
 ```json
 [[48.195,24.645],[48.205,24.655]]
 ```
 
-**Multi-polygon**
+**多多边形**
 
-You can provide multiple polygons by wrapping them in an additional array:
+可将多个多边形包装在额外数组中：
 
 ```json
 [
@@ -64,9 +62,9 @@ You can provide multiple polygons by wrapping them in an additional array:
 ]
 ```
 
-**Polygon with hole**
+**带孔多边形**
 
-If a polygon is completely contained inside another, it is treated as a **hole** and excluded from the area:
+若一个多边形完全包含在另一个内，视为**孔**并从区域中排除：
 
 ```json
 [
@@ -76,15 +74,15 @@ If a polygon is completely contained inside another, it is treated as a **hole**
 ```
 
 {% capture defining_polygons_in_metadata_note %}
-When defining polygons in metadata, the value must be a **string**, even if the content is a JSON array.
+在 metadata 中定义多边形时，值必须为**字符串**，即使内容为 JSON 数组。
 {% endcapture %}
 {% include templates/info-banner.md content=defining_polygons_in_metadata_note %}
 
 ---
 
-#### Circle definition format
+#### 圆形定义格式
 
-Circle definitions are JSON objects with the following fields:
+圆形定义为包含以下字段的 JSON 对象：
 
 ```json
 {
@@ -95,10 +93,10 @@ Circle definitions are JSON objects with the following fields:
 }
 ```
 
-* `latitude` — center latitude of the circle.
-* `longitude` — center longitude of the circle.
-* `radius` — radius of the circle (must be a positive number).
-* `radiusUnit` — unit of measurement (optional and defaults to `"METER"` if not specified); one of:
+* `latitude` — 圆心纬度。
+* `longitude` — 圆心经度。
+* `radius` — 圆半径（必须为正数）。
+* `radiusUnit` — 计量单位（可选，未指定时默认为 `"METER"`）；可为：
     * `"METER"`
     * `"KILOMETER"`
     * `"FOOT"`
@@ -106,8 +104,8 @@ Circle definitions are JSON objects with the following fields:
     * `"NAUTICAL_MILE"`
 
 {% capture defining_circles_in_metadata_note %}
-When storing circle definitions in metadata, the entire object must be serialized as a **string**.
-Example metadata value: `"{\"latitude\":48.1986,\"longitude\":24.6532,\"radius\":100.0,\"radiusUnit\":\"METER\"}"`
+在 metadata 中存储圆形定义时，整个对象必须序列化为**字符串**。
+示例 metadata 值：`"{\"latitude\":48.1986,\"longitude\":24.6532,\"radius\":100.0,\"radiusUnit\":\"METER\"}"`
 {% endcapture %}
 {% include templates/info-banner.md content=defining_circles_in_metadata_note %}
 
@@ -184,56 +182,54 @@ Example metadata value: `"{\"latitude\":48.1986,\"longitude\":24.6532,\"radius\"
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. **Parse the incoming message**
-   The message `data` must be a valid JSON object. If it is not, the message is routed via the `Failure` connection.
-2. **Extract coordinates to check**
-   The node retrieves latitude and longitude using the configured keys:
-    * First looks in the message data.
-    * If not found there, falls back to the message metadata.
-      Both values must be present and parseable as decimal numbers. Otherwise, the message is routed via `Failure`.
-3. **Resolve the geofence (perimeter)**
-   The geofence is determined in one of two ways:
-    * If **Fetch perimeter information from metadata** is disabled, the perimeter is built from static configuration fields.
-    * If enabled, the perimeter is loaded from the metadata key specified in **Perimeter key name**, and its format depends on the configured **Perimeter type**:
-        * If *Polygon*: the metadata value must be a string containing a JSON array of coordinates.
-        * If *Circle*: the metadata value must be a string containing a JSON object with latitude, longitude, radius, and optional radius unit.
-          If the metadata key is missing or contains an invalid value, the message is routed via `Failure`.
-4. **Check if point is inside the geofence**
-    * For **circle** perimeters, the node calculates the geodesic distance between the point and the center. If the distance is **less than** the configured range, the point is
-      considered **inside**.
-    * For **polygon** perimeters, the node checks if the point is located within the defined shape. If multiple polygons are provided, any containing polygon counts. Polygons fully
-      enclosed by others are treated as **holes**.
-5. **Route the message**
-    * If the point is **inside** the perimeter → routed via the `True` connection.
-    * If the point is **outside** → routed via the `False` connection.
-    * If any error occurs during parsing, coordinate extraction, or geofence resolution → routed via the `Failure` connection.
+1. **解析入站消息**
+   消息 `data` 必须为有效 JSON 对象。若不是，消息经 `Failure` 连接路由。
+2. **提取待检查坐标**
+   节点使用配置的键获取纬度和经度：
+    * 先在消息 data 中查找。
+    * 若未找到，回退到消息 metadata。
+      两个值必须存在且可解析为十进制数。否则，消息经 `Failure` 路由。
+3. **解析地理围栏（围栏）**
+   地理围栏通过以下两种方式之一确定：
+    * 若**从 metadata 获取围栏信息**禁用，围栏从静态配置字段构建。
+    * 若启用，围栏从**围栏键名**指定的 metadata 键加载，格式取决于配置的**围栏类型**：
+        * 若为 *Polygon*：metadata 值必须为包含坐标 JSON 数组的字符串。
+        * 若为 *Circle*：metadata 值必须为包含 latitude、longitude、radius 及可选 radius unit 的 JSON 对象的字符串。
+          若 metadata 键缺失或包含无效值，消息经 `Failure` 路由。
+4. **检查点是否在围栏内**
+    * 对于**圆形**围栏，节点计算点与中心之间的测地距离。若距离**小于**配置的半径，则视为**在内部**。
+    * 对于**多边形**围栏，节点检查点是否位于定义的形状内。若提供多个多边形，任一包含多边形即算通过。完全被其他多边形包围的多边形视为**孔**。
+5. **路由消息**
+    * 若点在围栏**内部** → 经 `True` 连接路由。
+    * 若点在围栏**外部** → 经 `False` 连接路由。
+    * 若解析、坐标提取或围栏解析过程中发生错误 → 经 `Failure` 连接路由。
 
 {% capture normalization_note %}
-Longitudes are normalized internally, allowing support for polygons that cross the ±180° meridian.
+经度在内部进行规范化，支持跨越 ±180° 经线的多边形。
 {% endcapture %}
 {% include templates/info-banner.md content=normalization_note %}
 
-## Output connections
+## 输出连接
 
-* `True`:
-    * The extracted point lies **inside** the configured geofence (circle or polygon).
-* `False`:
-    * The extracted point lies **outside** the configured geofence (or exactly on a circle boundary).
-* `Failure`:
-    * Incoming data is not a JSON object.
-    * Latitude/longitude are missing in both data and metadata or not numeric.
-    * **Fetch perimeter information from metadata** is enabled but the perimeter definition is missing/invalid.
-    * Other unexpected error.
+* `True`：
+    * 提取的点位于配置的地理围栏（圆形或多边形）**内部**。
+* `False`：
+    * 提取的点位于配置的地理围栏**外部**（或恰好在圆形边界上）。
+* `Failure`：
+    * 入站 data 不是 JSON 对象。
+    * data 和 metadata 中均缺少纬度/经度或值非数字。
+    * **从 metadata 获取围栏信息**已启用但围栏定义缺失或无效。
+    * 其他意外错误。
 
-## Examples
+## 示例
 
-The examples below show only the **relevant** fields. Unless stated otherwise, other message fields may have any values.
+以下示例仅展示**相关**字段。除非另有说明，其他消息字段可为任意值。
 
-### Example 1 — Point inside static circle → `True`
+### 示例 1 — 点在静态圆形内 → `True`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -244,7 +240,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -259,19 +255,19 @@ Data:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`True`**
+经 **`True`** 路由
 
-**Explanation**
+**说明**
 
-The point is within 150 meters of the configured circle center.
+该点在配置的圆心 150 米范围内。
 
 ---
 
-### Example 2 — Point outside static circle → `False`
+### 示例 2 — 点在静态圆形外 → `False`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -282,7 +278,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -297,19 +293,19 @@ Data:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`False`**
+经 **`False`** 路由
 
-**Explanation**
+**说明**
 
-The point is farther than 100 meters from the center, so it lies outside the geofence.
+该点距中心超过 100 米，位于地理围栏外。
 
 ---
 
-### Example 3 — Point inside static polygon → `True`
+### 示例 3 — 点在静态多边形内 → `True`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -320,7 +316,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -332,19 +328,19 @@ Data:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`True`**
+经 **`True`** 路由
 
-**Explanation**
+**说明**
 
-The point lies inside the defined rectangular polygon.
+该点位于定义的矩形多边形内。
 
 ---
 
-### Example 4 — Point inside polygon with hole → `False`
+### 示例 4 — 点在带孔多边形内部孔中 → `False`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -355,7 +351,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -367,19 +363,19 @@ Data:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`False`**
+经 **`False`** 路由
 
-**Explanation**
+**说明**
 
-The outer polygon contains the point, but it lies inside an internal hole.
+外多边形包含该点，但其位于内部孔中。
 
 ---
 
-### Example 5 — Point inside circle perimeter from metadata → `True`
+### 示例 5 — 点在 metadata 中的圆形围栏内 → `True`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -398,7 +394,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -410,19 +406,19 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`True`**
+经 **`True`** 路由
 
-**Explanation**
+**说明**
 
-The perimeter is loaded from metadata and the point lies within the defined circle.
+围栏从 metadata 加载，该点位于定义的圆形内。
 
 ---
 
-### Example 6 — Point outside polygon perimeter from metadata → `False`
+### 示例 6 — 点在 metadata 中的多边形围栏外 → `False`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -441,7 +437,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -453,19 +449,19 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`False`**
+经 **`False`** 路由
 
-**Explanation**
+**说明**
 
-The point lies outside the polygon defined in metadata.
+该点位于 metadata 中定义的多边形外。
 
 ---
 
-### Example 7 — Coordinates taken from metadata → `True`
+### 示例 7 — 坐标取自 metadata → `True`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -485,7 +481,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -497,19 +493,19 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`True`**
+经 **`True`** 路由
 
-**Explanation**
+**说明**
 
-The coordinates were found in metadata and match the geofence.
+在 metadata 中找到坐标且与地理围栏匹配。
 
 ---
 
-### Example 8 — Missing coordinates → `Failure`
+### 示例 8 — 缺少坐标 → `Failure`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -525,7 +521,7 @@ Metadata:
 {}
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -540,19 +536,19 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`Failure`**
+经 **`Failure`** 路由
 
-**Explanation**
+**说明**
 
-Neither `latitude` nor `longitude` keys are present in data or metadata, so the node cannot extract coordinates.
+data 和 metadata 中均不存在 `latitude` 和 `longitude` 键，节点无法提取坐标。
 
 ---
 
-### Example 9 — Invalid perimeter metadata → `Failure`
+### 示例 9 — 无效的围栏 metadata → `Failure`
 
-**Incoming message**
+**入站消息**
 
 Data:
 ```json
@@ -569,7 +565,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -581,10 +577,10 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-Routed via **`Failure`**
+经 **`Failure`** 路由
 
-**Explanation**
+**说明**
 
-The value in the metadata key is not a valid JSON string, so the perimeter cannot be parsed.
+metadata 键中的值不是有效的 JSON 字符串，无法解析围栏。

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect ESP32 Dev Kit V1 to ThingsBoard?"
+title: "如何将ESP32 Dev Kit V1连接到ThingsBoard？"
 redirect_to: "/device-library/paas/esp32-dev-kit-v1/"
 ---

@@ -1,14 +1,13 @@
-The device name and profile can be extracted from the incoming message. In this example, we will use  
-[json path](/docs/iot-gateway/config/mqtt/#json-path) to specify the device name and profile.
+设备名和配置文件可从入站消息中提取。本示例使用 [json path](/docs/iot-gateway/config/mqtt/#json-path) 指定设备名和配置文件。
 
-As an example, we will use ThingsBoard MQTT Demo Broker, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard MQTT 演示代理，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 1884:1884 thingsboard/tb-gw-mqtt-broker:latest
 ```
 {:.copy-code}
 
-The broker available at `0.0.0.0:1884` and publishes data to the topic `sensor/data` with the following JSON payload:
+代理运行于 `0.0.0.0:1884`，向主题 `sensor/data` 发布以下 JSON 负载：
 
 ```json
 {
@@ -19,46 +18,44 @@ The broker available at `0.0.0.0:1884` and publishes data to the topic `sensor/d
     "hum": 59.3
 }
 ```
-We also want to extract the device name from the `serialNumber` field and the device profile from the `sensorType` field.
-Let's configure the device name and profile in the MQTT connector. For this purpose, follow these steps:
+我们还希望从 `serialNumber` 字段提取设备名，从 `sensorType` 字段提取设备配置文件。
+在 MQTT 连接器中配置设备名和配置文件。按以下步骤操作：
 
 {% assign deviceNameAndProfileTopicAndConstantJson = '
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-1.png,
-        title: Go to "**Entities**" → "**Gateways**" on the left sidebar and select your gateway.
+        title: 在左侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-3.png,
-        title: Select the created MQTT connector, select "**Basic**" click on the "**Data mapping**" Click on the "**+ Add mapping**" button.
+        title: 选择已创建的 MQTT 连接器，选择“**基本**”并点击“**数据映射**”，再点击“**+ 添加映射**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-4.png,
-        title: In the opened window, fill in "**Topic filter**" field with `sensor/data`, also fill "**QoS**" with one of these values(`0`,`1`,`2`) and for "**Payload type**" select `JSON`.
+        title: 在打开的窗口中，“**主题过滤器**”填 `sensor/data`，“**QoS**”填 `0`、`1` 或 `2` 之一，“**负载类型**”选 `JSON`。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-5.png,
-        title: Then under "**Device**" subsection choose "**Message**" for the "**Name**" field, enter `${serialNumber}`, this is the [json path](/docs/iot-gateway/config/mqtt/#json-path) to the field that contains the device name.
+        title: 在“**设备**”子部分，“**名称**”字段选“**Message**”，填 `${serialNumber}`，这是 [json path](/docs/iot-gateway/config/mqtt/#json-path) 指向包含设备名的字段。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-6.png,
-        title: Then under "**Profile name**" subsection choose "**Message**" for the "**Name**" field, enter `${sensorType}`, this is the [json path](/docs/iot-gateway/config/mqtt/#json-path) to the field that contains the device name.
+        title: 在“**配置文件名称**”子部分，“**名称**”字段选“**Message**”，填 `${sensorType}`，这是 [json path](/docs/iot-gateway/config/mqtt/#json-path) 指向包含设备配置文件的字段。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-7.png,
-        title: Also, we need to add at least one attribute/time series because the connector will not add a device without any data to read. Click on the "**pencil**" icon next to the "**Time series**" section.
+        title: 还需要至少添加一个属性/时序数据，因为连接器不会添加无可读数据的设备。点击“**时序数据**”旁的“**铅笔**”图标。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-8.png,
-        title: In the opened window, click on the "**Add time series**" button and fill the fields as on the corresponding image. Do not forget to save changes.
+        title: 在打开的窗口中，点击“**添加时序数据**”按钮并按对应图片填写字段。不要忘记保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceNameAndProfileTopicAndConstantJson %}
 
-Now we can check if the device name and profile are set correctly. Go to "**Entities**" > "**Devices**" and as you can see, the device
-name is set to `SN-001` and the profile is set to `Thermometer`.
+可以检查设备名和配置文件是否正确设置。进入“**实体**”→“**设备**”，设备名应为 `SN-001`，配置文件为 `Thermometer`。
 
 ![image](/images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-9.png)
 
-If you are using advanced configuration mode and want to set the device name and profile using topic and json path, you can
-use the following configuration:
+若使用高级配置模式并需用主题和 json path 设置设备名和配置文件，可使用以下配置：
 
 ```json
 {

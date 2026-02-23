@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Validate incoming telemetry
-description: Validate incoming telemetry
+title: 验证入站遥测
+description: 验证入站遥测
 
 ---
 

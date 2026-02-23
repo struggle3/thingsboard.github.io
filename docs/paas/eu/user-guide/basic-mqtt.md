@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Basic MQTT authentication
-description: ThingsBoard MQTT based authentication.
+title: 基本 MQTT 认证
+description: ThingsBoard 基于 MQTT 的认证。
 
 client-id-only-1:
     0:

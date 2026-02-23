@@ -1,6 +1,6 @@
-{% assign modalTitle = 'Tell us about your success' %}
-{% assign modalDescription = 'Get your brand featured across our global channels — website, social media, and community.' %}
-{% assign formSubject = 'General Feedback' %}
+{% assign modalTitle = '分享您的成功案例' %}
+{% assign modalDescription = '将您的品牌展示于我们的全球渠道——网站、社交媒体和社区。' %}
+{% assign formSubject = '一般反馈' %}
 
 {% if page.modalTitle %}
 {% assign modalTitle = page.modalTitle %}
@@ -24,7 +24,7 @@
     <div class="modal-content">
         <form id="ContactUs" method="post" class="contact-form gtm_form" onsubmit="return validateContactForm(this)" novalidate>
             <div id="closeBtn" class="close-button">
-                <img src="/images/pricing/close-icon.svg" alt="Close icon">
+                <img src="/images/pricing/close-icon.svg" alt="关闭">
             </div>
             <h1 class="contact-us-title">{{ modalTitle }}</h1>
             <h2>{{ modalDescription }}</h2>
@@ -32,52 +32,52 @@
                 <div class="form-section">
                     <div class="form-element">
                         <label for="firstName">
-                            <input class="form-control" value="" placeholder="John" name="firstName" id="firstName" type="text" size="40" maxlength="50" aria-invalid="false">
-                            <p>First Name</p>
+                            <input class="form-control" value="" placeholder="名" name="firstName" id="firstName" type="text" size="40" maxlength="50" aria-invalid="false">
+                            <p>名</p>
                         </label>
                     </div>
                     <div class="form-element">
                         <label for="lastName">
-                            <input class="form-control" value="" placeholder="Doe" name="lastName" id="lastName" type="text" size="40" maxlength="50" aria-invalid="false">
-                            <p>Last Name</p>
+                            <input class="form-control" value="" placeholder="姓" name="lastName" id="lastName" type="text" size="40" maxlength="50" aria-invalid="false">
+                            <p>姓</p>
                         </label>
                     </div>
                     <div class="form-element">
                         <label for="email">
-                            <input class="form-control" value="" placeholder="john@example.com" name="email" id="email" type="email" size="40" maxlength="80" aria-invalid="false">
-                            <p>Email Address</p>
+                            <input class="form-control" value="" placeholder="your@example.com" name="email" id="email" type="email" size="40" maxlength="80" aria-invalid="false">
+                            <p>电子邮箱</p>
                         </label>
                     </div>
                     <div class="form-element">
                         <label for="company">
-                            <input class="form-control" value="" placeholder="My Company Inc." name="company" id="company" type="text" size="40" maxlength="80" aria-invalid="false">
-                            <p>Company</p>
+                            <input class="form-control" value="" placeholder="公司名称" name="company" id="company" type="text" size="40" maxlength="80" aria-invalid="false">
+                            <p>公司</p>
                         </label>
                     </div>
                     <div class="form-element">
                         <label for="subject" class="select-label">
                             <select class="form-control select" id="subject" name="subject">
-                                <option value="" disabled selected>Select Subject</option>
-                                <option value="Technical Support">Technical Support</option>
-                                <option value="ThingsBoard Products">ThingsBoard Products</option>
-                                <option value="Private Cloud">Private Cloud</option>
-                                <option value="Deployment Options">Deployment Options</option>
-                                <option value="Custom Development">Custom Development</option>
-                                <option value="Training">Training</option>
-                                <option value="Professional Services">Professional Services</option>
-                                <option value="Partnership">Partnership</option>
-                                <option value="Press or Analyst Inquiry">Press or Analyst Inquiry</option>
-                                <option value="General Feedback">General Feedback</option>
+                                <option value="" disabled selected>选择主题</option>
+                                <option value="Technical Support">技术支持</option>
+                                <option value="ThingsBoard Products">ThingsBoard产品</option>
+                                <option value="Private Cloud">私有云</option>
+                                <option value="Deployment Options">部署方式</option>
+                                <option value="Custom Development">定制开发</option>
+                                <option value="Training">培训</option>
+                                <option value="Professional Services">专业服务</option>
+                                <option value="Partnership">合作</option>
+                                <option value="Press or Analyst Inquiry">媒体或分析师咨询</option>
+                                <option value="General Feedback">一般反馈</option>
                                 <option value="TBMQ">TBMQ</option>
-                                <option value="Other">Other</option>
+                                <option value="Other">其他</option>
                             </select>
-                            <p>Subject</p>
+                            <p>主题</p>
                         </label>
                     </div>
                     <div class="form-element">
                         <label for="message">
-                            <textarea class="form-control text-area" placeholder="Enter Message" name="message" id="message" cols="50" rows="4" maxlength="3000" aria-invalid="false"></textarea>
-                            <p class="text-area-label">Message</p>
+                            <textarea class="form-control text-area" placeholder="请输入留言内容" name="message" id="message" cols="50" rows="4" maxlength="3000" aria-invalid="false"></textarea>
+                            <p class="text-area-label">留言</p>
                         </label>
                     </div>
                     <input type="hidden" name="_next" value="/docs/contact-us-thanks/">
@@ -94,7 +94,7 @@
                     <input type="text" name="_gotcha" style="display:none">
                 </div>
                 <div class="submit-button-container">
-                    <input id="modalContactUsSent" class="button gtm_button" value="Submit" type="submit">
+                    <input id="modalContactUsSent" class="button gtm_button" value="提交" type="submit">
                 </div>
             </fieldset>
     </form>
@@ -279,11 +279,11 @@
     function validateContactForm(form) {
         let isValid = true;
         const fieldsToValidate = [
-            { name: 'firstName', prettyName: 'First Name', type: 'text', id: 'firstName' },
-            { name: 'lastName', prettyName: 'Last Name', type: 'text', id: 'lastName' },
-            { name: 'email', prettyName: 'Email Address', type: 'email', id: 'email' },
-            { name: 'company', prettyName: 'Company', type: 'text', id: 'company' },
-            { name: 'message', prettyName: 'Message', type: 'textarea', id: 'message' }
+            { name: 'firstName', prettyName: '名', type: 'text', id: 'firstName' },
+            { name: 'lastName', prettyName: '姓', type: 'text', id: 'lastName' },
+            { name: 'email', prettyName: '电子邮箱', type: 'email', id: 'email' },
+            { name: 'company', prettyName: '公司', type: 'text', id: 'company' },
+            { name: 'message', prettyName: '留言', type: 'textarea', id: 'message' }
         ];
 
         fieldsToValidate.forEach(fieldSpec => {
@@ -299,9 +299,9 @@
             let errorMessageText = '';
 
             if (value === '') {
-                errorMessageText = `${fieldSpec.prettyName} is required.`;
+                errorMessageText = `请填写${fieldSpec.prettyName}。`;
             } else if (fieldSpec.type === 'email' && !isValidEmailFormat(value)) {
-                errorMessageText = `Please enter a valid ${fieldSpec.prettyName.toLowerCase()}.`;
+                errorMessageText = `请输入有效的${fieldSpec.prettyName}。`;
             }
 
             if (errorMessageText) {

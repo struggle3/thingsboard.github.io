@@ -1,5 +1,5 @@
 ```javascript
-/** Encoder **/
+/** 编码器 **/
 
 const command = {
         code: msg.method,

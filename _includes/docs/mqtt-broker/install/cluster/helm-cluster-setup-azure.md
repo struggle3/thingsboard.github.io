@@ -1,22 +1,21 @@
 * TOC
 {:toc}
 
-This guide will help you to set up TBMQ Cluster using the official Helm [chart](https://artifacthub.io/packages/helm/tbmq-helm-chart/tbmq-cluster) 
-on Azure using Azure Kubernetes Service (AKS).
+本指南将帮助你在 Azure Kubernetes Service (AKS) 上使用官方 Helm [chart](https://artifacthub.io/packages/helm/tbmq-helm-chart/tbmq-cluster) 部署 TBMQ 集群。
 
-## Prerequisites
+## 前置要求
 
 {% include templates/mqtt-broker/install/helm/azure/prerequisites.md %}
 
-## Configure your Kubernetes environment
+## 配置 Kubernetes 环境
 
 {% include templates/mqtt-broker/install/helm/azure/configure-deployment.md %}
 
-## Add the TBMQ Cluster Helm repository
+## 添加 TBMQ 集群 Helm 仓库
 
 {% include templates/mqtt-broker/install/helm/common/add-helm-repo.md %}
 
-## Modify default chart values
+## 修改默认 chart 值
 
 {% include templates/mqtt-broker/install/helm/common/get-default-chart-values.md %}
 
@@ -24,45 +23,44 @@ on Azure using Azure Kubernetes Service (AKS).
 
 {% include templates/mqtt-broker/install/helm/common/external-postgres.md %}
 
-If you're deploying on Azure AKS and plan to use Azure Database for PostgreSQL, follow this
-[guide](/docs/{{docsPrefix}}mqtt-broker/install/cluster/azure-cluster-setup/#step-5-provision-postgresql-db) to provision and configure your PostgreSQL instance.
+若在 Azure AKS 上部署并计划使用 Azure Database for PostgreSQL，请按此[指南](/docs/{{docsPrefix}}mqtt-broker/install/cluster/azure-cluster-setup/#step-5-provision-postgresql-db)配置并创建 PostgreSQL 实例。
 
-### Load Balancer configuration
+### 负载均衡器配置
 
 {% include templates/mqtt-broker/install/helm/azure/modify-load-balancer.md %}
 
-## Create namespace
+## 创建命名空间
 
 {% include templates/mqtt-broker/install/helm/common/create-namespace.md %}
 
-## Install the TBMQ Helm chart
+## 安装 TBMQ Helm chart
 
 {% include templates/mqtt-broker/install/helm/common/install-chart.md %}
 
-## Validate HTTP Access
+## 验证 HTTP 访问
 
 {% include templates/mqtt-broker/install/helm/azure/validate-http.md %}
 
-## Validate MQTT Access
+## 验证 MQTT 访问
 
 {% include templates/mqtt-broker/install/helm/azure/validate-mqtt.md %}
 
-## Troubleshooting
+## 故障排除
 
 {% include templates/mqtt-broker/install/helm/common/helm-setup-troubleshooting.md %}
 
-## Upgrading
+## 升级
 
 {% include templates/mqtt-broker/install/helm/common/upgrading.md %}
 
-## Uninstalling TBMQ Helm chart
+## 卸载 TBMQ Helm chart
 
 {% include templates/mqtt-broker/install/helm/common/uninstall-chart.md %}
 
-## Delete Kubernetes Cluster
+## 删除 Kubernetes 集群
 
 {% include templates/mqtt-broker/install/helm/azure/delete-cluster.md %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/mqtt-broker-guides-banner.md %}

@@ -1,37 +1,36 @@
+配置 HTTP(S) 负载均衡器以访问 ThingsBoard 实例的 Web 界面。基本上有 3 种配置选项：
 
-Configure HTTP(S) Load Balancer to access web interface of your ThingsBoard instance. Basically you have 3 possible options of configuration:
+* http - 不支持 HTTPS 的负载均衡器。推荐**用于开发环境**。
+  唯一优点是配置简单、成本最低。适用于开发服务器，但不适合生产环境。
+* https - 支持 HTTPS 的负载均衡器。推荐**用于生产环境**。充当 SSL 终结点。
+  可轻松配置以签发和维护有效 SSL 证书。自动将所有非安全 (HTTP) 流量重定向到安全 (HTTPS) 端口。
+* transparent - 仅将流量转发到 ThingsBoard 的 http 和 https 端口的负载均衡器。需要您自行准备和维护有效 SSL 证书。
+  适用于不能接受负载均衡器作为 SSL 终结点的生产环境。
 
-* http - Load Balancer without HTTPS support. Recommended **for development.**
-  The only advantage is simple configuration and minimum costs. May be good option for development server but definitely not suitable for production.
-* https - Load Balancer with HTTPS support. Recommended **for production.** Acts as an SSL termination point.
-  You may easily configure it to issue and maintain a valid SSL certificate. Automatically redirects all non-secure (HTTP) traffic to secure (HTTPS) port.
-* transparent - Load Balancer that simply forwards traffic to http and https ports of the ThingsBoard. Requires you to provision and maintain valid SSL certificate.
-  Useful for production environments that can't tolerate the LB to be an SSL termination point.
+请参阅以下链接/说明以配置各建议选项。
 
-See links/instructions below on how to configure each of the suggested options.
-
-#### HTTP Load Balancer
+#### HTTP 负载均衡器
 
 {% include templates/install/cloud-cluster-common/http-lb.md %}
 
-Now, you may use the address (the one you see instead of 34.111.24.134 in the command output) to access HTTP web UI (port 80) and connect your devices via [HTTP API](/docs/{{docsPrefix}}reference/http-api/)
-Use the following default credentials:
+现在，您可使用该地址（命令输出中替代 34.111.24.134 的地址）访问 HTTP Web UI（端口 80）并通过 [HTTP API](/docs/{{docsPrefix}}reference/http-api/) 连接设备。
+使用以下默认凭据：
 
-- **System Administrator**: sysadmin@thingsboard.org / sysadmin
-- **Tenant Administrator**: tenant@thingsboard.org / tenant
-- **Customer User**: customer@thingsboard.org / customer
+- **系统管理员**：sysadmin@thingsboard.org / sysadmin
+- **租户管理员**：tenant@thingsboard.org / tenant
+- **客户用户**：customer@thingsboard.org / customer
 
-#### HTTPS Load Balancer
+#### HTTPS 负载均衡器
 
 {% assign staticIP = "thingsboard-http-lb-address" %}
 {% include templates/install/gcp/https-lb.md %}
 
-Once provisioned, you may use your domain name to access Web UI (over https) and connect your devices via [HTTP API](/docs/{{docsPrefix}}reference/http-api/).
+配置完成后，您可使用域名访问 Web UI（通过 https）并通过 [HTTP API](/docs/{{docsPrefix}}reference/http-api/) 连接设备。
 
 {% capture https_lb_device_api_warn %}
-**NOTE**: The load balancer will redirect all HTTP traffic to HTTPS. Devices that do not support HTTPS will not be able to connect to ThingsBoard.
-If you would like to support such devices, you may either deploy separate load balancer for HTTP transport (recommended)
-or disable the redirect behavior by changing the *redirectToHttps* setting in the *https-load-balancer.yml* file.
+**注意**：负载均衡器会将所有 HTTP 流量重定向到 HTTPS。不支持 HTTPS 的设备将无法连接 ThingsBoard。
+如需支持此类设备，可单独部署 HTTP 传输负载均衡器（推荐），
+或在 *https-load-balancer.yml* 文件中修改 *redirectToHttps* 设置以禁用重定向行为。
 
 {% endcapture %}
 {% include templates/warn-banner.md content=https_lb_device_api_warn %}

@@ -1,13 +1,13 @@
 * TOC
 {:toc}
 
-This guide will help you to set up TBMQ in AWS EKS.
+本指南将帮助您在 AWS EKS 上部署 TBMQ。
 
-## Prerequisites
+## 前置条件
 
 {% include templates/mqtt-broker/install/aws/eks-prerequisites.md %}
 
-## Step 1. Open TBMQ K8S scripts repository
+## 步骤 1. 获取 TBMQ K8S 脚本仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -15,50 +15,49 @@ cd tbmq/k8s/aws
 ```
 {: .copy-code}
 
-## Step 2. Configure and create EKS cluster
+## 步骤 2. 配置并创建 EKS 集群
 
-In the `cluster.yml` file you can find suggested cluster configuration.
-Here are the fields you can change depending on your needs:
-- `region` - should be the AWS region where you want your cluster to be located (the default value is `us-east-1`)
-- `availabilityZones` - should specify the exact IDs of the region's availability zones
-  (the default value is `[us-east-1a,us-east-1b,us-east-1c]`)
-- `instanceType` - the type of the instance with TBMQ node (the default value is `m7a.large`)
+可在 `cluster.yml` 中查看建议的集群配置。
+可根据需要修改以下字段：
+- `region` - 集群所在 AWS 区域（默认 `us-east-1`）
+- `availabilityZones` - 区域可用区 ID 列表（默认 `[us-east-1a,us-east-1b,us-east-1c]`）
+- `instanceType` - TBMQ 节点实例类型（默认 `m7a.large`）
 
-**Note**: If you don't make any changes to `instanceType` and `desiredCapacity` fields, the EKS will deploy 2 nodes of type m7a.large.
+**注意**：若不修改 `instanceType` 和 `desiredCapacity`，EKS 将部署 2 个 m7a.large 节点。
 
 {% capture aws-eks-security %}
-In case you want to secure access to the PostgreSQL and MSK, you'll need to configure the existing VPC or create a new one,
-set it as the VPC for TBMQ cluster, create security groups for PostgreSQL and MSK,
-set them for `managed` node-group in TBMQ cluster and configure the access from TBMQ cluster nodes to PostgreSQL/MSK using another security group.
+若要加固对 PostgreSQL 和 MSK 的访问，需配置或新建 VPC、将其设为 TBMQ 集群的 VPC，
+为 PostgreSQL 和 MSK 创建安全组，并在 TBMQ 集群的 `managed` 节点组中配置这些安全组，
+再通过另一安全组配置从 TBMQ 集群节点到 PostgreSQL/MSK 的访问。
 
-You can find more information about configuring VPC for `eksctl` [here](https://eksctl.io/usage/vpc-networking/).
+关于 `eksctl` VPC 配置详见[此处](https://eksctl.io/usage/vpc-networking/)。
 {% endcapture %}
 {% include templates/info-banner.md content=aws-eks-security %}
 
-Command to create AWS cluster:
+创建 AWS 集群的命令：
 
 ```bash
 eksctl create cluster -f cluster.yml
 ```
 {: .copy-code}
 
-## Step 3. Create AWS load-balancer controller
+## 步骤 3. 创建 AWS 负载均衡控制器
 
-Once the cluster is ready you'll need to create AWS load-balancer controller.
-You can do it by following [this](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html) guide.
-The cluster provisioning scripts will create several load balancers:
+集群就绪后需创建 AWS 负载均衡控制器。
+可按[此指南](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)操作。
+集群脚本将创建以下负载均衡器：
 
-* tb-broker-http-loadbalancer - AWS ALB that is responsible for the web UI and REST API;
-* tb-broker-mqtt-loadbalancer - AWS NLB that is responsible for the MQTT communication.
+* tb-broker-http-loadbalancer - AWS ALB，用于 Web UI 和 REST API；
+* tb-broker-mqtt-loadbalancer - AWS NLB，用于 MQTT 通信。
 
-Provisioning of the AWS load-balancer controller is a **very important step** that is required for those load balancers to work properly.
+配置 AWS 负载均衡控制器是**必需步骤**，否则这些负载均衡器无法正常工作。
 
-## Step 4. Amazon PostgreSQL DB Configuration
+## 步骤 4. Amazon PostgreSQL 数据库配置
 
-You'll need to set up PostgreSQL on Amazon RDS.
-One of the ways to do it is by following [this](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SettingUp.html) guide.
+您需要在 Amazon RDS 上配置 PostgreSQL。
+可参考 [此指南](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SettingUp.html) 进行配置。
 
-**Note**: Some recommendations:
+**注意**：建议如下：
 
 * Make sure your PostgreSQL version is 16.x;
 * Use ‘Production’ template for high availability. It enables a lot of useful settings by default;
@@ -72,47 +71,43 @@ the database in the same VPC and subnets as TBMQ cluster and use
 
 {% include images-gallery.html imageCollection="tbmq-rds-set-up" %}
 
-## Step 5. Amazon MSK Configuration
+## 步骤 5. Amazon MSK 配置
 
-You'll need to set up Amazon MSK.
-To do so you need to open AWS console, MSK submenu, press `Create cluster` button and choose `Custom create` mode.
-You should see the similar image:
+需配置 Amazon MSK。
+在 AWS 控制台打开 MSK 子菜单，点击「Create cluster」并选择「Custom create」模式。
+应看到类似界面：
 
 {% include images-gallery.html imageCollection="tbmq-msk-set-up" %}
 
-**Note**: Some recommendations:
+**注意**：建议如下：
 
-* Apache Kafka version can be safely set to the 3.7.0 version as TBMQ is fully tested on it;
-* Use m5.large or similar instance types;
-* Consider creation of custom cluster configuration for your MSK. It will make change of Kafka parameters easier;
-* Use default 'Monitoring' settings or enable 'Enhanced topic-level monitoring'.
+* Apache Kafka 版本可设为 3.7.0，TBMQ 已在其上充分测试；
+* 使用 m5.large 或类似实例类型；
+* 为 MSK 创建自定义集群配置，便于修改 Kafka 参数；
+* 使用默认「Monitoring」或启用「Enhanced topic-level monitoring」。
 
-**Note**: Make sure your MSK instance is accessible from TBMQ cluster.
-The easiest way to achieve this is to deploy the MSK instance in the same VPC.
-We also recommend to use private subnets. This way it will be nearly impossible to accidentally expose it to the internet;
+**注意**：确保 MSK 实例可从 TBMQ 集群访问。
+最简单的方式是在同一 VPC 内部署 MSK，建议使用私有子网，降低意外暴露到互联网的风险。
 
 {% include images-gallery.html imageCollection="tbmq-msk-configuration" %}
 
-At the end, carefully review the whole configuration of the MSK and then finish the cluster creation.
+最后仔细检查 MSK 配置，然后完成集群创建。
 
-## Step 6. Amazon ElastiCache (Redis) Configuration
+## 步骤 6. Amazon ElastiCache (Redis) 配置
 
-You need to set up [ElastiCache](https://aws.amazon.com/elasticache/redis/) for Redis. TBMQ uses cache to store messages for [DEVICE persistent clients](/docs/mqtt-broker/architecture/#persistent-device-client),
-to improve performance and avoid frequent DB reads (see below for more details).
+需配置 [ElastiCache](https://aws.amazon.com/elasticache/redis/) 的 Redis。TBMQ 用缓存存储 [DEVICE 持久化客户端](/docs/mqtt-broker/architecture/#persistent-device-client) 的消息，
+以提升性能、减少 DB 读取（详见下文）。
 
-It is useful when clients connect to TBMQ with the authentication enabled.
-For every connection, the request is made to find MQTT client credentials that can authenticate the client.
-Thus, there could be an excessive amount of requests to be processed for a large number of connecting clients at once.
+启用认证后客户端连接 TBMQ 时会查询 MQTT 客户端凭据，大量并发连接会产生大量请求，使用缓存可缓解此问题。
 
-Please open AWS console and navigate to ElastiCache->Redis clusters->Create Redis cluster.
+在 AWS 控制台进入 ElastiCache -> Redis clusters -> Create Redis cluster。
 
-**Note**: Some recommendations:
+**注意**：建议如下：
 
-* Specify Redis Engine version 7.x and node type with at least 1 GB of RAM;
-* Make sure your Redis cluster is accessible from the TBMQ cluster.
-  The easiest way to achieve this is to deploy the Redis cluster in the same VPC.
-  We also recommend to use private subnets. Use `eksctl-tbmq-cluster-ClusterSharedNodeSecurityGroup-*` security group;
-* Disable automatic backups.
+* Redis 引擎版本选用 7.x，节点至少 1 GB 内存；
+* 确保 Redis 集群可从 TBMQ 集群访问，建议与 TBMQ 部署在同一 VPC、使用私有子网，
+  并采用 `eksctl-tbmq-cluster-ClusterSharedNodeSecurityGroup-*` 安全组；
+* 关闭自动备份。
 
 {% include images-gallery.html imageCollection="tbmq-redis-set-up" %}
 
@@ -134,11 +129,11 @@ Once the MSK cluster switch to the ‘Active’ state, to get the list of broker
 aws kafka get-bootstrap-brokers --region us-east-1 --cluster-arn $CLUSTER_ARN
 ```
 {: .copy-code}
-Where **$CLUSTER_ARN** is the Amazon Resource Name (ARN) of the MSK cluster:
+其中 **$CLUSTER_ARN** 为 MSK 集群的 Amazon 资源名（ARN）：
 
 {% include images-gallery.html imageCollection="tbmq-msk-link-configure" %}
 
-You'll need to paste data from the `BootstrapBrokerString` to the `TB_KAFKA_SERVERS` environment variable in the `tb-broker.yml` file.
+请将 `BootstrapBrokerString` 中的内容填入 `tb-broker.yml` 文件中的 `TB_KAFKA_SERVERS` 环境变量。
 
 Otherwise, click `View client information` seen on the screenshot above. Copy bootstrap server information in plaintext.
 
@@ -148,17 +143,17 @@ Once the Redis cluster switch to the ‘Available’ state, open the ‘Cluster 
 
 {% include images-gallery.html imageCollection="tbmq-redis-link-configure" %}
 
-Edit `tb-broker-cache-configmap.yml` and replace **YOUR_REDIS_ENDPOINT_URL_WITHOUT_PORT**.
+编辑 `tb-broker-cache-configmap.yml`，将 **YOUR_REDIS_ENDPOINT_URL_WITHOUT_PORT** 替换为实际值。
 
-## Step 8. Installation
+## 步骤 8. 安装
 
-Execute the following command to run installation:
+执行以下命令进行安装：
 ```bash
 ./k8s-install-tbmq.sh
 ```
 {: .copy-code}
 
-After this command finish you should see the next line in the console:
+命令完成后，控制台应显示：
 
 ```
 INFO  o.t.m.b.i.ThingsboardMqttBrokerInstallService - Installation finished successfully!
@@ -166,12 +161,12 @@ INFO  o.t.m.b.i.ThingsboardMqttBrokerInstallService - Installation finished succ
 
 {% capture aws-rds %}
 
-Otherwise, please check if you set the PostgreSQL URL and PostgreSQL password in the `tb-broker-db-configmap.yml` correctly.
+否则请检查 `tb-broker-db-configmap.yml` 中的 PostgreSQL URL 和密码是否正确。
 
 {% endcapture %}
 {% include templates/info-banner.md content=aws-rds %}
 
-## Step 9. Starting
+## 步骤 9. 启动
 
 Execute the following command to deploy the broker:
 
@@ -299,37 +294,37 @@ kubectl create configmap tbmq-mqtts-config \
 ```
 {: .copy-code}
 
-* where **YOUR_PEM_FILENAME** is the name of your **server certificate file**.
-* where **YOUR_PEM_KEY_FILENAME** is the name of your **server certificate private key file**.
+* **YOUR_PEM_FILENAME** 为**服务器证书文件**名称。
+* **YOUR_PEM_KEY_FILENAME** 为**服务器证书私钥文件**名称。
 
-Then, uncomment all sections in the ‘tb-broker.yml’ file that are marked with “Uncomment the following lines to enable two-way MQTTS”.
+然后，取消注释 'tb-broker.yml' 文件中所有标有「Uncomment the following lines to enable two-way MQTTS」的段落。
 
-Execute command to apply changes:
+执行以下命令使更改生效：
 
 ```bash
 kubectl apply -f tb-broker.yml
 ```
 {: .copy-code}
 
-Finally, deploy the "transparent" load balancer:
+最后，部署「透明」负载均衡器：
 
 ```bash
 kubectl apply -f receipts/mqtt-load-balancer.yml
 ```
 {: .copy-code}
 
-## Step 11. Validate the setup
+## 步骤 11. 验证部署
 
-Now you can open TBMQ web interface in your browser using DNS name of the load balancer.
+现在可使用负载均衡器的 DNS 名称在浏览器中打开 TBMQ Web 界面。
 
-You can get DNS name of the load-balancers using the next command:
+可使用以下命令查看负载均衡器的 DNS 名称：
 
 ```bash
 kubectl get ingress
 ```
 {: .copy-code}
 
-You should see the similar picture:
+将看到类似界面：
 
 ```text
 NAME                          CLASS    HOSTS   ADDRESS                                                                  PORTS   AGE
@@ -349,7 +344,7 @@ kubectl get services
 ```
 {: .copy-code}
 
-You should see the similar picture:
+将看到类似界面：
 
 ```text
 NAME                          TYPE           CLUSTER-IP       EXTERNAL-IP                                                                     PORT(S)                         AGE

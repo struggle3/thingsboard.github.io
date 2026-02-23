@@ -1,4 +1,4 @@
-Comment '# HSQLDB DAO Configuration' block.
+注释掉 '# HSQLDB DAO Configuration' 配置块。
  
 ```text
 # HSQLDB DAO Configuration

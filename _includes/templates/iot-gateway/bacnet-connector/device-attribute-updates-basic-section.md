@@ -1,15 +1,15 @@
-In order to add new attribute update, follow these steps:
+若要添加新的属性更新，请按以下步骤操作：
 
 {% assign creatingAttr = '
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-11-ce.png,
-        title: Click “**pencil**” icon of the “**Attribute updates**” subsection to add new attribute update;
+        title: 点击 "**铅笔**" 图标（"**属性更新**" 子节）以添加新的属性更新；
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-12-ce.png,
-        title: Click “**Add attribute update**” in the opened window;
+        title: 在打开的窗口中点击 "**添加属性更新**"；
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-13-ce.png,
-        title: Fill in "**Key**" field, select "**Object ID**" and "**Property ID**" from the dropdown list. Click “**Apply**” button.
+        title: 填写 "**Key**" 字段，从下拉列表选择 "**Object ID**" 和 "**Property ID**"。点击 "**应用**" 按钮。
     '
 %}
 

@@ -1,7 +1,7 @@
 * TOC
 {:toc}
 
-##  Server common parameters
+## 服务器通用参数
 
 <table>
 	<thead>
@@ -14,25 +14,25 @@
 			<td>server.address</td>
 			<td>HTTP_BIND_ADDRESS</td>
 			<td>0.0.0.0</td>
-			<td> Server bind-address</td>
+			<td>服务器绑定地址</td>
 		</tr>
 		<tr>
 			<td>server.port</td>
 			<td>HTTP_BIND_PORT</td>
 			<td>8080</td>
-			<td> Server bind port</td>
+			<td>服务器绑定端口</td>
 		</tr>
 		<tr>
 			<td>server.forward_headers_strategy</td>
 			<td>HTTP_FORWARD_HEADERS_STRATEGY</td>
 			<td>framework</td>
-			<td> Server forward headers strategy. Required for SWAGGER UI when reverse proxy is used</td>
+			<td>服务器转发头策略。使用反向代理时 SWAGGER UI 所需</td>
 		</tr>
 		<tr>
 			<td>server.ssl.enabled</td>
 			<td>SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable SSL support</td>
+			<td>启用/禁用 SSL 支持</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.type</td>
@@ -208,7 +208,7 @@
 </table>
 
 
-##  Cloud configuration
+## Cloud 配置
 
 <table>
 	<thead>
@@ -346,7 +346,7 @@
 </table>
 
 
-##  Application info parameters
+## 应用信息参数
 
 <table>
 	<thead>
@@ -365,7 +365,7 @@
 </table>
 
 
-##  Zookeeper connection parameters
+## Zookeeper 连接参数
 
 <table>
 	<thead>
@@ -422,7 +422,7 @@
 </table>
 
 
-##  Cluster parameters
+## 集群参数
 
 <table>
 	<thead>
@@ -447,7 +447,7 @@
 </table>
 
 
-##  Plugins configuration parameters
+## 插件配置参数
 
 <table>
 	<thead>
@@ -466,7 +466,7 @@
 </table>
 
 
-##  Security parameters
+## 安全参数
 
 <table>
 	<thead>
@@ -557,7 +557,7 @@
 </table>
 
 
-##  Mail settings parameters
+## 邮件设置参数
 
 <table>
 	<thead>
@@ -582,7 +582,7 @@
 </table>
 
 
-##  Usage statistics parameters
+## 使用统计参数
 
 <table>
 	<thead>
@@ -637,7 +637,7 @@
 </table>
 
 
-##  UI settings parameters
+## UI 设置参数
 
 <table>
 	<thead>
@@ -662,7 +662,7 @@
 </table>
 
 
-##  Database telemetry parameters
+## 数据库遥测参数
 
 <table>
 	<thead>
@@ -693,7 +693,7 @@
 </table>
 
 
-##  Cassandra driver configuration parameters
+## Cassandra 驱动配置参数
 
 <table>
 	<thead>
@@ -1008,7 +1008,7 @@
 </table>
 
 
-##  SQL configuration parameters
+## SQL 配置参数
 
 <table>
 	<thead>
@@ -1430,7 +1430,7 @@
 </table>
 
 
-##  Actor system parameters
+## Actor 系统参数
 
 <table>
 	<thead>
@@ -1676,7 +1676,7 @@
 </table>
 
 
-##  Cache settings parameters
+## 缓存设置参数
 
 <table>
 	<thead>
@@ -2218,7 +2218,7 @@
 </table>
 
 
-##  Spring data parameters
+## Spring Data 参数
 
 <table>
 	<thead>
@@ -2237,7 +2237,7 @@
 </table>
 
 
-##  Redis/Valkey configuration parameters
+## Redis/Valkey 配置参数
 
 <table>
 	<thead>
@@ -2448,7 +2448,7 @@
 </table>
 
 
-##  Update version parameters
+## 更新版本参数
 
 <table>
 	<thead>
@@ -2467,7 +2467,7 @@
 </table>
 
 
-##  Spring CORS configuration parameters
+## Spring CORS 配置参数
 
 <table>
 	<thead>
@@ -2510,7 +2510,7 @@
 </table>
 
 
-##  General spring parameters
+## 通用 Spring 参数
 
 <table>
 	<thead>
@@ -2589,7 +2589,7 @@
 </table>
 
 
-##  SQL DAO Configuration parameters
+## SQL DAO 配置参数
 
 <table>
 	<thead>
@@ -2718,7 +2718,7 @@
 </table>
 
 
-##  Audit log parameters
+## 审计日志参数
 
 <table>
 	<thead>
@@ -2885,7 +2885,7 @@
 </table>
 
 
-##  Device state parameters
+## 设备状态参数
 
 <table>
 	<thead>
@@ -2946,7 +2946,7 @@
 </table>
 
 
-##  Tbel parameters
+## Tbel 参数
 
 <table>
 	<thead>
@@ -3031,7 +3031,7 @@
 </table>
 
 
-##  JS parameters
+## JS 参数
 
 <table>
 	<thead>
@@ -3158,7 +3158,7 @@
 </table>
 
 
-##  Transport configuration parameters
+## 传输配置参数
 
 <table>
 	<thead>
@@ -3358,7 +3358,7 @@
 			<td>transport.mqtt.ssl.enabled</td>
 			<td>MQTT_SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable SSL support</td>
+			<td>启用/禁用 SSL 支持</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.bind_address</td>
@@ -3876,7 +3876,7 @@
 </table>
 
 
-##  CoAP server parameters
+## CoAP 服务器参数
 
 <table>
 	<thead>
@@ -4049,7 +4049,7 @@
 </table>
 
 
-##  Device connectivity parameters
+## 设备连接参数
 
 <table>
 	<thead>
@@ -4188,7 +4188,7 @@
 </table>
 
 
-##  Edges parameters
+## Edges 参数
 
 <table>
 	<thead>
@@ -4237,7 +4237,7 @@
 			<td>edges.rpc.ssl.enabled</td>
 			<td>EDGES_RPC_SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable SSL support</td>
+			<td>启用/禁用 SSL 支持</td>
 		</tr>
 		<tr>
 			<td>edges.rpc.ssl.cert</td>
@@ -4315,7 +4315,7 @@
 </table>
 
 
-##  Spring doc common parameters
+## Spring Doc 通用参数
 
 <table>
 	<thead>
@@ -4340,7 +4340,7 @@
 </table>
 
 
-##  Swagger common parameters
+## Swagger 通用参数
 
 <table>
 	<thead>
@@ -4425,7 +4425,7 @@
 </table>
 
 
-##  Queue configuration parameters
+## 队列配置参数
 
 <table>
 	<thead>
@@ -5560,7 +5560,7 @@
 </table>
 
 
-##  Event configuration parameters
+## 事件配置参数
 
 <table>
 	<thead>
@@ -5579,7 +5579,7 @@
 </table>
 
 
-##  General service parameters
+## 通用服务参数
 
 <table>
 	<thead>
@@ -5617,7 +5617,7 @@
 </table>
 
 
-##  Metrics parameters
+## 指标参数
 
 <table>
 	<thead>
@@ -5654,7 +5654,7 @@
 </table>
 
 
-##  Version control parameters
+## 版本控制参数
 
 <table>
 	<thead>
@@ -5685,7 +5685,7 @@
 </table>
 
 
-##  Notification system parameters
+## 通知系统参数
 
 <table>
 	<thead>
@@ -5710,7 +5710,7 @@
 </table>
 
 
-##  General management parameters
+## 通用管理参数
 
 <table>
 	<thead>
@@ -5735,7 +5735,7 @@
 </table>
 
 
-##  Mobile application settings for Thingsboard mobile application
+## ThingsBoard 移动应用设置
 
 <table>
 	<thead>

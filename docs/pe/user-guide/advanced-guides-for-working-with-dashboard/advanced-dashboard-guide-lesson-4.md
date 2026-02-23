@@ -2,7 +2,7 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Lesson 4. Alarm management
+title: 第 4 课：告警管理
 
 dashboard-lesson-4:
     0:

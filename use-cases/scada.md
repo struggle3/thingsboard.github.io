@@ -1,7 +1,7 @@
 ---
 layout: use-case
 title: SCADA
-description: SCADA ThingsBoard IoT Platform
+description: ThingsBoard 物联网平台 SCADA
 notitle: "true"
 includeAdvantages: "true"
 contactUsModal: "true"
@@ -10,21 +10,21 @@ contactUsModal: "true"
 
 {% include usecase-nav.html usecase="scada" %}
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">SCADA Swimming pool</h1>
+<h1 class="usecase-title">SCADA 游泳池</h1>
 
 <section class="scada-about">
     <div class="about-text">
         <div class="short">
             <div class="block">
-                <p class="text">SCADA systems are generally divided into two types: Traditional, which focuses on basic monitoring and control, and High-Performance, emphasizing streamlined interfaces, faster decision-making, and enhanced operational efficiency.</p>
+                <p class="text">SCADA 系统通常分为两类：传统型侧重于基础监测与控制，高性能型则强调简化界面、更快决策和提升运营效率。</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_SCADA_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/231a5800-ce96-11ef-852e-bd51c2b30fde?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
+                <a id="UseCases_SCADA_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/231a5800-ce96-11ef-852e-bd51c2b30fde?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
             </div>
         </div>
         <div class="long">
-            <p>The main advantage of SCADA (Supervisory Control and Data Acquisition) systems is their ability to monitor production processes in real time and respond quickly to deviations. ThingsBoard provides comprehensive tools to collect, process, and visualize data from SCADA components, such as PLCs (Programmable Logic Controllers) and RCUs (Remote Control Units), enabling seamless integration with various industrial processes.</p>
-            <p>To illustrate the flexibility of ThingsBoard's SCADA integration, we have developed the <a href="/docs/pe/solution-templates/swimming-pool-scada-system/">swimming pool management system template</a>. This solution demonstrates how SCADA symbols—such as valves, motors, filters and tanks—can be utilized to create simple yet powerful process control systems. It enables any production process to be visualized on a dashboard, allowing for real-time monitoring of equipment operation and timely detection of alarm signals. The template is designed to accommodate both Traditional and High-Performance SCADA systems.</p>
+            <p>SCADA（数据采集与监视控制）系统的主要优势在于能够实时监测生产过程并对偏差作出快速响应。ThingsBoard 提供完善的工具，用于从 PLC（可编程逻辑控制器）和 RCU（远程控制单元）等 SCADA 组件收集、处理和可视化数据，实现与各类工业流程的无缝集成。</p>
+            <p>为展示 ThingsBoard SCADA 集成的灵活性，我们开发了<a href="/docs/pe/solution-templates/swimming-pool-scada-system/">游泳池管理系统模板</a>。该方案展示如何利用阀门、电机、过滤器和储罐等 SCADA 符号构建简单而强大的过程控制系统。任何生产过程均可呈现在仪表板上，实现设备运行实时监测与告警及时检测。模板同时支持传统型和高性能型 SCADA 系统。</p>
         </div>
     </div>
 </section>
@@ -39,15 +39,15 @@ contactUsModal: "true"
       </div>
     </div>
     {% include contact-us-banner.liquid %}
-    <h2>SCADA overview</h2>
+    <h2>SCADA 概述</h2>
     <div class="table-lg">
         <div class="criteria-col">
-            <p>Design approach</p>
-            <p>Color-coded visualization (active)</p>
-            <p>Color-coded visualization (inactive)</p>
-            <p>Alarm indicators (warning)</p>
-            <p>Alarm indicators (critical)</p>
-            <p>Interactivity</p>
+            <p>设计方式</p>
+            <p>彩色编码可视化（活动）</p>
+            <p>彩色编码可视化（非活动）</p>
+            <p>告警指示器（警告）</p>
+            <p>告警指示器（严重）</p>
+            <p>交互性</p>
         </div>
         <div class="compare-col">
             <p>High-performance</p>
@@ -107,7 +107,7 @@ contactUsModal: "true"
 </section>
 
 <section class="scada-solution-structure">
-    <h2>Solution structure</h2>
+    <h2>解决方案结构</h2>
     <div class="scheme">
         <img id="schemeSVG" loading="lazy" data-src="/images/usecases/scada/scada-solution-structure.svg" alt="SCADA solution structure">
     </div>
@@ -134,14 +134,14 @@ contactUsModal: "true"
         </div>
         <div class="use-cases-solution-structure-card">
             <h3>IoT dashboards</h3>
-            <p>Visualize your SCADA data with ThingsBoard’s real-time IoT dashboards. Design interactive views using SCADA symbols, customizable widgets, and dynamic updates to monitor and control processes seamlessly.</p>
+            <p>Visualize your SCADA data with ThingsBoard’s real-time IoT dashboards. Design interactive views using SCADA symbols, customizable 部件, and dynamic updates to monitor and control processes seamlessly.</p>
         </div>
     </div>
 </section>
 
 <section class="scada-key-functions">
     <div class="header-selector">
-        <h2>Key functions of SCADA systems</h2>
+        <h2>SCADA 系统的关键功能</h2>
         <div class="scada-mode-selector">
             <div class="mode active gtm_button" onClick="activateScadaSection(this, 'high-performance', 'scada-key-functions')">
                 <h3>High-performance</h3>
@@ -236,7 +236,7 @@ contactUsModal: "true"
 
 <section class="dashboard-structure">
     <div class="header-selector">
-        <h2>Dashboard structure</h2>
+        <h2>仪表板结构</h2>
         <div class="scada-mode-selector">
             <div class="mode active gtm_button" onClick="activateScadaSection(this, 'high-performance', 'dashboard-structure')">
                 <h3>High-performance</h3>
@@ -254,7 +254,7 @@ contactUsModal: "true"
                         <h3>Swimming pool SCADA system state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>This interactive state allows operators to monitor the pool’s water level, temperature, and equipment operation. In real time, users can heat the pool, drain it, or fill it with water. By interacting with the on-screen widgets for water level, temperature, the filter sensor, and the pH filter, operators can access and control readings directly from a single dashboard.</p>
+                        <p>This interactive state allows operators to monitor the pool’s water level, temperature, and equipment operation. In real time, users can heat the pool, drain it, or fill it with water. By interacting with the on-screen 部件 for water level, temperature, the filter sensor, and the pH filter, operators can access and control readings directly from a single dashboard.</p>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@ contactUsModal: "true"
                         <h3>Water pump state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>This feature enables real-time monitoring of critical parameters like flow rate, temperature, rotation speed, vibration, and power consumption. It also provides information on the pump’s status and last maintenance. An alarm widget is integrated for rapid response to any issues, ensuring that any malfunctions can be quickly addressed and resolved.</p>
+                        <p>This feature enables real-time monitoring of critical parameters like flow rate, temperature, rotation speed, vibration, and power consumption. It also provides information on the pump’s status and last maintenance. An alarm 部件 is integrated for rapid response to any issues, ensuring that any malfunctions can be quickly addressed and resolved.</p>
                     </div>
                 </div>
             </div>
@@ -274,7 +274,7 @@ contactUsModal: "true"
                         <h3>Heat pump state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>This screen offers a comprehensive view of the heat pump's performance, including indicators like temperature, rotation speed, vibration, refrigerant pressure, and power consumption. Key data, such as inlet and outlet water temperatures, the desired pool water temperature, and the ambient air temperature, are displayed. Based on these inputs, the heat pump will automatically switch on or off. Operators can adjust the pool water temperature directly from the heat pump widget and also view information about the filter’s status and the last maintenance date. An alarm widget ensures that any malfunctions are quickly addressed in real time.</p>
+                        <p>This screen offers a comprehensive view of the heat pump's performance, including indicators like temperature, rotation speed, vibration, refrigerant pressure, and power consumption. Key data, such as inlet and outlet water temperatures, the desired pool water temperature, and the ambient air temperature, are displayed. Based on these inputs, the heat pump will automatically switch on or off. Operators can adjust the pool water temperature directly from the heat pump 部件 and also view information about the filter’s status and the last maintenance date. An alarm 部件 ensures that any malfunctions are quickly addressed in real time.</p>
                     </div>
                 </div>
             </div>
@@ -284,7 +284,7 @@ contactUsModal: "true"
                         <h3>Sand filter state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>The sand filter state provides detailed monitoring of flow rate, pressure, rotation speed, and vibration. It also displays the filter’s current mode, last maintenance date, and next scheduled service. Operators can easily switch filter modes directly from the widget, for example, from filtration to water draining (waste mode) with a simple click on the mode display.</p>
+                        <p>The sand filter state provides detailed monitoring of flow rate, pressure, rotation speed, and vibration. It also displays the filter’s current mode, last maintenance date, and next scheduled service. Operators can easily switch filter modes directly from the 部件, for example, from filtration to water draining (waste mode) with a simple click on the mode display.</p>
                     </div>
                 </div>
             </div>
@@ -308,7 +308,7 @@ contactUsModal: "true"
                         <h3>Swimming pool SCADA system state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>This interactive state allows operators to monitor the pool’s water level, temperature, and equipment operation. In real time, users can heat the pool, drain it, or fill it with water. By interacting with the on-screen widgets for water level, temperature, the filter sensor, and the pH filter, operators can access and control readings directly from a single dashboard.</p>
+                        <p>This interactive state allows operators to monitor the pool’s water level, temperature, and equipment operation. In real time, users can heat the pool, drain it, or fill it with water. By interacting with the on-screen 部件 for water level, temperature, the filter sensor, and the pH filter, operators can access and control readings directly from a single dashboard.</p>
                     </div>
                 </div>
             </div>
@@ -318,7 +318,7 @@ contactUsModal: "true"
                         <h3>Water pump state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>This feature enables real-time monitoring of critical parameters like flow rate, temperature, rotation speed, vibration, and power consumption. It also provides information on the pump’s status and last maintenance. An alarm widget is integrated for rapid response to any issues, ensuring that any malfunctions can be quickly addressed and resolved.</p>
+                        <p>This feature enables real-time monitoring of critical parameters like flow rate, temperature, rotation speed, vibration, and power consumption. It also provides information on the pump’s status and last maintenance. An alarm 部件 is integrated for rapid response to any issues, ensuring that any malfunctions can be quickly addressed and resolved.</p>
                     </div>
                 </div>
             </div>
@@ -328,7 +328,7 @@ contactUsModal: "true"
                         <h3>Heat pump state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>This screen offers a comprehensive view of the heat pump's performance, including indicators like temperature, rotation speed, vibration, refrigerant pressure, and power consumption. Key data, such as inlet and outlet water temperatures, the desired pool water temperature, and the ambient air temperature, are displayed. Based on these inputs, the heat pump will automatically switch on or off. Operators can adjust the pool water temperature directly from the heat pump widget and also view information about the filter’s status and the last maintenance date. An alarm widget ensures that any malfunctions are quickly addressed in real time.</p>
+                        <p>This screen offers a comprehensive view of the heat pump's performance, including indicators like temperature, rotation speed, vibration, refrigerant pressure, and power consumption. Key data, such as inlet and outlet water temperatures, the desired pool water temperature, and the ambient air temperature, are displayed. Based on these inputs, the heat pump will automatically switch on or off. Operators can adjust the pool water temperature directly from the heat pump 部件 and also view information about the filter’s status and the last maintenance date. An alarm 部件 ensures that any malfunctions are quickly addressed in real time.</p>
                     </div>
                 </div>
             </div>
@@ -338,7 +338,7 @@ contactUsModal: "true"
                         <h3>Sand filter state</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>The sand filter state provides detailed monitoring of flow rate, pressure, rotation speed, and vibration. It also displays the filter’s current mode, last maintenance date, and next scheduled service. Operators can easily switch filter modes directly from the widget, for example, from filtration to water draining (waste mode) with a simple click on the mode display.</p>
+                        <p>The sand filter state provides detailed monitoring of flow rate, pressure, rotation speed, and vibration. It also displays the filter’s current mode, last maintenance date, and next scheduled service. Operators can easily switch filter modes directly from the 部件, for example, from filtration to water draining (waste mode) with a simple click on the mode display.</p>
                     </div>
                 </div>
             </div>
@@ -357,7 +357,7 @@ contactUsModal: "true"
 </section>
 
 <section class="applications">
-    <h2>Applications of SCADA systems</h2>
+    <h2>SCADA 系统的应用</h2>
     <div class="applications-container-large">
         <div class="text-row-top">
             <div class="text-block">
@@ -532,8 +532,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0, mode)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_SCADA_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/231a5800-ce96-11ef-852e-bd51c2b30fde?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
-                <a id="UseCases_SCADA_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_SCADA_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/231a5800-ce96-11ef-852e-bd51c2b30fde?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
+                <a id="UseCases_SCADA_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
     
             return block;

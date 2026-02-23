@@ -1,30 +1,29 @@
-Now you are ready to publish telemetry data on behalf of your device. We will use, as mentioned before, the 
-`thingsboard-python-client-sdk` library.
+此时已可为设备发布遥测数据。 如前所述，我们将使用 `thingsboard-python-client-sdk` 库。
 
-Let’s set up our project:
+开始配置项目：
 
-1. Create project folder:
+1. 创建项目文件夹：
 
     ```bash
 {% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}   mkdir thingsboard_edge_example && cd thingsboard_edge_example{% else %}   mkdir thingsboard_example && cd thingsboard_example{% endif %}
    ```
    {:.copy-code}
 
-2. Install packages:
+2. 安装依赖：
 
    ```bash
    pip3 install tb-mqtt-client
    ```
    {:.copy-code}
 
-3. Create the main script:
+3. 创建主脚本：
 
    ```bash
    nano main.py
    ```
    {:.copy-code}
 
-4. Copy and paste the following code:
+4. 复制并粘贴以下代码：
 
    ```python
    import logging.handlers
@@ -130,38 +129,38 @@ Let’s set up our project:
 
 {% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}
 
-In the code above, change values for the following variables - THINGSBOARD_EDGE_SERVER, ACCESS_TOKEN to your credentials.
+将上方代码中的 THINGSBOARD_EDGE_SERVER、ACCESS_TOKEN 变量改为您的凭证。
 
-Necessary variables for connection:  
+连接所需变量：  
 
-   | Variable name | Default value | Description |
+   | 变量名 | 默认值 | 说明 |
    |-|-|
-   | ACCESS_TOKEN | **TEST_TOKEN** | Your device access token |
-   | THINGSBOARD_EDGE_SERVER | **{{hostName}}** | The IP address of your {{deviceName}} running Edge | 
+   | ACCESS_TOKEN | **TEST_TOKEN** | 设备访问令牌 |
+   | THINGSBOARD_EDGE_SERVER | **{{hostName}}** | 运行 Edge 的 {{deviceName}} 的 IP 地址 | 
    
-If you are running the script on the same **{{deviceName}}** where Edge is installed, you can also use `localhost`.
+若在已安装 Edge 的同一台 **{{deviceName}}** 上运行脚本，也可使用 `localhost`。
 
 {% else %}
 
-In the code above, change values for the following variables - THINGSBOARD_SERVER, ACCESS_TOKEN to your credentials.
+将上方代码中的 THINGSBOARD_SERVER、ACCESS_TOKEN 变量改为您的凭证。
 
-Necessary variables for connection:  
+连接所需变量：  
 
-   | Variable name | Default value | Description | 
+   | 变量名 | 默认值 | 说明 | 
    |-|-|
-   | ACCESS_TOKEN | **TEST_TOKEN** | Your device access token |
-   | THINGSBOARD_SERVER | **{{hostName}}** | Your ThingsBoard host or ip address. |
+   | ACCESS_TOKEN | **TEST_TOKEN** | 设备访问令牌 |
+   | THINGSBOARD_SERVER | **{{hostName}}** | 您的 ThingsBoard 主机或 IP 地址 |
 {% endif %}
 
-5. Click **Ctrl+O** and **Ctrl+X** keys to save the file.
-6. And finally, let’s start our script:
+5. 按 **Ctrl+O** 和 **Ctrl+X** 保存文件。
+6. 最后，运行脚本：
 
    ```bash
    python3 main.py
    ```
    {:.copy-code}
 
-If you did everything right, you should see the following console output:
+若操作正确，将看到如下控制台输出：
 ```
 > INFO:tb_device_mqtt:connection SUCCESS
 > 
@@ -170,8 +169,7 @@ If you did everything right, you should see the following console output:
 > 
 ```
 
-Let’s review and make an explanation for our code. In this step, we are interested in the `get_data` function.
-Data packing and returning in the `get_data` function, so you can easily add new telemetry or attributes to the dictionary if you want to monitor more values:
+下面回顾并解释代码。 本步骤关注 `get_data` 函数。`get_data` 负责打包并返回数据，如需监控更多指标，可方便地向字典中添加新的遥测或属性：
 ```python
 ...
 def get_data():
@@ -204,7 +202,7 @@ def get_data():
 ...
 ```
 
-Send data part, as you can see below, we send our attributes and telemetry data every 60 seconds (feel free to change it if you want more frequent data updating):
+数据发送部分：如下所示，每 60 秒发送一次属性和遥测（如需更频繁可自行调整）：
 ```python
 ...		
     while not client.stopped:

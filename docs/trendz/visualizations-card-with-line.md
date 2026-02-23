@@ -2,54 +2,53 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Card with line chart
-description: Card with line chart to show data trend
+title: 带折线图的 Card
+description: 使用 Card 内折线图展示数据趋势
 ---
 
 * TOC
 {:toc}
 
 
-Card with line chart widget allows visualizing the single important metric and compare the dynamics of it with the previous similar period, if necessary.
+Card with line chart部件用于展示单一重要指标，并可在需要时与上一相似时段对比变化趋势。
 
 ## Simple Card with line chart
 
-For creating simple Card with line chart view:
+创建简单Card with line chart视图：
 
-* Drag and drop the field that you would like to monitor in the Value column;
-* Select required aggregation type;
-* Click “Build Report”.
+* 将需监测的字段拖放到Value列
+* 选择所需聚合类型
+* 点击"Build Report"
 
 ![image](/images/trendz/card-with-line-simple.png)
 
 ## Comparison with the previous period
 
-Comparison with the previous similar period allows us to compare the value and dynamics with the corresponding period. 
-For example, if we have the amount of water consumed in the last 7 days, we can compare it with the amount of water consumed in the previous 7 days.
+与上一相似时段对比可比较数值及变化趋势。
+例如过去7天用水量可与再前7天用水量对比。
 
-* Turn on **Enable comparison in the settings**.
-* Click **Build Report**.
+* 在settings中开启**Enable comparison**
+* 点击**Build Report**
 
 ![image](/images/trendz/card-with-line-comparison.png)
 
-The compared value will present the difference between these two figures in percentage. The chart will also show the dynamics together for both of these periods.
-
+对比值以百分比展示两者的差值。chart同时展示两个时段的趋势线。
 
 ## Fast setting the visualization colors of the value difference
 
-The comparison of two periods will be presented by default as a red number with a warning if the dynamics are negative, or as a green number without a warning if the dynamics are positive.
+默认情况下，两时段对比结果：若趋势为负显示红色警告数字，若为正显示绿色无警告数字。
 
-* To invert the color, enable or disable the **Reverse comparison colors** option in the settings.
-* Click **Build Report**.
+* 要反转颜色，在settings中启用或禁用**Reverse comparison colors**
+* 点击**Build Report**
 
 ![image](/images/trendz/card-with-line-reverse-colors.png)
 
 ## Manual setting the visualization of the value difference
-It is also possible to manually set the visualization of the value difference by specifying ranges and colors for normal, warning, and dangerous value ranges.
+也可手动设置差值可视化，指定normal、warning和dangerous值范围及对应颜色。
 
-* Set the minimum and maximum values for the ranges in the field settings;
-* Click **Build Report**.
+* 在字段settings中设置各范围的最小值和最大值
+* 点击**Build Report**
 
-Please note that in this case, the **Reverse comparison colors setting** will be ignored.
+注意此时将忽略**Reverse comparison colors**设置。
 
 ![image](/images/trendz/card-with-line-custom-colors.png)

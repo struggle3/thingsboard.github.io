@@ -1,19 +1,18 @@
-Publishes messages to AWS Simple Queue Service (SQS) queues, sending the incoming message data as the message body. The node supports both Standard and FIFO queue types and returns
-the SQS response metadata as part of the outgoing message.
+向 AWS Simple Queue Service (SQS) 队列发布消息，入站消息 data 作为消息体发送。节点支持 Standard 和 FIFO 两种队列类型，并将 SQS 响应 metadata 作为出站消息的一部分返回。
 
-## Configuration
+## 配置
 
-### Queue configuration
+### Queue configuration（队列配置）
 
-Define the target SQS queue and its behavior.
+定义目标 SQS 队列及其行为。
 
 #### Queue type
 
-The type of SQS queue to publish messages to: **Standard** or **FIFO**.
+发布消息的 SQS 队列类型：**Standard** 或 **FIFO**。
 
 #### Queue URL pattern
 
-The full URL of the SQS queue to publish to.
+要发布到的 SQS 队列的完整 URL。
 
 You can specify the queue URL in the standard AWS format:
 
@@ -57,7 +56,7 @@ Provide authentication credentials to access your AWS SQS service.
 - **AWS Secret Access Key** - The secret access key corresponding to your access key ID.
 
 {% capture credentials_note %}
-**Note**: If you use Professional Edition, we highly recommend using [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} to securely store your secret key.
+**注意**：若使用 Professional Edition，建议使用 [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} 安全存储私密密钥。
 {% endcapture %}
 {% include templates/info-banner.md content=credentials_note %}
 
@@ -66,8 +65,7 @@ Provide authentication credentials to access your AWS SQS service.
 The AWS region where your SQS queue is deployed. The region must match the location of your SQS queue.
 
 {% capture timeout_note %}
-**Note**: The node uses fixed timeout values for AWS SQS operations: 10 seconds for establishing a connection and 5 seconds for the SQS service to process and respond to the
-request.
+**注意**：节点对 AWS SQS 操作使用固定超时：建立连接 10 秒，SQS 服务处理并响应请求 5 秒。
 {% endcapture %}
 {% include templates/info-banner.md content=timeout_note %}
 
@@ -135,13 +133,13 @@ request.
 ```
 {: .copy-code.expandable-3 }
 
-## Output message format
+## 输出消息格式
 
-The node transforms the incoming message by adding AWS SQS response information to the outgoing message metadata while preserving the original message data.
+节点通过将 AWS SQS 响应信息添加到出站消息 metadata 来转换入站消息，同时保留原始消息 data。
 
-### Success case
+### Success case（成功时）
 
-When a message is successfully published to SQS, the following fields are added to the outgoing message metadata:
+消息成功发布到 SQS 时，以下字段会添加到出站消息 metadata：
 
 - `messageId` – Unique identifier assigned by AWS SQS to the message. This ID can be used to track and identify the message.
 - `requestId` – Unique identifier for the API request to AWS. Useful for troubleshooting.
@@ -210,9 +208,9 @@ The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EX
 - **When set to `false`** (default) – The incoming message remains in an in-processing state throughout the entire SQS publish operation. The message is transformed in place, its
   metadata is updated with the SQS response fields, and the modified message is passed to the next node after the publish completes.
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node constructs an SQS send message request:
+1. 节点构建 SQS 发送消息请求：
     - The **queue URL pattern** is processed, replacing templates with values from the incoming message data and metadata.
     - A `SendMessageRequest` is created with the message data as the message body and the resolved queue URL as the destination.
     - **Message attributes** are processed: each attribute name and value is evaluated for templates and added to the request with data type "String".
@@ -228,7 +226,7 @@ The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EX
     - Error details are added to the outgoing message metadata under the `error` key.
     - The message is forwarded via the `Failure` connection.
 
-## Output connections
+## 输出连接
 
 - **Success**
     - The message was successfully published to the SQS queue.
@@ -239,15 +237,15 @@ The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EX
     - **SQS error**: The AWS SQS service returned an error, such as invalid credentials, insufficient permissions, non-existent queue, or invalid queue URL format.
     - **Unexpected error**: An unexpected error occurred during message processing.
 
-## Examples
+## 示例
 
-### Example 1 — Basic message to Standard queue
+### 示例 1 — 向 Standard 队列发送基本消息
 
-Publish a telemetry message to a Standard SQS queue with custom attributes and a delay.
+将带自定义属性和延迟的 telemetry 消息发布到 Standard SQS 队列。
 
-**Incoming message**
+**入站消息**
 
-Data:
+Data：
 
 ```json
 {
@@ -265,7 +263,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -282,11 +280,11 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：未更改。
 
-Metadata (only added fields shown):
+Metadata（仅显示新增字段）：
 
 ```json
 {
@@ -299,11 +297,11 @@ Metadata (only added fields shown):
 
 Routed via the `Success` connection.
 
-**Result**
+**结果**
 
-The telemetry data was successfully published to the SQS Standard queue with custom attributes. The message will be available for processing after a 30-second delay.
+telemetry 数据已成功发布到带自定义属性的 SQS Standard 队列。消息将在 30 秒延迟后可供处理。
 
-### Example 2 — FIFO queue with message ordering
+### 示例 2 — 带消息顺序的 FIFO 队列
 
 Publish an alarm message to a FIFO queue, ensuring message ordering and exactly-once processing per device.
 
@@ -340,7 +338,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -356,11 +354,11 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：未更改。
 
-Metadata (only added fields shown):
+Metadata（仅显示新增字段）：
 
 ```json
 {
@@ -374,12 +372,11 @@ Metadata (only added fields shown):
 
 Routed via the `Success` connection.
 
-**Result**
+**结果**
 
-The alarm was successfully published to the FIFO queue. Message ordering is guaranteed for all alarms from the same device (originator), and the message deduplication ID prevents
-duplicate processing.
+alarm 已成功发布到 FIFO 队列。同一设备（originator）的 alarm 保证消息顺序，消息去重 ID 防止重复处理。
 
-### Example 3 — Dynamic queue selection
+### 示例 3 — 动态队列选择
 
 Publish messages to different queues based on alarm severity using templates.
 
@@ -407,7 +404,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -421,11 +418,11 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：未更改。
 
-Metadata (only added fields shown):
+Metadata（仅显示新增字段）：
 
 ```json
 {
@@ -437,11 +434,11 @@ Metadata (only added fields shown):
 
 Routed via the `Success` connection.
 
-**Result**
+**结果**
 
-The message was dynamically routed to `https://sqs.us-west-2.amazonaws.com/123456789012/alarms-CRITICAL` based on the severity level and region in the message.
+消息根据严重程度和区域动态路由到 `https://sqs.us-west-2.amazonaws.com/123456789012/alarms-CRITICAL`。
 
-### Example 4 — Error handling for invalid queue
+### 示例 4 — 无效队列的错误处理
 
 Attempt to publish to a non-existent SQS queue, resulting in a failure.
 
@@ -456,7 +453,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -470,11 +467,11 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：未更改。
 
-Metadata (only added fields shown):
+Metadata（仅显示新增字段）：
 
 ```json
 {
@@ -484,6 +481,6 @@ Metadata (only added fields shown):
 
 Routed via the `Failure` connection.
 
-**Result**
+**结果**
 
-The SQS publish operation failed because the specified queue does not exist. The error details were captured in the message metadata and routed to the `Failure` connection.
+SQS 发布操作失败，因为指定的队列不存在。错误详情已记录到消息 metadata 并经 `Failure` 连接路由。

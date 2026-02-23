@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Layouts
-description: ThingsBoard Dashboard Layouts
+title: 布局
+description: ThingsBoard仪表板布局
 
 layout-1:
     0:

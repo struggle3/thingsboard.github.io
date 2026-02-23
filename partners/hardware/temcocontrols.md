@@ -1,9 +1,8 @@
 ---
 layout: hardware-partner
 hardware-partner: Temco Controls
-description: Temco is an official ThingsBoard hardware partner. Learn about Temco products, supported use cases, and integration guides with the ThingsBoard IoT platform.
+description: Temco 是 ThingsBoard 官方硬件合作伙伴。了解 Temco 产品、支持的应用场景及与 ThingsBoard 物联网平台的集成指南。
 
 ---
-
 
 

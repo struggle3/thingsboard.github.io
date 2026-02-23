@@ -1,24 +1,24 @@
-**Note:** make sure the downloaded PowerShell scripts are allowed to run on your system.
+**注意：** 请确保下载的 PowerShell 脚本可在您的系统上运行。
 
-* **Open PowerShell** (Run as Administrator).
-* **(Optional) Get the current execution policy**. 
-It determines the level of security for running scripts on a system. For example, if `Restricted` is returned, it means PowerShell doesn't execute any scripts.
+* **打开 PowerShell**（以管理员身份运行）。
+* **（可选）查看当前执行策略**。
+它决定了系统上运行脚本的安全级别。例如，若返回 `Restricted`，表示 PowerShell 不执行任何脚本。
 
 ```bash
 Get-ExecutionPolicy
 ```
 {: .copy-code}
 
-* **(Optional) Change the current execution policy if required**. 
-Set it to the one that will allow you to run PowerShell scripts and the one that suits your security requirements.
-For example, `Unrestricted` is the least restrictive setting that allows all scripts to be executed.
+* **（可选）如需，更改当前执行策略**。
+设置为允许运行 PowerShell 脚本且符合您安全要求的策略。
+例如，`Unrestricted` 为限制最少，允许执行所有脚本。
 
 ```bash
 Set-ExecutionPolicy Unrestricted
 ```
 {: .copy-code}
 
-* **Install TBMQ**
+* **安装 TBMQ**
 
 {% if docsPrefix == null %}
 

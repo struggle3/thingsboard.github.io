@@ -1,4 +1,4 @@
-Send GET request to the following URL:
+向以下 URL 发送 GET 请求：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 ```shell
@@ -15,16 +15,16 @@ coap://{{coapHostName}}/api/v1/$ACCESS_TOKEN/attributes?clientKeys=attribute1,at
 
 {% endif %}
 
-> ⚠️ Don&#39;t forget to replace {% unless docsPrefix contains "paas/" %}   
-&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请勿忘记将 {% unless docsPrefix contains "paas/" %}   
+&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 替换为你的 ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} 主机名或 IP 地址。   
+&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> 替换为设备的 access token。
 
 {% capture difference %}
-**Note**: This example shown with the coap-client instead of CoAP cli since CoAP cli does not support query parameters. Please refer to [Client libraries setup](#docsContent).
+**注意：** 此示例使用 coap-client 而非 CoAP cli，因 CoAP cli 不支持查询参数。请参阅 [客户端库配置](#docsContent)。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**Execute the command:**
+**执行命令：**
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 ```shell

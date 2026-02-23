@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: aws sns
-description: Publishes incoming message data to AWS SNS topic and returns response metadata in the outgoing message.
+description: 将入站消息数据发布到 AWS SNS topic，并在出站消息中返回响应 metadata。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

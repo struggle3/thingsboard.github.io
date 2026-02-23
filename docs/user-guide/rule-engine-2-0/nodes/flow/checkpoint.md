@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: checkpoint
-description: Transfers messages to a specified queue.
+description: 将消息转移到指定队列。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

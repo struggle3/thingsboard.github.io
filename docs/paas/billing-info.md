@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Plan and billing
-description: Billing options via ThingsBoard Cloud
+title: 套餐与计费
+description: 通过 ThingsBoard Cloud 的计费选项
 redirect_from: "/products/paas/billing-info/"
 
 ---

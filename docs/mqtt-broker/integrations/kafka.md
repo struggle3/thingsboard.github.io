@@ -1,23 +1,23 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Kafka Integration
-description: TBMQ Kafka integration guide
+title: Kafka 集成
+description: TBMQ Kafka 集成指南
 
 add-kafka-integration:
   0:
     image: /images/mqtt-broker/user-guide/ui/add-http-integration-1.png
-    title: 'Navigate to the "Integrations" page, and click "plus" icon to add a new integration.'
+    title: '进入「集成」页面，点击「+」图标添加新集成。'
   1:
     image: /images/mqtt-broker/user-guide/ui/add-kafka-integration-2.png
-    title: 'Select "HTTP" as the integration type and click "Next".'
+    title: '选择「HTTP」作为集成类型并点击「Next」。'
   2:
     image: /images/mqtt-broker/user-guide/ui/add-http-integration-3.png
-    title: 'Click "Next" to subscribe to the default topic "tbmq/#".'
+    title: '点击「Next」订阅默认主题「tbmq/#」。'
 
 kafka-integration-docker:
   0:
     image: /images/mqtt-broker/user-guide/ui/add-kafka-integration-4.png
-    title: 'Specify bootstrap servers that you are going to connect to, and if required, add Other properties key value pairs'
+    title: '指定要连接的 bootstrap 服务器，如需要可添加其他属性键值对。'
 
 kafka-integration-cloud-server:
   0:
@@ -46,13 +46,13 @@ kafka-integration-cloud-topic:
 send-uplink-message-kafka:
   0:
     image: /images/mqtt-broker/user-guide/ui/send-uplink-message-1.png
-    title: 'Navigate to the "WebSocket Client" page, select working connection, then click "Connect".'
+    title: '进入「WebSocket 客户端」页面，选择可用连接后点击「Connect」。'
   1:
     image: /images/mqtt-broker/user-guide/ui/send-uplink-message-kafka-1.png
-    title: 'Set topic name as "tbmq/kafka-integration", and click "Send" to publish message.'
+    title: '将主题名设为「tbmq/kafka-integration」，点击「Send」发布消息。'
   2:
     image: /images/mqtt-broker/user-guide/ui/send-uplink-message-kafka-2.png
-    title: 'In the Confluent Cloud open Topics and click on the topic "tbmq.messages".'
+    title: '在 Confluent Cloud 中打开 Topics 并点击主题「tbmq.messages」。'
   3:
     image: /images/mqtt-broker/user-guide/ui/send-uplink-message-kafka-3.png
     title: 'The message from the TBMQ Kafka integration should be available in the messages table.'

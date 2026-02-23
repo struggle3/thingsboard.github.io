@@ -1,67 +1,65 @@
 * TOC
 {:toc}
 
-## Overview {#overview}
+## 概述 {#overview}
 
-[Ollama](https://ollama.com/){:target="_blank"} is a powerful tool for running Large Language Models (LLMs) locally, but it does not include built-in authentication mechanisms.
-When exposing Ollama on a network, securing the API endpoint becomes your responsibility.
+[Ollama](https://ollama.com/){:target="_blank"} 是本地运行大语言模型（LLM）的强力工具，但不包含内置认证机制。
+当在网络上暴露 Ollama 时，保护 API 端点成为您的责任。
 
-This guide demonstrates how to deploy Ollama with [Nginx](https://nginx.org/){:target="_blank"} as a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy){:target="_blank"}
-to add authentication to your Ollama deployment. The Nginx proxy acts as a security gatekeeper, validating credentials before forwarding requests to the Ollama service.
+本指南演示如何将 Ollama 与 [Nginx](https://nginx.org/){:target="_blank"} 作为[反向代理](https://en.wikipedia.org/wiki/Reverse_proxy){:target="_blank"}部署，为 Ollama 部署添加认证。Nginx 代理充当安全守门人，在将请求转发到 Ollama 服务前验证凭据。
 
-We will cover two common authentication methods:
-- **HTTP Basic Authentication** (username and password)
-- **Bearer Token Authentication** (a secret API key)
+我们将介绍两种常见认证方式：
+- **HTTP Basic Authentication**（用户名和密码）
+- **Bearer Token Authentication**（密钥 API key）
 
-Both services, Ollama and Nginx, will be deployed together as containers using Docker Compose.
-This guide focuses on demonstrating the concept with a working implementation that you can use as a foundation for further customization.
-We use the standard Ollama Docker image without GPU acceleration to keep the setup straightforward, though GPU support can be added later for improved performance.
+Ollama 和 Nginx 两个服务将通过 Docker Compose 以容器形式一起部署。
+本指南重点通过可工作的实现演示概念，您可在此基础上进一步定制。
+我们使用标准 Ollama Docker 镜像且不启用 GPU 加速，以便设置简洁，之后可添加 GPU 支持以提升性能。
 
 {% capture https_warning %}
-After completing this guide, we **strongly recommend** securing your [Nginx proxy with HTTPS](https://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank"}
-to ensure that credentials (passwords or bearer tokens) are always encrypted and not sent in plain text over the network.
+完成本指南后，我们**强烈建议**按照[官方 Nginx HTTPS 配置指南](https://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank"}为 Nginx 代理配置 HTTPS，以确保凭据（密码或 bearer token）始终加密传输，不会以明文在网络上发送。
 {% endcapture %}
 {% include templates/warn-banner.md content=https_warning %}
 
-## Prerequisites {#prerequisites}
+## 前置条件 {#prerequisites}
 
-Before you start, ensure you have Docker and Docker Compose installed.
-The easiest way to get both is to install [Docker Desktop](https://docs.docker.com/desktop/){:target="_blank"} and ensure it is running before you proceed.
+开始前，请确保已安装 Docker 和 Docker Compose。
+最简单的方式是安装 [Docker Desktop](https://docs.docker.com/desktop/){:target="_blank"} 并确保其已运行后再继续。
 
-## Setup: Project Directory {#project-setup}
+## 设置：项目目录 {#project-setup}
 
-First, create a main project directory named `ollama-nginx-auth`. All the files we create throughout this guide will be placed inside this directory.
+首先创建主项目目录 `ollama-nginx-auth`。本指南中创建的所有文件都将放在该目录内。
 
-Next, inside the `ollama-nginx-auth` directory, create another directory named `nginx`. This is where you will store your Nginx-specific configuration files.
+然后在 `ollama-nginx-auth` 目录内创建 `nginx` 子目录，用于存放 Nginx 相关配置文件。
 
-After you are done, your directory structure should look like this:
+完成后，目录结构应如下：
 ```
 ollama-nginx-auth/
 └── nginx/
 ```
 
-Make sure you are working inside the main `ollama-nginx-auth` directory for the next steps.
+确保后续步骤都在主目录 `ollama-nginx-auth` 下进行。
 
-## Approach 1: HTTP Basic Authentication {#basic-auth}
+## 方式 1：HTTP Basic Authentication {#basic-auth}
 
-This method protects your endpoint with a simple username and password.
-When a request is made, Nginx checks the provided credentials against an encrypted list of users in a `.htpasswd` file to grant or deny access.
+此方式使用简单的用户名和密码保护端点。
+收到请求时，Nginx 根据 `.htpasswd` 文件中的加密用户列表验证提供的凭据，以决定允许或拒绝访问。
 
-The `.htpasswd` file is a standard file used for storing usernames and passwords for basic authentication on web servers like Nginx.
-Each line in the file represents a single user and contains the username followed by a colon and the encrypted (hashed) password.
+`.htpasswd` 是用于在 Nginx 等 Web 服务器上存储 basic 认证用户名和密码的标准文件。
+文件中每行代表一个用户，包含用户名后跟冒号和加密（哈希）密码。
 
-### Step 1: Create the Credential File {#basic-credentials}
+### 步骤 1：创建凭据文件 {#basic-credentials}
 
-From your project root (`ollama-nginx-auth`), create the `.htpasswd` file inside the `nginx` directory. This command creates a file with the username `myuser` and password `mypassword`.
+从项目根目录（`ollama-nginx-auth`）在 `nginx` 目录内创建 `.htpasswd` 文件。以下命令创建用户名为 `myuser`、密码为 `mypassword` 的文件。
 
 {% capture tabspec %}htpasswd-setup
 htpasswd-setup-linux-macos,Linux/macOS,shell,/docs/samples/analytics/resources/htpasswd-setup-linux-macos.sh
 htpasswd-setup-windows,Windows (PowerShell),text,/docs/samples/analytics/resources/htpasswd-setup-windows.ps1{% endcapture %}  
 {% include tabs.html %}
 
-### Step 2: Create the Nginx Configuration File {#basic-config}
+### 步骤 2：创建 Nginx 配置文件 {#basic-config}
 
-Create a file named `basic_auth.conf` inside the `nginx` directory (`ollama-nginx-auth/nginx/basic_auth.conf`) and paste the following content into it.
+在 `nginx` 目录（`ollama-nginx-auth/nginx/basic_auth.conf`）下创建 `basic_auth.conf` 文件，并粘贴以下内容。
 ```
 events {}
 
@@ -90,15 +88,15 @@ http {
 ```
 {: .copy-code}
 
-Here's what the configuration does:
-- `listen 80;`: Nginx listens on port 80 inside the Docker container.
-- `auth_basic "Restricted Access";`: Enables HTTP Basic Authentication.
-- `auth_basic_user_file /etc/nginx/.htpasswd;`: Specifies the location of the password file inside the container. We will mount our local file to this path.
-- `proxy_pass http://ollama:11434;`: Forwards any authenticated requests to the `ollama` service at its internal address.
+配置说明：
+- `listen 80;`：Nginx 在 Docker 容器内监听 80 端口。
+- `auth_basic "Restricted Access";`：启用 HTTP Basic Authentication。
+- `auth_basic_user_file /etc/nginx/.htpasswd;`：指定容器内密码文件路径。我们将把本地文件挂载到该路径。
+- `proxy_pass http://ollama:11434;`：将已认证的请求转发到 `ollama` 服务的内部地址。
 
-### Step 3: Create the Docker Compose File {#basic-compose}
+### 步骤 3：创建 Docker Compose 文件 {#basic-compose}
 
-Create a file named `docker-compose.basic.yml` in the root of your project (`ollama-nginx-auth/docker-compose.basic.yml`) and paste the following content into it.
+在项目根目录（`ollama-nginx-auth/docker-compose.basic.yml`）创建 `docker-compose.basic.yml` 文件，并粘贴以下内容。
 ```yml
 services:
   ollama:
@@ -125,78 +123,78 @@ volumes:
 ```
 {: .copy-code}
 
-### Step 4: Run and Test {#basic-test}
+### 步骤 4：运行与测试 {#basic-test}
 
-Start the services using the dedicated compose file. The `-f` flag specifies which file to use. This may take a some time.
+使用指定的 compose 文件启动服务。`-f` 参数指定要使用的文件。可能需要一定时间。
 ```shell
 docker compose -f docker-compose.basic.yml up -d
 ```
 {: .copy-code}
 
-Pull a model by executing the command directly inside the Ollama container. We'll use `gemma3:1b`, a lightweight model suitable for testing. This may take a some time.
+在 Ollama 容器内直接执行命令拉取模型。我们使用适合测试的轻量模型 `gemma3:1b`。可能需要一定时间。
 ```shell
 docker exec -it ollama ollama pull gemma3:1b
 ```
 {: .copy-code}
 
-Test with your user (`myuser`):
+使用您的用户（`myuser`）测试：
 
 {% capture tabspec %}http-basic-test
 http-basic-test-linux-macos,Linux/macOS,shell,/docs/samples/analytics/resources/http-basic-test-linux-macos.sh
 http-basic-test-windows,Windows (PowerShell),text,/docs/samples/analytics/resources/http-basic-test-windows.ps1{% endcapture %}  
 {% include tabs.html %}
 
-Test an API call with incorrect credentials to see it fail:
+使用错误凭据进行 API 调用以验证失败情况：
 
 {% capture tabspec %}http-basic-failed-test
 http-basic-failed-test-linux-macos,Linux/macOS,shell,/docs/samples/analytics/resources/http-basic-failed-test-linux-macos.sh
 http-basic-failed-test-windows,Windows (PowerShell),text,/docs/samples/analytics/resources/http-basic-failed-test-windows.ps1{% endcapture %}  
 {% include tabs.html %}
 
-The output will show `401 Unauthorized` error.
+输出将显示 `401 Unauthorized` 错误。
 
-### Step 5 (Optional): Manage Users {#basic-manage-users}
+### 步骤 5（可选）：管理用户 {#basic-manage-users}
 
-You can easily add or remove users from the `.htpasswd` file. Changes to this file take effect immediately without needing to restart Nginx.
+可在 `.htpasswd` 文件中轻松添加或删除用户。对该文件的修改会立即生效，无需重启 Nginx。
 
 {% capture adding-users-via-htpasswd %}
-Always use the `htpasswd` command to add users. This utility correctly encrypts the password and ensures the credentials are stored in the format that Nginx requires.
-Manually adding plain-text passwords to the file will not work.
+添加用户时请始终使用 `htpasswd` 命令。该工具会正确加密密码并确保凭据以 Nginx 要求的格式存储。
+手动向文件添加明文密码将无效。
 {% endcapture %}
 {% include templates/info-banner.md content=adding-users-via-htpasswd %}
 
-**To add a new user:**
+**添加新用户：**
 
-Run the `htpasswd` command again. This example adds `anotheruser` with password `anotherpassword`.
+再次运行 `htpasswd` 命令。以下示例添加用户 `anotheruser`，密码为 `anotherpassword`。
 
 {% capture tabspec %}http-basic-add-user
 http-basic-add-user-linux-macos,Linux/macOS,shell,/docs/samples/analytics/resources/http-basic-add-user-linux-macos.sh
 http-basic-add-user-windows,Windows (PowerShell),text,/docs/samples/analytics/resources/http-basic-add-user-windows.ps1{% endcapture %}  
 {% include tabs.html %}
 
-You can repeat this command for as many users as you need.
+需要多少用户即可重复执行该命令。
 
-**To remove a user:**
+**删除用户：**
 
-Simply open the file `./nginx/.htpasswd` in a text editor and delete the line corresponding to the user you want to remove.
+在文本编辑器中打开 `./nginx/.htpasswd` 文件，删除对应用户所在行即可。
 
-## Approach 2: Bearer Token (API Key) Authentication {#bearer-token}
+## 方式 2：Bearer Token（API Key）认证 {#bearer-token}
 
-This method uses a secret token. You will manage your keys in a simple text file, and Nginx will be configured to read them without needing a service restart.
+此方式使用密钥 token。您将在纯文本文件中管理密钥，Nginx 将配置为读取该文件且无需重启服务。
 
-### Step 1: Create the API Keys File {#bearer-keys}
+### 步骤 1：创建 API Keys 文件 {#bearer-keys}
 
-Create a file named `api_keys.txt` inside the `nginx` directory (`ollama-nginx-auth/nginx/api_keys.txt`) and paste your API keys into it, one per line.
+在 `nginx` 目录（`ollama-nginx-auth/nginx/api_keys.txt`）下创建 `api_keys.txt` 文件，将 API key 粘贴进去，每行一个。
 ```
 my-secret-api-key-1
 admin-key-abcdef
 ```
 {: .copy-code}
 
-### Step 2: Create the Nginx Configuration File {#bearer-config}
+### 步骤 2：创建 Nginx 配置文件 {#bearer-config}
 
-Create a file named `bearer_token.conf` inside the `nginx` directory (`ollama-nginx-auth/nginx/bearer_token.conf`) and paste the following content into it.
-This configuration includes a [Lua](https://www.lua.org/) script to read the API keys file dynamically.
+在 `nginx` 目录（`ollama-nginx-auth/nginx/bearer_token.conf`）下创建 `bearer_token.conf` 文件，并粘贴以下内容。
+此配置包含用于动态读取 API keys 文件的 [Lua](https://www.lua.org/) 脚本。
 ```
 events {}
 
@@ -259,18 +257,18 @@ http {
 ```
 {: .copy-code}
 
-Here's what the configuration does:
-- `listen 80;`: Nginx listens on port 80 inside the Docker container.
-- `access_by_lua_block`: Executes a Lua script for each request to validate the Bearer token.
-  - The script reads valid API keys from `/etc/nginx/api_keys.txt` on every request.
-  - It extracts the token from the `Authorization: Bearer <token>` header.
-  - If the token is missing or not found in the valid keys list, it returns a 401 Unauthorized response.
-- `proxy_pass http://ollama:11434;`: Forwards any authenticated requests to the `ollama` service at its internal address.
+配置说明：
+- `listen 80;`：Nginx 在 Docker 容器内监听 80 端口。
+- `access_by_lua_block`：为每个请求执行 Lua 脚本以验证 Bearer token。
+  - 脚本在每次请求时从 `/etc/nginx/api_keys.txt` 读取有效 API key。
+  - 从 `Authorization: Bearer <token>` header 中提取 token。
+  - 若 token 缺失或不在有效 key 列表中，返回 401 Unauthorized 响应。
+- `proxy_pass http://ollama:11434;`：将已认证的请求转发到 `ollama` 服务的内部地址。
 
-### Step 3: Create the Docker Compose File {#bearer-compose}
+### 步骤 3：创建 Docker Compose 文件 {#bearer-compose}
 
-Create a file named `docker-compose.bearer.yml` in the root of your project (`ollama-nginx-auth/docker-compose.bearer.yml`) and paste the following content into it.
-This `docker-compose.bearer.yml` uses an Nginx image that includes the required Lua module (`openresty/openresty`).
+在项目根目录（`ollama-nginx-auth/docker-compose.bearer.yml`）创建 `docker-compose.bearer.yml` 文件，并粘贴以下内容。
+该 `docker-compose.bearer.yml` 使用包含所需 Lua 模块的 Nginx 镜像（`openresty/openresty`）。
 ```yml
 services:
   ollama:
@@ -299,64 +297,63 @@ volumes:
 ```
 {: .copy-code}
 
-### Step 4: Run and Test {#bearer-test}
+### 步骤 4：运行与测试 {#bearer-test}
 
-Start the services using the dedicated compose file. The `-f` flag specifies which file to use.
+使用指定的 compose 文件启动服务。`-f` 参数指定要使用的文件。
 ```shell
 docker compose -f docker-compose.bearer.yml up -d
 ```
 {: .copy-code}
 
-Pull a model (this will be quick if you did it in Approach 1):
+拉取模型（若已在方式 1 中执行过则较快）：
 ```shell
 docker exec -it ollama ollama pull gemma3:1b
 ```
 {: .copy-code}
 
-Test a request using a valid API key:
+使用有效 API key 测试请求：
 
 {% capture tabspec %}bearer-test
 bearer-test-linux-macos,Linux/macOS,shell,/docs/samples/analytics/resources/bearer-test-linux-macos.sh
 bearer-test-windows,Windows (PowerShell),text,/docs/samples/analytics/resources/bearer-test-windows.ps1{% endcapture %}  
 {% include tabs.html %}
 
-Test with an invalid API key to see it fail:
+使用无效 API key 测试以验证失败情况：
 
 {% capture tabspec %}bearer-failed-test
 bearer-failed-test-linux-macos,Linux/macOS,shell,/docs/samples/analytics/resources/bearer-failed-test-linux-macos.sh
 bearer-failed-test-windows,Windows (PowerShell),text,/docs/samples/analytics/resources/bearer-failed-test-windows.ps1{% endcapture %}  
 {% include tabs.html %}
 
-### Step 5 (Optional): Manage API Keys {#bearer-manage-keys}
+### 步骤 5（可选）：管理 API Keys {#bearer-manage-keys}
 
-Simply open the file `./nginx/api_keys.txt` in a text editor. Add, change, or remove keys (one per line). Save the file.
+在文本编辑器中打开 `./nginx/api_keys.txt` 文件。添加、修改或删除 key（每行一个），然后保存。
 
-The changes take effect immediately on the next API request because the Lua script reads the file every time a request is made.
+由于 Lua 脚本在每次请求时都会读取该文件，修改会在下一次 API 请求时立即生效。
 
-For example, you can edit the file, remove the `admin-key-abcdef` key, save it, and then try to use that key in a test request.
-The request will now fail with a 401 Unauthorized error.
+例如，可编辑该文件，删除 `admin-key-abcdef` key，保存后尝试在测试请求中使用该 key。
+请求将返回 401 Unauthorized 错误。
 
-## Usage {#usage}
+## 使用 {#usage}
 
-To start or stop the services, you will use the `docker compose up` and `docker compose down` commands,
-making sure to specify the appropriate file for the authentication approach you want to use (`docker-compose.basic.yml` or `docker-compose.bearer.yml`).
-- To start the services for either approach, run the following command from your project directory, replacing `<compose-file-name>` with the correct file name:
+启动或停止服务时，使用 `docker compose up` 和 `docker compose down` 命令，并确保为所选认证方式指定对应文件（`docker-compose.basic.yml` 或 `docker-compose.bearer.yml`）。
+- 无论哪种方式，从项目目录运行以下命令启动服务，将 `<compose-file-name>` 替换为正确的文件名：
   ```shell
   docker compose -f <compose-file-name> up -d
   ```
   {: .copy-code}
 
-- When you're finished, stop the containers with the corresponding file name:
+- 完成后，使用对应文件名停止容器：
   ```shell
   docker compose -f <compose-file-name> down
   ```
   {: .copy-code}
 
-## Next steps {#next-steps}
+## 下一步 {#next-steps}
 
-Now that you have Ollama endpoint, here are some recommended next steps:
+Ollama 端点就绪后，建议执行以下操作：
 
-- **Enable HTTPS**: Secure your Nginx proxy with HTTPS by following the [official Nginx HTTPS configuration guide](https://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank"}.
+- **启用 HTTPS**：按照[官方 Nginx HTTPS 配置指南](https://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank"}为 Nginx 代理配置 HTTPS。
 
-- **Add GPU Support**: Enable GPU acceleration for Ollama to significantly improve inference speed.
-  Use the [Ollama Docker GPU setup instructions](https://github.com/ollama/ollama/blob/main/docs/docker.md){:target="_blank"} as a starting point.
+- **添加 GPU 支持**：为 Ollama 启用 GPU 加速以显著提升推理速度。
+  可参考 [Ollama Docker GPU 配置说明](https://github.com/ollama/ollama/blob/main/docs/docker.md){:target="_blank"}作为起点。

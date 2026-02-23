@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Public Dashboard Configuration Guide
-description: Detailed configuration instructions for the public dashboard on ThingsBoard Edge
+title: Edge 公共仪表板配置指南
+description: ThingsBoard Edge 上公共仪表板的详细配置说明
 
 makePublic:
   0:

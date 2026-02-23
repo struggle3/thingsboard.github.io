@@ -2,16 +2,16 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Notification center
-description: IoT alarm notifications
+title: 通知中心
+description: IoT 告警通知
 
 notification-center-send-notification-1:
     0:
         image: /images/user-guide/notifications/notification-center-send-notification-1-pe.png
-        title: 'Click the "<b>Send notification</b>" button in the top-right corner to open the new notification wizard.'
+        title: '点击右上角的「<b>发送通知</b>」按钮打开新通知向导。'
     1:
         image: /images/user-guide/notifications/notification-center-send-notification-2-pe.png
-        title: '<b>Specify recipients</b> and <b>at least one delivery method</b>.<br><i>In this example, we&#39;ll select the Web delivery method.</i>'
+        title: '<b>指定收件人</b>并<b>至少选择一种送达方式</b>。<br><i>本示例选择 Web 送达方式。</i>'
     2:
         image: /images/user-guide/notifications/notification-center-send-notification-3-pe.png
         title: '<b>Optionally</b>:<br> - <b>Attach a report</b> (available only for <b>Email</b> and <b>Slack</b> delivery methods).<br> - <b>Schedule the notification</b> for a later time.<br> Click "<b>Next</b>".'
@@ -28,7 +28,7 @@ notification-center-send-notification-1:
 notification-center-send-notification-2:
     0:
         image: /images/user-guide/notifications/notification-center-send-notification-7-pe.png
-        title: 'The recipient will receive the notification in the ThingsBoard interface and can view it on the Notification center page or by clicking the bell icon in the top-right corner of the screen.'
+        title: '收件人将在 ThingsBoard 界面中收到通知，可在通知中心页面查看，或点击屏幕右上角的铃铛图标。'
     1:
         image: /images/user-guide/notifications/notification-center-send-notification-8-pe.png
         title: 'Clicking the "Open this dashboard" button in the notification will open the corresponding dashboard.'

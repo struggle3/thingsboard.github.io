@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka 
-title: SNMP Device API Reference
-description: Supported SNMP API Reference for IoT Devices
+title: SNMP 设备 API 参考
+description: 支持的 IoT 设备 SNMP API 参考
 redirect_from: "/docs/reference/snmp-api"
 
 deviceProfileConfiguring1:

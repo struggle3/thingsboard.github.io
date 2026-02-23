@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect AgroSense Soil Moisture Sensor to ThingsBoard?"
+title: "如何将AgroSense Soil Moisture Sensor连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/soil-moisture-sensor/"
 ---

@@ -4,11 +4,11 @@
 {% assign sinceVersion = "3.8.0" %}
 {% include templates/since.md %}
 
-SCADA (Supervisory Control And Data Acquisition) is a complex software system for managing automated processes that collects and processes data in real time.
+SCADA（Supervisory Control And Data Acquisition）是用于管理自动化过程的复杂软件系统，可实时采集并处理数据。
 
-Based on ThingsBoard, a Swimming Pool SCADA system template has been implemented. It's designed to monitor and control swimming pool components.
-Sensors data in the local network is collected and sent via the Modbus protocol to the [IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){:target="_blank"}. The Gateway communicates with ThingsBoard through the MQTT protocol, ensuring continuous devices connectivity and data transmission to the SCADA system.
-ThingsBoard acts as the core of the SCADA system, storing data from devices in a database, processing it, visualizing the information, and sending control commands to the devices.
+基于ThingsBoard实现了Swimming Pool SCADA系统模板，用于监测与控制游泳池组件。
+本地网络中的传感器数据通过Modbus协议采集并发送至[IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){:target="_blank"}。Gateway通过MQTT协议与ThingsBoard通信，确保设备持续连接并向SCADA系统传输数据。
+ThingsBoard作为SCADA系统核心，将设备数据存储于数据库、进行处理、可视化信息并向设备发送控制命令。
 
 <br>
 
@@ -16,205 +16,205 @@ ThingsBoard acts as the core of the SCADA system, storing data from devices in a
 
 
 <br>
-To understand how the Swimming Pool SCADA system template works, let's start by installing it.
+要了解Swimming Pool SCADA系统模板的工作方式，请先安装。
 
-## Install solution template
+## 安装解决方案模板
 
-You will need to have access to ThingsBoard Professional Edition. The easiest way is to use [ThingsBoard Cloud](https://thingsboard.io/installations/choose-region/){:target="_blank"} server.
-The alternative option is to install ThingsBoard using [installation guide](/docs/user-guide/install/pe/installation-options/){:target="_blank"}.
+您需要ThingsBoard专业版访问权限。最简单的方式是使用[ThingsBoard Cloud](https://thingsboard.io/installations/choose-region/){:target="_blank"}。
+也可按[安装指南](/docs/user-guide/install/pe/installation-options/){:target="_blank"}自行安装。
 
-- Go to the "**Solution templates**" page. Find "**Swimming Pool SCADA system**" and click "**Install**" to start the installation process.
-- Configuration instructions for this solution will be provided — follow the steps as instructed.
-- Once done, click "**Close**" to complete the setup and proceed to the dashboard.
+- 进入“**Solution templates**”页面，找到“**Swimming Pool SCADA system**”并点击“**Install**”开始安装。
+- 将提供该解决方案的配置说明，请按步骤操作。
+- 完成后点击“**Close**”完成设置并进入仪表板。
 
 {% include images-gallery.html imageCollection="go-to-solution-templates-page-1" %}
 
-## Dashboard
+## 仪表板
 
-As part of this solution, we have developed a comprehensive Swimming Pool SCADA system dashboard that allows you to visualize, interact with, and control real-time data from multiple devices. The dashboard is designed to display critical information for water management, temperature control, and equipment performance.
-It allows operators to interact with various system components for real-time control and monitoring from any device. 
+本解决方案开发了全面的Swimming Pool SCADA系统仪表板，用于可视化、交互并控制多设备的实时数据。仪表板设计用于展示水管理、温度控制与设备绩效的关键信息。
+支持操作人员从任意设备与各类系统组件交互，进行实时控制与监测。
 
-Key features:
+主要特性：
 
-* **Interactive States**: Easily navigate the system by clicking on individual devices to access detailed metrics of specific states, streamlining your workflow.
+* **交互式状态**：点击单个设备即可访问特定状态的详细指标，简化工作流。
 
-* **Flexible Layouts for Multi-Device Access**: Whether you&#39;re using a desktop, tablet, or smartphone, the dashboard’s adaptive design ensures seamless operation and accessibility to your pool system anytime, anywhere.
+* **多设备访问的灵活布局**：无论使用桌面、平板或智能手机，仪表板的自适应设计均可确保对游泳池系统的无缝操作与随时随地访问。
 
-* **Water Quality Management**: Keep your pool in optimal condition by monitoring water levels and pH data. The system helps maintain balance and prevents water quality issues.
+* **水质管理**：通过监测水位与pH数据保持泳池最佳状态。系统有助于维持平衡并预防水质问题。
 
-* **Temperature Control**: Use outdoor temperature and pool temperature sensor data for intelligent heat pumps control. The system ensures that the water temperature is maintained efficiently according to predefined targets.
+* **温度控制**：使用室外温度与泳池温度传感器数据智能控制热泵。系统确保水温按预设目标高效维持。
 
-* **Equipment Monitoring**: Monitor the performance of pumps, sand filters, and other critical equipment. The dashboard provides insights into rotation speed, vibration, flow rates, power consumption, and more to monitor operational efficiency.
+* **设备监测**：监测泵、砂滤器及其他关键设备的绩效。仪表板提供转速、振动、流量、功耗等洞察以监测运营效率。
 
-* **Valve Control**: Remotely control water flow across different segments of the system by controlling valves. This adds flexibility to the system and enables quick adjustments to water flow as needed. You can interact with the valves directly through the dashboard to turn them on or off as necessary.
+* **阀门控制**：通过控制阀门远程控制系统中不同区段的水流。增加系统灵活性并支持按需快速调节水流。可通过仪表板直接与阀门交互以按需开关。
 
-* **Energy Management**: Track energy usage for heat pumps, filtration systems, and other devices. Use this data to optimize energy efficiency and reduce costs.
+* **能源管理**：跟踪热泵、过滤系统及其他设备的能耗。利用数据优化能效并降低成本。
 
-* **Remote System Management**: Take full control of your swimming pool system from anywhere. Operate pumps, switch between modes, and manage valves remotely.
+* **远程系统管理**：从任意位置全面控制游泳池系统。远程操作泵、切换模式并管理阀门。
 
-SCADA systems are divided into two types: 
-- **High-Performance SCADA systems**, which emphasize simplified interfaces, faster decision-making, and improved information perception efficiency.
-- **Traditional SCADA systems**, which focus on basic monitoring and control.
+SCADA系统分为两类：
+- **高性能SCADA系统**，侧重简化界面、更快决策与更高信息感知效率。
+- **传统SCADA系统**，侧重基本监测与控制。
 
-Choose the SCADA system type that suits you best:
+选择适合您的SCADA系统类型：
 
 {% capture scadasystems %}
 High-Performance<small>SCADA system</small>%,%highPerformance%,%templates/solutions/scada/scada-high-performance-system.md%br%
 Traditional<small>SCADA system</small>%,%traditional%,%templates/solutions/scada/scada-traditional-systems.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="scadasystems" toggle-spec=scadasystems %}
 
-For further customization of the Swimming Pool SCADA system dashboard refer to the [dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} development guide.
+Swimming Pool SCADA系统仪表板的更多自定义请参阅[仪表板](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}开发指南。
 
-For real-time monitoring of device data received from Modbus servers, you can access the **ThingsBoard IoT Gateways** dashboard to view the status and data of connected devices.
+要从Modbus服务器接收设备数据进行实时监测，可访问**ThingsBoard IoT Gateways**仪表板查看连接设备的状态与数据。
 
-## System components
+## 系统组件
 
-The SCADA Swimming Pool system includes:
-- 14 operational devices, essential for monitoring and controlling various components of the pool system;
-- An asset that gathers data from its connected devices and stores it as attributes for subsequent monitoring and control of various components within the SCADA system;
-- The gateway transmits data from these devices to ThingsBoard, ensuring seamless device connectivity and data transfer within the SCADA system.
+SCADA Swimming Pool系统包含：
+- 14台运营设备，用于监测与控制泳池系统各组件；
+- 用于从连接设备采集数据并以属性存储的资产，供SCADA系统内各组件后续监测与控制；
+- 网关将这些设备的数据传至ThingsBoard，确保SCADA系统内设备连接与数据传输顺畅。
 
-### Devices
+### 设备
 
-Choose the SCADA system type:
+选择SCADA系统类型：
 
 {% capture scadadevices %}
 High-Performance<small>SCADA system</small>%,%highPerformance%,%templates/solutions/scada/scada-devices-performance.md%br%
 Traditional<small>SCADA system</small>%,%traditional%,%templates/solutions/scada/scada-devices-traditional.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="scadadevices" toggle-spec=scadadevices %}
 
-### Asset
+### 资产
 
-The Swimming Pool SCADA system includes a single [asset](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"} named the **SCADA Swimming Pool system**. This asset serves as the central hub for collecting and processing data from all connected devices. 
-The data collected by the asset is processed using [Calculated fields](/docs/{{docsPrefix}}user-guide/calculated-fields/){:target="_blank"} and later used for monitoring and controlling various system components, including calculations that determine the status of each pipe—indicating whether water is flowing or not. 
-The data is then visualized on the dashboard, allowing users to interact with and control devices while monitoring system performance in real time.
+Swimming Pool SCADA系统包含一个名为**SCADA Swimming Pool system**的[资产](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}。该资产作为从所有连接设备采集并处理数据的中心枢纽。
+资产采集的数据通过[计算字段](/docs/{{docsPrefix}}user-guide/calculated-fields/){:target="_blank"}处理，随后用于监测与控制各系统组件，包括判断各管道是否在流水的计算。
+数据在仪表板上可视化，允许用户与设备交互并控制设备，同时实时监测系统绩效。
 
 {% include images-gallery.html imageCollection="solution-scada-asset" %}
 
-### Gateway
+### 网关
 
-The ThingsBoard IoT Gateway integrates devices into the SCADA system in ThingsBoard, ensuring seamless connectivity and data transmission. 
-The "Pool System Gateway" gateway configuration is accessible on the **Gateways** page in the **Entities** section.
+ThingsBoard IoT Gateway将设备集成至ThingsBoard的SCADA系统，确保连接与数据传输顺畅。
+“Pool System Gateway”网关配置可在**Entities**部分的**Gateways**页面访问。
 
 {% include images-gallery.html imageCollection="select-pool-system-gateway-1" %}
 
-The Pool System Gateway displays connected devices and their status. Click "Show Device Info" icon next to the device to view detailed information, including its status and relevant metrics.
+Pool System Gateway显示连接的设备及其状态。点击设备旁的“Show Device Info”图标可查看包含状态与相关指标在内的详细信息。
 
 {% include images-gallery.html imageCollection="gateway-devices" %}
 
-**Connector configuration**
+**连接器配置**
 
-Let&#39;s go over the connector settings. Click the **Connectors configuration** button to display available connectors. Click on the **Pool Connector** to open its configuration settings. 
-Navigate to the **Master Connections** tab, where you&#39;ll find connection parameters for connecting devices to the Modbus server and data processing settings for each device.
+了解连接器设置。点击**Connectors configuration**按钮显示可用连接器。点击**Pool Connector**打开其配置。
+在**Master Connections**标签页中可找到连接设备至Modbus服务器的连接参数及各设备的数据处理设置。
 
 {% include images-gallery.html imageCollection="gateway-connector-1" %}
 
-We'll examine the configuration parameters using the "Main intake valve" device as an example. Click the pencil icon next to the device name to open its settings window.
+我们以"Main intake valve"设备为例查看配置参数。点击设备名称旁的铅笔图标打开设置窗口。
 
 {% include images-gallery.html imageCollection="gateway-master-connections-1" %}
 
-In this template, we're using an emulator to simulate devices and their telemetry data.
-The host `host.docker.internal` and port `5021` are specific to your Modbus device. If you need to connect actual devices, replace the host and port values with the real ones.
-A detailed description of other parameters, such as Method, Unit ID, and others, can be found on the [Modbus Connector configuration](https://thingsboard.io/docs/iot-gateway/config/modbus/#subsection-slaves){:target="_blank"} page.
+本模板使用仿真器模拟设备及其遥测数据。
+主机`host.docker.internal`和端口`5021`针对您的Modbus设备。若要连接真实设备，请将主机与端口替换为实际值。
+Method、Unit ID等其他参数的详细说明请参见[Modbus Connector配置](https://thingsboard.io/docs/iot-gateway/config/modbus/#subsection-slaves){:target="_blank"}页面。
 
 {% include images-gallery.html imageCollection="gateway-master-connections-2" %}
 
-Scroll down to the "Time series" section. Here, you can configure the processing of incoming data. These settings will be interpreted in ThingsBoard as device telemetry data. 
-To open the time series configuration, click the pencil icon. For more details on each parameter and setting in the "Time series" section, refer to the [Modbus time series settings](https://thingsboard.io/docs/iot-gateway/config/modbus/#key-settings-for-timeseries){:target="_blank"} documentation.
+滚动至"Time series"部分。此处可配置入站数据的处理。这些设置将在ThingsBoard中解释为设备遥测数据。
+点击铅笔图标打开时间序列配置。有关"Time series"部分各参数与设置的更多说明，请参阅[Modbus time series设置](https://thingsboard.io/docs/iot-gateway/config/modbus/#key-settings-for-timeseries){:target="_blank"}文档。
 
 {% include images-gallery.html imageCollection="time-series-section-1" %}
 
-In the "RPC Requests" section, you can configure parameters for remote procedure calls (RPC) from ThingsBoard to the device. 
-This section is necessary for sending commands and receiving responses from the device. 
-For detailed information on each parameter in "RPC Requests", refer to the [Modbus RPC settings](https://thingsboard.io/docs/iot-gateway/config/modbus/#key-settings-for-rpc){:target="_blank"}  documentation.
+在"RPC Requests"部分可配置从ThingsBoard至设备的远程过程调用（RPC）参数。
+该部分用于向设备发送命令并接收响应。
+"RPC Requests"中各参数的详细说明请参阅[Modbus RPC设置](https://thingsboard.io/docs/iot-gateway/config/modbus/#key-settings-for-rpc){:target="_blank"}文档。
 
 {% include images-gallery.html imageCollection="rpc-requests-section-1" %}
 
-## Rule chain
+## 规则链
 
-Each message passes through The **Swimming Pool Device Rule Chain**. Here, telemetry, attributes, and RPC requests are saved, alarms are generated, and control of the heat pump is performed.
+每条消息经过**Swimming Pool Device Rule Chain**。在此处保存遥测、属性与RPC请求，生成告警，并执行热泵控制。
 
 {% include images-gallery.html imageCollection="solution-scada-rule-chain" %}
 
 <br>
-**Message processing flow:**
+**消息处理流程：**
 
-* **Alarm generation**:
-  Every message first passes through the [device profile node](/docs/user-guide/rule-engine-2-0/nodes/action/device-profile/){:target="_blank"}. This step allows the system to generate alarms based on the conditions defined in the device profiles (such as for the heat pump, water pump, and sand filter). If the telemetry exceeds the set thresholds, alarms are triggered and displayed on the dashboard.{% include images-gallery.html imageCollection="rule-chain-1" %}
+* **告警生成**：
+  每条消息首先经过[设备配置文件节点](/docs/user-guide/rule-engine-2-0/nodes/action/device-profile/){:target="_blank"}。此步使系统可根据设备配置文件中定义的条件生成告警（如热泵、水泵、砂滤器）。若遥测超出设定阈值，则触发告警并在仪表板上显示。{% include images-gallery.html imageCollection="rule-chain-1" %}
 
-* **Message type switch**:
-  After the initial profile processing, the message moves to the [message type switch node](/docs/user-guide/rule-engine-2-0/nodes/filter/message-type-switch/){:target="_blank"}. This node routes messages based on their type, such as telemetry data, attribute updates, or RPC requests. It sends each message down the appropriate path for further processing.
+* **消息类型切换**：
+  在初次配置文件处理后，消息进入[消息类型切换节点](/docs/user-guide/rule-engine-2-0/nodes/filter/message-type-switch/){:target="_blank"}。该节点按消息类型（如遥测数据、属性更新、RPC请求）路由消息，将每条消息发送至相应路径进行进一步处理。
 
 {% include images-gallery.html imageCollection="rule-chain-2" %}
 
-* **General logic – save attributes, time series, and RPC requests**:
-  Independent of the message type, these actions are performed for all devices.
+* **通用逻辑 – 保存属性、时间序列与RPC请求**：
+  与消息类型无关，以下操作对所有设备执行。
 
-  * [save attributes node](/docs/user-guide/rule-engine-2-0/nodes/action/save-attributes/){:target="_blank"}: The telemetry data from devices is saved as attributes.
-  * [save time series node](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries/){:target="_blank"}: Time series data is saved for historical analysis and monitoring.
-  * [rpc call request node](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-request/){:target="_blank"}: The system can generate and send RPC requests to devices. These RPC commands may turn devices on/off, change operational modes, or control valve positions. For example, valves can be opened/closed, and pumps can be activated/deactivated based on predefined conditions or manual requests.
+  * [save attributes节点](/docs/user-guide/rule-engine-2-0/nodes/action/save-attributes/){:target="_blank"}：设备遥测数据作为属性保存。
+  * [save time series节点](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries/){:target="_blank"}：时间序列数据保存以供历史分析与监测。
+  * [rpc call request节点](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-request/){:target="_blank"}：系统可生成并向设备发送RPC请求。这些RPC命令可开关设备、更改运行模式或控制阀门位置。例如，可根据预设条件或手动请求开关阀门、启停泵。
 
 {% include images-gallery.html imageCollection="rule-chain-3" %}
 
-* **Device profile filtering**:
-  Once the telemetry data is saved, the message is routed through the [device profile switch node](/docs/user-guide/rule-engine-2-0/nodes/filter/device-profile-switch/){:target="_blank"}. This node filters the devices based on their profile, allowing for device-specific actions. When telemetry from the **heat pump** is detected, the system checks specific conditions—like target temperature, outdoor temperature, and pool temperature—through a [switch node](/docs/user-guide/rule-engine-2-0/nodes/filter/switch/){:target="_blank"}. If the telemetry conditions meet the thresholds for turning the heat pump on or off, an RPC request is sent to control the heat pump’s state.
+* **设备配置文件过滤**：
+  遥测数据保存后，消息经[设备配置文件切换节点](/docs/user-guide/rule-engine-2-0/nodes/filter/device-profile-switch/){:target="_blank"}路由。该节点按配置文件过滤设备，支持设备特定操作。当检测到**热泵**遥测时，系统通过[switch节点](/docs/user-guide/rule-engine-2-0/nodes/filter/switch/){:target="_blank"}检查目标温度、室外温度、泳池温度等特定条件。若遥测条件满足启停热泵的阈值，则发送RPC请求控制热泵状态。
 
 {% include images-gallery.html imageCollection="rule-chain-4" %}
 
-## Device profiles
+## 设备配置文件
 
-In ThingsBoard, a device profile is a set of configurations and rules that define the behavior of devices using it. Device profiles simplify managing devices with similar parameters.
-They include a rule chain for processing incoming messages and events, transport configuration, alarm rules, and other parameters. Learn more about the device profile [here](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}.
+在ThingsBoard中，设备配置文件是一组定义使用该配置的设备行为的配置与规则。设备配置文件简化具有相似参数的设备管理。
+包含处理入站消息与事件的规则链、传输配置、告警规则及其他参数。更多说明请参见[此处](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}。
 
-For the "Swimming Pool SCADA system" solution template, six device profiles were created to manage the [14 operational devices](#devices). These profiles set a "[Swimming Pool Device Rule Chain](#rule-chain)" as the default rule chain to our devices, the transport configuration is set to default, and define specific alarm rules for them.
-Such as excessively high water temperature in the pool or exceeding the power consumption of the heat pump, etc.
+"Swimming Pool SCADA system"解决方案模板为[14台运营设备](#devices)创建了6个设备配置文件。这些配置文件将"[Swimming Pool Device Rule Chain](#rule-chain)"设为我们设备的默认规则链，传输配置为默认，并为设备定义特定告警规则。
+如泳池水温过高或热泵功耗超限等。
 
 {% include images-gallery.html imageCollection="device-profiles-1" %}
 
-## Alarm rules
+## 告警规则
 
-The Swimming Pool SCADA system includes alarm configurations for key devices, allowing operators to monitor critical conditions and respond swiftly to potential issues. Alarms are triggered based on predefined thresholds and rules defined in device profiles, helping to maintain the optimal performance of the system.
+Swimming Pool SCADA系统包含关键设备的告警配置，使操作人员可监测关键状况并快速响应潜在问题。告警基于设备配置文件中预定义的阈值与规则触发，有助于维持系统最佳绩效。
 
-**Device-Specific Alarms**
+**设备专属告警**
 
-**Heat pump**: The heat pump has five alarm rules based on the following metrics:
+**热泵**：热泵基于以下指标有五条告警规则：
 
-* Vibration levels
-* Power consumption
-* Rotation speed
-* Refrigerant pressure
-* Compressor temperature
+* 振动水平
+* 功耗
+* 转速
+* 制冷剂压力
+* 压缩机温度
 
 {% include images-gallery.html imageCollection="heat-pump-alarms-rule-1" %}
 
 <br>
-**Water pump**: The water pump is monitored by four alarm rules based on:
+**水泵**：水泵由基于以下四项规则监测：
 
-* Vibration levels
-* Power consumption
-* Rotation speed
-* Temperature
+* 振动水平
+* 功耗
+* 转速
+* 温度
 
 {% include images-gallery.html imageCollection="water-pump-alarms-rule-1" %}
 
-**Sand filter**: The sand filter is equipped with three alarm rules that track:
+**砂滤器**：砂滤器配备三条跟踪以下指标的告警规则：
 
-* Vibration levels
-* Rotation speed
-* Pressure
+* 振动水平
+* 转速
+* 压力
 
 {% include images-gallery.html imageCollection="sand-filter-alarms-rule-1" %}
 
 <br>
-**For example, let&#39;s take a closer look at the configuration of the "Rotation speed" alarm rule for the heat pump.**   
-This rule has two severity levels:
+**例如，详细查看热泵"Rotation speed"告警规则的配置。**
+该规则有两个严重级别：
 
-- If the value of the "rotationSpeed" key is greater than or equal to 0 and less than 50, and "running" equals 1, an alarm with a severity type of "Warning" will be triggered.
-- If the value of the "rotationSpeed" key is greater than or equal to 200 and "running" equals 1, an alarm with a severity type of "Critical" will be triggered.
+- 若"rotationSpeed"键的值大于等于0且小于50，且"running"等于1，则触发严重级别为"Warning"的告警。
+- 若"rotationSpeed"键的值大于等于200且"running"等于1，则触发严重级别为"Critical"的告警。
 
-A separate rule is defined for clearing the alarm:
+为清除告警定义了单独规则：
 
-- If the value of the "rotationSpeed" key returns to the range of greater than or equal to 50 and less than 200, the alarm will be automatically cleared.
+- 若"rotationSpeed"键的值回到大于等于50且小于200的范围，告警将自动清除。
 
 {% include images-gallery.html imageCollection="heat-pump-alarms-rule-2" %}
 
@@ -223,12 +223,12 @@ High-Performance<small>SCADA system</small>%,%highPerformance%,%templates/soluti
 Traditional<small>SCADA system</small>%,%traditional%,%templates/solutions/scada/heat-pump-scada-traditional.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="heatpumpscadasystems" toggle-spec=heatpumpscadasystems %}
 
-The configuration of other alarm rules is similar to the "Rotation speed" rule of the heat pump. Please review them for yourself.
+其他告警规则的配置与热泵的"Rotation speed"规则类似，请自行查看。
 
-For more about alarms and how to configure them, read [here](/docs/{{docsPrefix}}user-guide/alarms/){:target="_blank"}.
+有关告警及其配置的更多说明，请参阅[此处](/docs/{{docsPrefix}}user-guide/alarms/){:target="_blank"}。
 
-## Conclusion
+## 总结
 
-The Swimming Pool SCADA template provides a ready-to-use framework for managing swimming pool components. 
-It ensures seamless integration between sensors, and ThingsBoard, allowing real-time data collection, processing, and visualization. 
-This setup not only enhances operational efficiency but also provides a scalable and reliable solution for centralized supervision and control of swimming pool systems.
+Swimming Pool SCADA模板为游泳池组件的管理提供即用框架。
+确保传感器与ThingsBoard间的无缝集成，支持实时数据采集、处理与可视化。
+该配置不仅提升运营效率，更为游泳池系统的集中监管与控制提供可扩展且可靠的解决方案。

@@ -1,53 +1,53 @@
-bigheader: "Installation"
-abstract: "Documentation for installation and configuration of ThingsBoard IoT Gateway."
+bigheader: "安装"
+abstract: "ThingsBoard IoT网关安装与配置文档。"
 toc:
-- title: Installation options
+- title: 安装选项
   path: /docs/iot-gateway/installation/
-- title: IoT Gateway installation on Ubuntu (DEB)
+- title: Ubuntu (DEB) 安装IoT网关
   path: /docs/iot-gateway/install/deb-installation/
-- title: IoT Gateway installation on AlmaLinux/RHEL (RPM)
+- title: AlmaLinux/RHEL (RPM) 安装IoT网关
   path: /docs/iot-gateway/install/rpm-installation/
-- title: IoT Gateway installation using Docker (Linux and Mac OS)
+- title: 使用Docker (Linux和Mac OS) 安装IoT网关
   path: /docs/iot-gateway/install/docker-installation/
-- title: IoT Gateway installation using Docker (Windows)
+- title: 使用Docker (Windows) 安装IoT网关
   path: /docs/iot-gateway/install/docker-windows/
-- title: Installation from pip
+- title: 从pip安装
   path: /docs/iot-gateway/install/pip-installation/
-- title: Installation from sources (Latest version)
+- title: 从源码安装（最新版）
   path: /docs/iot-gateway/install/source-installation/
-- title: Upgrade instructions
+- title: 升级说明
   path: /docs/iot-gateway/install/upgrade-instructions/
-- title: Configuration guide
+- title: 配置指南
   section:
-    - title: General configuration
+    - title: 通用配置
       path: /docs/iot-gateway/configuration/
-    - title: MQTT Connector
+    - title: MQTT连接器
       path: /docs/iot-gateway/config/mqtt/
-    - title: Modbus Connector
+    - title: Modbus连接器
       path: /docs/iot-gateway/config/modbus/
-    - title: OPC-UA Connector
+    - title: OPC-UA连接器
       path: /docs/iot-gateway/config/opc-ua/
-    - title: BLE Connector
+    - title: BLE连接器
       path: /docs/iot-gateway/config/ble/
-    - title: Request Connector
+    - title: Request连接器
       path: /docs/iot-gateway/config/request/
-    - title: CAN Connector
+    - title: CAN连接器
       path: /docs/iot-gateway/config/can/
-    - title: BACnet Connector
+    - title: BACnet连接器
       path: /docs/iot-gateway/config/bacnet/
-    - title: ODBC Connector
+    - title: ODBC连接器
       path: /docs/iot-gateway/config/odbc/
-    - title: REST Connector
+    - title: REST连接器
       path: /docs/iot-gateway/config/rest/
-    - title: SNMP Connector
+    - title: SNMP连接器
       path: /docs/iot-gateway/config/snmp/
-    - title: FTP Connector
+    - title: FTP连接器
       path: /docs/iot-gateway/config/ftp/
-    - title: Socket Connector
+    - title: Socket连接器
       path: /docs/iot-gateway/config/socket/
-    - title: XMPP Connector
+    - title: XMPP连接器
       path: /docs/iot-gateway/config/xmpp/
-    - title: OCPP Connector
+    - title: OCPP连接器
       path: /docs/iot-gateway/config/ocpp/
-    - title: KNX Connector
+    - title: KNX连接器
       path: /docs/iot-gateway/config/knx/

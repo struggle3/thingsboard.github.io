@@ -1,4 +1,4 @@
-Send POST request to the following URL:
+向以下 URL 发送 POST 请求：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 
@@ -7,7 +7,7 @@ coap://{{HOST_NAME}}/api/v1/rpc
 ```
 {: .copy-code}
 
-> ⚠️ Where <code>{{HOST_NAME}}</code> is your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.
+> ⚠️ 其中 <code>{{HOST_NAME}}</code> 为你的 ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} 主机名或 IP 地址。
 
 {% endif %}
 {% if docsPrefix contains "paas/" %}
@@ -19,21 +19,21 @@ coap://{{coapHostName}}/api/v1/rpc
 
 {% endif %}
 
-Both request and response body should be valid JSON documents. The content of the documents is specific to the rule node that will handle your request.
+请求体和响应体均需为有效 JSON 文档，文档内容取决于处理请求的规则节点。
 
 <br>
-**Example**
+**示例**
 
-- In the {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}**Edge** {% endif %}**Root Rule Chain** add two nodes: [transformation script](/docs/user-guide/rule-engine-2-0/nodes/transformation/script){:target="_blank"} and [rpc call reply](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply){:target="_blank"}. Connect them to "[Log RPC from Device](/docs/user-guide/rule-engine-2-0/nodes/action/log){:target="_blank"}" action node with "**Success**" link.
-- In the **script** node enter the function:
+- 在 {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}**Edge** {% endif %}**根规则链**中添加两个节点：[transformation script](/docs/user-guide/rule-engine-2-0/nodes/transformation/script){:target="_blank"} 和 [rpc call reply](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply){:target="_blank"}，并用「**Success**」连线将它们连接到「[Log RPC from Device](/docs/user-guide/rule-engine-2-0/nodes/action/log){:target="_blank"}」操作节点。
+- 在 **script** 节点中输入函数：
 
 ```shell
 return {msg: {time:String(new Date())}, metadata: metadata, msgType: msgType};
 ```
 {: .copy-code}
 
-- Save the [rpc-client-request.json](/docs/reference/resources/rpc-client-request.json){:target="_blank" download="rpc-client-request.json"} file to your PC;
-- Now, send request to the server using the command below:
+- 将 [rpc-client-request.json](/docs/reference/resources/rpc-client-request.json){:target="_blank" download="rpc-client-request.json"} 文件保存到本机；
+- 使用以下命令向服务器发送请求：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 
@@ -42,7 +42,7 @@ cat rpc-client-request.json | coap post coap://{{HOST_NAME}}/api/v1/rpc
 ```
 {: .copy-code}
 
-> ⚠️ Replace <code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.
+> ⚠️ 请将 <code>{{HOST_NAME}}</code> 替换为你的 ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} 主机名或 IP 地址。
 
 {% endif %}
 {% if docsPrefix contains "paas/" %}
@@ -54,7 +54,7 @@ cat rpc-client-request.json | coap post coap://{{coapHostName}}/api/v1/rpc
 
 {% endif %}
 
-- You should receive a response from the server:
+- 将收到服务器响应：
 
 ```shell
 {"time":"2016 11 21 12:54:44.287"}

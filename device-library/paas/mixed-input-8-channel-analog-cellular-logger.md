@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Mixed Input, 8-Channel Analog Cellular Logger to ThingsBoard?
-category: Other devices
+title: 如何将 Mixed Input, 8-Channel Analog Cellular Logger 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [HTTP, MQTT, LTE, NB-IoT, LTE-M]
 vendor: Fusion DAQ
 deviceImageFileName: mixed-input-8-channel-analog-cellular-logger.jpg

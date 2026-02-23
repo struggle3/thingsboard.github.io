@@ -1,24 +1,23 @@
 * TOC
 {:toc}
 
-**Role-Based Access Control (RBAC)** in TBMQ PE provides a structured and secure way to manage access to broker features 
-and operations through predefined [user roles](/docs/pe/mqtt-broker/user-guide/ui/users/). 
-This system enables administrators to grant appropriate permissions to users based on their role within the organization.
+TBMQ PE 的**基于角色的访问控制（RBAC）**通过预定义[用户角色](/docs/pe/mqtt-broker/user-guide/ui/users/)管理对 Broker 功能与操作的访问，结构清晰且安全。
+便于管理员根据用户职责分配相应权限。
 
-### Available Roles
+### 可用角色
 
-TBMQ PE introduces two predefined user roles:
+TBMQ PE 提供两种预定义用户角色：
 
-* **Admin**: Full access to all broker features.
-* **Viewer**: Read-only access to all broker data — without the ability to perform changes or administrative actions.
+* **Admin**：对全部 Broker 功能拥有完全访问权限。
+* **Viewer**：对全部 Broker 数据仅可读，不能进行修改或管理操作。
 
-### Benefits
+### 优势
 
-* **Enhanced security**: Limit access to sensitive broker features based on user responsibilities.
-* **Simplified administration**: Easily assign predefined roles to users without managing granular permissions.
-* **Compliance and auditing**: Support best practices in access control by separating duties between administrative and observability roles.
+* **提升安全**：根据用户职责限制对敏感 Broker 功能的访问。
+* **简化管理**：可便捷分配预定义角色，无需逐项管理细粒度权限。
+* **合规与审计**：通过区分管理与监控职责，符合访问控制最佳实践。
 
-### Use Cases
+### 使用场景
 
-* Assign the **Admin** role to team members responsible for configuring or maintaining the broker environment.
-* Grant the **Viewer** role to operations or monitoring personnel who need visibility into system health and client behavior without risking configuration changes.
+* 将 **Admin** 角色分配给负责配置或维护 Broker 环境的团队成员。
+* 将 **Viewer** 角色分配给运维或监控人员，使其可查看系统健康与客户端行为，同时避免配置变更风险。

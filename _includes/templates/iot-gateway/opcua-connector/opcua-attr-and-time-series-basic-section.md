@@ -24,16 +24,15 @@ To add new time series or attribute key, follow these steps:
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=attrAndTimeseries %}
 
-You can enable a specific report strategy for each time series or attribute. This strategy defines how often  
-data is sent to the ThingsBoard server. The following strategies are available:
+您可为每个 time series 或 attribute 启用特定的上报策略。该策略定义数据发送到 ThingsBoard 服务器的频率。可用策略如下：
 
-- **On report period** - sends data to ThingsBoard after the report period;
-- **On value change** - sends data to ThingsBoard when the value changes;
-- **On value change or report period** - sends data to ThingsBoard when the value changes or after the report period;
-- **On received** - sends data to ThingsBoard after receiving data from the device (default strategy).
+- **On report period**（按上报周期）- 在上报周期后向 ThingsBoard 发送数据；
+- **On value change**（按值变化）- 当值变化时向 ThingsBoard 发送数据；
+- **On value change or report period**（按值变化或上报周期）- 当值变化或在上报周期后向 ThingsBoard 发送数据；
+- **On received**（按接收）- 从设备接收数据后向 ThingsBoard 发送数据（默认策略）。
 
 {% capture difference %}
-Additional information about the report strategy can be found [here](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}.
+有关 report strategy 的更多信息请参见[此处](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 

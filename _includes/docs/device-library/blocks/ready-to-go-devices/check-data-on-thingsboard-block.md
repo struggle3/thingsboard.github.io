@@ -1,23 +1,22 @@
-Once you have successfully done all the steps above and {{deviceName}} sent data, you can see it in the 
-Device Telemetry Tab:
+完成上述步骤且 {{deviceName}} 已发送数据后，可在设备遥测选项卡中查看：
 
 {% assign deviceTelemetryCE = '
     ===
         image: /images/helloworld/getting-started-ce/hello-world-2-1-connect-device-1-ce.png,
-        title: Click on the device row in the table to open device details;
+        title: 点击表格中的设备行以打开设备详情；
     ===
         image: /images/helloworld/getting-started-ce/hello-world-2-1-connect-device-3-ce.png,
-        title: Navigate to the telemetry tab.
+        title: 导航至遥测选项卡。
     '
 %}
 
 {% assign deviceTelemetryPE = '
     ===
         image: /images/helloworld/getting-started-pe/hello-world-2-1-connect-device-1-pe.png,
-        title: Click on the device row in the table to open device details;
+        title: 点击表格中的设备行以打开设备详情；
     ===
         image: /images/helloworld/getting-started-pe/hello-world-2-1-connect-device-3-pe.png,
-        title: Navigate to the telemetry tab.
+        title: 导航至遥测选项卡。
     '
 %}
 
@@ -27,5 +26,4 @@ Device Telemetry Tab:
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceTelemetryCE %}
 {% endif %}
 
-Let’s display {{deviceName}} attributes and telemetry on a dashboard. For this, you can create your own dashboard with 
-your custom widgets or use a ready-made dashboard and simply import it.
+可将 {{deviceName}} 的属性和遥测显示在仪表板上。您可以使用自定义部件创建自己的仪表板，或导入现成仪表板。

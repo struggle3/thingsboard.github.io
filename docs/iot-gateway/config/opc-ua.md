@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-gw
-title: OPC-UA Connector Configuration
-description: OPC-UA protocol support for ThingsBoard IoT Gateway
+title: OPC-UA 连接器配置
+description: ThingsBoard IoT Gateway 的 OPC-UA 协议支持
 
 ---
 

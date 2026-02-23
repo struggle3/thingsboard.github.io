@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: IoT Energy Management & Monitoring with ThingsBoard
-description: The Smart Energy solution based on ThingsBoard IoT platform enables real-time energy monitoring and optimization. It helps reduce costs, improve energy efficiency, automate management processes, and achieve sustainable development.
+title: 基于 ThingsBoard 的物联网能源管理与监测
+description: 基于 ThingsBoard 物联网平台的智慧能源方案支持实时能源监测与优化，助力降本增效、提升能效、自动化管理并实现可持续发展。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -11,19 +11,19 @@ contactUsModal: "true"
 
 {% include usecase-nav.html usecase="smart-energy" %}
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Smart energy</h1>
+<h1 class="usecase-title">智慧能源</h1>
 <section class="environment-monitoring-about">
     <div class="about-text">
         <div class="short">
             <div class="block">
-                <p class="text">Smart energy is intelligent energy resource management using IoT to improve efficiency, reduce costs, and automate processes. ThingsBoard is a perfect platform for these tasks, providing scalable data collection, analytics, and real-time remote control.</p>
+                <p class="text">智慧能源是借助物联网实现能效提升、成本降低与流程自动化的智能能源资源管理。ThingsBoard 为此类场景提供可扩展的数据采集、分析与实时远程控制，是理想平台。</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_SmartEnergy_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/e8e409c0-f2b5-11e6-a6ee-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0" class="button gtm_button">View live demo</a>            </div>
+                <a id="UseCases_SmartEnergy_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/e8e409c0-f2b5-11e6-a6ee-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0" class="button gtm_button">查看在线演示</a>            </div>
             </div>
         <div class="long">
-            <p>IoT is radically transforming the approach to energy management. IoT sensors capture the consumption of electricity, water, heat, as well as environmental parameters such as pressure, temperature, and more. This data is used to make automated decisions — from shutting down systems in case of failures to optimizing consumption and preventing losses.</p>
-            <p>The ThingsBoard platform provides a powerful technology stack for building such systems. It supports data collection from various types of devices and protocols (MQTT, CoAP, HTTP, etc.), dashboard visualizations, and advanced automation through its rule engine and alerting system. This enables real-time energy monitoring and rapid response to anomalies, reducing costs and improving operational efficiency.</p>
+            <p>物联网正在深刻改变能源管理方式。物联网传感器采集电、水、热消耗以及压力、温度等环境参数，用于自动决策——从故障时关闭系统到优化用能、防止损耗。</p>
+            <p>ThingsBoard 平台为构建此类系统提供完整技术栈，支持多种设备与协议（MQTT、CoAP、HTTP 等）的数据采集、仪表板可视化，以及通过规则引擎与告警系统实现的高级自动化，从而实现实时能源监测与异常快速响应，降低成本并提升运营效率。</p>
         </div>
     </div>
 </section>
@@ -42,16 +42,16 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="smart-energy-solution-structure">
-    <h2>Solution structure of smart energy use case</h2>
+    <h2>智慧能源应用场景的解决方案架构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
-                <p class="text">ThingsBoard offers a comprehensive IoT-based energy monitoring solution built on a modular, scalable architecture. At the device level, smart meters and industrial Modbus meters collect real-time data on energy consumption across facilities.</p>
+                <p class="text">ThingsBoard 提供基于模块化、可扩展架构的完整物联网能源监测方案。在设备层，智能电表与工业 Modbus 电表采集各设施的实时能耗数据。</p>
             </div>
         </div>
         <div class="long">
-            <p>These devices connect through IoT gateways that support a wide range of communication protocols, including MQTT, CoAP, HTTP, and LwM2M, ensuring secure and seamless data transmission to the cloud.</p>
-            <p>ThingsBoard core handles device and user management, real-time data processing via a powerful rule engine. The collected data is visualized through intuitive dashboards and mobile applications, giving users clear insights into energy usage, system alarms, and performance metrics — all in real time, from a single interface.</p>
+            <p>这些设备通过支持 MQTT、CoAP、HTTP、LwM2M 等多种通信协议的物联网网关连接，实现安全、无缝的数据上云。</p>
+            <p>ThingsBoard 核心负责设备与用户管理、通过强大规则引擎的实时数据处理。采集的数据通过直观的仪表板与移动应用呈现，使用户可在一个界面中实时掌握用能、系统告警与性能指标。</p>
         </div>
     </div>
     <div class="scheme">

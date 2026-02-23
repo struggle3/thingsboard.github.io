@@ -1,14 +1,14 @@
-{% assign linkLabel = include.linkLabel | default: 'Case studies' %}
+{% assign linkLabel = include.linkLabel | default: '案例展示' %}
 {% assign link = include.link | default: '/case-studies/' %}
 
 <div class="contact-us-banner">
     <div class="contact-us-banner-content">
-        <h2>Accelerate your IoT roadmap with our team</h2>
-        <p>Our team is a trusted partner for scalable solutions delivered fast and on a fixed timeline.</p>
+        <h2>携手我们团队，加速您的物联网路线图</h2>
+        <p>我们的团队是您可信赖的合作伙伴，能够快速、按固定周期交付可扩展的解决方案。</p>
         <div class="contact-us-banner-buttons">
-            <button onclick="openContactUsModal()">Contact Us</button>
+            <button onclick="openContactUsModal()">联系我们</button>
             <a {% if link == '/case-studies/' %} id="UseCasesToCaseStudies" {% else %} id="CaseStudiesToUseCases" {% endif %}  class="gtm_button" href="{{ link }}">{{ linkLabel }}</a>
         </div>
     </div>
-    <img src="/images/usecases/email-icon.svg" width="380" height="267" alt="Letter icon">
+    <img src="/images/usecases/email-icon.svg" width="380" height="267" alt="邮件图标">
 </div>

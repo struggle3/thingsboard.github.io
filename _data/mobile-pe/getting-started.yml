@@ -1,6 +1,6 @@
-bigheader: "Getting Started"
-abstract: "Getting Started with ThingsBoard PE Mobile Application."
+bigheader: "入门"
+abstract: "ThingsBoard PE移动应用入门。"
 hidetoc: "true"
 toc:
-  - title: Getting Started
+  - title: 入门
     path: /docs/pe/mobile/getting-started/

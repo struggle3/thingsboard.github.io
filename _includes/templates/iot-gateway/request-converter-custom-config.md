@@ -1,30 +1,30 @@
-A custom converter is converter written for some device:
+Custom converter 是为特定设备编写的 converter：
 
 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|-
-| type                        | **custom**                         | Provides information to connector that custom converter will be uses for converting data from response.                                  |
-| extension                   | **CustomRequestUplinkConverter**   | Name of custom converter class.                                                                                                       |
-| extension-config            |                                    | This subsection is a configuration for the custom converter. In default example it contains setting for parsing response string.      |
-| key                         | **Totaliser**                      | In this example value "Totaliser" will be interpreted as a telemetry key in ThingsBoard instance.                                     |
-| type                        | **float**                          | In this example type of the data.                                                                                                     |
-| fromByte                    | **0**                              | In this example start byte position in the response string.                                                                           |
-| toByte                      | **4**                              | In this example start byte position in the response string.                                                                           |
-| byteorder                   | **big**                            | In this example byteorder for response string.                                                                                        |
-| signed                      | **true**                           | In this example using to indicate is the data in response signed.                                                                     |
-| multiplier                  | **1**                              | In this example every data from in response should be multiplied to some coefficient.                                                 | 
+| type                        | **custom**                         | 指示 connector 使用 custom converter 转换响应数据。                                  |
+| extension                   | **CustomRequestUplinkConverter**   | Custom converter 类名。                                                                                                       |
+| extension-config            |                                    | 本小节为 custom converter 的配置。默认示例中包含解析响应字符串的设置。      |
+| key                         | **Totaliser**                      | 本例中值 "Totaliser" 将作为 ThingsBoard 实例中的 telemetry key 解释。                                     |
+| type                        | **float**                          | 本例中数据的类型。                                                                                                     |
+| fromByte                    | **0**                              | 本例中响应字符串的起始字节位置。                                                                           |
+| toByte                      | **4**                              | 本例中响应字符串的结束字节位置。                                                                           |
+| byteorder                   | **big**                            | 本例中响应字符串的字节序。                                                                                        |
+| signed                      | **true**                           | 本例中用于表示响应中的数据是否为有符号数。                                                                     |
+| multiplier                  | **1**                              | 本例中响应中的每个数据应乘以的系数。                                                 | 
 |--- 
 
 {% capture difference %}
 <br>
   
-**Custom converter usually needed if you want to collect data from some device with not regular structure in response or when the data needs some processing before sending it to the ThingsBoard.**  
+**当需要从未采用常规响应结构的设备采集数据，或数据在发送到 ThingsBoard 前需处理时，通常需要 custom converter。**  
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 
-Mapping subsection in the configuration will look like:
+配置中的 Mapping subsection 将如下所示：
 ```json
     {
       "url": "get_info",

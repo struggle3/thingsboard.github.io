@@ -1,6 +1,7 @@
 ---
 layout: docwithnav-gw
-title: Search Results
+title: 搜索结果
+description: IoT Gateway 文档搜索
 hidetoc: "true"
 ---
 {% include search.html %}

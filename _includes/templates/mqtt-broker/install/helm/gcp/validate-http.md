@@ -1,33 +1,33 @@
-Now you can open TBMQ web interface in your browser using DNS name of the load balancer.
+现在可在浏览器中使用负载均衡器的 DNS 名称打开 TBMQ Web 界面。
 
-You can get DNS name of the load-balancers using the next command:
+可使用以下命令获取负载均衡器的 DNS 名称：
 
 ```bash
 kubectl get ingress
 ```
 {: .copy-code}
 
-You should see the similar output:
+输出应类似：
 
 ```text
 NAME                          CLASS    HOSTS   ADDRESS              PORTS   AGE
 my-tbmq-cluster-http-lb       <none>   *       <your-domain-name>   80      3d1h
 ```
 
-Use `ADDRESS` field of the my-tbmq-cluster-http-lb to connect to the cluster.
+使用 my-tbmq-cluster-http-lb 的 `ADDRESS` 字段连接集群。
 
 {% include templates/mqtt-broker/login.md %}
 
-### Validate HTTPS access (if configured)
+### 验证 HTTPS 访问（若已配置）
 
-Check that the domain name is configured correctly using dig:
+使用 dig 检查域名是否正确配置：
 
 ```bash
 dig <your-domain-name>
 ```
 {: .copy-code}
 
-Sample output:
+示例输出：
 
 ```text
 
@@ -52,11 +52,11 @@ YOUR_DOMAIN_NAME. 36 IN	A	34.111.24.134
 
 ```
 
-Once assigned, wait for the Google-managed certificate to finish provisioning. This might take up to 60 minutes. You can check the status of the certificate using the following command:
+分配完成后，等待 Google 托管证书完成配置，可能需要最多 60 分钟。可使用以下命令查看证书状态：
 
 ```bash
 kubectl describe managedcertificate <your-managed-certificate-resource-name>
 ```
 {: .copy-code}
 
-The Certificate will be eventually provisioned if you have configured domain records properly. Use `<your-domain-name>` to connect to the cluster.
+若域名记录已正确配置，证书最终将完成配置。使用 `<your-domain-name>` 连接集群。

@@ -1,26 +1,26 @@
 {% assign addEdgePE = '
     ===
         image: /images/edge/user-guide/edge-install/1-instance-section-pe.webp ,
-        title: Log in to the **ThingsBoard Professional Edition instance** and go to the **Edge Management > Instances** section. Click the **“+”** icon in the top right corner and select the **“Add new edge”** option.
+        title: 登录 **ThingsBoard Professional Edition 实例**，进入 **Edge Management > Instances**（边缘管理 > 实例）部分。点击右上角 **"+"** 图标，选择 **"Add new edge"** 选项。
     ===
         image: /images/edge/user-guide/edge-install/2-add-new-edge-pe.webp,
-        title: Enter a name for your Edge in the **“Name”** field and click the **“Add”** button to confirm the addition of your new Edge.
+        title: 在 **"Name"** 字段输入Edge名称，点击 **"Add"** 按钮确认添加新Edge。
     ===
         image: /images/edge/user-guide/edge-install/3-done-pe.webp,
-        title: Your new edge should now appear at the top of the list, as entries are sorted by creation time by default.
+        title: 新Edge应出现在列表顶部，条目默认按创建时间排序。
 '
 %}
 
 {% assign addEdgeCE = '
     ===
         image: /images/edge/user-guide/edge-install/1-instance-section.webp,
-        title: Log in to the **ThingsBoard Community Edition instance** and go to the **Edge Management > Instances** section. Click the **“+”** icon in the top right corner and select the **“Add new edge”** option.
+        title: 登录 **ThingsBoard社区版实例**，进入 **Edge Management > Instances**（边缘管理 > 实例）部分。点击右上角 **"+"** 图标，选择 **"Add new edge"** 选项。
     ===
         image: /images/edge/user-guide/edge-install/2-add-new-edge.webp,
-        title: Enter a name for your Edge in the **“Name”** field and click the **“Add”** button to confirm the addition of your new Edge.
+        title: 在 **"Name"** 字段输入Edge名称，点击 **"Add"** 按钮确认添加新Edge。
     ===
         image: /images/edge/user-guide/edge-install/3-done.webp,
-        title: Your new Edge should now appear at the top of the list, as entries are sorted by creation time by default.
+        title: 新Edge应出现在列表顶部，条目默认按创建时间排序。
 '
 %}
 
@@ -30,4 +30,3 @@
 {% else %}  
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=addEdgeCE %}
 {% endif %}
-

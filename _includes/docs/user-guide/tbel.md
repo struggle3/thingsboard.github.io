@@ -2,68 +2,67 @@
 {:toc}
 
 
-ThingsBoard supports user-defined functions (UDF) for data processing in the [Rule Engine]() and [Data Converters](). 
-The original programming language for the UDF is JavaScript. It is popular, well-known, and simple. We plan to support JavaScript forever.
-Nevertheless, we have decided to provide an alternative to JavaScript. You may find our motivation below.
+ThingsBoard 在 [Rule Engine]() 和 [Data Converters]() 中支持用于数据处理的用户定义函数（UDF）。
+UDF 的原始编程语言为 JavaScript，其流行、易用且简单，我们计划长期支持。
+尽管如此，我们决定提供 JavaScript 的替代方案，动机如下。
 
-## Motivation
+## 动机
 
-ThingsBoard is written in Java and currently uses Java 17. There are two ways to execute the JS function in ThingsBoard:  
+ThingsBoard 使用 Java 编写，目前采用 Java 17。ThingsBoard 中执行 JS 函数有两种方式：  
 
-A) use remote JS Executor microservice written in Node.js. It is the default way for ThingsBoard to run in a cluster/microservices mode;
+A) 使用基于 Node.js 的远程 JS Executor 微服务，为 ThingsBoard 集群/微服务模式下的默认方式；
 
-B) use local JS Executor powered by Nashorn JS engine that runs inside the JVM. It is the default way for ThingsBoard while deployed in monolithic mode.
+B) 使用由 Nashorn JS 引擎驱动的本地 JS Executor，在 JVM 内运行，为 ThingsBoard 单体部署模式下的默认方式。
 
-The Nashorn JS engine is now deprecated and is removed from Java 16. It is also relatively slow. Some users already called Nashorn to be the platform's kryptonite.
-That is why it was absolutely clear that we need a replacement to Nashorn. 
-Many users suggested [GraalVM](https://www.graalvm.org/) for its built-in polyglot feature, but it was not suitable for us for multiple reasons.
-The most important reason is security and the ability to control every aspect of the UDF execution.
-Besides, most UDFs are relatively simple functions that transform or filter data, and we want to find a more effective way to execute them.   
+Nashorn JS 引擎现已废弃，并从 Java 16 中移除，且执行较慢。有用户称 Nashorn 为平台的"软肋"。
+因此我们需为其寻找替代方案。
+许多用户建议使用 [GraalVM](https://www.graalvm.org/) 的内置多语言特性，但出于多方面的原因不适合我们。
+主要原因包括安全及对 UDF 执行各环节的控制能力。
+此外，大多数 UDF 是较简单的数据转换或过滤函数，我们希望对其实行更高效地执行。   
 
-Our search for existing Script/Expression Language (EL) implementations led us to the [MVEL](https://github.com/mvel/mvel).
-The ThingsBoard Expression Language (TBEL) is basically a [fork](https://github.com/thingsboard/tbel) of MVEL with some important security constraints, 
-built-in memory management, and frequently used helper functions that are specific to ThingsBoard.
+对既有脚本/表达式语言（EL）实现的调研将我们引向 [MVEL](https://github.com/mvel/mvel)。
+ThingsBoard Expression Language（TBEL）本质上是 MVEL 的 [fork](https://github.com/thingsboard/tbel)，增加了重要安全约束、
+内置内存管理及 ThingsBoard 常用的辅助函数。
  
-### TBEL vs Nashorn
+### TBEL 与 Nashorn
 
-TBEL is lightweight and is super fast compared to Nashorn. For example, the execution of 1000 simple scripts like:
-"return msg.temperature > 20" took 16 seconds for Nashorn and 12 milliseconds for MVEL. More than 1000 times faster.
-We have forked the TBEL codebase and added additional security improvements to ensure no CPU or memory abuse. 
-So, no need to run Nashorn with the sandbox environment.
+TBEL 更轻量且相比 Nashorn 执行更快。例如，执行 1000 个简单脚本（如 `return msg.temperature > 20`）：
+Nashorn 需 16 秒，MVEL 仅 12 毫秒，快超过 1000 倍。
+我们对 TBEL 代码库进行了 fork 并增加了安全改进，以避免 CPU 或内存滥用。
+因此无需在沙箱环境中运行 Nashorn。
 
-Of course, TBEL is not as powerful as JS, but the majority of the use cases do not need this.
+TBEL 虽不及 JS 灵活，但大多数场景无需此能力。
 {% if docsPrefix contains 'paas/' %}
 The one who requires JS flexibility may use remote [JS Executors](/docs/pe/reference/msa/#javascript-executor-microservices) as usual.
 {% else %}
 The one who requires JS flexibility may use remote [JS Executors](/docs/{{docsPrefix}}reference/msa/#javascript-executor-microservices) as usual.
 {% endif %}
 
-### TBEL vs JS Executors
+### TBEL 与 JS Executors
 
 {% if docsPrefix contains 'paas/' %}
-[JS Executors](/docs/pe/reference/msa/#javascript-executor-microservices) is a separate microservice based on Node.js.
+[JS Executors](/docs/pe/reference/msa/#javascript-executor-microservices) 为基于 Node.js 的独立微服务。
 {% else %}
-[JS Executors](/docs/{{docsPrefix}}reference/msa/#javascript-executor-microservices) is a separate microservice based on Node.js.
+[JS Executors](/docs/{{docsPrefix}}reference/msa/#javascript-executor-microservices) 为基于 Node.js 的独立微服务。
 {% endif %}
-It is powerful and supports the latest JS language standards. 
-However, there is a noticeable overhead to execute JS functions remotely. 
-The Rule Engine and JS executors communicate through the queue. 
-This process consumes resources and introduces a relatively small latency (a few ms). 
-The latter may become a problem if you have multiple rule nodes chained into one rule chain.  
+其功能强大并支持最新 JS 语言标准。
+但远程执行 JS 函数有明显开销。
+Rule Engine 与 JS executors 通过队列通信。
+该过程消耗资源并引入数毫秒级延迟。
+若 Rule Chain 中存在多个 Rule Node 串联，此延迟可能成为问题。  
 
-TBEL execution consumes much less resources and has no extra latency for inter-process communications.
+TBEL 执行资源消耗更少，且无跨进程通信的额外延迟。
 
-## TBEL Language Guide
+## TBEL 语言指南
 
-TBEL is used to evaluate expressions written using Java syntax. Unlike Java however, TBEL is dynamically typed (with optional typing), meaning that the source code does not require type qualification.
-The TBEL expression can be as simple as a single identifier, or as complicated as an expression with method calls and inline collections.
+TBEL 用于求值以 Java 语法编写的表达式。但与 Java 不同，TBEL 为动态类型（支持可选类型），源码无需类型限定。
+TBEL 表达式可以简单到单个标识符，也可以复杂到包含方法调用和内联集合。
 
+### 循环和条件的语法约束
 
-### Syntax Constraints for Loops and Conditions
+在 TBEL（ThingsBoard Expression Language）中，为保障脚本环境的兼容性与可靠性，存在若干语法限制。使用 <code style="color: sienna;">foreach</code> 替代传统 <code style="color: sienna;">for</code> 循环；在无显式 <code style="color: sienna;">if</code> 语句时，需将 <code style="color: sienna;">ternary (? :) expressions</code> 用括号包裹。
 
-In TBEL (ThingsBoard Expression Language), certain syntax restrictions are enforced to ensure compatibility and reliability within the scripting environment. Use <code style="color: sienna;">foreach</code> instead of traditional <code style="color: sienna;">for</code> loops, and always wrap <code style="color: sienna;">ternary (? :) expressions</code> in parentheses when used without an explicit <code style="color: sienna;">if</code> statement.
-
-✅ Allowed:
+✅ 允许：
 
 ```java
 foreach (ValueType value : map) {
@@ -81,7 +80,7 @@ for (ValueType value : map) {
 ```
 {: .copy-code}
 
-✅ Correct:
+✅ 正确：
 
 ```java
 var msgNew = {
@@ -90,7 +89,7 @@ var msgNew = {
 ```
 {: .copy-code}
 
-❌ Incorrect:
+❌ 错误：
 
 ```java
 var msgNew = {
@@ -99,35 +98,34 @@ var msgNew = {
 ```
 {: .copy-code}
 
-### Simple Property Expression
+### 简单属性表达式
 
 ```java
 msg.temperature
 ```
 {: .copy-code}
 
-In this expression, we simply have a single identifier (msg.temperature), which by itself, is what we refer to in TBEL as a property expression, 
-in that the only purpose of the expression is to extract a property out of a variable or context object.
+此表达式中仅为单个标识符（msg.temperature），在 TBEL 中称为 property expression，
+其作用是从变量或上下文对象中提取属性。
 
-TBEL can even be used for evaluating a boolean expression. 
-Assuming you are using TBEL in the Rule Engine to define a simple script [filter node](https://thingsboard.io/docs/user-guide/rule-engine-2-0/nodes/filter/script/):
+TBEL 也可用于求值布尔表达式。
+若在 Rule Engine 中使用 TBEL 定义简单 [filter node](https://thingsboard.io/docs/user-guide/rule-engine-2-0/nodes/filter/script/) 脚本：
 
 ```java
 return msg.temperature > 10;
 ```
 {: .copy-code}
 
-Like Java, TBEL supports the full gamut of operator precedence rules, including the ability to use bracketing to control execution order.
+与 Java 一样，TBEL 支持完整的运算符优先级规则，包括使用括号控制执行顺序。
 
 ```java
 return (msg.temperature > 10 && msg.temperature < 20) || (msg.humidity > 10 && msg.humidity < 60);
 ```
 {: .copy-code}
 
-### Multiple statements
+### 多语句
 
-You may write scripts with an arbitrary number of statements using the semi-colon to denote the termination of a statement. 
-This is required in all cases except in cases where there is only one statement, or for the last statement in a script.
+可使用分号分隔多条语句。除仅有一条语句或脚本最后一条语句外，均需以分号结束。
 
 ```java
 var a = 2;
@@ -136,7 +134,7 @@ return a + b
 ```
 {: .copy-code}
 
-Note the lack of a semi-colon after 'a + b'. New lines are not substitutes for the use of the semi-colon in MVEL.
+注意 'a + b' 后无分号。在 MVEL 中，换行不能替代分号。
 
 ### Value Coercion
 
@@ -149,62 +147,62 @@ For example:
 ```
 {: .copy-code}
 
-This expression is *true* in TBEL because the type coercion system will coerce the untyped number *123* to a String in order to perform the comparison.
+此表达式在 TBEL 中为 *true*，因为类型强制系统会将无类型数字 *123* 强制为 String 以进行比较。
 
 ### Maps
 
-TBEL allows you to create Maps. We use our own implementation of the Map to control memory usage.
-That is why TBEL allows only inline creation of maps.
+TBEL 允许创建 Map。我们使用自有 Map 实现以控制内存使用。
+因此 TBEL 仅支持内联创建 map。
 
 ```java
-// Create new map
+// 创建新 map
 var map = {"temperature": 42, "nested" : "508"};
 ```
 {: .copy-code}
 
-There are two syntax variations for iterating over a map:
-1. Explicit entrySet() iteration:
+遍历 map 有两种写法：
+1. 显式 entrySet() 迭代：
 
 ```java
-// Iterate through the map
+// 遍历 map
 foreach(element : map.entrySet()){
-        // Get the key
+        // 获取 key
         element.getKey();
-        //or 
+        // 或
         element.key;
         
-        // Get the value
+        // 获取 value
         element.getValue();
-        //or 
+        // 或
         element.value;
 }
 
 ```
 {: .copy-code}
 
-2. Implicit iteration without entrySet():
+2. 不使用 entrySet() 的隐式迭代：
 
 ```java
-// Iterate through the map without entrySet()
+// 不使用 entrySet() 遍历 map
 foreach (ValueType value : map) {
-        // Process each value
+        // 处理每个 value
 }
 ```
 {: .copy-code}
 
-Most common operation with the map:
+Map 的常见操作：
 
-**Examples:**
+**示例：**
 
 ```java
-// Change value of the key
+// 修改 key 的 value
 map.temperature = 0;
 
-// Check existance of the key
+// 检查 key 是否存在
 if(map.temperature != null){
 // <you code>
 }
-// Null-Safe expressions using ?
+// 使用 ? 的 Null-Safe 表达式
 if(map.?nonExistingKey.smth > 10){
 // <you code>
 }
@@ -217,7 +215,7 @@ map.humidity = 73;                              // return nothing => map = {"tem
 map.put("humidity", 73);                        // return nothing => map ={"temperature": 0, "nested": "508", "humidity": 73}
 map.putIfAbsent("temperature1", 73);            // return nothing => map = {"temperature": 0, "nested": "508", "humidity": 73, "temperature1": 73}
 
-//change Value   
+// 修改 value   
 map.temperature = 73;                           // return nothing => map = {"temperature": 73, "nested": "508", "humidity": 73, "temperature1": 73}        
 var put1 = map.put("temperature", 73);          // return put1 = 73 => map = {"temperature": 73, "nested": "508", "humidity": 73, "temperature1": 73}
 var putIfAbsent1 = map.putIfAbsent("temperature", 73); // return putIfAbsent1 = 73 => map = {"temperature": 73, "nested": "508", "humidity": 73, "temperature1": 73}       
@@ -264,21 +262,21 @@ return unmodifiable;      // An error occurs with the message: 'Error: unmodifia
 
 ### Lists
 
-TBEL allows you to create Lists. We use our own implementation of the List to control memory usage of the script.
-That is why TBEL allows only inline creation of lists. For example:
+TBEL 允许创建 List。我们使用自有 List 实现以控制脚本内存使用。
+因此 TBEL 仅支持内联创建 list。例如：
 
 ```java
-// Create new list
+// 创建新 list
 var list = ["A", "B", "C"];
-// List elelement access
+// List 元素访问
 list[0];
-// Size of the list
+// list 大小
 list.size();
 // Foreach 
 foreach (item : list) { 
     var smth = item;
 }
-// For loop 
+// for 循环
 for (var i =0; i < list.size; i++) { 
     var smth = list[i];
 }
@@ -573,13 +571,13 @@ var channel_id = input[(i++)];
 ```
 {: .copy-code}
 
-### Literals
+### 字面量
 
-A literal is used to represent a fixed-value in the source of a particular script.
+字面量用于在脚本源码中表示固定值。
 
-**String literals**
+**字符串字面量**
 
-String literals may be denoted by single or double quotes.
+字符串字面量可用单引号或双引号表示。
 
 ```
 "This is a string literal"
@@ -587,7 +585,7 @@ String literals may be denoted by single or double quotes.
 ```
 {: .copy-code}
 
-String escape sequences:
+字符串转义序列：
 
 * \\ - Double escape allows rendering of single backslash in string.
 * \n - Newline
@@ -595,41 +593,41 @@ String escape sequences:
 * \u#### - Unicode character (Example: \uAE00)
 * \### - Octal character (Example: \73)
 
-**Numeric literals**
+**数值字面量**
 
-Integers can be represented in decimal (base 10), octal (base 8), or hexadecimal (base 16).
+整数可用十进制（base 10）、八进制（base 8）或十六进制（base 16）表示。
 
-A decimal integer can be expressed as any number that does not start with zero.
+十进制整数为不以 0 开头的任意数字。
 
 ```java
 125 // decimal
 ```
 {: .copy-code}
 
-An octal representation of an integer is possible by prefixing the number with a zero, followed by digits ranging from 0 to 7.
+八进制整数以 0 开头，后跟 0–7 的数字。
 
 ```java
 0353 // octal
 ```
 {: .copy-code}
 
-Hexidecimal is represented by prefixing the integer with 0x followed by numbers ranging from 0-9..A-F.
+十六进制以 0x 开头，后跟 0-9 或 A-F。
 
 ```java
 0xAFF0 // hex
 ```
 {: .copy-code}
 
-A floating point number consists of a whole number and a factional part denoted by the point/period character, with an optional type suffix.
+浮点数由整数部分和点号表示的小数部分组成，可有可选的类型后缀。
 
 ```java
-10.503 // a double
-94.92d // a double
-14.5f // a float
+10.503 // double
+94.92d // double
+14.5f // float
 ```
 {: .copy-code}
 
-You can represent `*`BigInteger`*` and `*`BigDecimal`*` literals by using the suffixes `B` and `I` (uppercase is mandatory).
+`*`BigInteger`*` 和 `*`BigDecimal`*` 字面量可使用后缀 `B` 和 `I`（必须大写）。
 
 ```
 104.39484B // BigDecimal
@@ -637,13 +635,13 @@ You can represent `*`BigInteger`*` and `*`BigDecimal`*` literals by using the su
 ```
 {: .copy-code}
 
-Boolean literals are represented by the reserved keywords `true` and `false`.
+布尔字面量由保留关键字 `true` 和 `false` 表示。
 
-The null literal is denoted by the reserved keywords `null` or `nil`.
+null 字面量由保留关键字 `null` 或 `nil` 表示。
 
-### Using Java Classes
+### 使用 Java 类
 
-The TBEL implementation allows the usage of **some** Java classes from the `java.util` and `java.lang` packages. For example:
+TBEL 实现允许使用 `java.util` 和 `java.lang` 包中的**部分** Java 类。例如：
 
 ```java
 var foo = Math.sqrt(4);
@@ -724,11 +722,11 @@ For the same purpose:
 - Added [Date](#tbdate)class, which can be used without specifying a package name.
 - In the `tbel` library, the  [map](#maps) and [list](#lists) classes have extended support for their primary methods, similar to Java.
  
-### Flow Control
+### 流程控制
 
 **If-Then-Else**
 
-TBEL supports full, C/Java-style if-then-else blocks. For example:
+TBEL 支持完整的 C/Java 风格 if-then-else 块。例如：
 
 ```java
 if (temperature > 0) {
@@ -741,21 +739,21 @@ if (temperature > 0) {
 ```
 {: .copy-code}
 
-**Ternary statements**
+**三元表达式**
 
-Ternary statements are supported just as in Java:
+与 Java 一样支持三元表达式：
 
 ```java
 temperature > 0 ? "Yes" : "No";
 ```
 {: .copy-code}
 
-Nested ternary statements are also supported.
+支持嵌套三元表达式。
 
 **Foreach**
 
-One of the most powerful features in TBEL is its foreach operator. It is similar to the foreach operator in Java 1.5 in both syntax and functionality. 
-It accepts two parameters separated by a colon. The first is the local variable for the current element, and the second is the collection or array to be iterated.
+TBEL 最强大的特性之一为 foreach 运算符。其语法与 Java 1.5 的 foreach 相似。
+它接受由冒号分隔的两个参数：第一个为当前元素的局部变量，第二个为要迭代的集合或数组。
 
 For example:
 
@@ -768,7 +766,7 @@ foreach (n : numbers) {
 ```
 {: .copy-code}
 
-Since TBEL treats Strings as iterable objects, you can iterate a String (character by character) with a foreach block:
+由于 TBEL 将 String 视为可迭代对象，可使用 foreach 逐字符遍历 String：
 
 ```java
 var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -778,7 +776,7 @@ foreach (c : str) {
 ```
 {: .copy-code}
 
-**For Loop**
+**For 循环**
 
 ```java
 var sum = 0;

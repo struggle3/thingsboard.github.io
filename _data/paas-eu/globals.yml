@@ -6,12 +6,12 @@ tocs:
 - faq
 docs-header:
 - toc: getting-started
-  title: Getting Started
+  title: 入门
 - toc: docs-home
-  title: Documentation
+  title: 文档
 - toc: guides
-  title: Guides
+  title: 指南
 - toc: api
   title: API
 - toc: faq
-  title: FAQ
+  title: 常见问题

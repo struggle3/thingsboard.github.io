@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://en.radionode365.com/kr/product/product_view.php?idx=102&part_idx=1" %}
 {% assign officialManualLink = "/docs/devices-library/resources/manuals/rn172wcd-user-manual-v1.01.pdf" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
@@ -13,33 +13,36 @@
   '
   %}
 
-## Introduction
+## 概述
 
-The [Radionode RN320 series]({{deviceVendorLink}}){: target="_blank"} is a battery-powered LoRaWAN® environmental sensor designed for long-term, low-maintenance deployments. The RN320-BTH model features a high-capacity 17,000 mAh battery, enabling up to 10 years of operation under typical conditions.
+[Radionode RN320 系列]({{deviceVendorLink}}){: target="_blank"} 是一款电池供电的 LoRaWAN® 环境传感器，面向长期、低维护部署。  
+RN320-BTH 配备 17,000 mAh 大容量电池，典型条件下可运行约 10 年。  
 
-The device integrates a high-accuracy temperature and humidity sensor and supports data reliability mechanisms, including retransmission to prevent sample loss. Measurements can also be stored locally on a microSD card for redundancy and offline access.
+设备集成高精度温湿度传感器，支持重传等数据可靠性机制以避免采样丢失。  
+测量数据可本地存储至 microSD 卡，便于冗余与离线访问。  
 
-User interaction is provided via an E-paper display, audible buzzer, and LED status indicator. The device supports simplified onboarding and remote monitoring through QR-code-based registration with the Radionode365 service.
+通过 E-paper 显示屏、蜂鸣器与 LED 状态灯进行人机交互。  
+支持通过 Radionode365 的二维码注册实现简化入网与远程监控。  
 
-## Features of RN-320 BTH device
+## RN-320 BTH 设备特性
 
-- LoRaWAN® long-range wireless communication 
-- High-accuracy temperature and humidity sensor 
-- E-paper display 
-- Loud buzzer (97 dBA)
-- 3-color LED indicator (Best / Moderate / Bad)
-- Long battery life (17,000 mAh, up to 10 years)
-- MicroSD card for local data storage 
-- Magnetic and wall-mount installation options
+- LoRaWAN® 远距离无线通信
+- 高精度温湿度传感器
+- E-paper 显示屏
+- 蜂鸣器（97 dBA）
+- 三色 LED 指示灯（优/中/差）
+- 长续航（17,000 mAh，最长约 10 年）
+- microSD 卡本地数据存储
+- 磁吸与壁挂安装
 
-## Prerequisites
+## 前置条件
 
-Before starting, ensure the following requirements are met:
+开始前请确保满足以下要求：
 
 **Hardware**
 
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 **Device Information**
 - DevEUI (from device label)
@@ -338,8 +341,7 @@ Now the communication will start between the network server and the ThingsBoard 
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=TBLora10 %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 - Navigate to **Devices**.
 - Confirm the **rn320-bth** device is created automatically.
 - Check Latest Telemetry for temperature and humidity values.
@@ -355,11 +357,11 @@ Now the communication will start between the network server and the ThingsBoard 
 ## Dashboard (Optional)
 
 - Navigate to Dashboards → Create new dashboard.
-- Add widgets for:
+- Add 部件 for:
   - Temperature 
   - Humidity 
   - RSSI / SNR
-- Bind widgets to the RN320-BTH device.
+- Bind 部件 to the RN320-BTH device.
 
 A sample of the dashboard created is shown in the pictures below.
 

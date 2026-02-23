@@ -2,54 +2,36 @@
 layout: docwithnav
 assignees:
   - samson0v
-title: How to connect Modbus device to ThingsBoard CE?
-description: Understand how to connect Modbus device to ThingsBoard using the ThingsBoard IoT Gateway
+title: 如何将 Modbus 设备连接至 ThingsBoard CE？
+description: 了解如何使用 ThingsBoard IoT Gateway 将 Modbus 设备连接至 ThingsBoard
 
 ---
 
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-In this guide, we will describe how to connect an Modbus device to ThingsBoard CE using ThingsBoard IoT Gateway.
-Whether you are just starting with Modbus protocol or looking to streamline your existing setup, this guide will
-provide you with the essential knowledge to get up and running quickly.
+本指南将介绍如何使用 ThingsBoard IoT Gateway 将 Modbus 设备连接至 ThingsBoard CE。
+无论您是刚接触 Modbus 协议，还是希望优化现有配置，本指南都将帮助您快速上手。
 
-**What is ThingsBoard IoT Gateway?**
+**什么是 ThingsBoard IoT Gateway？**
 
-The ThingsBoard IoT Gateway is an open-source solution that serves as a bridge between IoT devices connected to
-legacy or third-party systems and the ThingsBoard platform. It enables seamless integration of devices that cannot
-communicate with ThingsBoard directly, ensuring data can be collected, processed, and visualized in real time. With
-the IoT Gateway, you can connect multiple devices, aggregate telemetry, and manage configurations centrally. It
-supports flexible deployment scenarios, making it especially suitable for industrial automation, monitoring, and smart
-energy systems where Modbus is widely used.
+ThingsBoard IoT Gateway 是一款开源方案，在接入既有或第三方系统的物联网设备与 ThingsBoard 平台之间架起桥梁。它让无法直接与 ThingsBoard 通信的设备得以无缝集成，确保数据可实时采集、处理与展示。借助 IoT Gateway，您可以连接多台设备、聚合遥测数据并集中管理配置。它支持灵活的部署场景，尤其适用于 Modbus 广泛使用的工业自动化、监控和智能能源系统。
 
-**What is Modbus?**
+**什么是 Modbus？**
 
-Modbus supports different communication modes, including serial (Modbus RTU and ASCII) and network-based (Modbus
-TCP/IP), making it adaptable to a wide range of industrial environments. Its simplicity and open standard have
-contributed to its widespread adoption, allowing devices from different manufacturers to communicate seamlessly. Despite
-being decades old, Modbus remains relevant today due to its reliability, ease of implementation, and compatibility with
-modern industrial systems. Additionally, it is often used as a backbone protocol for data acquisition, process
-monitoring, and control in applications ranging from manufacturing plants to building automation.
+Modbus 支持多种通信模式，包括串口（Modbus RTU 和 ASCII）与网络（Modbus TCP/IP），可适应多种工业环境。其简洁性与开放标准促成了广泛采用，使不同厂商的设备可以互通。尽管已问世数十年，Modbus 凭借可靠、易实现及与现代工业系统的兼容性，至今仍在使用。此外，它常作为数据采集、过程监控及控制的主干协议，用于从工厂到楼宇自动化等场景。
 
-**What will You Learn?**
+**您将学到什么？**
 
-In this guide, we will walk you through the steps to connect a Modbus device to ThingsBoard CE using the ThingsBoard
-IoT Gateway. You will learn how to configure the gateway, set up the Modbus connector and map data points and send them
-to ThingsBoard. By the end of this guide, you will have a solid understanding of how to leverage the power of
-ThingsBoard IoT Gateway to integrate Modbus devices into your IoT ecosystem. By the end of this guide, you will have a
-working setup that allows you to seamlessly monitor and analyze your Modbus device data in ThingsBoard CE.
+本指南将分步骤说明如何使用 ThingsBoard IoT Gateway 将 Modbus 设备连接至 ThingsBoard CE。您将学会如何配置网关、设置 Modbus 连接器、映射数据点并发送至 ThingsBoard。完成本指南后，您将掌握利用 ThingsBoard IoT Gateway 将 Modbus 设备纳入物联网生态的方法，并建立起可在 ThingsBoard CE 中无缝监控与分析 Modbus 设备数据的运行环境。
 
-## Prerequisites
+## 前提条件
 
-- Before initiating the Gateway setup, ensure that the ThingsBoard server is up and running. You can install ThingsBoard
-  CE manually by following the steps outlined in
-  the [Installation Guide](/docs/user-guide/install/installation-options/).
-- Before moving forward, ensure Docker is installed and properly configured on your machine. If you haven't installed
-  Docker yet, you can download it from the [official Docker website](https://docs.docker.com/engine/install/) and follow
-  their installation guide for your specific operating system.
+- 在配置网关前，请确保 ThingsBoard 服务已运行。您可参考
+  [安装指南](/docs/user-guide/install/installation-options/) 手动安装 ThingsBoard CE。
+- 继续前请确保本机已安装并正确配置 Docker。若尚未安装，可从 [Docker 官网](https://docs.docker.com/engine/install/) 下载并按您所用系统的安装指南完成安装。
 
 ## Modbus Device Structure Overview
 

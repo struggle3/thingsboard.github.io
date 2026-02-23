@@ -1,18 +1,18 @@
-The table below describes the RPC request parameters:
+下表描述了 RPC 请求参数：
 
-| **Parameter** | **Description**                                                       |
+| **参数** | **描述**                                                       |
 |:--------------|:----------------------------------------------------------------------
-| tag           | RPC method name                                                       |
-| type          | Type of value                                                         | 
-| functionCode  | The function to use in data processing, specifically Modbus functions |
-| objectsCount  | Count of objects to write or read                                     | 
-| address       | Object address                                                        |
+| tag           | RPC 方法名称                                                       |
+| type          | 值类型                                                         | 
+| functionCode  | 数据处理中使用的功能，即 Modbus 功能码 |
+| objectsCount  | 写入或读取的对象数量                                     | 
+| address       | 对象地址                                                        |
 | ---           
 
 ![image](/images/gateway/modbus-connector/rpc-requests-advanced-1-ce.png)
 
 <br>
-Example:
+示例：
 
 ```json
 "rpc": [

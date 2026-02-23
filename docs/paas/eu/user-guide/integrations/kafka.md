@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Kafka Integration
-description: Kafka Integration guide
+title: Kafka 集成
+description: Kafka 集成指南
 Kafka main:
     0:
         image: /images/user-guide/integrations/kafka/Kafka_main.png

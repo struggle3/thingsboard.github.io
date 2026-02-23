@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Configuration properties
-description: TBMQ PE configuration properties and environment variables
+title: 配置属性
+description: TBMQ PE 配置属性和环境变量
 
 ---
 

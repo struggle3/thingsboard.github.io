@@ -1,4 +1,4 @@
-To run the integration via Docker, make sure you have [installed Docker Toolbox for Windows](https://docker-docs.uclv.cu/toolbox/toolbox_install_windows/){: target="_blank"}
+要通过 Docker 运行集成，请确保已 [安装 Docker Toolbox for Windows](https://docker-docs.uclv.cu/toolbox/toolbox_install_windows/){: target="_blank"}
 
 {% if page.url contains "remote-integrations" %}
 

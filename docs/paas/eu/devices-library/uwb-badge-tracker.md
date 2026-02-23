@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect UWB Badge Tracker to ThingsBoard?"
+title: "如何将UWB Badge Tracker连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/uwb-badge-tracker/"
 ---

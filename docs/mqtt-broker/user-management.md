@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: User Management
-description: User Management Guide
+title: 用户管理
+description: 用户管理指南
 
 ---
 

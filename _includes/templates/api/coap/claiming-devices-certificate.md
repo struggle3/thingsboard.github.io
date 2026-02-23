@@ -1,4 +1,4 @@
-Send POST request to the following URL:
+向以下 URL 发送 POST 请求：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 
@@ -7,7 +7,7 @@ coap://{{HOST_NAME}}/api/v1/claim
 ```
 {: .copy-code}
 
-> ⚠️ Don&#39;t forget to replace <code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.
+> ⚠️ 请勿忘记将 <code>{{HOST_NAME}}</code> 替换为你的 ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} 主机名或 IP 地址。
 
 {% endif %}
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/"%}

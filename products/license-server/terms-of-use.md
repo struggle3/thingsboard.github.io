@@ -1,65 +1,65 @@
 ---
 layout: plain
-title: ThingsBoard License Portal Terms of Use 
-description: ThingsBoard License Portal (web-portal)
+title: ThingsBoard 许可证门户使用条款
+description: ThingsBoard 许可证门户（Web 门户）
 
 ---
 
-<p style="text-align: center; font-size: 1.5em; font-weight: bold"> Terms of Use </p>
-<p> Last Updated: January 16, 2026 </p>
+<p style="text-align: center; font-size: 1.5em; font-weight: bold"> 使用条款 </p>
+<p> 最后更新：2026 年 1 月 16 日 </p>
 
 <br>
 
-**1. Introduction**
+**1. 引言**
 
-The ThingsBoard Licensing Portal (the "Portal"). By accessing or using this Portal to purchase and manage software licenses, you agree to be bound by these Terms of Use. If you do not agree, please do not use the Portal.
-
-<br>
-
-**2. Account Registration & Data**
-
-*Registration*: To access services, you must create a user account. You agree to provide accurate and complete information.
-
-*Billing Details*: You are responsible for maintaining up-to-date billing information, including Company Name, Address, Tax ID, and Email. You represent that you have the authority to provide this information and bind the associated entity.
-
-*Security*: You are responsible for safeguarding your login credentials. You are liable for all activities that occur under your account.
+ThingsBoard 许可证门户（以下简称「门户」）。通过访问或使用本门户购买和管理软件许可证，即表示您同意受这些使用条款的约束。如不同意，请勿使用本门户。
 
 <br>
 
-**3. License Management**
+**2. 账户注册与数据**
 
-The Portal allows you to self-manage your ThingsBoard licenses. By using these features, you acknowledge:
+*注册*：要访问服务，您必须创建用户账户。您同意提供准确完整的信息。
 
-*Purchases*: All license purchases are subject to the specific commercial terms agreed upon at checkout (e.g., pricing, duration).
+*账单详情*：您负责维护最新的账单信息，包括公司名称、地址、税号和电子邮箱。您声明您有权提供此信息并约束相关实体。
 
-*Key Management*: You are responsible for the actions taken within your account, including buying, unbundling, or deleting license keys.
-
-*Irreversibility*: Please note that deleting a license key or unbundling licenses may be irreversible actions that affect your active software deployments.
+*安全*：您负责保管您的登录凭据。您对在您账户下发生的所有活动承担责任。
 
 <br>
 
-**4. Termination & Account Deletion**
+**3. 许可证管理**
 
-*User Deletion*: You may delete your individual user account or your company account at any time through the Portal interface.
+门户允许您自行管理 ThingsBoard 许可证。使用这些功能即表示您确认：
 
-*Effect of Deletion*: Deleting your account will remove your access to the Portal and may permanently remove associated data and purchase history as well as a whole company account. It does not absolve you of any outstanding financial obligations.
+*购买*：所有许可证购买均受结账时约定的具体商业条款（如定价、期限）约束。
 
-*Our Rights*: We reserve the right to suspend or terminate your access to the Portal if you violate these Terms or engage in fraudulent activity.
+*密钥管理*：您对账户内执行的操作负责，包括购买、拆分或删除许可证密钥。
 
-<br>
-
-**5. Disclaimer & Liability**
-
-The Portal is provided on an "as-is" basis. We make no warranties regarding the uninterrupted availability of the Portal. To the maximum extent permitted by law, we shall not be liable for any indirect damages or loss of data resulting from your use of the Portal or the mismanagement of your license keys.
+*不可逆性*：请注意，删除许可证密钥或拆分许可证可能是不可逆操作，会影响您活跃的软件部署。
 
 <br>
 
-**6. Changes to Terms** 
+**4. 终止与账户删除**
 
-We reserve the right to modify these Terms at any time. Continued use of the Portal following any changes signifies your acceptance of the modified Terms.
+*用户删除*：您可随时通过门户界面删除您的个人用户账户或公司账户。
+
+*删除效果*：删除账户将移除您对门户的访问权限，并可能永久删除相关数据和购买历史以及整个公司账户。这并不免除您任何未偿还的财务义务。
+
+*我方权利*：如您违反这些条款或从事欺诈活动，我们保留暂停或终止您对门户访问的权利。
 
 <br>
 
-**7. Contact**
+**5. 免责声明与责任**
 
-For questions regarding these Terms or assistance with your account, please contact us at support@thingsboard.io. For billing-related questions, please use sales@thingsboard.io
+门户按「原样」提供。我们对门户的不间断可用性不作任何保证。在法律允许的最大范围内，我们不对因您使用门户或管理许可证密钥不当而造成的任何间接损害或数据丢失承担责任。
+
+<br>
+
+**6. 条款变更** 
+
+我们保留随时修改这些条款的权利。条款修改后若继续使用门户，即表示您接受修改后的条款。
+
+<br>
+
+**7. 联系**
+
+有关这些条款的问题或账户协助，请联系 support@thingsboard.io。有关账单问题，请使用 sales@thingsboard.io。

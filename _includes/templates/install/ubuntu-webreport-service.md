@@ -1,12 +1,11 @@
-
-Download installation package for the [Reports Server](/docs/pe/user-guide/reporting/#reports-server) component:
+下载 [Reports Server](/docs/pe/user-guide/reporting/#reports-server) 组件的安装包：
 
 ```bash
 wget https://dist.thingsboard.io/tb-web-report-{{ site.release.pe_ver }}.deb
 ```
 {: .copy-code}
 
-Install third-party libraries:
+安装第三方库：
 
 ```bash
 sudo apt install -yq  libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
@@ -17,14 +16,14 @@ sudo apt install -yq  libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
 ```
 {: .copy-code}
 
-Install Roboto fonts:
+安装 Roboto 字体：
 
 ```bash
 sudo apt install fonts-roboto
 ```
 {: .copy-code}
 
-Install Noto fonts (Japanese, Chinese, etc.):
+安装 Noto 字体（日语、中文等）：
 
 ```bash
 mkdir ~/noto
@@ -40,7 +39,7 @@ rm -rf ~/noto
 ```
 
 
-Install and start Web Report service:
+安装并启动 Web Report 服务：
 
 ```bash
 sudo dpkg -i tb-web-report-{{ site.release.pe_ver }}.deb

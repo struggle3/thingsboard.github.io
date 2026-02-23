@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Installing ThingsBoard PE in a cluster mode using microservices architecture
-description: Installing ThingsBoard PE in a cluster mode using microservices architecture
+title: 使用微服务架构以集群模式安装 ThingsBoard PE
+description: 使用微服务架构以集群模式安装 ThingsBoard PE
 
 ---
 

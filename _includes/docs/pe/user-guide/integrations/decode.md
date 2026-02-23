@@ -1,8 +1,9 @@
 * TOC
 {:toc}
 
-## Introduction
-This tutorial will show how to set up and integrate diverse signals from District Heating Substation (DHS) facility into ThingsBoard IoT platform using Decode DL28 Communications processor. Signals from digital and analog I/O, Modbus RTU devices and M-Bus heat meters are combined in a single ThingsBoard dashboard. Due to simplicity only a few signals and devices are connected but in real world  installation up to several hundred devices and several thousand signals may be used.
+## 简介
+
+本教程演示如何使用Decode DL28通信处理器，将区域供热站(DHS)设施中的多种信号集成到ThingsBoard IoT平台。来自数字和模拟I/O、Modbus RTU设备及M-Bus热量表的信号汇集于单个ThingsBoard仪表板。为简化演示仅连接少量信号与设备，实际部署中可使用数百台设备和数千个信号。
 
 
 
@@ -10,8 +11,9 @@ This tutorial will show how to set up and integrate diverse signals from Distric
 
 
 
-## System diagram
-System diagram shows some typical automation and metering elements in DHS: substation controllers or pump controllers connected to RS485 communication line, heat meters on M-Bus line and some I/O expansion to control valves and monitor level switches for example.
+## 系统框图
+
+系统框图展示DHS中典型的自动化与计量元件：通过RS485通信线连接的变电站控制器或泵控制器、M-Bus线上的热量表，以及用于控制阀门和监控液位开关等的I/O扩展。
 
 
 
@@ -19,22 +21,23 @@ System diagram shows some typical automation and metering elements in DHS: subst
 
 
 
-Decode [DL28](https://decode.rs/product/dl28/) device plays role of communication and signal concentrator and provides bridge function between all control, monitoring and measuring equipment installed in DHS and ThingsBoard servers on internet. Three signal are used in this example: two relay outputs and one of temperatures from heat meter.
+Decode [DL28](https://decode.rs/product/dl28/)设备充当通信与信号集中器，在DHS中安装的所有控制、监测和计量设备与互联网上的ThingsBoard服务器之间起桥接作用。本例使用三个信号：两个继电器输出和热量表的一个温度值。
 
-## Prerequisites 
-- Account on [ThingsBoard Cloud](https://thingsboard.cloud/signup/)
-- Computer with Ethernet connection and web browser
-- Decode DL28 communication controller
-- Decode EXIO I/O expansion device
-- Modbus RTU slave with at least one relay output
-- Heat meter with M-Bus
-- Connection to Internet
+## 前置条件
+- [ThingsBoard Cloud](https://thingsboard.cloud/signup/)账户
+- 具备以太网连接和浏览器的计算机
+- Decode DL28通信控制器
+- Decode EXIO I/O扩展设备
+- 至少有一个继电器输出的Modbus RTU从站
+- 带M-Bus的热量表
+- 互联网连接
 
-## Setup of ThingsBoard
-### Step 1. Log in
-Go to ThingsBoard Cloud web page and log in with credentials obtained when account is created.
-### Step 2. Add DL28 device
-After the successful login procedure, click on the Devices entry in the left side menu and then on "+" icon. Select Add New Device option, enter Name, Device type and Label fields and click on Add button.
+## ThingsBoard配置
+### 步骤1. 登录
+访问ThingsBoard Cloud网页，使用创建账户时获得的凭据登录。
+
+### 步骤2. 添加DL28设备
+登录成功后，点击左侧菜单的Devices，再点击「+」图标。选择Add New Device，输入Name、Device type和Label，点击Add按钮。
 
 
 
@@ -42,7 +45,7 @@ After the successful login procedure, click on the Devices entry in the left sid
 
 
 
-DL28 device appears on a Device window. Click on DL28 to open Device details window.
+DL28设备出现在Device窗口。点击DL28打开Device details窗口。
 
 
 
@@ -50,10 +53,10 @@ DL28 device appears on a Device window. Click on DL28 to open Device details win
 
 
 
-Client ID and Access token, used later in DL28 MQTT settings menu, may be copied using COPY DEVICE ID and COPY ACCESS TOKEN buttons.
+稍后在DL28 MQTT设置中使用的Client ID和Access token，可通过COPY DEVICE ID和COPY ACCESS TOKEN按钮复制。
 
-### Step 3. Add Dashboard
-Click on the Dashboards entry in the left side menu and then on "+" icon. Select Create new dashboard option, enter Name and Description fields and click on Add button. 
+### 步骤3. 添加仪表板
+点击左侧菜单的Dashboards，再点击「+」图标。选择Create new dashboard，输入Name和Description，点击Add按钮。
 
 
 
@@ -61,10 +64,10 @@ Click on the Dashboards entry in the left side menu and then on "+" icon. Select
 
 
 
-DL28 dashboard appears in a Dashboard window. 
+DL28仪表板出现在Dashboard窗口。
 
-### Step 4. Add Widgets
-Click on DL28, then on OPEN DASHBOARD button to open Dashboard. Click on the pencil icon to enter Edit mode and on ADD NEW WIDGET. From drop down list select Control widgets and then Switch control. Switch control widgets will be used to control relays on EXIO and Modbus RTU device.
+### 步骤4. 添加部件
+点击DL28，再点击OPEN DASHBOARD打开仪表板。点击铅笔图标进入Edit mode，再点击ADD NEW WIDGET。从下拉列表选择Control widgets，然后选择Switch control。Switch control部件将用于控制EXIO和Modbus RTU设备上的继电器。
 
 
 
@@ -72,7 +75,7 @@ Click on DL28, then on OPEN DASHBOARD button to open Dashboard. Click on the pen
 
 
 
-In Add Widget window click on the Entity alias field and press ENTER. Add DL28 device in a Entity alias list. Do this only once for all widgets.
+在Add Widget窗口中点击Entity alias字段并按ENTER。在Entity alias列表中添加DL28设备。所有部件只需添加一次。
 
 
 
@@ -80,7 +83,7 @@ In Add Widget window click on the Entity alias field and press ENTER. Add DL28 d
 
 
 
-Click on a Advanced tab and enter following parameters.
+点击Advanced标签并输入以下参数。
 
 
 
@@ -88,7 +91,7 @@ Click on a Advanced tab and enter following parameters.
 
 
 
-In Convert value function  enter following code for changing switch state. Data is published to topic **v1/devices/me/request+**.
+在Convert value function中输入以下用于切换开关状态的代码。数据发布到topic **v1/devices/me/request+**。
 
 ```bash
 if(value) return { "exio_relay_1": 1 };
@@ -101,9 +104,9 @@ else return { "exio_relay_1": 0 };
 
 
 
-Click ADD button to add widget to dashboard. Using similar procedure, add another switch widget with Switch title **GT900 RL1**, Attribute/Timeseries value key **gt900_relay_1** and in Convert value function **{ "gt900_relay_1": 1 }** for switch in ON state and **{ "gt900_relay_1": 0 }:** for switch in OFF state.
+点击ADD按钮将部件添加到仪表板。按同样步骤添加另一个开关部件：Switch标题为**GT900 RL1**，Attribute/Timeseries value key为**gt900_relay_1**，Convert value function在ON状态为**{ "gt900_relay_1": 1 }**，OFF状态为**{ "gt900_relay_1": 0 }**。
 
-Using similar procedure add two Led indicator widgets to display relay states, using LED titles **EXIO LED RL1** and **GT900 LED RL1**, and Attribute/Timeseries value keys **exio_relay_1** and **gt900_relay_1**.
+按同样步骤添加两个LED指示部件以显示继电器状态，LED标题为**EXIO LED RL1**和**GT900 LED RL1**，Attribute/Timeseries value key为**exio_relay_1**和**gt900_relay_1**。
 
 
 
@@ -111,7 +114,7 @@ Using similar procedure add two Led indicator widgets to display relay states, u
 
 
 
-Using similar procedure add Digital gauge widget to display return temperature from M-Bus heat  meter adding new Datasource. In a field Entity timeseries/attributes enter **cal_return_temp** and click on symbol for timeseries. Click on Add button to add gauge to dashboard.
+按同样步骤添加Digital gauge部件以显示M-Bus热量表回水温度，添加新Datasource。在Entity timeseries/attributes字段输入**cal_return_temp**，点击timeseries符号。点击Add按钮将仪表添加到仪表板。
 
 
 
@@ -119,18 +122,21 @@ Using similar procedure add Digital gauge widget to display return temperature f
 
 
 
-Click on apply changes icon to save changes and to exit edit mode.
+点击apply changes图标保存更改并退出edit mode。
 
-## Setup of DL28 device
-### Step 1. Connection
-Connect computer and the DL28 device to the same computer network with internet connection. Network addresses must be the same. Connect EXIO I/O expansion device to I2C port, modbus RTU slave to RS485 port S6 and heat meter to M-Bus master port S4 of DL28 using block diagram. Connect a power supply following safety procedures from user manual, and power up all connected devices.
-### Step 2 . Sign in
-Enter the IP address of DL28 device into web browser address bar and hit the ENTER. In popup window enter username and password. Default IP address, username and password are: **192.168.0.67**, **admin**, **admin** respectively.  After successful sign in the DL28 web page is loaded. Update current time on device if it is not valid. Change Default Gateway address in LAN settings if it is necessary.
-### Step 3. Setup EXIO
-In EXIO device menu click on Rescan button. EXIO device is detected and placed in device list. In this example EXIO type 3 is used (7xAI, 2xDO, 2xAO). Click Save button.
-### Step 4. Setup Modbus RTU
-In Modbus settings menu, check Modbus Master option and select value for poll interval and response timeout, for example 5 minutes and 10 seconds respectively. Click Save button.
-In Modbus Poll list menu add two parameters. For relay on/off control use ForceSingleCoil and for readout of the relay state use ReadCoilStatus. Automatically assigned register addresses are 52000 and 52001.
+## DL28设备配置
+### 步骤1. 连接
+将计算机和DL28设备连接到同一具备互联网接入的计算机网络，网络地址需一致。按框图将EXIO I/O扩展设备连接到I2C端口，将Modbus RTU从站连接到RS485端口S6，将热量表连接到M-Bus主站端口S4。按用户手册安全规范连接电源并为所有设备通电。
+
+### 步骤2. 登录
+在浏览器地址栏输入DL28设备的IP地址并按ENTER。在弹出窗口输入用户名和密码。默认IP、用户名和密码分别为：**192.168.0.67**、**admin**、**admin**。登录成功后加载DL28网页。若设备时间无效请更新。必要时在LAN设置中修改Default Gateway地址。
+
+### 步骤3. 配置EXIO
+在EXIO设备菜单点击Rescan按钮。检测到EXIO设备并加入设备列表。本例使用EXIO type 3（7xAI、2xDO、2xAO）。点击Save按钮。
+
+### 步骤4. 配置Modbus RTU
+在Modbus settings菜单，勾选Modbus Master并设置poll interval和response timeout（例如分别为5分钟和10秒）。点击Save按钮。
+在Modbus Poll list菜单添加两个参数。继电器开关控制使用ForceSingleCoil，读取继电器状态使用ReadCoilStatus。自动分配的寄存器地址为52000和52001。
 
 
 
@@ -138,10 +144,10 @@ In Modbus Poll list menu add two parameters. For relay on/off control use ForceS
 
 
 
-### Step 5. Setup M-Bus
-In Modbus Settings menu select M-Bus master mode, scan address range and polling interval. In this example address range is 1 to 3 and polling interval is 3 minutes. Click on a Save button.
-In Modbus Slave List menu click on Rescan button to start detection of connected M-Bus device. When device is added to list, click Save button to save it, and click Reload button to load new device data.
-Select a show/hide option to show detailed device data. Data values from M-Bus are stored in Modbus map using 4-byte float format. Find data fields of interest. In this example, Return Temperature is selected, stored in Input Register with offset 1222.
+### 步骤5. 配置M-Bus
+在Modbus Settings菜单选择M-Bus master模式、扫描地址范围和轮询间隔。本例地址范围为1到3，轮询间隔为3分钟。点击Save按钮。
+在Modbus Slave List菜单点击Rescan按钮开始检测连接的M-Bus设备。设备加入列表后，点击Save保存，点击Reload加载新设备数据。
+选择show/hide选项以显示设备详细数据。M-Bus数据值以4字节浮点格式存储在Modbus map中。查找感兴趣的数据字段。本例选择回水温度(Return Temperature)，存储在偏移量为1222的Input Register中。
 
 
 
@@ -149,9 +155,9 @@ Select a show/hide option to show detailed device data. Data values from M-Bus a
 
 
 
-### Step 6. Setup MQTT
-In MQTT Settings menu tick check boxes: Enable, Clean Session and JSON format. Enter Thingsboard broker data: Broker: **mqtt.thingsboard.cloud**, Port: **1883**, Reconnect Period: **10**, Keep Alive Interval: **60**, Client ID: Enter **Device ID** obtained from ThingsBoard demo account, Username: Enter **Access Token** obtained from ThingsBoard demo account, Password: Leave empty. Click on a Save button.
-In MQTT Publish List menu add three parameters, two for publishing relay states,  and one for publishing return temperature from heat meter. Click on a Save button.
+### 步骤6. 配置MQTT
+在MQTT Settings菜单勾选：Enable、Clean Session和JSON format。输入ThingsBoard broker数据：Broker：**mqtt.thingsboard.cloud**，Port：**1883**，Reconnect Period：**10**，Keep Alive Interval：**60**，Client ID：输入从ThingsBoard demo账户获得的**Device ID**，Username：输入从ThingsBoard demo账户获得的**Access Token**，Password：留空。点击Save按钮。
+在MQTT Publish List菜单添加三个参数，其中两个用于发布继电器状态，一个用于发布热量表回水温度。点击Save按钮。
 
 
 
@@ -159,8 +165,8 @@ In MQTT Publish List menu add three parameters, two for publishing relay states,
 
 
 
-Enter MQTT Subscribe List menu. Subscribe to topic **v1/devices/me/rpc/request/+** for two parameters with keywords  **exio_relay_1** and **gt900_relay_1** and reference them to DL28 internal Modbus Holding register 508 and Input register 52000 respectively.
-Click on a Save button to save changes and restart application by clicking on Restart button application in a Restart menu.
+进入MQTT Subscribe List菜单。为**exio_relay_1**和**gt900_relay_1**两个参数订阅topic **v1/devices/me/rpc/request/+**，分别引用DL28内部Modbus Holding register 508和Input register 52000。
+点击Save按钮保存更改，在Restart菜单点击Restart button application重启应用。
 
 
 
@@ -168,8 +174,8 @@ Click on a Save button to save changes and restart application by clicking on Re
 
 
 
-## Testing
-Open the DL28 dashboard. Relays are controlled by clicking on switches EXIO RL1 and GT900 RL1. Indicators show real state of output relays and some delay may be noticed on slow networks. Widget CAL_RETURN_TEMP  displays return temperature from heat meter.
+## 测试
+打开DL28仪表板。通过点击EXIO RL1和GT900 RL1开关控制继电器。指示器显示输出继电器的实际状态，慢速网络可能有延迟。部件CAL_RETURN_TEMP显示热量表的回水温度。
 
 
 
@@ -177,26 +183,27 @@ Open the DL28 dashboard. Relays are controlled by clicking on switches EXIO RL1 
 
 
 
-## Conclusion
-It is shown that the ThingsBoard is ideal platform for remote monitoring and control of district heating substation facilities. The solution is very scalable in terms of increasing the number of devices, dashboards and widgets and may cover even large distribution networks for whole cities. It is also demonstrated that mixing of remote monitoring and control with meter reading is possible in a ThingsBoard system.
+## 结论
+ThingsBoard是区域供热站设施远程监测与控制的理想平台。该方案在设备、仪表板和部件数量方面具有良好可扩展性，可覆盖整个城市的大型分布式网络。同时也展示了ThingsBoard系统中远程监测控制与抄表相结合的可能性。
 
-More details about the used products are available on their pages and manuals that could be downloaded from download page.
+更多关于所用产品的详细信息可从其页面和下载页面的手册获取。
 
-Please feel free to get in touch with Decode Team if you have any additional questions.
-## See also
+如有其他问题请随时联系Decode团队。
 
-Browse other [samples](/device-library/) or explore guides related to main ThingsBoard features:
+## 另见
 
- - [Device attributes](/docs/{{docsPrefix}}user-guide/attributes/) - how to use device attributes.
- - [Telemetry data collection](/docs/{{docsPrefix}}user-guide/telemetry/) - how to collect telemetry data.
- - [Using RPC capabilities](/docs/{{docsPrefix}}user-guide/rpc/) - how to send commands to/from devices.
- - [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine/) - how to use rule engine to analyze data from devices.
- - [Data Visualization](/docs/{{docsPrefix}}user-guide/visualization/) - how to visualize collected data.
+浏览其他[示例](/device-library/)或查阅与ThingsBoard主要功能相关的指南：
+
+ - [设备属性](/docs/{{docsPrefix}}user-guide/attributes/) — 如何使用设备属性。
+ - [遥测数据采集](/docs/{{docsPrefix}}user-guide/telemetry/) — 如何采集遥测数据。
+ - [使用RPC能力](/docs/{{docsPrefix}}user-guide/rpc/) — 如何向/从设备发送命令。
+ - [规则引擎](/docs/{{docsPrefix}}user-guide/rule-engine/) — 如何使用规则引擎分析设备数据。
+ - [数据可视化](/docs/{{docsPrefix}}user-guide/visualization/) — 如何可视化采集的数据。
 
 {% include templates/feedback.md %}
 
 {% include socials.html %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "HardwareSamples" %}{% include templates/multi-project-guides-banner.md %}

@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Getting Started with ThingsBoard Cloud
-description: Getting started with ThingsBoard open-source IoT platform and simulated IoT devices
+title: ThingsBoard Cloud 快速入门
+description: 使用 ThingsBoard 开源 IoT 平台和模拟 IoT 设备快速入门
 
 step1:
     0:

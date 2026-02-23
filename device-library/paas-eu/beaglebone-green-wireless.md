@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect BeagleBone Green Wireless to ThingsBoard?
-category: Single-board computers
+title: 如何将 BeagleBone Green Wireless 连接至 ThingsBoard？
+category: 单板计算机
 chip: TI Sitara AM3358BZCZA100
 connectivity: [WIFI, Bluetooth]
 vendor: BeagleBoard

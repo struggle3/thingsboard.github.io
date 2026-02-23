@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Integration Syrus 4 IoT Telematics Gateway - Thingsboard
-description: Syrus 4 IoT Telematics Gateway integration guide
+title: Syrus 4 物联网车联网网关与 ThingsBoard 集成
+description: Syrus 4 物联网车联网网关集成指南
 hidetoc: "true"
 
 ---
@@ -11,9 +11,9 @@ hidetoc: "true"
 * TOC
 {:toc}
 
-## Description
+## 描述
 
-Here&#39;s a detailed integration example between Syrus 4G IoT Telematics Gateway with Thingsboard Platform over MQTT connection.
+本文详细介绍 Syrus 4G 物联网车联网网关通过 MQTT 连接与 ThingsBoard 平台集成的示例。
 
 ## Getting Started
 

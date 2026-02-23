@@ -1,30 +1,30 @@
 0:
   width: 900px
   src: "/images/company-images/company-photos-carousel/company-photo-carousel-1.webp"
-  alt: "A man smiles while working on a laptop in an office setting. Three other men sit in the background."
+  alt: "办公室内一名男子对着笔记本电脑微笑工作，背景中有三名男子。"
 1:
   width: 451px
   multipleImage:
     0:
       src: "/images/company-images/company-photos-carousel/company-photo-carousel-2.webp"
-      alt: "Three people working at a computer, with a whiteboard in the background and plants in the foreground."
+      alt: "三人围在电脑前工作，背景是白板，前景有绿植。"
     1:
       src: "/images/company-images/company-photos-carousel/company-photo-carousel-3.webp"
-      alt: "A person in a white hoodie sits at a desk with a computer, wearing earbuds and holding a travel mug. In the background, another person is focused on a laptop with colorful stickers. Headphones are on the desk."
+      alt: "穿白色连帽衫的人坐在电脑桌前，戴耳机、手持随行杯；背景中另一人专注使用贴满贴纸的笔记本电脑，桌上有耳机。"
 2:
   width: 900px
   src: "/images/company-images/company-photos-carousel/company-photo-carousel-4.webp"
-  alt: "Two men sit attentively in an informal setting, while a person in the foreground uses a laptop. A large plant and bookshelves are in the background, creating a relaxed office atmosphere."
+  alt: "非正式环境中两名男子专注聆听，前景一人使用笔记本电脑，背景有大株绿植与书架，营造轻松办公氛围。"
 3:
   width: 451px
   multipleImage:
     0:
       src: "/images/company-images/company-photos-carousel/company-photo-carousel-5.webp"
-      alt: "Two people are sitting on blue bean bag chairs in a modern office space. The man is wearing glasses, a white shirt, and a vest. The woman is in formal attire. Shelves and plants are in the background, with another person working at a computer."
+      alt: "现代办公空间中两人坐在蓝色豆袋椅上，男士戴眼镜、穿白衬衫和背心，女士着正装，背景有书架、绿植及另一人在用电脑。"
     1:
       src: "/images/company-images/company-photos-carousel/company-photo-carousel-6.webp"
-      alt: "A person wearing glasses and a red checkered shirt sits at a desk with a computer monitor and a laptop. He is smiling and there is a window in the background."
+      alt: "戴眼镜、穿红色格纹衬衫的人坐在配有显示器和笔记本电脑的桌前微笑，背景有窗户。"
 4:
   width: 900px
   src: "/images/company-images/company-photos-carousel/company-photo-carousel-7.webp"
-  alt: "A group of six people gathered around a desk with computers and a laptop, collaborating on a project. The room has a vibrant red brick wall with brainstorming notes on a whiteboard. Everyone is focused and engaged in discussion."
+  alt: "六人围在放有电脑和笔记本电脑的桌旁协作项目，房间有红砖墙和白板上的头脑风暴笔记，众人专注讨论。"

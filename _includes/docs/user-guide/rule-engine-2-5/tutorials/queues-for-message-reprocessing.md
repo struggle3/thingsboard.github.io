@@ -1,46 +1,43 @@
 * TOC
 {:toc}
 
-## Use case
+## 应用场景
 
-Let's assume your device is sending temperature and humidity data to ThingsBoard. We will simulate the message sending to some external server using 
-Rest API call node.
+假设您的设备正在向ThingsBoard发送温度和湿度数据。我们将使用Rest API调用节点模拟将消息发送到外部服务器。
 
-In this tutorial, we will configure ThingsBoard Rule Engine to use queue with retry failed and timeout messages processing strategy.
-Although this scenario is fictional, you will learn how to work with the queue to allow reprocessing messages in case of failure or timeout processing errors
-and use this knowledge in real-life applications.
+在本教程中，我们将配置ThingsBoard规则引擎，使用具有「重试失败和超时消息」处理策略的队列。
+尽管该场景为虚构示例，您将学习如何使用队列在发生处理失败或超时时允许消息重处理，并在实际应用中运用该知识。
 
-## Prerequisites 
+## 前置条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+我们假定您已完成以下指南并阅读了所列文章：
 
-  * [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/).
+  * [快速入门](/docs/{{docsPrefix}}getting-started-guides/helloworld/) 指南。
+  * [规则引擎概述](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/)。
   
-In addition, you need to have at least one device provisioned in your environment.
+此外，您需要在环境中至少预置一个设备。
 
-## Step 1: Creating the Rule Chain
+## 步骤 1：创建规则链
 
 ![image](/images/user-guide/rule-engine-2-5/tutorials/reprocessing_rule_chain.png)
 
-We will add a **"Generator"** node to simulate 6 messages with a 1-second delay.
+我们将添加一个 **「生成器」** 节点，以 1 秒延迟模拟 6 条消息。
 
 ![image](/images/user-guide/rule-engine-2-5/tutorials/generator_reprocessing.png)
 
-All messages will be put into the queue with the name **"HighPriority"**. It uses the message process strategy called **"RETRY_FAILED_AND_TIMED_OUT"** 
-{% unless docsPrefix contains "paas/" %}(please, refer to [**configuration guide**](/docs/user-guide/install/{{docsPrefix}}config/) for more details){% endunless %} which means that
-the failed or timed out messages will be processed again.
+所有消息将被放入名为 **「HighPriority」** 的队列。该队列使用名为 **「RETRY_FAILED_AND_TIMED_OUT」** 的消息处理策略
+{% unless docsPrefix contains "paas/" %}（详见[**配置指南**](/docs/user-guide/install/{{docsPrefix}}config/)）{% endunless %}，即失败或超时的消息将被重新处理。
 
 ![image](/images/user-guide/rule-engine-2-5/tutorials/checkpoint_reprocessing.png)
 
-Finally, the messages will be sent to the external server.
+最后，消息将被发送到外部服务器。
 
 ![image](/images/user-guide/rule-engine-2-5/tutorials/rest_api.png)
 
-## Step 2: External server configuration
+## 步骤 2：配置外部服务器
 
-Let's assume we have a server ready to receive the messages. We have created a simple Controller in the Spring Boot Application for that.
-In addition, we have simulated every third message to be failed.
+假设我们有一台用于接收消息的服务器。我们已在Spring Boot应用中创建了一个简单的Controller。
+此外，我们模拟了每第三条消息处理失败。
 
 ```java
 @RestController
@@ -71,36 +68,30 @@ public class Controller {
 }
 ```
 
-## Step 3: Validation the Rule Chain logic
+## 步骤 3：验证规则链逻辑
 
-Let's check that our logic is correct by saving the Rule Chain and launching the external server. The generator will start to produce messages:
+保存规则链并启动外部服务器以验证我们的逻辑是否正确。生成器将开始产生消息：
 
-**"Checkpoint"** node received six messages:
+**「Checkpoint」** 节点接收了六条消息：
 
 ![image](/images/user-guide/rule-engine-2-5/tutorials/checkpoint_reprocessing_events.png)
 
-We can see that the next rest api call node, **"Send Request"**, processed eight messages.
+我们可以看到，下一个Rest API调用节点 **「Send Request」** 处理了八条消息。
 
 ![image](/images/user-guide/rule-engine-2-5/tutorials/rest_api_events.png)
 
-Every third message (two out of initial six) is failed.
+每第三条消息（初始六条中的两条）处理失败。
 
 ![image](/images/user-guide/rule-engine-2-5/tutorials/error_event.png)
 
-The last two messages are the ones that were needed to be reprocessed (the failed messages).
-That means that our logic works correctly.
+最后两条消息是经过重处理的消息（之前失败的消息）。
+这说明我们的逻辑正确无误。
 
-## TL;DR
+## 快速总结
 
-Download and import attached json [**file**](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/tutorials/resources/send_request_rule_chain.json) with a rule chain from this tutorial.
-Don't forget to populate the Generator nodes with your specific device.
- 
-## Next steps
+下载并导入本教程附带的规则链 JSON [**文件**](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/tutorials/resources/send_request_rule_chain.json)。
+别忘了在生成器节点中填写您的具体设备。
+
+## 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/multi-project-guides-banner.md %}
-
-
-
-
-
-

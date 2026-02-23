@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Markdown/HTML Card
-description: Markdown/HTML Card overview
+title: Markdown/HTML 卡片
+description: Markdown/HTML 卡片概述
 
 example-markdown-html-card-1:
     0:

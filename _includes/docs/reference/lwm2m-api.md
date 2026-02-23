@@ -1,49 +1,49 @@
 * TOC
 {:toc}
 
-> Before proceeding, we recommend reviewing the general [Getting Started guide](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"} to become familiar with ThingsBoard basics. Additionally, it is advisable to explore the [Device profiles](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"} documentation.
+> 建议先阅读通用 [快速入门指南](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"} 熟悉 ThingsBoard 基础，并查阅 [设备配置](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"} 文档。
 
-## LwM2M basics
+## LwM2M 基础
 
-[LwM2M (Lightweight M2M)](https://en.wikipedia.org/wiki/OMA_LWM2M){:target="_blank"} is a device management protocol designed for constrained devices and the demands of a machine-to-machine (M2M) environments.
-You can find more information about LwM2M [here](https://www.openmobilealliance.org/specifications/lwm2m/introduction){:target="_blank"}.
+[LwM2M (Lightweight M2M)](https://en.wikipedia.org/wiki/OMA_LWM2M){:target="_blank"} 是一种面向受限设备及机器对机器（M2M）环境的设备管理协议。
+更多信息请参见[此处](https://www.openmobilealliance.org/specifications/lwm2m/introduction){:target="_blank"}。
 
-One of the key advantages of LwM2M is its rich library of data structures, known as the [LwM2M Object and Resource Registry](https://www.openmobilealliance.org/specifications){:target="_blank"}.
-The most up-to-date list of available objects can be found in [this GitHub repository](https://github.com/OpenMobileAlliance/lwm2m-registry){:target="_blank"}.
+LwM2M 的一大优势是丰富的数据结构库，即 [LwM2M 对象与资源注册表](https://www.openmobilealliance.org/specifications){:target="_blank"}。
+最新可用对象列表见 [GitHub 仓库](https://github.com/OpenMobileAlliance/lwm2m-registry){:target="_blank"}。
 
-The registry enables efficient serialization/deserialization of telemetry data. The LwM2M protocol defines the processes for:
-- Device registration
-- Configuration and management
-- Firmware/software updates
+该注册表支持遥测数据的高效序列化/反序列化。LwM2M 协议定义了以下流程：
+- 设备注册
+- 配置与管理
+- 固件/软件更新
 
-**LwM2M object structure**
+**LwM2M 对象结构**
 
-###  DTLS Connection ID (CID) — used only when security mode is enabled
+### DTLS Connection ID (CID) — 仅在启用安全模式时使用
 
-- The default server-side CID length is now 8 bytes
+- 默认服务端 CID 长度现为 8 字节
 
-(parameter COAP_DTLS_CONNECTION_ID_LENGTH in tb-lwm2m-transport.yml).
+（tb-lwm2m-transport.yml 中的参数 COAP_DTLS_CONNECTION_ID_LENGTH）。
 
-- Setting the server CID length to 8 bytes automatically enables the MultiNodeConnectionIdGenerator, which assigns a unique CID to each client session.
-This improves DTLS connection resilience and allows stable operation in multi-node deployments.
+- 将服务端 CID 长度设为 8 字节会自动启用 MultiNodeConnectionIdGenerator，为每个客户端会话分配唯一 CID。
+可提升 DTLS 连接健壮性，并在多节点部署中保持稳定运行。
 
-- With LWM2M_DTLS_CONNECTION_ID_LENGTH = 8, the following behavior is enabled:
+- 当 LWM2M_DTLS_CONNECTION_ID_LENGTH = 8 时，将启用以下行为：
 
-    - MultiNode Connection ID generator with NodeID = 0x00 (applicable for a single-server deployment).
+    - NodeID = 0x00 的 MultiNode Connection ID 生成器（适用于单服务器部署）。
 
-    - Ensures DTLS session continuity across reconnects, especially in NATed or unstable network environments.
+    - 确保 DTLS 会话在重连后保持连续性，尤其在 NAT 或不稳定网络环境中。
 
-- Table: CID length alignment between LWM2M client and server
+- 表：LWM2M 客户端与服务端 CID 长度对齐
 
 <table>
     <thead>
         <tr>
             <td style="width: 5%"><b>№</b></td>
-            <td style="width: 15%"><b>CID Client</b></td>
-            <td style="width: 15%"><b>CID Server</b></td>
-            <td style="width: 30%"><b>Connection Mode</b></td>
+            <td style="width: 15%"><b>CID 客户端</b></td>
+            <td style="width: 15%"><b>CID 服务端</b></td>
+            <td style="width: 30%"><b>连接模式</b></td>
             <td style="width: 10%"><b>NodeID</b></td>
-            <td style="width: 25%"><b>Description</b></td>
+            <td style="width: 25%"><b>说明</b></td>
         </tr>
     </thead>
     <tbody>
@@ -53,7 +53,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>null</td>
             <td><b>DTLS 1.2 (no CID)</b></td>
             <td>–</td>
-            <td>Both sides do not support CID</td>
+            <td>双方均不支持 CID</td>
         </tr>
         <tr>
             <td>2</td>
@@ -61,7 +61,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>null</td>
             <td><b>DTLS 1.2 (no CID)</b></td>
             <td>–</td>
-            <td>Server does not support CID → CID not used</td>
+            <td>服务端不支持 CID → 不使用 CID</td>
         </tr>
         <tr>
             <td>3</td>
@@ -69,7 +69,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>4</td>
             <td><b>DTLS 1.2 (no CID)</b></td>
             <td>–</td>
-            <td>Client does not initiate CID → handshake without Connection ID</td>
+            <td>客户端未发起 CID → 无 Connection ID 握手</td>
         </tr>
         <tr>
             <td>4</td>
@@ -77,7 +77,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>0</td>
             <td><b>DTLS 1.2 (no CID)</b></td>
             <td>–</td>
-            <td>CID allowed but not generated by either side</td>
+            <td>允许 CID 但双方均未生成</td>
         </tr>
         <tr>
             <td>5</td>
@@ -85,7 +85,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>1</td>
             <td><b>DTLS 1.2 + CID active</b></td>
             <td>–</td>
-            <td>Short CID (SingleNode mode)</td>
+            <td>短 CID（SingleNode 模式）</td>
         </tr>
         <tr>
             <td>6</td>
@@ -93,7 +93,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>3</td>
             <td><b>DTLS 1.2 + CID active</b></td>
             <td>–</td>
-            <td>CID = 3 bytes, single-node mode</td>
+            <td>CID = 3 字节，单节点模式</td>
         </tr>
         <tr>
             <td>7</td>
@@ -101,7 +101,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>5</td>
             <td><b>DTLS 1.2 + CID active (MultiNode)</b></td>
             <td>0x00</td>
-            <td>Server CID > 4 bytes → server generates NodeID</td>
+            <td>服务端 CID > 4 字节 → 服务端生成 NodeID</td>
         </tr>
         <tr>
             <td>8</td>
@@ -109,7 +109,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>8</td>
             <td><b>DTLS 1.2 + CID active (MultiNode)</b></td>
             <td>0x00</td>
-            <td>Server CID = 8 bytes → server generates NodeID</td>
+            <td>服务端 CID = 8 字节 → 服务端生成 NodeID</td>
         </tr>
         <tr>
             <td>9</td>
@@ -117,7 +117,7 @@ This improves DTLS connection resilience and allows stable operation in multi-no
             <td>2</td>
             <td><b>DTLS 1.2 + CID active</b></td>
             <td>–</td>
-            <td>Server without NodeID, client uses long CID</td>
+            <td>服务端无 NodeID，客户端使用长 CID</td>
         </tr>
         <tr>
             <td>10</td>

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Installing ThingsBoard Edge on CentOS/RHEL Server
-description: Installing ThingsBoard Edge on CentOS/RHEL Server
+title: 在 CentOS/RHEL Server 上安装 ThingsBoard Edge
+description: 在 CentOS/RHEL Server 上安装 ThingsBoard Edge
 ---
 
 * TOC
@@ -11,31 +11,31 @@ description: Installing ThingsBoard Edge on CentOS/RHEL Server
 
 {% assign docsPrefix = "edge/" %}
 
-This guide provides step-by-step instructions for installing **ThingsBoard Edge** on **RHEL/CentOS 8/9**.
+本指南介绍在 **RHEL/CentOS 8/9** 上安装 **ThingsBoard Edge** 的步骤。
 
 {% include templates/edge/install/prerequisites.md %}
 
-## Guided Installation Using ThingsBoard Server Pre-configured Instructions
+## 使用 ThingsBoard Server 预配置指令进行引导安装
 
 {% include templates/edge/install/tb-server-pre-configured-install-instructions.md %}
 
 {% include templates/edge/install/manual-install-instructions-intro.md %}
 
-### Pre-installation step 
-Before continue to installation execute the following commands in order to install necessary tools:
+### 安装前步骤 
+在继续安装前，请执行以下命令安装必要工具：
 
 ```bash
 sudo yum install -y nano wget && sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 ```
 {: .copy-code}
 
-### Step 1. Install Java 17 (OpenJDK) 
+### 步骤 1：安装 Java 17（OpenJDK） 
 
 {% include templates/install/rhel-java-install.md %}
 
-### Step 2. Configure ThingsBoard Database
+### 步骤 2：配置 ThingsBoard 数据库
 
-**ThingsBoard Edge** supports **SQL** and **hybrid** database approaches. See the architecture [page](/docs/reference/#sql-vs-nosql-vs-hybrid-database-approach){: target="_blank"} for details.
+**ThingsBoard Edge** 支持 **SQL** 与 **hybrid** 数据库架构。详见 [架构说明](/docs/reference/#sql-vs-nosql-vs-hybrid-database-approach){: target="_blank"}。
 
 {% capture contenttogglespec %}
 PostgreSQL <small>(recommended for < 5K msg/sec)</small>%,%postgresql%,%templates/edge/install/rhel-db-postgresql.md%br%
@@ -43,12 +43,12 @@ Hybrid <br>PostgreSQL+Cassandra<br><small>(recommended for > 5K msg/sec)</small>
 
 {% include content-toggle.liquid content-toggle-id="rhelThingsboardDatabase" toggle-spec=contenttogglespec %}
 
-### Step 3. Choose Queue Service
-**ThingsBoard Edge** is able to use different messaging systems/brokers for storing the messages and communication between ThingsBoard services. How to choose the right queue implementation?
+### 步骤 3：选择 Queue 服务
+**ThingsBoard Edge** 可使用不同消息系统/代理来存储消息并实现 ThingsBoard 服务间通信。如何选择合适的 queue 实现？
 
-* **In Memory** queue implementation is built-in and default. It is useful for development(PoC) environments and is not suitable for production deployments or any sort of cluster deployments.
+* **In Memory** 为内置默认 queue 实现，适用于开发（PoC）环境，不适合生产部署或集群部署。
 
-* **Kafka** is recommended for production deployments. This queue is used on the most of ThingsBoard production environments now. 
+* **Kafka** 适用于生产部署，当前大多数 ThingsBoard 生产环境均使用该 queue。 
 
 {% capture contenttogglespecqueue %}
 In Memory <small>(built-in and default)</small>%,%inmemory%,%templates/install/queue-in-memory.md%br%
@@ -56,16 +56,16 @@ Kafka <small>(recommended for on-prem, production installations)</small> %,%kafk
 
 {% include content-toggle.liquid content-toggle-id="ubuntuThingsboardQueue" toggle-spec=contenttogglespecqueue %}
 
-### Step 4. ThingsBoard Edge Service Installation
+### 步骤 4：安装 ThingsBoard Edge 服务
 
-Download installation package.
+下载安装包。
 
 ```bash
 wget https://github.com/thingsboard/thingsboard-edge/releases/download/{{ site.release.edge_tag }}/tb-edge-{{ site.release.edge_ver }}.rpm
 ```
 {: .copy-code}
 
-Go to the download repository and install ThingsBoard Edge service
+进入下载目录并安装 ThingsBoard Edge 服务
 
 ```bash
 sudo rpm -Uvh tb-edge-{{ site.release.edge_ver }}.rpm
@@ -73,34 +73,34 @@ sudo rpm -Uvh tb-edge-{{ site.release.edge_ver }}.rpm
 {: .copy-code}
 
 
-### Step 5. Configure ThingsBoard Edge
+### 步骤 5：配置 ThingsBoard Edge
 
 {% include templates/edge/install/linux-configure-edge.md %}
 
-### Step 6. Run installation Script
+### 步骤 6：运行安装脚本
 
 {% include templates/edge/install/run-edge-install.md %} 
 
-### Step 7. Restart ThingsBoard Edge Service
+### 步骤 7：重启 ThingsBoard Edge 服务
 
 ```bash
 sudo service tb-edge restart
 ```
 {: .copy-code}
 
-### Step 8. Open ThingsBoard Edge UI
+### 步骤 8：打开 ThingsBoard Edge UI
 
 {% include templates/edge/install/open-edge-ui.md %} 
 
-## Troubleshooting
+## 故障排除
 
-ThingsBoard Edge logs are stored in the following directory:
+ThingsBoard Edge 日志位于以下目录：
  
 ```bash
 /var/log/tb-edge
 ```
 
-You can issue the following command in order to check if there are any errors on the service side:
+检查服务端错误可运行以下命令：
  
 ```bash
 cat /var/log/tb-edge/tb-edge.log | grep ERROR
@@ -108,6 +108,6 @@ cat /var/log/tb-edge/tb-edge.log | grep ERROR
 
 {% include templates/edge/install/edge-service-commands.md %} 
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/install/next-steps.md %}

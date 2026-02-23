@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Subscriptions
-description: Subscriptions management
+title: 订阅
+description: 订阅管理
 
 subscription-session:
   0:

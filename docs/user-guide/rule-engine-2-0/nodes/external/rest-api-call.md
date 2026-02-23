@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: rest api call
-description: Sends HTTP requests to external endpoints using configurable methods, authentication, and proxy settings, returning the response as outgoing message data.
+title: REST API call
+description: 使用可配置的方法、认证和代理设置向外部端点发送 HTTP 请求，并将响应作为出站消息数据返回。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

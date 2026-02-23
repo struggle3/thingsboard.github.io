@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Advanced filters
-description: Filters over entity fields, attributes and latest telemetry
+title: 高级筛选
+description: 对实体字段、属性和最新遥测进行筛选
 ---
 
 {% assign docsPrefix = "paas/eu/" %}

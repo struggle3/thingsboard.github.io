@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Configuration properties
-description: TBMQ CE configuration properties and environment variables
+title: 配置属性
+description: TBMQ CE 配置属性与环境变量
 
 ---
 

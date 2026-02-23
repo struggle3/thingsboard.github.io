@@ -1,54 +1,53 @@
-Let's add an **OPC-UA connector**, which will read some data from the demo server to the 
-created gateway.
+下面我们添加 **OPC-UA connector**，它将从演示服务器读取部分数据到已创建的网关。
 
-### Setup demo server
+### 配置演示服务器
 
-As a demo simulation server, we will use docker image, that can be installed and run using the following command:
+我们将使用 docker 镜像作为演示仿真服务器，可通过以下命令安装并运行：
 
 ```shell
 docker run -it -p 4840:4840 thingsboard/tb-gw-opcua-server:latest
 ```
 {:.copy-code}
 
-After running docker image, you can see the following logs in your terminal:
+运行 docker 镜像后，终端会显示以下日志：
 
 ![](/images/gateway/dashboard/run-demo-opcua-server.png)
 
-### Setup connector
+### 配置 connector
 
-This OPC-UA connector configuration establishes a connection to a server named **"OPC-UA Demo Server"** at **"opc.tcp://host.docker.internal:4840/freeopcua/server/"**. 
-The configuration specifies various settings, including timeouts, scan periods, and security mechanisms such as **"Basic128Rsa15"** with anonymous identity.
+此 OPC-UA connector 配置在 **"opc.tcp://host.docker.internal:4840/freeopcua/server/"** 连接到名为 **"OPC-UA Demo Server"** 的服务器。
+配置指定了 timeout、scan period、security 机制（如 anonymous 身份的 **"Basic128Rsa15"**）等。
 
-The mapping section defines how OPC-UA nodes are mapped to devices and their attributes and time series. In this case, a device with the name **"Demo Device"** and type **"default"** is mapped to nodes under **"`Root\.Objects\.MyObject`"**. 
-Attributes such as **frequency** and **power**, as well as time series like **temperature** and **humidity**, are mapped to specific paths in the OPC-UA server. 
-Additionally, the configuration supports RPC methods and attribute updates.
+mapping 部分定义 OPC-UA 节点如何映射到设备及其 attribute 和 time series。本例中将名为 **"Demo Device"**、类型为 **"default"** 的设备映射到 **"`Root\.Objects\.MyObject`"** 下的节点。
+**frequency** 和 **power** 等 attribute，以及 **temperature** 和 **humidity** 等 time series，映射到 OPC-UA 服务器中的特定 path。
+此外，配置支持 RPC 方法和 attribute update。
 
-To create a connector, follow these steps:
+创建 connector 请按以下步骤操作：
 
 {% assign addNewConnector = '
     ===
         image: /images/gateway/dashboard/gateway-getting-started-7-ce.png,
-        title: Click on "**Connectors configuration**" button on the right panel;
+        title: 在右侧面板点击"**Connectors configuration**"按钮；
     ===
         image: /images/gateway/dashboard/gateway-getting-started-8-ce.png,
-        title: Click the "**+ Add connector**" button;
+        title: 点击"**+ Add connector**"按钮；
     ===
         image: /images/gateway/dashboard/gateway-getting-started-opc-ua-9-ce.png,
-        title: Choose "**OPCUA**" connector type from the dropdown, fill in "**Name**" field, choose "**Logging level**" to "**INFO**", turn off the "**Fill configuration with default values**" option and click on "**Add**" button;
+        title: 在下拉中选择"**OPCUA**"connector 类型，填写"**Name**"，将"**Logging level**"设为"**INFO**"，关闭"**Fill configuration with default values**"并点击"**Add**"；
     ===
         image: /images/gateway/dashboard/gateway-getting-started-opc-ua-10-ce.png,
-        title: Connector created.
+        title: Connector 已创建。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addNewConnector %} 
 
-First, we need to configure the connection to the demo OPC-UA server. Let's start from the "**Server**" tab. 
-This section offers detailed connection configuration options and contains several important fields, including server endpoint url, security settings, scan period, poll period, subscriptions settings and other.
+首先配置到演示 OPC-UA 服务器的连接。从"**Server**"标签页开始。
+该部分提供 server endpoint url、security、scan period、poll period、subscriptions 等详细连接配置选项。
 
-- Go to the "**Server**" tab, and fill in the fields with following values:
+- 进入"**Server**"标签页，按下列值填写字段：
 
-| **Field name**      | **Value**                                             |
+| **字段名**      | **值**                                             |
 |:--------------------|:------------------------------------------------------|
 | Server endpoint url | opc.tcp://host.docker.internal:4840/freeopcua/server/ |
 | Enable subscription | false                                                 |
@@ -60,114 +59,114 @@ This section offers detailed connection configuration options and contains sever
 {% assign serverConfiguration = '
     ===
         image: /images/gateway/dashboard/server-configuration-1-ce.png,
-        title: Go to the "**Server**" tab, and fill in the fields with the value taken from the documentation.
+        title: 进入"**Server**"标签页，按文档填写字段值。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=serverConfiguration %}
 
-Now, we are ready to move to the "**Data mapping**" section. This configuration section contains list of nodes that the gateway will subscribe to after connecting to the OPC-UA server, along with settings for processing data from these nodes.
+接下来进入"**Data mapping**"部分。该部分包含网关连接 OPC-UA 服务器后将订阅的节点列表，以及处理这些节点数据的配置。
 
-Let&#39;s add new node using the following steps:
+按以下步骤添加新节点：
 
-- Go to the "**Data mapping**" tab, and click on "**Add mapping**" button.
-- In the opened window, fill in the "**Device node**" with "**Path**" type and "`Root\.Objects\.MyObject`" value;
-- For "**Device**" subsection use the following options/values:
-    - The "**Name**" row: select "**Constant**" in the "**Source**" dropdown field, fill in the "**Value / Expression**" field with the "**Device Demo**" value;
-    - The "**Profile name**" row: select "**Constant**" in the "**Source**" dropdown field, fill in the "**Value / Expression**" field with the "**default**" value.
+- 进入"**Data mapping**"标签页，点击"**Add mapping**"。
+- 在打开窗口中，将"**Device node**"类型设为"**Path**"，值设为"`Root\.Objects\.MyObject`"；
+- 对于"**Device**"子节使用以下选项/值：
+    - "**Name**"行：在"**Source**"下拉中选择"**Constant**"，在"**Value / Expression**"中填写"**Device Demo**"；
+    - "**Profile name**"行：在"**Source**"下拉中选择"**Constant**"，在"**Value / Expression**"中填写"**default**"。
 
 {% assign dataMappingConfiguration1 = '
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-1-ce.png,
-        title: Go to the "**Data mapping**" tab, and click "**Add mapping**" button;
+        title: 进入"**Data mapping**"标签页，点击"**Add mapping**"；
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-2-ce.png,
-        title: Fill in the fields with values taken from the documentation.
+        title: 按文档填写字段值。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=dataMappingConfiguration1 %}
 
-Let&#39;s move to "**Attributes**" section to add "frequency" and "power" attributes. The configuration in this unit provides settings for processing data from OPC-UA server. These settings will be interpreted in ThingsBoard platform instance as attributes of the device. Also we will use path for finding corresponding node.
+进入"**Attributes**"部分添加 "frequency" 和 "power" attribute。本部分配置用于处理 OPC-UA 服务器数据，在 ThingsBoard 中将被解释为设备 attribute。我们使用 path 查找对应节点。
 
 {% capture difference %}
-A **Path** type refers to the hierarchical address within the OPC-UA server's namespace. It is used to navigate to specific nodes in the server. The path for the attribute/time series value can be absolute or relative (relative in our case).
+**Path** 类型指 OPC-UA 服务器命名空间中的层级地址，用于定位服务器中的特定节点。attribute/time series 的 path 可为绝对或相对（本例为相对）。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Let&#39;s configure attribute section using the following steps:
+按以下步骤配置 attribute 部分：
 
-- Click on the "**pencil**" icon in the "**Attributes**" section;
-- In the opened window, click on the "**Add attribute**" button;
-- Fill in the "**Key**" field with the "**frequency**", select the "**Type**" field to the "**Path**", and fill in the "**Value**" with the "**${Frequency}**".
+- 点击"**Attributes**"部分的"**铅笔**"图标；
+- 在打开窗口中点击"**Add attribute**"；
+- 在"**Key**"中填写"**frequency**"，将"**Type**"选为"**Path**"，在"**Value**"中填写"**${Frequency}**"。
 
 {% assign dataMappingConfiguration2 = '
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-3-ce.png,
-        title: Click on the "**pencil**" icon in the "**Attributes**" section;
+        title: 点击"**Attributes**"部分的"**铅笔**"图标；
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-4-ce.png,
-        title: In the opened window, click on the "**Add attribute**" button;
+        title: 在打开窗口中点击"**Add attribute**"；
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-5-ce.png,
-        title: Fill in the "**Key**" field with the "**frequency**", select the "**Type**" field to the "**Path**", and fill in the "**Value**" with the "**${Frequency}**".
+        title: 在"**Key**"中填写"**frequency**"，将"**Type**"选为"**Path**"，在"**Value**"中填写"**${Frequency}**"。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=dataMappingConfiguration2 %}
 
-Let&#39;s add another attribute. Collapse the recently added "frequency" attribute, click the "**Add attribute**" button, and fill in the fields with the following values, using the same process as before:
+添加另一个 attribute：折叠刚添加的 "frequency" attribute，点击"**Add attribute**"，按相同步骤填写以下值：
 
-| **Field name** | **Value** |
+| **字段名** | **值** |
 |:---------------|:----------|
 | Key            | power     |
 | Type           | Path      |
 | Value          | ${Power}  |
 | ---            |           |
 
-Click the "**Apply**" button after you&#39;ve completed the configuration.
+完成配置后点击"**Apply**"。
 
 {% assign dataMappingConfiguration3 = '
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-6-ce.png,
-        title: Collapse the recently added "frequency" attribute, and click "**Add attribute**" button to add another attribute;
+        title: 折叠刚添加的 "frequency" attribute，点击"**Add attribute**"添加另一 attribute；
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-7-ce.png,
-        title: Fill in the fields with values taken from the documentation. Then, click "**Apply**".
+        title: 按文档填写字段值。然后点击"**Apply**"。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=dataMappingConfiguration3 %}
 
-We finish with the "**Attributes**" section, so let&#39;s move to the "**Time series**" section. The configuration in this unit provides settings for processing data from the OPC-UA server. These settings will be interpreted in ThingsBoard platform instance as time series of the device.
+完成"**Attributes**"部分后，进入"**Time series**"部分。本部分配置用于处理 OPC-UA 服务器数据，在 ThingsBoard 中将被解释为设备 time series。
 
-Let&#39;s configure time series section using the following steps:
+按以下步骤配置 time series 部分：
 
-- Click on the "**pencil**" icon in the "**Time series**" section;
-- In the opened window, click on the "**Add time series**" button;
-- Fill in the fields:
-  - Fill in the "**Key**" field with the "**temperature**";
-  - Select the "**Type**" field to the "**Path**";
-  - Fill in the "**Value**" with "**${Temperature}**".
+- 点击"**Time series**"部分的"**铅笔**"图标；
+- 在打开窗口中点击"**Add time series**"；
+- 填写字段：
+  - 在"**Key**"中填写"**temperature**"；
+  - 将"**Type**"选为"**Path**"；
+  - 在"**Value**"中填写"**${Temperature}**"。
 
 {% assign dataMappingConfiguration4 = '
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-8-ce.png,
-        title: Click on the "**pencil**" icon in "**Time series**" section;
+        title: 点击"**Time series**"部分的"**铅笔**"图标；
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-9-ce.png,
-        title: In the opened window, click on "**Add time series**" button;
+        title: 在打开窗口中点击"**Add time series**"；
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-10-ce.png,
-        title: Fill in the fields with values taken from the documentation.
+        title: 按文档填写字段值。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=dataMappingConfiguration4 %}
 
-Let&#39;s add another attribute. Collapse the recently added "**temperature**" time series, click the "**Add time series**" button, and fill in the fields with the following values, using the same process as before:
+添加另一 time series：折叠刚添加的"**temperature**"time series，点击"**Add time series**"，按相同步骤填写以下值：
 
-| **Field name** | **Value**   |
+| **字段名** | **值**   |
 |:---------------|:------------|
 | Key            | humidity    |
 | Type           | Path        |
@@ -177,63 +176,63 @@ Let&#39;s add another attribute. Collapse the recently added "**temperature**" t
 {% assign dataMappingConfiguration5 = '
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-11-ce.png,
-        title: Collapse the recently added "**temperature**" time series, and click "**Add time series**" button to add another time series;
+        title: 折叠刚添加的"**temperature**"time series，点击"**Add time series**"添加另一 time series；
     ===
         image: /images/gateway/dashboard/data-mapping-configuration-12-ce.png,
-        title: Fill in the fields with values taken from the documentation. Then, click "**Apply**".
+        title: 按文档填写字段值。然后点击"**Apply**"。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=dataMappingConfiguration5 %}
 
-The final view of your configured connector will look like on the following image. Click the "**Add**" button after you&#39;ve completed the configuration.
+配置完成后，connector 的最终效果如下。完成后点击"**Add**"。
 
 {% assign finalDataMappingConfiguration1 = '
     ===
         image: /images/gateway/dashboard/final-configured-data-mapping-1-ce.png,
-        title: The final view of your configured connector. Click the "**Add**" button after you&#39;ve completed the configuration.
+        title: 配置完成后的 connector 最终效果。完成后点击"**Add**"。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=finalDataMappingConfiguration1 %}
 
-Finally, save the OPC-UA configuration by clicking the "**Save**" button.
+最后，点击"**Save**"保存 OPC-UA 配置。
 
 {% assign finalDataMappingConfiguration2 = '
     ===
         image: /images/gateway/dashboard/final-configured-data-mapping-2-ce.png,
-        title: Finally, the save OPC-UA configuration by clicking the "**Save**" button.
+        title: 最后，点击"**Save**"保存 OPC-UA 配置。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=finalDataMappingConfiguration2 %}
 
-Following the steps outlined, your gateway will receive and apply the new configuration. It will then synchronize its state with the remote server.
-You can view the synchronization status of the connector configuration in the "**Configuration**" column, which will indicate whether the gateway is successfully aligned with the remote settings.
+完成上述步骤后，网关将接收并应用新配置，并与远程服务器同步状态。
+可在"**Configuration**"列查看 connector 配置的同步状态，确认网关是否与远程设置一致。
 
 {% assign finalDataMappingConfiguration3 = '
     ===
         image: /images/gateway/dashboard/final-configured-data-mapping-3-ce.png,
-        title: You can view the synchronization status of the connector configuration in the "**Configuration**" column, which will indicate whether the gateway is successfully aligned with the remote settings.
+        title: 可在"**Configuration**"列查看 connector 配置的同步状态。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=finalDataMappingConfiguration3 %}
 
-Also, you can see the connector logs to make sure that the connector works, for this purpose, follow these steps:
+此外，可查看 connector 日志以确认 connector 工作正常：
 {% assign seeConnectorLogs = '
     ===
         image: /images/gateway/dashboard/gateway-getting-started-opc-ua-14-ce.png,
-        title: In the "**General**" connector tab enable remove logging by turning on the "**Enable remote logging**" toggle. Choose "**DEBUG**" in the "**Log level**" drop-down menu. Click on the "**Save**" button to apply changes;
+        title: 在 connector 的"**General**"标签页中，开启"**Enable remote logging**"启用远程日志。在"**Log level**"下拉中选择"**DEBUG**"。点击"**Save**"应用更改；
     ===
         image: /images/gateway/dashboard/gateway-getting-started-opc-ua-12-ce.png,
-        title: Click on logs icon to open connector logs page;
+        title: 点击日志图标打开 connector 日志页面；
     ===
         image: /images/gateway/dashboard/gateway-getting-started-opc-ua-logs-13-ce.png,
-        title: You can see the "**Logs**" table that consists of "**Created time**", "**Status**" and "**Message**" columns.
+        title: 可看到由"**Created time**"、"**Status**"和"**Message**"列组成的"**Logs**"表格。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=seeConnectorLogs %}
 
-For now, the gateway is ready to process data through the newly created and configured OPC-UA connector.
+至此，网关已可通过新建并配置的 OPC-UA connector 处理数据。

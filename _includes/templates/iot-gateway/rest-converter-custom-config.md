@@ -1,16 +1,16 @@
-A custom converter is converter written for some device:
+Custom converter 是为特定设备编写的 converter：
 
 
 
-| **Parameter**                 | **Default value**             | **Description**                                                                                                                 |
+| **参数**                 | **默认值**             | **说明**                                                                                                                 |
 |:------------------------------|:------------------------------|---------------------------------------------------------------------------------------------------------------------------------
-| type                          | **custom**                    | Provides information to connector that custom converter will be uses for converting data from request.                          |
-| deviceNameExpression          | **SuperAnonDevice**           | Device name.                                                                                                                    |
-| deviceNameExpressionSource    | **constant**                  | Device name source.                                                                                                             |
-| deviceProfileExpressionSource | **constant**                  | Device profile source. It can be constant or request.                                                                           |
-| deviceProfileExpression       | **default**                   | Device profile name. It can be constant or request.                                                                                                           |
-| extension                     | **CustomRESTUplinkConverter** | Name of custom converter class.                                                                                                 |
-| extension-config              |                               | Configuration, for custom converter (You can put anything, there. It will be passed to the converter object on initialization). |
+| type                          | **custom**                    | 指示 connector 使用 custom converter 转换请求数据。                          |
+| deviceNameExpression          | **SuperAnonDevice**           | 设备名称。                                                                                                                    |
+| deviceNameExpressionSource    | **constant**                  | 设备名称来源。                                                                                                             |
+| deviceProfileExpressionSource | **constant**                  | Device profile 来源。可为 constant 或 request。                                                                           |
+| deviceProfileExpression       | **default**                   | Device profile 名称。可为 constant 或 request。                                                                                                           |
+| extension                     | **CustomRESTUplinkConverter** | 自定义 converter 类名。                                                                                                 |
+| extension-config              |                               | Custom converter 的配置（可放置任意内容，初始化时会传递给 converter 对象）。 |
 | key                           | **Totaliser**                 |                                                                                                                                 |
 | datatype                      | **float**                     |                                                                                                                                 |
 | fromByte                      | **0**                         |                                                                                                                                 |
@@ -22,13 +22,13 @@ A custom converter is converter written for some device:
 
 {% capture difference %}
   
-**Custom converter usually needed if you want to collect data from some device with not regular structure in response or when the data needs some processing before sending it to the ThingsBoard.**  
+**当需要从未采用常规响应结构的设备采集数据，或数据在发送到 ThingsBoard 前需处理时，通常需要 custom converter。**  
 {% endcapture %}  
 {% include templates/info-banner.md content=difference %}  
 
-**Notate: Everything, you placed in the "converter" section will be passed to the custom converter as a configuration.**  
+**注意：置于 "converter" 部分的全部内容将作为配置传递给 custom converter。**  
 
-Mapping subsection in the configuration looks like:  
+配置中的 Mapping subsection 如下所示：  
 
 ```json
 "converter": {

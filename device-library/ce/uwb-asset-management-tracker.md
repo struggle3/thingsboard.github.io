@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect UWB Asset Management Tracker to ThingsBoard?
-category: Other devices
+title: 如何将 UWB Asset Management Tracker 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: Lansitec
 deviceImageFileName: uwb-asset-management-tracker.png

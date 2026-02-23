@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect NCD Vibration Temperature Sensor to ThingsBoard?
-category: Other devices
+title: 如何将 NCD Vibration Temperature Sensor 连接至 ThingsBoard？
+category: 其他设备
 deviceImageFileName: ncd-vibration-sensor.png
 docsPrefix: pe/
 hardwareType: Sensors

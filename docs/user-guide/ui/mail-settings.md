@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Mail server configuration
-description: ThingsBoard IoT platform mail settings
+title: 邮件服务器配置
+description: ThingsBoard物联网平台邮件设置
 redirect_from: "/docs/samples/alarms/mail/"
 
 mail-server-configuration-1:

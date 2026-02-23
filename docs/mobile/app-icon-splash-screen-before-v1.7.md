@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-mobile
-title: Configure app icon and splash screen in ThingsBoard Mobile Application
+title: 在 ThingsBoard 移动应用中配置应用图标和启动画面
 
 ---
 

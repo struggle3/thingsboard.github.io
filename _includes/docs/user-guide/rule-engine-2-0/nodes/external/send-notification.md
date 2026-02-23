@@ -1,30 +1,26 @@
-Sends notifications to specified recipients using notification templates through the [notification center](/docs/{{docsPrefix}}user-guide/notifications/){:target="_
-blank"}.
+通过[通知中心](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}使用通知模板向指定收件人发送通知。
 
-## Configuration
+## 配置
 
 ### Template
 
-The notification template that defines the content, format, and delivery channels (Web, Email, SMS, Slack, etc.) of the notification. Select an
-existing [notification template](/docs/{{docsPrefix}}user-guide/notifications/#templates){:target="_blank"} from your ThingsBoard instance.
+定义通知内容、格式和配送渠道（Web、Email、SMS、Slack 等）的通知模板。从 ThingsBoard 实例中选择已有的[通知模板](/docs/{{docsPrefix}}user-guide/notifications/#templates){:target="_blank"}。
 
 {% capture template_type_note %}
-**Note**: Only notification templates with type **Rule node** can be used in this rule node.
+**注意**：仅类型为 **Rule node** 的通知模板可用于本规则节点。
 {% endcapture %}
 {% include templates/info-banner.md content=template_type_note %}
 
-You can use [values from the incoming message](/docs/{{docsPrefix}}user-guide/notifications/#rule-node){:target="_blank"} in your notification templates by using `${key}` syntax to
-reference message data fields, metadata, and other message properties.
+可使用 `${key}` 语法引用消息 data 字段、metadata 及其他消息属性，在通知模板中使用[入站消息中的值](/docs/{{docsPrefix}}user-guide/notifications/#rule-node){:target="_blank"}。
 
 {% capture template_syntax_note %}
-**Note**: Even for message data fields that typically use `$[key]` syntax in rule nodes, notification templates require the `${key}` syntax.
+**注意**：即使对于在规则节点中通常使用 `$[key]` 语法的消息 data 字段，通知模板也要求使用 `${key}` 语法。
 {% endcapture %}
 {% include templates/info-banner.md content=template_syntax_note %}
 
 ### Recipients
 
-A list of [recipient groups](/docs/{{docsPrefix}}user-guide/notifications/#recipients){:target="_blank"} that will receive the notification. Multiple recipient groups can be
-selected. The notification system will automatically resolve and deduplicate recipients across all selected groups.
+将接收通知的[收件人组](/docs/{{docsPrefix}}user-guide/notifications/#recipients){:target="_blank"}列表。可选择多个收件人组。通知系统将自动解析并在所有所选组之间去重。
 
 ### JSON Schema
 
@@ -73,22 +69,22 @@ selected. The notification system will automatically resolve and deduplicate rec
 ```
 {: .copy-code.expandable-3 }
 
-## Output message format
+## 输出消息格式
 
-The node transforms the incoming message by adding notification request statistics to the message metadata while preserving the original message data.
+节点通过将通知请求统计添加到消息 metadata 来转换入站消息，同时保留原始消息 data。
 
-When a notification is successfully processed and sent, the following field is added to the message metadata:
+当通知成功处理并发送时，以下字段添加到消息 metadata：
 
-- `notificationRequestResult` – A JSON string containing statistics about the notification delivery, including:
-    - `sent` – Map of delivery channels to the number of notifications successfully sent per channel
-    - `errors` – Map of delivery channels to the number of failed deliveries per channel (if any)
-    - `totalSent` – Total number of notifications successfully sent across all channels
-    - `totalErrors` – Total number of failed deliveries across all channels
-    - `error` – Error message if the entire notification request failed (null if successful)
+- `notificationRequestResult` — 包含通知配送统计的 JSON 字符串，包括：
+    - `sent` — 各配送渠道成功发送数量的映射
+    - `errors` — 各配送渠道失败数量的映射（如有）
+    - `totalSent` — 所有渠道成功发送的总数
+    - `totalErrors` — 所有渠道失败的总数
+    - `error` — 整个通知请求失败时的错误信息（成功时为 null）
 
-**Example:**
+**示例：**
 
-Original message metadata:
+原始消息 metadata：
 
 ```json
 {
@@ -96,7 +92,7 @@ Original message metadata:
 }
 ```
 
-After successful notification, metadata becomes:
+通知成功发送后，metadata 变为：
 
 ```json
 {
@@ -105,40 +101,38 @@ After successful notification, metadata becomes:
 }
 ```
 
-The message data remains unchanged.
+消息 data 保持不变。
 
-## Message acknowledgement behavior
+## 消息确认行为
 
-The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable:
+节点的消息确认行为由 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 环境变量控制：
 
-- **When set to `true`** – The incoming message is acknowledged and marked as successfully processed immediately upon receipt. A new message is created with the updated metadata
-  and is enqueued for processing by the next node.
-- **When set to `false`** (default) – The incoming message remains in an in-processing state throughout the entire notification operation. The message is transformed in place, its
-  metadata is updated with the notification result, and the modified message is passed to the next node after the notification completes.
+- **设为 `true` 时** — 入站消息在接收后立即被确认并标记为已成功处理。创建包含更新 metadata 的新消息并加入队列供下一节点处理。
+- **设为 `false` 时**（默认）— 入站消息在整个通知操作期间保持处理中状态。消息就地转换，其 metadata 使用通知结果更新，通知完成后将修改后的消息传递至下一节点。
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node creates a notification request using the incoming message data, metadata, originator information, and the configured template and recipients.
-2. The notification request is submitted asynchronously to the notification center, which sends the notification to resolved recipients.
-3. When processing completes:
-    - **Success**: Delivery statistics are added to the message metadata as `notificationRequestResult` and the message is routed to the `Success` connection.
-    - **Failure**: The message is routed to the `Failure` connection.
+1. 节点使用入站消息 data、metadata、来源实体信息及配置的模板和收件人创建通知请求。
+2. 通知请求异步提交至通知中心，由通知中心向解析出的收件人发送通知。
+3. 处理完成时：
+    - **Success**：将配送统计以 `notificationRequestResult` 添加到消息 metadata，消息经 `Success` 连接路由。
+    - **Failure**：消息经 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The notification was successfully processed and sent to recipients.
-    - Delivery statistics (`notificationRequestResult`) are included in the outgoing message metadata, showing how many notifications were sent per channel.
+    - 通知已成功处理并发送给收件人。
+    - 出站消息 metadata 包含配送统计（`notificationRequestResult`），显示各渠道发送数量。
 - **Failure**
-    - **Unexpected error**: An unexpected error occurred during notification processing.
+    - **意外错误**：通知处理过程中发生意外错误。
 
-## Examples
+## 示例
 
-### Example 1 — Sending telemetry values in notification
+### 示例 1 — 在通知中发送遥测值
 
-Send a notification containing the latest telemetry values from a device.
+发送包含设备最新遥测值的通知。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -159,7 +153,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -173,9 +167,9 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
-The notification template with ID `a1b2c3d4-e5f6-7890-abcd-ef1234567890` has the following content:
+ID 为 `a1b2c3d4-e5f6-7890-abcd-ef1234567890` 的通知模板具有以下内容：
 
 ```text
 Weather Update from ${deviceName}
@@ -188,9 +182,9 @@ Current readings:
 Device type: ${deviceType}
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：不变。
 
 Metadata:
 
@@ -202,11 +196,11 @@ Metadata:
 }
 ```
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The notification was successfully sent to users via Web interface. The notification content:
+通知已通过 Web 界面成功发送给用户。通知内容：
 
 ```text
 Weather Update from Weather Station 01

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: MQTT Topics & Wildcards
-description: TBMQ Topics guide
+title: MQTT 主题与通配符
+description: TBMQ 主题指南
 
 ---
 

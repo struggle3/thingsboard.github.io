@@ -1,23 +1,23 @@
 * TOC
 {:toc}
 
-This lesson is the third installment in our series on setting up a dashboard to visualize and monitor data from devices integrated into your premises. 
-In the first two parts, we explored assets and devices, added a dashboard, created states for buildings and offices, and implemented navigation between them. 
-Before we proceed, we strongly recommend reviewing the previous lessons if you have not done so already.
+本课为 dashboard 系列第三课，用于可视化和监控楼宇内集成设备的数据。
+前两课已介绍 assets 和 devices、添加 dashboard、为建筑和办公室创建 states 并实现它们之间的导航。
+继续前强烈建议先复习前两课。
 
 <br>
 <p><a href="/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-2/" class="button">Lesson 2: Dashboard states, widget actions, and Image Map widget</a></p>
 
 <br>
 
-In this part, we will add separate states for each device, simulate telemetry data for the devices, and display them on card widgets.
+本课将为每台设备添加独立 states，模拟设备 telemetry 并在 card 部件上展示。
 
 {% include default-carousel.liquid collectionMap = 'dashboard-lesson-3' nonActiveItemsVisibility = false %}
 
 ## Simulation of the devices' telemetry data
 
-Since we are using virtual devices, they do not send telemetry data to the ThingsBoard. However, we can simulate the transmission of such data in real time.
-To do this, we will use [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"}.
+由于使用虚拟设备，它们不会向 ThingsBoard 发送 telemetry。但我们可以实时模拟此类数据的发送。
+为此将使用 [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"}。
 
 We will add a new [Rule Chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain){:target="_blank"} with four [generator nodes](/docs/user-guide/rule-engine-2-0/nodes/action/generator/){:target="_blank"} that will periodically generate simple messages with random telemetry readings, unique to each of our devices.
 Then, we will save this telemetry in the database using the [save time series](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries/){:target="_blank"} node.

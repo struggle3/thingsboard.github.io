@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Energy Meter monitoring with ThingsBoard IoT Platform
-description: Energy Meter monitoring with ThingsBoard IoT Platform
+title: 使用 ThingsBoardIoT平台监测电能表
+description: 使用 ThingsBoardIoT平台监测电能表
 hidetoc: "true"
 
 ---
@@ -13,41 +13,41 @@ hidetoc: "true"
 
 ![image](/images/samples/digicom/head1.png)
 
-Digicom devices are designed to interoperate with ThingsBoard IoT platforms by providing the necessary settings and functionalities to be easily integrated, allowing you to create dashboards where data and telemetry can be displayed and monitored.
+Digicom 设备旨在与 ThingsBoardIoT平台互操作，提供必要设置与功能以便轻松集成，让您能够创建用于展示和监测数据与遥测的仪表板。
 
-This tutorial is intended to be an integration guide focused on setting up a professional monitoring application, covering the basic aspects of your Digicom device and the corresponding ThingsBoard configuration using the MQTT protocol integration
+本教程作为集成指南，侧重搭建专业监测应用，涵盖 Digicom 设备的基本要点及通过 MQTT 协议集成对应的 ThingsBoard 配置。
 
 ![image](/images/samples/digicom/scenario1.png)
 
-The described scenario includes your Digicom device being connected to an MQTT broker and ThingsBoard being subscribed to those data streams through an MQTT integration, thus converting the payloads into its message format through a specific Data Converter.
+所述场景包括：Digicom 设备连接到 MQTT broker，ThingsBoard 通过 MQTT 集成订阅这些数据流，并通过特定数据转换器将有效载荷转换为 ThingsBoard 消息格式。
 
-Before you start: To make this tutorial work, you need:
-- A Digicom device like DRN500 or DRN3000 Multifunction Routers with firmware release 1.10 or newer
-- A ThingsBoard instance on Cloud or Premise with a publicly reachable address
+开始前：要使本教程生效，需准备：
+- Digicom 设备，如 DRN500 或 DRN3000 多功能路由器，固件 1.10 或更高
+- 云端或本地部署的 ThingsBoard 实例，且具有可公开访问的地址
 
-## ThingsBoard setup
+## ThingsBoard 设置
 
-First of all, activate your ThingsBoard account, whether it is on Cloud or Premise. You can find detailed instructions on how to install and set up your personal ThingsBoard instance in the More References and Guides chapter. 
+首先激活 ThingsBoard 账户（云端或本地）。可在「更多参考资料与指南」章节找到安装与设置个人 ThingsBoard 实例的详细说明。
 
-Log in and get ready for your configuration!
+登录并完成配置准备。
 
-## Create the MQTT integration
+## 创建 MQTT 集成
 
-We will start by defining the data ingress section. [MQTT Integration](/docs/{{docsPrefix}}user-guide/integrations/mqtt/){:target="_blank"} allows to connect to external MQTT brokers, subscribe to data streams from those brokers and convert any type of payload from your devices to ThingsBoard message format. Its typical use is whenever your devices are already connected to external MQTT broker or any other IoT platform or connectivity provider with MQTT based back-end.
+我们先定义数据入口部分。[MQTT 集成](/docs/{{docsPrefix}}user-guide/integrations/mqtt/){:target="_blank"}用于连接外部 MQTT broker、订阅其数据流，并将设备任意类型的有效载荷转换为 ThingsBoard 消息格式。典型用途是当设备已连接到外部 MQTT broker 或其它具备 MQTT 后端的IoT平台、连接提供商时使用。
 
-Go to the "**Integrations center**" section -> "**Integrations**" page and click "**plus**" button to create new integration. Select type "**MQTT**". Click "**Next**";
+进入「**Integrations center**」->「**Integrations**」页面，点击「**plus**」按钮创建新集成。选择类型「**MQTT**」，点击「**Next**」；
 
 ![image](/images/samples/digicom/integ-mqtt-1.png)
 
 <br>
-At the next step, give a name to the [Uplink data converter](/docs/{{docsPrefix}}user-guide/integrations/#uplink-data-converter){:target="_blank"}, select "**TBEL**", delete the whole content of the function Decoder.
+下一步为 [Uplink data converter](/docs/{{docsPrefix}}user-guide/integrations/#uplink-data-converter){:target="_blank"} 命名，选择「**TBEL**」，清空 Decoder 函数的全部内容。
 
 {% capture difference %}
-**Notes:** [ThingsBoard Expression Language (TBEL)](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} is an optimized and super-efficient alternative to the original programming language for the UDF, which is JavaScript. TBEL is preferred although JavaScript is and will remain supported.
+**说明：** [ThingsBoard Expression Language (TBEL)](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} 是 UDF 原始编程语言 JavaScript 的优化且高效的替代方案。推荐使用 TBEL，JavaScript 仍将继续支持。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Paste the following TBEL code inside the function Decoder. Then, click "**Next**".
+将以下 TBEL 代码粘贴到 Decoder 函数中，然后点击「**Next**」。
 
 ```js
 // *** Digicom Data Converter ***
@@ -95,55 +95,55 @@ return result;
 ![image](/images/samples/digicom/integ-mqtt-2.png)
 
 <br>
-Click "**Skip**" in the [Downlink data converter](/docs/{{docsPrefix}}user-guide/integrations/#downlink-data-converter){:target="_blank"} tab.
+在 [Downlink data converter](/docs/{{docsPrefix}}user-guide/integrations/#downlink-data-converter){:target="_blank"} 选项卡中点击「**Skip**」。
 
 ![image](/images/samples/digicom/integ-mqtt-3.png)
 
 <br>
-Fill in the "**Connection**" tab:
+填写「**Connection**」选项卡：
 
-- Set the external MQTT broker "**Host**" address and "**Port**";
-- Select "**Basic**" for **Credentials type**, enter "**Username**" and "**Password**" (to be used for authenticating on the External MQTT broker);
-- Set the following **Topic**:
+- 设置外部 MQTT broker 的「**Host**」地址和「**Port**」；
+- **Credentials type** 选择「**Basic**」，填写「**Username**」和「**Password**」（用于在外部 MQTT broker 上鉴权）；
+- 设置以下 **Topic**：
 
 ```
 digicom/+/data/modbus
 ```
 {: .copy-code}
 
-- Select **QoS 1**;
+- 选择 **QoS 1**；
 
-Click on "**Check connection**" if you want to test it first.
+若要预先测试，可点击「**Check connection**」。
 
 ![image](/images/samples/digicom/integ-mqtt-4.png)
 
 <br>
-Click "**Add**" to finish the integration setup.
+点击「**Add**」完成集成设置。
 
 ![image](/images/samples/digicom/integ-mqtt-5.png)
 
 <br>
-If the connection is successful, the status of your MQTT integration will be "**Active**". Otherwise, it will remain "Inactive" until the first connection with the external broker takes place.   
-If the connection does not succeed, double-check the address, port, and credentials later.
+若连接成功，MQTT 集成状态将显示「**Active**」。否则将保持「Inactive」，直到首次与外部 broker 建立连接。  
+若连接失败，请随后仔细核对地址、端口与凭证。
 
 ![image](/images/samples/digicom/integ-mqtt-6.png)
 
-## Check and test the data converter
+## 检查并测试数据转换器
 
-The [Data converter](/docs/{{docsPrefix}}user-guide/integrations/#data-converters){:target="_blank"} is responsible for elaborating and transforming the data structure coming from the device into the telemetry and attribute data format suitable for ThingsBoard.   
-From here, we can simulate and test the conversion process even before receiving real data from the device.
+[Data converter](/docs/{{docsPrefix}}user-guide/integrations/#data-converters){:target="_blank"} 负责将设备传入的数据结构转换为适合 ThingsBoard 的遥测与属性数据格式。  
+在此处，我们可在收到设备真实数据之前模拟并测试转换过程。
 
-Go to the "**Data converters**" page of the "**Integration center**" section. Click on the "**Modbus Data**" conveter, and then enter edit mode.
+进入「**Integration center**」的「**Data converters**」页面。点击「**Modbus Data**」转换器，进入编辑模式。
 
 ![image](/images/samples/digicom/test-data-converter-1.png)
 
 <br>
-Once edit mode is active, the "**Test decoder function**" button will become available. Click on it to access the Test environment.
+进入编辑模式后，「**Test decoder function**」按钮将可用。点击进入测试环境。
 
 ![image](/images/samples/digicom/test-data-converter-2.png)
 
 <br>
-Copy the JSON packet code from the below table into the "**Payload content**" tab, then click on "**Test**" button, and check the "**Output**" tab.
+将下表 JSON 报文代码复制到「**Payload content**」选项卡，点击「**Test**」按钮，查看「**Output**」选项卡。
 
 ```json
 {
@@ -193,7 +193,7 @@ Copy the JSON packet code from the below table into the "**Payload content**" ta
 ![image](/images/samples/digicom/test-data-converter-3.png)
 
 <br>
-If everything has been correctly set up until now, you will see the result of the transformation process:
+若此前配置正确，将看到转换结果：
 
 ```json
 {
@@ -227,162 +227,162 @@ If everything has been correctly set up until now, you will see the result of th
 }
 ```
 
-Fine! The data ingress phase is done and working. Click on "**Cancel**" and then on the "**X**" icon to exit edit mode.   
-Let's switch to the device setup.
+数据入口阶段已完成且正常工作。点击「**Cancel**」，再点击「**X**」图标退出编辑模式。  
+接下来进行设备设置。
 
-## Device setup
+## 设备设置
 
-Log in into your device. Enter **Username** and **Password**. Then, click "**Login**" button.
+登录设备。输入 **Username** 和 **Password**，点击「**Login**」按钮。
 
 ![image](/images/samples/digicom/log1.png)
 
 <br>
-This guide will use the Modbus functionalities to read from an Electric Energy Meter and transmit that data to ThingsBoard through the MQTT protocol.
-We will concentrate on the Modbus and MQTT setup sections, assuming that the device is already correctly configured for Internet access and that the Modbus physical connections are correctly carried out.   
-Select "**Modbus**" – "**COM Configuration**" from the drop-down menu.
+本指南将使用 Modbus 功能从电能表读取数据，并通过 MQTT 协议将数据发送到 ThingsBoard。
+我们主要说明 Modbus 与 MQTT 配置，假定设备已正确配置互联网访问，且 Modbus 物理连接已正确完成。  
+从下拉菜单选择「**Modbus**」–「**COM Configuration**」。
 
 ![image](/images/samples/digicom/modbus_serial1.png)
 
 <br>
-Set the Modbus serial interface **enabled**, set **type**, **speed** and **data format** as for the Energy Meter operating parameters.   
-Click on "**Save**" button.
+将 Modbus 串口 **enabled** 设为启用，根据电能表运行参数设置 **type**、**speed** 和 **data format**。  
+点击「**Save**」按钮。
 
 ![image](/images/samples/digicom/Immagine-11.png)
 
 <br>
-Go to the "**Modbus**" –> "**Modbus Master**" from the drop-down menu.   
-Click on "**Add**" button.
+从下拉菜单进入「**Modbus**」–>「**Modbus Master**」。  
+点击「**Add**」按钮。
 
 ![image](/images/samples/digicom/Immagine-13.png)
 
 <br>
-Set the Modbus Master profile to **enabled**, set **Name**, **ID**, **Connection type**, **COM type** and **settings**, **rates** and **register formats**. Set the **Data Destination** to **MQTT**, then click "**Save**" button.
+将 Modbus Master 配置设为 **enabled**，设置 **Name**、**ID**、**Connection type**、**COM type** 及 **settings**、**rates**、**register formats**。将 **Data Destination** 设为 **MQTT**，然后点击「**Save**」按钮。
 
 ![image](/images/samples/digicom/Immagine-14.png)
 
 <br>
-Now we will define 4 sample sets of data values (Voltage, Current, Frequency and kVA) be read from the Energy Meter and sent to ThingsBoard as timeseries, for later representation and dashboarding.   
-Click on "**Requests**" button.
+下面定义从电能表读取的 4 组示例数据（电压、电流、频率、kVA）并作为时序发送到 ThingsBoard，用于后续展示与仪表板。  
+点击「**Requests**」按钮。
 
 ![image](/images/samples/digicom/slave1.png)
 
 <br>
-We fill in the needed parameters for the Voltage (**Volts**) values and click "**Save**" button.
+填写电压（**Volts**）所需参数，点击「**Save**」按钮。
 
 ![image](/images/samples/digicom/Immagine-16.png)
 
 <br>
-Repeat the previous steps for Current (**Ampere**), Frequency (**Hertz**) and Power (**kVA**) by clicking on "**Add**" button.   
-The final result will look as below.
+点击「**Add**」按钮，按相同方式配置电流（**Ampere**）、频率（**Hertz**）和功率（**kVA**）。  
+最终效果如下。
 
 ![image](/images/samples/digicom/Immagine-17.png)
 
 <br>
-If everything is correct the **Value** column will show coherent measurement data being updated at the given Scan rate.
-By clicking on "**Test**" an immediate data value read can be issued. 
+若配置正确，**Value** 列会按指定 Scan rate 显示并更新测量数据。
+点击「**Test**」可立即触发一次数据读取。
 
 <br>
-Select **Modbus** – **MQTT Configuration** from the drop-down menu.
+从下拉菜单选择 **Modbus** – **MQTT Configuration**。
 
 ![image](/images/samples/digicom/modqtt1.png)
 
 <br>
-Fill in the MQTT destination parameters for our external Broker, like **Server Address** and **Port Number**, **Username** and **Password** (in this example our MQTT Broker is set for using **MQTT Basic Authentication**).   
-Set the **Publishing topic** to which the device will send the data to. By default, the device does publish to the following topic structure for its Modbus data: 
+填写外部 Broker 的 MQTT 目标参数，如 **Server Address**、**Port Number**、**Username** 和 **Password**（本例使用 **MQTT Basic Authentication**）。  
+设置设备发送数据的 **Publishing topic**。默认设备 Modbus 数据发布到以下 topic 结构： 
 
 ```
 digicom/<device SN>/data/modbus
 ```
 {:.copy-code}
 
-Click on "**Save**" button.
+点击「**Save**」按钮。
 
 ![image](/images/samples/digicom/modqtt2.png)
 
 <br>
-In order to start the newly configured processes it is needed to restart the device.   
-Select **Device** – "**Reboot**" from the drop-down menu.   
+需重启设备以使新配置生效。  
+从下拉菜单选择 **Device** –「**Reboot**」。
 
 ![image](/images/samples/digicom/reb1.png)
 
 <br>
-Click on "**Reboot**" and **confirm**.
+点击「**Reboot**」并**确认**。
 
 ![image](/images/samples/digicom/reb2.png)
 
-Wait for the device to become operational again, then go back to ThingsBoard account and check the device appearing in the "**Devices**" page.
+等待设备重新就绪后，返回 ThingsBoard 账户，在「**Devices**」页面检查设备是否出现。
 
-## Check the device
+## 检查设备
 
-Go to the "**Devices**" page of the "**Entities**" section from menu bar on the left.
-A new [device](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"} should appear as soon as it has published the first data to the external MQTT broker on which ThingsBoard is connected too.
+从左侧菜单栏进入「**Entities**」的「**Devices**」页面。
+当设备首次向 ThingsBoard 连接的外部 MQTT broker 发布数据后，新的[设备](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}应会显示。
 
 ![image](/images/samples/digicom/check-device-1.png)
 
 <br>
-Check data telemetries and attributes.
-Click on the device row (not on the checkbox) and go to the "**Last telemetry**" tab.
-This panel shows the latest values of the measurements the Data converter has extracted from the data stream.
+检查遥测与属性数据。
+点击设备行（非复选框），进入「**Last telemetry**」选项卡。
+此面板显示数据转换器从数据流中提取的最新测量值。
 
-Navigate to the "**Attributes**" tab.
-This panel shows the latest Client and Server attributes the Data converter has extracted from the data stream.
+进入「**Attributes**」选项卡。
+此面板显示数据转换器从数据流中提取的最新 Client 和 Server 属性。
 
 ![image](/images/samples/digicom/check-device-2.png)
 
 <br>
-So, with those data in the system we can now proceed and create a simple Dashboard.
+数据已在系统中，接下来可创建简单仪表板。
 
-## Create a Dashboard
+## 创建仪表板
 
-ThingsBoard offers a powerful feature – the ability to create and customize interactive visualizations, also known as [Dashboards](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}. These dashboards are instruments for monitoring and managing your data and devices efficiently.
+ThingsBoard 提供强大功能——创建和自定义交互式可视化，即[Dashboards](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}。这些仪表板是高效监测与管理数据和设备的工具。
 
-Navigate to the "**Dashboards**" page through the main menu on the left of the screen. Click the "**+**" sign in the upper right corner of the screen, and select "**Create new dashboard**" from the drop-down menu.
-In the opened dialog, it is necessary to enter a dashboard title, description is optional. Click "**Add**".
+通过左侧主菜单进入「**Dashboards**」页面。点击屏幕右上角「**+**」，从下拉菜单选择「**Create new dashboard**」。
+在弹出对话框中输入仪表板标题，description 可选。点击「**Add**」。
 
 ![image](/images/samples/digicom/dashboard-energy-meter-1.png)
 
 <br>
-After creating the dashboard, it will open automatically, and you can immediately start adding widgets to it.   
-Click the "**Add widget**" button at the top of the screen or click the large "**Add new widget**" icon in the center of the screen (if this is your first widget on this dashboard).
+创建后仪表板会自动打开，可立即添加部件。  
+点击屏幕顶部的「**Add widget**」按钮，或点击屏幕中央较大的「**Add new widget**」图标（若为该仪表板上首个部件）。
 
 ![image](/images/samples/digicom/dashboard-energy-meter-2.png)
 
 <br>
-Find the "**Analogue gauges**" widget bundle and click on it.
+找到「**Analogue gauges**」部件包并点击。
 
 ![image](/images/samples/digicom/dashboard-energy-meter-3.png)
 
 <br>
-Select the "**Radial gauge**" widget.
+选择「**Radial gauge**」部件。
 
 ![image](/images/samples/digicom/dashboard-energy-meter-4.png)
 
 <br>
-The "Add Widget" window will appear. Specify the device "**50012345**" as the data source in the "**Device**" field. 
-Specify the telemetry key "**power**" as **Data key**.   
-Scroll down and set other details as you prefer, like the title, units, minimum and maximum ranges for the gauge scale.
+出现「Add Widget」窗口。在「**Device**」字段指定设备「**50012345**」作为数据源。  
+将遥测键「**power**」设为 **Data key**。  
+向下滚动并按需设置其它项，如标题、单位、仪表量程最小最大值。
 
-If you want to customize further, go to the "**Advanced**" and go deeper in the widget appearance and styling.
+若要进一步自定义，进入「**Advanced**」调整部件外观与样式。
 
-Click on "**Add**".
+点击「**Add**」。
 
 ![image](/images/samples/digicom/dashboard-energy-meter-5.png)
 
 <br>
-You have added a widget that displays the current power readings.
+已添加显示当前功率读数的部件。
 
 ![image](/images/samples/digicom/dashboard-energy-meter-6.png)
 
 <br>
-Similarly, add additional widgets for the three other available telemetry values (data keys) and position them appropriately on the dashboard.   
-Once you have completed the configuration, click "**Save**" to save the dashboard.
+同样为另外三个遥测值（data keys）添加部件，并在仪表板上合理排列。  
+完成后点击「**Save**」保存仪表板。
 
 ![image](/images/samples/digicom/dashboard-energy-meter-7.png)
 
-## More references and guides
+## 更多参考资料与指南
 
-You may find more online documentation and guides on how to work with ThingsBoard, create [customers](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"}, [users](/docs/{{docsPrefix}}user-guide/ui/users/){:target="_blank"}, and [assets](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}, and make your [dashboards](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} even more powerful and professional!
+可在在线文档中查阅更多关于 ThingsBoard 使用、创建[customers](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"}、[users](/docs/{{docsPrefix}}user-guide/ui/users/){:target="_blank"}和[assets](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}，以及让[dashboards](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}更强大的指南。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

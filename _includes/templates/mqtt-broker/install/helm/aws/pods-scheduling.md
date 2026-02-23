@@ -1,18 +1,18 @@
-To ensure high availability and proper scheduling in your EKS-based TBMQ cluster,
-you must assign TBMQ components to specific node groups using the `nodeSelector` field in your Helm `values.yml`.
+为确保基于 EKS 的 TBMQ 集群高可用及正确调度，
+必须使用 Helm `values.yml` 中的 `nodeSelector` 字段将 TBMQ 组件分配到特定节点组。
 
-Your `cluster.yml` already defines dedicated node groups with role-based labels.
-For example for `tbmq-node` mananged node group you have:
+您的 `cluster.yml` 已定义带基于角色标签的专用节点组。
+例如，`tbmq-node` 托管节点组为：
 
 ```yaml
 labels: { role: tbmq }
 ```
 
-You must map each component to the appropriate node group using these labels.
+必须使用这些标签将各组件映射到相应节点组。
 
-Here’s how to explicitly assign each component:
+以下为显式分配各组件的示例：
 
-- TBMQ Broker:
+- TBMQ Broker：
 
 ```yaml
 tbmq:
@@ -21,7 +21,7 @@ tbmq:
 ```
 {: .copy-code}
 
-- TBMQ Integration Executor:
+- TBMQ Integration Executor：
 
 ```yaml
 tbmq-ie:
@@ -30,7 +30,7 @@ tbmq-ie:
 ```
 {: .copy-code}
 
-- Kafka Controller Nodes:
+- Kafka Controller 节点：
 
 ```yaml
 kafka:
@@ -40,7 +40,7 @@ kafka:
 ```
 {: .copy-code}
 
-- Redis Cluster Nodes:
+- Redis 集群节点：
 
 ```yaml
 redis-cluster:
@@ -50,7 +50,7 @@ redis-cluster:
 ```
 {: .copy-code}
 
-- PostgreSQL (if not using external DB):
+- PostgreSQL（若未使用外部数据库）：
 
 ```yaml
 postgresql:

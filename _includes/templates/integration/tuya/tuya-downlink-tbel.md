@@ -1,5 +1,5 @@
 ```javascript
-/** Encoder **/
+/** 编码器 **/
 
 var command = {};
 command["code"] = msg.method;
@@ -11,13 +11,13 @@ if (msg.params == "false" || msg.params == "true") {
 
 var result = {
 
-    // downlink data content type: JSON, TEXT or BINARY (base64 format)
+    // 下行数据内容类型：JSON、TEXT 或 BINARY（base64 格式）
     contentType: "JSON",
 
-    // downlink data
+    // 下行数据
     data: JSON.stringify(command),
 
-    // Optional metadata object presented in key/value format
+    // 可选的 key/value 格式元数据对象
     metadata: {
         deviceId: metadata.deviceName
     }

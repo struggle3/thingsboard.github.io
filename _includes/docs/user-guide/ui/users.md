@@ -2,174 +2,173 @@
 * TOC
 {:toc}
 
-## User overview
+## 用户概览
 
-In ThingsBoard, a **User** is an entity with credentials to access the platform.
+在ThingsBoard中，**用户**是具备平台访问凭证的实体。
 
-ThingsBoard supports a three-level role hierarchy:
+ThingsBoard支持三级角色体系：
 
-1) **System administrator**. 
-- Has full access to the entire platform instance.
-- Can create and manage Tenant Administrators.
+1) **系统管理员**
+- 拥有整个平台实例的完整访问权限。
+- 可创建和管理租户管理员。
 
-2) **Tenant administrator**.
-- Has full control over a specific tenant environment.
-- Can create and manage:
-  - Customers
-  - Customer Users
-- Responsible for assigning access to dashboards, devices, assets, and other resources.
+2) **租户管理员**
+- 对特定租户环境拥有完全控制权。
+- 可创建和管理：
+  - 客户
+  - 客户用户
+- 负责为仪表板、设备、资产及其他资源分配访问权限。
 
-3) **Customer user**.
-- Has limited access to view dashboards, entities, and their data assigned by the Tenant Administrator.
-- Cannot create other customers or sub-customers.
+3) **客户用户**
+- 仅能查看租户管理员分配给的仪表板、实体及其数据。
+- 无法创建其他客户或子客户。
 
 {% capture difference %}
-**Important:**
+**重要：**
 <br>
-In Thingsboard Professional Edition, the Customer can create other customer users and subcustomers.
+在ThingsBoard专业版中，客户可创建其他客户用户和子客户。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-The instructions below give an overview of adding the user on each level.
+以下说明如何在各级添加用户。
 
-### System administrator
+### 系统管理员
 
-If you are the **System administrator,** you can create the user in [Tenant](/docs/{{docsPrefix}}user-guide/ui/tenants) by the following steps.
+若您是**系统管理员**，可通过以下步骤在[租户](/docs/{{docsPrefix}}user-guide/ui/tenants)中创建用户。
 
-1. Go to Tenants on the left-hand menu. Navigate to Tenant admins, and click plus icon to add a new user.
+1. 在左侧菜单进入租户，选择租户管理员，点击加号图标添加新用户。
 
    ![image](/images/user-guide/ui/users/ce/tenant-user-add.png)
 
-2. Fill in the email and select the activation method in the Add User window. 
-The system administrator can also add the name and description optionally. Afterward click Add.
+2. 在添加用户窗口中填写邮箱并选择激活方式。
+系统管理员也可选填姓名和描述。填写完成后点击添加。
 
    ![image](/images/user-guide/ui/users/ce/user-add-window.png)
 
-3. If you selected the **activation link method,** click the arrow to copy this link and insert it in the browser or to any messenger used by the user. An example of an activation link is provided below.
+3. 若选择**激活链接**方式，点击箭头复制链接，在浏览器中打开或发送至用户使用的即时通讯工具。下方为激活链接示例。
 
    ![image](/images/user-guide/ui/users/ce/user-activation-link.png)
 
-4. If you selected send **activation mail option,** then you need to check your email box and find the message about the Thingsboard account activation. 
-Click Activate Your Account, and follow the easy password-creating process.
+4. 若选择**发送激活邮件**，需查收邮箱中关于ThingsBoard账户激活的邮件。
+点击激活账户，按提示完成密码创建。
 
    ![image](/images/user-guide/ui/users/ce/account-activation-email.png)
 
 {% capture difference %}
-**NOTE:**
+**注意：**
 <br>
-To receive an email from ThingsBoard, you should set up a mail server at the system administrator level in advance.
-Check out the [mail settings](/docs/{{docsPrefix}}user-guide/ui/mail-settings) instructions.
+要接收ThingsBoard发送的邮件，需事先在系统管理员层面配置邮件服务器。
+请参阅[邮件设置](/docs/{{docsPrefix}}user-guide/ui/mail-settings)说明。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 
-After a user is created, the system administrator can use the action tabs on the tenant details page.
+用户创建完成后，系统管理员可使用租户详情页的操作标签。
 
-They are as follows:
+操作包括：
 
-1) **Disable the User account**.
+1) **禁用用户账户**。
 
-2) **Display activation link** will show the activation link for the Tenant administrator user.
+2) **显示激活链接**：显示租户管理员用户的激活链接。
 
-3) **Resend activation** will resend the account activation email to the user's email box.
+3) **重新发送激活**：向用户邮箱重新发送账户激活邮件。
 
-4) **Login as Tenant administrator** opens the Thingsboard platform from the Tenant administrator UI. 
+4) **以租户管理员身份登录**：从租户管理员界面打开ThingsBoard平台。
 
-5) The System Administrator can also **delete** the Tenant administrator from the tenants' users list.
+5) 系统管理员还可从租户用户列表中**删除**租户管理员。
 
    ![image](/images/user-guide/ui/users/ce/user-tenant-tabs.png)
 
-When the admin clicks Disable User Account, he will see a message in the top left corner saying that the user account has been successfully disabled, and the tab will change to Enable User Account. 
-See the picture below.
+管理员点击禁用用户账户后，左上角会提示用户账户已成功禁用，标签会变为「启用用户账户」。
+如图所示。
 
    ![image](/images/user-guide/ui/users/ce/user-account-disabled.png)
 
-If the user with a disabled account tries to access the platform, he will see the following error message.
+若被禁用账户的用户尝试访问平台，会看到以下错误提示。
 
    ![image](/images/user-guide/ui/users/ce/error-message.png)
 
-Similarly, when the admin clicks Enable User Account, he will see the message in the top left corner that the user account has been successfully enabled. The tab will change to Disable User Account. See the picture below.
+同样，管理员点击启用用户账户后，左上角会提示用户账户已成功启用，标签会变为「禁用用户账户」。如图所示。
 
    ![image](/images/user-guide/ui/users/ce/user-account-enabled.png)
 
-### Tenant administrator
+### 租户管理员
 
-As a **Tenant administrator**, you can add a new user using the following steps.
+作为**租户管理员**，可通过以下步骤添加新用户。
 
-1. Go to Customers. Navigate to Customer Users, and click the plus icon to add a new user. 
+1. 进入客户，选择客户用户，点击加号图标添加新用户。 
 
    ![image](/images/user-guide/ui/users/ce/customer-user-add.png)
 
-2. Be sure to fill in the email and select the activation method in the Add User window.
-The Tenant administrator can add the name and description optionally. When done, click Add.
+2. 在添加用户窗口中填写邮箱并选择激活方式。
+租户管理员可选填姓名和描述。完成后点击添加。
 
    ![image](/images/user-guide/ui/users/ce/customer-user-add-window.png)
 
-3. When the user is created, the Tenant Administrator can use the action tabs on the user details page. 
+3. 用户创建后，租户管理员可使用用户详情页的操作标签。 
 
 They are as follows:
 
-1) **Disable the User account.** How to disable the account was mentioned above.  
+1) **禁用用户账户**。禁用方法如上所述。  
 
-2) **Display activation link** will show the activation link for the Customer user.
+2) **显示激活链接**：显示客户用户的激活链接。
 
-3) **Resend activation** will resend the account activation email to the user's email box. 
+3) **重新发送激活**：向用户邮箱重新发送账户激活邮件。 
 
-4) **Login as a Customer user** lets the Tenant administrator open the Thingsboard platform from the user UI. 
+4) **以客户用户身份登录**：租户管理员可从用户界面打开ThingsBoard平台。 
 
-5) The Tenant Administrator can also **delete the Customer user** from the customers’ list.
-
+5) 租户管理员也可从客户列表中**删除**该客户用户’ 
 
    ![image](/images/user-guide/ui/users/ce/customer-user-account-disable.png)
 
-The Tenant administrator can optionally assign the default dashboard and set the fullscreen mode, as shown in the picture below.
+租户管理员可选择性分配默认仪表板并设置全屏模式，如图所示。
 
 
    ![image](/images/user-guide/ui/users/ce/default-dashboard-assigned.png)
 
-Likewise, the Tenant administrator can optionally assign the home dashboard for the Customer user and hide the dashboard toolbar, as shown in the picture below.
+同样，租户管理员可选择性为客户用户分配主页仪表板并隐藏仪表板工具栏，如图所示。
 
 
    ![image](/images/user-guide/ui/users/ce/home-dashboard-assigned.png) 
 
-**IMPORTANT**: There is no need to assign a default dashboard and home dashboard together since the default dashboard will be the first one a user sees when he logs into his account.
+**重要**：无需同时分配默认仪表板和主页仪表板，因为用户登录后首先看到的将是默认仪表板。
 
-If any questions arise, click the Question mark in the upper right corner.
+如有疑问，可点击右上角的问号图标。
 
-### Customer User UI
+### 客户用户界面
 
-#### Default dashboard as the home page
+#### 默认仪表板作为首页
 
-When the Customer user logs into his account, the default dashboard is the first he sees. If the Tenant administrator sets the fullscreen default dashboard, the Customer user will see the dashboard without the lefthand menu, as in the example below. 
-The dashboard toolbar will always be available for the user, and he can switch to another dashboard, if one is assigned, and set realtime ranges for himself.
-Additionally, there is an option to export this dashboard.
+客户用户登录后首先看到的是默认仪表板。若租户管理员设置了全屏默认仪表板，客户用户将看到无左侧菜单的仪表板，如下例所示。
+仪表板工具栏始终可用，用户可切换到已分配的其他仪表板，并自行设置实时时间范围。
+此外，还可导出该仪表板。
 
    ![image](/images/user-guide/ui/users/ce/default-dashboard.png) 
 
 
-Customer users can switch between the left-hand menu tabs to view all the assets, devices, entities, edges, and dashboards assigned by the Tenant administrator if the fullscreen mode is not check-marked.
-The dashboard example is shown below.
+若未勾选全屏模式，客户用户可通过左侧菜单切换查看租户管理员分配的全部资产、设备、实体、边缘和仪表板。
+仪表板示例如下。
 
    ![image](/images/user-guide/ui/users/ce/default-dashboard-not-fullscreen-1.png) 
 
 
-#### Home dashboard as the home page
+#### 主页仪表板作为首页
 
-If the Tenant administrator assigns the dashboard as the home dashboard, then the Customer user will see this dashboard on his home page.
-If Hide home dashboard toolbar is selected, then the Customer user will see the home dashboard without the toolbar.
-The dashboard with the disabled toolbar is shown below.
+若租户管理员将某仪表板设为主页仪表板，客户用户将在其首页看到该仪表板。
+若勾选「隐藏主页仪表板工具栏」，客户用户将看到无工具栏的主页仪表板。
+禁用工具栏的仪表板如下所示。
 
   ![image](/images/user-guide/ui/users/ce/home-dashboard-no-toolbar.png)    
 
-The dashboard with the enabled toolbar is shown in the picture below. The user can set real-time ranges and export the dashboard.
+启用工具栏的仪表板如图所示。用户可设置实时时间范围并导出仪表板。
 
 
    ![image](/images/user-guide/ui/users/ce/home-dashboard-toolbar.png)
 
-The Customer user can also optionally hide the home dashboard toolbar or change the home dashboard in his profile settings.
+客户用户也可在个人资料设置中选择性隐藏主页仪表板工具栏或更改主页仪表板。
    
    ![image](/images/user-guide/ui/users/ce/profile-window.png)  
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

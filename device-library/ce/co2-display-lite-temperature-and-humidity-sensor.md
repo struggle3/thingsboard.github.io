@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect CO2 Display lite Temperature and humidity sensor to ThingsBoard?
-category: Other devices
+title: 如何将 CO2 Display lite Temperature and humidity sensor 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: MClimate
 hasIntegrationDeviceConfiguration: true

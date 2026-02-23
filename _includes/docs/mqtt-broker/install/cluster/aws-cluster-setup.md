@@ -1,14 +1,14 @@
 * TOC
 {:toc}
 
-This guide will help you set up TBMQ {{tbmqSuffix}} in AWS EKS.
+本指南将帮助您在 AWS EKS 上搭建 TBMQ {{tbmqSuffix}}。
 
-## Prerequisites
+## 前置条件
 
 {% include templates/mqtt-broker/install/aws/eks-prerequisites.md %}
 
 {% if docsPrefix == null %}
-## Clone TBMQ repository
+## 克隆 TBMQ 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -17,7 +17,7 @@ cd tbmq/k8s/aws
 {: .copy-code}
 
 {% else %}
-## Clone TBMQ PE K8S repository
+## 克隆 TBMQ PE K8S 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq-pe-k8s.git
@@ -26,38 +26,38 @@ cd tbmq-pe-k8s/aws
 {: .copy-code}
 {% endif %}
 
-## Configure and create EKS cluster
+## 配置并创建 EKS 集群
 
-In the `cluster.yml` file you will find a sample cluster configuration.
-You can adjust the following fields according to your requirements:
+在 `cluster.yml` 中可找到示例集群配置。
+可根据需求调整以下字段：
 
-* `region` – the AWS region where the cluster will be created.
-  Default: `us-east-1`.
+* `region` – 创建集群的 AWS 区域。
+  默认：`us-east-1`。
 
-* `availabilityZones` – the availability zones within the chosen region.
-  Default: `[us-east-1a, us-east-1b, us-east-1c]`.
+* `availabilityZones` – 所选区域内的可用区。
+  默认：`[us-east-1a, us-east-1b, us-east-1c]`。
 
-* `managedNodeGroups` – defines the node groups used by the cluster.
-  By default, there are two groups: one for **TBMQ core services** and another for **TBMQ Integration Executors**.
-  If preferred, you may co-locate both workloads in the same node group.
+* `managedNodeGroups` – 定义集群使用的节点组。
+  默认有两组：一组用于 **TBMQ 核心服务**，另一组用于 **TBMQ Integration Executors**。
+  若需要，可将两者部署到同一节点组。
 
-* `instanceType` – the EC2 instance type for TBMQ and TBMQ IE nodes.
-  Default: `m7a.large`.
+* `instanceType` – TBMQ 和 TBMQ IE 节点的 EC2 实例类型。
+  默认：`m7a.large`。
 
-**Note**: If you don't make any changes to `instanceType` and `desiredCapacity` fields, the EKS will deploy 4 nodes of type m7a.large.
+**注意**：若未修改 `instanceType` 和 `desiredCapacity`，EKS 将部署 4 个 m7a.large 类型的节点。
 
-Command to create the AWS cluster:
+创建 AWS 集群命令：
 
 ```bash
 eksctl create cluster -f cluster.yml
 ```
 {: .copy-code}
 
-## Create an AWS load-balancer controller
+## 创建 AWS 负载均衡器控制器
 
-Once the cluster is ready, you'll need to create AWS load-balancer controller.
-You can do it by following [this](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html) guide.
-The cluster provisioning scripts will create several load balancers:
+集群就绪后，需创建 AWS 负载均衡器控制器。
+可参考[此指南](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)。
+集群部署脚本将创建若干负载均衡器：
 
 * tbmq-http-loadbalancer - AWS ALB that is responsible for the web UI and REST API;
 * tbmq-mqtt-loadbalancer - AWS NLB that is responsible for the MQTT communication.

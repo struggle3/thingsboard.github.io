@@ -1,5 +1,5 @@
 
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.milesight-iot.com/lorawan/sensor/ws101/" %}
 
 {% assign thingsboardHost = "https://" | append: hostName %}
@@ -10,11 +10,11 @@
 - Smartphone with NFC-enabled and Milesight ToolBox application ([Android](https://play.google.com/store/apps/details?id=com.ursalinknfc){: target="_blank"}/[iOS](https://itunes.apple.com/app/id1518748039){: target="_blank"})
 - LoRaWAN® gateway (in our case [UG56 LoRaWAN® Gateway](/device-library/pe/ug56-lorawan-gateway/){:target="_blank"})
 - Configured integration on networks server and ThingsBoard
-- [Network Server account](#device-connection)
+- [网络服务器账户](#设备连接)
 '
  %}
 
-## Introduction
+## 概述
 
 [WS101 Smart Button]({{deviceVendorLink}}){: target="_blank"} is a LoRaWAN®-based smart button for wireless controls, triggers and alarms.  
 WS101 supports multiple press actions, all of which can be defined by the user to control devices or trigger scenes.
@@ -25,15 +25,15 @@ LoRaWAN® enables encrypted radio transmissions over long distances while consum
 {% assign feature = "Platform Integrations" %}{% include templates/pe-feature-banner.md %}
 <br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前，需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
 
-## Device connection
+## 设备连接
 
 According to the [official user manual]({{officialManualLink}}){: target="_blank"}, we need a smartphone with NFC enabled and the ToolBox application to connect the sensor.  
 Since this device can only be operated using a LoRaWAN® gateway, we must first connect it to a network server that has an integration configured with ThingsBoard.  
@@ -61,7 +61,7 @@ Loriot
 
 {% include /docs/device-library/blocks/ready-to-go-devices/ws101-smart-button-check-data-block.md %}
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

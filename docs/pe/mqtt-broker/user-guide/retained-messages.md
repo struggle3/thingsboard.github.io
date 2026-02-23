@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Retained Messages
-description: TBMQ Retained Messages feature
+title: 保留消息
+description: TBMQ 保留消息功能
 
 details-retained-messages:
   0:

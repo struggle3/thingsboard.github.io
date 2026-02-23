@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Tuya Integration
-description: Tuya Integration Guide
+title: Tuya 集成
+description: Tuya 集成指南
 
 tuya-application-add-device:
     0:

@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - ashvayka
-title: Installing ThingsBoard Trendz Analytics on Ubuntu
-description: Installing ThingsBoard Trendz Analytics on Ubuntu
+title: 在 Ubuntu 上安装 ThingsBoard Trendz Analytics
+description: 在 Ubuntu 上安装 ThingsBoard Trendz Analytics
 
 trendz-settings:
   0:
@@ -37,16 +37,16 @@ trendz-sync:
 * TOC
 {:toc}
 
-This guide explains how to install **Trendz Analytics** on **Ubuntu 22.04 LTS** or **Ubuntu 24.04 LTS**.
+本指南说明如何在**Ubuntu 22.04 LTS**或**Ubuntu 24.04 LTS**上安装**Trendz Analytics**。
 
-**Important note before proceeding with Ubuntu installation**
+**Ubuntu安装前重要说明**
 
-Certain Trendz Analytics features like **predictions, metric explorations, and Python calculation fields** require a Python executor.
+Trendz Analytics的部分功能（如**predictions**、**metric explorations**和**Python calculation fields**）依赖Python executor。
 
-The python executor runs **only via Docker**. Even on Ubuntu, Docker is essential to fully utilize all Trendz features.
-We recommend following the [Docker (Linux or Mac OS) installation guide](/docs/trendz/install/docker) and using the Docker installation instead of Ubuntu.
+Python executor**仅能通过Docker运行**。即使在Ubuntu上，也要使用Docker才能完整使用Trendz。
+建议遵循[Docker (Linux或Mac OS) 安装指南](/docs/trendz/install/docker)，采用Docker安装而非Ubuntu。
 
-Proceed here **only** if you have a compelling reason to use a combined Ubuntu + Docker setup.
+**仅**在有充分理由使用Ubuntu + Docker组合方案时再继续阅读本文。
 
 ## Prerequisites
 
@@ -67,14 +67,14 @@ Proceed here **only** if you have a compelling reason to use a combined Ubuntu +
 
 ### Step 2. Trendz Analytics service installation
 
-Download installation package.
+下载安装包。
 
 ```bash
 wget https://dist.thingsboard.io/trendz-{{ site.release.trendz_ver }}.deb
 ```
 {: .copy-code}
 
-Install Trendz Analytics as a service
+安装Trendz Analytics服务
 
 ```bash
 sudo dpkg -i trendz-{{ site.release.trendz_ver }}.deb
@@ -83,8 +83,7 @@ sudo dpkg -i trendz-{{ site.release.trendz_ver }}.deb
 
 ### Step 3. Configure Trendz database
 
-Trendz uses PostgreSQL as a database. You can install PostgreSQL on the same server for Trendz or use managed PostgreSQL 
-service from your cloud vendor.
+Trendz使用PostgreSQL作为数据库。可在同一服务器为Trendz安装PostgreSQL，或使用云商的托管PostgreSQL服务。
 
 * **PostgreSQL Installation**
 
@@ -92,31 +91,31 @@ service from your cloud vendor.
 
 * **Create Database for Trendz**
 
-Connect to the database to create trendz DB:
+连接数据库并创建trendz库：
 
 ```bash
 psql -U postgres -d postgres -h 127.0.0.1 -W
 ```
 {: .copy-code}
 
-Create database named "trendz":
+创建名为"trendz"的数据库：
 ```bash
 CREATE DATABASE trendz;
 ```
 {: .copy-code}
 
-Press “Ctrl+D” twice to logout.
+按"Ctrl+D"两次退出。
 
 * **Configure database connection for Trendz**
 
-Edit Trendz configuration file
+编辑Trendz配置文件
 
 ```bash
 sudo nano /etc/trendz/conf/trendz.conf
 ```
 {: .copy-code}
 
-Add the following lines to the configuration file. Don't forget **to replace** "PUT_YOUR_POSTGRESQL_PASSWORD_HERE" with your **real postgres user password**:
+在配置文件中添加以下行。**勿忘**将"PUT_YOUR_POSTGRESQL_PASSWORD_HERE"替换为**真实的postgres用户密码**：
 
 ```bash
 # DB Configuration
@@ -128,7 +127,7 @@ export SPRING_DATASOURCE_PASSWORD=PUT_YOUR_POSTGRESQL_PASSWORD_HERE
 
 ### Step 4. Run installation script
 
-Once Trendz service is installed and DB configuration is updated, you can execute the following script:
+Trendz服务安装完毕且DB配置更新后，执行以下脚本：
 
 ```bash
 sudo /usr/share/trendz/bin/install/install.sh
@@ -137,7 +136,7 @@ sudo /usr/share/trendz/bin/install/install.sh
 
 ### Step 5. Start Trendz service
 
-Execute the following command to start Trendz Analytics:
+执行以下命令启动Trendz Analytics：
 
 ```bash
 sudo service trendz start
@@ -150,10 +149,10 @@ sudo service trendz start
 
 ### Step 7. Install Trendz Python Executor
 
-To utilize all Trendz capabilities, such as Trendz Python Calculation Fields or Prediction Models, it is essential to
-install an additional service: the Trendz Python Executor, which can securely run Python code.
+要使用Trendz Python Calculation Fields或Prediction Models等全部Trendz能力，
+需安装Trendz Python Executor——该服务可安全运行Python代码。
 
-You can learn more about how to install it [here](/docs/trendz/install/python-executor-configuration).
+安装方法[见](/docs/trendz/install/python-executor-configuration)。
 
 ## Authentication
 
@@ -161,13 +160,13 @@ You can learn more about how to install it [here](/docs/trendz/install/python-ex
 
 ## Troubleshooting
 
-Trendz logs are stored in the following directory:
+Trendz日志位于以下目录：
 
 ```bash
 /var/log/trendz
 ```
 
-You can issue the following command in order to check if there are any errors on the backend side:
+检查backend是否有错误可执行：
 
 ```bash
 cat /var/log/trendz/trendz.log | grep ERROR

@@ -3,7 +3,7 @@ layout: docwithnav-pe
 assignees:
 - nick
 title: MQTT Sparkplug API
-description: Supported MQTT Sparkplug API Reference for IoT Devices
+description: IoT 设备支持的 MQTT Sparkplug API 参考
 
 sparkplug-create-device-profile:
     0:

@@ -1,25 +1,25 @@
-Download installation package:
+下载安装包：
 
 ```bash
 wget https://dist.thingsboard.io/tb-opc-ua-integration-{{ site.release.pe_ver }}.rpm
 ```
 {: .copy-code}
 
-Install integration as a service:
+安装集成作为服务：
 
 ```bash
 sudo rpm -Uvh tb-opc-ua-integration-{{ site.release.pe_ver }}.rpm
 ```
 {: .copy-code}
 
-Open the file for editing using the following command:
+使用以下命令打开文件进行编辑：
 
 ```bash 
 sudo nano /etc/tb-opc-ua-integration/conf/tb-opc-ua-integration.conf
 ``` 
 {: .copy-code}
 
-Locate the following configuration block:
+找到以下配置块：
 
 ```bash
 # UNCOMMENT NEXT LINES AND PUT YOUR CONNECTION PARAMETERS:
@@ -29,7 +29,7 @@ Locate the following configuration block:
 # export INTEGRATION_SECRET=YOUR_INTEGRATION_SECRET
 ```
 
-and put your configuration parameters. Please don't forget to uncomment the export statement. See example below:
+填入您的配置参数。请不要忘记取消 export 语句的注释。参见以下示例：
 
 ```bash
 # UNCOMMENT NEXT LINES AND PUT YOUR CONNECTION PARAMETERS:
@@ -39,23 +39,23 @@ export INTEGRATION_ROUTING_KEY=b75**************************34d
 export INTEGRATION_SECRET=vna**************mik
 ```
 
-Execute the following command to start ThingsBoard:
+执行以下命令以启动 ThingsBoard：
 
 ```bash
 sudo service tb-opc-ua-integration start
 ```
 {: .copy-code}
 
- - **Advanced configuration**
+ - **高级配置**
 
-Once can lookup additional configuration parameters inside the yml configuration file.
+可在 yml 配置文件中查找其他配置参数。
 
-Open the file for editing using the following command:
+使用以下命令打开文件进行编辑：
 
 ```bash 
 sudo nano /etc/tb-opc-ua-integration/conf/tb-opc-ua-integration.conf
 ``` 
 {: .copy-code} 
 
-After executing this command you can open logs which are located here `/var/log/tb-opc-ua-integration/`. 
-You should see some INFO log messages with your latest Integration configuration that arrived from the server.
+执行此命令后可在以下位置查看日志 `/var/log/tb-opc-ua-integration/`. 
+您应能看到来自服务器的部分 INFO 日志信息，其中包含最新的集成配置。

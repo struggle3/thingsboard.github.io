@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Trendz Analytics upgrade instructions
-description: Trendz Analytics upgrade instructions
+title: Trendz Analytics 升级说明
+description: Trendz Analytics 升级说明
 table-of-contents: "false"
 active-menu-item-click: "true"
 effective-url: '/docs/trendz/install/upgrade-instructions/'

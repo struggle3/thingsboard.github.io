@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.dusuniot.com/product/dsgw-210-rk3328-iot-gateway-hub-controller-bridge-hardware/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign officialManualLink = "https://manuals.plus/dusun/dsgw-210-home-assistant-gateway-manual/" %}
@@ -9,16 +9,16 @@
   '
   %}
 
-## Introduction
+## 概述
 
 [DSGW-210 Smart Gateway Hub]({{deviceVendorLink}}){: target="_blank"} is IoT gateway with multiple protocol and edge computing function. It provides reliable connectivity for a wide range of wireless IoT devices. The gateway’s modular architecture provides the ability to customize many gateway features including Cellular, Bluetooth, Wi-Fi, Ethernet, USB, ZigBee, Z-wave and Li battery backup.
 <br><br><br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前，需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
 ## Product Summary

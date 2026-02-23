@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Combine data from ThingsBoard and external databases
-description: Combine data from ThingsBoard and external SQL databases to compute metrics and analyze trends.
+title: 合并 ThingsBoard 与外部数据库数据
+description: 合并 ThingsBoard 与外部 SQL 数据库数据以计算指标并分析趋势。
 
 settings-add:
   0:

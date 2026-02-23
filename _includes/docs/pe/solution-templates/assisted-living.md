@@ -4,115 +4,115 @@
 
 {% include templates/solution-templates.md %}
 
-An Assisted Living solution template for monitoring resident health and facility safety has been implemented based on ThingsBoard.   
-The solution is designed for senior housing, nursing homes, and care facilities where staff need real-time visibility into residents’ vital signs, indoor location, and critical safety events.
+基于ThingsBoard实现的辅助生活解决方案模板，用于监测住户健康状况与设施安全。
+该方案面向养老公寓、护理院及照护机构，使工作人员能实时掌握住户生命体征、室内位置及关键安全事件。
 
-The template combines wearable devices (BLE/LoRa wristbands), environmental room sensors, and gateways to collect telemetry, detect abnormal conditions, and trigger alarms such as panic button presses, abnormal heart rate/temperature, smoke, water leaks, or open doors/windows. It also provides administrative tools to manage facility layout (floors/zones/rooms) and assign devices to residents and rooms.
+模板整合可穿戴设备（BLE/LoRa腕带）、室内环境传感器和网关，采集遥测、检测异常并触发告警（如紧急按钮、心率/体温异常、烟雾、漏水、门窗开启）。同时提供管理工具，用于管理设施布局（楼层/区域/房间）并将设备分配给住户和房间。
 
 {% include images-gallery.html imageCollection="solution-highlights" %}
 
-## Install solution template
+## 安装解决方案模板
 
-To understand how the Assisted Living solution works, start by installing the solution template.
+要了解Assisted Living解决方案的工作方式，请先安装解决方案模板。
 
-You will need access to ThingsBoard Professional Edition. The easiest way is to use the [ThingsBoard Cloud](/installations/choose-region/){:target="_blank"}. Alternatively, you can install ThingsBoard using the [Professional Edition installation guide](/docs/user-guide/install/pe/installation-options/){:target="_blank"}.
+您需要ThingsBoard专业版访问权限。最简单的方式是使用[ThingsBoard Cloud](/installations/choose-region/){:target="_blank"}，也可按[专业版安装指南](/docs/user-guide/install/pe/installation-options/){:target="_blank"}自行安装。
 
-- Go to the **Solution templates** page.
-- Find **Assisted living** and click **Install**.
-- Follow the provided configuration instructions.
-- Once the installation is complete, click **Close**.
-- The **Assisted Living Administration** dashboard opens automatically.
+- 进入**Solution templates**页面。
+- 找到**Assisted living**并点击**Install**。
+- 按提供的配置说明操作。
+- 安装完成后点击**Close**。
+- **Assisted Living Administration**仪表板将自动打开。
 
-After installation, a fully functional simulation for monitoring resident health and facility safety is created automatically. No devices, integrations, or custom code are required to start exploring the solution.
+安装后，会自动创建完整的住户健康与设施安全监测模拟，无需设备、集成或自定义代码即可开始体验。
 
 {% include images-gallery.html imageCollection="install-solution-template" %}
 
-## Key application areas
+## 主要应用场景
 
-The Assisted Living solution template is applicable in environments where resident safety, indoor visibility, and facility condition monitoring must be ensured in real time:
-- **Assisted living facilities** – Continuous monitoring of resident vitals, panic button events, and indoor location to support timely staff response.
-- **Nursing homes and long-term care centers** – Automated detection of health anomalies and safety hazards (falls/noise, smoke, leaks, open doors/windows) to reduce operational risk.
-- **Memory care units** – Prevention of wandering and rapid resident localization using RSSI-based indoor positioning and door/window monitoring.
-- **Post-acute and rehabilitation centers** – Tracking resident movement and recovery indicators, with escalation workflows for abnormal vitals or distress events.
-- **Hospice and palliative care facilities** – Resident comfort monitoring through environmental sensors (temperature, humidity, IAQ) and proactive alerting for unsafe conditions.
-- **Retirement communities with independent living** – Light-touch supervision using wearables and room sensors, providing assistance only when alerts indicate potential issues.
-- **Multi-building care campuses** – Centralized management of multiple floors/zones, staff workflows, and alarm policies across a distributed facility layout.
+Assisted Living解决方案模板适用于需要实时保障住户安全、室内可视性与设施状况监测的环境：
+- **辅助生活机构**——持续监测住户生命体征、紧急按钮事件及室内位置，以支持及时响应。
+- **护理院与长期照护中心**——自动检测健康异常与安全隐患（跌倒/噪音、烟雾、漏水、门窗开启），降低运营风险。
+- **认知照护单元**——通过基于RSSI的室内定位及门窗监测，防止走失并快速定位住户。
+- **急性后期与康复中心**——跟踪住户活动与康复指标，并对异常生命体征或求救事件启动升级流程。
+- **临终关怀与姑息照护机构**——通过环境传感器（温度、湿度、IAQ）监测住户舒适度，并对不安全状况提前告警。
+- **独立居住养老社区**——利用可穿戴与房间传感器进行轻度监护，仅在告警提示潜在问题时介入。
+- **多楼栋照护园区**——集中管理多层/多区域的布局、人员工作流及告警策略。
 
-## System components
+## 系统组件
 
-The Assisted Living solution includes the following core components:
-- **Resident wristbands (BLE/LoRa wearables)** – Track vital signs such as heart rate and body temperature, provide panic button events, and transmit beacon signals for indoor positioning.
-- **Room sensors** – Monitor environmental and safety conditions such as room temperature, humidity, indoor air quality (IAQ), smoke, water leaks, and door/window open/close status.
-- **Gateways** – BLE or LoRa gateways that receive signals from nearby sensors and wristbands and forward messages to the platform.
-- **Indoor positioning (RSSI-based)** – Resident location is derived from beacon messages received by multiple gateways. The system uses RSSI values to determine the closest gateway and associate the resident with the corresponding room/zone.
-- **Data processing and enrichment** – Incoming gateway messages are deduplicated and enriched with gateway attributes (for example, room and zone identifiers) before being routed to the appropriate device processing chain.
-- **Dashboard visualization** – A facility administration dashboard for monitoring residents, rooms, alarms, and for managing zones/rooms/device assignments.
+Assisted Living解决方案包含以下核心组件：
+- **住户腕带（BLE/LoRa可穿戴设备）**——监测心率、体温等生命体征，提供紧急按钮事件，并发送用于室内定位的信标信号。
+- **房间传感器**——监测房间温度、湿度、室内空气质量（IAQ）、烟雾、漏水及门窗开合状态。
+- **网关**——BLE或LoRa网关，接收附近传感器与腕带信号并转发至平台。
+- **室内定位（基于RSSI）**——住户位置由多网关接收的信标消息推算，系统根据RSSI值判定最近网关并关联住户至对应房间/区域。
+- **数据处理与丰富**——入站网关消息去重并补充网关属性（如房间、区域标识）后，路由至相应设备处理链。
+- **仪表板可视化**——设施管理仪表板，用于监测住户、房间、告警及管理区域/房间/设备分配。
 
-## Devices
+## 设备
 
-The solution includes wearable devices and room sensors connected via gateways.
-- **Resident wristbands** – Provide vitals and location signals (BLE beacon) and generate panic/noise/battery telemetry.
-- **Room sensors** – Provide telemetry for environment and safety, including IAQ, temperature, humidity, smoke, leak, and door/window status.
-- **Gateways** – Collect data from nearby wristbands and sensors and forward messages to ThingsBoard.
+解决方案包含通过网关连接的可穿戴设备与房间传感器。
+- **住户腕带**——提供生命体征与位置信号（BLE信标），并生成紧急/噪音/电池遥测。
+- **房间传感器**——提供环境与安全遥测，包括IAQ、温度、湿度、烟雾、漏水和门窗状态。
+- **网关**——从附近腕带和传感器采集数据并转发至ThingsBoard。
 
-## Dashboard
+## 仪表板
 
-As part of this solution, we provide the **Assisted Living Administration** dashboard, which serves as the primary interface for monitoring and managing the facility.
+本解决方案提供**Assisted Living Administration**仪表板，作为监测与管理设施的主界面。
 
-It enables staff to:
-- Monitor residents’ heart rate and body temperature in real time.
-- Track resident locations on interactive floor plans.
-- Detect and handle resident alarms (panic button, abnormal vitals, noise).
-- Detect and handle infrastructure alarms (smoke, leaks, door/window status).
-- Manage zones, rooms, and resident/device assignments.
+工作人员可：
+- 实时监测住户心率和体温。
+- 在交互式平面图上跟踪住户位置。
+- 检测并处理住户告警（紧急按钮、生命体征异常、噪音）。
+- 检测并处理设施告警（烟雾、漏水、门窗状态）。
+- 管理区域、房间及住户/设备分配。
 
-<b><font size="3">Dashboard structure</font></b>
+<b><font size="3">仪表板结构</font></b>
 
-The dashboard consists of multiple states:
-- **Main state (Overview)** – Real-time facility view with floor plans, resident and room markers, and alarm lists.
-- **Residents state** – Resident roster management, including personal, medical, emergency contact details, and wristband assignments.
-- **Zones state** – Facility hierarchy management (floors/zones) and floor plan uploads.
-- **Zone details state** – Room mapping and device assignment for a selected zone.
+仪表板包含多种状态：
+- **Main state (Overview)**——实时设施视图，含平面图、住户与房间标记、告警列表。
+- **Residents state**——住户名册管理，含个人、医疗、紧急联系人及腕带分配。
+- **Zones state**——设施层级管理（楼层/区域）及平面图上传。
+- **Zone details state**——所选区域的房间映射与设备分配。
 
 {% include images-gallery.html imageCollection="dashboard-structure" %}
 
-## Alarms
+## 告警
 
-The solution uses pre-configured [alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"} assigned to [device profiles](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}. Thresholds for Major and Critical severity levels can be adjusted directly from the dashboard settings.
+解决方案使用预配置的[告警规则](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"}，并关联至[设备配置文件](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}。Major和Critical严重级别的阈值可直接在仪表板设置中调整。
 
-<b><font size="3">Resident alarms (Wristband)</font></b>
-- **Panic button** – Triggers a Major alarm on a single press and a Critical alarm if pressed two or more times.
-- **Heart rate** – Triggers when pulse value breaches configured lower/upper limits.
-- **Body temperature** – Triggers when temperature breaches configured lower/upper limits.
-- **High noise** – Triggers when noise exceeds the configured threshold (may indicate a fall or distress).
-- **Low battery** – Triggers when wristband battery level drops below the configured percentage.
+<b><font size="3">住户告警（腕带）</font></b>
+- **紧急按钮**——单次按下触发Major告警，两次及以上触发Critical告警。
+- **心率**——脉搏值超出配置的下限/上限时触发。
+- **体温**——温度超出配置的下限/上限时触发。
+- **高噪音**——噪音超过配置的阈值时触发（可能表示跌倒或遇险）。
+- **低电量**——腕带电量低于配置的百分比时触发。
 
 {% include images-gallery.html imageCollection="resident-alarms" %}
 
-<b><font size="3">Infrastructure alarms (Room sensors)</font></b>
-- **Security (Door/Window)** – Triggers when door or window open event lasts longer than the allowed duration.
-- **Critical hazards** – Triggers immediately if smoke or water leak is detected.
-- **Environment** – Triggers when IAQ, temperature, or humidity breach configured comfort ranges.
-- **Sensor battery** – Triggers when room sensor battery level drops below the configured limit.
+<b><font size="3">设施告警（房间传感器）</font></b>
+- **安防（门窗）**——门窗开启事件持续超过允许时长时触发。
+- **严重隐患**——检测到烟雾或漏水时立即触发。
+- **环境**——IAQ、温度或湿度超出配置的舒适范围时触发。
+- **传感器电量**——房间传感器电量低于配置的限值时触发。
 
 {% include images-gallery.html imageCollection="infrastructure-alarms" %}
 
 
-## Rule chains
+## 规则链
 
-The Assisted Living solution relies on dedicated rule chains for gateway ingestion and device telemetry processing.
-- **AL Gateway Rule Chain** – Processes data arriving from gateways:
-  - deduplicates messages received from multiple gateways; 
-  - identifies the target device using serial number from payload; 
-  - enriches messages with gateway (room/zone) attributes; 
-  - routes messages by device type (room sensor vs wristband); 
-  - determines resident location using the maximum RSSI value (closest gateway).
-- **AL Wristband Device Rule Chain** – Saves telemetry, evaluates alarms, and counts active alarms. The alarm count is propagated to the corresponding resident user entity for dashboard visualization.
-- **AL Room Device Rule Chain** – Saves telemetry and evaluates alarms for infrastructure sensors. Unlike the wristband chain, it does not propagate alarm counts to resident user entities.
+Assisted Living解决方案依赖专用规则链处理网关接入与设备遥测。
+- **AL Gateway Rule Chain**——处理来自网关的数据：
+  - 对多网关接收的消息去重；
+  - 通过负载中的序列号识别目标设备；
+  - 补充网关（房间/区域）属性；
+  - 按设备类型（房间传感器 vs 腕带）路由消息；
+  - 使用最大RSSI值（最近网关）判定住户位置。
+- **AL Wristband Device Rule Chain**——保存遥测、评估告警并统计活跃告警数量，告警数传递给对应住户用户实体用于仪表板展示。
+- **AL Room Device Rule Chain**——为设施传感器保存遥测并评估告警，与腕带链不同，不将告警数传递给住户用户实体。
 
 {% include images-gallery.html imageCollection="rule-chains" %}
 
-## Conclusion
+## 总结
 
-The Assisted Living solution demonstrates how ThingsBoard can be used to build an integrated resident safety and facility monitoring platform. 
-By combining wearable telemetry, room sensor data, RSSI-based indoor positioning, and alarm-driven workflows, the solution enables care staff to respond to emergencies faster, maintain comfortable living conditions, and manage facility structure and device assignments from a single administration dashboard.
+Assisted Living解决方案展示了如何使用ThingsBoard构建集成式的住户安全与设施监测平台。
+结合可穿戴遥测、房间传感器数据、基于RSSI的室内定位和告警驱动的工作流，使照护人员能更快响应紧急情况、维护舒适居住条件，并在统一管理仪表板中管理设施结构与设备分配。

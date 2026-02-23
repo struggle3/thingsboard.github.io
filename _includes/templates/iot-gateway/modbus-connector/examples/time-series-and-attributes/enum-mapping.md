@@ -1,42 +1,36 @@
-Modbus devices can have registers that represent enumerated values, for example operational modes, status codes, or
-error states. To make these values more understandable, you can map them to human-readable strings using the enum
-mapping feature in ThingsBoard IoT Gateway Modbus connector. This feature works for all register types and can be used
-in both uplink data (attributes and time series) and uplink RPC to Device calls. Let's explore how to set up enum
-mapping in your Modbus connector configuration.
+Modbus 设备的寄存器可能表示枚举值，例如运行模式、状态码或错误状态。为便于理解，可使用 ThingsBoard IoT 网关 Modbus 连接器的枚举映射功能将其映射为可读字符串。该功能适用于所有寄存器类型，可用于上行数据（属性和时序数据）及上行 RPC 到设备调用。下面说明如何在 Modbus 连接器配置中设置枚举映射。
 
-As an example, we will use ThingsBoard Modbus Demo Server, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard Modbus 演示服务器，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 5021:5021 thingsboard/tb-gw-modbus-server:latest
 ```
 {:.copy-code}
 
-The server available at `0.0.0.0:5021`. The server has the following structure:
+服务器地址为 `0.0.0.0:5021`，结构如下：
 
-| Variable Name    | Register Type   | Data Type  | Address    |
-|:-----------------|:----------------|------------|:-----------|
-| Temperature      | Holding         | 16int      | 0          |
-| Humidity         | Holding         | 16int      | 1          |
-| Power            | Holding         | 16int      | 2          |
-| Pressure         | Holding         | 16int      | 3          |
-| Operational Mode | Holding         | 16int      | 4          |
-| Relay            | Coil            | bits       | 1          |
+| 变量名         | 寄存器类型 | 数据类型 | 地址   |
+|:---------------|:-----------|----------|:-------|
+| Temperature    | Holding    | 16int    | 0      |
+| Humidity       | Holding    | 16int    | 1      |
+| Power          | Holding    | 16int    | 2      |
+| Pressure       | Holding    | 16int    | 3      |
+| Operational Mode | Holding | 16int    | 4      |
+| Relay          | Coil       | bits     | 1      |
 | --------------   | --------------- | ---------- | ---------- |
 
-We are interested in mapping the `Operational Mode` and `Relay` registers to human-readable strings. The `Operational Mode` register can have the following values:
-- `1`: Normal Mode
-- `2`: Service Mode
-- `3`: Calibration Mode
+我们要将 `Operational Mode` 和 `Relay` 寄存器映射为可读字符串。`Operational Mode` 可能取值为：
+- `1`：正常模式
+- `2`：维护模式
+- `3`：标定模式
 
-And the `Relay` register can have the following values:
-- `0`: OFF
-- `1`: ON
+`Relay` 可能取值为：
+- `0`：关闭
+- `1`：开启
 
-To set up enum mapping for these registers, you need to define the `variants` parameter in the configuration for each 
-register. This parameter is an object where each key represents a possible register value, and the corresponding value 
-is the human-readable string that describes that register value.
+要为这些寄存器配置枚举映射，需在每个寄存器配置中定义 `variants` 参数。该参数为对象，键为可能的寄存器值，值为对应的可读描述。
 
-Copy and paste the following configuration into the Modbus connector advanced configuration mode:
+将以下配置复制粘贴到 Modbus 连接器高级配置模式中：
 ```json
 {
   "master": {
@@ -95,7 +89,6 @@ Copy and paste the following configuration into the Modbus connector advanced co
 ```
 {:.copy-code.expandable-15}
 
-After applying this configuration, the `operational_mode` and `relay` registers will be mapped to their respective 
-human-readable strings in uplink data. This makes it easier to interpret the data received from the Modbus device:
+应用该配置后，`operational_mode` 和 `relay` 寄存器在上行数据中会映射为相应的可读字符串，便于理解 Modbus 设备数据：
 
 ![image](/images/gateway/modbus-connector/examples/enum-mapping-overview.png)

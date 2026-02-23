@@ -1,14 +1,14 @@
 ### Device configuration
 
-To connect and send data we should configure the device and network server.
+连接并发送数据前，需配置设备和网络服务器。
 Firstly, we are going to configure the device, and save required information for network server configuration.
-To add a device to network server and get information from it, we will need the following device parameters:
+要将设备加入网络服务器并从中获取信息，需准备以下设备参数：
 
 - **Device EUI** - device identifier
 - **Application EUI** - Application identifier
 - **Application Key** - Application key to identify device. We recommend to use a generated key, not from the example!
 
-Depending on the network server, you may also need to provide join type (OTAA), LoRaWAN version.
+根据网络服务器要求，可能还需提供接入类型（OTAA）、LoRaWAN 版本。
 
 VS121 sensor provides user-friendly web GUI for configuration and users can access it via Wi-Fi connection. Default SSID device: Workplace Sensor.
 
@@ -46,4 +46,4 @@ To obtain the necessary parameters, follow these steps:
 
 {% include images-gallery.liquid imageCollection=milesightInterface %}
 
-The parameters above are required for connection.
+以上参数为连接所必需。

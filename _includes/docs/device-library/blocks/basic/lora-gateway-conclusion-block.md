@@ -1,7 +1,7 @@
-With the knowledge in this guide, you can easily connect your {{deviceName}} and use the built-in integration to retrieve data from devices connected to {{deviceName}}.  
+掌握本指南内容后，您可以轻松连接 {{deviceName}}，并利用内置集成从连接的设备获取数据。  
 
-You can find some LoRaWAN devices in our device library and connect them or any other devices through a gateway on a network server.  
+可在设备库中找到部分 LoRaWAN 设备，并通过网络服务器上的网关连接它们或其它设备。  
 
-After connecting the devices to the gateway, you will be able to see and process the data coming from the devices on the ThingsBoard.  
+将设备连接到网关后，您即可在 ThingsBoard 上查看并处理设备上报的数据。  
 
-Explore the platform [documentation](/docs/{{page.docsPrefix}}){: target="_blank"} to learn more about key concepts and features. 
+了解更多核心概念与功能，请查阅平台[文档](/docs/{{page.docsPrefix}}){: target="_blank"}。 

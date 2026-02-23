@@ -1,4 +1,4 @@
-Now copy & paste the following script to the Decoder function section:
+请将以下脚本复制并粘贴到 Decoder function 区域：
 
 ```javascript
 

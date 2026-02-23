@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: integration downlink
-description: Pushes the incoming message as a downlink message to a selected integration.
+description: 将入站消息作为 downlink 消息推送到所选的 integration。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

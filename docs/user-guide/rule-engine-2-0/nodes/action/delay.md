@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: delay (deprecated)
-description: Delays incoming messages for a configurable period before forwarding them to the next rule node.
+description: 在将入站消息转发到下一 rule 节点前延迟可配置时长。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

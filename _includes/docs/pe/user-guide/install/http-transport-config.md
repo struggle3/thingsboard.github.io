@@ -1,12 +1,12 @@
 * TOC
 {:toc}
 
-##  Server common properties
+## 服务端通用属性
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -92,12 +92,12 @@
 </table>
 
 
-##  Spring common parameters
+## Spring 通用参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -123,12 +123,12 @@
 </table>
 
 
-##  Zookeeper connection parameters. Used for service discovery.
+## Zookeeper 连接参数（用于服务发现）
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -180,12 +180,12 @@
 </table>
 
 
-##  Cache parameters
+## 缓存参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -211,12 +211,12 @@
 </table>
 
 
-##  Redis/Valkey configuration parameters
+## Redis/Valkey 配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -422,12 +422,12 @@
 </table>
 
 
-##  HTTP server parameters
+## HTTP 服务端参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -508,12 +508,12 @@
 </table>
 
 
-##  Queue configuration parameters
+## 队列配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -932,12 +932,12 @@
 </table>
 
 
-##  General service parameters
+## 通用服务参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -957,12 +957,12 @@
 </table>
 
 
-##  Usage statistics parameters
+## 使用统计参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -994,12 +994,12 @@
 </table>
 
 
-##  Metrics parameters
+## 指标参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1013,12 +1013,12 @@
 </table>
 
 
-##  General management parameters
+## 通用管理参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1032,12 +1032,12 @@
 </table>
 
 
-##  Notification system parameters
+## 通知系统参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>

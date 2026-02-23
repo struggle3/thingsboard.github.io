@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Helmet Sensor to ThingsBoard?"
+title: "如何将Helmet Sensor连接到ThingsBoard？"
 redirect_to: "/device-library/paas/helmet-sensor/"
 ---

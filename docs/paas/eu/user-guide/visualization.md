@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Data Visualization
-description: IoT data visualization for various IoT projects using iot dashboards, dashboard widgets and real-time charts
+title: 数据可视化
+description: 使用 IoT 仪表盘、仪表盘部件与实时图表实现各种 IoT 项目的数据可视化
 redirect_to: "/iot-data-visualization/"
 
 ---

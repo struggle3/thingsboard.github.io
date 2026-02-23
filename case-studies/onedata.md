@@ -1,22 +1,22 @@
 ---
 layout: case-studies
-title: OneData Boosts Hospital Efficiency 60-70% with ThingsBoard IoT
+title: OneData 借助 ThingsBoard IoT 将医院效率提升 60–70%
 notitle: "true"
 customTitle: "true"
-description: OneData Software Solutions transforms multi-specialty hospital operations with ThingsBoard IoT platform—real-time asset tracking, patient monitoring, automated alerts, and comprehensive dashboards for 500+ assets.
+description: OneData Software Solutions 借助 ThingsBoard 物联网平台变革多专科医院运营——实时资产追踪、患者监控、自动告警与 500+ 资产的综合仪表盘。
 ---
 
 <div class="case-study-page-wrapper">
     <section class="case-study-hero">
         <div class="card">
             <div class="text">
-                <p class="category">HEALTHCARE</p>
-                <h1>Visual Transformation: How OneData boosted 60-70% Efficiency at a multi-speciality hospital</h1>
+                <p class="category">医疗健康</p>
+                <h1>可视化转型：OneData 如何将多专科医院效率提升 60–70%</h1>
                 <div class="image inner" style="background-image: url('/images/case-studies/onedata.webp')">
                     <img src="/images/case-studies/onedata.svg" title="OneData" alt="OneData logo" width="200" height="38">
                 </div>
-                <p>OneData Software Solutions is a technology and software development company that helps businesses modernize and grow with digital solutions. They offer a broad range of services including data analytics, custom software and website development, cloud consulting, digital marketing, IoT solutions, UI/UX design, and ERP/CRM systems.</p>
-                <p>Their focus is on transforming raw data into actionable insights, building scalable cloud-based systems, connecting smart devices for real-time operations, and improving customer engagement through targeted marketing and intuitive user experiences. They serve diverse industries and emphasize customized, results-driven technology to support business growth and operational efficiency.</p>
+                <p>OneData Software Solutions 是一家技术与软件开发公司，帮助企业在数字化方案下实现现代化与增长。服务涵盖数据分析、定制软件与网站开发、云咨询、数字营销、IoT 方案、UI/UX 设计与 ERP/CRM 系统。</p>
+                <p>其重点是将原始数据转化为可执行洞察、构建可扩展的云系统、连接智能设备实现实时运营，并通过精准营销与直观体验提升客户参与。服务多行业并强调定制化、结果导向的技术，以支持业务增长与运营效率。</p>
             </div>
             <div class="image large" style="background-image: url('/images/case-studies/onedata.webp')">
                 <img src="/images/case-studies/onedata.svg" title="OneData" alt="OneData logo" width="200" height="38">
@@ -28,169 +28,169 @@ description: OneData Software Solutions transforms multi-specialty hospital oper
             <p>
                 ~{% include number-animation.html startNum = 1 targetNum = 70 %}%
             </p>
-            <p>reduction in tracking time</p>
+            <p>追踪时间减少</p>
         </div>
         <div class="block">
             <p>
                 {% include number-animation.html startNum = 1 targetNum = 500 %}+
             </p>
-            <p>assets monitored in real-time</p>
+            <p>资产实时监控</p>
         </div>
         <div class="block">
             <p>{% include number-animation.html startNum = 1 targetNum = 30 %}%</p>
-            <p>cut in lost equipment costs</p>
+            <p>设备丢失成本降低</p>
         </div>
     </section>
     <section class="quote-with-mark fill-background">
-        <img src="/images/case-studies/quote.svg" title="Quote mark" alt="Quote mark" width="96" height="90">
+        <img src="/images/case-studies/quote.svg" title="引号" alt="引号" width="96" height="90">
         <div class="quote-text">
-            <p>"ThingsBoard and OneData have revolutionized our hospital—tracking assets and patients are now effortless with visual maps, saving us 60-70% time and allowing focus on patient care."</p>
-            <h2>Dr. Rajesh Kumar, Hospital Administrator, Multi-Specialty Hospital-Chennai</h2>
+            <p>“ThingsBoard 与 OneData 彻底改变了我们医院——借助可视化地图，资产与患者追踪变得轻松，节省了 60–70% 时间，让我们能专注于患者照护。”</p>
+            <h2>Dr. Rajesh Kumar，医院管理员，钦奈多专科医院</h2>
         </div>
     </section>
     <section class="problem">
         <div class="title-block">
-            <h2>What problem did they face?</h2>
-            <p>The Hospital grappled with chronic inefficiencies in asset and patient tracking. Manual methods led to lost equipment, delayed patient care, overburdened staff, and safety risks amid high daily volumes, wasting up to 70% of nursing time on non-clinical tasks.</p>
+            <h2>他们面临哪些问题？</h2>
+            <p>医院在资产与患者追踪方面长期低效。人工方式导致设备丢失、患者照护延迟、员工负担过重与安全风险，在高日流量下最多浪费护理人员 70% 时间于非临床任务。</p>
         </div>
         <div class="cards-row">
             <div class="card">
-                <h3>Challenges</h3>
+                <h3>挑战</h3>
                 <ul>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Asset Misplacement: Critical items like wheelchairs and IV pumps were frequently lost, taking 20-30 minutes per search and causing 25% equipment downtime.</p>
+                        <p>资产错放：轮椅、输液泵等关键物品经常找不到，每次查找约 20–30 分钟，设备停机达 25%。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Patient Safety Gaps: Elopement risks and poor bed turnover delayed admissions, increasing wait times by 40% during peaks.</p>
+                        <p>患者安全缺口：走失风险与床位周转慢延误入院，高峰时段等待时间增加 40%。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Staff Overload: Manual logging consumed 60-70% of shift time, driving burnout and 30% higher turnover.</p>
+                        <p>员工过载：人工记录占用班次 60–70% 时间，导致倦怠与 30% 更高流失率。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Inventory Inaccuracy: No real-time data led to over-purchasing and 20% annual equipment loss costs.</p>
+                        <p>库存不准：缺乏实时数据导致过度采购与每年约 20% 的设备丢失成本。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Emergency Delays: Slow location of defibrillators or crash carts risked lives in critical scenarios.</p>
+                        <p>应急延迟：除颤仪或抢救车定位慢，在关键场景下存在生命风险。</p>
                     </li>
                 </ul>
             </div>
             <div class="card">
-                <h3>Key results</h3>
+                <h3>主要成果</h3>
                 <ul>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>60-70% reduction in tracking time, freeing staff for direct care.</p>
+                        <p>追踪时间减少 60–70%，员工可投入直接照护。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>50% faster response rates with real-time visual mapping for 500+ assets.</p>
+                        <p>借助 500+ 资产实时可视化地图，响应速度提升 50%。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>40% drop in staffing needs for tracking, optimizing 80-bed operations.</p>
+                        <p>追踪所需人力减少 40%，优化 80 床运营。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>30% cut in lost equipment costs and 35% better asset utilization.</p>
+                        <p>设备丢失成本降低 30%，资产利用率提升 35%。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Zero elopement incidents post-implementation, with scalable handling of 200 daily patients.</p>
+                        <p>实施后走失事件为零，可扩展支持每日 200 名患者。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>For a 100-device indoor tracking deployment, annual service cost is cheaper, we deliver measurable operational gains without enterprise-level infrastructure spend.</p>
+                        <p>对于 100 台设备的室内追踪部署，年度服务成本更低，我们在不投入企业级基础设施的情况下实现可衡量的运营收益。</p>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
     <section class="tb-power mb">
-        <h2>How ThingsBoard powers the Multi-Specialty Hospital?</h2>
+        <h2>ThingsBoard 如何赋能多专科医院？</h2>
         <div class="block">
             <div class="text">
-                <h3>Real-time asset tracking</h3>
-                <p>BLE beacons and WiFi integration provide sub-meter accuracy for 500+ items, showing locations on interactive floor plans. Staff access via mobile app cuts search time from 30 minutes to 2, reducing downtime by 50%. Visual heatmaps highlight idle assets for redistribution.</p>
+                <h3>实时资产追踪</h3>
+                <p>BLE 信标与 WiFi 集成为 500+ 物品提供亚米级精度，在交互式平面图上显示位置。员工通过移动应用访问，将查找时间从 30 分钟降至 2 分钟，停机减少 50%。可视化热力图突出闲置资产便于调配。</p>
             </div>
-            <img src="/images/case-studies/onedata-1.webp" title="Real-time asset tracking" alt="Real-time asset tracking" width="450" height="240">
+            <img src="/images/case-studies/onedata-1.webp" title="实时资产追踪" alt="实时资产追踪" width="450" height="240">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Patient monitoring and safety</h3>
-                <p>Wearable tags track movements, alerting for unauthorized zones or falls. Integrated with vital sensors, it supports 200 patients daily, cutting elopement incidents by 40% and enabling quick reunions.</p>
+                <h3>患者监控与安全</h3>
+                <p>可穿戴标签追踪移动，对未授权区域或跌倒告警。与生命体征传感器集成，每日支持 200 名患者，走失事件减少 40% 并便于快速找回。</p>
             </div>
-            <img src="/images/case-studies/onedata-2.webp" title="Patient monitoring and safety" alt="Patient monitoring and safety" width="450" height="240">
+            <img src="/images/case-studies/onedata-2.webp" title="患者监控与安全" alt="患者监控与安全" width="450" height="240">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Dashboard visualization</h3>
-                <p>Custom widgets display live maps, telemetry, and analytics across departments. Nurses view asset status (onsite/offsite) instantly, improving utilization by 35% and supporting data-driven procurement.</p>
+                <h3>仪表盘可视化</h3>
+                <p>定制部件在各科室展示实时地图、遥测与分析。护士可即时查看资产状态（在院/离院），利用率提升 35% 并支持数据驱动的采购。</p>
             </div>
-            <img src="/images/case-studies/onedata-3.webp" title="Dashboard visualization" alt="Dashboard visualization" width="450" height="240">
+            <img src="/images/case-studies/onedata-3.webp" title="仪表盘可视化" alt="仪表盘可视化" width="450" height="240">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Automated alerts and reporting</h3>
-                <p>Rule chains trigger SMS/email for low battery or overdue returns, with historical reports analyzing trends. This slashed lost assets by 30%, optimizing 80-bed capacity.</p>
+                <h3>自动告警与报表</h3>
+                <p>规则链在电量低或逾期未还时触发短信/邮件，历史报表分析趋势。设备丢失减少 30%，80 床容量得到优化。</p>
             </div>
-            <img src="/images/case-studies/onedata-4.webp" title="Automated alerts and reporting" alt="Automated alerts and reporting" width="450" height="240">
+            <img src="/images/case-studies/onedata-4.webp" title="自动告警与报表" alt="自动告警与报表" width="450" height="240">
         </div>
     </section>
-    {% include contact-us-banner.liquid linkLabel='Use cases' link='/iot-use-cases/' %}
+    {% include contact-us-banner.liquid linkLabel='应用场景' link='/iot-use-cases/' %}
     <section class="tb-help">
-        <h2>How ThingsBoard helps healthcare improve operations with IoT</h2>
+        <h2>ThingsBoard 如何帮助医疗健康用IoT改善运营</h2>
         <div class="block">
             <div class="text">
-                <h3>Rule Engine</h3>
-                <p>Processes telemetry to trigger actions like alarms for asset misuse, automating workflows that reduced manual checks by 60%. Custom chains filter data for efficiency in high-volume settings.</p>
+                <h3>规则引擎</h3>
+                <p>处理遥测并触发如资产滥用告警等动作，自动化工作流使人工巡检减少 60%。定制规则链在高流量场景下过滤数据以提升效率。</p>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/entities-table.webp" title="ThingsBoard entities table widget" alt="ThingsBoard entities table widget" width="776" height="776">
-                <img src="/images/case-studies/value-card.webp" title="ThingsBoard value card widget" alt="ThingsBoard value card widget" width="388" height="388">
+                <img src="/images/case-studies/entities-table.webp" title="ThingsBoard 实体表部件" alt="ThingsBoard 实体表部件" width="776" height="776">
+                <img src="/images/case-studies/value-card.webp" title="ThingsBoard 数值卡片部件" alt="ThingsBoard 数值卡片部件" width="388" height="388">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Asset hierarchies</h3>
-                <p>Organizes devices into logical groups (e.g., by ward), enabling bulk management and inheritance of rules, simplifying oversight for 80-bed facilities.</p>
+                <h3>资产层级</h3>
+                <p>将设备按逻辑分组（如按病区），支持批量管理与规则继承，简化 80 床设施的监管。</p>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/hierarchy-widget.webp" title="ThingsBoard hierarchy widget" alt="ThingsBoard hierarchy widget" width="388" height="388">
-                <img src="/images/case-studies/roles-table.webp" title="Thingsboard roles table widget" alt="Thingsboard roles table widget" width="776" height="776">
+                <img src="/images/case-studies/hierarchy-widget.webp" title="ThingsBoard 层级部件" alt="ThingsBoard 层级部件" width="388" height="388">
+                <img src="/images/case-studies/roles-table.webp" title="ThingsBoard 角色表部件" alt="ThingsBoard 角色表部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Dashboarding</h3>
-                <p>Interactive visualizations with maps and charts provide role-based views, empowering staff with instant insights and cutting response times by 50%.</p>
+                <h3>仪表盘</h3>
+                <p>带地图与图表的交互式可视化提供基于角色的视图，让员工获得即时洞察，响应时间缩短 50%。</p>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/time-series-chart.webp" title="Thingsboard time series chart widget" alt="Thingsboard time series chart widget" width="776" height="776">
-                <img src="/images/case-studies/maps-widgets.webp" title="ThingsBoard maps widget" alt="ThingsBoard maps widget" width="776" height="776">
+                <img src="/images/case-studies/time-series-chart.webp" title="ThingsBoard 时序图部件" alt="ThingsBoard 时序图部件" width="776" height="776">
+                <img src="/images/case-studies/maps-widgets.webp" title="ThingsBoard 地图部件" alt="ThingsBoard 地图部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Alarms and security</h3>
-                <p>Configurable notifications via SMS/email, plus RBAC and encryption, ensure secure, proactive operations, preventing breaches while scaling seamlessly.</p>
+                <h3>告警与安全</h3>
+                <p>可配置的短信/邮件通知，以及 RBAC 与加密，确保安全、主动的运营，在无缝扩展的同时防范违规。</p>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/alarms-table.webp" title="ThingsBoard alarms table widget" alt="ThingsBoard alarms table widget" width="776" height="776">
-                <img src="/images/case-studies/notification-widget.webp" title="ThingsBoard notification widget" alt="ThingsBoard notification widget" width="388" height="388">
+                <img src="/images/case-studies/alarms-table.webp" title="ThingsBoard 告警表部件" alt="ThingsBoard 告警表部件" width="776" height="776">
+                <img src="/images/case-studies/notification-widget.webp" title="ThingsBoard 通知部件" alt="ThingsBoard 通知部件" width="388" height="388">
             </div>
         </div>
         {% include services-banner.liquid %}
     </section>
     <section class="authored-quote">
-        <img class="h-auto" src="/images/case-studies/Raja_Marimuthu.webp" title="Anuruddha Tennakoon and Migara Amithodhana" alt="Anuruddha Tennakoon and Migara Amithodhana" width="658" height="424">
+        <img class="h-auto" src="/images/case-studies/Raja_Marimuthu.webp" title="Anuruddha Tennakoon 与 Migara Amithodhana" alt="Anuruddha Tennakoon 与 Migara Amithodhana" width="658" height="424">
         <div class="text">
             <h2>OneData Software Solutions Pvt. Ltd.</h2>
-            <p class="quote">“Managing and synchronizing hundreds of connected devices in a hospital was a key challenge, and ThingsBoard helped us turn that complexity into real-time operational clarity.”</p>
+            <p class="quote">“在医院中管理与同步数百台连接设备曾是关键挑战，ThingsBoard 帮助我们将这种复杂性转化为实时运营清晰度。”</p>
             <p class="author">Raja Marimuthu</p>
             <p class="title">CEO</p>
         </div>
@@ -204,7 +204,7 @@ description: OneData Software Solutions transforms multi-specialty hospital oper
                 </div>
             </div>
         </div>
-        <p>Real stories, real impact — share your experience with ThingsBoard!</p>
-        <a id="CaseStudy_OneData_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">Contact us</a>
+        <p>真实故事，真实影响——分享您与 ThingsBoard 的经验！</p>
+        <a id="CaseStudy_OneData_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">联系我们</a>
     </section>
 </div>

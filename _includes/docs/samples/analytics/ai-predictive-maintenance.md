@@ -11,55 +11,55 @@
 * TOC
 {:toc}
 
-This document describes a ThingsBoard solution that turns raw device telemetry into actionable maintenance insights:
+本文档介绍将原始设备遥测数据转化为可操作维护洞察的 ThingsBoard 解决方案：
 
-**Workflow:**
-1. Devices send `vibration` (mm/s), `temperature` (°C), and `acousticDev` (% deviation from baseline).
-2. [Calculated Fields](/docs/user-guide/calculated-fields/) maintain a rolling window of the last N values (default: 100) and/or last M minutes for each metric.
-3. The rolling window is forwarded to an AI Rule Node (OpenAI or another LLM provider).
-4. If the AI detects an anomaly, the rule chain creates a ThingsBoard Alarm and optionally sends a notification.
+**工作流程：**
+1. 设备发送 `vibration`（mm/s）、`temperature`（°C）和 `acousticDev`（相对基线的偏差百分比）。
+2. [计算字段](/docs/user-guide/calculated-fields/)为每个指标维护最近 N 个值（默认：100）和/或最近 M 分钟的滚动窗口。
+3. 滚动窗口被转发到 AI 规则节点（OpenAI 或其他 LLM provider）。
+4. 若 AI 检测到异常，规则链会创建 ThingsBoard 告警并可选择发送通知。
 
 
-### Architecture
+### 架构
 
 ![image](/images/samples/analytics/iot-anomaly-detection-diagram.svg)
 
-### Prerequisites
+### 前置条件
 
-- ThingsBoard version **4.2+**
-- Device(s) capable of sending the required telemetry values (for this guide, we will emulate them)
-- LLM provider credentials (OpenAI, Azure OpenAI, etc.)
+- ThingsBoard 版本 **4.2+**
+- 能够发送所需遥测值的设备（本指南中将模拟这些值）
+- LLM provider 凭据（OpenAI、Azure OpenAI 等）
 
-### Telemetry Input and Output
+### 遥测输入与输出
 
-**Expected telemetry keys (per device):**
-- `vibration` — mm/s (float)
-- `temperature` — °C (float)
-- `acousticDev` — % deviation from baseline (float)
+**每设备预期的遥测键：**
+- `vibration` — mm/s（浮点数）
+- `temperature` — °C（浮点数）
+- `acousticDev` — 相对基线的偏差百分比（浮点数）
 
-**AI Output:**
-- `anomaly` — short label (e.g., `"Bearing Wear"`)
-- `summary` — concise human-readable recommendation (e.g., `"Vibration has reached 7.4 mm/s and temperature is at 86°C accompanied by irregular acoustic patterns, indicating bearing wear. Recommend immediate bearing inspection and replacement to avoid catastrophic failure."`)
+**AI 输出：**
+- `anomaly` — 简短标签（如 `"Bearing Wear"`）
+- `summary` — 简洁的可读建议（如 `"Vibration has reached 7.4 mm/s and temperature is at 86°C accompanied by irregular acoustic patterns, indicating bearing wear. Recommend immediate bearing inspection and replacement to avoid catastrophic failure."`）
 
-### Calculated field configuration
+### 计算字段配置
 
-**Purpose:** Maintain a rolling window of the last N readings (default 100, configurable) efficiently and forward them directly to the AI node.
+**目的：** 高效维护最近 N 个读数（默认 100，可配置）的滚动窗口，并将其直接转发到 AI 节点。
 
-**Steps:**
+**步骤：**
 
-<b>1. [Download](/docs/samples/analytics/resources/equipment_sensor.json){:target="_blank" download="equipment_sensor.json"}</b> and import the **EquipmentSensor** device profile into your ThingsBoard instance.
+<b>1. [下载](/docs/samples/analytics/resources/equipment_sensor.json){:target="_blank" download="equipment_sensor.json"}</b> 并将 **EquipmentSensor** 设备配置文件导入到您的 ThingsBoard 实例。
 
 {% include images-gallery.html imageCollection="import-equipment-sensor-device-profile" %}
 
-<b>2. [Download](/docs/samples/analytics/resources/rolling-window-records.json){:target="_blank" download="rolling-window-records.json"}</b> and import the calculated field into the **EquipmentSensor** device profile.
+<b>2. [下载](/docs/samples/analytics/resources/rolling-window-records.json){:target="_blank" download="rolling-window-records.json"}</b> 并将计算字段导入到 **EquipmentSensor** 设备配置文件中。
 
 {% include images-gallery.html imageCollection="import-calculated-field-into-profile" %}
 
-**Key notes:**
+**要点：**
 
-- Rolling window time range is set to **1 day**.
-- The number of stored values is set to **100**. The default maximum is 1000, configurable in system settings.
-- The TBEL script outputs the rolling values in a single message to the rule engine:
+- 滚动窗口时间范围设置为 **1 天**。
+- 存储值数量设置为 **100**。系统设置中默认最大为 1000，可配置。
+- TBEL 脚本以单条消息将滚动值输出到规则引擎：
 
 ```javascript
 // Sample script to output raw values of the rolling arguments;
@@ -70,41 +70,41 @@ return {
 };
 ```
 
-### Rule chain configuration
+### 规则链配置
 
-**Purpose:** Analyze the rolling window data, classify anomalies, and generate a plain-language summary. Works with OpenAI or other LLM providers.
+**目的：** 分析滚动窗口数据，对异常进行分类，并生成自然语言摘要。支持 OpenAI 或其他 LLM provider。
 
-**Steps:**
+**步骤：**
 
-- [Download](/docs/samples/analytics/resources/equipment_health_analysis.json){:target="_blank" download="equipment_health_analysis.json"} the <b>json file</b> with the "<b>Equipment Health Analysis</b>" rule chain configuration.
+- [下载](/docs/samples/analytics/resources/equipment_health_analysis.json){:target="_blank" download="equipment_health_analysis.json"} 包含「<b>Equipment Health Analysis</b>」规则链配置的 <b>json 文件</b>。
 
 {% include images-gallery.html imageCollection="import-equipment-health-analysis-rule-chain" showListImageTitles="true" %}
 
-<b>5.</b> Update the <b>EquipmentSensor</b> profile to reference the "<b>Equipment Health Analysis</b>" rule chain.
+<b>5.</b> 更新 <b>EquipmentSensor</b> 配置文件，引用「<b>Equipment Health Analysis</b>」规则链。
 
 {% include images-gallery.html imageCollection="update-equipment-sensor-profile" %}
 
-Important details:
+重要说明：
 
-* System and user prompts can reference incoming message data:
-  * `$[*]` — entire message body
-  * `${*}` — entire message metadata
-  * `$[key]` — a specific message body field
-  * `${key}` — a specific metadata value
-* Supported response formats: **TEXT**, **JSON**, and **JSON Schema** (we use JSON Schema here).
-* A **deduplication** node with a 5-second interval is used to reduce AI token usage.
+* 系统和用户提示可引用传入消息数据：
+  * `$[*]` — 整个消息体
+  * `${*}` — 整个消息元数据
+  * `$[key]` — 消息体中的特定字段
+  * `${key}` — 元数据中的特定值
+* 支持的响应格式：**TEXT**、**JSON** 和 **JSON Schema**（本文使用 JSON Schema）。
+* 使用 5 秒间隔的 **deduplication** 节点来减少 AI token 消耗。
 
-### Testing
+### 测试
 
-<b>Step 1.</b> Create a test device **Equipment Sensor 1** with the **EquipmentSensor** profile.
+<b>步骤 1.</b> 使用 **EquipmentSensor** 配置文件创建测试设备 **Equipment Sensor 1**。
 
 {% include images-gallery.html imageCollection="create-test-device-1" %}
 
-<b>Step 2.</b> Copy the "<b>Check connectivity</b>" command from the device details. 
+<b>步骤 2.</b> 从设备详情中复制「<b>Check connectivity</b>」命令。
 
 {% include images-gallery.html imageCollection="create-test-device-2" %}
 
-Your command will look something like this: 
+您的命令大致如下：
 
 ```bash
 curl -v -X POST http://{{ HOST }}/api/v1/6sED1ALqyJg0P6ezIODH/telemetry \
@@ -112,19 +112,19 @@ curl -v -X POST http://{{ HOST }}/api/v1/6sED1ALqyJg0P6ezIODH/telemetry \
 --data "{temperature:25}"
 ```
 
-<b>&#8195; *</b> Where `{{ HOST }}` is the <b>host of your ThingsBoard instance</b>, and `6sED1ALqyJg0P6ezIODH` is the <b>device access token</b>.
+<b>&#8195; *</b> 其中 `{{ HOST }}` 为 <b>ThingsBoard 实例的主机</b>，`6sED1ALqyJg0P6ezIODH` 为 <b>设备访问令牌</b>。
 
 {% include images-gallery.html imageCollection="check-connectivity-command-from-device" %}
 
-<br><b>Step 3.</b> Modify and send test data.
+<br><b>步骤 3.</b> 修改并发送测试数据。
 
-<b>Step 3.1 No alarm case:</b>
+<b>步骤 3.1 无告警情况：</b>
 
 {% if docsPrefix == nil or docsPrefix == "pe/" %}
 
-Send the following test data to ThingsBoard. Be sure to replace:
-- `$THINGSBOARD_HOST_NAME` with the host of your ThingsBoard instance,
-- `$YOUR_DEVICE_ACCESS_TOKEN` with your device&#39;s access token.
+将以下测试数据发送到 ThingsBoard。请务必替换：
+- `$THINGSBOARD_HOST_NAME` 为您的 ThingsBoard 实例主机，
+- `$YOUR_DEVICE_ACCESS_TOKEN` 为您的设备访问令牌。
 
 ```bash
 curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
@@ -136,8 +136,8 @@ curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/t
 {% endif %}
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
 
-Send the following test data to ThingsBoard.
-Make sure to replace `$YOUR_DEVICE_ACCESS_TOKEN` with your device&#39;s access token.
+将以下测试数据发送到 ThingsBoard。
+请确保将 `$YOUR_DEVICE_ACCESS_TOKEN` 替换为您的设备访问令牌。
 
 ```bash
 curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
@@ -148,18 +148,18 @@ curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
 
 {% endif %}
 
-There won&#39;t be an alarm created.
+不会创建告警。
 
 {% include images-gallery.html imageCollection="send-test-data-no-alarm-case" %}
 
 <br>
-<b>Step 3.2 Bearing wear detection:</b>
+<b>步骤 3.2 轴承磨损检测：</b>
 
 {% if docsPrefix == nil or docsPrefix == "pe/" %}
 
-Simulate a bearing wear event by sending the following test data to ThingsBoard. Be sure to replace:
-- `$THINGSBOARD_HOST_NAME` with the host of your ThingsBoard instance,
-- `$YOUR_DEVICE_ACCESS_TOKEN` with your device&#39;s access token.
+通过将以下测试数据发送到 ThingsBoard 来模拟轴承磨损事件。请务必替换：
+- `$THINGSBOARD_HOST_NAME` 为您的 ThingsBoard 实例主机，
+- `$YOUR_DEVICE_ACCESS_TOKEN` 为您的设备访问令牌。
 
 ```bash
 curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
@@ -171,8 +171,8 @@ curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/t
 {% endif %}
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
 
-Simulate a bearing wear event by sending the following test data to ThingsBoard.
-Make sure to replace `$YOUR_DEVICE_ACCESS_TOKEN` with your device&#39;s access token.
+通过将以下测试数据发送到 ThingsBoard 来模拟轴承磨损事件。
+请确保将 `$YOUR_DEVICE_ACCESS_TOKEN` 替换为您的设备访问令牌。
 
 ```bash
 curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
@@ -185,7 +185,7 @@ curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
 
 {% include images-gallery.html imageCollection="send-test-data-bearing-wear-detection" %}
 
-<br>An alarm will be created. Below is an example of the AI output:
+<br>将创建告警。以下是 AI 输出示例：
 
 ```json
 {
@@ -195,13 +195,13 @@ curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
 ```
 
 <br>
-<b>Step 3.3 Misalignment</b> detection:
+<b>步骤 3.3 不对中</b> 检测：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" %}
 
-Simulate a misalignment event by sending the following test data to ThingsBoard. Be sure to replace:
-- `$THINGSBOARD_HOST_NAME` with the host of your ThingsBoard instance,
-- `$YOUR_DEVICE_ACCESS_TOKEN` with your device&#39;s access token.
+通过将以下测试数据发送到 ThingsBoard 来模拟不对中事件。请务必替换：
+- `$THINGSBOARD_HOST_NAME` 为您的 ThingsBoard 实例主机，
+- `$YOUR_DEVICE_ACCESS_TOKEN` 为您的设备访问令牌。
 
 ```bash
 curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
@@ -213,8 +213,8 @@ curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/t
 {% endif %}
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
 
-Simulate misalignment event by sending the following test data to ThingsBoard. 
-Make sure to replace `$YOUR_DEVICE_ACCESS_TOKEN` with your device&#39;s access token.
+通过将以下测试数据发送到 ThingsBoard 来模拟不对中事件。
+请确保将 `$YOUR_DEVICE_ACCESS_TOKEN` 替换为您的设备访问令牌。
 
 ```bash
 curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
@@ -227,7 +227,7 @@ curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
 
 {% include images-gallery.html imageCollection="send-test-data-misalignment-detection" %}
 
-<br>An alarm will be created. Below is an example of the AI output:
+<br>将创建告警。以下是 AI 输出示例：
 
 ```json
 {
@@ -236,20 +236,20 @@ curl -v -X POST http://{{ HOST }}/api/v1/$YOUR_DEVICE_ACCESS_TOKEN/telemetry \
 }
 ```
 
-### Performance & Cost Controls
+### 性能与成本控制
 
-* **Batching & debounce**: Send to AI only after N points or every T seconds.
-* **Early filters**: Skip AI call if all metrics are comfortably within normal bands.
-* **Payload compacting**: Send statistics (min/mean/max/std, trend) instead of full arrays if prompt allows.
+* **批处理与防抖**：仅在收到 N 个点或每 T 秒后向 AI 发送。
+* **提前过滤**：若所有指标均处于正常范围内，则跳过 AI 调用。
+* **有效负载压缩**：若提示允许，可发送统计量（min/mean/max/std、趋势）而非完整数组。
 
-### Troubleshooting
+### 故障排查
 
-* **No alarms**: 
-  1. Verify raw device data is available in 'Latest telemetry' tab. 
-  2. Enable and browse the calculated field debug events.
-  3. Enable and browse the corresponding rule nodes debug events. 
-* **High costs**: Increase the de-duplication period, tune prompt or switch AI model.
+* **无告警**：
+  1. 确认「Latest telemetry」标签页中有原始设备数据。
+  2. 启用并查看计算字段调试事件。
+  3. 启用并查看对应规则节点调试事件。
+* **成本过高**：增加去重周期，调整提示或更换 AI 模型。
 
-### Next steps
+### 下一步
 
-Experiment with AI prompts and share your feedback with community! 
+尝试调整 AI 提示，并向社区反馈您的建议！

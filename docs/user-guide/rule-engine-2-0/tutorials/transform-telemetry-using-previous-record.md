@@ -1,18 +1,18 @@
 ---
 layout: docwithnav
-title: Transform telemetry using previous record
-description: Transform telemetry using previous record
+title: 使用前一条记录转换 telemetry
+description: 使用前一条记录转换 telemetry
 ---
 
 * TOC
 {:toc}
 
-## Use case
+## 使用场景
 
-Let's assume your device is reporting absolute "counter" that correspond to water consumption.
-However, you would like to visualize not the "absolute" but "delta" values, e.g. how many water was consumer within last day, week, month.
+假设设备上报与用水量对应的绝对「counter」值。
+而您希望可视化「delta」值（如过去一天/一周/一月的用水量）而非绝对值。
 
-In this tutorial we will calculate "delta" of the counter readings based on current and previous reading.
+本教程将根据当前读数与前一条读数计算 counter 的「delta」。
 
 Assuming that previous reported value of counter was 90, we will transform incoming telemetry:
 

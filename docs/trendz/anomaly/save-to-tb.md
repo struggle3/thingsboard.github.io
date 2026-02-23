@@ -1,47 +1,45 @@
 ---
 layout: docwithnav-trendz
-title: Saving Telemetry To ThingsBoard
-description: How to configure and manage saving anomaly detection telemetry data to ThingsBoard.
+title: 将遥测保存到 ThingsBoard
+description: 如何配置和管理将异常检测遥测数据保存到 ThingsBoard。
 ---
 
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Saving telemetry to ThingsBoard allows you to persist anomaly detection results such as anomaly scores and score indexes as time series data.  
-This enables further analysis, visualization, and alerting within ThingsBoard.
+将遥测保存到 ThingsBoard 可将异常检测结果（如异常分数和分数指数）持久化为时序数据。  
+便于在 ThingsBoard 内进行进一步分析、可视化和告警。
 
-## Configuration
+## 配置
 
-To save telemetry data to ThingsBoard, follow these steps in your anomaly detection model configuration:
+在异常检测模型配置中，按以下步骤将遥测数据保存到 ThingsBoard：
 
-### 1. Configure Telemetry Key and Storage Frequency
+### 1. 配置遥测键和存储频率
 
-- **Telemetry Key:** Specify the telemetry key under which anomaly scores and score indexes will be saved in ThingsBoard.
-- **Telemetry Storage Frequency:** Define how frequently telemetry data should be stored.  
-  It is recommended to set this frequency lower than:
-    - the segment time range (for fixed segments), or
-    - the product of segment size and sliding step (for sliding windows).  
-  This helps prevent overlapping anomalies.
+- **Telemetry Key（遥测键）：** 指定异常分数和分数指数在 ThingsBoard 中的保存键名。
+- **Telemetry Storage Frequency（遥测存储频率）：** 定义遥测数据的存储频率。  
+  建议将该频率设置为低于：
+    - 段时间范围（固定段），或
+    - 段大小与滑动步长的乘积（滑动窗口）。  
+  有助于避免异常重叠。
 
-**Note:** It is not recommended to set the telemetry storage frequency lower than 1 hour, as this can cause performance pressure on ThingsBoard.
+**注意：** 不建议将遥测存储频率设为低于 1 小时，否则可能对 ThingsBoard 造成性能压力。
 
-**Warning:** Changing the telemetry storage frequency after running the first refresh may lead to inconsistent or 
-overlapping data in ThingsBoard. It is recommended to finalize the frequency setting before enabling telemetry saving.
+**警告：** 在首次刷新后更改遥测存储频率可能导致 ThingsBoard 中数据不一致或重叠。建议在启用遥测保存前确定频率设置。
 
-### 2. Enable Anomaly Refresh
+### 2. 启用异常刷新
 
-To activate telemetry saving, anomaly refresh must be enabled with the **"Enable Saving Anomaly Data"** toggle.  
-Read more about enabling refresh [here](/docs/trendz/anomaly/refresh-reprocess).
+要激活遥测保存，必须在**“Enable Saving Anomaly Data”**开关中启用异常刷新。  
+[更多关于启用刷新的说明](/docs/trendz/anomaly/refresh-reprocess)。
 
-Once refresh is enabled, the required entity fields in Trendz will be created automatically.  
-If refresh is later disabled, telemetry saving will also stop automatically and the required entity fields will be disabled.
+启用刷新后，Trendz 将自动创建所需实体字段。  
+若之后禁用刷新，遥测保存也会自动停止，所需实体字段将被禁用。
 
-The telemetry data already stored will remain in ThingsBoard, even if the model is deleted.
+即使删除模型，已保存的遥测数据仍保留在 ThingsBoard 中。
 
-Telemetry data can be saved during both **Refresh** and **Reprocess**, provided that the **"Enable Saving Anomaly Data"** 
-flag is enabled in the refresh settings.
+在**刷新**和**重新处理**过程中均可保存遥测数据，前提是在刷新设置中启用 **"Enable Saving Anomaly Data"** 标志。
 
 ## Next Steps
 

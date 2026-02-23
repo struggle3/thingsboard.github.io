@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Solar Tracker to ThingsBoard?"
+title: "如何将Solar Tracker连接到ThingsBoard？"
 redirect_to: "/device-library/paas/solar-tracker/"
 ---

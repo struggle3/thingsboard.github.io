@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Smart office template
-description: Smart office template overview
+title: 智能办公模板
+description: 智能办公模板概览
 redirect_from: "/docs/samples/monitoring/facilities-monitoring-poc/"
 
 solution-highlights:

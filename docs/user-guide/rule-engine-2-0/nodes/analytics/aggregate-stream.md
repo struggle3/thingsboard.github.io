@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: aggregate stream
-description: Aggregates incoming data stream.
+title: aggregate stream（聚合流）
+description: 聚合入站数据流。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

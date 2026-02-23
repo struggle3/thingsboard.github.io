@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: gps geofencing events
-description: Monitors GPS coordinates against polygon or circle geofences and routes messages based on entry, exit, and presence duration events.
+description: 监控 GPS 坐标与多边形或圆形 geofence 的关系，根据进入、离开和停留时长事件路由消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

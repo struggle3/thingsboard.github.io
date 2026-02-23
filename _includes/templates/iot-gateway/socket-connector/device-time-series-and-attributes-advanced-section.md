@@ -1,21 +1,20 @@
-This converter is designed for binary payloads. It directly interprets binary data to retrieve attributes and 
-time series, using specific byte positions for data extraction.
+本 converter 面向二进制 payload。它直接解析二进制数据以获取 attribute 和 time series，使用特定字节位置进行数据提取。
 
-| **Parameter** | **Default value** | **Description**                                                                                                      |
+| **参数** | **默认值** | **说明**                                                                                                      |
 |:--------------|:------------------|----------------------------------------------------------------------------------------------------------------------|
-| telemetry     |                   | This subsection contains parameters of the incoming message, that will be interpreted as telemetry for the device.   |
-| ... key       | **temp**          | Name for telemetry in ThingsBoard.                                                                                   |
-| ... byteFrom  | **0**             | Used to slice received data from the specific index.                                                                 |
-| ... byteTo    | **-1**            | Used to slice received data to the specific index.                                                                   |
-| attributes    |                   | This subsection contains parameters of the incoming requests, that will be interpreted as attributes for the device. |
-| ... key       | **hum**           | Name for attribute in ThingsBoard.                                                                                   |
-| ... byteFrom  | **2**             | Used to slice received data from the specific index.                                                                 |
-| ... byteTo    | **4**             | Used to slice received data to the specific index.                                                                   |
+| telemetry     |                   | 本小节包含消息中将被解释为设备 telemetry 的参数。   |
+| ... key       | **temp**          | ThingsBoard 中 telemetry 的名称。                                                                                   |
+| ... byteFrom  | **0**             | 用于从指定索引开始切片接收数据。                                                                 |
+| ... byteTo    | **-1**            | 用于切片接收数据到指定索引。                                                                   |
+| attributes    |                   | 本小节包含请求中将被解释为设备 attribute 的参数。 |
+| ... key       | **hum**           | ThingsBoard 中 attribute 的名称。                                                                                   |
+| ... byteFrom  | **2**             | 用于从指定索引开始切片接收数据。                                                                 |
+| ... byteTo    | **4**             | 用于切片接收数据到指定索引。                                                                   |
 | ---           |                   |                                                                                                                      |
 
-The attributes section uses the same parameters as the telemetry section.
+attributes 部分使用与 telemetry 部分相同的参数。
 
-Example:
+示例：
 ```json
 {
   "address": "127.0.0.1:50001",

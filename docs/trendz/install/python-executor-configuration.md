@@ -1,24 +1,24 @@
 ---
 layout: docwithnav-trendz
-title: Trendz Python Executor Configuration
-description: How to configure Trendz Python Executor on Linux or Mac OS
+title: Trendz Python 执行器配置
+description: 如何在 Linux 或 Mac OS 上配置 Trendz Python 执行器
 
 ---
 
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Trendz Python Executor is required to run:
+Trendz Python 执行器用于运行：
 
-* Python Calculation fields
-* All prediction models (except Fourier Transformation)
-* Code generation for Metric Explorer
+* Python 计算字段
+* 所有预测模型（傅里叶变换除外）
+* 指标浏览器的代码生成
 
-Starting from version 1.14.0, the only way to run these features is via Trendz Python Executor using Docker (or Kubernetes).
+自 1.14.0 版本起，运行这些功能的唯一方式是通过 Docker（或 Kubernetes）使用 Trendz Python 执行器。
 
-## Prerequisites
+## 前置条件
 
 ### Windows
 
@@ -28,11 +28,11 @@ Starting from version 1.14.0, the only way to run these features is via Trendz P
 
 {% include templates/trendz/install/docker-requirements-linux.md %}
 
-## Python Executor Standalone Installation
+## Python 执行器独立安装
 
-### Step 1: Create Docker Compose File
+### 步骤 1：创建 Docker Compose 文件
 
-Create the Docker Compose file with the following configuration:
+使用以下配置创建 Docker Compose 文件：
 
 ```yml
 services:
@@ -53,15 +53,15 @@ services:
 ```
 {: .copy-code}
 
-Explanation of key fields:
+关键字段说明：
 
-* `8181` - Python executor port for communication with Trendz service
-* `restart: always` - automatically restarts the executor on failure or system reboot
-* `thingsboard/trendz-python-executor:{{ site.release.trendz_ver }}` - Docker image for Trendz Python Executor
-* `trendz-python-executor-conf:/python-executor-config-files` - mounts the volume ``trendz-python-executor-conf` to Trendz Python Executor directory with configuration files
-* `trendz-python-executor-data:/data` - mounts the volume `trendz-python-executor-data` to Trendz Python Executor additional data directory
+* `8181` - Python 执行器与 Trendz 服务通信的端口
+* `restart: always` - 失败或系统重启时自动重启执行器
+* `thingsboard/trendz-python-executor:{{ site.release.trendz_ver }}` - Trendz Python 执行器的 Docker 镜像
+* `trendz-python-executor-conf:/python-executor-config-files` - 将卷 `trendz-python-executor-conf` 挂载到 Trendz Python 执行器的配置文件目录
+* `trendz-python-executor-data:/data` - 将卷 `trendz-python-executor-data` 挂载到 Trendz Python 执行器的额外数据目录
 
-### Step 2: Start Python Executor
+### 步骤 2：启动 Python 执行器
 
 ```bash
 docker compose up -d
@@ -69,13 +69,13 @@ docker compose logs -f trendz-python-executor
 ```
 {: .copy-code}
 
-### Step 3: Connect Trendz to Python Executor
+### 步骤 3：将 Trendz 连接到 Python 执行器
 
-* **Linux or Mac OS**
+* **Linux 或 Mac OS**
 
-Configure Trendz to communicate with the Python Executor.
+配置 Trendz 与 Python 执行器通信。
 
-Edit `/usr/share/trendz/conf/trendz.conf` and add:
+编辑 `/usr/share/trendz/conf/trendz.conf` 并添加：
 
 ```bash
 export SCRIPT_ENGINE_TIMEOUT=30000
@@ -84,18 +84,18 @@ export SCRIPT_ENGINE_DOCKER_PROVIDER_URL=PYTHON_EXECUTOR_HOST:PYTHON_EXECUTOR_PO
 ```
 {: .copy-code}
 
-Replace `PYTHON_EXECUTOR_HOST` and `PYTHON_EXECUTOR_PORT` with your Python Executor service values and ensure Trendz can reach this network destination.
+将 `PYTHON_EXECUTOR_HOST` 和 `PYTHON_EXECUTOR_PORT` 替换为您的 Python 执行器服务值，并确保 Trendz 能访问此网络目标。
 
 * **Windows**
 
-Open Notepad as Administrator and edit:
+以管理员身份打开记事本并编辑：
 
 ```text
 C:\Program Files (x86)\trendz\conf\trendz.yml
 ```
 {: .copy-code}
 
-Locate the `script-engine` block and configure:
+找到 `script-engine` 块并配置：
 
 ```yml
 script-engine:
@@ -107,19 +107,19 @@ script-engine:
   websocket-concurrency: "${SCRIPT_ENGINE_WEBSOCKET_CONCURRENCY:5}"
 ```
 
-Replace `PYTHON_EXECUTOR_HOST` and `PYTHON_EXECUTOR_PORT` with your Python Executor service values and ensure Trendz can reach this network destination.
+将 `PYTHON_EXECUTOR_HOST` 和 `PYTHON_EXECUTOR_PORT` 替换为您的 Python 执行器服务值，并确保 Trendz 能访问此网络目标。
 
-## How to Migrate Trendz Python Executor 1.13.2 to Trendz Python Executor 1.14.0
+## 如何将 Trendz Python 执行器 1.13.2 迁移到 1.14.0
 
-If you already have a Python Executor with a version earlier than 1.14.0 connected to Trendz, you should migrate it before updating Trendz to 1.14.0.
+若您已有低于 1.14.0 的 Python 执行器连接到 Trendz，应在将 Trendz 更新到 1.14.0 之前先迁移。
 
-### Step 1. Modify Docker Compose File
+### 步骤 1. 修改 Docker Compose 文件
 
-Locate the `docker-compose.yml` file from which the Python Executor was launched.
+找到启动 Python 执行器所用的 `docker-compose.yml` 文件。
 
-Change the Python Executor image tag to version 1.14.0 and update the `volumes` section to include configuration and data directories.
+将 Python 执行器镜像标签更改为 1.14.0，并更新 `volumes` 部分以包含配置和数据目录。
 
-The final `docker-compose.yml` should look like this:
+最终的 `docker-compose.yml` 应如下所示：
 
 ```yml
 services:
@@ -140,9 +140,9 @@ services:
 ```
 {: .copy-code}
 
-### Step 2. Restart Python Executor
+### 步骤 2. 重启 Python 执行器
 
-Restart the Python Executor to apply the changes:
+重启 Python 执行器以应用更改：
 
 ```bash
 docker compose up -d
@@ -150,55 +150,55 @@ docker compose logs -f trendz-python-executor
 ```
 {: .copy-code}
 
-## How to Connect Additional Libraries to the Python Executor
+## 如何将额外库连接到 Python 执行器
 
-If necessary, you can add additional Python libraries to the **Python Executor** and use them in your Trendz Calculation Fields or Trendz Custom Prediction Models.
+如有需要，您可以为 **Python 执行器** 添加额外的 Python 库，并在 Trendz 计算字段或 Trendz 自定义预测模型中使用它们。
 
-For example, if you want to add the **`emoji`** library (specific version 2.2.0), follow these steps.
+例如，若要添加 **`emoji`** 库（特定版本 2.2.0），请按以下步骤操作。
 
-### Step 1. Open a shell in the running container
+### 步骤 1. 在运行中的容器中打开 shell
 
 ```bash
 docker compose exec trendz-python-executor bash
 ```
 
-### Step 2. Add library to `requirements.txt`
+### 步骤 2. 将库添加到 `requirements.txt`
 
-You need to append the library name and version to the `requirements.txt` file located in your configuration directory (`/python-executor-config-files`):
+您需要将库名称和版本追加到配置目录（`/python-executor-config-files`）中的 `requirements.txt` 文件：
 
 ```bash
 echo 'emoji==2.2.0' >> /python-executor-config-files/requirements.txt
 ```
 {: .copy-code}
 
-After append all necessary dependencies type `exit` to exit from a shell.
+追加所有必要依赖后，输入 `exit` 退出 shell。
 
-### Step 3. Restart the Docker Container
+### 步骤 3. 重启 Docker 容器
 
-Find the container name and restart it:
+查找容器名称并重启：
 ```bash
 docker compose restart trendz-python-executor
 ```
 {: .copy-code}
 
-### Step 4. Verify Installation
+### 步骤 4. 验证安装
 
-Check the logs to ensure the library was installed successfully:
+检查日志以确认库已成功安装：
 
 ```bash
 docker compose logs trendz-python-executor
 ```
 {: .copy-code}
 
-You should see:
+您应看到：
 
 ```text
 Installing custom Python requirements...
 Requirement already satisfied: emoji==2.2.0 in /usr/local/lib/python3.9/site-packages
 ```
 
-After the container restarts, you can import and use the custom libraries in your Trendz Calculation Fields or Trendz Custom Prediction Models.
+容器重启后，您可以在 Trendz 计算字段或 Trendz 自定义预测模型中导入并使用自定义库。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationOptions" %}{% include templates/trndz-guides-banner.md %}

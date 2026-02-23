@@ -3,19 +3,19 @@
     <div class="modal-content">
         <div class="modal-body">
             <div id="smCloseBtn" class="close-button">
-                <img src="/images/pricing/close-icon.svg" alt="Close icon">
+                <img src="/images/pricing/close-icon.svg" alt="关闭">
             </div>
             <div class="card calculator">
                 <div class="calculator-header">
-                    <h2>Self-managed subscription calculator</h2>
+                    <h2>自托管订阅计价器</h2>
                 </div>
                 <div class="input-parameters">
                     <div class="input-group">
                         <div class="input-label-group xs-row">
                             <label for="sm-devices" class="label">
-                                Number of Devices
+                                设备数量
                                 <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                    <span class="tooltip-text">The total number of IoT devices that will connect to ThingsBoard</span>
+                                    <span class="tooltip-text">将连接到ThingsBoard的IoT设备总数</span>
                                 </span>
                             </label>
                             <input id="sm-devices" type="number" value="10" min="1" max="150000" class="input input-right" data-sm-input="devices">
@@ -36,9 +36,9 @@
                         <div class="instance-group">
                             <div class="instance-info">
                                 <h4>
-                                    Production Instances
+                                    生产实例
                                     <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                        <span class="tooltip-text">Production instances handle your live data and real-time operations</span>
+                                        <span class="tooltip-text">生产实例处理您的实时数据和实时操作</span>
                                     </span>
                                 </h4>
                                 <p id="smProdInstancesDescription">Maker includes 1 instance. Choose Prototype plan to add more for high availability (HA) and reliability.</p>
@@ -52,9 +52,9 @@
                         <div class="instance-group">
                             <div class="instance-info">
                                 <h4>
-                                    Development Instances
+                                    开发实例
                                     <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                        <span class="tooltip-text">Development instances for testing and CI/CD workflows</span>
+                                        <span class="tooltip-text">用于测试和CI/CD工作流的开发实例</span>
                                     </span>
                                 </h4>
                                 <p id="smDevInstancesDescription">Choose Prototype plan to add dev instances. Safely test new features without impacting your live data.</p>
@@ -66,16 +66,16 @@
                             </div>
                         </div>
                         <div class="white-labeling-prompt" id="smWhiteLabelingPrompt">
-                            <span class="prompt-text">Need White Labeling?</span>
-                            <button type="button" class="prompt-link" id="smChoosePrototype">Choose Pilot Plan</button>
+                            <span class="prompt-text">需要白标定制？</span>
+                            <button type="button" class="prompt-link" id="smChoosePrototype">选择Pilot套餐</button>
                         </div>
                     </div>
                     <div class="input-group addons">
                         <p class="label">
-                            Add-ons
+                            附加模块
                             <span class="tooltip">
                                 <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Optional features to enhance your plan</span>
+                                <span class="tooltip-text">用于增强套餐的可选功能</span>
                             </span>
                         </p>
                         <div class="add-ons-grid three-items">
@@ -83,10 +83,10 @@
                                 <div class="addon-badge hidden" id="smEdgeBadge">100% OFF</div>
                                 <div class="addon-header">
                                     <span class="addon-title">
-                                        Edge Computing
+                                        边缘计算
                                         <span class="tooltip">
                                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Deploy edge computing instances for local data processing</span>
+                                            <span class="tooltip-text">部署边缘计算实例进行本地数据处理</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -94,9 +94,9 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description" id="smEdgeDescription">Process data where it is collected.</p>
+                                <p class="addon-description" id="smEdgeDescription">在数据采集处处理数据。</p>
                                 <div class="addon-counter hidden" data-sm-addon-counter="edgeComputing" id="smEdgeCounter">
-                                    <label>Edge Instances</label>
+                                    <label>边缘实例</label>
                                     <div class="stepper-control unset-width">
                                         <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease edge instances">−</button>
                                         <input type="number" value="1" min="1" id="smEdgeInstances" aria-label="Edge instances count">
@@ -111,7 +111,7 @@
                                         Trendz Analytics
                                         <span class="tooltip">
                                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Advanced analytics and visualization for your IoT data</span>
+                                            <span class="tooltip-text">面向IoT数据的高级分析与可视化</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -119,15 +119,15 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description">Advanced analytics for your solution.</p>
+                                <p class="addon-description">面向您解决方案的高级分析。</p>
                             </div>
                             <div class="addon-card" data-sm-addon="mobileApp" id="smMobileAppCard">
                                 <div class="addon-header">
                                     <span class="addon-title">
-                                        White-labeled Mobile App
+                                        白标移动应用
                                         <span class="tooltip">
                                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Customizable mobile app branded for your company</span>
+                                            <span class="tooltip-text">可定制的、带有公司品牌的移动应用</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -135,14 +135,14 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description">Customizable mobile app for your end-users.</p>
+                                <p class="addon-description">面向终端用户的可定制移动应用。</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="actions-container">
                     <div class="reset-container">
-                        <button id="smCalculatorReset" class="button reset">Reset</button>
+                        <button id="smCalculatorReset" class="button reset">重置</button>
                     </div>
                 </div>
             </div>
@@ -157,24 +157,24 @@
     const TB_SM_ENTERPRISE_THRESHOLD = 50000;
     const TB_SM_DESCRIPTIONS = {
         Maker: {
-            production: 'Maker includes 1 instance. Choose Prototype plan to add more for high availability (HA) and reliability.',
-            development: 'Choose Prototype plan to add dev instances. Safely test new features without impacting your live data.'
+            production: 'Maker包含1个实例。选择Prototype套餐可增加更多实例以实现高可用性(HA)和可靠性。',
+            development: '选择Prototype套餐可添加开发实例。在不影响实时数据的情况下安全测试新功能。'
         },
         Prototype: {
-            production: 'Your plan includes 1 instance. Add a 2nd instance for high availability (HA) to prevent downtime.',
-            development: 'Add dedicated instances for your dev, test, and CI/CD workflows. Keep your production data clean.'
+            production: '您的套餐包含1个实例。添加第2个实例可实现高可用性(HA)以防止停机。',
+            development: '为您的开发、测试和CI/CD工作流添加专用实例。保持生产数据独立。'
         },
         Pilot: {
-            production: 'Your plan includes 1 instance. Add a 2nd instance for high availability (HA) to prevent downtime.',
-            development: 'Add dedicated instances for your dev, test, and CI/CD workflows. Keep your production data clean.'
+            production: '您的套餐包含1个实例。添加第2个实例可实现高可用性(HA)以防止停机。',
+            development: '为您的开发、测试和CI/CD工作流添加专用实例。保持生产数据独立。'
         },
         Startup: {
-            production: 'Your 2 instances provide HA. Add more to scale your application and handle a larger processing load.',
-            development: 'Add dedicated instances for your dev, test, and CI/CD workflows. Keep your production data clean.'
+            production: '您的2个实例提供HA。可添加更多实例以扩展应用并处理更大处理负载。',
+            development: '为您的开发、测试和CI/CD工作流添加专用实例。保持生产数据独立。'
         },
         Business: {
-            production: 'Your plan includes 3 instances for HA. Add more at any time to horizontally scale your solution.',
-            development: 'Add dedicated instances for your dev, test, and CI/CD workflows. Keep your production data clean.'
+            production: '您的套餐包含3个HA实例。可随时添加更多以实现横向扩展。',
+            development: '为您的开发、测试和CI/CD工作流添加专用实例。保持生产数据独立。'
         }
     };
 
@@ -324,7 +324,7 @@
                 toggle.checked = true;
                 toggle.disabled = true;
                 if (counterEl) counterEl.classList.add('hidden');
-                if (descEl) descEl.textContent = 'Process data where it is collected.';
+                if (descEl) descEl.textContent = '在数据采集处处理数据。';
                 if (tbSmState.addons[key].count) tbSmState.addons[key].count = 1;
             } else {
                 card.classList.remove('addon-free');
@@ -341,7 +341,7 @@
                         counterEl.querySelector('[data-action="decrement"]').disabled = tbSmState.addons.edge.count <= plan.edgeInstancesIncluded;
                     } else {
                         counterEl.classList.add('hidden');
-                        descEl.textContent = 'Process data where it is collected.';
+                        descEl.textContent = '在数据采集处处理数据。';
                     }
                 } else if (key === 'mobile') {
                     card.classList.remove('addon-disabled');
@@ -477,22 +477,22 @@
         </div>`;
 
     const tbSmDisplayEnterprise = (devices) => {
-        let msg = `Self-managed Pay-as-you-go Enterprise Request\n`;
-        msg += `- Devices: ${formatNumber(devices)}\n`;
-        msg += `- Prod Instances: ${formatNumber(tbSmState.prodInstances)}\n`;
-        msg += `- Development Instances: ${formatNumber(tbSmState.devInstances)}\n`;
+        let msg = `自托管按量付费企业报价申请\n`;
+        msg += `- 设备: ${formatNumber(devices)}\n`;
+        msg += `- 生产实例: ${formatNumber(tbSmState.prodInstances)}\n`;
+        msg += `- 开发实例: ${formatNumber(tbSmState.devInstances)}\n`;
 
         const hasAddons = tbSmState.addons.edge.enabled || tbSmState.addons.trendz.enabled || tbSmState.addons.mobile.enabled;
         if (hasAddons) {
-            msg += `\nAdd-ons:\n`;
+            msg += `\n附加模块:\n`;
             if (tbSmState.addons.edge.enabled) {
-                msg += `- Edge Computing: ${tbSmState.addons.edge.count} instance(s)\n`;
+                msg += `- 边缘计算: ${tbSmState.addons.edge.count} 个实例\n`;
             }
             if (tbSmState.addons.trendz.enabled) {
-                msg += `- Trendz Analytics: Enabled\n`;
+                msg += `- Trendz Analytics: 已启用\n`;
             }
             if (tbSmState.addons.mobile.enabled) {
-                msg += `- White-labeled Mobile App: Enabled\n`;
+                msg += `- 白标移动应用: 已启用\n`;
             }
         }
 
@@ -501,13 +501,13 @@
         tbSmUi.results.innerHTML = `
             <div class="card-header enterprise-header">
                 <div class="header-top">
-                    <h3>Deployment Summary</h3>
+                    <h3>部署摘要</h3>
                     <div class="header-actions">
-                        <div id="smCopyButton" class="icon-button" title="Copy">${copyIcon}<span class="tooltip-text">Copy deployment summary</span></div>
-                        <div id="smDownloadButton" class="icon-button" title="Download">${downloadIcon}<span class="tooltip-text">Download summary</span></div>
+                        <div id="smCopyButton" class="icon-button" title="Copy">${copyIcon}<span class="tooltip-text">复制部署摘要</span></div>
+                        <div id="smDownloadButton" class="icon-button" title="Download">${downloadIcon}<span class="tooltip-text">下载摘要</span></div>
                     </div>
                 </div>
-                <h4 class="wrap">You are building at an impressive scale.</h4>
+                <h4 class="wrap">您正在构建令人瞩目的规模。</h4>
             </div>
             <div class="results-scroll-container">
                 <div class="results-section">
@@ -517,10 +517,10 @@
                         ${tbSmCreateItem('Development Instances', formatNumber(tbSmState.devInstances), null, true)}
                     </div>
                 </div>
-                <p class="contact-us-text enterprise-text">You have reached a tier where economies of scale apply. Let's talk about aligning our pricing structure with your specific rollout schedule and volume requirements.</p>
+                <p class="contact-us-text enterprise-text">您已达到规模经济适用的层级。让我们讨论如何根据您的具体部署计划和规模需求调整定价结构。</p>
             </div>
             <div class="results-footer">
-                <a id="smContactUs" href="/docs/contact-us/" class="button">Get Enterprise Quote</a>
+                <a id="smContactUs" href="/docs/contact-us/" class="button">获取企业报价</a>
             </div>`;
 
         const contactBtn = document.getElementById('smContactUs');
@@ -540,27 +540,27 @@
                     <span class="section-title-with-chevron">${plan.name} ${chevronUpIcon}</span>
                     <span class="section-value">
                         ${formatCurrency(plan.price)}
-                        <span class="tooltip">${infoIcon}<span class="tooltip-text">Base plan price</span></span>
+                        <span class="tooltip">${infoIcon}<span class="tooltip-text">基础套餐价格</span></span>
                     </span>
                 </div>
                 <div class="section-content">
-                    ${tbSmCreateItem('Included Devices', formatNumber(plan.includedDevices))}
-                    ${tbSmCreateItem('Included Prod Instances', formatNumber(plan.includedProdInstances))}
-                    ${tbSmCreateItem('White Labeling', `<span class="badge ${hasWL ? 'enabled' : 'disabled'}">${hasWL ? 'Enabled' : 'Disabled'}</span>`, null, true)}
-                    ${tbSmCreateItem('Base Price', formatCurrency(plan.price), 'Monthly base price')}
+                    ${tbSmCreateItem('包含设备', formatNumber(plan.includedDevices))}
+                    ${tbSmCreateItem('包含生产实例', formatNumber(plan.includedProdInstances))}
+                    ${tbSmCreateItem('白标定制', `<span class="badge ${hasWL ? 'enabled' : 'disabled'}">${hasWL ? '已启用' : '未启用'}</span>`, null, true)}
+                    ${tbSmCreateItem('基础价格', formatCurrency(plan.price), '月度基础价格')}
         `;
 
         if (isBusiness && extraDevices > 0) {
-            detailsHtml += tbSmCreateItem('Extra Devices', formatNumber(extraDevices), 'Devices beyond included');
-            detailsHtml += tbSmCreateItem('Extra Devices Cost', formatCurrency(extraDevicesCost), `${formatNumber(extraDevices)} × ${formatCurrency(plan.extraDevicePrice)}`);
+            detailsHtml += tbSmCreateItem('额外设备', formatNumber(extraDevices), '超出包含数量的设备');
+            detailsHtml += tbSmCreateItem('额外设备费用', formatCurrency(extraDevicesCost), `${formatNumber(extraDevices)} × ${formatCurrency(plan.extraDevicePrice)}`);
         }
         if (!isMaker && extraProd > 0) {
-            detailsHtml += tbSmCreateItem('Extra Prod Instances', formatNumber(extraProd), 'Additional production instances');
+            detailsHtml += tbSmCreateItem('额外生产实例', formatNumber(extraProd), '增加的生产实例');
             detailsHtml += tbSmCreateItem('Extra Prod Instances Cost', formatCurrency(extraProdCost), `${formatNumber(extraProd)} × ${formatCurrency(plan.extraProdInstancePrice)}`);
         }
         if (!isMaker && tbSmState.devInstances > 0) {
-            detailsHtml += tbSmCreateItem('Extra Dev Instances', formatNumber(tbSmState.devInstances), 'Development/QA instances');
-            detailsHtml += tbSmCreateItem('Extra Dev Instances Cost', formatCurrency(devCost), `${formatNumber(tbSmState.devInstances)} × ${formatCurrency(plan.devQaExtraInstancePrice)}`);
+            detailsHtml += tbSmCreateItem('额外开发实例', formatNumber(tbSmState.devInstances), '开发/QA实例');
+            detailsHtml += tbSmCreateItem('额外开发实例费用', formatCurrency(devCost), `${formatNumber(tbSmState.devInstances)} × ${formatCurrency(plan.devQaExtraInstancePrice)}`);
         }
         detailsHtml += '</div></div>';
 
@@ -577,25 +577,25 @@
         tbSmUi.results.innerHTML = `
             <div class="card-header">
                 <div class="header-top">
-                    <h3>Calculation summary</h3>
+                    <h3>计算摘要</h3>
                     <div class="header-actions">
                         <div id="smCopyButton" class="icon-button" title="Copy">${copyIcon}</div>
                         <div id="smDownloadButton" class="icon-button" title="Download">${downloadIcon}</div>
                     </div>
                 </div>
                 <div class="optimal-plan-row">
-                    <span>Subscription plan:</span>
+                    <span>订阅套餐：</span>
                     <span class="plan-link">${plan.name}</span>
                 </div>
             </div>
             <div class="results-scroll-container">
                 ${detailsHtml}
-                <div class="addons-separator"><span>Add-ons</span></div>
+                <div class="addons-separator"><span>附加模块</span></div>
                 ${addonsHtml}
             </div>
             <div class="results-footer">
                 <div class="results-total">
-                    <span>Total</span>
+                    <span>总计</span>
                     <span class="total-value">
                         ${formatCurrency(totalPrice)}/month
                         <span class="tooltip">${infoIcon}<span class="tooltip-text">${tooltips.join(' + ')}</span></span>
@@ -603,7 +603,7 @@
                 </div>
                 <a id="smGetStarted" href="javascript:;" class="button" onClick="getLicense(event, '${plan.productId}', '${plan.planId}',
                 '${plan.name}', null, '${extraDevices}', null, null, '${extraProd}', '${tbSmState.devInstances}', '${tbSmState.addons.edge.enabled}',
-                '${tbSmState.addons.edge.extraEdgeCalc}', '${tbSmState.addons.trendz.enabled}')">Get started</a>
+                '${tbSmState.addons.edge.extraEdgeCalc}', '${tbSmState.addons.trendz.enabled}')">立即开始</a>
             </div>`;
 
         tbSmInitExpandable();
@@ -633,7 +633,7 @@
             <div class="results-section inactive">
                 <div class="section-header">
                     <span class="${isMobile ? 'section-title' : 'section-title-with-chevron'}">${title} ${isMobile ? '' : chevronDownIcon}</span>
-                    <span class="add-to-plan-btn" data-sm-addon="${id}">Add (${formatCurrency(cost)})</span>
+                    <span class="add-to-plan-btn" data-sm-addon="${id}">添加 (${formatCurrency(cost)})</span>
                 </div>
             </div>`;
         };
@@ -641,14 +641,14 @@
         if (tbSmState.addons.edge.enabled && breakdown.edge) {
             const edge = breakdown.edge;
             if (edge.isFree) {
-                html += section('edgeComputing', 'Edge Computing', `<span class="section-value strikethrough">${formatCurrency(7)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Free with Maker</span></span></span>`, true, `<div class="section-content">${tbSmCreateItem('Included Edges', 1)}</div>`);
+                html += section('edgeComputing', 'Edge Computing', `<span class="section-value strikethrough">${formatCurrency(7)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Maker套餐免费</span></span></span>`, true, `<div class="section-content">${tbSmCreateItem('包含边缘实例', 1)}</div>`);
             } else {
                 let content = `<div class="section-content">`;
-                content += tbSmCreateItem('Included Edges', edge.included);
-                content += tbSmCreateItem('Add-on Base Price', formatCurrency(edge.base), 'Monthly Edge Computing fee');
+                content += tbSmCreateItem('包含边缘实例', edge.included);
+                content += tbSmCreateItem('附加模块基础价格', formatCurrency(edge.base), '边缘计算月度费用');
                 if (edge.extra) {
-                    content += tbSmCreateItem('Extra Edges', edge.extra, 'Additional edge instances');
-                    content += tbSmCreateItem('Extra Edges Cost', formatCurrency(edge.extraCost), `${edge.extra} × ${formatCurrency(plan.extraEdgePrice)}`);
+                    content += tbSmCreateItem('额外边缘实例', edge.extra, '增加的边缘实例');
+                    content += tbSmCreateItem('额外边缘实例费用', formatCurrency(edge.extraCost), `${edge.extra} × ${formatCurrency(plan.extraEdgePrice)}`);
                 }
                 content += '</div>';
                 html += section('edgeComputing', 'Edge Computing', `<span class="section-value">${formatCurrency(edge.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Total Edge Computing cost</span></span></span>`, true, content);
@@ -660,14 +660,14 @@
         if (tbSmState.addons.trendz.enabled && breakdown.trendz) {
             const trendz = breakdown.trendz;
             if (trendz.isFree) {
-                html += section('trendzAnalytics', 'Trendz Analytics', `<span class="section-value strikethrough">${formatCurrency(12)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Free with Maker</span></span></span>`, true, `<div class="section-content">${tbSmCreateItem('Included Devices', plan.includedDevices)}</div>`);
+                html += section('trendzAnalytics', 'Trendz Analytics', `<span class="section-value strikethrough">${formatCurrency(12)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Maker套餐免费</span></span></span>`, true, `<div class="section-content">${tbSmCreateItem('包含设备', plan.includedDevices)}</div>`);
             } else {
                 let content = `<div class="section-content">`;
-                content += tbSmCreateItem('Included Devices', formatNumber(trendz.includedDevices));
-                content += tbSmCreateItem('Add-on Base Price', formatCurrency(trendz.base), 'Monthly Trendz Analytics fee');
+                content += tbSmCreateItem('包含设备', formatNumber(trendz.includedDevices));
+                content += tbSmCreateItem('附加模块基础价格', formatCurrency(trendz.base), 'Trendz Analytics月度费用');
                 if (trendz.extra > 0) {
-                    content += tbSmCreateItem('Extra Devices', formatNumber(trendz.extra), 'Devices beyond included');
-                    content += tbSmCreateItem('Extra Devices Cost', formatCurrency(trendz.extraCost), `${formatNumber(trendz.extra)} × ${formatCurrency(plan.trendzExtraDevicePrice)}`);
+                    content += tbSmCreateItem('额外设备', formatNumber(trendz.extra), '超出包含数量的设备');
+                    content += tbSmCreateItem('额外设备费用', formatCurrency(trendz.extraCost), `${formatNumber(trendz.extra)} × ${formatCurrency(plan.trendzExtraDevicePrice)}`);
                 }
                 content += '</div>';
                 html += section('trendzAnalytics', 'Trendz Analytics', `<span class="section-value">${formatCurrency(trendz.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Total Trendz Analytics cost</span></span></span>`, true, content);
@@ -711,12 +711,12 @@
         if (extraProd) msg += `- Extra Prod Instances: ${formatNumber(extraProd)} (${formatCurrency(extraProdCost)})\n`;
         if (tbSmState.devInstances) msg += `- Dev Instances Cost: ${formatCurrency(devCost)}\n`;
         if (Object.keys(breakdown).length) {
-            msg += '\nAdd-ons:\n';
-            if (breakdown.edge) msg += breakdown.edge.isFree ? '- Edge: FREE\n' : `- Edge: ${formatCurrency(breakdown.edge.cost)} (Total: ${breakdown.edge.total})\n`;
-            if (breakdown.trendz) msg += breakdown.trendz.isFree ? '- Trendz: FREE\n' : `- Trendz: ${formatCurrency(breakdown.trendz.cost)}\n`;
-            if (breakdown.mobile) msg += `- Mobile App: ${formatCurrency(breakdown.mobile.cost)}\n`;
+            msg += '\n附加模块:\n';
+            if (breakdown.edge) msg += breakdown.edge.isFree ? '- 边缘计算: 免费\n' : `- 边缘计算: ${formatCurrency(breakdown.edge.cost)} (总计: ${breakdown.edge.total})\n`;
+            if (breakdown.trendz) msg += breakdown.trendz.isFree ? '- Trendz: 免费\n' : `- Trendz: ${formatCurrency(breakdown.trendz.cost)}\n`;
+            if (breakdown.mobile) msg += `- 移动应用: ${formatCurrency(breakdown.mobile.cost)}\n`;
         }
-        tbSmState.clipboardMessage = msg + `\nTotal: ${formatCurrency(totalPrice)}`;
+        tbSmState.clipboardMessage = msg + `\n总计: ${formatCurrency(totalPrice)}`;
     };
 
     const tbSmSendGTM = () => {

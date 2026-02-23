@@ -1,14 +1,14 @@
-#### Two-way TLS
+#### 双向 TLS
 
-The more complex way to enable MQTTS is to obtain valid (signed) TLS certificate and configure it in the MQTT Transport. The main advantage of this option is that you may use it in combination with "X.509 certificate" MQTT client credentials.
+启用 MQTTS 的较复杂方式是获取有效（已签名）的 TLS 证书并在 MQTT Transport 中配置。此选项的主要优势是可与“X.509 证书”MQTT 客户端凭据配合使用。
 
-To enable the **two-way TLS**:
+要启用**双向 TLS**：
 
-Follow [this guide](/docs/user-guide/mqtt-over-ssl/) to create a **.jks** file with the SSL certificate.
-Afterwards, you need to set **MQTT_SSL_KEY_STORE_PASSWORD** and **MQTT_SSL_KEY_PASSWORD** environment variables in the `tb-services.yml` or `tb-node.yaml` file
-to the corresponding key-store and certificate key passwords.
+按照[此指南](/docs/user-guide/mqtt-over-ssl/)创建包含 SSL 证书的 **.jks** 文件。
+然后，需要在 `tb-services.yml` 或 `tb-node.yaml` 文件中设置 **MQTT_SSL_KEY_STORE_PASSWORD** 和 **MQTT_SSL_KEY_PASSWORD** 环境变量
+为对应的 key-store 和证书密钥密码。
 
-You'll need to create a config-map with your JKS file, you can do it by calling command:
+需要创建包含 JKS 文件的 config-map，可通过以下命令调用：
 
 ```
 kubectl create configmap tb-mqtts-config \
@@ -16,5 +16,5 @@ kubectl create configmap tb-mqtts-config \
 ```
 {: .copy-code}
 
-where **YOUR_JKS_FILENAME** is the name of your **.jks** file. Then, uncomment all sections in the '{{eksTbServicesFile}}' file that are marked with "Uncomment the following lines to enable two-way MQTTS".
-Also, uncomment sections in the 'routes.yml' file that is marked with the same "Uncomment the following lines to enable two-way MQTTS" comment.
+其中 **YOUR_JKS_FILENAME** 为您的 **.jks** 文件名。然后，取消注释 '{{eksTbServicesFile}}' 文件中标有“取消注释以下行以启用双向 MQTTS”的所有部分。
+同时，取消注释 'routes.yml' 文件中标有相同“取消注释以下行以启用双向 MQTTS”注释的部分。

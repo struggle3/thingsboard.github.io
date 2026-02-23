@@ -3,7 +3,7 @@ layout: docwithnav-pe
 assignees:
 - ashvayka
 title: Migrate from old Docker deployment files
-description: Migrate from old Docker deployment files
+description: 从旧版 Docker 部署文件迁移
 ---
 
 * TOC

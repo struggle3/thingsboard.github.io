@@ -1,9 +1,8 @@
-Due to the nature of preferred way of communication between Modbus master there are 3 options how to configure this 
-part: if using TCP, UDP or via Serial port.
+根据 Modbus 主站偏好的通信方式，有三种配置选项：使用 TCP、UDP 或串口。
 
 {% capture difference %} 
-All configuration parameters list, and their detailed description can be found in the 
-[Advanced configuration](/docs/iot-gateway/config/modbus/#device-mapping) section.
+所有配置参数列表及详细说明请参阅 
+[高级配置](/docs/iot-gateway/config/modbus/#device-mapping) 章节。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 

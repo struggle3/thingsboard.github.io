@@ -1,9 +1,9 @@
-Set the terminal in the directory which contains the `docker-compose.yml` file and execute the following commands to up this docker compose directly:
+进入包含 `docker-compose.yml` 的目录，执行以下命令启动 Docker Compose：
 
 ```
 docker compose --profile trendz up -d && docker compose logs -f trendz
 ```
 {: .copy-code}
 
-After executing this command you can open `http://{your-host-ip}:8888` in your browser (for ex. `http://localhost:8888`).
-You should see Trendz login page.
+执行后可在浏览器中打开 `http://{your-host-ip}:8888`（如 `http://localhost:8888`）。
+您将看到 Trendz 登录页面。

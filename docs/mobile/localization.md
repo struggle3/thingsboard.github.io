@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-mobile
-title: Add a custom localization to ThingsBoard Mobile App
+title: 为ThingsBoard移动应用添加自定义本地化
 
 ---
 {% include docs/mobile/localization.md %}

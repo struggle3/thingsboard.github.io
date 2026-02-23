@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: Loriot integration
-description: Loriot integration guide
+title: Loriot 集成
+description: Loriot 集成指南
 
 create-loriot-account:
     0:

@@ -1,10 +1,9 @@
-Unassigns the message originator from a customer.
+从客户中取消分配消息发起者。
 
-## Configuration
+## 配置
 
-- **Unassign from specific customer if originator is dashboard** - When enabled, allows specifying which customer to unassign the dashboard from.
-- **Customer title** - The name of the customer to unassign the dashboard from. Supports templatization using `${metadataKey}` or `$[dataKey]` to
-  substitute values from the message metadata or data.
+- **Unassign from specific customer if originator is dashboard（发起者为仪表板时从特定客户取消分配）** - 启用时，允许指定从哪个客户取消分配仪表板。
+- **Customer title（客户标题）** - 要从中取消分配仪表板的客户的名称。支持使用 `${metadataKey}` 或 `$[dataKey]` 模板化，以替换消息元数据或数据中的值。
 
 ### JSON Schema
 
@@ -24,41 +23,41 @@ Unassigns the message originator from a customer.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-The processing algorithm varies depending on the originator entity type:
+处理算法因发起者实体类型而异：
 
-**For `DASHBOARD`:**
+**对于 `DASHBOARD`：**
 
-1. Checks if **Customer title** is specified: if no customer title is provided, the processing fails with an error.
-2. Resolves any templates in the **Customer title** using values from the message data and metadata.
-3. Searches for the customer with the resolved title within the tenant.
-4. If the customer doesn't exist, the processing fails.
-5. Unassigns the dashboard from the specified customer.
+1. 检查是否指定 **Customer title**：若未提供客户标题，处理失败并报错。
+2. 使用消息数据和元数据中的值解析 **Customer title** 中的模板。
+3. 在租户内搜索具有解析后标题的客户。
+4. 若客户不存在，处理失败。
+5. 从指定客户取消分配仪表板。
 
-**For other originator types:**
+**对于其他发起者类型：**
 
-1. Unassigns the entity from whatever customer it's currently assigned to.
-2. If the entity is not assigned to any customer, the processing is considered successful.
+1. 从实体当前所属的任意客户中取消分配。
+2. 若实体未分配给任何客户，处理视为成功。
 
-On successful completion, the message is forwarded to the `Success` connection. If an error occurs, the message is routed to the `Failure` connection.
+成功完成后，消息转发至 `Success` 连接。发生错误时，消息路由至 `Failure` 连接。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The entity was successfully unassigned from the customer or the entity was not assigned to any customer.
+    - 实体已成功从客户中取消分配，或实体未分配给任何客户。
 - `Failure`
-    - Unexpected error occurred during processing.
+    - 处理过程中发生意外错误。
 
-## Examples
+## 示例
 
-### Example 1 — Unassigning device from customer
+### 示例 1 — 从客户取消分配设备
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -66,26 +65,26 @@ Originator: `DEVICE`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- A customer named "My Customer" exists under the tenant.
-- Originator device is assigned to "My Customer".
+- 租户下存在名为「My Customer」的客户。
+- 发起者设备分配给「My Customer」。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The device is unassigned from "My Customer" and becomes a tenant-level entity.
+设备从「My Customer」中取消分配，成为租户级别实体。
 
-### Example 2 — Unassigning dashboard from specific customer
+### 示例 2 — 从特定客户取消分配仪表板
 
-**Incoming message**
+**传入消息**
 
-Originator: `DASHBOARD`.
+发起者：`DASHBOARD`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -93,24 +92,24 @@ Originator: `DASHBOARD`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- "Target Customer" and "Other Customer" both exist under the tenant.
-- Originator dashboard is assigned to both customers.
+- 租户下存在「Target Customer」和「Other Customer」。
+- 发起者仪表板分配给这两个客户。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The dashboard is unassigned from "Target Customer" but remains assigned to "Other Customer".
+仪表板从「Target Customer」中取消分配，但仍分配给「Other Customer」。
 
-### Example 3 — Using pattern for dashboard customer title
+### 示例 3 — 为仪表板客户标题使用模式
 
-**Incoming message**
+**传入消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -118,7 +117,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -126,9 +125,9 @@ Metadata:
 }
 ```
 
-Originator: `DASHBOARD`.
+发起者：`DASHBOARD`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -136,26 +135,26 @@ Originator: `DASHBOARD`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- A customer named "Premium North" exists under the tenant.
-- Originator dashboard is assigned to "Premium North".
+- 租户下存在名为「Premium North」的客户。
+- 发起者仪表板分配给「Premium North」。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The pattern `$[customerName] ${region}` is resolved by substituting values from data and metadata, resulting in "Premium North". The dashboard is unassigned from this customer.
+模式 `$[customerName] ${region}` 通过用数据和元数据中的值替换得到解析，结果为「Premium North」。仪表板从此客户中取消分配。
 
-### Example 4 — Entity not assigned to any customer
+### 示例 4 — 实体未分配给任何客户
 
-**Incoming message**
+**传入消息**
 
-Originator: `ASSET`.
+发起者：`ASSET`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -163,25 +162,25 @@ Originator: `ASSET`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- Originator asset is not assigned to any customer (tenant-level entity).
+- 发起者资产未分配给任何客户（租户级别实体）。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-Since the asset is not assigned to any customer, no unassignment operation is performed, but the processing is considered successful.
+由于资产未分配给任何客户，不执行取消分配操作，但处理视为成功。
 
-### Example 5 — Dashboard with non-existent customer
+### 示例 5 — 仪表板与不存在的客户
 
-**Incoming message**
+**传入消息**
 
-Originator: `DASHBOARD`.
+发起者：`DASHBOARD`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -189,15 +188,15 @@ Originator: `DASHBOARD`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- No customer named "Non-existent Customer" exists.
-- Originator dashboard is assigned to some other customer.
+- 不存在名为「Non-existent Customer」的客户。
+- 发起者仪表板分配给其他客户。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Failure` connection.
+传出消息与传入消息相同。经 `Failure` 连接路由。
 
-**Result**
+**结果**
 
-The processing fails with an error because the specified customer "Non-existent Customer" doesn't exist.
+由于指定的客户「Non-existent Customer」不存在，处理失败并报错。

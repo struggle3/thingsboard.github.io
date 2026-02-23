@@ -2,45 +2,45 @@
 * TOC
 {:toc}
 
-The **Last Will** feature in MQTT allows clients to notify others if they disconnect unexpectedly, giving a way to trigger actions like switching to backup systems or alerting users.
+MQTT 的 **Last Will**（遗嘱）功能可在客户端异常断开时通知其他客户端，用于触发切换备用系统或告警等操作。
 
-The term "Last Will", like a will in the real world, speaks for itself. In the real world, a last will or testament is a legal document that specifies a person's wishes after they pass away. It usually includes instructions for distributing assets, taking care of dependents, and other final wishes.
+「Last Will」一词类似现实中的遗嘱。现实中，遗嘱是规定身后意愿的法律文件，通常包含资产分配、照顾 dependents 等安排。
 
-Here are examples from IoT. In a **smart home** setup, devices such as thermostats and security cameras communicate with a central hub. If a security camera goes offline unexpectedly, a Last Will message could trigger an alert to the homeowner or even activate a backup system, such as turning on lights or alarms. 
-Similarly, in **agriculture**, devices monitor field conditions to optimize irrigation. If a key sensor disconnects, the Last Will message can notify the farmer, allowing them to take preventive actions.
+IoT 示例：在**智能家居**场景中，温控器和安防摄像头等设备与中央 hub 通信。若摄像头异常离线，Last Will 消息可触发住户告警或启动备用系统（如开灯、报警）。
+**农业**场景中，设备监控田间状态以优化灌溉。若关键传感器断开，Last Will 消息可通知农户并采取预防措施。
 
-## How the Last Will works
+## Last Will 工作原理
 
-1. The Last Will message and its [parameters](/docs/{{docsPrefix}}mqtt-broker/user-guide/last-will/#parameters-of-the-last-will) are set when a client connects to the broker, in the `CONNECT` packet. The broker stores a Last Will message data in the session state.
-2. In case happens unexpected (ungraceful) disconnection, the Last Will message is sent to the clients that are subscribed to the Will Topic.
+1. Last Will 消息及其[参数](/docs/{{docsPrefix}}mqtt-broker/user-guide/last-will/#parameters-of-the-last-will)在客户端连接 broker 时通过 `CONNECT` 包设置。broker 将 Last Will 数据保存在会话状态中。
+2. 发生意外（非正常）断开时，Last Will 消息会发送给订阅 Will Topic 的客户端。
 
-## Ungraceful disconnection - publish
+## 非正常断开 — 发布遗嘱
 
-Ungraceful disconnection happens when a client disconnects unexpectedly due to reasons such as network failure, a crash, or power loss. 
-In this case, the broker does not receive the `DISCONNECT` message, and it assumes the client has disconnected abnormally.
+非正常断开指客户端因网络故障、崩溃或断电等原因意外断开。
+此时 broker 未收到 `DISCONNECT` 消息，会认为客户端异常断开。
 
-Ungraceful situations, according to the official [documentation](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901040), include but are not limited to:
-* **An I/O error** or network failure detected by the server.
-* The client fails to communicate within the **Keep Alive time**.
-* The **client** closes the connection without sending a `DISCONNECT` packet with **Reason Code 0x00** (Normal disconnection).
-* The **server** closes the connection without receiving a `DISCONNECT` packet with **Reason Code 0x00** (Normal disconnection).
+根据官方[文档](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901040)，非正常情况包括但不限于：
+* 服务器检测到的 **I/O 错误** 或网络故障。
+* 客户端在 **Keep Alive** 时间内未进行通信。
+* **客户端** 在未发送 **Reason Code 0x00**（正常断开）的 `DISCONNECT` 包的情况下关闭连接。
+* **服务器** 在未收到 **Reason Code 0x00**（正常断开）的 `DISCONNECT` 包的情况下关闭连接。
 
-## Graceful disconnection - do not publish
+## 正常断开 — 不发布遗嘱
 
-Graceful disconnection occurs when a client sends a `DISCONNECT` message before terminating the connection.
-This informs the broker that the client is intentionally disconnecting, and as a result, the Last Will message is not triggered. The client is effectively saying, "I'm leaving on purpose, and everything is fine".
+正常断开指客户端在终止连接前发送 `DISCONNECT` 消息。
+此时 broker 得知客户端有意断开，不会触发 Last Will 消息。相当于客户端表明「主动离开，一切正常」。
 
-The Last Will message will be removed from the session state when:
-* **After the Last Will message is Published**. Once the broker detects an unexpected disconnection and successfully publishes the Last Will message to the clients subscribed to the Will Topic, the Last Will message is removed from the session.
-* **Normal Disconnection**. If the broker receives a `DISCONNECT` packet with Reason Code 0x00 (Normal disconnection) from the client, the broker will not publish the Last Will message, and it will be removed from the session.
+以下情况会将 Last Will 消息从会话中移除：
+* **Last Will 消息已发布**。broker 检测到意外断开并成功向订阅 Will Topic 的客户端发布 Last Will 消息后，会从会话中移除该消息。
+* **正常断开**。 broker 收到客户端带有 Reason Code 0x00（正常断开）的 `DISCONNECT` 包时，不会发布 Last Will 消息，并将其从会话中移除。
 
-## Parameters of the Last Will
+## Last Will 参数
 
 The feature “Last Will and Testament” was introduced in [MQTT 3.1](https://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html#connect) with the following parameters:
-* **Will Topic**. The MQTT topic where the Last Will message will be published.
-* **Will Message**. The content of the Last Will. This can be an empty message.
-* **Will QoS**. The Quality of Service level for the Last Will message ([which QoS to use?](/docs/{{docsPrefix}}mqtt-broker/user-guide/qos)).
-* **Will Retain**. Use the Retain flag if the Will Message should be available to any new clients subscribing to the topic after the message is published. This is useful for status messages that need to stay available until updated.
+* **Will Topic**：发布 Last Will 消息的 MQTT 主题。
+* **Will Message**：Last Will 的内容，可为空。
+* **Will QoS**：Last Will 消息的 QoS 级别，参见[如何选择 QoS？](/docs/{{docsPrefix}}mqtt-broker/user-guide/qos)。
+* **Will Retain**：若希望消息发布后新订阅该主题的客户端仍能收到，使用 Retain 标志。适用于需保持到更新的状态消息。
 
 In [MQTT 5.0](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901040), the feature gained additional properties:
 * **Payload Format Indicator**. If true, it indicates the payload is UTF-8 encoded text. If false or not set, it assumes binary data.
@@ -54,14 +54,14 @@ In [MQTT 5.0](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_T
 * **User Properties**. Custom metadata in the form of key-value pairs that the client can include in the Will Message.
 
 {% capture difference %}
-Unsure how to set up a session with the Last Will? Check out the WebSocket Client [documentation](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/websocket-client/#last-will) for detailed step-by-step instructions.
+不确定如何配置带 Last Will 的会话？请参阅 WebSocket Client [文档](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/websocket-client/#last-will)中的分步说明。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Last Will with delay
+## 带延迟的 Last Will
 
-The **Will Delay Interval** specifies how long the broker needs to wait before publishing the Last Will message after an ungraceful disconnection. 
-This feature allows clients to reconnect within the delay interval without triggering the Last Will message, which **can be useful in situations where brief network interruptions occur**.
+**Will Delay Interval** 指定 broker 在非正常断开后、发布 Last Will 消息前需等待的时间。
+该功能允许客户端在延迟内重连而不触发 Last Will，**适用于短暂网络中断**。
 
 If a client disconnects unexpectedly and doesn't reconnect before the Will Delay Interval expires, the broker will publish the Last Will message to the Will Topic. 
 If the client reconnects within the delay, the Last Will message is discarded, as the client is considered back online.
@@ -81,46 +81,46 @@ In this case:
 
 **Note**: if the Session Expiry Interval is shorter than the Will Delay Interval, the Last Will message will be delivered when the session expires.
 
-## Last Will as retained message
+## 作为保留消息的 Last Will
 
-The **Retain Flag** is used to keep the Last Will message on the broker, so that new subscribers can receive it immediately upon subscribing to the relevant topic, even if the message was published before they subscribed.
+**Retain Flag** 用于在 broker 上保留 Last Will 消息，使新订阅者在订阅相关主题后能立即收到，即使消息在其订阅前已发布。
 
 If a client disconnects unexpectedly, its Last Will message indicates an important state change. By using the **Retain Flag = true**, this message will be **stored** by the broker and **sent to any future subscribers** of the topic. 
 For example, if a new device joins a network after a client disconnects, it will still receive the "offline" or "disconnected" Last Will message.
 
-## Last Will guide with TBMQ WebSocket Client
+## 使用 TBMQ WebSocket Client 的 Last Will 指南
 
-In this guide, we will demonstrate how the Last Will feature works in the TBMQ using a WebSocket client. 
-By simulating an ungraceful disconnection, you'll see how the broker publishes the Last Will message to inform other connected clients.
+本指南演示 TBMQ 中 Last Will 在 WebSocket 客户端上的工作方式。
+通过模拟非正常断开，您将看到 broker 如何发布 Last Will 消息以通知其他已连接客户端。
 
-### Step 1. Add client "Security Camera"
+### 步骤 1. 添加客户端「Security Camera」
 
-To add a new client **Security Camera**, which will publish a Last Will message, follow these steps:
+添加将发布 Last Will 消息的新客户端 **Security Camera**，按以下步骤操作：
 
-1. Navigate to the _WebSocket Client_ page and click on _Select Connection_ icon.
-2. Click the _Add new connection_ button. 
-3. Set the connection name as _Security Camera_, then configure the Last Will topic and payload.
-4. Click _Connect_ to establish the client connection.
+1. 进入 _WebSocket Client_ 页面并点击 _Select Connection_ 图标。
+2. 点击 _Add new connection_ 按钮。
+3. 将连接名称设为 _Security Camera_，配置 Last Will 主题与 payload。
+4. 点击 _Connect_ 建立客户端连接。
 
 {% include images-gallery.html imageCollection="ws-connection-add-camera" %}
 
-### Step 2. Add client "Security Hub"
+### 步骤 2. 添加客户端「Security Hub」
 
-Now let's add another connection, **Security Hub**, which will receive the Last Will message from the **Security Camera**:
+添加另一个连接 **Security Hub**，用于接收 **Security Camera** 的 Last Will 消息：
 
-1. Once again, click on the _Add new connection_ button.
-2. Set the connection name as _Security Hub_.
-3. Click _Connect_.
-4. Add subscription with the default topic filter `sensors/#` to receive Last Will message.
+1. 再次点击 _Add new connection_ 按钮。
+2. 将连接名称设为 _Security Hub_。
+3. 点击 _Connect_。
+4. 添加使用默认主题过滤器 `sensors/#` 的订阅以接收 Last Will 消息。
 
 {% include images-gallery.html imageCollection="ws-connection-add-hub" %}
 
-### Step 3. Trigger an ungraceful disconnection
+### 步骤 3. 触发非正常断开
 
-To publish the Last Will message, the connection between the client and the broker must be terminated ungracefully. To do this in TBMQ, follow these steps:
+要发布 Last Will 消息，客户端与 broker 间的连接需被非正常终止。在 TBMQ 中按以下步骤操作：
 
-1. Click on _Select Connection_ icon and open the _Security Camera_ session details window.
-2. Click _Disconnect client_ to forcefully terminate the connection.
-3. In the _Messages_ table of the WebSocket client _Security Hub_ you should see the received Last Will message.
+1. 点击 _Select Connection_ 图标，打开 _Security Camera_ 会话详情窗口。
+2. 点击 _Disconnect client_ 强制终止连接。
+3. 在 WebSocket 客户端 _Security Hub_ 的 _Messages_ 表格中应能看到收到的 Last Will 消息。
 
 {% include images-gallery.html imageCollection="ws-connection-ungraceful-disconnect" %}

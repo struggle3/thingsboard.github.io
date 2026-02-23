@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Deploy TBMQ PE Cluster on AWS with Kubernetes
-description: Deploy TBMQ PE Cluster on AWS with Kubernetes
+title: 使用 Kubernetes 在 AWS 上部署 TBMQ PE 集群
+description: 使用 Kubernetes 在 AWS 上部署 TBMQ PE 集群
 
 tbmq-rds-set-up:
   0:

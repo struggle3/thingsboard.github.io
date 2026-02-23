@@ -2,23 +2,23 @@
 {% if docsPrefix != 'paas/' %}
 {% capture info %}
 <br>
-**INFO: To use this feature, you should configure [MQTT over SSL in ThingsBoard](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/)**  
+**说明：使用本功能前，需先在 ThingsBoard 中配置 [MQTT over SSL](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/)**  
 {% endcapture %}
 {% include templates/info-banner.md content=info %}
 {% endif %}
 
 
 |---
-| **Parameter**             | **Example value**                            | **Description**                                                                |
+| **参数**             | **示例值**                            | **说明**                                                                |
 |:-|:-|-
-| *deviceName*              | **DEVICE_NAME**                              | Device name in ThingsBoard.                                                    |
-| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | Provisioning device key, you should take it from configured device profile.    |
-| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | Provisioning device secret, you should take it from configured device profile. | 
-| credentialsType           | **X509_CERTIFICATE**                         | Credentials type parameter.                                                    |
-| hash                      | **MIIB........AQAB**                         | Public key X509 hash for device in ThingsBoard.                                |
+| *deviceName*              | **DEVICE_NAME**                              | ThingsBoard 中的设备名称。                                                    |
+| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | 设备 profile 中配置的 provisioning device key。                                |
+| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | 设备 profile 中配置的 provisioning device secret。 | 
+| credentialsType           | **X509_CERTIFICATE**                         | Credentials type 参数。                                                    |
+| hash                      | **MIIB........AQAB**                         | 设备在 ThingsBoard 中的 X509 公钥 hash。                                |
 |---
 
-Provisioning request data example:
+Provisioning 请求数据示例：
  
 ```json
 {
@@ -30,7 +30,7 @@ Provisioning request data example:
 }
 ```
 
-Provisioning response example:
+Provisioning 响应示例：
 
 ```json
 {
@@ -43,9 +43,9 @@ Provisioning response example:
 ```
 
 
-### MQTT Example script
+### MQTT 示例脚本
 
-To use this script put your **mqttserver.pub.pem** (public key of the server) into the folder with script. 
+将 **mqttserver.pub.pem**（服务器公钥）置于脚本所在目录。 
 
 ```python
 

@@ -39,9 +39,9 @@
 {%- assign prev_minor = prev_parts[1] -%}
 
 {% if patch_status == "true" %}
-### Upgrading {{ platform }} to latest {{ base_version }} ({{ current_version }})
+### 将 {{ platform }} 升级到最新 {{ base_version }}（{{ current_version }}）
 {% else %}
-### Upgrading {{ platform }} to {{ current_version }}
+### 将 {{ platform }} 升级到 {{ current_version }}
 {% endif %}
 
 {%- if x_status == "true" -%}
@@ -66,13 +66,13 @@
 {%- endif -%}
 
 {% capture difference %}
-**NOTE:**
+**注意：**
 {% if curr_major > "4" or (curr_major == "4" and curr_minor >= "2") %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version }}{% if patch_status == "true" %} or any {{ base_version }} patch{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version }}{% if patch_status == "true" %} 或任意 {{ base_version }} 补丁{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version }}**]({{ prev_version_href }})。
 {% else %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} and ThingsBoard version {{ v | strip }}{% endfor %}{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version_label }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} 和 ThingsBoard 版本 {{ v | strip }}{% endfor %}{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version_label }}**]({{ prev_version_href }})。
 {% endif %}
 {% endcapture %}
 
@@ -93,10 +93,10 @@ In order to upgrade to {{ current_version_with_platform | upcase }} you need to 
 {% endif %}
 
 {% capture update_manifests_note %}
-We strongly recommend that you also update your Docker Compose deployment manifests to [**the corresponding version from GitHub repository**]({{ docker-compose-repo-link }}) with every ThingsBoard upgrade. This ensures your ThingsBoard service runs with the latest best-practice parameters and configurations, while also guarantees that all required services are correctly deployed to support the newest features introduced in the release.
+强烈建议在每次 ThingsBoard 升级时，将 Docker Compose 部署清单更新为 [**GitHub 仓库中的对应版本**]({{ docker-compose-repo-link }})。这可以确保 ThingsBoard 服务使用最新的最佳实践参数和配置运行，并保证正确部署所有必要服务以支持发行版中的最新功能。
 <br>
 <br>
-If you are running older releases of ThingsBoard - be aware that the manifests in `master` branch of the repository may contain configurations for features that are not available in your specific version. Always ensure that manifests are compatible with your target ThingsBoard version while merging deployment files.
+若运行较旧版本的 ThingsBoard，请注意仓库 `master` 分支的清单可能包含你当前版本中不可用的功能配置。合并部署文件时，请始终确保清单与目标 ThingsBoard 版本兼容。
 {% endcapture %}
 {% include templates/warn-banner.md content=update_manifests_note %}
 
@@ -114,7 +114,7 @@ If you are running older releases of ThingsBoard - be aware that the manifests i
 {%- endif -%}
 {%- endif -%}
 
-#### {{ platform }} service upgrade
+#### {{ platform }} 服务升级
 
 {% assign skipUpgrade = false %}
 {% if update_status == "false" %}

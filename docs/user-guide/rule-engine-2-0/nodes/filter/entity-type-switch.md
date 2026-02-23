@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: entity type switch
-description: Routes messages to different connections based on the originator entity type.
+description: 根据 originator entity 类型将消息路由到不同连接。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

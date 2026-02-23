@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: delete key-value pairs
-description: Deletes specified key-value pairs from either the message data or metadata.
+description: 从消息 data 或 metadata 中删除指定的键值对。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

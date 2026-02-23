@@ -1,11 +1,11 @@
-| **Parameter**             | **Example value**                            | **Description**                                                                |
+| **参数**             | **示例值**                            | **说明**                                                                |
 |:-|:-
-| *deviceName*              | **DEVICE_NAME**                              | Device name in ThingsBoard.                                                    |
-| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | Provisioning device key, you should take it from configured device profile.    |
-| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | Provisioning device secret, you should take it from configured device profile. | 
+| *deviceName*              | **DEVICE_NAME**                              | ThingsBoard 中的设备名称。                                                    |
+| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | 预配置设备密钥，需从已配置的设备配置中获取。    |
+| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | 预配置设备密钥，需从已配置的设备配置中获取。 | 
 |-
 
-Provisioning request data example:
+预配置请求数据示例：
  
 ```json
 {
@@ -16,7 +16,7 @@ Provisioning request data example:
 ```
 {: .copy-code}
 
-Provisioning response example:
+预配置响应示例：
 
 ```json
 {
@@ -27,7 +27,7 @@ Provisioning response example:
 ```
 {: .copy-code}
 
-### MQTT Example script
+### MQTT 示例脚本
 
 ```python
 from paho.mqtt.client import Client
@@ -147,7 +147,7 @@ if __name__ == '__main__':
 {: .copy-code}
 
 
-### HTTP Example script
+### HTTP 示例脚本
 
 {% highlight python %}
 from requests import post
@@ -166,9 +166,9 @@ if __name__ == '__main__':
 {% endhighlight %}
 {: .copy-code}
 
-### CoAP Example script
+### CoAP 示例脚本
 
-To communicate with ThingsBoard we will use asyncio and aiocoap modules, so we should install it: <br><br>
+要与 ThingsBoard 通信，我们将使用 asyncio 和 aiocoap 模块，需先安装：<br><br>
 
 <b>pip3 install asyncio aiocoap --user</b>
 

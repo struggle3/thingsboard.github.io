@@ -1,18 +1,16 @@
-Delays incoming messages for a configurable period before forwarding them to the next rule node.
+在将传入消息转发到下一 Rule 节点之前，延迟可配置的一段时间。
 
 {% capture deprecation_note %}
-**This node is deprecated** due to potential data loss. It acknowledges incoming messages (removing them from the persistent queue) but stores them only in memory, which is lost
-if the server restarts or crashes.
+**此节点已弃用**，可能导致数据丢失。它确认传入消息（从持久队列中移除）但仅将其存储在内存中，若服务器重启或崩溃则会丢失。
 {% endcapture %}
 {% include templates/warn-banner.md content=deprecation_note %}
 
-## Configuration
+## 配置
 
-- **Use period in seconds pattern** - When enabled, uses the **Period in seconds pattern** to extract delay period from message metadata or data. When disabled, uses the fixed
-  **Period in seconds** field
-    - **Period in seconds** - Fixed delay period in seconds
-    - **Period in seconds pattern** - Pattern to extract delay period from message metadata or data (e.g., `${metadataKey}` or `$[dataKey]`)
-- **Maximum pending messages** - Maximum number of messages that can be held in memory waiting for delay timeout
+- **Use period in seconds pattern（使用以秒为单位的延迟模式）** - 启用时，使用 **Period in seconds pattern** 从消息元数据或数据中提取延迟时长。禁用时，使用固定的 **Period in seconds** 字段
+    - **Period in seconds（延迟秒数）** - 固定延迟时长（秒）
+    - **Period in seconds pattern（延迟秒数模式）** - 从消息元数据或数据中提取延迟时长的模式（如 `${metadataKey}` 或 `$[dataKey]`）
+- **Maximum pending messages（最大待处理消息数）** - 可保留在内存中等待延迟超时的最大消息数
 
 ### JSON Schema
 
@@ -44,37 +42,37 @@ if the server restarts or crashes.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node checks if the number of pending messages is below the configured maximum limit
-    - If limit exceeded, processing fails and the message is routed to the `Failure` connection
-2. **Delay period determination**:
-    - If **Use period in seconds pattern** is enabled: extracts the delay period from message metadata or data using the configured pattern
-    - If pattern extraction fails or value is not parsable as integer: processing fails and the message is routed to the `Failure` connection
-    - If pattern mode is disabled: uses the fixed **Period in seconds** configuration value
-3. **Message delay processing**:
-    - Stores the message in memory for the calculated delay period
-    - After the delay period expires, forwards the original message to the `Success` connection
-    - The original message is acknowledged immediately
+1. 节点检查待处理消息数是否低于配置的最大限制
+    - 若超出限制，处理失败，消息路由至 `Failure` 连接
+2. **延迟时长确定**：
+    - 若 **Use period in seconds pattern** 已启用：使用配置的模式从消息元数据或数据中提取延迟时长
+    - 若模式提取失败或值无法解析为整数：处理失败，消息路由至 `Failure` 连接
+    - 若禁用模式：使用固定的 **Period in seconds** 配置值
+3. **消息延迟处理**：
+    - 将消息在内存中存储计算出的延迟时长
+    - 延迟时长到期后，将原始消息转发至 `Success` 连接
+    - 原始消息立即被确认
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - Message delay timeout has expired and the message is being forwarded
+    - 消息延迟超时已到期，消息正在被转发
 - `Failure`
-    - Maximum pending messages limit exceeded
-    - Failed to parse delay period from metadata/data pattern
-    - Other unexpected errors occurred
+    - 超出最大待处理消息数限制
+    - 无法从元数据/数据模式解析延迟时长
+    - 发生其他意外错误
 
-## Examples
+## 示例
 
-### Example 1 — Fixed delay period
+### 示例 1 — 固定延迟时长
 
-**Incoming message**
+**传入消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -84,15 +82,15 @@ Any message.
 }
 ```
 
-**Result**
+**结果**
 
-The message will be delayed for 5 seconds, then forwarded to the `Success`.
+消息将延迟 5 秒，然后转发至 `Success`。
 
-### Example 2 — Dynamic delay from metadata
+### 示例 2 — 从元数据动态延迟
 
-**Incoming message**
+**传入消息**
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -100,7 +98,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -110,15 +108,15 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-The message will be delayed for 10 seconds (extracted from metadata), then forwarded to the `Success` connection.
+消息将延迟 10 秒（从元数据提取），然后转发至 `Success` 连接。
 
-### Example 3 — Dynamic delay from message data
+### 示例 3 — 从消息数据动态延迟
 
-**Incoming message**
+**传入消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -126,7 +124,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -136,17 +134,17 @@ Data:
 }
 ```
 
-**Result**
+**结果**
 
-The message will be delayed for 3 seconds (extracted from message data), then forwarded to the `Success` connection.
+消息将延迟 3 秒（从消息数据提取），然后转发至 `Success` 连接。
 
-### Example 4 — Maximum pending messages exceeded
+### 示例 4 — 超出最大待处理消息数
 
-**Incoming message**
+**传入消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -156,23 +154,23 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- 5 messages are already delayed
+- 已有 5 条消息处于延迟中
 
-**Outgoing message**
+**传出消息**
 
-The message is routed to the `Failure` connection.
+消息路由至 `Failure` 连接。
 
-**Result**
+**结果**
 
-Processing fails with error because the pending messages limit has been exceeded.
+由于超出待处理消息限制，处理失败并返回错误。
 
-### Example 5 — Invalid delay pattern
+### 示例 5 — 无效延迟模式
 
-**Incoming message**
+**传入消息**
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -180,7 +178,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -190,6 +188,6 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-Processing fails with runtime exception because the specified pattern is resolved to `${invalidKey}` which cannot be parsed as integer.
+由于指定模式解析为 `${invalidKey}` 且无法解析为整数，处理失败并抛出运行时异常。

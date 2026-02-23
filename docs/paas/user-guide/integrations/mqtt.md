@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: MQTT Integration
-description: MQTT Integration guide
+title: MQTT 集成
+description: MQTT 集成指南
 create_dashboard:
     0:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-1-paas.png

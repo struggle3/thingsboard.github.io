@@ -1,23 +1,22 @@
-Retrieves server-side attributes or the latest time series from the message originator's **Customer** and adds them to the message data or metadata.
+从消息来源实体的**客户**获取服务端属性或最新时序数据，并添加到消息 data 或 metadata。
 
-## Configuration
+## 配置
 
-The configuration allows you to specify which data to fetch from the customer and how to map it to new keys in the outgoing message.
+配置允许指定从客户获取哪些数据以及如何映射到出站消息中的新键。
 
-- **Mapping of customer's** - Specifies the type of data to fetch from the customer.
-    - *Attributes*: Fetches server-side attributes from the customer.
-    - *Latest telemetry*: Fetches the latest value of a time series key from the customer.
-- **Attributes/Latest telemetry mapping** - A list of key-value pairs to define how data is fetched and added to the message.
-    - **Source attribute/telemetry key**: The name of the attribute or telemetry key on the Customer entity.
-    - **Target key**: The key that will be used to store the fetched value in the message data or metadata.
-    - Both **Source attribute/telemetry key** and **Target key** support templatization using `${metadataKey}` or `$[dataKey]` to substitute values from the message metadata or
-      data.
-- **Add mapped attributes/latest telemetry to** - Determines the destination for the fetched data.
-    - *Message*: Adds the fetched key-value pairs to the message data. If the original message data is not a valid JSON object, the processing will fail.
-    - *Metadata*: Adds the fetched key-value pairs to the message metadata.
-- **Fetch originator's attributes if originator is customer** - A boolean flag that is relevant only when the message originator is a Customer entity.
-    - If *enabled*, the node fetches data directly from that Customer originator.
-    - If *disabled*, the node will fail to find a parent customer for the Customer originator, and the message will be routed to the `Failure` connection.
+- **Mapping of customer's** — 指定从客户获取的数据类型。
+    - *Attributes*：从客户获取服务端属性。
+    - *Latest telemetry*：从客户获取时序键的最新值。
+- **Attributes/Latest telemetry mapping** — 键值对列表，定义如何获取数据并添加到消息。
+    - **Source attribute/telemetry key**：客户实体上的属性或遥测键名。
+    - **Target key**：在消息 data 或 metadata 中存储获取值的键。
+    - **Source attribute/telemetry key** 和 **Target key** 均支持使用 `${metadataKey}` 或 `$[dataKey]` 从消息 metadata 或 data 替换值的模板。
+- **Add mapped attributes/latest telemetry to** — 确定获取数据的目标位置。
+    - *Message*：将获取的键值对添加到消息 data。若原始消息 data 不是有效 JSON 对象，处理将失败。
+    - *Metadata*：将获取的键值对添加到消息 metadata。
+- **Fetch originator's attributes if originator is customer** — 布尔标志，仅当消息来源实体为 Customer 时相关。
+    - *启用*：节点直接从该 Customer 来源实体获取数据。
+    - *禁用*：节点无法为 Customer 来源实体找到父客户，消息将经 `Failure` 连接路由。
 
 ### JSON Schema
 
@@ -66,30 +65,27 @@ The configuration allows you to specify which data to fetch from the customer an
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node identifies the **Customer** associated with the incoming message originator (e.g., the customer of the device that sent the message). If a customer cannot be found, the
-   message is routed to the `Failure` connection.
-2. It resolves any templates in the **Source attribute/telemetry key** and **Target key** fields using the message data and metadata.
-3. Based on the configuration, it asynchronously requests the specified server-side attributes or latest time series values from the Customer entity.
-4. If any of the requested keys do not exist on the customer, they are simply ignored. The message processing continues with the data that was successfully found.
-5. The fetched key-value pairs are added to either the message data or metadata, according to the **Add mapped attributes/latest telemetry to** setting.
-6. The enriched message is forwarded to the `Success` connection. If an error occurs (e.g., trying to add data to a non-JSON message data), the message is routed to the `Failure`
-   connection.
+1. 节点识别与入站消息来源实体关联的**客户**（如发送消息的设备的客户）。若找不到客户，消息经 `Failure` 连接路由。
+2. 使用消息 data 和 metadata 解析 **Source attribute/telemetry key** 和 **Target key** 字段中的模板。
+3. 根据配置，异步向客户实体请求指定的服务端属性或最新时序值。
+4. 若请求的键在客户上不存在，则忽略。消息处理继续使用成功找到的数据。
+5. 根据**Add mapped attributes/latest telemetry to**设置，将获取的键值对添加到消息 data 或 metadata。
+6. 丰富后的消息转发至 `Success` 连接。若发生错误（如尝试向非 JSON 消息 data 添加数据），消息经 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - The message is successfully enriched with the requested data from the customer.
-- `Failure`:
-    - An error occurred during processing. For example, if the originator has no customer, or if the **Add mapped attributes/latest telemetry to** is set to *Message* but the
-      message data is not a valid JSON object.
+- `Success`：
+    - 消息已成功使用客户的请求数据丰富。
+- `Failure`：
+    - 处理过程中发生错误。例如，来源实体无客户时，或 **Add mapped attributes/latest telemetry to** 设为 *Message* 但消息 data 不是有效 JSON 对象时。
 
-## Examples
+## 示例
 
-### Example 1 — Enriching metadata
+### 示例 1 — 丰富 metadata
 
-**Incoming message**:
+**入站消息**：
 
 Metadata:
 
@@ -100,7 +96,7 @@ Metadata:
 }
 ```
 
-**Node configuration**:
+**节点配置**：
 
 ```json
 {
@@ -113,9 +109,9 @@ Metadata:
 }
 ```
 
-**Outgoing message**:
+**出站消息**：
 
-The outgoing message is sent via the `Success` connection with its metadata enriched.
+出站消息经 `Success` 连接发送，metadata 已丰富。
 
 Metadata:
 
@@ -127,9 +123,9 @@ Metadata:
 }
 ```
 
-### Example 2 — Enriching data
+### 示例 2 — 丰富 data
 
-**Incoming message**:
+**入站消息**：
 
 Data:
 
@@ -148,7 +144,7 @@ Metadata:
 }
 ```
 
-**Node configuration**:
+**节点配置**：
 
 ```json
 {
@@ -161,9 +157,9 @@ Metadata:
 }
 ```
 
-**Outgoing message**:
+**出站消息**：
 
-The outgoing message is sent via the `Success` connection with its data enriched with the customer's specific alarm threshold.
+出站消息经 `Success` 连接发送，data 已使用客户的告警阈值丰富。
 
 Data:
 

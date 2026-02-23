@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-gw
-title: IoT Gateway Upgrade Instructions
+title: IoT Gateway升级说明
 
 ---
 

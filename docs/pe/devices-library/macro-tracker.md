@@ -1,5 +1,6 @@
 ---
 layout: docwithnav-pe
-title: "How to connect Macro Tracker to ThingsBoard?"
+title: "如何将 Macro Tracker 连接到 ThingsBoard？"
+description: Macro Tracker 与 ThingsBoard 的连接指南
 redirect_to: "/device-library/pe/macro-tracker/"
 ---

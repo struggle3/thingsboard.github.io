@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: PROXY Protocol
-description: TBMQ PROXY Protocol description
+title: PROXY 协议
+description: TBMQ PROXY 协议说明
 
 ---
 

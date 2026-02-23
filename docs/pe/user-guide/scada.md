@@ -2,38 +2,38 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: SCADA dashboards
-description: SCADA IoT dashboards using ThingsBoard
+title: SCADA 仪表板
+description: 使用 ThingsBoard 的 SCADA IoT 仪表板
 
 scada-dashboard-layout-1:
     0:
         image: /images/user-guide/scada/scada-dashboards/add-scada-dashboard-1-pe.png
-        title: 'Go to the "Dashboards" page, and click on the "plus" icon located in the upper-right corner of the screen to add a new dashboard. Select "Create new dashboard" from the dropdown menu that appears. In the dialog box that opens, type in the title for the dashboard and confirm by clicking "Add";'
+        title: '进入「仪表板」页面，点击屏幕右上角的「plus」图标添加新仪表板。在出现的下拉菜单中选择「创建新仪表板」。在打开的对话框中输入仪表板标题，点击「添加」确认；'
     1:
         image: /images/user-guide/scada/scada-dashboards/add-scada-dashboard-2-pe.png
-        title: 'Once created, the new dashboard will open automatically, allowing you to configure it immediately. Click on the "Layouts" sign in the top-left corner of the dashboard interface;'
+        title: '创建后，新仪表板将自动打开，可立即配置。点击仪表板界面左上角的「布局」；'
     2:
         image: /images/user-guide/scada/scada-dashboards/add-scada-dashboard-3-pe.png
-        title: 'Then, simply change the layout from "Default" to "SCADA", then save your changes.'
+        title: '然后将布局从「Default」改为「SCADA」，保存更改。'
 
 layout-settings-1:
     0:
         image: /images/user-guide/scada/scada-dashboards/layout-settings-1-pe.png
-        title: 'Click the "gear" icon in the "Manage layouts" window;'
+        title: '在「管理布局」窗口中点击「齿轮」图标；'
     1:
         image: /images/user-guide/scada/scada-dashboards/layout-settings-2-pe.png
-        title: 'This opens a small window with layout setting.'
+        title: '将打开包含布局设置的小窗口。'
 
 scada-columns-count-1:
     0:
         image: /images/user-guide/scada/scada-dashboards/scada-columns-count-1-pe.png
-        title: 'The number of columns in the layout settings must be divisible by 24 (e.g., 24, 48, 72, up to 1008);'
+        title: '布局设置中的列数必须能被 24 整除（例如 24、48、72，最高 1008）；'
     1:
         image: /images/user-guide/scada/scada-dashboards/scada-columns-count-2-pe.png
-        title: 'The count of columns is set to 24;'
+        title: '列数设置为 24；'
     2:
         image: /images/user-guide/scada/scada-dashboards/scada-columns-count-3-pe.png
-        title: 'The count of columns is set to 48.'
+        title: '列数设置为 48。'
 
 scada-minimum-layout-width-1:
       0:
@@ -90,13 +90,13 @@ high-performance-scada-symbols:
 add-scada-symbol-widget-1:
     0:
         image: /images/user-guide/scada/scada-dashboards/add-scada-symbol-widget-1-pe.png
-        title: 'While in dashboard editing mode, сlick the "+ Add widget" icon at the top of the screen, or (if this is your first widget on this dashboard) click a large "Add new widget" sign in the middle of the screen to open the Select widgets bundle dialog box;'
+        title: '在仪表板编辑模式下，点击屏幕顶部的「+ 添加部件」图标，或（若为首次添加）点击屏幕中央的「添加新部件」打开选择部件包对话框；'
     1:
         image: /images/user-guide/scada/scada-dashboards/add-scada-symbol-widget-2-pe.png
-        title: 'Find the "SCADA fluid system" widgets bundle and click on it;'
+        title: '找到「SCADA fluid system」部件包并点击；'
     2:
         image: /images/user-guide/scada/scada-dashboards/add-scada-symbol-widget-3-pe.png
-        title: 'Choose the "Horizontal wheel valve" widget.'
+        title: '选择「Horizontal wheel valve」部件。'
 
 scada-selected-target-device-1:
     0:

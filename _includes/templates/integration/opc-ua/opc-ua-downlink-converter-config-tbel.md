@@ -1,4 +1,4 @@
-Use this function:
+使用以下函数：
 
 ```ruby
 var data = {

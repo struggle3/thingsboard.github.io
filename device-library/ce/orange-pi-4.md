@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Orange Pi 4 to ThingsBoard?
-category: Single-board computers
+title: 如何将 Orange Pi 4 连接至 ThingsBoard？
+category: 单板计算机
 chip: Rockchip RK3399
 connectivity: [Ethernet, WIFI, Bluetooth]
 vendor: Orange Pi

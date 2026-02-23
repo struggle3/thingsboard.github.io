@@ -2,9 +2,9 @@
 layout: docwithnav-paas-eu
 assignees:
 - dskarzhynets
-description: Using templates for dynamic configuration
+description: 使用模板实现动态配置
 redirect_from: "/docs/paas/eu/user-guide/ui/templatization"
-title: Templatization
+title: 模板化
 ---
 
 {% assign docsPrefix = "paas/eu/" %}

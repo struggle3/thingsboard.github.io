@@ -2,33 +2,33 @@
 * TOC
 {:toc}
 
-Shared subscriptions are an advanced capability introduced in MQTT v5 that has been widely anticipated by users. 
-While TBMQ does not restrict its usage to MQTT v5 clients exclusively, clients with **any protocol version** can leverage this feature. 
-The official [documentation](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901250) offers comprehensive details on shared subscriptions, 
-and this tutorial will focus on the fundamental aspects of this functionality. 
-By understanding and exploring shared subscriptions, users can harness the full potential of this powerful feature in their MQTT interactions.
+共享订阅是 MQTT v5 引入的高级能力，用户期待已久。
+TBMQ 不限定仅 MQTT v5 客户端使用，**任意协议版本**的客户端均可利用此特性。
+官方[文档](https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901250)对共享订阅有详细说明，
+本教程聚焦该功能的核心要点。
+理解并掌握共享订阅后，用户可在 MQTT 交互中充分发挥这一能力。
 
-## What are Shared Subscriptions?
+## 什么是共享订阅？
 
-In traditional or standard subscriptions, each subscribed client receives a duplicate copy of every published message that matches the subscribed topic. 
-This approach ensures that all clients receive the same set of messages. 
-However, shared subscriptions introduce a more efficient mechanism for distributing the subscription load among multiple clients within a defined group. 
-This technique, known as **client load balancing**, enables MQTT clients to collectively handle the incoming message flow more effectively, 
-optimizing network bandwidth and reducing overall processing overhead.
+在传统或标准订阅中，每个已订阅客户端都会收到匹配订阅主题的每条发布消息的一份副本。
+该方式确保所有客户端收到同一组消息。
+共享订阅则引入更高效的机制，在指定组内的多个客户端间分配订阅负载。
+这一称为**客户端负载均衡**的技术，使 MQTT 客户端能更高效地共同处理入站消息流，
+优化网络带宽并降低整体处理开销。
 
-Shared subscriptions are identified by a distinct style of topic filter, which follows a specific format. 
-The format for a shared subscription topic filter is as follows:
+共享订阅通过特定格式的主题过滤器标识。
+共享订阅主题过滤器格式如下：
 ```
 $share/{ShareName}/{TopicFilter}
 ```
 
-where:
-* $share - is a constant that denotes the subscription as shared.
-* {ShareName} - is the identifier of the shared subscription, which helps distinguish it from other shared subscriptions.
-* {TopicFilter} - represents the topic filter used for the subscription, similar to regular subscriptions. 
-It can include wildcards such as `#` and `+` to match multiple topics.
+其中：
+* $share —— 表示该订阅为共享订阅的常量。
+* {ShareName} —— 共享订阅的标识符，用于区分其他共享订阅。
+* {TopicFilter} —— 表示用于订阅的主题过滤器，与普通订阅类似。
+  可包含通配符如 `#` 和 `+` 以匹配多个主题。
 
-For example, the following is a shared subscription:
+例如，以下为共享订阅：
 
 ```
 $share/group1/country/+/city/+/home/#

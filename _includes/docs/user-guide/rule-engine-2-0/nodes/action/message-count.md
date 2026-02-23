@@ -1,12 +1,11 @@
-Counts incoming messages over a specified time interval and outputs a message containing the count result.
+在指定时间间隔内对传入消息进行计数，并输出包含计数结果的消息。
 
-## Configuration
+## 配置
 
-### Count parameters
+### 计数参数
 
-- **Interval in seconds**: Time interval in seconds for counting messages. The node will output the message count at each interval and reset the counter.
-- **Output time series key prefix**: Prefix used to create the property name in the output message that holds the count result. The property name will be formatted as
-  `{prefix}_{serviceId}`, where serviceId is the unique identifier of the ThingsBoard service instance (e.g., "tb-rule-engine1").
+- **Interval in seconds（间隔秒数）**：计数消息的时间间隔（秒）。节点在每个间隔输出消息计数并重置计数器。
+- **Output time series key prefix（输出时序 key 前缀）**：用于创建输出消息中保存计数结果的属性名称的前缀。属性名称格式为 `{prefix}_{serviceId}`，其中 serviceId 是 ThingsBoard 服务实例的唯一标识符（如「tb-rule-engine1」）。
 
 ### JSON Schema
 
@@ -30,37 +29,37 @@ Counts incoming messages over a specified time interval and outputs a message co
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. **Initialize counter**: On node initialization, creates a counter set to 0 and schedules the first tick message based on the configured interval.
-2. **Process incoming message**:
-    - **Regular message**: Increments the message counter by 1 and acknowledges the message
-    - **Tick message**: Processes the accumulated count and generates telemetry output
-3. **Generate telemetry output** (on tick):
-    - Places the current message count in the message data under the key `{telemetryPrefix}_{serviceId}`
-    - Resets the message counter to 0 for the next interval
-    - Adds metadata with `delta` key containing the actual time difference since last scheduled tick
-    - Creates a `POST_TELEMETRY_REQUEST` message with tenant as originator
-4. **Schedule next tick**:
-    - Calculates the next tick timestamp to maintain consistent intervals
-    - Schedules the next internal tick message with appropriate delay
+1. **初始化计数器**：节点初始化时，创建设为 0 的计数器，并根据配置的间隔调度首次 tick 消息。
+2. **处理传入消息**：
+    - **常规消息**：将消息计数器加 1 并确认消息
+    - **Tick 消息**：处理累积计数并生成遥测输出
+3. **生成遥测输出**（tick 时）：
+    - 将当前消息计数放入消息数据的 `{telemetryPrefix}_{serviceId}` 键下
+    - 将消息计数器重置为 0 以准备下一间隔
+    - 添加包含自上次调度 tick 以来实际时间差的 `delta` 元数据
+    - 创建发起者为租户的 `POST_TELEMETRY_REQUEST` 消息
+4. **调度下一 tick**：
+    - 计算下一 tick 时间戳以保持间隔一致
+    - 使用适当延迟调度下一内部 tick 消息
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - Generated result message containing the message count for the interval
+    - 包含间隔内消息计数的生成结果消息
 
-## Examples
+## 示例
 
-### Example 1 — Basic message counting
+### 示例 1 — 基本消息计数
 
-**Incoming messages over 5 seconds**
+**5 秒内的传入消息**
 
-- Message 1 at t = 0s
-- Message 2 at t = 1s
-- Message 3 at t = 3s
+- t = 0s 时的消息 1
+- t = 1s 时的消息 2
+- t = 3s 时的消息 3
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -69,17 +68,17 @@ Counts incoming messages over a specified time interval and outputs a message co
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Current service ID is `tb-rule-engine1`.
+当前服务 ID 为 `tb-rule-engine1`。
 
-**Outgoing message at t = 5s**
+**t = 5s 时的传出消息**
 
-Type: `POST_TELEMETRY_REQUEST`
+类型：`POST_TELEMETRY_REQUEST`
 
-Originator: current tenant
+发起者：当前租户
 
-Data:
+数据：
 
 ```json
 {
@@ -87,7 +86,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -95,6 +94,6 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-After 5 seconds, a result message is generated showing that 3 messages were processed during the interval. The counter is reset to 0 for the next interval.
+5 秒后生成结果消息，显示该间隔内处理了 3 条消息。计数器重置为 0 以准备下一间隔。

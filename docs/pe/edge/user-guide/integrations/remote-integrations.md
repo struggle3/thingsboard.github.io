@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Remote Integrations
-description: Remote Integrations Documentation
+title: 远程集成
+description: 远程集成文档
 
 addConverter:
     0:

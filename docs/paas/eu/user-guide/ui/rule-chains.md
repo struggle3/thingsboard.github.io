@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - vparomskiy
-title: Rule Chains
-description: ThingsBoard Rule Chains management
+title: 规则链
+description: ThingsBoard 规则链管理
 redirect_to: "/docs/paas/eu/user-guide/rule-engine-2-0/overview/"
 
 ---

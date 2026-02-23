@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-pe
-title: ThingsBoard Device Library
-description: Device Library and connecting guides
+title: ThingsBoard 设备库
+description: 设备库及连接指南
 redirect_to: "/device-library/?platform=pe"
 ---

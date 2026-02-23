@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Using RPC capabilities
-description: Remote control of IoT devices from the ThingsBoard IoT cloud using RPC feature
+title: 使用 RPC 能力
+description: 通过 ThingsBoard IoT 云的 RPC 功能远程控制 IoT 设备
 
 ---
 

@@ -1,41 +1,41 @@
-### Add a device on The Things Industries
+### 在 The Things Industries 上添加设备
 
-To add a device, you can follow next steps:
+要添加设备，请按以下步骤操作：
 
 {% assign addDeviceOnThingsIndustries = '
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/26.png,
-        title: Go to the **Applications** page. Then select your **application** and click on its name.
+        title: 进入 **应用** 页面。然后选择您的 **应用** 并点击其名称。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/27.png,
-        title: Click on the **+ Register end device** button.
+        title: 点击 **+ 注册终端设备** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/28.png,
-        title: Choose "**Enter end device specifics manually**". Then, put the **APP EUI** value to the **JoinEUI** field. Press the **Confirm** button.
+        title: 选择「**手动输入终端设备规格**」。然后，将 **APP EUI** 值填入 **JoinEUI** 字段。点击 **确认** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/29.png,
-        title: Fill the rest parameters and press **Register end device** button.
+        title: 填写其余参数并点击 **注册终端设备** 按钮。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addDeviceOnThingsIndustries %}
 
-### Configure Payload Formatter
+### 配置 Payload Formatter
 
-- [Download the JSON file](https://github.com/LoRaWAN-Product-Decoder/MOKOSMART-LoRaWAN-Product-Decoder/blob/main/LW001-BG%20PRO%20V2/LW001-BG%20PRO%20V2%20on%20TTN.js){:target="_blank"} with the uplink converter settings.
+- [下载 JSON 文件](https://github.com/LoRaWAN-Product-Decoder/MOKOSMART-LoRaWAN-Product-Decoder/blob/main/LW001-BG%20PRO%20V2/LW001-BG%20PRO%20V2%20on%20TTN.js){:target="_blank"}（包含上行数据转换器配置）。
 
 {% assign ConfigurePayloadFormatter = '
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/30.png,
-        title: Go to the **Payload formatters** page and select **Custom Javascript formatter** for Formatter type. Paste the decode function and click **Save changes** button.  
+        title: 进入 **Payload formatters** 页面，为 Formatter type 选择 **Custom Javascript formatter**。粘贴解码函数并点击 **Save changes** 按钮。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=ConfigurePayloadFormatter %}
 
-### Create integration in ThingsBoard
+### 在 ThingsBoard 中创建集成
 
-At first, copy the code, we will need it to create the uplink converter:  
+首先，复制以下代码，创建上行数据转换器时需要用到：
 
 ```javascript
 var data = decodeToJson(payload);
@@ -49,39 +49,39 @@ var result = {
 return result;
 ```
   
-In the "Connect" step, you will need the following parameters:  
-- Region: *eu1* (region where your application was registered inside The Things Industries Console);  
-- Username: *thingsboard-application-2025-05@lansitec-testplan* (use Username from integration on The Things Stack Industries);  
-- Password: use **Password** from integration on The Things Industries. 
+在「连接」步骤中，您需要以下参数：
+- Region（区域）：*eu1*（在 The Things Industries 控制台中注册应用所在区域）；  
+- Username（用户名）：*thingsboard-application-2025-05@lansitec-testplan*（使用 The Things Stack Industries 集成中的用户名）；  
+- Password（密码）：使用 The Things Industries 集成中的 **密码**。
 
-Now, navigate to the **Integrations** page under the **Integrations center** section of **your ThingsBoard instance** and follow these steps:
+现在，进入 **ThingsBoard 实例** 的 **集成中心** 部分下的 **集成** 页面，按以下步骤操作：
 
 {% assign createIntegrationInThingsBoard = '
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/31.png,
-        title: Click "**plus**" icon in the upper right corner to add new integration. Select "**The Things Stack Industries**" integration type. Then, click "**Next**" button.
+        title: 点击右上角的「**加号**」图标添加新集成。选择「**The Things Stack Industries**」集成类型。然后点击「**下一步**」按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/32.png,
-        title: Paste the previously copied script to the **Decoder function** section. Click "**Next**" button.
+        title: 将先前复制的脚本粘贴到 **解码器函数** 区域。点击「**下一步**」按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/33.png,
-        title: Leave the "Downlink data converter" field empty. Click on "**Skip**" button.
+        title: 将「下行数据转换器」字段留空。点击「**跳过**」按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/34.png,
-        title: Next, fill in the fields with your parameters. After, press "**Add**" button.
+        title: 填写您的参数，然后点击「**添加**」按钮。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=createIntegrationInThingsBoard %}
 
-### Check data on ThingsBoard
+### 在 ThingsBoard 上检查数据
 
-So, the device was added and if it sends any data - it should appear in the [devices](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}. To check it you may open Devices page in Entities section. The device should be in devices list. You can check the data by click on it and open tab Attributes or Latest telemetry.
+设备已添加后，若其发送了数据，应会显示在[设备](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}中。要检查数据，您可以在**实体**部分打开**设备**页面。设备应出现在设备列表中。您可以通过点击设备，然后打开**属性**或**最新遥测数据**选项卡来查看数据。
 
 {% assign checkDataOnThingsBoard = '
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/35.png,
-        title: So, the device was added and if it sends any data - it should appear in the devices. To check it you may open **Devices** page in **Entities** section. The device should be in devices list. You can check the data by click on it and open tab **Attributes** or **Latest telemetry**.  
+        title: 设备已添加后，若其发送了数据，应会显示在设备中。要检查数据，您可以在 **实体** 部分打开 **设备** 页面。设备应出现在设备列表中。您可以通过点击设备，然后打开 **属性** 或 **最新遥测数据** 选项卡来查看数据。
 '
 %}
 

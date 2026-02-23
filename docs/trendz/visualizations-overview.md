@@ -2,11 +2,11 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Visualisations Overview
-description: Built in Visualisation Types in Trendz Analytics 
+title: 可视化概览
+description: Trendz Analytics 内置可视化类型 
 ---
 
-Trendz provides major visualization types required for analyzing IoT datasets. 
+Trendz为IoT数据分析提供主要可视化类型。
 
 * [**Tables**](/docs/trendz/visualizations-tables)
 * [**Line Chart**](/docs/trendz/visualizations-line)
@@ -27,19 +27,19 @@ Trendz provides major visualization types required for analyzing IoT datasets.
     </div>
 </div>
 
-* Open Trend UI home page and press **Create View** button
-* Select **Line** chart
-* Select **Date** field from left navigation panel and drop it to the **X axis** section
-* Select any telemetry field from left navigation panel and drop it to the **Y axis** section
+* 打开Trend UI首页，点击**Create View**按钮
+* 选择**Line** chart
+* 从左侧导航面板选择**Date**字段，拖放到**X axis**区域
+* 从左侧导航面板选择任意telemetry字段，拖放到**Y axis**区域
 
-At this moment you will see average measurement from all entities in the ThingsBoard
+此时将看到ThingsBoard中所有实体的平均测量值
 
-* Add **Entity Name** to the **Series** section - separate series displayed for each entity
+* 将**Entity Name**添加到**Series**区域——每个实体将显示为独立series
 
 ## Video Tutorial
 
-We are glad to present the series of webinars about ThingsBoard Trendz Analytics functionality. 
-Learn more about Trendz Analytics features and how it helps to transform the IoT data into value for informed decision-making.
+我们很高兴呈现关于ThingsBoard Trendz Analytics功能的系列网络研讨会。
+了解更多Trendz Analytics特性，以及如何将IoT数据转化为价值以支持决策。
 
 &nbsp;
 <div id="video">  

@@ -1,45 +1,41 @@
 * TOC
 {:toc}
 
-This guide will help you become familiar with TBMQ {{tbmqSuffix}} configuration files and parameters. 
-We **strongly recommend** configuring TBMQ using environment variables. 
-This way, you won't need to merge the configuration files when a new platform release arrives. 
+本指南帮助您熟悉 TBMQ {{tbmqSuffix}} 的配置文件和参数。
+我们**强烈建议**使用环境变量配置 TBMQ。
+这样在新平台版本发布时，您无需合并配置文件。
 
-The list of available configuration parameters and corresponding environment variables can be found [here](#configuration-parameters).
+可用配置参数及对应环境变量列表见[此处](#configuration-parameters)。
 
-## How to change configuration parameters?
+## 如何修改配置参数？
 
-### Docker-Based deployment
+### Docker-Based 部署
 
-If TBMQ is installed in a Docker Compose environment, you can edit the scripts and add environment variables for 
-the corresponding containers. For more details, refer to the [Docker documentation](https://docs.docker.com/compose/environment-variables/#/the-envfile-configuration-option).
+若 TBMQ 部署在 Docker Compose 环境中，可编辑脚本并为对应容器添加环境变量。更多详情请参阅 [Docker 文档](https://docs.docker.com/compose/environment-variables/#/the-envfile-configuration-option)。
 
-### K8S-Based deployment
+### K8S-Based 部署
 
-If TBMQ is installed in a K8S environment, you can edit the scripts and add environment variables for the 
-corresponding deployments/stateful sets. For more details, refer to the [K8S documentation](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).
+若 TBMQ 部署在 K8S 环境中，可编辑脚本并为对应 deployments/stateful sets 添加环境变量。更多详情请参阅 [K8S 文档](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。
 
-## Configuration parameters
+## 配置参数
 
-The configuration file is written in YAML format. All configuration parameters have corresponding environment variable names and default values. 
-To change a configuration parameter, simply modify its default value. For example:
+配置文件采用 YAML 格式。所有配置参数均有对应的环境变量名和默认值。修改配置参数时，只需修改其默认值。例如：
 
 ```bash
 server:
   address: "${HTTP_BIND_ADDRESS:0.0.0.0}"
 ```
 
-In this case, *'HTTP_BIND_ADDRESS'* is the environment variable name and *'0.0.0.0'* is the default value.
+本例中，*'HTTP_BIND_ADDRESS'* 为环境变量名，*'0.0.0.0'* 为默认值。
 
-You can use the simple example below to add a new environment variable 'HTTP_BIND_PORT' with the value '8084'.
+以下示例用于添加值为 '8084' 的环境变量 'HTTP_BIND_PORT'：
 
 ```bash
 ...
 export HTTP_BIND_PORT=8084
 ```
 
-The parameters are grouped by system components. The list contains the name (address in **thingsboard-mqtt-broker.yml** file), 
-environment variable, default value, and description.
+参数按系统组件分组。列表包含名称（**thingsboard-mqtt-broker.yml** 中的路径）、环境变量、默认值和说明。
 
 {% if docsPrefix == "pe/" %}
 {% include docs/pe/mqtt-broker/install/config.md %}

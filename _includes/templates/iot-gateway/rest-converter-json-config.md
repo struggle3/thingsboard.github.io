@@ -1,34 +1,34 @@
-Json converter is default converter, it looks for deviceName, deviceType, attributes and telemetry in the incoming request from the client, with rules, described in this subsection:
+Json converter 是默认 converter，根据本小节所述规则，在来自客户端的请求中查找 deviceName、deviceType、attribute 和 telemetry：
 
-| **Parameter**                 | **Default value**     | **Description**                                                                                                                                                                                                                                          |
+| **参数**                 | **默认值**     | **说明**                                                                                                                                                                                                                                          |
 |:------------------------------|:----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| type                          | **json**              | Provides information to connector that default converter will be used for converting data from the incoming request.                                                                                                                                     | 
-| deviceNameExpression          | **Device ${name}**    | JSON expression used to build the device name. In this example, the connector takes the name field from the incoming request payload and produces a device name like Device SensorA                                                                      |
-| deviceNameExpressionSource    | **request**           | Defines where the connector should take values for **deviceNameExpression** from: `request` means read from the incoming request payload; `constant` means treat the expression as a fixed value (no payload parsing).                                   |
-| deviceProfileExpressionSource | **request**           | Defines where the connector should take values for **deviceProfileExpression** from: `request` means read from the incoming request payload; `constant` means use the expression as a fixed value.                                                       |
-| deviceProfileExpression       | **default**           | JSON expression used to resolve the device profile name. With `default`, the connector will assign the device to the default profile (or use the payload field if **deviceProfileExpressionSource** is `request` and the expression references a field). |
-| attributes                    |                       | This subsection contains parameters of the incoming requests, that will be interpreted as attributes for the device.                                                                                                                                     |
-| ... type                      | **string**            | Type of incoming data for a current attribute.                                                                                                                                                                                                           |
-| ... key                       | **model**             | Simple JSON expression, uses for looking key in the incoming data, that will send to ThingsBoard instance as attribute key.                                                                                                                              |
-| ... value                     | **${sensorModel}**    | Simple JSON expression, uses for looking value in the incoming data, that will send to ThingsBoard instance as value of key parameter.                                                                                                                   |
-| timeseries                    |                       | This subsection contains parameters of the incoming message, that will be interpreted as telemetry for the device.                                                                                                                                       |
-| ... type                      | **double**            | Type of incoming data for a current telemetry.                                                                                                                                                                                                           |
-| ... key                       | **temperature**       | Simple JSON expression, uses for looking key in the incoming message, that will send to ThingsBoard instance as attribute key.                                                                                                                           |
-| ... value                     | **${temp}**           | Simple JSON expression, uses for looking value in the incoming message, that will send to ThingsBoard instance as value of key parameter.                                                                                                                |
-| ... tsField                   | **${timestampField}** | **Optional.** JSON-path expression for field that carries a datetime string. If not present, the `ts` or `timestamp` properties from incoming message will be used as timestamp for data entry.                                                          |                                                                                                                     
-| ... dayfirst                  | **false**             | **Optional.** Points out that the first number is the **day** (`DD.MM.YY HH:mm:ss.SSS`).<br>• `false` → `10.11.24 10:10:10.252` → **11 Oct 2024 10:10:10.252** <br>• `true`  → `10.11.24 10:10:10.252` → **10 Nov 2024 10:10:10.252**                    |
-| ... yearfirst                 | **false**             | **Optional.** Points out that the first number is the **year** (`DD.MM.YY HH:mm:ss.SSS`).<br>• `false` → follows `dayfirst` rule<br>• `true`  → `10.11.24 10:10:10.252` → **24 Nov 2010 10:10:10.252**                                                   |
+| type                          | **json**              | 指示 connector 使用默认 converter 转换来自请求的数据。                                                                                                                                     | 
+| deviceNameExpression          | **Device ${name}**    | 用于构建设备名称的 JSON 表达式。本例中，connector 从请求 payload 的 name 字段取值，生成如 Device SensorA 的设备名称                                                                      |
+| deviceNameExpressionSource    | **request**           | 定义 **deviceNameExpression** 的值来源：`request` 表示从请求 payload 读取；`constant` 表示将表达式视为固定值（不解析 payload）。                                   |
+| deviceProfileExpressionSource | **request**           | 定义 **deviceProfileExpression** 的值来源：`request` 表示从请求 payload 读取；`constant` 表示将表达式作为固定值使用。                                                       |
+| deviceProfileExpression       | **default**           | 用于解析 device profile 名称的 JSON 表达式。`default` 表示 connector 将设备分配到默认 profile（或当 **deviceProfileExpressionSource** 为 `request` 且表达式引用某字段时使用该 payload 字段）。 |
+| attributes                    |                       | 本小节包含请求中将被解释为设备 attribute 的参数。                                                                                                                                     |
+| ... type                      | **string**            | 当前 attribute 的输入数据类型。                                                                                                                                                                                                           |
+| ... key                       | **model**             | 用于在输入数据中查找 key 的简单 JSON 表达式，将作为 attribute key 发送到 ThingsBoard 实例。                                                                                                                              |
+| ... value                     | **${sensorModel}**    | 用于在输入数据中查找 value 的简单 JSON 表达式，将作为 key 参数的值发送到 ThingsBoard 实例。                                                                                                                   |
+| timeseries                    |                       | 本小节包含消息中将被解释为设备 telemetry 的参数。                                                                                                                                       |
+| ... type                      | **double**            | 当前 telemetry 的输入数据类型。                                                                                                                                                                                                           |
+| ... key                       | **temperature**       | 用于在输入消息中查找 key 的简单 JSON 表达式，将作为 attribute key 发送到 ThingsBoard 实例。                                                                                                                           |
+| ... value                     | **${temp}**           | 用于在输入消息中查找 value 的简单 JSON 表达式，将作为 key 参数的值发送到 ThingsBoard 实例。                                                                                                                |
+| ... tsField                   | **${timestampField}** | **可选。** 携带日期时间字符串的字段的 JSON-path 表达式。若未指定，将使用输入消息中的 `ts` 或 `timestamp` 作为数据条目时间戳。                                                          |                                                                                                                     
+| ... dayfirst                  | **false**             | **可选。** 指明第一个数字为**日**（`DD.MM.YY HH:mm:ss.SSS`）。<br>• `false` → `10.11.24 10:10:10.252` → **2024年10月11日 10:10:10.252** <br>• `true`  → `10.11.24 10:10:10.252` → **2024年11月10日 10:10:10.252**                    |
+| ... yearfirst                 | **false**             | **可选。** 指明第一个数字为**年**（`DD.MM.YY HH:mm:ss.SSS`）。<br>• `false` → 遵循 `dayfirst` 规则<br>• `true`  → `10.11.24 10:10:10.252` → **2010年11月24日 10:10:10.252**                                                   |
 | ---                           
 
 {% capture difference %}
-**Parameters in attributes and telemetry section may differ from those presented above, but will have the same structure.**  
+**attributes 和 telemetry 部分的参数可能与上述不同，但结构相同。**  
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-In addition, you can send **multipart/form-data** requests while still using the `json` converter - no additional configuration is required. 
-The REST connector merges multipart fields into a single key-value object, so you can reference them the same way as with **application/json**.
+此外，使用 `json` converter 时也可发送 **multipart/form-data** 请求，无需额外配置。
+REST connector 会将 multipart 字段合并为单一键值对象，因此可像 **application/json** 一样引用。
 
-Below are two equivalent requests. The first one sends data as `application/json`:
+以下是两个等效请求示例。第一个以 `application/json` 发送数据：
 
 ```json
 {
@@ -39,7 +39,7 @@ Below are two equivalent requests. The first one sends data as `application/json
   "timestampField": "10.11.24 14:30:00.000"
 }
 ```
-Send this request to the `/test_device` endpoint with the POST method, using Basic Auth with credentials (user / passwd):
+使用 POST 方法、Basic 认证凭据（user / passwd）向 `/test_device` 端点发送该请求：
 
 ```bash
 curl -X POST http://127.0.0.1:5000/test_device \
@@ -55,8 +55,8 @@ curl -X POST http://127.0.0.1:5000/test_device \
 ```
 {: .copy-code}
 
-You can achieve the same result using a `multipart/form-data` request, where each field is sent as a separate part.
-Note: when using `curl -F`, `curl` automatically sets the `Content-Type: multipart/form-data; boundary=...` header.
+也可使用 `multipart/form-data` 请求达到相同效果，每个字段作为独立 part 发送。
+注意：使用 `curl -F` 时，`curl` 会自动设置 `Content-Type: multipart/form-data; boundary=...` 头。
 
 ```bash
 curl -X POST "http://127.0.0.1:5000/test_device" \
@@ -70,13 +70,13 @@ curl -X POST "http://127.0.0.1:5000/test_device" \
 {: .copy-code}
 
 {% capture difference %}
-**Notes:**
-1. **File uploads are not supported** for device attributes or telemetry. If a multipart request contains file parts, the gateway will ignore them and log an info message.
-2. **Multipart form fields are received as strings.** Values will be converted to boolean, integer, or double according to the configured field type in the `json` converter.
+**说明：**
+1. 设备 attribute 或 telemetry **不支持文件上传**。若 multipart 请求包含文件 part，网关将忽略并记录信息日志。
+2. **Multipart 表单字段以字符串接收。** 将根据 `json` converter 中配置的字段类型转换为 boolean、integer 或 double。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-This is how the mapping subsection for both examples above looks like:
+上述两个示例的 mapping 配置小节如下所示：
 
 ```json
  {
@@ -124,12 +124,11 @@ This is how the mapping subsection for both examples above looks like:
 {: .copy-code}
 
 {% capture tsField %}
-**Note**: In **Mapping subsection** configuration section for `humidity` timeseries key illustrates how to use the `tsField` and
-`dayfirst` options.
+**说明**：`humidity` telemetry key 的 **Mapping subsection** 配置示例了 `tsField` 与 `dayfirst` 选项的用法。
 {% endcapture %}
 {% include templates/info-banner.md content=tsField %}
 
-Also, you can combine values from HTTP request in attributes, telemetry and serverSideRpc section, for example:
+此外，可在 attribute、telemetry 和 serverSideRpc 部分组合 HTTP 请求中的值，例如：
 
 ```json
 {

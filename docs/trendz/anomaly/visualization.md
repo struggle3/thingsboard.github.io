@@ -1,94 +1,92 @@
 ---
 layout: docwithnav-trendz
-title: Anomaly Visualization
-description: Visualize detected anomalies.
-
+title: 异常可视化
+description: 可视化已检测到的异常。
 ---
 
 * TOC
 {:toc}
 
-## Anomalies View Report
+## 异常视图报告
 
-The Anomaly View Report is a fully configured solution for anomaly visualization. The view functionality is quite 
-similar to the Review tab in the anomaly model details (read more about the Review tab [here](/docs/trendz/anomaly/overview#review-tab)).
+异常视图报告是为异常可视化设计的完整解决方案。其功能与异常模型详情中的 Review 标签页类似（[Review 标签页详情](/docs/trendz/anomaly/overview#review-tab)）。
 
-You can customize the view using the following settings:
-- **Default Anomaly Selection:** Sets the default anomaly selected when opening the view.
-  - Options: `last`, `max score index`
-  - Location: *Settings → General → Default anomaly selection*
+可通过以下设置自定义视图：
+- **Default Anomaly Selection（默认异常选择）：** 设置打开视图时默认选中的异常。
+  - 选项：`last`、`max score index`
+  - 位置：*Settings → General → Default anomaly selection*
 
-- **Hide Anomalies List:** Hides the anomalies list widget from the view.
-  - Location: *Settings → View mode fields → Hide anomalies list*
+- **Hide Anomalies List（隐藏异常列表）：** 在视图中隐藏异常列表部件。
+  - 位置：*Settings → View mode fields → Hide anomalies list*
 
-- **Hide Anomalies Chart:** Hides the anomalies chart widget from the view.
-  - Location: *Settings → View mode fields → Hide anomalies chart*
+- **Hide Anomalies Chart（隐藏异常图表）：** 在视图中隐藏异常图表部件。
+  - 位置：*Settings → View mode fields → Hide anomalies chart*
 
-- **Timerange:** Sets the time range used for the anomalies view.
-  - Location: Upper central section of the view
+- **Timerange（时间范围）：** 设置异常视图使用的时间范围。
+  - 位置：视图中部上方
 
-- **Filters:** Selects which items will be shown in the widget.
-  - Location: Upper left section of the view
+- **Filters（筛选器）：** 选择在部件中显示的设备。
+  - 位置：视图左上角
 
-## Anomaly View Field
+## 异常字段
 
-Trendz provides low-level tools for anomaly visualization via **Anomaly Fields**, which can be used to build custom dashboards and insights.
+Trendz 通过**异常字段（Anomaly Fields）** 提供异常可视化的底层工具，可用于构建自定义仪表板和洞察。
 
-To use anomaly fields:
+使用异常字段：
 
-1. Open any view (e.g., timeseries, card, bar chart).
-2. Drag and drop the **Anomaly Field** onto the canvas.
-3. Click on it to configure its properties.
+1. 打开任意视图（如时序图、卡片、柱状图）。
+2. 将 **Anomaly Field** 拖放到画布上。
+3. 点击配置其属性。
 
-### Field Properties
+### 字段属性
 
-- **Anomaly:** (`SCORE`, `SCORE_INDEX`) Select which anomaly metric to visualize:
-  - `SCORE`: Like *temperature* - shows anomaly intensity at a point in time.
-  - `SCORE_INDEX`: Like *area* - accumulates across anomaly duration to show total impact.
+- **Anomaly（异常）：**（`SCORE`、`SCORE_INDEX`）选择要可视化的异常指标：
+  - `SCORE`：类似*温度*，显示某时刻的异常强度。
+  - `SCORE_INDEX`：类似*面积*，在异常持续时间内累积，显示总体影响。
 
-- **Model:** Select an active anomaly model. Only active models are available for visualization.
+- **Model（模型）：** 选择活动异常模型。仅活动模型可用于可视化。
 
-- **Aggregation:** Defines how values are combined across time or entities:
-  - For **SCORE**:
-    - Recommended: `MAX`, `LATEST`, `COUNT`
-    - Not recommended: `SUM`, `AVG`, `MIN`, `UNIQ`
-  - For **SCORE_INDEX**:
-    - Recommended: `COUNT`, `SUM`, `UNIQ`, `LATEST`
-    - Acceptable but less sensitive: `AVG`, `MIN`
+- **Aggregation（聚合）：** 定义跨时间或实体的值的组合方式：
+  - 对于 **SCORE**：
+    - 推荐：`MAX`、`LATEST`、`COUNT`
+    - 不推荐：`SUM`、`AVG`、`MIN`、`UNIQ`
+  - 对于 **SCORE_INDEX**：
+    - 推荐：`COUNT`、`SUM`、`UNIQ`、`LATEST`
+    - 可用但灵敏度较低：`AVG`、`MIN`
 
-  Use `MAX` for `SCORE` to catch peak anomaly intensity.
-  Use `SUM` for `SCORE_INDEX` to visualize the full anomaly footprint.
+  对 `SCORE` 使用 `MAX` 可捕获峰值异常强度。
+  对 `SCORE_INDEX` 使用 `SUM` 可可视化完整异常影响。
 
-- **Label (Anomaly):** field name as shown in the chart legend.
+- **Label (Anomaly)（标签）：** 图表图例中显示的名称。
 
-- **Chart Type:** Choose from: `bar`, `line`, or `area`
+- **Chart Type（图表类型）：** 可选：`bar`、`line` 或 `area`
 
-Anomaly fields are ideal for building flexible visualizations across time and devices without storing anomalies in ThingsBoard.
+异常字段适用于在不将异常保存到 ThingsBoard 的情况下跨时间和设备构建灵活的可视化。
 
-## Anomaly Business Entity Fields
+## 异常业务实体字段
 
-Available **only when "Save to TB" is enabled** (See [this section](/docs/trendz/anomaly/save-to-tb.md) for more on saving to ThingsBoard).
+**仅在启用“Save to TB”时可用**（保存到 ThingsBoard 的说明见[此处](/docs/trendz/anomaly/save-to-tb.md)）。
 
-To use:
-1. Open any view.
-2. Navigate to a business entity linked to an anomaly model.
-3. Drag and drop the following fields:
+使用方法：
+1. 打开任意视图。
+2. 导航至与异常模型关联的业务实体。
+3. 拖放以下字段：
   - `{Model Name} SCORE`
   - `{Model Name} SCORE INDEX`
 
-- Use **Anomaly Fields** when you need to **count anomalies** or avoid saving them to TB.
-- Use **Business Entity Fields** when anomalies are saved, and you want precise control.
+- 当需要**统计异常**或避免保存到 TB 时，使用**异常字段**。
+- 当异常已保存且需要精确控制时，使用**业务实体字段**。
 
-## Best Practices
+## 最佳实践
 
-Use the following guidance to choose the right tool for visualizing and analyzing anomalies in Trendz:
+根据以下建议选择适合的异常可视化与分析工具：
 
-- **If you want a simple, plug-and-play anomaly visualization:**  
-  - Use **Anomaly Report**.
-- **If you need flexible visualizations and don’t want to save anomalies to ThingsBoard:**  
-  - Use **Anomaly Fields**.
-- **If you need fine control over which anomalies are saved to ThingsBoard:** 
-  - Use **Anomaly Business Entity Fields**.
+- **若需要简单即插即用的异常可视化：**  
+  - 使用**异常报告**。
+- **若需要灵活可视化且不希望将异常保存到 ThingsBoard：**  
+  - 使用**异常字段**。
+- **若需要精确控制保存到 ThingsBoard 的异常：** 
+  - 使用**异常业务实体字段**。
 
 ## Next Steps
 

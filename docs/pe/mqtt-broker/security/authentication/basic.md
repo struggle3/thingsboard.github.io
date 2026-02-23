@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Basic Authentication
-description: Basic Authentication
+title: 基本认证
+description: 基本认证
 
 security-authentication-basic:
   0:

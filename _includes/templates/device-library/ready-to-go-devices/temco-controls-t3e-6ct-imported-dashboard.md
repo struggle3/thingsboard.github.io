@@ -1,9 +1,9 @@
-### Import dashboard
+### 导入仪表盘
 
-Download [Check Device Data Dashboard](/docs/devices-library/resources/dashboards/ready-to-go-devices/temco-t3e-6ct-dashboard.json){:target="_blank" download="temco-t3e-6ct-dashboard.json"} and import it.
+下载 [检查设备数据仪表盘](/docs/devices-library/resources/dashboards/ready-to-go-devices/temco-t3e-6ct-dashboard.json){:target="_blank" download="temco-t3e-6ct-dashboard.json"} 并导入。
 
-You can import a dashboard in JSON format. To do this, you should go to the Dashboard group, click on the "**+**" button in the upper-right corner of the page and choose "**Import dashboard**".
-The dashboard import window will appear, prompting you to upload the JSON file and click "**Import**".
+您可导入 JSON 格式的仪表盘。操作方式：进入「仪表盘」组，点击页面右上角的 **「+」** 按钮，选择 **「导入仪表盘」**。
+仪表盘导入窗口将弹出，提示您上传 JSON 文件并点击 **「导入」**。
 
 {% assign importingDashboardPE = '
     ===
@@ -31,11 +31,11 @@ The dashboard import window will appear, prompting you to upload the JSON file a
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=importingDashboardCE %}
 {% endif %}
 
-After importing, we should choose an entity alias for our device.  
-Start by clicking the "**pencil**" icon, selecting  entity aliases, choosing the "**My device**" alias and then clicking the "**pencil**" icon again to open it for editing.   
-Then, choose the created device from dropdown list and save entity alias. Now, you should be able to see the data from the device. 
+导入后，我们需要为设备选择实体别名。
+首先点击 **「铅笔」** 图标，选择实体别名，选择 **「My device」** 别名，再次点击 **「铅笔」** 图标打开编辑。
+然后，从下拉列表中选择已创建设备并保存实体别名。完成后即可查看设备数据。
 
-If you did everything right, you should see the following dashboard:
+若操作正确，您将看到以下仪表盘：
 
 {% if page.docsPrefix == "pe/" or page.docsPrefix contains "paas/" or docsPrefix == "pe/" or docsPrefix contains "paas/" %}
 ![imagePe](/images/devices-library/ready-to-go-devices/temco-t3e-6ct/temco-t3e-6ct-dashboard-pe.png)

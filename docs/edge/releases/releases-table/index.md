@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: ThingsBoard Edge Releases
-description: Edge architecture
+title: ThingsBoard Edge 版本发布
+description: Edge 架构与版本发布
 table-of-contents: "false"
 effective-url: '/docs/edge/releases/releases-table/'
 

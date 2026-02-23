@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Getting started with TBMQ Professional Edition
-description: TBMQ - broker for real Use Cases
+title: TBMQ 专业版入门
+description: TBMQ - 面向实际应用场景的代理
 
 broker-sessions:
     0:

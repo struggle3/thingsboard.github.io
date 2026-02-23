@@ -1,33 +1,33 @@
-View all pods of the cluster:
+查看集群中所有 pods：
 
 ```bash
 kubectl get pods
 ```
 {: .copy-code}
 
-View last logs for the desired pod:
+查看指定 pod 的最新日志：
  
 ```bash
 kubectl logs -f POD_NAME
 ```
 {: .copy-code}
 
-To view TBMQ logs use command:
+查看 TBMQ 日志：
 
 ```bash
 kubectl logs -f tb-broker-0
 ```
 {: .copy-code}
 
-You can use <b>grep</b> command to show only the output with desired string in it. 
-For example, you can use the following command in order to check if there are any errors on the backend side:
+可使用 <b>grep</b> 仅显示包含指定字符串的输出。
+例如，检查 backend 侧是否有错误：
 
 ```bash
 kubectl logs -f tb-broker-0 | grep ERROR
 ```
 {: .copy-code}
 
-If you have multiple nodes you could redirect logs from all nodes to files on your machine and then analyze them: 
+若有多节点，可将各节点日志重定向到本机文件再分析：
 
 ```bash
 kubectl logs -f tb-broker-0 > tb-broker-0.log
@@ -35,7 +35,7 @@ kubectl logs -f tb-broker-1 > tb-broker-1.log
 ```
 {: .copy-code}
 
-**Note:** you can always log into the TBMQ container and view logs there:
+**说明：** 也可进入 TBMQ 容器内查看日志：
 
 ```bash
 kubectl exec -it tb-broker-0 -- bash

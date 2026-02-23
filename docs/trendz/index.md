@@ -3,12 +3,12 @@ layout: docwithnav-trendz
 assignees:
 - vparomskiy
 title: Trendz Analytics
-description: ThingsBoard Trends - Business Intelligence and Analytics Platform for Iot powered Business
+description: ThingsBoard Trends - 面向 IoT 业务的商业智能与分析平台
 ---
 
-Welcome to the Trendz Analytics documentation homepage!
-Here, you'll find comprehensive resources to assist you in establishing your data analytics pipeline using Trendz. Discover a wide array of instruments and features available on our platform,
-and explore step-by-step how-to guides for constructing end-to-end IoT solutions.
+欢迎来到Trendz Analytics文档首页！
+在这里，您将找到建立数据分析流程所需的全面资源。发现平台上丰富的工具与功能，
+并通过分步指南探索如何构建端到端IoT解决方案。
 
 <div class="doc-features row mt-4">
     <div class="col-12 col-sm-6 col-lg col-xxl-6 col-4xl mb-4">
@@ -16,7 +16,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/feature-logo/getting-started.svg" alt="Getting started icon">
             <div class="feature-title">Getting started</div>
             <div class="feature-text">
-                Provides an overview of the Trendz Analytics functionality and short "How-to" guide.
+                概述Trendz Analytics功能及简明"如何操作"指南。
             </div>
         </a>
     </div>
@@ -25,7 +25,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/feature-logo/install.svg" alt="Install icon">
             <div class="feature-title">Installation</div>
             <div class="feature-text">
-                Learn how to install and upgrade Trendz Analytics.
+                学习如何安装和升级Trendz Analytics。
             </div>
         </a>
     </div>
@@ -34,7 +34,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/feature-logo/guides.svg" alt="guides">
             <div class="feature-title">Guides</div>
             <div class="feature-text">
-                Learn how to use Trendz for data analysis.
+                学习如何使用Trendz进行数据分析。
             </div>
         </a>
     </div>
@@ -43,7 +43,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/feature-logo/tutorials.svg" alt="tutorials">
             <div class="feature-title">Video tutorials</div>
             <div class="feature-text">
-                Watch Video tutorials how-to use Trendz Analytics built-in instruments.
+                观看视频教程，了解如何使用Trendz Analytics内置工具。
             </div>
         </a>
     </div>
@@ -57,7 +57,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/trendz/icons/metric-explorer.svg" alt="metric-explorer">
             <div class="feature-title">Explore Metrics</div>
             <div class="feature-text">
-                Learn how to explore existing metrics or create new ones.
+                学习如何探索现有指标或创建新指标。
             </div>
         </a>
     </div>
@@ -66,7 +66,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/trendz/icons/ai-assistant.svg" alt="ai-assistant">
             <div class="feature-title">AI Assistant</div>
             <div class="feature-text">
-                Learn how to use AI Assistant to generate visualizations and then analyze them.
+                学习如何使用AI Assistant生成可视化并进行分析。
             </div>
         </a>
     </div>
@@ -75,7 +75,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/trendz/icons/prediction.svg" alt="prediction">
             <div class="feature-title">Predict Time Series</div>
             <div class="feature-text">
-                Overview how to use Trendz Analytics to predict time series data and build forecasts.
+                概述如何使用Trendz Analytics预测时序数据并构建预测。
             </div>
         </a>
     </div>
@@ -85,7 +85,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/trendz/icons/anomaly.svg" alt="anomaly">
             <div class="feature-title">Anomaly Detection</div>
             <div class="feature-text">
-                Learn how to identify anomalies in the data.
+                学习如何识别数据中的异常。
             </div>
         </a>
     </div>
@@ -94,7 +94,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/trendz/icons/calculation.svg" alt="calculated-fields">
             <div class="feature-title">Calculation Fields</div>
             <div class="feature-text">
-                Learn how to create and configure calculated fields to suit your analysis needs.
+                学习如何创建和配置计算字段以满足分析需求。
             </div>
         </a>
     </div>
@@ -103,7 +103,7 @@ and explore step-by-step how-to guides for constructing end-to-end IoT solutions
             <img class="feature-logo" src="/images/trendz/icons/views.svg" alt="views">
             <div class="feature-title">Build Analytics Views</div>
             <div class="feature-text">
-                Learn how to create and configure analytics views to build different visualizations.
+                学习如何创建和配置分析视图以构建不同可视化。
             </div>
         </a>
     </div>

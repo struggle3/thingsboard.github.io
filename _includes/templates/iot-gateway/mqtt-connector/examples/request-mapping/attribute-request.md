@@ -1,88 +1,85 @@
-For an Attribute request, the gateway must know which device name to target and which attribute to request. You can extract the device name either from the `Message` payload using [json-path](/docs/iot-gateway/config/mqtt/#json-path)
-or from the topic using a [regex](/docs/iot-gateway/config/mqtt/#regular-expressions). Choose [json-path](/docs/iot-gateway/config/mqtt/#json-path) when the device name is inside the JSON message; choose [regex](/docs/iot-gateway/config/mqtt/#regular-expressions) when it's encoded in the topic.
+对于属性请求，网关需要知道目标设备名和要请求的属性。可使用 [json-path](/docs/iot-gateway/config/mqtt/#json-path) 从 `Message` 负载提取设备名，
+也可用 [正则表达式](/docs/iot-gateway/config/mqtt/#regular-expressions) 从主题提取。设备名在 JSON 消息中时选择 [json-path](/docs/iot-gateway/config/mqtt/#json-path)；编码在主题中时选择 [正则表达式](/docs/iot-gateway/config/mqtt/#regular-expressions)。
 
-Suppose you want to retrieve the current firmware version for device `SN-001` from ThingsBoard to make decisions based on the firmware version.
+假设要为设备 `SN-001` 从 ThingsBoard 获取当前固件版本，以便根据固件版本做决策。
 
 {% capture difference %}
-**Please note:**
-An **Attribute request** allows a device to retrieve attribute values from ThingsBoard. This is useful for:
-- Getting configuration parameters stored as shared attributes
-- Retrieving client attributes that were previously reported
-- Implementing device configuration management
+**请注意：**
+**属性请求**允许设备从 ThingsBoard 获取属性值，适用于：
+- 获取存储为共享属性的配置参数
+- 获取此前上报的客户端属性
+- 实现设备配置管理
 
-The gateway acts as a bridge, receiving the attribute request from the device, fetching the attribute from ThingsBoard, and delivering the response back to the device.
+网关作为桥梁，接收设备的属性请求，从 ThingsBoard 获取属性，并将响应返回给设备。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Let's configure an Attribute request in the MQTT connector to allow devices to request attribute values from ThingsBoard.
-We'll demonstrate two ways to extract the device name:
+在 MQTT 连接器中配置属性请求，使设备能从 ThingsBoard 请求属性值。演示两种提取设备名的方式：
 
-- From message (`JSON` payload).
-- From topic (e.g., `sensor/SN-001/attributes/request`).
+- 从消息（`JSON` 负载）。
+- 从主题（如 `sensor/SN-001/attributes/request`）。
 
-Follow these steps:
+按以下步骤操作：
 
 {% assign deviceNameAttributeJson = '
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-1.png,
-        title: Go to "**Entities**" - "**Gateways**" on the left sidebar and select your gateway.
+        title: 在左侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/mqtt-connector/examples/disconnect-request-gateway.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/mqtt-gateway-configuring-11-ce.png,
-        title: Select the MQTT connector, click on the "**Basic**". Click the "**Add mapping**" under "**Requests mapping**" section to add new attribute request mapping.
+        title: 选择 MQTT 连接器，点击“**基本**”，在“**请求映射**”下点击“**添加映射**”以添加新的属性请求映射。
     ===
         image: /images/gateway/mqtt-connector/examples/attribute-request-1.png,
-        title: Select "**Attribute request**" in the **Request type** field, enter the "**Topic filter**" as `v1/devices/me/attributes/request`.
+        title: 在**请求类型**中选择“**属性请求**”，将“**主题过滤器**”填为 `v1/devices/me/attributes/request`。
     ===
         image: /images/gateway/mqtt-connector/examples/attribute-request-2.png,
-        title: Configure the device name and attribute settings. For device name expression, select source type as `Message` and enter `${serialNumber}` as the value. For attribute name expression, select source type as `Message` and enter `${versionAttribute}, ${pduAttribute}` as the value.
+        title: 配置设备名和属性。设备名表达式选择来源类型 `Message`，值填 `${serialNumber}`。属性名表达式选择来源类型 `Message`，值填 `${versionAttribute}, ${pduAttribute}`。
     ===
         image: /images/gateway/mqtt-connector/examples/attribute-request-3.png,
-        title: Configure the response topic as `devices/${deviceName}/attrs` and the response value expression as `${attributeKey}: ${attributeValue}`. 
+        title: 将响应主题配置为 `devices/${deviceName}/attrs`，响应值表达式为 `${attributeKey}: ${attributeValue}`。
     ===
         image: /images/gateway/mqtt-connector/examples/attribute-request-4.png,
-        title: Remember to save your changes by clicking the designated button.
+        title: 记得点击相应按钮保存更改。
     '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceNameAttributeJson %}
 
-Let's demonstrate how to use these attribute request configurations with two examples:
+下面用两个示例演示如何使用这些属性请求配置：
 
-### Example 1: Device name and attribute from message payload
+### 示例 1：设备名和属性来自消息负载
 
-Suppose we have a device with an attribute `firmwareVersion` stored as a shared attribute in ThingsBoard and suppose we want to request this attribute
-for some purposes.
+假设某设备在 ThingsBoard 中有共享属性 `firmwareVersion`，我们需要因某些目的请求该属性。
 
-Let's add this attribute to the device `SN-001` in ThingsBoard first:
+先在 ThingsBoard 中为设备 `SN-001` 添加该属性：
 
-1. Go to "**Devices**" → select device `SN-001` - "**Attributes**" tab - select "**Shared attributes**".
+1. 进入“**设备**”→选择设备 `SN-001`→“**属性**”标签→选择“**共享属性**”。
 
-2. Then click on the "**+**" icon and add `firmwareVersion` attribute with type "**String**" and set it to `1.2.3` click the "**Add**" button.
+2. 点击“**+**”图标，添加 `firmwareVersion` 属性，类型为“**字符串**”，值设为 `1.2.3`，点击“**添加**”。
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-attribute-requests-1.png)
 
-This message contains the device name in the JSON payload, which is extracted using the `${serialNumber}` JSON path, and the attribute name using the `${attributeNames}` JSON path. After processing this message, ThingsBoard will retrieve the "firmwareVersion" attribute for device "SN-001" and publish it to the response topic.
+此消息的设备名在 JSON 负载中，通过 `${serialNumber}` 提取；属性名通过 `${attributeNames}` 提取。处理完成后，ThingsBoard 将获取设备 "SN-001" 的 "firmwareVersion" 属性并发布到响应主题。
 
-The response will be published to the topic `devices/SN-001/attrs` with a payload like: Let's subscribe to the response topic to see the result:
-Open terminal and type the following command and press Enter:
+响应将发布到主题 `devices/SN-001/attrs`，负载类似如下：订阅响应主题以查看结果：
+在终端执行以下命令并按回车：
 
 ```bash
 mosquitto_sub -h 127.0.0.1 -p 1884 -t devices/SN-001/attrs
 ```
 {: .copy-code}
 
-Open another terminal to simulate sending a message from the device to the MQTT broker with the device name and attribute name in the JSON payload:
+在另一终端模拟设备向 MQTT 代理发送包含设备名和属性名的 JSON 负载消息：
 
 ```bash
 mosquitto_pub -h 127.0.0.1 -p 1884 -t v1/devices/me/attributes/request -m '{"serialNumber": "SN-001", "versionAttribute": "firmwareVersion"}'
 ```
 {: .copy-code}
 
-This message contains the device name in the JSON payload, which is extracted using the `${serialNumber}` JSON path, 
-and the attribute name using the `${attributeNames}` JSON path. After processing this message, ThingsBoard will retrieve the `firmwareVersion` attribute for device `SN-001` and publish it to the response topic.)
+此消息的设备名在 JSON 负载中，通过 `${serialNumber}` 提取，属性名通过 `${attributeNames}` 提取。处理完成后，ThingsBoard 将获取设备 `SN-001` 的 `firmwareVersion` 属性并发布到响应主题。
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-attribute-requests-2.png)
 
@@ -94,8 +91,7 @@ firmwareVersion: "1.2.3"
 
 
 
-If you are using advanced configuration mode, you can
-use the following configuration:
+若使用高级配置模式，可使用以下配置：
 
 ```json
 {

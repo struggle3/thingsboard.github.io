@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Configuration properties
-description: ThingsBoard Edge configuration properties and environment variables
+title: 配置属性
+description: ThingsBoard Edge配置属性与环境变量
 
 ---
 

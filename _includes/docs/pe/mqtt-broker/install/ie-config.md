@@ -1,11 +1,11 @@
 
 
-##  HTTP server parameters
+## HTTP 服务端参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -13,24 +13,24 @@
 			<td>server.address</td>
 			<td>HTTP_BIND_ADDRESS</td>
 			<td>0.0.0.0</td>
-			<td> HTTP Server bind address</td>
+			<td>HTTP 服务端绑定地址</td>
 		</tr>
 		<tr>
 			<td>server.port</td>
 			<td>HTTP_BIND_PORT</td>
 			<td>8082</td>
-			<td> HTTP Server bind port</td>
+			<td>HTTP 服务端绑定端口</td>
 		</tr>
 	</tbody>
 </table>
 
 
-##  Kafka parameters
+## Kafka 参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -38,7 +38,7 @@
 			<td>queue.integration-downlink.poll-interval</td>
 			<td>TB_IE_DOWNLINK_POLL_INTERVAL</td>
 			<td>1000</td>
-			<td> Interval in milliseconds to poll messages from 'tbmq.ie.downlink' topics</td>
+			<td>轮询 tbmq.ie.downlink 主题消息的间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>queue.integration-msg.poll-interval</td>
@@ -340,12 +340,12 @@
 </table>
 
 
-##  Service parameters
+## 服务参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -379,12 +379,12 @@
 </table>
 
 
-##  Integration common parameters
+## 集成通用参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -484,12 +484,12 @@
 </table>
 
 
-##  Management parameters
+## 管理参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -521,12 +521,12 @@
 </table>
 
 
-##  Statistics parameters
+## 统计参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -558,12 +558,12 @@
 </table>
 
 
-##  Event configuration parameters
+## 事件配置参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>描述</b></td>
 		</tr>
 	</thead>
 	<tbody>

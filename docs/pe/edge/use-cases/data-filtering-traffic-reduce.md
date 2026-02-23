@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Data filtering and traffic reduce
-description: ThingsBoard Edge use case #2
+title: 数据过滤与流量缩减
+description: ThingsBoard Edge 应用案例 #2
 
 provisionDevicesEdge:
     0:

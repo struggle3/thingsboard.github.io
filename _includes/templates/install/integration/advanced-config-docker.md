@@ -1,7 +1,7 @@
- - **Advanced configuration**
+ - **高级配置**
 
-See configuration yml file below for a list of possible configuration parameters, corresponding environment variables and their default values.
-For example, default client id of the integration, that is used in integration debug messages is *"remote"* and can be altered by setting *"RPC_CLIENT_ID"* environment variable.
+下方配置 yml 文件列出了可用的配置参数、对应的环境变量及其默认值。
+例如，集成在调试消息中使用的默认客户端 ID 为 *"remote"*，可通过设置 *"RPC_CLIENT_ID"* 环境变量修改。
 
 
 ```bash

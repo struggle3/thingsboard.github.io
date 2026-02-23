@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: 3M Msg/sec Throughput with a Single TBMQ Node
-description: TBMQ 3M msg/s throughput single node performance test
+title: 单节点 TBMQ 实现 300 万条/秒吞吐量
+description: TBMQ 单节点 300 万条/秒吞吐量性能测试
 
 tbmq-3m-single-node-test-aws-instances:
   0:

@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: Tank Level Monitoring with ThingsBoard for Any Industry
-description: A comprehensive IoT solution for tank level monitoring. Real-time insights for fuel, water, and chemical storage with dashboards, alarms, and scalable device management — powered by ThingsBoard
+title: ThingsBoard 面向各行业的储罐液位监测
+description: 全面的储罐液位监测物联网解决方案。为燃油、水和化学品储存在仪表板、警报和可扩展设备管理方面提供实时洞察——基于 ThingsBoard
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -12,7 +12,7 @@ contactUsModal: "true"
 {% include usecase-nav.html usecase="tank-level-monitoring" %}
 
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Tank level monitoring solution</h1>
+<h1 class="usecase-title">储罐液位监测解决方案</h1>
 <section class="tank-monitoring-about">
     <div class="about-text">
         <div class="short">
@@ -20,7 +20,7 @@ contactUsModal: "true"
                 <p class="text">Modern enterprises that manage liquid storage — from fuel to water — face the critical need for continuous tank level monitoring and infrastructure status control. Poor monitoring can lead to leaks, equipment downtime, and higher operational costs. In this context, IoT-powered solutions become essential for digital transformation. The ThingsBoard IoT platform addresses these challenges with ease.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_FuelLevelMonitoring_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/e1ff5690-5e0c-11ee-aeee-d16039673934?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>            
+                <a id="UseCases_FuelLevelMonitoring_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/e1ff5690-5e0c-11ee-aeee-d16039673934?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>            
             </div>
         </div>
         <div class="long">
@@ -37,7 +37,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="tank-monitoring-solution-structure">
-    <h2>Solution structure of tank level monitoring</h2>
+    <h2>储罐液位监测解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
@@ -45,7 +45,7 @@ contactUsModal: "true"
             </div>
         </div>
         <div class="long">
-            <p>Once collected, the data is transmitted to ThingsBoard for processing, aggregation, and visualization. The platform offers historical data storage, advanced alarm rule configuration, and remote device management. Incoming data is presented through interactive dashboards that display all metrics in user-friendly formats: graphs, maps, tables, and status widgets.</p>
+            <p>Once collected, the data is transmitted to ThingsBoard for processing, aggregation, and visualization. The platform offers historical data storage, advanced alarm rule configuration, and remote device management. Incoming data is presented through interactive dashboards that display all metrics in user-friendly formats: graphs, maps, tables, and status 部件.</p>
         </div>
     </div>
     <div class="scheme">
@@ -55,9 +55,9 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Tank level monitoring dashboard structure</h2>
+        <h2>储罐液位监测仪表板结构</h2>
         <p>
-            The dashboards in ThingsBoard are modular: each panel is a self-contained widget that retrieves data from a specific device or group. They support drill-down navigation, filtering, and grouping by fuel type or region. This makes the interface intuitive and easy to scale for large deployments.
+            The dashboards in ThingsBoard are modular: each panel is a self-contained 部件 that retrieves data from a specific device or group. They support drill-down navigation, filtering, and grouping by fuel type or region. This makes the interface intuitive and easy to scale for large deployments.
         </p>
     </div>
     <div class="dashboard-structure-block">
@@ -128,7 +128,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header">
-        <h2>Applications of tank level monitoring solution</h2>
+        <h2>储罐液位监测解决方案的应用</h2>
         <p>ThingsBoard's Tank Level Monitoring Solution is adaptable across a wide range of industries, addressing their specific needs:</p>
     </div>
     <div class="applications-container-large">
@@ -205,11 +205,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of tank level monitoring</h2>
+        <h2>储罐液位监测总结</h2>
         <p>The ThingsBoard-based tank level monitoring solution automates fluid storage monitoring for any scale or complexity. With strong support for industrial protocols, real-time visualization, rule-based alarming, and device control, it is a perfect fit for B2B enterprises, public infrastructure, and industrial environments. Enhanced transparency and timely alarms lead to improved operational efficiency and reduced costs.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -310,8 +310,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_FuelLevelMonitoring_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/e1ff5690-5e0c-11ee-aeee-d16039673934?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>            
-                <a id="UseCases_FuelLevelMonitoring_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_FuelLevelMonitoring_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/e1ff5690-5e0c-11ee-aeee-d16039673934?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>            
+                <a id="UseCases_FuelLevelMonitoring_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
 
             applyImageBg(block);

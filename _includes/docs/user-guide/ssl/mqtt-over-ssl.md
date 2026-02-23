@@ -1,26 +1,26 @@
 * TOC
 {:toc}
 
-ThingsBoard provides the ability to run MQTT server over SSL. Both one-way and two-way SSL are supported.
+ThingsBoard 支持在 MQTT 服务器上启用 SSL，包括单向和双向 SSL。
 
-Most of the ThingsBoard environments use the load balancer as a termination point for the SSL connection between the devices and the platform.
-In other words, MQTT traffic is encrypted between the device and the load balancer, but is decrypted between the load balancer and platform services.
-The advantage of such an option is the simplicity of configuration. 
-Most of the cloud load balancers (AWS, Google cloud, etc) have built-in certificate generation tools and rich documentation how to configure SSL over TCP.
-The disadvantage of such an option is that two-way SSL is not possible. The information about client certificate is not passed from the load balancer to the platform services. 
+大多数 ThingsBoard 环境中，负载均衡器作为设备与平台之间 SSL 连接的终端。
+即：MQTT 流量在设备与负载均衡器之间加密，在负载均衡器与平台服务之间解密。
+这种方式配置简单。
+多数云负载均衡器（如 AWS、Google Cloud 等）提供内置证书生成工具和完善的 SSL over TCP 配置文档。
+缺点是无法使用双向 SSL，客户端证书信息不会从负载均衡器传递到平台服务。
 
-Nevertheless, it is possible to configure ThingsBoard to two-way SSL for MQTT and avoid SSL termination on the Load Balancer.
-We recommend to use valid SSL certificates generated using trusted CA authorities and avoid spending time on resolving issues with [self-signed certificates](#self-signed-certificates-generation).
-See instructions below on how to configure SSL for certificates stored in PEM file format or Java Keystore.
+仍可配置 ThingsBoard 使用 MQTT 双向 SSL，并避免在 Load Balancer 上做 SSL 终结。
+建议使用受信任 CA 签发的有效 SSL 证书，以节省在 [自签名证书](#self-signed-certificates-generation) 相关问题上的排查时间。
+以下说明如何在 PEM 文件格式或 Java Keystore 中配置 SSL。
 
 
-## SSL configuration using PEM certificates file
+## 使用 PEM 证书文件的 SSL 配置
 
 {% assign sinceVersion = "3.3.2" %}
 {% include templates/since.md %}
 
-Configure the following environment variables via [configuration](/docs/user-guide/install/{{docsPrefix}}config/) file, docker-compose or kubernetes scripts.
-We will use **thingsboard.conf** for example:
+通过 [configuration](/docs/user-guide/install/{{docsPrefix}}config/) 文件、docker-compose 或 kubernetes 脚本配置以下环境变量。
+示例以 **thingsboard.conf** 为例：
 
 ```bash
 ...
@@ -32,33 +32,33 @@ export MQTT_SSL_PEM_KEY_PASSWORD=secret
 ...
 ```
 
-where:
+说明：
 
-* MQTT_SSL_ENABLED - Enable/disable SSL support;
-* MQTT_SSL_CREDENTIALS_TYPE -  Server credentials type. PEM - pem certificate file; KEYSTORE - java keystore;
-* MQTT_SSL_PEM_CERT - Path to the server certificate file. Holds server certificate or certificate chain, may also include server private key;
-* MQTT_SSL_PEM_KEY - Path to the server certificate private key file. Optional by default. Required if the private key is not present in server certificate file;
-* MQTT_SSL_PEM_KEY_PASSWORD - Optional server certificate private key password.
+* MQTT_SSL_ENABLED — 启用/禁用 SSL；
+* MQTT_SSL_CREDENTIALS_TYPE — 服务器凭证类型。PEM 表示 PEM 证书文件；KEYSTORE 表示 Java keystore；
+* MQTT_SSL_PEM_CERT — 服务器证书文件路径。可包含服务器证书或证书链，也可包含服务器私钥；
+* MQTT_SSL_PEM_KEY — 服务器证书私钥文件路径。默认可选。若服务器证书文件中不含私钥则必须指定；
+* MQTT_SSL_PEM_KEY_PASSWORD — 可选，服务器证书私钥密码。
 
-After completing the setup, start or restart the ThingsBoard server.
+配置完成后，启动或重启 ThingsBoard 服务。
 
 {% include templates/ssl/pem_files_location.md %}
 
-## Additional configuration properties
+## 其他配置属性
 
-You may configure following additional environment variables via [configuration](/docs/user-guide/install/{{docsPrefix}}config/) file, docker-compose or kubernetes scripts.
+可通过 [configuration](/docs/user-guide/install/{{docsPrefix}}config/) 文件、docker-compose 或 kubernetes 脚本配置以下环境变量：
 
- * MQTT_SSL_BIND_ADDRESS - the bind address for the MQTT server. Default value *0.0.0.0* indicates all interfaces;
- * MQTT_SSL_BIND_PORT - the bind port for the MQTT server. Default value is *8883*;
- * MQTT_SSL_PROTOCOL - ssl protocol name. Default value is *TLSv1.2*. See [java doc](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#sslcontext-algorithms) for more details;
- * MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT - Skip certificate validity check for client certificates. Default value is *false*.
+ * MQTT_SSL_BIND_ADDRESS — MQTT 服务器绑定地址。默认 *0.0.0.0* 表示所有接口；
+ * MQTT_SSL_BIND_PORT — MQTT 服务器绑定端口。默认 *8883*；
+ * MQTT_SSL_PROTOCOL — SSL 协议名。默认 *TLSv1.2*。详见 [java doc](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#sslcontext-algorithms)；
+ * MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT — 跳过客户端证书有效期校验。默认 *false*。
 
 {% include docs/user-guide/ssl/self-signed-ecc.md %}
 
-## Client Examples
+## Client 示例
 
-See following resources:
+参见以下文档：
 
- - [Device Authentication options](/docs/{{docsPrefix}}user-guide/device-credentials/) for authentication options overview
- - [Access Token based authentication](/docs/{{docsPrefix}}user-guide/access-token/) for example of **one-way SSL** connection 
- - [X.509 Certificate based authentication](/docs/{{docsPrefix}}user-guide/certificates/) for example of **two-way SSL** connection
+ - [设备认证选项](/docs/{{docsPrefix}}user-guide/device-credentials/) — 认证方式概览
+ - [基于 Access Token 的认证](/docs/{{docsPrefix}}user-guide/access-token/) — **单向 SSL** 连接示例
+ - [基于 X.509 Certificate 的认证](/docs/{{docsPrefix}}user-guide/certificates/) — **双向 SSL** 连接示例

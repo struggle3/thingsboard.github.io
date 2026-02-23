@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://temcocontrols.com/shop/t3-6ct/" %}
 {% assign sensorName = "Temco HUM-W1" %}
 {% assign sensorVendorLink = "https://temcocontrols.com/shop/humidity-and-temp-transmitters-with-waterproof-connector/" %}
@@ -8,7 +8,7 @@
  %}
 {% assign thingsboardInstanceLink = "https://" | append: hostName %}
 
-## Introduction
+## 概述
 
 [{{deviceName}}]({{deviceVendorLink}}){: target="_blank"} is general purpose input / ouput modules for building 
 integrators. Available in several input/output configurations, the T3 module provide convenient termination for field 
@@ -16,12 +16,12 @@ devices and interfacing to your HVAC, lighting, temperature sensors, and other t
 applications. Each of the analog inputs can be jumper configured for signals of either 0-5V, 0-20mA, or dry contact. 
 The outputs are available in dry contacts 1amp/output, 0-10V analog, and PNP sinking.<br><br>
 
-## Prerequisites
+## 前置条件
 
 To continue with this guide, we will need the following:  
 {{ prerequisites }}
 - [ThingsBoard IoT Gateway](/docs/iot-gateway/installation/){: target="_blank"} installed
-- [ThingsBoard account]({{thingsboardInstanceLink}}){: target="_blank"}
+- [ThingsBoard 账户]({{thingsboardInstanceLink}}){: target="_blank"}
 
 
 ## Devices connection
@@ -55,8 +55,7 @@ Advanced%,%advancedConfig%,%templates/device-library/ready-to-go-devices/temco-c
 
 {% include content-toggle.liquid content-toggle-id="creatingAndConfiguringGateway" toggle-spec=configuringgatewaytogglespec %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 Once you have successfully done all the steps above and Gateway sent data, you can see it in the 
 Device Telemetry Tab:
 
@@ -70,7 +69,7 @@ Device Telemetry Tab:
 {% endif %}
 
 Let’s display Temco T3E-6CT time series on a dashboard. For this purpose, you can create your own dashboard with your 
-custom widgets or use a ready-made dashboard and simply import it.
+custom 部件 or use a ready-made dashboard and simply import it.
 
 {% capture readytogodevicestogglespec %}
 Imported Dashboard%,%importedDashboard%,%templates/device-library/ready-to-go-devices/temco-controls-t3e-6ct-imported-dashboard.md%br%
@@ -78,7 +77,7 @@ New Dashboard%,%newDashboard%,%templates/device-library/ready-to-go-devices/gate
 
 {% include content-toggle.liquid content-toggle-id="minicomputersDashboard" toggle-spec=readytogodevicestogglespec %}
 
-## Conclusion
+## 总结
 
 With the knowledge in this guide, you can easily connect your Temco T3E-6CT controller with Temperature and humidity 
 sensor to ThingsBoard. After connecting the devices to the gateway, you will be able to see and process the data coming 

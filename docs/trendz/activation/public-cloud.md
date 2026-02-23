@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: How To Activate Trendz on ThingsBoard Public Cloud
-description: How To Activate Trendz on ThingsBoard Public Cloud
+title: 在 ThingsBoard 公有云上激活 Trendz
+description: 在 ThingsBoard 公有云上激活 Trendz
 
 step-1:
   0:
@@ -46,60 +46,60 @@ step-3:
 * TOC
 {:toc}
 
-This guide describes how to activate Trendz in your ThingsBoard public Cloud environment via the Billing page.
+本指南介绍如何通过计费页在 ThingsBoard 公有云环境中激活 Trendz。
 
-## Activation Steps
+## 激活步骤
 
-### Step 1. Open the Billing Page
+### 步骤 1：打开计费页面
 
-* Log in to your ThingsBoard Cloud environment.
-* In the left-side navigation menu, open the **Plan and Billing** page.
+* 登录 ThingsBoard Cloud 环境
+* 在左侧导航菜单中打开「**Plan and Billing**」页面
 
 {% include images-gallery.html imageCollection="step-1" %}
 
-### Step 2. Add the Trendz add-on
+### 步骤 2：添加 Trendz 插件
 
-**Option A: Add Trendz add-on only**
+**选项 A：仅添加 Trendz 插件**
 
-* Click the **Add to plan +** button in the Trendz Analytics row.
-* Click the **Next: Summary** button.
+* 在 Trendz Analytics 行点击「**Add to plan +**」按钮
+* 点击「**Next: Summary**」按钮
 
 {% include images-gallery.html imageCollection="step-2-option-a" %}
 
-**Option B: Change subscription plan and add Trendz add-on**
+**选项 B：更改订阅方案并添加 Trendz 插件**
 
-* Click the **Update plan** button.
-* In the modal that appears, select the most suitable plan for your business goals and click the **Customize** or **Select** button.
-* In the Customize step, enable the **Trendz Analytics** add-on.
-* Click the **Next: Summary** button.
+* 点击「**Update plan**」按钮
+* 在出现的弹窗中选择最适合您业务目标的方案，并点击「**Customize**」或「**Select**」按钮
+* 在 Customize 步骤中启用「**Trendz Analytics**」插件
+* 点击「**Next: Summary**」按钮
 
 {% include images-gallery.html imageCollection="step-2-option-b" %}
 
-### Step 3. Activate plan
+### 步骤 3：激活方案
 
-* Review your plan configuration to ensure everything is correct.
-* If you have a coupon code, click **Apply coupon** button and submit it.
-* Click the **Update plan** button to activate your plan.
-* Verify that **Trendz Analytics** 
+* 检查方案配置确保无误
+* 如有优惠券，点击「**Apply coupon**」并提交
+* 点击「**Update plan**」按钮激活方案
+* 确认「**Trendz Analytics**」 
 
 {% include images-gallery.html imageCollection="step-3" %}
 
-### Step 4. Access Trendz Interface
+### 步骤 4：访问 Trendz 界面
 
-You can access the Trendz interface using the following links:
+可通过以下链接访问 Trendz 界面：
 
 * [Trendz Cloud (US)](https://thingsboard.cloud/trendz/){:target="_blank"} 
 * [Trendz Cloud (EU)](https://eu.thingsboard.cloud/trendz/){:target="_blank"}
 
 {% include templates/trendz/install/topology-discovery.md %} 
 
-## Pricing
+## 定价
 
-You can find out up-to-date prices on Trendz add-on in the ThingsBoard billing page as it is shown on [step-3](#step-3-activate-plan).
+可在 ThingsBoard 计费页面查看 Trendz 插件最新价格，见 [步骤 3](#step-3-activate-plan)。
 
-If you have any questions about anything, just **[contact us](/docs/contact-us)** - our team will help you find the best solution tailored to your requirements.
+如有任何问题，请**[联系我们](/docs/contact-us)**，我们的团队将帮您找到最适合的解决方案。
 
-## Next Steps
+## 下一步
 
-* Follow our [Getting Started guide](/docs/trendz/getting-started) to explore all Trendz capabilities.
-* Visit our [Documentation](/docs/trendz) to explore all Trendz capabilities and features.
+* 遵循 [入门指南](/docs/trendz/getting-started) 了解 Trendz 功能
+* 访问 [文档](/docs/trendz) 了解 Trendz 功能与特性

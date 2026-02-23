@@ -2,41 +2,41 @@
 * TOC
 {:toc}
 
-This guide explains how MQTT topics work, how to use wildcards in topic strings, and provide examples to help you effectively utilize this feature in your MQTT deployments.
+本文介绍 MQTT 主题的工作方式、如何在主题字符串中使用通配符，并提供示例，帮助您在 MQTT 部署中有效使用该特性。
 
-## Topics
+## 主题
 
-In MQTT, topics are fundamental to the communication model. They act as addressing mechanisms that enable publishers and subscribers to exchange messages.
-There are two types of topics:
-* **Topic Names**. Used by publishers to send messages. **Must not contain** wildcards or start with `$` (such topic reserved for TBMQ system purposes).
-* **Topic Filters**. Used by subscribers to receive messages and **can include** wildcard characters such as `#` and `+`.
+在 MQTT 中，主题是通信模型的基础。它们作为寻址机制，使发布者和订阅者能够交换消息。
+主题分两类：
+* **主题名称(Topic Names)**。发布者用于发送消息。**不得包含**通配符或以 `$` 开头（此类主题保留给 TBMQ 系统用途）。
+* **主题过滤器(Topic Filters)**。订阅者用于接收消息，**可包含**通配符字符如 `#` 和 `+`。
 
-Remember that the length of any MQTT topic must not exceed 65535 bytes.
-Additionally, the topic must be at least 1 character long and must not contain a null character.
+请注意，MQTT 主题长度不得超过 65535 字节。
+此外，主题至少 1 个字符长，且不得包含空字符。
 
-Topics in MQTT are hierarchical and use forward slash or delimiter character (`/`) as a topic level separator. 
-This separator divides the topic tree into "topic levels".
-For example, a topic may look like `sensors/livingroom/temperature`, where `sensors`, `livingroom` and `temperature` are topic levels.
-Such a structure facilitates effective control over message routing, especially when using wildcards in topics.
+MQTT 主题具有层级结构，使用正斜杠或分隔符(`/`)作为主题层级分隔符。
+该分隔符将主题树划分为「主题层级」。
+例如，主题可为 `sensors/livingroom/temperature`，其中 `sensors`、`livingroom` 和 `temperature` 为主题层级。
+此结构便于有效控制消息路由，尤其在主题中使用通配符时。
 
-## Wildcards
+## 通配符
 
-Wildcards in MQTT topics provide powerful mechanisms to simplify the subscription to multiple topics and reduce the complexity of managing topic subscriptions in dynamic environments. They enable subscribers to use patterns to match multiple topic hierarchies with a single subscription.
+MQTT 主题中的通配符提供强大机制，用于简化对多主题的订阅并降低动态环境中管理主题订阅的复杂度。订阅者可使用模式以单一订阅匹配多个主题层级。
 
-MQTT supports two types of wildcards:
-1. **Multi-level wildcard (`#`)** - matches any number of levels at the end of the topic string.
-2. **Single-level wildcard (`+`)** - matches one level in the topic hierarchy.
+MQTT 支持两类通配符：
+1. **多层通配符(`#`)** ——匹配主题字符串末尾任意数量的层级。
+2. **单层通配符(`+`)** ——匹配主题层级中的一层。
 
-### Multi-level wildcard
+### 多层通配符
 
-The number sign (`#`) is a wildcard character that matches all remaining levels in the topic hierarchy. It represents the parent and any number of child levels.
+井号(`#`)是匹配主题层级中所有剩余层级的通配符。它代表父级及任意数量的子层级。
 
 <table>
   <thead>
       <tr>
-          <td style="width: 30%"><b>Subscription Topic Filter</b></td>
-          <td style="width: 35%"><b>Matching Topics</b></td>
-          <td style="width: 35%"><b>Not Matching Topics</b></td>
+          <td style="width: 30%"><b>订阅主题过滤器</b></td>
+          <td style="width: 35%"><b>匹配的主题</b></td>
+          <td style="width: 35%"><b>不匹配的主题</b></td>
       </tr>
   </thead>
   <tbody>
@@ -55,27 +55,27 @@ The number sign (`#`) is a wildcard character that matches all remaining levels 
   </tbody>
 </table>
 
-The multi-level wildcard `#` **must**:
-* Be used only once.
-* Be at the end of the topic filter.
-* Be preceded by a delimiter character (`/`).
+多层通配符 `#` **必须**：
+* 仅使用一次。
+* 位于主题过滤器末尾。
+* 前接分隔符(`/`)。
 
-These topic filters are **invalid** because the `#` wildcard is not correctly positioned at the end of the topic filter or is not properly preceded by a delimiter character:
+以下主题过滤器**无效**，因 `#` 通配符未正确置于主题过滤器末尾或未由分隔符正确前接：
 * `#sensors`
 * `#/sensors`
 * `sensors/#/`
 * `sensors/#/temperature`
 
-### Single-level wildcard
+### 单层通配符
 
-The plus character (`+`) represents a single level in the topic hierarchy. It can be used to subscribe to topics with a common pattern at one specific level.
+加号(`+`)表示主题层级中的单层。可用于在特定层级上以共同模式订阅主题。
 
 <table>
   <thead>
       <tr>
-          <td style="width: 30%"><b>Subscription Topic Filter</b></td>
-          <td style="width: 35%"><b>Matching Topics</b></td>
-          <td style="width: 35%"><b>Not Matching Topics</b></td>
+          <td style="width: 30%"><b>订阅主题过滤器</b></td>
+          <td style="width: 35%"><b>匹配的主题</b></td>
+          <td style="width: 35%"><b>不匹配的主题</b></td>
       </tr>
   </thead>
   <tbody>
@@ -93,24 +93,24 @@ The plus character (`+`) represents a single level in the topic hierarchy. It ca
   </tbody>
 </table>
 
-The single-level wildcard `+` **must** either:
-* Be at the start of the topic filter or follow a forward slash `/`.
-* Be at the end of the topic filter or be followed by a forward slash `/`.
+单层通配符 `+` **必须**：
+* 位于主题过滤器开头或紧跟正斜杠 `/`。
+* 位于主题过滤器末尾或被正斜杠 `/` 紧跟。
 
-These topic filters are **invalid** because the `+` wildcard is not correctly positioned relative to the delimiter characters:
+以下主题过滤器**无效**，因 `+` 通配符相对分隔符的位置不正确：
 * `+sensors`
 * `sensors+`
 * `sensors/home+`
 * `sensors/+home`
 
-### Wildcards usage examples
+### 通配符使用示例
 
-The next examples demonstrate the flexibility and depth of subscription patterns possible with different positions of single-level and multi-level wildcards in MQTT topics.
+以下示例展示在 MQTT 主题中单层与多层通配符不同位置上，订阅模式所具有的灵活性与深度。
 
 <table>
   <thead>
       <tr>
-          <td style="width: 50%"><b>Subscription Topic Filter</b></td><td style="width: 50%"><b>Matching Topics</b></td>
+          <td style="width: 50%"><b>订阅主题过滤器</b></td><td style="width: 50%"><b>匹配的主题</b></td>
       </tr>
   </thead>
 <tbody>
@@ -165,59 +165,59 @@ The next examples demonstrate the flexibility and depth of subscription patterns
   </tbody>
 </table>
 
-## Best practices
+## 最佳实践
 
-When designing MQTT topics, it's important to follow best practices to ensure clarity, consistency, and manageability. 
+设计 MQTT 主题时，遵循最佳实践有助于保证清晰、一致和可维护。
 
-* Avoid blank spaces and special characters (except `/`). They are not explicitly forbidden, but they can cause confusion or errors.
-* Avoid camel case. Use lowercase letters consistently to avoid case-sensitivity confusion. Topics are case-sensitive, so it means that `sensors/temperature` and `Sensors/Temperature` are considered two different topics.
-* Avoid starting or ending topic with forward slashes (`/`). It can be unintuitive and lead to inconsistencies. For example, the topics `sensors/home` and `/sensors/home` are considered as different topics.
-* Avoid subscribing to all topics. Subscribing to `#` means the client will receive every message published to any topic in the MQTT broker. This can quickly overwhelm the client with a flood of messages, leading to performance issues and potential crashes.
-* Avoid very deep hierarchies as they can become difficult to manage over time. Use clear, descriptive, and hierarchical topic names, for example `building/floor1/room1/temperature`.
-* Avoid non-printable characters to ensure compatibility across different systems and prevent unexpected issues. Try to use only ASCII characters instead.
+* 避免空白和特殊字符（除 `/` 外）。虽未明确禁止，但可能引起混淆或错误。
+* 避免驼峰命名。统一使用小写以避免大小写混淆。主题区分大小写，即 `sensors/temperature` 与 `Sensors/Temperature` 视为不同主题。
+* 避免主题以正斜杠(`/`)开头或结尾。易造成理解困难和不一致。例如 `sensors/home` 与 `/sensors/home` 视为不同主题。
+* 避免订阅所有主题。订阅 `#` 表示客户端将接收 broker 上发往任一提主题的每条消息，可能很快被大量消息淹没，导致性能问题甚至崩溃。
+* 避免过深的层级结构，随时间推移难以维护。使用清晰、描述性强且层级化的主题名，例如 `building/floor1/room1/temperature`。
+* 避免不可打印字符，以保证跨系统兼容并减少意外问题。尽量仅使用 ASCII 字符。
 
-## Multiple subscriptions match
+## 多订阅匹配
 
-In MQTT, it's possible for a client to have multiple subscriptions where more than one subscription matches the topic of a published message.
+在 MQTT 中，一个客户端可以有多个订阅，其中多个订阅匹配同一条发布消息的主题。
 
-Consider a client that subscribes to the following topics:
+假设客户端订阅以下主题：
 * `sensors/+/temperature`
 * `sensors/room1/#`
 
-If a message is published to the topic `sensors/room1/temperature`, **both subscriptions match** this topic. 
+若消息发布到主题 `sensors/room1/temperature`，**两个订阅均匹配**该主题。
 
-In this case, TBMQ will not send the message to each matching subscription. 
-Instead, it will deliver the message to the **subscription with the highest QoS**, or to the first matching subscription if multiple have the same QoS.
+此时 TBMQ 不会向每个匹配订阅各发一份。
+而是将消息投递给 **QoS 最高的订阅**，或当多个订阅 QoS 相同时投递给第一个匹配的订阅。
 
-## Configuring maximum topic segments
+## 配置最大主题段数
 
-In TBMQ configuration, you can define the maximum number of forward slashes (`/`) that can be used in a topic.
+在 TBMQ 配置中，可定义主题中允许使用的最大正斜杠(`/`)数量。
 
-By default, there is no restriction because the environment variable `MQTT_TOPIC_MAX_SEGMENTS_COUNT` is set to `0` (disabled).
+默认不限制，因环境变量 `MQTT_TOPIC_MAX_SEGMENTS_COUNT` 设为 `0`（禁用）。
 
-Having too many segments in a topic name can negatively impact processing time and performance. 
-Each additional segment increases the complexity of topic matching and routing within the broker, which can lead to increased latency and resource consumption.
+主题名中段数过多会负面影响处理时间和性能。
+每增加一个段都会提高 broker 内主题匹配与路由的复杂度，可能导致延迟上升和资源消耗增加。
 
-For example, if you set `MQTT_TOPIC_MAX_SEGMENTS_COUNT` to `2`, the broker will throw an error if a user tries to use more than two forward slashes (`/`) in the topic, such as in `sensors/floor1/room1/temperature` that contains `3` forward slashes.
+例如，若将 `MQTT_TOPIC_MAX_SEGMENTS_COUNT` 设为 `2`，则当用户尝试在主题中使用超过两个正斜杠(`/`)时（如 `sensors/floor1/room1/temperature` 含 3 个正斜杠），broker 将抛出错误。
 
-## Shared subscription topics
+## 共享订阅主题
 
-It is also worth mentioning feature [shared subscriptions](/docs/{{docsPrefix}}mqtt-broker/user-guide/shared-subscriptions/) that are used to distribute messages across multiple subscribers, allowing for load balancing and efficient use of resources.
+还需提及 [共享订阅](/docs/{{docsPrefix}}mqtt-broker/user-guide/shared-subscriptions/) 特性，用于在多个订阅者间分发消息，实现负载均衡和资源高效利用。
 
-Shared subscription topic has a **specific format** to differentiate it from regular topic. 
+共享订阅主题具有**特定格式**，以区别于普通主题。
 
-The general structure of shared topics is:
+共享主题的通用结构为：
 ```
 $share/{ShareName}/{TopicFilter}
 ```
 
-where:
-* $share - is a constant that denotes the subscription as shared.
-* {ShareName} - is the identifier of the shared subscription, which helps distinguish it from other shared subscriptions.
-* {TopicFilter} - represents the topic filter used for the subscription, similar to regular subscriptions.
-  It can include wildcards such as `#` and `+` to match multiple topics.
+其中：
+* $share —— 表示该订阅为共享订阅的常量。
+* {ShareName} —— 共享订阅的标识符，用于区分其他共享订阅。
+* {TopicFilter} —— 表示用于订阅的主题过滤器，与普通订阅类似。
+  可包含通配符如 `#` 和 `+` 以匹配多个主题。
 
-Example of a shared subscription topic:
+共享订阅主题示例：
 
 ```
 $share/group1/country/+/city/+/home/#

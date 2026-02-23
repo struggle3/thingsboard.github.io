@@ -21,19 +21,19 @@
 {%- assign platform_hash = "#upgrading-trendz-analytics-to-" -%}
 
 {% capture tb_haproxy_note %}
-**NOTE:**
+**注意：**
 <br>
-If you are using Trendz behind **HAProxy**, make sure that the paths **`/trendz/`** and **`/apiTrendz/`** are routed to the Trendz backend instead of **`/trendz`** and **`/apiTrendz`**.
+若 Trendz 部署在 **HAProxy** 之后，请确保将 **`/trendz/`** 和 **`/apiTrendz/`** 路径路由到 Trendz 后端，而非 **`/trendz`** 和 **`/apiTrendz`**。
 <br>
-Additionally, we highly recommend adding Trendz to the **ThingsBoard HAProxy configuration** so that Trendz is accessible from the **same domain as ThingsBoard**.
+建议将 Trendz 加入 **ThingsBoard HAProxy 配置**，使 Trendz 可通过 **与 ThingsBoard 相同的域名**访问。
 {% endcapture %}
 {% include templates/warn-banner.md content=tb_haproxy_note %}
 
-#### {{ platform }} service upgrade
+#### {{ platform }} 服务升级
 
 {% include docs/trendz/install/docker-upgrade-steps.md version=current_version %}
 
-#### Sync Trendz with ThingsBoard
+#### 同步 Trendz 与 ThingsBoard
 
-After upgrade, it's necessary to sync Trendz with ThingsBoard. You can find out how to do it [here](/docs/trendz/install/docker#step-6-sync-thingsboard-with-trendz).
+升级后需将 Trendz 与 ThingsBoard 同步。操作步骤见[此处](/docs/trendz/install/docker#step-6-sync-thingsboard-with-trendz)。
 

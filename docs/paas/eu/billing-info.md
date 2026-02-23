@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Plan and billing
-description: Billing options via ThingsBoard EU Cloud
+title: 套餐与计费
+description: 通过 ThingsBoard EU Cloud 的计费选项
 
 ---
 

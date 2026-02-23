@@ -2,80 +2,80 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Tenants
-description: ThingsBoard Tenants management
+title: 租户
+description: ThingsBoard 租户管理
 
 tenants-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/create-tenant-1-pe.png
-        title: 'Login to your ThingsBoard instance WEB UI as a system administrator;'
+        title: '以系统管理员身份登录ThingsBoard实例WEB UI；'
     1:
         image: /images/user-guide/tenant-profile/PE/create-tenant-2-pe.png
-        title: 'Navigate to the Tenants page. Then click on the "plus" icon in the upper right corner of the screen;'
+        title: '导航至Tenants页面。然后点击屏幕右上角的"plus"图标；'
     2:
         image: /images/user-guide/tenant-profile/PE/create-tenant-3-pe.png
-        title: 'Specify a name for the Tenant. We keep the default tenant profile;'
+        title: '为租户指定名称。保留默认租户配置；'
     3:
         image: /images/user-guide/tenant-profile/PE/create-tenant-4-pe.png
-        title: 'Fill in the fields that you think are important. Then click "Add";'
+        title: '填写您认为重要的字段。然后点击"Add"；'
     4:
         image: /images/user-guide/tenant-profile/PE/create-tenant-5-pe.png
-        title: 'New tenant is created.'
+        title: '新租户已创建。'
 
 tenant-new-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/create-user-in-tenant-1-pe.png
-        title: 'Click the "Manage tenant admins" icon on the row of the tenant. The second option: choose the tenant and click on it. Then click on "Manage tenant admins" button;'
+        title: '点击租户行的"Manage tenant admins"图标。或者：选择租户并点击，然后点击"Manage tenant admins"按钮；'
     1:
         image: /images/user-guide/tenant-profile/PE/create-user-in-tenant-2-pe.png
-        title: 'Click on the "plus" icon in the top right corner. In "Add User" window specify user email, enter information about the new user and select "Show activation link" or "Send activation email" from the drop-down menu;'
+        title: '点击右上角的"plus"图标。在"Add User"窗口中指定用户邮箱、输入新用户信息，并从下拉菜单中选择"Show activation link"或"Send activation email"；'
     2:
         image: /images/user-guide/tenant-profile/PE/create-user-in-tenant-3-pe.png
-        title: 'If you selected the option "Show activation link", copy the link address and send it to the user. Click "OK";'
+        title: '若选择了"Show activation link"选项，请复制链接地址并发送给用户。点击"OK"；'
     3:
         image: /images/user-guide/tenant-profile/PE/create-user-in-tenant-4-pe.png
-        title: 'New user with tenant administrator role is created.'
+        title: '具有租户管理员角色的新用户已创建。'
 
 multiple-users-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/create-user-in-tenant-5-pe.png
-        title: 'The tenant can have multiple users.'
+        title: '租户可拥有多名用户。'
 
 tenant-edit-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/edit-tenant-1-pe.png
-        title: 'Click on a tenant`s name to open their details. Click the "pencil" icon to enter edit mode;'
+        title: '点击租户名称打开其详情。点击"pencil"图标进入编辑模式；'
     1:
         image: /images/user-guide/tenant-profile/PE/edit-tenant-2-pe.png
-        title: 'Edit the fields. For example, you can set up a home dashboard for all users of this tenant. After that, save all changes;'
+        title: '编辑字段。例如，可为该租户的所有用户设置主仪表板。完成后保存所有更改；'
     2:
         image: /images/user-guide/tenant-profile/PE/edit-tenant-3-pe.png
-        title: 'You have updated tenant information.'
+        title: '租户信息已更新。'
     
 user-edit-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/edit-user-1-pe.png
-        title: 'Click on a user`s name to open their details. Click the "pencil" icon to enter edit mode;'
+        title: '点击用户名称打开其详情。点击"pencil"图标进入编辑模式；'
     1:
         image: /images/user-guide/tenant-profile/PE/edit-user-2-pe.png
-        title: 'Edit the fields. For example, you can set up a home dashboard for all users of this user. After editing, save all changes;'
+        title: '编辑字段。例如，可为该用户设置主仪表板。编辑后保存所有更改；'
     2:
         image: /images/user-guide/tenant-profile/PE/edit-user-3-pe.png
-        title: 'You have updated user information.'
+        title: '用户信息已更新。'
 
 user-delete-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/delete-user-2-pe.png
-        title: 'Go to the tenant. Find the user you want to delete. Click on the "delete" icon and confirm the deletion by clicking on "Yes".'
+        title: '进入租户。找到要删除的用户。点击"delete"图标并在提示中点击"Yes"确认删除。'
 tenant-delete-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/delete-tenant-2-pe.png
-        title: 'Find the tenant you want to delete. Click on the "delete" icon and confirm the deletion by clicking on "Yes".'
+        title: '找到要删除的租户。点击"delete"图标并在提示中点击"Yes"确认删除。'
 
 tenant-login-pe:
     0:
         image: /images/user-guide/tenant-profile/PE/login-as-a-tenant-administrator-1-pe.png
-        title: 'Open the tenant group. Click the "login" icon opposite to the user account to log in as a tenant administrator.'
+        title: '打开租户组。点击用户账户旁的"login"图标以租户管理员身份登录。'
 
 ---
 

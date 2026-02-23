@@ -1,25 +1,25 @@
-Checks whether the specified fields are present in the incoming message **data** and/or **metadata**.
-By default, the node requires **all** specified fields to be present; you can switch to “at least one” mode.
+检查入站消息 **data** 和/或 **metadata** 中是否存在指定字段。
+默认情况下，节点要求**所有**指定字段都存在；可切换为「至少一个」模式。
 
-## Preconditions
+## 前置条件
 
-Incoming message data must be a JSON object.
+入站消息 data 必须为 JSON 对象。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Message field names** — optional. A set of **top-level** JSON field names to look for in the message data.
-* **Metadata field names** — optional. A set of metadata key names to look for in the message metadata.
+* **消息字段名** — 可选。要在消息 data 中查找的**顶级** JSON 字段名集合。
+* **Metadata 字段名** — 可选。要在消息 metadata 中查找的 metadata 键名集合。
 
 {% capture at_least_one_set_required_note %}
-Although each set is optional, at least one of them must be provided with at least one field (i.e., at least one set must be non-empty).
+尽管每集合均可选，但其中至少一个必须提供至少一个字段（即至少一个集合非空）。
 {% endcapture %}
 {% include templates/info-banner.md content=at_least_one_set_required_note %}
 
-* **Check that all specified fields are present** — toggle.
-    * **Enabled:** route `True` only if **all** listed message/metadata fields are present.
-    * **Disabled:** route `True` if **at least one** listed message/metadata field is present.
+* **检查所有指定字段是否都存在** — 开关。
+    * **启用：** 仅当**所有**列出的消息/metadata 字段都存在时才经 `True` 路由。
+    * **禁用：** 当**至少一个**列出的消息/metadata 字段存在时经 `True` 路由。
 
 ### JSON Schema
 
@@ -74,43 +74,43 @@ Although each set is optional, at least one of them must be provided with at lea
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Extract **data** as a JSON object and **metadata** as key–value pairs.
-2. Evaluate presence:
-    * If **Check all keys** is enabled: route `True` if **every** listed field in `messageNames` exists in data **and** every listed field in `metadataNames` exists in metadata.
-    * If **Check all keys** is disabled: route `True` if **any** listed field exists in data **or** metadata.
-3. Otherwise, route `False`. If an error occurs (e.g., payload is not a JSON object), route `Failure`.
+1. 将 **data** 提取为 JSON 对象，**metadata** 提取为键值对。
+2. 评估存在性：
+    * 若**检查所有键**已启用：当 `messageNames` 中列出的每个字段均存在于 data **且** `metadataNames` 中列出的每个字段均存在于 metadata 时，经 `True` 路由。
+    * 若**检查所有键**已禁用：当任意列出的字段存在于 data **或** metadata 时，经 `True` 路由。
+3. 否则经 `False` 路由。若发生错误（如负载不是 JSON 对象），经 `Failure` 路由。
 
 {% capture top_level_keys_note %}
-Only **top-level** keys are checked; nested paths (e.g., `sensor.temp`) are not supported.
+仅检查**顶级**键；不支持嵌套路径（如 `sensor.temp`）。
 {% endcapture %}
 {% include templates/info-banner.md content=top_level_keys_note %}
 
 {% capture presence_meaning_note %}
-Presence means the **key exists**, regardless of its value (including `null` or empty string).
+存在指**键存在**，无论其值如何（包括 `null` 或空字符串）。
 {% endcapture %}
 {% include templates/info-banner.md content=presence_meaning_note %}
 
-## Output connections
+## 输出连接
 
-* `True`:
-    * If the configured presence condition is satisfied.
-* `False`:
-    * If the configured presence condition is not satisfied.
-* `Failure`:
-    * If the incoming message data cannot be parsed as a JSON object
-    * If another unexpected error occurred during message processing.
+* `True`：
+    * 当配置的存在条件满足时。
+* `False`：
+    * 当配置的存在条件不满足时。
+* `Failure`：
+    * 当入站消息 data 无法解析为 JSON 对象时。
+    * 消息处理过程中发生其他意外错误时。
 
-## Examples
+## 示例
 
-The examples below show only the **relevant** fields of the incoming message. Unless explicitly stated otherwise, other message fields may have any values.
+以下示例仅展示入站消息的**相关**字段。除非另有说明，其他消息字段可为任意值。
 
 ---
 
-### Example 1 — All required data fields present → `True`
+### 示例 1 — 所有必填 data 字段都存在 → `True`
 
-**Incoming message**
+**入站消息**
 
 Data:
 ```json
@@ -120,7 +120,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -133,23 +133,23 @@ Data:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-Both `temp` and `humidity` exist in the payload.
+`temp` 和 `humidity` 均存在于负载中。
 
 ---
 
-### Example 2 — Missing one required data field → `False`
+### 示例 2 — 缺少一个必填 data 字段 → `False`
 
-**Incoming message**
+**入站消息**
 
 Data:
 ```json
@@ -158,7 +158,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -171,23 +171,23 @@ Data:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`False`** 路由。
 
-**Explanation**
+**说明**
 
-`humidity` is not present.
+`humidity` 不存在。
 
 ---
 
-### Example 3 — At least one metadata field present → `True`
+### 示例 3 — 至少一个 metadata 字段存在 → `True`
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 ```json
@@ -197,7 +197,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -210,23 +210,23 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-At least one listed metadata key (`token`) is present.
+至少一个列出的 metadata 键（`token`）存在。
 
 ---
 
-### Example 4 — At least one data field present → `True`
+### 示例 4 — 至少一个 data 字段存在 → `True`
 
-**Incoming message**
+**入站消息**
 
 Data:
 ```json
@@ -244,7 +244,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -259,29 +259,29 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-At least one listed key (`temperature`) is present.
+至少一个列出的键（`temperature`）存在。
 
 ---
 
-### Example 5 — Invalid message format → `Failure`
+### 示例 5 — 无效消息格式 → `Failure`
 
-**Incoming message data**
+**入站消息 data**
 
 ```
 "not a JSON object"
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -293,14 +293,14 @@ At least one listed key (`temperature`) is present.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-**`Failure`**.
+**`Failure`**。
 
-**Explanation**
+**说明**
 
-Message data is not a JSON object, so the node cannot check data keys.
+消息 data 不是 JSON 对象，节点无法检查 data 键。

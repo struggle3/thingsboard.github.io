@@ -3,42 +3,42 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-CoAP Integration allows to stream data from devices that use a CoAP protocol to connect to ThingsBoard and converts payloads of these devices into the ThingsBoard format.
+CoAP 集成用于从使用 CoAP 协议连接 ThingsBoard 的设备流式传输数据，并将这些设备的负载转换为 ThingsBoard 格式。
 
-Please review the integration diagram to learn more.
+请参阅集成示意图了解更多。
 
 ![image](/images/user-guide/integrations/coap-integration.svg)
 
-## Prerequisites
+## 前置条件
 
-In this tutorial, we will show you how CoAP integration works as part of **tb-core** service with **NO SECURE** security mode selected. In order to do this we will use: 
+本教程演示 CoAP 集成作为 **tb-core** 服务一部分、选择 **NO SECURE** 安全模式时的工作方式。我们将使用： 
 
 {% if docsPrefix == "pe/" %}
-- The instance of [ThingsBoard Professional Edition](https://thingsboard.io/docs/user-guide/install/pe/installation-options/) installed locally;
+- The instance of [ThingsBoard专业版](https://thingsboard.io/docs/user-guide/install/pe/installation-options/) installed locally;
 {% endif %}
 {% if docsPrefix contains "paas/" %}
 - ThingsBoard Professional Edition instance — [{{hostName}}](https://{{hostName}});
 {% endif %}
 
-- [coap-client](https://manpages.ubuntu.com/manpages/focal/man5/coap-client.5.html) utility which is intended to simulate CoAP client that will connect to CoAP integration;
+- [coap-client](https://manpages.ubuntu.com/manpages/focal/man5/coap-client.5.html) 工具，用于模拟连接 CoAP 集成的 CoAP 客户端；
 
 {% if docsPrefix == "pe/" %}
-Let's assume that we have a sensor which is sending current temperature and humidity readings. Our sensor device **SN-001** publishes it's temperature and humidity readings to CoAP Integration on **coap://localhost** URL.
+假设我们有一台正在发送当前温度和湿度读数的传感器。传感器设备 **SN-001** 将温度和湿度读数发布到 CoAP 集成的 **coap://localhost** URL。
 {% endif %}
 {% if docsPrefix contains "paas/" %}
-Let's assume that we have a sensor which is sending current temperature and humidity readings. Our sensor device **SN-001** publishes it's temperature and humidity readings to CoAP Integration on **coap://int.{{hostName}}** URL.
+假设我们有一台正在发送当前温度和湿度读数的传感器。传感器设备 **SN-001** 将温度和湿度读数发布到 CoAP 集成的 **coap://int.{{hostName}}** URL。
 {% endif %}
 
-For demo purposes we assume that our device is smart enough to send data in 3 different payload types:
-- **Text** - in this case payload is:
+演示中假设我们的设备支持 3 种负载类型：
+- **Text** — 负载格式为：
 
 ```text
 SN-001,default,temperature,25.7,humidity,69
 ```
 
-- **JSON** - in this case payload is:
+- **JSON** — 负载格式为：
 
 ```json
 {
@@ -49,30 +49,30 @@ SN-001,default,temperature,25.7,humidity,69
 }
 ```
 
-- **Binary** - in this case, the payload looks like this (in HEX string):
+- **Binary** — 负载示例（十六进制字符串）：
 
 ```text
 \x53\x4e\x2d\x30\x30\x31\x64\x65\x66\x61\x75\x6c\x74\x32\x35\x2e\x37\x36\x39
 ```
 
-Here is the description of the bytes in this payload:
+负载字节说明：
 - **0-5** bytes - **\x53\x4e\x2d\x30\x30\x31** - device name. If we convert it to text - **SN-001**;
 - **6-12** bytes - **\x64\x65\x66\x61\x75\x6c\x74** - device type. If we convert it to text - **default**;
 - **13-16** bytes - **\x32\x35\x2e\x37** - temperature telemetry. If we convert it to text - **25.7**;
 - **17-18** bytes - **\x36\x39** - humidity telemetry. If we convert it to text - **69**;
 
-You can use payload type based on your device capabilities and business cases.
+可根据设备能力和业务场景选择负载类型。
 
-## Uplink Converter
+## 上行转换器
 
-Before setting up an **CoAP integration**, you need to create an **Uplink Converter** that is a script for parsing and transforming the data received by CoAP integration to format that ThingsBoard uses. **deviceName** and **deviceType** are required, while attributes and telemetry are optional. attributes and telemetry are flat key-value objects. Nested objects are not supported.
+配置 **CoAP 集成**前，需创建 **Uplink Converter**，即用于将 CoAP 集成接收的数据解析并转换为 ThingsBoard 格式的脚本。**deviceName** 和 **deviceType** 为必填，attributes 和 telemetry 可选。attributes 和 telemetry 为扁平键值对象，不支持嵌套。
 
-To create an **Uplink Converter** go to **Data Converters** section and Click **Add new data converter —> Create new converter**.
-Name it **"CoAP Uplink Converter"** and select type **Uplink**. Use debug mode for now.
+创建 **Uplink Converter**：进入 **Data Converters** 部分，点击 **Add new data converter —> Create new converter**。
+命名为 **"CoAP Uplink Converter"**，选择类型 **Uplink**。暂时启用 debug mode。
 
 {% assign feature = "integrations" %}{% include templates/debug-mode.md %}
 
-**Choose device payload type to for decoder configuration:**
+**选择解码器配置使用的设备负载类型：**
 
 - **Text payload**
 
@@ -103,13 +103,13 @@ JavaScript<small></small>%,%anonymous%,%templates/integration/coap/coap-uplink-b
 
 {% include content-toggle.liquid content-toggle-id="coapuplinkbinary" toggle-spec=coapuplinkbinary %}
 
-## CoAP Integration Setup
+## CoAP 集成配置
 
 {% include images-gallery.html imageCollection="coap-integration-setup" showListImageTitles="true" %}
 
-### CoAP Integration Configuration
+### CoAP 集成配置项
 
-CoAP Integration allows us to choose a security mode:
+CoAP 集成可配置安全模式：
 
 - **NO SECURE(default mode)**
 - **DTLS**
@@ -120,7 +120,7 @@ CoAP Integration allows us to choose a security mode:
 {% unless docsPrefix contains "paas/" %}
 
 
-For the last 2 types, before creating integration, DTLS support should be enabled in the .yml configuration file or should be updated by overriding the next environment variables in the .conf file:
+后两种类型在创建集成前，需在 .yml 中启用 DTLS 支持，或在 .conf 中覆盖下列环境变量：
 
 ```
 # Enable/disable DTLS 1.2 support
@@ -139,13 +139,13 @@ export COAP_DTLS_KEY_ALIAS=serveralias
 export TB_COAP_X509_DTLS_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT=false
 ```
 
-Please, note, that added above environment variables use default DTLS configuration settings. In order to get the CoAP server launched correctly in the DTLS mode, you need to update at least key store settings. Please refer to the [CoAP over DTLS](/docs/{{docsPrefix}}user-guide/coap-over-dtls) guide in order to learn more about the CoAP DTLS configuration.
+注意，上述环境变量使用默认 DTLS 配置。要在 DTLS 模式下正确启动 CoAP 服务，需至少更新 key store 配置。详见 [CoAP over DTLS](/docs/{{docsPrefix}}user-guide/coap-over-dtls) 指南。
 
 {% endunless %}
 
-In addition, CoAP integration will provide us automatically generated CoAP endpoint URL for data transmitting based on the Base URL path and next path prefixes:
+此外，CoAP 集成会根据 Base URL 路径及下列路径前缀自动生成 CoAP endpoint URL：
 - **/i** - Integration resource in the CoAP server
-- **/$INTEGRATION_ROUTING_KEY** - autogenerated integration routing key
+- **/$INTEGRATION_ROUTING_KEY** — 自动生成的集成路由键
 
 {% if docsPrefix != "pe/" %}
 
@@ -159,11 +159,11 @@ Each of the additional path prefixes will be added to the CoAP server as CoAP re
 
 {% endif %}
 
-## Send Uplink message
+## 发送上行消息
 
-Once CoAP Integration has been created, the CoAP server register appropriate resources, and then it waits for data from the devices.
+CoAP 集成创建后，CoAP 服务会注册相应资源并等待设备数据。
 
-Choose device payload type to send uplink message
+选择设备负载类型以发送上行消息
 
 {% capture senduplink %}
 Text payload<br>%,%text%,%templates/integration/coap/coap-send-uplink-text.md%br%
@@ -172,7 +172,7 @@ Binary payload<br>%,%binary%,%templates/integration/coap/coap-send-uplink-binary
 
 {% include content-toggle.liquid content-toggle-id="coapintegrationsenduplink" toggle-spec=senduplink %}
 
-Once the command will send you can go to **Device groups** -> **All** you should find an **SN-001** device provisioned by the Integration. 
+命令执行后，进入 **Device groups** -> **All**，应能看到由集成配置的 **SN-001** 设备。 
 Click on the device, go to the **Latest Telemetry** tab to see the “temperature” key and its value (25.7) there and also the “humidity” key and its value (69) there as well.
 
 {% if docsPrefix == "pe/" %}
@@ -182,6 +182,6 @@ Click on the device, go to the **Latest Telemetry** tab to see the “temperatur
 ![image](/images/user-guide/integrations/coap/coap-integration-test-uplink-paas.png)
 {% endif %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/guides-banner.md %}

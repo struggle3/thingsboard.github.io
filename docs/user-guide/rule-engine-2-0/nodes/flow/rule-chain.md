@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: rule chain
-description: Forwards incoming messages to a specified rule chain.
+description: 将入站消息转发到指定的 rule chain。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

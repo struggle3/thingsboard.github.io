@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Kafka Integration
-description: TBMQ Kafka integration guide
+title: Kafka 集成
+description: TBMQ Kafka 集成指南
 
 add-kafka-integration:
   0:

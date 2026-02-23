@@ -1,82 +1,83 @@
 ---
 layout: docwithnav-gw
-title: IoT Gateway installation from sources.
+title: IoT Gateway 源码安装
+description: 从源码安装 ThingsBoard IoT Gateway
 
 ---
 
-## Installation from sources
+## 源码安装
 
-To install ThingsBoard Gateway from sources, you should follow steps below:    
+从源码安装 ThingsBoard Gateway，请按以下步骤操作：    
   
-**1.** Install required libraries to the system with apt:
+**1.** 使用 apt 安装所需系统库：
 ```bash
 sudo apt install python3-dev python3-pip python3-venv libglib2.0-dev git
 ```
 {: .copy-code}
 
-**2.** Download repository from GitHub:
+**2.** 从 GitHub 克隆仓库：
 ```bash
 git clone --recurse-submodules https://github.com/thingsboard/thingsboard-gateway.git --depth 1
 ```
 {: .copy-code}
 
-**3.** Move into downloaded directory:
+**3.** 进入克隆目录：
 ```bash
 cd thingsboard-gateway
 ```
 {: .copy-code}
 
-**4.** Create and activate virtual environment:
+**4.** 创建并激活虚拟环境：
 ```bash
 python3 -m venv venv && source venv/bin/activate
 ```
 {: .copy-code}
 
-**5.** Install python requirements:
+**5.** 安装 Python 依赖：
 ```bash
 pip install -r requirements.txt
 ```
 {: .copy-code}
 
-**6.** Install the library:
+**6.** 安装库：
 ```bash
 python setup.py install
 ```
 {: .copy-code}
 
-**7.** Create "logs" folder:
+**7.** 创建「logs」目录：
 ```bash
 mkdir logs
 ```
 {: .copy-code}
 
-**8.** Configure the gateway to work with your instance of the ThingsBoard platform: change the "host" and "accessToken" to your values in a *tb_gateway.json* configuration file.
-You can find a description of this file in the [IoT Gateway Configuration](/docs/iot-gateway/configuration/#general-configuration-file) guide.
+**8.** 配置网关以连接你的 ThingsBoard 实例：在 *tb_gateway.json* 配置文件中修改「host」和「accessToken」为你的值。
+该文件说明见 [IoT Gateway 配置](/docs/iot-gateway/configuration/#general-configuration-file) 指南。
 
-The tb_gateway.json file is located in the config folder:
+tb_gateway.json 位于 config 目录：
 
 ```bash
 thingsboard-gateway/thingsboard_gateway/config
 ```
 
-**9.** Run gateway, to check installation result:
+**9.** 运行网关以验证安装：
 ```bash
 python3 ./thingsboard_gateway/tb_gateway.py
 ```
 {: .copy-code}
 
-## Build local docker image
+## 构建本地 Docker 镜像
 
-In order to build local docker image, follow the next steps:
+构建本地 Docker 镜像，请按以下步骤操作：
 
-**1.** Copy **Dockerfile** to **root** folder, using the following command:
+**1.** 将 **Dockerfile** 复制到**根目录**：
 
 ```bash
 cp docker/Dockerfile .
 ```
 {: .copy-code}
 
-**2.** From project root folder execute the following command:
+**2.** 在项目根目录执行：
 
 ```bash
 docker build -t local-gateway . 
@@ -85,9 +86,10 @@ docker build -t local-gateway .
 
 ## Hot Reloader
 
-If you are using Gateway for development, you can enable Hot Reloader to restart Gateway every time when you edit any project file.
+开发环境使用时，可启用 Hot Reloader，在编辑任意项目文件时自动重启 Gateway。
 
-To run Gateway with Hot Reloader, use the following command:
+启用 Hot Reloader 运行 Gateway，执行：
+
 ```bash
 python3 ./thingsboard_gateway/tb_gateway.py true
 ```

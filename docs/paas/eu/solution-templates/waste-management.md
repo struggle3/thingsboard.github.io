@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Waste Management template
-description: Waste Management template overview
+title: 废弃物管理模板
+description: 废弃物管理模板概览
 solution-highlights:
     0:
         image: /images/solutions/waste_monitoring/waste-monitoring-1.png

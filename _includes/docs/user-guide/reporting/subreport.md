@@ -6,148 +6,148 @@
 
 {% assign feature = "Reporting" %}{% include templates/pe-feature-banner.md %}
 
-A **Subreport** in ThingsBoard is a special type of report template that is **designed to be embedded inside another (master) report**. 
-It behaves like a **reusable**, **modular block** that receives context from the parent report and generates its content accordingly.
+ThingsBoard中的**子报表**是一种**设计用于嵌入另一（主）报表**的特殊报表模板类型。
+它的行为类似于**可重用**的**模块化块**，从父报表接收上下文并根据其生成内容。
 
-Just like regular reports, subreports can contain components such as tables, text blocks, images, etc., and they fully support dynamic entity aliases and data filtering.
+与常规报表一样，子报表可包含表格、文本块、图像等组件，并完全支持动态实体别名和数据筛选。
 
-> Subreports **are not scheduled or generated independently** — they are **included as part of a main (master) report.**
+> 子报表**不能独立调度或生成** — 它们**作为主报表的一部分包含**。
 
-## Where are subreports useful?
+## 子报表的适用场景
 
-Subreports are especially useful when you want to:
+子报表在以下场景特别有用：
 
-- **dynamically generate repeating sections** for multiple entities (for example, an alarm table for each device in the report).
-- **reuse a layout or data block** across multiple reports (e.g., a telemetry summary for devices).
-- **split responsibilities** between different teams working on specific parts of the report.
+- **为多个实体动态生成重复部分**（例如，报表中每台设备的告警表）。
+- **在多个报表中重用布局或数据块**（例如，设备的遥测摘要）。
+- **在不同团队之间分配职责**，各自负责报表的特定部分。
 
-## New entity filters for subreport
+## 子报表的实体筛选器
 
-For subreports, special filters are available that are not present in regular reports:
-- **Entity from master report**. Uses the entity retrieved from the data source configured for the subreport component in the master report.
-    - If multiple entities are present, a separate subreport component will be generated for each one. This is useful when you need to create a repeating block for each device or asset in a list.
-- **Owner of entity from master report**. Uses the owner of the entity retrieved from the datasource in the master report.
-    - If multiple entities are present, a separate subreport component will be generated for each entity.
+子报表提供常规报表中不存在的特殊筛选器：
+- **主报表中的实体**。使用主报表中子报表组件配置的数据源检索的实体。
+    - 如果存在多个实体，将为每个实体生成一个单独的子报表组件。当您需要为设备或资产列表中的每项创建重复块时非常有用。
+- **主报表中实体的所有者**。使用主报表数据源中检索的实体的所有者。
+    - 如果存在多个实体，将为每个实体生成一个单独的子报表组件。
 
 {% include images-gallery.html imageCollection="reporting-new-entity-aliases-2" %}
 
-## Creating subreport template
+## 创建子报表模板
 
-- Open the "**Reporting**" page from the left-hand sidebar. You will automatically land on the "**Templates**" tab.
-- Click the "**+ Add report template**" button in the top-right corner and select "**Create new report template**" from the dropdown menu.
-- In the pop-up window, fill in the following:
-  - Enter a descriptive name for the template.
-  - Choose the report format: **PDF** or **CSV**. 
-  - Select **Subreport** as the report template type. 
-  - Click Add to open the **Report Builder** interface.
+- 从左侧边栏打开"**报表**"页面。您将自动进入"**模板**"标签页。
+- 点击右上角的"**+ 添加报表模板**"按钮，从下拉菜单中选择"**创建新报表模板**"。
+- 在弹窗中填写以下内容：
+  - 为模板输入描述性名称。
+  - 选择报表格式：**PDF**或**CSV**。
+  - 选择**子报表**作为报表模板类型。
+  - 点击"**添加**"以打开**报表构建器**界面。
 
 {% include images-gallery.html imageCollection="create-subreport-template" %}
 
-### Subreport Builder
+### 子报表构建器
 
-In the **Subreport Builder**, components are added using a **drag-and-drop action** from the **components library** into the **subreport&#39;s content area**.
-- Add and configure the required elements, such as tables, text blocks, images, charts, and other available components.
-- Configure each component’s data sources in the same way as you would for a regular report.
+在**子报表构建器**中，通过**拖放操作**从**组件库**将组件添加到**子报表内容区域**。
+- 添加并配置所需元素，如表格、文本块、图像、图表及其他可用组件。
+- 以与常规报表相同的方式配置每个组件的数据源。
 
 {% include images-gallery.html imageCollection="subreport-builder" %}
 
-## Adding subreport to master report
+## 将子报表添加到主报表
 
-- Open or create the **main (master) report template**.
-- From the list of available components, **select Subreport** and **drag** it to the desired position in the report layout.
-- **Configure the subreport component**:
-  - In the "**Datasource**" section, specify the entity whose data will be passed to the subreport template. Use the **Filter** field to apply additional conditions for entity selection.
-  > If the specified entity alias returns multiple entities, a separate subreport instance will be generated for each one.
-  - In the "**Subreport**" section, choose the **pre-created subreport template** you want to include.
-- Save changes.
+- 打开或创建**主报表模板**。
+- 从可用组件列表中**选择子报表**并**拖拽**到报表布局中的所需位置。
+- **配置子报表组件**：
+  - 在"**数据源**"部分，指定其数据将传递给子报表模板的实体。使用**筛选器**字段为实体选择应用附加条件。
+  > 如果指定的实体别名返回多个实体，将为每个实体生成一个单独的子报表实例。
+  - 在"**子报表**"部分，选择要包含的**预创建子报表模板**。
+- 保存更改。
 
 {% include images-gallery.html imageCollection="adding-subreport-to-master-report" %}
 
-(Optional) Run Generate Preview to ensure the subreport displays correctly.
+（可选）运行生成预览以确保子报表正确显示。
 
-## Example. Daily alarm report for each device
+## 示例。每台设备的每日告警报表
 
-Imagine you need a daily report template that lists all alarms triggered for each of your devices during the current day.
+假设您需要一个每日报表模板，列出当天每台设备触发的所有告警。
 
-This can be achieved by using subreport:
-- **Subreport** — contains a table of alarms for a single device.
-- **Master report** — iterates through all devices and inserts the subreport for each one.
+这可以通过子报表实现：
+- **子报表** — 包含单台设备的告警表。
+- **主报表** — 遍历所有设备并为每台插入子报表。
 
-### Step 1: Create the subreport template
+### 步骤 1：创建子报表模板
 
-First, create a **Subreport** template that will contain the alarm table for a single device.
-For its **datasource**, use a **new entity alias** with the filter type "**Entity from master report**".
-This allows the master report to pass data about a specific device into the subreport.
+首先，创建包含单台设备告警表的**子报表**模板。
+其**数据源**使用筛选类型为"**主报表中的实体**"的**新实体别名**。
+这允许主报表将特定设备的数据传递给子报表。
 
-- Open the "**Reporting**" page from the left-hand sidebar. You will automatically land on the "**Templates**" tab.
-- Click the "**+ Add report template**" button in the top-right corner and select "**Create new report template**" from the dropdown menu.
-- In the pop-up window, fill in the following:
-  - Enter a "**Daily Device Alarms (Subreport)**" as subreport template name. 
-  - Choose the **PDF** report format.
-  - Select **Subreport** as the report template type.
+- 从左侧边栏打开"**报表**"页面。您将自动进入"**模板**"标签页。
+- 点击右上角的"**+ 添加报表模板**"按钮，从下拉菜单中选择"**创建新报表模板**"。
+- 在弹窗中填写以下内容：
+  - 输入"**每日设备告警（子报表）**"作为子报表模板名称。
+  - 选择**PDF**报表格式。
+  - 选择**子报表**作为报表模板类型。
 
 {% include images-gallery.html imageCollection="example-create-subreport-1" %}
 
 <br>
 
-**Configure the subreport in Report Builder:**
-- **Add a "Rich text" component** by dragging it from the **components library** into the **content area**. In its configurations:
-    - Set the **Datasource** by creating a new Entity Alias with filter type "**Entity from master report**". This allows the master report to pass the specific device to the subreport.
-    - Add the **data key** "**name**" with the type "**Entity field**".
-    - In the **Content** tab, enter your desired text and include the variable **${Name}** to dynamically display the current entity name.
-  - Save the component.
+**在报表构建器中配置子报表：**
+- **添加"富文本"组件**，从**组件库**拖入**内容区域**。在其配置中：
+    - 通过创建筛选类型为"**主报表中的实体**"的新实体别名来设置**数据源**。这允许主报表将特定设备传递给子报表。
+    - 添加类型为"**实体字段**"的**数据键**"**name**"。
+    - 在**内容**标签页中，输入所需文本并包含变量**${Name}**以动态显示当前实体名称。
+  - 保存组件。
 
 {% include images-gallery.html imageCollection="example-create-subreport-2" %}
-- **Add an "Alarm table" component** by dragging it from the **components library** into the **content area**. In its configurations:
-  - Set the **time window** to display alarms from the **current day**.
-  - Use the previously created "**Entity from master report**" as the **datasource** so that the table displays alarms for the device whose data is passed by the master report.
-  - Set the table **title** and include the variable **${entityName}** to dynamically display the current entity name.
-  - Save the component.
+- **添加"告警表"组件**，从**组件库**拖入**内容区域**。在其配置中：
+  - 将**时间窗口**设置为显示**当天**的告警。
+  - 使用之前创建的"**主报表中的实体**"作为**数据源**，使表格显示主报表传递数据的设备的告警。
+  - 设置表**标题**并包含变量**${entityName}**以动态显示当前实体名称。
+  - 保存组件。
 
 {% include images-gallery.html imageCollection="example-create-subreport-3" %}
 
-- **Add a "Divider" component** to visually separate sections in the report for each device. Save the component.
+- **添加"分隔线"组件**，以在报表中为每台设备在视觉上分隔部分。保存组件。
 
-{% include images-gallery.html imageCollection="example-create-subreport-4" %} 
+{% include images-gallery.html imageCollection="example-create-subreport-4" %}
 
-Subreport configuration is complete. Save the subreport by clicking the "**Save**" button in the top-right corner.
+子报表配置完成。点击右上角的"**保存**"按钮保存子报表。
 
 {% include images-gallery.html imageCollection="example-create-subreport-5" %}
 
-### Step 2: Create the master report template
+### 步骤 2：创建主报表模板
 
-Now create another **template for the master report**.
-We&#39;ll configure it to pass the data of **each of your devices** to the **subreport** template. The subreport template will then generate a report for each device according to its own configuration.
+现在创建另一个**主报表模板**。
+我们将配置其将**每台设备**的数据传递给**子报表**模板。子报表模板然后根据其自身配置为每台设备生成报表。
 
-- Go to "**Reports**" page → "**Templates**" tab, then click "**+ Add report template**".
-- Fill in the template details:
-  - Name it "**Daily Device Alarms Report**".
-  - Set the format to **PDF**.
-  - Choose "**Report**" as the template type. 
-  - Click "**Add**".
+- 进入"**报表**"页面 → "**模板**"标签页，然后点击"**+ 添加报表模板**"。
+- 填写模板详情：
+  - 命名为"**每日设备告警报表**"。
+  - 将格式设为**PDF**。
+  - 选择"**报表**"作为模板类型。
+  - 点击"**添加**"。
 
 {% include images-gallery.html imageCollection="example-create-report-1" %}
 
 <br>
-**Configure the master report in Report Builder:**
-- **Add a "Heading" component** by dragging it from the **components library** into the **content area**.
-  - Enter the heading text, for example: "**Daily device alarms report**"'
-  - Save the component.
+**在报表构建器中配置主报表：**
+- **添加"标题"组件**，从**组件库**拖入**内容区域**。
+  - 输入标题文本，例如："**每日设备告警报表**"
+  - 保存组件。
 
 {% include images-gallery.html imageCollection="example-create-report-2" %}
 
-- **Add an "Subreport" component** by dragging it from the **components library** into the **content area**. 
-  - In the "**Datasource**" section, create a new entity alias that retrieves all your entities with Device type. 
-  - In the "**Subreport**" section, select the previously created subreport **Daily Device Alarms (Subreport)**.
-  - Save the component.
-- Finally, save the master report template.
+- **添加"子报表"组件**，从**组件库**拖入**内容区域**。
+  - 在"**数据源**"部分，创建获取所有设备类型实体的新实体别名。
+  - 在"**子报表**"部分，选择之前创建的子报表**每日设备告警（子报表）**。
+  - 保存组件。
+- 最后，保存主报表模板。
 
 {% include images-gallery.html imageCollection="example-create-report-3" %}
 
-### Step 3: Generate test report
+### 步骤 3：生成测试报表
 
-To make sure the subreport is generated correctly, click the "**Generate test report**" button in the top-right corner of the window.
+要确保子报表正确生成，点击窗口右上角的"**生成测试报表**"按钮。
 
-As you can see, the generated report contains all three of our devices, each with its separate table showing the alarms for the current day.
+如您所见，生成的报表包含我们所有三台设备，每台都有单独显示当天告警的表格。
 
 {% include images-gallery.html imageCollection="example-generate-test-report" %}

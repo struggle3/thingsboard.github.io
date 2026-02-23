@@ -1,14 +1,14 @@
-Edit the **ThingsBoard Edge** configuration file by running this command:
+执行以下命令编辑 **ThingsBoard Edge** 配置文件：
 
 ```bash
 echo 'export JAVA_OPTS="$JAVA_OPTS -Xms512M -Xmx1G"' | sudo tee -a /etc/tb-edge/conf/tb-edge.conf
 ```
 {: .copy-code}
 
-This sets (or updates) the environment variable JAVA_OPTS by appending two options to its current value:
-* **Xms512M:** Sets the initial heap size of the Java Virtual Machine (JVM) to 512 Megabytes.
-* **Xmx1G:** Sets the maximum heap size that the JVM is allowed to use to 1 Gigabyte.
+该命令在 JAVA_OPTS 当前值后追加两个选项：
+* **Xms512M：** 将 Java 虚拟机（JVM）初始堆大小设为 512 MB。
+* **Xmx1G：** 将 JVM 最大堆大小设为 1 GB。
 
-We recommend that you adjust these parameters according to your server resources. 
-It should be set to at least 2G (gigabytes) and increased accordingly if additional RAM is available. 
-Typically, you should set it to 1/2 of your total RAM if you are not running any other memory-intensive processes (e.g. Cassandra), or 1/3 otherwise.
+建议根据服务器资源调整这些参数。  
+应至少设为 2G，若有更多 RAM 可相应增加。  
+一般情况下，若不运行其他内存密集型进程（如 Cassandra），可设为总 RAM 的 1/2，否则设为 1/3。

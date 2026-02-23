@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Aliases
-description: ThingsBoard Aliases
+title: 别名
+description: ThingsBoard 别名
 
 create-alias:
     0:

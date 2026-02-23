@@ -1,25 +1,25 @@
-### Add a gateway on the Loriot
+### 在 Loriot 上添加网关
 
-We need to add a gateway on the [Loriot](https://loriot.io){: target="_blank"}.   
+我们需要在 [Loriot](https://loriot.io){: target="_blank"} 上添加网关。
 
-To add a gateway, you can follow next steps:
+要添加网关，请按以下步骤操作：
 
 {% assign addGatewaySteps = '
     ===
         image: /images/devices-library/basic/integrations/loriot/main-page-network.png,
-        title: Login to Loriot server. Open the "**Sample network**" or create a new one in the "**Networks**" section
+        title: 登录 Loriot 服务器。在「**网络**」部分打开「**示例网络**」或创建新网络。
     ===
         image: /images/devices-library/basic/integrations/loriot/sample-network.png,
-        title: Click on the "**Add Gateway**" button.
+        title: 点击「**添加网关**」按钮。
     ===
         image: /images/devices-library/basic/integrations/loriot/register-gateway.png,
-        title: Scroll down and select "**Packet Forwarder Semtech**".
+        title: 向下滚动并选择「**Packet Forwarder Semtech**」。
     ===
         image: /images/devices-library/basic/integrations/loriot/add-gateway.png,
-        title: Scroll up and put information about the gateway **MAC Address** (Just remove **FFFF** or **FFFE** in the middle of ***gateway EUI***) into **eth0 MAC address** and gateway EUI to **Custom EUI** field.
+        title: 向上滚动，将网关的 **MAC 地址**（从***网关 EUI***中去除中间的 **FFFF** 或 **FFFE** 后得到）填入 **eth0 MAC address** 字段，将网关 EUI 填入 **Custom EUI** 字段。
     ===
         image: /images/devices-library/basic/integrations/loriot/gateway-added-disconnected.png,
-        title: The gateway is added. You can see its status - disconnected.
+        title: 网关已添加。您可看到其状态为已断开连接。
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addGatewaySteps %}
@@ -32,31 +32,31 @@ To add a gateway, you can follow next steps:
 
 {% endif %}
 
-### Configure application on the Loriot
+### 在 Loriot 上配置应用
 
-Now we need to copy the "**Application ID**" in the Loriot. It is required for configuring the integration in ThingsBoard. 
+现在需要在 Loriot 中复制「**应用 ID**」。在 ThingsBoard 中配置集成时需要用到。
 
-To do this please follow next steps:
+请按以下步骤操作：
 
 {% assign copyLoriotApplicationId = '
     ===
         image: /images/devices-library/basic/integrations/loriot/main-page-application.png,
-        title: Go to the "**Applications**" in the left menu and choose "**SampleApp**" or create a new one.
+        title: 在左侧菜单中进入「**应用**」，选择「**SampleApp**」或创建新应用。
     ===
         image: /images/devices-library/basic/integrations/loriot/sample-application.png,
-        title: Copy "**Application ID**" value and save it.
+        title: 复制「**应用 ID**」值并保存。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=copyLoriotApplicationId %}
 
-Now we can move to ThingsBoard to configure integration.
+现在可以前往 ThingsBoard 配置集成。
 
-### Create integration in ThingsBoard
+### 在 ThingsBoard 中创建集成
 
-Next we will create an integration with Loriot inside the ThingsBoard.  
+接下来，我们将在 ThingsBoard 中创建与 Loriot 的集成。
 
-At first, copy the code, we will need it to create the uplink converter:
+首先，复制以下代码，创建上行数据转换器时需要用到：
 
 {% capture converterCode %}
 var data = decodeToJson(payload);
@@ -158,61 +158,61 @@ return uplinkDataList;
 {% assign createLoriotIntegration = '
     ===
         image: /images/devices-library/basic/integrations/loriot/1-create-integration-name-type.png,
-        title: Click "**plus**" button to add new integration. Select type "**Loriot**". Then, click "**Next**".
+        title: 点击「**加号**」按钮添加新集成。选择类型「**Loriot**」。然后点击「**下一步**」。
     ===
         image: /images/devices-library/basic/integrations/loriot/2-create-integration-uplink.png,
-        title: Paste the previously copied script to the Decoder function section. Click "**Next**".
+        title: 将先前复制的脚本粘贴到解码器函数区域。点击「**下一步**」。
     ===
         image: /images/devices-library/basic/integrations/loriot/3-create-integration-downlink.png,
-        title: Leave the "**Downlink data converter**" field empty. Click on "**Skip**" button.
+        title: 将「**下行数据转换器**」字段留空。点击「**跳过**」按钮。
     ===
         image: /images/devices-library/basic/integrations/loriot/4-create-integration-configuration.png,
-        title: Next, fill in the fields with your parameters. After, press "**Add**" button.
+        title: 填写您的参数，然后点击「**添加**」按钮。
 '
 %}
 
 <br>
-Now, open the "**Integration center**" section -> "**Integrations**" page and follow this steps:  
+现在，打开「**集成中心**」部分 ->「**集成**」页面，按以下步骤操作：
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=createLoriotIntegration %}
 
-Integration is created.
+集成已创建。
 
 <br>
-To check integration connection you can do the following:
+可按以下方式检查集成连接状态：
 
-- Click on integration row in the list;
-- Go to the "**Events**" tab;
-- Select "**Lifecycle events**" from **Event type** dropdown list.
+- 点击集成列表中的某一行；
+- 进入「**事件**」选项卡；
+- 在 **事件类型** 下拉列表中选择「**生命周期事件**」。
 
-If you see event **STARTED** and status **Success** it means that integration is successfully started and ready to receive messages.
+若看到 **STARTED** 事件且状态为 **Success**，则表示集成已成功启动，可以接收消息。
 
-![Check integration connection](/images/devices-library/basic/integrations/check-integration-started.png)
+![检查集成连接](/images/devices-library/basic/integrations/check-integration-started.png)
 
-### Troubleshooting
+### 故障排除
 
-If you see the next error message, that means the output was not created automatically.
+若看到以下错误信息，表示输出未自动创建。
 
-![Check integration connection](/images/devices-library/basic/integrations/loriot/loriot-integration-error-pe.png)
+![检查集成连接](/images/devices-library/basic/integrations/loriot/loriot-integration-error-pe.png)
 
-You can configure it manually:
+您可以手动配置：
 
 {% assign loriotTroubleshooting = '
     ===
         image: /images/devices-library/basic/integrations/loriot/loriot-troubleshootin-1-pe.png,
-        title: Go to edit mode ThingsBoard Loriot integration, switch off **"Create Loriot Application output"** slider and copy **"HTTP endpoint URL"**. Then, apply changes;
+        title: 进入 ThingsBoard Loriot 集成的编辑模式，关闭 **「创建 Loriot 应用输出」** 开关并复制 **「HTTP 端点 URL」**。然后应用更改；
     ===
         image: /images/devices-library/basic/integrations/loriot/loriot-troubleshootin-2-pe.png,
-        title: Now, go to **eu2.loriot.io** than navigate to the **"Output"** page in left panel. Click on **"Add new output"** button;
+        title: 打开 **eu2.loriot.io**，在左侧面板中进入 **「输出」** 页面，点击 **「添加新输出」** 按钮；
     ===
         image: /images/devices-library/basic/integrations/loriot/loriot-troubleshootin-3-pe.png,
-        title: Select **"HTTP Push"**. Paste **"HTTP endpoint URL"** in **"Target URL for POSTs"** field. Press **"Add Output"** button;
+        title: 选择 **「HTTP Push」**。将 **「HTTP 端点 URL」** 粘贴到 **「Target URL for POSTs」** 字段。点击 **「添加输出」** 按钮；
     ===
         image: /images/devices-library/basic/integrations/loriot/loriot-troubleshootin-4-pe.png,
-        title: Delete default output;
+        title: 删除默认输出；
     ===
         image: /images/devices-library/basic/integrations/loriot/loriot-troubleshootin-5-pe.png,
-        title: Go to the cloud and check the connection.
+        title: 前往云端检查连接状态。
 '
 %}
 

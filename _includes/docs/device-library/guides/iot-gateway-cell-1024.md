@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://exxn.es/en/iot-gateway/" %}
 {% assign prerequisites = '
 - <a href="' | append: deviceVendorLink | append: '" target="_blank">' | append: deviceName | append: '</a>
@@ -7,7 +7,7 @@
 
 {% assign thingsboardInstanceLink = "https://" | append: hostName %}
 
-## Introduction
+## 概述
 The EXXN IoT Gateway is a versatile device with an ARM processor that can be adapted to a variety of use cases, including monitoring environmental sensors, energy consumption, radon gas levels, marine environments, and edge computing.
 <br>
 <br>
@@ -18,24 +18,22 @@ The EXXN IoT Gateway is a versatile device with an ARM processor that can be ada
 
 ### Prerequisites
 
-To continue with this guide we will need the following:  
+继续本指南前，需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{thingsboardInstanceLink}}){: target="_blank"}  
+- [ThingsBoard 账户]({{thingsboardInstanceLink}}){: target="_blank"}  
 
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 {% include /docs/device-library/blocks/ready-to-go-devices/iot-gateway-cell-1024-create-device-thingsboard-block.md %}
 
-## Connect device to ThingsBoard
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 {% include /docs/device-library/blocks/ready-to-go-devices/iot-gateway-cell-1024-configuration-block.md %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/ready-to-go-devices/iot-gateway-cell-1024-check-data-on-thingsboard-block.md %}
 
-## Control device using RPC
+## 使用 RPC 控制设备 {#control-device-using-rpc}
 
 {% include /docs/device-library/blocks/ready-to-go-devices/iot-gateway-cell-1024-using-rpc-block.md %}
 
@@ -51,7 +49,7 @@ Here you can find some additional links, that can be useful.
 For more information, visit the website at [EXXN Engineering](https://exxn.es/en/){:target="_blank"}.  
 If you have any problems or doubts, please do not hesitate in contact to EXXN support at: [troubleshooting@exxn.es](mailto://troubleshooting@exxn.es).  
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

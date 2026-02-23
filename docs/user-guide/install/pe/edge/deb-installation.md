@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Installing ThingsBoard Edge on Ubuntu Server
-description: Installing ThingsBoard Edge on Ubuntu Server
+title: 在 Ubuntu Server 上安装 ThingsBoard Edge
+description: 在 Ubuntu Server 上安装 ThingsBoard Edge
 
 ---
 

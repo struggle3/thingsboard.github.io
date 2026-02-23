@@ -1,64 +1,64 @@
-## Prerequisites
+## 前提条件
 
-- Active [DigitalOcean](https://cloud.digitalocean.com/){:target="_blank"} account
+- 有效的 [DigitalOcean](https://cloud.digitalocean.com/){:target="_blank"} 账号
 
-## Step 1. Launch Ubuntu 18.04 on DigitalOcean
+## 步骤 1. 在 DigitalOcean 上启动 Ubuntu 18.04
 
-### Step 1.1 Create DigitalOcean Droplet
+### 步骤 1.1 创建 DigitalOcean Droplet
 
-- Login to your DigitalOcean account.
-- Click the "Droplets" menu item and then the "Create Droplet" button (see image below).   
+- 登录 DigitalOcean 账号。
+- 点击 "Droplets" 菜单项，然后点击 "Create Droplet" 按钮（见下图）。   
 
 ![image](/images/user-guide/install/digital-ocean-pe/create-droplet.png)
 
-### Step 1.2 Select your plan
+### 步骤 1.2 选择套餐
 
-- Once "Create Droplets" page is loaded, select "Ubuntu 18.04 x64" as your image (see image below).
-- Choose your plan. For beginners we would like to recommend 2CPUs and 4GB of RAM plan. 
+- 加载 "Create Droplets" 页面后，选择 "Ubuntu 18.04 x64" 作为镜像（见下图）。
+- 选择套餐。建议初学者使用 2 核 CPU、4GB 内存 套餐。 
 
-  Note: Advanced ThingsBoard users may choose the plan that suites their workload best. 
+  注意：高级 ThingsBoard 用户可根据自身负载选择更合适的套餐。 
     
 ![image](/images/user-guide/install/digital-ocean-pe/choose-plan.png)
 
-### Step 1.3 Choose Region
+### 步骤 1.3 选择区域
 
-- Scroll down to select datacenter region from the available list (see image below).
-- [Optional] Enable backups. Although this is optional we highly recommend to do this. 
-- [Optional] Add block storage
+- 向下滚动，从可用列表中选择数据中心区域（见下图）。
+- [可选] 启用备份。虽为可选，但强烈建议启用。 
+- [可选] 添加块存储
 
 ![image](/images/user-guide/install/digital-ocean-pe/choose-region.png)
 
-### Step 1.4 Authentication
+### 步骤 1.4 认证
 
-- Use existing or create new SSH Key that will be used to connect to your instance. Make sure you have access to the SSH Key you have chosen. We will use this key later in the guide to connect to this instance. 
-- Put a meaningful hostname
-- Add "thingsboard" tag, just-in-case, we are not going to use it in this instruction.
-- Finally, click the "Create Droplet" button.
+- 使用现有或创建新的 SSH 密钥用于连接实例。确保所选 SSH 密钥可访问。后续步骤中将用此密钥连接实例。 
+- 设置有意义的主机名
+- 添加 "thingsboard" 标签（本指南不会使用）。
+- 最后，点击 "Create Droplet" 按钮。
 
 ![image](/images/user-guide/install/digital-ocean-pe/create-final.png)
 
-- Once droplet is created, copy the IP address of your droplet to a safe place. We will use it later in the guide. 
+- Droplet 创建后，将 IP 地址保存到安全位置，后续步骤中将使用。 
 
 ![image](/images/user-guide/install/digital-ocean-pe/droplet-created.png)
 
-## Step 2. Configure Firewall Rules
+## 步骤 2. 配置防火墙规则
 
-Now we need to configure Firewall rules to allow MQTT, CoAP and HTTP traffic. See images below:
+需配置防火墙规则以允许 MQTT、CoAP 和 HTTP 流量。见下图：
 
 ![image](/images/user-guide/install/digital-ocean-pe/create-firewall.png)
 
-- Give your Firewall a meaningful name;
-- Configure HTTP, HTTPS and three custom rules as set on the screen below. 
+- 为防火墙设置有意义名称；
+- 按下方界面配置 HTTP、HTTPS 及三条自定义规则。 
 
 ![image](/images/user-guide/install/digital-ocean-pe/firewall-config.png)
 
-- Leave outbound rules as-is;
-- Select your droplet or tag to assign this firewall;
-- Finally click "Create Firewall" button.
+- 保持出站规则不变；
+- 选择 Droplet 或标签以分配此防火墙；
+- 最后点击 "Create Firewall" 按钮。
 
 ![image](/images/user-guide/install/digital-ocean-pe/firewall-final.png)
 
-## Step 3. Connect to your instance using SSH
+## 步骤 3. 使用 SSH 连接实例
 
-Please use the [official guide](https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/){:target="_blank"} 
-and the SSH Key we have created during [Step 1.4](/docs/user-guide/install/pe/digital-ocean/#step-14-authentication).
+请参考 [官方指南](https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/){:target="_blank"} 
+及 [步骤 1.4](/docs/user-guide/install/pe/digital-ocean/#step-14-authentication) 中创建的 SSH 密钥。

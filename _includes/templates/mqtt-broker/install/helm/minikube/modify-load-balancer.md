@@ -1,19 +1,18 @@
-By default, the Helm chart deploys a standard NGINX Ingress Controller for HTTP and MQTT traffic when installing TBMQ on Kubernetes.
+默认情况下，在 Kubernetes 上安装 TBMQ 时，Helm chart 会为标准 NGINX Ingress Controller 部署 HTTP 和 MQTT 流量配置。
 
 ```yaml
 loadbalancer:
   type: "nginx"
 ```
 
-which is suitable for Minikube and other generic Kubernetes environments.
+此配置适用于 Minikube 及其他通用 Kubernetes 环境。
 
-#### HTTPS access
+#### HTTPS 访问
 
-Currently, HTTPS termination at the load balancer level is not implemented for the NGINX Ingress Controller. This functionality may be added in a future release.
+目前 NGINX Ingress Controller 在负载均衡器层面的 HTTPS 终止尚未实现。此功能可能在后续版本中添加。
 
-#### MQTTS access
+#### MQTTS 访问
 
-The NGINX Ingress Controller does not support TLS termination for TCP-based protocols like MQTT.
-If you want to secure MQTT communication,
-you must configure Two-Way TLS (Mutual TLS or mTLS) directly on the application level (TBMQ side).
-Please refer to the TBMQ Helm chart documentation for [details](https://artifacthub.io/packages/helm/tbmq-helm-chart/tbmq-cluster#configuring-mutual-tls-mtls-for-mqtt) on configuring Two-Way TLS.
+NGINX Ingress Controller 不支持基于 TCP 的协议（如 MQTT）的 TLS 终止。
+若要保护 MQTT 通信，必须在应用层（TBMQ 侧）直接配置双向 TLS（Mutual TLS 或 mTLS）。
+有关配置双向 TLS 的详情，请参阅 TBMQ Helm chart 文档 [此处](https://artifacthub.io/packages/helm/tbmq-helm-chart/tbmq-cluster#configuring-mutual-tls-mtls-for-mqtt)。

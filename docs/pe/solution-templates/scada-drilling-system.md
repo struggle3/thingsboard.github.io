@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: SCADA Oil & Gas Drilling system
-description: SCADA Oil & Gas Drilling system overview
+title: SCADA 石油与天然气钻井系统
+description: SCADA 石油与天然气钻井系统概览
 
 go-to-drilling-solution-templates-page-1:
     0:

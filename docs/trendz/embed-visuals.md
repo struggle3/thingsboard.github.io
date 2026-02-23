@@ -2,66 +2,62 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Add Trendz widgets on dashboard
-description: Add Trendz widgets on dashboard 
-
+title: 在仪表板添加 Trendz 部件
+description: 在仪表板上添加 Trendz 部件
 ---
 
 * TOC
 {:toc}
 
-All interactive visualizations created with the Trendz Analytics Platform could be shared with other users and embed on ThingsBoard Dashboards 
-or external sites. In this guide, you will learn how to do this. 
+使用 Trendz Analytics 平台创建的所有交互式可视化均可分享给其他用户，并嵌入 ThingsBoard 仪表板或外部站点。本指南将说明具体操作。
 
-## Add visualization on ThingsBoard Dashboard
+## 在 ThingsBoard 仪表板添加可视化
 
-### Add using share wizard
+### 使用分享向导添加
 
-* Click on **Share** button in the top right corner of the visualization.
-* Select whether you want to add view on new or existing dashboard.
-* Select on what dashboard state view should be added.
-* Enable `Create alias from filter` - enable this option if you want to create dashboard alias that would be used to filter data in view. For example if you created view that shows data from multiple devices - you can use dashboard state alias to filter data by device name. Once alias value changed - filter inside Trendz view would be automatically updated.
-* Press Save button.
+* 点击可视化右上角的 **Share** 按钮。
+* 选择是在新仪表板还是现有仪表板上添加视图。
+* 选择视图应添加到的仪表板状态。
+* 启用 `Create alias from filter`：如需创建用于在视图中筛选数据的仪表板别名，请启用此选项。例如，若视图显示多设备数据，可使用仪表板状态别名按设备名称筛选。别名值变更后，Trendz 视图内的筛选器会自动更新。
+* 点击 Save 按钮。
 
-### Add via direct link to Trendz view
+### 通过直接链接添加 Trendz 视图
 
-Once widgets bundle imported, and you already have saved Trendz Visualization - follow next steps to add them on the dashboard:
-* In Trendz, open required visualization
-* Press **Share** button, and click `Copy link` button - sharable URL will be copied into the clipboard
-* Open required ThingsBoard Dashboard and press Edit button
-* Select **Advanced analytics View Static** widget from **Advanced analytics Bundle** and add it on the Dashboard
-* Switch to **Advanced** tab of the widget and insert the copied URL from step 1
-* Save dashboard
+导入部件包并已保存 Trendz 可视化后，按以下步骤添加到仪表板：
+* 在 Trendz 中打开目标可视化
+* 点击 **Share** 按钮，再点击 `Copy link` 按钮，可分享 URL 将复制到剪贴板
+* 打开目标 ThingsBoard 仪表板并点击 Edit 按钮
+* 从 **Advanced analytics Bundle** 选择 **Advanced analytics View Static** 部件并添加到仪表板
+* 切换到部件的 **Advanced** 标签页，粘贴第 1 步复制的 URL
+* 保存仪表板
 
 ![image](/images/trendz/embed-trendz.gif) 
 
-## Use Dashboard time window
+## 使用仪表板时间窗口
 
-By default, all Trendz visualizations use individual time range. However you can change this behavior and configure widget to toke time from ThingsBoard Dashboard.
-This option available for both, Static Trendz widget and for Trendz View with aliases.
+默认情况下，所有 Trendz 可视化使用独立时间范围。也可修改此行为，将部件配置为从 ThingsBoard 仪表板获取时间。
+该选项对 Static Trendz 部件和带别名的 Trendz View 均可用。
 
-* Open Dashboard Edit Mode
-* Select required Trendz Widget
-* Switch to **Advanced** Tab
-* Enable checkbox **Use Dashboard Time Window** 
+* 打开仪表板编辑模式
+* 选择目标 Trendz 部件
+* 切换到 **Advanced** 标签页
+* 勾选 **Use Dashboard Time Window**
 
-## Embed visualization on external site
-You can also embed Trendz visualization into your web site by adding iFrame that points to required visualization.
+## 在外网嵌入可视化
+也可通过添加指向目标可视化的 iFrame 将 Trendz 可视化嵌入您的网站。
 
-Add iFrame on your site with the following URL **http://{TRENDZ_URL}/viewMode/{VIEW_ID}?jwt={JWT_TOKEN}**. Where:
-* TRENDZ_URL - url of Trendz service
-* VIEW_ID - ID of saved visualization inside Trendz
-* JWT_TOKEN - ThingsBoard JWT token that should be used to authenticate in the ThingsBoard
+在网站中添加以下 URL 格式的 iFrame：**http://{TRENDZ_URL}/viewMode/{VIEW_ID}?jwt={JWT_TOKEN}**。其中：
+* TRENDZ_URL - Trendz 服务地址
+* VIEW_ID - Trendz 中已保存可视化的 ID
+* JWT_TOKEN - 用于 ThingsBoard 认证的 JWT 令牌
 
-## Blocked View problem
+## 视图被屏蔽问题
 
-If HTTPS was not enabled for Trendz it is possible that visuals shared on 3rd party websites or on ThingsBoard Dashboard 
-would be blank. 
+若 Trendz 未启用 HTTPS，分享到第三方网站或 ThingsBoard 仪表板的可视化可能为空白。
 
-The problem is that most browser block mixed content requests: if ThingsBoard use HTTPS and Trendz does not - browser will 
-block requests to Trendz. You can find detailed error in browser console.
+原因是多数浏览器会屏蔽混合内容请求：若 ThingsBoard 使用 HTTPS 而 Trendz 未使用，浏览器会屏蔽对 Trendz 的请求。可在浏览器控制台查看具体错误。
 
-For fixing this - you need to enable HTTPS for Trendz UI. Find details how to do this in Trendz installation guide.
+解决办法：为 Trendz UI 启用 HTTPS。具体步骤见 Trendz 安装指南。
 
 ## Next Steps
 

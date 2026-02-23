@@ -1,13 +1,13 @@
 {% include templates/install/queue-confluent-cloud-config.md %}
 
-Create docker compose file for ThingsBoard queue service:
+创建 ThingsBoard 队列服务的 docker compose 文件：
 
 ```text
 notepad docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following line to the yml file. Don’t forget to replace “CLUSTER_API_KEY”, "CLUSTER_API_SECRET" and "localhost:9092" with your real Confluent Cloud bootstrap servers:
+将以下内容添加到 yml 文件中。 请勿忘记将 “CLUSTER_API_KEY”、"CLUSTER_API_SECRET" 和 "localhost:9092" 替换为您的实际 Confluent Cloud 引导服务器地址：
 
 ```yml
 services:
@@ -77,4 +77,4 @@ volumes:
 ```
 {: .copy-code.expandable-15}
 
-You can update default Rule Engine queues configuration using UI. More about ThingsBoard Rule Engine queues see in [documentation](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/).
+您可通过 UI 更新默认规则引擎队列配置。有关 ThingsBoard 规则引擎队列的更多信息，请参阅[文档](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/)。

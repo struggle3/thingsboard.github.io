@@ -1,25 +1,24 @@
-Deletes relations from the message originator based on configured direction, type, and optional target entity.
+根据配置的方向、类型以及可选的目标实体，删除消息发起者的关系。
 
-## Configuration
+## 配置
 
-- **Direction**: Defines the direction of relations to delete from the message originator.
-    - *From originator*: Deletes relations where the message originator is the "from" entity
-    - *To originator*: Deletes relations where the message originator is the "to" entity
-- **Relation type**: Type of relations to delete. Supports templatization using `${metadataKey}` and `$[dataKey]` patterns.
-- **Delete relation with specific entity**: When enabled, deletes relation only with the specified target entity. When disabled, deletes all relations of the specified type and
-  direction.
+- **Direction（方向）**：定义从消息发起者删除的关系方向。
+    - *From originator（从发起者）*：删除消息发起者为「from」实体的关系
+    - *To originator（到发起者）*：删除消息发起者为「to」实体的关系
+- **Relation type（关系类型）**：要删除的关系类型。支持使用 `${metadataKey}` 和 `$[dataKey]` 模式进行模板化。
+- **Delete relation with specific entity（删除与特定实体的关系）**：启用时，仅删除与指定目标实体的关系。禁用时，删除指定类型和方向的所有关系。
 
-### Target entity configuration (when **Delete relation with specific entity** is enabled)
+### 目标实体配置（启用 **Delete relation with specific entity** 时）
 
-- **Type**: Type of target entity to delete relation with.
-- **Entity identifier**: Name, title, or email of the target entity (depends on entity type). Supports templatization using `${metadataKey}` and `$[dataKey]` patterns.
+- **Type（类型）**：要删除关系的目标实体类型。
+- **Entity identifier（实体标识符）**：目标实体的名称、标题或邮箱（取决于实体类型）。支持使用 `${metadataKey}` 和 `$[dataKey]` 模式进行模板化。
 
-Supported target entity types:
+支持的目标实体类型：
 
-- *Device*, *Asset*, *Entity View*, *Edge*, *Converter*, *Role* - specify name as entity identifier
-- *Customer*, *Dashboard* - specify title as entity identifier
-- *User* - specify email as entity identifier
-- *Tenant* - no identifier needed (uses current tenant)
+- *Device*、*Asset*、*Entity View*、*Edge*、*Converter*、*Role* - 使用名称作为实体标识符
+- *Customer*、*Dashboard* - 使用标题作为实体标识符
+- *User* - 使用邮箱作为实体标识符
+- *Tenant* - 无需标识符（使用当前租户）
 
 ### JSON Schema
 
@@ -70,38 +69,38 @@ Supported target entity types:
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. **Process relation type**: Processes the configured relation type pattern, substituting any placeholders with values from the message.
-2. **Determine deletion mode**:
-    - If **Delete relation with specific entity** is enabled, proceeds to specific entity deletion
-    - If disabled, proceeds to delete all relations of the specified type and direction
-3. **Specific entity deletion** (when **Delete relation with specific entity** is enabled):
-    - Processes the target entity identifier pattern, substituting placeholders with message values
-    - Looks up the target entity by type and processed identifier (processing fails if entity doesn't exist)
-    - Deletes the relation of specified type and direction between message originator and target entity
-4. **Bulk deletion** (when **Delete relation with specific entity** is disabled):
-    - Deletes all relations of the specified type and direction involving the message originator
-5. **Route message**: Routes the original message to `Success` if all deletions were successful, otherwise to `Failure`.
+1. **处理关系类型**：处理配置的关系类型模式，用消息中的值替换占位符。
+2. **确定删除模式**：
+    - 若 **Delete relation with specific entity** 已启用，执行特定实体删除
+    - 若禁用，删除指定类型和方向的所有关系
+3. **特定实体删除**（启用 **Delete relation with specific entity** 时）：
+    - 处理目标实体标识符模式，用消息中的值替换占位符
+    - 按类型和处理后的标识符查找目标实体（若实体不存在则处理失败）
+    - 删除消息发起者与目标实体之间指定类型和方向的关系
+4. **批量删除**（禁用 **Delete relation with specific entity** 时）：
+    - 删除涉及消息发起者、指定类型和方向的所有关系
+5. **路由消息**：若所有删除均成功则将原始消息路由至 `Success`，否则路由至 `Failure`。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - All relations of the specified type and direction involving the message originator were successfully deleted
-    - Relation of specified type and direction between message originator and target entity was deleted
+    - 涉及消息发起者、指定类型和方向的关系均已成功删除
+    - 消息发起者与目标实体之间指定类型和方向的关系已删除
 - `Failure`
-    - Target entity was not found
-    - Unexpected error occurred during processing
+    - 未找到目标实体
+    - 处理过程中发生意外错误
 
-## Examples
+## 示例
 
-### Example 1 — Delete all relations of specific type
+### 示例 1 — 删除指定类型的所有关系
 
-**Incoming message**
+**传入消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -111,29 +110,29 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Following relations exist:
+存在以下关系：
 
-- From originator with type `Contains` to `Device A`, `Device B`, and `Device C`.
-- From originator with type `Uses` to `Asset D`
+- 发起者到 `Device A`、`Device B`、`Device C` 的类型为 `Contains` 的关系。
+- 发起者到 `Asset D` 的类型为 `Uses` 的关系
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-All `Contains` relations from the originator are deleted (relations to `Device A`, `Device B`, and `Device C`).
-The `Uses` relation to `Asset D` remains unchanged.
+发起者的所有 `Contains` 关系已删除（到 `Device A`、`Device B`、`Device C` 的关系）。
+到 `Asset D` 的 `Uses` 关系保持不变。
 
-### Example 2 — Delete relation with specific entity using patterns
+### 示例 2 — 使用模式删除与特定实体的关系
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`
+发起者：`DEVICE`
 
-Data:
+数据：
 
 ```json
 {
@@ -141,7 +140,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -149,7 +148,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -161,29 +160,29 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Following relations exist:
+存在以下关系：
 
-- From originator device with type `LocatedIn` to asset named `Building`.
-- From originator with various type to other assets.
+- 发起者设备与名为 `Building` 的资产之间的类型为 `LocatedIn` 的关系。
+- 发起者与其他资产的各种类型的关系
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The `LocatedIn` relation between originator device and asset `Building` is deleted.
-All other relations remain unchanged.
+发起者设备与资产 `Building` 之间的 `LocatedIn` 关系已删除。
+所有其他关系保持不变。
 
-### Example 3 — Delete relation with tenant
+### 示例 3 — 删除与租户的关系
 
-**Incoming message**
+**传入消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -194,28 +193,28 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Following relation exist:
+存在以下关系：
 
-- From current tenant with type `Owns` to the originator.
+- 当前租户到发起者的类型为 `Owns` 的关系。
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The `Owns` relation from the tenant to originator device is deleted.
-Note that there is no need to specify an entity identifier since there is only one tenant to choose from: the current tenant.
+租户与发起者设备之间的 `Owns` 关系已删除。
+注意：无需指定实体标识符，因为仅有一个租户可选：当前租户。
 
-### Example 4 — Attempt to delete relation with non-existent entity
+### 示例 4 — 尝试删除与不存在实体的关系
 
-**Incoming message**
+**传入消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -227,14 +226,14 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-No asset named `nonexistent_asset` exists in the system.
+系统中不存在名为 `nonexistent_asset` 的资产。
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Failure` connection.
+与传入消息相同，经 `Failure` 连接路由。
 
-**Result**
+**结果**
 
-Processing fails because target entity does not exist. No relations are modified. 
+由于目标实体不存在，处理失败。未修改任何关系。

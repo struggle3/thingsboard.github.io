@@ -1,25 +1,25 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Redis Architecture for Persistent DEVICE clients
-description: Redis Architecture Overview for Persistent DEVICE clients
+title: 持久化设备客户端的 Redis 架构
+description: 持久化设备客户端的 Redis 架构概览
 
 redis-cluster-constraints:
  0:
   image: /images/mqtt-broker/architecture/details/redis-cluster-constraints.png
-  title: 'Key-slot based sharding in a Redis Cluster (masters with replicas)'
+  title: 'Redis 集群中基于 key-slot 的分片（主节点与副本）'
 
 redis-data-structures:
   0:
    image: /images/mqtt-broker/architecture/details/sorted-set.png
-   title: 'Maintaining per-client message order with a Redis Sorted Set'
+   title: '使用 Redis 有序集合维护每客户端消息顺序'
    
 jedis-to-lettuce:
   0:
    image: /images/mqtt-broker/architecture/details/jedis-performance.png
-   title: 'RedisInsight shows ~66k commands/s per node, aligning with TBMQ’s 40k msg/s, as Lua scripts trigger multiple Redis operations per message.'
+   title: 'RedisInsight 显示每节点约 66k 命令/秒，与 TBMQ 的 40k 消息/秒一致，因 Lua 脚本每条消息会触发多次 Redis 操作。'
   1:
    image: /images/mqtt-broker/architecture/details/lettuce-performance.png
-   title: 'At 60k msg/s, RedisInsight shows ~100k commands/s per node, aligning with the expected increase from 40k msg/s, which produced ~66k commands/s per node.' 
+   title: '在 60k 消息/秒时，RedisInsight 显示每节点约 100k 命令/秒，与从 40k 消息/秒（约 66k 命令/秒每节点）的预期提升一致。' 
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Troubleshooting
-description: TBMQ troubleshooting guide
+title: 故障排查
+description: TBMQ 故障排查指南
 
 ---
 

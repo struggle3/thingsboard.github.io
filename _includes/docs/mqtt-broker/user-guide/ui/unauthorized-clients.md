@@ -7,91 +7,91 @@
 {% include templates/mqtt-broker/since.md %}
 {% endif %}
 
-**Unauthorized clients** in MQTT are those clients that attempted but failed to establish a connection with the MQTT broker due to various reasons such as bad credentials, incorrect TLS configuration etc. 
+MQTT 中的**Unauthorized clients**（未授权客户端）是指因凭据错误、TLS 配置错误等原因尝试连接 MQTT broker 但失败的客户端。
 
-Regularly reviewing and analyzing unauthorized client attempts can help identify potential security threats and misconfigured clients.
+定期查看和分析未授权客户端尝试有助于发现潜在安全威胁和配置错误的客户端。
 
 {% capture unauthorizedClientEnableAuth %}
-The Unauthorized Clients feature functions only if the corresponding authentication method is [enabled](/docs/{{docsPrefix}}mqtt-broker/security/authentication/basic/).
+Unauthorized Clients 功能仅在相应认证方式已[启用](/docs/{{docsPrefix}}mqtt-broker/security/authentication/basic/)时生效。
 {% endcapture %}
 {% include templates/info-banner.md title="Check configuration" content=unauthorizedClientEnableAuth %}
 
-## Unauthorized Clients table
+## Unauthorized Clients 表
 
-On the Unauthorized Clients tab of the Authorization page, you can view and filter a list of all unauthorized client connection attempts to the broker.
-The table contains the following information about each unauthorized client:
-* **Last update time**. The timestamp of the last connection attempt.
-* **Client ID**. The unique identifier for the client attempting to connect.
-* **Username**. The username provided by the client.
-* **Password**. Indicates whether a password was provided (true/false).
-* **TLS**. Indicates if TLS was used for the connection attempt (true/false).
-* **Client IP**. The IP address of the client attempting to connect.
-* **Reason**. Text description of the reason why client could not connect, such as incorrect client credentials. To read the full text of reason, click on the "Show reason" icon.
+在 Authorization 页面的 Unauthorized Clients 选项卡中，可查看并筛选所有未授权客户端连接 broker 的尝试列表。
+表包含每项未授权客户端的以下信息：
+* **Last update time**。 最近一次连接尝试的时间戳。
+* **Client ID**。 尝试连接的客户端唯一标识符。
+* **Username**。 客户端提供的用户名。
+* **Password**。 是否提供了密码（true/false）。
+* **TLS**。 连接尝试是否使用 TLS（true/false）。
+* **Client IP**。 尝试连接的客户端 IP 地址。
+* **Reason**。 客户端无法连接的文本说明，如 incorrect client credentials。点击 "Show reason" 图标可查看完整说明。
 
 {% include images-gallery.html imageCollection="unauthorized-clients" %}
 
-## Reasons
+## 原因说明
 
-Each unauthorized client connection attempt has a specific reason for access denial that TBMQ identifies and notifies users about. 
-These reasons, whether related to Basic authentication, SSL/TLS or SCRAM issues, are clearly listed in the table for easy reference.
+每次未授权客户端连接尝试都有 TBMQ 识别并通知用户的特定拒绝访问原因。
+这些原因，无论与 Basic 认证、SSL/TLS 或 SCRAM 相关，均在表中清晰列出，便于参考。
 
-### Basic credentials
+### Basic 凭据
 
-Below are the reasons related to TBMQ Basic Credentials for why a client could not be authorized, along with generalized examples and possible solutions:
+以下是与 TBMQ Basic Credentials 相关的客户端无法获得授权的原因，以及概括性示例和可能的解决方案：
 
-1. **No Credentials Found**. No credentials found matching the given client ID and username.
-  * **Example**. The client submits a client ID and username that do not match any stored credentials.
-  * **Solution**. Verify and provide the correct client ID and username that match the stored credentials.
-2. **Password Does Not Match**. The provided password does not match the credentials found by the given client ID and username.
-  * **Example**. The client provides an incorrect password for the given client ID and username.
-  * **Solution**. Ensure that the client submits the correct password.
-3. **No Password Provided**. No password provided to match the credentials found by the given client ID and username.
-  * **Example**. The client submits a client ID and username but omits the password.
-  * **Solution**. Ensure that the client includes a password with their authentication request.
-4. **Cannot Parse Basic Credentials**.
-  * **Example**. The server cannot parse the Basic credentials due to a malformed configuration.
-  * **Solution**. Verify that the credentials are correctly formed and parsable.
+1. **No Credentials Found**。 未找到与给定 client ID 和 username 匹配的凭据。
+  * **示例**。 客户端提交的 client ID 和 username 与任一已存储凭据均不匹配。
+  * **解决方案**。 验证并提供与已存储凭据匹配的正确 client ID 和 username。
+2. **Password Does Not Match**。 提供的密码与按 client ID 和 username 找到的凭据不一致。
+  * **示例**。 客户端为给定 client ID 和 username 提供了错误密码。
+  * **解决方案**。 确保客户端提交正确密码。
+3. **No Password Provided**。 未提供密码以匹配按 client ID 和 username 找到的凭据。
+  * **示例**。 客户端提交了 client ID 和 username 但未提供密码。
+  * **解决方案**。 确保客户端在认证请求中包含密码。
+4. **Cannot Parse Basic Credentials**。
+  * **示例**。 服务器因配置格式错误无法解析 Basic 凭据。
+  * **解决方案**。 验证凭据格式正确且可解析。
 
-### X.509 Certificate Chain credentials
+### X.509 Certificate Chain 凭据
 
-Below are the reasons related to SSL/TLS for why a client could not be authorized:
+以下是与 SSL/TLS 相关的客户端无法获得授权的原因：
 
-1. **Failed to Get Client Certificate CN**.
-  * **Example**. The TLS handshake fails because the server could not extract client's certificate CN.
-  * **Solution**. Ensure the client's certificate includes a proper CN.
-2. **X509 Authentication Failure**. A failure occurred in the X509 authentication process.
-  * **Example**. The certificate chain is not trusted, resulting in an X509 authentication failure.
-  * **Solution**. Verify that the certificate chain is correct and trusted by the server.
-3. **Peer Identity Not Verified**.
-  * **Example**. The server cannot verify the identity of the client due to a missing or invalid certificate.
-  * **Solution**. Ensure that the client's certificate is valid and properly configured.
-4. **No Certificates in Chain**. No certificates are present in the chain to verify the client's identity.
-  * **Example**. The client's certificate chain is empty or incomplete.
-  * **Solution**. Provide a complete certificate chain that includes all necessary intermediate certificates.
-5. **Failed to Get Certificate CN**. Could not get the Common Name from the certificate.
-  * **Example**. The server attempts to extract the CN but finds that it is missing.
-  * **Solution**. Ensure that each certificate in the chain includes a valid CN.
-6. **No Authorization Rules for CN**. No authorization rules found for the provided common name in the credentials.
-  * **Example**. The client's CN does not match any existing authorization rules.
-  * **Solution**. Add appropriate authorization rules for the client's CN in the server's configuration.
-7. **SSL Handler Not Constructed**. Could not authenticate the client using X509 credentials because the SSL handler is not constructed.
-  * **Example**. The server-side SSL handler is not properly constructed or initialized.
-  * **Solution**. Check the server configuration to ensure that the SSL handler is correctly set up and initialized.
-8. **No Matching X509 Credentials Found**.
-  * **Example**. The server does not find any X509 credentials that match the client's certificate chain.
-  * **Solution**. Verify that the server has the correct X509 credentials configured.
-9. **Cannot Parse SSL Credentials**.
-  * **Example**. The server fails to parse the X.509 Certificate Chain credentials due to a malformed configuration.
-  * **Solution**. Ensure that the credentials are correctly formed and parsable.
+1. **Failed to Get Client Certificate CN**。
+  * **示例**。 TLS 握手失败，因服务器无法提取客户端证书 CN。
+  * **解决方案**。 确保客户端证书包含有效的 CN。
+2. **X509 Authentication Failure**。 X509 认证过程中发生失败。
+  * **示例**。 证书链不被信任，导致 X509 认证失败。
+  * **解决方案**。 验证证书链正确且被服务器信任。
+3. **Peer Identity Not Verified**。
+  * **示例**。 因缺少或无效的证书，服务器无法验证客户端身份。
+  * **解决方案**。 确保客户端证书有效且配置正确。
+4. **No Certificates in Chain**。 链中无证书可验证客户端身份。
+  * **示例**。 客户端证书链为空或不完整。
+  * **解决方案**。 提供包含所有必要中间证书的完整证书链。
+5. **Failed to Get Certificate CN**。 无法从证书获取 Common Name。
+  * **示例**。 服务器尝试提取 CN 但发现缺失。
+  * **解决方案**。 确保链中每张证书都包含有效 CN。
+6. **No Authorization Rules for CN**。 凭据中未找到所提供 common name 的授权规则。
+  * **示例**。 客户端 CN 与任何现有授权规则不匹配。
+  * **解决方案**。 在服务器配置中为客户端 CN 添加合适的授权规则。
+7. **SSL Handler Not Constructed**。 因 SSL handler 未构建，无法使用 X509 凭据认证客户端。
+  * **示例**。 服务端 SSL handler 未正确构建或初始化。
+  * **解决方案**。 检查服务器配置，确保 SSL handler 正确设置并初始化。
+8. **No Matching X509 Credentials Found**。
+  * **示例**。 服务器未找到任何与客户端证书链匹配的 X509 凭据。
+  * **解决方案**。 验证服务器已正确配置 X509 凭据。
+9. **Cannot Parse SSL Credentials**。
+  * **示例**。 服务器因配置格式错误无法解析 X.509 Certificate Chain 凭据。
+  * **解决方案**。 确保凭据格式正确且可解析。
 
-## Manage Unauthorized Clients
+## 管理 Unauthorized Clients
 
-To delete client that had failed to pass the authentication from the Unauthorized Clients table please follow these steps:
-1. Find the client in the _Authentication_ - _Unauthorized Clients_ table and click on the delete icon.
-2. Confirm the action by selecting _Yes_.
+从 Unauthorized Clients 表中删除未通过认证的客户端，请按以下步骤操作：
+1. 在 _Authentication_ - _Unauthorized Clients_ 表中找到客户端，点击删除图标。
+2. 选择 _Yes_ 确认操作。
 
-To delete all unauthorized clients:
-1. Click on the button "Delete all unauthorized clients".
-2. Confirm delete all clients by clicking _Yes_.
+删除所有未授权客户端：
+1. 点击 "Delete all unauthorized clients" 按钮。
+2. 点击 _Yes_ 确认删除所有客户端。
 
 {% include images-gallery.html imageCollection="delete-unauthorized-client" %}

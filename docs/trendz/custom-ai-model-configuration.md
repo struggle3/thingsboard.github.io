@@ -1,268 +1,262 @@
 ---
 layout: docwithnav-trendz
-title: Enable AI Features
-description: Step-by-step guide how to set uo AI Settings in Trendz
+title: 启用 AI 功能
+description: 在 Trendz 中设置 AI 配置的分步指南
 
 ai-settings:
   0:
     image: /images/trendz/ai/settings/ai-settings-1.png
-    title: "Navigate to <b>Settings → AI Assistant</b> tab."
+    title: "导航至 <b>设置 → AI 助手</b> 选项卡。"
   1:
     image: /images/trendz/ai/settings/ai-settings-2.png
-    title: "The <b>AI Features</b> section."
+    title: "<b>AI 功能</b> 部分。"
   2:
     image: /images/trendz/ai/settings/ai-settings-3.png
-    title: "The <b>AI Models</b> section."
+    title: "<b>AI 模型</b> 部分。"
 
 ai-models:
   0:
     image: /images/trendz/ai/settings/ai-models-1.png
-    title: "Click the <b>New AI Model</b> button."
+    title: "点击 <b>新建 AI 模型</b> 按钮。"
   1:
     image: /images/trendz/ai/settings/ai-models-2.png
-    title: "Enter a <b>Name</b> (any label you wish to identify the model in the list)."
+    title: "输入 <b>名称</b>（用于在列表中识别模型的任意标签）。"
   2:
     image: /images/trendz/ai/settings/ai-models-3.png
-    title: "Choose a <b>Provider</b> (currently supported: `OPEN_AI`, `GOOGLE`, `AMAZON_BEDROCK`, `CUSTOM`)."
+    title: "选择 <b>提供商</b>（当前支持：`OPEN_AI`、`GOOGLE`、`AMAZON_BEDROCK`、`CUSTOM`）。"
   3:
     image: /images/trendz/ai/settings/ai-models-4.png
-    title: "Enter the <b>Model Name</b> (specific to the provider)."
+    title: "输入 <b>模型名称</b>（特定于提供商）。"
   4:
     image: /images/trendz/ai/settings/ai-models-5.png
-    title: "Provide additional parameters (like Base URL or API Key), depending on the provider."
+    title: "根据提供商提供额外参数（如 Base URL 或 API Key）。"
   5:
     image: /images/trendz/ai/settings/ai-models-6.png
-    title: "Set the <b>Temperature</b> and <b>Top P</b> parameters."
+    title: "设置 <b>Temperature</b> 和 <b>Top P</b> 参数。"
   6:
     image: /images/trendz/ai/settings/ai-models-7.png
-    title: "Click <b>Save</b>."
+    title: "点击 <b>保存</b>。"
   7:
     image: /images/trendz/ai/settings/ai-models-8.png
-    title: "If everything is set up correctly, you will see a success message."
+    title: "如果一切配置正确，您将看到成功消息。"
 
 model-delete:
   0:
     image: /images/trendz/ai/settings/model-delete-1.png
-    title: "Actions → Delete."
+    title: "操作 → 删除。"
   1:
     image: /images/trendz/ai/settings/model-delete-2.png
-    title: "Confirm."
-    
+    title: "确认。"
+
 model-edit:
   0:
     image: /images/trendz/ai/settings/model-edit-1.png
-    title: "Actions → Edit."
+    title: "操作 → 编辑。"
   1:
     image: /images/trendz/ai/settings/model-edit-2.png
-    title: "Change Properties → Save."
+    title: "修改属性 → 保存。"
 
 ai-features:
   0:
     image: /images/trendz/ai/settings/ai-features-1.png
-    title: "To enable AI features, toggle <b>Enable AI Features</b> on."
+    title: "要启用 AI 功能，请打开 <b>启用 AI 功能</b> 开关。"
   1:
     image: /images/trendz/ai/settings/ai-features-2.png
-    title: "<b>Use Single Model:</b> apply a single AI model for all features."
+    title: "<b>使用单一模型：</b> 为所有功能应用单个 AI 模型。"
   2:
     image: /images/trendz/ai/settings/ai-features-3.png
-    title: "<b>Custom per Feature Configuration:</b> assign different AI models to specific features."
+    title: "<b>按功能自定义配置：</b> 为特定功能分配不同的 AI 模型。"
   3:
     image: /images/trendz/ai/settings/ai-features-4.png
-    title: "To switch between options, enable or disable <b>Use Single Model</b> checkbox."
+    title: "要切换选项，请启用或禁用 <b>使用单一模型</b> 复选框。"
   4:
     image: /images/trendz/ai/settings/ai-features-5.png
-    title: "If a feature is disabled, neither you nor other users will be able to access AI capabilities related to it."
+    title: "如果某功能被禁用，您或其他用户将无法访问其相关 AI 能力。"
   5:
     image: /images/trendz/ai/settings/ai-features-6.png
-    title: "Once all configurations are completed, click <b>Save</b> to apply the changes."
+    title: "完成所有配置后，点击 <b>保存</b> 应用更改。"
 
 providers:
   0:
     image: /images/trendz/ai/settings/providers-1.png
-    title: "Open AI."
+    title: "Open AI。"
   1:
     image: /images/trendz/ai/settings/providers-2.png
-    title: "Google (Recommended)."
+    title: "Google（推荐）。"
   2:
     image: /images/trendz/ai/settings/providers-3.png
-    title: "Amazon Bedrock."
+    title: "Amazon Bedrock。"
   3:
     image: /images/trendz/ai/settings/providers-4.png
-    title: "Other Models (Custom)."
+    title: "其他模型（自定义）。"
 
 ---
 * TOC
 {:toc}
 
-Trendz proposes a wide range of features that rely on large language models (AI models).
+Trendz 提供多种依赖大语言模型（AI 模型）的功能。
 
-For cloud installations, Trendz provides a default AI model with a limited number of requests available. To extend this 
-request limit or to enable additional AI features, you need to configure the **AI Settings** section.
+对于云安装，Trendz 提供默认 AI 模型，请求次数有限。要扩展此请求限制或启用更多 AI 功能，您需要配置 **AI 设置** 部分。
 
-## AI Settings
+## AI 设置
 
-Navigate to **Settings → AI Assistant** tab.
+导航至 **设置 → AI 助手** 选项卡。
 
-This section contains two parts: the **AI Features** section and the **AI Models** section. Before configuring the 
-AI Features, you must add at least one AI Model.
+此部分包含两部分：**AI 功能** 和 **AI 模型** 部分。在配置 AI 功能之前，您必须先添加至少一个 AI 模型。
 
 {% include images-gallery.html imageCollection="ai-settings" %}
 
-### AI Models
+### AI 模型
 
-To add a new AI model:
+添加新 AI 模型：
 
-1. Click the **New AI Model** button.
-2. Enter a **Name** (any label you wish to identify the model in the list).
-3. Choose a **Provider** (currently supported: `OPEN_AI`, `GOOGLE`, `AMAZON_BEDROCK`, `CUSTOM`).
-4. Enter the **Model Name** (specific to the provider).
-5. Provide additional parameters (like Base URL or API Key), depending on the provider.
-6. Set the **Temperature** and **Top P** parameters.
-7. Click **Save**.
+1. 点击 **新建 AI 模型** 按钮。
+2. 输入 **名称**（用于在列表中识别模型的任意标签）。
+3. 选择 **提供商**（当前支持：`OPEN_AI`、`GOOGLE`、`AMAZON_BEDROCK`、`CUSTOM`）。
+4. 输入 **模型名称**（特定于提供商）。
+5. 根据提供商提供额外参数（如 Base URL 或 API Key）。
+6. 设置 **Temperature** 和 **Top P** 参数。
+7. 点击 **保存**。
 
-If everything is set up correctly, you will see a success message.
+如果一切配置正确，您将看到成功消息。
 
 {% include images-gallery.html imageCollection="ai-models" %}
 
-* **Temperature** determines how creative or deterministic the model is. A lower value (e.g., 0) produces more repetitive 
-and predictable responses, while a higher value increases creativity and diversity.
-* **Top P** (nucleus sampling) controls the probability distribution used when generating responses. Lower values 
-restrict the model to more likely outputs; higher values allow more variety.
+* **Temperature** 决定模型的创意性或确定性。较低值（如 0）产生更重复、可预测的响应，较高值增加创意性和多样性。
+* **Top P**（核采样）控制生成响应时使用的概率分布。较低值限制模型输出更可能的结果；较高值允许更多多样性。
 
-Once a model is created, you can add as many as you need - for instance, different models from multiple providers for different features.
+创建模型后，您可以根据需要添加多个——例如，来自不同提供商的不同模型用于不同功能。
 
-To delete a Model: Click **Actions → Delete → Confirm**.
+删除模型：点击 **操作 → 删除 → 确认**。
 
-**Important:** If you delete a model that is already used in AI Features, the feature using this model will be disabled.
+**重要：** 如果您删除已在 AI 功能中使用的模型，使用该模型的功能将被禁用。
 
 {% include images-gallery.html imageCollection="model-delete" %}
 
-To edit a Model: Click **Actions → Edit → Change Properties → Save**.
+编辑模型：点击 **操作 → 编辑 → 修改属性 → 保存**。
 
 {% include images-gallery.html imageCollection="model-edit" %}
 
-### AI Features
+### AI 功能
 
-To enable AI features, toggle **Enable AI Features** on.
+要启用 AI 功能，请打开 **启用 AI 功能** 开关。
 
-Once enabled, you will see two configuration options:
+启用后，您将看到两个配置选项：
 
-* **Use Single Model:** apply a single AI model for all features.
-* **Custom per Feature Configuration:** assign different AI models to specific features.
+* **使用单一模型：** 为所有功能应用单个 AI 模型。
+* **按功能自定义配置：** 为特定功能分配不同的 AI 模型。
 
-To switch between options, enable or disable **Use Single Model** checkbox.
+要切换选项，请启用或禁用 **使用单一模型** 复选框。
 
-If you select the single model option, the same model will be used for all AI functions. For more flexibility, you can 
-assign different models to the following features:
+如果选择单一模型选项，所有 AI 功能将使用同一模型。为获得更大灵活性，您可为以下功能分配不同模型：
 
-1. **Prompts** - used for AI View Summary (learn more [here](/docs/trendz/ai-widget-summary/#trendz-widgets)).
-2. **View Assistant** - used for View Assistant features (learn more [here](/docs/trendz/ai-assistance-overview/)).
-3. **Metric Code Assistant** - used for Metric Explorer feature (learn more [here](/docs/trendz/metric/overview/)).
+1. **Prompts** - 用于 AI 视图摘要（更多信息请参阅[此处](/docs/trendz/ai-widget-summary/#trendz-widgets)）。
+2. **视图助手** - 用于视图助手功能（更多信息请参阅[此处](/docs/trendz/ai-assistance-overview/)）。
+3. **指标代码助手** - 用于指标浏览器功能（更多信息请参阅[此处](/docs/trendz/metric/overview/)）。
 
-Different features may require different model configurations:
+不同功能可能需要不同的模型配置：
 
-* **Quick models** - for fast responses (e.g., View Assistant)
-* **Cost-efficient models** - for lightweight tasks (e.g., Prompts)
-* **Advanced models** - for complex reasoning (e.g., Metric Code Assistant)
+* **快速模型** - 用于快速响应（如视图助手）
+* **经济型模型** - 用于轻量任务（如 Prompts）
+* **高级模型** - 用于复杂推理（如指标代码助手）
 
-If a feature is disabled, neither you nor other users will be able to access AI capabilities related to it.
+如果某功能被禁用，您或其他用户将无法访问其相关 AI 能力。
 
-Once all configurations are completed, click **Save** to apply the changes.
+完成所有配置后，点击 **保存** 应用更改。
 
 {% include images-gallery.html imageCollection="ai-features" %}
 
-## AI Model Providers Overview
+## AI 模型提供商概览
 
-Currently, Trendz could be integrated with the following providers:
+目前，Trendz 可与以下提供商集成：
 
 * OPEN_AI
 * GOOGLE
 * AMAZON_BEDROCK
-* CUSTOM (OpenAI API)
+* CUSTOM（OpenAI API）
 
 {% include images-gallery.html imageCollection="providers" %}
 
 ### Open AI
 
-Please refer to the [Open AI API key documentation](https://platform.openai.com/api-keys) to find out how to create API keys for Open AI models.
+请参阅 [Open AI API 密钥文档](https://platform.openai.com/api-keys) 了解如何为 Open AI 模型创建 API 密钥。
 
-Supported models:
-* Gpt-4o (Recommended - high performance)
-  * Input (1m) token price: 2.5$
-  * Output (1m) token price: 10$
-* Gpt-4o-mini (Recommended - cost efficiency)
-  * Input (1m) token price: 0.15$
-  * Output (1m) token price: 0.6$
-* o3-mini (Recommended - cost efficiency, high performance but slow speed)
-  * Input (1m) token price: 1.1$
-  * Output (1m) token price: 4.4$
-* o4-mini (Recommended - cost efficiency, high performance but slow speed)
-  * Input (1m) token price: 1.1$
-  * Output (1m) token price: 4.4$
+支持的模型：
+* Gpt-4o（推荐 - 高性能）
+  * 输入（100万）token 价格：2.5$
+  * 输出（100万）token 价格：10$
+* Gpt-4o-mini（推荐 - 成本效益）
+  * 输入（100万）token 价格：0.15$
+  * 输出（100万）token 价格：0.6$
+* o3-mini（推荐 - 成本效益、高性能但速度较慢）
+  * 输入（100万）token 价格：1.1$
+  * 输出（100万）token 价格：4.4$
+* o4-mini（推荐 - 成本效益、高性能但速度较慢）
+  * 输入（100万）token 价格：1.1$
+  * 输出（100万）token 价格：4.4$
 
-### Google (Recommended):
+### Google（推荐）
 
-Please refer to the [Google API key documentation](https://ai.google.dev/gemini-api/docs/api-key) to find out how to create an API key for Google models.
+请参阅 [Google API 密钥文档](https://ai.google.dev/gemini-api/docs/api-key) 了解如何为 Google 模型创建 API 密钥。
 
-Supported models:
+支持的模型：
 * Gemini-1.5-pro
-  * Input (1m) token price: 1.25$
-  * Output (1m) token price: 5$
+  * 输入（100万）token 价格：1.25$
+  * 输出（100万）token 价格：5$
 * Gemini-1.5-flash
-  * Input (1m) token price: 0.075$
-  * Output (1m) token price: 0.3$
-* Gemini-2.0-flash (Recommended - cost efficiency, average performance)
-  * Input (1m) token price: 0.1$
-  * Output (1m) token price: 0.4$
+  * 输入（100万）token 价格：0.075$
+  * 输出（100万）token 价格：0.3$
+* Gemini-2.0-flash（推荐 - 成本效益、中等性能）
+  * 输入（100万）token 价格：0.1$
+  * 输出（100万）token 价格：0.4$
 * Gemini-2.0-flash-lite
-  * Input (1m) token price: 0.075$
-  * Output (1m) token price: 0.3$
-* Gemini-2.5-flash (Recommended - high performance)
-  * Input (1m) token price: 0.3$
-  * Output (1m) token price: 2.5$
+  * 输入（100万）token 价格：0.075$
+  * 输出（100万）token 价格：0.3$
+* Gemini-2.5-flash（推荐 - 高性能）
+  * 输入（100万）token 价格：0.3$
+  * 输出（100万）token 价格：2.5$
 
 ### Amazon Bedrock
 
-Please refer to [AWS API key documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started-api.html) to find out how to create Access key IDs and Secret access keys.
+请参阅 [AWS API 密钥文档](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started-api.html) 了解如何创建访问密钥 ID 和秘密访问密钥。
 
-Supported models:
-* Amazon (Recommended)
-  * Amazon Nova Lite (Recommended - cost efficiency)
-    * Input (1m) token price: 0.06$
-    * Output (1m) token price: 0.24$
+支持的模型：
+* Amazon（推荐）
+  * Amazon Nova Lite（推荐 - 成本效益）
+    * 输入（100万）token 价格：0.06$
+    * 输出（100万）token 价格：0.24$
   * Amazon Nova Pro
-    * Input (1m) token price: 0.8$
-    * Output (1m) token price: 3.2$
+    * 输入（100万）token 价格：0.8$
+    * 输出（100万）token 价格：3.2$
 * Anthropic
   * Claude 3.5 haiku
-    * Input (1m) token price: 0.8$
-    * Output (1m) token price: 4$
-  * Claude 3.5 sonnet (Recommended)
-    * Input (1m) token price: 3$
-    * Output (1m) token price: 15$
+    * 输入（100万）token 价格：0.8$
+    * 输出（100万）token 价格：4$
+  * Claude 3.5 sonnet（推荐）
+    * 输入（100万）token 价格：3$
+    * 输出（100万）token 价格：15$
   * Claude 3.7 sonnet
-    * Input (1m) token price: 3$
-    * Output (1m) token price: 15$
+    * 输入（100万）token 价格：3$
+    * 输出（100万）token 价格：15$
 * Meta Llama
   * Llama 3.1 Instruct (70b)
-    * Input (1m) token price: 0.72$
-    * Output (1m) token price: 0.72$
+    * 输入（100万）token 价格：0.72$
+    * 输出（100万）token 价格：0.72$
   * Llama 3.2 Instruct (90b)
-    * Input (1m) token price: 0.72$
-    * Output (1m) token price: 0.72$
-  * Llama 3.3 Instruct (70b) (Recommended)
-    * Input (1m) token price: 0.72$
-    * Output (1m) token price: 0.72$
+    * 输入（100万）token 价格：0.72$
+    * 输出（100万）token 价格：0.72$
+  * Llama 3.3 Instruct (70b)（推荐）
+    * 输入（100万）token 价格：0.72$
+    * 输出（100万）token 价格：0.72$
 * Mistral AI
   * Mistral Large (24.02)
-    * Input (1m) token price: 3$
-    * Output (1m) token price: 12$
+    * 输入（100万）token 价格：3$
+    * 输出（100万）token 价格：12$
 
-### Other Models (Custom)
+### 其他模型（自定义）
 
-It’s possible to connect any model that supports the OpenAI API standard. To do this, choose the *Custom* provider,  
-enter the model URL, model name, and API key.
+可以连接支持 OpenAI API 标准的任何模型。为此，选择 *Custom* 提供商，输入模型 URL、模型名称和 API 密钥。
 
-## Next Steps
+## 下一步
 
 {% assign currentGuide = "AiAssistant" %}{% include templates/trndz-guides-banner.md %}

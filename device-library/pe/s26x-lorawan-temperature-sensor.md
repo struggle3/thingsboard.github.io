@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect RS26x LoRaWAN Temperature Sensor to ThingsBoard?
-category: Other devices
+title: 如何将 RS26x LoRaWAN Temperature Sensor 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN®
 vendor: Ezurio
 hasIntegrationDeviceConfiguration: true

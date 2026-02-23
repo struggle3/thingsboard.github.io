@@ -1,14 +1,14 @@
-### Start Minikube
+### 启动 Minikube
 
 ```bash
 minikube start
 ```
 {: .copy-code}
 
-### Install NGINX Ingress Controller
+### 安装 NGINX Ingress Controller
 
-To expose HTTP(S) services in a generic Kubernetes environment like Minikube, you need to install the NGINX Ingress Controller. 
-This example installs it using Helm and configures it with a LoadBalancer service type:
+在 Minikube 等通用 Kubernetes 环境中暴露 HTTP(S) 服务，需安装 NGINX Ingress Controller。
+本示例使用 Helm 安装并配置为 LoadBalancer 服务类型：
 
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -20,44 +20,44 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
 ```
 {: .copy-code}
 
-This will deploy the NGINX ingress controller in the default namespace and configure it to expose traffic externally via a LoadBalancer service.
-Before continuing, make sure the ingress controller pod is running and ready:
+这将在 default 命名空间部署 NGINX ingress controller，并配置为通过 LoadBalancer 服务对外暴露流量。
+继续前，请确保 ingress controller pod 已运行且就绪：
 
 ```bash
 kubectl get pods -n default
 ```
 {: .copy-code}
 
-You should see something like:
+输出应类似：
 
 ```text
 NAME                                                     READY   STATUS    RESTARTS   AGE
 nginx-ingress-ingress-nginx-controller-xxxxx             1/1     Running   0          1m
 ```
 
-### Start Minikube Tunnel
+### 启动 Minikube Tunnel
 
-Since Minikube doesn’t natively support external LoadBalancer services, you need to create a tunnel to expose them outside the cluster. 
-This is required for accessing services like the NGINX Ingress Controller and TBMQ’s MQTT LoadBalancer.
+由于 Minikube 本身不支持外部 LoadBalancer 服务，需创建 tunnel 以在集群外暴露这些服务。
+这是访问 NGINX Ingress Controller 和 TBMQ 的 MQTT LoadBalancer 等服务的必要条件。
 
-Run the following command in a separate terminal:
+在单独终端中运行以下命令：
 
 ```bash
 minikube tunnel
 ```
 {: .copy-code}
 
-This command requires administrative privileges and may prompt for your password. 
-It will create a network route on your machine and assign an external IP to the NGINX LoadBalancer service.
+此命令需要管理员权限，可能会提示输入密码。
+它将在您的机器上创建网络路由并为 NGINX LoadBalancer 服务分配外部 IP。
 
-After starting the tunnel, verify that the NGINX Ingress Controller received an EXTERNAL-IP:
+启动 tunnel 后，验证 NGINX Ingress Controller 是否已获得 EXTERNAL-IP：
 
 ```shell
 kubectl get svc -n default
 ```
 {: .copy-code}
 
-Example output:
+示例输出：
 
 ```text
 NAME                                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE

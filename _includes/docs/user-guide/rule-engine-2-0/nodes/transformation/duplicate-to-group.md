@@ -1,28 +1,27 @@
-Duplicates an incoming message to every entity belonging to a specified entity group. For each entity, a new message is created with that entity set as the new originator.
+将入站消息复制到指定实体组内的每个实体。对每个实体，创建一条以该实体为新来源实体的新消息。
 
-## Preconditions
+## 前置条件
 
-If the node is configured with **Entity group is message originator** enabled, the incoming message **must** originate from an entity of the type `ENTITY_GROUP`. If the originator
-is any other entity type (like a `DEVICE` or `ASSET`), the message will be routed to the `Failure` chain.
+若节点配置了**Entity group is message originator**（实体组即消息来源）并启用，入站消息**必须**来自类型为 `ENTITY_GROUP` 的实体。若来源实体为其他类型（如 `DEVICE` 或 `ASSET`），消息将经 `Failure` 链路由。
 
-## Configuration
+## 配置
 
-The node can be configured in two modes.
+节点有两种配置模式。
 
-### Mode 1: Specific entity group
+### 模式 1：指定实体组
 
-This is the default mode, where you manually select the target entity group.
+默认模式，手动选择目标实体组。
 
-- **Entity group is message originator** - disabled (toggle is off).
-- **Owner** - the owner of the entity group (e.g., a specific Customer or Tenant).
-- **Type** - the entity type of the entities within the group (e.g., *Device*, *Asset*).
-- **Select entity group** - the specific entity group to which the message will be duplicated.
+- **Entity group is message originator** — 禁用（开关关闭）。
+- **Owner** — 实体组的拥有者（如指定 Customer 或 Tenant）。
+- **Type** — 组内实体的实体类型（如 *Device*、*Asset*）。
+- **Select entity group** — 要复制消息到的具体实体组。
 
-### Mode 2: Originator is the entity group
+### 模式 2：来源实体即实体组
 
-In this mode, the target entity group is dynamically determined from the incoming message originator.
+在此模式下，目标实体组由入站消息来源实体动态确定。
 
-- **Entity group is message originator** - enabled (toggle is on).
+- **Entity group is message originator** — 启用（开关打开）。
 
 ### JSON Schema
 
@@ -60,38 +59,37 @@ In this mode, the target entity group is dynamically determined from the incomin
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node first determines the target **Entity Group** based on its configuration:
-    - If a specific group is selected, it uses that group.
-    - If **Entity group is message originator** is enabled, it checks if the incoming message originator is an `ENTITY_GROUP`. If it's not, the processing fails. If it is, that
-      originator is used as the target group.
-2. The node fetches a list of all entities that are members of the target entity group.
-3. For **each entity** in the group, a new message is created. This new message is a copy of the original, but its originator is set to the current entity from the group.
-4. All newly created messages are sent out via the `Success` chain. The original message is acknowledged once all duplicates have been successfully enqueued.
-5. If the target entity group is empty or does not exist, the original message is routed to the `Failure` chain.
+1. 节点根据配置确定目标**实体组**：
+    - 若选择具体组，使用该组。
+    - 若**Entity group is message originator**已启用，检查入站消息来源实体是否为 `ENTITY_GROUP`。若不是，处理失败。若是，则将该来源实体作为目标组。
+2. 节点获取目标实体组所有成员实体列表。
+3. 对组内**每个实体**创建一条新消息。该新消息为原始消息的副本，但其来源实体设为组中的当前实体。
+4. 所有新消息经 `Success` 链发送。所有副本成功入队后确认原始消息。
+5. 若目标实体组为空或不存在，原始消息经 `Failure` 链路由。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - New messages (one for each entity in the group) are sent through this chain.
-- `Failure`:
-    - If the target entity group is empty.
-    - If the **Entity group is message originator** option is enabled, but the actual message originator is not an entity group.
-    - If any other unexpected error occurs.
+- `Success`：
+    - 新消息（组内每个实体一条）经此链发送。
+- `Failure`：
+    - 目标实体组为空时。
+    - **Entity group is message originator** 已启用，但实际消息来源实体不是实体组时。
+    - 发生其他意外错误时。
 
-## Examples
+## 示例
 
-### Example 1 — Duplicate to a specific device group
+### 示例 1 — 复制到指定设备组
 
-**Incoming message**
+**入站消息**
 
-Data: `{"targetTemperature": 100"}`
+Data: `{"targetTemperature": 100}`
 
-**Node configuration**
+**节点配置**
 
 {% capture status_property_note %}
-**Note:** The `entityGroupId` is a placeholder UUID for the `Thermostats Floor 1` group.
+**注意：** `entityGroupId` 中的 UUID 为 `Thermostats Floor 1` 组的占位符。
 {% endcapture %}
 {% include templates/info-banner.md content=status_property_note %}
 
@@ -105,34 +103,34 @@ Data: `{"targetTemperature": 100"}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Device group named `Thermostats Floor 1` exists with ID `a1b2c3d4-e5f6-7890-1234-567890abcdef` and contains two entities: `Thermostat A` and `Thermostat B`.
+名为 `Thermostats Floor 1` 的设备组存在，ID 为 `a1b2c3d4-e5f6-7890-1234-567890abcdef`，包含 `Thermostat A` 和 `Thermostat B`。
 
-**Outgoing messages**
+**出站消息**
 
-Two new messages are created and sent via the `Success` chain:
+经 `Success` 链创建并发送两条新消息：
 
-1. **Message 1**:
-    - **Originator**: `Thermostat A`
-    - **Data**: `{"targetTemperature": 100}`
-2. **Message 2**:
-    - **Originator**: `Thermostat B`
-    - **Data**: `{"targetTemperature": 100}`
+1. **Message 1**：
+    - **Originator**：`Thermostat A`
+    - **Data**：`{"targetTemperature": 100}`
+2. **Message 2**：
+    - **Originator**：`Thermostat B`
+    - **Data**：`{"targetTemperature": 100}`
 
-**Explanation**: The original message is duplicated to all members (`Thermostat A`, `Thermostat B`) of the `Thermostats Floor 1` entity group.
+**说明**：原始消息复制到 `Thermostats Floor 1` 实体组的所有成员（`Thermostat A`、`Thermostat B`）。
 
 ---
 
-### Example 2 — Entity group is originator of the incoming message
+### 示例 2 — 入站消息的来源实体为实体组
 
-**Incoming message**
+**入站消息**
 
-Originator: entity group named `All sensors`
+Originator: 名为 `All sensors` 的实体组
 
 Data: `{"command": "reboot"}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -140,19 +138,19 @@ Data: `{"command": "reboot"}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Entity group named `All sensors` exists and contains two entities: `Sensor A` and `Sensor B`
+名为 `All sensors` 的实体组存在，包含 `Sensor A` 和 `Sensor B`。
 
-**Outgoing messages**
+**出站消息**
 
-Two new messages are created and sent via the `Success` chain:
+经 `Success` 链创建并发送两条新消息：
 
-1. **Message 1**:
+1. **Message 1**：
     - Originator: `Sensor X`
     - Data: `{"command": "reboot"}`
-2. **Message 2**:
+2. **Message 2**：
     - Originator: `Sensor Y`
     - Data: `{"command": "reboot"}`
 
-**Explanation**: The incoming message originator is the entity group itself. The node duplicates the message to all members of that group.
+**说明**：入站消息的来源实体为实体组本身。节点将消息复制到该组所有成员。

@@ -1,14 +1,14 @@
-Configuration, provided in this section is used for sending RPC requests from ThingsBoard to the device.
+本部分的配置用于从 ThingsBoard 向设备发送 RPC 请求。
 
-| **Parameter**    | **Default value** | **Description**                                                             |
+| **参数**    | **默认值** | **说明**                                                             |
 |:-----------------|:------------------|-----------------------------------------------------------------------------|
-| methodRPC        | **rpcMethod1**    | RPC method name.                                                            |
-| withResponse     | **true**          | Boolean value that determines whether to send response back to ThingsBoard. |
-| methodProcessing | **write**         | Type of operation.                                                          |
-| encoding         | **utf-8**         | Encoding used when writing received string data to storage.                 |
+| methodRPC        | **rpcMethod1**    | RPC 方法名称。                                                            |
+| withResponse     | **true**          | 布尔值，确定是否向 ThingsBoard 返回响应。 |
+| methodProcessing | **write**         | 操作类型。                                                          |
+| encoding         | **utf-8**         | 将接收到的字符串数据写入存储时使用的编码。                 |
 | ---              |                   |                                                                             |
 
-This subsection in configuration file looks like this:
+配置文件中本小节如下所示：
 
 ```json
 "serverSideRpc": [

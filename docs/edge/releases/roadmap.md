@@ -1,18 +1,18 @@
 ---
 layout: docwithnav-edge
-title: ThingsBoard Edge Roadmap
-description: Upcoming releases
+title: ThingsBoard Edge 路线图
+description: 即将发布的版本
 
 ---
 
 * TOC
 {:toc}
 
-The product roadmap below covers only **major features** and does not include minor enhancements and bug fixes.
-View active development and bug fixes for the latest release [on our GitHub repository](https://github.com/thingsboard/thingsboard-edge/tree/rc){: target="_blank"}.
+以下产品路线图仅涵盖**主要功能**，不包含次要增强与错误修复。
+查看最新版本的积极开发与错误修复请访问 [GitHub 仓库](https://github.com/thingsboard/thingsboard-edge/tree/rc){: target="_blank"}。
 
 ## v4.4.0
 
-**Major** release with everything from **ThingsBoard CE**, plus:
-* ThingsBoard Runner - Docker service for installation and upgrade of Edge instances and IoT Gateway on remote machines from the ThingsBoard UI in one click.
-* Edge homepage - new section providing a centralized, at-a-glance overview of all Edge instances, including statistics, alarms, connection status, and uplink/downlink rates.
+**重大**发布，包含 **ThingsBoard CE** 的所有功能，以及：
+* ThingsBoard Runner - Docker 服务，可通过 ThingsBoard UI 一键在远程机器上安装和升级 Edge 实例及 IoT Gateway。
+* Edge 首页 - 新区域，提供所有 Edge 实例的集中一览视图，包括统计、告警、连接状态和上行/下行速率。

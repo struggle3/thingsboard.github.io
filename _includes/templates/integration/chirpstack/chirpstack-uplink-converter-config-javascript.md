@@ -1,5 +1,5 @@
 
-The script used in the example:
+示例中使用的脚本：
 
 ```javascript
 // Decode an uplink message from a buffer

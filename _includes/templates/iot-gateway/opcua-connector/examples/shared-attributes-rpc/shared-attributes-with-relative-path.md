@@ -1,47 +1,43 @@
-Attribute updates allow you to update node values in the OPC-UA server. 
-You can add new attribute updates in the "**Attribute updates**" section of the device configuration page.
+Attribute 更新允许您更新 OPC-UA 服务器中的节点值。 
+您可在设备配置页面的 "**Attribute updates**" 部分添加新的 attribute 更新。
 
-As an example, we will use Prosys OPC-UA Simulation Server, which is available at `opc.tcp://0.0.0.0:53530/OPCUA/SimulationServer`.
-The server has the following structure:
+我们将使用 Prosys OPC-UA Simulation Server 作为示例，其地址为 `opc.tcp://0.0.0.0:53530/OPCUA/SimulationServer`。
+服务器结构如下：
 
 ![image](/images/gateway/opc-ua-connector/examples/opc-ua-server-structure-overview-3.png)
 
-#### Example: Relay Controlling (Relative Path)
+#### 示例：继电器控制（相对路径）
 
-We are interested in node "**Relay**", we added this node as a telemetry parameter with the key `relay`. We used 
-telemetry so that later it would be convenient for us to see if the value we changed using the attribute update 
-has changed. You, also, can add this telemetry datapoint to the device configuration or use the reserved `get` RPC 
-method to check the value of the node.
+我们关注 "**Relay**" 节点，已将其添加为 key 为 `relay` 的 telemetry 参数。我们使用 telemetry 以便后续方便查看通过 attribute 更新修改的值是否已生效。您也可在设备配置中添加此 telemetry 数据点，或使用保留的 `get` RPC 方法检查节点值。
 
-Let's add an attribute update to our configuration. For this purpose, follow these steps:
+让我们在配置中添加 attribute 更新。请按以下步骤操作：
 
 {% assign attributeUpdatesRelativePath = '
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-1.png,
-        title: Go to "**Entities**" → "**Gateways**" in the right sidebar and select your gateway.
+        title: 在右侧边栏中进入 "**Entities**" → "**Gateways**" 并选择您的网关。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 在右侧菜单中点击 "**Connectors configuration**"（连接器配置）按钮。
     ===
         image: /images/gateway/opc-ua-connector/examples/attribute-updates-relative-path-1.png,
-        title: Select the created OPC-UA connector, click on the "**Data mapping**" tab. Make sure you have configured and connected device (if you do not know how to do it, see [Getting Started](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"} guide or [Connection settings](/docs/iot-gateway/config/opc-ua/#connection-settings) and [Data mapping](/docs/iot-gateway/config/opc-ua/#data-mapping) sections of this guide). Click on the "**Pencil**" icon on a device you want to configure attribute updates for.
+        title: 选择已创建的 OPC-UA connector，点击 "**Data mapping**" 选项卡。请确保已配置并连接设备（若不知如何操作，请参阅[入门指南](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"}或本指南的 [Connection settings](/docs/iot-gateway/config/opc-ua/#connection-settings) 和 [Data mapping](/docs/iot-gateway/config/opc-ua/#data-mapping) 部分）。点击要配置 attribute 更新的设备旁的 "**Pencil**"（铅笔）图标。
     ===
         image: /images/gateway/opc-ua-connector/examples/attribute-updates-relative-path-2.png,
-        title: Scroll down to the "**Attribute updates**" section and click on the "**Pencil**" icon to edit the attribute updates.
+        title: 向下滚动至 "**Attribute updates**" 部分，点击 "**Pencil**" 图标编辑 attribute 更新。
     ===
         image: /images/gateway/opc-ua-connector/examples/attribute-updates-relative-path-3.png,
-        title: Click on the "**Add attribute update**" button. In our case, we will add `relay` attribute update, so the "**Key**" field, enter `relay`, select the "**Type**" as **Path**, and in the "**Value**" field enter `${Relay}`. This is a relative path to the device node we want to update.
+        title: 点击 "**Add attribute update**" 按钮。本示例中我们将添加 `relay` attribute 更新，在 "**Key**" 字段输入 `relay`，将 "**Type**" 选为 **Path**，在 "**Value**" 字段输入 `${Relay}`。这是要更新的设备节点的相对路径。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-relative-path-9.png,
-        title: Remember to save your changes by clicking the "**Apply**" button.
+        title: 请记得点击 "**Apply**" 按钮保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=attributeUpdatesRelativePath %}
 
-Now we can check if the attribute update works. Go to "**Entities**" → "**Devices**" → select a created device → "**Attributes**" tab → 
-select "**Shared attributes**" → click on the "**+**" icon and add `relay` attribute with type "**Boolean**" set it 
-to "**True**".
+现在我们可以检查 attribute 更新是否生效。进入 "**Entities**" → "**Devices**" → 选择已创建设备 → "**Attributes**" 选项卡 → 
+选择 "**Shared attributes**" → 点击 "**+**" 图标并添加类型为 "**Boolean**"、值为 "**True**" 的 `relay` attribute。
 
 {% assign attributeUpdatesRelativePath2 = '
     ===
@@ -53,15 +49,13 @@ to "**True**".
 
 {% include images-gallery.liquid showListImageTitles="false" imageCollection=attributeUpdatesRelativePath2 %}
 
-Now, let's check the value of the relay node. In the selected device, go to the "**Last telemetry**" tab and check the 
-value of the `relay` telemetry. It should be `true` since we set the shared attribute to `true`.
+现在检查 relay 节点的值。在所选设备中进入 "**Last telemetry**" 选项卡，查看 `relay` telemetry 的值。由于我们将 shared attribute 设为 `true`，应显示为 `true`。
 
 ![image](/images/gateway/opc-ua-connector/examples/result-device-overview-2.png)
 
-Try to change the value of the `relay` shared attribute to `false`. After a few seconds, you should see that the
-`relay` telemetry value has changed to `false`, which means that the attribute update worked correctly.
+尝试将 `relay` shared attribute 的值改为 `false`。几秒钟后，您应能看到 `relay` telemetry 值已变为 `false`，说明 attribute 更新已正确生效。
 
-Full configuration for OPC-UA connector for the examples above will look like this:
+上述示例的 OPC-UA connector 完整配置如下：
 
 ```json
 {

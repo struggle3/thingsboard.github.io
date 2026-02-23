@@ -1,59 +1,55 @@
-RPC To Connector allows you to send a command to the connector from the ThingsBoard IoT Gateway UI.
-It is important to note that the method you are calling must be defined on the OPC-UA server.
+RPC 到连接器允许从 ThingsBoard IoT 网关界面向连接器发送命令。
+需注意，调用的方法必须在 OPC-UA 服务器上已定义。
 
 {% capture difference %}
-**Please note**: The RPC To Connector will execute the method on every device that has the OPC-UA connector configured.
+**请注意**：RPC 到连接器将在每个配置了 OPC-UA 连接器的设备上执行该方法。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-As an example, we will use ThingsBoard OPC-UA Demo Server, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard OPC-UA 演示服务器，可通过 Docker 及以下命令运行：
 ```bash
 docker run -it -p 4840:4840 thingsboard/tb-gw-opcua-server:latest
 ```
 
-The server has the following endpoint URL: `opc.tcp://0.0.0.0:4840/freeopcua/server/`.
+服务器端点 URL 为：`opc.tcp://0.0.0.0:4840/freeopcua/server/`。
 
-#### Example: Relay Controlling
+#### 示例：继电器控制
 
-Let's see a practical example of using RPC To Connector. On our OPC-UA server, we have "set_relay" method that
-turns on or off the relay. The method accepts a boolean argument, where `true` turns on the relay and `false` turns 
-it off. To call this method, use the following steps:
+下面展示 RPC 到连接器的实际用法。OPC-UA 服务器上有 "set_relay" 方法，
+可开关继电器。该方法接受布尔参数，`true` 打开继电器，`false` 关闭继电器。调用该方法的步骤如下：
 
 {% assign rpcToConnector = '
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-1.png,
-        title: Go to "**Entities**" → "**Gateways**" in the right sidebar and select your gateway.
+        title: 在右侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/opc-ua-connector/examples/rpc-to-connector-1.png,
-        title: Select the created OPC-UA connector, click on the "**RPC**" icon. Make sure you have configured and connected device (if you do not know how to do it, see [Getting Started](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"} guide or [Connection settings](/docs/iot-gateway/config/opc-ua/#connection-settings) and [Data mapping](/docs/iot-gateway/config/opc-ua/#data-mapping) sections of this guide).
+        title: 选择已创建的 OPC-UA 连接器，点击“**RPC**”图标。请确保已配置并连接设备（若不清楚如何操作，请参阅[入门指南](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"}或本指南的[连接设置](/docs/iot-gateway/config/opc-ua/#connection-settings)和[数据映射](/docs/iot-gateway/config/opc-ua/#data-mapping)）。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=rpcToConnector %}
 
-Let's first turn on the relay. To do this, fill in the "**Method**" field with `set_relay` and in the "**Arguments**" field
-enter `true`, then click on the "**Send**" button.
+先打开继电器。在“**方法**”中填 `set_relay`，在“**参数**”中填 `true`，再点击“**发送**”按钮。
 
 ![image](/images/gateway/opc-ua-connector/examples/rpc-to-connector-2.png)
 
-As you can see, the response contains `true`, which means that the method was executed successfully and the relay is 
-now on:
+响应中包含 `true`，表示方法已成功执行且继电器已打开：
 
 ![image](/images/gateway/opc-ua-connector/examples/rpc-to-connector-3.png)
 
-And finally, let's turn off the relay. To do this, fill in the "**Method**" field with `set_relay` and in the
-"**Arguments**" field enter `false`, then click on the "**Send**" button:
+最后关闭继电器。在“**方法**”中填 `set_relay`，在“**参数**”中填 `false`，再点击“**发送**”按钮：
 
 ![image](/images/gateway/opc-ua-connector/examples/rpc-to-connector-4.png)
 
-Result:
+结果：
 
 ![image](/images/gateway/opc-ua-connector/examples/rpc-to-connector-5.png)
 
-Full configuration for OPC-UA connector for the example above will look like this:
+上述示例的 OPC-UA 连接器完整配置如下：
 
 ```json
 {

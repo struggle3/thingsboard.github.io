@@ -1,8 +1,8 @@
-Transfers messages to a specified queue. After successful transfer, the incoming message is acknowledged.
+将消息转移至指定队列。转移成功后，入站消息被确认。
 
-## Configuration
+## 配置
 
-* Queue name - Specify the target queue where messages should be transferred.
+* Queue name — 指定消息应转移到的目标队列。
 
 ### JSON Schema
 
@@ -17,17 +17,17 @@ Transfers messages to a specified queue. After successful transfer, the incoming
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node receives an incoming message.
-2. A copy of the incoming message is created. This copy is enqueued to the configured target queue.
-3. Once the copy is successfully enqueued to the target queue, the original incoming message is acknowledged.
-4. If enqueueing fails, the original message is routed via the `Failure` connection without being acknowledged.
+1. 节点接收入站消息。
+2. 创建入站消息的副本。该副本入队到配置的目标队列。
+3. 副本成功入队到目标队列后，原始入站消息被确认。
+4. 若入队失败，原始消息经 `Failure` 连接路由，且不被确认。
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The message was successfully transferred to the target queue and acknowledged.
+    - 消息已成功转移至目标队列并被确认。
 - **Failure**
-    - An error occurred while enqueueing the message.
-    - An unexpected error occurred during processing.
+    - 消息入队时发生错误。
+    - 处理过程中发生意外错误。

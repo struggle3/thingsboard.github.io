@@ -1,9 +1,9 @@
 * TOC
 {:toc}
 
-Access token–based authentication is the default authentication method for devices in ThingsBoard. 
-When a device is created, ThingsBoard automatically generates a unique access token. This token can be [updated](/docs/{{docsPrefix}}user-guide/ui/devices/#manage-device-credentials){:target="_blank"} later in the device details.
+Access Token 认证是 ThingsBoard 中设备的默认认证方式。
+设备创建时，ThingsBoard 会自动生成唯一的 access token。该 token 可随后在设备详情中 [更新](/docs/{{docsPrefix}}user-guide/ui/devices/#manage-device-credentials){:target="_blank"}。
 
-To authenticate a device over HTTP, the client must include the access token as part of the HTTP request URL.
+要通过 HTTP 认证设备，客户端必须在 HTTP 请求 URL 中包含 access token。
 
-For details about supported endpoints, request formats, and payloads, refer to the [HTTP API](/docs/{{docsPrefix}}reference/http-api/){:target="_blank"} documentation.
+有关支持的端点、请求格式和 payload，请参阅 [HTTP API](/docs/{{docsPrefix}}reference/http-api/){:target="_blank"} 文档。

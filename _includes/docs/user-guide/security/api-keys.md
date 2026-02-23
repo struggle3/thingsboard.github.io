@@ -4,37 +4,37 @@
 {% assign sinceVersion = "4.3" %}
 {% include templates/since.md %}
 
-API keys provide a simpler alternative to password-based authentication for the ThingsBoard API.   
-Unlike JWT tokens that require login and periodically expire, API keys are long-lived credentials that remain valid until their configured expiration date or until they are manually revoked.
+API keys 为 ThingsBoard API 提供比密码认证更简单的替代方式。
+与需要登录且定期过期的 JWT token 不同，API keys 是长期有效的凭据，在配置的过期日期之前或手动吊销前一直有效。
 
 <hr>
 
 <b><font size="4">Key features</font></b>
 
-- **No login required:** API keys work immediately without exchanging a username and password.
-- **Long-lived:** They stay valid until the expiration date you set.
-- **Permission inheritance:** The key inherits the exact same rights as the user it was created for.
-- **Easy management:** You can enable, disable, or delete a key at any time.
-- **Simple integration:** Perfect for third-party apps where you want to avoid complex authentication code.
+- **No login required**：API keys 无需交换用户名和密码即可立即使用。
+- **Long-lived**：在您设置的过期日期前保持有效。
+- **Permission inheritance**：key 继承创建该 key 的用户的全部权限。
+- **Easy management**：可随时启用、禁用或删除 key。
+- **Simple integration**：适合希望避免复杂认证代码的第三方应用。
 
 <hr>
 
 ## Creating API Keys
 
-API keys can be created for **your own account** or for **other platform users**, depending on your permissions.
+API keys 可为 **您自己的账户** 或 **其他平台用户** 创建，具体取决于您的权限。
 
 ### Creating API Key for Your Account
 
-To create an API key for your own account:
-- In the top-right corner, click the ***three-dot*** menu and select **Account**.
-- Navigate to the **Security** tab.
-- In the **API keys** section, click the **Manage** button.
-- Click the **+ Generate** button.
-- Enter a **description** for the API key (e.g., *Production server*, *Testing environment*).
-- Select the expiration period.
-- Click **Generate**.
+为自己的账户创建 API key：
+- 点击右上角的 ***three-dot*** 菜单，选择 **Account**。
+- 进入 **Security** 标签。
+- 在 **API keys** 区域点击 **Manage** 按钮。
+- 点击 **+ Generate** 按钮。
+- 输入 API key 的 **description**（如 *Production server*、*Testing environment*）。
+- 选择有效期。
+- 点击 **Generate**。
 
-**Important:** Copy and save the generated API key - it will not be displayed again.
+**重要**：复制并保存生成的 API key，之后将不再显示。
 
 {% include images-gallery.html imageCollection="creating-api-key-for-our-account" %}
 
@@ -42,21 +42,21 @@ To create an API key for your own account:
 
 ### Creating API Key for Another User
 
-API keys can also be created directly from the user’s details page.
-A system administrator can create API keys for any users available to them (tenant users), and a tenant administrator can create API keys for their customer users.
-In the user details view, the API keys tab provides full access to API key management for that specific user.
+也可在用户详情页直接创建 API key。
+系统管理员可为可见的任意用户（tenant 用户）创建 API key，tenant 管理员可为客户用户创建 API key。
+在用户详情视图中，API keys 标签提供该用户的完整 API key 管理能力。
 
-- Navigate to the **Customers**/**Users** section.
-- Click on the desired user to open their **details**.
-- Go to the **API keys** tab.
-- Click the **+ Generate** button.
-- Enter a **description** for the API key (e.g., *Production server*, *Testing environment*).
-- Select the expiration period.
-- Click **Generate**.
+- 进入 **Customers**/**Users** 区域。
+- 点击目标用户打开其 **details**。
+- 进入 **API keys** 标签。
+- 点击 **+ Generate** 按钮。
+- 输入 API key 的 **description**（如 *Production server*、*Testing environment*）。
+- 选择有效期。
+- 点击 **Generate**。
 
-**Important:** Copy and save the generated API key — it will not be displayed again.
+**重要**：复制并保存生成的 API key，之后将不再显示。
 
-**Note:** The API key inherits all permissions of the user for whom it was created.
+**注意**：API key 继承为其创建的用户的所有权限。
 
 {% include images-gallery.html imageCollection="creating-api-key-for-another-user" %}
 
@@ -66,16 +66,16 @@ In the user details view, the API keys tab provides full access to API key manag
 
 ### In API requests
 
-Include the API key in the **X-Authorization** header with the **ApiKey** prefix:
+在 **X-Authorization** header 中使用 **ApiKey** 前缀携带 API key：
 
 ```text
 X-Authorization: ApiKey $YOUR_API_KEY_VALUE
 ```
 {: .copy-code}
 
-&#42; Replace **$YOUR_API_KEY_VALUE** with the API key.
+&#42; 将 **$YOUR_API_KEY_VALUE** 替换为您的 API key。
 
-<br>Example:
+<br>示例：
 
 ```text
 curl -X GET --header 'Accept: application/json' \
@@ -85,7 +85,7 @@ curl -X GET --header 'Accept: application/json' \
 {: .copy-code}
 
 {% capture difference %}
-**Security note**: Always use HTTPS in production environments. Executing commands over insecure HTTP connections will send your API key unencrypted, making it vulnerable to interception.
+**Security note**：生产环境请始终使用 HTTPS。在不安全的 HTTP 连接上执行命令会以明文传输 API key，易被窃听。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -93,19 +93,19 @@ curl -X GET --header 'Accept: application/json' \
 
 ### In Swagger UI
 
-When using [Swagger UI](https://swagger.io/){:target="_blank"}, you can authenticate with an API key:
+使用 [Swagger UI](https://swagger.io/){:target="_blank"} 时，可通过 API key 认证：
 
-- Open **Swagger UI**.
-- Click the **Authorize** button.
-- In the **API key form (apiKey)** section, enter your **API key value** with the **ApiKey** prefix:
+- 打开 **Swagger UI**。
+- 点击 **Authorize** 按钮。
+- 在 **API key form (apiKey)** 区域，输入带 **ApiKey** 前缀的 **API key value**：
   ```
   ApiKey YOUR_API_KEY_VALUE
   ```
   {: .copy-code}
-- Click **Authorize**.
+- 点击 **Authorize**。
 
 {% capture difference %}
-**Note:** If both JWT and API key are authenticated, **JWT** takes precedence.
+**注意**：若同时使用 JWT 和 API key 认证，**JWT** 优先。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -115,17 +115,17 @@ When using [Swagger UI](https://swagger.io/){:target="_blank"}, you can authenti
 
 ## Managing API keys
 
-In the API keys table, each key displays the following information:
-- **Created time:** When the API key was generated
-- **Description:** A custom description assigned to the key
-- **Status:** Indicates whether the key is active or disabled
-- **Expiration time:** The date and time when the key will expire
+在 API keys 表格中，每个 key 显示以下信息：
+- **Created time**：API key 的生成时间
+- **Description**：为 key 分配的自定义描述
+- **Status**：key 为激活还是已禁用
+- **Expiration time**：key 的过期日期和时间
 
 {% include images-gallery.html imageCollection="managing-api-keys-1" %}
 
-Additionally, the following actions are available for each API key:
-- **Enable/disable API keys** — Use the toggle switch next to each API key to temporarily disable or re-enable it without deleting the key.
-- **Delete API keys** — Click the delete (trash) icon to permanently remove a key. This action cannot be undone.
-- **Edit description** — Click the edit (pencil) icon next to the **description** to update the API key’s description.
+此外，每个 API key 可执行以下操作：
+- **Enable/disable API keys** — 使用每个 API key 旁的开关临时禁用或重新启用，而无需删除 key。
+- **Delete API keys** — 点击删除（垃圾桶）图标永久移除 key。此操作不可撤销。
+- **Edit description** — 点击 **description** 旁的编辑（铅笔）图标更新 API key 的描述。
 
 {% include images-gallery.html imageCollection="managing-api-keys-2" %}

@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Industrial Raspberry Pi EG500 to ThingsBoard?
-category: Single-board computers
+title: 如何将 Industrial Raspberry Pi EG500 连接至 ThingsBoard？
+category: 单板计算机
 connectivity: [LoRaWAN, HTTP, MQTT, WIFI, Bluetooth, 4G]
 vendor: Raspberry
 deviceImageFileName: elastel-eg500-02.png

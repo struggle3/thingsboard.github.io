@@ -1,40 +1,39 @@
-You can configure additional settings like: TLS connection, polling time, byte order and word order, and other. 
-The table below describes the parameters for this purpose:
+您可以配置其他设置，例如：TLS 连接、轮询时间、字节序和字序等。
+下表描述了相关参数：
 
-| **Parameter**                   | **Default value** | **Description**                                                               |
+| **参数**                   | **默认值** | **描述**                                                               |
 |:--------------------------------|:------------------|-------------------------------------------------------------------------------|
-| Connection timeout (s)          | **35**            | Timeout in seconds for connecting to Modbus server                            |
-| Byte order                      | **LITTLE**        | Order of bytes to read                                                        |
-| Word order                      | **LITTLE**        | The order of words when reading several registers                             |
-| Retries                         | **true**          | Retrying sending data to the master. The values can be either: true or false  |
-| Retries on empty                | **true**          | Retrying sending data to the master if it is empty                            |
-| Retries on invalid              | **true**          | Retrying sending data to the master if it is failed                           |
-| Poll period (ms)                | **5000**          | Period in milliseconds to check the attributes and the telemetry on the slave |
-| Connect attempt time (ms)       | **5000**          | A waiting period in milliseconds before connecting to the master              |
-| Connect attempt count           | **5**             | The number of connection attempts made through the ThingsBoard gateway        |
-| Wait after failed attempts (ms) | **300000**        | A waiting period in milliseconds before trying to send data to the master     |
+| 连接超时 (s)          | **35**            | 连接 Modbus 服务器的超时时间（秒）                            |
+| 字节序                      | **LITTLE**        | 读取字节的顺序                                                        |
+| 字序                      | **LITTLE**        | 读取多个寄存器时字的顺序                             |
+| 重试                         | **true**          | 是否向主站重试发送数据。可选值：true 或 false  |
+| 空值时重试                | **true**          | 主站返回空值时是否重试                            |
+| 无效时重试              | **true**          | 主站返回失败时是否重试                           |
+| 轮询周期 (ms)                | **5000**          | 检查从站属性和遥测的周期（毫秒） |
+| 连接尝试时间 (ms)       | **5000**          | 连接主站前的等待时间（毫秒）              |
+| 连接尝试次数           | **5**             | 通过 ThingsBoard 网关进行的连接尝试次数        |
+| 失败尝试后等待 (ms) | **300000**        | 向主站发送数据前等待的时间（毫秒）     |
 | ---                             |                   |                                                                               |
 
 {% assign advancedConnectionSettings = '
     ===
         image: /images/gateway/modbus-connector/advanced-connection-settings-1-ce.png,
-        title: Click on the "**Advanced connection settings**" subsection to open it;
+        title: 点击「**高级连接设置**」子部分将其打开；
     ===
         image: /images/gateway/modbus-connector/advanced-connection-settings-2-ce.png,
-        title: Make the necessary settings.
+        title: 进行必要设置。
 '
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=advancedConnectionSettings %}
 
-Also, you can configure TLS connection (**can be used only for TCP/UDP connection type**). The table below describes the 
-parameters required to configure TLS connection:
+此外，您还可以配置 TLS 连接（**仅用于 TCP/UDP 连接类型**）。下表描述了配置 TLS 连接所需的参数：
 
-| **Parameter**                   | **Description**                                             |
+| **参数**                   | **描述**                                             |
 |:--------------------------------|:------------------------------------------------------------|
-| Path to client certificate file | Path to certificate file in filesystem with gateway         |
-| Path to private key file        | Path to private key file                                    | 
-| Password                        | Server password                                             |
-| Server hostname                 | Server hostname (Should match with hostname in certificate) |
+| 客户端证书文件路径 | 网关文件系统中证书文件的路径         |
+| 私钥文件路径        | 私钥文件路径                                    | 
+| 密码                        | 服务器密码                                             |
+| 服务器主机名                 | 服务器主机名（应与证书中的主机名匹配） | 
 | ---                             |                                                             |
 
 ![image](/images/gateway/modbus-connector/tls-connection.png)

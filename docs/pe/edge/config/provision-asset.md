@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Assets
-description: Edge Assets Overview
+title: Edge 资产
+description: Edge 资产概览
 
 createAssetOnEdge:
   0:

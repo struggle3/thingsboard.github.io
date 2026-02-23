@@ -2,40 +2,40 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Managing domain
-description: Domain managing through ThingsBoard
+title: 域名管理
+description: 通过ThingsBoard管理域名
 
 register-domain:
     0:
         image: /images/user-guide/domain/adding-new-domain-1-ce.png
-        title: 'Go to the "OAuth 2.0" page of the "Security" section. On the "Domains" tab click the "plus" icon;'
+        title: '进入"安全"部分的"OAuth 2.0"页面，在"域名"标签页点击"加号"图标；'
     1:
         image: /images/user-guide/domain/adding-new-domain-2-ce.png
-        title: 'Enter valid domain name in the "Domain name" field and click "Add" button;'
+        title: '在"域名"字段输入有效域名并点击"添加"按钮；'
     2:
         image: /images/user-guide/domain/adding-new-domain-3-ce.png
-        title: 'You can see your domain name on the "Domains" tab.'
+        title: '您可以在"域名"标签页查看已添加的域名。'
 
 login-with-domain:
     0:
         image: /images/user-guide/domain/domain-login-1-ce.png
-        title: 'Now you can use your domain name to access ThingsBoard web interface and services. Try to login by entering the chosen domain name in the browser address line.'
+        title: '现在您可以使用域名访问ThingsBoard Web界面和服务。在浏览器地址栏输入所选域名进行登录。'
 
 domain-details:
     0:
         image: /images/user-guide/domain/domain-details-1-ce.png
-        title: 'To view details about a registered domain, simply click on it to open the domain details dialog. Switch to editing mode by clicking the large orange button;'
+        title: '要查看已注册域名的详情，点击该域名打开详情对话框。点击橙色大按钮切换至编辑模式；'
     1:
         image: /images/user-guide/domain/domain-details-2-ce.png
-        title: 'Make the required modifications. Confirm and save your changes by clicking the "Apply changes" button.'
+        title: '进行所需修改，点击"应用更改"按钮确认并保存。'
 
 delete-domain:
     0:
         image: /images/user-guide/domain/delete-domain-1-ce.png
-        title: 'To delete the domain click "Delete" button on the "Domain" tab;'
+        title: '要删除域名，在"域名"标签页点击"删除"按钮；'
     1:
         image: /images/user-guide/domain/delete-domain-2-ce.png
-        title: 'In the confirmation dialog, click "Yes" if you are sure you want to delete the domain.'
+        title: '在确认对话框中，如确定要删除请点击"是"。'
 
 ---
 

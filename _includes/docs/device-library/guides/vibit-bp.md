@@ -1,4 +1,4 @@
-{% assign deviceName = "VIBit-BP" %}
+﻿{% assign deviceName = "VIBit-BP" %}
 {% assign deviceVendorLink = "https://machineastro.com/vibit-battery-powered/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign officialManualLink = "/docs/devices-library/resources/manuals/vibit-bp.pdf" %}
@@ -8,7 +8,7 @@
   '
   %}
 
-## Introduction
+## 概述
 
 [VIBit-BP]({{deviceVendorLink}}){:target="_blank"} is a battery-powered, compact tri-axial vibration and temperature sensor designed for anomaly detection without the need for external power or wiring. It transmits data wirelessly via Bluetooth Low Energy (BLE), making it ideal for remote condition monitoring in industrial settings.<br><br><br><br><br>
 
@@ -16,10 +16,10 @@
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-bp-architecture.png)
 
-## Prerequisites
+## 前置条件
 
 To continue with this guide, we will need the following:  
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 {{ prerequisites }} 
 - VIBit-BP BLE Gateway is configured to relay data to ThingsBoard.
 - Laptop with Chrome/Firefox etc. browser and Ethernet cable to establish the connection between Gateway and Laptop.
@@ -164,8 +164,7 @@ To enable communication between the VIBit-BP sensor and the VIBit-BP BLE Gateway
 
 This completes the setup to stream sensor data securely from the BLE gateway to ThingsBoard.
 
-## Check Data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 - In ThingsBoard, navigate to the "**Devices**" section and select your VIBit-BP device.
 - Access the "**Latest telemetry**" tab and Wake-up the VIBit-BP Sensor using Magnet for quick view or wait for the configured telemetry frequency to view real-time data such as:
   - 3-axis acceleration and velocity RMS
@@ -179,7 +178,7 @@ Use the [Dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Conclusion
+## 总结
 
 Integrating VIBit-BP with ThingsBoard using MQTT authentication offers a wireless, battery-powered solution for monitoring equipment health, enabling predictive maintenance without the constraints of wiring or external power sources. The seamless data transmission and visualization capabilities enhance operational efficiency and equipment reliability.
 {% include add-device-banner.liquid %}

@@ -1,15 +1,15 @@
 
-One type of security configuration is Basic authentication.
-The REST Connector waits for HTTP requests with the Authorization header that contains the word Basic word followed by a space and a base64-encoded string username:password.
+Basic 认证是一种安全配置方式。
+REST Connector 等待带有 Authorization 头的 HTTP 请求，该头包含 "Basic" 后跟空格及 base64 编码的 username:password 字符串。
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|-
-| type               | **basic**                      | Type of authorization.      |
-| username           | **username**                   | Username for authorization. |
-| password           | **password**                   | Password for authorization. |
+| type               | **basic**                      | 授权类型。      |
+| username           | **username**                   | 授权用户名。 |
+| password           | **password**                   | 授权密码。 |
 |---
 
-Security section in configuration file will look like this: 
+配置文件中的 security 部分将如下所示：
 
 ```json
 {
@@ -22,12 +22,12 @@ Security section in configuration file will look like this:
 ```
 {: .copy-code}
 
-Also, make sure that your request have `Authorization` header with provided credentials.
+另外，请确保请求中包含带有上述凭据的 `Authorization` 头。
 
-If you are using cURL, the request will look like:
+若使用 cURL，请求示例为：
 ```bash
 curl --user username:password -H "Content-Type: application/json" -X POST \
     -d '{"name": "SN-001", "sensorModel": "example"}' http://127.0.0.1:5000/test_device
 ```
 
-Or if you are using Postman or Insomnia, simply enable Basic auth.
+若使用 Postman 或 Insomnia，只需启用 Basic 认证即可。

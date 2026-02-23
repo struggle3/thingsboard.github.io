@@ -5,6 +5,6 @@ In Loriot UI:
 
 <br>
 In ThingsBoard UI: 
-- Click "Add" to confirm creating integration.
+- 点击「Add」确认创建 integration。
 
 ![image](/images/user-guide/integrations/loriot/loriot-add-integration-4-1-pe.png)

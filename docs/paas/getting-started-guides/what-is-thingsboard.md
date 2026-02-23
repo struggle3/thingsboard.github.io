@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: What is ThingsBoard?
-description: ThingsBoard key features and advantages for the rapid development of IoT projects and applications.
+title: 什么是 ThingsBoard？
+description: ThingsBoard 的关键特性与优势，助力 IoT 项目和应用快速开发。
 ---
 
 {% assign docsPrefix = "paas/" %}

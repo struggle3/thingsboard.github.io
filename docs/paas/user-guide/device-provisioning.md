@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: Provisioning devices
-description: IoT device management using ThingsBoard provisioning devices feature
+title: 设备预配置
+description: 使用 ThingsBoard 设备预配置功能进行 IoT 设备管理
 deviceProfileConfiguration:
     0:
         image: /images/user-guide/device-provisioning/device-provisioning-step-1.png 

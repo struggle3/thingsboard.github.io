@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: REST Client
-description: Supported REST API Reference for server-side integration of your java projects
+title: REST 客户端
+description: 用于 Java 项目服务端集成的 REST API 参考
 
 ---
 

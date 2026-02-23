@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: WebSocket Client
-description: MQTT tool
+title: WebSocket 客户端
+description: MQTT 工具
 
 ws-connection-add:
   0:
     image: /images/mqtt-broker/user-guide/ui/ws-connection-add-1.png
-    title: 'Go to the WebSocket Client page and click the Select Connection, represented by the expand more icon.'
+    title: '进入 WebSocket 客户端页面，点击「选择连接」（展开更多图标）。'
   1:
     image: /images/mqtt-broker/user-guide/ui/ws-connection-add-2.png
-    title: 'Click on the button "Connect".'
+    title: '点击「Connect」按钮。'
 
 ws-connection-details:
   0:

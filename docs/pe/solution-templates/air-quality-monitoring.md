@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Air Quality Monitoring template
-description: Air Quality Monitoring template overview
+title: 空气质量监控模板
+description: 空气质量监控模板概览
 solution-highlights:
     0:
         image: /images/solutions/air_quality_index/air-quality-index-1.png

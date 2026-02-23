@@ -1,17 +1,17 @@
-### GET method
+### GET 方法
 
-With the GET method you can send a GET request to the REST API.
+使用 GET 方法可向 REST API 发送 GET 请求。
 
 ```bash
 get requestUrlExpression=<requestUrlExpression>;value=<value>;
 ```
 
-Where:
-- `<requestUrlExpression>` - the URL of the REST API;
-- `<value>` - the value to send.
+其中：
+- `<requestUrlExpression>` - REST API 的 URL；
+- `<value>` - 要发送的值。
 
-For example, in our case, we know that we can get the room light level from the REST API with the URL
-**"http://127.0.0.1:8000/light-level"**. To get the value of the room light level, run the query:
+例如，本示例中可从 URL 为 **"http://127.0.0.1:8000/light-level"** 的 REST API 获取房间光照度。
+要获取房间光照度值，请运行以下查询：
 
 ```bash
 get requestUrlExpression=http://127.0.0.1:8000/light-level;value=${params};
@@ -27,21 +27,21 @@ get requestUrlExpression=http://127.0.0.1:8000/light-level;value=${params};
 ![image](/images/gateway/get-set-connector-rpc/rest-get-set-rpc-1.png)
 {: refdef}
 
-### SET method
+### SET 方法
 
-With the SET method you can send a POST request to the REST API.
+使用 SET 方法可向 REST API 发送 POST 请求。
 
 ```bash
 set requestUrlExpression=<requestUrlExpression>;value=<value>;HTTPMethod=<HTTPMethod>;
 ```
 
-Where:
-- `<requestUrlExpression>` - the URL of the REST API;
-- `<value>` - the value to send.
-- `<HTTPMethod>` - the HTTP method to use.
+其中：
+- `<requestUrlExpression>` - REST API 的 URL；
+- `<value>` - 要发送的值；
+- `<HTTPMethod>` - 要使用的 HTTP 方法。
 
-For example, in our case, we know that we can set the room light level to the REST API with the URL
-**"http://127.0.0.1:8000/light-level"**. To set the value of the room light level, run the following query:
+例如，本示例中可将房间光照度设置到 URL 为 **"http://127.0.0.1:8000/light-level"** 的 REST API。
+要设置房间光照度值，请运行以下查询：
 
 ```bash
 set requestUrlExpression=http://127.0.0.1:8000/light-level;value=80;HTTPMethod=POST;
@@ -57,8 +57,7 @@ set requestUrlExpression=http://127.0.0.1:8000/light-level;value=80;HTTPMethod=P
 ![image](/images/gateway/get-set-connector-rpc/rest-get-set-rpc-2.png)
 {: refdef}
 
-Also, let's take a look at light level after setting it using GET method. To do this, simply run the GET RPC method, 
-described above:
+使用 GET 方法查看设置后的光照度。只需运行上述 GET RPC 方法即可：
 
 ```bash
 get requestUrlExpression=http://127.0.0.1:8000/light-level;value=${params};

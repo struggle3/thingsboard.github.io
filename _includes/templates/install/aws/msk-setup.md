@@ -1,27 +1,27 @@
-ThingsBoard uses **Kafka as an external queue** for exchanging data between microservices, storing unprocessed messages, and more. 
-Kafka is useful for **handling peak loads and failures**, ensuring that all messages from devices are processed reliably. 
-By default, the deployment uses **local Kafka**, but ThingsBoard is also compatible with **managed services such as Amazon MSK**.
+ThingsBoard 使用 **Kafka 作为外部队列**，用于在微服务之间交换数据、存储未处理的消息等。
+Kafka 有助于**处理峰值负载和故障**，确保来自设备的所有消息得到可靠处理。
+默认情况下，部署使用**本地 Kafka**，但 ThingsBoard 也兼容 **Amazon MSK 等托管服务**。
 
-Here are the steps to create a **basic Kafka MSK cluster**:
+以下为创建**基础 Kafka MSK 集群**的步骤：
 
-- Open the **AWS console**, go to [MSK](https://console.aws.amazon.com/msk){:target="_blank"} and click the "**Create Cluster**" button.
-- Select "**Custom creation**" method.
-- Specify a **name for your cluster** and select "**Cluster type**" - "**Provisioned**", which will allow you to specify the **number of brokers and storage volume**.
-- Select **Apache Kafka version 3.8.x** to use **Express brokers** or **version 4.0.x** for **Standard brokers**.
-- Choose **kafka.m7.large** or similar instance types.
-- Select the **storage size** for the broker (with the default ThingsBoard partition settings, Kafka can use up to **100 GB**).
-- Make sure your **MSK instance is accessible** from the **ThingsBoard cluster**. The easiest way to achieve this is by **deploying the MSK instance in the same VPC**.
-  We also recommend using **private subnets**, as this will make it virtually impossible to accidentally expose the instance to the **Internet**.
-- Use the **default security settings**. Make sure that "**Plaintext" mode** is enabled.
-- Use either the "**Basic monitoring**" or "**Enhanced topic-level monitoring**" settings.
+- 打开 **AWS 控制台**，前往 [MSK](https://console.aws.amazon.com/msk){:target="_blank"}，点击“**创建集群**”按钮。
+- 选择“**自定义创建**”方式。
+- 指定**集群名称**，选择“**集群类型**”为“**预置型**”，以便指定**代理数量和存储卷**。
+- 选择 **Apache Kafka 3.8.x** 使用 **Express 代理**，或 **4.0.x** 使用 **Standard 代理**。
+- 选择 **kafka.m7.large** 或类似实例类型。
+- 为代理选择**存储大小**（使用默认 ThingsBoard 分区设置时，Kafka 最多可使用 **100 GB**）。
+- 确保 **MSK 实例**可从 **ThingsBoard 集群**访问。最简单的方式是**在同一 VPC 中部署 MSK 实例**。
+  建议使用**私有子网**，这样几乎不可能意外将实例暴露到 **Internet**。
+- 使用**默认安全设置**。确保启用“**Plaintext**”模式。
+- 使用“**基本监控**”或“**增强主题级监控**”设置。
 
 {% include images-gallery.html imageCollection="mskSetup" %}
 
-Once the <b>MSK cluster</b> switches to the "<b>Active</b>" state, navigate to "<b>Details</b>" and click "<b>View client information</b>".   
-Copy the <b>bootstrap server information in plaintext</b> – this is your <b>Kafka endpoint</b>.
+**MSK 集群**切换为“**Active**”状态后，进入“**详情**”并点击“**查看客户端信息**”。
+复制**明文 bootstrap server 信息**——即您的 **Kafka 端点**。
 
 {% include images-gallery.html imageCollection="mskConnectionParams" %}
 
-Edit the `tb-kafka.yml` file, find the **StatefulSet section** named `tb-kafka`, and set the `spec.replicas` value to **0** to disable the default local **Kafka deployment**.
+编辑 `tb-kafka.yml` 文件，找到名为 `tb-kafka` 的 **StatefulSet 部分**，将 `spec.replicas` 设置为 **0** 以禁用默认本地 **Kafka 部署**。
 
-Edit `tb-kafka-configmap.yml` and replace **TB_KAFKA_SERVERS** value with **MSK endpoint**.
+编辑 `tb-kafka-configmap.yml`，将 **TB_KAFKA_SERVERS** 值替换为 **MSK 端点**。

@@ -1,41 +1,41 @@
-Sends SMS messages to specified phone numbers via configured SMS provider.
+通过配置的短信提供商向指定电话号码发送短信。
 
-## Configuration
+## 配置
 
 ### Phone Numbers To Template
 
-A comma-separated list of phone numbers that will receive the SMS message. This field supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}.
+将接收短信的电话号码，逗号分隔。该字段支持[模板](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}。
 
 ### SMS Message Template
 
-The content of the SMS message to send. This field supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}.
+要发送的短信内容。该字段支持[模板](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}。
 
 ### Use System SMS Provider Settings
 
-When enabled, the node uses the [SMS provider configured in the system settings](/docs/{{docsPrefix}}user-guide/ui/sms-provider-settings/){:target="_blank"}. 
-This allows centralized SMS provider configuration at the tenant or system level without configuring individual rule nodes.
+启用后，节点使用[系统设置中配置的短信提供商](/docs/{{docsPrefix}}user-guide/ui/sms-provider-settings/){:target="_blank"}。
+可在租户或系统级集中配置短信提供商，而无需逐个配置规则节点。
 
-When disabled, you must configure the SMS provider directly in the rule node. The following SMS provider types are supported:
+禁用后，必须直接在规则节点中配置短信提供商。支持以下短信提供商类型：
 
 #### AWS SNS
 
-Amazon Simple Notification Service for SMS delivery. Required configuration:
+用于短信配送的 Amazon Simple Notification Service。所需配置：
 
-- **AWS Access Key ID** – Your AWS IAM access key ID with SNS permissions.
-- **AWS Secret Access Key** – Your AWS IAM secret access key.
-- **AWS Region** – The AWS region for SNS (e.g., `us-east-1`, `eu-west-1`).
+- **AWS Access Key ID** — 具有 SNS 权限的 AWS IAM 访问密钥 ID。
+- **AWS Secret Access Key** — AWS IAM 私密访问密钥。
+- **AWS Region** — SNS 的 AWS 区域（如 `us-east-1`、`eu-west-1`）。
 
 #### Twilio
 
-Twilio messaging service. Required configuration:
+Twilio 消息服务。所需配置：
 
-- **Phone Number From** – The Twilio phone number or Messaging Service SID to send from (E.164 format, e.g., `+19995550123`).
-- **Twilio Account SID** – Your Twilio account identifier.
-- **Twilio Account Token** – Your Twilio authentication token.
+- **Phone Number From** — 发送方 Twilio 电话号码或 Messaging Service SID（E.164 格式，如 `+19995550123`）。
+- **Twilio Account SID** — Twilio 账户标识符。
+- **Twilio Account Token** — Twilio 认证令牌。
 
 #### SMPP
 
-SMS Messaging Peer-to-Peer protocol for direct carrier integration. For SMPP configuration details, refer to the [SMPP protocol specification](https://smpp.org/){:target="_blank"}.
+用于直接运营商对接的 SMS Messaging Peer-to-Peer 协议。SMPP 配置详情请参阅 [SMPP 协议规范](https://smpp.org/){:target="_blank"}。
 
 ### JSON Schema
 
@@ -149,42 +149,40 @@ SMS Messaging Peer-to-Peer protocol for direct carrier integration. For SMPP con
 ```
 {: .copy-code.expandable-3 }
 
-## Output message format
+## 输出消息格式
 
-The node does not modify the incoming message. Both message data and metadata are passed through unchanged to the next node in the chain.
+节点不修改入站消息。消息 data 和 metadata 均原样传递至链中下一节点。
 
-## Message acknowledgement behavior
+## 消息确认行为
 
-The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable:
+节点的消息确认行为由 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 环境变量控制：
 
-- **When set to `true`** – The incoming message is acknowledged and marked as successfully processed immediately upon receipt. A new message is created as a copy. 
-  The SMS sending operation proceeds asynchronously, and after completion, the copy is enqueued for processing by the next node.
-- **When set to `false`** (default) – The incoming message remains in an in-processing state throughout the entire SMS sending operation. The message is passed to the next node
-  after the SMS operation completes.
+- **设为 `true` 时** — 入站消息在接收后立即被确认并标记为已成功处理。创建消息副本。短信发送操作异步进行，完成后将副本加入队列供下一节点处理。
+- **设为 `false` 时**（默认）— 入站消息在整个短信发送操作期间保持处理中状态。短信操作完成后将消息传递至下一节点。
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node processes the phone numbers template to extract target phone numbers from the incoming message data and metadata.
-2. The node processes the SMS message template to create the message content using values from the incoming message data and metadata.
-3. The SMS is sent asynchronously via either the system-configured SMS provider or the node-specific SMS provider configuration.
-4. When processing completes:
-    - **Success**: The message is routed to the `Success` connection.
-    - **Failure**: The message is routed to the `Failure` connection.
+1. 节点处理电话号码模板，从入站消息 data 和 metadata 中提取目标电话号码。
+2. 节点处理短信内容模板，使用入站消息 data 和 metadata 中的值创建消息内容。
+3. 通过系统配置的短信提供商或节点专用的短信提供商配置异步发送短信。
+4. 处理完成时：
+    - **Success**：消息经 `Success` 连接路由。
+    - **Failure**：消息经 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The SMS was successfully sent to all specified phone numbers.
+    - 短信已成功发送至所有指定电话号码。
 - **Failure**
-    - An unexpected error occurred during SMS sending (e.g., invalid phone number format, SMS provider authentication failure, network error).
+    - 短信发送过程中发生意外错误（如无效电话号码格式、短信提供商认证失败、网络错误）。
 
-## Examples
+## 示例
 
-### Example 1 — Sending temperature alert
+### 示例 1 — 发送温度告警
 
-Send an SMS alert when a device reports high temperature.
+设备上报高温时发送短信告警。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -204,7 +202,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -214,17 +212,17 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：不变。
 
-Metadata: unchanged.
+Metadata：不变。
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-An SMS message is sent to +15551234567:
+向 +15551234567 发送短信：
 
 ```text
 Device Temperature Sensor 01 has high temperature 85.3

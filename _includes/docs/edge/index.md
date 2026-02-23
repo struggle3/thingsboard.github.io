@@ -1,63 +1,63 @@
 {% if docsPrefix == 'pe/' %}
-{% assign platformName = 'Edge Computing add-on' %}
+{% assign platformName = '边缘计算插件' %}
 {% else %}
-{% assign platformName = 'Open-source IoT edge computing' %}
+{% assign platformName = '开源 IoT 边缘计算' %}
 {% endif %}
 
 {% if docsPrefix != 'pe/' %}
 <div class="ce-banner" id="ceBanner">
-  <span>Looking for white-labeling or premium features? <a href="/docs/pe/edge/" target="_blank">Explore Edge Professional Edition documentation →</a></span>
-  <button class="banner-close" aria-label="Close banner">×</button>
+  <span>需要白标或高级功能？ <a href="/docs/pe/edge/" target="_blank">查看 Edge 专业版文档 →</a></span>
+  <button class="banner-close" aria-label="关闭横幅">×</button>
 </div>
 {% endif %}
 
 <ul class="benefits-list">
-  <li>Your devices operate in locations with unreliable or expensive connectivity</li>
-  <li>You need sub-second response times that cloud round-trips can't provide</li>
-  <li>Local operators need dashboards and controls without depending on internet access</li>
-  <li>You want to filter or aggregate data before sending it to the cloud</li>
+  <li>设备部署在网络不稳定或成本较高的场景</li>
+  <li>需要亚秒级响应，云端往返无法满足</li>
+  <li>本地运维需要仪表板和控制在无网环境下可用</li>
+  <li>希望在上传云端前过滤或聚合数据</li>
 </ul>
 
 <p class="learn-more">
-  Learn how Edge handles offline operation, local alarms, and data synchronization → <a href="/docs/{{docsPrefix}}edge/getting-started-guides/what-is-edge/" target="_blank">What is ThingsBoard Edge?</a>
+  了解 Edge 如何实现离线运行、本地告警与数据同步 → <a href="/docs/{{docsPrefix}}edge/getting-started-guides/what-is-edge/" target="_blank">什么是 ThingsBoard Edge？</a>
 </p>
 
-<h2>IoT Edge Computing Documentation & Guides</h2>
+<h2>IoT 边缘计算文档与指南</h2>
 
 <div class="doc-features row mt-4">
     <div class="col-12 col-sm-6 col-lg col-xxl-6 col-4xl mb-4">
         <a class="feature-card" href="/docs/{{docsPrefix}}edge/getting-started/" target="_blank">
-            <img class="feature-logo" src="/images/feature-logo/getting-started.svg" alt="Getting started icon">
-            <h3 class="feature-title">Getting started</h3>
+            <img class="feature-logo" src="/images/feature-logo/getting-started.svg" alt="入门图标">
+            <h3 class="feature-title">快速入门</h3>
             <div class="feature-text">
-                Set up your first Edge instance and connect a device. Takes 15-30 minutes.
+                搭建首个 Edge 实例并连接设备。约需 15–30 分钟。
             </div>
         </a>
     </div>
     <div class="col-12 col-sm-6 col-lg col-xxl-6 col-4xl mb-4">
         <a class="feature-card" href="/docs/user-guide/install/{{docsPrefix}}edge/installation-options/" target="_blank">
-            <img class="feature-logo" src="/images/feature-logo/install.svg" alt="Install icon">
-            <h3 class="feature-title">Installation</h3>
+            <img class="feature-logo" src="/images/feature-logo/install.svg" alt="安装图标">
+            <h3 class="feature-title">安装</h3>
             <div class="feature-text">
-                Deploy on Docker, Ubuntu, CentOS, Windows, or Raspberry Pi.
+                支持 Docker、Ubuntu、CentOS、Windows 或 Raspberry Pi 部署。
             </div>
         </a>
     </div>
     <div class="col-12 col-sm-6 col-lg col-xxl-6 col-4xl mb-4">
         <a class="feature-card" href="/docs/{{docsPrefix}}edge/use-cases/overview/" target="_blank">
-            <img class="feature-logo" src="/images/feature-logo/tutorials.svg" alt="Tutorials icon">
-            <h3 class="feature-title">Edge Use Cases</h3>
+            <img class="feature-logo" src="/images/feature-logo/tutorials.svg" alt="教程图标">
+            <h3 class="feature-title">Edge 使用场景</h3>
             <div class="feature-text">
-                Deployment scenarios, traffic reduction, and local data processing.
+                部署场景、流量优化及本地数据处理。
             </div>
         </a>
     </div>
     <div class="col-12 col-sm-6 col-lg col-xxl-6 col-4xl mb-4">
         <a class="feature-card" href="/docs/{{docsPrefix}}edge/faq/" target="_blank">
-            <img class="feature-logo" src="/images/feature-logo/faq.svg" alt="Question icon">
-            <h3 class="feature-title">FAQ</h3>
+            <img class="feature-logo" src="/images/feature-logo/faq.svg" alt="问号图标">
+            <h3 class="feature-title">常见问题</h3>
             <div class="feature-text">
-                Common questions about Edge capabilities, limitations, and configuration.
+                关于 Edge 能力、限制和配置的常见问题。
             </div>
         </a>
     </div>
@@ -65,10 +65,10 @@
 
 {% if docsPrefix != 'pe/' %}
 <div class="commercial-banner">
-  <h2>Need more opportunities?</h2>
-  <p>Start with pre-built solution templates, connect legacy equipment via 30+ integration protocols, and white-label everything as your own product.</p>
+  <h2>需要更多能力？</h2>
+  <p>从预置解决方案模板起步，通过 30+ 集成协议连接传统设备，并可将一切白标为自有产品。</p>
   <div class="banner-actions">
-    <a href="/docs/contact-us/?subject=ThingsBoard%20Products" class="btn-primary" target="_blank">Contact us</a>
+    <a href="/docs/contact-us/?subject=ThingsBoard%20Products" class="btn-primary" target="_blank">联系我们</a>
   </div>
 </div>
 {% endif %}

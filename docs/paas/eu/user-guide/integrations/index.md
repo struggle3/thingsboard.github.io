@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Platform Integrations
-description: Platform Integrations Documentation 
+title: 平台集成
+description: 平台集成交档
 
 ---
 {% assign docsPrefix = "paas/eu/" %}

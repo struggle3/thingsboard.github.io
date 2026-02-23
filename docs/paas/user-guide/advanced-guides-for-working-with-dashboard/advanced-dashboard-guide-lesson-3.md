@@ -2,7 +2,7 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Lesson 3. Adding and configuring individual states for each device
+title: 第 3 课：为每台设备添加并配置独立状态
 
 dashboard-lesson-3:
     0:

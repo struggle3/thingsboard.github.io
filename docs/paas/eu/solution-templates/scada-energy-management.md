@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: SCADA Energy management
-description: SCADA Energy management overview
+title: SCADA 能源管理
+description: SCADA 能源管理概览
 
 go-to-solution-templates-page-1:
     0:

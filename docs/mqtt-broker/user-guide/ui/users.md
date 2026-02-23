@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: User management
-description: UI user management
+title: 用户管理
+description: 用户管理界面
 
 add-user-broker:
     0:
         image: /images/mqtt-broker/user-guide/ui/add-user-broker-1.png
-        title: 'Navigate to the Users page. Then click on the "plus" icon in the top right corner;'
+        title: '进入用户页面，点击右上角「+」图标；'
     1:
         image: /images/mqtt-broker/user-guide/ui/add-user-broker-2.png
-        title: 'Provide the email address, which must be unique within the system. The fields for first name, last name, and description are optional. Click "Add" to create the user.'
+        title: '填写邮箱（系统内唯一），名字、姓氏和描述为选填。点击「Add」创建用户。'
 
 edit-user-broker:
     0:

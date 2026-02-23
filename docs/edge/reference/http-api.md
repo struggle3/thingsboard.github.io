@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: HTTP Device API Reference
-description: Supported HTTP API Reference for IoT Devices
+title: HTTP设备API参考
+description: 支持的IoT设备HTTP API参考
 redirect_from: "/docs/edge/reference/http-api"
 ---
 

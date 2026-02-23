@@ -1,44 +1,45 @@
 * TOC
 {:toc}
 
-ThingsBoard allows you to send Remote Procedure Calls (RPC) from server-side applications to devices and vice versa.
-Basically, this feature allows you to send commands to/from devices and receive results of commands execution. 
-This guide covers ThingsBoard RPC capabilities. After reading this guide, you will get familiar with the following topics:
+ThingsBoard 允许您在服务端应用与设备之间进行远程过程调用（RPC）的双向通信。
+简而言之，该功能允许您向设备发送命令或从设备接收命令，并获取命令执行结果。
+本指南介绍 ThingsBoard 的 RPC 能力。阅读后将熟悉以下主题：
 
-- RPC types;
-- Basic RPC use-cases;
-- RPC client-side and server-side APIs;
-- RPC widgets.
+- RPC 类型；
+- 基本 RPC 使用场景；
+- RPC 客户端与服务端 API；
+- RPC 部件。
 
-ThingsBoard RPC feature may be divided into two types based on the originator of the remote procedure execution:device-originated and server-originated RPC.
-In order to use more familiar names, we will name device-originated RPC calls as a **client-side** RPC and server-originated RPC as **server-side** RPC.
+ThingsBoard 的 RPC 功能可根据远程过程调用的发起方分为两种类型：设备发起和服务端发起的 RPC。
+为便于理解，我们将设备发起的 RPC 调用称为**客户端**RPC，服务端发起的 RPC 称为**服务端**RPC。
 
-## Client-side RPC
+## 客户端 RPC
+{: #client-side-rpc}
 
-Client-side RPC feature allows you to send the request **from the device to the platform** and get the response back to the device.
+客户端 RPC 功能允许您**从设备向平台**发送请求，并将响应返回给设备。
 
-Let's review typical use cases of the client-side RPC calls:
+让我们了解客户端 RPC 调用的典型使用场景：
 
-* Irrigation system gets the weather forecast from the online service through the platform.
-* Constrained device without system clock requests the current timestamp from the platform.
-* Access Control card reader sends the request to third-party security system to make a decision to open the door and log access.
+* 灌溉系统通过平台从在线服务获取天气预报。
+* 无系统时钟的受限设备向平台请求当前时间戳。
+* 门禁读卡器向第三方安防系统发送请求，以决定是否开门并记录访问。
 
-Under the hood, device sends a message to the platform, which is processed by the [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/).
-The Rule Engine may apply some calculations using device attributes, telemetry or any other data stored in the platform. 
-Rule Engine may also invoke external system if needed. Once the message is processed, the result is sent back to the device. 
-See the diagram below:
+在底层，设备向平台发送消息，由[规则引擎](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/)处理。
+规则引擎可使用设备属性、遥测数据或平台中存储的任何其他数据进行计算。
+规则引擎也可在需要时调用外部系统。消息处理完成后，结果将发送回设备。
+如下图所示：
 
    {:refdef: style="text-align: center;"}
    ![image](/images/user-guide/client-side-rpc.svg)
    {: refdef}
 
-The client-side RPC request consists of two fields, both of them are mandatory:
+客户端 RPC 请求包含两个必填字段：
 
-* **method** - name of the method to distinct the RPC calls.
-  For example, "getCurrentTime" or "getWeatherForecast". The value of the parameter is a string.
-* **params** - additional parameters used for processing of the request. The value is a JSON. Leave empty JSON "{}" if no parameters needed.
+* **method** - 用于区分 RPC 调用的方法名称。
+  例如 "getCurrentTime" 或 "getWeatherForecast"。该参数值为字符串。
+* **params** - 用于处理请求的额外参数。值为 JSON。若无需参数则使用空 JSON "{}"。
 
-Example of the RPC request:
+RPC 请求示例：
 
 ```json
 {
@@ -48,37 +49,34 @@ Example of the RPC request:
 ```
 {: .copy-code}
 
-The RPC response may be any number, string or JSON. For example:
+RPC 响应可以是任意数字、字符串或 JSON。例如：
 
 ```text
 1631881236974
 ```
 
-### Sending the client-side RPC from the device
+### 从设备发送客户端 RPC
 
-ThingsBoard provides an API to send RPC commands from the device.
-The API is specific for each supported network protocol.
-You may review the API and examples on the corresponding reference page:
+ThingsBoard 提供从设备发送 RPC 命令的 API。
+该 API 针对每种支持的网络协议有专门实现。
+您可在相应参考页面查看 API 及示例：
 
-- [MQTT client-side RPC API reference](/docs/{{docsPrefix}}reference/mqtt-api/#client-side-rpc)
-- [CoAP client-side RPC API reference](/docs/{{docsPrefix}}reference/coap-api/#client-side-rpc)
-- [HTTP client-side RPC API reference](/docs/{{docsPrefix}}reference/http-api/#client-side-rpc)
+- [MQTT 客户端 RPC API 参考](/docs/{{docsPrefix}}reference/mqtt-api/#client-side-rpc)
+- [CoAP 客户端 RPC API 参考](/docs/{{docsPrefix}}reference/coap-api/#client-side-rpc)
+- [HTTP 客户端 RPC API 参考](/docs/{{docsPrefix}}reference/http-api/#client-side-rpc)
 
-LwM2M and SNMP protocols do not support the client-side RPC yet.
+LwM2M 和 SNMP 协议尚不支持客户端 RPC。
 
-### Processing the client-side RPC by the platform
+### 平台对客户端 RPC 的处理
 
-The client-side RPC command is transformed to the Rule Engine 
-message with the "TO_SERVER_RPC_REQUEST" [message type](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types). 
-The message contains unique UUID based identifier that is stored in the "requestId" metadata field. 
-You may design your [Rule Chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain) 
-to process the incoming message using transformation, enrichment or any other 
-rule node [type](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-types). 
-Once the incoming message is transformed to the response message, 
-one should use [RPC Call Reply](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply/) node to send reply to the device.
+客户端 RPC 命令会转换为规则引擎消息，[消息类型](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types)为 "TO_SERVER_RPC_REQUEST"。
+消息包含基于 UUID 的唯一标识符，存储在 "requestId" 元数据字段中。
+您可以设计[规则链](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain)，
+使用转换、丰富或其他规则节点[类型](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-types)处理传入消息。
+将传入消息转换为响应消息后，应使用 [RPC 调用回复](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply/)节点向设备发送回复。
 
-For example, let's modify root Rule Chain to process "getCurrentTime" client-side RPC and reply with the current time in milliseconds.
-We will use "Script" transformation node with the following JS code:
+例如，修改根规则链以处理 "getCurrentTime" 客户端 RPC 并以毫秒级当前时间回复。
+我们将使用 "Script" 转换节点配合以下 JavaScript 代码：
 
 ```javascript
 var rpcResponse;
@@ -93,53 +91,54 @@ return {msg: rpcResponse, metadata: metadata, msgType: msgType};
 
 {% include images-gallery.html imageCollection="client-side-rpc-rule-chain" %}
 
-## Server-side RPC
+## 服务端 RPC
+{: #server-side-rpc}
 
-Server-side RPC feature allows you to send the request **from the platform to the device** and optionally get the response back to the platform.
+服务端 RPC 功能允许您**从平台向设备**发送请求，并可选择将响应返回平台。
 
-The typical use cases of the server-side RPC calls is all sorts of remote control: 
-reboot, turn the engine on/off, change state of the gpio/actuators, change configuration parameters, etc.
+服务端 RPC 调用的典型场景包括各类远程控制：
+重启、开关引擎、改变 GPIO/执行器状态、修改配置参数等。
 
-Server-side RPC is divided into one-way and two-way:
+服务端 RPC 分为单向和双向：
  
- - One-way RPC request does not expect device to provide any reply.  
+ - 单向 RPC 请求不需要设备提供任何回复。  
    
    {:refdef: style="text-align: center;"}
    ![image](/images/user-guide/one-way-rpc.svg)
    {: refdef}
    
- - Two-way RPC request expects to receive a response from the device within configurable timeout.
+ - 双向 RPC 请求期望在可配置的超时时间内收到设备的响应。
 
    {:refdef: style="text-align: center;"}
    ![image](/images/user-guide/two-way-rpc.svg)
    {: refdef}
    
 
-Before version 3.3, ThingsBoard supported **lightweight** RPC only. 
-The lightweight RPC calls are short-lived, typically within 30 seconds which is the default timeout of any REST API call to the platform.
-Since they are short-lived, there was no reason for storing them to the database. 
-They lived in memory of the server, assuming that if server dies, the dashboard widget will send the same request to other ThingsBoard server in the cluster.
-The lightweight RPC consume low amount of resources since their processing does not invoke any input/output operations accept storing of the audit logs and rule engine messages.
+3.3 版本之前，ThingsBoard 仅支持**轻量级**RPC。
+轻量级 RPC 调用生命周期短，通常在 30 秒内（即平台 REST API 调用的默认超时）。
+因其短暂，无需存入数据库。
+它们保存在服务端内存中，假设若服务端宕机，仪表板部件会向集群中的其他 ThingsBoard 服务端发送相同请求。
+轻量级 RPC 资源消耗低，因其处理不涉及除审计日志和规则引擎消息之外的任何 I/O 操作。
 
-Since version 3.3, ThingsBoard provides support of [**persistent**](#persistent-rpc) RPC calls.
-Persistent RPC has a configurable lifetime and is stored in the database.
-Persistent RPC is extremely useful when your device may not be reachable for long period of time. 
-This typically happens in case of poor network connection or [Power-Saving Mode](/docs/{{docsPrefix}}user-guide/psm) (PSM).
+自 3.3 版本起，ThingsBoard 支持 [**持久化**](#persistent-rpc) RPC 调用。
+持久化 RPC 具有可配置的生命周期并存储在数据库中。
+当设备可能长期不可达时，持久化 RPC 尤为有用。
+这种情况通常发生在网络状况差或处于[省电模式](/docs/{{docsPrefix}}user-guide/psm)（PSM）时。
 
-### Server-side RPC structure
+### 服务端 RPC 结构
+{: #server-side-rpc-structure}
 
-The body of server-side RPC request consists of multiple fields:
+服务端 RPC 请求体包含多个字段：
 
-* **method** - mandatory, name of the method to distinct the RPC calls.
-  For example, "getCurrentTime" or "getWeatherForecast". The value of the parameter is a string.
-* **params** - mandatory, parameters used for processing of the request. The value is a JSON. Leave empty JSON "{}" if no parameters needed.
-* **timeout** - optional, value of the processing timeout in milliseconds. The default value is 10000 (10 seconds). The minimum value is 5000 (5 seconds).
-* **expirationTime** - optional, value of the epoch time (in milliseconds, UTC timezone). Overrides **timeout** if present.
-* **persistent** - optional, see [persistent] vs [lightweight] RPC. The default value is "false".
-* **retries** - optional, defines how many times persistent RPC will be re-sent in case of failures on the network and/or device side.
-* **additionalInfo** - optional, defines metadata for the persistent RPC that will be added to the [persistent RPC events].
+* **method** - 必填，用于区分 RPC 调用的方法名称。例如 "getCurrentTime" 或 "getWeatherForecast"。参数值为字符串。
+* **params** - 必填，用于处理请求的参数。值为 JSON。若无参数则使用空 JSON "{}"。
+* **timeout** - 可选，处理超时毫秒数。默认 10000（10 秒）。最小 5000（5 秒）。
+* **expirationTime** - 可选，纪元时间毫秒数（UTC）。若存在则覆盖 **timeout**。
+* **persistent** - 可选，参见[持久化]与[轻量级]RPC。默认为 "false"。
+* **retries** - 可选，定义网络和/或设备侧失败时持久化 RPC 的重发次数。
+* **additionalInfo** - 可选，定义将添加至[持久化 RPC 事件]的持久化 RPC 元数据。
 
-Example of the RPC request:
+RPC 请求示例：
 
 ```json
 {
@@ -153,7 +152,7 @@ Example of the RPC request:
 ```
 {: .copy-code}
 
-The RPC response may be any JSON. For example:
+RPC 响应可以是任意 JSON。例如：
 
 ```json
 {
@@ -163,30 +162,30 @@ The RPC response may be any JSON. For example:
 }
 ```
 
-### Sending server-side RPC
+### 发送服务端 RPC
 
-The server-side RPC are typically sent using REST API or dashboard widgets. In fact, dashboard widgets use the same REST API. 
-Once platform received the RPC, it validates the payload and runs permission checks.
-Then, server-side RPC command is transformed to the Rule Engine message.
-The Rule Engine may enrich the command with additional parameters and finally issues delivery of the command to the device.
+服务端 RPC 通常通过 REST API 或仪表板部件发送。实际上，仪表板部件使用的是同一 REST API。
+平台收到 RPC 后会验证载荷并执行权限检查。
+随后，服务端 RPC 命令被转换为规则引擎消息。
+规则引擎可为命令添加额外参数，并最终将命令下发至设备。
 
-Let's review how to send the command in details:
+下面详细说明如何发送命令：
 
-#### Using the REST API
+#### 使用 REST API
 
-In order to send an RPC request you need to execute an HTTP POST request to the following URL:
+要发送 RPC 请求，需向以下 URL 发起 HTTP POST 请求：
 
 ```shell
 http(s)://host:port/api/plugins/rpc/{callType}/{deviceId}
 ```
 
-where
+其中
 
-- **http(s)://host:port** is your ThingsBoard server base URL. For example, [{{hostName}}](https://{{hostName}})
-- **callType** is either **oneway** or **twoway**;
-- **deviceId** is your target [Device ID](/docs/{{docsPrefix}}user-guide/ui/devices/#get-device-id).
+- **http(s)://host:port** 为 ThingsBoard 服务器基础 URL。例如 [{{hostName}}](https://{{hostName}})
+- **callType** 为 **oneway** 或 **twoway**；
+- **deviceId** 为目标[设备 ID](/docs/{{docsPrefix}}user-guide/ui/devices/#get-device-id)。
 
-The request body should be a valid JSON with RPC request object we discussed [above](#server-side-rpc-structure).
+请求体应为[上文](#server-side-rpc-structure)所述 RPC 请求对象的有效 JSON。
 
 For example:
 
@@ -195,11 +194,11 @@ A,set-gpio-request.sh,shell,resources/set-gpio-request.sh,/docs/{{docsPrefix}}us
 B,set-gpio-request.json,json,resources/set-gpio-request.json,/docs/{{docsPrefix}}user-guide/resources/set-gpio-request.json{% endcapture %}  
 {% include tabs.html %}
 
-**Please note** that in order to execute this request, you will need to substitute **$JWT_TOKEN** with a valid [JWT](https://jwt.io/) access token.
-This token should belong to the user with either **TENANT_ADMIN** or **CUSTOMER_USER** role that owns the device identified by **$DEVICE_ID**.
-Use the following [guide](/docs/{{docsPrefix}}reference/rest-api/#rest-api-auth) to get the token.
+**请注意**，要执行此请求，需将 **$JWT_TOKEN** 替换为有效的 [JWT](https://jwt.io/) 访问令牌。
+该令牌应属于拥有 **$DEVICE_ID** 所标识设备的 **TENANT_ADMIN** 或 **CUSTOMER_USER** 角色用户。
+请使用以下[指南](/docs/{{docsPrefix}}reference/rest-api/#rest-api-auth)获取令牌。
 
-When user sends the **lightweight** RPC via REST API, the API call contains reply from the device or the error code. For example:
+用户通过 REST API 发送**轻量级**RPC 时，API 调用会包含设备回复或错误码。例如：
 
 ```json
 {
@@ -210,35 +209,34 @@ When user sends the **lightweight** RPC via REST API, the API call contains repl
 ```
 
 
-When user sends the **persistent** RPC via REST API, the response contains the unique identifier "rpcId". For example:
+用户通过 REST API 发送**持久化**RPC 时，响应会包含唯一标识符 "rpcId"。例如：
 
 ```json
 {
    "rpcId": "b10bb1a0-0afd-11ec-a08f-1b3182194747"
 }
 ```
-You may use this identifier to track the state of the command. See persistent RPC [states](#persistent-rpc-states) for more details.
+您可使用此标识符跟踪命令状态。详见持久化 RPC [状态](#persistent-rpc-states)。
 
 
-#### Using the Dashboard
+#### 使用仪表板
 
-The [Control Widgets](/docs/{{docsPrefix}}user-guide/ui/widget-library/#rpc-control-widget) are used to send RPC commands to the device.
-The most popular widgets are "RPC Button", "Round Switch", "Switch Control" and "Knob Control". 
-The advanced settings of those widgets allow you to define RPC method name and params.
-You may also develop [custom widgets](/docs/{{docsPrefix}}user-guide/contribution/widgets-development) and use [control api](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/#control-api) to send RPC commands.
+[控制部件](/docs/{{docsPrefix}}user-guide/ui/widget-library/#rpc-control-widget)用于向设备发送 RPC 命令。
+最常用的部件有 "RPC 按钮"、"圆形开关"、"开关控件" 和 "旋钮控件"。
+这些部件的高级设置允许您定义 RPC 方法名和参数。
+您也可开发[自定义部件](/docs/{{docsPrefix}}user-guide/contribution/widgets-development)并使用[控制 API](/docs/{{docsPrefix}}user-guide/contribution/widgets-development/#control-api)发送 RPC 命令。
 
-#### Using the Rule Engine
+#### 使用规则引擎
 
-All server-side RPC commands that are sent from the widgets or REST API are eventually transformed to the rule engine message 
-with the "RPC_CALL_FROM_SERVER_TO_DEVICE" [message type](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types).
+所有从部件或 REST API 发送的服务端 RPC 命令最终都会转换为规则引擎消息，
+[消息类型](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types)为 "RPC_CALL_FROM_SERVER_TO_DEVICE"。
 
-The message contains unique UUID based identifier that is stored in the "requestUUID" metadata field.
-You may design your [Rule Chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain)
-to process the incoming message using transformation, enrichment or any other
-rule node [type](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-types).
-Finally, one should use [RPC Call Request](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-request/) node to send the message to the device.
+消息包含存储在 "requestUUID" 元数据字段中的基于 UUID 的唯一标识符。
+您可以设计[规则链](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain)，
+使用转换、丰富或其他规则节点[类型](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-types)处理传入消息。
+最后，应使用 [RPC 调用请求](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-request/)节点将消息发送至设备。
 
-You may also create the RPC using generator node:
+您也可以使用生成器节点创建 RPC：
 
 ```javascript
 var msg = { method: "rpcCommand", params: {} };
@@ -254,82 +252,65 @@ return { msg: msg, metadata: metadata, msgType: msgType };
 
 {% include images-gallery.html imageCollection="server-side-rpc-rule-chain" %}
 
-### Processing server-side RPC on the device
+### 在设备上处理服务端 RPC
 
-ThingsBoard provides a convenient API to receive and process server-side RPC commands on the device.
-This API is specific for each supported network protocol.
-You can review API and examples on the corresponding reference page:
+ThingsBoard 提供便于在设备上接收和处理服务端 RPC 命令的 API。
+该 API 针对每种支持的网络协议有专门实现。
+您可在相应参考页面查看 API 及示例：
 
- - [MQTT RPC API reference](/docs/{{docsPrefix}}reference/mqtt-api/#rpc-api)
- - [CoAP RPC API reference](/docs/{{docsPrefix}}reference/coap-api/#rpc-api)
- - [HTTP RPC API reference](/docs/{{docsPrefix}}reference/http-api/#rpc-api) 
+ - [MQTT RPC API 参考](/docs/{{docsPrefix}}reference/mqtt-api/#rpc-api)
+ - [CoAP RPC API 参考](/docs/{{docsPrefix}}reference/coap-api/#rpc-api)
+ - [HTTP RPC API 参考](/docs/{{docsPrefix}}reference/http-api/#rpc-api) 
 
 
-### Persistent RPC
+### 持久化 RPC
+{: #persistent-rpc}
 
-#### States
+#### 状态
+{: #rpc-states}
 
-ThingsBoard tracks state of the persistent RPC. There are 7 available states:
+ThingsBoard 跟踪持久化 RPC 的状态。共有 7 种状态：
 
 {% if docsPrefix contains 'paas/' %}
 
-* **QUEUED** - RPC was created and saved to the database; 
-  No attempt to send the RPC to device yet; 
-  ThingsBoard will attempt to send the RPC immediately when device becomes online or if it is already online;
-  The platform will attempt to send all pending RPC calls at once by default. 
-  In rare cased of constrained devices and multiple messages in the queue this may lead to overload of the network or device.
-* **SENT** - ThingsBoard performed attempt to send the RPC to device.
-* **DELIVERED** - device confirmed that the RPC was delivered; This is the last step of processing for **one-way** RPC;   
-* **SUCCESSFUL** - ThingsBoard received reply for the **two-way** RPC;  
-* **TIMEOUT** - ThingsBoard transport layer (MQTT/CoAP/LwM2M, etc) detected timeout of the RPC delivery;
-The timeout is controlled using one of the corresponding configuration parameters: 
-MQTT_TIMEOUT (10 seconds by default), COAP_TIMEOUT (10 seconds by default), LWM2M_TIMEOUT (120 seconds by default)
-By default, platform will not retry delivery of the RPC, and the state will change to FAILED.
-You may configure number of retries in the RPC body. 
-The maximum number of retries is 5 by default.
-* **EXPIRED** - The RPC was not delivered or platform did not receive the reply from device within configured expiration time;
-* **FAILED** - failed to deliver the RPC during configurable number of retries or device firmware does not support such a command.
+* **QUEUED** - RPC 已创建并保存到数据库；尚未尝试向设备发送；当设备上线或已在线时，ThingsBoard 会立即尝试发送；默认情况下平台会同时尝试发送所有待处理 RPC；在受限设备且队列中消息较多时，可能导致网络或设备过载。
+* **SENT** - ThingsBoard 已尝试向设备发送 RPC。
+* **DELIVERED** - 设备已确认 RPC 送达；这是**单向**RPC 处理的最后一步。  
+* **SUCCESSFUL** - ThingsBoard 已收到**双向**RPC 的回复。  
+* **TIMEOUT** - ThingsBoard 传输层（MQTT/CoAP/LwM2M 等）检测到 RPC 投递超时；超时由对应配置参数控制：MQTT_TIMEOUT（默认 10 秒）、COAP_TIMEOUT（默认 10 秒）、LWM2M_TIMEOUT（默认 120 秒）；默认平台不会重试，状态会变为 FAILED；可在 RPC 体中配置重试次数；默认最大重试次数为 5。
+* **EXPIRED** - 在配置的过期时间内 RPC 未送达或平台未收到设备回复；
+* **FAILED** - 在可配置次数的重试后仍无法送达，或设备固件不支持该命令。
 
 {% else %}
 
-* **QUEUED** - RPC was created and saved to the database;
-  No attempt to send the RPC to device yet;
-  ThingsBoard will attempt to send the RPC immediately when device becomes online or if it is already online;
-  The platform will attempt to send all pending RPC calls at once by default.
-  In rare cased of constrained devices and multiple messages in the queue this may lead to overload of the network or device.
-  To avoid the overload, you may enable sequential delivery of RPC calls using "ACTORS_RPC_SEQUENTIAL" [configuration](/docs/user-guide/install/{{docsPrefix}}config/) parameter.
-* **SENT** - ThingsBoard performed attempt to send the RPC to device.
-* **DELIVERED** - device confirmed that the RPC was delivered; This is the last step of processing for **one-way** RPC;
-* **SUCCESSFUL** - ThingsBoard received reply for the **two-way** RPC;
-* **TIMEOUT** - ThingsBoard transport layer (MQTT/CoAP/LwM2M, etc) detected timeout of the RPC delivery;
-  The timeout is controlled using one of the corresponding [configuration](/docs/user-guide/install/{{docsPrefix}}config/) parameters:
-  MQTT_TIMEOUT (10 seconds by default), COAP_TIMEOUT (10 seconds by default), LWM2M_TIMEOUT (120 seconds by default)
-  By default, platform will not retry delivery of the RPC, and the state will change to FAILED.
-  You may configure number of retries in the RPC body.
-  The maximum number of retries is controlled by "ACTORS_RPC_MAX_RETRIES" [configuration](/docs/user-guide/install/{{docsPrefix}}config/) parameter (5 by default).
-* **EXPIRED** - The RPC was not delivered or platform did not receive the reply from device within configured expiration time;
-* **FAILED** - failed to deliver the RPC during configurable number of retries or device firmware does not support such a command.
+* **QUEUED** - RPC 已创建并保存到数据库；尚未尝试向设备发送；当设备上线或已在线时，ThingsBoard 会立即尝试发送；默认情况下平台会同时尝试发送所有待处理 RPC；在受限设备且队列中消息较多时，可能导致网络或设备过载；可启用 "ACTORS_RPC_SEQUENTIAL" [配置](/docs/user-guide/install/{{docsPrefix}}config/)参数以启用 RPC 顺序投递避免过载。
+* **SENT** - ThingsBoard 已尝试向设备发送 RPC。
+* **DELIVERED** - 设备已确认 RPC 送达；这是**单向**RPC 处理的最后一步。
+* **SUCCESSFUL** - ThingsBoard 已收到**双向**RPC 的回复。
+* **TIMEOUT** - ThingsBoard 传输层（MQTT/CoAP/LwM2M 等）检测到 RPC 投递超时；超时由对应 [配置](/docs/user-guide/install/{{docsPrefix}}config/)参数控制：MQTT_TIMEOUT（默认 10 秒）、COAP_TIMEOUT（默认 10 秒）、LWM2M_TIMEOUT（默认 120 秒）；默认平台不会重试，状态会变为 FAILED；可在 RPC 体中配置重试次数；最大重试次数由 "ACTORS_RPC_MAX_RETRIES" [配置](/docs/user-guide/install/{{docsPrefix}}config/)参数控制（默认 5）。
+* **EXPIRED** - 在配置的过期时间内 RPC 未送达或平台未收到设备回复；
+* **FAILED** - 在可配置次数的重试后仍无法送达，或设备固件不支持该命令。
 
 {% endif %}
 
 {% capture sequential-rpc-deadlock-warning %}
-Be careful while configuring sequential RPC delivery in combination with increased expiration time, delivery timeout and number of retries.
-If sequential RPC delivery is enabled and your device will not be able to handle specific two-way RPC command, other commands will not be sent to this device.  
+在配置顺序 RPC 投递时，若同时增加过期时间、投递超时和重试次数需格外小心。
+若启用了顺序 RPC 投递且设备无法处理某个双向 RPC 命令，其他命令将无法发送至该设备。  
 {% endcapture %}
 {% include templates/info-banner.md content=sequential-rpc-deadlock-warning %} 
 
-#### Rule chain events 
+#### 规则链事件 
 
-Changes to the [RPC states](/docs/{{docsPrefix}}user-guide/rpc/#rpc-states) are pushed to the Rule Engine as separate messages. 
-Each RPC state has corresponding message type. See image below:
+[RPC 状态](/docs/{{docsPrefix}}user-guide/rpc/#rpc-states)的变化会作为独立消息推送到规则引擎。 
+每种 RPC 状态都有对应的消息类型。如下图所示：
 
 {% include images-gallery.html imageCollection="rule-chain" %}
 
-The message contains exhaustive information about the RPC request, including entity ids and "additionalInfo" from the RPC request body. 
-The "RPC Successful" message also contains reply from the device. 
-These messages are useful if you would like to process the reply from the device in the external system.
+消息包含 RPC 请求的完整信息，包括实体 id 及请求体中的 "additionalInfo"。
+"RPC Successful" 消息还会包含设备回复。
+若要在外部系统中处理设备回复，这些消息很有用。
 
-See example of successful RPC message below:
+成功 RPC 消息示例如下：
 
 ```json
 {
@@ -375,16 +356,16 @@ See example of successful RPC message below:
 ```
 
 
-#### TTL configuration
+#### TTL 配置
 
 {% if docsPrefix contains 'paas/' %}
 
-The time-to-live of persistent RPC depends on the subscription plan. See 'RPC TTL' parameter in [Subscriptions](/docs/{{docsPrefix}}subscription/) for more details.
+持久化 RPC 的生存时间取决于订阅计划。详见[订阅](/docs/{{docsPrefix}}subscription/)中的 'RPC TTL' 参数。
 
 {% else %}
-The time-to-live of persistent RPC is configured by the System Administrator in the [Tenant Profile](/docs/{{docsPrefix}}user-guide/tenant-profiles/) using **RPC TTL days configuration** parameter.
-The System administrator may completely disable the cleanup of the persistent RPC from the database using **SQL_TTL_RPC_ENABLED** [configuration](/docs/user-guide/install/{{docsPrefix}}config/) parameter.
-The frequency of RPC cleanup procedure is controlled using **SQL_RPC_TTL_CHECKING_INTERVAL** parameters which is set to 2 hours by default.
+持久化 RPC 的生存时间由系统管理员在[租户配置文件](/docs/{{docsPrefix}}user-guide/tenant-profiles/)中通过 **RPC TTL 天配置**参数设置。
+系统管理员可使用 **SQL_TTL_RPC_ENABLED** [配置](/docs/user-guide/install/{{docsPrefix}}config/)参数完全禁用持久化 RPC 的数据库清理。
+RPC 清理过程的频率由 **SQL_RPC_TTL_CHECKING_INTERVAL** 参数控制，默认为 2 小时。
 
 {% include images-gallery.html imageCollection="tenant-profile-rpc" %}
 {% endif %}

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Connecting Raspberry Pi with Grove Base Hat to ThingsBoard
-description: ThingsBoard IoT Platform sample for Raspberry Pi Grove Base Hat connecting over MQTT
+title: 将 Raspberry Pi 与 Grove Base Hat 连接到 ThingsBoard
+description: ThingsBoard 物联网平台示例：通过 MQTT 连接 Raspberry Pi Grove Base Hat
 
 ---
 
@@ -9,18 +9,18 @@ description: ThingsBoard IoT Platform sample for Raspberry Pi Grove Base Hat con
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-ThingsBoard Community Edition is an open-source server-side platform that allows you to monitor and control IoT devices.
-It is free for both personal and commercial usage and you can deploy it anywhere.
-If you are not familiar with the platform yet, we recommend to review [what is thingsboard page](/docs/getting-started-guides/what-is-thingsboard/) and [getting started guide](/docs/getting-started-guides/helloworld/) at first and then proceed with this tutorial.
-Within this guide we use [thingsboard.cloud](https://thingsboard.cloud).
+ThingsBoard 社区版是一款开源服务端平台，可用于监控和控制物联网设备。
+对个人和商业用途均免费，可在任意位置部署。
+若您尚未熟悉平台，建议先阅读 [什么是 ThingsBoard](/docs/getting-started-guides/what-is-thingsboard/) 和 [快速入门指南](/docs/getting-started-guides/helloworld/)，再继续本教程。
+本指南使用 [thingsboard.cloud](https://thingsboard.cloud)。
 
-This sample application will allow you to collect information from sensors and control Servo, Led of your Raspberry Pi device with Grove Base Hat PCB using ThingsBoard web UI. The purpose of this application is to demonstrate ThingsBoard and Grove Base Hat PCB integrations.
+本示例应用可让您通过 ThingsBoard Web UI 采集传感器信息并控制 Raspberry Pi Grove Base Hat PCB 上的舵机和 LED。本应用旨在展示 ThingsBoard 与 Grove Base Hat PCB 的集成。
 
-Raspberry Pi will use simple application written in Python for connecting to ThingsBoard server via MQTT, sending information from sensors and listening to RPC commands. ThingsBoard built-in dashboards will be used for data visualizing and controlling Servo and Led as well.
+Raspberry Pi 将使用 Python 编写的简单应用，通过 MQTT 连接 ThingsBoard 服务器，发送传感器信息并监听 RPC 命令。ThingsBoard 内置仪表板用于数据可视化及控制舵机和 LED。
 
-At the end we will get the following result:
+最终效果如下：
 <br>
 
 

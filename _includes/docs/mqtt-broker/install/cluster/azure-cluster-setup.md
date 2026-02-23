@@ -7,14 +7,14 @@
 * TOC
 {:toc}
 
-This guide will help you set up TBMQ {{tbmqSuffix}} in AKS.
+本指南将帮助你在 AKS 中部署 TBMQ {{tbmqSuffix}}。
 
-## Prerequisites
+## 前置要求
 
 {% include templates/mqtt-broker/install/azure/aks-prerequisites.md %}
 
 {% if docsPrefix == null %}
-## Clone TBMQ repository
+## 克隆 TBMQ 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -23,7 +23,7 @@ cd tbmq/k8s/azure
 {: .copy-code}
 
 {% else %}
-## Clone TBMQ PE K8S repository
+## 克隆 TBMQ PE K8S 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq-pe-k8s.git
@@ -32,15 +32,15 @@ cd tbmq-pe-k8s/azure
 {: .copy-code}
 {% endif %}
 
-## Define environment variables
+## 定义环境变量
 
 {% include templates/mqtt-broker/install/azure/aks-define-env-variables.md %}
 
-## Configure and create AKS cluster
+## 配置并创建 AKS 集群
 
 {% include templates/mqtt-broker/install/azure/aks-configure-and-create-cluster.md %}
 
-## Update the context of kubectl
+## 更新 kubectl 上下文
 
 {% include templates/mqtt-broker/install/azure/aks-update-kubectl-ctx.md %}
 
@@ -99,9 +99,9 @@ Example of response:
 }
 ```
 
-Note the value of the host from the command output (**tbmq-db.postgres.database.azure.com** in our case). Also, note username and password (**postgres**) from the command.
+记下命令输出中的 host 值（本示例为 **tbmq-db.postgres.database.azure.com**）以及用户名和密码（**postgres**）。
 
-Edit the database settings file and replace **YOUR_AZURE_POSTGRES_ENDPOINT_URL** with the host value, **YOUR_AZURE_POSTGRES_USER** and **YOUR_AZURE_POSTGRES_PASSWORD** with the correct values:
+编辑数据库配置文件，将 **YOUR_AZURE_POSTGRES_ENDPOINT_URL** 替换为 host 值，**YOUR_AZURE_POSTGRES_USER** 和 **YOUR_AZURE_POSTGRES_PASSWORD** 替换为正确凭据：
 
 ```bash
 nano tbmq-db-configmap.yml
@@ -120,9 +120,9 @@ kubectl config set-context $(kubectl config current-context) --namespace=thingsb
 
 ## Azure Cache for Valkey
 
-TBMQ {{tbmqSuffix}} relies on **Valkey** to store messages for [DEVICE persistent clients](/docs/{{docsPrefix}}mqtt-broker/architecture/#persistent-device-client).
-The cache also improves performance by reducing the number of direct database reads, especially when authentication is enabled and multiple clients connect at once.
-Without caching, every new connection triggers a database query to validate MQTT client credentials, which can cause the unnecessary load under high connection rates.
+TBMQ {{tbmqSuffix}} 依赖 **Valkey** 存储 [DEVICE 持久客户端](/docs/{{docsPrefix}}mqtt-broker/architecture/#persistent-device-client) 的消息。
+缓存还能减少直接数据库读取，提升性能，尤其在启用认证且多客户端并发连接时。
+若无缓存，每次新连接都会触发数据库查询以验证 MQTT 客户端凭据，在高连接率下可能造成不必要的负载。
 
 {% capture valkey-azure-version %}
 **Note:** Starting from **TBMQ {{tbmqSuffix}} {{valkey_from_version}}**, [Valkey](https://valkey.io/) **8.0** is officially supported.
@@ -132,15 +132,15 @@ To ensure compatibility with TBMQ {{tbmqSuffix}} {{valkey_from_version}} and lat
 {% endcapture %}
 {% include templates/info-banner.md content=valkey-azure-version %}
 
-You can choose one of the following paths depending on your environment:
+可根据环境选择下列路径之一：
 
-- [Deploy a Valkey cluster on AKS](https://learn.microsoft.com/en-us/azure/aks/valkey-overview)**(Recommended)**
-- [Quickstart: Create a Redis Enterprise cache](https://learn.microsoft.com/en-us/azure/redis/quickstart-create-managed-redis)
+- [在 AKS 上部署 Valkey 集群](https://learn.microsoft.com/en-us/azure/aks/valkey-overview)**（推荐）**
+- [快速入门：创建 Redis Enterprise 缓存](https://learn.microsoft.com/en-us/azure/redis/quickstart-create-managed-redis)
 
-Once your Azure Cache is ready, update the cache configuration in `tbmq-cache-configmap.yml` with the correct endpoint values:
+Azure Cache 就绪后，在 `tbmq-cache-configmap.yml` 中填入正确的 endpoint 配置：
 
-* **For standalone Redis**:
-  Uncomment and set the following values. Make sure the `REDIS_HOST` value does **not** include the port (`:6379`).
+* **独立 Redis**：
+  取消注释并设置下列值。确保 `REDIS_HOST` **不**包含端口（`:6379`）。
 
   ```yaml
   REDIS_CONNECTION_TYPE: "standalone"
@@ -148,8 +148,8 @@ Once your Azure Cache is ready, update the cache configuration in `tbmq-cache-co
   #REDIS_PASSWORD: "YOUR_REDIS_PASSWORD"
   ```
 
-* **For Valkey cluster**:
-  Provide a comma-separated list of "host:port" node endpoints to bootstrap from.
+* **Valkey 集群**：
+  提供以逗号分隔的 "host:port" 节点 endpoint 列表以进行引导。
 
   ```yaml
   REDIS_CONNECTION_TYPE: "cluster"
@@ -160,18 +160,18 @@ Once your Azure Cache is ready, update the cache configuration in `tbmq-cache-co
   #REDIS_JEDIS_CLUSTER_TOPOLOGY_REFRESH_ENABLED: "true"
   ```
 
-**Hints for Valkey Cluster Creation**
+**Valkey 集群创建提示**
 
-The official Azure documentation for creating a Valkey cluster assumes a completely new environment. Since you have already set up your resources earlier in this guide, you should adapt the instructions as follows:
+官方 Azure 文档假设从全新环境创建 Valkey 集群。由于你已按本指南完成前期资源创建，需按下列方式调整：
 
-* **Skip Infrastructure Creation:** You have already created the Resource Group and AKS cluster. You may skip the steps regarding `az group create` and `az aks create`.
-* **Optional Services:** You can choose to skip creating an **Azure Key Vault (AKV)** instance and **Azure Container Registry (ACR)** to simplify the setup.
-* **Node Pools:** Creating a dedicated node pool for Valkey is optional. While dedicated pools offer better resource isolation, you can use your existing node pool for this deployment.
-* **Namespace:** We recommend deploying the Valkey cluster into the same namespace as TBMQ (e.g., `thingsboard-mqtt-broker`) rather than creating a separate `valkey` namespace. This keeps all components unified.
+* **跳过基础设施创建**：Resource Group 和 AKS 集群已创建，可跳过 `az group create` 和 `az aks create` 相关步骤。
+* **可选服务**：可选择不创建 **Azure Key Vault (AKV)** 和 **Azure Container Registry (ACR)** 以简化部署。
+* **节点池**：为 Valkey 创建专用节点池为可选。专用池隔离更好，也可使用现有节点池。
+* **命名空间**：建议将 Valkey 集群部署到与 TBMQ 相同的命名空间（如 `thingsboard-mqtt-broker`），而非单独的 `valkey` 命名空间，便于统一管理。
 
-#### Creating the Secret
+#### 创建 Secret
 
-If you choose not to use Azure Key Vault, you must create a generic Kubernetes secret manually. This secret must be formatted exactly as the Valkey container expects (with specific keys and line breaks).
+若不使用 Azure Key Vault，需手动创建 generic Kubernetes secret。格式必须与 Valkey 容器期望的一致（含特定 key 与换行）。
 
 <details markdown="1">
 <summary>

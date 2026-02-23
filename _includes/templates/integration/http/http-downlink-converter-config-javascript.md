@@ -6,14 +6,14 @@
 {% endif %}
 
 <br>
-Add a converter to the integration. You can customize a downlink according to your configuration.
-Let’s consider an example where we send an attribute update message. So we should change code in the downlink encoder function under line **//downlink data** input:
+向集成添加转换器。您可以根据配置自定义下行。
+我们来看一个发送属性更新消息的示例。因此我们应修改 **//下行数据** 输入行下的下行编码器函数中的代码：
 
 ```ruby
 data: JSON.stringify(msg)
 ```
 {: .copy-code}
-where **msg** is the message that we receive and send back to the device.
+其中 **msg** 是我们接收并发回设备的消息。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/integrations/http/http-create-downlink-java-2-pe.png)
@@ -23,25 +23,25 @@ where **msg** is the message that we receive and send back to the device.
 {% endif %}
 
 <br>
-An example of downlink converter:
+下行转换器示例：
 
 ```ruby
-// Encode downlink data from incoming Rule Engine message
+// 从传入规则引擎消息编码下行数据
 
-// msg - JSON message payload downlink message json
-// msgType - type of message, for ex. 'ATTRIBUTES_UPDATED', 'POST_TELEMETRY_REQUEST', etc.
-// metadata - list of key-value pairs with additional data about the message
-// integrationMetadata - list of key-value pairs with additional data defined in Integration executing this converter
+// msg - 下行消息 JSON 负载
+// msgType - 消息类型，例如 'ATTRIBUTES_UPDATED'、'POST_TELEMETRY_REQUEST' 等
+// metadata - 包含消息附加数据的键值对列表
+// integrationMetadata - 包含执行此转换器的集成中定义的附加数据的键值对列表
 
 var result = {
 
-    // downlink data content type: JSON, TEXT or BINARY (base64 format)
+    // 下行数据内容类型：JSON、TEXT 或 BINARY（base64 格式）
     contentType: "JSON",
 
-    // downlink data
+    // 下行数据
     data: JSON.stringify(msg),
 
-    // Optional metadata object presented in key/value format
+    // 以键/值格式呈现的可选元数据对象
     metadata: {
     }
 };

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: AWS SQS integration
-description: AWS SQS integration guide
+title: AWS SQS 集成
+description: AWS SQS 集成指南
 redirect_to: "/docs/paas/eu/user-guide/integrations/"
 
 ---

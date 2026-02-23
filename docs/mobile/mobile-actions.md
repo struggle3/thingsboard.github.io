@@ -1,17 +1,17 @@
 ---
 layout: docwithnav-mobile
-title: Configure mobile actions in ThingsBoard Mobile Application
+title: 在ThingsBoard移动应用中配置移动操作
 
 mobile-actions:
  0:
   image: /images/mobile/mobile-actions-1.png
-  title: 'In the drop-down menu <b>Type</b>, choose a <i>Mobile action</i> action type'
+  title: '在<b>类型</b>下拉菜单中选择<i>移动操作</i>操作类型'
  1:
   image: /images/mobile/mobile-actions-2.png
-  title: 'In the <b>Mobile action type</b> drop-down menu choose mobile action type you want to set up'
+  title: '在<b>移动操作类型</b>下拉菜单中选择要设置的移动操作类型'
  2:
   image: /images/mobile/mobile-actions-3.png
-  title: 'Configure java-script functions with your own processing logic depending on the selected mobile action type.<br>Use help buttons to open details about function definitions and examples.'
+  title: '根据所选移动操作类型，配置具有自有处理逻辑的java-script函数。<br>使用帮助按钮查看函数定义和示例详情。'
 
 ---
 

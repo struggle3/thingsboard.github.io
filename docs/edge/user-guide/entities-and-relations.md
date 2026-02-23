@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Entities and Relations on Edge
-description: Entities and Relations on Edge
+title: Edge上的实体与关系
+description: Edge上的实体与关系
 ---
 
 {% assign docsPrefix = "edge/" %}

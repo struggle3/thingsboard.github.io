@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Temco Tstat10 to ThingsBoard?
-category: Other devices
+title: 如何将 Temco Tstat10 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [HTTP, Ethernet, WIFI, BACnet, RS485]
 vendor: Temco Controls
 deviceImageFileName: temco-tstat10.jpg

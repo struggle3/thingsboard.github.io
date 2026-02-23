@@ -1,14 +1,14 @@
-You should install some system libraries for using BLE Connector and bleak library for python.  
-Just copy following commands and run them:  
+使用 BLE Connector 及 bleak 库需安装部分系统库和 Python bleak 库。
+复制并执行以下命令：  
 
-This command will install required libraries:  
+此命令将安装所需库：  
 
 ```bash
 sudo apt-get install -y libglib2.0-dev zlib1g-dev
 ```
 {: .copy-code}
 
-This command will install bluepy library:  
+此命令将安装 bluepy 库：  
 
 ```bash
 sudo pip3 install bleak

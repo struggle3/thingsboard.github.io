@@ -1,49 +1,49 @@
-Configure MQTT load balancer if you plan to use MQTT protocol to connect devices.
+若计划使用 MQTT 协议连接设备，请配置 MQTT 负载均衡器。
 
-Create TCP load balancer using following command:
+使用以下命令创建 TCP 负载均衡器：
 
 ```bash
 kubectl apply -f receipts/mqtt-load-balancer.yml
 ```
 {: .copy-code}
 
-The load balancer will forward all TCP traffic for ports 1883 and 8883.
+该负载均衡器将转发端口 1883 和 8883 的所有 TCP 流量。
 
-#### One-way TLS
+#### 单向 TLS
 
-The simplest way to configure MQTTS is to make your MQTT load balancer (AWS NLB) to act as a TLS termination point.
-This way we setup the one-way TLS connection, where the traffic between your devices and load balancers is encrypted, and the traffic between your load balancer and MQTT Transport is not encrypted.
-There should be no security issues, since the ALB/NLB is running in your VPC.
-The only major disadvantage of this option is that you can't use "X.509 certificate" MQTT client credentials, since information about client certificate is not transferred from the load balancer to the ThingsBoard MQTT Transport service.
+配置 MQTTS 的最简单方式是让 MQTT 负载均衡器（AWS NLB）作为 TLS 终止点。
+这样我们建立单向 TLS 连接：设备与负载均衡器之间的流量被加密，负载均衡器与 MQTT 传输服务之间的流量不加密。
+由于 ALB/NLB 在您的 VPC 内运行，不应存在安全问题。
+此方案的主要缺点是无法使用「X.509 证书」类 MQTT 客户端凭据，因为客户端证书信息不会从负载均衡器传递到 ThingsBoard MQTT 传输服务。
 
-To enable the **one-way TLS**:
+要启用 **单向 TLS**：
 
-Use [AWS Certificate Manager](https://aws.amazon.com/certificate-manager/) to create or import SSL certificate. Note your certificate ARN.
+使用 [AWS Certificate Manager](https://aws.amazon.com/certificate-manager/) 创建或导入 SSL 证书。记下证书 ARN。
 
-Edit the load balancer configuration and replace *YOUR_MQTTS_CERTIFICATE_ARN* with your certificate ARN:
+编辑负载均衡器配置，将 *YOUR_MQTTS_CERTIFICATE_ARN* 替换为您的证书 ARN：
 
 ```bash
 nano receipts/mqtts-load-balancer.yml
 ```
 {: .copy-code}
 
-Execute the following command to deploy plain https load balancer:
+执行以下命令部署纯 HTTPS 负载均衡器：
 
 ```bash
 kubectl apply -f receipts/mqtts-load-balancer.yml
 ```
 {: .copy-code}
 
-#### Two-way TLS
+#### 双向 TLS
 
-The more complex way to enable MQTTS is to obtain valid (signed) TLS certificate and configure it in the MQTT Transport. The main advantage of this option is that you may use it in combination with "X.509 certificate" MQTT client credentials.
+启用 MQTTS 的更复杂方式是获取有效（已签名）的 TLS 证书并在 MQTT 传输中配置。此方案的主要优势是可与「X.509 证书」类 MQTT 客户端凭据配合使用。
 
-To enable the **two-way TLS**:
+要启用 **双向 TLS**：
 
-Follow [this guide](/docs/user-guide/mqtt-over-ssl/) to create a **.pem** file with the SSL certificate.
-Store the file as *server.pem* in the working directory.
+按照 [本指南](/docs/user-guide/mqtt-over-ssl/) 创建包含 SSL 证书的 **.pem** 文件。
+将文件以 *server.pem* 保存在工作目录中。
 
-You'll need to create a config-map with your PEM file, you can do it by calling command:
+需要创建包含 PEM 文件的 config-map，可执行：
 
 ```
 kubectl create configmap tb-mqtts-config \
@@ -53,19 +53,19 @@ kubectl create configmap tb-mqtts-config \
 ```
 {: .copy-code}
 
-* where **YOUR_PEM_FILENAME** is the name of your **server certificate file**.
-* where **YOUR_PEM_KEY_FILENAME** is the name of your **server certificate private key file**. 
+* **YOUR_PEM_FILENAME** 为 **服务器证书文件** 名称。
+* **YOUR_PEM_KEY_FILENAME** 为 **服务器证书私钥文件** 名称。
 
-Then, uncomment all sections in the '{{tbServicesFile}}' file that are marked with "Uncomment the following lines to enable two-way MQTTS".
+然后，取消 '{{tbServicesFile}}' 文件中所有标有「Uncomment the following lines to enable two-way MQTTS」的段落注释。
 
-Execute command to apply changes:
+执行以下命令使更改生效：
 
 ```
 kubectl apply -f {{tbServicesFile}}
 ```
 {: .copy-code}
 
-Finally, deploy the "transparent" load balancer:
+最后，部署「透明」负载均衡器：
 
 ```bash
 kubectl apply -f receipts/mqtt-load-balancer.yml

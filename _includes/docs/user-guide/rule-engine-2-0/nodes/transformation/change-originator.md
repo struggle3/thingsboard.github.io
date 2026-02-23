@@ -1,36 +1,35 @@
-Changes the originator of the incoming message to another entity, as defined in the configuration. The originator can be changed to:
+根据配置将入站消息的来源实体更换为另一实体。来源实体可更换为：
 
-* **Customer** — the customer of the current originator.
-* **Tenant** — the tenant of the current originator.
-* **Related entity** — an entity related to the current originator.
-* **Alarm originator** — the originator of the alarm, if the current originator is an alarm.
-* **Entity by name pattern** — an entity found in the database by a configured name pattern.
+* **Customer** — 当前来源实体的客户。
+* **Tenant** — 当前来源实体的租户。
+* **Related entity** — 与当前来源实体相关的实体。
+* **Alarm originator** — 告警的来源实体（若当前来源实体为告警）。
+* **Entity by name pattern** — 通过配置的名称模式在数据库中查找的实体。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **New originator** — specifies which entity to set as the new originator for the outgoing message. Can be one of:
-    * *Customer* — the customer assigned to the current originator.
-    * *Tenant* — the tenant that owns the current originator.
-    * *Related entity* — an entity related to the current originator, resolved using the configured **Relations query**.
-    * *Alarm originator* — the entity that originated the alarm; available only when the current originator is an `ALARM`.
-    * *Entity by name pattern* — an entity looked up in the database by **Type** and a configured **Name pattern**.
+* **New originator** — 指定将哪个实体设为出站消息的新来源实体。可为：
+    * *Customer* — 分配给当前来源实体的客户。
+    * *Tenant* — 拥有当前来源实体的租户。
+    * *Related entity* — 与当前来源实体相关的实体，使用配置的**关系查询**解析。
+    * *Alarm originator* — 产生告警的实体；仅当当前来源实体为 `ALARM` 时可用。
+    * *Entity by name pattern* — 通过**Type**和配置的**Name pattern**在数据库中查找的实体。
 
-If *Related entity* is configured for *New originator*, you need to specify **Relations query** to resolve new originator:
+若 *New originator* 配置为 *Related entity*，需指定**关系查询**以解析新来源实体：
 
-* **Direction** — specifies the direction of the relation (*From originator* or *To originator*), relative to the current originator.
-* **Max relation level** - maximum level of nested relations that are followed. If not specified, there is no limit for nesting.
-* **Fetch last level relation only** - if enabled, only relations located in the **Max relation level** are considered, others are discarded. If disabled, entities found on all
-  levels are considered. This field is shown only if **Max relation level** is set to a value other than 1.
-* **Relation filters** - list of filters that found relation must satisfy to be considered.
-    * **Relation type** - found relation must have this type.
-    * **Entity type** - set of entity types that related entity must match.
+* **Direction** — 指定相对于当前来源实体的关系方向（*From originator* 或 *To originator*）。
+* **Max relation level** — 要追踪的嵌套关系的最大层级。未指定时无层级限制。
+* **Fetch last level relation only** — 启用后仅考虑**Max relation level**层级的关系，其余丢弃。禁用时考虑所有层级找到的实体。该字段仅在 **Max relation level** 设为非 1 时显示。
+* **Relation filters** — 找到的关系必须满足的过滤器列表。
+    * **Relation type** — 找到的关系必须具有此类型。
+    * **Entity type** — 相关实体必须匹配的实体类型集合。
 
-If *Entity by name pattern* is configured for *New originator*, you need to specify following fields to find new originator:
+若 *New originator* 配置为 *Entity by name pattern*，需指定以下字段以查找新来源实体：
 
-* **Type** - type of the entity to look for. Can be one of: *Device*, *Asset*, *Entity View*, *User* or *Edge*.
-* **Name pattern** - name pattern of the entity to look for. For example, `MyDevice` or, if using pattern, `${deviceName}`.
+* **Type** — 要查找的实体类型。可为：*Device*、*Asset*、*Entity View*、*User* 或 *Edge*。
+* **Name pattern** — 要查找的实体的名称模式。例如 `MyDevice`，或使用模板 `${deviceName}`。
 
 ### JSON Schema
 
@@ -71,29 +70,29 @@ If *Entity by name pattern* is configured for *New originator*, you need to spec
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Try to find new originator based on configuration
-    1. If found, change originator of the message to the new one and route the message via `Success`.
-    2. If not found, route the message via `Failure`.
+1. 根据配置尝试查找新来源实体
+    1. 若找到，将消息来源实体更换为新实体，并经 `Success` 路由消息。
+    2. 若未找到，经 `Failure` 路由消息。
 
-## Output connections
+## 输出连接
 
-* `Success`:
-    * If new originator was found and changed.
-* `Failure`:
-    * If new originator was not found.
-    * If unexpected error occurred during message processing.
+* `Success`：
+    * 找到并更换新来源实体时。
+* `Failure`：
+    * 未找到新来源实体时。
+    * 消息处理过程中发生意外错误时。
 
-## Examples
+## 示例
 
-### Example 1 — Changing originator to a customer
+### 示例 1 — 将来源实体更换为客户
 
-**Incoming message**
+**入站消息**
 
-Originator is an asset.
+来源实体为资产。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -101,27 +100,27 @@ Originator is an asset.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Originator asset is assigned to a customer with ID `781a4826-8334-11f0-8de9-0242ac120002`.
+来源资产分配给 ID 为 `781a4826-8334-11f0-8de9-0242ac120002` 的客户。
 
-**Outgoing message**
+**出站消息**
 
-Originator is `CUSTOMER` with ID `781a4826-8334-11f0-8de9-0242ac120002`.
+来源实体为 ID `781a4826-8334-11f0-8de9-0242ac120002` 的 `CUSTOMER`。
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** Because incoming message originator (an asset) is assigned to a customer, customer was found and originator was changed to that customer.
+**说明：** 因入站消息来源实体（资产）分配给客户，找到客户并将来源实体更换为该客户。
 
 ---
 
-### Example 2 — Changing originator to a tenant
+### 示例 2 — 将来源实体更换为租户
 
-**Incoming message**
+**入站消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -129,27 +128,27 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Processing happens in tenant with ID `a8b88d08-8339-11f0-8de9-0242ac120002`.
+处理在 ID 为 `a8b88d08-8339-11f0-8de9-0242ac120002` 的租户下进行。
 
-**Outgoing message**
+**出站消息**
 
-Same as incoming message but originator is a `TENANT` with ID `a8b88d08-8339-11f0-8de9-0242ac120002`.
+与入站消息相同，但来源实体为 ID `a8b88d08-8339-11f0-8de9-0242ac120002` 的 `TENANT`。
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** Because message processing always happens under some tenant, tenant can always be found an so originator was changed to that tenant.
+**说明：** 消息处理始终在某个租户下进行，因此总能找到租户，来源实体更换为该租户。
 
 ---
 
-### Example 3 — Changing originator to a related entity
+### 示例 3 — 将来源实体更换为相关实体
 
-**Incoming message**
+**入站消息**
 
-Originator is an asset named `Parent Asset`.
+来源实体为名为 `Parent Asset` 的资产。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -167,32 +166,31 @@ Originator is an asset named `Parent Asset`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The system has the following relations:
+系统具有以下关系：
 
 Level 1: `Parent Asset` -- Contains --> `Child Device`
 
 Level 2: `Child Device` -- Contains --> `Grandchild Device`
 
-**Outgoing message**
+**出站消息**
 
-Same as incoming message, but the originator is changed to the `Child Asset`.
+与入站消息相同，但来源实体更换为 `Child Asset`。
 
-**Output connections**: `Success`.
+**输出连接**: `Success`。
 
-**Explanation**: The node searches for related entities starting from `Parent Asset`. It finds `Child Device` at level 1. Since `maxLevel` is set to 1, the search stops there, and `Child
-Device` becomes the new originator. The `Grandchild Device` at level 2 is ignored.
+**说明**: 节点从 `Parent Asset` 开始查找相关实体。在 level 1 找到 `Child Device`。因 `maxLevel` 为 1，查找止于此，`Child Device` 成为新来源实体。Level 2 的 `Grandchild Device` 被忽略。
 
 ---
 
-### Example 4 — Changing originator to an alarm originator
+### 示例 4 — 将来源实体更换为告警来源实体
 
-**Incoming message**
+**入站消息**
 
-Originator is an `ALARM`.
+来源实体为 `ALARM`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -200,24 +198,23 @@ Originator is an `ALARM`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Originator of the incoming alarm is a device with ID `c4d81246-8341-11f0-8de9-0242ac120002`.
+入站告警的来源实体为 ID `c4d81246-8341-11f0-8de9-0242ac120002` 的设备。
 
-**Outgoing message**
+**出站消息**
 
-Same as incoming but the originator is the `DEVICE` with ID `c4d81246-8341-11f0-8de9-0242ac120002`.
+与入站消息相同，但来源实体为 ID `c4d81246-8341-11f0-8de9-0242ac120002` 的 `DEVICE`。
 
-**Output connections**: `Success`.
+**输出连接**: `Success`。
 
-**Explanation**: The incoming message's originator is an alarm. The node successfully identifies the entity that created the alarm (the device) and sets it as the new originator
-for the outgoing message.
+**说明**: 入站消息来源实体为告警。节点成功识别创建告警的实体（设备）并将其设为出站消息的新来源实体。
 
 ---
 
-### Example 5 - Changing originator to entity by name pattern
+### 示例 5 — 按名称模式将来源实体更换为指定实体
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -227,7 +224,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -237,16 +234,14 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-A device with the name `Sensor-T1000` and ID `e6f15598-8345-11f0-8de9-0242ac120002` exists.
+存在名为 `Sensor-T1000`、ID 为 `e6f15598-8345-11f0-8de9-0242ac120002` 的设备。
 
-**Outgoing message**
+**出站消息**
 
-Originator is the `DEVICE` with ID `e6f15598-8345-11f0-8de9-0242ac120002`.
+来源实体为 ID `e6f15598-8345-11f0-8de9-0242ac120002` 的 `DEVICE`。
 
-**Output connections**: `Success`.
+**输出连接**: `Success`。
 
-**Explanation**: The node resolves the name pattern `${sensorName}` by substituting it with the value from the message metadata, resulting in the name `Sensor-T1000`. It then finds
-the
-device with this name and successfully changes the originator.
+**说明**: 节点通过用消息 metadata 中的值替换，解析名称模式 `${sensorName}`，得到名称 `Sensor-T1000`。随后找到具有该名称的设备并成功更换来源实体。

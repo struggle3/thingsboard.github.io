@@ -8,9 +8,9 @@
 * TOC 
 {:toc}
 
-## Overview
+## 概述
 
-Azure Event Hub Integration allows to stream data from Azure Event Hub to ThingsBoard and converts device payloads to the ThingsBoard format.
+Azure Event Hub集成可从Azure Event Hub向ThingsBoard流式传输数据，并将设备负载转换为ThingsBoard格式。
 
 ![image](/images/user-guide/integrations/azure-event-hub-integration.svg)
  

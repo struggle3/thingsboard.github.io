@@ -1,18 +1,18 @@
-Execute the following command to pull the image:
+执行以下命令拉取镜像：
 
 ```bash
 docker pull thingsboard/tb-pe-opc-ua-integration:{{ site.release.pe_full_ver }}
 ```
 {: .copy-code}
 
-Execute the following command to create volume for the integration logs (799 is the user id of ThingsBoard non-root docker user):
+执行以下命令创建集成日志卷（799 为 ThingsBoard 非 root Docker 用户 ID）：
 
 ```bash
 mkdir -p ~/.tb-pe-opc-ua-integration-logs && sudo chown -R 799:799 ~/.tb-pe-opc-ua-integration-logs
 ```
 {: .copy-code}
 
-Execute the following command to run the integration:
+执行以下命令运行集成：
 
 ```bash
 docker run -it -v ~/.tb-pe-opc-ua-integration-logs:/var/log/tb-opc-ua-integration \
@@ -22,44 +22,44 @@ docker run -it -v ~/.tb-pe-opc-ua-integration-logs:/var/log/tb-opc-ua-integratio
 ```
 {: .copy-code}
 
-Where: 
+其中：
     
-- `thingsboard.cloud` - is the host name of your ThingsBoard PE instance;
-- `9090` - is the port of your ThingsBoard PE instance. It is configured in thingsboard.yml using INTEGRATIONS_RPC_PORT env variable;    
-- `YOUR_ROUTING_KEY` - placeholder for your **integration key** obtained on [create remote integration in ThingsBoard](#create-remote-integration-in-thingsboard);
-- `YOUR_SECRET` - placeholder for your **integration secret** obtained on [create remote integration in ThingsBoard](#create-remote-integration-in-thingsboard);
-- `docker run`              - run this container;
-- `-it`                     - attach a terminal session with current ThingsBoard process output;
-- `-v ~/.tb-pe-opc-ua-integration-logs:/var/log/tb-opc-ua-integration`   - mounts the host's dir `~/.tb-pe-opc-ua-integration-logs` to ThingsBoard logs directory;
-- `--name tb-pe-opc-ua-integration`             - friendly local name of this machine;
-- `--restart always`        - automatically start ThingsBoard Integration in case of system reboot and restart in case of failure.;
-- `thingsboard/tb-pe-opc-ua-integration:{{ site.release.pe_full_ver }}`          - docker image.
+- `thingsboard.cloud` - 您的 ThingsBoard PE 实例的主机名；
+- `9090` - 您的 ThingsBoard PE 实例的端口，通过 thingsboard.yml 中的 INTEGRATIONS_RPC_PORT 环境变量配置；
+- `YOUR_ROUTING_KEY` - 占位符，替换为在 [于 ThingsBoard 中创建远程集成](#create-remote-integration-in-thingsboard) 时获取的**集成密钥**；
+- `YOUR_SECRET` - 占位符，替换为在 [于 ThingsBoard 中创建远程集成](#create-remote-integration-in-thingsboard) 时获取的**集成密钥**；
+- `docker run` - 运行此容器；
+- `-it` - 附加到显示当前 ThingsBoard 进程输出的终端会话；
+- `-v ~/.tb-pe-opc-ua-integration-logs:/var/log/tb-opc-ua-integration` - 将主机目录 `~/.tb-pe-opc-ua-integration-logs` 挂载到 ThingsBoard 日志目录；
+- `--name tb-pe-opc-ua-integration` - 容器的本地友好名称；
+- `--restart always` - 系统重启或故障后自动启动 ThingsBoard 集成；
+- `thingsboard/tb-pe-opc-ua-integration:{{ site.release.pe_full_ver }}` - Docker 镜像。
 
-After executing this command you can open logs which are located here `~/.tb-pe-opc-ua-integration-logs`. 
-You should see some INFO log messages with your latest Integration configuration that arrived from the server.
+执行此命令后可在以下位置查看日志 `~/.tb-pe-opc-ua-integration-logs`。
+您应能看到一些带有最新从服务器接收的集成配置的 INFO 日志消息。
 
 {% capture difference %}
-You can detach from session terminal with **`Ctrl-p`**+**`Ctrl-q`** - the container will keep running in the background.
+可使用 **`Ctrl-p`**+**`Ctrl-q`** 从会话终端分离——容器将继续在后台运行。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-- **Reattaching, stop and start commands**
+- **重新连接、停止和启动命令**
 
-To reattach to the terminal (to see ThingsBoard logs) run:
+要重新连接到终端（查看 ThingsBoard 日志）请运行：
 
 ```
 docker attach tb-pe-opc-ua-integration
 ```
 {: .copy-code}
 
-To stop the container:
+停止容器：
 
 ```
 docker stop tb-pe-opc-ua-integration
 ```
 {: .copy-code}
 
-To start the container:
+启动容器：
 
 ```
 docker start tb-pe-opc-ua-integration

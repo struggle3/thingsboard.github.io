@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Cloud Events
-description: Cloud Events
+title: 云事件
+description: 云事件
 cloudEvents:
     0:
         image: /images/edge/cloud-events.png

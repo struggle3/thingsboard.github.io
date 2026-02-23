@@ -1,19 +1,19 @@
-Now you can open TBMQ web interface in your browser using DNS name of the load balancer.
+现在可在浏览器中使用负载均衡器的 DNS 名称打开 TBMQ Web 界面。
 
-You can get DNS name of the load-balancers using the next command:
+可使用以下命令获取负载均衡器的 DNS 名称：
 
 ```bash
 kubectl get ingress
 ```
 {: .copy-code}
 
-You should see the similar picture:
+输出应类似：
 
 ```text
 NAME                          CLASS    HOSTS   ADDRESS         PORTS   AGE
 my-tbmq-cluster-http-lb       <none>   *       34.111.24.134   80      3d1h
 ```
 
-Use `ADDRESS` field of the `my-tbmq-cluster-http-lb` to connect to the cluster.
+使用 `my-tbmq-cluster-http-lb` 的 `ADDRESS` 字段连接集群。
 
 {% include templates/mqtt-broker/login.md %}

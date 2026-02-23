@@ -1,17 +1,16 @@
-## Self-signed certificates generation
+## 自签名证书生成
 
-Use the instructions below to generate your own certificate files. Useful for tests, but time-consuming and not recommended for production.
+以下说明用于生成自有证书文件，适用于测试环境，耗时且不推荐用于生产环境。
 
-> **Note:** These steps require Linux-based OS with openssl installed.
+> **注意：** 需在已安装 openssl 的 Linux 类系统上执行以下步骤。
 
-You need to either create a self-signed certificate for the server or follow the advanced steps to create a CA-signed server certificate. 
-Both methods achieve the same goal: securing your server with a valid certificate.
+可选择为服务器创建自签名证书，或按进阶步骤创建 CA 签名的服务器证书。
+两种方式都能实现同一目标：用有效证书保护服务器。
 
-#### Self-signed certificate PEM file
+#### 自签名证书 PEM 文件
 
-This is a simpler method where the server generates its own certificate and signs it. 
-Useful for basic testing or small setups where you don't need a Certificate Authority (CA).
-To generate a server self-signed PEM certificate and private key, use the following command:
+这是更简单的方式，由服务器自行生成并签署证书，适用于基础测试或无需证书颁发机构（CA）的小型部署。
+生成服务器自签名 PEM 证书及私钥可使用以下命令：
 
 ```bash
 openssl ecparam -out server_key.pem -name secp256r1 -genkey
@@ -19,64 +18,64 @@ openssl req -new -key server_key.pem -x509 -nodes -days 365 -out server.pem
 ```
 {: .copy-code}
 
-You can also add `-nodes` (short for no DES) if you don't want to protect your private key with a passphrase. Otherwise, it will prompt you for "at least a 4 character" password.
+如不想用密码保护私钥，可加 `-nodes`（no DES 的缩写），否则会要求输入「至少 4 个字符」的密码。
 
-The **days** parameter (365) you can replace with any number to affect the expiration date. It will then prompt you for things like "Country Name", but you can just hit Enter and accept the defaults.
+**days** 参数（365）可改为任意数字以影响有效期。随后会提示输入「Country Name」等，可直接按 Enter 使用默认值。
 
-Add `-subj '/CN=localhost'` to suppress questions about the contents of the certificate (replace localhost with your desired domain).
+添加 `-subj '/CN=localhost'` 可跳过证书内容相关提问（将 localhost 替换为你的域名）。
 
-Self-signed certificates are not validated with any third party unless you import them to the browsers previously. If you need more security, you should use a certificate signed by a certificate authority (CA).
+自签名证书不经第三方校验，除非事先导入浏览器。如需更高安全性，应使用由证书颁发机构（CA）签名的证书。
 
-#### Certificate PEM File signed by a certificate authority (CA)
+#### 由证书颁发机构（CA）签名的证书 PEM 文件
 
-This method creates a Certificate Authority (CA) to sign your server certificate. For more secure setups,
-particularly if you plan to manage multiple certificates or require a dedicated Certificate Authority (CA) for signing.
+本方法通过创建证书颁发机构（CA）来签署服务器证书，适合需要更高安全性的场景，
+尤其是计划管理多张证书或需要专用 CA 进行签名时。
 
-**Generate a CA private key:**
+**生成 CA 私钥：**
 
 ```bash
 openssl ecparam -out ca_key.pem -name secp256r1 -genkey
 ```
 {: .copy-code}
 
-**Generate a self-signed CA certificate:**
+**生成自签名 CA 证书：**
 
 ```bash
 openssl req -new -x509 -key ca_key.pem -days 365 -out ca.pem
 ```
 {: .copy-code}
 
-This creates a self-signed CA certificate "**ca.pem**" valid for 365 days. When prompted, fill out the certificate details (e.g., Common Name: My Root CA).
+将生成有效期为 365 天的自签名 CA 证书「**ca.pem**」。按提示填写证书信息（如 Common Name：My Root CA）。
 
-**Generate a private key for the server:**
+**生成服务器私钥：**
 
 ```bash
 openssl ecparam -out server_key.pem -name secp256r1 -genkey
 ```
 {: .copy-code}
 
-This generates an **EC private key: server_key.pem**.
+将生成 **EC 私钥 server_key.pem**。
 
-**Create a Certificate Signing Request (CSR):**
+**创建证书签名请求（CSR）：**
 
 ```bash
 openssl req -new -key server_key.pem -out server.csr
 ```
 {: .copy-code}
 
-The CSR "**server.csr**" contains the server's details to be signed by the CA.
+「**server.csr**」包含待 CA 签名的服务器信息。
 
-**Finally, Sign the server certificate using the CA:**
+**最后，使用 CA 签署服务器证书：**
 
 ```bash
 openssl x509 -req -in server.csr -CA ca.pem -CAkey ca_key.pem -CAcreateserial -out server.pem -days 365
 ```
 {: .copy-code}
 
-This command produces "**server.pem**", a server certificate signed by the CA.
+该命令将生成由 CA 签名的服务器证书「**server.pem**」。
 
-`-req` - indicates that the input is a Certificate Signing Request (CSR).
-`-CA` and `-CAkey` - specify the CA certificate "**ca.pem**" and its private key "**ca_key.pem**" used to sign the server certificate.
+`-req`：表示输入为证书签名请求（CSR）。
+`-CA` 与 `-CAkey`：指定用于签署服务器证书的 CA 证书「**ca.pem**」及其私钥「**ca_key.pem**」。
 
-The `-CAcreateserial` flag automatically generates a serial number file "**ca.srl**" to keep track of certificate serial numbers for this CA. 
-This is useful if you plan to sign multiple certificates. If you don’t want to generate "**ca.srl**", replace `-CAcreateserial` with `-set_serial <serial_number>` to specify the serial number manually.
+`-CAcreateserial` 会自动生成序列号文件「**ca.srl**」以记录该 CA 的证书序列号。 
+签署多张证书时很有用。若不希望生成「**ca.srl**」，可将 `-CAcreateserial` 换成 `-set_serial <serial_number>` 手动指定序列号。

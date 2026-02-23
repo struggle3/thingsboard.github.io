@@ -81,14 +81,12 @@ h2, h3, h4 {
 
 {% else %}
 
-### ERROR: You must define "cards" front-matter YAML
+### 错误：您必须在 front-matter 中定义「cards」YAML
 {: style="color:red" }
 
-This template requires that you insert YAML at the top of your document
-that defines the "cards" you'd like to display on the page. The cards will
-render in clickable boxes.
+此模板要求您在文档顶部插入定义要在页面上显示的「cards」的 YAML。这些卡片将渲染为可点击的方框。
 
-To get rid of this message and take advantage of this template, define `cards`:
+要消除此消息并正确使用此模板，请定义 `cards`：
 
 ```yaml
 ---
@@ -113,9 +111,6 @@ cards:
 ---
 ```
 
-**Note:** If `progression` is set to `yes` then a "Start Here!" icon will be
-placed on the first card and arrows suggesting linear reading will be overlayed
-between the other cards, telling the reader that they should explore the content
-in a certain order.
+**注意：** 若将 `progression` 设置为 `yes`，则会在第一张卡片上放置「从这里开始！」图标，并在其他卡片之间叠加建议顺序阅读的箭头，引导读者按特定顺序浏览内容。
 
 {% endif %}

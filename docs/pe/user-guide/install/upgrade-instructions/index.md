@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Upgrade instructions
-description: ThingsBoard PE IoT platform upgrade instructions
+title: 升级说明
+description: ThingsBoard PE IoT 平台升级说明
 redirect_from: 
   - "/docs/user-guide/install/aws-marketplace-pe-upgrade/"
 table-of-contents: "false"

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: TBMQ Professional Edition Roadmap
-description: TBMQ upcoming releases
+title: TBMQ 专业版路线图
+description: TBMQ 即将发布版本
 
 ---
 

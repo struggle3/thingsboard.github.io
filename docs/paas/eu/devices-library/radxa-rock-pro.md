@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect Radxa Rock Pro to ThingsBoard?"
+title: "如何将Radxa Rock Pro连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/radxa-rock-pro/"
 ---

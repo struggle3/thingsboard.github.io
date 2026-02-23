@@ -1,14 +1,14 @@
 {% assign current_version = include.version %}
 
-1. Create a dump of your database:
+1. 创建数据库备份导出：
     ```bash
     docker compose exec postgres sh -c "pg_dump -U postgres trendz > /var/lib/postgresql/data/trendz_dump"
     ```
     {: .copy-code}
 
-2. Change the version of the `thingsboard/trendz` and `thingsboard/trendz-python-executor` in the `docker-compose.yml` file to the **{{ current_version }}**.
+2. 将 `docker-compose.yml` 中 `thingsboard/trendz` 与 `thingsboard/trendz-python-executor` 的版本号改为 **{{ current_version }}**。
 
-3. Execute the following commands:
+3. 执行以下命令：
 {% if include.skipUpgrade %}
     ```bash
     docker pull thingsboard/trendz:{{ current_version }}

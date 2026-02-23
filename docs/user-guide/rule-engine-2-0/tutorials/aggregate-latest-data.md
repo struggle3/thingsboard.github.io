@@ -1,106 +1,106 @@
 ---
 layout: docwithnav
-title: Aggregate latest telemetry values periodically
-description: Calculate average temperature in the warehouse
+title: 定期聚合最新 telemetry 值
+description: 计算仓库内平均温度
 hidetoc: "true"
 
 ---
 
 {% assign feature = "Analytics Rule Nodes" %}{% include templates/pe-feature-banner.md %}
 
-This tutorial will show how to calculate average temperature in the warehouse based on readings from multiple temperature sensors inside the warehouse. 
+本教程演示如何根据仓库内多个温度传感器的最新读数，每分钟计算仓库平均温度。 
 
 * TOC
 {:toc}
 
-## Use case
+## 使用场景
 
-Let's assume you have a warehouse with multiple temperature sensors. For example, one per each zone. Let's also assume temperature readings are reported by the sensor only when it detects temperature change.
-Thus, some sensors may have been inactive for a week although some sensors may report temperature change just recently. 
+假设仓库内有多个温度传感器（例如每区域一个），且传感器仅在检测到温度变化时上报读数。
+因此，部分传感器可能已一周无上报，而其他传感器可能最近才上报变化。 
 
-In this tutorial we will configure ThingsBoard Rule Engine to automatically calculate average temperature in the warehouse based on latest readings from multiple temperature sensors every minute.
-Please note that this is just a simple theoretical use case to demonstrate the capabilities of the platform. You can use this tutorial as a basis for much more complex scenarios.
+本教程将配置ThingsBoard Rule Engine，根据多个温度传感器的最新读数每分钟自动计算仓库平均温度。
+请注意，这仅为一个简单的理论示例，用于展示平台能力。您可将本教程作为基础实现更复杂的场景。
 
 
-We will use 1 warehouse, 2 sensors and 1 minute execution period just for demo purposes.
+为演示方便，仅使用 1 个仓库、2 个传感器和 1 分钟执行周期。
 
-## Prerequisites
+## 前置条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+请确保已完成以下指南并阅读所列文章：
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
+  * [Getting Started](/docs/getting-started-guides/helloworld/) 指南。
+  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/)。
 
-## Model definition
+## 模型定义
 
-We will create one asset that has name "Warehouse A" and type "warehouse". We will add this asset to an asset group called "Warehouses".
+创建一个名为「Warehouse A」、类型为「warehouse」的 asset，并将其加入名为「Warehouses」的 asset 分组。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/add-asset.png)
 
-We will create two devices that has names "Sensor A1" and "Sensor A2" and type "thermometer". We will add this devices to device group called "Thermometers".
+创建两个设备，名称分别为「Sensor A1」和「Sensor A2」，类型为「thermometer」，并将其加入名为「Thermometers」的设备分组。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/add-meters.png)
 
-We must also create relations between the warehouse asset and thermometers. This relation will be used in the rule chain to associate thermometer readings with the warehouse itself. 
-It is also convenient to use relations in the dashboards to provide drill-down capabilities. You may notice two outbound relations from the warehouse asset to the thermometers on the screenshot below:
+还需在 warehouse asset 与温度计设备之间创建 relations。rule chain 将用这些 relation 将温度计读数关联到仓库本身。 
+relations 也可用于 dashboard 中实现下钻。下面截图中可看到 warehouse asset 到温度计的两条出向 relation：
  
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/add-relations.png)
 
-**Note**: Please review the following [**documentation page**](/docs/user-guide/entities-and-relations/) to learn how to create assets and relations.
+**说明**：请参阅 [**文档页面**](/docs/user-guide/entities-and-relations/) 了解如何创建 assets 和 relations。
 
-## Message Flow
+## 消息流
 
-In this section, we explain the purpose of each node in this tutorial. There will be two rule chains involved:
+本节说明本教程中各节点的作用。涉及两个 rule chain：
 
-  * "Thermometer Emulators" - optional rule chain to simulate data from two temperature sensors; 
-  * "Warehouse Temperature" - rule chain that actually calculates average temperature in the warehouse;
+  * 「Thermometer Emulators」— 可选，用于模拟两个温度传感器的数据； 
+  * 「Warehouse Temperature」— 负责计算仓库平均温度的 rule chain；
 
 ### Thermometer Emulators rule chain
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/emulator-rule-chain.png)
 
-  * **Nodes A and B**: Generator nodes
+  * **Nodes A 和 B**：Generator 节点
 
-    * Two similar nodes that periodically generate a very simple message with random temperature reading.
+    * 两个类似节点，定期生成包含随机温度读数的简单消息。
 
     ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/nodes-a-and-b.png)
 
-  * **Node C**: Rule Chain node
+  * **Node C**：Rule Chain 节点
 
-    * Forwards all messages to default rule chain.
+    * 将所有消息转发到默认 rule chain。
 
 ### Warehouse Temperature rule chain
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/aggregation-rule-chain.png)
 
-  * **Node D**: Aggregate latest. Periodically (period of execution is defined as "Execution period value") executes the following:
+  * **Node D**：Aggregate latest 节点。按周期（「Execution period value」定义执行周期）执行：
 
-    *  Fetches all devices related to the "Warehouse A" asset using "Contains" relation.
-    *  Fetches latest temperature reading for each of the devices and calculates average temperature reading.
-    *  Generates "POST_TELEMETRY_REQUEST" message that contains value of the average temperature.
+    *  通过「Contains」relation 获取与「Warehouse A」asset 相关的所有设备。
+    *  获取每个设备的最新温度读数并计算平均温度读数。
+    *  生成包含平均温度值的「POST_TELEMETRY_REQUEST」消息。
 
     ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/node-d-part1.png)
 
     ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/node-d-part2.png)
 
-  * **Node E**: Save telemetry node
+  * **Node E**：Save telemetry 节点
 
-    * Simple node that stores incoming message to the database and dispatches updates to the subscribers.
+    * 简单节点，将入站消息写入数据库并分发给订阅者。
 
 
-## Configuring the Rule Chains
+## 配置 Rule Chains
 
-Download and [**import**](/docs/user-guide/ui/rule-chains/#rule-chains-importexport) attached emulators rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/thermometer_emulators.json) as a new "Thermometer Emulators" rule chain and 
-attached warehouse temperature rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/warehouse_temperature.json) as a new "Warehouse Temperature" rule chain. 
-Please note that some nodes have debug enabled. This affects performance. Create Node C as shown on the image above in the thermometer emulators rule chain to forward telemetry to the root rule chain.
+下载并 [**import**](/docs/user-guide/ui/rule-chains/#rule-chains-importexport) 附带的模拟器 rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/thermometer_emulators.json) 作为新的「Thermometer Emulators」rule chain，以及
+仓库温度 rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/warehouse_temperature.json) 作为新的「Warehouse Temperature」rule chain。 
+注意部分节点已开启 debug，会影响性能。在 thermometer emulators rule chain 中按上图创建 Node C，将 telemetry 转发到 root rule chain。
 
-## Validating the flow
+## 验证流程
 
-Download and [**import**](/docs/user-guide/ui/dashboards/#iot-dashboard-importexport) attached dashboard [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/warehouse_thermometers.json) as a new "Warehouse Temperature" dashboard.
+下载并 [**import**](/docs/user-guide/ui/dashboards/#iot-dashboard-importexport) 附带的 dashboard [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/warehouse_thermometers.json) 作为新的「Warehouse Temperature」dashboard。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/dashboard-part1.png)
 
-Note that you can drill down to the chart for particular warehouse by clicking on the corresponding row.
+可点击对应行下钻到具体仓库的图表。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation-latest/dashboard-part2.png)
 

@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Users
-description: ThingsBoard Users management
+title: 用户
+description: ThingsBoard 用户管理
 
 users-intro-pe:
     0:

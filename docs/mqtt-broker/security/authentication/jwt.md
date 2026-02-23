@@ -1,12 +1,12 @@
 ---
 layout: docwithnav-mqtt-broker
-title: JWT Authentication
-description: JWT Authentication
+title: JWT 认证
+description: JWT 认证
 
 configure-jwt-auth-provider:
   0:
     image: /images/mqtt-broker/security/auth-providers/jwt/configure-jwt-auth-provider.png
-    title: 'Open the Authentication > Providers page, select the JWT row, and click the "Edit" button to configure the provider.'
+    title: '打开认证 > 提供者页面，选择 JWT 行，点击「编辑」按钮配置提供者。'
 configure-signature-verifier-mechanism:
   0:
     image: /images/mqtt-broker/security/auth-providers/jwt/configure-signature-verifier-mechanism.png

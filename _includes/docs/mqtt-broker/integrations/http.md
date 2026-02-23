@@ -1,99 +1,99 @@
 * TOC
 {:toc}
 
-TBMQ HTTP Integration provides a simple and efficient way to forward MQTT messages from devices to an external system using the HTTP protocol. 
-It acts as a **bridge** between TBMQ and external applications, ensuring seamless and reliable data exchange. 
+TBMQ HTTP 集成提供了一种通过 HTTP 协议将设备 MQTT 消息转发至外部系统的简便方式。
+它作为 TBMQ 与外部应用之间的**桥梁**，确保数据交换顺畅可靠。
 
-## Data Flow Overview
+## 数据流概述
 
-TBMQ HTTP Integration enables forwarding MQTT messages to an external HTTP service:  
+TBMQ HTTP 集成支持将 MQTT 消息转发至外部 HTTP 服务：
 
-1. **Device (client) publishes an MQTT message** to a topic that matches the Integration's **Topic Filters**.  
-2. **TBMQ broker receives the message** and forwards to TBMQ Integration Executor.  
-3. **TBMQ Integration Executor processes the message**, formats it as an HTTP request, and forwards it to the external service.  
-4. **External service receives the request** and processes the data accordingly.  
+1. **设备（客户端）发布 MQTT 消息**到匹配集成**主题过滤器**的主题。
+2. **TBMQ 代理接收消息**并转发至 TBMQ Integration Executor。
+3. **TBMQ Integration Executor 处理消息**，将其格式化为 HTTP 请求并转发至外部服务。
+4. **外部服务接收请求**并相应处理数据。
 
 ![image](/images/mqtt-broker/integrations/tbmq-http-integration.png)
 
-## Prerequisites
+## 前置条件
 
-Before setting up the integration, ensure the following:
+设置集成前，请确保：
 
-- A running **[TBMQ](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/)** instance.  
-- An external service ready to receive HTTP requests (e.g., **[ThingsBoard Cloud](/docs/paas/getting-started-guides/what-is-thingsboard-cloud/)**).  
-- A client capable of publishing MQTT messages (e.g., **[TBMQ WebSocket Client](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/websocket-client/)**).  
+- 有正在运行的 **[TBMQ](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/)** 实例。
+- 有可接收 HTTP 请求的外部服务（如 **[ThingsBoard Cloud](/docs/paas/getting-started-guides/what-is-thingsboard-cloud/)**）。
+- 有可发布 MQTT 消息的客户端（如 **[TBMQ WebSocket Client](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/websocket-client/)**）。
 
-## Create ThingsBoard Integration
+## 创建 ThingsBoard 集成
 
-In this tutorial, we use **ThingsBoard** as the external service receiving HTTP requests from TBMQ. However, any other HTTP-compatible service can be used.
+本教程以 **ThingsBoard** 作为接收 TBMQ HTTP 请求的外部服务，也可使用其他兼容 HTTP 的服务。
 
-Follow the official **[ThingsBoard HTTP Integration Guide](/docs/paas/user-guide/integrations/http/)** to create an integration on ThingsBoard Cloud.
+按照官方 **[ThingsBoard HTTP 集成指南](/docs/paas/user-guide/integrations/http/)** 在 ThingsBoard Cloud 上创建集成。
 
-Once the HTTP Integration is created:
+创建 HTTP 集成后：
 
-1. Open the **details page** and enable **debug mode** to verify data reception.  
-2. **Copy the HTTP endpoint URL**, as this will be needed in the next step.
+1. 打开**详情页**并启用**调试模式**以验证数据接收。
+2. **复制 HTTP 端点 URL**，下一步将用到。
 
 {% include images-gallery.html imageCollection="tb-endpoint-url" %}
 
-## Create TBMQ HTTP Integration
+## 创建 TBMQ HTTP 集成
 
-1. Go to the **Integrations** page and click the "+" button to create a new integration.
-2. Select **HTTP** as the integration type and click **Next**.
-3. On the **Topic Filters** page click **Next** to subscribe to the default topic `tbmq/#`.
-4. In the **Configuration** step, paste the **Endpoint URL** from the ThingsBoard Integration.
-5. Open **Advanced settings** and set **Payload content type** to `JSON`.
-6. Click **Add** to save the integration.
+1. 进入**集成**页面，点击 “+” 创建新集成。
+2. 选择 **HTTP** 作为集成类型，点击**下一步**。
+3. 在**主题过滤器**页面点击**下一步**，订阅默认主题 `tbmq/#`。
+4. 在**配置**步骤，粘贴 ThingsBoard 集成的**端点 URL**。
+5. 打开**高级设置**，将**负载内容类型**设为 `JSON`。
+6. 点击**添加**保存集成。
 
 {% include images-gallery.html imageCollection="add-http-integration" %}
 
-> You can test the connectivity to the configured HTTP endpoint by sending a HEAD request using the 'Check connection' button.
+> 可使用“检查连接”按钮发送 HEAD 请求测试与已配置 HTTP 端点的连通性。
 
 ### Topic Filters
 
 {% include templates/mqtt-broker/user-guide/integrations/topic-filters.md %}
 
-### Configuration
+### 配置
 
-|**Field**|**Description**|
+|**字段**|**描述**|
 |:-|:-|-
-| **Send only message payload** | If enabled, the incoming message's payload is forwarded as is. If disabled, a JSON object with the payload and other properties is sent. |
-| **Endpoint URL** | The external service URL where HTTP requests are sent. |
-| **Request Method** | Defines how the request is made. Supported methods: `GET`, `POST`, `PUT`, `DELETE`. |
-| **Credentials** | Supported authentication options: |
-| | **Anonymous** – No authentication. |
-| | **Basic Authentication** – Uses `Username` and `Password` for authentication. |
-| | **PEM-based authentication** – Uses PEM certificate to authenticate. |
-| **Headers** | A collection of key-value pairs added to the HTTP request headers. |
-| **Payload Content Type** | Defines the format of the request body. Supported: `JSON`, `Text`, `Binary (Base64)`. |
-| **Send as binary on parsing error** | If enabled, messages with a failed `JSON` or `Text` parsing attempt will be sent as a binary payload. If disabled, failed messages will not be sent. |
-| **Read Timeout** | Maximum time the request waits for a response before timing out. |
-| **Max Parallel Requests** | Limits the number of concurrent HTTP requests. |
-| **Max Response Size** | Defines the maximum allowed size for incoming responses. |
-| **Metadata** | Custom metadata that can be used for additional processing. |
+| **仅发送消息负载** | 启用时，传入消息的负载按原样转发。禁用时，发送包含负载及其他属性的 JSON 对象。 |
+| **端点 URL** | 发送 HTTP 请求的外部服务 URL。 |
+| **请求方法** | 定义请求方式。支持：`GET`、`POST`、`PUT`、`DELETE`。 |
+| **凭证** | 支持的认证选项： |
+| | **匿名** – 无需认证。 |
+| | **基本认证** – 使用 `用户名` 和 `密码` 认证。 |
+| | **PEM 认证** – 使用 PEM 证书认证。 |
+| **Headers** | 添加到 HTTP 请求头的键值对集合。 |
+| **负载内容类型** | 定义请求体格式。支持：`JSON`、`Text`、`Binary (Base64)`。 |
+| **解析失败时按二进制发送** | 启用时，`JSON` 或 `Text` 解析失败的消息将作为二进制负载发送。禁用时，失败消息不会发送。 |
+| **读取超时** | 请求在超时前等待响应的最长时间。 |
+| **最大并行请求数** | 限制并发 HTTP 请求数。 |
+| **最大响应大小** | 定义允许的传入响应最大大小。 |
+| **Metadata** | 可用于额外处理的自定义元数据。 |
 |---
 
-### Events
+### 事件
 
 {% include templates/mqtt-broker/user-guide/integrations/events.md %}
 
-## Sending an Uplink Message
+## 发送上行消息
 
-To send a message, follow these steps:
+发送消息请按以下步骤：
 
-1. Navigate to the **WebSocket Client** page.
-2. Select 'WebSocket Default Connection' or any other available working connection, then click **Connect**. Make sure the 'Connection status' is shown as `Connected`.
-3. Set the 'Topic' field to `tbmq/http-integration` to match the Integration's 'Topic Filter' `tbmq/#`.
-4. Click the **Send** icon to publish the message. 
-5. If successfull, the message should appear in the 'Messages' table.
+1. 进入**WebSocket Client**页面。
+2. 选择“WebSocket Default Connection”或其他可用连接，点击**连接**。确保“连接状态”显示为 `Connected`。
+3. 将“主题”字段设为 `tbmq/http-integration`，以匹配集成的主题过滤器 `tbmq/#`。
+4. 点击**发送**图标发布消息。
+5. 成功后，消息应出现在“消息”表中。
 
 {% include images-gallery.html imageCollection="send-uplink-message" %}
 
-Once the message is published:
+消息发布后：
 
-1. In the **ThingsBoard Cloud** open the HTTP Integration details.
-2. Go to the **Events** tab.
-3. If the setup is correct, you should see an event with the status **'OK'** and a message payload similar to:
+1. 在 **ThingsBoard Cloud** 中打开 HTTP 集成详情。
+2. 进入**事件**标签页。
+3. 若配置正确，应看到状态为 **'OK'** 的事件及类似如下的消息负载：
 
 ```json
 {
@@ -115,18 +115,18 @@ Once the message is published:
 }
 ```
 
-Message description:
+消息说明：
 
-- **payload**: Content of the MQTT message.
-- **topicName**: The MQTT topic to which the message was published.
-- **clientId**: The ID of the MQTT client that published the message.
-- **eventType**: Type of MQTT event, here it's a published message (the only supported type for now).
-- **qos**: Quality of Service level used for the incoming message.
-- **retain**: Indicates if the message is a retained MQTT message.
-- **tbmqIeNode**: Node ID of the Integration Executor service that handled the message.
-- **tbmqNode**: Node ID of the TBMQ broker that received the message.
-- **ts**: Timestamp (in milliseconds) when the message was received.
-- **props**: MQTT 5.0 user properties or other MQTT properties.
-- **metadata**: Additional metadata added from integration configuration, e.g., the name of the integration that handled the message, added by default.
+- **payload**：MQTT 消息内容。
+- **topicName**：发布消息的 MQTT 主题。
+- **clientId**：发布消息的 MQTT 客户端 ID。
+- **eventType**：MQTT 事件类型，此处为已发布消息（当前唯一支持的类型）。
+- **qos**：传入消息使用的服务质量等级。
+- **retain**：表示消息是否为保留 MQTT 消息。
+- **tbmqIeNode**：处理消息的 Integration Executor 服务节点 ID。
+- **tbmqNode**：接收消息的 TBMQ 代理节点 ID。
+- **ts**：接收消息时的时间戳（毫秒）。
+- **props**：MQTT 5.0 用户属性或其他 MQTT 属性。
+- **metadata**：从集成配置添加的额外元数据，默认包含处理消息的集成名称。
 
 {% include images-gallery.html imageCollection="http-integration-result" %}

@@ -1,44 +1,44 @@
 ---
 layout: docwithnav-trendz
-title: Native Calculation Fields
-description: Native Calculation Fields
+title: 原生计算字段
+description: 原生计算字段
 ---
 
 * TOC
 {:toc}
 
-Native Calculations are calculation fields designed with minimal restrictions and maximum flexibility. They allow you to 
-freely define which relations, telemetries, or attributes to use and from which time range. You can use five input 
-parameters and five available functions to fetch telemetries, attributes, or relations from any timerange for any entity. 
-All these functions or parameters will be covered later in this article.
+原生计算是设计为限制最少、灵活性最大的计算字段。它们允许您
+自由定义使用哪些关系、遥测或属性以及使用哪个时间范围。您可以使用五个输入
+参数和五个可用函数，从任意实体在任意时间范围内获取遥测、属性或关系。
+本文稍后将介绍所有这些函数和参数。
 
-## Rules
+## 规则
 
-The only rule is the required output format. The code must return an array of timestamp/value objects:
+唯一规则是所需的输出格式。代码必须返回时间戳/值对象的数组：
 
 ```
 [{"ts": <ts>, "value": <value>}]
 ```
 
-This timeseries could be saved to ThingsBoard when a reprocess or refresh job is set up for the originator.
+此时间序列可在为发起者设置重处理或刷新任务时保存到 ThingsBoard。
 
-## Parameters
+## 参数
 
-Within a Native Calculation, you can use the following parameters:
+在原生计算中，您可以使用以下参数：
 
-1. **startTs** - start timestamp (in ms)
-2. **endTs** - end timestamp (in ms)
-3. **groupBy** - grouping interval ('minute', 'hour', 'day', 'week', or 'month')
-4. **tzName** - timezone of the user who runs the task (e.g., test, refresh, or reprocess)
-5. **tzOffsetMs** - offset in milliseconds between UTC and the user’s timezone
+1. **startTs** - 起始时间戳（毫秒）
+2. **endTs** - 结束时间戳（毫秒）
+3. **groupBy** - 分组间隔（'minute'、'hour'、'day'、'week' 或 'month'）
+4. **tzName** - 运行任务用户时区（如测试、刷新或重处理）
+5. **tzOffsetMs** - UTC 与用户时区之间的毫秒偏移
 
-These parameters may differ depending on the calculation context.
+这些参数可能因计算上下文而异。
 
-## Functions
+## 函数
 
 ### get_originator_id()
 
-Returns the ID (UUID) of the current calculation originator.
+返回当前计算发起者的 ID（UUID）。
 
 ```python
 originator_id = get_originator_id()
@@ -46,7 +46,7 @@ originator_id = get_originator_id()
 
 ### get_originator_type()
 
-Returns the type ('DEVICE' or 'ASSET') of the current originator.
+返回当前发起者的类型（'DEVICE' 或 'ASSET'）。
 
 ```python
 originator_type = get_originator_type()
@@ -54,7 +54,7 @@ originator_type = get_originator_type()
 
 ### get_telemetries()
 
-Fetch telemetry data from any available entity.
+从任意可用实体获取遥测数据。
 
 ```python
 get_telemetries(
@@ -66,7 +66,7 @@ get_telemetries(
 )
 ```
 
-Returns a dictionary of telemetry values:
+返回遥测值字典：
 
 ```
 {
@@ -76,16 +76,16 @@ Returns a dictionary of telemetry values:
 }
 ```
 
-#### Examples
+#### 示例
 
-Fetch telemetries (temperature and heat_consumption) from originator with default timerange:
+使用默认时间范围从发起者获取遥测（temperature 和 heat_consumption）：
 
 ```python
 keys = ['temperature', 'heat_consumption']
 telemetries = get_telemetries(keys)
 ```
 
-Fetch telemetries with custom timerange:
+使用自定义时间范围获取遥测：
 
 ```python
 keys = ['temperature', 'heat_consumption']
@@ -94,7 +94,7 @@ to_ts = 1735689600000   # 1 Jan 2025
 telemetries = get_telemetries(keys, from_ts=from_ts, to_ts=to_ts)
 ```
 
-Fetch telemetries from device with id `8c790660-782a-4c7b-ae07-0c3163a6f968` with default timerange:
+使用默认时间范围从 id 为 `8c790660-782a-4c7b-ae07-0c3163a6f968` 的设备获取遥测：
 
 ```python
 keys = ['temperature', 'heat_consumption']
@@ -103,7 +103,7 @@ entity_type = 'DEVICE'
 telemetries = get_telemetries(keys, entity_id=entity_id, entity_type=entity_type)
 ```
 
-Fetch telemetries from device with id `8c790660-782a-4c7b-ae07-0c3163a6f968` with custom timerange:
+使用自定义时间范围从 id 为 `8c790660-782a-4c7b-ae07-0c3163a6f968` 的设备获取遥测：
 
 ```python
 keys = ['temperature', 'heat_consumption']
@@ -114,7 +114,7 @@ entity_type = 'DEVICE'
 telemetries = get_telemetries(keys, from_ts=from_ts, to_ts=to_ts, entity_id=entity_id, entity_type=entity_type)
 ```
 
-Use retrieved telemetries in custom logic:
+在自定义逻辑中使用获取的遥测：
 
 ```python
 if not telemetries['temperature']:
@@ -129,7 +129,7 @@ for temperature_reading in telemetries['temperature']:
 
 ### get_attributes()
 
-Fetch attributes data from any available entity.
+从任意可用实体获取属性数据。
 
 ```python
 get_attributes(
@@ -139,7 +139,7 @@ get_attributes(
 )
 ```
 
-Returns a dictionary grouped by scope:
+返回按范围分组的字典：
 
 ```
 {
@@ -149,9 +149,9 @@ Returns a dictionary grouped by scope:
 }
 ```
 
-#### Examples
+#### 示例
 
-Fetch area attribute (server scope) from originator:
+从发起者获取 area 属性（服务器范围）：
 
 ```python
 attributes = [{'scope': 'SERVER_SCOPE', 'key': 'area'}]
@@ -159,7 +159,7 @@ fetched_attributes = get_attributes(attributes)
 area = fetched_attributes.get('SERVER_SCOPE', {}).get('area')
 ```
 
-Fetch area attribute (server scope) from asset with id `4e0aba8c-772d-4d61-9f16-3d8c896b1600`:
+从 id 为 `4e0aba8c-772d-4d61-9f16-3d8c896b1600` 的资产获取 area 属性（服务器范围）：
 
 ```python
 attributes = [{'scope': 'SERVER_SCOPE', 'key': 'area'}]
@@ -171,7 +171,7 @@ area = fetched_attributes.get('SERVER_SCOPE', {}).get('area')
 
 ### get_relations()
 
-Fetch relations data from any available entity.
+从任意可用实体获取关系数据。
 
 ```python
 get_relations(
@@ -184,7 +184,7 @@ get_relations(
 )
 ```
 
-Returns a list of relations:
+返回关系列表：
 
 ```
 [
@@ -198,21 +198,21 @@ Returns a list of relations:
 ]
 ```
 
-#### Examples
+#### 示例
 
-Fetch all relations for originator:
+获取发起者的所有关系：
 
 ```python
 relations = get_relations()
 ```
 
-Fetch only relations with type Contains, direction TO, and target assets with profile EM apartment:
+仅获取类型为 Contains、方向为 TO、目标资产配置文件为 EM apartment 的关系：
 
 ```python
 relations = get_relations(direction='TO', relation_type='Contains', target_entity_type='ASSET', target_entity_profile_name='EM apartment')
 ```
 
-Fetch all relations for device with id `8c790660-782a-4c7b-ae07-0c3163a6f968`:
+获取 id 为 `8c790660-782a-4c7b-ae07-0c3163a6f968` 的设备的所有关系：
 
 ```python
 entity_id = '8c790660-782a-4c7b-ae07-0c3163a6f968'
@@ -220,7 +220,7 @@ entity_type = 'DEVICE'
 relations = get_relations(entity_id=entity_id, entity_type=entity_type)
 ```
 
-Fetch only relations with type Contains, direction TO, and target assets with profile EM apartment for device with id `8c790660-782a-4c7b-ae07-0c3163a6f968`:
+获取 id 为 `8c790660-782a-4c7b-ae07-0c3163a6f968` 的设备的类型为 Contains、方向为 TO、目标资产配置文件为 EM apartment 的关系：
 
 ```python
 entity_id = '8c790660-782a-4c7b-ae07-0c3163a6f968'
@@ -228,7 +228,7 @@ entity_type = 'DEVICE'
 relations = get_relations(entity_id=entity_id, entity_type=entity_type, direction='TO', relation_type='Contains', target_entity_type='ASSET', target_entity_profile_name='EM apartment')
 ```
 
-Relations usage: fetch area attribute from associated asset:
+关系用法：从关联资产获取 area 属性：
 
 ```python
 relations = get_relations(direction='TO', relation_type='Contains', target_entity_type='ASSET', target_entity_profile_name='EM apartment')
@@ -243,29 +243,29 @@ fetched_attributes = get_attributes(attributes, entity_id=apartment_id, entity_t
 area = fetched_attributes.get('SERVER_SCOPE', {}).get('area')
 ```
 
-## Best Practices
+## 最佳实践
 
-Use Native Calculations when:
+在以下情况使用原生计算：
 
-* You need flexible relation navigation or telemetry fetching.
-* You want to experiment using the Metric Explorer.
+* 您需要灵活的关系导航或遥测获取。
+* 您想使用指标浏览器进行实验。
 
-Avoid Native Calculations when:
+在以下情况避免使用原生计算：
 
-* The same result can be achieved with Simple or Batched Calculations (they perform better).
+* 简单或批量计算可实现相同结果（它们性能更好）。
 
-## Limitations
+## 限制
 
-Native Calculations only support the **Fixed timerange** strategy.
+原生计算仅支持 **固定时间范围** 策略。
 
-## Example
+## 示例
 
-Example Native Calculation to compute temperature difference between a heat meter and the building average:
+示例：计算热表与建筑平均温度的温差的原生计算：
 
 ```python
 import statistics
 
-# 1. Fetch the 'temperature' telemetry from the current EM heat meter.
+# 1. 从当前 EM 热表获取 'temperature' 遥测。
 heat_meter_temperature_data = get_telemetries(keys=["temperature"])
 if not heat_meter_temperature_data or "temperature" not in heat_meter_temperature_data:
     print("Temperature telemetry not found for the heat meter.")
@@ -276,7 +276,7 @@ if not heat_meter_temperature_values:
     print("Temperature telemetry values are empty.")
     return []
 
-# 2. Traverse from 'EM heat meter' to 'EM apartment' using relation type 'Contains' (direction TO).
+# 2. 使用关系类型 'Contains'（方向 TO）从 'EM heat meter' 遍历到 'EM apartment'。
 apartment_relations = get_relations(direction="TO", relation_type="Contains", target_entity_type="ASSET", target_entity_profile_name="EM apartment")
 if not apartment_relations:
     print("No related apartment found for the heat meter.")
@@ -286,7 +286,7 @@ apartment_id = apartment_relations[0]["entityId"]
 apartment_type = apartment_relations[0]["entityType"]
 print(f"Apartment ID: {apartment_id}")
 
-# 3. Traverse from 'EM apartment' to 'EM building' using relation type 'Contains' (direction TO).
+# 3. 使用关系类型 'Contains'（方向 TO）从 'EM apartment' 遍历到 'EM building'。
 building_relations = get_relations(entity_id=apartment_id, entity_type=apartment_type, direction="TO", relation_type="Contains", target_entity_type="ASSET", target_entity_profile_name="EM building")
 if not building_relations:
     print("No related building found for the apartment.")
@@ -296,14 +296,14 @@ building_id = building_relations[0]["entityId"]
 building_type = building_relations[0]["entityType"]
 print(f"Building ID: {building_id}")
 
-# 4. Find all 'EM apartment' entities related to the 'EM building' using relation type 'Contains' (direction FROM).
+# 4. 使用关系类型 'Contains'（方向 FROM）查找与 'EM building' 相关的所有 'EM apartment' 实体。
 apartment_relations_from_building = get_relations(entity_id=building_id, entity_type=building_type, direction="FROM", relation_type="Contains", target_entity_type="ASSET", target_entity_profile_name="EM apartment")
 if not apartment_relations_from_building:
     print("No related apartments found for the building.")
     return []
 
 building_heat_meter_temperatures = {}
-# 5. For each 'EM apartment', find all related 'EM heat meter' entities using relation type 'Contains' (direction FROM).
+# 5. 对于每个 'EM apartment'，使用关系类型 'Contains'（方向 FROM）查找所有相关的 'EM heat meter' 实体。
 for apartment in apartment_relations_from_building:
     apartment_id = apartment["entityId"]
     apartment_type = apartment["entityType"]
@@ -314,7 +314,7 @@ for apartment in apartment_relations_from_building:
             heat_meter_id = heat_meter["entityId"]
             heat_meter_type = heat_meter["entityType"]
 
-            # 6. For each 'EM heat meter' found in step 5, fetch the 'temperature' telemetry.
+            # 6. 对于步骤 5 中找到的每个 'EM heat meter'，获取 'temperature' 遥测。
             heat_meter_temperature_data = get_telemetries(keys=["temperature"], entity_id=heat_meter_id, entity_type=heat_meter_type)
             if heat_meter_temperature_data and "temperature" in heat_meter_temperature_data:
                 heat_meter_temperature_values = heat_meter_temperature_data["temperature"]
@@ -331,13 +331,13 @@ for apartment in apartment_relations_from_building:
                             print(f"Error converting temperature value to float: {e}")
                             continue
 
-# 7. Calculate the average temperature of all 'EM heat meter' entities within the building for each timestamp.
+# 7. 计算建筑内所有 'EM heat meter' 实体在每个时间戳的平均温度。
 building_average_temperatures = {}
 for ts, temperatures in building_heat_meter_temperatures.items():
     if temperatures:
         building_average_temperatures[ts] = statistics.mean(temperatures)
 
-# 8. Calculate the temperature difference for each time interval.
+# 8. 计算每个时间间隔的温差。
 temperature_differences = []
 for temp_data in heat_meter_temperature_values:
     ts = temp_data["ts"]
@@ -352,11 +352,11 @@ for temp_data in heat_meter_temperature_values:
         print(f"Error converting temperature value to float: {e}")
         continue
 
-# 9. Output the 'temperature_difference' as the metric value.
+# 9. 输出 'temperature_difference' 作为指标值。
 res = temperature_differences
 return res
 ```
 
-## Next Steps
+## 下一步
 
 {% assign currentGuide = "CalculatedFields" %}{% include templates/trndz-guides-banner.md %}

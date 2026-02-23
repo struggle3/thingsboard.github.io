@@ -6,7 +6,7 @@
 
 {% include templates/edge/install/copy-edge-credentials.md %}
 
-Edit the **ThingsBoard Edge** configuration file.
+编辑 **ThingsBoard Edge** 配置文件。
 
 {% if docsPrefix == 'pe/edge/' %}
 
@@ -35,15 +35,15 @@ EOL'
 
 {% endif %}
 
-* **PUT_YOUR_EDGE_KEY_HERE:** Replace with your **actual Edge Key**.
-* **PUT_YOUR_EDGE_SECRET_HERE:** Replace with your **actual Edge Secret**.
-* **PUT_YOUR_RPC_HOST:**
-  * Use **localhost** if the Edge is running on the same machine as the Server instance.
-  * Use an **X.X.X.X** IP address if the Edge is connecting to the Server instance in the same network or in a Docker container.
+* **PUT_YOUR_EDGE_KEY_HERE：** 替换为 **实际的 Edge Key**。
+* **PUT_YOUR_EDGE_SECRET_HERE：** 替换为 **实际的 Edge Secret**。
+* **PUT_YOUR_RPC_HOST：**
+  * Edge 与 Server 实例在同一台机器上时使用 **localhost**。
+  * Edge 连接同一网络或 Docker 内的 Server 实例时使用 **X.X.X.X** IP 地址。
 
-#### Configure PostgreSQL (Optional)
+#### 配置 PostgreSQL（可选）
 
-If you changed PostgreSQL default datasource settings, use the following command:
+若修改了 PostgreSQL 默认数据源设置，请使用以下命令：
 
 ```bash
 sudo sh -c 'cat <<EOL >> /etc/tb-edge/conf/tb-edge.conf
@@ -54,4 +54,4 @@ EOL'
 ```
 {: .copy-code}
 
-* **PUT_YOUR_POSTGRESQL_PASSWORD_HERE:** Replace with your actual **PostgreSQL user password**.
+* **PUT_YOUR_POSTGRESQL_PASSWORD_HERE：** 替换为实际的 **PostgreSQL 用户密码**。

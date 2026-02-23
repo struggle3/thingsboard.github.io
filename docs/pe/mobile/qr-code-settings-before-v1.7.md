@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-mobile-pe
-title: Configure mobile application QR code settings
+title: 配置移动应用QR code设置
 
 ---
 

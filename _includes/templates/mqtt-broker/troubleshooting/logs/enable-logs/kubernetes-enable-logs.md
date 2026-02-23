@@ -1,9 +1,9 @@
-For kubernetes deployment we are using <b>ConfigMap</b> kubernetes entity to provide tb-brokers with logback configuration.
-So in order to update **logback.xml** you need to edit `tb-broker-configmap.yml` and execute the following command:
+Kubernetes 部署使用 <b>ConfigMap</b> 为 tb-brokers 提供 logback 配置。
+修改 **logback.xml** 需编辑 `tb-broker-configmap.yml` 并执行：
 
  ```bash
 kubectl apply -f tb-broker-configmap.yml
  ```
 {: .copy-code}
 
-After 10 seconds the changes should be applied to logging configuration.
+约 10 秒后，日志配置将生效。

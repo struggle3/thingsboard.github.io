@@ -1,20 +1,20 @@
-### Configure AZ tools
+### 配置 Azure 工具
 
-After installation is done, you need to login to the cli using the next command:
+安装完成后，需使用以下命令登录 CLI：
 
 ```bash
 az login
 ```
 {: .copy-code}
 
-### Define environment variables
+### 定义环境变量
 
 {% include templates/mqtt-broker/install/helm/azure/define-env-variables.md %}
 
-### Configure and create AKS cluster
+### 配置并创建 AKS 集群
 
 {% include templates/mqtt-broker/install/azure/aks-configure-and-create-cluster.md %}
 
-### Update the context of kubectl
+### 更新 kubectl 上下文
 
 {% include templates/mqtt-broker/install/azure/aks-update-kubectl-ctx.md %}

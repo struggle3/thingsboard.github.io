@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect UP Squared Pro AI Edge to ThingsBoard?
-category: Single-board computers
+title: 如何将 UP Squared Pro AI Edge 连接至 ThingsBoard？
+category: 单板计算机
 chip: Intel Atom x7-E3950 Processor
 connectivity: [Ethernet, WIFI, Bluetooth]
 vendor: Aaeon

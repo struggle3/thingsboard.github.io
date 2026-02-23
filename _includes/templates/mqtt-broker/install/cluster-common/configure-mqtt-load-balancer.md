@@ -1,19 +1,19 @@
-Configure MQTT load balancer to be able to use MQTT protocol to connect devices.
+配置 MQTT 负载均衡器以支持通过 MQTT 协议连接设备。
 
-Create TCP load balancer using the following command:
+执行以下命令创建 TCP 负载均衡器：
 
 ```bash
 kubectl apply -f receipts/mqtt-load-balancer.yml
 ```
 {: .copy-code}
 
-The load balancer will forward all TCP traffic for ports 1883 and 8883.
+负载均衡器将转发 1883 和 8883 端口的所有 TCP 流量。
 
 #### MQTT over SSL
 
-Follow [this guide](https://thingsboard.io/docs/user-guide/mqtt-over-ssl/) to create a .pem file with the SSL certificate. Store the file as _server.pem_ in the working directory.
+按照 [此指南](https://thingsboard.io/docs/user-guide/mqtt-over-ssl/) 创建包含 SSL 证书的 .pem 文件。将文件以 _server.pem_ 保存在工作目录中。
 
-You’ll need to create a config-map with your PEM file, you can do it by calling command:
+需创建包含 PEM 文件的 config-map，可执行以下命令：
 
 ```bash
 kubectl create configmap tbmq-mqtts-config \
@@ -23,12 +23,12 @@ kubectl create configmap tbmq-mqtts-config \
 ```
 {: .copy-code}
 
-* where **YOUR_PEM_FILENAME** is the name of your **server certificate file**.
-* where **YOUR_PEM_KEY_FILENAME** is the name of your **server certificate private key file**.
+* **YOUR_PEM_FILENAME** 为**服务器证书文件**名称。
+* **YOUR_PEM_KEY_FILENAME** 为**服务器证书私钥文件**名称。
 
-Then, uncomment all sections in the ‘tbmq.yml’ file that are marked with “Uncomment the following lines to enable two-way MQTTS”.
+然后，取消 tbmq.yml 文件中标记为「Uncomment the following lines to enable two-way MQTTS」的所有节的注释。
 
-Execute command to apply changes:
+执行以下命令应用更改：
 
 ```bash
 kubectl apply -f tbmq.yml

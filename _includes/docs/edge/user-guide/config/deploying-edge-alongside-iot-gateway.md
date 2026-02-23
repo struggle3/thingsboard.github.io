@@ -1,68 +1,68 @@
 * TOC
 {:toc}
 
-The [ThingsBoard Edge](/docs/{{docsPrefix}}getting-started-guides/what-is-edge/){: target="_blank"} can be run alongside the [ThingsBoard IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){: target="_blank"}. 
-This approach can create a robust, decentralized IoT architecture due to **Edge's** ability to process data at its source and **IoT Gateway's** extended list of communication protocols.
+[ThingsBoard Edge](/docs/{{docsPrefix}}getting-started-guides/what-is-edge/){: target="_blank"} 可与 [ThingsBoard IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){: target="_blank"} 一起运行。
+由于 **Edge** 在源头处理数据的能力以及 **IoT Gateway** 扩展的通信协议列表，此方式可创建稳健的分布式物联网架构。
 
-## How Does It Work?
+## 工作原理
 
-**ThingsBoard IoT Gateway** collects data locally, translates it into the [ThingsBoard-compatible communication protocols](/docs/{{peDocsPrefix}}edge/api/){: target="_blank"}, and transmits it to the **ThingsBoard Edge**.
-The [Rule Engine](/docs/{{peDocsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){: target="_blank"} processes the data in real time, enabling immediate visualizations and event responses. Summarised or aggregated data can be sent to the central server for analysis if required.
+**ThingsBoard IoT Gateway** 在本地收集数据，将其转换为 [ThingsBoard 兼容的通信协议](/docs/{{peDocsPrefix}}edge/api/){: target="_blank"}，并传输到 **ThingsBoard Edge**。
+[Rule Engine](/docs/{{peDocsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){: target="_blank"} 实时处理数据，支持即时可视化和事件响应。如需要，可将汇总或聚合数据发送到中央服务器进行分析。
 
 ![image](/images/edge/how-does-it-work.webp){: style="display: block; margin: auto; max-width: 600px; max-height: 600px"}
 
 {% capture local-deployment %}
-When deployed in remote locations with unreliable internet connections, **Edge** continues operating until connectivity is restored.
+在互联网连接不可靠的偏远地区部署时，**Edge** 将在连接恢复前持续运行。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 
-## Prerequisites
-* Have [Docker](https://docs.docker.com/engine/install/){: target="_blank"} installed
-* The **ThingsBoard Cloud** Account (Demo, Professional edition, or Community edition)
-* Any Linux-based **IoT Gateway** device
+## 前置条件
+* 已安装 [Docker](https://docs.docker.com/engine/install/){: target="_blank"}
+* **ThingsBoard Cloud** 账户（Demo、Professional edition 或 Community edition）
+* 任意基于 Linux 的 **IoT Gateway** 设备
 
-## Step 1. Creating a New Edge Instance
+## 步骤 1. 创建新的 Edge 实例
 
 {% include images-gallery.html imageCollection="startEdge" showListImageTitles="true" %}
 
-## Step 2. Installing Edge on the Gateway Device
+## 步骤 2. 在 Gateway 设备上安装 Edge
 
-To install the **Edge instance** on the **IoT Gateway** device, initiate the **SSH (Secure Shell)** connection to the **device** through the terminal:
+要在 **IoT Gateway** 设备上安装 **Edge 实例**，请通过终端发起到 **设备** 的 **SSH (Secure Shell)** 连接：
 
 ```bash
 ssh username@ip_address
 ```
 {: .copy-code}
 
-* **username:** Enter the actual username with access to the Gateway device;
-* **ip_address:** Enter the actual IP address of the Gateway device;
-* **password:** The terminal will request the authentication credentials.
+* **username：** 输入具有 Gateway 设备访问权限的实际用户名；
+* **ip_address：** 输入 Gateway 设备的实际 IP 地址；
+* **password：** 终端将请求认证凭据。
 
 {% capture local-deployment %}
-If the **SSH** server runs on a non-default port, specify it with the **-p** command.<br>
-Example: _ssh -p 2222 username@ip_address_
+若 **SSH** 服务器在非默认端口运行，请使用 **-p** 命令指定。<br>
+示例：_ssh -p 2222 username@ip_address_
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 
-Once connected, create a new directory:
+连接后，创建新目录：
 
 ```bash
 mkdir tb_edge
 ```
 {: .copy-code}
 
-Create a docker-compose file for the **ThingsBoard Edge** service within this directory:
+在此目录中为 **ThingsBoard Edge** 服务创建 docker-compose 文件：
 
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Configure this file:
+配置此文件：
 
 {% include images-gallery.html imageCollection="copyYml" showListImageTitles="true" %}
 
-To run the **Edge instance** on the **IoT Gateway device**, execute the following commands:
+要在 **IoT Gateway 设备** 上运行 **Edge 实例**，请执行以下命令：
 
 ```bash
 docker compose up -d
@@ -71,65 +71,65 @@ docker compose logs -f mytbedge
 {: .copy-code}
 
 {% capture local-deployment %}
-The command must be executed in the same directory in which the **docker-compose.yml** file is saved.
+必须在保存 **docker-compose.yml** 文件的同一目录中执行该命令。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 
-To configure a **local port forwarding via SSH**, open **another terminal tab** and execute the following command:
+要配置 **通过 SSH 的本地端口转发**，请打开 **另一个终端标签** 并执行以下命令：
 
 ```bash
 ssh -N -L 8080:127.0.0.1:8080 username@ip_address
 ```
 {: .copy-code}
 
-* **8080:** The port on your local machine;
-* **127.0.0.1:** The target remote host accessible by the IoT Gateway device;
-* **8080:** The port to access the IoT Gateway device.
-* **username:** Enter the actual username with access to the Gateway device;
-* **ip_address:** Enter the actual IP address of the Gateway device;
+* **8080：** 本地机器上的端口；
+* **127.0.0.1：** IoT Gateway 设备可访问的目标远程主机；
+* **8080：** 访问 IoT Gateway 设备的端口。
+* **username：** 输入具有 Gateway 设备访问权限的实际用户名；
+* **ip_address：** 输入 Gateway 设备的实际 IP 地址；
 
-Any connection to **localhost:8080** on your local machine will be forwarded to **127.0.0.1:8080** on the **IoT Gateway device**. The **ThingsBoard Edge** instance is available at [**http://127.0.0.1:8080**](http://127.0.0.1:8080){: target="_blank"}. Use your credentials to log in.
+本地机器上对 **localhost:8080** 的任何连接将转发到 **IoT Gateway 设备** 的 **127.0.0.1:8080**。**ThingsBoard Edge** 实例可通过 [**http://127.0.0.1:8080**](http://127.0.0.1:8080){: target="_blank"} 访问。使用您的凭据登录。
 
-## Step 3. Provisioning the ThingsBoard IoT Gateway on Edge
+## 步骤 3. 在 Edge 上配置 ThingsBoard IoT Gateway
 
-To provision the **ThingsBoard Gateway** on **Edge** instance:
+要在 **Edge** 实例上配置 **ThingsBoard Gateway**：
 
 {% include images-gallery.html imageCollection="provisionGW" showListImageTitles="true" %}
 
-## Step 4. Installing the ThingsBoard IoT Gateway Software on the Gateway Device
+## 步骤 4. 在 Gateway 设备上安装 ThingsBoard IoT Gateway 软件
 
-Once the **docker-compose.yml** file has been downloaded, open the terminal and initiate the **SSH** connection to the **IoT Gateway device**:
+下载 **docker-compose.yml** 文件后，打开终端并发起到 **IoT Gateway 设备** 的 **SSH** 连接：
 
 ```bash
 ssh username@ip_address
 ```
 {: .copy-code}
 
-* **username:** Enter the actual username with access to the Gateway device;
-* **ip_address:** Enter the actual IP address of the Gateway device;
-* **password:** The terminal will request the authentication credentials.
+* **username：** 输入具有 Gateway 设备访问权限的实际用户名；
+* **ip_address：** 输入 Gateway 设备的实际 IP 地址；
+* **password：** 终端将请求认证凭据。
 
-To install **ThingsBoard IoT Gateway**, create a new directory:
+要安装 **ThingsBoard IoT Gateway**，请创建新目录：
 
 ```bash
 mkdir iot_gateway
 ```
 {: .copy-code}
 
-Create the docker-compose file for your **ThingsBoard IoT Gateway** within this directory:
+在此目录中为 **ThingsBoard IoT Gateway** 创建 docker-compose 文件：
 
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Copy the content of the previously downloaded **docker-compose.yml** file and paste it into the new one via the terminal:
+将之前下载的 **docker-compose.yml** 文件内容通过终端复制并粘贴到新文件中：
 
 {% include images-gallery.html imageCollection="copyPasteYml" %}
 
-Save the changes in the **docker-compose.yml** file. To close it, press **CTRL+X**.
+保存 **docker-compose.yml** 文件中的更改。要关闭，请按 **CTRL+X**。
 
-To start the **ThingsBoard IoT Gateway**, execute the following command in the terminal:
+要在终端中启动 **ThingsBoard IoT Gateway**，请执行以下命令：
 
 ```bash
 docker compose up -d
@@ -137,8 +137,8 @@ docker compose logs -f
 ```
 {: .copy-code}
 
-Once the **ThingsBoard Edge** and **ThingsBoard IoT Gateway** are running on the **IoT Gateway device**, you can connect IoT devices and sensors to transfer data. Read [this real-life example of visualizing data from IoT devices on a Dashboard](/docs/{{docsPrefix}}device-library/recomputer-r1000/#visualize-incoming-data-with-the-dashboard){: target="_blank"} when **ThingsBoard Edge** and **Gateway** are deployed on the same **IoT Gateway device**. 
+**ThingsBoard Edge** 和 **ThingsBoard IoT Gateway** 在 **IoT Gateway 设备** 上运行后，即可连接物联网设备和传感器以传输数据。当 **ThingsBoard Edge** 和 **Gateway** 部署在同一 **IoT Gateway 设备** 上时，请参阅[此在仪表板上可视化物联网设备数据的实际示例](/docs/{{docsPrefix}}device-library/recomputer-r1000/#visualize-incoming-data-with-the-dashboard){: target="_blank"}。
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

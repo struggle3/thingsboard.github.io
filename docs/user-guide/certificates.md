@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: X.509 Certificate Based Authentication
-description: ThingsBoard  X.509 Certificate based authentication for IoT devices and projects.
+title: 基于 X.509 Certificate 的认证
+description: ThingsBoard 基于 X.509 Certificate 的 IoT 设备与项目认证
 
 ---
 

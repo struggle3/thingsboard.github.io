@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Integration Executor configuration properties
-description: TBMQ CE IE configuration properties and environment variables
+title: Integration Executor 配置属性
+description: TBMQ CE Integration Executor 配置属性与环境变量
 
 ---
 

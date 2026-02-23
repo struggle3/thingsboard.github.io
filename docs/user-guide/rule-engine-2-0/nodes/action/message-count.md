@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: message count
-description: Counts incoming messages over a specified time interval and outputs a message containing the count for each interval.
+description: 在指定时间间隔内统计入站消息数量，并输出包含每个间隔计数的消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

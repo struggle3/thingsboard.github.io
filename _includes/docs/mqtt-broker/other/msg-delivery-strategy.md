@@ -2,48 +2,48 @@
 * TOC
 {:toc}
 
-This feature addresses how messages are delivered to MQTT subscribers in TBMQ. When a client subscribes to a topic and a new matching message is published, 
-TBMQ delivers the message to the subscriber using its underlying networking layer—**Netty**.
+本功能说明 TBMQ 如何向 MQTT 订阅者投递消息。当客户端订阅某个主题并有新的匹配消息发布时，
+TBMQ 使用其底层网络层 **Netty** 将消息投递给订阅者。
 
-Netty provides two main ways to send messages over a network channel:
-- `writeAndFlush()`: Sends the message and immediately flushes the channel, pushing data to the network right away.
-- `write()` (without `flush()`): Writes the message to the channel's buffer but does not send it immediately. It remains in the buffer until a separate `flush()` call is made.
+Netty 提供两种通过网络信道发送消息的主要方式：
+- `writeAndFlush()`：发送消息并立即刷新信道，立即将数据推到网络。
+- `write()`（不带 `flush()`）：将消息写入信道缓冲区，但不立即发送。数据保持在缓冲区中，直到单独调用 `flush()`。
 
-TBMQ leverages this capability to offer two **delivery strategies**:
-- **Write and flush for each message**;
-- **Buffer messages and flush periodically or based on count**.
+TBMQ 利用此能力提供两种 **投递策略**：
+- **每条消息立即写入并刷新**；
+- **缓冲消息并定期或按数量刷新**。
 
-These strategies are configurable for [two types of clients](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/):
-- **Device clients** (non-persistent and persistent clients);
-- **Application clients** (persistent clients).
+这些策略可为 [两类客户端](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/) 配置：
+- **设备客户端**（非持久和持久客户端）；
+- **应用客户端**（持久客户端）。
 
 
-## Write and Flush for Each Message
+## 每条消息立即写入并刷新
 
-- **Behavior**: TBMQ calls `writeAndFlush()` for every message sent to a subscriber.
-- **Pros**:
-    - Ensures low latency — messages are delivered as soon as they are available.
-    - Simple and reliable, ideal for low-throughput environments.
-- **Cons**:
-    - High CPU and I/O overhead under heavy load.
-    - Can cause performance bottlenecks due to excessive flushing.
+- **行为**：TBMQ 对发送给订阅者的每条消息调用 `writeAndFlush()`。
+- **优点**：
+    - 保证低延迟，消息一旦就绪即投递。
+    - 简单可靠，适合低吞吐量场景。
+- **缺点**：
+    - 高负载下 CPU 和 I/O 开销高。
+    - 过多刷新可能导致性能瓶颈。
 
-## Buffered Delivery (Write without Flush)
+## 缓冲投递（仅写入不刷新）
 
-- **Behavior**: TBMQ calls `write()` to queue the message in the Netty channel buffer. A `flush()` is triggered:
-    - After a configured number of messages (`buffered-msg-count`) are buffered.
-    - If a session becomes idle for the duration specified by `idle-session-flush-timeout-ms` (i.e., no new messages are sent to the subscriber during this time), the buffer is automatically flushed. This behavior applies only to Device clients.
-- **Pros**:
-    - Greatly reduces the number of flush operations, improving throughput.
-    - More efficient under high-load or bursty message traffic.
-- **Cons**:
-    - May introduce delivery delays, particularly in low-throughput scenarios where messages are published infrequently.
+- **行为**：TBMQ 使用 `write()` 将消息加入 Netty 信道缓冲区。`flush()` 在以下情况触发：
+    - 缓冲消息数达到配置的 `buffered-msg-count`。
+    - 若会话在 `idle-session-flush-timeout-ms` 指定的时间内空闲（即在此期间未向订阅者发送新消息），则自动刷新缓冲区。此行为仅适用于设备客户端。
+- **优点**：
+    - 显著减少刷新次数，提高吞吐量。
+    - 在高负载或突发流量下更高效。
+- **缺点**：
+    - 可能引入投递延迟，尤其在消息发布不频繁的低吞吐量场景。
 
-## Configuration
+## 配置
 
-You can configure the strategy separately for **Device clients** and **Application clients** via application properties.
+可通过应用属性分别为 **设备客户端** 和 **应用客户端** 配置策略。
 
-### Device Clients
+### 设备客户端
 
 ```yaml
 # If enabled, each message is published to non-persistent subscribers with flush. When disabled, the messages are buffered in the channel and are flushed once in a while
@@ -57,10 +57,10 @@ persistent-session.device.write-and-flush: "${MQTT_PERSISTENT_MSG_WRITE_AND_FLUS
 persistent-session.device.buffered-msg-count: "${MQTT_PERSISTENT_BUFFERED_MSG_COUNT:5}"
 ```
 
-### Additional Buffered Delivery Settings (Device Clients)
+### 缓冲投递额外设置（设备客户端）
 
-When message buffering is enabled, TBMQ maintains a cache of active client sessions to track buffered messages and determine when to flush them. 
-The parameters below define the cache size, expiration policies, and scheduler behavior responsible for flushing message buffers based on activity or thresholds.
+启用消息缓冲后，TBMQ 维护活跃客户端会话缓存以跟踪缓冲消息并决定何时刷新。
+以下参数定义缓存大小、过期策略以及根据活动或阈值刷新消息缓冲区的调度器行为。
 
 ```yaml
 # When either `MQTT_MSG_WRITE_AND_FLUSH` or `MQTT_PERSISTENT_MSG_WRITE_AND_FLUSH` is set to false,
@@ -85,7 +85,7 @@ scheduler-execution-interval-ms: "${MQTT_BUFFERED_SCHEDULER_INTERVAL_MS:100}"
 idle-session-flush-timeout-ms: "${MQTT_BUFFERED_IDLE_FLUSH_MS:200}"
 ```
 
-### Application Clients
+### 应用客户端
 
 ```yaml
 # If enabled, each message is published to persistent APPLICATION client subscribers with flush. When disabled, the messages are buffered in the channel and are flushed once in a while
@@ -94,88 +94,88 @@ write-and-flush: "${MQTT_APP_MSG_WRITE_AND_FLUSH:false}"
 buffered-msg-count: "${MQTT_APP_BUFFERED_MSG_COUNT:10}"
 ```
 
-## How It Works
+## 工作原理
 
-When a **Device client** session is active and buffering is enabled:
+当 **设备客户端** 会话活跃且启用缓冲时：
 
-1. **Session Buffer Creation**  
-   TBMQ stores the session state in a cache with a `SessionFlushState` object that holds:
-    - The count of buffered messages.
-    - The timestamp of the last flush.
-    - The client’s Netty channel context.
+1. **会话缓冲区创建**
+   TBMQ 在缓存中存储会话状态，使用 `SessionFlushState` 对象保存：
+    - 缓冲消息计数。
+    - 上次刷新时间戳。
+    - 客户端的 Netty 信道上下文。
 
-2. **Message Write without Flush**  
-   When a message is delivered:
-    - It's written using `channel.write()`, without an immediate flush.
-    - The buffer count is incremented.
+2. **仅写入不刷新**
+   投递消息时：
+    - 使用 `channel.write()` 写入，不立即刷新。
+    - 缓冲区计数递增。
 
-3. **Flush Trigger**  
-   A flush is triggered in any of the following cases:
-    - **Buffered count** reaches the configured threshold (e.g., 5).
-    - **Session is idle** for more than the configured timeout.
-    - **Session is evicted** from cache (due to expiration or max size), and pending messages are flushed to avoid data loss.
+3. **刷新触发**
+   以下任一情况会触发刷新：
+    - **缓冲数量** 达到配置阈值（如 5）。
+    - **会话空闲** 超过配置的超时时间。
+    - **会话被驱逐** 出缓存（过期或达到最大容量），待处理消息被刷新以避免数据丢失。
 
-4. **Scheduled Background Flusher**  
-   A background thread periodically scans the cache and flushes idle session buffers.
+4. **调度后台刷新**
+   后台线程定期扫描缓存并刷新空闲会话缓冲区。
 
-5. **Shutdown Handling**  
-   On service shutdown, all buffered sessions are flushed to ensure message delivery consistency.
+5. **关闭处理**
+   服务关闭时，所有缓冲会话会被刷新以确保消息投递一致性。
 
-For **Application clients**, buffered delivery is applied during message processing in batches.
+对于 **应用客户端**，缓冲投递在批量消息处理期间应用。
 
-- Messages are written to the Netty channel using `write()` without an immediate flush.
-- A flush is triggered **after a configured number of messages** (`buffered-msg-count`, default: 10) have been written.
-- Once the entire batch is processed, **any remaining unflushed messages are flushed explicitly**.
-- This approach avoids idle-time-based flushing and is optimized for high-throughput, batched delivery scenarios.
+- 使用 `write()` 将消息写入 Netty 信道，不立即刷新。
+- 在写入 **配置数量的消息**（`buffered-msg-count`，默认 10）后触发刷新。
+- 整个批次处理完成后，**显式刷新所有剩余未刷新消息**。
+- 此方式避免基于空闲时间的刷新，适用于高吞吐量批量投递场景。
 
-This strategy is made possible because each Application client is processed in a dedicated thread (consumer) that polls messages from dedicated Kafka topic, allowing TBMQ to control flushing independently per client. 
-This design provides precise batching and flushing without requiring shared caches or background schedulers, leading to both scalability and consistency in message delivery.
+此策略之所以可行，是因为每个应用客户端在专用线程（消费者）中处理，从专用 Kafka topic 拉取消息，允许 TBMQ 独立控制每个客户端的刷新。
+该设计在不依赖共享缓存或后台调度器的前提下实现精确批处理和刷新，兼顾可扩展性和消息投递一致性。
 
-## Recommendations
+## 建议
 
-Choosing the right message delivery strategy depends on your workload characteristics, performance goals, and client behavior. Below are some practical recommendations to guide your configuration.
+选择合适的消息投递策略取决于工作负载特征、性能目标和客户端行为。以下为实用建议。
 
-**Use `write-and-flush = true` (No Buffering) When:**
+**在以下情况使用 `write-and-flush = true`（无缓冲）：**
 
-- You prioritize **low latency** over throughput.
-- Your system experiences **low to moderate message rates**.
-- Clients expect **immediate delivery** (e.g., real-time dashboards, alerts).
-- Simplicity and predictability are more important than raw performance.
+- 优先考虑 **低延迟** 而非吞吐量。
+- 系统 **消息率较低或中等**。
+- 客户端需要 **即时投递**（如实时仪表板、告警）。
+- 简洁和可预测性比原始性能更重要。
 
-**Use `write-and-flush = false` (Buffered Delivery) When:**
+**在以下情况使用 `write-and-flush = false`（缓冲投递）：**
 
-- You expect **high-throughput** workloads with **frequent publications**.
-- Minimizing **system call overhead and I/O pressure** is important.
-- Clients can tolerate slight delivery delays in exchange for improved efficiency.
-- You want to **scale to thousands of clients** without saturating the CPU or network.
+- 存在 **高吞吐量** 且 **发布频繁** 的工作负载。
+- 需要降低 **系统调用开销和 I/O 压力**。
+- 客户端可接受轻微投递延迟以换取更高效率。
+- 需要 **扩展到数千客户端** 而不使 CPU 或网络饱和。
 
-### Tuning Tips
+### 调优建议
 
-- Start with `buffered-msg-count` values between **5–10** and adjust based on profiling.
-- For Device clients, tune `idle-session-flush-timeout-ms` to balance between delay and timely delivery.
-- Monitor logs for cache evictions and flush timings to identify performance bottlenecks.
-- If messages are frequently delayed in low-throughput setups, consider enabling immediate flushing.
+- 从 **5–10** 的 `buffered-msg-count` 开始，再根据 profiling 调整。
+- 对于设备客户端，调整 `idle-session-flush-timeout-ms` 以平衡延迟与及时投递。
+- 监控日志中的缓存驱逐和刷新时间，定位性能瓶颈。
+- 若在低吞吐量下消息经常延迟，可考虑启用立即刷新。
 
-### Recommendation Summary
+### 建议汇总
 
-| Scenario                           | Recommended Setting                      |
+| 场景                           | 推荐设置                      |
 |------------------------------------|------------------------------------------|
-| Low-latency, real-time delivery    | `write-and-flush = true`                 |
-| High message volume                | `write-and-flush = false`, with tuning   |
-| Batch-based Application processing | Application buffering with custom count  |
-| Low-frequency messages             | Avoid buffering to prevent delays        |
+| 低延迟、实时投递    | `write-and-flush = true`                 |
+| 高消息量                | `write-and-flush = false`，并调优   |
+| 基于批量的应用处理 | 自定义 count 的应用缓冲  |
+| 低频消息             | 避免缓冲以防延迟        |
 
-> In our 3 million messages per second (3M msg/sec) performance test on a single TBMQ node, buffered delivery was enabled to maximize throughput and overall system performance.
-> This configuration significantly reduced CPU overhead and improved latency, resulting in more efficient message processing under high load.
-> See the [performance test results](/docs/{{docsPrefix}}mqtt-broker/reference/3m-throughput-single-node-performance-test/) and 
-> [configuration details](https://github.com/thingsboard/tbmq/blob/3M-single-node-perf-test/k8s/aws/tb-broker-configmap.yml) for more information.
+> 在单节点 TBMQ 每秒 300 万条消息（3M msg/sec）的性能测试中，我们启用缓冲投递以最大化吞吐量和整体系统性能。
+> 该配置显著降低 CPU 开销并改善延迟，在高负载下实现更高效的消息处理。
+> 详见 [性能测试结果](/docs/{{docsPrefix}}mqtt-broker/reference/3m-throughput-single-node-performance-test/) 和
+> [配置详情](https://github.com/thingsboard/tbmq/blob/3M-single-node-perf-test/k8s/aws/tb-broker-configmap.yml)。
 
-## Conclusion
+## 总结
 
-The Buffered Message Delivery mechanism provides a smart and flexible way to manage how messages are sent to MQTT subscribers in TBMQ. By leveraging Netty’s ability to defer flushing, TBMQ can significantly reduce I/O overhead and increase throughput in demanding environments.
+缓冲消息投递机制提供智能且灵活的方式，用于管理 TBMQ 中向 MQTT 订阅者发送消息的方式。通过利用 Netty 延迟刷新的能力，TBMQ 可显著减少 I/O 开销并在高要求环境中提高吞吐量。
 
-**Choose the delivery strategy that best matches your deployment needs:**
-- Use **write-and-flush** for low-latency, low-throughput scenarios.
-- Enable **buffering** for high-throughput workloads where performance optimization is crucial.
+**选择最适合部署需求的投递策略：**
+- 在低延迟、低吞吐量场景使用 **write-and-flush**。
+- 在性能优化至关重要的高吞吐量工作负载下启用 **缓冲**。
 
-This feature ensures that your MQTT message delivery pipeline remains efficient, reliable, and adaptable to varying client behaviors and system loads.
+该功能确保 MQTT 消息投递管道保持高效、可靠，并能适应不同的客户端行为和系统负载。

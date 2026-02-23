@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: ThingsBoard Performance on different AWS instances
-description: ThingsBoard Performance on different AWS instances results
+title: ThingsBoard 在不同 AWS 实例上的性能
+description: ThingsBoard 在不同 AWS 实例上的性能测试结果
 
 postgres-only-1000:
     0:

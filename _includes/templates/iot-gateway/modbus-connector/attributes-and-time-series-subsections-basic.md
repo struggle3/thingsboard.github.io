@@ -1,69 +1,61 @@
-The configuration in this unit provides settings for processing data on Modbus server. These settings will be 
-interpreted in ThingsBoard platform instance as attributes/time series of the device. The following parameters are used 
-to configure device attributes and time series:
+本单元配置提供 Modbus 服务器上数据处理相关设置。这些设置在 ThingsBoard 平台实例中将被解释为设备的 attribute/time series。以下参数用于配置设备 attribute 和 time series：
 
-- **Key** - key of the attribute or time series on the platform.
-- **Type** - data type of the Modbus register.
-- **Function code** - Modbus function code for reading the register.
-- **Objects count** - number of registers to read.
-- **Address** - address of the register on the Modbus server.
+- **Key** - 平台上 attribute 或 time series 的 key。
+- **Type** - Modbus 寄存器的数据类型。
+- **Function code** - 读取寄存器的 Modbus 功能码。
+- **Objects count** - 要读取的寄存器数量。
+- **Address** - Modbus 服务器上寄存器的地址。
 
 {% capture difference %}
-All configuration parameters list, and their detailed description can be found in the 
-[Advanced configuration](/docs/iot-gateway/config/modbus/#device-mapping) section.
+所有配置参数列表及详细说明请参见[高级配置](/docs/iot-gateway/config/modbus/#device-mapping)部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 ![image](/images/gateway/modbus-connector/attributes-and-timeseries-overview.png)
 
-For adding a new attribute or time series, use the following steps:
+要添加新的 attribute 或 time series，请按以下步骤操作：
 
 {% assign attributes = '
     ===
         image: /images/gateway/modbus-connector/attributes-1-ce.png,
-        title: Click on "**pencil**" icon in the "Attributes" or "**Time series**" section (depends on the selected section);
+        title: 在 "Attributes" 或 "**Time series**" 部分点击 "**pencil**" 图标（取决于所选部分）；
     ===
         image: /images/gateway/modbus-connector/attributes-2-ce.png,
-        title: In the opened window click "**Add attribute**" or "**Add time series**" (depends on selected section);
+        title: 在打开的窗口中点击 "**Add attribute**" 或 "**Add time series**"（取决于所选部分）；
     ===
         image: /images/gateway/modbus-connector/attributes-3-ce.png,
-        title: Fill in key, type, function code, objects count and address fields. Click "Apply".
+        title: 填写 key、type、function code、objects count 和 address 字段。点击 "Apply"。
 '
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=attributes %}
 
-##### Report strategy
+##### Report strategy（上报策略）
 
-You can enable a specific report strategy for each time series or attribute. This strategy defines how often
-data is sent to the ThingsBoard server. The following strategies are available:
+您可为每个 time series 或 attribute 启用特定的 report strategy。该策略定义数据发送到 ThingsBoard 服务器的频率。可用策略如下：
 
-- **On report period** - sends data to ThingsBoard after the report period;
-- **On value change** - sends data to ThingsBoard when the value changes;
-- **On value change or report period** - sends data to ThingsBoard when the value changes or after the report period;
-- **On received** - sends data to ThingsBoard after receiving data from the device (default strategy).
+- **On report period** - 在上报周期后向 ThingsBoard 发送数据；
+- **On value change** - 当值变化时向 ThingsBoard 发送数据；
+- **On value change or report period** - 当值变化或在上报周期后向 ThingsBoard 发送数据；
+- **On received** - 从设备接收数据后向 ThingsBoard 发送数据（默认策略）。
 
 {% capture difference %}
-Additional information about the report strategy can be found [here](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}.
+有关 report strategy 的更多信息请参见[此处](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-##### Enum mapping
+##### Enum mapping（枚举映射）
 
 {% capture difference %}
-Feature available since ThingsBoard IoT Gateway v.3.8.1 and only in advanced configuration mode.
+此功能自 ThingsBoard IoT Gateway v.3.8.1 起可用，且仅在高级配置模式下可用。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-You can map register values to human-readable strings using the enum mapping feature. This is particularly 
-useful for registers where value denotes a state of the device instead of a "sensor value". Enum mapping works with 
-all register types. Uplink `RPC to Device` calls can use enum mapping to get interpreted values.
-Also, enum mapping works with batch reading as expected.
+可使用 enum mapping 功能将寄存器值映射为人类可读的字符串。对于值表示设备状态而非“传感器值”的寄存器特别有用。Enum mapping 适用于所有寄存器类型。上行 `RPC to Device` 调用可使用 enum mapping 获取解释后的值。
+此外，enum mapping 可按预期与批量读取配合使用。
 
-In order to set up enum mapping for a specific attribute or time series, you need to define the `variants` parameter in the
-configuration. This parameter is an object where each key represents a possible register value, and the corresponding
-value is the human-readable string that describes that register value.
+要为特定 attribute 或 time series 设置 enum mapping，需在配置中定义 `variants` 参数。该参数为对象，每个 key 表示可能的寄存器值，对应的 value 为描述该寄存器值的人类可读字符串。
 
-Example of enum mapping configuration:
+Enum mapping 配置示例：
 ```json
 {
   "tag": "status",
@@ -79,7 +71,7 @@ Example of enum mapping configuration:
 }
 ```
 
-Example of enum mapping configuration for coil register:
+线圈寄存器 enum mapping 配置示例：
 ```json
 {
   "tag": "relay",
@@ -95,7 +87,7 @@ Example of enum mapping configuration for coil register:
 }
 ```
 
-Example of enum mapping configuration for `RPC to Device` call:
+`RPC to Device` 调用的 enum mapping 配置示例：
 ```json
 {
   "method": "getStatus",
@@ -112,54 +104,49 @@ Example of enum mapping configuration for `RPC to Device` call:
 ```
 
 {% capture difference %}
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/modbus/#usage-examples) section.
+更多使用示例请参见[使用示例](/docs/iot-gateway/config/modbus/#usage-examples)部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-##### Modifier
+##### Modifier（修饰符）
 
-**modifier** for attribute/time series value can be applied using the following settings:
+可通过以下设置对 attribute/time series 值应用 **modifier**：
 
-| **Parameter** | **Description**                                                                                                                                                                  |
+| **参数** | **说明**                                                                                                                                                                  |
 |:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Type          | **multiplier** - the result of reading will be multiplied by the value of this parameter. <br>**divider** - the result of reading will be divided by the value of this parameter |
-| Value         | The value that will be used to modify the read value                                                                                                                             | 
+| Type          | **multiplier** - 读取结果将乘以此参数的值。<br>**divider** - 读取结果将除此参数的值 |
+| Value         | 用于修改读取值的数值                                                                                                                             | 
 | ---           |                                                                                                                                                                                  |
 
 {% capture difference %}
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/modbus/#usage-examples) section.
+更多使用示例请参见[使用示例](/docs/iot-gateway/config/modbus/#usage-examples)部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 ![image](/images/gateway/modbus-connector/modifier.png)
 
-##### Batch reading
+##### Batch reading（批量读取）
 
 {% capture difference %}
-Feature available since ThingsBoard IoT Gateway v.3.7.9 and only in advanced configuration mode.
+此功能自 ThingsBoard IoT Gateway v.3.7.9 起可用，且仅在高级配置模式下可用。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To optimize the reading process, you can group multiple registers into a single batch read request. This approach 
-reduces the number of requests sent to the Modbus server, which can enhance performance and decrease network traffic.
-Take attention that the registers in a batch read request must be of the same type and function code.
+为优化读取过程，可将多个寄存器分组到单个批量读取请求中。这种方式可减少发送到 Modbus 服务器的请求数量，从而提高性能并降低网络流量。请注意，批量读取请求中的寄存器必须为相同类型和功能码。
 
-Two parameters are important for group reading configuration: `address` and `tag`. Let's look at them in more detail:
+组读取配置中有两个重要参数：`address` 和 `tag`。详细说明如下：
 
-- **address** - is the address of the starting register and the address of the ending register, separated by a `-`
-  character. For example, `0-10` means that the group read starts with the register at address `0` and ends at the
-  register at address `10`, inclusive.
-- **tag** - is a unique identifier for each register within a group read. It is used to identify a specific register within
-  a given address range. The tag name can be formed using an expression using the following variables:
-    - `${address}` - register address within group read.
-    - `${unitId}` - slave ID.
-    - `${functionCode}` - function code.
-    - `${type}` - data type of register.
-    - `${objectsCount}` - number of objects.
+- **address** - 起始寄存器地址与结束寄存器地址，用 `-` 分隔。例如 `0-10` 表示组读取从地址 `0` 的寄存器开始，到地址 `10` 的寄存器结束（含）。
+- **tag** - 组读取内每个寄存器的唯一标识符，用于在给定地址范围内识别特定寄存器。tag 名称可使用以下变量构成表达式：
+    - `${address}` - 组读取内的寄存器地址。
+    - `${unitId}` - slave ID。
+    - `${functionCode}` - 功能码。
+    - `${type}` - 寄存器的数据类型。
+    - `${objectsCount}` - 对象数量。
 
-Also, `divider` and `multiplier` parameters work as expected.
+`divider` 和 `multiplier` 参数按预期工作。
 
-Example of group reading configuration:
+组读取配置示例：
 
 ```json
 {
@@ -172,6 +159,6 @@ Example of group reading configuration:
 ```
 
 {% capture difference %}
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/modbus/#usage-examples) section.
+更多使用示例请参见[使用示例](/docs/iot-gateway/config/modbus/#usage-examples)部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}

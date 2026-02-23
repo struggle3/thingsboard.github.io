@@ -6,55 +6,55 @@
 * TOC
 {:toc}
 
-This guide provides instructions on how to configure a custom mobile application to launch directly from a [QR code scan](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/) using your phone's camera.
+本指南介绍如何配置自定义移动应用，使其可通过手机相机[扫描QR code](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/)直接启动。
 
-In application version 1.7.0+, we have made QR code settings configuration much easier by using configuration file.
+在1.7.0及更高版本中，我们通过配置文件大幅简化了QR code设置配置。
 
 {% capture pre_1_7_0_link %} 
-Important Notice: Please use [this guide](/docs/{{peDocsPrefix}}mobile/qr-code-settings-before-v1.7/) for pre 1.7.x qr code configuration 
+重要提示：请使用[本指南](/docs/{{peDocsPrefix}}mobile/qr-code-settings-before-v1.7/)进行1.7.x之前的QR code配置
 {% endcapture %} {% include templates/info-banner.md content=pre_1_7_0_link %}
 
-## Platform Configuration
+## 平台配置
 
-### iOS Application Setup
+### iOS应用设置
 
-Navigate to **Mobile Center → Applications → Your custom iOS app** in the ThingsBoard platform.
+在ThingsBoard平台中导航至**Mobile Center → Applications → 您的自定义iOS应用**。
 
 #### App Site Association ID
 
-Provide the **App Site Association ID** in your app store info settings:
+在应用商店信息设置中提供**App Site Association ID**：
 
-![App Site Association ID Configuration](/images/mobile/{{peDocsPrefix}}qr-code-settings-ios-store-info.png)
+![App Site Association ID配置](/images/mobile/{{peDocsPrefix}}qr-code-settings-ios-store-info.png)
 
-The App Site Association ID consists of two parts separated by a dot:
+App Site Association ID由两部分组成，以点分隔：
 
 **1. App Store Team ID**
-- Get your Team ID from [Apple Developer Account](https://developer.apple.com/account)
-- Look for it in the "Membership details" block
+- 从[Apple Developer Account](https://developer.apple.com/account)获取您的Team ID
+- 在"Membership details"区块中查找
 
-![Team ID Location](/images/mobile/qr-code-settings-team-id.png)
+![Team ID位置](/images/mobile/qr-code-settings-team-id.png)
 
 **2. App Bundle ID**
-- Must be the same as the Application package in your app settings
-- This is your app's unique identifier
+- 必须与应用设置中的Application package相同
+- 这是您应用的唯一标识符
 
-### Android Application Setup
+### Android应用设置
 
-Navigate to **Mobile Center → Applications → Your custom Android app** in the ThingsBoard platform.
+在ThingsBoard平台中导航至**Mobile Center → Applications → 您的自定义Android应用**。
 
-#### SHA-256 Fingerprint
+#### SHA-256指纹
 
-Provide the **SHA-256 fingerprint** of your app's signing key:
+提供您应用签名密钥的**SHA-256指纹**：
 
-![SHA-256 Fingerprint Configuration](/images/mobile/{{peDocsPrefix}}qr-code-settings-sha256.png)
+![SHA-256指纹配置](/images/mobile/{{peDocsPrefix}}qr-code-settings-sha256.png)
 
-**For Google Play distributed apps:**
-Use the SHA-256 certificate fingerprint located in your Google Play Console under:
-**Release → Setup → App Integrity → App Signing tab**
+**通过Google Play分发的应用：**
+使用Google Play Console中以下位置的SHA-256证书指纹：
+**Release → Setup → App Integrity → App Signing选项卡**
 
-![Google Play SHA-256 Fingerprint](/images/mobile/sha256-fingerprint.png)
+![Google Play SHA-256指纹](/images/mobile/sha256-fingerprint.png)
 
-**For locally distributed apps:**
-Use the SHA-256 key that your APK is signed with.
+**本地分发的应用：**
+使用APK签名所用的SHA-256密钥。
 
-For more detailed information, read the guide "[Set up app links for Android](https://docs.flutter.dev/cookbook/navigation/set-up-app-links)" in the official Flutter documentation.
+更详细信息，请阅读Flutter官方文档中的指南"[Set up app links for Android](https://docs.flutter.dev/cookbook/navigation/set-up-app-links)"。

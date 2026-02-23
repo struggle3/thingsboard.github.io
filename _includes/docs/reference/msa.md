@@ -2,42 +2,42 @@
 * TOC
 {:toc}
 
-Since ThingsBoard v2.2, the platform supports microservices deployment mode. 
-This article consist of high level diagram, description of data flow between various services and some architecture choices made.       
+自 ThingsBoard v2.2 起，平台支持微服务部署模式。
+本文包括高层架构图、各服务间数据流说明及部分架构选型。
 
-## Architecture diagram
+## 架构图
 
  <object width="80%" data="/images/reference/msa-architecture.svg"></object> 
   
-## Transport Microservices
+## 传输微服务
 
-ThingsBoard provides MQTT, HTTP and CoAP based APIs that are available for your device applications/firmware. 
-Each of the protocol APIs are provided by a separate server component and is part of ThingsBoard "Transport Layer". 
-The full list of components and corresponding documentation pages are listed below:
+ThingsBoard 提供基于 MQTT、HTTP 和 CoAP 的 API，供设备应用或固件使用。
+各协议 API 由独立的服务器组件提供，属于 ThingsBoard“传输层”。
+完整组件列表及对应文档页如下：
 
-* HTTP Transport microservice provides device APIs described [here](/docs/{{docsPrefix}}reference/http-api/); 
-* MQTT Transport microservice provides device APIs described [here](/docs/{{docsPrefix}}reference/mqtt-api/)
-and also enables gateway APIs described [here](/docs/{{docsPrefix}}reference/gateway-mqtt-api/);
-* CoAP Transport microservice provides device APIs described [here](/docs/{{docsPrefix}}reference/coap-api/);
-* LwM2M Transport microservice provides device APIs described [here](/docs/{{docsPrefix}}reference/lwm2m-api/).
+* HTTP 传输微服务提供设备 API，见[此处](/docs/{{docsPrefix}}reference/http-api/)； 
+* MQTT 传输微服务提供设备 API，见[此处](/docs/{{docsPrefix}}reference/mqtt-api/)，
+  并启用网关 API，见[此处](/docs/{{docsPrefix}}reference/gateway-mqtt-api/)；
+* CoAP 传输微服务提供设备 API，见[此处](/docs/{{docsPrefix}}reference/coap-api/)；
+* LwM2M 传输微服务提供设备 API，见[此处](/docs/{{docsPrefix}}reference/lwm2m-api/)。
 
-Each of the transport servers listed above communicates with the main ThingsBoard Node microservices using Kafka. 
-[Apache Kafka](https://kafka.apache.org) is a distributed, reliable and scalable persistent message queue and streaming platform.
+上述各传输服务器通过 Kafka 与主 ThingsBoard Node 微服务通信。
+[Apache Kafka](https://kafka.apache.org) 是分布式、可靠、可扩展的持久消息队列与流处理平台。
 
-The messages that are sent to Kafka are serialized using [protocol buffers](https://developers.google.com/protocol-buffers/) 
-with the messages definition available [here](https://github.com/thingsboard/thingsboard/blob/master/common/proto/src/main/proto/transport.proto).
+发送至 Kafka 的消息使用 [protocol buffers](https://developers.google.com/protocol-buffers/) 序列化，
+消息定义见[此处](https://github.com/thingsboard/thingsboard/blob/master/common/proto/src/main/proto/transport.proto)。
 
-**Note**: Starting v2.5, ThingsBoard PE is going to support alternative queue implementation: Amazon DynamoDB. See [roadmap](/docs/{{docsPrefix}}reference/roadmap) for more details.
+**注意**：自 v2.5 起，ThingsBoard PE 将支持替代队列实现：Amazon DynamoDB。详见 [roadmap](/docs/{{docsPrefix}}reference/roadmap)。
  
-There are two main topics that are used by the transport layer microservices.
+传输层微服务使用两个主要 topic。
 
-First topic "tb.transport.api.requests" is used to execute short-living API requests to check device credentials or create device on behalf of the gateway.
-Responses to this requests are sent to the topic that is specific for each transport microservice. The prefix of such "callback" topic is "tb.transport.api.responses" by default.
+第一个 topic "tb.transport.api.requests" 用于执行短生命周期 API 请求，以校验设备凭据或代表网关创建设备。
+对此类请求的响应发送到各传输微服务专用的 topic。默认下，这类“回调”topic 前缀为 "tb.transport.api.responses"。
 
-Second topic "tb.rule-engine" is used to store all incoming telemetry messages from devices until they are not processed by the rule engine. In case the rule engine node(s) are down
-, messages will be persisted and available for later processing.
+第二个 topic "tb.rule-engine" 用于存储来自设备的所有遥测消息，直至被 Rule Engine 处理。
+若 Rule Engine 节点宕机，消息将持久化，供后续处理。
 
-You can see a part of configuration file to specify those properties below:   
+配置示例片段如下：   
 
 ```yaml
 transport:
@@ -50,78 +50,77 @@ transport:
       topic: "${TB_RULE_ENGINE_TOPIC:tb.rule-engine}"
 ```    
 
-Since ThingsBoard uses very simple communication protocol between transport and core services, 
-it is quite easy to implement support of custom transport protocol, for example: CSV over plain TCP, binary payloads over UDP, etc.
-We suggest to review existing transports [implementation](https://github.com/thingsboard/thingsboard/tree/master/common/transport/mqtt) to get started or [contact us](/docs/contact-us/) if you need any help.
+由于 ThingsBoard 在传输与核心服务间使用非常简单的通信协议，
+实现自定义传输协议支持（如纯 TCP 上的 CSV、UDP 上的二进制负载等）较为容易。
+建议查看现有传输 [实现](https://github.com/thingsboard/thingsboard/tree/master/common/transport/mqtt) 入手，或 [联系我们](/docs/contact-us/) 获取帮助。
 
-## Web UI Microservices
+## Web UI 微服务
 
-ThingsBoard provides a lightweight component written using Express.js framework to host static web ui content. Those components are completely stateless and no much configuration available. 
+ThingsBoard 提供基于 Express.js 的轻量组件托管静态 Web UI 内容。这些组件完全无状态，配置项较少。
 
-## JavaScript Executor Microservices
+## JavaScript Executor 微服务
 
-ThingsBoard rule engine allows users to specify custom javascript functions to parse, filter and transform messages. 
-Since those functions are user defined, we need to execute them in an isolated context to avoid impact on main processing.
-ThingsBoard provides a lightweight component written using Node.js to execute user defined JavaScript functions remotely to isolate them from the core rule engine components.
+ThingsBoard Rule Engine 允许用户指定自定义 JavaScript 函数来解析、过滤和转换消息。
+由于这些函数由用户定义，需在隔离上下文中执行，以避免影响主处理流程。
+ThingsBoard 提供基于 Node.js 的轻量组件，远程执行用户定义的 JavaScript 函数，与核心 Rule Engine 组件隔离。
 
-**Note**: ThingsBoard monolith app executes user defined functions in a java embedded JS engine, which does not allow to isolate resource consumption.    
+**注意**：ThingsBoard 单体应用在 Java 内嵌 JS 引擎中执行用户函数，无法隔离资源消耗。
  
-We recommend to launch 20+ separate JavaScript Executors that will allow certain concurrency level and load balancing of JS execution requests. 
-Each microservice will subscribe to "js.eval.requests" kafka topic as part of single consumer group to enable load balancing. 
-Requests for the same script are forwarded to the same JS executor using built-in Kafka partitioning by key (key is a script/rule node id).
+建议启动 20 个以上的 JavaScript Executor 以支持一定并发和 JS 执行请求的负载均衡。
+各微服务将作为单一 consumer group 的成员订阅 "js.eval.requests" Kafka topic，实现负载均衡。
+相同脚本的请求通过 Kafka 的 key 分区（key 为 script/rule node id）转发至同一 JS executor。
 
-It is possible to define max amount of pending JS execution requests and max request timeout to avoid single JS execution blocking the JS exector microservice.
-Each ThingsBoard core service has individual blacklist for JS functions and will not invoke blocked function more then 3(by default) times.
+可配置待处理 JS 执行请求的最大数量及最大超时，避免单个 JS 执行阻塞 JS executor 微服务。
+各 ThingsBoard 核心服务对 JS 函数有独立黑名单，默认对已屏蔽函数最多调用 3 次。
 
 ## ThingsBoard Node
 
-ThingsBoard node is a core service written in Java that is responsible for handling:
+ThingsBoard Node 是以 Java 编写的核心服务，负责处理：
  
- * [REST API](/docs/{{docsPrefix}}reference/rest-api/) calls;
- * WebSocket [subscriptions](/docs/{{docsPrefix}}user-guide/telemetry/#websocket-api) on entity telemetry and attribute changes;
- * Processing messages via [rule engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/);
- * Monitoring device [connectivity state](/docs/{{docsPrefix}}user-guide/device-connectivity-status/) (active/inactive).
+ * [REST API](/docs/{{docsPrefix}}reference/rest-api/) 调用；
+ * 实体遥测与属性变更的 WebSocket [订阅](/docs/{{docsPrefix}}user-guide/telemetry/#websocket-api)；
+ * 通过 [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/) 处理消息；
+ * 设备 [连接状态](/docs/{{docsPrefix}}user-guide/device-connectivity-status/)（活跃/非活跃）监控。
  
-**Note**: moving rule engine to a separate microservice is scheduled for ThingsBoard v2.5. See [roadmap](/docs/{{docsPrefix}}reference/roadmap) for more details. 
+**注意**：将 Rule Engine 迁移为独立微服务计划于 ThingsBoard v2.5 完成。详见 [roadmap](/docs/{{docsPrefix}}reference/roadmap)。
  
-ThingsBoard node uses Actor System to implement tenant, device, rule chains and rule node actors. 
-Platform nodes can join the cluster, where each node is equal. Service discovery is done via Zookeeper. 
-ThingsBoard nodes route messages between each other using consistent hashing algorithm based on entity id. 
-So, messages for the same entity are processed on the same ThingsBoard node. Platform uses [gRPC](https://grpc.io/) to send messages between ThingsBoard nodes.
+ThingsBoard Node 使用 Actor System 实现租户、设备、Rule Chain 与 Rule Node Actor。
+平台节点可加入集群，各节点地位平等。服务发现通过 Zookeeper 完成。
+ThingsBoard 节点间使用基于实体 ID 的 consistent hashing 算法路由消息。
+因此，同一实体的消息在同一 ThingsBoard 节点上处理。平台使用 [gRPC](https://grpc.io/) 在节点间发送消息。
 
-**Note**: ThingsBoard authors consider moving from gRPC to Kafka in the future releases for exchanging messages between ThingsBoard nodes. 
-The main idea is to sacrifice small performance/latency penalties in favor of persistent and reliable message delivery and automatic load balancing provided by Kafka consumer groups. 
+**注意**：ThingsBoard 作者计划在未来版本中用 Kafka 替代 gRPC 进行节点间消息交换。
+主要考虑是以小幅性能与延迟牺牲，换取 Kafka consumer groups 带来的持久可靠投递与自动负载均衡。
 
-## Third-party  
+## 第三方组件  
 
 ### Kafka
 
-[Apache Kafka](https://kafka.apache.org/) is an open-source stream-processing software platform. ThingsBoard uses Kafka to persist incoming telemetry from HTTP/MQTT/CoAP transpots 
-until it is processed by the rule engine. ThingsBoard also uses Kafka for some API calls between micro-services.
+[Apache Kafka](https://kafka.apache.org/) 是开源流处理软件平台。ThingsBoard 使用 Kafka 持久化来自 HTTP/MQTT/CoAP 传输的遥测数据，
+直至被 Rule Engine 处理。ThingsBoard 还在部分微服务间 API 调用中使用 Kafka。
 
-### Cache database
+### 缓存数据库
 
-ThingsBoard caches assets, entity views, devices, device credentials, device sessions and entity relations.
+ThingsBoard 缓存资产、实体视图、设备、设备凭据、设备会话与实体关系。
 
 ##### Redis
-[Redis](https://redis.io/) is source-available (under [RSALv2](https://redis.io/legal/rsalv2-agreement/) and [SSPLv1](https://redis.io/legal/server-side-public-license-sspl/)) in-memory data structure store used by ThingsBoard for caching.
+[Redis](https://redis.io/) 是源代码可用（遵循 [RSALv2](https://redis.io/legal/rsalv2-agreement/) 与 [SSPLv1](https://redis.io/legal/server-side-public-license-sspl/)）的内存数据结构存储，ThingsBoard 用于缓存。
 
 ##### Valkey
-[Valkey](https://valkey.io/) is an open-source (BSD licensed), in-memory data structure store that could be used as a drop-in replacement for Redis.
+[Valkey](https://valkey.io/) 是开源（BSD 许可）内存数据结构存储，可作为 Redis 的替代使用。
 
 ### Zookeeper
 
-[Zookeeper](https://zookeeper.apache.org/) is an open-source server which enables highly reliable distributed coordination. 
-ThingsBoard uses Zookeeper to address requests processing from a single entity (device,asset,tenant) to a certain ThingsBoard server 
-and guarantee that only one server process data from particular device at a single point in time. 
+[Zookeeper](https://zookeeper.apache.org/) 是支持高可靠分布式协调的开源服务器。
+ThingsBoard 使用 Zookeeper 将来自单一实体（设备、资产、租户）的请求处理路由到特定 ThingsBoard 服务器，
+并保证任意时刻仅有一台服务器处理特定设备的数据。
 
-**Note**: Zookeeper is also used by Kafka, so there was almost no reasons to use two different coordination services (Consul, etcd) in parallel.      
+**注意**：Kafka 也使用 Zookeeper，因此几乎无需并行使用两种不同协调服务（Consul、etcd）。
 
-### HAProxy (or other LoadBalancer)
+### HAProxy（或其他负载均衡器）
 
-We recommend to use HAProxy for load balancing. 
-You can find the reference [haproxy.cfg](https://github.com/thingsboard/thingsboard/blob/release-2.5/docker/haproxy/config/haproxy.cfg) 
-configuration that corresponds to the architecture diagram below: 
+建议使用 HAProxy 进行负载均衡。 
+可参考与下述架构图对应的 [haproxy.cfg](https://github.com/thingsboard/thingsboard/blob/release-2.5/docker/haproxy/config/haproxy.cfg) 配置： 
 
 {% highlight conf %}
 #HA Proxy Config
@@ -242,12 +241,12 @@ backend tb-api-backend
   http-request set-header X-Forwarded-Port %[dst_port]
 {% endhighlight %}
 
-### Databases
+### 数据库
 
-See "[SQL vs NoSQL vs Hybrid?](/docs/{{docsPrefix}}reference/#sql-vs-nosql-vs-hybrid-database-approach)" for more details. 
+详见 "[SQL vs NoSQL vs Hybrid?](/docs/{{docsPrefix}}reference/#sql-vs-nosql-vs-hybrid-database-approach)"。
 
-## Deployment
+## 部署
 
-You can find the reference [docker-compose.yml]({{ page.reference_compose_yml }})
-and corresponding [documentation]({{ page.reference_compose_readme }}) that will help you to run ThingsBoard containers in a cluster mode 
-(although on a single host machine)
+可参考 [docker-compose.yml]({{ page.reference_compose_yml }})
+及对应 [文档]({{ page.reference_compose_readme }})，以集群模式运行 ThingsBoard 容器
+（可在单台主机上运行）

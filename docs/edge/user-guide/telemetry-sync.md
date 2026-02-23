@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: How synchronization works
-description: How synchronization works
+title: 同步工作原理
+description: 同步工作原理
 
 edge-rule-chain:
     0:

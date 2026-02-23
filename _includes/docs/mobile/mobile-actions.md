@@ -7,92 +7,91 @@
 * TOC
 {:toc}
 
-Mobile actions is a special subtype of [widget actions](/docs/{{docsPrefix}}user-guide/ui/widget-actions/) allowing to use various mobile device functions
-like take photo, scan QR code, get device location, make phone call and so on. Result of mobile action can be processed by special java-script functions allowing
-you to perform further processing, for ex. save taken photo or device location to entity attributes, use scanned QR code for device claiming, etc.  
+移动操作是[部件操作](/docs/{{docsPrefix}}user-guide/ui/widget-actions/)的一种特殊子类型，允许使用各种移动设备功能，
+如拍照、扫描QR code、获取设备位置、拨打电话等。移动操作的结果可通过特殊的JavaScript函数处理，
+从而执行后续处理，例如将拍摄的照片或设备位置保存到实体属性、使用扫描的QR code进行设备认领等。
 
-## Configuration
+## 配置
 
-You can configure  mobile actions in the dashboard widget configuration:
+您可以在仪表板部件配置中配置移动操作：
 
 {% if docsPrefix == 'pe/' %}
-1. Go to the **Dashboard groups** through the main menu on the left of the screen;
-2. Open target dashboard group;
+1. 通过屏幕左侧主菜单进入**仪表板组**；
+2. 打开目标仪表板组；
 {% else %}
-3. Go to the **Dashboards** through the main menu on the left of the screen;
+3. 通过屏幕左侧主菜单进入**仪表板**；
 {% endif %}
-4. Click on the dashboard you want to modify;
-5. In the opened dashboard details click **Open dashboard** button;
-6. Use the **pencil** button in the bottom-right corner of the screen to enter dashboard edit mode;
-7. Edit target widget by clicking the Pencil icon on the right top of the widget;
-8. In the widget’s Edit mode move to the last cell **Actions**;
-9. Click the “+” icon on the right of the window to add a new action;
-10. In the drop-down menu **Type**, choose a *Mobile action* action type;
-11. In the **Mobile action type** drop-down menu choose mobile action type you want to set up;
-12. Configure java-script functions with your own processing logic depending on the selected mobile action type.<br>Use help buttons to open details about function definitions and examples;   
+4. 点击要修改的仪表板；
+5. 在打开的仪表板详情中点击**打开仪表板**按钮；
+6. 使用屏幕右下角的**铅笔**按钮进入仪表板编辑模式；
+7. 点击部件右上角的铅笔图标编辑目标部件；
+8. 在部件的编辑模式下移至最后一个单元格**操作**；
+9. 点击窗口右侧的"+"图标添加新操作；
+10. 在**类型**下拉菜单中选择*移动操作*操作类型；
+11. 在**移动操作类型**下拉菜单中选择要设置的移动操作类型；
+12. 根据所选的移动操作类型，使用自有处理逻辑配置JavaScript函数。<br>使用帮助按钮查看函数定义和示例详情；
 
 {% include images-gallery.html imageCollection="mobile-actions" %}
 
-## Take picture from gallery
+## 从相册选择图片
 
-The action opens image gallery picker to select the picture. It returns selected image as a URL in base64 data format.
-You can configure **processImage** function to process resulting image data. For example an image can be stored as entity attribute value, which allows it to be displayed later using widgets.
+该操作打开图片选择器以选择图片。它以base64数据格式的URL形式返回所选图像。
+您可以配置**processImage**函数来处理图像数据。例如，图像可作为实体属性值存储，后续可使用部件显示。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action. 
+参见[移动操作配置](#configuration)了解如何配置此操作。
 
-## Take Photo
+## 拍照
 
-The action opens phone camera for taking photo. It returns captured photo image as a URL in base64 data format.
-You can configure **processImage** function to process resulting image data. For example an image can be stored as entity attribute value, which allows it to be displayed later using widgets.
+该操作打开手机相机拍照。它以base64数据格式的URL形式返回拍摄的照片图像。
+您可以配置**processImage**函数来处理图像数据。例如，图像可作为实体属性值存储，后续可使用部件显示。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action.
+参见[移动操作配置](#configuration)了解如何配置此操作。
 
-## Open map directions
+## 打开地图路线
 
-The action takes provided location in latitude/longitude format and opens available map application to display possible directions.
-You should configure **getLocation** function to prepare location data.
-For example, you can extract latitude/longitude values from current entity attributes and external map application will display to user possible directions to target entity.
+该操作接收纬度/经度格式的位置数据，并打开可用的地图应用显示可能的路线。
+您应配置**getLocation**函数以准备位置数据。
+例如，您可从当前实体属性中提取纬度/经度值，外部地图应用将向用户显示到目标实体的可能路线。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action.
+参见[移动操作配置](#configuration)了解如何配置此操作。
 
-## Open map location
+## 打开地图位置
 
-The action takes provided location in latitude/longitude format and opens available map application to display the location on the map.
-You should configure **getLocation** function to prepare location data.
-For example, you can extract latitude/longitude values from current entity attributes and external map application will display to user target entity location.
+该操作接收纬度/经度格式的位置数据，并打开可用的地图应用在地图上显示位置。
+您应配置**getLocation**函数以准备位置数据。
+例如，您可从当前实体属性中提取纬度/经度值，外部地图应用将向用户显示目标实体位置。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action.
+参见[移动操作配置](#configuration)了解如何配置此操作。
 
-## Scan QR code
+## 扫描QR code
 
-The action opens QR code scanner to scan QR code. It returns scanned QR code value.
-You can configure **processQrCode** function to process resulting QR code.
-For example QR code can be used in device claiming scenario.
-The value of QR code can be presented as device claiming information containing **device name** and **secret key**.
-User scans QR code, and then it parsed as a device claiming info used to perform device claiming.
-See [Claiming devices](/docs/{{docsPrefix}}user-guide/claiming-devices/) for details.
+该操作打开QR code扫描器扫描QR code。返回扫描的QR code值。
+您可以配置**processQrCode**函数来处理 QR code。
+例如，QR code可用于设备认领场景。QR code的值可作为包含**设备名称**和**密钥**的设备认领信息呈现。
+用户扫描QR code后，将其解析为设备认领信息以执行设备认领。
+详见[认领设备](/docs/{{docsPrefix}}user-guide/claiming-devices/)。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action.
+参见[移动操作配置](#configuration)了解如何配置此操作。
 
-## Make phone call
+## 拨打电话
 
-The action takes provided phone number and opens associated application to make phone call.
-You should configure **getPhoneNumber** function to return phone number.
-For example, you can extract phone number value from current entity attribute and user will be directed to appropriate phone application to make a call.
+该操作接收提供的电话号码并打开相应应用拨打电话。
+您应配置**getPhoneNumber**函数返回电话号码。
+例如，您可从当前实体属性中提取电话号码值，用户将被引导至相应的电话应用拨打电话。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action.
+参见[移动操作配置](#configuration)了解如何配置此操作。
 
-## Get phone location
+## 获取手机位置
 
-The action takes current phone location using location services. It returns location as a pair of latitude and longitude values.
-You can configure **processLocation** function to process resulting location data.
-For example location data can be stored as entity attribute values to set or update current location of the entity to be displayed in map widgets.
+该操作使用位置服务获取当前手机位置。以纬度和经度值对的形式返回位置。
+您可以配置**processLocation**函数来处理 位置数据。
+例如，位置数据可作为实体属性值存储，以设置或更新实体的当前位置，从而在地图部件中显示。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action.
+参见[移动操作配置](#configuration)了解如何配置此操作。
 
-## Take screenshot
+## 截屏
 
-The action captures current phone screen. It returns captured screen image as a URL in base64 data format.
-You can configure **processImage** function to process resulting image data. For example an image can be stored as entity attribute value, which allows it to be displayed later using widgets.
+该操作捕获当前手机屏幕。以base64数据格式的URL形式返回捕获的屏幕图像。
+您可以配置**processImage**函数来处理图像数据。例如，图像可作为实体属性值存储，后续可使用部件显示。
 
-See [Mobile action configuration](#configuration) to learn how to configure this action.
+参见[移动操作配置](#configuration)了解如何配置此操作。

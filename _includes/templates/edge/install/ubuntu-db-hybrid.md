@@ -1,36 +1,36 @@
 {% capture hybrid-info %}
-The ThingsBoard team recommends using a **hybrid database approach** if you plan to manage 1M+ devices in production or handle **high data ingestion rate (more than 5000 msg/sec)**.
-In this case, **ThingsBoard Edge** stores time-series data in Cassandra while continuing to use PostgreSQL for primary entities such as devices, assets, dashboards, and customers.  
+如果您计划在生产环境中管理 100 万以上设备或处理**高数据采集率（超过 5000 msg/sec）**，ThingsBoard 团队建议使用**混合数据库方案**。
+在此方案下，**ThingsBoard Edge** 将时序数据存储在 Cassandra 中，同时继续使用 PostgreSQL 存储设备、资产、仪表板和客户等主要实体。
 {% endcapture %}
 {% include templates/info-banner.md content=hybrid-info %}
 
-##### PostgreSQL Installation
+##### PostgreSQL 安装
 
 {% include templates/install/postgres-install-ubuntu.md %}
 
-To create a new PostgreSQL database named **tb_edge**, use the following command:
+要创建名为 **tb_edge** 的新 PostgreSQL 数据库，请使用以下命令：
 
 ```bash
 echo "CREATE DATABASE tb_edge;" | psql -U postgres -d postgres -h 127.0.0.1 -W
 ```
 {: .copy-code}
 
-Press **"Ctrl+D"** twice to quit PostgreSQL.
+按两次 **"Ctrl+D"** 退出 PostgreSQL。
 
-##### Cassandra Installation
+##### Cassandra 安装
 
 {% include templates/edge/install/cassandra-ubuntu-install.md %}
 
-##### ThingsBoard Edge Configuration
+##### ThingsBoard Edge 配置
 
-Edit **ThingsBoard Edge** configuration file:
+编辑 **ThingsBoard Edge** 配置文件：
 
 ```bash 
 sudo nano /etc/tb-edge/conf/tb-edge.conf
 ``` 
 {: .copy-code}
 
-Add the following lines to the configuration file. Don't forget **to replace** "PUT_YOUR_POSTGRESQL_PASSWORD_HERE" with your **real postgres user password**:
+将以下行添加到配置文件。别忘了**将** "PUT_YOUR_POSTGRESQL_PASSWORD_HERE" **替换为您的 postgres 用户实际密码**：
 
 ```bash
 # DB Configuration 
@@ -41,7 +41,7 @@ export SPRING_DATASOURCE_PASSWORD=PUT_YOUR_POSTGRESQL_PASSWORD_HERE
 ``` 
 {: .copy-code}
 
-You can optionally add the following parameters to reconfigure your Edge instance to connect to external Cassandra nodes:
+您可以选择性添加以下参数，以将 Edge 实例重新配置为连接外部 Cassandra 节点：
 
 ```bash
 export CASSANDRA_CLUSTER_NAME=Edge Cluster

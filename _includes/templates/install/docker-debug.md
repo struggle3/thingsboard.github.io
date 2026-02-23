@@ -1,18 +1,18 @@
-If something goes wrong, you can stream the ThingsBoard container logs in real time:
+如遇问题，可实时查看 ThingsBoard 容器日志：
 
 ```bash
 docker compose logs -f thingsboard-pe
 ```
 {: .copy-code}
 
-Bring down every container defined in your Compose file:
+停止 Compose 文件中定义的所有容器：
 
 ```bash
 docker compose down
 ```
 {: .copy-code}
 
-Launch all services in detached mode:
+在后台模式启动所有服务：
 
 ```bash
 docker compose up -d

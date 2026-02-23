@@ -1,14 +1,13 @@
 * TOC
 {:toc}
 
-## Assigning custom attributes to entities and attributes managing
+## 为实体分配自定义属性及属性管理
 
-ThingsBoard provides the ability to assign custom attributes to your entities and manage these attributes.
-Those attributes are stored in the database and may be used for data visualization and data processing.
+ThingsBoard 支持为实体分配并管理自定义属性。属性存储在数据库中，可用于数据可视化和处理。
 
-Attributes are treated as key-value pairs. Flexibility and simplicity of the key-value format allow easy and seamless integration with almost any IoT device on the market.
-Key is always a string and is basically an attribute name, while the attribute value can be either string, boolean, double, integer or JSON. 
-For example:
+属性以 key-value 形式存储。key-value 的灵活性和简洁性便于与市面常见 IoT 设备集成。
+Key 始终为字符串，即属性名；value 可为 string、boolean、double、integer 或 JSON。
+例如：
 
 ```json
 {
@@ -25,22 +24,21 @@ For example:
 ```
 {: .copy-code}
 
-## Attribute names
+## Attribute 名称
 
-As a platform user, you can define any attribute name. 
-However, we recommend to use [camelCase](https://en.wikipedia.org/wiki/Camel_case).
-This make it easy to write custom JS functions for data processing and visualization.
+作为平台用户，可自定义任意 attribute 名称。
+建议使用 [camelCase](https://en.wikipedia.org/wiki/Camel_case)，便于编写数据处理与可视化的自定义 JS 函数。
 
-## Attribute types
+## Attribute 类型
 
-ThingsBoard supports three types of attributes: **server-side**, **shared**, and **client-side**.
-Each type has a specific purpose, access rules, and use cases, which we explain below.
+ThingsBoard 支持三种属性类型：**server-side**、**shared** 和 **client-side**。
+各类别有各自的用途、访问规则和典型场景，下文分别说明。
 
 ### Server-side attributes
 
-This type of attribute is supported by almost any platform entity: Device, Asset, Customer, Tenant, User, etc.
-Server-side attributes are the ones that you may configure via Administration UI or REST API.
-The device firmware can't access the server-side attribute.
+该类型几乎适用于所有平台实体：Device、Asset、Customer、Tenant、User 等。
+Server-side attributes 可通过管理界面或 REST API 配置。
+设备固件无法访问 server-side attribute。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/server-side-attributes.svg)

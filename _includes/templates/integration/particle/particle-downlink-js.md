@@ -1,4 +1,4 @@
-You can use our example of Downlink Converter, or write your own according to your configuration:
+可使用我们的 Downlink Converter 示例，或根据您的配置自行编写：
 
 ```javascript
 /** Encoder **/

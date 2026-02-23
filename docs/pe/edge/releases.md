@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Release Notes
-description: ThingsBoard Edge Release Notes
+title: Edge 发布说明
+description: ThingsBoard Edge 发布说明
 
 ---
 

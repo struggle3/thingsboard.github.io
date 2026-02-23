@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: to email
-description: Prepares a message for email dispatch by transforming it with configured sender, recipients, subject, and body content using template-based field substitution.
+description: 通过模板字段替换配置发件人、收件人、主题和正文，将消息转换为可发送的邮件格式。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

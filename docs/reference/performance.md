@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: ThingsBoard Data Collection Performance
-description: ThingsBoard IoT Platform data collection performance overview
+title: ThingsBoard 数据采集性能
+description: ThingsBoard 物联网平台数据采集性能概览
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: MQTT Client Credentials
-description: UI MQTT Client Credentials
+title: MQTT 客户端凭据
+description: 界面 MQTT 客户端凭据
 
 add-client-credentials:
   0:

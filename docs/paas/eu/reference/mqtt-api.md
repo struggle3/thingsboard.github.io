@@ -2,14 +2,14 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: MQTT Device API Reference
-description: Supported MQTT API Reference for IoT Devices
+title: MQTT 设备 API 参考
+description: IoT 设备支持的 MQTT API 参考
 redirect_from: "/docs/paas/eu/reference/mqtt-api"
 
 server-side-rpc:
     0:
         image: /images/reference/device-connectivity-apis/server-side-rpc-mqtt-1-paas.png
-        title: 'Use RPC debug terminal widget in your ThingsBoard instance'
+        title: '在 ThingsBoard 实例中使用 RPC 调试终端部件'
     1:
         image: /images/reference/device-connectivity-apis/server-side-rpc-mqtt-2-paas.png
         title: 'Subscribe to RPC commands from the server'

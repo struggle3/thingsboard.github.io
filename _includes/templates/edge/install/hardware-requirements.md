@@ -1,6 +1,6 @@
-### Edge Hardware Requirements
+### Edge 硬件要求
 
-The hardware requirements for **ThingsBoard Edge** are determined by the number of connected devices and the intensity of interactions with the platform interface.
-To ensure optimal performance, we recommend the following:
-* **At least 1GB of RAM (Light workload):** It is suitable for minimal interactions with the platform interface, such as dashboards and device management, and fewer than 100 connected devices.
-* **At least 4GB of RAM (Heavy workload):** This configuration is suitable for intense platform interactions and 100+ devices connected to a single machine.
+**ThingsBoard Edge** 的硬件要求取决于连接设备数量及与平台界面的交互强度。
+为获得最佳性能，建议如下：
+* **至少 1GB RAM（轻负载）：** 适用于与平台界面交互较少（如 dashboards 和设备管理）及少于 100 台连接设备的场景。
+* **至少 4GB RAM（重负载）：** 适用于与平台频繁交互及单台机器连接 100 台以上设备的场景。

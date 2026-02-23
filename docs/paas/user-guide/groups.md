@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: Entity Groups
-description: Entity Groups Guide
+title: 实体分组
+description: 实体分组指南
 
 create-entity-group-1:
     0:

@@ -8,74 +8,74 @@
 * TOC
 {:toc}
 
-Remote Integrations allow reliable data streaming from multiple devices in the local area network (LAN) to the ThingsBoard platform in the cloud. 
-They are helpful if you have, for example, a local MQTT broker or OPC-UA server with no external IP address and is not reachable from where your ThingsBoard platform is installed. 
-The remote integration initiates a connection to these servers, pulls the data, stores it locally, and then streams it to the ThingsBoard instance.
+远程集成支持将局域网（LAN）内多台设备的数据可靠地流式传输到云端 ThingsBoard 平台。 
+适用于例如本地 MQTT broker 或 OPC-UA 服务器无公网 IP、无法从 ThingsBoard 所在位置访问的场景。 
+远程集成会连接这些服务器、拉取数据、在本地存储并流式传输到 ThingsBoard 实例。
 
-Although this approach requires some additional steps in the deployment process, it allows integration with servers and devices deployed in the LAN. A separate integration process improves isolation level and performance.
+尽管部署流程会多出一些步骤，但可实现与局域网内服务器和设备的集成。独立集成进程也能提升隔离程度和性能。
 
-The remote integration approach enables tenants to launch plain [TCP](/docs/user-guide/integrations/tcp/) and [UDP](/docs/user-guide/integrations/udp/) integrations. Those two integrations are unique because they start a server that binds to a specific port. 
-Since ThingsBoard is a multi-tenant environment, we can't launch TCP and UDP integrations as part of the core service due to possible port collisions between tenants. 
-That is why we propose each tenant to launch a TCP/UDP integration as a remote one. The same applies to any custom integration that the tenant creates.
+远程集成支持租户启动 [TCP](/docs/user-guide/integrations/tcp/) 和 [UDP](/docs/user-guide/integrations/udp/) 集成。这两种集成需启动绑定特定端口的服务。 
+ThingsBoard 为多租户环境，TCP 和 UDP 集成无法作为 core 服务的一部分运行，否则可能发生租户间端口冲突。 
+因此建议各租户以远程方式运行 TCP/UDP 集成。租户创建的自定义集成亦然。
 
 ![image](/images/user-guide/integrations/remote/remote-integrations-overview.png)
 
-It is possible to execute any ThingsBoard Integration separately from the ThingsBoard instance.
+可将任意 ThingsBoard 集成与 ThingsBoard 实例分开运行。
 
-This guide contains step-by-step instructions on how to launch MQTT remote integration that connects to the local MQTT Broker and pushes data to the [ThingsBoard Cloud](https://{{hostName}}/signup).
+本指南提供分步说明，介绍如何启动连接本地 MQTT Broker 的 MQTT 远程集成，并将数据推送到 [ThingsBoard Cloud](https://{{hostName}}/signup)。
 
-You can find additional information about the ThingsBoard Platform integrations feature [here](/docs/{{peDocsPrefix}}user-guide/integrations/).
+更多 ThingsBoard 平台集成功能说明见[此处](/docs/{{peDocsPrefix}}user-guide/integrations/)。
 
-## ThingsBoard configuration
+## ThingsBoard 配置
 
-We assume you already have a tenant administrator account on your own [ThingsBoard PE instance](/docs/user-guide/install/pe/installation-options/) or [ThingsBoard Cloud](https://{{hostName}}/signup).
+假设您已在自有 [ThingsBoard PE 实例](/docs/user-guide/install/pe/installation-options/)或 [ThingsBoard Cloud](https://{{hostName}}/signup) 拥有租户管理员账户。
 
-### Create remote integration in ThingsBoard
+### 在 ThingsBoard 中创建远程集成
 
-Let's create remote integration in ThingsBoard that will connect to the local broker using port 1883 and subscribe to all topics.
+在 ThingsBoard 中创建远程集成，使其通过端口 1883 连接本地 broker 并订阅所有 topic。
 
-- Go to the "**Integrations center**" section -> "**Integrations**" page and click "plus" icon to add a new integration. Name it "**MQTT remote integration**", select type "**MQTT**";
+- 进入「**Integrations center**」->「**Integrations**」页面，点击「plus」添加新集成。命名为「**MQTT remote integration**」，选择类型「**MQTT**」；
 
 ![image](/images/user-guide/integrations/remote/remote-integration-1-paas.png)
 
-- The next step is to add a default uplink converter. The new converter will contain necessary code to convert incoming data. Click "**Next**";
+- 下一步添加默认上行转换器。新转换器将包含转换入站数据所需的代码。点击「**Next**」；
 
 ![image](/images/user-guide/integrations/remote/remote-integration-2-paas.png)
 
-- You can create a new downlink converter at the step of adding a downlink converter. But for now, leave the "Downlink data converter" field empty. Click "**Skip**";
+- 在添加下行转换器步骤可新建下行转换器。此处保持「Downlink data converter」为空。点击「**Skip**」；
 
 ![image](/images/user-guide/integrations/remote/remote-integration-3-paas.png)
 
-- Specify **host**: "**{{hostName}}**" and **port**: "**1883**" at the connection step;
-- Subscribe to all **topics**;
-- You can also select an MQTT **QoS** level. We use MQTT QoS level 0 (At most once) by default;
-- Copy and save the "**Integration key**" and "**Integration secret**". We will use this values later;
+- 在连接步骤指定 **host**：「**{{hostName}}**」，**port**：「**1883**」；
+- 订阅所有 **topics**；
+- 也可选择 MQTT **QoS** 级别。默认使用 MQTT QoS 0（At most once）；
+- 复制并保存「**Integration key**」和「**Integration secret**」，后续会用到；
 
 ![image](/images/user-guide/integrations/remote/remote-integration-4-paas.png)
 
-- Go to the **advanced settings**. It is better to uncheck the "**Clean session**" parameter. Many brokers do not support sticky sessions, so will silently close the connection if you try to connect with this option enabled;
-- Click the "**Add**" button to create the integration.
+- 进入 **advanced settings**。建议取消勾选「**Clean session**」。多数 broker 不支持粘性会话，启用该选项可能导致静默断开；
+- 点击「**Add**」创建集成。
 
 ![image](/images/user-guide/integrations/remote/remote-integration-5-paas.png)
 
 <br>
-Now let's proceed to the steps for installation remote integration.
+接下来执行远程集成安装步骤。
 
-## Choose your platform and install
+## 选择平台并安装
 
-One can install ThingsBoard Integration via Docker, Debian or RPM packages.
-Please use one of the next steps.
+可通过 Docker、Debian 或 RPM 包安装 ThingsBoard 集成。
+请按下列步骤之一操作。
 
- * [Docker on Linux or Mac OS](#docker-on-linuxmac)
- * [Docker on Windows](#docker-on-windows)
+ * [Linux 或 Mac OS 上的 Docker](#docker-on-linuxmac)
+ * [Windows 上的 Docker](#docker-on-windows)
  * [Ubuntu](#ubuntu-server)
  * [CentOS/RHEL Server](#centosrhel-server)
 
 ### Docker on Linux/Mac
 
-- **[Install Docker CE](https://docs.docker.com/engine/installation/)**
+- **[安装 Docker CE](https://docs.docker.com/engine/installation/)**
 
-- **Choose Integration to install**
+- **选择要安装的集成**
 
 {% capture contenttogglespec %}
 HTTP Integrations<br><small>(HTTP, Sigfox, ThingPark, OceanConnect and <br> T-Mobile IoT CDP)</small>%,%http%,%templates/install/integration/http-docker.md%br%
@@ -90,15 +90,15 @@ CoAP<br> Integration<br>%,%coap%,%templates/install/integration/coap-docker.md{%
 
 {% include templates/install/integration/advanced-config-docker.md %} 
 
-- **Troubleshooting**
+- **故障排查**
 
 {% include templates/troubleshooting/dns-issues.md %}
 
 ### Docker on Windows
 
-- **[Install Docker Toolbox for Windows](https://docker-docs.uclv.cu/toolbox/toolbox_install_windows/)**
+- **[安装 Windows 版 Docker Toolbox](https://docker-docs.uclv.cu/toolbox/toolbox_install_windows/)**
 
-- **Choose Integration to install**
+- **选择要安装的集成**
 
 {% capture contenttogglespecwin %}
 HTTP Integrations<br><small>(HTTP, Sigfox, ThingPark, OceanConnect and <br> T-Mobile IoT CDP)</small>%,%http%,%templates/install/integration/http-docker-windows.md%br%
@@ -113,13 +113,13 @@ CoAP<br> Integration<br>%,%coap%,%templates/install/integration/coap-docker-wind
 
 {% include templates/install/integration/advanced-config-docker.md %} 
 
-- **Troubleshooting**
+ - **故障排查**
 
 {% include templates/troubleshooting/dns-issues-windows.md %}
 
 ### Ubuntu Server
 
- - Install Java 17 (OpenJDK) 
+ - 安装Java 17 (OpenJDK)
 
 {% include templates/install/ubuntu-java-install.md %}
 
@@ -155,10 +155,10 @@ CoAP<br> Integration<br>%,%coap%,%templates/install/integration/coap-rhel.md{% e
 
 {% include content-toggle.liquid content-toggle-id="remoteintegrationinstallrhel" toggle-spec=rhelinstallspec %} 
 
-## Remote integration configuration
+## 远程集成配置
 
-Remote integration configuration is done via ThingsBoard UI and there is no specific steps.
-Explore guides and video tutorials related to specific integrations:
+远程集成通过 ThingsBoard UI 配置，无特殊步骤。
+查看与具体集成相关的指南和视频教程：
 
  - [HTTP](/docs/{{peDocsPrefix}}user-guide/integrations/http/)
  - [MQTT](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/)
@@ -184,10 +184,10 @@ Explore guides and video tutorials related to specific integrations:
  - [Tuya](/docs/{{peDocsPrefix}}user-guide/integrations/tuya/)
  - [Custom](/docs/{{peDocsPrefix}}user-guide/integrations/custom/)
   
-## Remote integration troubleshooting
+## 远程集成故障排查
 
-Please review the log files. Their location is specific to the platform and installation package you have used and is mentioned in the installation steps. 
+请查看日志文件。其位置取决于您使用的平台和安装包，在安装步骤中有说明。 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: send notification
-description: Sends notifications to specified recipients using notification templates through the notification center.
+description: 通过通知中心使用通知模板向指定接收者发送通知。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

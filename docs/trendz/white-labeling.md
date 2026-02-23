@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
   - vparomskiy
-title: Overview
-description: Trendz White Labeling configuration - set color schema, logo and other branding settings
+title: 概览
+description: Trendz 白标配置 - 设置配色、logo 及其他品牌参数
 
 trendz-white-labeling-section:
   0:

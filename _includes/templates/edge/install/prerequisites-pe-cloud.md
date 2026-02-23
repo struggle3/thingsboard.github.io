@@ -1,3 +1,3 @@
-Sign up for a [ThingsBoard Cloud](https://thingsboard.cloud/signup){:target="_blank"} account, which is the easiest way to get started. Throughout the rest of this tutorial, this URL will be referred to as **SERVER_URL**
+注册 [ThingsBoard Cloud](https://thingsboard.cloud/signup){:target="_blank"} 账号，这是最简单的入门方式。在本教程后续内容中，该URL将称为 **SERVER_URL**。
 
-Log in using your ThingsBoard Cloud **tenant credentials**.
+请使用ThingsBoard Cloud **租户凭据**登录。

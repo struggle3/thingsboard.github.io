@@ -1,81 +1,79 @@
 * TOC
 {:toc}
 
-After installing **TBMQ PE**, as described in the [Installation Options guide](/docs/pe/mqtt-broker/install/installation-options/), 
-your instance is accessible by default via its public **IP address** or the **DNS record of the cloud Load Balancer**.
-However, configuring a **custom domain name** provides several important advantages:
+按照[安装选项指南](/docs/pe/mqtt-broker/install/installation-options/)完成**TBMQ PE**安装后，默认可通过公共**IP 地址**或云负载均衡器的**DNS 记录**访问实例。
+配置**自定义域名**具有以下优势：
 
-* **Simplified access** - users can log in using an easy-to-remember hostname instead of an IP or Load Balancer DNS name.
-* **Secure SSL connections** - domains enable the use of trusted SSL/TLS certificates.
-* **White labeling** - TBMQ uses the domain to apply custom branding to the login page (logos, titles, and colors). The domain simplifies configuration management, as each TBMQ deployment supports only one login page branding configuration.
-* **OAuth 2.0 / SSO integration** - multiple domains allow separate login configurations for each authentication provider.
+* **简化访问**：用户可使用易记的主机名登录，而无需使用 IP 或负载均衡器 DNS 名称。
+* **安全的 SSL 连接**：域名支持使用受信任的 SSL/TLS 证书。
+* **白标**：TBMQ 根据域名对登录页应用自定义品牌（徽标、标题和颜色）。每个 TBMQ 部署仅支持一套登录页品牌配置，域名可简化配置管理。
+* **OAuth 2.0 / SSO 集成**：多域名支持为各认证提供商分别配置登录。
 
-## Domain Registration
+## 域名注册
 
 {% capture domain_owner_note %}
-**Note:** You must be the owner of the domain you are registering.
+**注意：**您必须对所注册域名拥有所有权。
 {% endcapture %}
 {% include templates/info-banner.md content=domain_owner_note %}
 
-To use your own hostname with TBMQ, you must first configure DNS and then register the domain inside TBMQ.
+在 TBMQ 中使用自有主机名前，需先配置 DNS，再在 TBMQ 内注册域名。
 
-### Step 1. Configure DNS
+### 步骤 1. 配置 DNS
 
-On your DNS provider’s website:
+在 DNS 服务商网站：
 
-* Add an **A record** (or **CNAME record**) to map your domain to the IP or hostname where TBMQ is hosted.
+* 添加 **A 记录**（或 **CNAME 记录**）将域名解析至 TBMQ 所在 IP 或主机名。
 
-    * See [How to Create an A Record](#how-to-create-an-a-record-for-your-domain)
-    * Or [How to Create a CNAME Record](#how-to-create-a-cname-record-for-your-domain)
+    * 参见[如何创建 A 记录](#how-to-create-an-a-record-for-your-domain)
+    * 或[如何创建 CNAME 记录](#how-to-create-a-cname-record-for-your-domain)
 
-* Add a valid **SSL certificate** for the chosen domain.
+* 为所选域名配置有效的 **SSL 证书**。
 
-### Step 2. Register Domain in TBMQ
+### 步骤 2. 在 TBMQ 中注册域名
 
-* Log in to your **TBMQ PE** account.
+* 登录您的 **TBMQ PE** 账户。
 
 {% include images-gallery.html imageCollection="register-domain" showListImageTitles="true" %}
 
-## Logging in with Your Domain
+## 使用域名登录
 
-After successful registration, you can access your TBMQ instance using the configured domain name.
-Open a web browser and enter the domain in the address bar - you should see the TBMQ login page.
+注册成功后，可使用已配置域名访问 TBMQ 实例。
+在浏览器地址栏输入域名，应能看到 TBMQ 登录页。
 
 {% include images-gallery.html imageCollection="login-with-domain" %}
 
-## Viewing Domain Details
+## 查看域名详情
 
-To view details about a registered domain, simply click on it to open the domain details dialog.
+点击已注册域名即可打开域名详情对话框。
 
 {% include images-gallery.html imageCollection="domain-details" %}
 
-## Deleting a Domain
+## 删除域名
 
-To delete the domain click "trash" icon in the domain's row you want to delete. In the confirmation dialog, click "Yes" if you are sure you want to delete the domain.
+点击要删除域名所在行的“垃圾桶”图标。在确认对话框中，确认删除后点击“是”。
 
 {% include images-gallery.html imageCollection="delete-domain" %}
 
-## How to Create an A Record for Your Domain {#how-to-create-an-a-record-for-your-domain}
+## 如何为域名创建 A 记录 {#how-to-create-an-a-record-for-your-domain}
 
-### What Is an A Record?
+### 什么是 A 记录？
 
-An **A record (Address Record)** links a domain name directly to an **IPv4 address**.
-It tells DNS resolvers where to find your server.
+**A 记录（地址记录）**将域名直接指向**IPv4 地址**。
+用于告知 DNS 解析器服务器的位置。
 
-**Example:**
+**示例：**
 
 ```
 mqtt.mycompany.com → 203.0.113.45
 ```
 
-### When to Use an A Record
+### 何时使用 A 记录
 
-Use an **A record** when your TBMQ instance has a **fixed public IP address** - for example, a VM, Kubernetes service, or on-premise server.
+当 TBMQ 实例具有**固定公共 IP 地址**时使用 A 记录，例如 VM、Kubernetes 服务或本地服务器。
 
-### How to Create an A Record
+### 如何创建 A 记录
 
-The exact procedure depends on your DNS provider.
-Refer to their documentation for detailed instructions:
+具体步骤取决于 DNS 服务商，请参阅其文档：
 
 * [Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html){:target="_blank"}
 * [GoDaddy](https://www.godaddy.com/help/add-an-a-record-19238){:target="_blank"}
@@ -87,33 +85,32 @@ Refer to their documentation for detailed instructions:
 * [Infoblox NIOS](https://docs.infoblox.com/space/BloxOneDDI/186811892/Creating+A+Record){:target="_blank"}
 * [Namecheap](https://www.namecheap.com/support/knowledgebase/article.aspx/434/2237/how-do-i-set-up-host-records-for-a-domain/){:target="_blank"}
 
-If your provider is not listed, check their documentation or contact their support team for assistance.
+若未列出您的服务商，请查阅其文档或联系技术支持。
 
-## How to Create a CNAME Record for Your Domain {#how-to-create-a-cname-record-for-your-domain}
+## 如何为域名创建 CNAME 记录 {#how-to-create-a-cname-record-for-your-domain}
 
-### What Is a CNAME Record?
+### 什么是 CNAME 记录？
 
-A **CNAME (Canonical Name Record)** maps one domain name to another domain name.
-It acts as an **alias**, allowing several domains or subdomains to point to the same hostname.
+**CNAME（规范名称记录）**将域名映射到另一域名。
+相当于**别名**，允许多个域名或子域名指向同一主机名。
 
-**Example:**
+**示例：**
 
 ```
 mqtt.mycompany.com → broker.mycompany.net
 ```
 
-### When to Use a CNAME Record
+### 何时使用 CNAME 记录
 
-Use a **CNAME record** when:
+下列情况使用 CNAME 记录：
 
-* You want multiple domains (e.g., `mqtt.mycompany.com`, `iot.mycompany.com`) to resolve to the same host.
-* Your server’s IP may change, but the target domain remains constant.
-* You want to simplify DNS management by maintaining only one A record (on the primary domain).
+* 需将多个域名（如 `mqtt.mycompany.com`、`iot.mycompany.com`）解析到同一主机。
+* 服务器 IP 可能变化，但目标域名保持不变。
+* 希望通过仅维护一个 A 记录（在主域名上）简化 DNS 管理。
 
-### How to Create a CNAME Record
+### 如何创建 CNAME 记录
 
-Each DNS provider has its own interface for adding CNAME records.
-Below are direct links to their setup guides:
+各 DNS 服务商的添加 CNAME 界面不同，可直接参考其配置指南：
 
 * [Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values.html){:target="_blank"}
 * [GoDaddy](https://www.godaddy.com/help/add-a-cname-record-19236){:target="_blank"}
@@ -128,53 +125,52 @@ Below are direct links to their setup guides:
 * [Infoblox NIOS](https://docs.infoblox.com/display/BloxOneDDI/Creating+a+CNAME+Record){:target="_blank"}
 * [Namecheap](https://www.namecheap.com/support/knowledgebase/article.aspx/9646/2237/how-to-create-a-cname-record-for-your-domain){:target="_blank"}
 
-If your provider is not listed, check their documentation or contact their support team for assistance.
+若未列出您的服务商，请查阅其文档或联系技术支持。
 
-## Troubleshooting
+## 故障排查
 
-If your domain does not resolve or TBMQ is not accessible, verify the DNS configuration.
+若域名无法解析或无法访问 TBMQ，请检查 DNS 配置。
 
-### Check DNS Record
+### 检查 DNS 记录
 
-Use the [Google Admin Toolbox DIG](https://toolbox.googleapps.com/apps/dig/){:target="_blank"}
-or run the following command on Linux:
+使用 [Google Admin Toolbox DIG](https://toolbox.googleapps.com/apps/dig/){:target="_blank"} 或在 Linux 上运行：
 
 ```bash
 dig your-domain.com any
 ```
 {: .copy-code}
 
-Replace `your-domain.com` with your actual domain name.
-Example:
+将 `your-domain.com` 替换为实际域名。
+示例：
 
 ```bash
 dig mqtt.mycompany.com any
 ```
 
-### Review the Output
+### 查看输出
 
-If no `ANSWER SECTION` appears, the record was not added correctly.
-For example, this output shows **no record found**:
+若未出现 `ANSWER SECTION`，说明记录未正确添加。
+例如以下输出表示**未找到记录**：
 
 ```bash
 ;; ANSWER SECTION:
 mqtt.mycompany.com. 3600 IN HINFO "RFC8482" ""
 ```
 
-A correct record should look like this:
+正确记录应类似：
 
 ```bash
 ;; ANSWER SECTION:
 mqtt.mycompany.com. 3600 IN CNAME broker.mycompany.net.
 ```
 
-or, if using an A record:
+若使用 A 记录：
 
 ```bash
 ;; ANSWER SECTION:
 mqtt.mycompany.com. 3600 IN A 203.0.113.45
 ```
 
-### Contact Support
+### 联系技术支持
 
-If the configuration appears correct but the issue persists, please [contact us](https://thingsboard.io/docs/pe/mqtt-broker/help/){:target="_blank"} for further assistance.
+若配置看似正确但问题仍存在，请[联系我们](https://thingsboard.io/docs/pe/mqtt-broker/help/){:target="_blank"}获取帮助。

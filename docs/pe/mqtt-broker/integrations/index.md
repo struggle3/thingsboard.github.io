@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Integrations
-description: TBMQ Integrations Documentation 
+title: 集成
+description: TBMQ 集成文档 
 
 ---
 

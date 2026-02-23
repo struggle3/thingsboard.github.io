@@ -24,12 +24,12 @@ When to use
 
 <hr>
 
-### Arguments
+### 参数
 
-Arguments define which telemetry values are used for aggregation.
-This calculated field type reads **historical telemetry only from the current entity**.
+Arguments 定义用于聚合的遥测值。
+本计算字段类型**仅从当前实体**读取历史遥测。
 
-Click **Add argument** and fill in the required fields:
+点击 **Add argument** 并填写必填项：
 - **Time series key** — the telemetry key whose data will be aggregated (for example, temperature, power, voltage)
 - **Argument name** — the variable name referenced by metrics
 
@@ -268,7 +268,7 @@ Example output for one interval:
 
 <hr>
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎为 ThingsBoard 在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 加星。
+如有疑问，请 [联系我们](/docs/contact-us/){:target="_blank"}。

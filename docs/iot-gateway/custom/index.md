@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-gw
-title: IoT Gateway customization
+title: IoT Gateway 自定义
 
 ---
 
@@ -8,13 +8,13 @@ title: IoT Gateway customization
 * TOC
 {:toc}
 
-This section of documentation may help you to customize your IoT Gateway to meet your specific requirements.
-In the gateway we have "extensions" which are used to customize the gateway, add your own connectors or converters.  
-In general extensions usage looks like this:
-1. You need to create a file with your extension or extensions in the gateway extension folder. (Name of folder with your extension is a type of connector)
-2. You need to add your extension to the configuration file of the gateway:  
+本部分文档可帮助您自定义 IoT Gateway 以满足特定需求。
+网关中有“扩展”（extensions），用于自定义网关、添加自有连接器或转换器。  
+扩展的一般使用方式如下：
+1. 在网关扩展目录中创建包含您扩展的文件。（扩展所在文件夹名称即为连接器类型）
+2. 将扩展添加到网关的配置文件中：  
 
-    2.1. Custom connector: add your connector to the "connectors" section of the main configuration (tb_gateway.json). For example:  
+    2.1. 自定义连接器：将连接器添加到主配置（tb_gateway.json）的「connectors」部分。例如：  
     ```
     ...
     "connectors": [
@@ -28,9 +28,9 @@ In general extensions usage looks like this:
     ```  
     {:.copy-code}
     
-    2.2. Custom converter: It depends on realization of connector, but usually you need to add "converter" parameter to the configuration of the connector.  
-         You can get more information in configuration article of the interesting connector.  
-         Below you can see configuration example for MQTT and OPCUA connectors.  
+    2.2. 自定义转换器：取决于连接器实现，通常需在连接器配置中添加「converter」参数。  
+         可在对应连接器的配置文档中获取更多信息。  
+         下方为 MQTT 和 OPCUA 连接器的配置示例。  
     
     MQTT:
     
@@ -69,12 +69,12 @@ In general extensions usage looks like this:
     ...
     ```
 
-3. To apply changes - you need to restart a gateway (If you want to add connector) or connector (If you want to add converter).  
+3. 应用更改：需重启网关（若添加连接器）或连接器（若添加转换器）。  
 
-In this section we have the following articles to help you with the customization:  
+本部分包含以下文章以帮助您完成自定义：  
 
-1. [Methods and datatypes](methods-and-datatypes.md) - This article describes the methods and data types that are used in the IoT Gateway.
-    This article will be useful to understand flow of data and methods in the IoT Gateway.  
-2. [Serial connector](serial-connector.md) - This article describes how to create the serial connector and converters for it for IoT Gateway.
-    This article contains custom connector, converters and steps to use them.  
+1. [方法及数据类型](methods-and-datatypes.md) - 介绍 IoT Gateway 中使用的方法和数据类型。
+    可帮助理解 IoT Gateway 中数据与方法的流转。  
+2. [串口连接器](serial-connector.md) - 介绍如何为 IoT Gateway 创建串口连接器及其转换器。
+    包含自定义连接器、转换器及使用步骤。  
 

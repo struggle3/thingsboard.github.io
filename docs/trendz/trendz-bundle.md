@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Import Advanced analytics Bundle into ThingsBoard
-description: Import Advanced analytics Bundle into ThingsBoard
+title: 将 Advanced Analytics Bundle 导入 ThingsBoard
+description: 将 Advanced Analytics Bundle 导入 ThingsBoard
 
 tb-trendz-3.5-resource-lib-update:
   0:

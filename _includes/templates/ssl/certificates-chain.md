@@ -1,33 +1,33 @@
-## X.509 Certificate chain:
+## X.509 证书链：
 
-### Step 1. Prepare your server and certificate chain
+### Step 1. 准备服务器与证书链
 
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-ThingsBoard Team has already provisioned a valid certificate for [ThingsBoard Cloud](https://{{hostName}}/signup){:target="_blank"}.
+ThingsBoard Team 已为 [ThingsBoard Cloud](https://{{hostName}}/signup){:target="_blank"} 配置有效证书。
 {% endif %}
 {% if docsPrefix == null or docsPrefix == "pe/" %}
-Follow the [MQTT over SSL](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/){:target="_blank"} guide to provision server certificate if you are hosting your own ThingsBoard instance.
+若自托管 ThingsBoard，请按 [MQTT over SSL](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/){:target="_blank"} 指南配置服务器证书。
 {% endif %}
 
-Once provisioned, you should prepare a CA root certificate in pem format. This certificate will be used by mqtt client to validate the server certificate.
-Save the CA root certificate to your working directory as "**ca-root.pem**".
-An example of CA root certificate for *{{mqttHostName}}* is located [here](/docs/paas/user-guide/resources/mqtt-over-ssl/ca-root.pem).
+配置完成后，准备 pem 格式的 CA root 证书。MQTT 客户端将使用该证书校验服务器证书。
+将 CA root 证书保存到工作目录，命名为 "**ca-root.pem**"。
+*{{mqttHostName}}* 的 CA root 证书示例见[此处](/docs/paas/user-guide/resources/mqtt-over-ssl/ca-root.pem)。
 
-### Step 2. Generate Client certificate chain
+### Step 2. 生成 Client 证书链
 
-We should generate a certificate chain with **reasonable** Common Names (CNs). We will use the intermediate certificate to sign certificates for our devices.
-For example, the certificate chain CNs might be the following: 
+需生成具有合理 Common Names (CN) 的证书链。将使用中间证书为设备签发证书。
+例如，证书链 CN 可如下：
 
- * Root certificate CN: company-name.com;
- * Intermediate certificate: device-group-name.company-name.com;
- * Device certificate: device-name.device-group-name.company-name.com;
+ * Root 证书 CN: company-name.com；
+ * Intermediate 证书: device-group-name.company-name.com；
+ * Device 证书: device-name.device-group-name.company-name.com；
 
-Use the following commands to generate the self-signed private keys, certificate signing requests, and x509 certificates
-for each chain level. The commands are based on the **OpenSSL** tool, which is most likely already installed on your workstation:
+使用以下命令为各级链生成自签名私钥、证书签发请求和 x509 证书。
+命令基于 **OpenSSL** 工具，工作机通常已安装：
 
-**Step 2.1** Generate root certificate 
+**Step 2.1** 生成 root 证书 
 
-Generate the Root certificate and private key, use the following command. Don't forget to put the correct CN when prompted:
+生成 Root 证书和私钥，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl req -x509 -newkey rsa:4096 -keyout rootKey.pem -out rootCert.pem -sha256 -days 365 -nodes
@@ -36,7 +36,7 @@ openssl req -x509 -newkey rsa:4096 -keyout rootKey.pem -out rootCert.pem -sha256
 
 <details>
 <summary>
-Sample output, referencing *company.com* as CN
+示例输出，CN 为 *company.com*
 </summary>
 {% highlight text %}
 Generating a RSA private key
@@ -60,9 +60,9 @@ Email Address []:
 </details>
 <br>
 
-**Step 2.2** Generate intermediate certificate 
+**Step 2.2** 生成 intermediate 证书 
 
-To generate the intermediate key and certificate request, use the following command. Don't forget to put the correct CN when prompted:
+生成 intermediate 密钥和证书请求，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl req -new -newkey rsa:4096 -keyout intermediateKey.pem -out intermediate.csr -sha256 -nodes
@@ -71,7 +71,7 @@ openssl req -new -newkey rsa:4096 -keyout intermediateKey.pem -out intermediate.
 
 <details>
 <summary>
-Sample output, referencing *group.company.com* as CN
+示例输出，CN 为 *group.company.com*
 </summary>
 {% highlight text %}
 Generating a RSA private key
@@ -100,7 +100,7 @@ An optional company name []:
 </details>
 <br>
 
-To generate the intermediate certificate, use the following command. Don't forget to put the correct CN when prompted:
+生成 intermediate 证书，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl x509 -req -in intermediate.csr -out intermediateCert.pem -CA rootCert.pem -CAkey rootKey.pem -days 365 -sha256 -CAcreateserial -extfile <(echo "basicConstraints=CA:TRUE")
@@ -109,7 +109,7 @@ openssl x509 -req -in intermediate.csr -out intermediateCert.pem -CA rootCert.pe
 
 <details>
 <summary>
-Sample output
+示例输出
 </summary>
 {% highlight text %}
 Signature ok
@@ -120,9 +120,9 @@ Getting CA Private Key
 <br>
 
 
-**Step 2.3** Generate device certificate 
+**Step 2.3** 生成 device 证书 
 
-To generate the device certificate, use the following command. Don't forget to put the correct CN when prompted:
+生成 device 证书，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl req -new -newkey rsa:4096 -keyout deviceKey.pem -out device.csr -sha256 -nodes
@@ -131,7 +131,7 @@ openssl req -new -newkey rsa:4096 -keyout deviceKey.pem -out device.csr -sha256 
 
 <details>
 <summary>
-Sample output, referencing <i>device123.group.company.com</i> as CN
+示例输出，CN 为 <i>device123.group.company.com</i>
 </summary>
 {% highlight text %}
 Generating a RSA private key
@@ -160,7 +160,7 @@ An optional company name []:
 </details>
 <br>
 
-To generate the intermediate certificate, use the following command. Don't forget to put the correct CN when prompted:
+生成 device 证书，使用以下命令。提示时请填写正确的 CN：
 
 ```bash
 openssl x509 -req -in device.csr -out deviceCert.pem -CA intermediateCert.pem -CAkey intermediateKey.pem -days 365 -sha256 -CAcreateserial
@@ -169,7 +169,7 @@ openssl x509 -req -in device.csr -out deviceCert.pem -CA intermediateCert.pem -C
 
 <details>
 <summary>
-Sample output
+示例输出
 </summary>
 {% highlight text %}
 Signature ok
@@ -180,26 +180,24 @@ Getting CA Private Key
 <br>
 
 
-Finally, you need to concatenate certificates into a chain starting from the device certificate till the root.
+最后，需将证书自 device 证书至 root 依次拼接为链：
 
 ```bash
 cat deviceCert.pem intermediateCert.pem rootCert.pem > chain.pem
 ```
 {: .copy-code}
 
-The output of the commands will be private keys and certificates for each level of chain. In the next steps
-we will use device key file *deviceKey.pem* and a chain of certificates *chain.pem*.
+命令将输出各级链的私钥和证书。后续步骤将使用 device 私钥文件 *deviceKey.pem* 和证书链 *chain.pem*。
 
-### Step 3. Provision Client Intermediate Public Key as Device Profile X509 provision strategy
+### Step 3. 将 Client Intermediate 公钥配置为 Device Profile 的 X509 provision 策略
 
-Go to **ThingsBoard Web UI -> Profiles -> Device profiles -> Your Device profile -> Device provisioning**.
-Select **X.509 Certificates Chain** provision strategy, insert the contents of *intermediateCert.pem* file
-and regular expression pattern to fetch common name from *deviceCert.pem*, choose allow to create new devices or not and click save.
-Alternatively, the same can be done through the [REST API](/docs/{{docsPrefix}}reference/rest-api/).
+进入 **ThingsBoard Web UI -> Profiles -> Device profiles -> Your Device profile -> Device provisioning**。
+选择 **X.509 Certificates Chain** provision 策略，粘贴 *intermediateCert.pem* 内容及从 *deviceCert.pem* 提取 common name 的正则，选择是否允许创建新设备并保存。
+也可通过 [REST API](/docs/{{docsPrefix}}reference/rest-api/) 完成。
 
-### Step 4. Test the connection
+### Step 4. 测试连接
 
-Execute the following command to upload temperature readings to ThingsBoard Cloud using secure channel:
+执行以下命令，通过安全通道向 ThingsBoard Cloud 上报温度数据：
 
 {% if docsPrefix contains 'paas/' %}
 ```bash
@@ -214,7 +212,7 @@ mosquitto_pub --cafile ca-root.pem -d -q 1 -h "YOUR_TB_HOST" -p "8883" \
 ```
 {: .copy-code}
 
-Similar command for the [self-signed](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/#self-signed-certificates-generation) server certificate:
+[自签名](/docs/{{docsPrefix}}user-guide/mqtt-over-ssl/#self-signed-certificates-generation) 服务器证书的类似命令：
 
 ```bash
 mosquitto_pub --insecure --cafile server.pem -d -q 1 -h "YOUR_TB_HOST" -p "8883" \
@@ -225,4 +223,4 @@ mosquitto_pub --insecure --cafile server.pem -d -q 1 -h "YOUR_TB_HOST" -p "8883"
 
  
 
-Don't forget to replace **YOUR_TB_HOST** with the host of your ThingsBoard instance.
+请将 **YOUR_TB_HOST** 替换为您的 ThingsBoard 实例 host。

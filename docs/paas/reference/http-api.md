@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: HTTP Device API Reference
-description: Supported HTTP API Reference for IoT Devices
+title: HTTP 设备 API 参考
+description: IoT 设备支持的 HTTP API 参考
 redirect_from: "/docs/paas/reference/http-api"
 
 server-side-rpc:

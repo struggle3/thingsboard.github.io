@@ -1,9 +1,9 @@
 {% capture dockerComposeStandalone %}
-ThingsBoard supports **Docker Compose V2** (Docker Desktop or Compose plugin) starting from **3.4.2** release, because **docker-compose** as standalone setup is no longer supported by Docker.
+自 **3.4.2** 版本起，ThingsBoard 支持 **Docker Compose V2**（Docker Desktop 或 Compose 插件），因为 Docker 不再支持 **docker-compose** 作为独立安装方式。
 
-**We strongly recommend to update to Docker Compose V2 and use it.**
+**我们强烈建议升级到 Docker Compose V2 并使用它。**
 
-If you still rely on using Docker Compose as docker-compose (with a hyphen), then please execute the following commands to start **ThingsBoard**:
+如仍使用带连字符的 docker-compose，请执行以下命令启动 **ThingsBoard**：
 
 **docker-compose up -d && docker-compose logs -f my{{serviceName}}**
 

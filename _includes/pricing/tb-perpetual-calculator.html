@@ -3,19 +3,19 @@
     <div class="modal-content">
         <div class="modal-body">
             <div id="perpCloseBtn" class="close-button">
-                <img src="/images/pricing/close-icon.svg" alt="Close icon">
+                <img src="/images/pricing/close-icon.svg" alt="关闭">
             </div>
             <div class="card calculator">
                 <div class="calculator-header">
-                    <h2>Perpetual license calculator</h2>
+                    <h2>永久许可证计价器</h2>
                 </div>
                 <div class="input-parameters">
                     <div class="input-group">
                         <div class="input-label-group xs-row">
                             <label for="perp-devices" class="label">
-                                Number of Devices
-                                <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                    <span class="tooltip-text">The total number of IoT devices that will connect to ThingsBoard</span>
+                                设备数量
+                                <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="提示">
+                                    <span class="tooltip-text">将连接到ThingsBoard的IoT设备总数</span>
                                 </span>
                             </label>
                             <input id="perp-devices" type="number" value="1000" min="1000" class="input input-right">
@@ -35,12 +35,12 @@
                         <div class="instance-group">
                             <div class="instance-info">
                                 <h4>
-                                    Production Instances
-                                    <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                        <span class="tooltip-text">Production instances handle your live data and real-time operations</span>
+                                    生产实例
+                                    <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="提示">
+                                        <span class="tooltip-text">生产实例处理您的实时数据和实时操作</span>
                                     </span>
                                 </h4>
-                                <p id="perpProdDescription">1 Production Instance included. Add a 2nd instance for high availability (HA) to prevent downtime.</p>
+                                <p id="perpProdDescription">包含1个生产实例。添加第2个实例可实现高可用性(HA)以防止停机。</p>
                             </div>
                             <div class="stepper-control" id="perpProdStepper">
                                 <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease production instances">−</button>
@@ -51,12 +51,12 @@
                         <div class="instance-group">
                             <div class="instance-info">
                                 <h4>
-                                    Development Instances
-                                    <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                        <span class="tooltip-text">Development instances for testing and CI/CD workflows</span>
+                                    开发实例
+                                    <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="提示">
+                                        <span class="tooltip-text">用于测试和CI/CD工作流的开发实例</span>
                                     </span>
                                 </h4>
-                                <p id="perpDevDescription">Add dedicated instances for your dev, test, and CI/CD workflows.</p>
+                                <p id="perpDevDescription">为您的开发、测试和CI/CD工作流添加专用实例。</p>
                             </div>
                             <div class="stepper-control" id="perpDevStepper">
                                 <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease development instances">−</button>
@@ -67,20 +67,20 @@
                     </div>
                     <div class="input-group addons">
                         <p class="label">
-                            Add-ons
+                            附加模块
                             <span class="tooltip">
-                                <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Optional features to enhance your perpetual license</span>
+                                <img src="/images/pricing/info-icon.svg" alt="提示">
+                                <span class="tooltip-text">用于增强永久许可证的可选功能</span>
                             </span>
                         </p>
                         <div class="add-ons-grid three-items">
                             <div class="addon-card" id="perpEdgeCard">
                                 <div class="addon-header">
                                     <span class="addon-title">
-                                        Edge Computing
+                                        边缘计算
                                         <span class="tooltip">
-                                            <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Deploy edge computing instances for local data processing</span>
+                                            <img src="/images/pricing/info-icon.svg" alt="提示">
+                                            <span class="tooltip-text">部署边缘计算实例进行本地数据处理</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -88,9 +88,9 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description" id="perpEdgeDescription">2 Edge Computing instances are included.</p>
+                                <p class="addon-description" id="perpEdgeDescription">包含2个边缘计算实例。</p>
                                 <div class="addon-counter" id="perpEdgeCounter">
-                                    <label>Edge Instances</label>
+                                    <label>边缘实例</label>
                                     <div class="stepper-control">
                                         <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease edge instances">−</button>
                                         <input type="number" value="2" min="2" id="perpEdgeInstances" aria-label="Edge instances count">
@@ -103,8 +103,8 @@
                                     <span class="addon-title">
                                         Trendz Analytics
                                         <span class="tooltip">
-                                            <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Advanced analytics and visualization for your IoT data</span>
+                                            <img src="/images/pricing/info-icon.svg" alt="提示">
+                                            <span class="tooltip-text">面向IoT数据的高级分析与可视化</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -112,15 +112,15 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description">Advanced analytics for your solution.</p>
+                                <p class="addon-description">面向您解决方案的高级分析。</p>
                             </div>
                             <div class="addon-card" id="perpOfflineCard">
                                 <div class="addon-header">
                                     <span class="addon-title">
-                                        Offline Mode
+                                        离线模式
                                         <span class="tooltip">
-                                            <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                            <span class="tooltip-text">Operate your ThingsBoard instance without internet connectivity</span>
+                                            <img src="/images/pricing/info-icon.svg" alt="提示">
+                                            <span class="tooltip-text">在无网络连接的情况下运行ThingsBoard实例</span>
                                         </span>
                                     </span>
                                     <label class="toggle-switch">
@@ -128,14 +128,14 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <p class="addon-description">Full functionality without internet.</p>
+                                <p class="addon-description">无网络时完整功能可用。</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="actions-container">
                     <div class="reset-container">
-                        <button id="perpResetBtn" class="button reset">Reset</button>
+                        <button id="perpResetBtn" class="button reset">重置</button>
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
             tbSmPUi.steppers.edge.querySelector('[data-action="decrement"]').disabled = tbSmPState.addons.edge.count <= plan.edgeInstancesIncluded;
         } else {
             tbSmPUi.steppers.edge.classList.add('hidden');
-            tbSmPUi.desc.edge.textContent = 'Process data where it is collected.';
+            tbSmPUi.desc.edge.textContent = '在数据采集处处理数据。';
         }
 
         tbSmPUi.cards.trendz.classList.toggle('active', tbSmPState.addons.trendz.enabled);
@@ -387,25 +387,25 @@
                     <span class="section-title-with-chevron">${plan.name} ${chevronUpIcon}</span>
                     <span class="section-value">
                         ${formatCurrency(plan.price)}
-                        <span class="tooltip">${infoIcon}<span class="tooltip-text">Base perpetual license price</span></span>
+                        <span class="tooltip">${infoIcon}<span class="tooltip-text">基础永久许可价格</span></span>
                     </span>
                 </div>
                 <div class="section-content">
-                    ${tbSmPCreateItem('Included Devices', formatNumber(plan.includedDevices), null, true)}
-                    ${tbSmPCreateItem('Included Prod Instances', formatNumber(plan.includedProdInstances))}
-                    ${tbSmPCreateItem('White Labeling', '<span class="badge enabled">Enabled</span>')}
-                    ${tbSmPCreateItem('Base Price', formatCurrency(plan.price), 'One-time perpetual license fee')}`;
+                    ${tbSmPCreateItem('包含设备', formatNumber(plan.includedDevices), null, true)}
+                    ${tbSmPCreateItem('包含生产实例', formatNumber(plan.includedProdInstances))}
+                    ${tbSmPCreateItem('白标定制', '<span class="badge enabled">已启用</span>')}
+                    ${tbSmPCreateItem('基础价格', formatCurrency(plan.price), '一次性永久许可费')}`;
 
         if (extraDevices > 0) {
-            detailsHtml += tbSmPCreateItem('Extra Devices', formatNumber(extraDevices), 'Devices beyond included');
+            detailsHtml += tbSmPCreateItem('额外设备', formatNumber(extraDevices), '超出包含数量的设备');
             detailsHtml += tbSmPCreateItem('Extra Devices Cost', formatCurrency(extraDevicesCost), `${formatNumber(extraDevices)} × ${formatCurrency(plan.extraDevicePrice)}`);
         }
         if (extraProd > 0) {
-            detailsHtml += tbSmPCreateItem('Extra Prod Instances', formatNumber(extraProd), 'Additional instances');
+            detailsHtml += tbSmPCreateItem('额外生产实例', formatNumber(extraProd), '增加的实例');
             detailsHtml += tbSmPCreateItem('Extra Prod Instances Cost', formatCurrency(extraProdCost), `${formatNumber(extraProd)} × ${formatCurrency(plan.extraProdInstancePrice)}`);
         }
         if (tbSmPState.devInstances > 0) {
-            detailsHtml += tbSmPCreateItem('Extra Dev Instances', formatNumber(tbSmPState.devInstances));
+            detailsHtml += tbSmPCreateItem('额外开发实例', formatNumber(tbSmPState.devInstances));
             detailsHtml += tbSmPCreateItem('Extra Dev Instances Cost', formatCurrency(devCost), `${formatNumber(tbSmPState.devInstances)} × ${formatCurrency(plan.devQaExtraInstancePrice)}`);
         }
 
@@ -425,7 +425,7 @@
             <div class="results-scroll-container">
                 <div class="card-header">
                     <div class="header-top">
-                        <h3>Calculation summary</h3>
+                        <h3>计算摘要</h3>
                         <div class="header-actions">
                             <div id="perpCopyBtn" class="icon-button" title="Copy">${copyIcon}</div>
                             <div id="perpDownloadBtn" class="icon-button" title="Download">${downloadIcon}</div>
@@ -433,7 +433,7 @@
                     </div>
                 </div>
                 ${detailsHtml}
-                <div class="addons-separator"><span>Add-ons</span></div>
+                <div class="addons-separator"><span>附加模块</span></div>
                 ${addonsHtml}
             </div>
             <div class="results-footer">
@@ -444,7 +444,7 @@
                         <span class="tooltip">${infoIcon}<span class="tooltip-text">${tooltips.join(' + ')}</span></span>
                     </span>
                 </div>
-                <a id="perpContactBtn" href="/docs/contact-us/" class="button">Contact Us</a>
+                <a id="perpContactBtn" href="/docs/contact-us/" class="button">联系我们</a>
             </div>`;
 
         tbSmPInitExpandable();
@@ -471,18 +471,18 @@
             <div class="results-section inactive">
                 <div class="section-header">
                     <span class="section-title${chevron ? '-with-chevron' : ''}" >${title} ${chevron ? chevronDownIcon : ''}</span>
-                    <span class="add-to-plan-btn" data-perp-addon="${id}">Add (${formatCurrency(cost)})</span>
+                    <span class="add-to-plan-btn" data-perp-addon="${id}">添加 (${formatCurrency(cost)})</span>
                 </div>
             </div>`;
 
         if (tbSmPState.addons.edge.enabled && breakdown.edge) {
             const edge = breakdown.edge;
             const content = `<div class="section-content">
-                ${tbSmPCreateItem('Add-on Base Price', formatCurrency(edge.base))}
-                ${tbSmPCreateItem('Included Edges', edge.included)}
-                ${edge.extra > 0 ? tbSmPCreateItem('Extra Edges', edge.extra) + tbSmPCreateItem('Extra Edges Cost', formatCurrency(edge.extraCost)) : ''}
+                ${tbSmPCreateItem('附加模块基础价格', formatCurrency(edge.base))}
+                ${tbSmPCreateItem('包含边缘实例', edge.included)}
+                ${edge.extra > 0 ? tbSmPCreateItem('额外边缘实例', edge.extra) + tbSmPCreateItem('额外边缘实例费用', formatCurrency(edge.extraCost)) : ''}
             </div>`;
-            html += section('edgeComputing', 'Edge Computing', `<span class="section-value">${formatCurrency(edge.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Edge Computing add-on</span></span></span>`, 'expandable', content);
+            html += section('edgeComputing', 'Edge Computing', `<span class="section-value">${formatCurrency(edge.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">边缘计算附加模块</span></span></span>`, 'expandable', content);
         } else {
             html += addButton('edge', 'Edge Computing', plan.edgeMonthPrice);
         }
@@ -491,11 +491,11 @@
             const trendz = breakdown.trendz;
             const hasExtra = trendz.extraDevices > 0;
             const content = hasExtra ? `<div class="section-content">
-                ${tbSmPCreateItem('Add-on Base Price', formatCurrency(trendz.base))}
+                ${tbSmPCreateItem('附加模块基础价格', formatCurrency(trendz.base))}
                 ${tbSmPCreateItem('Extra Devices', trendz.extraDevices)}
                 ${tbSmPCreateItem('Extra Devices Cost', formatCurrency(trendz.extraCost))}
             </div>` : '';
-            html += section('trendzAnalytics', 'Trendz Analytics', `<span class="section-value">${formatCurrency(trendz.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Trendz Analytics add-on</span></span></span>`, hasExtra ? 'expandable' : '', content);
+            html += section('trendzAnalytics', 'Trendz Analytics', `<span class="section-value">${formatCurrency(trendz.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">Trendz Analytics附加模块</span></span></span>`, hasExtra ? 'expandable' : '', content);
         } else {
             html += addButton('trendz', 'Trendz Analytics', plan.trendzMonthPrice);
         }
@@ -503,8 +503,8 @@
         if (tbSmPState.addons.offline.enabled && breakdown.offline) {
             html += `<div class="results-section">
                 <div class="section-header">
-                    <span class="section-title">Offline Mode</span>
-                    <span class="section-value">${formatCurrency(breakdown.offline.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">One-time offline mode license</span></span></span>
+                    <span class="section-title">离线模式</span>
+                    <span class="section-value">${formatCurrency(breakdown.offline.cost)}<span class="tooltip">${infoIcon}<span class="tooltip-text">一次性离线模式许可</span></span></span>
                 </div>
             </div>`;
         } else {

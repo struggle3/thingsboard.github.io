@@ -2,23 +2,23 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Calculated fields
-description: Calculated fields
+title: 计算字段
+description: 计算字段
 
 create-new-calculated-field:
     0:
         image: /images/user-guide/calculated-fields/create-new-calculated-field-1-pe.png
-        title: 'To create a calculated field, select to the Entity or Profile where the calculated field should be applied. In the entity details window, navigate to the "Calculated fields" tab. Click the "plus" icon button and select "Create new calculated field" from the dropdown menu.<br>The calculated field configuration window will open — let&#39;s proceed with the setup.'
+        title: '创建计算字段时，选择要应用计算字段的实体或档案。在实体详情窗口中进入「计算字段」选项卡。点击「plus」图标按钮，从下拉菜单选择「创建新计算字段」。<br>计算字段配置窗口将打开，继续进行设置。'
 
 calculated-field-general:
     0:
         image: /images/user-guide/calculated-fields/calculated-field-general-1-pe.png
-        title: 'Enter a <b>descriptive name</b> for the calculated field, select the entity or entity profile to which the calculated field will be applied, and choose calculated field <b>type</b>.'
+        title: '输入计算字段的 <b>描述性名称</b>，选择要应用计算字段的实体或实体档案，并选择计算字段 <b>类型</b>。'
 
 argument-name:
     0:
         image: /images/user-guide/calculated-fields/argument-name-1-pe.png
-        title: 'Click "Add argument" and fill in the required fields.'
+        title: '点击「添加参数」并填写必填字段。'
 
 attribute-argument-type:
     0:

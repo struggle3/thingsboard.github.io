@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: switch
-description: Routes messages to one or more connections returned by a script.
+description: 将消息路由到脚本返回的一个或多个连接。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

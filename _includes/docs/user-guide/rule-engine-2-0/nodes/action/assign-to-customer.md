@@ -1,10 +1,9 @@
-Assigns the message originator to a specified customer.
+将消息发起者分配给指定客户。
 
-## Configuration
+## 配置
 
-- **Customer title** - The name of the target customer. Supports templatization using `${metadataKey}` or `$[dataKey]` to substitute values from the message metadata or data.
-- **Create new customer if it doesn't exist** - When enabled, creates a new customer if no customer matching the title is found. When disabled, the processing fails if the target
-  customer doesn't exist.
+- **Customer title（客户标题）** - 目标客户的名称。支持使用 `${metadataKey}` 或 `$[dataKey]` 模板化，以替换消息元数据或数据中的值。
+- **Create new customer if it doesn't exist（不存在时创建新客户）** - 启用后，若未找到匹配标题的客户则创建新客户。禁用时，若目标客户不存在则处理失败。
 
 ### JSON Schema
 
@@ -31,34 +30,34 @@ Assigns the message originator to a specified customer.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. Resolves any templates in the **Customer title** using values from the message data and metadata.
-2. Searches for an existing customer with the resolved title within the tenant.
-3. If the customer doesn't exist and **Create new customer if it doesn't exist** is enabled:
-    - Creates a new customer with the resolved title
-    - Generates a `ENTITY_CREATED` lifecycle event for the newly created customer
-4. If the customer doesn't exist and creation is disabled, the processing fails.
-5. Assigns the originator to the target customer.
-6. If the entity is already assigned to the target customer, no change is made but the processing is still considered successful.
-7. On successful completion, the message is forwarded to the `Success` connection. If an error occurs, the message is routed to the `Failure` connection.
+1. 使用消息数据和元数据中的值解析 **Customer title** 中的模板。
+2. 在租户内搜索具有解析后标题的现有客户。
+3. 若客户不存在且 **Create new customer if it doesn't exist** 已启用：
+    - 使用解析后的标题创建新客户
+    - 为新创建的客户生成 `ENTITY_CREATED` 生命周期事件
+4. 若客户不存在且禁用了创建，则处理失败。
+5. 将发起者分配给目标客户。
+6. 若实体已分配给目标客户，不会进行更改，但处理仍视为成功。
+7. 成功完成后，消息转发至 `Success` 连接。发生错误时，消息路由至 `Failure` 连接。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The entity was successfully assigned to the customer or the entity was already assigned to the target customer.
+    - 实体已成功分配给客户，或实体已属于目标客户。
 - `Failure`
-    - An error occurred during processing, such as the target customer not existing when creation is disabled.
+    - 处理过程中发生错误，例如在禁用创建时目标客户不存在。
 
-## Examples
+## 示例
 
-### Example 1 — Assigning to existing customer
+### 示例 1 — 分配给现有客户
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -67,24 +66,24 @@ Originator: `DEVICE`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- A customer named "My Customer" exists under the tenant.
-- Originator device is not assigned to any customer.
+- 租户下存在名为「My Customer」的客户。
+- 发起者设备未分配给任何客户。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The device is assigned to "My Customer".
+设备被分配给「My Customer」。
 
-### Example 2 — Using pattern for customer name
+### 示例 2 — 为客户名称使用模式
 
-**Incoming message**
+**传入消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -92,7 +91,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -100,140 +99,23 @@ Metadata:
 }
 ```
 
-Originator: `ASSET`.
-
-**Node configuration**
+**节点配置**
 
 ```json
 {
-  "customerNamePattern": "${customerType} - $[region] Region",
+  "customerNamePattern": "$[region] $${customerType}",
   "createCustomerIfNotExists": false
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- A customer named "Premium - North Region" exists under the tenant.
-- Originator asset is not assigned to any customer.
+租户下存在名为「North Premium」的客户。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The pattern `${customerType} - $[region] Region` is resolved by substituting values from metadata and data, resulting in "Premium - North Region". The asset is assigned to this
-customer.
-
-### Example 3 — Creating customer if it doesn't exist
-
-**Incoming message**
-
-Originator: `DEVICE`.
-
-**Node configuration**
-
-```json
-{
-  "customerNamePattern": "New Customer",
-  "createCustomerIfNotExists": true
-}
-```
-
-**State of the system**
-
-- No customer named "New Customer" exists.
-- Originator device is not assigned to any customer.
-
-**Outgoing message**
-
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
-
-**Result**
-
-Since the customer "New Customer" doesn't exist and `createCustomerIfNotExists` is true, a new customer is created at the tenant level with the title "New Customer". The device is
-then assigned to this newly created customer. A `ENTITY_CREATED` lifecycle event for the newly created customer is generated.
-
-### Example 4 — Entity already assigned to target customer
-
-**Incoming message**
-
-Originator: `ASSET`.
-
-**Node configuration**
-
-```json
-{
-  "customerNamePattern": "Target Customer",
-  "createCustomerIfNotExists": false
-}
-```
-
-**State of the system**
-
-- "Target Customer" exists under the tenant.
-- Originator asset is already assigned to "Target Customer".
-
-**Outgoing message**
-
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
-
-**Result**
-
-Since the asset is already assigned to "Target Customer", no assignment change is performed, but the processing is considered successful.
-
-### Example 5 — Customer doesn't exist and creation disabled
-
-**Incoming message**
-
-Originator: `DEVICE`.
-
-**Node configuration**
-
-```json
-{
-  "customerNamePattern": "Non-existent Customer",
-  "createCustomerIfNotExists": false
-}
-```
-
-**State of the system**
-
-- No customer named "Non-existent Customer" exists.
-- Originator device is not assigned to any customer.
-
-**Outgoing message**
-
-The outgoing message is identical to the incoming one. Routed via the `Failure` connection.
-
-**Result**
-
-The processing fails with an error because the target customer doesn't exist and `createCustomerIfNotExists` is false.
-
-### Example 6 — Reassigning from one customer to another
-
-**Incoming message**
-
-Originator: `ENTITY_VIEW`.
-
-**Node configuration**
-
-```json
-{
-  "customerNamePattern": "New Customer",
-  "createCustomerIfNotExists": false
-}
-```
-
-**State of the system**
-
-- "Old Customer" and "New Customer" both exist under the tenant.
-- Originator entity view is currently assigned to "Old Customer".
-
-**Outgoing message**
-
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
-
-**Result**
-
-The entity view is reassigned from "Old Customer" to "New Customer".
+模式 `$[region] $${customerType}` 通过用消息数据和元数据中的值替换得到解析，客户名称变为「North Premium」。设备被分配给「North Premium」客户。

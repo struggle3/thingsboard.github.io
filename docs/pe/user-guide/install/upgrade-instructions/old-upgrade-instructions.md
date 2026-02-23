@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Upgrade instructions
-description: ThingsBoard PE IoT platform upgrade instructions
+title: 升级说明
+description: ThingsBoard PE IoT 平台升级说明
 hidetoc: "true"
 
 ---

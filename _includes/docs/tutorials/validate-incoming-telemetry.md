@@ -1,98 +1,98 @@
 * TOC
 {:toc}
 
-This guide explains how to validate incoming telemetry data in ThingsBoard and discard invalid values before they are stored.
+本指南介绍如何在 ThingsBoard 中验证 incoming telemetry 数据，并在存储前丢弃无效值。
 
-As an example, we will validate temperature readings received from a Thermometer sensor and ensure that only values within the supported range are stored in the database.
+以 Thermometer 温度传感器的温度读数为例，确保仅将支持范围内的值存入数据库。
 
-The guide is introductory and focuses on demonstrating the core platform capabilities rather than building configurations from scratch.    
-For this reason, predefined rule chain configurations are provided and imported during the setup process.
+本指南为入门级，重点演示平台核心能力，而非从零构建配置。    
+因此，在设置过程中将提供并导入预设的 rule chain 配置。
 
-After importing these configurations into your ThingsBoard instance, you can explore their structure, logic, and behavior, and later adapt them for your own use cases.
-
-<hr>
-
-## Use case
-
-Assume your device is equipped with a Thermometer temperature sensor that periodically sends telemetry to ThingsBoard.
-
-The Thermometer sensor supports temperature measurements in the range -40 °C to +80 °C
-
-Your objective is to:
-- Accept and store temperature readings only if they fall within the valid range
-- Discard telemetry values outside this range
-- Allow all other telemetry data (that does not contain temperature) to pass through unchanged
-
-Although this scenario is simplified, it demonstrates a common telemetry validation pattern that can be applied to real-world IoT deployments.
+将上述配置导入 ThingsBoard 实例后，可查看其结构、逻辑和行为，并据此适配自己的使用场景。
 
 <hr>
 
-## Prerequisites
+## 使用场景
 
-Before proceeding, review the [Rule Engine](/docs/user-guide/rule-engine-2-0/overview/){:target="_blank"} documentation, which explains message routing and processing concepts used in this example.
+假设设备配备 Thermometer 温度传感器，定期向 ThingsBoard 发送遥测。
+
+Thermometer 传感器支持 -40 °C 至 +80 °C 的温度测量。
+
+目标是：
+- 仅在温度值处于有效范围内时，接受并存储温度读数
+- 丢弃超出范围的遥测值
+- 其他不含温度字段的遥测数据均原样放行
+
+虽然示例简化，但展示了可应用于实际 IoT 部署的常见遥测验证模式。
 
 <hr>
 
-## Validation logic
+## 前置条件
 
-Incoming messages may **contain or omit** the <span class="code-light">temperature</span> field.   
-Telemetry validation follows these rules:
-- If the message **does not contain** the <span class="code-light">temperature</span>, it is considered **valid**
-- If the <span class="code-light">temperature</span> key exists, its value must be within the range **-40 to 80**
+在继续前，请阅读 [Rule Engine](/docs/user-guide/rule-engine-2-0/overview/){:target="_blank"} 文档，了解本示例中使用的消息路由与处理概念。
 
-Only messages that meet these conditions are stored in the database.
+<hr>
+
+## 验证逻辑
+
+Incoming 消息可能**包含或未包含** <span class="code-light">temperature</span> 字段。   
+遥测验证遵循以下规则：
+- 若消息**不包含** <span class="code-light">temperature</span>，则视为**有效**
+- 若存在 <span class="code-light">temperature</span> 键，其值必须在 **-40 至 80** 范围内
+
+仅满足上述条件的消息会存入数据库。
 
 <br>
 
-Telemetry validation is implemented using a [rule chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain){:target="_blank"} that filters incoming messages before they are saved. Rule chain behaves as follows:
-- Routes **all messages from devices using this rule chain** to a [filter node](/docs/user-guide/rule-engine-2-0/nodes/filter/script){:target="_blank"} with the temperature validation script
-- Forwards **validated telemetry** to the [save timeseries node](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries){:target="_blank"}, which stores data in the database
+遥测验证通过 [rule chain](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-chain){:target="_blank"} 实现，在保存前过滤 incoming 消息。Rule chain 行为如下：
+- 将**使用该 rule chain 的设备发出的所有消息**路由到带温度验证脚本的 [filter node](/docs/user-guide/rule-engine-2-0/nodes/filter/script){:target="_blank"}
+- 将**已验证的遥测**转发至 [save timeseries node](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries){:target="_blank"}，由该节点将数据存入数据库
 
-This rule chain ensures that only valid temperature readings are stored, while invalid values are filtered out before persistence.
+该 rule chain 确保仅存储有效的温度读数，无效值在持久化前被过滤。
 
-## Step 1. Import the validation rule chain
+## 步骤 1. 导入验证 rule chain
 
-1. Download the rule chain configuration file:   
-   [validate_incoming_telemetry_rule_chain.json](/docs/user-guide/resources/guides/validate_incoming_telemetry_rule_chain.json){:target="_blank" download="validate_incoming_telemetry_rule_chain.json"}.
-2. Navigate to the **Rule chains** page.
-3. Click the **"&#43; Add rule chain"** button in the top-right corner and select **"Import rule chain"**.
-4. [Upload the rule chain configuration file](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#import-rule-chain){:target="_blank"} and click **Import**.
-5. Click **Apply changes** to finalize the import.
+1. 下载 rule chain 配置文件：   
+   [validate_incoming_telemetry_rule_chain.json](/docs/user-guide/resources/guides/validate_incoming_telemetry_rule_chain.json){:target="_blank" download="validate_incoming_telemetry_rule_chain.json"}。
+2. 进入 **Rule chains** 页面。
+3. 点击右上角 **「&#43; Add rule chain」** 按钮，选择 **「Import rule chain」**。
+4. [上传 rule chain 配置文件](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#import-rule-chain){:target="_blank"} 并点击 **Import**。
+5. 点击 **Apply changes** 完成导入。
 
-<br><b><font size="3">Script used in this example</font></b>
+<br><b><font size="3">本示例使用的脚本</font></b>
 
 ```javascript
 return typeof msg.temperature === 'undefined' || (msg.temperature >= -40 && msg.temperature <= 80);
 ```
 {:.copy-code}
 
-**How the script works**
-- <span class="code-light">typeof msg.temperature === 'undefined'</span> **&#8702;** allows messages that do not include temperature data to pass through unchanged.
-- <span class="code-light">(msg.temperature >= -40 && msg.temperature <= 80)</span> **&#8702;** validates that the temperature value is within the supported range.
+**脚本逻辑说明**
+- <span class="code-light">typeof msg.temperature === 'undefined'</span> **&#8702;** 允许不包含温度数据的消息原样通过。
+- <span class="code-light">(msg.temperature >= -40 && msg.temperature <= 80)</span> **&#8702;** 校验温度值在支持范围内。
 
 <hr>
 
-## Step 2. Add demo device
+## 步骤 2. 添加演示设备
 
-Next, create a demo device that publishes temperature telemetry and ensure it uses the imported validation rule chain.
+创建一台上报温度遥测的演示设备，并确保其使用刚导入的验证 rule chain。
 
-1. Navigate to **Entities** **&#8702;** **Devices**.
-2. Click the **"&#43; Add device"** button in the top-right corner, select **"Add new device"** and create:
+1. 进入 **Entities** **&#8702;** **Devices**。
+2. 点击右上角 **「&#43; Add device」** 按钮，选择 **「Add new device」** 并创建：
     - **Device name:** Thermometer
     - **Device profile:** thermostat
-3. In the **thermostat** device profile settings, set the imported **Validate Incoming Telemetry** rule chain as the default rule chain for this profile.
-4. Save the changes.
+3. 在 **thermostat** 设备配置文件设置中，将导入的 **Validate Incoming Telemetry** rule chain 设为此配置文件的默认 rule chain。
+4. 保存更改。
 
-From this point onward, all telemetry published by devices using this profile is validated before being stored.
+此后，使用该配置文件的所有设备在上报遥测前都会经过验证。
 
 <hr>
 
-## Test the configuration
+## 测试配置
 
-To verify that the validation works as expected, open the device&#39;s **Latest telemetry** tab to monitor incoming data in real time, then publish the test telemetry messages.   
-You can use the [Check connectivity](/docs/{{docsPrefix}}user-guide/ui/devices/#check-connectivity){:target="_blank"} feature, or execute the command below&#42;:
+要验证验证逻辑是否按预期工作，请打开设备的 **Latest telemetry** 标签页实时查看 incoming 数据，然后发布测试遥测消息。   
+可使用 [Check connectivity](/docs/{{docsPrefix}}user-guide/ui/devices/#check-connectivity){:target="_blank"} 功能，或执行以下命令&#42;：
 
-1. Temperature **within** the valid range (for example, <span class="code-light">25</span>).   
+1. 温度**在**有效范围内（例如 <span class="code-light">25</span>）。   
    {% if docsPrefix == null or docsPrefix == "pe/" %}
    ```bash
    curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/telemetry --header Content-Type:application/json --data "{temperature:25}"
@@ -112,7 +112,7 @@ You can use the [Check connectivity](/docs/{{docsPrefix}}user-guide/ui/devices/#
    {: .copy-code}
    {% endif %}
 
-2. Temperature **below** the range (for example, <span class="code-light">-50<span>).   
+2. 温度**低于**范围（例如 <span class="code-light">-50<span>）。   
    {% if docsPrefix == null or docsPrefix == "pe/" %}
    ```bash
    curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/telemetry --header Content-Type:application/json --data "{temperature:-50}"
@@ -132,7 +132,7 @@ You can use the [Check connectivity](/docs/{{docsPrefix}}user-guide/ui/devices/#
    {: .copy-code}
    {% endif %}
 
-3. Temperature **above** the range (for example, <span class="code-light">100</span>).   
+3. 温度**高于**范围（例如 <span class="code-light">100</span>）。   
    {% if docsPrefix == null or docsPrefix == "pe/" %}
    ```bash
    curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/telemetry --header Content-Type:application/json --data "{temperature:100}"
@@ -152,7 +152,7 @@ You can use the [Check connectivity](/docs/{{docsPrefix}}user-guide/ui/devices/#
    {: .copy-code}
    {% endif %}
 
-4. A message **without** the <span class="code-light">temperature</span> field.   
+4. **不含** <span class="code-light">temperature</span> 字段的消息。   
    {% if docsPrefix == null or docsPrefix == "pe/" %}
    ```bash
    curl -v -X POST http://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/telemetry --header Content-Type:application/json --data "{humidity:46}"
@@ -172,12 +172,12 @@ You can use the [Check connectivity](/docs/{{docsPrefix}}user-guide/ui/devices/#
    {: .copy-code}
    {% endif %}
 
-**&#42;** Make sure to replace:
-{% if docsPrefix == null or docsPrefix == "pe/" %}- **$THINGSBOARD_HOST_NAME** with the hostname or IP address of your ThingsBoard instance.{% endif %}
-- **$ACCESS_TOKEN** with the device access token
+**&#42;** 请务必替换：
+{% if docsPrefix == null or docsPrefix == "pe/" %}- **$THINGSBOARD_HOST_NAME** 为 ThingsBoard 实例的主机名或 IP 地址。{% endif %}
+- **$ACCESS_TOKEN** 为设备 access token
 
-Only telemetry messages that pass validation are persisted. Invalid temperature values are discarded.
+仅通过验证的遥测消息会被持久化。无效的温度值会被丢弃。
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}

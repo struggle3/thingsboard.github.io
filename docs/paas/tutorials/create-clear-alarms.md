@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Create and clear alarms
-description: Create and clear alarms using an Alarm rules feature
+title: 创建与清除告警
+description: 使用告警规则功能创建与清除告警
 
 ---
 

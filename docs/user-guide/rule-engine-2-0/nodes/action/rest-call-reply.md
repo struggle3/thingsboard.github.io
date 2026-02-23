@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: rest call reply
-description: Sends the incoming message data as an HTTP response to a REST API call made to the rule engine.
+description: 将入站消息数据作为 HTTP 响应发送给对 rule engine 发起的 REST API 调用。
 hidetoc: "true"
 ---
 

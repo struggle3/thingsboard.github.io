@@ -1,23 +1,23 @@
 * TOC
 {:toc}
 
-[n8n](https://n8n.io/){: target="_blank"} is a workflow automation platform that lets you connect ThingsBoard to hundreds of other services.
+[n8n](https://n8n.io/){: target="_blank"} 是一款工作流自动化平台，可让您将 ThingsBoard 与数百种其他服务连接起来。
 
-The [ThingsBoard n8n Node](https://github.com/thingsboard/thingsboard-n8n-node){: target="_blank"} gives you direct access to your IoT entities, telemetry, and alarms from n8n workflows.
+[ThingsBoard n8n Node](https://github.com/thingsboard/thingsboard-n8n-node){: target="_blank"} 使您能够从 n8n 工作流中直接访问 IoT 实体、遥测和告警。
 
-- **Manage IoT devices, assets, and customers** directly from n8n workflows
-- **Access and manipulate telemetry data** in real-time with attribute and time-series operations
-- **Monitor alarms** and create automated responses based on alarm severity and type
-- **Navigate entity relationships** to understand your IoT infrastructure topology
-- **Build AI-powered IoT automation** using n8n AI Agents with natural language commands
+- 直接从 n8n 工作流中**管理 IoT 设备、资产和客户**
+- 通过属性和时序操作**实时访问和操作遥测数据**
+- **监控告警**并根据告警严重程度和类型创建自动化响应
+- **浏览实体关系**以了解 IoT 基础设施拓扑
+- 使用 n8n AI Agents 的**自然语言命令构建 AI 驱动的 IoT 自动化**
 
-## Quick Start: Your First Workflow
+## 快速入门：您的第一个工作流
 
-Here's what you can build in 5 minutes - a real-world data pipeline that exports IoT telemetry to cloud storage.
+以下为 5 分钟内即可搭建的内容——将 IoT 遥测导出到云存储的实战数据管道。
 
-**Scenario**: Every day at midnight, automatically export the last 24 hours of device telemetry to AWS S3 as JSON files for data warehousing, analytics, or compliance archival.
+**场景**：每天午夜自动将过去 24 小时的设备遥测导出为 JSON 文件到 AWS S3，用于数据仓库、分析或合规归档。
 
-**The Workflow**:
+**工作流**：
 ```
 Schedule (Daily at 00:00 UTC)
     ↓
@@ -44,62 +44,62 @@ Upload to AWS S3
 
 {% include images-gallery.liquid imageCollection=quickExample %}
 
-This is a production-ready pattern used for IoT data archival, analytics pipelines, and compliance logging.
+这是用于 IoT 数据归档、分析管道和合规日志的生产级模式。
 
-Want to see the full step-by-step walkthrough with code details? Jump to [Example 2: Daily Telemetry Export to AWS S3](#example-2-daily-telemetry-export-to-aws-s3) after installation.
+想查看完整的分步演练和代码细节？安装后跳转到 [示例 2：每日遥测导出到 AWS S3](#example-2-daily-telemetry-export-to-aws-s3)。
 
-## When to use n8n with ThingsBoard
+## 何时将 n8n 与 ThingsBoard 配合使用
 
-ThingsBoard's Rule Engine is great for IoT-specific automation. But when you need to connect to external systems that ThingsBoard doesn't integrate with natively, n8n fills the gap.
+ThingsBoard 的规则引擎非常适合 IoT 专项自动化。但当您需要连接到 ThingsBoard 未原生集成的外部系统时，n8n 可以填补这一空白。
 
-**Use n8n when you need to**:
-- Archive telemetry to **AWS S3**, **Google Cloud Storage**, or **Azure Blob** for data warehousing
-- Export data to **databases** (PostgreSQL, Snowflake, ClickHouse) for analytics
-- Create tickets in **Jira**, **ServiceNow**, or other ticketing systems
-- Sync device data with **CRMs** (Salesforce, HubSpot) or **ERPs**
-- Let non-technical users write query via **AI chat**
+**在以下情况使用 n8n**：
+- 将遥测归档到 **AWS S3**、**Google Cloud Storage** 或 **Azure Blob** 用于数据仓库
+- 将数据导出到 **数据库**（PostgreSQL、Snowflake、ClickHouse）用于分析
+- 在 **Jira**、**ServiceNow** 或其他工单系统中创建工单
+- 将设备数据与 **CRM**（Salesforce、HubSpot）或 **ERP** 同步
+- 让非技术人员通过 **AI 聊天**编写查询
 
-## Requirements
+## 前置条件
 
-Before you begin, ensure you have the following:
+开始前，请确保满足以下条件：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" %}
-- **ThingsBoard instance**:
-    - **Local/On-premise instance**: Self-hosted ThingsBoard installation on your own [infrastructure](/docs/{{docsPrefix}}user-guide/install/installation-options/){: target="_blank"}, or
+- **ThingsBoard 实例**：
+    - **本地/私有部署实例**：在您自己的[基础设施](/docs/{{docsPrefix}}user-guide/install/installation-options/){: target="_blank"}上自托管的 ThingsBoard 安装，或
 {% endif %}
 {% if docsPrefix == nil or docsPrefix == "pe/" %}
-    - **ThingsBoard Cloud**: Fully managed cloud service available [here](https://thingsboard.io/installations/choose-region/){: target="_blank"}
+    - **ThingsBoard Cloud**：完全托管的云服务，可在[此处](https://thingsboard.io/installations/choose-region/){: target="_blank"}获取
 {% endif %}
 {% if docsPrefix == "paas/" %}
-- **ThingsBoard Cloud**: Fully managed cloud service available at [thingsboard.cloud](https://thingsboard.cloud/signup){: target="_blank"}
+- **ThingsBoard Cloud**：完全托管的云服务，可在 [thingsboard.cloud](https://thingsboard.cloud/signup){: target="_blank"} 获取
 {% endif %}
 {% if docsPrefix == "paas/eu/" %}
-- **EU ThingsBoard Cloud**: Fully managed cloud service available at [eu.thingsboard.cloud](https://eu.thingsboard.cloud/signup){: target="_blank"}
+- **EU ThingsBoard Cloud**：完全托管的云服务，可在 [eu.thingsboard.cloud](https://eu.thingsboard.cloud/signup){: target="_blank"} 获取
 {% endif %}
-- **Authentication credentials**: Valid username and password with appropriate permissions on the ThingsBoard instance
-- **n8n instance**:
-    - **Local n8n installation**: Self-hosted n8n on your infrastructure, or
-    - **Docker-based n8n deployment**: n8n running in Docker containers
-    - **Cloud n8n**: The ThingsBoard node requires official verification to be listed in the n8n Cloud catalog.
+- **认证凭据**：ThingsBoard 实例上具有适当权限的有效用户名和密码
+- **n8n 实例**：
+    - **本地 n8n 安装**：在您的基础设施上自托管的 n8n，或
+    - **基于 Docker 的 n8n 部署**：在 Docker 容器中运行的 n8n
+    - **n8n Cloud**：ThingsBoard 节点需通过官方验证才能列入 n8n Cloud 目录
 
-## Installation
+## 安装
 
-Before you start, make sure n8n is already running. Check the [official n8n docs](https://docs.n8n.io/){: target="_blank"} if you need to install it first.
+开始前，请确保 n8n 已运行。如需安装，请参阅[官方 n8n 文档](https://docs.n8n.io/){: target="_blank"}。
 
-### Install the ThingsBoard Node
+### 安装 ThingsBoard 节点
 
 {% capture difference %}
-**Note:** Community nodes require `N8N_COMMUNITY_PACKAGES_ENABLED=true` in your n8n environment. Most n8n installations have this enabled by default. If you can't access the Community Nodes section in Settings, you'll need to set this variable before starting n8n.
+**注意：** 社区节点要求在 n8n 环境中设置 `N8N_COMMUNITY_PACKAGES_ENABLED=true`。大多数 n8n 安装默认已启用。若在设置中看不到 Community Nodes 区域，需在启动 n8n 前设置该变量。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**Recommended: Use the n8n GUI** (for self-hosted instances):
+**推荐：使用 n8n GUI**（用于自托管实例）：
 
-1. Open n8n in your browser
-2. Click the **three dots** (bottom-left) → **Settings** → **Community Nodes**
-3. Click **Install a community node**
-4. Enter: `@thingsboard/n8n-nodes-thingsboard` and click **Install**
-5. Refresh your browser
+1. 在浏览器中打开 n8n
+2. 点击左下角**三个点** → **Settings** → **Community Nodes**
+3. 点击 **Install a community node**
+4. 输入：`@thingsboard/n8n-nodes-thingsboard` 并点击 **Install**
+5. 刷新浏览器
 
 {% assign n8nGuiInstallation = '
     ===
@@ -119,34 +119,34 @@ Before you start, make sure n8n is already running. Check the [official n8n docs
 
 {% include images-gallery.liquid imageCollection=n8nGuiInstallation %}
 
-### Configure AI Agent Support (Optional)
+### 配置 AI Agent 支持（可选）
 
-Skip this if you're only using the node in regular workflows (not with AI agents).
+若仅在常规工作流中使用该节点（不与 AI agents 配合），可跳过此步骤。
 
-To let AI agents use ThingsBoard as a tool, add this **additional** environment variable before starting n8n:
+若要让 AI agents 将 ThingsBoard 用作工具，在启动 n8n 前添加以下**额外**环境变量：
 
 ```text
 N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
 ```
 {: .copy-code}
 
-**How to set it**:
-- **Docker**: Add to `docker-compose.yml` environment section (along with `N8N_COMMUNITY_PACKAGES_ENABLED=true`)
-- **npm/local**: Export in your shell: `N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true n8n start`
+**如何设置**：
+- **Docker**：添加到 `docker-compose.yml` 的 environment 部分（与 `N8N_COMMUNITY_PACKAGES_ENABLED=true` 一并）
+- **npm/本地**：在 shell 中导出：`N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true n8n start`
 
-### Configure Credentials
+### 配置凭据
 
-Connect n8n to your ThingsBoard instance:
+将 n8n 连接到 ThingsBoard 实例：
 
-1. Click **+** (top-left) → **Credentials**
-2. Search for **ThingsBoard API** → **Continue**
-3. Fill in your ThingsBoard details:
-   - **Base URL**: Your instance URL (e.g., {% if docsPrefix == "paas/eu/" %}`https://eu.thingsboard.cloud`{% else %}`https://thingsboard.cloud`{% endif %})
-   - **Username**: Your email
-   - **Password**: Your password
-4. Click **Save**
+1. 点击左上角 **+** → **Credentials**
+2. 搜索 **ThingsBoard API** → **Continue**
+3. 填写 ThingsBoard 信息：
+   - **Base URL**：您的实例 URL（例如 {% if docsPrefix == "paas/eu/" %}`https://eu.thingsboard.cloud`{% else %}`https://thingsboard.cloud`{% endif %}）
+   - **Username**：您的邮箱
+   - **Password**：您的密码
+4. 点击 **Save**
 
-These credentials work across all ThingsBoard nodes in your workflows.
+这些凭据可在工作流中所有 ThingsBoard 节点间共用。
 
 
 {% assign n8nGuiInstallation = '
@@ -167,15 +167,15 @@ These credentials work across all ThingsBoard nodes in your workflows.
 
 {% include images-gallery.liquid imageCollection=n8nGuiInstallation %}
 
-### Verify Installation
+### 验证安装
 
-After installing the node and restarting n8n, verify the ThingsBoard node is available:
+安装节点并重启 n8n 后，验证 ThingsBoard 节点是否可用：
 
-1. **Open n8n** in your browser (typically [http://localhost:5678](http://localhost:5678){:target="_blank"})
-2. **Create a new workflow** - Click **Create Workflow** in the top-right corner
-3. **Add a node** - Click the **+** button on the workflow canvas
-4. **Search for ThingsBoard** - Type "ThingsBoard" in the search field
-5. **Verify it appears** - You should see the ThingsBoard node with available actions
+1. 在浏览器中**打开 n8n**（通常是 [http://localhost:5678](http://localhost:5678){:target="_blank"})
+2. **创建新工作流** - 点击右上角 **Create Workflow**
+3. **添加节点** - 点击工作流画布上的 **+** 按钮
+4. **搜索 ThingsBoard** - 在搜索框输入 "ThingsBoard"
+5. **验证节点出现** - 应看到 ThingsBoard 节点及其可用操作
 
 {% assign installationVerification = '
     ===
@@ -195,15 +195,15 @@ After installing the node and restarting n8n, verify the ThingsBoard node is ava
 
 {% include images-gallery.liquid imageCollection=installationVerification %}
 
-**Note**: The number of operations may differ between Community Edition and Professional Edition.
+**注意**：社区版和专业版的操作数量可能不同。
 
-**If you don't see the node**:
-- Verify `N8N_COMMUNITY_PACKAGES_ENABLED=true` is set
-- Check that npm installation completed without errors
-- Restart n8n after installation
-- Check n8n logs for loading errors
+**若看不到节点**：
+- 确认已设置 `N8N_COMMUNITY_PACKAGES_ENABLED=true`
+- 检查 npm 安装是否无错误完成
+- 安装后重启 n8n
+- 在 n8n 日志中查看加载错误
 
-## How to Use the Node
+## 如何使用节点
 
 {% assign n8nUsageNode = '
     ===
@@ -216,52 +216,52 @@ After installing the node and restarting n8n, verify the ThingsBoard node is ava
 
 
 
-There are two ways to use the ThingsBoard node:
+使用 ThingsBoard 节点有两种方式：
 
-### 1. Regular Workflow Node
+### 1. 常规工作流节点
 
-Drag the ThingsBoard node onto your canvas and configure what you want to do (get devices, save telemetry, create alarms, etc.).
+将 ThingsBoard 节点拖到画布上，配置要执行的操作（获取设备、保存遥测、创建告警等）。
 
-Good for:
-- Scheduled tasks (daily reports, health checks)
-- Webhooks (incoming sensor data, external triggers)
-- Multi-step workflows (get device → fetch telemetry → send to Slack)
+适用于：
+- 定时任务（每日报告、健康检查）
+- Webhook（传入传感器数据、外部触发）
+- 多步骤工作流（获取设备 → 拉取遥测 → 发送到 Slack）
 
-### 2. AI Agent Tool
+### 2. AI Agent 工具
 
-Give an AI agent access to ThingsBoard operations. Users can then ask questions in plain English instead of building workflows.
+为 AI agent 提供 ThingsBoard 操作访问权限。用户随后可用自然语言提问，而无需构建工作流。
 
-Good for:
-- Non-technical users querying entities, data, etc
-- Support teams troubleshooting issues
+适用于：
+- 非技术人员查询实体、数据等
+- 支持团队排查问题
 
-**Setup required**: See [AI Agent Configuration](#configure-ai-agent-support-optional) above.
+**配置要求**：参见上方 [AI Agent 配置](#configure-ai-agent-support-optional)。
 
-Check out the [examples below](#usage-examples) to see both approaches in action.
+查看下方 [示例](#usage-examples) 了解两种方式的实战用法。
 
-## Common Workflow Patterns
+## 常见工作流模式
 
-**Archive telemetry to cloud storage**: Schedule (daily) → Code (calc time range) → Get timeseries → Convert to file → S3/GCS upload
+**将遥测归档到云存储**：Schedule（每日）→ Code（计算时间范围）→ Get timeseries → Convert to file → S3/GCS 上传
 
-**Create tickets from alarms**: Webhook (alarm) → Check severity → Create Jira/ServiceNow ticket
+**根据告警创建工单**：Webhook（告警）→ 检查严重程度 → 创建 Jira/ServiceNow 工单
 
-**Customer onboarding automation**: CRM webhook (new customer) → Create devices and dashboard → Assign to customer
+**客户入职自动化**：CRM webhook（新客户）→ 创建设备和仪表板 → 分配给客户
 
-**AI-powered queries**: Chat → AI Agent → ThingsBoard operations → Natural language response
+**AI 驱动的查询**：Chat → AI Agent → ThingsBoard 操作 → 自然语言响应
 
-## Usage Examples
+## 使用示例
 
-This section provides practical examples demonstrating the three usage patterns of the ThingsBoard n8n node.
+本节提供演示 ThingsBoard n8n 节点三种使用模式的实用示例。
 
-### Example 1: AI Agent
+### 示例 1：AI Agent
 
-**Real-world scenario**: Ask questions in plain text to check entities, their status, query data, update configurations, etc.
+**实战场景**：用纯文本提问，检查实体、状态、查询数据、更新配置等。
 
-**Why this matters**:
-- Just ask what you need (“Which devices are offline?”, “Show today’s temperature”) and the node handles the technical part for you.
-- Reduces bottlenecks in your IoT operations
+**意义**：
+- 只需提出需求（「哪些设备离线？」、「显示今日温度」），节点会处理技术细节。
+- 减少 IoT 运营中的瓶颈
 
-**Setup**: Use the ThingsBoard node as a **tool for AI Agents** to enable conversational IoT control
+**配置**：将 ThingsBoard 节点用作 **AI Agents 的工具**，实现对话式 IoT 控制
 
 {% assign example1 = '
     ===
@@ -281,47 +281,47 @@ This section provides practical examples demonstrating the three usage patterns 
 
 {% include images-gallery.liquid imageCollection=example1 %}
 
-**How it works**:
-1. User asks: *"Which freezers in the warehouse are showing temperatures above -10°C?"*
-2. AI Agent (powered by Google Gemini, Anthropic, or OpenAI) automatically:
-   - Calls `Get devices` to find all freezer devices
-   - Calls `Get timeseries` for temperature readings
-   - Filters results and responds in plain language
-3. No code, no API knowledge needed
+**工作流程**：
+1. 用户提问：*「仓库中哪些冰柜温度高于 -10°C？」*
+2. AI Agent（基于 Google Gemini、Anthropic 或 OpenAI）自动：
+   - 调用 `Get devices` 查找所有冰柜设备
+   - 调用 `Get timeseries` 获取温度读数
+   - 过滤结果并以自然语言回复
+3. 无需代码或 API 知识
 
-**Real queries your team can ask**:
-- *"Show me all devices that haven't sent data in the last 24 hours"*
-- *"What's the current temperature of Freezer 3?"*
-- *"Which sensors are in Building A?"*
-- *"Get me the last week of humidity data for all warehouse sensors"*
+**团队可问的实际查询**：
+- *「显示过去 24 小时内未发送数据的设备」*
+- *「冰柜 3 当前温度是多少？」*
+- *「Building A 中有哪些传感器？」*
+- *「获取所有仓库传感器过去一周的湿度数据」*
 
-This democratizes IoT access - anyone can query your infrastructure without knowing ThingsBoard's API.
-
----
-
-### Example 2: Daily Telemetry Export to AWS S3
-
-**Real-world scenario**: Every night, export device telemetry to S3, but also enrich it with device metadata from your CRM, convert to Parquet format for Athena, and trigger a Lambda function to update your data warehouse. One workflow, multiple outputs.
-
-**Why use n8n instead of ThingsBoard's native export**:
-- **Multi-destination** - Send the same data to S3 + Snowflake + email report in one workflow
-- **Data transformation** - Enrich telemetry with business context (customer names, locations from CRM)
-- **Custom formats** - Convert to Parquet, Avro, or CSV with specific schemas for your analytics tools
-- **Conditional logic** - Export only specific devices, filter by customer tier, or aggregate before storage
-- **Integration chains** - After S3 upload → Trigger AWS Lambda → Update tracking database → Send Slack notification
+这将使 IoT 访问民主化——任何人都可在不了解 ThingsBoard API 的情况下查询基础设施。
 
 ---
 
-<b><font size="4">Building the workflow</font></b>
+### 示例 2：每日遥测导出到 AWS S3
 
-<b><font size="3">Step 1: Create a new workflow and add Schedule Trigger</font></b>
+**实战场景**：每晚将设备遥测导出到 S3，同时用 CRM 中的设备元数据丰富数据，转换为 Parquet 格式供 Athena 使用，并触发 Lambda 函数更新数据仓库。一个工作流，多种输出。
 
-Start by creating a new workflow and adding a Schedule Trigger to run the export daily at midnight UTC.
+**为何用 n8n 而非 ThingsBoard 原生导出**：
+- **多目的地** - 在同一工作流中将相同数据发送到 S3 + Snowflake + 邮件报告
+- **数据转换** - 用业务上下文丰富遥测（客户名称、CRM 中的位置）
+- **自定义格式** - 转换为 Parquet、Avro 或 CSV，并为分析工具提供特定 schema
+- **条件逻辑** - 仅导出特定设备、按客户层级过滤或存储前聚合
+- **集成链** - S3 上传后 → 触发 AWS Lambda → 更新追踪数据库 → 发送 Slack 通知
 
-**Configuration**:
-- Click **Add first step…** → Select **Schedule Trigger**
-- Set **Trigger Interval**: Every day at 00:00 (midnight)
-- This ensures your export runs automatically every 24 hours
+---
+
+<b><font size="4">构建工作流</font></b>
+
+<b><font size="3">步骤 1：创建新工作流并添加 Schedule Trigger</font></b>
+
+创建新工作流并添加 Schedule Trigger，在 UTC 午夜每日执行导出。
+
+**配置**：
+- 点击 **Add first step…** → 选择 **Schedule Trigger**
+- 设置 **Trigger Interval**：每天 00:00（午夜）
+- 确保导出每 24 小时自动运行
 
 {% assign example21 = '
     ===
@@ -335,17 +335,17 @@ Start by creating a new workflow and adding a Schedule Trigger to run the export
 
 {% include images-gallery.liquid imageCollection=example21 %}
 
-<br>**What you just did**: Set up automated daily execution at midnight UTC.
+<br>**您已完成**：设置 UTC 午夜每日自动执行。
 
 ---
 
-<b><font size="3">Step 2: Add Code node for time range calculation</font></b>
+<b><font size="3">步骤 2：添加 Code 节点计算时间范围</font></b>
 
-ThingsBoard's API requires timestamps in milliseconds. Add a Code node to calculate the exact 24-hour time range.
+ThingsBoard API 需要毫秒时间戳。添加 Code 节点计算精确的 24 小时时间范围。
 
-**Configuration**:
-- Click **+** after the Schedule node → Select **Code**
-- Paste the following code:
+**配置**：
+- 在 Schedule 节点后点击 **+** → 选择 **Code**
+- 粘贴以下代码：
 
 ```javascript
 const DAY_MS = 24 * 60 * 60 * 1000;  // 24 hours in milliseconds
@@ -356,7 +356,7 @@ return [{ startTsMs, endTsMs }];  // Pass to next node
 ```
 {: .copy-code}
 
-- Click **Execute node** to test
+- 点击 **Execute node** 进行测试
 
 {% assign example22 = '
     ===
@@ -370,18 +370,18 @@ return [{ startTsMs, endTsMs }];  // Pass to next node
 
 {% include images-gallery.liquid imageCollection=example22 %}
 
-<br>**What you got**: Two timestamps (startTsMs and endTsMs) representing exactly 24 hours of data.
+<br>**您将得到**：表示精确 24 小时数据的两个时间戳（startTsMs 和 endTsMs）。
 
 ---
 
-<b><font size="3">Step 3: Get device by name from ThingsBoard</font></b>
+<b><font size="3">步骤 3：从 ThingsBoard 按名称获取设备</font></b>
 
-Now retrieve the device you want to export telemetry for.
+现在获取要导出遥测的目标设备。
 
-**Configuration**:
-- Click **+** → **ThingsBoard** → **Get a device by name**
-- **Device Name**: Enter your device name (e.g., "Temperature Sensor 1")
-- Click **Execute node**
+**配置**：
+- 点击 **+** → **ThingsBoard** → **Get a device by name**
+- **Device Name**：输入设备名称（如 "Temperature Sensor 1"）
+- 点击 **Execute node**
 
 {% assign example23 = '
     ===
@@ -395,23 +395,23 @@ Now retrieve the device you want to export telemetry for.
 
 {% include images-gallery.liquid imageCollection=example23 %}
 
-<br>**What you got**: The full device object including ID, type, and metadata needed for the next step.
+<br>**您将得到**：完整设备对象，包括下一步所需的 ID、类型和元数据。
 
 ---
 
-<b><font size="3">Step 4: Get timeseries data for the device</font></b>
+<b><font size="3">步骤 4：获取设备的时序数据</font></b>
 
-Fetch the telemetry data using the time range from the Code node.
+使用 Code 节点计算的时间范围拉取遥测数据。
 
-**Configuration**:
-- Click **+** → **ThingsBoard** → **Get timeseries**
-- Drag values from the **INPUT panel** (left side):
-  - **Entity ID**: From "Get a device by name" → id → id
-  - **Entity Type**: From "Get a device by name" → id → entityType
-  - **Start timestamp**: From Code node → startTsMs
-  - **End timestamp**: From Code node → endTsMs
-  - **Keys**: Enter the telemetry keys you want (e.g., "temperature,humidity")
-- Click **Execute node**
+**配置**：
+- 点击 **+** → **ThingsBoard** → **Get timeseries**
+- 从 **INPUT 面板**（左侧）拖入值：
+  - **Entity ID**：来自 "Get a device by name" → id → id
+  - **Entity Type**：来自 "Get a device by name" → id → entityType
+  - **Start timestamp**：来自 Code 节点 → startTsMs
+  - **End timestamp**：来自 Code 节点 → endTsMs
+  - **Keys**：输入需要的遥测键（如 "temperature,humidity"）
+- 点击 **Execute node**
 
 {% assign example24 = '
     ===
@@ -425,21 +425,21 @@ Fetch the telemetry data using the time range from the Code node.
 
 {% include images-gallery.liquid imageCollection=example24 %}
 
-<br>**What you got**: The last 24 hours of telemetry data for your device in JSON format.
+<br>**您将得到**：设备过去 24 小时遥测数据的 JSON 格式。
 
 ---
 
-<b><font size="3">Step 5: Build your logic with uploading to AWS S3</font></b>
+<b><font size="3">步骤 5：构建逻辑并上传到 AWS S3</font></b>
 
-Finally, upload the file to your S3 bucket.
+最后，将文件上传到 S3 存储桶。
 
-**Configuration**:
-- Click **+** → **AWS S3**
-- **Operation**: Upload
-- **Bucket Name**: Your S3 bucket name
-- **File Name**: Use expressions for datestamped names (e.g., `telemetry-{{ $now.format('yyyy-MM-dd') }}.json`)
-- Configure AWS credentials
-- Click **Execute node**
+**配置**：
+- 点击 **+** → **AWS S3**
+- **Operation**：Upload
+- **Bucket Name**：您的 S3 存储桶名称
+- **File Name**：使用表达式生成带日期的文件名（如 `telemetry-{{ $now.format('yyyy-MM-dd') }}.json`）
+- 配置 AWS 凭据
+- 点击 **Execute node**
 
 {% assign example26 = '
     ===
@@ -453,60 +453,60 @@ Finally, upload the file to your S3 bucket.
 
 {% include images-gallery.liquid imageCollection=example26 %}
 
-<br>**What you got**: Your telemetry data successfully uploaded to S3 with a datestamped filename.
+<br>**您将得到**：遥测数据已成功上传到 S3，文件名带有日期戳。
 
 ---
 
-<b><font size="4">Final result</font></b>
+<b><font size="4">最终结果</font></b>
 
-You've built a complete automated data pipeline that:
-1. Runs every night at midnight UTC
-2. Calculates the exact 24-hour time window
-3. Fetches device telemetry from ThingsBoard
-4. Converts it to a file format
-5. Uploads to AWS S3 with predictable naming
+您已构建完整的自动化数据管道：
+1. 每夜 UTC 午夜运行
+2. 计算精确的 24 小时时间窗口
+3. 从 ThingsBoard 拉取设备遥测
+4. 转换为文件格式
+5. 以可预测命名上传到 AWS S3
 
-**What you get**:
-- Daily JSON files in S3: `s3://my-bucket/telemetry-2024-12-23.json`
-- Automated backups without manual intervention
-- Data ready for AWS Athena queries or data pipeline ingestion
-- Complete audit trail of daily exports
+**您将获得**：
+- S3 中的每日 JSON 文件：`s3://my-bucket/telemetry-2024-12-23.json`
+- 无需人工干预的自动备份
+- 可直接用于 AWS Athena 查询或数据管道摄入的数据
+- 每日导出的完整审计追踪
 
-**What makes this powerful**:
-n8n acts as the orchestration layer between ThingsBoard and your data ecosystem. You're not just exporting data - you're building a complete data pipeline with transformations, enrichments, and multi-system integration that ThingsBoard alone can't handle.
+**强大之处**：
+n8n 作为 ThingsBoard 与数据生态系统之间的编排层。您不仅是在导出数据——而是在构建包含转换、丰富和多系统集成的完整数据管道，这些是 ThingsBoard 单独无法完成的。
 
-**Next steps - extend this workflow**:
-- **Add multiple destinations**: After "Convert to File", split to also send to Snowflake, Google Sheets, or email
-- **Enrich the data**: Before S3 upload, join with CRM data or add business context
-- **Conditional routing**: Route high-value customers to premium storage, others to standard
-- **Trigger downstream actions**: After S3 upload → Trigger AWS Lambda → Update inventory system → Notify team
-
----
-
-### Example 3: Webhook-Triggered Device Query
-
-**Real-world scenario**: Your customer portal has a "Get Device Status" button. When clicked, it needs to fetch real-time telemetry for whatever device the customer owns - you don't know which device in advance.
-
-**Why this pattern?** Most real workflows are dynamic:
-- Mobile apps that query devices by name (not hardcoded IDs)
-- Chatbots that respond to "check temperature in Room 405"
-- External systems triggering reports for specific assets
-- Customer-facing dashboards that filter by user
-
-**What you'll learn**: How to chain ThingsBoard operations together, passing data between nodes (device name → device ID → telemetry keys → actual data).
+**下一步 - 扩展此工作流**：
+- **添加多目的地**：在 "Convert to File" 后分流，同时发送到 Snowflake、Google Sheets 或邮件
+- **丰富数据**：在 S3 上传前与 CRM 数据合并或添加业务上下文
+- **条件路由**：将高价值客户路由到高级存储，其他到标准存储
+- **触发下游操作**：S3 上传后 → 触发 AWS Lambda → 更新库存系统 → 通知团队
 
 ---
 
-<b><font size="4">Building the workflow</font></b>
+### 示例 3：Webhook 触发的设备查询
 
-<b><font size="3">Step 1: Set up the trigger (simulating a webhook)</font></b>
+**实战场景**：客户门户有「获取设备状态」按钮。点击后需要获取客户所拥有设备的实时遥测——您事先不知道具体设备。
 
-We'll use a manual trigger to simulate what would normally be a webhook from your customer portal.
+**为何需要该模式？** 大多数实战工作流是动态的：
+- 按名称（而非硬编码 ID）查询设备的移动应用
+- 响应「检查 Room 405 温度」的聊天机器人
+- 为特定资产触发报告的外部系统
+- 按用户过滤的客户仪表板
 
-**Configuration**:
-- Click **Add first step…** → **Trigger manually**
-- Click the trigger node → Click **pencil icon** (top-right)
-- Paste this JSON (simulating incoming webhook data):
+**您将学到**：如何将 ThingsBoard 操作串联，在节点间传递数据（设备名称 → 设备 ID → 遥测键 → 实际数据）。
+
+---
+
+<b><font size="4">构建工作流</font></b>
+
+<b><font size="3">步骤 1：设置触发器（模拟 webhook）</font></b>
+
+我们将使用手动触发器模拟通常来自客户门户的 webhook。
+
+**配置**：
+- 点击 **Add first step…** → **Trigger manually**
+- 点击触发器节点 → 点击右上角**铅笔图标**
+- 粘贴以下 JSON（模拟传入 webhook 数据）：
 
 ```json
 {
@@ -515,8 +515,8 @@ We'll use a manual trigger to simulate what would normally be a webhook from you
 ```
 {:.copy-code}
 
-- Save the changes
-- **Back to canvas**
+- 保存更改
+- **返回画布**
 
 {% assign example31 = '
     ===
@@ -536,22 +536,22 @@ We'll use a manual trigger to simulate what would normally be a webhook from you
 
 {% include images-gallery.liquid imageCollection=example31 %}
 
-<br>**What you just did**: Created a workflow input that accepts a device name. In production, this would come from a webhook, API call, or chat message.
+<br>**您已完成**：创建工作流输入，接受设备名称。在生产环境中，这将来自 webhook、API 调用或聊天消息。
 
 ---
 
-<b><font size="3">Step 2: Find the device in ThingsBoard</font></b>
+<b><font size="3">步骤 2：在 ThingsBoard 中查找设备</font></b>
 
-Now we need to look up the device by name to get its ID (since most ThingsBoard operations need the device ID, not the name).
+现在需要按名称查找设备以获取其 ID（因为大多数 ThingsBoard 操作需要设备 ID，而非名称）。
 
-**Configuration**:
-- Click **+** next to the trigger node → **ThingsBoard** → **Get device by name**
-- Drag `deviceName` from the **INPUT panel** (left) into the **Name** field
+**配置**：
+- 在触发器节点旁点击 **+** → **ThingsBoard** → **Get device by name**
+- 从 **INPUT 面板**（左侧）将 `deviceName` 拖入 **Name** 字段
 
-  *This creates a dynamic link - the node will use whatever device name was in the trigger*
+  *这将创建动态链接——节点将使用触发器中出现的设备名称*
 
-- Click **Execute step** to test it
-- **Back to canvas**
+- 点击 **Execute step** 进行测试
+- **返回画布**
 
 {% assign example32 = '
     ===
@@ -577,22 +577,22 @@ Now we need to look up the device by name to get its ID (since most ThingsBoard 
 
 {% include images-gallery.liquid imageCollection=example32 %}
 
-<br>**What you got**: The full device object - including the ID we need for the next steps.
+<br>**您将得到**：完整设备对象——包括下一步所需的 ID。
 
 ---
 
-<b><font size="3">Step 3: Discover what telemetry this device has</font></b>
+<b><font size="3">步骤 3：发现该设备的遥测键</font></b>
 
-Before we can fetch telemetry, we need to know what keys are available (temperature? humidity? battery?). This step finds that out.
+在拉取遥测前，需要了解有哪些可用键（温度？湿度？电量？）。此步骤将查明这一点。
 
-**Configuration**:
-- Click **+** → **ThingsBoard** → **Get timeseries keys**
-- Drag **Entity ID** and **Entity Type** from the **INPUT panel** (left)
+**配置**：
+- 点击 **+** → **ThingsBoard** → **Get timeseries keys**
+- 从 **INPUT 面板**（左侧）拖入 **Entity ID** 和 **Entity Type**
 
-  *We're using the device info from Step 2 automatically*
+  *我们自动使用步骤 2 中的设备信息*
 
-- Click **Execute step**
-- **Back to canvas**
+- 点击 **Execute step**
+- **返回画布**
 
 {% assign example33 = '
     ===
@@ -606,27 +606,27 @@ Before we can fetch telemetry, we need to know what keys are available (temperat
 
 {% include images-gallery.liquid imageCollection=example33 %}
 
-<br>**What you got**: A list of available telemetry keys (like `temperature`, `humidity`, etc.)
+<br>**您将得到**：可用遥测键列表（如 `temperature`、`humidity` 等）
 
 ---
 
-<b><font size="3">Step 4: Fetch the actual telemetry data</font></b>
+<b><font size="3">步骤 4：拉取实际遥测数据</font></b>
 
-Finally, get the actual sensor readings using the keys we just discovered.
+最后，使用刚发现的键获取实际传感器读数。
 
-**Configuration**:
-- Click the **+** button to the right of the **Get timeseries keys** node.
-- Select **ThingsBoard**
-- Choose **Get timeseries** action
-- Configure parameters:
-  - Get a device by name -> id -> **id** to **Entity ID**
-  - Get a device by name -> id -> **entityType** to **Entity Type**
-  - Get timeseries keys -> **timeseriesKeys** to **Keys (Comma Separated)**
+**配置**：
+- 在 Get timeseries keys 节点右侧点击 **+** 按钮。
+- 选择 **ThingsBoard**
+- 选择 **Get timeseries** 操作
+- 配置参数：
+  - Get a device by name -> id -> **id** 到 **Entity ID**
+  - Get a device by name -> id -> **entityType** 到 **Entity Type**
+  - Get timeseries keys -> **timeseriesKeys** 到 **Keys (Comma Separated)**
 
-  **Note**: The Keys field needs comma-separated values. Since Step 3 returns an array, you'll need to join it: `{{ $json.timeseriesKeys.join(',') }}`
+  **注意**：Keys 字段需要逗号分隔的值。由于步骤 3 返回数组，需要拼接：`{{ $json.timeseriesKeys.join(',') }}`
 
-- Click **Execute step**
-- **Back to canvas**
+- 点击 **Execute step**
+- **返回画布**
 
 {% assign example34 = '
     ===
@@ -640,19 +640,19 @@ Finally, get the actual sensor readings using the keys we just discovered.
 
 {% include images-gallery.liquid imageCollection=example34 %}
 
-<br>**What you got**: Real telemetry data! Temperature, humidity, or whatever sensors this device has.
+<br>**您将得到**：真实遥测数据！温度、湿度或该设备拥有的任意传感器数据。
 
 ---
 
-<b><font size="4">Why this matters</font></b>
+<b><font size="4">意义</font></b>
 
-You just built a completely reusable workflow. Change the input from "Refrigerator" to "Freezer 3" and it works automatically. No hardcoded IDs, no changes needed.
+您已构建完全可复用的工作流。将输入从 "Refrigerator" 改为 "Freezer 3" 即可自动生效。无需硬编码 ID，也无需任何修改。
 
-**This pattern unlocks**:
-1. Customer portals - each user sees their own devices
-2. Chatbots - "check the AC in Room 405" just works
-3. Mobile apps - query any device by name
-4. Multi-tenant systems - same workflow, different data
+**该模式支持**：
+1. 客户门户 - 每位用户看到自己的设备
+2. 聊天机器人 -「检查 Room 405 的空调」即可工作
+3. 移动应用 - 按名称查询任意设备
+4. 多租户系统 - 相同工作流，不同数据
 
 {% assign ruleChainUseCase = '
     ===
@@ -669,35 +669,35 @@ You just built a completely reusable workflow. Change the input from "Refrigerat
 
 {% include images-gallery.liquid imageCollection=ruleChainUseCase %}
 
-<b><font size="4">Next steps</font></b>
+<b><font size="4">下一步</font></b>
 
-- Replace the manual trigger with a **Webhook** to connect your customer portal
-- Add a **Slack** or **Email** node at the end to send the telemetry data
-- Use a **Schedule** trigger to run this hourly for monitoring
-- Connect to an **AI Agent** so users can ask "check device X" in chat
+- 用 **Webhook** 替换手动触发器，连接客户门户
+- 在末尾添加 **Slack** 或 **Email** 节点发送遥测数据
+- 使用 **Schedule** 触发器每小时运行以进行监控
+- 连接到 **AI Agent**，让用户可在聊天中询问「检查设备 X」
 
-## API Reference
+## API 参考
 
-The ThingsBoard n8n node is built on top of the ThingsBoard REST API. For detailed information about API endpoints, request/response formats, and additional parameters, refer to the [ThingsBoard REST API documentation](https://thingsboard.io/docs/{{docsPrefix}}reference/rest-api/){: target="_blank"}.
+ThingsBoard n8n 节点基于 ThingsBoard REST API 构建。有关 API 端点、请求/响应格式和附加参数的详细信息，请参阅 [ThingsBoard REST API 文档](https://thingsboard.io/docs/{{docsPrefix}}reference/rest-api/){: target="_blank"}。
 
-## Links
+## 链接
 
-- **npm Package**: [@thingsboard/n8n-nodes-thingsboard](https://www.npmjs.com/package/@thingsboard/n8n-nodes-thingsboard){: target="_blank"}
-- **GitHub Repository**: [thingsboard/thingsboard-n8n-node](https://github.com/thingsboard/thingsboard-n8n-node){: target="_blank"}
-- **n8n Documentation**: [docs.n8n.io](https://docs.n8n.io/){: target="_blank"}
-- **n8n Community**: [community.n8n.io](https://community.n8n.io/){: target="_blank"}
-- **ThingsBoard REST API**: [REST API Reference](/docs/{{docsPrefix}}reference/rest-api/){: target="_blank"}
+- **npm 包**：[@thingsboard/n8n-nodes-thingsboard](https://www.npmjs.com/package/@thingsboard/n8n-nodes-thingsboard){: target="_blank"}
+- **GitHub 仓库**：[thingsboard/thingsboard-n8n-node](https://github.com/thingsboard/thingsboard-n8n-node){: target="_blank"}
+- **n8n 文档**：[docs.n8n.io](https://docs.n8n.io/){: target="_blank"}
+- **n8n 社区**：[community.n8n.io](https://community.n8n.io/){: target="_blank"}
+- **ThingsBoard REST API**：[REST API 参考](/docs/{{docsPrefix}}reference/rest-api/){: target="_blank"}
 
-## Support
+## 支持
 
-If you encounter issues or have questions about the ThingsBoard n8n node:
+若遇到问题或对 ThingsBoard n8n 节点有疑问：
 
-- **GitHub Issues**: [Report bugs or request features](https://github.com/thingsboard/thingsboard-n8n-node/issues){: target="_blank"}
-- **ThingsBoard Community**: [Get help from the community](https://thingsboard.io/community/){: target="_blank"}
-- **n8n Community**: [n8n community](https://community.n8n.io/){: target="_blank"}
+- **GitHub Issues**：[报告错误或请求功能](https://github.com/thingsboard/thingsboard-n8n-node/issues){: target="_blank"}
+- **ThingsBoard 社区**：[从社区获取帮助](https://thingsboard.io/community/){: target="_blank"}
+- **n8n 社区**：[n8n 社区](https://community.n8n.io/){: target="_blank"}
 
-## License
+## 许可证
 
-MIT License - see the [LICENSE file](https://github.com/thingsboard/thingsboard-n8n-node/blob/master/LICENSE.md){: target="_blank"} for details.
+MIT 许可证 - 详见 [LICENSE 文件](https://github.com/thingsboard/thingsboard-n8n-node/blob/master/LICENSE.md){: target="_blank"}。
 
 ---

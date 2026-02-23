@@ -1,27 +1,27 @@
-### Prepare for upgrading ThingsBoard Edge
+### 升级 ThingsBoard Edge 前的准备
 
-Back up your ThingsBoard Edge data before upgrading.
+升级前请备份 ThingsBoard Edge 数据。
 
-#### Stop the Edge container
+#### 停止 Edge 容器
 
-Navigate to your **docker-compose.yml** directory and stop the container:
+进入 **docker-compose.yml** 所在目录并停止容器：
 
 ```
 docker compose stop
 ```
 {: .copy-code}
 
-#### Backup the database volume
+#### 备份数据库卷
 
-Before upgrading, make a **backup copy** of the database volume:
+升级前，为数据库卷创建 **备份副本**：
 
 ```bash
 docker run --rm -v tb-edge-postgres-data:/source -v tb-edge-postgres-data-backup:/backup busybox sh -c "cp -a /source/. /backup"
 ```
 {: .copy-code}
 
-This copies all contents from **tb-edge-postgres-data** to **tb-edge-postgres-data-backup**.
+此操作将 **tb-edge-postgres-data** 的全部内容复制到 **tb-edge-postgres-data-backup**。
 
-#### Restore the backup (if needed)
+#### 恢复备份（如需）
 
 {% include templates/edge/user-guide/backup/docker-restore-backup.md %}

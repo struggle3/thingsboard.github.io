@@ -1,20 +1,20 @@
 * TOC
 {:toc}
 
-MQTT Client Credentials provide the means to configure security measures for connecting clients within the system.
+MQTT Client Credentials 用于为系统中连接的客户端配置安全措施。
 
-To create new client credentials within the system, it is imperative to first authenticate as an Admin user. 
-This authorization process grants you the necessary privileges and access rights to perform administrative tasks.
+要在系统中创建新的客户端凭据，必须先以 Admin 用户身份认证。
+该授权过程赋予您执行管理任务所需的权限和访问权。
 
-By authenticating as an Admin user, you will have the authority to create and manage client credentials, 
-enabling you to enforce robust security measures for the clients connecting to the system. 
-This approach ensures that the system remains secure and that only authorized clients can establish connections and interact with TBMQ.
+以 Admin 用户身份认证后，您将有权创建和管理客户端凭据，
+从而可为连接到系统的客户端实施可靠的安全措施。
+该方法确保系统安全，仅有授权客户端可建立连接并与 TBMQ 交互。
 
 {% include templates/mqtt-broker/authentication.md %}
 
-## Create/update MQTT Client Credentials
+## 创建/更新 MQTT Client Credentials
 
-**MQTT_BASIC** credentials example:
+**MQTT_BASIC** 凭据示例：
 
 ```bash
 curl --location --request POST 'http://localhost:8083/api/mqtt/client/credentials' \
@@ -28,14 +28,14 @@ curl --location --request POST 'http://localhost:8083/api/mqtt/client/credential
 ```
 {: .copy-code}
 
-By implementing the above configuration, clients with the username **test_user** and password **test_pass** will be able to successfully log in to the system. 
-However, it's important to note that these clients will have restricted privileges based on the specified topic access permissions.
+实施上述配置后，username 为 **test_user**、password 为 **test_pass** 的客户端将能成功登录系统。
+但需注意，这些客户端将根据指定的主题访问权限受到限制。
 
-Clients authenticated with these credentials will be limited to publishing messages solely to topics that start with _test/_. 
-Additionally, they will be allowed to subscribe exclusively to topics that start with _my/_. 
-This configuration ensures that the clients' access is constrained to specific topic patterns, thereby maintaining a controlled and secure environment.
+使用这些凭据认证的客户端仅能发布到以 _test/_ 开头的主题。
+此外，仅能订阅以 _my/_ 开头的主题。
+该配置确保客户端访问被限制在特定主题模式内，从而维持受控且安全的环境。
 
-**SSL** credentials examples:
+**SSL** 凭据示例：
 
 ```bash
 curl --location --request POST 'http://localhost:8083/api/mqtt/client/credentials' \
@@ -61,26 +61,26 @@ curl --location --request POST 'http://localhost:8083/api/mqtt/client/credential
 ```
 {: .copy-code}
 
-Where:
-- **certCnPattern** - the pattern for the common name that should be present in the certificate chain.
-- **certCnIsRegex** - option to control whether the common name (CN) pattern is treated as a regular expression (regex) for matching.
-- **authRulesMapping** - mapping rules to map extracted from the client's CN keyword to the authorization rules (to allow clients to publish and subscribe only to certain topics).
+其中：
+- **certCnPattern** - 证书链中应存在的 common name 匹配模式。
+- **certCnIsRegex** - 控制 common name (CN) 模式是否作为正则表达式 (regex) 进行匹配。
+- **authRulesMapping** - 将客户端 CN 中提取的 keyword 映射到授权规则的规则（允许客户端仅发布和订阅特定主题）。
 
-By employing the above configurations, clients connecting with an X.509 Certificate chain will be permitted to log in based on specific criteria.
-The X.509 Certificate chain should have the certificate CN that matches exactly with the _Root Common Name_ string in the first case, 
-matches with _.* Pattern Common Name .*_ in the second case, and the certificate's CN should contain the string _test_.
-Once authenticated using these credentials, clients will gain access to publishing and subscribing privileges limited to topics that start with _test_ssl/_.
+采用上述配置后，使用 X.509 Certificate chain 连接的客户端将根据特定条件被允许登录。
+第一种情况中 X.509 Certificate chain 的证书 CN 应与 _Root Common Name_ 精确匹配，
+第二种情况应与 _.* Pattern Common Name .*_ 匹配，且证书的 CN 应包含字符串 _test_。
+使用这些凭据认证后，客户端将获得限于以 _test_ssl/_ 开头主题的发布和订阅权限。
 
-## Get all MQTT Client Credentials
+## 获取所有 MQTT Client Credentials
 
 ```bash
 curl --location --request GET 'http://localhost:8083/api/mqtt/client/credentials?pageSize=100&page=0' \
 --header "X-Authorization: Bearer $ACCESS_TOKEN"
 ```
 {: .copy-code}
-**Note**, _pageSize_ parameter equal to 100 and _page_ parameter equal to 0, so the above request will fetch first 100 MQTT client credentials.
+**注意**，_pageSize_ 参数为 100、_page_ 参数为 0，因此上述请求将获取前 100 个 MQTT 客户端凭据。
 
-## Delete MQTT Client Credentials
+## 删除 MQTT Client Credentials
 
 ```bash
 curl --location --request DELETE 'http://localhost:8083/api/mqtt/client/credentials/$CREDENTIALS_ID' \
@@ -88,4 +88,4 @@ curl --location --request DELETE 'http://localhost:8083/api/mqtt/client/credenti
 ```
 {: .copy-code}
 
-Paste actual ID of the MQTT client credentials you want to delete instead of _$CREDENTIALS_ID_.
+将 _$CREDENTIALS_ID_ 替换为要删除的 MQTT 客户端凭据的实际 ID。

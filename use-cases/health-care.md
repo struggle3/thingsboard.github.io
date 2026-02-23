@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: Health Care
-description: Health monitoring
+title: 医疗健康
+description: 健康监测
 notitle: "true"
 includeAdvantages: "true"
 contactUsModal: "true"
@@ -10,21 +10,21 @@ contactUsModal: "true"
 
 {% include usecase-nav.html usecase="health-care" %}
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Health care: smart assisted living solution</h1>
+<h1 class="usecase-title">医疗健康：智慧辅助生活解决方案</h1>
 
 <section class="health-about">
     <div class="about-text">
         <div class="short">
             <div class="block">
-                <p class="text">ThingsBoard is an IoT platform with all the tools needed to build a comprehensive healthcare monitoring and management solution with ease. ThingsBoard provides an extensive range of built-in features as well as flexible customization options.</p>
+                <p class="text">ThingsBoard 是一个物联网平台，具备构建全面医疗健康监测与管理系统所需的所有工具。ThingsBoard 提供丰富的内置功能以及灵活的定制选项。</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_HealthCare_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/f8e77210-8fa8-11ef-90c1-0b39f28da380?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
+                <a id="UseCases_HealthCare_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/f8e77210-8fa8-11ef-90c1-0b39f28da380?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
             </div>
         </div>
         <div class="long">
-            <p>Healthcare monitoring systems are designed to track patient health metrics in real time and immediately notify medical professionals of critical changes. ThingsBoard, as a robust IoT platform, provides all the necessary tools for collecting, processing, and visualizing data from devices that use protocols like BLE or LoRaWAN gateways, enabling seamless integration and support for flexible solutions.</p>
-            <p>Our smart assisted living solution powered by ThingsBoard provides real-time monitoring and management of residents' health in assisted living facilities. Using ThingsBoard’s powerful IoT capabilities, this solution integrates connected devices, data analytics, and automated alerts to create a seamless experience for caregivers and administrators, ensuring timely responses and a higher quality of care.</p>
+            <p>医疗健康监测系统旨在实时跟踪患者健康指标，并在关键变化发生时立即通知医护人员。ThingsBoard 作为强大的物联网平台，为从使用 BLE 或 LoRaWAN 网关协议的设备收集、处理和可视化数据提供所有必要工具，实现无缝集成并支持灵活解决方案。</p>
+            <p>我们基于 ThingsBoard 的智慧辅助生活解决方案，为辅助生活机构的住客提供实时健康监测与管理。 借助 ThingsBoard 强大的物联网能力，该解决方案整合互联设备、数据分析和自动化警报，为护理人员和管理者创建无缝体验，确保及时响应和更高护理质量。</p>
         </div>
     </div>
 </section>
@@ -36,144 +36,144 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="health-solution-structure addedBanner">
-    <h2>Solution structure</h2>
+    <h2>解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
-                <p class="text">The solution is designed to be used with BLE (Bluetooth Low Energy) or LoRaWAN gateways and devices. The rooms may be equipped with a number of sensors like room temperature, humidity, indoor air quality (IAQ), leak, smoke, and open/close detectors.</p>
+                <p class="text">该解决方案设计用于 BLE（低功耗蓝牙）或 LoRaWAN 网关和设备。房间可配备多种传感器，如室内温度、湿度、室内空气质量（IAQ）、漏水、烟雾和开关门探测器。</p>
             </div>
         </div>
         <div class="long">
-            <p>The geopositioning of the resident is done via the beacon in the wristband and a set of nearby gateways. The platform deduplicates the incoming message from the beacon and enriches it with the attributes of the nearby gateways. The geopositioning algorithm is relatively simple and based on the payload's RSSI parameter. One may improve the algorithm based on the particular use case.</p>
+            <p>住客的地理定位通过腕带中的信标和一组附近网关实现。平台对来自信标的传入消息进行去重，并使用附近网关的属性对其进行丰富。地理定位算法相对简单，基于有效载荷的 RSSI 参数。可根据具体用例改进算法。</p>
         </div>
     </div>
     <div class="scheme">
-        <img id="schemeSVG"  loading="lazy" data-src="/images/usecases/health-care/health-care-solution-structure.svg" alt="Health care solution structure">
+        <img id="schemeSVG"  loading="lazy" data-src="/images/usecases/health-care/health-care-solution-structure.svg" alt="医疗健康解决方案结构">
     </div>
 </section>
 <section class="health-solution-structure">
-    <h2>Smart assisted living benefits</h2>
-    <p>The smart assisted living solution offers a range of benefits for care providers, residents, and facility administrators, supporting safe and efficient management of assisted living facilities:</p>
+    <h2>智慧辅助生活优势</h2>
+    <p>智慧辅助生活解决方案为护理提供方、住客和机构管理人员带来诸多优势，支持辅助生活机构的安全高效管理：</p>
     <div class="health-solution-structure-cards">
         <div class="health-solution-structure-card">
-            <h3>Efficient monitoring and response</h3>
-            <p>Enables real-time tracking of residents’ health and environmental conditions, allowing caregivers to respond promptly to emergencies.</p>
+            <h3>高效监测与响应</h3>
+            <p>支持实时跟踪住客健康和环境状况，让护理人员能够及时响应紧急情况。</p>
         </div>
         <div class="health-solution-structure-card">
-            <h3>Automated alerts and notifications</h3>
-            <p>Configurable alerts ensure that caregivers and family members are notified of potential health risks, reducing the likelihood of delayed responses.</p>
+            <h3>自动化警报与通知</h3>
+            <p>可配置的警报确保护理人员和家属及时获知潜在健康风险，减少响应延迟。</p>
         </div>
         <div class="health-solution-structure-card">
-            <h3>Personalized care plans</h3>
-            <p>Customizable alert rules and comprehensive health profiles allow facilities to tailor care based on individual residents' needs, enhancing the quality of care.</p>
+            <h3>个性化护理方案</h3>
+            <p>可定制的警报规则和完善的健康档案使机构能够根据每位住客需求提供定制护理，提升护理质量。</p>
         </div>
         <div class="health-solution-structure-card">
-            <h3>Increased safety and comfort</h3>
-            <p>Environmental monitoring maintains optimal room conditions, minimizing risks associated with temperature or noise fluctuations.</p>
+            <h3>增强安全与舒适</h3>
+            <p>环境监测保持最佳房间条件，最大程度降低温湿度或噪音波动带来的风险。</p>
         </div>
         <div class="health-solution-structure-card">
-            <h3>Data-driven insights</h3>
-            <p>Collects historical health data for each resident, allowing for trend analysis and proactive management of chronic conditions.</p>
+            <h3>数据驱动洞察</h3>
+            <p>收集每位住客的历史健康数据，支持趋势分析和慢性病的主动管理。</p>
         </div>
         <div class="health-solution-structure-card">
-            <h3>Streamlined administration</h3>
-            <p>A centralized dashboard and intuitive UI simplify the management of resident profiles, health alerts, and facility zones, saving time and reducing administrative burden.</p>
+            <h3>简化管理</h3>
+            <p>集中式仪表板和直观界面简化住客档案、健康警报和机构区域的管理，节省时间并减轻管理负担。</p>
         </div>
     </div>
 </section>
 
 <section class="dashboard-structure">
-    <h2>Dashboard structure</h2>
-    <p>The smart assisted living dashboard enables caregivers and administrators to monitor residents’ health data and environmental conditions in real-time, with intuitive interfaces and easily configurable alarm systems.</p>
+    <h2>仪表板结构</h2>
+    <p>智慧辅助生活仪表板让护理人员和管理人员能够实时监测住客健康数据与环境状况，配备直观界面和易于配置的警报系统。</p>
     <div class="dashboard-structure-block">
         <div class="menu">
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Resident overview</h3>
+                        <h3>住客总览</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Provides a detailed profile for each resident, including health metrics such as heart rate, body temperature, and panic button status, allowing caregivers to quickly assess each resident's current health condition.</p>
+                        <p>为每位住客提供详细档案，包括心率、体温和紧急按钮状态等健康指标，让护理人员能够快速评估每位住客的当前健康状况。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Resident alarm configuration</h3>
+                        <h3>住客警报配置</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Allows administrators to set customized alarm rules for resident health parameters like heart rate and body temperature. Major and critical thresholds can be configured to trigger appropriate alerts in case of abnormalities.</p>
+                        <p>允许管理员为住客健康参数（如心率和体温）设置定制警报规则。可配置主要和关键阈值，在出现异常时触发相应警报。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Real-time resident alarms</h3>
+                        <h3>实时住客警报</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Displays active alarms for residents, such as panic button presses or irregular vital signs, with real-time updates on each alert's status and severity, enabling quick response by caregivers.</p>
+                        <p>显示住客的活跃警报，如紧急按钮触发或生命体征异常，并实时更新每条警报的状态和严重程度，方便护理人员快速响应。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Room alarm configuration</h3>
+                        <h3>房间警报配置</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Provides settings to adjust alarm thresholds for environmental factors in rooms, such as temperature, humidity, air quality, and window or door status. This ensures rooms remain within safe and comfortable conditions for residents.</p>
+                        <p>提供调整房间环境因素警报阈值的设置，如温度、湿度、空气质量和门窗状态，确保房间维持在安全舒适的条件下。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Resident list management</h3>
+                        <h3>住客列表管理</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Lists all residents with essential information such as age, gender, assigned room, and floor, allowing caregivers to locate and access each resident’s data efficiently.</p>
+                        <p>列出所有住客及其基本信息，如年龄、性别、分配房间和楼层，方便护理人员高效查找和访问每位住客的数据。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Zone and floor management</h3>
+                        <h3>区域与楼层管理</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Enables administrators to organize the facility into zones or floors, allowing for easy navigation and monitoring of different areas within the facility.</p>
+                        <p>允许管理员将机构划分为区域或楼层，便于在机构内不同区域进行导航和监测。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Room and device layout</h3>
+                        <h3>房间与设备布局</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Shows the layout of each floor with room labels and device icons, allowing caregivers and administrators to identify the location of sensors and devices quickly for effective monitoring.</p>
+                        <p>显示各楼层布局及房间标签和设备图标，让护理人员和管理人员快速识别传感器和设备位置，实现有效监测。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Device addition</h3>
+                        <h3>设备添加</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Allows the addition of new devices like sensors or gateways to specific rooms, supporting scalability and enabling administrators to expand monitoring capabilities as needed.</p>
+                        <p>允许向特定房间添加传感器或网关等新设备，支持可扩展性，使管理员能够按需扩展监测能力。</p>
                     </div>
                 </div>
             </div>
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>Room configuration</h3>
+                        <h3>房间配置</h3>
                     </div>
                     <div class="expansion-content">
-                        <p>Provides a tool to edit room details and positions within the facility layout, enabling accurate mapping and customization of room assignments.</p>
+                        <p>提供在机构布局中编辑房间详情和位置的工具，实现准确的映射和房间分配的定制。</p>
                     </div>
                 </div>
             </div>
@@ -182,75 +182,75 @@ contactUsModal: "true"
 </section>
 
 <section class="applications health">
-    <h2>Applications of smart assisted living solution</h2>
-    <p>A similar IoT-based monitoring and management solution, like smart assisted living, can be adapted and applied in various fields and directions. Here are some of them:</p>
+    <h2>智慧辅助生活解决方案的应用</h2>
+    <p>类似的基于物联网的监测和管理解决方案（如智慧辅助生活）可适应并应用于多个领域和方向，例如：</p>
     <div class="applications-container-large">
         <div class="text-row-top">
             <div class="text-block">
-                <h3>Hospitals and healthcare facilities</h3>
-                <p>Real-time monitoring of patients' conditions, tracking vital signs, managing wards and departments, and setting up alerts for timely response by medical staff to any health deterioration.</p>
+                <h3>医院和医疗机构</h3>
+                <p>实时监测患者状况，跟踪生命体征，管理病房和科室，并为医护人员设置警报以应对任何健康状况恶化。</p>
             </div>
             <div class="text-block">
-                <h3>Rehabilitation <br> centers</h3>
-                <p>Monitoring the condition of patients undergoing rehabilitation after surgery or injuries. The system can track recovery progress, transmit data to doctors, and set reminders for physical therapy.</p>
+                <h3>康复中心</h3>
+                <p>监测术后或受伤后接受康复治疗的患者状况。系统可跟踪康复进度，向医生传输数据，并设置物理治疗提醒。</p>
             </div>
             <div class="text-block">
-                <h3>Prisons and correctional facilities</h3>
-                <p>Monitoring the health of inmates with vital sign tracking, smoke detectors, and access control systems. The system can also monitor movements and support facility security.</p>
+                <h3>监狱和惩教机构</h3>
+                <p>通过生命体征跟踪、烟雾探测器和门禁控制系统监测在押人员健康。系统还可监控活动并支持设施安全。</p>
             </div>
         </div>
         <div class="images-row">
-            <div class="application-image"><img src="/images/usecases/health-care/hospital-1.svg" alt="Hospital"></div>
-            <div class="application-image"><img src="/images/usecases/health-care/sport-complex-1.svg" alt="Sport complex"></div>
-            <div class="application-image"><img src="/images/usecases/health-care/rehabilitation-center-1.svg" alt="Rehabilitation center"></div>
-            <div class="application-image"><img src="/images/usecases/health-care/factories-1.svg" alt="Factory"></div>
-            <div class="application-image"><img src="/images/usecases/health-care/prison-1.svg" alt="Prison"></div>
+            <div class="application-image"><img src="/images/usecases/health-care/hospital-1.svg" alt="医院"></div>
+            <div class="application-image"><img src="/images/usecases/health-care/sport-complex-1.svg" alt="体育场馆"></div>
+            <div class="application-image"><img src="/images/usecases/health-care/rehabilitation-center-1.svg" alt="康复中心"></div>
+            <div class="application-image"><img src="/images/usecases/health-care/factories-1.svg" alt="工厂"></div>
+            <div class="application-image"><img src="/images/usecases/health-care/prison-1.svg" alt="监狱"></div>
         </div>
         <div class="text-row-bottom">
             <div class="text-block">
-                <h3>Sports complexes and fitness centers</h3>
-                <p>Maintaining optimal conditions in gyms and locker rooms, monitoring the health of visitors (e.g., heart rate), and setting up emergency alerts if someone’s health deteriorates during workouts.</p>
+                <h3>体育场馆和健身中心</h3>
+                <p>保持健身房和更衣室的最佳条件，监测访客健康状况（如心率），并在锻炼期间若有人健康状况恶化时设置紧急警报。</p>
             </div>
             <div class="text-block">
-                <h3>Factories and industrial sites</h3>
-                <p>Ensuring employee safety by monitoring working conditions (temperature, gas emissions, noise, humidity) and controlling equipment status to respond promptly to emergency situations.</p>
+                <h3>工厂和工业场所</h3>
+                <p>通过监测工作条件（温度、气体排放、噪音、湿度）并控制设备状态，确保员工安全，及时响应紧急情况。</p>
             </div>
         </div>
     </div>
     <div class="applications-container-small">
         <div class="application-block">
-            <div class="image"><img src="/images/usecases/health-care/hospital-2.svg" alt="Water valve"></div>
+            <div class="image"><img src="/images/usecases/health-care/hospital-2.svg" alt="水阀"></div>
             <div class="text-block">
-                <h3>Hospitals and healthcare facilities</h3>
-                <p>Real-time monitoring of patients' conditions, tracking vital signs, managing wards and departments, and setting up alerts for timely response by medical staff to any health deterioration.</p>
+                <h3>医院和医疗机构</h3>
+                <p>实时监测患者状况，跟踪生命体征，管理病房和科室，并为医护人员设置警报以应对任何健康状况恶化。</p>
             </div>
         </div>
         <div class="application-block">
             <div class="text-block">
-                <h3>Rehabilitation centers</h3>
-                <p>Monitoring the condition of patients undergoing rehabilitation after surgery or injuries. The system can track recovery progress, transmit data to doctors, and set reminders for physical therapy.</p>
+                <h3>康复中心</h3>
+                <p>监测术后或受伤后接受康复治疗的患者状况。系统可跟踪康复进度，向医生传输数据，并设置物理治疗提醒。</p>
             </div>
-            <div class="image"><img src="/images/usecases/health-care/sport-complex-2.svg" alt="Oil pump"></div>
+            <div class="image"><img src="/images/usecases/health-care/sport-complex-2.svg" alt="油泵"></div>
         </div>
         <div class="application-block">
-            <div class="image"><img src="/images/usecases/health-care/rehabilitation-center-2.svg" alt="Food conveyor"></div>
+            <div class="image"><img src="/images/usecases/health-care/rehabilitation-center-2.svg" alt="食品传送带"></div>
             <div class="text-block">
-                <h3>Prisons and correctional facilities</h3>
-                <p>Monitoring the health of inmates with vital sign tracking, smoke detectors, and access control systems. The system can also monitor movements and support facility security.</p>
+                <h3>监狱和惩教机构</h3>
+                <p>通过生命体征跟踪、烟雾探测器和门禁控制系统监测在押人员健康。系统还可监控活动并支持设施安全。</p>
             </div>
         </div>
         <div class="application-block">
             <div class="text-block">
-                <h3>Sports complexes and fitness centers</h3>
-                <p>Maintaining optimal conditions in gyms and locker rooms, monitoring the health of visitors (e.g., heart rate), and setting up emergency alerts if someone’s health deteriorates during workouts.</p>
+                <h3>体育场馆和健身中心</h3>
+                <p>保持健身房和更衣室的最佳条件，监测访客健康状况（如心率），并在锻炼期间若有人健康状况恶化时设置紧急警报。</p>
             </div>
-            <div class="image"><img src="/images/usecases/health-care/factories-2.svg" alt="Chemical plant"></div>
+            <div class="image"><img src="/images/usecases/health-care/factories-2.svg" alt="化工厂"></div>
         </div>
         <div class="application-block">
-            <div class="image"><img src="/images/usecases/health-care/prison-2.svg" alt="Power plant"></div>
+            <div class="image"><img src="/images/usecases/health-care/prison-2.svg" alt="发电厂"></div>
             <div class="text-block">
-                <h3>Factories and industrial sites</h3>
-                <p>Ensuring employee safety by monitoring working conditions (temperature, gas emissions, noise, humidity) and controlling equipment status to respond promptly to emergency situations.</p>
+                <h3>工厂和工业场所</h3>
+                <p>通过监测工作条件（温度、气体排放、噪音、湿度）并控制设备状态，确保员工安全，及时响应紧急情况。</p>
             </div>
         </div>
     </div>
@@ -258,11 +258,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of health care solution</h2>
-        <p>This smart assisted living solution on ThingsBoard provides a comprehensive approach to resident and facility management, with robust monitoring capabilities, intuitive zoning and device management, and customizable alerts for both health and environmental conditions. The solution empowers caregivers and administrators to respond quickly, keep environments safe, and provide the highest standard of care for residents.</p>
+        <h2>医疗健康解决方案总结</h2>
+        <p>基于 ThingsBoard 的智慧辅助生活解决方案为住客和设施管理提供全面方案，具备强大的监测能力、直观的区域与设备管理，以及可定制的健康与环境条件警报。该解决方案使护理人员和管理人员能够快速响应、保持环境安全，并为住客提供最高标准的护理。</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -357,8 +357,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_HealthCare_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/f8e77210-8fa8-11ef-90c1-0b39f28da380?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
-                <a id="UseCases_HealthCare_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_HealthCare_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/f8e77210-8fa8-11ef-90c1-0b39f28da380?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
+                <a id="UseCases_HealthCare_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
     
             return block;
@@ -366,15 +366,15 @@ contactUsModal: "true"
 
         function getImage(index) {
             const images = [
-                "<img src='/images/usecases/health-care/resident-overview.webp' alt='Resident overview dialog of dashboard'/>",
-                "<img src='/images/usecases/health-care/resident-alarm.webp' alt='Resident alarm configuration dialog of dashboard'/>",
-                "<img src='/images/usecases/health-care/real-time-resident-alarm.webp' alt='Real time resident alarm state of dashboard'/>",
-                "<img src='/images/usecases/health-care/room-alarm-configuration.webp' alt='Room alarm configuration state of dashboard'/>",
-                "<img src='/images/usecases/health-care/resident-list-management.webp' alt='Resident list management state of dashboard'/>",
-                "<img src='/images/usecases/health-care/zone-and-floor-management.webp' alt='Zone and floor management state of dashboard'/>",
-                "<img src='/images/usecases/health-care/room-and-device-layout.webp' alt='Room and device layout state of dashboard'/>",
-                "<img src='/images/usecases/health-care/device-addition.webp' alt='Device addition state of dashboard'/>",
-                "<img src='/images/usecases/health-care/room-configuration.webp' alt='Room configuration state of dashboard'/>"
+                "<img src='/images/usecases/health-care/resident-overview.webp' alt='仪表板住客总览对话框'/>",
+                "<img src='/images/usecases/health-care/resident-alarm.webp' alt='仪表板住客警报配置对话框'/>",
+                "<img src='/images/usecases/health-care/real-time-resident-alarm.webp' alt='仪表板实时住客警报状态'/>",
+                "<img src='/images/usecases/health-care/room-alarm-configuration.webp' alt='仪表板房间警报配置状态'/>",
+                "<img src='/images/usecases/health-care/resident-list-management.webp' alt='仪表板住客列表管理状态'/>",
+                "<img src='/images/usecases/health-care/zone-and-floor-management.webp' alt='仪表板区域与楼层管理状态'/>",
+                "<img src='/images/usecases/health-care/room-and-device-layout.webp' alt='仪表板房间与设备布局状态'/>",
+                "<img src='/images/usecases/health-care/device-addition.webp' alt='仪表板设备添加状态'/>",
+                "<img src='/images/usecases/health-care/room-configuration.webp' alt='仪表板房间配置状态'/>"
             ];
             return images[index];
         }

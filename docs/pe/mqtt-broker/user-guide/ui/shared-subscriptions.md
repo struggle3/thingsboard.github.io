@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Application Shared Subscriptions
-description: Application Shared Subscriptions
+title: 应用共享订阅
+description: 应用共享订阅
 
 add-shared-subscriptions:
   0:

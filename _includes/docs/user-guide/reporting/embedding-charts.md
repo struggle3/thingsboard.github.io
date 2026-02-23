@@ -6,269 +6,269 @@
 
 {% assign feature = "Reporting" %}{% include templates/pe-feature-banner.md %}
 
-Charts are powerful visualization tools that make analytics more accessible, intuitive, and actionable. Instead of manually analyzing raw numbers, charts help you see patterns and insights at a glance.
+图表是强大的可视化工具，使分析更易理解、直观且可操作。通过图表，您无需手动分析原始数据即可快速发现规律和洞察。
 
-Common use cases:
-- **Visualizing time series** – track changes in metrics over time and highlight emerging trends.
-- **Comparing categories or entities** – quickly compare data from multiple devices or key performance indicators across groups.
-- **Spotting anomalies and irregular patterns** – easily identify sudden deviations or abnormal events.
-- **Aggregating data** – display averages, minimums, or maximums across time intervals in a clear and structured way.
-- **Showing proportions and distribution** – use pie or doughnut charts to illustrate how categories contribute to the whole.
-- **Management presentations** – communicate key insights visually to stakeholders without digging into raw numbers.
+常见用例：
+- **可视化时序数据** — 跟踪指标随时间的变化并突出新兴趋势。
+- **比较类别或实体** — 快速比较多台设备的数据或跨组的关键性能指标。
+- **发现异常和不规则模式** — 轻松识别突然偏离或异常事件。
+- **聚合数据** — 以清晰有序的方式显示时间区间的平均值、最小值或最大值。
+- **展示占比和分布** — 使用饼图或环形图说明各类别对整体的贡献。
+- **管理汇报** — 向利益相关者可视化传达关键洞察，而无需深入原始数据。
 
-Using charts makes analytics more visual and helps you make informed decisions faster.
+使用图表使分析更具视觉性，帮助您更快做出明智决策。
 
-## Chart types in ThingsBoard reports
+## ThingsBoard报表中的图表类型
 
-ThingsBoard supports a variety of chart components, each designed for specific purposes. 
-Below is a list of available charts with explanations and practical examples.
+ThingsBoard支持多种图表组件，每种都针对特定用途设计。
+以下是可用图表列表及说明和实际示例。
 
 <div style="display: flex; flex-direction: column;">
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Time series chart.</b>
+      <b>&#8226; 时序图表。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/time-series-table.png" alt="Time series chart" class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
-    <p>A universal chart for visualizing values over time. Ideal for monitoring trends and detecting anomalies. Can combine line and bar views.<br><b>Example:</b> displaying sensor temperature throughout the day together with the number of messages in each interval.</p>
+    <p>用于可视化随时间变化的值的通用图表。适合监控趋势和检测异常。可结合折线和柱状视图。<br><b>示例：</b>显示一天中各时间段的传感器温度以及每个区间的消息数量。</p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Line chart.</b>
+      <b>&#8226; 折线图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/line-chart.png" alt="Line chart" class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    A classic line graph for comparing multiple metrics over time. Great for showing progression or correlation.<br>
-    <b>Example:</b> comparing average room temperatures across different areas.
+    用于比较多个指标随时间的经典折线图。适合展示进展或相关性。<br>
+    <b>示例：</b>比较不同区域的平均室内温度。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Bar chart.</b>
+      <b>&#8226; 柱状图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/bar-chart.png" alt="Bar chart" class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Vertical bars for comparing categories or groups. Perfect for ranking and showing aggregated values.<br>
-    <b>Example:</b> monthly energy consumption of devices for the month.
+    用于比较类别或组的垂直柱状图。适合排名和显示聚合值。<br>
+    <b>示例：</b>当月设备的月度能耗。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Point chart.</b>
+      <b>&#8226; 点图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/point-chart.png" alt="Point chart" class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Shows individual values as dots. Useful for scatter plots or event distribution over time.<br>
-    <b>Example:</b> displaying motion sensor trigger events.
+    以点的形式显示各个值。适用于散点图或事件随时间分布。<br>
+    <b>示例：</b>显示运动传感器触发事件。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; State chart.</b>
+      <b>&#8226; 状态图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/state-chart.png" alt="State chart" class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Illustrates changes in system or device states over time (e.g., ONLINE/OFFLINE).<br>
-    <b>Example:</b> pump activity (ON/OFF) during a week.
+    展示系统或设备状态随时间的变化（例如ONLINE/OFFLINE）。<br>
+    <b>示例：</b>一周内泵的活动状态（开/关）。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Bar chart with labels.</b>
+      <b>&#8226; 带标签的柱状图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/bar-chart-with-labels.png" alt="Bar chart with labels." class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Bar chart with numeric labels inside or above bars. Highlights exact values.<br>
-    <b>Example:</b> daily water usage per apartment, with liters displayed directly on bars.
+    在柱内或柱上方显示数值标签的柱状图。突出精确值。<br>
+    <b>示例：</b>每户每日用水量，升数直接显示在柱上。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Range chart.</b>
+      <b>&#8226; 范围图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/range-chart.png" alt="Range chart." class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Displays minimum and maximum values over time as shaded ranges.<br>
-    <b>Example:</b> hourly min/max temperature.
+    以阴影区域形式显示随时间的最小值和最大值。<br>
+    <b>示例：</b>每小时最低/最高温度。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Bars.</b>
+      <b>&#8226; 条形图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/bars.png" alt="Bars." class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Compact representation of metrics as progress bars. Useful for completion levels.<br>
-    <b>Example:</b> battery charge or memory usage.
+    以进度条形式紧凑显示指标。适用于完成度。<br>
+    <b>示例：</b>电池电量或内存使用率。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Pie.</b>
+      <b>&#8226; 饼图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/pie.png" alt="Pie." class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Circular chart for showing parts of a whole.<br>
-    <b>Example:</b> share of electricity consumption by department.
+    用于显示整体各部分构成的圆形图表。<br>
+    <b>示例：</b>各部门用电占比。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Doughnut.</b>
+      <b>&#8226; 环形图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/doughnut.png" alt="Doughnut." class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    Similar to a pie chart, but with a hollow center where a key metric (e.g., average, sum, KPI) can be displayed.<br>
-    <b>Example:</b> % of used capacity plus absolute value in the center.
+    与饼图类似，但中间空心处可显示关键指标（如平均值、总和、KPI）。<br>
+    <b>示例：</b>已用容量百分比加上中心的绝对值。
     </p>
   </div><br>
   <div>
     <p style="font-size: 16px;">
-      <b>&#8226; Horizontal doughnut.</b>
+      <b>&#8226; 横向环形图。</b>
     </p>
     <img src="/images/user-guide/reporting/embedding-charts/horizontal-doughnut.png" alt="Horizontal doughnut." class="image-float" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px">
     <p class="text-content">
-    A horizontal variation of the doughnut chart, displayed as side-by-side rings. Useful for compact metric comparison.<br>
-    <b>Example:</b> percentage of completed vs. pending tasks in a project.
+    环形图的横向变体，以并排圆环形式显示。适用于紧凑的指标比较。<br>
+    <b>示例：</b>项目中已完成与待办任务的百分比。
     </p>
   </div>
 </div>
 
 <hr>
 
-## Adding a Chart to a Report
+## 向报表添加图表
 
-1. Navigate to the **Templates** tab on the **Reporting** page.
-2. Open an existing report (or subreport) template or [create a new one](/docs/{{docsPrefix}}user-guide/reporting/reporting-key-concepts/#how-to-create-a-report-template){:target="_blank"}.
-3. In the **Components library**, go to **Charts**, select the **chart type**, and drag it into the **content area** of your report.
-
-<hr>
-
-## Configuring a Chart
-
-Define the data the chart should display, the time interval for that data, X and Y axis configurations, thresholds, legend, appearance settings, and other options.
-
-#### Time window
-
-- Define the time intervals for displaying telemetry data on the chart. Learn more about configuring the time window [here](/docs/{{docsPrefix}}user-guide/dashboards/#time-window){:target="_blank"}.
-
-#### Data configuration
-
-- **Datasource:**
-  - Define the chart&#39;s data source:
-    - **Device** — telemetry from a specific device.
-    - **Entity alias** — an abstract reference to one or more entities. It is often used when a chart needs to work with multiple entities.
-  - If needed, configure [filters](/docs/{{docsPrefix}}user-guide/widgets/#filters){:target="_blank"}.
-
-- **Series:**   
-  Specify which telemetry keys to visualize (e.g., *temperature*).
-
-For each data key (depending on the selected chart), you can configure units, labels, colors, line or bar styles, and more.
-
-#### Layout settings
-
-Adjust the appearance of the component by setting height, width, alignment, padding, margins, background, and border styles.
-
-#### Other settings
-
-Depending on the chart type, you may configure additional options that improve clarity and usability:
-
-- **Y axes** – configure axis labels, units, position, and value ranges to control how vertical data is displayed.
-- **Thresholds** – add reference lines based on constant values, keys, or entities to highlight safe, warning, or critical limits.
-- **X axis** – define horizontal axis properties including label, position, ticks, and vertical line.
-- **Legend** – manage the placement, formatting, and content of the chart legend to clarify series meanings.
-- For configuring other options and more details, see the [Widgets](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"} documentation.
-
-#### Saving and Testing
-
-1. Once the chart is configured, click **Save**. 
-2. To verify that your template is set up correctly and the data displays as expected, click <b>Generate test report</b> (next to the <b>Save</b> button).
-The system will generate a sample report using the available test data from the selected device or entity alias.
+1. 导航至**报表**页面的**模板**标签页。
+2. 打开现有报表（或子报表）模板或[创建新模板](/docs/{{docsPrefix}}user-guide/reporting/reporting-key-concepts/#how-to-create-a-report-template){:target="_blank"}。
+3. 在**组件库**中，进入**图表**，选择**图表类型**，并将其拖入报表的**内容区域**。
 
 <hr>
 
-## Example: Embedding a Line Chart
+## 配置图表
 
-**Goal:** Display and compare temperature readings from three devices over the past 24 hours.
+定义图表应显示的数据、该数据的时间区间、X轴和Y轴配置、阈值、图例、外观设置及其他选项。
 
-<br><b><font size="4">Step 1. Preparation</font></b>
+#### 时间窗口
 
-- **Prepare three devices** that will send temperature values to ThingsBoard as telemetry. Data from my devices is sent once per hour.   
-  > If needed, simulate telemetry in real time using the [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"}.   
-  [See the guide here.](/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-3/#simulation-of-the-devices-telemetry-data){:target="_blank"}
+- 定义在图表上显示遥测数据的时间区间。更多关于配置时间窗口的信息请见[此处](/docs/{{docsPrefix}}user-guide/dashboards/#time-window){:target="_blank"}。
 
-<b><font size="4">Step 2. Adding the chart</font></b>
+#### 数据配置
 
-- Go to the <b>Templates</b> tab on the <b>Reporting</b> page.
-- Select an existing report template or [create a new one](/docs/{{docsPrefix}}user-guide/reporting/reporting-key-concepts/#how-to-create-a-report-template){:target="_blank"}.
-- Drag the <b>Line chart</b> component into the content area of your report.
+- **数据源：**
+  - 定义图表的数据源：
+    - **设备** — 来自特定设备的遥测。
+    - **实体别名** — 对一个或多个实体的抽象引用。当图表需要与多个实体配合使用时常用。
+  - 如需要，配置[筛选器](/docs/{{docsPrefix}}user-guide/widgets/#filters){:target="_blank"}。
+
+- **系列：**
+  指定要可视化的遥测键（例如*temperature*）。
+
+对于每个数据键（取决于所选图表），您可以配置单位、标签、颜色、折线或柱状样式等。
+
+#### 布局设置
+
+通过设置高度、宽度、对齐、内边距、外边距、背景和边框样式来调整组件外观。
+
+#### 其他设置
+
+根据图表类型，您可以配置提高清晰度和可用性的附加选项：
+
+- **Y轴** – 配置轴标签、单位、位置和值范围，以控制垂直数据的显示方式。
+- **阈值** – 基于常量值、键或实体添加参考线，以突出安全、警告或临界限制。
+- **X轴** – 定义水平轴属性，包括标签、位置、刻度线和垂直线。
+- **图例** – 管理图表图例的放置、格式和内容，以明确各系列的含义。
+- 有关配置其他选项及更多详情，请参阅[部件](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"}文档。
+
+#### 保存与测试
+
+1. 配置图表后，点击**保存**。
+2. 要验证模板配置是否正确且数据按预期显示，点击<b>生成测试报表</b>（位于<b>保存</b>按钮旁边）。
+系统将使用所选设备或实体别名的可用测试数据生成示例报表。
+
+<hr>
+
+## 示例：嵌入折线图
+
+**目标：** 显示并比较三台设备过去24小时的温度读数。
+
+<br><b><font size="4">步骤 1. 准备</font></b>
+
+- **准备三台设备**，向ThingsBoard发送温度值作为遥测。我的设备数据每小时发送一次。
+  > 如需要，可使用[规则引擎](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"}实时模拟遥测。
+  [参见本指南](/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-3/#simulation-of-the-devices-telemetry-data){:target="_blank"}
+
+<b><font size="4">步骤 2. 添加图表</font></b>
+
+- 进入<b>报表</b>页面的<b>模板</b>标签页。
+- 选择现有报表模板或[创建新模板](/docs/{{docsPrefix}}user-guide/reporting/reporting-key-concepts/#how-to-create-a-report-template){:target="_blank"}。
+- 将<b>折线图</b>组件拖入报表的内容区域。
 
 {% include images-gallery.html imageCollection="chart-component-example-1" %}
 
-<br><b><font size="4">Step 3. Configuring the chart</font></b>
+<br><b><font size="4">步骤 3. 配置图表</font></b>
 
-- **Time window:** last 24 hours, aggregated by 1 hour.
-- **Title:**
+- **时间窗口：** 过去24小时，按1小时聚合。
+- **标题：**
   ```text
-  Temperature history
+  温度历史
   ```
   {:.copy-code}
 
-- **Datasource:** create a new Entity alias that includes the three devices.
-  - **Alias name:** My devices
-  - **Filter type:** Entity list
-  - **Type:** Device
-  - **Entity list**: specify three devices for comparing temperature values.
-- **Series:** add the telemetry key <b>temperature</b>, with label 
+- **数据源：** 创建包含三台设备的新实体别名。
+  - **别名名称：** 我的设备
+  - **筛选类型：** 实体列表
+  - **类型：** 设备
+  - **实体列表：** 指定三台用于比较温度值的设备。
+- **系列：** 添加遥测键<b>temperature</b>，标签为
   ```text
   ${entityName} temperature
   ```
   {:.copy-code}
 
-- **Y axis:**
-  - **Label:** Temperature 
-  - **Min:** 15 
-  - **Max:** 35 
-  - **Units:** °C
-- **Legend:**:
-  - **Position** at the **bottom**, 
-  - Display **Min**, **Max**, and **Average** values.
-- **Save** the component.
+- **Y轴：**
+  - **标签：** 温度
+  - **最小值：** 15
+  - **最大值：** 35
+  - **单位：** °C
+- **图例：**
+  - **位置**在**底部**，
+  - 显示**最小值**、**最大值**和**平均值**。
+- **保存**组件。
 
 {% include images-gallery.html imageCollection="chart-component-example-2" %}
 
-<br><b><font size="4">Step 4. Save the report template</font></b>
+<br><b><font size="4">步骤 4. 保存报表模板</font></b>
 
-- Update the file naming pattern to make reports easy to identify:
+- 更新文件命名模式，便于识别导出的报表：
   ```
   temperature-monitoring-report-%d{yyyy-MM-dd_HH:mm:ss}
   ```
   {:.copy-code}
 
-- Save the template.
+- 保存模板。
 
 {% include images-gallery.html imageCollection="chart-component-example-3" %}
 
-<br><b><font size="4">Step 5. Testing</font></b>
+<br><b><font size="4">步骤 5. 测试</font></b>
 
-- Click <b>Generate test report</b> to verify the configuration.
+- 点击<b>生成测试报表</b>以验证配置。
 
 {% include images-gallery.html imageCollection="chart-component-example-4" %}
 
-<br><b><font size="4">✅ Result</font></b>
+<br><b><font size="4">✅ 结果</font></b>
 
-The generated report will include a line chart showing temperature trends from all three devices, allowing you to compare them over time.
+生成的报表将包含显示所有三台设备温度趋势的折线图，方便您随时间比较。
 
 {% include images-gallery.html imageCollection="chart-component-example-5" %}
 
 <hr>
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/multi-project-guides-banner.md %}
 
 <hr>
 
-## Your feedback
+## 您的反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎在[github](https://github.com/thingsboard/thingsboard){:target="_blank"}上为ThingsBoard加星，帮助我们传播。
+如对本示例有任何疑问，请[联系我们](/docs/contact-us/){:target="_blank"}。

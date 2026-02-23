@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Sensy32 to ThingsBoard?
-category: Other devices
+title: 如何将 Sensy32 连接至 ThingsBoard？
+category: 其他设备
 connectivity: WIFI, Bluetooth
 vendor: Sensy32
 hasIntegrationDeviceConfiguration: true

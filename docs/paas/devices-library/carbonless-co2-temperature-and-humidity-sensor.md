@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Carbonless CO2 temperature and humidity Sensor to ThingsBoard?"
+title: "如何将Carbonless CO2 temperature and humidity Sensor连接到ThingsBoard？"
 redirect_to: "/device-library/paas/carbonless-co2-temperature-and-humidity-sensor/"
 ---

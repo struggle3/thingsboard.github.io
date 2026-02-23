@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Dashboards Overview
-description: Edge Dashboards Overview
+title: Edge 仪表板概览
+description: Edge 仪表板概览
 
 dashboard-provision:
     0:

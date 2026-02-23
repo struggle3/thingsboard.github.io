@@ -1,17 +1,17 @@
-Deletes specified key-value pairs from the incoming message data or its metadata.
+从入站消息 data 或其 metadata 中删除指定的键值对。
 
-## Preconditions
+## 前置条件
 
-If you're deleting from the message **data**, it must be a valid JSON object. If the message data is not a JSON object, the node will pass the message through without modification.
+若从消息 **data** 删除，其必须为有效 JSON 对象。若消息 data 不是 JSON 对象，节点将原样透传消息。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Delete key-values from** — specifies where the deletion should happen. Can be either:
-    * *Message* — deletes key-value pairs from the message **data**.
-    * *Metadata* — deletes key-value pairs from the **metadata**.
-* **Keys** — a set of keys to delete from the source. **Java regular expressions are supported.** If a configured key pattern does not match any key in the source, it is ignored.
+* **从以下位置删除键值对** — 指定删除操作发生的位置。可为：
+    * *Message* — 从消息 **data** 删除键值对。
+    * *Metadata* — 从 **metadata** 删除键值对。
+* **Keys** — 要从源中删除的键集合。**支持 Java 正则表达式。** 若配置的键模式在源中无匹配，则忽略。
 
 ### JSON Schema
 
@@ -46,28 +46,28 @@ If you're deleting from the message **data**, it must be a valid JSON object. If
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node checks the configured source for deletion (*Message* or *Metadata*).
-2. It iterates through all keys in the source.
-3. For each key, it checks if the key matches any of the patterns listed in the **Keys** configuration.
-4. All matching key-value pairs are removed from the source.
-5. If at least one key-value pair was deleted, a new message is created with the updated data or metadata and passed to the next node via `Success`.
-6. If no keys matched or the source was empty, the original message is passed through unchanged via `Success`.
-7. If an unexpected error occurs, the message is routed via `Failure`.
+1. 节点检查配置的删除源（*Message* 或 *Metadata*）。
+2. 遍历源中所有键。
+3. 对每个键，检查其是否匹配 **Keys** 配置中列出的任一模式。
+4. 所有匹配的键值对从源中移除。
+5. 若至少删除一个键值对，创建包含更新后 data 或 metadata 的新消息，经 `Success` 传递至下一节点。
+6. 若无键匹配或源为空，原始消息经 `Success` 原样透传。
+7. 若发生意外错误，消息经 `Failure` 路由。
 
-## Output connections
+## 输出连接
 
-* `Success`:
-    * if processing completes without exceptions, even if no keys were deleted.
-* `Failure`:
-    * if an unexpected error occurs during processing.
+* `Success`：
+    * 处理正常完成（即使未删除任何键）时。
+* `Failure`：
+    * 处理过程中发生意外错误时。
 
-## Examples
+## 示例
 
-### Example 1 — Delete from data
+### 示例 1 — 从 data 删除
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -80,7 +80,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -92,7 +92,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -103,15 +103,15 @@ Data:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** The key-value pairs for `internal_id` and `deviceName` are deleted from the message data.
+**说明：** `internal_id` 和 `deviceName` 的键值对从消息 data 中删除。
 
 -----
 
-### Example 2 — Delete from metadata
+### 示例 2 — 从 metadata 删除
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -124,7 +124,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -136,7 +136,7 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Metadata:
 
@@ -147,15 +147,15 @@ Metadata:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** The key-value pairs for `rssi` and `snr` are deleted from the metadata.
+**说明：** `rssi` 和 `snr` 的键值对从 metadata 中删除。
 
 -----
 
-### Example 3 — Using Java regular expressions
+### 示例 3 — 使用 Java 正则表达式
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -168,7 +168,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -179,7 +179,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -190,15 +190,15 @@ Data:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** The regular expression `temp_.*` matches `temp_main` and `temp_ambient`. These key-value pairs are deleted from the message data.
+**说明：** 正则表达式 `temp_.*` 匹配 `temp_main` 和 `temp_ambient`。这些键值对从消息 data 中删除。
 
 -----
 
-### Example 4 — No matching keys
+### 示例 4 — 无匹配键
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -209,7 +209,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -220,7 +220,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -231,6 +231,6 @@ Data:
 }
 ```
 
-**Output connections:** `Success`.
+**输出连接：** `Success`。
 
-**Explanation:** The key `pressure` does not exist in the message data, so nothing is deleted. The original message is passed through unchanged.
+**说明：** 消息 data 中不存在 `pressure` 键，故无任何删除。原始消息原样透传。

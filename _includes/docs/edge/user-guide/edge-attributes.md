@@ -1,129 +1,129 @@
 * TOC 
 {:toc}
 
-## Overview
+## 概述
 
-**Custom attributes** are the structured data that can be assigned to the entities. They are stored in the database and can be used for visualization, analysis, logic configuration, and integration with other services.
+**Custom attributes（自定义属性）**是可分配给实体的结构化数据。其存储在数据库中，可用于可视化、分析、逻辑配置及与其他服务集成。
 
-In **ThingsBoard Edge**, attributes work similarly to the **ThingsBoard** platform. For a comprehensive understanding of the **ThingsBoard Attributes**, please refer to the [Working with IoT Attributes](/docs/{{peDocsPrefix}}user-guide/attributes/){: target="_blank"} documentation.
+在 **ThingsBoard Edge** 中，属性的工作方式与 **ThingsBoard** 平台相同。若要全面了解 **ThingsBoard 属性**，请参阅 [Working with IoT Attributes](/docs/{{peDocsPrefix}}user-guide/attributes/){: target="_blank"} 文档。
 
-## Assigning Attributes to the Edge Entities
+## 为 Edge 实体分配属性
 
-**Custom attributes** can be managed from the **Edge** instance. They are stored and processed locally for immediate use. 
+**自定义属性**可在 **Edge** 实例上管理。其本地存储和处理以供即时使用。
 
-To add an attribute to any Edge [entity](/docs/{{peDocsPrefix}}user-guide/entities-and-relations/){: target="_blank"}: 
-* Go to the **Entity section** (e.g. **Entities > Devices** section) and click on the entity. On the **Entity details** page, select the **"Attributes"** tab and select the **"Server attributes"** option in the **"Entity attributes scope"** drop-down menu. 
-* Click the **"Add"** button. In the **"Add attribute"** window, enter the attribute name in the **"Key"** field. Then, select the **attribute value** (_String, Integer, Double, Boolean, JSON_) type and input an **attribute value** in the corresponding fields. Click the **"Add"** button.
-* Once the attribute is added, you can see it in the list
+要为任意 Edge [实体](/docs/{{peDocsPrefix}}user-guide/entities-and-relations/){: target="_blank"} 添加属性：
+* 进入 **Entity section**（如 **Entities > Devices** 区域）并点击实体。在 **Entity details** 页面选择 **"Attributes"** 选项卡，在 **"Entity attributes scope"** 下拉菜单中选择 **"Server attributes"** 选项。
+* 点击 **"Add"** 按钮。在 **"Add attribute"** 窗口中，在 **"Key"** 字段输入属性名称。然后选择 **attribute value**（_String、Integer、Double、Boolean、JSON_）类型，并在相应字段输入 **attribute value**。点击 **"Add"** 按钮。
+* 添加属性后，您可在列表中看到它
 
 {% include images-gallery.html imageCollection="addAttributeOnEdge" %}
 
-If an attribute is assigned to an entity on the **ThingsBoard Server**, and the entity is then assigned to an **Edge** instance, the **attribute** is automatically assigned as well. 
-Read about **how to assign entities to the Edge** instance [here](/docs/{{docsPrefix}}config/management/#entities-management){: target="_blank"}.
+若在 **ThingsBoard Server** 上为实体分配了属性，且该实体随后被分配给 **Edge** 实例，**attribute** 也会自动分配。
+请[在此](/docs/{{docsPrefix}}config/management/#entities-management){: target="_blank"}了解如何将实体分配到 Edge 实例。
 
-## Using Attributes to Visualize Data on the Dashboard
+## 使用属性在仪表板上可视化数据
 
-In visualization data process, **entity attributes** can be used to provide context for telemetry data, display static or dynamic metadata about devices, and act as configuration parameters to filter or annotate dashboards. 
+在数据可视化过程中，**实体属性**可用于提供遥测数据的上下文、显示设备静态或动态元数据，并作为配置参数来筛选或标注仪表板。
 
-To display **attributes** on the Dashboard, create the [Entity alias](/docs/{{peDocsPrefix}}user-guide/ui/aliases/){: target="_blank"} and bind it to the widget. Widgets like [Cards](/docs/{{peDocsPrefix}}user-guide/ui/widget-library/#cards){: target="_blank"}, [Input widgets](/docs/{{peDocsPrefix}}user-guide/ui/widget-library/#input-widgets){: target="_blank"}, or [Entity Tables](/docs/{{peDocsPrefix}}user-guide/ui/entity-table-widget/){: target="_blank"} are ideal for displaying attributes.
+要在 Dashboard 上显示 **attributes**，请创建 [Entity alias](/docs/{{peDocsPrefix}}user-guide/ui/aliases/){: target="_blank"} 并将其绑定到部件。诸如 [Cards](/docs/{{peDocsPrefix}}user-guide/ui/widget-library/#cards){: target="_blank"}、[Input widgets](/docs/{{peDocsPrefix}}user-guide/ui/widget-library/#input-widgets){: target="_blank"} 或 [Entity Tables](/docs/{{peDocsPrefix}}user-guide/ui/entity-table-widget/){: target="_blank"} 等部件非常适合显示属性。
 
 {% include images-gallery.html imageCollection="dashboard" %}
 
-Read more about **Edge Dashboards configuration** [here](/docs/{{docsPrefix}}user-guide/db-overview/){: target="_blank"}.
+请[在此](/docs/{{docsPrefix}}user-guide/db-overview/){: target="_blank"}了解更多关于 **Edge Dashboards 配置**。
 
-## Syncing Attribute Updates
+## 同步属性更新
 
-To ensure that any changes to the **attributes** are synchronized between the **Server** and **Edge** instances, adjust the **Rule Chains**. 
+为确保 **属性** 的变更在 **Server** 与 **Edge** 实例之间同步，需调整 **Rule Chains**。
 
-If the changes occurred on the **ThingsBoard Server** and must be propagated to the **Edge** instance:
-* Log in to the **ThingsBoard Server**, go to the **Rule chains** section and click on the **Rule Chain**.
-* On the **Rule Chain** edit page, find the **"push to edge"** node using the **Node search** bar. Drag and drop the node onto the **Rule Chain** sheet. Then, in the **"Add rule node"** pop-up window enter the node title and select the **"Server attributes"** option in the **"Entity attributes scope"** field. Click the **"Add"** button to proceed.
-* Connect the **“message type switch”** node and the **"push to edge"** node with the **"Attributes Deleted"** and **"Attributes Updated"** link labels. Click the **“Apply changes”** button on the **Rule Chain** sheet.
+若变更发生在 **ThingsBoard Server** 且需传播到 **Edge** 实例：
+* 登录 **ThingsBoard Server**，进入 **Rule chains** 区域并点击 **Rule Chain**。
+* 在 **Rule Chain** 编辑页面，使用 **Node search** 栏找到 **"push to edge"** 节点。将节点拖放到 **Rule Chain** 画布上。然后在 **"Add rule node"** 弹出窗口中输入节点标题，在 **"Entity attributes scope"** 字段中选择 **"Server attributes"** 选项。点击 **"Add"** 按钮继续。
+* 使用 **"Attributes Deleted"** 和 **"Attributes Updated"** 链接标签连接 **"message type switch"** 节点与 **"push to edge"** 节点。点击 **Rule Chain** 画布上的 **"Apply changes"** 按钮。
 
 {% include images-gallery.html imageCollection="pushToEdge" %}
 
-To keep the **ThingsBoard Server** up to date with any attribute changes that have occurred on the **Edge**:
-* Log in to the **ThingsBoard Server**, go to the **Edge management > Rule chains templates** section and click on the **Rule Chain**.
-* On the **Rule Chain** edit page, find the **"push to cloud"** node using the **Node search** bar. Drag and drop the node onto the **Rule Chain** sheet. Then, in the **"Add rule node"** pop-up window enter the node title and select the **"Server attributes"** option in the **"Entity attributes scope"** field. Click the **"Add"** button to proceed.
-* Connect the **“message type switch”** node and the **"push to cloud"** node with the **"Attributes Deleted"** and **"Attributes Updated"** link labels. Click the **“Apply changes”** button on the **Rule Chain** sheet.
+若要保持 **ThingsBoard Server** 与 **Edge** 上发生的属性变更同步：
+* 登录 **ThingsBoard Server**，进入 **Edge management > Rule chains templates** 区域并点击 **Rule Chain**。
+* 在 **Rule Chain** 编辑页面，使用 **Node search** 栏找到 **"push to cloud"** 节点。将节点拖放到 **Rule Chain** 画布上。然后在 **"Add rule node"** 弹出窗口中输入节点标题，在 **"Entity attributes scope"** 字段中选择 **"Server attributes"** 选项。点击 **"Add"** 按钮继续。
+* 使用 **"Attributes Deleted"** 和 **"Attributes Updated"** 链接标签连接 **"message type switch"** 节点与 **"push to cloud"** 节点。点击 **Rule Chain** 画布上的 **"Apply changes"** 按钮。
 
 {% include images-gallery.html imageCollection="pushToCloud" %}
 
 {% capture edge-rule-chain %}
-Starting with **Edge 4.0**, you can create and edit a **Rule Chain** on the **Edge**. 
+从 **Edge 4.0** 起，您可以在 **Edge** 上创建和编辑 **Rule Chain**。
 {% endcapture %}
 {% include templates/info-banner.md content=edge-rule-chain %}
 
-Read about how to **subscribe to device attributes change** [here](/docs/{{docsPrefix}}config/subscribe-to-attribute/#step-3-subscribe-to-device-attributes-change-and-publish-device-attributes-message){: target="_blank"}.
+请[在此](/docs/{{docsPrefix}}config/subscribe-to-attribute/#step-3-subscribe-to-device-attributes-change-and-publish-device-attributes-message){: target="_blank"}了解如何 **订阅设备属性变更**。
 
-## Custom Attributes for Edge Instance
+## Edge 实例的自定义属性
 
-Starting with the 3.9.0 release, **custom attributes** can be assigned to the **Edge** instance and used as placeholders in the **Rule Chains**. This allows each **Edge** instance to dynamically replace placeholders with its specific attributes in real time. In this way, one **Edge Rule Chain** template can be used for multiple instances, eliminating the need to create a separate **Rule Chain template** for each **Edge** instance.
-The retrieved **Edge attributes** can be used for metadata enrichment, authentication and tagging, analysis, and contextualization of transmitted data. This approach streamlines the management of multiple **Edge** instances and supports efficient scaling while minimizing errors and simplifying maintenance. 
+从 3.9.0 版本起，可将 **自定义属性** 分配给 **Edge** 实例，并在 **Rule Chains** 中用作占位符。这样每个 **Edge** 实例可实时动态将其特定属性替换占位符。如此一来，一个 **Edge Rule Chain** 模板可用于多个实例，无需为每个 **Edge** 实例单独创建 **Rule Chain template**。
+所获取的 **Edge 属性**可用于元数据丰富、认证与标记、分析以及传输数据的语境化。此方法简化了多个 **Edge** 实例的管理，支持高效扩展，同时最大限度地减少错误并简化维护。
 
-To assign a custom attribute to the **Edge** instance, follow these steps:
+要为 **Edge** 实例分配自定义属性，请按以下步骤操作：
 
-* Log in to the **ThingsBoard Server**, go to the **Edge management > Instances** section and click on the **Edge** instance. On the **"Edge details"** page, select the **"Attributes"** tab. 
-* Click the **“Add”** button and add a new custom attribute (_e.g. edgeAccessToken_).
-* Confirm the assigned attribute.
-* Select the **"Relations"** tab and click the **“Add”** button to add a new relation (_e.g. the relation between the Edge and the Device(s)_). Click the **“Add”** button.
-* The newly created relations will appear in the **"Relations"** tab.
+* 登录 **ThingsBoard Server**，进入 **Edge management > Instances** 区域并点击 **Edge** 实例。在 **"Edge details"** 页面选择 **"Attributes"** 选项卡。
+* 点击 **"Add"** 按钮并添加新的自定义属性（_如 edgeAccessToken_）。
+* 确认已分配的属性。
+* 选择 **"Relations"** 选项卡并点击 **"Add"** 按钮添加新关系（_如 Edge 与 Device(s) 之间的关系_）。点击 **"Add"** 按钮。
+* 新创建的关系将出现在 **"Relations"** 选项卡中。
 
 {% include images-gallery.html imageCollection="addEdgeAttributes" %}
 
-To use **Edge** attributes as placeholders in the **Rule Chain template**:
-* Go to the **ThingsBoard Server**, the **Edge management > Rule chains templates** section and click the appropriate **Rule Chain**.
-  * If you're using **Edge 4.0** or later, stay in your **Edge** instance and go to the **Rule chains** section. To edit a rule chain, click the appropriate **Rule Chain**.
-* On the **Rule Chain** edit page, find the **"related entity data"** node using the **Node search** bar. Drag and drop the node onto the **Rule Chain sheet**. Fill in the following fields in the pop-up window:
-  * **Name:** Enter the node name.
-  * **Direction:** Select the relation direction (_From originator/To originator_).
-  * **Relation type:** Select the relation type (_Contains/Manages_).
-  * **Entity types:** Add the entity type.
-* Scroll down and continue with the configuration. In the **"Data to fetch"** configuration block, select the **"Attributes"** tab and enter the **"Attributes mapping"** parameters:
-  * **Source attribute key:** Enter the entity attribute key you want to track.
-  * **Target key:** Enter the target key name. Click the **"Add"** button.
-* Then, find the **"rest api call"** node using the **Node search** bar. Drag and drop the node onto the **Rule Chain sheet**. In the pop-up window, enter the **node name** and click the **"Add"** button.
-  * **Name:** Enter the node name.
-  * **Headers:** Enter the request header and value. The header or value can be a static string, or pattern that is resolved using Message Metadata properties.
-  * Click the **"Add"** button. Read more about the **REST API Call node configuration** [here](/docs/user-guide/rule-engine-2-0/nodes/external/rest-api-call/){:target="_blank"}.
-* Connect the **"message type switch"** and **"related entity data"** nodes with the **“Post telemetry”** link label. Then, connect the **"related entity data"** and **"rest api call"** nodes with the **"Success"** link label. Click the **“Apply changes”** button on the **Rule Chain sheet**.
+要在 **Rule Chain template** 中将 **Edge** 属性用作占位符：
+* 进入 **ThingsBoard Server** 的 **Edge management > Rule chains templates** 区域并点击相应的 **Rule Chain**。
+  * 若使用 **Edge 4.0** 或更高版本，请留在 **Edge** 实例并进入 **Rule chains** 区域。要编辑规则链，请点击相应的 **Rule Chain**。
+* 在 **Rule Chain** 编辑页面，使用 **Node search** 栏找到 **"related entity data"** 节点。将节点拖放到 **Rule Chain sheet** 上。在弹出窗口的以下字段中填写：
+  * **Name：** 输入节点名称。
+  * **Direction：** 选择关系方向（_From originator/To originator_）。
+  * **Relation type：** 选择关系类型（_Contains/Manages_）。
+  * **Entity types：** 添加实体类型。
+* 向下滚动并继续配置。在 **"Data to fetch"** 配置块中，选择 **"Attributes"** 选项卡并输入 **"Attributes mapping"** 参数：
+  * **Source attribute key：** 输入要追踪的实体属性键。
+  * **Target key：** 输入目标键名称。点击 **"Add"** 按钮。
+* 然后使用 **Node search** 栏找到 **"rest api call"** 节点。将节点拖放到 **Rule Chain sheet** 上。在弹出窗口中输入 **node name** 并点击 **"Add"** 按钮。
+  * **Name：** 输入节点名称。
+  * **Headers：** 输入请求头和值。头或值可为静态字符串，或使用 Message Metadata 属性解析的模式。
+  * 点击 **"Add"** 按钮。请[在此](/docs/user-guide/rule-engine-2-0/nodes/external/rest-api-call/){:target="_blank"}了解更多关于 **REST API Call 节点配置**。
+* 使用 **"Post telemetry"** 链接标签连接 **"message type switch"** 与 **"related entity data"** 节点。然后使用 **"Success"** 链接标签连接 **"related entity data"** 与 **"rest api call"** 节点。点击 **Rule Chain sheet** 上的 **"Apply changes"** 按钮。
 
 {% include images-gallery.html imageCollection="edgeAttributesAsPlaceholders" %}
 
-## Using Attributes in Edge Rule Chains
+## 在 Edge 规则链中使用属性
 
-In **ThingsBoard Edge**, **Rule Chains** can leverage **edge attributes** to create dynamic, real-time data processing logic. 
+在 **ThingsBoard Edge** 中，**Rule Chains** 可利用 **edge attributes** 创建动态、实时的数据处理逻辑。
 
-Let's consider a situation in which it is necessary to be notified whenever any device attribute undergoes a change. 
+考虑以下场景：需要在任何设备属性发生变更时收到通知。
 
-Before configuring the alarm notifications, have these steps completed: 
-* [Add a Device](/docs/{{docsPrefix}}config/create-device/#creating-device-on-edge-instance){: target="_blank"}.
-* Add a new custom device attribute.
-* [Create an Asset](/docs/{{docsPrefix}}config/provision-asset/#creating-relations){: target="_blank"}.
-* [Set a relation](/docs/{{docsPrefix}}config/provision-asset/#creating-relations){: target="_blank"} between the **Asset** and **Device**.
+在配置告警通知前，请完成以下步骤：
+* [添加 Device](/docs/{{docsPrefix}}config/create-device/#creating-device-on-edge-instance){: target="_blank"}。
+* 添加新的自定义设备属性。
+* [创建 Asset](/docs/{{docsPrefix}}config/provision-asset/#creating-relations){: target="_blank"}。
+* 在 **Asset** 与 **Device** 之间[设置关系](/docs/{{docsPrefix}}config/provision-asset/#creating-relations){: target="_blank"}。
 
-Follow these steps to configure the alarm notifications:
-* Log in to the **ThingsBoard Server**, go to the **Edge management > Rule chains templates** section and click the appropriate **Rule Chain**.
-  * If you're using **Edge 4.0** or later, stay in your **Edge** instance and go to the **Rule chains** section. To edit a rule chain, click the appropriate **Rule Chain**.
-* On the **Rule Chain** edit page, find the **"related entity data"** node using the **Node search** bar. Drag and drop the node onto the **Rule Chain sheet**. Fill in the following fields in the pop-up window:
-  * **Name:** Enter the node name.
-  * **Direction:** Select the relation direction (_From originator/To originator_).
-  * **Relation type:** Select the relation type (_Contains/Manages_).
-  * **Entity types:** Add the entity type.
-* Scroll down and continue with the configuration. In the **"Data to fetch"** configuration block, select the **"Attributes"** tab and enter the **"Attributes mapping"** parameters:
-  * **Source attribute key:** Enter the entity attribute key you want to track.
-  * **Target key:** Enter the target key name. Click the **"Add"** button.
-* Then, find the **"create alarm"** node using the **Node search** bar. Drag and drop the node onto the **Rule Chain sheet**. In the pop-up window, enter the **node name** and click the **"Add"** button.
-* Connect the **"message type switch"** and **"related entity data”** nodes with the **“Attributes Updated”** and **“Attributes Deleted”** link labels. Then, connect the **“related entity data”** and **"create alarm"** nodes with the **"Success"** link label. Click the **“Apply changes”** button on the **Rule Chain sheet**.
-* To verify if the **Alarm** notification will be sent, go to the **Entities > Devices** section, and open the **"Attributes"** tab on the **"Device details"** page. Change the attribute you added to the **"related entity data"** node.
-* Confirm the received **Alarm** notification.
+按以下步骤配置告警通知：
+* 登录 **ThingsBoard Server**，进入 **Edge management > Rule chains templates** 区域并点击相应的 **Rule Chain**。
+  * 若使用 **Edge 4.0** 或更高版本，请留在 **Edge** 实例并进入 **Rule chains** 区域。要编辑规则链，请点击相应的 **Rule Chain**。
+* 在 **Rule Chain** 编辑页面，使用 **Node search** 栏找到 **"related entity data"** 节点。将节点拖放到 **Rule Chain sheet** 上。在弹出窗口的以下字段中填写：
+  * **Name：** 输入节点名称。
+  * **Direction：** 选择关系方向（_From originator/To originator_）。
+  * **Relation type：** 选择关系类型（_Contains/Manages_）。
+  * **Entity types：** 添加实体类型。
+* 向下滚动并继续配置。在 **"Data to fetch"** 配置块中，选择 **"Attributes"** 选项卡并输入 **"Attributes mapping"** 参数：
+  * **Source attribute key：** 输入要追踪的实体属性键。
+  * **Target key：** 输入目标键名称。点击 **"Add"** 按钮。
+* 然后使用 **Node search** 栏找到 **"create alarm"** 节点。将节点拖放到 **Rule Chain sheet** 上。在弹出窗口中输入 **node name** 并点击 **"Add"** 按钮。
+* 使用 **"Attributes Updated"** 和 **"Attributes Deleted"** 链接标签连接 **"message type switch"** 与 **"related entity data"** 节点。然后使用 **"Success"** 链接标签连接 **"related entity data"** 与 **"create alarm"** 节点。点击 **Rule Chain sheet** 上的 **"Apply changes"** 按钮。
+* 要验证 **Alarm** 通知是否将发送，请进入 **Entities > Devices** 区域，打开 **"Device details"** 页面的 **"Attributes"** 选项卡。更改已添加到 **"related entity data"** 节点的属性。
+* 确认收到的 **Alarm** 通知。
 
 {% include images-gallery.html imageCollection="attributesInRuleChain" %}
 {% capture local-deployment %}
-Be sure to **Acknowledge** and **Clear** the notification when you receive it. You can do this either in the Cloud or on the Edge. If the unacknowledged alarm exists, it will be updated rather than created.
+收到通知时请务必 **Acknowledge** 并 **Clear**。您可在 Cloud 或 Edge 上执行此操作。若存在未确认的告警，将更新而非创建。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

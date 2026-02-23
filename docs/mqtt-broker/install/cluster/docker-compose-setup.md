@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Deploy TBMQ Cluster using Docker Compose
-description: Deploy TBMQ Cluster using Docker Compose
+title: 使用 Docker Compose 部署 TBMQ 集群
+description: 使用 Docker Compose 部署 TBMQ 集群
 
 ---
 

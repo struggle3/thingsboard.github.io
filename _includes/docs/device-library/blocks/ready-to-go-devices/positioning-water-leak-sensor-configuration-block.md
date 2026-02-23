@@ -1,8 +1,8 @@
 ### Device configuration
 
-To connect and send data we should configure the device and network server.  
+连接并发送数据前，需配置设备和网络服务器。  
 First, we are going to configure the device and save the required information for the network server configuration.  
-To add a device to the network server and retrieve data from it, you will need the following device parameters:
+要将设备加入网络服务器并从中获取数据，需准备以下设备参数：
 
 - **Device EUI** – Device identifier
 - **Application EUI** – Application identifier

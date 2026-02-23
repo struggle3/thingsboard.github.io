@@ -6,32 +6,32 @@
 {% endif %}
 
 {% capture tb-open-source %}
-ThingsBoard is an open-source IoT platform that provides a robust suite of features for data collection, processing, visualization, and device management.
-If you are a new platform user, we suggest reading [**What is ThingsBoard?**](/docs/getting-started-guides/what-is-thingsboard/){: target="_blank"} before proceeding with ThingsBoard Edge.  
+ThingsBoard是一款开源IoT平台，提供数据采集、处理、可视化和设备管理等一系列功能。
+如果您是新用户，建议在开始使用ThingsBoard Edge之前先阅读 [**什么是ThingsBoard？**](/docs/getting-started-guides/what-is-thingsboard/){: target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=tb-open-source %}
 
-**ThingsBoard Edge** is a robust software product by ThingsBoard, designed to leverage edge computing.
+**ThingsBoard Edge** 是由ThingsBoard开发的强大软件产品，旨在利用边缘计算能力。
 
 {% if docsPrefix == 'pe/edge/' %}
-With ThingsBoard Edge, data analysis and management is brought to the point of data generation - the edge. 
-It seamlessly synchronizes with ThingsBoard PE, whether it's a [cloud](https://thingsboard.cloud){: target="_blank"} or an on-premise installation, aligning with your business requirements.
+使用ThingsBoard Edge，可将数据分析和管理带到数据产生的地点——边缘。
+无论ThingsBoard PE是[云端](https://thingsboard.cloud){: target="_blank"}还是本地部署，它都能与其无缝同步，满足您的业务需求。
 
-ThingsBoard Edge PE is designed for a **single** tenant and/or **multiple** customers.
-As such, you cannot share ThingsBoard Edge between multiple tenants, and devices from different tenants cannot be connected to a single ThingsBoard Edge.
-In such scenarios, separate ThingsBoard Edge instances would need to be provisioned for each tenant.
+ThingsBoard Edge PE专为**单一**租户和/或**多个**客户设计。
+因此，您无法在多个租户之间共享ThingsBoard Edge，不同租户的设备也无法连接到同一个ThingsBoard Edge。
+在此类场景下，需要为每个租户单独部署ThingsBoard Edge实例。
 {% else %}
-With ThingsBoard Edge, data analysis and management is brought to the edge, where data generation happens. 
-It synchronizes effortlessly with ThingsBoard CE according to your business requirements.
+使用ThingsBoard Edge，可将数据分析和管理带到数据产生的地点——边缘。
+它可根据您的业务需求与ThingsBoard CE轻松同步。
 
-ThingsBoard Edge CE is designed for a **single** tenant and/or **single** customer. 
-Sharing ThingsBoard Edge between multiple tenants or customers is not feasible, and devices from different tenants or customers cannot be connected to a single ThingsBoard Edge.
-In such cases, multiple ThingsBoard Edge instances need to be provisioned for each tenant or customer.
+ThingsBoard Edge CE专为**单一**租户和/或**单一**客户设计。
+无法在多个租户或客户之间共享ThingsBoard Edge，不同租户或客户和设备也无法连接到同一个ThingsBoard Edge。
+在此类情况下，需要为每个租户或客户分别部署多个ThingsBoard Edge实例。
 {% endif %}
 
 {% if docsPrefix != 'pe/edge/' %}
 {% capture difference %}
-Looking for **white-labeling** or **premium features**? <a href="/docs/pe/edge/" target="_blank">Explore Edge Professional Edition documentation →</a>
+需要**白标定制**或**高级功能**？<a href="/docs/pe/edge/" target="_blank">查看Edge专业版文档 →</a>
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 {% endif %}
@@ -40,74 +40,74 @@ Looking for **white-labeling** or **premium features**? <a href="/docs/pe/edge/"
 
 ![image](/images/edge/overview/edge_overview.svg){: style="display: block; margin: auto"}
 
-## Use-Cases for ThingsBoard Edge
+## ThingsBoard Edge应用场景
 
-- **Autonomous Vehicles**
-  Edge computing allows for the collection, processing, and response to road events with minimal latency. Modern autonomous vehicles generate enormous amounts of data - ranging from 5 TB to 20 TB per day. 4G or 5G networks might not be able to handle such high throughput, but ThingsBoard Edge can filter this data, processing most of it locally, and only pushing a subset of this data to the cloud.
+- **自动驾驶**
+  边缘计算支持以最低延迟采集、处理并响应道路事件。现代自动驾驶汽车每天产生的数据量极大，从5TB到20TB不等。4G或5G网络可能无法承载如此高的吞吐量，而ThingsBoard Edge可以在本地过滤和处理大部分数据，仅将数据子集推送到云端。
 
-- **Smart Farming**
-  Rapidly respond to failures of silo aeration systems at remote sites, even if the cloud connectivity from the on-field location is currently weak.
+- **智慧农业**
+  即使在田间位置的云端连接较弱的情况下，也能快速响应偏远地区筒仓通风系统的故障。
 
-- **Smart Houses**
-  Processing and analyzing data closer to smart houses allows for enhanced security of sensitive user information. The low latency of smart house solutions results in a better user experience, with quicker responses from end devices compared to the time it takes for edge devices to connect to the cloud for decision-making.
+- **智能家居**
+  在靠近智能家居的位置进行数据处理和分析，可增强敏感用户信息的安全性。智能家居方案的低延迟带来更好的用户体验，终端设备的响应速度比边缘设备连接云端进行决策要快得多。
 
-- **Security Solutions**
-  Responding to security violations and threats in a matter of seconds is a necessity. Edge computing provides this capability, making the quality of your connectivity to the cloud irrelevant - decisions will be made by the local edge engine on a remote site in real-time.
+- **安防解决方案**
+  在几秒钟内响应安全违规和威胁是必要能力。边缘计算提供此能力，使云端连接质量变得无关紧要——决策将由现场本地边缘引擎实时做出。
 
-- **In-Hospital Monitoring**
-  For data privacy in healthcare devices, data processing must occur at the edge. Only necessary pieces of readings from medical devices are pushed to the cloud, while all other sensitive data is stored on the edge. An additional benefit of edge processing in this scenario is the ability to react to critical medical cases as quickly as possible due to real-time processing of data from edge medical devices.
+- **院内监护**
+  出于医疗设备的数据隐私考虑，数据处理必须在边缘进行。只有医疗设备所需的必要读数推送到云端，其他敏感数据均存储在边缘。在此场景下，边缘处理的另一优势是能够通过实时处理边缘医疗设备数据，尽快响应危急医疗情况。
 
-- **Predictive Maintenance**
-  Processing and storing data from edge devices closer to the equipment enables analysis of vast amounts of data locally. This allows detection of changes in production lines before a failure occurs, with only average readings from production lines being sent to the cloud, according to your business needs.
+- **预测性维护**
+  在靠近设备的位置处理和存储边缘设备数据，便于在本地分析大量数据。这有助于在生产线发生故障之前检测变化，并根据业务需求仅将生产线上的平均读数发送到云端。
 
-## Features of ThingsBoard Edge
+## ThingsBoard Edge功能
 
-With **ThingsBoard Edge**, you get:
+使用**ThingsBoard Edge**，您可以获得：
 
-- **Local deployment and storage**: Process and store data from local (edge) devices without connecting to the cloud. Push updates to the cloud once the connection is restored.
+- **本地部署与存储**：在不连接云端的情况下处理和存储本地（边缘）设备的数据。连接恢复后将更新推送到云端。
 
 ![image](/images/edge/overview/offline_network_.svg){: style="display: block; margin: auto"}
 
-- **Traffic filtering**: Filter data from local (edge) devices on the ThingsBoard Edge service and push only a subset of the data to the cloud for further processing or storage.
+- **流量过滤**：在ThingsBoard Edge服务上过滤本地（边缘）设备的数据，仅将数据子集推送到云端进行进一步处理或存储。
 
 ![image](/images/edge/overview/data_filtering.svg){: style="display: block; margin: auto"}
 
-- **Local alarms**: Instantly respond to critical situations on site, without the need for a cloud connection.
+- **本地告警**：在现场即时响应关键情况，无需云端连接。
 
 ![image](/images/edge/overview/alarm.svg){: style="display: block; margin: auto"}
 
-- **Real-time dashboards**: Monitor local events and time series data.
-- **Local storage**: Store data from edge devices on the edge if the cloud connection is inactive and push updates to the cloud once the connection is restored.
-- **Batch Update**: Update thousands of edge configurations with a single click.
+- **实时仪表盘**：监控本地事件和时序数据。
+- **本地存储**：当云端连接不可用时，在边缘存储边缘设备的数据，连接恢复后将更新推送到云端。
+- **批量更新**：一键更新数千个边缘配置。
 
 ![image](/images/edge/overview/update_dashboard.svg){: style="display: block; margin: auto"}
 
-ThingsBoard Edge inherits features from {{appPrefix}}, providing the same experience for connecting, managing, and processing data from your devices.
+ThingsBoard Edge继承{{appPrefix}}的功能，为连接、管理和处理设备数据提供相同的体验。
 
-It supports the following **ThingsBoard** features:
-* [**Attributes**](/docs/{{cloudDocsPrefix}}user-guide/attributes/){: target="_blank"} - Assign and manage custom attributes to your entities.
-* [**Telemetry**](/docs/{{cloudDocsPrefix}}user-guide/telemetry/){: target="_blank"} - API for collecting time series data from your devices.
-* [**Entities and relations**](/docs/{{cloudDocsPrefix}}user-guide/entities-and-relations/){: target="_blank"} - Model physical world objects (e.g., devices and assets) and the relationships between them.
-* [**Data visualization**](/docs/{{cloudDocsPrefix}}guides/#AnchorIDDataVisualization){: target="_blank"} - Develop custom dashboards and widgets.
-* [**Rule engine**](/docs/{{cloudDocsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){: target="_blank"} - Manage data processing & actions on incoming telemetry and events.
-* [**RPC**](/docs/{{cloudDocsPrefix}}user-guide/rpc/){: target="_blank"} - Send remote procedure calls (RPC) **from both edge and cloud sides** to devices, and vice versa.
-* [**Audit log**](/docs/{{cloudDocsPrefix}}user-guide/audit-log/){: target="_blank"} - Track user activity.
-* [**API Limits**](/docs/{{cloudDocsPrefix}}user-guide/api-limits/){: target="_blank"} - Control and limit the number of API requests from a single host.
+它支持以下**ThingsBoard**功能：
+* [**Attributes（属性）**](/docs/{{cloudDocsPrefix}}user-guide/attributes/){: target="_blank"} - 为实体分配和管理自定义属性。
+* [**Telemetry（遥测）**](/docs/{{cloudDocsPrefix}}user-guide/telemetry/){: target="_blank"} - 从设备采集时序数据的API。
+* [**Entities and relations（实体与关系）**](/docs/{{cloudDocsPrefix}}user-guide/entities-and-relations/){: target="_blank"} - 对物理世界对象（如设备和资产）及其关系进行建模。
+* [**数据可视化**](/docs/{{cloudDocsPrefix}}guides/#AnchorIDDataVisualization){: target="_blank"} - 开发自定义仪表盘和部件。
+* [**Rule engine（规则引擎）**](/docs/{{cloudDocsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){: target="_blank"} - 管理传入遥测和事件的数据处理与动作。
+* [**RPC**](/docs/{{cloudDocsPrefix}}user-guide/rpc/){: target="_blank"} - 从边缘和云端两侧向设备发送远程过程调用（RPC），反之亦然。
+* [**Audit log（审计日志）**](/docs/{{cloudDocsPrefix}}user-guide/audit-log/){: target="_blank"} - 跟踪用户活动。
+* [**API Limits（API限制）**](/docs/{{cloudDocsPrefix}}user-guide/api-limits/){: target="_blank"} - 控制并限制来自单一主机的API请求数量。
 
 {% if docsPrefix == 'pe/edge/' %}
-Furthermore, Edge PE supports the following **ThingsBoard PE** features:
-* [**Integrations**](/docs/user-guide/integrations/){: target="_blank"}
-    * Connect existing NB IoT, LoRaWAN, SigFox, and other devices with specific payload formats directly to the ThingsBoard platform.
-    * Stream data from devices connected to existing IoT Platforms to enable real-time interactive dashboards and efficient data processing.
-* [**White-labeling**](/docs/pe/user-guide/white-labeling/){: target="_blank"} - Configure a custom menu, logo, color scheme, email server settings, and customer email templates to interact with users, etc.
-* [**Scheduler**](/docs/pe/user-guide/scheduler/){: target="_blank"} - Schedule various types of events with flexible configuration.
-* [**Entity Groups**](/docs/pe/user-guide/groups/){: target="_blank"} - Organize entities into groups, assign roles to specific user groups, grant specific permissions to specific user groups over specific device groups.
+此外，Edge PE支持以下**ThingsBoard PE**功能：
+* [**Integrations（集成）**](/docs/user-guide/integrations/){: target="_blank"}
+    * 将采用特定载荷格式的现有NB IoT、LoRaWAN、SigFox等设备直接连接到ThingsBoard平台。
+    * 从连接至现有IoT平台的设备流式传输数据，以启用实时交互式仪表盘和高效数据处理。
+* [**White-labeling（白标定制）**](/docs/pe/user-guide/white-labeling/){: target="_blank"} - 配置自定义菜单、徽标、配色、邮件服务器设置和客户邮件模板等，以便与用户交互。
+* [**Scheduler（调度器）**](/docs/pe/user-guide/scheduler/){: target="_blank"} - 通过灵活配置调度各类事件。
+* [**Entity Groups（实体分组）**](/docs/pe/user-guide/groups/){: target="_blank"} - 将实体分组、为特定用户组分配角色、为特定用户组授予对特定设备组的特定权限。
 {% endif %}
 
-## Project Roadmap
+## 项目路线图
 
-<p><a href="/docs/{{docsPrefix}}roadmap" class="button">ThingsBoard Edge Roadmap</a></p>
+<p><a href="/docs/{{docsPrefix}}roadmap" class="button">ThingsBoard Edge路线图</a></p>
 
-## Next Steps
+## 下一步
 
-<p><a href="/docs/{{docsPrefix}}getting-started" class="button">Getting Started Guide</a></p>
+<p><a href="/docs/{{docsPrefix}}getting-started" class="button">入门指南</a></p>

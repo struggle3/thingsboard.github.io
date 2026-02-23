@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Deploy TBMQ Cluster on Azure with Kubernetes
-description: TBMQ microservices setup with Kubernetes in AKS
+title: 在 Azure 上使用 Kubernetes 部署 TBMQ 集群
+description: 在 AKS 中使用 Kubernetes 配置 TBMQ 微服务
 
 ---
 

@@ -5,7 +5,7 @@ nano tb-node.env
 ```
 {: .copy-code}
 
-Add the following line to the file. Don’t forget to replace "CLUSTER_API_KEY", "CLUSTER_API_SECRET" and "confluent.cloud:9092" with your real Confluent Cloud bootstrap servers:
+将以下内容添加到文件中。请勿忘记将 "CLUSTER_API_KEY"、"CLUSTER_API_SECRET" 和 "confluent.cloud:9092" 替换为实际的 Confluent Cloud 引导服务器：
 
 ```bash
 TB_QUEUE_TYPE=kafka
@@ -56,9 +56,9 @@ TB_QUEUE_VC_PARTITIONS=1
 ```
 {: .copy-code}
 
-You can update default Rule Engine queues configuration using UI. More about ThingsBoard Rule Engine queues see in [documentation](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/).
+您可以通过 UI 更新默认规则引擎队列配置。有关 ThingsBoard 规则引擎队列的更多信息，请参阅[文档](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/)。
 
-Check docker-compose.yml and configure ports if you need:
+如需配置端口，请检查 docker-compose.yml：
 
 ```bash
 nano docker-compose.yml

@@ -1,7 +1,7 @@
 ---
 layout: plain
-title: ThingsBoard Professional Edition EULA
-description: ThingsBoard Professional Edition End User License Agreement
+title: ThingsBoard 专业版 EULA
+description: ThingsBoard 专业版最终用户许可协议
 
 ---
 

@@ -1,71 +1,71 @@
 ---
 layout: plain
-title: ThingsBoard Demo Server Privacy Policy
-description: ThingsBoard Demo Server Privacy Policy
+title: ThingsBoard 演示服务器隐私政策
+description: ThingsBoard 演示服务器隐私政策
 
 ---
 
 <br>
-<p style="text-align: center; font-size: 1.5em; font-weight: bold;">PRIVACY POLICY</p>
+<p style="text-align: center; font-size: 1.5em; font-weight: bold;">隐私政策</p>
 <br>
-<h2> Privacy Policy Statement on the Use of this Service (Website)</h2>
-<p style="font-size: 0.8em; color: grey">As of January 14, 2026</p> 
+<h2>关于本服务（网站）使用的隐私政策声明</h2>
+<p style="font-size: 0.8em; color: grey">自 2026 年 1 月 14 日起生效</p> 
 <br>
 
-<p> <b>1. Definition of Policy</b> </p> 
-<p> 1.1 The following Privacy Policy is adopted by ThingsBoard, Inc. (“ThingsBoard” or “We”) in regard to the use of ThingsBoard Demo Server Platform ("Live Demo", "Community Edition Demo Cloud") and related web pages and services (the <b>“Service”</b>), excluding affiliated websites covered by independent privacy policies. This Privacy Policy applies to information collected through the Service and otherwise (for example, if you contact us directly). However, it does not cover any information, whether personal or not, that may be collected through other websites or in other venues. Your use of the Service and our remaining services is subject to this Privacy Policy, which may be updated periodically to reflect changes in how we collect, use, and/or share information.</p>
+<p> <b>1. 政策定义</b> </p> 
+<p> 1.1 以下隐私政策由 ThingsBoard, Inc.（“ThingsBoard”或“我们”）针对 ThingsBoard 演示服务器平台（“Live Demo”、“社区版演示云”）及相关网页和服务（以下简称“服务”）的使用而制定，不包括受独立隐私政策约束的附属网站。本隐私政策适用于通过服务及其他方式收集的信息（例如，如果您直接联系我们）。但是，它不涵盖通过其他网站或其他场所可能收集的任何信息（无论是否为个人信息）。您对服务及我们其他服务的使用须遵守本隐私政策，我们可能会定期更新本隐私政策以反映我们收集、使用和/或共享信息方式的变化。</p>
 
-<p> 1.2 It is your responsibility to review this Privacy Policy together with the actual date of the change. Please check this Privacy Policy each time you use our Service to ensure you are aware of any changes in our practices. Your continued use of the Service will signify your acceptance of any changes to our Privacy Policy.</p>
-
-<br>
-<p> <b>2. Collection</b> </p> 
-<p> 2.1 You may not access the Service without providing some portion of the required personal information to us. If you request receipt of certain notifications and updates, we will collect personally identifiable information, which you voluntarily give us. Said information may include your name, telephone number, email address, postal address, and any other information which would allow someone to identify you personally. Certain non-personally identifiable information, or non-PII, may also be collected when you use the Service, including the type of Internet browser and operating system you use, region, other navigational clickstream data, etc.</p> 
-
-<p> 2.2 We may collect:</p>
-
-- Name, email address, phone number, physical address
-- Name of the company, job title and other professional details like job role, industry, etc.
-- Billing details for clients engaged in a business relationship
-- Opinions and other information submitted via our websites, surveys or other channels (for ex: LinkedIn, Twitter, FB & others)
-- Whatever additional information related to you, such as your computer’s operating system, browser, and your use of and activities on our websites
-- When registering, subscribing or ordering on our site, as appropriate, you may be asked to enter your: name, e-mail address, mailing address, phone number or credit card information. You may, however, visit our site anonymously.
-- The content you provide through our products: The Services include the Thingsboard Demo, Thingsboard PE Demo, platforms you use, where we collect and store content that you add to the service. This content includes any information about you that you may choose to include.
-- Information you provide through our support channels: The Services also include customer support, where you may choose to submit information regarding a problem you are experiencing with a Service. Whether you designate yourself as a technical contact, open a support ticket, speak to one of our representatives directly or otherwise engage with our support team, you will be asked to provide contact information, a summary of the problem you are experiencing, and any other documentation, screenshots or information that would be helpful in resolving the issue.
-
-<p> 2.3 We utilize our proprietary internal tracking library to help us analyze how users interact with our website and services, improve our offerings, and understand user behavior. This data is processed exclusively through our in-house analytics system. We do not utilize third-party services (such as Google Analytics) to analyze this data, and we do not share this usage information with third-party data analytics providers. By registering for an account or otherwise using our services, you acknowledge and consent to the collection and analysis of this data by us for internal improvement and security purposes.</p>
-
-<p> 2.4 You may collect personal information of individuals approached to use the Service by you (<b>“Users”</b>). You represent and warrant that your users accept this Privacy Policy and agree to share their personal data with you. You are liable for all and any breach of the personally identifiable information of Users. </p> 
-
-<p> 2.5 Pursuant to the Service use, certain personal data and sensitive data can be collected by you with help of specific technical equipment for without limitation remote monitoring and control (<b>“IoT Devices”</b>). You represent and warrant that you have a legal right to such collection and Users agree upon said data collection.</p> 
-
+<p> 1.2 您有责任查看本隐私政策及变更的实际日期。请每次使用我们的服务时查看本隐私政策，以确保您了解我们做法的任何变更。您继续使用服务即表示您接受我们隐私政策的任何变更。</p>
 
 <br>
-<p> <b>3. Purpose and Use</b> </p> 
-<p> 3.1 ThingsBoard, Inc. uses the personally identifiable information to provide you with public information regarding us and our services; to share news, updates and reports in response to your inquiries; for gaining an understanding of your needs; for performing statistical analysis or analyses of global Service usage; for security and legal compliance; for notifying you of any changes to this Service or our remain services; for billing; and for other services. We also reserve the right to make full use of information that is not personally identifiable information.</p> 
+<p> <b>2. 收集</b> </p> 
+<p> 2.1 除非向我们提供部分所需的个人信息，否则您可能无法访问服务。如果您请求接收某些通知和更新，我们将收集您自愿提供给我们的个人身份信息。所述信息可能包括您的姓名、电话号码、电子邮箱地址、邮寄地址以及任何其他可识别您个人的信息。当您使用服务时，我们可能还会收集某些非个人身份信息或非 PII，包括您使用的互联网浏览器和操作系统的类型、地区、其他导航点击流数据等。</p> 
 
-<p>3.2 We generally retain information for so long as it is relevant to serve you. Data may persist in copies made for backup purposes.</p> 
+<p> 2.2 我们可能收集：</p>
 
-<br>
-<p> <b>4. Disclosure</b> </p> 
-<p>4.1 We will not sell, share, or rent your information to others except to our staff and to trusted third parties and affiliates when we need to share the information to provide a product or service you have requested. Without limiting the above, we will share your personal data with third parties only in the ways that are described in this Privacy Policy.</p> 
+- 姓名、电子邮箱地址、电话号码、物理地址
+- 公司名称、职位及其他职业详情（如职位角色、行业等）
+- 建立业务关系的客户的账单信息
+- 通过我们的网站、调查或其他渠道（例如 LinkedIn、Twitter、FB 等）提交的意见和其他信息
+- 与您相关的任何其他信息，例如您计算机的操作系统、浏览器以及您对我们网站的使用和活动
+- 当您在我们的网站上注册、订阅或订购时，根据情况您可能会被要求输入：姓名、电子邮箱地址、邮寄地址、电话号码或信用卡信息。但是，您可以匿名访问我们的网站。
+- 您通过我们的产品提供的内容：服务包括 ThingsBoard Demo、ThingsBoard PE Demo，您使用的平台，我们在其中收集和存储您添加到服务中的内容。该内容包括您可能选择包含的关于您的任何信息。
+- 您通过我们支持渠道提供的信息：服务还包括客户支持，您可以选择提交有关您在使用服务时遇到的问题的信息。无论您是否指定自己为技术联系人、提交支持工单、直接与我们的代表交谈或以其他方式与我们的支持团队联系，您都将被要求提供联系信息、您所遇问题的摘要以及有助于解决问题的任何其他文档、截图或信息。
 
-<p>4.2 It may happen, the disclosure of your personally identifiable information would be necessary in response to a subpoena, court order, or a request for cooperation from law enforcement or other governmental agency globally, in accordance with applicable law. Your personal data may also be shared when we believe disclosure is necessary in connection with efforts to investigate, prevent, or take other action regarding actual or suspected illegal activity or other wrongdoing, to protect and defend the rights, property or safety of the Service, ThingsBoard, Inc., our users, or others.</p> 
+<p> 2.3 我们利用专有的内部跟踪库来帮助我们分析用户如何与我们的网站和服务互动、改进我们的产品并了解用户行为。该数据仅通过我们的内部分析系统处理。我们不会使用第三方服务（如 Google Analytics）来分析这些数据，也不会与第三方数据分析提供商共享此使用信息。通过注册账户或以其他方式使用我们的服务，您确认并同意我们为内部改进和安全目的收集和分析这些数据。</p>
 
-<p> 4.3 We will use commercially reasonable efforts to make you aware of the disclosure of your personal information contrary to the terms set forth in this Privacy Policy (e.g., in the event of any material security breach).</p> 
+<p> 2.4 您可能收集由您邀请使用服务的个人（“用户”）的个人信息。您声明并保证您的用户接受本隐私政策并同意与您共享其个人数据。您对用户个人身份信息的所有和任何泄露承担责任。</p> 
 
-<p> 4.4 We implement a variety of security measures to maintain the safety of your personal information when you place an order or enter, submit, or access your personal information.</p>
+<p> 2.5 根据服务的使用，您可以通过特定技术设备收集某些个人数据和敏感数据，用于（但不限于）远程监控和控制（“物联网设备”）。您声明并保证您对此类收集享有合法权利，且用户同意所述数据收集。</p> 
 
-<br>
-<p> <b>5. Third Parties</b> </p> 
-<p>5.1 The Service may contain links to other websites owned and operated by third parties. Said third parties and affiliates may collect information from you, their computer servers may be located outside your region. Browsing of Third Party websites and/or using their services out of the scope of this Privacy Policy. We do not control, and are not responsible for, the privacy and security practices of any third parties. Please acknowledge their privacy and security terms prior to any interaction with third parties. </p> 
-
-<br>
-<p> <b>6. No tracking</b> </p> 
-<p>6.1 Nowadays some browsers provide the “Do Not Track” feature in a proprietary way. There is no common understanding of how to interpret Do Not Track requests. The Service does not currently respond to Do Not Track signals.</p> 
 
 <br>
-<p id="unsubscribe"> <b>7. Unsubscribe request</b> </p> 
-<p>By subscribing to the Live Demo subscribe to our newsletters and remaining email campaigns without limitation. You can opt out at any time by using the unsubscribe links at the bottom of our emails. Our Service gives you the ability to delete all personal information from within the Service. 
-You can completely delete your account and data by clicking the "Delete Account" button available on the User Profile Page. Please note, however, that we may need to retain certain information for record keeping purposes, to complete transactions or to comply with our legal obligations.</p> 
+<p> <b>3. 目的和使用</b> </p> 
+<p> 3.1 ThingsBoard, Inc. 使用个人身份信息向您提供有关我们及我们服务的公开信息；根据您的询问分享新闻、更新和报告；了解您的需求；进行全球服务使用情况的统计分析；用于安全和法律合规；通知您本服务或我们其他服务的任何变更；用于计费；以及用于其他服务。我们保留充分利用非个人身份信息的权利。</p> 
+
+<p>3.2 我们通常在信息与为您服务相关期间保留信息。数据可能存在于为备份目的而制作的副本中。</p> 
+
+<br>
+<p> <b>4. 披露</b> </p> 
+<p>4.1 我们不会向他人出售、共享或出租您的信息，除非向我们的员工以及我们需要共享信息以提供您所请求的产品或服务时向受信任的第三方和关联方。在不限制上述规定的情况下，我们仅以本隐私政策中所述的方式与第三方共享您的个人数据。</p> 
+
+<p>4.2 根据适用法律，为响应传票、法院命令或执法部门或其他政府机构的合作请求，可能需要披露您的个人身份信息。当我们认为披露对于调查、预防或采取有关实际或涉嫌非法活动或其他不当行为的其他行动、保护和服务、ThingsBoard, Inc.、我们的用户或他人的权利、财产或安全所必要时，也可能共享您的个人数据。</p> 
+
+<p> 4.3 如发生与本隐私政策规定条款相悖的您的个人信息披露（例如，任何重大安全漏洞），我们将尽合理商业努力告知您。</p> 
+
+<p> 4.4 当您下单或输入、提交或访问您的个人信息时，我们实施各种安全措施以维护您个人信息的安全。</p>
+
+<br>
+<p> <b>5. 第三方</b> </p> 
+<p>5.1 服务可能包含指向第三方拥有和运营的其他网站的链接。所述第三方和关联方可能从您那里收集信息，其计算机服务器可能位于您所在地区之外。浏览第三方网站和/或使用其服务超出本隐私政策范围。我们不对任何第三方的隐私和安全做法进行控制，也不对此负责。在与第三方进行任何互动之前，请了解其隐私和安全条款。</p> 
+
+<br>
+<p> <b>6. 不跟踪</b> </p> 
+<p>6.1 如今一些浏览器以专有方式提供“请勿跟踪”功能。对于如何解释“请勿跟踪”请求尚无共识。服务目前不响应“请勿跟踪”信号。</p> 
+
+<br>
+<p id="unsubscribe"> <b>7. 取消订阅请求</b> </p> 
+<p>订阅 Live Demo 即订阅我们的新闻通讯及其他电子邮件活动（不限）。您可随时使用我们电子邮件底部的取消订阅链接选择退出。我们的服务使您能够从服务内删除所有个人信息。
+您可以通过点击用户个人资料页面上提供的“删除账户”按钮完全删除您的账户和数据。但请注意，我们可能需要出于记录保存目的、完成交易或遵守我们的法律义务而保留某些信息。</p> 
 
 

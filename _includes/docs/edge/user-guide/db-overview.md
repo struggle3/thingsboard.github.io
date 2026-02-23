@@ -1,45 +1,45 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-The **Edge Dashboards** are robust and effective tools for local monitoring and management of IoT data. They can function and display data in real time, even when there is no connection to the Cloud. The data can be synchronized with the server when the connection is restored.
+**Edge 仪表板**是用于本地监控与管理 IoT 数据的强大工具。即使未连接云端，也能实时运行并展示数据。连接恢复后可与服务器同步数据。
 
-The **Edge Dashboards** are designed in the same way as the [Platform (Cloud) Dashboards](/docs/{{cloudDocsPrefix}}user-guide/dashboards/){: target="_blank"}. Please read the Platform Dashboard documentation for a general understanding of its functionality.
+**Edge 仪表板**的设计方式与[平台（云端）仪表板](/docs/{{cloudDocsPrefix}}user-guide/dashboards/){: target="_blank"}相同。请参阅平台仪表板文档了解其功能。
 
-## Dashboard Provision to ThingsBoard Edge
+## 仪表板配置到 ThingsBoard Edge
 
-The dashboards can be created and managed on the **ThingsBoard server**, and then [provisioned](/docs/{{docsPrefix}}getting-started/#step-5-provision-dashboard-to-thingsboard-edge){: target="_blank"} to the **Edge instance**. This approach enables the simultaneous deployment of changes to all Edge instances.
+仪表板可在 **ThingsBoard 服务器**上创建和管理，然后[配置](/docs/{{docsPrefix}}getting-started/#step-5-provision-dashboard-to-thingsboard-edge){: target="_blank"}到 **Edge 实例**。此方式可将更改同时部署到所有 Edge 实例。
 
-You can verify that the Dashboard is provisioned: 
+您可验证仪表板已配置： 
 
 {% include images-gallery.html imageCollection="dashboard-provision" showListImageTitles="true" %}
 
-## The Edge Dashboard Creation And Management
+## Edge 仪表板创建与管理
 
-You can also create and manage **Dashboards** right from the **Edge** itself. All changes are automatically propagated to the Platform when connected. 
+您也可直接在 **Edge** 上创建和管理 **仪表板**。连接后，所有更改会自动传播到平台。
 
-To **create** the Edge Dashboard on your **ThingsBoard Edge** instance, do the following:
+在 **ThingsBoard Edge** 实例上**创建** Edge 仪表板，按以下步骤操作：
 
 {% include images-gallery.html imageCollection="create-dashboard" showListImageTitles="true" %}
-You can learn about **Widgets** [here](/docs/{{cloudDocsPrefix}}user-guide/widgets/){: target="_blank"}.
+可在此了解**部件**：[此处](/docs/{{cloudDocsPrefix}}user-guide/widgets/){: target="_blank"}。
 
-Read more about the **Dashboard toolbar** [here](/docs/{{cloudDocsPrefix}}user-guide/dashboards/#dashboard-toolbar){: target="_blank"}.
+**仪表板工具栏**详见[此处](/docs/{{cloudDocsPrefix}}user-guide/dashboards/#dashboard-toolbar){: target="_blank"}。
 
-To verify that the changes are successfully propagated: 
+验证更改是否已成功传播： 
 
 {% include images-gallery.html imageCollection="changes-from-edge-to-server" showListImageTitles="true" %}
 
-If you have multiple instances of **ThingsBoard Edge**, you can delete the Dashboard on one of them *without affecting* it on the other instances. To delete the **Dashboard** from all **ThingsBoard Edge** instances *at once*, delete it from your ThingsBoard platform.
+若有多个 **ThingsBoard Edge** 实例，可在其一上删除仪表板而*不影响*其他实例。若要从所有 **ThingsBoard Edge** 实例*一次性*删除 **仪表板**，需在 ThingsBoard 平台上删除。
 
-### Assign/Remove Customers
+### 分配/移除客户
 
-Before you assign customers to the Dashboard, make sure that you have assigned them to the **ThingsBoard Edge** instance first. You can read more about Customers [here](/docs/{{cloudDocsPrefix}}user-guide/ui/customers/){: target="_blank"}.
+在向仪表板分配客户前，请确保已先将客户分配到 **ThingsBoard Edge** 实例。客户相关说明见[此处](/docs/{{cloudDocsPrefix}}user-guide/ui/customers/){: target="_blank"}。
 
-To **assign/unassign** customers to the **Edge Dashboard**, do the following:
+向 **Edge 仪表板** **分配/取消分配**客户，按以下步骤操作：
 
 {% include images-gallery.html imageCollection="assign-customer" showListImageTitles="true" %}
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

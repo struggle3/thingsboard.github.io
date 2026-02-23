@@ -1,25 +1,25 @@
-Uses **static** or **semi-static data** stored as entity attributes
+使用存储为实体属性的**静态**或**半静态数据**。
 
-**Examples:** model, maxTemperature, safeZone, buildingId
+**示例：**model、maxTemperature、safeZone、buildingId
 
-**Configuration:**
-- **Argument type**: Attribute
-- Choose the scope: **Server**, **Client**, or **Shared**.
-- Specify the **attribute key**.
-- Set the **argument name** - the variable name used in the script logic.
-- Optionally, set **default value** for attribute.
+**配置：**
+- **参数类型**：Attribute
+- 选择作用域：**Server**、**Client** 或 **Shared**。
+- 指定**属性键**。
+- 设置**参数名称**，即脚本逻辑中使用的变量名。
+- 可选设置属性的**默认值**。
 
 {% assign attributeArgumentTypeCE = '
     ===
         image: /images/user-guide/calculated-fields/argument-attribute-1-ce.png
-        title: Select the **attribute** argument type (3), choose the **attribute scope** (4), specify the **attribute key** (5), and set the **argument name** (6). Optionally, define a default value (7). Click **Add** (8) to add the argument.
+        title: 选择 **attribute** 参数类型(3)，选择**属性作用域**(4)，指定**属性键**(5)，设置**参数名称**(6)。可选定义默认值(7)。点击 **Add**(8) 添加参数。
 '
 %}
 
 {% assign attributeArgumentTypePE = '
     ===
         image: /images/user-guide/calculated-fields/argument-attribute-1-pe.png
-        title: Select the **attribute** argument type (3), choose the **attribute scope** (4), specify the **attribute key** (5), and set the **argument name** (6). Optionally, define a default value (7). Click **Add** (8) to add the argument.
+        title: 选择 **attribute** 参数类型(3)，选择**属性作用域**(4)，指定**属性键**(5)，设置**参数名称**(6)。可选定义默认值(7)。点击 **Add**(8) 添加参数。
 '
 %}
 

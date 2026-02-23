@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Widget actions
-description: ThingsBoard dashboard widget actions
+title: 部件操作
+description: ThingsBoard 仪表板部件操作
 
 add-new-action-1:
     0:

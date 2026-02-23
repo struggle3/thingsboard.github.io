@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: acknowledge
-description: Acknowledges the incoming message and forwards it to the next node in the rule chain.
+description: 确认入站消息并将其转发到 rule chain 中的下一节点。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

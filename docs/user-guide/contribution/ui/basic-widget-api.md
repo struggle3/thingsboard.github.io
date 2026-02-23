@@ -2,7 +2,8 @@
 layout: docwithnav
 assignees:
 - ikulikov
-title: Basic widget API
+title: 部件基础 API
+description: 部件 API 参考与上下文属性说明
 
 ---
 

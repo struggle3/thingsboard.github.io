@@ -1,34 +1,34 @@
-To deploy the **ThingsBoard Gateway**:
+要部署 **ThingsBoard Gateway**：
 
 {% assign iotGWdashboardPE = '
     ===
         image: /images/edge/user-guide/edge-install/6-dashboard-group-pe.webp,
-        title: Log in to the **ThingsBoard Professional Edition** instance and go to the **Dashboards** section and select the **"Group"** tab. Click the **"+"** icon to add a new group. In the **"Add entity group"** pop-up window, enter the group name in the **"Name"** field and click the **"Add"** button.
+        title: 登录 **ThingsBoard Professional Edition** 实例，进入 **仪表板** 部分，选择 **「Group」** 选项卡。点击 **「+」** 图标添加新分组。在 **「添加实体分组」** 弹出窗口中，在 **「Name」** 字段输入分组名称，并点击 **「Add」** 按钮。
     ===
         image: /images/edge/user-guide/edge-install/7-all-dashboards-pe.webp,
-        title: Then, select the **"All"** tab and find the **"ThingsBoard IoT Gateways"** dashboard. The **"ThingsBoard IoT Gateways"** dashboard is one of the pre-created, out-of-the-box dashboards available. Click the **"Dashboard details"** button.
+        title: 然后选择 **「All」** 选项卡，找到 **「ThingsBoard IoT Gateways」** 仪表板。**「ThingsBoard IoT Gateways」** 仪表板为预置的开箱即用仪表板。点击 **「Dashboard details」** 按钮。
     ===
         image: /images/edge/user-guide/edge-install/8-manage-owner-and-groups-pe.webp,
-        title: On the **"Dashboard details"** page click the **"Manage owner and groups"** button.
+        title: 在 **「Dashboard details」** 页面点击 **「Manage owner and groups」** 按钮。
     ===
         image: /images/edge/user-guide/edge-install/9-add-group-pe.webp,
-        title: In the **"Manage owner and groups"** pop-up window, select the newly created group from the **"Groups"** drop-down menu. Click the **"Update"** button.
+        title: 在 **「Manage owner and groups」** 弹出窗口中，从 **「Groups」** 下拉菜单选择新创建的分组。点击 **「Update」** 按钮。
     ===
         image: /images/edge/user-guide/edge-install/10-instance-secton-manage-dashboard-pe.webp,
-        title: Navigate to the **Edge Management > Instances** section, then click the **“Manage edge dashboard groups”** button.
+        title: 进入 **Edge Management > Instances** 部分，点击 **「Manage edge dashboard groups」** 按钮。
     ===
         image: /images/edge/user-guide/edge-install/11-assign-pe.webp,
-        title: On the **“Dashboard groups”** page, click the **“+”** icon to assign the newly created group to the Edge instance. Click the **“Assign”** button. The group and all dashboard within it will be assigned to the Edge instance.
+        title: 在 **「Dashboard groups」** 页面，点击 **「+」** 图标，将新创建的分组分配给 Edge 实例。点击 **「Assign」** 按钮。该分组及其内所有仪表板将分配给 Edge 实例。
 '
 %}
 
 {% assign iotGWdashboardCE = '
     ===
         image: /images/edge/user-guide/edge-install/6-instance-section-manage-dashboard.webp,
-        title: Log in to the **ThingsBoard Community Edition** instance and go to the **Edge Management > Instances** section, then click the **“Manage dashboards”** button.
+        title: 登录 **ThingsBoard Community Edition** 实例，进入 **Edge Management > Instances** 部分，点击 **「Manage dashboards」** 按钮。
     ===
         image: /images/edge/user-guide/edge-install/7-assign.webp,
-        title: On the **“Edge Dashboards”** page, click the **“+”** icon to assign the **“ThingsBoard IoT Gateways”** dashboard to the Edge instance. Click the **“Assign”** button. The **"ThingsBoard IoT Gateways"** dashboard is one of the pre-created, out-of-the-box dashboards available.
+        title: 在 **「Edge Dashboards」** 页面，点击 **「+」** 图标，将 **「ThingsBoard IoT Gateways」** 仪表板分配给 Edge 实例。点击 **「Assign」** 按钮。**「ThingsBoard IoT Gateways」** 仪表板为预置的开箱即用仪表板。
 '
 %}
 
@@ -41,20 +41,20 @@ To deploy the **ThingsBoard Gateway**:
 {% assign localhostPE = '
     ===
         image: /images/edge/user-guide/edge-install/12-dashboards-on-edge-pe.webp,
-        title: Open your **Edge instance**, navigate to the **Dashboards** section and open the **“ThingsBoard IoT Gateways”** dashboard.
+        title: 打开 **Edge 实例**，进入 **Dashboards** 部分，打开 **「ThingsBoard IoT Gateways」** 仪表板。
     ===
         image: /images/edge/user-guide/edge-install/13-add-gw-pe.webp,
-        title: Click the **“+”** icon in the upper right corner to add a new gateway. Enter the gateway name in the **“Name”** field, and select the **“default”** device profile. Click the **“Create”** button.
+        title: 点击右上角 **「+」** 图标添加新网关。在 **「Name」** 字段输入网关名称，选择 **「default」** 设备配置。点击 **「Create」** 按钮。
 '
 %}
 
 {% assign localhostCE = '
     ===
         image: /images/edge/user-guide/edge-install/8-dashboards-on-edge.webp,
-        title: Open your **Edge instance**, navigate to the **Dashboards** section and open the **“ThingsBoard IoT Gateways”** dashboard.
+        title: 打开 **Edge 实例**，进入 **Dashboards** 部分，打开 **「ThingsBoard IoT Gateways」** 仪表板。
     ===
         image: /images/edge/user-guide/edge-install/9-add-gw.webp,
-        title: Click the **“+”** icon in the upper right corner to add a new gateway. Enter the gateway name in the **“Name”** field, and select the **“default”** device profile. Click the **“Create”** button.
+        title: 点击右上角 **「+」** 图标添加新网关。在 **「Name」** 字段输入网关名称，选择 **「default」** 设备配置。点击 **「Create」** 按钮。
 '
 %}
 

@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Lesson 2. Dashboard states, widget actions, and Image Map widget
+title: 课程2. 仪表板状态、部件操作与Image Map部件
 redirect_to: "/docs/pe/user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-2/"
 
 ---

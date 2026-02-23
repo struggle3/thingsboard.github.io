@@ -1,8 +1,8 @@
-In order to get the state of the device from ThingsBoard during booting we have [functionality](/docs/{{page.docsPrefix}}reference/mqtt-api/#request-attribute-values-from-the-server) to do this in the code.  
+为在启动时从 ThingsBoard 获取设备状态，代码中实现了相应[功能](/docs/{{page.docsPrefix}}reference/mqtt-api/#request-attribute-values-from-the-server)。  
 
-Below are the relevant parts of the code example:  
+以下为示例代码的相关部分：  
 
-- Connecting modules to use API functionality:  
+- 引入模块以使用 API 功能：  
 ```cpp
 ...
 #include <AttributeRequest.h>
@@ -16,9 +16,9 @@ const std::array<IAPI_Implementation*, ...> apis = {
 };
 ...
 ```
-We need to define what API we will use in our code.
+需在代码中定义要使用的 API。
 
-- Attribute callbacks:  
+- 属性回调：  
     
 ```cpp
 ...
@@ -60,17 +60,14 @@ const Attribute_Request_Callback<MAX_ATTRIBUTES> attribute_client_request_callba
 ...
 ```
 
-We have three callbacks:
-* Shared Attributes Callback: 
-  This callback is specific to shared attributes. Its primary function is to receive a response containing the blinking interval, which determines the appropriate blinking period.;
-* Client Attributes Callback: 
-  This callback is specific to client attributes. It receives information regarding the mode and state of the LED. Once this data is received, the system saves and sets these parameters.
-* Request Timeout Callback: 
-  This callback is triggered when the request for attribute data times out. It is used to handle the timeout event.
+共有三个回调：
+* 共享属性回调：专用于共享属性，主要接收包含闪烁间隔的响应，以确定合适的闪烁周期；
+* 客户端属性回调：专用于客户端属性，接收 LED 模式与状态信息，收到后保存并应用这些参数；
+* 请求超时回调：在属性数据请求超时时触发，用于处理超时。
 
-This functionality allows us to keep the actual state after rebooting.  
+此功能使设备在重启后能保持实际状态。  
 
-- Attribute requests:    
+- 属性请求：    
 ```cpp
 ...
     // Request current states of shared attributes
@@ -86,4 +83,4 @@ This functionality allows us to keep the actual state after rebooting.
     }
 ...
 ``` 
-In order for our callbacks to receive the data, we have to send a request to ThingsBoard.  
+为使回调能接收数据，需向 ThingsBoard 发送请求。  

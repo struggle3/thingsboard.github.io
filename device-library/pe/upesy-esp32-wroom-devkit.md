@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect uPesy ESP32 Wroom DevKit v2 to ThingsBoard?
-category: Microcontrollers
+title: 如何将 uPesy ESP32 Wroom DevKit v2 连接至 ThingsBoard？
+category: 微控制器
 chip: ESP32
 connectivity: [HTTP, MQTT, WIFI, Bluetooth]
 vendor: uPesy

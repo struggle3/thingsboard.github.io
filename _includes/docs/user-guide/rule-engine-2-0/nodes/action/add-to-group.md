@@ -1,17 +1,13 @@
-Adds the message originator entity to an entity group based on a configurable group name pattern.
+根据可配置的组名模式，将消息发起者实体添加到实体组中。
 
-## Configuration
+## 配置
 
-The configuration allows you to specify how entities are added to groups and how the system behaves when groups don't exist or when entities are already in other groups.
+配置允许您指定如何将实体添加到组，以及当组不存在或实体已属于其他组时的系统行为。
 
-- **Group name pattern** - A pattern that defines the name of the target entity group. The pattern supports templatization using `${metadataKey}` or `$[dataKey]` to substitute
-  values from the message metadata or data.
-- **Create new group if not exists** - When enabled, creates a new entity group if no group matching the pattern is found. When disabled, the processing fails if the target group
-  doesn't exist.
-- **Remove from current groups** - When enabled, removes the entity from all its current groups (except the "All" group) before adding it to the target group. This ensures the
-  entity belongs only to the target group and the "All" group.
-- **Groups cache expiration time (sec)** - Specifies the maximum time interval (in seconds) to cache entity group records. A value of 0 means records will never expire from the
-  cache. This improves performance by reducing database lookups for frequently accessed groups.
+- **Group name pattern（组名模式）** - 定义目标实体组名称的模式。模式支持使用 `${metadataKey}` 或 `$[dataKey]` 模板化，以替换消息元数据或数据中的值。
+- **Create new group if not exists（不存在时创建新组）** - 启用后，若未找到匹配模式的实体组则创建新组。禁用时，若目标组不存在则处理失败。
+- **Remove from current groups（从当前组中移除）** - 启用后，在将实体添加到目标组之前，会将其从所有当前所属组（除「全部」组外）中移除。这可确保实体仅属于目标组和「全部」组。
+- **Groups cache expiration time (sec)（组缓存过期时间，秒）** - 指定缓存实体组记录的最长时间间隔（秒）。值为 0 表示记录永不过期。通过减少对常用组的数据库查询来提升性能。
 
 ### JSON Schema
 
@@ -49,37 +45,37 @@ The configuration allows you to specify how entities are added to groups and how
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node identifies the **owner** of the message originator entity (tenant or customer).
-2. It resolves any templates in the **Group name pattern** using values from the message data and metadata.
-3. The node searches for an existing entity group matching the resolved group name, entity type and owner of the originator.
-4. If **Remove from current groups** is enabled:
-    - The node retrieves all entity groups that currently contain the originator entity
-    - It removes the entity from all groups except the target group and the special "All" group
-5. If the target group exists or **Create new group if not exists** is enabled:
-    - If the group doesn't exist and creation is enabled, a new entity group is created with the resolved name
-    - The originator entity is added to the target group
-6. If the target group doesn't exist and creation is disabled, the processing fails
-7. Group lookups are cached according to the **Groups cache expiration time** setting to improve performance
-8. On successful completion, the message is forwarded to the `Success` connection. If an error occurs, the message is routed to the `Failure` connection.
+1. 节点识别消息发起者实体的**所有者**（租户或客户）。
+2. 使用消息数据和元数据中的值解析 **Group name pattern** 中的模板。
+3. 节点搜索与解析后的组名、实体类型和发起者所有者匹配的现有实体组。
+4. 若 **Remove from current groups** 已启用：
+    - 节点获取当前包含发起者实体的所有实体组
+    - 将实体从除目标组和特殊「全部」组以外的所有组中移除
+5. 若目标组存在或 **Create new group if not exists** 已启用：
+    - 若组不存在且启用了创建，则使用解析后的名称创建新实体组
+    - 将发起者实体添加到目标组
+6. 若目标组不存在且禁用了创建，则处理失败
+7. 根据 **Groups cache expiration time** 设置缓存组查找结果以提升性能
+8. 成功完成后，消息转发至 `Success` 连接。发生错误时，消息路由至 `Failure` 连接。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - The entity was successfully added to the target group.
-- `Failure`:
-    - An error occurred during processing, such as the target group not existing when creation is disabled.
+- `Success`：
+    - 实体已成功添加到目标组。
+- `Failure`：
+    - 处理过程中发生错误，例如在禁用创建时目标组不存在。
 
-## Examples
+## 示例
 
-### Example 1 — Adding device to group
+### 示例 1 — 将设备添加到组
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE` that belongs to the tenant.
+发起者：属于租户的 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -90,23 +86,23 @@ Originator: `DEVICE` that belongs to the tenant.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-There is a device group named "My device group" which belongs to a tenant.
+存在名为「My device group」且属于租户的设备组。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The originator device is added to the "My device group" group.
+发起者设备被添加到「My device group」组。
 
-### Example 2 — Using pattern for target group name
+### 示例 2 — 为目标组名使用模式
 
-**Incoming message**
+**传入消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -114,9 +110,9 @@ Data:
 }
 ```
 
-Originator: `DEVICE` that belongs to the tenant.
+发起者：属于租户的 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -127,26 +123,25 @@ Originator: `DEVICE` that belongs to the tenant.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-There is a device group named "Warehouse devices" which belongs to a tenant.
+存在名为「Warehouse devices」且属于租户的设备组。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The pattern `${location}` devices is resolved by substituting the location value from the message data, resulting in the group name "Warehouse devices". The originator device is
-added to the "Warehouse devices" group.
+模式 `${location}` devices 通过用消息数据中的 location 值替换得到解析，组名变为「Warehouse devices」。发起者设备被添加到「Warehouse devices」组。
 
-### Example 3 — Creating group if it does not exist
+### 示例 3 — 组不存在时创建
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE` that belongs to the tenant.
+发起者：属于租户的 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -157,26 +152,25 @@ Originator: `DEVICE` that belongs to the tenant.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Device group named "My device group" does not exist.
+名为「My device group」的设备组不存在。
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-Since the group "My device group" does not exist and `createGroupIfNotExists` is set to true, the group is first created at the tenant level (same hierarchy level as the device),
-then the originator device is added to the newly created "My device group" group.
+由于「My device group」组不存在且 `createGroupIfNotExists` 设置为 true，首先在租户层级（与设备相同的层级）创建该组，然后将发起者设备添加到新建的「My device group」组。
 
-### Example 4 — Removing device from current groups
+### 示例 4 — 从当前组中移除设备
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE` that belongs to the tenant.
+发起者：属于租户的 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -187,31 +181,30 @@ Originator: `DEVICE` that belongs to the tenant.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- Device group "All" exists
-- Device group "Group A" exists
-- Device group "Group B" exists
-- Device group "Group C" exists
-- The originator device is currently a member of "All", "Group B" and "Group C" groups
-- All groups are located on the same hierarchy level as device (tenant level)
+- 设备组「All」存在
+- 设备组「Group A」存在
+- 设备组「Group B」存在
+- 设备组「Group C」存在
+- 发起者设备当前属于「All」、「Group B」和「Group C」组
+- 所有组与设备处于同一层级（租户层级）
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-Since `removeFromCurrentGroups` is set to true, the originator device is first removed from its current groups ("Group B" and "Group C"), then added to the "Group A" group. The
-device ends up being a member of "Group A" and the "All" group.
+由于 `removeFromCurrentGroups` 设置为 true，发起者设备首先从其当前所属组（「Group B」和「Group C」）中移除，然后被添加到「Group A」组。设备最终属于「Group A」和「All」组。
 
-### Example 5 — Ownership hierarchy error
+### 示例 5 — 所有权层级错误
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE` that belongs to the tenant.
+发起者：属于租户的 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -222,26 +215,25 @@ Originator: `DEVICE` that belongs to the tenant.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Device group "Customer Group A" exists but is owned by a customer
+设备组「Customer Group A」存在，但由客户拥有
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Failure` connection.
+传出消息与传入消息相同。经 `Failure` 连接路由。
 
-**Result**
+**结果**
 
-The processing fails because the node looks for a group named "Customer Group" under the tenant's ownership (since the device belongs to the tenant), but the group "Customer Group"
-exists under a customer.
+处理失败，因为节点在租户的所有权下查找名为「Customer Group」的组（设备属于租户），但「Customer Group」组存在于客户下。
 
-### Example 6 — Unsupported entity type
+### 示例 6 — 不支持的实体类型
 
-**Incoming message**
+**传入消息**
 
-Originator: `TENANT` entity.
+发起者：`TENANT` 实体。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -252,10 +244,10 @@ Originator: `TENANT` entity.
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Failure` connection.
+传出消息与传入消息相同。经 `Failure` 连接路由。
 
-**Result**
+**结果**
 
-The processing fails because the originator entity type `TENANT` does not support entity groups. 
+处理失败，因为发起者实体类型 `TENANT` 不支持实体组。

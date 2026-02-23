@@ -1,4 +1,4 @@
-Instructions listed below will help you to install PostgreSQL.
+以下说明将帮助您安装 PostgreSQL。
 
 ```bash
 # Update your system
@@ -6,9 +6,9 @@ sudo dnf update
 ```
 {: .copy-code}
 
-Install the repository.
+安装软件源。
 
-**For CentOS/RHEL 8:**
+**对于 CentOS/RHEL 8：**
 
 ```bash
 # Install the repository RPM:
@@ -16,7 +16,7 @@ sudo dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-
 ```
 {: .copy-code}
 
-**For CentOS/RHEL 9:**
+**对于 CentOS/RHEL 9：**
 
 ```bash
 # Install the repository RPM:
@@ -24,7 +24,7 @@ sudo dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-
 ```
 {: .copy-code}
 
-Install the package.
+安装软件包。
 
 ```bash
 # Install packages

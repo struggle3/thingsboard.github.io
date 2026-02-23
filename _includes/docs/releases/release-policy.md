@@ -1,150 +1,150 @@
 * TOC
 {:toc}
 
-This guide explains how ThingsBoard versions are numbered, how long each version is supported, what kind of upgrade requires downtime, and which Docker tags to use in different environments. 
-It’s written for platform administrators, SREs, DevOps engineers, and technical users who deploy and maintain ThingsBoard.
+本指南说明 ThingsBoard 的版本编号规则、各版本支持时长、何种升级需要停机，以及不同环境下应使用的 Docker 标签。 
+面向平台管理员、SRE、DevOps 工程师和部署维护 ThingsBoard 的技术用户。
 
 ---
 
-## ThingsBoard versioning
+## ThingsBoard 版本规范
 
-ThingsBoard version numbers reflect the scope of changes introduced in each release. This follows semantic versioning principles, helping you gauge the potential impact of upgrading.
-ThingsBoard version numbers have four parts: <span class="code-light">MAJOR.MINOR.MAINTENANCE.PATCH</span>. For example, version <span class="code-light">4.2.1.0</span> indicates major version 4, minor version 2, maintenance 1 and patch level 0.
+ThingsBoard 版本号反映每次发布引入的变更范围，遵循语义化版本原则，便于评估升级影响。
+版本号由四部分组成：<span class="code-light">MAJOR.MINOR.MAINTENANCE.PATCH</span>。例如 <span class="code-light">4.2.1.0</span> 表示主版本 4、次版本 2、维护版本 1、补丁级别 0。
 
-The version number is incremented based on the level of change included in the release.
+版本号随发布中变更等级递增。
 
 <table style="width:75%">
   <thead>
     <tr>
-      <td style="width: 20%"><b>Level</b></td>
-      <td style="width: 60%"><b>Changes</b></td>
-      <td style="width: 20%"><b>Upgrade scripts required</b></td>
+      <td style="width: 20%"><b>级别</b></td>
+      <td style="width: 60%"><b>变更类型</b></td>
+      <td style="width: 20%"><b>是否需要升级脚本</b></td>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>MAJOR</td>
-      <td>Breaking changes, removed/deprecated APIs, major migrations, new features</td>
-      <td>Yes</td>
+      <td>破坏性变更、移除/弃用 API、重大迁移、新功能</td>
+      <td>是</td>
     </tr>
     <tr>
       <td>MINOR</td>
-      <td>New features with backward compatibility</td>
-      <td>Yes</td>
+      <td>向后兼容的新功能</td>
+      <td>是</td>
     </tr>
     <tr>
       <td>MAINTENANCE</td>
-      <td>Bug fixes, security fixes, <b>framework upgrades</b><br><small><b>Note:</b> Upgrade scripts are usually required, but <u>not always</u> (e.g. Angular 18→20)</small></td>
-      <td>May be required</td>
+      <td>缺陷修复、安全修复、<b>框架升级</b><br><small><b>注意：</b>通常需要升级脚本，但<u>并非总是</u>（如 Angular 18→20）</small></td>
+      <td>可能需要</td>
     </tr>
     <tr>
       <td>PATCH</td>
-      <td>Hotfix releases that do not require upgrade scripts (critical bugs/security fixes; no env/DB changes).</td>
-      <td>No</td>
+      <td>不需要升级脚本的热修复（严重缺陷/安全修复；无环境/DB 变更）</td>
+      <td>否</td>
     </tr>
   </tbody>
 </table>
 
-**Examples**
+**示例**
 
-<span class="code-light">4.2.0.0</span> — Initial 4.2 LTS release
+<span class="code-light">4.2.0.0</span> — 4.2 LTS 首个发布
 
-<span class="code-light">4.2.0.2</span> — Two hotfixes later, no upgrade scripts required to move within <span class="code-light">4.2.0.x</span>
+<span class="code-light">4.2.0.2</span> — 两次热修复后，在 <span class="code-light">4.2.0.x</span> 内升级无需升级脚本
 
-<span class="code-light">4.2.1.0</span> — First maintenance release; expect upgrade scripts
+<span class="code-light">4.2.1.0</span> — 首个维护版本；需要执行升级脚本
 
-<span class="code-light">4.2.1.3</span> — Hotfixes on top of <span class="code-light">4.2.1.0</span>; zero‑downtime within <span class="code-light">4.2.1.x</span>
+<span class="code-light">4.2.1.3</span> — 基于 <span class="code-light">4.2.1.0</span> 的热修复；在 <span class="code-light">4.2.1.x</span> 内可实现零停机升级
 
-<span class="code-light">4.2.2.0</span> — Maintenance release: includes Angular upgrade (18 → 20). No DB scripts required, but potential UI impact.
+<span class="code-light">4.2.2.0</span> — 维护版本：含 Angular 升级（18 → 20）。无需 DB 脚本，但可能影响 UI。
 
-## Lifecycle & Support (How long versions are supported?)
+## 生命周期与支持（版本支持时长）
 
-ThingsBoard maintains **Long‑Term Support (LTS)** lines for production users. Customers using LTS releases can be confident that their critical systems will be protected and operate reliably.
+ThingsBoard 为生产用户提供**长期支持（LTS）** 线路。使用 LTS 发布的客户可放心，其关键系统将得到保障并稳定运行。
 
 <table style="width:75%">
   <thead>
     <tr>
-      <td style="width: 20%"><b>Release Type</b></td>
-      <td style="width: 30%"><b>Description</b></td>
-      <td style="width: 30%"><b>Support Duration</b></td>
-      <td style="width: 20%"><b>Typical Frequency</b></td>
+      <td style="width: 20%"><b>发布类型</b></td>
+      <td style="width: 30%"><b>说明</b></td>
+      <td style="width: 30%"><b>支持时长</b></td>
+      <td style="width: 20%"><b>典型频率</b></td>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><b>LTS</b></td>
-      <td>Announced yearly; for stable, long-term production use.</td>
-      <td><b>18 months</b> from initial LTS GA (e.g., 4.2.0.0 release date)</td>
-      <td>Annually</td>
+      <td>每年发布；面向稳定、长期的生产使用。</td>
+      <td>自 LTS GA 起 <b>18 个月</b>（如 4.2.0.0 发布日期）</td>
+      <td>每年</td>
     </tr>
     <tr>
       <td><b>Standard</b></td>
-      <td>Releases between LTS lines, including new features.</td>
-      <td><b>6 months</b> from initial GA date</td>
-      <td>Every three months (Minor)</td>
+      <td>LTS 之间的发布，含新功能。</td>
+      <td>自 GA 日起 <b>6 个月</b></td>
+      <td>每季度（Minor）</td>
     </tr>
   </tbody>
 </table>
 
-## Choosing the Right Version
+## 选择合适版本
 
-**If you run production:**
+**若用于生产环境：**
 
-1. **Prefer the latest LTS line** in Active Support.
+1. **优先选择处于活跃支持的 latest LTS 线路**。
 
-2. To stay up to date with hotfixes, track the line’s **PATCH** updates only (same MAINTENANCE number, e.g., <span class="code-light">4.2.1.0</span> → <span class="code-light">4.2.1.3</span>).
+2. 若要保持热修复更新，仅跟踪该线路’s **PATCH** 更新（MAINTENANCE 号相同，如 <span class="code-light">4.2.1.0</span> → <span class="code-light">4.2.1.3</span>）。
 
-3. **Schedule maintenance windows** to adopt new **MAINTENANCE** releases when needed (e.g., <span class="code-light">4.2.0.x</span> → <span class="code-light">4.2.1.0</span>).
+3. **规划维护窗口**，在需要时升级到新的 **MAINTENANCE** 发布（如 <span class="code-light">4.2.0.x</span> → <span class="code-light">4.2.1.0</span>）。
 
-4. **Framework upgrades in MAINTENANCE releases** (e.g., Angular 18 → 20):
-   * We provide **full backward compatibility for the core platform** and **do not require any upgrade scripts**.
-   * However, **custom UI code** (widgets or custom CSS) that depends on internal component structure or CSS variable names **may break**.
-   * This can affect **up to 1% of users** with heavy customizations.
-   * **Recommendation:** Always test custom UI in a staging environment before upgrading to such MAINTENANCE releases.
+4. **MAINTENANCE 发布中的框架升级**（如 Angular 18 → 20）：
+   * 我们保证**核心平台完整向后兼容**且**不要求任何升级脚本**。
+   * 但依赖内部组件结构或 CSS 变量名的**自定义 UI 代码**（部件或自定义 CSS）**可能不可用**。
+   * 可能影响**约 1%** 重度自定义用户。
+   * **建议：** 在升级到此类 MAINTENANCE 发布前，务必在预发布环境测试自定义 UI。
 
-## Docker Hub Tagging Strategy
+## Docker Hub 标签策略
 
 <table style="width:75%">
   <thead>
     <tr>
-      <td style="width: 20%"><b>Tag</b></td>
-      <td style="width: 20%"><b>Example</b></td>
-      <td style="width: 30%"><b>Purpose</b></td>
-      <td style="width: 30%"><b>Update Policy</b></td>
+      <td style="width: 20%"><b>标签</b></td>
+      <td style="width: 20%"><b>示例</b></td>
+      <td style="width: 30%"><b>用途</b></td>
+      <td style="width: 30%"><b>更新策略</b></td>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>M.m.P.p</td>
       <td>4.2.1.0</td>
-      <td>Production</td>
-      <td>Immutable</td>
+      <td>生产环境</td>
+      <td>不可变</td>
     </tr>
     <tr>
       <td>M.m.P</td>
       <td>4.2.1-latest</td>
-      <td>Automatic safe patches</td>
-      <td>Floating (within 4.2.1.x)</td>
+      <td>自动安全补丁</td>
+      <td>浮动（在 4.2.1.x 内）</td>
     </tr>
     <tr>
       <td>latest</td>
       <td>latest</td>
-      <td>For development/testing (non-LTS)</td>
-      <td>Floating (latest master release)</td>
+      <td>开发/测试（非 LTS）</td>
+      <td>浮动（最新 master 发布）</td>
     </tr>
   </tbody>
 </table>
 
-**Recommendations**
+**建议**
 
- - **Production:** Pin to the immutable full tag (e.g., 4.2.1.0). You update only when you change the tag.
+ - **生产环境：** 固定到完整不可变标签（如 4.2.1.0）。仅在更改标签时更新。
 
- - **Auto security hotfixes (no downtime):** Use 4.2.1.1, 4.2.1.2, … , but never jump to 4.2.2.0.
+ - **自动安全热修复（零停机）：** 使用 4.2.1.1、4.2.1.2、… ，但不要跳到 4.2.2.0。
 
- - **Avoid latest in production.** It may include breaking changes and is not covered by the LTS policy.
+ - **生产环境避免使用 latest。** 可能含破坏性变更，且不受 LTS 策略保障。
 
 ## Compatibility & Deprecations
 
- - **API/behavior compatibility** is maintained within a MAJOR version whenever feasible. Minor releases may deprecate features but should not break existing integrations without a migration path.
+ - 在可行范围内，MAJOR 版本内保持 **API/行为兼容性**。Minor 发布可能弃用功能，但不应在没有迁移路径的情况下破坏现有集成。
 
- - **Deprecation policy:** Features flagged as deprecated in a Minor release will remain for at least one subsequent Minor before removal (or be guarded by feature flags when possible). Deprecations and removals are always called out in Release Notes.
+ - **弃用策略：** Minor 发布中标记为弃用的功能，至少会保留到下一个 Minor 后才移除（或在可能时通过 feature flag 控制）。弃用与移除均会在 Release Notes 中说明。

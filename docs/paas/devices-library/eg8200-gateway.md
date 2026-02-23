@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect EG8200 Gateway to ThingsBoard?"
+title: "如何将EG8200 Gateway连接到ThingsBoard？"
 redirect_to: "/device-library/paas/eg8200-gateway/"
 ---

@@ -1,10 +1,10 @@
-Create a docker compose file for Trendz Analytics service:
+为 Trendz Analytics 服务创建 Docker Compose 文件：
 
 ```text
 sudo nano docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following configuration to the YAML file.
+将以下配置添加到 YAML 文件中。
 
 {% include templates/trendz/install/docker-compose.md %}

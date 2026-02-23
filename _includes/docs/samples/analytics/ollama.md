@@ -1,241 +1,210 @@
 * TOC
 {:toc}
 
-## Introduction to Ollama
+## Ollama 简介
 
-[Ollama](https://ollama.com/){:target="_blank"} is an open-source tool that allows you to run Large Language Models (LLMs) locally on your own infrastructure. Think of it as
-bringing the power of AI models like Llama, Mistral, or Gemma directly to your servers instead of sending requests to external cloud services.
+[Ollama](https://ollama.com/){:target="_blank"} 是一款开源工具，可让您在自己的基础设施上本地运行大语言模型（LLM）。可以理解为将 Llama、Mistral 或 Gemma 等 AI 模型的能力直接部署到您的服务器，而无需向外部云服务发送请求。
 
-Unlike cloud-based AI providers such as OpenAI, Anthropic, or Google Gemini that require API calls over the internet, Ollama runs entirely within your environment. This fundamental
-difference opens up new possibilities for enterprises looking to leverage AI while maintaining control over their data and infrastructure.
+与需要通过互联网进行 API 调用的 OpenAI、Anthropic 或 Google Gemini 等基于云的 AI provider 不同，Ollama 完全在您的环境中运行。这一根本差异为希望利用 AI 同时保持对数据和基础设施控制的企业开辟了新可能。
 
-## Why Consider Ollama for Your ThingsBoard Deployment?
+## 为何考虑在 ThingsBoard 部署中使用 Ollama？
 
-If you already have a ThingsBoard deployment and are exploring AI integration, Ollama addresses several key concerns:
+若您已有 ThingsBoard 部署并希望探索 AI 集成，Ollama 可解决多项关键顾虑：
 
-**Cost Reduction**: Ollama eliminates per-token charges common with cloud AI services. Once you have GPU-enabled infrastructure, you pay only for hardware and operations, making
-costs predictable regardless of usage volume.
+**降低成本**：Ollama 消除了云 AI 服务常见的按 token 收费。一旦拥有支持 GPU 的基础设施，您只需支付硬件和运维成本，用量再大成本也可预测。
 
-**Data Privacy**: All data processing happens within your infrastructure. Your telemetry data and AI analysis never leave your network, helping you maintain compliance with
-regulations like GDPR, HIPAA, or industry-specific requirements.
+**数据隐私**：所有数据处理均在您的基础设施内完成。遥测数据和 AI 分析不会离开您的网络，有助于遵守 GDPR、HIPAA 或行业特定法规。
 
-**Network Independence**: Ollama doesn't depend on external internet connectivity or third-party service availability, making it suitable for facilities with limited internet
-access or critical infrastructure where reliability is paramount.
+**网络独立性**：Ollama 不依赖外部互联网连接或第三方服务可用性，适合互联网接入受限或可靠性至关重要的关键基础设施。
 
-## Understanding Ollama Deployment Options
+## 了解 Ollama 部署选项
 
-The way you integrate Ollama with ThingsBoard depends largely on your current deployment architecture. Let's explore how Ollama fits with the most common ThingsBoard deployment
-patterns.
+将 Ollama 与 ThingsBoard 集成的方式很大程度上取决于您当前的部署架构。下面介绍 Ollama 如何适配最常见的 ThingsBoard 部署模式。
 
-### Single Server Monolithic Deployment
+### 单机单体部署
 
-If you're running ThingsBoard as a single service on one server (such as an EC2 instance), Ollama can be deployed directly on the same machine as an additional service. This works
-well if:
+若您在单台服务器（如 EC2 实例）上以单一服务运行 ThingsBoard，Ollama 可作为附加服务直接部署在同一台机器上。适用于：
 
-- Your server has GPU capabilities (recommended for acceptable performance)
-- You have sufficient memory and CPU resources to run both services
-- Your AI workload is moderate and doesn't require dedicated hardware
+- 服务器具备 GPU 能力（推荐以保证可接受的性能）
+- 有足够内存和 CPU 同时运行两个服务
+- AI 工作负载适中，无需专用硬件
 
-In this scenario, Ollama runs alongside ThingsBoard, and communication happens through localhost connections, keeping everything simple and contained.
+在此场景中，Ollama 与 ThingsBoard 并行运行，通过 localhost 连接通信，部署简单且集中。
 
-### Single Server Docker Compose Deployment
+### 单机 Docker Compose 部署
 
-For ThingsBoard deployments using Docker Compose in cluster mode (microservices), you have two options for adding Ollama:
+对于在集群模式（微服务）下使用 Docker Compose 的 ThingsBoard 部署，可通过两种方式添加 Ollama：
 
-- **As a Docker container**: Add Ollama to your existing docker-compose.yml file, making it part of your container stack. Note that this approach may require additional
-  configuration to enable GPU support through Docker.
-- **As a system service**: Install Ollama directly on the host system, running it as a regular Linux service. This approach often configures GPU support automatically during
-  installation, making it simpler to get hardware acceleration working.
+- **作为 Docker 容器**：在现有的 docker-compose.yml 中添加 Ollama，使其成为容器栈的一部分。注意，此方式可能需要额外配置以通过 Docker 启用 GPU 支持。
+- **作为系统服务**：在宿主机上直接安装 Ollama，以常规 Linux 服务运行。此方式在安装时通常会自动配置 GPU 支持，更容易获得硬件加速。
 
-Both approaches work well for this deployment type, but the system service installation typically provides easier GPU access out of the box.
+两种方式均适用于此类部署，但系统服务安装通常开箱即可获得 GPU 访问。
 
-### Kubernetes Cluster Deployment
+### Kubernetes 集群部署
 
-In Kubernetes environments, it's recommended to run Ollama on a separate node pool with GPU support. This approach offers several benefits:
+在 Kubernetes 环境中，建议在支持 GPU 的独立节点池上运行 Ollama。此方式具有以下优势：
 
-- **Scalability**: Kubernetes makes it straightforward to scale your Ollama deployment to meet demand. You can add GPU-enabled nodes to your node pool as your AI workload grows,
-  and Kubernetes will automatically distribute Ollama pods across available resources. This allows you to scale AI capabilities independently from your ThingsBoard infrastructure.
-- **Security**: Kubernetes provides various features to secure your Ollama deployment, including network policies to control traffic between pods, pod security standards to enforce
-  security best practices, and ingress controllers to manage external access with TLS termination and authentication.
-- **Complexity**: Keep in mind that Kubernetes deployments are considerably more complex to set up and maintain. You'll need to configure components like the Nvidia GPU operator
-  for GPU access, set up proper node selectors or taints/tolerations for pod scheduling, and manage resource quotas and limits. This requires solid Kubernetes expertise.
+- **可扩展性**：Kubernetes 可轻松扩展 Ollama 部署以满足需求。随着 AI 工作负载增长，可向节点池添加支持 GPU 的节点，Kubernetes 会自动在可用资源之间分布 Ollama pod。这样可独立于 ThingsBoard 基础设施扩展 AI 能力。
+- **安全性**：Kubernetes 提供多种功能保护 Ollama 部署，包括控制 pod 间流量的网络策略、强制最佳实践的安全标准，以及通过 TLS 终止和认证管理外部访问的 ingress 控制器。
+- **复杂性**：请注意，Kubernetes 部署的搭建和维护较为复杂。需要配置 Nvidia GPU operator 等组件以访问 GPU，为 pod 调度设置合适的 node selectors 或 taints/tolerations，并管理资源配额和限制。这需要扎实的 Kubernetes 经验。
 
-### Remote Ollama Deployment
+### 远程 Ollama 部署
 
-Perhaps the most flexible approach is running Ollama on completely separate infrastructure from your ThingsBoard deployment. In this model:
+或许最灵活的方式是在与 ThingsBoard 部署完全分离的基础设施上运行 Ollama。在此模式中：
 
-- Ollama runs on dedicated GPU-enabled servers optimized for AI workloads
-- ThingsBoard makes HTTP/HTTPS requests to the remote Ollama instance
+- Ollama 运行在针对 AI 工作负载优化的专用支持 GPU 的服务器上
+- ThingsBoard 通过 HTTP/HTTPS 向远程 Ollama 实例发起请求
 
-This separation of concerns allows you to scale your AI infrastructure independently from your IoT platform and optimize each for its specific workload.
+这种职责分离使您能够独立于IoT平台扩展 AI 基础设施，并针对各自工作负载进行优化。
 
-## Understanding Authentication Requirements
+## 了解认证要求
 
-Here's an important consideration: Ollama itself does not include built-in authentication mechanisms. The software is designed to be fast and simple, leaving security
-implementation to the deployment architecture around it.
+需注意：Ollama 本身不包含内置认证机制。该软件设计追求快速简单，将安全实现交给部署架构负责。
 
-This means that without additional security layers, anyone who can reach your Ollama endpoint can use it freely. Depending on your deployment scenario, this presents different
-levels of concern:
+这意味着在无额外安全层的情况下，任何能访问 Ollama 端点的人都可以自由使用。根据部署场景，这会产生不同程度的关注：
 
-**When authentication is critical:**
+**认证至关重要时：**
 
-- Ollama is exposed to untrusted networks or the internet
-- Multiple teams or projects share the same Ollama instance
-- Compliance requirements mandate access controls
-- You need to track or limit usage
+- Ollama 暴露给不受信任网络或互联网
+- 多个团队或项目共享同一 Ollama 实例
+- 合规要求规定必须进行访问控制
+- 需要追踪或限制使用
 
-**When authentication might be less critical:**
+**认证可能不那么关键时：**
 
-- Ollama runs within a fully trusted, isolated network (e.g., Docker Compose setups or Kubernetes clusters without external access to Ollama)
-- Only ThingsBoard has network access to the Ollama endpoint
-- Your infrastructure already provides network-level security
+- Ollama 运行在完全可信的隔离网络中（例如无外部访问 Ollama 的 Docker Compose 或 Kubernetes 集群）
+- 仅 ThingsBoard 有网络访问 Ollama 端点的权限
+- 您的基础设施已提供网络级安全
 
-Even in trusted network scenarios, implementing authentication provides defense in depth and enables better access control and auditing.
+即使在可信网络场景中，实施认证也能提供纵深防御，并实现更好的访问控制和审计。
 
-## ThingsBoard's Authentication Support for Ollama
+## ThingsBoard 对 Ollama 的认证支持
 
-Understanding the need for flexible security options, ThingsBoard provides three authentication methods when connecting to Ollama endpoints:
+考虑到对灵活安全选项的需求，ThingsBoard 在连接 Ollama 端点时提供三种认证方式：
 
-### None (No Authentication)
+### None（无认证）
 
-This option makes unauthenticated requests to the Ollama endpoint. While this might seem insecure, it's appropriate for specific scenarios:
+此选项向 Ollama 端点发出未认证请求。尽管可能看似不安全，但适用于特定场景：
 
-- Ollama runs on the same server as ThingsBoard with localhost-only access
-- Network-level security (firewalls, VPNs) already isolates the Ollama endpoint
-- You're in a development or testing environment
+- Ollama 与 ThingsBoard 在同一服务器上运行，仅 localhost 访问
+- 网络级安全（防火墙、VPN）已将 Ollama 端点隔离
+- 处于开发或测试环境
 
-When using this option, you're relying on network architecture and infrastructure controls to secure access to Ollama.
+使用此选项时，您依赖网络架构和基础设施控制来保护 Ollama 的访问。
 
-### Basic Authentication (Username and Password)
+### Basic Authentication（用户名和密码）
 
-HTTP Basic authentication provides a straightforward security layer using username and password credentials. When using this method, ThingsBoard encodes your credentials in Base64
-format and passes them in the Authorization header as `Basic <encoded-credentials>`.
+HTTP Basic 认证使用用户名和密码凭据提供简单的安全层。使用此方式时，ThingsBoard 将凭据以 Base64 编码并以 `Basic <encoded-credentials>` 形式放入 Authorization header。
 
-This method:
+此方式：
 
-- Is simple to implement and understand
-- Works well for smaller teams or single-user scenarios
-- Requires credential management (password rotation, secure storage)
+- 实现和理解简单
+- 适合小团队或单用户场景
+- 需要凭据管理（密码轮换、安全存储）
 
-**Important**: Always use HTTPS when using Basic authentication to ensure credentials are encrypted in transit and not sent in plain text over the network.
+**重要**：使用 Basic 认证时请始终使用 HTTPS，确保凭据在传输中加密，不会以明文在网络中发送。
 
-### Token Authentication (Bearer Token/API Key)
+### Token Authentication（Bearer Token/API Key）
 
-Token-based authentication uses API keys (bearer tokens) to authenticate requests. When using this method, ThingsBoard passes your token in the Authorization header as
-`Bearer <your-token>`.
+基于 Token 的认证使用 API key（bearer token）进行认证。使用此方式时，ThingsBoard 以 `Bearer <your-token>` 形式在 Authorization header 中传递 token。
 
-This approach:
+此方式：
 
-- Is familiar to anyone who has worked with cloud AI services
-- Allows for easy credential rotation without changing passwords
-- Supports multiple tokens for different applications or environments
-- Enables fine-grained access control when combined with reverse proxy capabilities
+- 对使用过云 AI 服务的人很熟悉
+- 无需更换密码即可轻松进行凭据轮换
+- 支持为不同应用或环境使用多个 token
+- 与反向代理能力结合可实现细粒度访问控制
 
-**Important**: Always use HTTPS when using Token authentication to ensure your API keys are encrypted in transit and not sent in plain text over the network.
+**重要**：使用 Token 认证时请始终使用 HTTPS，确保 API key 在传输中加密，不会以明文在网络中发送。
 
-## Setting Up Authentication for Ollama
+## 为 Ollama 设置认证
 
-If you need to implement Basic or Token authentication for your Ollama deployment, we provide
-a [guide for setting up Nginx as a reverse proxy with authentication](/docs/samples/analytics/ollama/nginx). This guide serves as a starting point to help you get moving with
-authentication implementation.
+若需要为 Ollama 部署实施 Basic 或 Token 认证，我们提供了[使用 Nginx 作为带认证的反向代理的配置指南](/docs/samples/analytics/ollama/nginx)。该指南是认证实现入门的参考，涵盖 Docker Compose 下两种认证方式的配置，可在此基础上根据您的环境进行定制和扩展。
 
-The guide covers configuring both authentication methods with Docker Compose, providing a foundation you can adapt and expand for your specific environment.
+## 选择适合的认证方式
 
-## Choosing the Right Authentication Method
+选择何种认证方式取决于您的具体部署场景：
 
-Selecting the appropriate authentication method depends on your specific deployment scenario:
+**在以下情况使用「None」：**
 
-**Use "None" when:**
+- Ollama 和 ThingsBoard 在同一服务器上通过 localhost 通信
+- 您的网络架构已提供完全隔离
 
-- Ollama and ThingsBoard are on the same server communicating via localhost
-- Your network architecture already provides complete isolation
+**在以下情况使用「Basic Authentication」：**
 
-**Use "Basic Authentication" when:**
+- 希望尽量简化用户管理
+- 团队较小或只有单用户访问
+- 已正确配置 HTTPS
 
-- User management overhead should be minimal
-- You have a small team or single-user access
-- You have HTTPS properly configured
+**在以下情况使用「Token Authentication」：**
 
-**Use "Token Authentication" when:**
+- 希望与 AI 行业标准一致
+- 多个应用或团队将访问 Ollama
+- 需要支持无中断的凭据轮换
+- 需要更好的访问审计追踪
+- 团队已熟悉 API key 管理
 
-- You want to align with AI industry standards
-- Multiple applications or teams will access Ollama
-- You need to support credential rotation without disruption
-- You require better audit trails for access
-- Your team is already familiar with API key management
+对于大多数生产部署，尤其是远程 Ollama 场景，Token 认证在安全性和可用性之间取得最佳平衡。
 
-For most production deployments, especially remote Ollama scenarios, Token authentication offers the best balance of security and usability.
+## 在 ThingsBoard 中配置 Ollama
 
-## Configuring Ollama in ThingsBoard
+Ollama 部署完成并（可选）配置认证后，将其连接到 ThingsBoard 较为直接。您可通过 ThingsBoard 界面将 Ollama 配置为 AI 模型 provider。
 
-Once you have Ollama deployed and optionally secured with authentication, connecting it to ThingsBoard is straightforward. You'll configure Ollama as an AI model provider through
-the ThingsBoard interface.
+### 访问配置表单
 
-### Accessing the Configuration Form
+按照 [向 ThingsBoard 添加 AI 模型](/docs/{{docsPrefix}}samples/analytics/ai-models/#adding-ai-models-to-thingsboard){:target="_blank"} 的说明，在 ThingsBoard 中进入 AI 模型配置区域。这将打开 AI 模型配置表单，您可在其中添加 Ollama 端点。
 
-Navigate to the AI models configuration section in ThingsBoard by following the instructions
-at [Adding AI Models to ThingsBoard](/docs/{{docsPrefix}}samples/analytics/ai-models/#adding-ai-models-to-thingsboard){:target="_blank"}. This will open the AI model configuration
-form where you can add your Ollama endpoint.
+### 配置参数
 
-### Configuration Parameters
+Ollama 配置表单包含以下关键设置：
 
-The Ollama configuration form includes the following key settings:
+**Provider**：从 AI provider 下拉框中选择 "Ollama"。
 
-**Provider**: Select "Ollama" from the AI provider dropdown.
+**Base URL**：Ollama 实例的 HTTP/HTTPS 端点地址。示例：
 
-**Base URL**: This is the HTTP/HTTPS endpoint where your Ollama instance is accessible. Examples:
+- `http://localhost:11434` - 同一服务器上本地运行的 Ollama
+- `http://192.168.1.100:8880` - 您网络中另一台服务器上的 Ollama
+- `https://ollama.yourdomain.com` - 带 HTTPS 反向代理后的 Ollama
 
-- `http://localhost:11434` - Ollama running locally on the same server
-- `http://192.168.1.100:8880` - Ollama on another server in your network
-- `https://ollama.yourdomain.com` - Ollama behind a reverse proxy with HTTPS
+**Authentication**：从三种选项中选择一种：
 
-**Authentication**: Choose one of three options:
+- **None**：不使用认证。ThingsBoard 将直接向 Ollama 端点发送未认证请求。
 
-- **None**: No authentication will be used. ThingsBoard will make direct, unauthenticated requests to the Ollama endpoint.
+- **Basic**：使用用户名和密码的 HTTP Basic 认证。
+    - **Username**：认证用户名
+    - **Password**：认证密码
 
-- **Basic**: HTTP Basic authentication using username and password credentials.
-    - **Username**: Your authentication username
-    - **Password**: Your authentication password
+- **Token**：使用 API key 的 Bearer token 认证。
+    - **Token**：您的 API key 或 bearer token
 
-- **Token**: Bearer token authentication using an API key.
-    - **Token**: Your API key or bearer token
+**Model ID**：要使用的具体 Ollama 模型（如 `llama3:8b`、`mistral:7b`、`gemma3:1b`）。应与已拉取到 Ollama 实例中的模型完全一致。
 
-**Model ID**: The specific Ollama model you want to use (e.g., `llama3:8b`, `mistral:7b`, `gemma3:1b`). This should match exactly with a model you've pulled into your Ollama
-instance.
+**Temperature、Top P、Top K、Maximum Output Tokens**：这些参数控制模型的响应行为，各 AI provider 通用。请根据您的用例要求进行配置。
 
-**Temperature, Top P, Top K, Maximum Output Tokens**: These parameters control the model's response behavior and are common across AI providers. Configure them according to your
-specific use case requirements.
+**Context Length**：该关键设置决定单次请求中模型可处理的上下文（对话历史、系统提示、输入数据）量。
 
-**Context Length**: This critical setting determines how much context (conversation history, system prompts, input data) the model can process in a single request.
+### 理解 Context Length
 
-### Understanding Context Length
+在使用 Ollama 时，Context length 值得特别关注，因为它会显著影响模型能力和服务器资源利用。
 
-The context length setting deserves special attention when working with Ollama, as it significantly impacts both the model's capabilities and your server's resource utilization.
+Context length（也称 context window）是模型在单次请求中可处理的 token 总数，包括系统提示、输入数据和模型生成的响应。需将该值设得足够大，以容纳所有输入和预期输出而不丢失数据。
 
-Context length (also called context window) is the total number of tokens the model can process in a single request, including your system prompts, input data, and the model's
-generated response. You need to set this value high enough to accommodate all your inputs plus the expected output without losing any data.
+**内存考虑：**
+与基础设施自动扩展的云服务不同，使用 Ollama 时您管理的是固定硬件资源。Context length 会显著影响 GPU 内存使用——更大的 context window 需要 substantially 更多内存。确切的对应关系因模型大小和架构而异，但影响相当大。
 
-**Memory considerations:**
-Unlike cloud services where infrastructure scales automatically, with Ollama you're managing fixed hardware resources. Context length significantly affects GPU memory usage -
-larger context windows require substantially more memory. The exact relationship varies by model size and architecture, but the impact is considerable.
+**确定合适的值：**
+最适合您用例的 context length 最好通过实证确定。先根据典型输入大小加预期输出长度做合理估计，再根据以下情况调整：
 
-**Determining the right value:**
-The appropriate context length for your use case is best determined empirically. Start with a reasonable estimate based on your typical input size plus expected output length, then
-adjust based on:
+- 请求是否被截断
+- GPU 上的实际内存使用
+- 性能和响应时间
 
-- Whether requests are being truncated
-- Actual memory usage on your GPU
-- Performance and response times
+若发现数据被截断，增大 context length。若内存使用过高或性能不佳，考虑减小或使用更小模型。
 
-If you find data being cut off, increase the context length. If memory usage is too high or performance suffers, consider reducing it or using a smaller model.
+### 测试配置
 
-### Testing Your Configuration
+填写所有必填字段后，点击表单底部的 **Check connectivity** 按钮。测试成功将显示绿色勾选，确认 ThingsBoard 可与 Ollama 端点通信且指定模型可用。
 
-After filling in all required fields, click the **Check connectivity** button at the bottom of the form. A successful test will show a green checkbox confirming that ThingsBoard
-can communicate with your Ollama endpoint and the specified model is available.
+## 在 ThingsBoard 中使用 Ollama
 
-## Using Ollama in ThingsBoard
-
-For a practical example of using AI models in ThingsBoard, including Ollama, check out
-our [Predictive Maintenance with AI guide](https://thingsboard.io/docs/samples/analytics/ai-predictive-maintenance/){:target="_blank"}. This guide demonstrates how to use AI for
-anomaly detection and predictive maintenance scenarios, showcasing real-world applications of AI integration in IoT systems.
+有关在 ThingsBoard 中使用 AI 模型（包括 Ollama）的实战示例，请参阅我们的 [AI 预测性维护指南](https://thingsboard.io/docs/samples/analytics/ai-predictive-maintenance/){:target="_blank"}。该指南展示如何将 AI 用于异常检测和预测性维护场景，展示 IoT 系统中 AI 集成的实际应用。

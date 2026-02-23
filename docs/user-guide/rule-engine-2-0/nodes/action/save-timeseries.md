@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: save time series
-description: Stores the incoming message data as time series data of the message originator.
+title: 保存 time series
+description: 将入站消息数据存储为消息 originator 的 time series 数据。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -8,31 +8,25 @@
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-aggregate-stream.png)
 
-Calculates MIN/MAX/SUM/AVG/COUNT/UNIQUE based on the incoming data stream. 
-Groups incoming data stream based on originator id of the message (i.e. particular device, asset, customer), 
-**aggregation function** (e.g. "Average", "Sum", "Min", "Max"), **aggregation interval value** (e.g. 1 minute, 6 hours) into **Intervals**.
+根据入站数据流计算 MIN/MAX/SUM/AVG/COUNT/UNIQUE。
+按消息 originator id（如设备、Asset、Customer）、**aggregation function**（如 "Average"、"Sum"、"Min"、"Max"）、**aggregation interval value**（如 1 分钟、6 小时）将入站数据流分组为 **Intervals**。
 
+Intervals 按 **interval persistence policy** 和 **interval check value** 定期持久化。Intervals 按 **Interval TTL value** 缓存在内存中。
+Intervals 状态按 **state persistence policy** 和 **state persistence value** 作为时序实体持久化。
+若某实体无数据，可为这些实体生成默认值。勾选 **Create intervals automatically** 并配置 **Interval entities** 可查找这些实体。
 
-Intervals are periodically persisted based on **interval persistence policy** and **interval check value**. Intervals are cached in memory based on **Interval TTL value**.
-State of the Intervals are persisted as timeseries entities based on **state persistence policy** and **state persistence value**.
-In case there is no data for certain entity, it might be useful to generate default values for those entities. 
-To lookup those entities one may select **Create intervals automatically** checkbox and configure **Interval entities**.
+为各 interval 的聚合结果生成 `POST_TELEMETRY_REQUEST` 消息。
 
-
-Generates 'POST_TELEMETRY_REQUEST' messages with the results of the aggregation for particular interval.
-
-
-Configuration below will calculate average hourly temperature and will persist it within one minute once the hourly interval is ended. 
-In case some delayed telemetry will arrive for the particular interval, the rule node will lookup it from internal cache or from telemetry values.
+以下配置将计算每小时平均温度，在小时 interval 结束后一分钟内持久化。
+若某 interval 有延迟 telemetry 到达，规则节点会从内部缓存或 telemetry 中查找。
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-aggregate-stream-config.png)
     
-The results of aggregation will be persisted to the database once per minute. Alternatively you can persist the interval on each new message to avoid any data loss in case of server outage.
-In case devices for some building are not reporting any temperature readings, we can generate default value (zero) for such building on each interval by selecting "Create Intervals automatically" and 
-specifying "Buildings" entity group.    
+聚合结果每分钟写入数据库一次。也可在每条新消息时持久化 interval，以避免服务器故障时的数据丢失。
+若某建筑下的设备未上报温度读数，可勾选 "Create Intervals automatically" 并指定 "Buildings" 实体组，从而在每个 interval 为这些建筑生成默认值（零）。    
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-aggregate-stream-config-2.png)
 
-**Since TB Version 3.3.3** you can select the queue name:
+**Since TB Version 3.3.3** 可选择队列名：
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-queue-name.png)

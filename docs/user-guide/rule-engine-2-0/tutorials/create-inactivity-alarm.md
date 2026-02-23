@@ -1,12 +1,12 @@
 ---
 layout: docwithnav
-title: Create Alarm when the Device is offline
-description: To create an alarm when the device is offline for a certain period of time using the Rule Engine.
+title: 设备离线时创建 Alarm
+description: 使用 Rule Engine 在设备离线一段时间后创建 alarm。
 
 ---
 
 
-This tutorial is to show you how to create an alarm when the device is offline for a certain period of time using RuleEngine.
+本教程演示如何使用 Rule Engine 在设备离线一定时间后创建 alarm。
 
 * TOC
 {:toc}
@@ -209,7 +209,7 @@ Try to post temperature = 20. Alarm should be created a minute after the telemet
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":20}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 
-***you need to replace $ACCESS_TOKEN with the actual device token**
+***you need to replace$ACCESS_TOKENwith the actual device token**
 {% endhighlight %}
 
 

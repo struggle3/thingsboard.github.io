@@ -1,14 +1,13 @@
-The device name and profile can be extracted from the topic. In this example, we will use  
-[regex](/docs/iot-gateway/config/mqtt/#regular-expressions) to specify the device name and constant for profile.
+设备名和配置文件可从主题中提取。本示例使用 [正则表达式](/docs/iot-gateway/config/mqtt/#regular-expressions) 指定设备名和常量配置文件。
 
-As an example, we will use ThingsBoard MQTT Demo Broker, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard MQTT 演示代理，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 1884:1884 thingsboard/tb-gw-mqtt-broker:latest
 ```
 {:.copy-code}
 
-The broker available at `0.0.0.0:1884` and publishes data to the topic `sensor/Thermo-A/data` where `Thermo-A` is the device name: with the following JSON payload:
+代理运行于 `0.0.0.0:1884`，向主题 `sensor/Thermo-A/data` 发布数据（其中 `Thermo-A` 为设备名），负载如下：
 
 ```json
 {
@@ -17,49 +16,46 @@ The broker available at `0.0.0.0:1884` and publishes data to the topic `sensor/T
     "hum": 60.3
 }
 ```
-To match this topic, either enter `sensor/Thermo-A/data` in **Topic filter** field or use [wildcards](/docs/iot-gateway/config/mqtt/#wildcard-usage)
-to subscribe to both `sensor/Thermo-A/data` and let's say `sensor/Thermo-B/data`.
+匹配该主题时，可在**主题过滤器**中填 `sensor/Thermo-A/data`，或使用[通配符](/docs/iot-gateway/config/mqtt/#wildcard-usage)
+同时订阅 `sensor/Thermo-A/data` 及如 `sensor/Thermo-B/data` 等主题。
 
-Let’s configure the MQTT connector to take the device name from the topic and use a constant for the device profile (e.g., `Thermometer`).
-Follow these steps:
+配置 MQTT 连接器，使设备名从主题获取，配置文件使用常量（如 `Thermometer`）。按以下步骤操作：
 
 {% assign deviceNameAndProfileTopicAndConstantJson = '
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-1.png,
-        title: Go to "**Entities**" → "**Gateways**" on the left sidebar and select your gateway.
+        title: 在左侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-3.png,
-        title: Select the created MQTT connector, select "**Basic**" click on the "**Data mapping**" Click on the "**+ Add mapping**" button.
+        title: 选择已创建的 MQTT 连接器，选择“**基本**”并点击“**数据映射**”，再点击“**+ 添加映射**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-topic-constant-json-4.png,
-        title: In the opened window, fill in "**Topic filter**" field with `sensor/+/data`, also fill "**QoS**" with one of these values(`0`,`1`,`2`) and for "**Payload type**" select `JSON`.
+        title: 在打开的窗口中，“**主题过滤器**”填 `sensor/+/data`，“**QoS**”填 `0`、`1` 或 `2` 之一，“**负载类型**”选 `JSON`。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-topic-constant-json-5.png,
-        title: Then under "**Device**" subsection choose "**Topic**" for the "**Name**" field, enter `(?<=sensor/)(.*?)(?=/data)`, this is the [regex](/docs/iot-gateway/config/mqtt/#regular-expressions) used to extract device name.
+        title: 在“**设备**”子部分，“**名称**”字段选“**Topic**”，填 `(?<=sensor/)(.*?)(?=/data)`，这是用于提取设备名的 [正则表达式](/docs/iot-gateway/config/mqtt/#regular-expressions)。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-topic-constant-json-6.png,
-        title: Then under "**Profile name**" subsection choose "**Constant**" for the "**Name**" field, enter `Thermometer`, this is **Constant** value that will be used to form device profile name.
+        title: 在“**配置文件名称**”子部分，“**名称**”字段选“**Constant**”，填 `Thermometer`，这是用于形成设备配置文件名的**常量**值。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-topic-constant-json-7.png,
-        title: Also, we need to add at least one attribute/time series because the connector will not add a device without any data to read. Click on the "**pencil**" icon next to the "**Time series**" section.
+        title: 还需要至少添加一个属性/时序数据，因为连接器不会添加无可读数据的设备。点击“**时序数据**”旁的“**铅笔**”图标。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-8.png,
-        title: In the opened window, click on the "**Add time series**" button and fill the fields as on the corresponding image. Do not forget to save changes.
+        title: 在打开的窗口中，点击“**添加时序数据**”按钮并按对应图片填写字段。不要忘记保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceNameAndProfileTopicAndConstantJson %}
 
-Now we can check if the device name and profile are set correctly. Go to "**Entities**" > "**Devices**" and as you can see, the device
-name is set to `Thermo-A` and the profile is set to `Thermometer`.
+可以检查设备名和配置文件是否正确设置。进入“**实体**”→“**设备**”，设备名应为 `Thermo-A`，配置文件为 `Thermometer`。
 
 ![image](/images/gateway/mqtt-connector/examples/device-name-and-profile-topic-constant-json-9.png)
 
-If you are using advanced configuration mode and want to set the device name and profile using topic and json path, you can
-use the following configuration:
+若使用高级配置模式并需用主题和 json path 设置设备名和配置文件，可使用以下配置：
 
 ```json
 {

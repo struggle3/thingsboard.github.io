@@ -7,84 +7,84 @@
 {% include templates/mqtt-broker/since.md %}
 {% endif %}
 
-## Overview
+## 概述
 
-**Integrations** in TBMQ are the data bridges that allow you to forward MQTT messages from connected clients to external systems such as HTTP endpoints, Kafka brokers, or other MQTT brokers. 
-This enables seamless data flow between IoT devices and the broader data infrastructure, allowing the MQTT broker to act as a central integration point in your architecture.
+TBMQ 中的**集成**是数据桥梁，可将连接客户端发出的 MQTT 消息转发至外部系统，如 HTTP 端点、Kafka 代理或其他 MQTT 代理。
+这使 IoT 设备与更广泛的数据基础设施之间的数据流动顺畅，让 MQTT 代理成为架构中的中心集成点。
 
-### Why Use Integrations?
+### 为何使用集成？
 
-Integrations make MQTT data useful outside the broker. They help you:
+集成使 MQTT 数据在代理之外可用。它们帮助您：
 
-- Bridge MQTT messages to external systems for processing, storage, or analytics.
-- Enable interoperability between MQTT and other protocols.
-- Build complex event-driven workflows across different platforms.
-- Maintain modularity and scalability in your IoT architecture.
+- 将 MQTT 消息桥接至外部系统以便处理、存储或分析。
+- 实现 MQTT 与其他协议之间的互操作性。
+- 在不同平台间构建复杂的事件驱动工作流。
+- 保持 IoT 架构的模块化与可扩展性。
 
-### High-Level Design
+### 高层设计
 
-At a high level, the integration flow in TBMQ works like this:
+从高层看，TBMQ 的集成流程如下：
 
-1. **MQTT clients** connect to the **TBMQ** broker using **MQTT** or **MQTTS** and publish messages.
-2. When a message matches an integration [topic filter](#integration-entity) (MQTT subscription), **TBMQ** sends the message to the [TBMQ Integration Executor](#new-microservice) using **Kafka**.
-3. The **Integration Executor** receives the message, processes it, and forwards it to the correct external system, such as:
-- An **HTTP endpoint** over **HTTP or HTTPS**.
-- Another **MQTT broker** over **MQTT or MQTTS**.
-- A **Kafka broker** using the **Kafka binary protocol over TCP or TLS**.
+1. **MQTT 客户端**使用 **MQTT** 或 **MQTTS** 连接至 **TBMQ** 代理并发布消息。
+2. 当消息匹配集成的[主题过滤器](#integration-entity)（MQTT 订阅）时，**TBMQ** 通过 **Kafka** 将消息发送至 [TBMQ Integration Executor](#new-microservice)。
+3. **Integration Executor** 接收消息、进行处理，并转发至正确的外部系统，例如：
+- 通过 **HTTP 或 HTTPS** 至 **HTTP 端点**。
+- 通过 **MQTT 或 MQTTS** 至其他 **MQTT 代理**。
+- 通过 **Kafka 二进制协议（TCP 或 TLS）** 至 **Kafka 代理**。
 
 ![image](/images/mqtt-broker/integrations/tbmq-ie-main.png)
 
-### New microservice
+### 新微服务
 
-TBMQ uses a dedicated microservice called **TBMQ Integration Executor** (shortened as "TBMQ IE") to manage and run integrations.
+TBMQ 使用名为 **TBMQ Integration Executor**（简写为 “TBMQ IE”）的专用微服务来管理与运行集成。
 
-With this feature, TBMQ supports two service types defined by the `TB_SERVICE_TYPE` environment variable:
+该功能下，TBMQ 支持由 `TB_SERVICE_TYPE` 环境变量定义的两种服务类型：
 
-* **tbmq** – the core MQTT broker service;
-* **tbmq-integration-executor** – the integration execution service (tbmq-ie).
+* **tbmq** – 核心 MQTT 代理服务；
+* **tbmq-integration-executor** – 集成执行服务（tbmq-ie）。
 
-The Integration Executor service listens for integration events and messages from TBMQ (via Kafka), processes them based on the integration configuration, 
-and forwards the data to the external system. You can deploy multiple Integration Executor microservices within your TBMQ cluster to ensure scalability and fault isolation.
+Integration Executor 服务监听来自 TBMQ（经 Kafka）的集成事件与消息，根据集成配置处理它们，并将数据转发至外部系统。
+您可在 TBMQ 集群内部署多个 Integration Executor 微服务，以实现可扩展性与故障隔离。
 
-> This architecture ensures clear separation of concerns, high availability, and improves scalability and system performance.
+> 该架构确保了职责清晰、高可用，并提升了可扩展性与系统性能。
 
-### Deployment Options
+### 部署选项
 
-In TBMQ, integrations can only be deployed using Integration Executor microservice.
+在 TBMQ 中，集成只能通过 Integration Executor 微服务部署。
 
-> Why Not Embedded in the TBMQ?
+> 为何不嵌入 TBMQ？
 
-We **intentionally do not embed integration logic** inside the TBMQ broker. This decision provides several key benefits:
+我们**有意不将集成逻辑嵌入** TBMQ 代理内部。该设计带来以下好处：
 
-- **Isolation**: Failures or slow responses from external systems (e.g., HTTP endpoints) do not affect MQTT message processing in the broker.
-- **Scalability**: `tbmq-ie` instances can be scaled independently based on load, without impacting the performance of the broker.
-- **Resilience**: Each Integration Executor can restart or fail independently without interrupting the core MQTT services.
-- **Extensibility**: New integration types or improvements can be added to the Integration Executor without changing the broker itself.
-- **Clear separation of responsibilities**: The broker handles MQTT protocol logic, while the Integration Executor focuses on data delivery to external systems.
+- **隔离**：外部系统（如 HTTP 端点）的故障或慢响应不会影响代理中的 MQTT 消息处理。
+- **可扩展性**：`tbmq-ie` 实例可根据负载独立扩展，不影响代理性能。
+- **弹性**：每个 Integration Executor 可独立重启或失败，而不中断核心 MQTT 服务。
+- **可扩展性**：可在 Integration Executor 中添加新的集成类型或改进，而不修改代理本身。
+- **职责清晰**：代理负责 MQTT 协议逻辑，Integration Executor 负责向外部系统投递数据。
 
-## Architecture
+## 架构
 
-In this section, you'll learn how TBMQ and the Integration Executor communicate internally, how data flows between components, and how the system remains scalable and fault-tolerant under load.
+本节介绍 TBMQ 与 Integration Executor 如何内部通信、数据如何在组件间流动，以及系统如何在负载下保持可扩展与容错。
 
-### Integration Entity
+### 集成实体
 
-Integration objects have corresponding entities that are stored in the TBMQ’s PostgreSQL database. 
-They are mainly used for the TBMQ Web UI - to view and manage the integrations. Each integration entity includes basic fields like:
+集成对象在 TBMQ 的 PostgreSQL 数据库中对应实体。
+主要用于 TBMQ Web UI——查看和管理集成。每个集成实体包含基本字段，例如：
 
-- **Type** – HTTP, Kafka, or MQTT.
-- **Name** – a human-readable name.
-- **Enabled** – whether the integration is enabled or disabled.
-- **Status** – actual status of the integration:
-  - **Disabled**: Not active.
-  - **Active**: Running and processing messages.
-  - **Failed**: Encountered connection failure.
-  - **Pending**: Waiting for validation and activation.
-- **Configuration** – contains connection details and parameters for the external system.
-- **Topic filters** – define MQTT-based subscriptions and act as triggers. When a broker receives a message matching a topic filter, the integration is triggered and forwards it to the configured external system.
+- **Type** – HTTP、Kafka 或 MQTT。
+- **Name** – 可读名称。
+- **Enabled** – 集成是否启用或禁用。
+- **Status** – 集成的实际状态：
+  - **Disabled**：未激活。
+  - **Active**：运行中并处理消息。
+  - **Failed**：发生连接失败。
+  - **Pending**：等待验证和激活。
+- **Configuration** – 包含外部系统的连接详情与参数。
+- **Topic filters** – 定义基于 MQTT 的订阅并作为触发器。当代理收到匹配主题过滤器的消息时，触发集成并将其转发至配置的外部系统。
 
-You can configure multiple integrations with different types, topic filters, and target systems. Each integration operates independently and can be enabled or disabled at any time.
+您可以为不同类型、主题过滤器和目标系统配置多个集成。每个集成独立运行，可随时启用或禁用。
 
-An example of MQTT integration (partial configuration):
+MQTT 集成配置示例（部分）：
 
 ```json
 {
@@ -107,183 +107,183 @@ An example of MQTT integration (partial configuration):
 }
 ```
 
-### TBMQ (MQTT Broker) Component
+### TBMQ（MQTT 代理）组件
 
-The core TBMQ service (`TB_SERVICE_TYPE=tbmq`) is responsible for handling MQTT protocol logic, including client connections, subscriptions, and message routing. 
-It also manages integration entities by processing create, update, and delete requests and storing them in the database. 
-Additionally, it sends integration validation requests (for validating configuration or connection checks) to TBMQ IE and publishes integration configuration events to TBMQ IE. 
-Finally, it matches incoming MQTT messages against integration subscriptions and forwards them to TBMQ IE when applicable.
+核心 TBMQ 服务（`TB_SERVICE_TYPE=tbmq`）负责 MQTT 协议逻辑，包括客户端连接、订阅与消息路由。
+还通过处理创建、更新和删除请求来管理集成实体，并将其存储于数据库。
+此外，向 TBMQ IE 发送集成验证请求（用于验证配置或连接检查），并向 TBMQ IE 发布集成配置事件。
+最后，将收到的 MQTT 消息与集成订阅匹配，并在适用时转发至 TBMQ IE。
 
-The broker is stateless with respect to Integration Executor and can be scaled horizontally to handle increasing MQTT traffic.
+代理相对于 Integration Executor 无状态，可水平扩展以应对增加的 MQTT 流量。
 
-### TBMQ Integration Executor Component
+### TBMQ Integration Executor 组件
 
-The Integration Executor (`TB_SERVICE_TYPE=tbmq-integration-executor`) is a standalone microservice responsible for receiving and processing validation requests from TBMQ, then sending back responses. 
-It also manages the full integration lifecycle based on configuration events (create, update, or delete). 
-Additionally, it executes integration logic, including retry mechanisms, timeout handling, and backpressure control. 
-It delivers MQTT messages to the configured external system, such as HTTP, Kafka, or MQTT. 
-It also sends lifecycle, error, and statistics integration events back to TBMQ.
+Integration Executor（`TB_SERVICE_TYPE=tbmq-integration-executor`）是独立微服务，负责接收并处理来自 TBMQ 的验证请求，然后返回响应。
+根据配置事件（创建、更新或删除）管理完整集成生命周期。
+此外，执行集成逻辑，包括重试机制、超时处理与背压控制。
+将 MQTT 消息投递至配置的外部系统，如 HTTP、Kafka 或 MQTT。
+向 TBMQ 发回生命周期、错误与统计集成事件。
 
-This component operates independently of the broker and can be scaled separately. 
-It ensures that delays or failures in external systems do not affect the broker’s ability to process MQTT traffic.
+该组件独立于代理运行，可单独扩展。
+确保外部系统的延迟或故障不会影响代理处理 MQTT 流量的能力。
 
-### Kafka (Internal Communication Layer)
+### Kafka（内部通信层）
 
-Kafka acts as the **bridge** between the TBMQ brokers and Integration Executors.
-It enables reliable delivery of integration-related events between services. 
-It also provides buffering of messages in case of component downtime, processing delays, or spikes in load. 
-Additionally, it supports scalable and parallel processing by allowing multiple broker and executor instances to work concurrently.
+Kafka 在 TBMQ 代理与 Integration Executor 之间充当**桥梁**。
+支持服务之间可靠投递集成相关事件。
+在组件宕机、处理延迟或负载激增时提供消息缓冲。
+通过允许多个代理与执行器实例并发工作，实现可扩展与并行处理。
 
 ![image](/images/mqtt-broker/integrations/tbmq-ie-communication.png)
 
-TBMQ and its Integration Executor microservices communicate asynchronously over Kafka using multiple **dedicated** topics.
-Each topic serves a specific purpose and allows for decoupled, reliable, and scalable data flow between the components.
+TBMQ 与其 Integration Executor 微服务通过 Kafka 在多个**专用**主题上异步通信。
+每个主题服务于特定目的，支持组件间解耦、可靠且可扩展的数据流。
 
-* **tbmq.ie.downlink.$integrationType** — [Compact](https://docs.confluent.io/kafka/design/log_compaction.html) topic used to send integration configurations and validation requests from TBMQ to IE ($integrationType can be 'http', 'mqtt', or 'kafka').
-* **tbmq.ie.uplink** — Topic for sending lifecycle events, statistics, and errors from IE back to TBMQ.
-* **tbmq.ie.uplink.notifications.$serviceId** — Topic used for sending validation responses and other one-off replies to the correct TBMQ node (identified by $serviceId).
-* **tbmq.msg.ie.$integrationId** — Per-integration message processing topic used to forward MQTT messages from TBMQ to the IE ($integrationId is the UUID of the integration entity).
+* **tbmq.ie.downlink.$integrationType** — 用于将集成配置和验证请求从 TBMQ 发送至 IE 的 [Compact](https://docs.confluent.io/kafka/design/log_compaction.html) 主题（$integrationType 可为 'http'、'mqtt' 或 'kafka'）。
+* **tbmq.ie.uplink** — 用于将生命周期事件、统计与错误从 IE 发回 TBMQ 的主题。
+* **tbmq.ie.uplink.notifications.$serviceId** — 用于将验证响应及其他一次性回复发送至正确的 TBMQ 节点（由 $serviceId 标识）的主题。
+* **tbmq.msg.ie.$integrationId** — 用于将 MQTT 消息从 TBMQ 转发至 IE 的按集成消息处理主题（$integrationId 为集成实体的 UUID）。
 
-### Downlink topic
+### 下行主题
 
-TBMQ uses **Kafka compact topics** for downlink communication. Each integration type has its own dedicated topic:
+TBMQ 对下行通信使用 **Kafka compact 主题**。每种集成类型有各自的专用主题：
 
 - `tbmq.ie.downlink.http`
 - `tbmq.ie.downlink.mqtt`
 - `tbmq.ie.downlink.kafka`
 
-These topics are used to deliver integration configuration data when an integration is **created, updated, or deleted**. 
-They are also used to trigger **connection and validation requests** to test the connectivity to the external system and validate the configuration before activation.
+这些主题用于在集成**创建、更新或删除**时投递集成配置数据。
+也用于触发**连接和验证请求**，以在激活前测试外部系统连通性并验证配置。
 
-#### How It Works
+#### 工作方式
 
-- Integration lifecycle events (create, update, delete) are published to the relevant **downlink compact topic**, based on integration type (e.g., `tbmq.ie.downlink.http` for HTTP integration).
-- Kafka’s **log compaction** mechanism keeps only the most recent configuration per integration ID, discarding outdated messages.
-- On startup or partitions reassignment, the `tbmq-ie` instance enters **restoration mode**:
-  1. **Seeks to the beginning** of the assigned topic partitions.
-  2. **Restores the latest state** of all relevant integrations from the compacted records.
-  3. **Skips all validation requests** since they were already processed in the past.
-  4. Once the **end of the partition is reached** the restoration is complete, it transitions to **real-time mode** and begins normal operation.
-- Integrations are only initialized after their latest configurations are fully restored from Kafka.
-- In real-time mode, new integration events are handled immediately. Validation requests are processed on the fly.
-- On shutdown or partitions revocation, the `tbmq-ie` instance stops the affected integrations and cleans up underlying resources such as protocol clients and connections.
+- 集成生命周期事件（创建、更新、删除）根据集成类型发布至相应的**下行 compact 主题**（例如 HTTP 集成使用 `tbmq.ie.downlink.http`）。
+- Kafka 的 **log compaction** 机制仅保留每个集成 ID 的最新配置，丢弃过时消息。
+- 启动或分区重新分配时，`tbmq-ie` 实例进入**恢复模式**：
+  1. **Seek 至**所分配主题分区的**起始位置**。
+  2. 从 compact 记录**恢复**所有相关集成的最新状态。
+  3. **跳过**所有验证请求（因其已过去处理）。
+  4. 到达**分区末端**后恢复完成，切换至**实时模式**并开始正常运行。
+- 集成仅在从 Kafka 完全恢复其最新配置后才初始化。
+- 在实时模式下，新的集成事件立即处理。验证请求即时处理。
+- 关闭或分区回收时，`tbmq-ie` 实例停止受影响的集成并清理底层资源（如协议客户端与连接）。
 
-#### Benefits of This Approach
+#### 该方式的优势
 
-**Resilience** ensures that TBMQ IE can fully recover after restarts without requiring external configuration stores. 
-**Consistency** guarantees that it always works with the latest valid configuration, avoiding stale or conflicting states. 
-**Scalability** is achieved through a stateless service design, with all configuration state persisted in Kafka. 
-**Reduced Load** means that only changed configurations are written, eliminating the need to resend the full configuration set repeatedly.
+**弹性**确保 TBMQ IE 可在重启后完全恢复，无需外部配置存储。
+**一致性**保证始终使用最新有效配置，避免陈旧或冲突状态。
+**可扩展性**通过无状态服务设计实现，所有配置状态持久化于 Kafka。
+**降低负载**意味着仅写入变更的配置，无需重复发送完整配置集。
 
-This pattern provides a **durable, distributed configuration source** backed by Kafka, enabling reliable and scalable integration execution across multiple TBMQ IE instances.
+该模式提供由 Kafka 支持的**持久化、分布式配置源**，使多个 TBMQ IE 实例上的集成执行可靠且可扩展。
 
-#### Why Separate Topics?
+#### 为何使用独立主题？
 
-Although downlink topics are not used for message processing (which is useful for parallel processing), separating them by integration type provides several key benefits:
+尽管下行主题不用于消息处理（对并行处理有益），按集成类型分离它们带来以下好处：
 
-- **Executor Specialization**: You can assign specific Integration Executor instances to process only certain integration types using the `TB_SERVICE_INTEGRATIONS_SUPPORTED` and `TB_SERVICE_INTEGRATIONS_EXCLUDED` [environment variables](/docs/{{docsPrefix}}mqtt-broker/install/ie-config/#service-parameters).
-- **Targeted Consumption**: Executors subscribe only to topics they are configured to handle.
-- **Improved Isolation**: Different integration types often have different configuration payloads and validation logic. Dedicated topics ensure that only relevant messages are received by each executor.
-- **Operational Simplicity**: Easier to debug and monitor traffic per integration type.
-- **Flexible Scaling**: Each topic can be tuned individually (e.g., partitions, retention) based on the specific load characteristics of each integration type.
+- **执行器专业化**：可使用 `TB_SERVICE_INTEGRATIONS_SUPPORTED` 和 `TB_SERVICE_INTEGRATIONS_EXCLUDED` [环境变量](/docs/{{docsPrefix}}mqtt-broker/install/ie-config/#service-parameters) 让特定 Integration Executor 实例仅处理某些集成类型。
+- **定向消费**：执行器仅订阅其配置为处理的主题。
+- **更好隔离**：不同集成类型常有不同配置负载与验证逻辑。专用主题确保每个执行器仅收到相关消息。
+- **运维简洁**：便于按集成类型调试和监控流量。
+- **灵活扩展**：可根据每种集成类型的负载特性单独调优每个主题（如分区、保留期）。
 
-This design empowers admins to deploy **specialized executor instances** — for example, running only HTTP integrations in one pool and Kafka in another — giving you flexibility, isolation, and efficiency at scale.
+该设计使管理员能部署**专业化执行器实例**——例如在一个池中仅运行 HTTP 集成，在另一个池中运行 Kafka——在规模上提供灵活性、隔离与效率。
 
-### Uplink Topic
+### 上行主题
 
-This topic is used by Integration Executors to send important events back to the TBMQ broker. This includes:
+该主题供 Integration Executor 向 TBMQ 代理发送重要事件，包括：
 
-- **Lifecycle events** (e.g., integration started or stopped).
-- **Errors** (to report failed message deliveries to external systems).
-- **Statistics** (such as success/failure processing counts).
+- **生命周期事件**（例如集成启动或停止）。
+- **错误**（报告向外部系统投递失败）。
+- **统计**（如成功/失败处理计数）。
 
-All messages received on this topic are stored in the TBMQ database as Event entities and used for internal tracking, diagnostics, and administrative visibility.
+该主题收到的所有消息作为 Event 实体存储于 TBMQ 数据库，用于内部跟踪、诊断与管理可见性。
 
-### Uplink Notifications Topic
+### 上行通知主题
 
-These node-specific topics are used by Integration Executors to **send direct replies to specific TBMQ nodes**, 
-typically in response to one-time operations. 
-The topic is dynamically constructed using the target node's service ID.
-For example, they are used to reply to **“Check Connection”** requests and to send **validation results or error details** back to the initiating TBMQ node.
+这些按节点划分的主题供 Integration Executor **向特定 TBMQ 节点发送直接回复**，
+通常针对一次性操作。
+主题使用目标节点的服务 ID 动态构建。
+例如，用于回复**“检查连接”**请求，并向发起 TBMQ 节点返回**验证结果或错误详情**。
 
-This mechanism ensures that responses are routed to the correct instance in clustered environments and maintains accurate request-response correlation.
+该机制确保在集群环境中将响应路由至正确实例，并保持准确的请求-响应关联。
 
-### Integration Lifecycle
+### 集成生命周期
 
-The lifecycle of an integration in TBMQ includes its **creation, update, deletion, execution, monitoring**, and **error handling**.  
-Integrations can be managed either through the **TBMQ Web UI** or via the **REST API**.
+TBMQ 中集成的生命周期包括**创建、更新、删除、执行、监控**和**错误处理**。
+集成可通过 **TBMQ Web UI** 或 **REST API** 管理。
 
-When a create or update request is received, TBMQ sends a **validation request** to the Integration Executor. 
-The IE then validates the configuration based on the integration type and responds with the result.
+收到创建或更新请求时，TBMQ 向 Integration Executor 发送**验证请求**。
+IE 根据集成类型验证配置并返回结果。
 
-This validation process ensures the configuration of the integration is correct before the integration is saved and activated.
-You can also manually test the integration connectivity with the external system using the **“Check Connection”** button on the UI or via the REST API. 
+该验证过程确保在保存并激活集成前配置正确。
+也可使用 UI 上的**“检查连接”**按钮或 REST API 手动测试与外部系统的集成连通性。
 
-#### Validation Scenarios
+#### 验证场景
 
-**Scenario 1: Integration Executor not running — Timeout**
+**场景 1：Integration Executor 未运行 — 超时**
 
 ![image](/images/mqtt-broker/integrations/tbmq-ie-admin-timeout.png)
 
-The Integration Executor is not running, so the broker waits for a response until a timeout occurs. Result: **Timeout exception**.
-The integration will not be saved.
+Integration Executor 未运行，代理会等待响应直至超时。结果：**超时异常**。
+集成不会被保存。
 
-**Scenario 2: Integration Executor running — Configuration Error**
+**场景 2：Integration Executor 运行中 — 配置错误**
 
 ![image](/images/mqtt-broker/integrations/tbmq-ie-admin-error.png)
 
-The Integration Executor is running, but the integration configuration is invalid. Result: **Failure**.
-The integration will not be saved.
+Integration Executor 运行中，但集成配置无效。结果：**失败**。
+集成不会被保存。
 
-**Scenario 3: Integration Executor running — Success**
+**场景 3：Integration Executor 运行中 — 成功**
 
 ![image](/images/mqtt-broker/integrations/tbmq-ie-admin-ok.png)
 
-The Integration Executor is running and the configuration is valid. Result: **Success**.
-Once validation succeeds, the integration entity is saved in the database, the integration subscriptions are persisted in the [Subscription Trie](/docs/{{docsPrefix}}mqtt-broker/architecture/#subscriptions-trie),
-and integration configuration event is sent to the Integration Executor for processing.
+Integration Executor 运行且配置有效。结果：**成功**。
+验证成功后，集成实体保存至数据库，集成订阅持久化至 [Subscription Trie](/docs/{{docsPrefix}}mqtt-broker/architecture/#subscriptions-trie)，
+并发送集成配置事件至 Integration Executor 处理。
 
-### Integration Message Processing Topic
+### 集成消息处理主题
 
 ![image](/images/mqtt-broker/integrations/tbmq-ie-msg-processing.png)
 
-TBMQ uses a **dedicated Kafka topic for each integration** to deliver MQTT messages to the Integration Executor (`tbmq-ie`).
+TBMQ 为每个集成使用**专用 Kafka 主题**向 Integration Executor（`tbmq-ie`）投递 MQTT 消息。
 
-When an MQTT client publishes a message, the TBMQ broker first checks if any integration has a topic filter in Subscription Trie matching the message topic. 
-If a match is found, TBMQ creates an integration event by serializing the message and publishes it to that integration’s own Kafka topic 
-(`tbmq.msg.ie.$integrationId`). The Integration Executor, that is managing that integration and subscribed to that Kafka topic, 
-consumes the message, processes it, and forwards it to the configured external system. 
-The executor may also log the result or report back to TBMQ for monitoring purposes.
+当 MQTT 客户端发布消息时，TBMQ 代理首先检查是否有集成在 Subscription Trie 中有匹配消息主题的主题过滤器。
+若匹配，TBMQ 通过序列化消息创建集成事件，并发布至该集成的 Kafka 主题
+（`tbmq.msg.ie.$integrationId`）。管理该集成并订阅该 Kafka 主题的 Integration Executor
+消费消息、处理并转发至配置的外部系统。
+执行器也可能记录结果或向 TBMQ 反馈以用于监控。
 
-This decoupled, event-driven flow allows TBMQ to offload integration message handling entirely to the executor service. 
-As a result, the broker never waits for external responses, preserving low-latency MQTT performance even when external systems are slow or unavailable.
+该解耦、事件驱动的流程使 TBMQ 将集成消息处理完全交给执行器服务。
+因此，代理不会等待外部响应，即使在外部系统缓慢或不可用时也能保持低延迟的 MQTT 性能。
 
-Each integration has its own Kafka topic, which enables full isolation of message flow. 
-Messages for different integrations are processed independently, in separate threads (Kafka consumers), allowing parallel execution and fine-grained error control.
+每个集成拥有各自的 Kafka 主题，实现消息流的完全隔离。
+不同集成的消息在独立线程（Kafka 消费者）中独立处理，支持并行执行与细粒度错误控制。
 
-Even when an integration is disabled, TBMQ continues publishing matching messages to its Kafka topic. 
-This ensures no message loss, as the executor will resume processing once the integration is re-enabled. 
-Kafka’s retention policies and buffering capabilities provide additional resilience in high-load or temporary-failure scenarios.
+即使集成被禁用，TBMQ 仍会继续将匹配消息发布至其 Kafka 主题。
+这确保无消息丢失，执行器在集成重新启用后可恢复处理。
+Kafka 的保留策略与缓冲能力在高负载或临时故障场景下提供额外弹性。
 
-This architecture ensures reliable, scalable, and fault-tolerant message processing without impacting core broker performance.
-Several key benefits:
+该架构确保可靠、可扩展且容错的消息处理，而不影响核心代理性能。
+主要优势：
 
-- High throughput and non-blocking broker performance.
-- Clean separation of concerns between message routing and message delivery.
-- Full control over retry, backpressure, and error handling per integration.
+- 高吞吐与非阻塞的代理性能。
+- 消息路由与消息投递之间的职责清晰分离。
+- 按集成对重试、背压与错误处理的完整控制。
 
-#### What Happens If an Integration Stays Disabled for a Long Time?
+#### 若集成长时间禁用会发生什么？
 
-To avoid unused topics consuming storage indefinitely, TBMQ includes an automatic **cleanup mechanism**.
+为避免未使用主题无限占用存储，TBMQ 包含自动**清理机制**。
 
-If an integration remains **disabled** for an extended period, its dedicated Kafka message topic will be **deleted automatically**, 
-along with any undelivered messages it contains.
+若集成在较长时间内保持**禁用**，其专用 Kafka 消息主题将**自动删除**，
+连同其中未送达的消息。
 
-However, there’s no need to take manual action — when the integration is **re-enabled**, 
-TBMQ will **recreate the topic automatically** and resume normal message processing.
+但无需手动操作——当集成**重新启用**时，
+TBMQ 将**自动重建主题**并恢复正常消息处理。
 
-You can control the cleanup behavior using the following environment variables.
-By default, the cleanup task runs every 3 hours and removes topics associated with integrations that have been inactive for more than 1 week.
+可使用以下环境变量控制清理行为。
+默认情况下，清理任务每 3 小时运行一次，并移除与不活动超过 1 周的集成关联的主题。
 
 ```yaml
 cleanup:
@@ -295,15 +295,15 @@ cleanup:
   ttl: "${INTEGRATIONS_CLEANUP_TTL_SEC:604800}"
 ```
 
-This approach ensures that inactive integrations do not waste resources while still allowing for automatic recovery when they’re reactivated.
-Additionally, Kafka topic retention settings can be customized to fine-tune storage limits and control how long messages are retained per topic.
+该方法确保不活动集成不会浪费资源，同时仍允许在重新激活时自动恢复。
+此外，可自定义 Kafka 主题保留设置以微调存储限制并控制每主题消息保留时间。
 
-### Message Delivery Error Handling & Retry Mechanism
+### 消息投递错误处理与重试机制
 
-When an integration message fails to be processed (e.g., due to a timeout, unreachable external system, or malformed request), 
-the Integration Executor handles the error based on the configured **acknowledgment and retry strategy** for the `tbmq.msg.ie.$integrationId` topic.
+当集成消息处理失败时（例如因超时、外部系统不可达或格式错误的请求），
+Integration Executor 根据 `tbmq.msg.ie.$integrationId` 主题配置的**确认与重试策略**处理错误。
 
-These behaviors are controlled via the following configuration block:
+这些行为由以下配置块控制：
 
 ```yaml
 integration-msg:
@@ -320,27 +320,27 @@ integration-msg:
     pause-between-retries: "${TB_IE_MSG_ACK_STRATEGY_PAUSE_BETWEEN_RETRIES:1}"
 ```
 
-#### Strategy Options
+#### 策略选项
 
-- **SKIP_ALL** (default):
-  - If a message fails or timed out during processing, it is skipped after logging the error.
-  - This ensures high throughput and avoids retry delays but sacrifices guaranteed delivery to external systems.
+- **SKIP_ALL**（默认）：
+  - 若处理期间消息失败或超时，记录错误后跳过。
+  - 保证高吞吐并避免重试延迟，但牺牲向外部系统的保证投递。
 
-- **RETRY_ALL**:
-  - The executor retries failed and timed out messages in-place, up to the configured number of times (`retries`).
-  - A pause between retries is enforced (`pause-between-retries`) to avoid tight retry loops.
-  - If `retries` is set to `0`, the executor retries the message indefinitely.
+- **RETRY_ALL**：
+  - 执行器在配置次数（`retries`）内就地重试失败和超时消息。
+  - 强制重试间隔（`pause-between-retries`）以避免紧循环重试。
+  - 若 `retries` 设为 `0`，执行器将无限重试该消息。
 
-#### Timeout Control
+#### 超时控制
 
-Each batch of messages (or “pack”) has a **processing timeout** (`pack-processing-timeout`) to prevent long-running tasks from blocking the entire consumer thread.
-This ensures system responsiveness even under high load or slow external targets.
+每批消息（“包”）有**处理超时**（`pack-processing-timeout`），防止长时间任务阻塞整个消费者线程。
+这在高负载或外部目标缓慢时保证系统响应。
 
-This approach provides a flexible balance between performance and delivery guarantees, giving admins control over retry behavior, failure tolerance, and system resilience.
+该方法在性能与投递保证之间取得灵活平衡，让管理员能控制重试行为、故障容忍度与系统弹性。
 
-### Hot Reinitialization of Failed Integrations
+### 失败集成的热重新初始化
 
-In addition to message-level retries, TBMQ supports **automatic reinitialization** of failed integrations through a periodic background check.
+除消息级重试外，TBMQ 支持通过定期后台检查**自动重新初始化**失败集成。
 
 ```yaml
 reinit:
@@ -350,64 +350,64 @@ reinit:
   frequency: "${INTEGRATIONS_REINIT_FREQUENCY_MS:300000}"
 ```
 
-If an integration enters the `FAILED` state (for example, due to broken connections or configuration issues), the Integration Executor will periodically **attempt to reinitialize it**. 
-This process checks all failed integrations every `frequency` milliseconds. 
-If the issue is resolved, such as the remote system becoming reachable, the integration is restored automatically without requiring manual intervention.
+若集成进入 `FAILED` 状态（例如因连接中断或配置问题），Integration Executor 将定期**尝试重新初始化**。
+该过程每 `frequency` 毫秒检查所有失败集成。
+若问题已解决（如远程系统恢复可达），集成将自动恢复，无需人工干预。
 
-This feature ensures long-running integrations remain self-healing and robust in dynamic environments.
+该功能确保长时间运行的集成在动态环境中保持自愈与健壮。
 
-### Integration Metrics Overview
+### 集成指标概述
 
-The **Integration Executor** (`tbmq-ie`) collects and reports detailed metrics that give visibility into the health, performance, and behavior of all configured integrations.  
-These metrics are logged periodically and can be exported to external monitoring systems like **Prometheus** or **Grafana** for alerting, dashboards, and historical analysis.
+**Integration Executor**（`tbmq-ie`）收集并报告详细指标，用于监控所有已配置集成的健康状况、性能与行为。
+这些指标定期记录，并可由 **Prometheus** 或 **Grafana** 等外部监控系统导出，用于告警、仪表板和历史分析。
 
-Below is a breakdown of the main metric categories recorded in the logs:
+以下是日志中记录的主要指标类别：
 
-**1. Current Integration Activity**
+**1. 当前集成活动**
 
-This section logs **per-integration-type counters** for the current reporting interval.
+本节记录**按集成类型的计数器**，对应当前报告周期。
 
-Example:
+示例：
 ```
 IntegrationStatisticsKey(integrationStatisticsMetricName=START, success=true, integrationType=HTTP) = [0]
 ```
 
-**Explanation:**
-- `START`: Number of times an integration startup was attempted.
-- `success=true | false`: Whether the attempt succeeded or failed.
-- `integrationType`: The type of integration (e.g., HTTP, MQTT, Kafka).
+**说明：**
+- `START`：集成启动尝试次数。
+- `success=true | false`：尝试是否成功或失败。
+- `integrationType`：集成类型（如 HTTP、MQTT、Kafka）。
 
-Additional metric types you may see:
-- `integrationStatisticsMetricName=STOP`: Number of times integration shutdown was triggered.
-- `integrationStatisticsMetricName=MSGS_UPLINK`: Number of messages forwarded from the executor to external systems.
+可能出现的其他指标类型：
+- `integrationStatisticsMetricName=STOP`：集成关闭触发次数。
+- `integrationStatisticsMetricName=MSGS_UPLINK`：从执行器转发至外部系统的消息数。
 
-Example:
+示例：
 ```
 MSGS_UPLINK, success=true, integrationType=MQTT = [38]
 ```
--> 38 messages were successfully forwarded to an external MQTT broker.
+-> 38 条消息成功转发至外部 MQTT 代理。
 
-**2. Integration State Summary**
+**2. 集成状态摘要**
 
-This section tracks the **current state** of all integrations managed by the executor.
+本节跟踪执行器管理的所有集成的**当前状态**。
 
-Example:
+示例：
 ```
 START, success=true, integrationType=MQTT = [1]
 ```
--> There is currently **one active MQTT integration** in the `STARTED` state.
+-> 当前有**一个活跃的 MQTT 集成**处于 `STARTED` 状态。
 
-**Key points:**
-- `success=true`: Number of integrations in `STARTED` state.
-- `success=false`: Number of integrations in `FAILED` state.
+**要点：**
+- `success=true`：处于 `STARTED` 状态的集成数。
+- `success=false`：处于 `FAILED` 状态的集成数。
 
-These values are updated whenever any integration changes state. They help admins understand the **real-time health** of all running integrations across types.
+这些值在任何集成状态变化时更新。帮助管理员了解**所有运行集成的实时健康状况**，按类型汇总。
 
-**3. Integration Uplink Queue Stats**
+**3. 集成上行队列统计**
 
-These metrics summarize the state of the **uplink Kafka topic**, which is used by the executor to send error, statistics and lifecycle events back to TBMQ.
+这些指标汇总用于执行器向 TBMQ 发送错误、统计和生命周期事件的**上行 Kafka 主题**状态。
 
-Example:
+示例：
 ```
 queueSize = [0]
 totalMsgs = [1]
@@ -415,19 +415,19 @@ successfulMsgs = [1]
 failedMsgs = [0]
 ```
 
-**Metric descriptions:**
-- `queueSize`: Number of messages currently waiting in the uplink Kafka queue.
-- `totalMsgs`: Total number of messages sent to the uplink topic.
-- `successfulMsgs`: Messages published successfully.
-- `failedMsgs`: Messages that failed to publish.
+**指标说明：**
+- `queueSize`：上行 Kafka 队列中当前等待的消息数。
+- `totalMsgs`：发送至上行主题的消息总数。
+- `successfulMsgs`：成功发布的消息数。
+- `failedMsgs`：发布失败的消息数。
 
-These values help monitor the **reliability and health of internal communication** between executor and broker services.
+这些值有助于监控执行器与代理服务之间的**内部通信可靠性与健康状况**。
 
-**4. Integration Message Processing Stats**
+**4. 集成消息处理统计**
 
-These are **per-integration-instance metrics** that reflect how messages are being processed and delivered to external systems.
+这些是**按集成实例的指标**，反映消息如何被处理并投递至外部系统。
 
-Example:
+示例：
 ```
 [integrationProcessor][f6e82897-dd18-4c6f-ac31-5f19ce75e2db]
 totalMsgs = [38]
@@ -440,44 +440,44 @@ successfulIterations = [38]
 failedIterations = [0]
 ```
 
-**Metric descriptions:**
-- `[integrationProcessor][<UUID>]`: The metric group for a specific integration instance.
-- `totalMsgs`: Total messages received for processing.
-- `successfulMsgs`: Messages successfully delivered.
-- `tmpTimeout`: Messages that exceeded the processing timeout but will be retried.
-- `tmpFailed`: Messages that failed but will be retried.
-- `timeoutMsgs`: Messages that exceeded the processing timeout and will not be retried.
-- `failedMsgs`: Messages that failed permanently after retry attempts.
-- `successfulIterations`: Number of successful message batch executions (all messages in the batch processed without error).
-- `failedIterations`: Number of message batch executions that resulted in one or more processing failures.
+**指标说明：**
+- `[integrationProcessor][<UUID>]`：特定集成实例的指标组。
+- `totalMsgs`：接收待处理的消息总数。
+- `successfulMsgs`：成功投递的消息数。
+- `tmpTimeout`：超出处理超时但将重试的消息数。
+- `tmpFailed`：失败但将重试的消息数。
+- `timeoutMsgs`：超出处理超时且不再重试的消息数。
+- `failedMsgs`：重试后永久失败的消息数。
+- `successfulIterations`：成功消息批次执行次数（批次中所有消息无错误处理）。
+- `failedIterations`：导致一个或多个处理失败的消息批次执行次数。
 
-These metrics are essential for monitoring **message-level reliability**, troubleshooting integration issues, and ensuring timely delivery to external targets.
+这些指标对监控**消息级可靠性**、排查集成问题及确保及时投递至外部目标至关重要。
 
-## Scalability and Fault Tolerance
+## 可扩展性与容错
 
-- **Executor Scaling**: You can run multiple instances of the `tbmq-ie` service in parallel. Kafka handles partitioning and distributes integration messages across executors automatically, enabling horizontal scaling.
-- **Fault Isolation**: Issues in external systems (e.g., a slow or unreachable HTTP endpoint) affect only the Integration Executor. The TBMQ broker continues operating normally without delay or message loss.
-- **Backpressure Management**: Kafka acts as a message buffer. If executors become slow or temporarily overloaded, Kafka retains messages based on its configured retention policies until the executors are ready to process them.
-- **Resilience**: Executor instances can restart or fail independently. Integrations are restored automatically using compacted configuration topics, without manual intervention.
+- **执行器扩展**：可并行运行多个 `tbmq-ie` 服务实例。Kafka 处理分区并在执行器间自动分布集成消息，支持水平扩展。
+- **故障隔离**：外部系统的问题（如缓慢或不可达的 HTTP 端点）仅影响 Integration Executor。TBMQ 代理继续正常运行，无延迟或消息丢失。
+- **背压管理**：Kafka 充当消息缓冲。若执行器变慢或暂时过载，Kafka 按其配置的保留策略保留消息，直至执行器准备好处理。
+- **弹性**：执行器实例可独立重启或失败。集成通过 compact 配置主题自动恢复，无需人工干预。
 
-This architecture supports modern cloud-native deployment models and ensures that TBMQ remains robust and responsive, even under heavy load or partial system failures.
+该架构支持现代云原生部署模式，确保 TBMQ 在高负载或部分系统故障下仍保持健壮与响应迅速。
 
-## Supported Integration Types
+## 支持的集成类型
 
-TBMQ currently supports three outbound integration types, each designed for specific use cases:
+TBMQ 目前支持三种出站集成类型，分别面向特定用例：
 
-- [**HTTP Integration**](/docs/{{docsPrefix}}mqtt-broker/integrations/http/) – Send MQTT messages to REST APIs or Webhooks via HTTP(S).
-- [**MQTT Integration**](/docs/{{docsPrefix}}mqtt-broker/integrations/mqtt/) – Forward messages to external MQTT brokers for cross-broker communication via MQTT(S).
-- [**Kafka Integration**](/docs/{{docsPrefix}}mqtt-broker/integrations/kafka/) – Stream messages into Kafka topics for real-time processing via TCP(TLS).
+- [**HTTP 集成**](/docs/{{docsPrefix}}mqtt-broker/integrations/http/) – 通过 HTTP(S) 将 MQTT 消息发送至 REST API 或 Webhook。
+- [**MQTT 集成**](/docs/{{docsPrefix}}mqtt-broker/integrations/mqtt/) – 通过 MQTT(S) 将消息转发至外部 MQTT 代理，实现跨代理通信。
+- [**Kafka 集成**](/docs/{{docsPrefix}}mqtt-broker/integrations/kafka/) – 通过 TCP(TLS) 将消息流式写入 Kafka 主题，支持实时处理。
 
-## Roadmap
+## 路线图
 
-We’re actively working on expanding integration capabilities in TBMQ. Upcoming plans include:
+我们正在积极扩展 TBMQ 的集成能力。后续计划包括：
 
-- **New outbound integration types**, such as Redis, PostgreSQL, RabbitMQ, and more.
-- **Inbound (source) integrations**, which will allow TBMQ to receive messages from external systems — for example, Kafka integrations (acting as consumers) or MQTT integrations (acting as subscribers).
-- **Message transformation and filtering**, enabling dynamic processing before forwarding data to external targets.
+- **新的出站集成类型**，如 Redis、PostgreSQL、RabbitMQ 等。
+- **入站（源）集成**，使 TBMQ 能从外部系统接收消息——例如 Kafka 集成（作为消费者）或 MQTT 集成（作为订阅者）。
+- **消息转换与过滤**，在向外部目标转发数据前支持动态处理。
 
-These enhancements will enable even greater flexibility in building event-driven and bi-directional IoT architectures.
+这些增强将为构建事件驱动和双向 IoT 架构提供更大灵活性。
 
-**Stay tuned for future updates!**
+**敬请关注后续更新！**

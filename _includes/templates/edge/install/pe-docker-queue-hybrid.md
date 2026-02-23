@@ -1,14 +1,14 @@
-[Apache Cassandra](https://cassandra.apache.org/_/index.html){: target="_blank"} is an open source NoSQL database designed to manage massive amounts of data.
+[Apache Cassandra](https://cassandra.apache.org/_/index.html){: target="_blank"} 是一款开源 NoSQL 数据库，专为管理海量数据而设计。
 
-[Apache Kafka](https://kafka.apache.org/){: target="_blank"} is an open source stream processing software platform.
+[Apache Kafka](https://kafka.apache.org/){: target="_blank"} 是开源流处理软件平台。
 
-Create the **docker compose file**:
+创建 **docker compose 文件**：
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following configuration lines to the **yml file**:
+将以下配置行添加到 **yml 文件**：
 
 ```
 version: '3.8'

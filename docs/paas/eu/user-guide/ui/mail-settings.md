@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Mail server configuration
-description: ThingsBoard IoT platform mail settings
+title: 邮件服务器配置
+description: ThingsBoard IoT 平台邮件设置
 
 mail-server-configuration-1:
     0:

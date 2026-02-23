@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Upgrade instructions
-description: ThingsBoard IoT platform upgrade instructions
+title: 升级说明
+description: ThingsBoardIoT平台升级说明
 table-of-contents: "false"
 active-menu-item-click: "true"
 
@@ -15,7 +15,7 @@ active-menu-item-click: "true"
   {% include upgrade-instructions-table.liquid %}
 </div>
 
-<p id="upgrade-links-old" style="margin-bottom: 10px">Upgrade instructions for <a href="/docs/user-guide/install/upgrade-instructions/old-upgrade-instructions/">versions older than 3.0</a>.</p>
+<p id="upgrade-links-old" style="margin-bottom: 10px">适用于 <a href="/docs/user-guide/install/upgrade-instructions/old-upgrade-instructions/">3.0 以下版本</a> 的升级说明。</p>
 
 <script>
   (function () {

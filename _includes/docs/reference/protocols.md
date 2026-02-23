@@ -1,5 +1,5 @@
 
-ThingsBoard supports following protocols for device connectivity:
+ThingsBoard 支持以下设备连接协议：
 
  - **[MQTT](/docs/{{docsPrefix}}reference/mqtt-api)**
 {% if docsPrefix != "edge/" and docsPrefix != "pe/edge/" %} 
@@ -10,10 +10,10 @@ ThingsBoard supports following protocols for device connectivity:
  - **[LwM2M](/docs/{{docsPrefix}}reference/lwm2m-api)**
  - **[SNMP](/docs/{{docsPrefix}}reference/snmp-api)**
 
-See protocol specific documentation for more details. More protocols are coming soon.
+详见各协议文档。更多协议即将支持。
 
-**Note** You can also connect **existing** devices to the platform using:
+**注意**：也可通过以下方式将**既有**设备接入平台：
 
 - **[ThingsBoard Gateway](/docs/iot-gateway/what-is-iot-gateway/)**
-or design your own gateway using **[Gateway MQTT API](/docs/{{docsPrefix}}reference/gateway-mqtt-api/)**.
+或使用 **[Gateway MQTT API](/docs/{{docsPrefix}}reference/gateway-mqtt-api/)** 自建网关。
 

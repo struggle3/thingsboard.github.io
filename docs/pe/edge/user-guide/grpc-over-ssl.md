@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge over TLS/SSL 
-description: Edge over TLS/SSL 
+title: 基于 TLS/SSL 的 Edge
+description: 基于 TLS/SSL 的 Edge
 ---
 
 {% include docs/edge/user-guide/grpc-over-ssl.md %}

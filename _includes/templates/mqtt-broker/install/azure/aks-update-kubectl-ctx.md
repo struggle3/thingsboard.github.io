@@ -1,15 +1,15 @@
-When the cluster is created, we can connect kubectl to it using the next command:
+集群创建后，可使用以下命令将 kubectl 连接到该集群：
 
 ```bash
 az aks get-credentials --resource-group $AKS_RESOURCE_GROUP --name $TB_CLUSTER_NAME
 ```
 {: .copy-code}
 
-For validation, you can execute the following command:
+为验证连接，可执行以下命令：
 
 ```bash
 kubectl get nodes
 ```
 {: .copy-code}
 
-You should see cluster`s nodes list.
+您应能看到集群节点列表。

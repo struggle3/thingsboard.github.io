@@ -1,17 +1,17 @@
 ---
 layout: docwithnav-gw
-title: Socket Connector Configuration
-description: Socket API support for ThingsBoard IoT Gateway
+title: Socket 连接器配置
+description: ThingsBoard IoT Gateway 的 Socket API 支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you get familiar with Socket Connector configuration for ThingsBoard IoT Gateway. 
-Use the [general configuration guide](/docs/iot-gateway/configuration/) to enable this connector. 
-A Socket connector runs a server on the local machine to which other devices can connect. This connector is useful 
-when you have devices that can send data over TCP or UDP protocols. 
+本指南将帮助您熟悉 ThingsBoard IoT Gateway 的 Socket 连接器配置。 
+请使用 [通用配置指南](/docs/iot-gateway/configuration/) 启用此连接器。 
+Socket 连接器在本地运行服务器，供其他设备连接。当您有设备可通过 TCP 或 UDP 协议发送数据时，
+此连接器非常有用。 
 
 We will describe the connector configuration file below.
 

@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Track Overall Equipment Effectiveness (OEE) on industrial plant
-description: How to track real-time OEE scores for manufacturing plants using data from IoT sensors. Dive into Availability, Performance, and Quality metrics to optimize assembly lines and tackle downtime causes.  
+title: 工业厂房综合设备效率（OEE）追踪
+description: 使用 IoT 传感器数据追踪制造厂的实时 OEE 得分，从 Availability、Performance、Quality 指标着手优化产线并应对停机原因。  
 
 oee-score-dashboard:
   0:
@@ -63,93 +63,95 @@ oee-score-quality-score:
 {:toc}
 
 ## Introduction
-A manufacturing plant produces automotive parts and operates 24/7. The plant has three assembly lines, and each line has an Overall Equipment Efficiency (OEE) score of 85%, 90%, and 75%, respectively.
-By utilizing data from iot sensors, installed near assembly lines in smart factory, and analyzing real-time data from the assembly lines, we can track Availability, Performance, and Quality indicators for the whole plant and for each individual part in assembly line. Once we will track those metrics in real-time 
-and on daily basis we would be able to analyze equipment downtime reasons and identify the root cause of the low OEE score, like unplanned downtime, low performance, or low quality.
+某制造厂生产汽车零部件，24/7运行。工厂有3条组装线，OEE分别为85%、90%、75%。
+利用smart factory组装线旁iot sensors的数据，分析组装线实时数据，可跟踪全厂及单条线的Availability、Performance和Quality指标。
+实时、按日跟踪这些指标后，可分析设备downtime原因、定位低OEE根因，如计划外停机、低performance或低质量。
 
-**Task definition:** Track OEE score for the whole plant and for each assembly line in real-time and on daily basis.
+**任务定义：** 实时、按日跟踪全厂及每条组装线的OEE。
 
 {% include images-gallery.html imageCollection="oee-score-dashboard" %}
 
 
 ### Implementation plan
-* Compute **Availability** metric for assembly lines by tracking amount and reasons of downtime events.
-* Identify top 5 downtime reasons for each assembly line to perform root cause analysis.
-* Analyze **Performance** metric by tracking speed of production compared to the planned speed.
-* Compute **Quality** metric based on amount of rejected parts and rejection reasons.
+* 通过跟踪downtime事件的数量和原因，计算组装线的**Availability**指标
+* 确定每条组装线的top 5 downtime原因，进行根因分析
+* 通过跟踪实际生产速度与计划速度的对比，分析**Performance**指标
+* 基于不合格件数量及不合格原因计算**Quality**指标
 
 
 ## Getting started:
 
 ### Prerequisites
-Lets take a look at entities that exists in ThingsBoard in scope of the solution that we are discussing. It is important to understand how they are connected between each other and what raw telemetry we receive from sensors. 
-The mechanisms how entities and sensors are provisioned are out of scope of this guide. You can find details how to do that in our documentation. So here is how our domain model looks like:
+先了解方案涉及的ThingsBoard实体及其关系、传感器上报的原始telemetry。
+实体的provision及传感器配置不在本指南范围内。可参考文档。领域模型如下：
 
-* `Manufacturing plant` registered in ThingsBoard as an asset. 
-* `Assembly line` registered in ThingsBoard as devices and has a relation to the manufacturing plant asset.
-* On-site Gateway collects data from assembly lines via modbus protocol and sends it to ThingsBoard as a telemetry.
-* Following metrics colelcted from assembly line:
-  * `powerUsageWh` - amount of energy consumed by assembly line in Wh
-  * `producedParts` - amount of parts produced
-  * `rejectedParts` - amount of parts rejected during quality check
-  * `status` - current status of assembly line (running, stopped, maintenance, etc)
-  * `reason` - reason of downtime event (maintenance, lack of materials, etc)
+* `Manufacturing plant`在ThingsBoard中注册为asset
+* `Assembly line`在ThingsBoard中注册为device，与manufacturing plant asset关联
+* 现场Gateway通过modbus协议从组装线采集数据，作为telemetry发送至ThingsBoard
+* 组装线上报的指标：
+  * `powerUsageWh` - 能耗（Wh）
+  * `producedParts` - 产量
+  * `rejectedParts` - 质检不合格数
+  * `status` - 当前状态（running、stopped、maintenance等）
+  * `reason` - 停机原因（maintenance、lack of materials等）
 
 ### Step 1: Analyze equipment downtime duration and compute Availability metric
-We have all required information from assembly line to compute how much time it was down and what was the reason. Every 30 seconds we receive energy consumption details from assembly line 
-in the format `{powerUsageWh: 10, ts: 1675421880000}`. Also, each time when equipment is stopped operator select the reason and ThingsBoard receive an event about status change in the format `{status: "stopped", reason: "maintenance", ts: 1675421880000}`.
+组装线提供了计算停机时长和原因所需的信息。每30秒收到能耗数据，
+格式`{powerUsageWh: 10, ts: 1675421880000}`。设备停机时操作员选择原因，ThingsBoard收到状态变更事件，
+格式`{status: "stopped", reason: "maintenance", ts: 1675421880000}`。
 
-To analyze how much time assembly line was operational or stopped we will use Trendz **state fields**. State field is a special type of field that can tell how much time equipment was in specific state based on simple boolean condition. So let's start:
+分析组装线运行或停机时长时，使用Trendz **state fields**。State field可根据简单布尔条件表示设备处于某state的时长。
+开始配置：
 
-* Create Line chart in Trendz
-* Add `Date` field into X-axis section - it allows to split data by month, week, day or hour
-* Add `assemblyLine` field into series section - it allows to split data by assembly line
-* Add State field into Y-axis section
-  * Change aggregation to `Duration percent` - with this aggregation we will see how much time in % each assembly line was operational
-  * Change label to `Availability score`
-  * Use following javascript formula to define operational state
+* 在Trendz创建Line chart
+* 在X-axis区域添加`Date`字段——按月、周、日或小时拆分数据
+* 在Series区域添加`assemblyLine`字段——按组装线拆分
+* 在Y-axis区域添加State字段
+  * 聚合改为`Duration percent`——显示每条组装线运行时间占比
+  * 标签改为`Availability score`
+  * 用下列javascript公式定义运行state
 
 ```javascript
 var state = none(assemblyLine.status);
 return state == "running";
 ```
 
-* Save view with the name **OEE Availability line chart**
+* 以名称**OEE Availability line chart**保存视图
 
-As a result we can see a real-time line chart that shows as OEE Availability score for each assembly line. Later we can add here a threshold to highlight when Availability score is below expected target so we can quicker react to potential problems.
+可得到展示各组装线OEE Availability score的实时折线图。后续可添加阈值，当Availability score低于目标时高亮，以便快速响应。
 
 {% include images-gallery.html imageCollection="oee-score-availability-calculation" %}
 
 
 ### Step 2: Build bar chart with top 5 downtime reasons for each assembly line.
-Now we want to know what are the most frequent downtime reasons in different machines. This data should be visualized in form of stacked bar chart where each bar represents one assembly line and each bar is split by top 5 downtime reasons. 
+分析不同设备的最常见停机原因。数据以stacked bar chart展示，每根柱代表一条组装线，每根柱按top 5停机原因拆分。
 
-* Create Bar chart in Trendz
-* Add `assemblyLine` field into X-axis section - it allows to split data by assembly line
-* Add `assemblyLine.status` field into Series section with aggregation `UNIQ`- it allows to group data by status
-* Add `assemblyLine.status` field into Values section with aggregation `COUNT`- it allows to count amount of events for each status
-* Add `assemblyLine.status` field into Filters and select all available statuses that represent downtime.
-* Open view settings
-  * Set sorting to `Descending`
-  * Set sorting column to `assemblyLine.status`
-  * Set `Limit` to 5
-  * Enable checkbox `Stacked bar`
-* Save view with the name **Availability: Top 5 downtime reasons**
+* 在Trendz创建Bar chart
+* 在X-axis区域添加`assemblyLine`——按组装线拆分
+* 在Series区域添加`assemblyLine.status`，聚合选`UNIQ`——按status分组
+* 在Values区域添加`assemblyLine.status`，聚合选`COUNT`——统计各status事件数
+* 在Filters中添加`assemblyLine.status`，选择代表downtime的所有status
+* 打开view settings
+  * 排序设为`Descending`
+  * 排序列设为`assemblyLine.status`
+  * `Limit`设为5
+  * 勾选`Stacked bar`
+* 以名称**Availability: Top 5 downtime reasons**保存
 
 {% include images-gallery.html imageCollection="oee-score-downtime-reasons" %}
 
 ### Step 3: Compare current and planned production speed
-Performance score in OEE framework is a ratio of actual production speed to the planned speed. We have a planned speed for each assembly line stored as an attribute value and we can calculate actual speed based on the amount of produced parts.
-Sensors on assembly line reports amount of produced parts every 60 seconds in the format `{producedParts: 10, ts: 1675421880000}`.  We want to create a line chart that will show assembly line performance score for each line.
+OEE框架中，Performance score为实际生产速度与计划速度之比。每条组装线的计划速度存于attribute，实际速度可根据产量计算。
+组装线传感器每60秒上报产量，格式`{producedParts: 10, ts: 1675421880000}`。创建展示各线performance score的折线图。
 
-* Create Line chart in Trendz
-* Add `Date` field into X-axis section - it allows to split data by month, week, day or hour
-* Add `assemblyLine` field into series section - it allows to split data by assembly line
-* Add Calculated field into Y-axis section
-  * Change label to `Perfromance score`
-  * Enable `Batch calculation` checkbox - we want to use raw telemetry values to calculate performance score
-  * Use AVG aggregation - we want to calculate average performance score for each time interval because user can switch intervals between hour, day, week and month
-  * Use following javascript formula to calculate performance score
+* 在Trendz创建Line chart
+* 在X-axis区域添加`Date`——按月、周、日或小时拆分
+* 在Series区域添加`assemblyLine`——按组装线拆分
+* 在Y-axis区域添加Calculated字段
+  * 标签改为`Perfromance score`
+  * 勾选`Batch calculation`——使用原始telemetry计算performance score
+  * 使用AVG聚合——因用户可切换hour、day、week、month，需计算各时间间隔的平均performance score
+  * 用下列javascript公式计算performance score
  
 ```javascript
 var plannedSpeed = uniq(assemblyLine.plannedSpeed)[0].value;
@@ -165,23 +167,24 @@ for (var i = 0; i < rawProducedPartsArray.length; i++) {
 return performanceScore;
 ```
 
-* Save view with the name **OEE Performance score line chart**
+* 以名称**OEE Performance score line chart**保存
 
-In this view we are using batch calculated fields because we need to get access to raw values reported from sensors. 
-Once transformation performed, Trendz would apply selected aggregation function, in our case AVG, to the result array to receive single value for each time interval and assembly line. Opposite to this, simple calculated field apply aggregation before transformation. 
+本视图使用batch calculated fields以访问传感器上报的原始值。
+transformation完成后，Trendz对结果数组应用所选聚合函数（本例为AVG），得到每个时间间隔、每条线的单一值。
+而简单calculated field在transformation前先应用聚合。
 
 {% include images-gallery.html imageCollection="oee-score-production-speed-vs-planned" %}
 
 ### Step 4: Compute Quality score based on amount of rejected parts
-Final aspect to analyze is a Quality score that would tell how many rejected parts we have and how it differs between assembly lines, because some equipment may have mechanical losses or non-experienced operators in the shift and as a result we will have more rejected parts.
-This information is submitted from sensors in the following format: `{rejectedParts: 10, ts: 1675421880000}`. We want to create a line chart that will show assembly line quality score for each line.
+最后分析Quality score——不合格件数量及各组装线差异。部分设备可能有机械损耗或操作员经验不足导致更多不合格件。
+传感器上报格式：`{rejectedParts: 10, ts: 1675421880000}`。创建展示各线quality score的折线图。
 
-* Create Line chart in Trendz
-* Add `Date` field into X-axis section - it allows to split data by month, week, day or hour
-* Add `assemblyLine` field into series section - it allows to split data by assembly line
-* Add Calculated field into Y-axis section
-  * Change label to `Quality score`
-  * Use following javascript formula to calculate quality score
+* 在Trendz创建Line chart
+* 在X-axis区域添加`Date`——按月、周、日或小时拆分
+* 在Series区域添加`assemblyLine`——按组装线拆分
+* 在Y-axis区域添加Calculated字段
+  * 标签改为`Quality score`
+  * 用下列javascript公式计算quality score
 
 ```javascript
 var producedParts = sum(assemblyLine.producedParts);
@@ -191,15 +194,15 @@ var qualityScore = 100 - rejectedParts * 100 / producedParts;
 return qualityScore;
 ```
 
-* Save view with the name **OEE Quality score line chart**
+* 以名称**OEE Quality score line chart**保存
 
-In the formula for calculated field we are computing percent of 'good' details produced by assembly line.
+计算字段公式中，计算的是组装线生产合格件的百分比。
 
 {% include images-gallery.html imageCollection="oee-score-quality-score" %}
 
 ## Summary
-By tracking OEE scores and their components for each assembly line, we can pinpoint the specific factors that are impacting efficiency and identify opportunities for improvement. 
-This knowledge allows plant managers to implement targeted solutions to address the unique challenges faced by each assembly line, ultimately resulting in a more efficient and productive manufacturing plant. By analyzing data on Availability, Performance, and Quality, plant 
-managers can identify the root causes of low OEE scores and develop targeted solutions to improve them. Through continuous monitoring and improvement, the 
-plant can optimize its assembly lines, reduce downtime, and produce higher quality parts at a faster rate. As technology continues to evolve, real-time data collection and analysis 
-will become even more important for ensuring the success and competitiveness of manufacturing plants.
+通过跟踪每条组装线的OEE及其构成，可定位影响效率的具体因素、找到改进空间。
+工厂管理者可针对每条线实施针对性方案，最终提升效率和生产能力。
+分析Availability、Performance、Quality数据可定位低OEE根因并制定改进措施。
+通过持续监测和改进，可优化组装线、减少停机、提高产量和质量。
+随着技术发展，实时数据采集与分析对制造厂的成功和竞争力将更加重要。

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: The Things Stack Community integration
-description: The Things Stack Community integration guide
+title: The Things Stack Community 集成
+description: The Things Stack Community 集成指南
 
 ---
 {% assign docsPrefix = "paas/eu/" %}

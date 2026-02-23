@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
 title: Edge Professional Edition upgrade instructions
-description: Edge upgrade instructions
+description: Edge 升级说明
 table-of-contents: "false"
 active-menu-item-click: "true"
 effective-url: '/docs/user-guide/install/pe/edge/upgrade-instructions/'

@@ -1,6 +1,6 @@
 ![image](/images/user-guide/integrations/uplink-converter-example-tbel.png)
 
-The full source code of TBEL function used in converter:
+converter 中使用的 TBEL 函数完整源码：
 
 ```shell
 // decode payload to JSON

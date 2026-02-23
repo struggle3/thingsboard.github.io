@@ -1,6 +1,6 @@
 ---
 layout: common
-title: Apply for Hardware Partner Program
+title: 申请硬件合作伙伴计划
 notitle: "true"
 ---
 
@@ -13,58 +13,58 @@ notitle: "true"
         <form id="contact-form" class="contact-form" action="https://app.mailerlite.com/webforms/submit/h5b7n2" data-id="1211392" data-code="h5b7n2" method="POST" target="_blank">
             <fieldset>
                 <div class="form-title center">
-                    <h1>Hardware Partner Program Silver Level</h1>
+                    <h1>硬件合作伙伴计划白银级别</h1>
                 </div>
                 <div class="cloud-provider">
                     <div class="logo-container partner">
                         <img src="/images/partners/silver-partner.svg" alt="silver partner">
                     </div>
                     <div class="cloud-provider-desc">
-                        <p>Silver Partnership does not require any fees but assumes you have basic ThingsBoard knowledge and will prepare the online tutorial and demo dashboard on your own.</p>
+                        <p>白银合作伙伴不收取任何费用，但要求您具备基础的 ThingsBoard 知识，并自行准备在线教程和演示仪表板。</p>
                     </div>
                 </div>
-                <p>Please fill this form to get further instructions.</p>
+                <p>请填写此表单以获取进一步说明。</p>
                 <div class="form-section">
                     <div class="form-element first half ml-field-first_name ml-validate-required">
                         <label for="fields[first_name]">
                             <input type="text" name="fields[first_name]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>First name*</p>
+                            <p>名*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-last_name ml-validate-required">
                         <label for="fields[last_name]">
                             <input type="text" name="fields[last_name]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Last name*</p>
+                            <p>姓*</p>
                         </label>
                     </div>
                     <div class="form-element first half ml-field-email ml-validate-required ml-validate-email">
                         <label for="fields[email]">
                             <input type="email" name="fields[email]" class="form-control" value="" autocomplete="email" x-autocompletetype="email" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Email Address*</p>
+                            <p>电子邮箱*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-company ml-validate-required">
                         <label for="fields[company]">
                             <input type="text" name="fields[company]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Company*</p>
+                            <p>公司*</p>
                         </label>
                     </div>
                     <div class="form-element first half ml-field-company_website ml-validate-required">
                         <label for="fields[company_website]">
                             <input type="text" name="fields[company_website]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Company Website*</p>
+                            <p>公司网站*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-phone">
                         <label for="fields[phone]">
                             <input type="text" name="fields[phone]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Phone Number</p>
+                            <p>电话号码</p>
                         </label>
                     </div>
                 </div>
                 <input type="hidden" name="ml-submit" value="1" />
                 <button class="button" type="submit" class="primary">
-                    Submit
+                    提交
                 </button>
                 <button disabled="disabled" style="display: none;" type="button" class="loading">
                     <img src="https://static.mailerlite.com/images/rolling@2x.gif" width="20" height="20" style="width: 20px; height: 20px;" alt="rolling">
@@ -76,63 +76,63 @@ notitle: "true"
         <form id="contact-form" class="contact-form" action="https://app.mailerlite.com/webforms/submit/d6b3t8" data-id="1211402" data-code="d6b3t8" method="POST" target="_blank">
             <fieldset>
                 <div class="form-title center">
-                    <h1>Hardware Partner Program Gold Level</h1>
+                    <h1>硬件合作伙伴计划黄金级别</h1>
                 </div>
                 <div class="cloud-provider">
                     <div class="logo-container partner">
                         <img src="/images/partners/gold-partner.svg" alt="gold partner">
                     </div>
                     <div class="cloud-provider-desc">
-                        <p>Gold Partnership includes our support services and help with preparing online tutorials and dashboards that will become an ultimate selling tool for your devices.</p>
+                        <p>黄金合作伙伴包括我们的支持服务以及协助准备在线教程和仪表板，这些将成为您设备的终极销售工具。</p>
                         <br>
                         <p>
-                            <span class="cloud-price-aws-desc">Yearly fee:</span>
+                            <span class="cloud-price-aws-desc">年费：</span>
                             <span class="cloud-price-aws">$500</span>
                         </p>
                     </div>
                 </div>
-                <p>Please fill this form to get further instructions.</p>
+                <p>请填写此表单以获取进一步说明。</p>
                 <div class="form-section">
                     <div class="form-element first half ml-field-first_name ml-validate-required">
                         <label for="fields[first_name]">
                             <input type="text" name="fields[first_name]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>First name*</p>
+                            <p>名*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-last_name ml-validate-required">
                         <label for="fields[last_name]">
                             <input type="text" name="fields[last_name]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Last name*</p>
+                            <p>姓*</p>
                         </label>
                     </div>
                     <div class="form-element first half ml-field-email ml-validate-required ml-validate-email">
                         <label for="fields[email]">
                             <input type="email" name="fields[email]" class="form-control" value="" autocomplete="email" x-autocompletetype="email" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Email Address*</p>
+                            <p>电子邮箱*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-company ml-validate-required">
                         <label for="fields[company]">
                             <input type="text" name="fields[company]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Company*</p>
+                            <p>公司*</p>
                         </label>
                     </div>
                     <div class="form-element first half ml-field-company_website ml-validate-required">
                         <label for="fields[company_website]">
                             <input type="text" name="fields[company_website]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Company Website*</p>
+                            <p>公司网站*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-phone">
                         <label for="fields[phone]">
                             <input type="text" name="fields[phone]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Phone Number</p>
+                            <p>电话号码</p>
                         </label>
                     </div>
                 </div>
                 <input type="hidden" name="ml-submit" value="1" />
                 <button class="button" type="submit" class="primary">
-                    Submit
+                    提交
                 </button>
                 <button disabled="disabled" style="display: none;" type="button" class="loading">
                     <img src="https://static.mailerlite.com/images/rolling@2x.gif" width="20" height="20" style="width: 20px; height: 20px;" alt="rolling">
@@ -144,63 +144,63 @@ notitle: "true"
         <form id="contact-form" class="contact-form" action="https://app.mailerlite.com/webforms/submit/r7f3c8" data-id="1211404" data-code="r7f3c8" method="POST" target="_blank">
             <fieldset>
                 <div class="form-title center">
-                    <h1>Hardware Partner Program Platinum Level</h1>
+                    <h1>硬件合作伙伴计划铂金级别</h1>
                 </div>
                 <div class="cloud-provider">
                     <div class="logo-container partner">
                         <img src="/images/partners/platinum-partner.svg" alt="Platinum Level">
                     </div>
                     <div class="cloud-provider-desc">
-                        <p>Platinum Partnership includes access to white-labeled partner portal, our support services and help with preparing online tutorials and dashboards that will become an ultimate selling tool for your devices.</p>
+                        <p>铂金合作伙伴包括白标合作伙伴门户访问权限、我们的支持服务以及协助准备在线教程和仪表板，这些将成为您设备的终极销售工具。</p>
                         <br>
                         <p>
-                            <span class="cloud-price-aws-desc">Yearly fee:</span>
+                            <span class="cloud-price-aws-desc">年费：</span>
                             <span class="cloud-price-aws">$2000</span>
                         </p>
                     </div>
                 </div>
-                <p>Please fill this form to get further instructions.</p>
+                <p>请填写此表单以获取进一步说明。</p>
                 <div class="form-section">
                     <div class="form-element first half ml-field-first_name ml-validate-required">
                         <label for="fields[first_name]">
                             <input type="text" name="fields[first_name]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>First name*</p>
+                            <p>名*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-last_name ml-validate-required">
                         <label for="fields[last_name]">
                             <input type="text" name="fields[last_name]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Last name*</p>
+                            <p>姓*</p>
                         </label>
                     </div>
                     <div class="form-element first half ml-field-email ml-validate-required ml-validate-email">
                         <label for="fields[email]">
                             <input type="email" name="fields[email]" class="form-control" value="" autocomplete="email" x-autocompletetype="email" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Email Address*</p>
+                            <p>电子邮箱*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-company ml-validate-required">
                         <label for="fields[company]">
                             <input type="text" name="fields[company]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Company*</p>
+                            <p>公司*</p>
                         </label>
                     </div>
                     <div class="form-element first half ml-field-company_website ml-validate-required">
                         <label for="fields[company_website]">
                             <input type="text" name="fields[company_website]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Company Website*</p>
+                            <p>公司网站*</p>
                         </label>
                     </div>
                     <div class="form-element half ml-field-phone">
                         <label for="fields[phone]">
                             <input type="text" name="fields[phone]" class="form-control" value="" spellcheck="false" autocapitalize="off" autocorrect="off">
-                            <p>Phone Number</p>
+                            <p>电话号码</p>
                         </label>
                     </div>
                 </div>
                 <input type="hidden" name="ml-submit" value="1" />
                 <button class="button" type="submit" class="primary">
-                    Submit
+                    提交
                 </button>
                 <button disabled="disabled" style="display: none;" type="button" class="loading">
                     <img src="https://static.mailerlite.com/images/rolling@2x.gif" width="20" height="20" style="width: 20px; height: 20px;" alt="rolling">
@@ -208,7 +208,7 @@ notitle: "true"
             </fieldset>
         </form>
     </div>
-    <p class="questions">Questions about partner programs? <a href="/docs/contact-us/" target="_blank">Contact us</a>.</p>
+    <p class="questions">对合作伙伴计划有疑问？<a href="/docs/contact-us/" target="_blank">联系我们</a>。</p>
 </section>
 
 <script src="https://static.mailerlite.com/js/w/webforms.min.js?v3772b61f1ec61c541c401d4eadfdd02f"></script>

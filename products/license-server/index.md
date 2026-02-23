@@ -2,110 +2,110 @@
 layout: docwithnav-license
 assignees:
 - ashvayka
-title: What is ThingsBoard License Server?
-description: Features and advantages of ThingsBoard License Server
+title: 什么是 ThingsBoard 许可证服务器？
+description: ThingsBoard 许可证服务器的功能与优势
 
 ---
 
 
-The **ThingsBoard License Server** is a proprietary billing solution that allows **ThingsBoard Professional Edition (TB PE)** customers to easily purchase license keys online.
-The online payment processing is secured by [Stripe](https://stripe.com/), which allows both credit cards and wire transfer. 
+**ThingsBoard 许可证服务器** 是一套专有的计费解决方案，允许 **ThingsBoard 专业版（TB PE）** 客户轻松在线购买许可证密钥。
+在线支付由 [Stripe](https://stripe.com/) 保障安全，支持信用卡和电汇。
 
 
-You may already know that TB PE supports pay-as-you-go subscriptions and perpetual license models. 
-The License Server was introduced in mid-2019, based on our experience of billing first 500 TB PE clients, to bring improvements in the following areas:
+您可能已经知道，TB PE 支持按需付费订阅和永久许可证模式。
+许可证服务器于 2019 年中推出，基于我们对前 500 名 TB PE 客户的计费经验，旨在在以下方面做出改进：
 
- - **Deploy anywhere.** Before License Server, the pay-as-you-go subscription was available only on few marketplaces like AWS and Azure. 
-  It was not technically possible to deploy a pay-as-you-go subscription on-premises or any other clouds, like Digital Ocean or Alibaba Cloud, although it was highly demanded from our customers.
-  Now, you can launch your TB PE instance anywhere you like.
+ - **随处部署**。在许可证服务器出现之前，按需付费订阅仅在 AWS、Azure 等少数市场上提供。
+  从技术上讲，无法在本地或 Digital Ocean、阿里云等其他云上部署按需付费订阅，尽管客户对此需求很高。
+  现在，您可以在任意位置启动 TB PE 实例。
     
- - **Simple upgrades.** Migration between subscription plans was possible, but not as easy and straightforward as it should be. 
- This process involved manual reconfiguration, DB backup/restore and obviously caused downtime.
- With License Server, this is done with just a few clicks and no downtime at all.  
+ - **简单升级**。订阅计划之间的迁移虽有可能，但操作并不像应有的那样简单直接。
+ 该过程涉及手动重新配置、数据库备份/恢复，显然会导致停机。
+ 使用许可证服务器，只需几步即可完成，且完全无需停机。  
     
- - **Smooth purchase process.** We’ve added a possibility to pay with credit/debit card. 
- Now you can easily purchase a yearly license online, without manual paperwork. 
- This allows launching your instance in minutes. 
- All invoices are automatically generated and available for download in the license portal in a PDF form.
+ - **顺畅购买流程**。我们增加了信用卡/借记卡支付功能。
+  现在您可以轻松在线购买年度许可证，无需手动文书工作。
+  数分钟内即可启动实例。
+  所有发票会自动生成，可在许可证门户以 PDF 形式下载。
  
- - **Customer experience.** Some cloud marketplaces are greedy for the customer's data. 
- So, it was hard for us to improve the customer satisfaction rate without direct communication with the client.
- Now we can have real-life feedback and, based on that info, make our products as customer-friendly as possible.
+ - **客户体验**。部分云市场过度索取客户数据。
+  因此，我们很难在不直接与客户沟通的情况下提高客户满意度。
+  现在我们可以获得真实反馈，并据此让产品尽可能贴近客户需求。
  
- - **Cluster setup.** With a modern microservices deployment approach, we added the ability to set up a single license key per all nodes in the ThingsBoard cluster. 
- This minimizes efforts for cluster management and removes manual work required to add/remove nodes in the cluster. 
- Now you can launch several cluster nodes in a [floating mode](https://en.wikipedia.org/wiki/Floating_licensing) and actual ThingsBoard processes are not related to physical hardware.
+ - **集群设置**。采用现代微服务部署方式，我们增加了为 ThingsBoard 集群中所有节点设置单一许可证密钥的能力。
+  这简化了集群管理，减少添加/移除集群节点所需的手动工作。
+  现在您可以在[浮动模式](https://en.wikipedia.org/wiki/Floating_licensing)下启动多个集群节点，实际 ThingsBoard 进程与物理硬件无关。
  
- - **Distributors and Channel Partners.** For ThingsBoard partners License server simplifies management of their clients. 
- It is a new step toward deeper cooperation and trust. Each partner has dedicated coupon codes to track sales and provide benefits to end-users.   
- With close-hand ability to order new licenses for end-users, the delivery time of a solution is reduced — extra expenses decrease respectively.
+ - **经销商与渠道合作伙伴**。对于 ThingsBoard 合作伙伴，许可证服务器可简化对客户的管理。
+  这是深化合作与信任的新一步。每家合作伙伴都有专用优惠券代码用于跟踪销售并向最终用户提供优惠。
+  能够为最终用户快速订购新许可证，可缩短解决方案交付时间，并相应降低额外成本。
  
-The License Server product is designed to be generic and may be used to sell any software products with the pay-as-you-go or perpetual license models.
-If you are interested to use it for selling your software, please [contact us](/docs/contact-us/).  
+许可证服务器产品设计为通用型，可用于销售任何采用按需付费或永久许可证模式的软件产品。
+如果您有兴趣将其用于销售自己的软件，请[联系我们](/docs/contact-us/)。  
 
 * TOC
 {:toc}
  
-### Product features
+### 产品功能
 
- - **Pay-as-you-go subscriptions**
+ - **按需付费订阅**
  
-License Server allows purchasing monthly or yearly subscriptions for ThingsBoard. See [pricing](/pricing/) for more details about available subscriptions.
-Once you purchase a subscription, you can flexibly upgrade or downgrade your subscription plan. By default, the subscription covers single ThingsBoard PE instance (server process). 
-However, you can add more instances to the same subscription. This allows launching multiple instances that use same subscription credentials in one server cluster.
-This feature is very useful for container-based setups.
+许可证服务器支持购买 ThingsBoard 的月度或年度订阅。有关可用订阅的更多详情，请参见[定价](/pricing/)。
+购买订阅后，您可以灵活地升级或降级订阅计划。默认情况下，订阅涵盖单个 ThingsBoard PE 实例（服务器进程）。
+但是，您可以向同一订阅添加更多实例。这允许在单一服务器集群中启动使用同一订阅凭据的多个实例。
+该功能对基于容器的部署非常有用。
 
-Pay-as-you-go subscriptions are convenient for small companies and start-ups that are getting started with the platform and would like to minimize upfront licensing costs. 
-Most of the subscriptions are limited by the number of devices and/or assets you can create.
+按需付费订阅适合正在起步、希望尽量减少前期许可成本的小公司和初创企业。
+大多数订阅受限于可创建设备和/或资产的数量。
 
- - **Perpetual fallback licenses**  
+ - **永久备用许可证**  
  
-License Server allows purchasing perpetual fallback licenses. 
-A perpetual fallback license is a license that allows you to use a specific version of the software without an active subscription for it. 
-When purchasing a perpetual fallback license, you get one year of software updates included. After one year, you can continue using the platform.
-You can purchase software updates for the subsequent years for additional fee, typically 40% of the initial license cost.
+许可证服务器支持购买永久备用许可证。
+永久备用许可证允许您在无需为其支付有效订阅的情况下使用软件特定版本。
+购买永久备用许可证时，您可获得一年的软件更新。一年后，您可以继续使用平台。
+您可为后续年份购买软件更新，通常需支付约初始许可证成本的 40% 的额外费用。
 
-A single perpetual fallback license covers a single ThingsBoard PE instance (server process). 
-For example, if you like to run ThingsBoard PE in an HA mode, you will need at least two licenses.
+单个永久备用许可证涵盖单个 ThingsBoard PE 实例（服务器进程）。
+例如，若要以 HA 模式运行 ThingsBoard PE，您至少需要两个许可证。
 
- - **Secure online payments via Stripe**
+ - **通过 Stripe 进行安全在线支付**
  
-License Server is collecting Payments via [Stripe](https://stripe.com/). 
-This means we use best practices in terms of security and processing of transactions provided by the most popular online payment platform.
-ThingsBoard has no access to your credit card data. You can cancel your subscription at any time. 
-ThingsBoard also provides the ability to download digital copies copy of the invoices.   
+许可证服务器通过 [Stripe](https://stripe.com/) 收取款项。
+这意味着我们使用最流行的在线支付平台所提供的最佳安全与交易处理实践。
+ThingsBoard 无法访问您的信用卡数据。您可随时取消订阅。
+ThingsBoard 还提供下载发票电子副本的功能。   
 
- - **Coupons**
+ - **优惠券**
  
-License Server allows the administrator to provision coupons. These coupons may be used by partners, distributors and for marketing campaigns.
+许可证服务器允许管理员配置优惠券。这些优惠券可供合作伙伴、经销商和营销活动使用。
 
- - **Hardware agnostic licensing**
+ - **硬件无关的许可**
  
-License Server does not generate license keys based on hardware or VM parameters. 
-License Server client issues periodic license check requests to the License Server. 
-These requests validate that the subscription / perpetual license is valid and the number of launched instances does not exceed subscription threshold.
-See [Architecture](#architecture) for more details. 
+许可证服务器不会基于硬件或 VM 参数生成许可证密钥。
+许可证服务器客户端会定期向许可证服务器发出许可证验证请求。
+这些请求验证订阅/永久许可证是否有效，以及已启动实例数量是否未超过订阅阈值。
+更多详情请参见[架构](#architecture)。
 
-### Prerequisites
+### 前提条件
 
-The License Server Client (e.g. your ThingsBoard PE instance) requires an internet connection to the host: license.thingsboard.io to issue license check requests. 
-In case internet connection to the host is not available for more than 24 hours, License Server Client may shutdown ThingsBoard instance.  
+许可证服务器客户端（例如您的 ThingsBoard PE 实例）需要能够连接到 license.thingsboard.io 主机以发出许可证验证请求。
+若无法连接到该主机的时间超过 24 小时，许可证服务器客户端可能会关闭 ThingsBoard 实例。  
 
-### Architecture  
+### 架构  
 
-The License Server provides REST API for the License Server clients to **activate** and **check** licenses.
+许可证服务器为许可证服务器客户端提供 REST API，用于**激活**和**验证**许可证。
 
-- **Instance Activation flow**
+- **实例激活流程**
 
-During the first launch of ThingsBoard PE, built-in License Server Client generates an "Activate Instance Request" to the License Server. 
-This request contains the license key and version info about the current platform installation. 
-License Server lookup the subscription info based on the license key and replies with the instance id, subscription plan data, and some magic bytes.
-License Client stores this information locally and uses instance id and some magic bytes for the next license check requests. 
+在首次启动 ThingsBoard PE 时，内置的许可证服务器客户端会向许可证服务器生成“激活实例请求”。
+该请求包含许可证密钥以及当前平台安装的版本信息。
+许可证服务器根据许可证密钥查找订阅信息，并回复实例 ID、订阅计划数据以及若干校验字节。
+许可证客户端将此信息本地存储，并在后续许可证验证请求中使用实例 ID 和校验字节。
 
 ![image](/images/license/license-activation.gif)
 
-License Client issues periodic license check requests to the License Server.
-If those requests are not successful for a configurable period of time (typically 24 hours), the license client will shut down the ThingsBoard PE instance.
-In case of a successful request, the client may receive an update to the subscription plan data. This may be caused by the update of the subscription plan.   
+许可证客户端定期向许可证服务器发出许可证验证请求。
+若这些请求在可配置的时间内（通常为 24 小时）未成功，许可证客户端将关闭 ThingsBoard PE 实例。
+若请求成功，客户端可能会收到订阅计划数据的更新。这可能由订阅计划的更新引起。   
 
 ![image](/images/license/license-check.gif)

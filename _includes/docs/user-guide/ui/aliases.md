@@ -1,442 +1,436 @@
 * TOC
 {:toc}
 
-Alias is a reference to a single entity or group of entities that are used in the widgets. Alias may be static or dynamic.
+别名是指向单个实体或实体组的引用，用于部件中。别名可以是静态的或动态的。
 
-They can range from a simple reference to a single device to a complex search query for specific assets from a list.
+可简单引用单个设备，也可进行针对列表中特定资产的复杂搜索查询。
 
-In this tutorial, aliases will be used in the system according to the scheme shown below. And all devices transmit telemetry values - "temperature".
+本教程中，别名将按下图所示方案在系统中使用。所有设备均传输遥测值——“temperature”。
 
 ![image](/images/user-guide/ui/alias/alias-scheme.png)
 
-## Prerequisites
+## 前置条件
 
-Before proceeding with this guide, it's recommended that you follow [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/) guide to become familiar with ThingsBoard devices, dashboards and widgets. This will enhance your learning experience and understanding of the concepts presented here.
+在继续本指南之前，建议先阅读[入门](/docs/{{docsPrefix}}getting-started-guides/helloworld/)指南，以熟悉 ThingsBoard 设备、仪表板和部件。这将有助于您理解本文所述概念。
 
-## Creating alias
+## 创建别名
 
-To create an alias, you need to define the entities from which data will be extracted.
+要创建别名，需要定义从中提取数据的实体。
 
-Then follow these steps:
+然后按以下步骤操作：
 
 {% include images-gallery.html imageCollection="create-alias" showListImageTitles="true" %}
 
-Now, let’s use the added alias in a widget:
+现在，让我们在部件中使用已添加的别名：
 
 {% include images-gallery.html imageCollection="use-alias-in-widget" showListImageTitles="true" %}
 
-## Alias types
+## 别名类型
 
 {% if docsPrefix == null %}
-In the ThingsBoard, there are various types of aliases, each offering different capabilities for configuring widgets: [Single entity](#single-entity), [Entity list](#entity-list), [Entity name](#entity-name), [Entity type](#entity-type), [Entity from dashboard state](#entity-from-dashboard-state), [Asset type](#asset-type), [Device type](#device-type), [Entity view type](#entity-view-type), [Edge type](#edge-type), [Api Usage State](#api-usage-state), [Relations query](#relations-query), [Asset search query](#asset-search-query), [Device search query](#device-search-query), [Entity view search query](#entity-view-search-query), and [Edge search query](#edge-search-query).
+ThingsBoard 中有多种别名类型，各有不同配置能力：[单个实体](#single-entity)、[实体列表](#entity-list)、[实体名称](#entity-name)、[实体类型](#entity-type)、[来自仪表板状态的实体](#entity-from-dashboard-state)、[资产类型](#asset-type)、[设备类型](#device-type)、[实体视图类型](#entity-view-type)、[Edge 类型](#edge-type)、[API 使用状态](#api-usage-state)、[关系查询](#relations-query)、[资产搜索查询](#asset-search-query)、[设备搜索查询](#device-search-query)、[实体视图搜索查询](#entity-view-search-query)和[Edge 搜索查询](#edge-search-query)。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-In the ThingsBoard, there are various types of aliases, each offering different capabilities for configuring widgets: [Single entity](#single-entity), [Group entities](#group-entities), [Entity list](#entity-list), [Entity name](#entity-name), [Entity type](#entity-type), [Entity group list](#entity-group-list), [Entities by group name](#entities-by-group-name), [Entity from dashboard state](#entity-from-dashboard-state), [Owner of entity from dashboard state](#owner-of-entity-from-dashboard-state), [Asset type](#asset-type), [Device type](#device-type), [Entity view type](#entity-view-type), [Edge type](#edge-type), [Api Usage State](#api-usage-state), [Relations query](#relations-query), [Asset search query](#asset-search-query), [Device search query](#device-search-query), [Entity view search query](#entity-view-search-query), [Edge search query](#edge-search-query), and [Scheduler events](#scheduler-events).
+ThingsBoard 中有多种别名类型，各有不同配置能力：[单个实体](#single-entity)、[实体组](#group-entities)、[实体列表](#entity-list)、[实体名称](#entity-name)、[实体类型](#entity-type)、[实体组列表](#entity-group-list)、[按组名的实体](#entities-by-group-name)、[来自仪表板状态的实体](#entity-from-dashboard-state)、[来自仪表板状态实体的所有者](#owner-of-entity-from-dashboard-state)、[资产类型](#asset-type)、[设备类型](#device-type)、[实体视图类型](#entity-view-type)、[Edge 类型](#edge-type)、[API 使用状态](#api-usage-state)、[关系查询](#relations-query)、[资产搜索查询](#asset-search-query)、[设备搜索查询](#device-search-query)、[实体视图搜索查询](#entity-view-search-query)、[Edge 搜索查询](#edge-search-query)和[调度器事件](#scheduler-events)。
 {% endif %}
 
-They provide flexibility and powerful capabilities for configuring dashboards in ThingsBoard, allowing users to efficiently organize and visualize data from various sources.
+它们为在 ThingsBoard 中高效组织和可视化各类数据源提供灵活且强大的仪表板配置能力。
 
-Let's take a look at each of them.
+下面逐一介绍。
 
-### Single entity
+### 单个实体
 
 {% if docsPrefix == null %}
-This alias allows choosing a single entity. It can be a device, asset, entity view, tenant, customer, user, dashboard, edge, current customer, current tenant, current user or current user owner.
+此别名允许选择单个实体。可以是设备、资产、实体视图、租户、客户、用户、仪表板、Edge、当前客户、当前租户、当前用户或当前用户所有者。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias allows choosing a single entity. It can be a device, asset, entity view, tenant, customer, dashboard, user, data converter, integration, scheduler event, blob entity, role, edge, current customer, current tenant, current user or current user owner.
+此别名允许选择单个实体。可以是设备、资产、实体视图、租户、客户、仪表板、用户、数据转换器、集成、调度器事件、blob 实体、角色、Edge、当前客户、当前租户、当前用户或当前用户所有者。
 {% endif %}
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, and select the "Single entity" filter type. Then choose the entity type and specify the final entity.
+添加别名：在“添加别名”对话框中输入别名名称，选择“单个实体”筛选类型。然后选择实体类型并指定具体实体。
 
 {% include images-gallery.html imageCollection="single-alias-1" %}
 
-In this example, an alias has been created that filters one device - Thermometer A1. 
+本例中，已创建一个筛选单个设备 Thermometer A1 的别名。
 
-Let's use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Single entity" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add" and apply changes. 
-The Entities table widget with the alias that displays one device - Thermometer A1 has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“单个实体”别名，在“Columns”部分指定“temperature”数据键。点击“Add”并应用更改。
+已添加显示单个设备 Thermometer A1 的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="single-alias-2" %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-### Group entities
+### 实体组
 
-This alias allows choosing one entity group as the data source. It can be a device group, asset group, entity view group, customer group, dashboard group, user group and edge group.
+此别名允许选择一个实体组作为数据源。可以是设备组、资产组、实体视图组、客户组、仪表板组、用户组或 Edge 组。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, and select the "Group entities" filter type. Then choose the entities type and select the entity group.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体组”筛选类型。然后选择实体类型并选择实体组。
 
 {% include images-gallery.html imageCollection="group-entities-1" %}
 
-In this example, an alias has been created that displays all devices that belong to the "Thermostats" device group.
+本例中，已创建一个显示属于“Thermostats”设备组的所有设备的别名。
 
-Let's use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Group entities" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add" and apply changes. 
-The Entities table widget with the alias that displays all devices that belong to the “Thermostats” device group has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体组”别名，在“Columns”部分指定“temperature”数据键。点击“Add”并应用更改。
+已添加显示属于“Thermostats”设备组的所有设备的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="group-entities-2" %}
 {% endif %}
 
-### Entity list
+### 实体列表
 
 {% if docsPrefix == null %}
-This alias allows you to display multiple entities. It can be devices, assets, entity views, tenants, customers, dashboards, users or edges.
+此别名允许显示多个实体。可以是设备、资产、实体视图、租户、客户、仪表板、用户或 Edge。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias allows you to display multiple entities. It can be devices, assets, entity views, tenants, customers, dashboards, users, data converters, integrations, scheduler events, blob entities, roles or edges.
+此别名允许显示多个实体。可以是设备、资产、实体视图、租户、客户、仪表板、用户、数据转换器、集成、调度器事件、blob 实体、角色或 Edge。
 {% endif %}
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, and select the "Entity list" filter type. Then choose the entities type and specify entities whose data you want to display on the widget.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体列表”筛选类型。然后选择实体类型并指定要在部件上显示其数据的实体。
 
 {% include images-gallery.html imageCollection="entity-list-1" %}
 
 {% if docsPrefix == null %}
-This alias filters a list from specified devices: Thermometer A1, Thermometer A2, and Thermometer A3.
+此别名筛选指定设备列表：Thermometer A1、Thermometer A2 和 Thermometer A3。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias filters a list from specified devices: Thermometer A1, Compressor BC-10, and Compressor QA-32.
+此别名筛选指定设备列表：Thermometer A1、Compressor BC-10 和 Compressor QA-32。
 {% endif %}
 
-Let's use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity list" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add" and apply changes. 
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体列表”别名，在“Columns”部分指定“temperature”数据键。点击“Add”并应用更改。
 
 {% if docsPrefix == null %}
-The Entities table widget with the alias that displays a list of several devices, which in this case are Thermometer A1, Thermometer A2, and Thermometer A3 has been added.
+已添加显示多个设备列表的 Entities table 部件，本例为 Thermometer A1、Thermometer A2 和 Thermometer A3。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-The Entities table widget with the alias that displays a list of several devices, which in this case are Compressor BC-10, Compressor QA-32, and Thermometer A1 has been added.
+已添加显示多个设备列表的 Entities table 部件，本例为 Compressor BC-10、Compressor QA-32 和 Thermometer A1。
 {% endif %}
 
 
 {% include images-gallery.html imageCollection="entity-list-2" %}
 
-### Entity name
+### 实体名称
 
 {% if docsPrefix == null %}
-This alias allows you to display entities whose names start with the entered expression. These objects can be devices, assets, entity views, tenants, customers, users, dashboards or edges.
+此别名允许显示名称以输入表达式开头的实体。可以是设备、资产、实体视图、租户、客户、用户、仪表板或 Edge。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias allows you to display entities whose names start with the entered expression. These objects can be devices, assets, entity views, tenants, customers, dashboards, users, data converters, integrations, scheduler events, blob entities, rales or edges.
+此别名允许显示名称以输入表达式开头的实体。可以是设备、资产、实体视图、租户、客户、仪表板、用户、数据转换器、集成、调度器事件、blob 实体、角色或 Edge。
 {% endif %}
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, and select the "Entity name" filter type. Then choose the entities type and enter an expression that will filter the names of the displayed entities.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体名称”筛选类型。然后选择实体类型并输入用于筛选显示实体名称的表达式。
 
 {% include images-gallery.html imageCollection="entity-name-1" %}
 
-This alias filters devices with names start with "Compressor". 
+此别名筛选名称以“Compressor”开头的设备。
 
-Let's use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity name" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add" and apply changes. 
-The Entities table widget with alias that filters devices, which names start with ‘Compressor’, has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体名称”别名，在“Columns”部分指定“temperature”数据键。点击“Add”并应用更改。
+已添加按名称以“Compressor”开头的设备筛选的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="entity-name-2" %}
 
-### Entity type
+### 实体类型
 
 {% if docsPrefix == null %}
-This alias allows you to display all your entities and your customers' entities of the specified type. These objects can be devices, assets, entity views, tenants, customers, users, dashboards or edges.
+此别名允许显示您及客户指定类型的所有实体。可以是设备、资产、实体视图、租户、客户、用户、仪表板或 Edge。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias allows you to display all your entities and your customers' entities of the specified type. These objects can be devices, assets, entity views, tenants, customers, dashboards, users, data converters, integrations, scheduler events, blob entities, rales or edges.
+此别名允许显示您及客户指定类型的所有实体。可以是设备、资产、实体视图、租户、客户、仪表板、用户、数据转换器、集成、调度器事件、blob 实体、角色或 Edge。
 {% endif %}
 
-Adding an alias: in the "Add Alias" dialog, enter the alias name, select the filter as "Entity Type", and choose the entity type.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体类型”筛选，并选择实体类型。
 
 {% include images-gallery.html imageCollection="entity-type-1" %}
 
-This alias displays all your and your customers' devices. 
+此别名显示您及客户的所有设备。
 
-Let's use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity type" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add" and apply changes. 
-The Entities table widget displaying all your devices and your customers' devices has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体类型”别名，在“Columns”部分指定“temperature”数据键。点击“Add”并应用更改。
+已添加显示您及客户所有设备的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="entity-type-2" %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-### Entity group list
+### 实体组列表
 
-This alias allows you to display a list of entity groups, which can include device group(s), asset group(s), entity view group(s), customer group(s), dashboard group(s), user group(s) or edge group(s).
+此别名允许显示实体组列表，可包含设备组、资产组、实体视图组、客户组、仪表板组、用户组或 Edge 组。
 
-Adding an alias: in the “Add alias” dialog, enter the alias name, and select the "Entity group list" filter. Then select the entity type and specify entity groups you want to display on the widget.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体组列表”筛选。然后选择实体类型并指定要在部件上显示的实体组。
 
 {% include images-gallery.html imageCollection="entity-group-list-1" %}
 
-This alias displays a list of device groups, which in this case are "Compressors" and "Thermostats". 
+此别名显示设备组列表，本例为“Compressors”和“Thermostats”。
 
-Let's use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity group list" alias in the "Entity alias" field. Click "Add" and apply changes.
-The Entities table widget displaying a list of device groups has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体组列表”别名。点击“Add”并应用更改。
+已添加显示设备组列表的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="entity-group-list-2" %}
 
-### Entity group name
+### 实体组名称
 
-This alias allows you to display multiple entity name groups that begin with an entered query.
-They can include device groups, asset groups, entity view groups, customer groups, dashboard groups, user groups, or edge groups.
+此别名允许显示以输入查询开头的多个实体组名称。可包含设备组、资产组、实体视图组、客户组、仪表板组、用户组或 Edge 组。
 
-Adding an alias: in the “Add alias” dialog, enter the alias name, and select the "Entity group name" filter type. Then choose the entity type and enter an expression that will filter the names of the displayed entity groups.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体组名称”筛选类型。然后选择实体类型并输入用于筛选显示实体组名称的表达式。
 
 {% include images-gallery.html imageCollection="entity-group-name-1" %}
 
-This alias displays device groups whose names start with "Compressor".
+此别名显示名称以“Compressor”开头的设备组。
 
-Let’s use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity group name" alias in the “Entity alias” field. Click "Add" and apply changes.
-The Entities table widget, displaying device groups whose name begins with the entered query, has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体组名称”别名。点击“Add”并应用更改。
+已添加显示名称以输入查询开头的设备组的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="entity-group-name-2" %}
 
-### Entities by group name
+### 按组名的实体
 
-This alias allows filtering entities by entering the exact full name of a group whose entities you want to display in the widget.
-They can include device groups, asset groups, entity view groups, customer groups, dashboard groups, user groups, or edge groups.
+此别名允许通过输入要显示实体的组的完整名称来筛选实体。可包含设备组、资产组、实体视图组、客户组、仪表板组、用户组或 Edge 组。
 
-The difference between the "Entities by group name" alias and the "[Group entities](#group-entities)" alias is that the former resolves the group by the specified name while the latter uses a hard-coded group ID.
-More importantly, during the lookup of entities, this alias will use information about the current user. 
-So, if you share the dashboard with multiple customers, and would like each customer to see devices that belong to them, you should use this alias instead of "Group entities".
+“按组名的实体”别名与“[实体组](#group-entities)”别名的区别在于：前者通过指定名称解析组，后者使用硬编码的组 ID。更重要的是，在查找实体时，此别名将使用当前用户信息。因此，若将仪表板分享给多个客户，且希望每位客户仅看到属于自己的设备，应使用此别名而非“实体组”。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, and select the "Entities by group name" filter type. Then select an entity type and enter the exact full name of a group whose entities you want to display.
+添加别名：在“添加别名”对话框中输入别名名称，选择“按组名的实体”筛选类型。然后选择实体类型并输入要显示其实体的组的完整名称。
 
 {% include images-gallery.html imageCollection="entities-by-group-name-1" %}
 
-This alias filters device group by name - "Compressors". 
+此别名按名称筛选设备组——“Compressors”。
 
-Let’s use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. 
-Navigate to the "Entity alias" tab. Specify the "Entities by group name" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add" and apply changes.
-The Entities table widget that displays entities filtered by the exact full name of the entity group entered has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。
+进入“Entity alias”选项卡。在“Entity alias”字段指定“按组名的实体”别名，在“Columns”部分指定“temperature”数据键。点击“Add”并应用更改。
+已添加显示按输入的实体组完整名称筛选实体的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="entities-by-group-name-2" %}
 {% endif %}
 
-### Entity from dashboard state
+### 来自仪表板状态的实体
 
 {% if docsPrefix == null %}
-This alias allows choosing one or more entities from the dashboard state. The entities can be a device, asset, entity view, tenant, customer, user, dashboard, edge, current customer, current tenant, current user, or current user owner.
+此别名允许从仪表板状态中选择一个或多个实体。可以是设备、资产、实体视图、租户、客户、用户、仪表板、Edge、当前客户、当前租户、当前用户或当前用户所有者。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias allows choosing one or more entities from the dashboard state. The entities can be a device, asset, entity view, tenant, customer, dashboard, user, data converter, integration, scheduler event, blob entity, role, edge, current customer, current tenant, current user, or current user owner.
+此别名允许从仪表板状态中选择一个或多个实体。可以是设备、资产、实体视图、租户、客户、仪表板、用户、数据转换器、集成、调度器事件、blob 实体、角色、Edge、当前客户、当前租户、当前用户或当前用户所有者。
 {% endif %}
 
-For example, if Entities table widget is created on a [root dashboard state](/docs/{{docsPrefix}}user-guide/dashboards/#states) with several entities displayed on it, and you'd like to create a dashboard state which will display a widget with the entity you clicked on, you need to use this alias.
+例如，若在[根仪表板状态](/docs/{{docsPrefix}}user-guide/dashboards/#states)上创建了显示多个实体的 Entities table 部件，且希望创建一个显示点击实体详情部件的新仪表板状态，则需使用此别名。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, and select the filter type "Entity from dashboard state". Then click "Add".
+添加别名：在“添加别名”对话框中输入别名名称，选择“来自仪表板状态的实体”筛选类型。然后点击“Add”。
 
 {% include images-gallery.html imageCollection="entity-from-dashboard-state-1" %}
 
-This alias is used for filtering data for other dashboard states.
+此别名用于为其他仪表板状态筛选数据。
 
 {% if docsPrefix == null %}
-For the next example, we will need two aliases: the previously discussed "[Entity type](#entity-type)" alias and the "Entity from dashboard state" alias. Let's start:
+下一个示例需要两个别名：前述“[实体类型](#entity-type)”别名和“来自仪表板状态的实体”别名。开始如下：
 
-First we need to create an Entity table widget that will display a list of entities: add an Entities table widget that will display a list of entities. Use the "Entity type" alias as a data source.
+首先创建一个显示实体列表的 Entity table 部件：添加一个显示实体列表的 Entities table 部件。使用“实体类型”别名作为数据源。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-For the next example, we will need two aliases: the previously discussed "[Group entities](#group-entities)" alias and the "Entity from dashboard state" alias. Let's start:
+下一个示例需要两个别名：前述“[实体组](#group-entities)”别名和“来自仪表板状态的实体”别名。开始如下：
 
-First we need to create an Entity table widget that will display a list of entities: add an Entities table widget that will display a list of entities. Use the "Group entities" alias as a data source.
+首先创建一个显示实体列表的 Entity table 部件：添加一个显示实体列表的 Entities table 部件。使用“实体组”别名作为数据源。
 {% endif %}
 
 {% include images-gallery.html imageCollection="entity-from-dashboard-state-2" %}
 
-After adding the Entities table widget, add a new a [state](/docs/{{docsPrefix}}user-guide/dashboards/#states):
+添加 Entities table 部件后，添加新的[状态](/docs/{{docsPrefix}}user-guide/dashboards/#states)：
 
 {% include images-gallery.html imageCollection="entity-from-dashboard-state-3" showListImageTitles="true" %}
 
-Time to add an [action](/docs/{{docsPrefix}}user-guide/ui/widget-actions) to a root dashboard widget and execute it using an Entity from dashboard state alias on the widget in the created state:
+接下来为根仪表板部件添加[操作](/docs/{{docsPrefix}}user-guide/ui/widget-actions)，并在所创建状态的部件上使用来自仪表板状态的实体别名执行：
 
 {% include images-gallery.html imageCollection="entity-from-dashboard-state-4" showListImageTitles="true" %}
 
-Now, click the action button next to any entity. You will be transitioned to an inner state, which contains a widget with the details of the selected entity.
+现在，点击任意实体旁的操作按钮。将跳转到内部状态，其中包含选中实体详情的部件。
 
 {% include images-gallery.html imageCollection="entity-from-dashboard-state-5" %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-### Owner of entity from dashboard state
+### 来自仪表板状态实体的所有者
 
-This alias allows displaying owners of the devices, assets, entities, etc. Commonly used when there is a hierarchy of customers, providing visibility into which devices belong to whom.
+此别名用于显示设备、资产、实体等的所有者。通常用于存在客户层次结构时，了解设备归属。
 
-Adding an alias: in the “Add alias” dialog, enter the alias name, and select the filter type "Owner of entity from dashboard state". Then click "Add".
+添加别名：在“添加别名”对话框中输入别名名称，选择“来自仪表板状态实体的所有者”筛选类型。然后点击“Add”。
 
 {% include images-gallery.html imageCollection="owner-of-entity-from-dashboard-state-1" %}
 
-Let’s learn how to use the "Owner of entity from dashboard state" alias to display device owners on the widget.
+学习如何在部件中使用“来自仪表板状态实体的所有者”别名显示设备所有者。
 
-For the next example, we will need two aliases: the previously discussed "[Entity type](#entity-type)" alias and the "Owner of entity from dashboard state" alias.
+下一个示例需要两个别名：前述“[实体类型](#entity-type)”别名和“来自仪表板状态实体的所有者”别名。
 
-First let's add an Entity table widget that will display a list of all devices. Use the “Entity type” alias as a data source.
+首先添加一个显示所有设备列表的 Entity table 部件。使用“实体类型”别名作为数据源。
 
 {% include images-gallery.html imageCollection="owner-of-entity-from-dashboard-state-2" %}
 
-Add another Entities table widget that will display the owner of the selected device. Specify the "Owner of entity from dashboard state" alias in the "Entity alias" field. Click the "Add" button in the lower right corner;
+再添加一个显示选中设备所有者的 Entities table 部件。在“Entity alias”字段指定“来自仪表板状态实体的所有者”别名。点击右下角“Add”按钮；
 
 {% include images-gallery.html imageCollection="owner-of-entity-from-dashboard-state-3" %}
 
-Now we need to add an [action](/docs/{{docsPrefix}}user-guide/ui/widget-actions) that updates the current state of the dashboard.
+现在需要添加用于更新仪表板当前状态的[操作](/docs/{{docsPrefix}}user-guide/ui/widget-actions)。
 
 {% include images-gallery.html imageCollection="owner-of-entity-from-dashboard-state-4" showListImageTitles="true" %}
 
-Click on the row with the device name in the "Entities" widget. The action will be executed, and the owner of the selected device will be displayed in the "Device Owner" widget.
+点击“Entities”部件中设备名称所在行。将执行操作，选中设备的所有者将显示在“Device Owner”部件中。
 
 {% include images-gallery.html imageCollection="owner-of-entity-from-dashboard-state-5" %}
 {% endif %}
 
-### Asset type
+### 资产类型
 
-This alias allows you to filter assets by the specified asset profile(s) (and optionally by names starting with the entered query).
+此别名允许按指定的资产配置（asset profile）筛选资产（可选：按名称以输入查询开头的筛选）。
 
-Adding an alias: in the “Add alias” dialog, enter the alias name, and select the “Asset type” filter type. Then specify the asset profile(s) and enter an expression that will filter the names of the displayed assets.
+添加别名：在“添加别名”对话框中输入别名名称，选择“资产类型”筛选类型。然后指定资产配置（asset profile）并输入用于筛选显示资产名称的表达式。
 
 {% include images-gallery.html imageCollection="asset-type-1" %}
 
-This alias filters assets whose asset profile is "buildings" and whose names start with “Build”.
+此别名筛选资产配置为“buildings”且名称以“Build”开头的资产。
 
-Let’s use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Asset type" alias in the "Entity alias" field. Click "Add" and apply changes. The Entities table widget that displays assets with the asset profile "buildings" and whose name begins with "Build" has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“资产类型”别名。点击“Add”并应用更改。已添加显示资产配置为“buildings”且名称以“Build”开头的资产的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="asset-type-2" %}
  
-### Device type
+### 设备类型
 
-This alias allows you to filter devices by the specified device profile(s) (and optionally by names starting with the entered query).
+此别名允许按指定的设备配置（device profile）筛选设备（可选：按名称以输入查询开头的筛选）。
 
-Adding an alias: in the “Add alias” dialog, enter the alias name, and select the “Device type” filter type. Then specify the device profile(s) and enter an expression that will filter the names of the displayed devices.
+添加别名：在“添加别名”对话框中输入别名名称，选择“设备类型”筛选类型。然后指定设备配置（device profile）并输入用于筛选显示设备名称的表达式。
 
 {% include images-gallery.html imageCollection="device-type-1" %}
 
-This alias filters devices whose device profile is "thermometers" and whose names start with “Therm”.
+此别名筛选设备配置为“thermometers”且名称以“Therm”开头的设备。
 
-Let’s use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Device type" alias in the "Entity alias" field. Click "Add" and apply changes. The Entities table widget that displays devices with the device profile "thermometers" and whose name begins with "Therm" has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“设备类型”别名。点击“Add”并应用更改。已添加显示设备配置为“thermometers”且名称以“Therm”开头的设备的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="device-type-2" %}
  
-### Entity View type
+### 实体视图类型
 
-This alias allows you to filter devices by the specified entity view type(s) (and optionally by names starting with the entered query).
+此别名允许按指定的实体视图类型筛选设备（可选：按名称以输入查询开头的筛选）。
 
-Adding an alias: in the “Add alias” dialog, enter the alias name, and select the "Entity view type" filter type. Then specify the entity view type(s) and enter an expression that will filter the names of the displayed entity views.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体视图类型”筛选类型。然后指定实体视图类型并输入用于筛选显示实体视图名称的表达式。
 
 {% include images-gallery.html imageCollection="entity-view-type-1" %}
 
-This alias filters entity views of type "Compressors Entity View Type" and with name starting with "Compressor".
+此别名筛选类型为“Compressors Entity View Type”且名称以“Compressor”开头的实体视图。
 
-Let's see an example. Entity views named "Compressor BC-10 Entity View" and "Compressor QA-32 Entity View" have been created with the type "Compressors Entity View Type," providing access to the 'Power' timeseries from Compressor BC-10 and Compressor QA-32.
+示例：已创建名为“Compressor BC-10 Entity View”和“Compressor QA-32 Entity View”的实体视图，类型为“Compressors Entity View Type”，可访问 Compressor BC-10 和 Compressor QA-32 的“Power”时序。
 
-Let’s use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity view type" alias in the "Entity alias" field. Click "Add" and apply changes. The Entities table widget that displays entity views with the entity view type "Compressors Entity View Type" and whose name begins with "Compressor" has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体视图类型”别名。点击“Add”并应用更改。已添加显示实体视图类型为“Compressors Entity View Type”且名称以“Compressor”开头的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="entity-view-type-2" %}
 
-### Edge type
+### Edge 类型
 
-This alias allows you to filter devices by the specified edge type(s) (and optionally by names starting with the entered query).
+此别名允许按指定的 Edge 类型筛选设备（可选：按名称以输入查询开头的筛选）。
 
-Adding an alias: in the “Add alias” dialog, enter the alias name, and select the “Entity view type” filter type. Then specify the entity view type(s) and enter an expression that will filter the names of the displayed entity view.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体视图类型”筛选类型。然后指定实体视图类型并输入用于筛选显示实体视图名称的表达式。
 
 {% include images-gallery.html imageCollection="edge-type-1" %}
 
-This alias filters edges with an edge type of "edge instance" and names starting with "Edge".
+此别名筛选 Edge 类型为“edge instance”且名称以“Edge”开头的 Edge。
 
-Let’s use an added alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Edge type" alias in the "Entity alias" field. Click "Add" and apply changes. The Entities table widget that displays edges with the edge type "edge instance" and whose name begins with "Edge" has been added.
+让我们在部件中使用该别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“Edge 类型”别名。点击“Add”并应用更改。已添加显示 Edge 类型为“edge instance”且名称以“Edge”开头的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="edge-type-2" %}
 
-### API Usage State
+### API 使用状态
 
-There is an API Usage layout in the main menu of the TB platform. API Usage shows full statistics on the platform.  
-Api Usage State alias allows fetching only the data you need from the user dashboard statistics.
+TB 平台主菜单中有 API Usage 布局。API Usage 显示平台完整统计。API 使用状态别名允许仅从用户仪表板统计中获取所需数据。
 
 {% include images-gallery.html imageCollection="api-usage-state-1" %}
 
-Let's learn how to use the "Api Usage State" alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Api Usage State" alias in the "Entity alias" field and add data key(s) in the "Columns" section that fetches statistics from an API usage. Click "Add" and apply changes. The Entities table widget that displays API usage statistics has been added.
+学习如何在部件中使用“API 使用状态”别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“API 使用状态”别名，并在“Columns”部分添加从 API 使用中获取统计的数据键。点击“Add”并应用更改。已添加显示 API 使用统计的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="api-usage-state-2" %}
 
-### Relations query
+### 关系查询
 
-This alias allows displaying entities that are related to a specified originator up to a specified level and in a specified direction.
+此别名允许显示与指定发起方在指定级别和方向上相关的实体。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, specify the "Relations query" filter type.
-Then, select the entity type and the entity itself for which you want to display the relationship. Set direction to "From" or "To" and max relation level.
+添加别名：在“添加别名”对话框中输入别名名称，指定“关系查询”筛选类型。然后选择实体类型和要显示关系的实体。将方向设为“From”或“To”并设置最大关系级别。
 
 {% include images-gallery.html imageCollection="relations-query-1" %}
 
-In the example alias displays entities that have any relation to asset ‘District A’ up to relation level 3.
+本例中别名显示与资产“District A”在关系级别 3 内有任意关系的实体。
 
-Let's learn how to use the "Relations query" alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Relations query" alias in the "Entity alias" field and add the "entityType" data key in the "Columns" section. Click "Add" and apply changes. The Entities table widget displays entities and their type that have any relation to the asset "District A" up to relation level 3.
+学习如何在部件中使用“关系查询”别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“关系查询”别名，在“Columns”部分添加“entityType”数据键。点击“Add”并应用更改。已添加显示与资产“District A”在关系级别 3 内有任意关系的实体及其类型的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="relations-query-2" %}
 
-### Asset search query
+### 资产搜索查询
 
-This alias allows displaying assets of the specified asset profile(s) that are related to a specified entity up to a specified level and in a specified direction.  
+此别名允许显示指定资产配置（asset profile）中与指定实体在指定级别和方向上相关的资产。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, select the "Asset search query" filter type, and select the entity type and an entity itself, for which you want to display the relationship. Set direction to "From" or "To", max relation level and specify the asset profile(s) by which the assets will be filtered.
+添加别名：在“添加别名”对话框中输入别名名称，选择“资产搜索查询”筛选类型，选择实体类型及要显示关系的实体。将方向设为“From”或“To”，设置最大关系级别，并指定用于筛选资产的资产配置（asset profile）。
 
 {% include images-gallery.html imageCollection="asset-search-query-1" %}
 
-This alias displays assets with "buildings" and "district" asset profiles that have any relation to the device "Compressor QA-32" with a direction "From" and a relation level of 2.
+此别名显示资产配置为“buildings”和“district”且与设备“Compressor QA-32”在方向“From”和关系级别 2 上有任意关系的资产。
 
-Let's learn how to use the "Asset search query" alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Asset search query" alias in the "Entity alias" field, and add "name" and "type" data keys in the "Columns" section. Click "Add" and apply changes. The Entities table widget that displays assets that have any relation to the device "Compressor QA-32" with relation level of 2 has been added.
+学习如何在部件中使用“资产搜索查询”别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“资产搜索查询”别名，在“Columns”部分添加“name”和“type”数据键。点击“Add”并应用更改。已添加显示与设备“Compressor QA-32”在关系级别 2 上有任意关系的资产的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="asset-search-query-2" %}
 
-### Device search query
+### 设备搜索查询
 
-This alias allows displaying devices of specified device profile(s) that are related to a specified originator up to a specified level and in a specified direction.  
+此别名允许显示指定设备配置（device profile）中与指定发起方在指定级别和方向上相关的设备。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, select the "Device search query" filter type, and select the entity type and an entity itself, for which you want to display the relationship. Set direction to "From" or "To", max relation level and specify the device profile(s) by which the devices will be filtered.
+添加别名：在“添加别名”对话框中输入别名名称，选择“设备搜索查询”筛选类型，选择实体类型及要显示关系的实体。将方向设为“From”或“To”，设置最大关系级别，并指定用于筛选设备的设备配置（device profile）。
 
 {% include images-gallery.html imageCollection="device-search-query-1" %}
 
 {% if docsPrefix == null %}
-This alias displays devices with the "thermometers" device profile that have any relation to the asset "Building A" with direction "From" and relation level of 1.
+此别名显示设备配置为“thermometers”且与资产“Building A”在方向“From”和关系级别 1 上有任意关系的设备。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias displays devices with the "compressors" device profile that have any relation to the asset "Building A" with direction "From" and relation level of 1.
+此别名显示设备配置为“compressors”且与资产“Building A”在方向“From”和关系级别 1 上有任意关系的设备。
 {% endif %}
 
-Let's learn how to use the "Device search query alias" in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Device search query" alias in the "Entity alias" field and add "name", "type" and "temperature" data keys in the "Columns" section. Click "Add" and apply changes. The Entities table widget that displays devices that have any relation to the asset "Building A" up to relation level of 1 has been added.
+学习如何在部件中使用“设备搜索查询”别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“设备搜索查询”别名，在“Columns”部分添加“name”、“type”和“temperature”数据键。点击“Add”并应用更改。已添加显示与资产“Building A”在关系级别 1 内有任意关系的设备的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="device-search-query-2" %}
 
-### Entity view search query
+### 实体视图搜索查询
 
-This alias allows displaying entity views of the specified type that are related to a specified originator up to a specified level and in a specified direction.
+此别名允许显示指定类型中与指定发起方在指定级别和方向上相关的实体视图。
 
-A "Compressor BC-10 Entity View" entity view which has a relation to the "Compressor BC-10" device was created with a type "compressors entity view type" providing access to “temperature” timeseries from Compressor BC-10.
+已创建与设备“Compressor BC-10”存在关系的“Compressor BC-10 Entity View”实体视图，类型为“compressors entity view type”，可访问 Compressor BC-10 的“temperature”时序。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, select the "Entity view search query" filter type, and select the entity type and an entity itself, for which you want to display the relationship. Set direction to "From" or "To", max relation level and specify the entity view type(s) by which entity views will be filtered.
+添加别名：在“添加别名”对话框中输入别名名称，选择“实体视图搜索查询”筛选类型，选择实体类型及要显示关系的实体。将方向设为“From”或“To”，设置最大关系级别，并指定用于筛选实体视图的实体视图类型。
 
 {% include images-gallery.html imageCollection="entity-view-search-query-1" %}
 
 {% if docsPrefix == null %}
-This alias filters entity views with the "compressors entity view type" type that have any relation to the asset "Building A" with direction "From" and relation level of 1.
+此别名筛选类型为“compressors entity view type”且与资产“Building A”在方向“From”和关系级别 1 上有任意关系的实体视图。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-This alias filters entity views with the "Compressors Entity View Type" type that have any relation to the asset "Building A" with direction "From" and relation level of 1.
+此别名筛选类型为“Compressors Entity View Type”且与资产“Building A”在方向“From”和关系级别 1 上有任意关系的实体视图。
 {% endif %}
 
-Let's learn how to use the "Entity view search query" alias in a widget. In the "Tables" widgets bundle, select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity view search query" alias in the "Entity alias" field and add "name", "type" and "temperature" data keys in the "Columns" section. Click "Add" and apply changes. The Entities table widget displaying entity views that have any relation to the asset "Building A" up to relation level of 1 has been added.
+学习如何在部件中使用“实体视图搜索查询”别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“实体视图搜索查询”别名，在“Columns”部分添加“name”、“type”和“temperature”数据键。点击“Add”并应用更改。已添加显示与资产“Building A”在关系级别 1 内有任意关系的实体视图的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="entity-view-search-query-2" %}
 
-### Edge search query
+### Edge 搜索查询
 
-This alias allows displaying edges of the specified type that are related to a specified originator up to a specified level and in a specified direction.
+此别名允许显示指定类型中与指定发起方在指定级别和方向上相关的 Edge。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, select the "Edge search query" filter type, and select the entity type and an entity itself, for which you want to display the relationship. Set direction to "From" or "To", max relation level and specify the edge type(s) by which the edges will be filtered.
+添加别名：在“添加别名”对话框中输入别名名称，选择“Edge 搜索查询”筛选类型，选择实体类型及要显示关系的实体。将方向设为“From”或“To”，设置最大关系级别，并指定用于筛选 Edge 的 Edge 类型。
 
 {% include images-gallery.html imageCollection="edge-search-query-1" %}
 
-This alias filters edges with the "edge instance" type that have any relation to the asset "Building A" with a direction "From" and relation level of 1.
+此别名筛选类型为“edge instance”且与资产“Building A”在方向“From”和关系级别 1 上有任意关系的 Edge。
 
-Let's learn how to use the "Edge search query" alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Edge search query" alias in the "Entity alias" field and add "name" and "type" data keys in the "Columns" section. Click "Add" and apply changes. The Entities table widget displaying edges with any relation to the asset "Building A" up to relation level of 1 has been added.
+学习如何在部件中使用“Edge 搜索查询”别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“Edge 搜索查询”别名，在“Columns”部分添加“name”和“type”数据键。点击“Add”并应用更改。已添加显示与资产“Building A”在关系级别 1 内有任意关系的 Edge 的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="edge-search-query-2" %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-### Scheduler events
+### 调度器事件
 
-This alias allows displaying scheduler events associated with a specified entity.
+此别名允许显示与指定实体关联的调度器事件。
 
-Adding an alias: in the "Add alias" dialog, enter the alias name, select the "Scheduler events" filter type, and select the entity for which scheduler events will be displayed.
+添加别名：在“添加别名”对话框中输入别名名称，选择“调度器事件”筛选类型，并选择要显示调度器事件的实体。
 
 {% include images-gallery.html imageCollection="scheduler-events-1" %}
 
-This alias displays scheduler events for the "Compressor BC-10" device.
+此别名显示设备“Compressor BC-10”的调度器事件。
 
-Let's learn how to use the "Scheduler events" alias in a widget. In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Scheduler events" alias in the "Entity alias" field and add "name", "type" and "schedule" data keys in the "Columns" section. Click "Add" and apply changes. The Entities table widget that displays scheduler events for the "Compressor BC-10" device has been added.
+学习如何在部件中使用“调度器事件”别名。在“Tables”部件捆绑包中选择“Entities table”部件。进入“Entity alias”选项卡。在“Entity alias”字段指定“调度器事件”别名，在“Columns”部分添加“name”、“type”和“schedule”数据键。点击“Add”并应用更改。已添加显示设备“Compressor BC-10”调度器事件的 Entities table 部件。
 
 {% include images-gallery.html imageCollection="scheduler-events-2" %}
 

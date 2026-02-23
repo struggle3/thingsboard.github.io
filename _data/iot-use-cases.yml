@@ -1,142 +1,142 @@
 0:
   type: "General"
-  name: "Smart Energy"
-  description: "Deliver and store data from smart meters in reliable and fault-tolerant way, visualize real-time and historical energy consumption data on customizable end-user dashboards, integrate with third-party analytics frameworks and solutions."
+  name: "智能能源"
+  description: "以可靠、容错的方式采集与存储智能电表数据，在可定制的终端用户仪表盘上展示实时与历史能耗，并与第三方分析框架和方案集成。"
   media:
     image: "https://img.thingsboard.io/usecases/smart-energy/video/smart-energy.png"
-    alt: "Smart energy"
+    alt: "智能能源"
     video: ["https://video.thingsboard.io/usecases/smart-energy.mp4", "https://video.thingsboard.io/usecases/smart-energy.webm"]
   href: "/use-cases/smart-energy/"
 1:
   type: "SCADA"
-  name: "SCADA Swimming Pool System"
-  description: "SCADA systems are generally divided into two types: Traditional and High-Performance. Monitor and control your industrial processes in real time with SCADA. Use SCADA symbols on dashboards to create and manage any workflow, offering full flexibility to design and oversee operations according to your requirements."
+  name: "SCADA泳池系统"
+  description: "SCADA系统通常分为传统型与高性能型。使用SCADA实时监控与管控工业流程，在仪表盘上使用SCADA符号创建和管理任意工作流，按需灵活设计与监督运营。"
   media:
     image: "https://img.thingsboard.io/usecases/scada/video/scada.png"
-    alt: "See more about SCADA Swimming pool"
+    alt: "了解更多SCADA泳池"
     video: ["https://video.thingsboard.io/usecases/scada.mp4", "https://video.thingsboard.io/usecases/scada.webm"]
   href: "/use-cases/scada/"
 2:
   type: "SCADA"
-  name: "SCADA Oil & Gas drilling system"
-  description: "Automate drilling operations with SCADA and ThingsBoard. Control rigs, pumps, and blowout preventers in real time, visualize key parameters, and enhance operational safety. Flexible SCADA symbol templates allow you to tailor the system to any production scenario."
+  name: "SCADA油气钻井系统"
+  description: "使用SCADA与ThingsBoard实现钻井作业自动化，实时控制钻机、泵与防喷器，可视化关键参数并提升作业安全。灵活的SCADA符号模板可适配任意生产场景。"
   media:
     image: "https://img.thingsboard.io/solutions/scada_drilling_system/hp-scada-systems-in-drilling-1.png"
-    alt: "See more about SCADA Oil & gas drilling system"
+    alt: "了解更多SCADA油气钻井系统"
     video: ["https://video.thingsboard.io/usecases/hp-drilling-scada-system.mp4", "https://video.thingsboard.io/usecases/hp-drilling-scada-system.webm"]
   href: "/use-cases/scada-oil-and-gas-drilling-system/"
 3:
   type: "SCADA"
-  name: "SCADA Energy management"
-  description: "Gain a complete real-time view of energy consumption and generation. Use SCADA powered by ThingsBoard to monitor, analyze, and optimize energy flows — from generation to end use. Track efficiency, forecast demand peaks, and reduce costs with intuitive dashboards and seamless integration with industrial equipment."
+  name: "SCADA能源管理"
+  description: "全面实时掌握能耗与发电。使用ThingsBoard驱动的SCADA监控、分析与优化能源流（从发电到终端用能），通过直观仪表盘及与工业设备无缝集成追踪能效、预测需求峰值并降低成本。"
   media:
     image: "https://img.thingsboard.io/solutions/scada_energy_management/scada-energy-management-1.png"
-    alt: "See more about SCADA Energy management"
+    alt: "了解更多SCADA能源管理"
     video: ["https://video.thingsboard.io/usecases/scada-energy-management.mp4", "https://video.thingsboard.io/usecases/scada-energy-management.webm"]
   href: "/use-cases/scada-energy-management/"
 4:
   type: "General"
-  name: "Environment Monitoring"
-  description: "Monitor and analyze indoor and outdoor environments using a wide range of sensors. ThingsBoard supports data acquisition using modern connectivity technologies and protocols: NB IoT, LoRaWAN, SigFox, MQTT, CoAP, HTTP, LwM2M, and others."
+  name: "环境监测"
+  description: "通过多种传感器监测与分析室内外环境。ThingsBoard支持采用NB IoT、LoRaWAN、SigFox、MQTT、CoAP、HTTP、LwM2M等现代连接技术与协议进行数据采集。"
   media:
     image: "https://img.thingsboard.io/usecases/environment-monitoring/video/environment-monitoring.png"
-    alt: "Environment monitoring dashboard"
+    alt: "环境监测仪表盘"
     video: ["https://video.thingsboard.io/usecases/environment-monitoring.mp4", "https://video.thingsboard.io/usecases/environment-monitoring.webm"]
   href: "/use-cases/environment-monitoring/"
 5:
   type: "General"
-  name: "Smart Office"
-  description: "Ensure employee health and safety to boost organization productivity. Optimize resource consumption by monitoring and control of the office indoor climate. ThingsBoard provides rich data visualization, powerful processing engine, remote control and OTA updates capabilities."
+  name: "智能办公"
+  description: "保障员工健康与安全以提升组织效率。通过监测与调控办公室室内环境优化资源消耗。ThingsBoard提供丰富的数据可视化、强大处理引擎、远程控制与OTA更新能力。"
   media:
     image: "/images/usecases/smart-office/smart-office-1-v2.webp"
-    alt: "See more about Smart Office"
+    alt: "了解更多智能办公"
     video: ["https://video.thingsboard.io/usecases/smart-office-v3.mp4", "https://video.thingsboard.io/usecases/smart-office-v3.webm"]
   href: "/use-cases/smart-office/"
 6:
   type: "General"
-  name: "Water Metering"
-  description: "Enable water consumption data collection, analysis and fraud detection using ThingsBoard. Use interactive dashboards that allow administrators and end-users to browse the state of the water meters and aggregated water consumption statistics. Enable alarms over SMS and email and integrate with external billing systems."
+  name: "水表计量"
+  description: "使用ThingsBoard实现用水数据采集、分析与防作弊。通过交互式仪表盘供管理员与终端用户查看水表状态与用水统计，支持短信与邮件告警并与外部计费系统集成。"
   media:
     image: "https://img.thingsboard.io/usecases/water-metering/video/water-metering.png"
-    alt: "Water metering dashboard"
+    alt: "水表计量仪表盘"
     video: ["https://video.thingsboard.io/usecases/water-metering.mp4", "https://video.thingsboard.io/usecases/water-metering.webm"]
   href: "/use-cases/water-metering/"
 7:
   type: "General"
-  name: "Smart Retail"
-  description: "Control quality of food storage by monitoring chillers and freezers. Ensure availability of the goods using smart shelves. Ensure safety using motion detection and fire alarms. ThingsBoard provides a solution template to monitor supermarket assets, browse historical data and generate alarms based on user-defined thresholds."
+  name: "智慧零售"
+  description: "通过监测冷柜与冰柜保障食品储存质量，利用智能货架保障商品可得性，通过动检与消防告警保障安全。ThingsBoard提供超市资产监控、历史数据浏览及基于用户阈值告警的解决方案模板。"
   media:
     image: "https://img.thingsboard.io/usecases/smart-retail/video/smart-retail.png"
-    alt: "Smart retail dashboard"
+    alt: "智慧零售仪表盘"
     video: ["https://video.thingsboard.io/usecases/smart-retail.mp4", "https://video.thingsboard.io/usecases/smart-retail.webm"]
   href: "/use-cases/smart-retail/"
 8:
   type: "General"
-  name: "Smart Farming"
-  description: "Collect important indicators for your agricultural production such as soil conditions or facilities state via IoT sensors and visualize them using end-user customizable dashboards provided by ThingsBoard platform."
+  name: "智慧农业"
+  description: "通过IoT传感器采集土壤状况、设施状态等农业生产关键指标，并使用ThingsBoard平台提供的可定制终端用户仪表盘进行可视化。"
   media:
     image: "https://img.thingsboard.io/usecases/smart-farming/video/smart-farming.png"
-    alt: "Smart farming dashboard"
+    alt: "智慧农业仪表盘"
     video: ["https://video.thingsboard.io/usecases/smart-farming.mp4", "https://video.thingsboard.io/usecases/smart-farming.webm"]
   href: "/use-cases/smart-farming/"
 9:
   type: "General"
-  name: "Site Fleet Tracking"
-  description: "Monitor excavators, haul trucks, and machinery across industrial or mining zones in real time using ThingsBoard. Leverage geofencing, calculated fields, and smart alarms to track fuel usage, detect zone violations, and optimize equipment efficiency — all without rule chains. Explore how this zero-code solution boosts operational safety and control."
+  name: "现场车队追踪"
+  description: "使用ThingsBoard实时监控工业或矿区的挖掘机、运输车与设备。借助电子围栏、计算字段与智能告警追踪油耗、发现越区并优化设备效率，无需规则链即可实现零代码方案，提升运营安全与管控。"
   media:
     image: "/images/usecases/fleet-tracking/site-fleet-tracking-1.webp"
-    alt: "Fleet tracking dashboard"
+    alt: "车队追踪仪表盘"
     video: ["https://video.thingsboard.io/usecases/mine-site-monitoring.mp4", "https://video.thingsboard.io/use-cases/mine-site-monitoring.webm"]
   href: "/use-cases/site-fleet-tracking/"
 10:
   type: "General"
-  name: "Smart Metering"
-  description: "Collect, store and aggregate data from smart meters in reliable and fault-tolerant way. Analyze resource consumption and raise alerts on leakage, anomaly or fraud. Present results of the analysis to end users."
+  name: "智能计量"
+  description: "以可靠、容错的方式采集、存储与汇总智能表计数据，分析资源消耗并对泄漏、异常或作弊发出告警，将分析结果呈现给终端用户。"
   media:
     image: "https://img.thingsboard.io/usecases/smart-metering/video/smart-metering.png"
-    alt: "Fleet tracking dashboard"
+    alt: "智能计量仪表盘"
     video: ["https://video.thingsboard.io/usecases/smart-metering.mp4", "https://video.thingsboard.io/usecases/smart-metering.webm"]
   href: "/use-cases/smart-metering/"
 11:
   type: "General"
-  name: "Health Care: Smart Assisted Living Solution"
-  description: "Track patient health metrics in real time and immediately notify medical professionals of critical changes. This solution integrates connected devices, data analytics, and automated alerts to create a seamless experience for caregivers and administrators, ensuring timely responses and a higher quality of care."
+  name: "医疗健康：智能辅助生活方案"
+  description: "实时追踪患者健康指标并在出现关键变化时即时通知医护人员。该方案整合联网设备、数据分析与自动告警，为护理人员与管理员提供无缝体验，确保及时响应与更高质量的照护。"
   media:
     image: "https://img.thingsboard.io/usecases/health-care/video/health-care.png"
-    alt: "Health Care dashboard"
+    alt: "医疗健康仪表盘"
     video: ["https://video.thingsboard.io/usecases/health-care.mp4", "https://video.thingsboard.io/usecases/health-care.webm"]
   href: "/use-cases/health-care/"
 12:
   type: "General"
-  name: "Air Quality Monitoring"
-  description: "Deliver and store data from smart meters in reliable and fault-tolerant way, visualize real-time and historical energy consumption data on customizable end-user dashboards, integrate with third-party analytics frameworks and solutions."
+  name: "空气质量监测"
+  description: "以可靠、容错的方式采集与存储智能表计数据，在可定制的终端用户仪表盘上展示实时与历史能耗，并与第三方分析框架和方案集成。"
   media:
     image: "https://img.thingsboard.io/usecases/air-quality/video/air-quality.png"
-    alt: "Air quality dashboard"
+    alt: "空气质量仪表盘"
     video: ["https://video.thingsboard.io/usecases/air-quality.mp4", "https://video.thingsboard.io/usecases/air-quality.webm"]
   href: "/use-cases/air-quality-monitoring/"
 13:
   type: "General"
-  name: "Smart Irrigation"
-  description: "Monitor the irrigation system and respond in time to changes in field conditions. List the fields and monitor their soil moisture, location, statistics, etc."
+  name: "智能灌溉"
+  description: "监测灌溉系统并随田间条件变化及时响应，列出田块并监测土壤湿度、位置与统计等信息。"
   media:
     image: "https://img.thingsboard.io/usecases/smart-irrigation/video/smart-irrigation.png"
-    alt: "Smart irrigation dashboard"
+    alt: "智能灌溉仪表盘"
     video: ["https://video.thingsboard.io/usecases/smart-irrigation.mp4", "https://video.thingsboard.io/usecases/smart-irrigation.webm"]
   href: "/use-cases/smart-irrigation/"
 14:
   type: "General"
-  name: "Waste Management"
-  description: "Optimize waste management operations with our solution. Streamline processes, monitor waste levels, and track data for efficient and sustainable practices."
+  name: "废弃物管理"
+  description: "通过本方案优化废弃物管理流程，简化工序、监测废弃物量并追踪数据，实现高效可持续运营。"
   media:
     image: "https://img.thingsboard.io/solutions/waste_monitoring/waste-monitoring-1.png"
-    alt: "Waste monitoring dashboard"
+    alt: "废弃物监测仪表盘"
   href: "/use-cases/waste-management/"
 15:
   type: "General"
-  name: "Tank Level Monitoring"
-  description: "Deliver and store data from smart meters in reliable and fault-tolerant way, visualize real-time and historical energy consumption data on customizable end-user dashboards, integrate with third-party analytics frameworks and solutions."
+  name: "储罐液位监测"
+  description: "以可靠、容错的方式采集与存储智能表计数据，在可定制的终端用户仪表盘上展示实时与历史能耗，并与第三方分析框架和方案集成。"
   media:
     image: "https://img.thingsboard.io/solutions/fuel_level_monitoring/fuel-monitoring-1.png"
-    alt: "Fuel level monitoring"
+    alt: "液位监测"
   href: "/use-cases/tank-level-monitoring/"

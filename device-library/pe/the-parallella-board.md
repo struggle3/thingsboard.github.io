@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect The Parallella Board to ThingsBoard?
-category: Single-board computers
+title: 如何将 The Parallella Board 连接至 ThingsBoard？
+category: 单板计算机
 chip: Xilinx Zynq Z-7010
 connectivity: Ethernet
 vendor: Adapteva

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: RPC reply with data from related device
-description: RPC reply with data from related device
+title: 使用关联设备数据回复 RPC
+description: 使用关联设备数据回复 RPC
 
 ---
 

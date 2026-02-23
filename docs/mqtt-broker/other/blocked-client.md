@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Blocked Clients
-description: TBMQ Blocked Clients description
+title: 被拦截客户端
+description: TBMQ 被拦截客户端说明
 
 ---
 

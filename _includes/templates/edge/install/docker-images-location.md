@@ -1,4 +1,4 @@
-Here you can find ThingsBoard Edge docker image: 
+ThingsBoard Edge Docker 镜像位置： 
 
 {% if docsPrefix == "pe/edge/" %}
 * [thingsboard/tb-edge-pe](https://hub.docker.com/r/thingsboard/tb-edge-pe){:target="_blank"}

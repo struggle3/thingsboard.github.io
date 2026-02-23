@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Edge Over-the-Air Firmware And Software Updates
-description: Edge Over-the-Air Firmware And Software Updates Overview
+title: Edge空中固件与软件更新
+description: Edge空中固件与软件更新概述
 
 cannot-edit-on-edge:
     0:

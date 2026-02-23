@@ -1,22 +1,22 @@
-Copy the following script:
+复制以下脚本：
 
 ```ruby
-// Encode downlink data from incoming Rule Engine message
+// 将规则引擎消息编码为下行数据
 
-// msg - JSON message payload downlink message json
-// msgType - type of message, for ex. 'ATTRIBUTES_UPDATED', 'POST_TELEMETRY_REQUEST', etc.
-// metadata - list of key-value pairs with additional data about the message
-// integrationMetadata - list of key-value pairs with additional data defined in Integration executing this converter
+// msg - 下行消息的 JSON 载荷
+// msgType - 消息类型，如 'ATTRIBUTES_UPDATED'、'POST_TELEMETRY_REQUEST' 等
+// metadata - 消息的键值对形式的附加数据
+// integrationMetadata - 执行此转换器的集成中定义的键值对形式的附加数据
 
 var result = {
 
-    // downlink data content type: JSON, TEXT or BINARY (base64 format)
+    // 下行数据内容类型：JSON、TEXT 或 BINARY（base64）
     contentType: "JSON",
 
-    // downlink data
+    // 下行数据
     data: JSON.stringify(msg),
 
-    // Optional metadata object presented in key/value format
+    // 可选的 key/value 形式元数据对象
     metadata: {
     }
 };
@@ -25,6 +25,6 @@ return result;
 ```
 {: .copy-code}
 
-Choose "Create new" and paste copied code to the Encoder function section. Click "Next";
+选择「Create new」并将复制的代码粘贴到编码器函数区域，点击「Next」；
 
 ![image](/images/pe/edge/integrations/http/add-http-integration-template-3-java-edge.png)

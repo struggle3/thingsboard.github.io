@@ -2,8 +2,8 @@
 layout: docwithnav-edge
 assignees:
 - stitenko 
-title: SNMP Device API Reference 
-description: Supported SNMP API Reference for IoT Devices
+title: SNMP设备API参考
+description: 支持的IoT设备SNMP API参考
 redirect_from: "/docs/edge/reference/snmp-api"
 
 deviceProfileConfiguring1:

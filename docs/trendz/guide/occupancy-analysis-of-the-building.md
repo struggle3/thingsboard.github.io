@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Predictive occupancy monitoring for hotels
-description: Analyze and predict occupancy of different zones, areas and spaces in the building
+title: 酒店预测性入住率监控
+description: 分析并预测建筑物内不同区域、空间的人流与入住率
 
 building-occupancy-dashboard:
   0:
@@ -82,48 +82,48 @@ building-occupancy-dashboard-configuration:
 
 ## Introduction
 
-As a mid-sized hotel looking to improve their guest experience and reduce operational costs, our client turned to occupancy monitoring. 
-They wanted to gain a better understanding of which areas of the hotel were most popular and when, in order to allocate their staff and resources more effectively.
-Additionally, they were interested in reducing their environmental impact by reducing their energy usage and identifying potential issues with their HVAC system.  
+某中型酒店希望提升客户体验、降低运营成本，因此引入occupancy monitoring。
+希望通过分析不同区域的受欢迎程度和时段，更合理地调配人力和资源。
+同时希望减少能耗、识别HVAC系统潜在问题，降低环境影响。
 
-**Task definition** - Analyze occupancy rates for different areas within a hotel and predict hourly occupancy rates for the upcoming week.
+**任务定义** - 分析酒店内不同区域的occupancy rate，并预测未来一周的 hourly occupancy rate。
 
 {% include images-gallery.html imageCollection="building-occupancy-dashboard" %}
 
 ### Implementation plan
-* Compute hourly occupancy rate as a percent from max capacity for each area.
-* Compute occupancy rate for the whole floor and building.
-* Build a forecast for occupancy rate for the upcoming week.
-* Show weekly heatmaps for each area/floor/building.
-* Display top-5 overcrowded areas.
-* Display top-5 underutilized areas.
-* Create occupancy analysis dashboard in ThingsBoard.
+* 计算各区域按最大容量百分比的hourly occupancy rate
+* 计算整层、整栋建筑的occupancy rate
+* 构建未来一周occupancy rate预测
+* 展示各区域/楼层/建筑的周heatmap
+* 显示top-5拥挤区域
+* 显示top-5低利用率区域
+* 在ThingsBoard创建occupancy分析dashboard
 
 ### Key outcomes
-* 12% reduction in utility costs.
-* 15% reduction in labor costs.
-* 10% increase in positive guest reviews.
+* 公共事业成本降低12%
+* 人力成本降低15%
+* 正面客户评价提升10%
 
 ## Getting started:
 
 ### Prerequisites
-We are focusing and data analysis and visualization in this guide. So we will omit details about sensors installation and configuration. Here is a short description of the system that we will use in this guide:
+本指南聚焦数据分析和可视化，传感器安装与配置从简。系统概况如下：
 
-* Occupancy sensors already installed in each area of the hotel and connected to ThingsBoard via LoRaWAN integration. 
-* There are 3 asset types in ThingsBoard - building, floor, area. Building has relations to multiple floors, floor has relations to multiple areas and each area has related occupancy sensor. 
-* Sensor reports how many people are currently in the area.
-* Occupancy sensor payload - `{"ts": 1651419204000, peopleCnt": 5}`
-* Each area has an attribute with maximum capacity. We will use this attribute to compute occupancy rate. Initial values are set during system provisioning.
+* 酒店各区域已安装occupancy sensors，通过LoRaWAN integration连接ThingsBoard
+* ThingsBoard中有3种asset类型：building、floor、area。Building关联多个floor，floor关联多个area，每个area关联occupancy sensor
+* 传感器上报当前区域内人数
+* Occupancy sensor payload——`{"ts": 1651419204000, peopleCnt": 5}`
+* 每个area有最大容量attribute。用于计算occupancy rate。provision时设置初始值
 
 ### Step 1: Compute hourly occupancy rate as a percent from max capacity for each area
-Let's start with computing occupancy rate for each area. For doing that we are using Trendz calculated field where we define formula that is based on max area capacity and historical occupancy reported by sensor. 
-We use heatmap to visualize occupancy rate for each hour of the day for the last 7 days. User can change a time range to focus on real time data or historical period.
+先计算各区域的occupancy rate。使用Trendz calculated field，基于区域最大容量和传感器上报的历史occupancy定义公式。
+使用heatmap展示过去7天各小时的occupancy rate。用户可切换时间范围，聚焦实时或历史数据。
 
-* Create Heatmap view
-* Add **Date(Hour)** into `X-axis` section
-* Add **Date(Day)** into `Y-axis` section
-* Add **Calculated** field into `Value` section. Change Label to **Occupancy rate**
-* Write function that returns occupancy rate as a percent from max capacity
+* 创建Heatmap视图
+* 在`X-axis`区域添加**Date(Hour)**
+* 在`Y-axis`区域添加**Date(Day)**
+* 在`Value`区域添加**Calculated**字段，Label改为**Occupancy rate**
+* 编写返回按最大容量百分比的occupancy rate的函数
 
 ```javascript
 var peopleCnt = sum(occupancySensor.peopleCnt);
@@ -132,33 +132,33 @@ var maxCapacity = uniq(area.maxCapacity);
 return peopleCnt / maxCapacity * 100;
 ```
 
-* Set calculated field **Unit** to **%**
-* Add Area, Floor and Building fields into `filter` section so user can focus on specific area of the hotel.
-* Set default time range to **Last 7 days**
-* Save view with name **Weekly occupancy rate heatmap**
+* 计算字段**Unit**设为**%**
+* 在`filter`区域添加Area、Floor、Building字段，便于聚焦酒店特定区域
+* 默认时间范围——**Last 7 days**
+* 以名称**Weekly occupancy rate heatmap**保存
 
 {% include images-gallery.html imageCollection="building-occupancy-weakly-heatmap" %}
 
 ### Step 2: Compute occupancy rate for the whole floor and building
-Heatmap created in _Step 1_ contains filter fields. If no filers are selected, heatmap will show occupancy rate for the whole system. Data from all areas, floors and buildings will be aggregated and displayed on the heatmap.
+Step 1创建的heatmap包含filter字段。未选择filter时，heatmap显示全系统的occupancy rate。所有区域、楼层、建筑的数据会聚合显示。
 
-In real life case most probably we want to focus on specific building or area. To do that we can use filters. For example if user will select specific building in the filters - heatmap will show occupancy rate only for this building. 
-In the background Trendz will perform the following steps:
-* Fetch all floors for the selected building.
-* Then load all areas for each floor.
-* Load occupancy data for each sensor in the area.
-* Apply calculation for each sensor.
-* Aggregate results on hte building level.
+实际中通常聚焦特定建筑或区域。使用filter实现。例如在filter中选择特定建筑，heatmap仅显示该建筑的occupancy rate。
+Trendz在后台会：
+* 拉取所选建筑的所有floor
+* 拉取各floor的所有area
+* 拉取各area内sensor的occupancy数据
+* 对每个sensor应用计算
+* 在建筑层面聚合结果
 
-It means that if user wants to see occupancy rate for the whole floor or building - we can use same view and just select floor or building in the filters.
+因此查看整层或整栋建筑的occupancy rate时，可使用同一视图，只需在filter中选择楼层或建筑即可。
 
 ### Step 3: Predict an occupancy rate for the upcoming week with hourly breakdown
-Till that moment we worked with historical data. Now we will use Trendz prediction instruments to build a forecast for the upcoming week. First, we would create a line chart that shows occupancy rate for the last 7 days with hourly breakdown.
+此前使用历史数据。现在使用Trendz prediction工具构建未来一周预测。先创建展示过去7天、按小时拆分的occupancy rate折线图。
 
-* Create Line chart view
-* Add **Date(Full Hour)** into `X-axis` section
-* Add **Calculated** field into `Y-axis` section. Change Label to **Occupancy rate**
-* Write function that returns occupancy rate as a percent from max capacity
+* 创建Line chart视图
+* 在`X-axis`区域添加**Date(Full Hour)**
+* 在`Y-axis`区域添加**Calculated**字段，Label改为**Occupancy rate**
+* 编写返回按最大容量百分比的occupancy rate的函数
 
 ```javascript
 var peopleCnt = sum(occupancySensor.peopleCnt);
@@ -167,89 +167,89 @@ var maxCapacity = uniq(area.maxCapacity);
 return peopleCnt / maxCapacity * 100;
 ```
 
-* Enable checkbox `Prediction`
-  * Prediction method - **Fourier transformation** 
-  * Prediction range - 7
-  * Prediction unit - days
-* Set calculated field **Unit** to **%**
-* Add Area name into ``Series`` section - it will show occupancy rate for each area as a separate line.
-* Add Area, Floor and Building fields into `filter` section so user can focus on specific area of the hotel.
-* Set default time range to **Last 7 days**
+* 勾选`Prediction`
+  * Prediction method——**Fourier transformation**
+  * Prediction range——7
+  * Prediction unit——days
+* 计算字段**Unit**设为**%**
+* 在`Series`区域添加Area name——各区域occupancy rate显示为独立线
+* 在`filter`区域添加Area、Floor、Building，便于聚焦酒店特定区域
+* 默认时间范围——**Last 7 days**
 
-Finally, we have to predict calculated **Occupancy rate** field for the next 7 days. To do that we will use **Fourier transformation** prediction method that shows good results for seasonal time series data.
+最后，对计算字段**Occupancy rate**预测未来7天。使用**Fourier transformation** prediction method，对季节性时序效果较好。
 
-* Click on  **Occupancy rate** field in the `Y-axis` section
-* Enable checkbox `Prediction`
-  * Prediction method - **Fourier transformation**
-  * Prediction range - 7
-  * Prediction unit - days
-* Save view with name **Hourly occupancy forecast**
+* 点击`Y-axis`区域中的**Occupancy rate**字段
+* 勾选`Prediction`
+  * Prediction method——**Fourier transformation**
+  * Prediction range——7
+  * Prediction unit——days
+* 以名称**Hourly occupancy forecast**保存
 
-Historical data for each area visualized with solid line and forecast is shown with dashed line. 
+各区域历史数据以实线显示，预测以虚线显示。
 
 {% include images-gallery.html imageCollection="building-occupancy-forecast-configuration" %}
 
 ### Step 4: Bar chart with top-5 overcrowded/underutilized areas in the hotel
-Tom-5 bar charts are a good option to better understand our system on a big time range. We can compare assets and understand which areas are overcrowded and which are underutilized. Let's start with overcrowded areas.
+Top-5 bar chart便于在较大时间范围内理解系统、对比asset、识别拥挤与低利用率区域。先从拥挤区域开始。
 
-* Create Bar chart view
-* Add **Area name** into `X-axis` section
-* Add **Occupancy rate** into `Y-axis` section. Reuse calculated field from Step 1.
-* Open View settings 
-  * Set sorting to **Descending**
-  * Set `Limit` to 5
-  * Enable Horizontal bar chart
-* Add Area, Floor and Building fields into `filter` section so user can focus on specific area of the hotel.
-* Set default time range to **Last 7 days**
-* Save view with name **top-5 overcrowded areas**
+* 创建Bar chart视图
+* 在`X-axis`区域添加**Area name**
+* 在`Y-axis`区域添加**Occupancy rate**。复用Step 1的计算字段
+* 打开View settings
+  * 排序——**Descending**
+  * `Limit`——5
+  * 启用Horizontal bar chart
+* 在`filter`区域添加Area、Floor、Building，便于聚焦酒店特定区域
+* 默认时间范围——**Last 7 days**
+* 以名称**top-5 overcrowded areas**保存
 
-Almost the same steps should be done for a bar chart with top-5 underutilized areas in the hotel. Just change sorting to **Ascending** and change view name to **top-5 underutilized areas**.
+top-5低利用率区域的bar chart步骤几乎相同。仅将排序改为**Ascending**，视图名称改为**top-5 underutilized areas**。
 
 {% include images-gallery.html imageCollection="building-occupancy-top-crowded-areas" %}
 
 ### Step 5: Create occupancy analysis dashboard in ThingsBoard
-All Trendz analytic charts are ready and we can create user dashboard in ThingsBoard. Note that user can have access to multiple hotels and we want to create a dashboard that will work for all of them. User should have an ability to select a hotel, floor and area.
-At first, we will add all Trendz views on the dashboard: 
+所有Trendz分析chart已就绪，可在ThingsBoard创建用户dashboard。注意用户可能访问多家酒店，需创建适用于所有酒店的dashboard。用户应能选择酒店、楼层、区域。
+首先添加所有Trendz视图到dashboard：
 
-* In ThingsBoard create dashboard with name **Occupancy analysis**
-* In Trendz: for each widget that we created in previous steps:
-  * Click on `Share to ThingsBoard` button and copy `Add on Dashboard`.
-  * Select **Occupancy analysis** dashboard.
-  * Enable **Create alias** checkbox.
-  * Select **Area name** as a filter.
-* Return to ThingsBoard **Occupancy analysis** dashboard and tune dashboard layout.
+* 在ThingsBoard创建名为**Occupancy analysis**的dashboard
+* 在Trendz：对前几步创建的每个部件：
+  * 点击`Share to ThingsBoard`，复制`Add on Dashboard`
+  * 选择**Occupancy analysis** dashboard
+  * 勾选**Create alias**
+  * Filter选择**Area name**
+* 返回ThingsBoard **Occupancy analysis** dashboard并调整布局
 
-Then we would create dashboard aliases that will be used to filter data in the dashboard.
+然后创建用于dashboard过滤的aliases：
 
-* Create new alias **All buildings** - this alias would hold all buildings that are visible to the user. 
-  * Filter type - **Asset type**
-  * Asset type - **Building**
-* Create new alias **Selected entity** - this alias would hold an Entity that user clicked on.
-  * Filter type - **Entity from dashboard state**
-  * State entity parameter name - **selectedEntity**
-* Create new alias **Filtered areas** - this alias would hold all Areas that user want to focus on. 
-  * Filter type - **Asset search query**
-  * Enable **Root entity** checkbox with entity parameter name - **selectedEntity**
-  * Enable checkbox **Fetch last level relation only**
-  * Direction - From
-  * Max relation level - 3 
-  * Asset types - **Area**
+* 创建新alias **All buildings**——保存用户可见的所有建筑
+  * Filter type——**Asset type**
+  * Asset type——**Building**
+* 创建新alias **Selected entity**——保存用户点击的实体
+  * Filter type——**Entity from dashboard state**
+  * State entity parameter name——**selectedEntity**
+* 创建新alias **Filtered areas**——保存用户要聚焦的Area
+  * Filter type——**Asset search query**
+  * 勾选**Root entity**，entity parameter name——**selectedEntity**
+  * 勾选**Fetch last level relation only**
+  * Direction——From
+  * Max relation level——3
+  * Asset types——**Area**
 
-Finally, we have to add hierarchy widget that will show all buildings/floors/areas in the hotel and allow user to select specific area. Once user would click on entity - **Filtered areas** alias will refresh and load all areas for the selected entity. 
-After that all Trendz widgets on the dashboard would be updated because they use **Filtered areas** alias as a datasource. As a result user will see occupancy data for the selected areas.
+最后添加hierarchy部件，展示酒店内所有建筑/楼层/区域，供用户选择。用户点击实体后，**Filtered areas** alias会刷新并加载所选实体的所有区域。
+之后dashboard上所有Trendz部件会更新，因其以**Filtered areas** alias为数据源。用户将看到所选区域的occupancy数据。
 
-* Add hierarchy widget `Cards` -> `Entities hierarchy` to the dashboard. It will show all buildings/floors/areas in the hotel.
-  * Set datasource alias to **All buildings**
-  * Latest data key - **Name**
-* Add `On node selected` action for hierarchy widget. It will update `selectedEntity` parameter in the dashboard state.
-  * Action type - **Update current dashboard state**
-  * State entity parameter name - **selectedEntity**
-* For all Trendz widgets on the dashboard set datasource alias to **Filtered areas**.
-* Save dashboard.
+* 在dashboard添加hierarchy部件`Cards` -> `Entities hierarchy`，展示酒店内所有建筑/楼层/区域
+  * 数据源alias——**All buildings**
+  * Latest data key——**Name**
+* 为hierarchy部件添加`On node selected` action，更新dashboard state中的`selectedEntity`参数
+  * Action type——**Update current dashboard state**
+  * State entity parameter name——**selectedEntity**
+* 所有dashboard上的Trendz部件的数据源alias设为**Filtered areas**
+* 保存dashboard
 
 {% include images-gallery.html imageCollection="building-occupancy-dashboard-configuration" %}
 
 ## Summary
-In conclusion, the implementation of occupancy monitoring technology helped our client to achieve their goals of improving guest experience, reducing operational costs, and minimizing their environmental footprint. 
-By leveraging real-time data and predictive analytics, they were able to optimize their staffing levels, allocate their resources more effectively, and reduce their energy usage. 
-The key outcomes of this implementation included a reduction in utility and labor costs, as well as an increase in positive guest reviews.
+综上所述，occupancy monitoring技术的实施帮助客户实现了提升客户体验、降低运营成本、减少环境影响的目标。
+借助实时数据和预测分析，他们优化了人员配置、更有效地分配资源、降低了能耗。
+实施的主要成效包括公共事业和人力成本下降，以及正面客户评价提升。

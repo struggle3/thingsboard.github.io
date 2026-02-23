@@ -1,21 +1,21 @@
-Executes a user-defined function that returns a boolean value.
-The message is routed via the `True` connection if the function returns `true`, and via the `False` connection if it returns `false`.
-If script execution fails, the message is routed via the `Failure` connection.
-Supports **TBEL** and **JavaScript**.
+执行用户自定义函数并返回布尔值。
+若函数返回 `true`，消息通过 `True` 连接路由；若返回 `false`，通过 `False` 连接路由。
+若脚本执行失败，消息通过 `Failure` 连接路由。
+支持 **TBEL** 和 **JavaScript**。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Script language** — defines which scripting language is used. Can be either *TBEL* or *JavaScript*.
+* **脚本语言** — 定义使用的脚本语言。可为 *TBEL* 或 *JavaScript*。
 
-* **Script body** — the body of the function used to evaluate the incoming message.
-  This script must return a boolean (`true` or `false`) and can access the following arguments:
-    * `msg` — the message data, typically an object or array.
-    * `metadata` — the message metadata.
-      In JavaScript, this is an object where all values are strings.
-      In TBEL, it is a `java.util.Map<String, String>`.
-    * `msgType` — the type of the message as a string.
+* **脚本内容** — 用于评估入站消息的函数体。
+  该脚本必须返回布尔值（`true` 或 `false`），并可访问以下参数：
+    * `msg` — 消息数据，通常为对象或数组。
+    * `metadata` — 消息元数据。
+      在 JavaScript 中为对象，所有值为字符串。
+      在 TBEL 中为 `java.util.Map<String, String>`。
+    * `msgType` — 消息类型（字符串）。
 
 ### JSON Schema
 
@@ -30,7 +30,7 @@ Supports **TBEL** and **JavaScript**.
   "properties": {
     "scriptLang": {
       "type": "string",
-      "description": "Scripting language used to execute the function.",
+      "description": "用于执行函数的脚本语言。",
       "enum": [
         "TBEL",
         "JS"
@@ -38,11 +38,11 @@ Supports **TBEL** and **JavaScript**.
     },
     "jsScript": {
       "type": "string",
-      "description": "JavaScript function body that must return a boolean value. Used when 'scriptLang' is 'JS'."
+      "description": "必须返回布尔值的 JavaScript 函数体。当 'scriptLang' 为 'JS' 时使用。"
     },
     "tbelScript": {
       "type": "string",
-      "description": "TBEL function body that must return a boolean value. Used when 'scriptLang' is 'TBEL'."
+      "description": "必须返回布尔值的 TBEL 函数体。当 'scriptLang' 为 'TBEL' 时使用。"
     }
   },
   "additionalProperties": false
@@ -50,38 +50,38 @@ Supports **TBEL** and **JavaScript**.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. Determine which script to execute based on the configured **Script language**:
-    * If *TBEL*, use the configured **TBEL script**.
-    * If *JS*, use the configured **JavaScript script**.
-2. Execute the script as a function.
-3. The script must return a boolean value:
-    * If `true`, route via the `True` connection.
-    * If `false`, route via the `False` connection.
-4. If the script throws an exception, route via the `Failure` connection.
+1. 根据配置的**脚本语言**确定要执行的脚本：
+    * 若为 *TBEL*，使用配置的 **TBEL 脚本**。
+    * 若为 *JS*，使用配置的 **JavaScript 脚本**。
+2. 将脚本作为函数执行。
+3. 脚本必须返回布尔值：
+    * 若为 `true`，通过 `True` 连接路由。
+    * 若为 `false`，通过 `False` 连接路由。
+4. 若脚本抛出异常，通过 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
-* `True`:
-    * If the script returns `true`.
-* `False`:
-    * If the script returns `false`.
-* `Failure`:
-    * If the script returns a non-boolean value (e.g., a string or number).
-    * If the script throws an error or cannot be evaluated.
+* `True`：
+    * 若脚本返回 `true`。
+* `False`：
+    * 若脚本返回 `false`。
+* `Failure`：
+    * 若脚本返回非布尔值（如字符串或数字）。
+    * 若脚本抛出错误或无法求值。
 
-## Examples
+## 示例
 
-### Example 1 — JavaScript script with dynamic threshold check → `True`
+### 示例 1 — 使用动态阈值检查的 JavaScript 脚本 → `True`
 
-This example checks if the message type is `POST_TELEMETRY_REQUEST`.
-If so, it iterates over all numeric telemetry values in the message and compares them to threshold values from metadata.
-Returns `true` if any value exceeds its threshold.
+此示例检查消息类型是否为 `POST_TELEMETRY_REQUEST`。
+若是，则遍历消息中所有数值型遥测值，并与元数据中的阈值比较。
+若有任意值超过其阈值，返回 `true`。
 
-**Incoming message**
+**入站消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -91,7 +91,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -100,10 +100,10 @@ Metadata:
 }
 ```
 
-Message type: `POST_TELEMETRY_REQUEST`
+消息类型：`POST_TELEMETRY_REQUEST`
 
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -112,19 +112,19 @@ Message type: `POST_TELEMETRY_REQUEST`
 }
 ```
 
-**Result**: **`True`**
+**结果**：**`True`**
 
-**Explanation**: temperature (45.2) exceeds the threshold (45.0), so the script returns `true`.
+**说明**：温度 (45.2) 超过阈值 (45.0)，因此脚本返回 `true`。
 
 ---
 
-### Example 2 — TBEL script with dynamic threshold check → `True`
+### 示例 2 — 使用动态阈值检查的 TBEL 脚本 → `True`
 
-Same logic as the previous example, but implemented using TBEL.
+与上一示例逻辑相同，但使用 TBEL 实现。
 
-**Incoming message**
+**入站消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -134,7 +134,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -143,9 +143,9 @@ Metadata:
 }
 ```
 
-Message type: `POST_TELEMETRY_REQUEST`
+消息类型：`POST_TELEMETRY_REQUEST`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -154,17 +154,17 @@ Message type: `POST_TELEMETRY_REQUEST`
 }
 ```
 
-**Result**: **`True`**
+**结果**：**`True`**
 
-**Explanation**: humidity (88) exceeds its threshold (85), so the script returns `true`.
+**说明**：湿度 (88) 超过其阈值 (85)，因此脚本返回 `true`。
 
 ---
 
-### Example 3 — JavaScript script, runtime error → `Failure`
+### 示例 3 — JavaScript 脚本，运行时错误 → `Failure`
 
-**Incoming message**
+**入站消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -172,26 +172,26 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
   "scriptLang": "JS",
-  "jsScript": "// This script expects temperature inside a 'data' object.\nreturn msg.data.temperature > 20;"
+  "jsScript": "// 此脚本期望温度在 'data' 对象内。\nreturn msg.data.temperature > 20;"
 }
 ```
 
-**Result**: **`Failure`**
+**结果**：**`Failure`**
 
-**Explanation**: `msg.data` is `undefined`, so accessing its property causes a runtime error.
+**说明**：`msg.data` 为 `undefined`，访问其属性导致运行时错误。
 
 ---
 
-### Example 4 — TBEL script, runtime error → `Failure`
+### 示例 4 — TBEL 脚本，运行时错误 → `Failure`
 
-**Incoming message**
+**入站消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -199,15 +199,15 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
   "scriptLang": "TBEL",
-  "tbelScript": "// This script expects temperature inside a 'data' object.\nreturn msg.data.temperature > 20;"
+  "tbelScript": "// 此脚本期望温度在 'data' 对象内。\nreturn msg.data.temperature > 20;"
 }
 ```
 
-**Result**: **`Failure`**
+**结果**：**`Failure`**
 
-**Explanation**: `msg.data` is `null`, so accessing its property causes a runtime error.
+**说明**：`msg.data` 为 `null`，访问其属性导致运行时错误。

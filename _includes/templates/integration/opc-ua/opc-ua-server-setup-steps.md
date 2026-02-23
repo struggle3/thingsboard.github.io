@@ -1,5 +1,5 @@
 - Download and install the [OPC UA C++ Demo Server](https://www.unified-automation.com/downloads/opc-ua-servers.html){:target="_blank"}.
-> **Note:** This server currently supports Windows only.
+> **注意**：该服务器目前仅支持 Windows。
 
 - **Launch the UA Admin Dialog** after installation.
 - Make sure the **hostname/IP address** and **port** are configured correctly.   

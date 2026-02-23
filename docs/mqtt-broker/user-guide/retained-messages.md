@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Retained Messages
-description: TBMQ Retained Messages feature
+title: 保留消息
+description: TBMQ 保留消息功能
 
 details-retained-messages:
   0:
     image: /images/mqtt-broker/user-guide/ui/details-retained-messages-1.png
-    title: 'Navigate to the "Retained Messages" page.'
+    title: '进入「保留消息」页面。'
   1:
     image: /images/mqtt-broker/user-guide/ui/details-retained-messages-2.png
-    title: 'You can use the advanced filter feature to find the retained messages.'
+    title: '可使用高级筛选查找保留消息。'
   2:
     image: /images/mqtt-broker/user-guide/ui/details-retained-messages-3.png
     title: 'Click on the button "Payload", represented by icon "{}".'

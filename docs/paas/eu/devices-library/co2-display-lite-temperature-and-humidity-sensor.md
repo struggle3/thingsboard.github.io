@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect CO2 Display lite Temperature and humidity sensor to ThingsBoard?"
+title: "如何将CO2 Display lite Temperature and humidity sensor连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/co2-display-lite-temperature-and-humidity-sensor/"
 ---

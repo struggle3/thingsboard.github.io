@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Application Shared Subscriptions
-description: Application Shared Subscriptions
+title: 应用共享订阅
+description: 应用共享订阅
 
 add-shared-subscriptions:
   0:
     image: /images/mqtt-broker/user-guide/ui/add-shared-subscriptions-1.png
-    title: 'Open Shared Subscriptions page and click on the "plus" icon.'
+    title: '打开共享订阅页面，点击「+」图标。'
   1:
     image: /images/mqtt-broker/user-guide/ui/add-shared-subscriptions-2.png
-    title: 'Fill in the Name, Topic filter and Partitions fields.'
+    title: '填写名称、主题过滤器和分区数。'
 
 delete-shared-subscriptions:
   0:

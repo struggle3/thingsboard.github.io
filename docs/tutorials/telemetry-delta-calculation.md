@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Telemetry delta calculation
-description: Telemetry delta calculation using the Calculated fields feature
+title: 遥测 delta 计算
+description: 使用 Calculated fields 功能进行遥测 delta 计算
 
 ---
 

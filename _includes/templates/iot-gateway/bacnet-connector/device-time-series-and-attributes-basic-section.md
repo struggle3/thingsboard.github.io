@@ -1,81 +1,76 @@
-Configuration in this subsection provides settings for processing data from BACnet device as timeseries and 
-attributes on the platform instance.
+本子节的配置提供将 BACnet 设备数据作为平台实例上的时序和属性进行处理的设置。
 
-To add new time series or attribute key, follow these steps:
+若要添加新的时序或属性 key，请按以下步骤操作：
 
 {% assign creatingAttrAndTimeseries = '
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-3-ce.png,
-        title: Click “**pencil**” icon of the “**Attributes**” section to add new attribute key;
+        title: 点击 "**属性**" 部分的 "**铅笔**" 图标以添加新的属性 key；
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-4-ce.png,
-        title: Click “**Add attribute**” in the opened window;
+        title: 在打开的窗口中点击 "**添加属性**"；
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-5-ce.png,
-        title: Enter the **key name**, select "Object ID" and "Property ID" from the dropdown list. Click “**Apply**”;
+        title: 输入 **key 名称**，从下拉列表选择 "Object ID" 和 "Property ID"。点击 "**应用**"；
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-6-ce.png,
-        title: Now click on the “**pencil**” icon of the “**Time series**” section to add new time series key;
+        title: 现在点击 "**时序**" 部分的 "**铅笔**" 图标以添加新的时序 key；
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-7-ce.png,
-        title: Click "**Add time series**" in the opened window;
+        title: 在打开的窗口中点击 "**添加时序**"；
     ===
         image: /images/gateway/bacnet-connector/bacnet-gateway-configuring-8-ce.png,
-        title: Enter the **key name**, select "Object ID" and "Property ID" from the dropdown list. Click “**Apply**”.
+        title: 输入 **key 名称**，从下拉列表选择 "Object ID" 和 "Property ID"。点击 "**应用**"。
     '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=creatingAttrAndTimeseries %}
 
 {% capture difference %}
-All configuration parameters list, and their detailed description can be found in the
-[Advanced configuration](/docs/iot-gateway/config/bacnet/#device-attributes-and-time-series) section.
+完整配置参数列表及其详细说明请参阅
+[高级配置](/docs/iot-gateway/config/bacnet/#device-attributes-and-time-series) 部分。
 
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/bacnet/#usage-examples) section.
+更多使用示例请参阅 [示例用法](/docs/iot-gateway/config/bacnet/#usage-examples) 部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-#### Filtering (from v.3.7.5 and only in advanced configuration mode)
+#### 筛选（自 v.3.7.5 起，仅在高级配置模式下可用）
 
-You can set up filtering for time series and attributes based on Object Type, Object ID and Property ID. This allows 
-you to specify which data should be collected and sent to the platform. Let's review each filtering option:
+您可根据对象类型 (Object Type)、对象 ID (Object ID) 和属性 ID (Property ID) 为时序和属性设置筛选。由此可指定应收集并发送到平台的数据。以下为各筛选选项说明：
 
-**Object Type Filtering**
+**对象类型筛选**
 
-This filter allows you to specify the type of BACnet objects from which data should be collected. For example, you can 
-choose to collect data only from "**Analog Input**" or "**Binary Output**" object types or both:
-- `"objectType": "*"` - will collect data from all [supported object types](/docs/iot-gateway/config/bacnet/#supported-object-types);
-- `"objectType": "analogValue"` - will collect data only from Analog Value objects;
-- `"objectType": ["analogValue", "binaryInput"]` - will collect data from both "Analog Value" and "Binary Input" objects.
+此筛选可指定应从哪些类型的 BACnet 对象收集数据。例如，可选择仅从 "**Analog Input**" 或 "**Binary Output**" 对象类型或两者收集数据：
+- `"objectType": "*"` - 从所有[支持的对象类型](/docs/iot-gateway/config/bacnet/#supported-object-types)收集数据；
+- `"objectType": "analogValue"` - 仅从 Analog Value 对象收集数据；
+- `"objectType": ["analogValue", "binaryInput"]` - 从 "Analog Value" 和 "Binary Input" 对象收集数据。
 
-**Object ID Filtering**
+**对象 ID 筛选**
 
-This filter allows you to specify particular Object IDs for data collection. You can define a single Object ID or a list
-of Object IDs:
-- `"objectId": 1234` - will collect data only from the object with ID 1234;
-- `"objectId": "*"` - will collect data from all Object IDs;
-- `"objectId": "0-10"` - will collect data from Object IDs in the range 0 to 10 (inclusive);
-- `"objectId": ["0-10", "12-15"]` - will collect data from Object IDs in the ranges 0 to 10 and 12 to 15 (inclusive).
+此筛选可指定用于数据收集的特定对象 ID。可定义单个对象 ID 或对象 ID 列表：
+- `"objectId": 1234` - 仅从 ID 为 1234 的对象收集数据；
+- `"objectId": "*"` - 从所有对象 ID 收集数据；
+- `"objectId": "0-10"` - 从 0 到 10（含）范围内的对象 ID 收集数据；
+- `"objectId": ["0-10", "12-15"]` - 从 0 到 10 和 12 到 15（含）范围内的对象 ID 收集数据。
 
-**Property ID Filtering**
+**属性 ID 筛选**
 
-This filter allows you to specify particular Property IDs for data collection. You can define a single Property ID or a list
-of Property IDs:
-- `"propertyId": "presentValue"` - will read only the "presentValue" property;
-- `"propertyId": "*"` - will read all [supported properties](/docs/iot-gateway/config/bacnet/#supported-property-identifiers);
-- `"propertyId": ["presentValue", "location"]` - will read both "presentValue" and "location" properties.
+此筛选可指定用于数据收集的特定属性 ID。可定义单个属性 ID 或属性 ID 列表：
+- `"propertyId": "presentValue"` - 仅读取 "presentValue" 属性；
+- `"propertyId": "*"` - 读取所有[支持的属性](/docs/iot-gateway/config/bacnet/#supported-property-identifiers)；
+- `"propertyId": ["presentValue", "location"]` - 读取 "presentValue" 和 "location" 属性。
 
 {% capture info %}
 <div>
   <p>
-    <b style="color:red">WARNING:</b>
-    <span style="color:black">It is not allowed to use the Object Types list (except "*") with Object ID range or a list of ranges.</span>
+    <b style="color:red">警告：</b>
+    <span style="color:black">不允许将对象类型列表（"*" 除外）与对象 ID 范围或范围列表一起使用。</span>
   </p>
 </div>
 {% endcapture %}
 {% include templates/warn-banner.md content=info %}
 
-Example of filtering configuration:
+筛选配置示例：
 
 ```json
 {
@@ -91,23 +86,22 @@ Example of filtering configuration:
 ```
 
 {% capture difference %}
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/bacnet/#usage-examples) section.
+更多使用示例请参阅 [示例用法](/docs/iot-gateway/config/bacnet/#usage-examples) 部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-#### Report strategy
+#### 上报策略
 
-For each time series or attribute, you can enable specific report strategy. This strategy defines how often the 
-data will be sent to the ThingsBoard server. The following strategies are available:
+对于每个时序或属性，您可启用特定的上报策略。该策略定义向 ThingsBoard 服务器发送数据的频率。可用策略如下：
 
-- **On report period** - sends data to ThingsBoard after the report period;
-- **On value change** - sends data to ThingsBoard when the value changes;
-- **On value change or report period** - sends data to ThingsBoard when the value changes or after the report period;
-- **On received** - sends data to ThingsBoard after receiving data from the device (default strategy).
+- **按上报周期** - 在上报周期后向 ThingsBoard 发送数据；
+- **按值变化** - 当值发生变化时向 ThingsBoard 发送数据；
+- **按值变化或上报周期** - 当值发生变化或在上报周期后向 ThingsBoard 发送数据；
+- **按接收** - 从设备接收数据后向 ThingsBoard 发送数据（默认策略）。
 
 ![image](/images/gateway/bacnet-connector/bacnet-gateway-configuring-10-ce.png)
 
 {% capture difference %}
-Additional information about the report strategy can be found [here](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}.
+有关上报策略的更多信息请参阅[此处](/docs/iot-gateway/features-overview/report-strategy){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}

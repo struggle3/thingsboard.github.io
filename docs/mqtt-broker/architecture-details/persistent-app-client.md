@@ -1,11 +1,11 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Architecture for Persistent APPLICATION clients
-description: Architecture Overview for Persistent APPLICATION clients
+title: 持久化应用客户端架构
+description: 持久化应用客户端架构概览
 
 ---
 
-* TOC
+* 目录
 {:toc}
 
 ![image](/images/coming-soon.jpg)

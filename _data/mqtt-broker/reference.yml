@@ -1,19 +1,19 @@
-bigheader: "Architecture"
-abstract: "Design docs, deployment scenarios and performance"
+bigheader: "架构"
+abstract: "设计文档、部署场景与性能"
 toc:
-- title: Architecture Overview
+- title: 架构概览
   path: /docs/mqtt-broker/architecture/
-- title: Architecture Details
+- title: 架构详情
   section:
-    - title: "Persistent DEVICE Client"
+    - title: "持久化DEVICE客户端"
       path: /docs/mqtt-broker/architecture-details/persistent-device-client/
-    - title: "Persistent APPLICATION Client"
+    - title: "持久化APPLICATION客户端"
       path: /docs/mqtt-broker/architecture-details/persistent-app-client/
-- title: Performance Tests
+- title: 性能测试
   section:
-    - title: "Point-to-point: 1M Msg/sec Throughput"
+    - title: "点对点：100万消息/秒吞吐量"
       path: /docs/mqtt-broker/reference/1m-throughput-p2p-performance-test/
-    - title: "Fan-out: 3M Msg/sec Throughput"
+    - title: "扇出：300万消息/秒吞吐量"
       path: /docs/mqtt-broker/reference/3m-throughput-single-node-performance-test/
-    - title: "Fan-in: 100M MQTT Connections"
+    - title: "扇入：1亿MQTT连接"
       path: /docs/mqtt-broker/reference/100m-connections-performance-test/

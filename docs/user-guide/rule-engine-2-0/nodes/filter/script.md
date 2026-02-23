@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: script
-description: Routes messages based on the result of a boolean script.
+description: 根据布尔脚本结果路由消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

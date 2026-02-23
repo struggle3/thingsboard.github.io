@@ -1,25 +1,22 @@
 ---
 layout: docwithnav
-title: LPWA GPS Tracker with monoZ
-description: Configuration of a monoZ telemetry device to enable it to send telemetry data to the ThingsBoard.
+title: 使用 monoZ 的 LPWA GPS 追踪器
+description: 配置 monoZ 遥测设备，使其能够将遥测数据发送到 ThingsBoard。
 
 ---
 
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-**monoZero** is a powerful development kit ecosystem designed for swift prototyping of cellular
-IoT projects. Loaded with LTE-M / NB-IoT cellular modem and low power STM32 MCU, it hosts
-5 different types of peripherals for allowing users to easily connect and control their variety
-of sensors or other devices.
+**monoZero** 是一款强大的开发套件生态系统，专为蜂窝物联网项目的快速原型设计而构建。配备 LTE-M/NB-IoT 蜂窝调制解调器和低功耗 STM32 MCU，提供 5 种不同类型的外设，便于用户轻松连接和控制多种传感器或其他设备。
 
-This guide will cover the following sections:
+本指南涵盖以下部分：
 
-1. Hardware setup of GPS tracker using monoZero;
-2. Embedded firmware to read and send GPS data via MQTT using monoZ SDK;
-3. monoZ Cloud OSS (based on ThingsBoard) configuration to receive the GPS data via MQTT and display in a dashboard.
+1. 使用 monoZero 的 GPS 追踪器硬件设置；
+2. 使用 monoZ SDK 通过 MQTT 读取并发送 GPS 数据的嵌入式固件；
+3. monoZ Cloud OSS（基于 ThingsBoard）配置，通过 MQTT 接收 GPS 数据并在仪表板中显示。
 
 ![image](/images/samples/monoz/monoZero-01.png)
 

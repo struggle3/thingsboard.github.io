@@ -3,7 +3,7 @@ layout: docwithnav
 assignees:
 - ashvayka
 title: Tenant Profiles
-description: IoT tenant profiles
+description: IoT tenant 配置
 redirect_from: "/docs/user-guide/ui/tenant-profiles"
 entityLimits:
     0:
@@ -28,16 +28,16 @@ files-limits:
 isolatedQueueConfiguration:
     0:
         image: /images/user-guide/tenant-profile/queue-tenant-profile-1-ce.png
-        title: 'Step 1. Open tenant profile menu and add new tenant profile. Click "isolated ThingsBoard RuleEngine" box, Main queue added by default and can not be renamed or deleted.'
+        title: '步骤 1。打开 tenant profile 菜单并添加新 tenant profile。勾选 "isolated ThingsBoard RuleEngine"，Main queue 默认添加且不可重命名或删除。'
     1:
         image: /images/user-guide/tenant-profile/queue-tenant-profile-2-ce.png
-        title: 'Step 2. Click "Add Queue" if you need to add new custom queue.'
+        title: '步骤 2。若需添加新的自定义 queue，点击 "Add Queue"。'
     2:
         image: /images/user-guide/tenant-profile/queue-tenant-profile-3-ce.png
-        title: 'Step 3. Configure submit and processing settings.'
+        title: '步骤 3。配置 submit 和 processing 设置。'
     3:
         image: /images/user-guide/tenant-profile/queue-tenant-profile-4-ce.png
-        title: 'Step 4. Now tenant profile is ready to assign for particular tenants.'
+        title: '步骤 4。此时 tenant profile 已可分配给特定 tenant。'
 ---
 
 {% include get-hosts-name.html %}

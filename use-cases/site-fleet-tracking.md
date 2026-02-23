@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: Geofencing-Based Excavator & Truck Tracking for Clay Mines
-description: Explore how ThingsBoard enables safe and efficient vehicle tracking on clay mine sites using calculated fields, geofencing zones, and zero rule chain logic.
+title: 粘土矿基于地理围栏的挖掘机和卡车跟踪
+description: 了解 ThingsBoard 如何通过计算字段、地理围栏区域和零规则链逻辑，在粘土矿场地实现安全高效的车辆跟踪。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -11,7 +11,7 @@ contactUsModal: "true"
 
 {% include usecase-nav.html usecase="site-fleet-tracking" %}
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Site fleet tracking monitoring solution</h1>
+<h1 class="usecase-title">场地车队跟踪监测解决方案</h1>
 <section class="fleet-tracking-about">
     <div class="about-text">
         <div class="short">
@@ -19,7 +19,7 @@ contactUsModal: "true"
                 <p class="text">Clay mining operations present a high-risk, high-movement environment, where visibility, safety, and fuel efficiency are critical. Coordinating fleets of excavators and haul trucks across loading, unloading, and restricted zones requires more than GPS — it demands precision logic and real-time automation.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_FleetTracking_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/3b0ab5a0-f838-11f0-a24d-13b2783631c6?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
+                <a id="UseCases_FleetTracking_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/3b0ab5a0-f838-11f0-a24d-13b2783631c6?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
             </div>
         </div>
         <div class="long">
@@ -36,7 +36,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="fleet-tracking-solution-structure">
-    <h2>Solution structure of the site fleet tracking monitoring solution</h2>
+    <h2>场地车队跟踪监测解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
@@ -55,9 +55,9 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Dashboard structure of the site fleet tracking monitoring solution</h2>
+        <h2>场地车队跟踪监测解决方案仪表板结构</h2>
         <p>
-            The solution includes a set of modular dashboards designed to give mine operators full situational control — from zone-level events to individual machine analytics. The primary Mine Overview Dashboard presents a full satellite view of the site with color-coded zones (Loading, Unloading, Restricted), live machine positions, fuel levels, and telemetry streams. Interactive widgets highlight: machines per zone, fuel usage per day, active alarms with severity, zone-specific transitions and KPIs
+            The solution includes a set of modular dashboards designed to give mine operators full situational control — from zone-level events to individual machine analytics. The primary Mine Overview Dashboard presents a full satellite view of the site with color-coded zones (Loading, Unloading, Restricted), live machine positions, fuel levels, and telemetry streams. Interactive 部件 highlight: machines per zone, fuel usage per day, active alarms with severity, zone-specific transitions and KPIs
         </p>
     </div>
     <div class="dashboard-structure-block">
@@ -168,7 +168,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header">
-        <h2>Applications of the site fleet tracking monitoring solution</h2>
+        <h2>场地车队跟踪监测解决方案的应用</h2>
         <p>A solution like this is perfectly suited for a variety of industrial and logistics use cases where zone-based automation, fleet safety, and machine telemetry matter:</p>
     </div>
     <div class="applications-container-large">
@@ -246,13 +246,13 @@ contactUsModal: "true"
 
 <section class="summary fleet-tracking">
     <div class="summary-text">
-        <h2>Summary of the site fleet tracking monitoring solution</h2>
+        <h2>场地车队跟踪监测解决方案总结</h2>
         <p>ThingsBoard’s Clay Mine Monitoring Solution sets a new benchmark for no-code industrial IoT. By eliminating Rule Chains and relying solely on calculated fields and alarm rules, it reduces configuration overhead, speeds up deployment, and empowers teams to operate smarter and safer.</p>
         <p>The platform provides everything needed for real-time tracking, performance analysis, geofencing control, and automated alerts — all through a powerful and flexible dashboard layer.</p>
         <p>Whether applied to clay mines or other heavy equipment scenarios, this solution offers unmatched operational clarity and scalability.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -353,8 +353,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_FleetTracking_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/3b0ab5a0-f838-11f0-a24d-13b2783631c6?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>
-                <a id="UseCases_FleetTracking_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_FleetTracking_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/3b0ab5a0-f838-11f0-a24d-13b2783631c6?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>
+                <a id="UseCases_FleetTracking_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
 
             applyImageBg(block);

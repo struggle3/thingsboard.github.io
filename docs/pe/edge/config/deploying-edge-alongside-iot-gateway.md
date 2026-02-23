@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Deploying ThingsBoard Edge Alongside ThingsBoard IoT Gateway
-description: Deploying ThingsBoard Edge alongside ThingsBoard IoT Gateway
+title: 与 ThingsBoard IoT 网关同时部署 ThingsBoard Edge
+description: 与 ThingsBoard IoT 网关同时部署 ThingsBoard Edge
 
 startEdge:
   0:

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: rabbitmq
-description: Publishes messages to RabbitMQ exchanges, sending the incoming message data as the message body.
+description: 将消息发布到 RabbitMQ exchange，以入站消息数据作为消息体。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

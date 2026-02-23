@@ -1,9 +1,8 @@
-Stores the incoming message data as attribute data of the message originator.
+将入站消息数据存储为消息 originator 的 attribute 数据。
 
-## Preconditions
+## 前置条件
 
-The node accepts messages of type `POST_ATTRIBUTES_REQUEST` and expects message data to be a JSON object where each property name represents an attribute key, and its corresponding
-value is the attribute value. For example:
+该节点接受类型为 `POST_ATTRIBUTES_REQUEST` 的消息，并要求消息数据为 JSON 对象，每个属性名表示 attribute 的 key，对应的值表示 attribute 的 value。例如：
 
 ```json
 {
@@ -12,25 +11,25 @@ value is the attribute value. For example:
 }
 ```
 
-## Configuration
+## 配置
 
-### Processing settings
+### 处理设置
 
-The save attributes node can perform three distinct actions, each governed by configurable processing strategies:
+save attributes 节点可执行三种操作，每种操作由可配置的处理策略控制：
 
-- **Attributes**: saves attribute data to the database.
-- **WebSockets**: notifies WebSocket subscriptions about updates to the attribute data.
-- **Calculated fields**: notifies calculated fields about updates to the attribute data.
+- **Attributes**：将 attribute 数据保存到数据库。
+- **WebSockets**：向 WebSocket 订阅通知 attribute 数据更新。
+- **Calculated fields**：向 calculated fields 通知 attribute 数据更新。
 
-For each of these actions, you can choose from the following **processing strategies**:
+对于每种操作，您可选择下列 **processing strategies**（处理策略）：
 {% include docs/user-guide/rule-engine-2-0/processing-strategies-explanation.md %}
 
 {% capture processing_strategies_availability_note %}
-**Note**: Processing strategies are available since TB version 4.0.
+**说明**：Processing strategies 自 TB 4.0 起可用。
 {% endcapture %}
 {% include templates/info-banner.md content=processing_strategies_availability_note %}
 
-Processing strategies can be set using either **Basic** or **Advanced processing settings**.
+processing strategies 可通过 **Basic** 或 **Advanced processing settings** 设置。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-processing-settings-modes-switcher-ce.png)
@@ -38,11 +37,11 @@ Processing strategies can be set using either **Basic** or **Advanced processing
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-processing-settings-modes-switcher-pe.png)
 {% endif %}
 
-- **Basic processing settings** - provide predefined strategies for all actions:
-    - On every message: applies the **On every message** strategy to all actions. All actions are performed for all messages.
-    - Deduplicate: applies the **Deduplicate** strategy (with a specified interval) to all actions.
-    - WebSockets only: for all actions except WebSocket notifications, the **Skip** strategy is applied, while WebSocket notifications use the **On every message** strategy.
-      Effectively, nothing is stored in a database; data is available only in real-time via WebSocket subscriptions.
+- **Basic processing settings** — 为所有操作提供预设策略：
+    - On every message：对所有操作应用 **On every message** 策略。所有消息都会执行所有操作。
+    - Deduplicate：对所有操作应用 **Deduplicate** 策略（指定间隔）。
+    - WebSockets only：除 WebSocket 通知外，所有操作应用 **Skip** 策略，WebSocket 通知使用 **On every message** 策略。
+      实际效果为：不写入数据库；数据仅通过 WebSocket 订阅实时可用。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-basic-processing-settings-options-ce.png)
@@ -50,7 +49,7 @@ Processing strategies can be set using either **Basic** or **Advanced processing
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-basic-processing-settings-options-pe.png)
 {% endif %}
 
-- **Advanced processing settings** - allow you to configure each action’s processing strategy independently.
+- **Advanced processing settings** — 允许为每个操作独立配置处理策略。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-attributes-advanced-processing-settings-ce.png)
@@ -58,12 +57,11 @@ Processing strategies can be set using either **Basic** or **Advanced processing
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-attributes-advanced-processing-settings-pe.png)
 {% endif %}
 
-When configuring the processing strategies in advanced mode, certain combinations can lead to unexpected behavior. Consider the following scenarios:
+在高级模式下配置处理策略时，某些组合可能导致意外行为。请考虑以下场景：
 
 {% include docs/user-guide/rule-engine-2-0/advanced-processing-strategies-hazards.md %}
 
-Due to the scenarios described above, the ability to configure each persistence action independently—including setting different deduplication intervals—should be treated as a
-performance optimization rather than a strict processing guarantee.
+鉴于上述场景，将每个持久化操作独立配置（包括设置不同的去重间隔）的能力应视为性能优化，而非严格的处理保证。
 
 ### Scope
 
@@ -73,38 +71,34 @@ performance optimization rather than a strict processing guarantee.
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-attributes-scope-pe.png)
 {% endif %}
 
-The node supports three attribute scopes: *Client attributes*, *Shared attributes*, and *Server attributes*. You can set the default scope in the node configuration, or override it
-by specifying a valid `scope` property in the message metadata.
+节点支持三种属性范围：*客户端属性*、*共享属性*和*服务端属性*。可在节点配置中设置默认范围，也可通过在消息 metadata 中指定有效的 `scope` 属性进行覆盖。
 
-The supported `scope` values are:
+支持的 `scope` 值：
 
-- `CLIENT_SCOPE` corresponds to *Client attributes*
-- `SHARED_SCOPE` corresponds to *Shared attributes*
-- `SERVER_SCOPE` corresponds to *Server attributes*
+- `CLIENT_SCOPE` 对应 *客户端属性*
+- `SHARED_SCOPE` 对应 *共享属性*
+- `SERVER_SCOPE` 对应 *服务端属性*
 
-If the message metadata contains an invalid `scope` (e.g. `INVALID_SCOPE`) value, the message processing will fail.
+若消息 metadata 包含无效的 `scope` 值（如 `INVALID_SCOPE`），消息处理将失败。
 
 ### Advanced settings
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-attributes-advanced-settings.png)
 
-* **Save attributes only if the value changes** – if enabled, the node compares incoming attributes with their current stored values and only saves attributes that are new, have
-  changed values, or have different data types.
+* **Save attributes only if the value changes** — 若启用，节点将入站属性与当前存储值比较，仅保存新增、值已变更或数据类型不同的属性。
 
 {% capture concurrent_writes_note %}
-**Note**: Avoid concurrent writes of the same attributes because change-detection is not transactional and may produce unexpected results in such cases.
+**注意**：避免对同一属性进行并发写入，因为变更检测非事务性，此类情况下可能产生意外结果。
 {% endcapture %}
 {% include templates/info-banner.md content=concurrent_writes_note %}
 
 {% capture last_updated_ts_note %}
-**Note**: If the attribute save is skipped because the value has not changed, the attribute’s last updated timestamp will not be updated.
+**注意**：若因值未变更而跳过属性保存，属性的最后更新时间戳将不会更新。
 {% endcapture %}
 {% include templates/info-banner.md content=last_updated_ts_note %}
 
-* **Send attributes updated notification** – if enabled, the node sends an [Attributes Updated](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types)
-  event to the originator's default rule chain for `SHARED_SCOPE` and `SERVER_SCOPE` attributes.
-* **Force notification to the device** - if enabled, the node always sends attribute update notifications to devices with active subscriptions. If disabled, device notifications
-  are controlled by the `notifyDevice` property in the message metadata (defaults to `true` when absent).
+* **Send attributes updated notification** — 若启用，节点对 `SHARED_SCOPE` 和 `SERVER_SCOPE` 属性向来源实体的默认规则链发送 [Attributes Updated](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types) 事件。
+* **Force notification to the device** — 若启用，节点始终向有活跃订阅的设备发送属性更新通知。若禁用，设备通知由消息 metadata 中的 `notifyDevice` 属性控制（缺失时默认为 `true`）。
 
 ### JSON Schema
 
@@ -295,60 +289,58 @@ If the message metadata contains an invalid `scope` (e.g. `INVALID_SCOPE`) value
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node verifies that the message type is `POST_ATTRIBUTES_REQUEST`. If not, the processing fails and the message is routed to the `Failure` connection.
+1. 节点验证消息类型是否为 `POST_ATTRIBUTES_REQUEST`。若不是，处理失败并将消息路由到 `Failure` 连接。
 
-2. The node parses the message data to extract attribute key-value pairs. If the data is empty, the processing ends and message is routed to the `Success` connection.
+2. 节点解析消息数据以提取属性键值对。若数据为空，处理结束并将消息路由到 `Success` 连接。
 
-3. The node determines the attribute scope using the following priority:
-    - Message metadata `scope` property value, if present and valid (`CLIENT_SCOPE`, `SHARED_SCOPE`, or `SERVER_SCOPE`)
-    - If an invalid scope (e.g. `INVALID_SCOPE`) is provided in metadata, processing fails and the message is routed to the `Failure` connection.
-    - Node's configured default scope, if metadata scope value is not provided
+3. 节点按下列优先级确定属性作用域：
+    - 消息 metadata 中的 `scope` 属性值（若存在且有效：`CLIENT_SCOPE`、`SHARED_SCOPE` 或 `SERVER_SCOPE`）
+    - 若 metadata 中提供无效的 scope（如 `INVALID_SCOPE`），处理失败并将消息路由到 `Failure` 连接
+    - 若 metadata 未提供 scope，则使用节点配置的默认 scope
 
-4. If **Save attributes only if the value changes** is enabled, the node performs change detection:
-    - Retrieves current attribute values for all incoming attribute keys from the database
-    - Compares each incoming attribute with its current stored value
-    - Filters the attributes list to include only those that:
-        - Are new (not currently stored)
-        - Have different values from what's currently stored
-        - Have different data types from what's currently stored
-    - If no changes are detected, the processing ends and the message is routed to the `Success` connection.
+4. 若启用 **Save attributes only if the value changes**（仅当值变更时保存属性），节点执行变更检测：
+    - 从数据库获取所有入站属性 key 的当前值
+    - 将每个入站属性与其当前存储值比较
+    - 仅保留下列属性：
+        - 新增（当前未存储）
+        - 与当前存储值不同
+        - 与当前存储数据类型不同
+    - 若未检测到变更，处理结束并将消息路由到 `Success` 连接
 
-5. The node determines device notification settings using the following priority:
-    - Always notify if **Force notification to the device** is enabled in configuration
-    - Otherwise, check the message metadata `notifyDevice` property:
-        - If absent or empty string: defaults to sending notification
-        - If present: sends notification only if the value is `true` (case-insensitive)
+5. 节点按下列优先级确定设备通知设置：
+    - 若配置中启用 **Force notification to the device**，始终发送通知
+    - 否则检查消息 metadata 中的 `notifyDevice` 属性：
+        - 若缺失或为空字符串：默认发送通知
+        - 若存在：仅当值为 `true`（不区分大小写）时发送通知
 
-6. Saves the attributes to the database according to the configured processing strategy. Once the save operation completes:
-    - On success: the processing is successful and the message is routed to the `Success` connection
-    - On failure: the processing fails and the message is routed to the `Failure` connection
-    - If **Send attributes updated notification** was enabled, an `ATTRIBUTES_UPDATED` event is published to the originator default rule chain for `SHARED_SCOPE` and `SERVER_SCOPE`
-      attributes.
+6. 按配置的处理策略将属性保存到数据库。保存完成时：
+    - 成功：处理成功，消息路由到 `Success` 连接
+    - 失败：处理失败，消息路由到 `Failure` 连接
+    - 若启用 **Send attributes updated notification**，会向 originator 的默认规则链发布 `ATTRIBUTES_UPDATED` 事件（针对 `SHARED_SCOPE` 和 `SERVER_SCOPE` 属性）
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - If an incoming message was successfully processed.
+    - 入站消息被成功处理时
 - `Failure`
-    - If an incoming message type is not `POST_ATTRIBUTES_REQUEST`.
-    - If an incoming message payload cannot be parsed to attribute key-value pairs.
-    - If the incoming message metadata includes a non-empty `scope` property whose value does not match one of the valid attribute scopes (i.e. `CLIENT_SCOPE`, `SHARED_SCOPE`,
-      or `SERVER_SCOPE`).
-    - If unexpected error occurs during message processing.
+    - 入站消息类型不是 `POST_ATTRIBUTES_REQUEST` 时
+    - 入站消息 payload 无法解析为属性键值对时
+    - 入站消息 metadata 包含非空 `scope` 属性且其值不是有效作用域（即 `CLIENT_SCOPE`、`SHARED_SCOPE` 或 `SERVER_SCOPE`）时
+    - 消息处理过程中发生意外错误时
 
-## Examples
+## 示例
 
-### Example 1 — On every message strategy
+### 示例 1 — On every message 策略
 
-**Incoming message**
+**入站消息**
 
-Type: `POST_ATTRIBUTES_REQUEST`
+类型：`POST_ATTRIBUTES_REQUEST`
 
-Originator: `DEVICE`
+Originator：`DEVICE`
 
-Data:
+数据：
 
 ```json
 {
@@ -358,7 +350,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -372,29 +364,29 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-Three server attributes are saved:
+保存了三个服务器属性：
 
 - `firmware_version`: "1.0.1"
 - `serial_number`: "SN-001"
 - `last_maintenance`: "2025-01-15"
 
-WebSocket subscriptions and calculated fields are notified. An `ATTRIBUTES_UPDATED` event is sent to the originator's default rule chain since the scope is `SERVER_SCOPE`.
+WebSocket 订阅和 calculated fields 收到通知。由于 scope 为 `SERVER_SCOPE`，会向 originator 的默认规则链发送 `ATTRIBUTES_UPDATED` 事件。
 
-### Example 2 — Attributes with Deduplicate strategy
+### 示例 2 — 使用 Deduplicate 策略的属性
 
-**Incoming message**
+**入站消息**
 
-Type: `POST_ATTRIBUTES_REQUEST`
+类型：`POST_ATTRIBUTES_REQUEST`
 
-Originator: `DEVICE`
+Originator：`DEVICE`
 
-Data:
+数据：
 
 ```json
 {
@@ -404,7 +396,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -419,28 +411,27 @@ Data:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Message for this device that falls within current 120-second interval was already processed.
+该设备在当前 120 秒间隔内的消息已处理过。
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-Since deduplication is enabled with a 120-second interval and the message was already processed, the attributes are not saved to the database. WebSocket notifications and
-calculated fields are also not triggered.
+由于启用了 120 秒去重间隔且该消息已处理过，属性不会保存到数据库。也不会触发 WebSocket 通知和 calculated fields。
 
-### Example 3 — Advanced processing with mixed strategies
+### 示例 3 — 混合策略的高级处理
 
-**Incoming message**
+**入站消息**
 
-Type: `POST_ATTRIBUTES_REQUEST`
+类型：`POST_ATTRIBUTES_REQUEST`
 
-Originator: `DEVICE`
+Originator：`DEVICE`
 
-Data:
+数据：
 
 ```json
 {
@@ -450,7 +441,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -474,30 +465,30 @@ Data:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Message for this device that falls within current deduplication interval was already processed.
+该设备在当前去重间隔内的消息已处理过。
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-- Attributes are NOT saved to the database due to deduplication
-- WebSocket subscriptions ARE notified
-- Calculated fields are NOT triggered (SKIP strategy)
-- An `ATTRIBUTES_UPDATED` event is NOT sent since attributes weren't saved
+- 由于去重，属性未保存到数据库
+- WebSocket 订阅已收到通知
+- Calculated fields 未触发（SKIP 策略）
+- 由于属性未保存，不发送 `ATTRIBUTES_UPDATED` 事件
 
-### Example 4 — Save attributes only if value changes
+### 示例 4 — 仅当值变更时保存属性
 
-**Incoming message**
+**入站消息**
 
-Type: `POST_ATTRIBUTES_REQUEST`
+类型：`POST_ATTRIBUTES_REQUEST`
 
-Originator: `DEVICE`
+Originator：`DEVICE`
 
-Data:
+数据：
 
 ```json
 {
@@ -507,7 +498,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -521,36 +512,36 @@ Data:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Current stored attributes:
+当前已存储属性：
 
-- `temperature_threshold`: 25.0 (same value)
-- `humidity_threshold`: 65.0 (different value)
-- `maintenance_scheduled`: not stored (new attribute)
+- `temperature_threshold`: 25.0（值相同）
+- `humidity_threshold`: 65.0（值不同）
+- `maintenance_scheduled`: 未存储（新属性）
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-Only two attributes are saved due to change detection:
+因变更检测仅保存两个属性：
 
-- `humidity_threshold`: 70.0 (value changed from 65.0)
-- `maintenance_scheduled`: true (new attribute)
+- `humidity_threshold`: 70.0（值从 65.0 变为 70.0）
+- `maintenance_scheduled`: true（新属性）
 
-The `temperature_threshold` is not saved since its value hasn't changed. WebSocket subscriptions and calculated fields are notified only for the changed attributes.
+`temperature_threshold` 未保存，因其值未变更。WebSocket 订阅和 calculated fields 仅对被变更属性收到通知。
 
-### Example 5 — Scope override from message metadata
+### 示例 5 — 从消息 metadata 覆盖 scope
 
-**Incoming message**
+**入站消息**
 
-Type: `POST_ATTRIBUTES_REQUEST`
+类型：`POST_ATTRIBUTES_REQUEST`
 
-Originator: `DEVICE`
+Originator：`DEVICE`
 
-Data:
+数据：
 
 ```json
 {
@@ -558,7 +549,7 @@ Data:
 }
 ```
 
-Metadata:
+Metadata：
 
 ```json
 {
@@ -566,7 +557,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -580,14 +571,14 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one. Routed via the `Success` connection.
+出站消息与入站消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-One client attributes is saved (using scope from metadata):
+保存了一个客户端属性（使用 metadata 中的 scope）：
 
 - `power_setting`: "low"
 
-No `ATTRIBUTES_UPDATED` event is sent since client attributes don't trigger this notification.
+由于客户端属性不触发该通知，不会发送 `ATTRIBUTES_UPDATED` 事件。

@@ -1,6 +1,6 @@
 {% capture connectivityContent %}
-ThingsBoard provides a lot of device connectivity options. The diagram below is designed to provide a visual overview of existing options and help you to choose the correct option for your devices. 
-In case you have not found out how to connect your device using the diagram or something is not clear, please [contact us](/docs/contact-us/) and help us to improve this guide.
+ThingsBoard 提供多种设备连接方式。下图旨在直观呈现现有选项，帮助您为设备选择合适方案。
+若通过图表仍无法确定设备连接方式或有任何疑问，请[联系我们](/docs/contact-us/)，以帮助我们改进本指南。
 {% endcapture %}
 {% include templates/info-banner.md content=connectivityContent %}
 
@@ -10,55 +10,54 @@ In case you have not found out how to connect your device using the diagram or s
 {% endif %}
 
 {% if docsPrefix == 'pe/' %}
-  <object width="100%" style="max-width: max-content;" data="/images/connectivity-pe.svg">Decision tree showing how to connect devices to ThingsBoard. If the device is IP enabled with custom firmware, use MQTT, HTTP, CoAP, Sparkplug, or the MQTT Gateway native ThingsBoard API depending on protocol. If already connected to a backend like Azure, AWS, IBM Watson, or OPC-UA, use relevant integrations. Non-IP devices such as LoRaWAN, SigFox, NB-IoT, SMS, or industrial protocols like OPC-UA, Modbus, BLE, CAN, REST, or SNMP can be connected via IoT Gateway. For other protocols - use "Contact Us" form.</object>
+  <object width="100%" style="max-width: max-content;" data="/images/connectivity-pe.svg">设备连接决策树。若设备支持 IP 且可自定义固件，可根据协议使用 MQTT、HTTP、CoAP、Sparkplug 或 MQTT Gateway 原生 ThingsBoard API。若已连接 Azure、AWS、IBM Watson 或 OPC-UA 等后端，使用相应集成。LoRaWAN、SigFox、NB-IoT、SMS 等非 IP 设备或 OPC-UA、Modbus、BLE、CAN、REST、SNMP 等工业协议可通过 IoT Gateway 连接。其他协议请使用「联系我们」表单。</object>
 {% elsif docsPrefix == 'paas/' %}
-  <object width="100%" style="max-width: max-content;" data="/images/connectivity-paas.svg">Decision tree showing how to connect devices to ThingsBoard. If the device is IP enabled with custom firmware, use MQTT, HTTP, CoAP, Sparkplug, or the MQTT Gateway native ThingsBoard API depending on protocol. If already connected to a backend like Azure, AWS, IBM Watson, or OPC-UA, use relevant integrations. Non-IP devices such as LoRaWAN, SigFox, NB-IoT, SMS, or industrial protocols like OPC-UA, Modbus, BLE, CAN, REST, or SNMP can be connected via IoT Gateway. For other protocols - use "Contact Us" form.</object>
+  <object width="100%" style="max-width: max-content;" data="/images/connectivity-paas.svg">设备连接决策树。若设备支持 IP 且可自定义固件，可根据协议使用 MQTT、HTTP、CoAP、Sparkplug 或 MQTT Gateway 原生 ThingsBoard API。若已连接 Azure、AWS、IBM Watson 或 OPC-UA 等后端，使用相应集成。LoRaWAN、SigFox、NB-IoT、SMS 等非 IP 设备或 OPC-UA、Modbus、BLE、CAN、REST、SNMP 等工业协议可通过 IoT Gateway 连接。其他协议请使用「联系我们」表单。</object>
 {% elsif docsPrefix == 'paas/eu/' %}
-  <object width="100%" style="max-width: max-content;" data="/images/connectivity-paas-eu.svg">Decision tree showing how to connect devices to ThingsBoard. If the device is IP enabled with custom firmware, use MQTT, HTTP, CoAP, Sparkplug, or the MQTT Gateway native ThingsBoard API depending on protocol. If already connected to a backend like Azure, AWS, IBM Watson, or OPC-UA, use relevant integrations. Non-IP devices such as LoRaWAN, SigFox, NB-IoT, SMS, or industrial protocols like OPC-UA, Modbus, BLE, CAN, REST, or SNMP can be connected via IoT Gateway. For other protocols - use "Contact Us" form.</object>
+  <object width="100%" style="max-width: max-content;" data="/images/connectivity-paas-eu.svg">设备连接决策树。若设备支持 IP 且可自定义固件，可根据协议使用 MQTT、HTTP、CoAP、Sparkplug 或 MQTT Gateway 原生 ThingsBoard API。若已连接 Azure、AWS、IBM Watson 或 OPC-UA 等后端，使用相应集成。LoRaWAN、SigFox、NB-IoT、SMS 等非 IP 设备或 OPC-UA、Modbus、BLE、CAN、REST、SNMP 等工业协议可通过 IoT Gateway 连接。其他协议请使用「联系我们」表单。</object>
 {% else %}
-  <object width="100%" style="max-width: max-content;" data="/images/connectivity.svg">Decision tree showing how to connect devices to ThingsBoard. If the device is IP enabled with custom firmware, use MQTT, HTTP, CoAP, Sparkplug, or the MQTT Gateway native ThingsBoard API depending on protocol. If already connected to a backend like Azure, AWS, IBM Watson, or OPC-UA, use relevant integrations. Non-IP devices such as LoRaWAN, SigFox, NB-IoT, SMS, or industrial protocols like OPC-UA, Modbus, BLE, CAN, REST, or SNMP can be connected via IoT Gateway. For other protocols - use "Contact Us" form.</object>
+  <object width="100%" style="max-width: max-content;" data="/images/connectivity.svg">设备连接决策树。若设备支持 IP 且可自定义固件，可根据协议使用 MQTT、HTTP、CoAP、Sparkplug 或 MQTT Gateway 原生 ThingsBoard API。若已连接 Azure、AWS、IBM Watson 或 OPC-UA 等后端，使用相应集成。LoRaWAN、SigFox、NB-IoT、SMS 等非 IP 设备或 OPC-UA、Modbus、BLE、CAN、REST、SNMP 等工业协议可通过 IoT Gateway 连接。其他协议请使用「联系我们」表单。</object>
 {% endif %}
 
 
-## Connecting well-known devices
+## 连接常见设备
 
-You can check the [Device Library](/docs/{{docsPrefix}}device-library) section to explore how to connect widely used devices to ThingsBoard.
+您可查看[设备库](/docs/{{docsPrefix}}device-library)了解如何将常用设备连接至 ThingsBoard。
 
-## Built-in transport protocols
+## 内置传输协议
 
-The built-in transport protocol implementations are applicable for devices that communicate over those protocols and are able to connect directly to ThingsBoard.
+内置传输协议实现适用于使用这些协议通信、并能直接连接 ThingsBoard 的设备。
 
-- [MQTT API reference](/docs/{{docsPrefix}}reference/mqtt-api)
-- [MQTT Sparkplug API reference](/docs/{{docsPrefix}}reference/mqtt-sparkplug-api)
-- [CoAP API reference](/docs/{{docsPrefix}}reference/coap-api)
-- [HTTP API reference](/docs/{{docsPrefix}}reference/http-api)
-- [LwM2M API reference](/docs/{{docsPrefix}}reference/lwm2m-api)
-- [SNMP API reference](/docs/{{docsPrefix}}reference/snmp-api)
+- [MQTT API 参考](/docs/{{docsPrefix}}reference/mqtt-api)
+- [MQTT Sparkplug API 参考](/docs/{{docsPrefix}}reference/mqtt-sparkplug-api)
+- [CoAP API 参考](/docs/{{docsPrefix}}reference/coap-api)
+- [HTTP API 参考](/docs/{{docsPrefix}}reference/http-api)
+- [LwM2M API 参考](/docs/{{docsPrefix}}reference/lwm2m-api)
+- [SNMP API 参考](/docs/{{docsPrefix}}reference/snmp-api)
 
-Most of the protocols above support JSON, Protobuf or own data format. This is the best option for new devices when you have control over the firmware.
+以上大部分协议支持 JSON、Protobuf 或自有数据格式。在可控制固件的情况下，这是新设备的最佳选择。
 
 ## IoT Gateway
 
-ThingsBoard IoT Gateway helps to connect devices that are located in the local network and do not have access to the internet or use specific non-IP protocols.
-IoT Gateway supports MQTT, OPC-UA, Modbus, BLE, HTTP, CAN, BACnet, ODBC, SNMP and other protocols.
-The gateway converts the data from devices to internal ThingsBoard format and upload it over MQTT to the platform.
-See [What is IoT Gateway?](/docs/iot-gateway/what-is-iot-gateway/) for more info.
+ThingsBoard IoT Gateway 可将位于局域网、无法访问互联网或使用特定非 IP 协议的设备连接至平台。
+IoT Gateway 支持 MQTT、OPC-UA、Modbus、BLE、HTTP、CAN、BACnet、ODBC、SNMP 等协议。
+网关将设备数据转换为 ThingsBoard 内部格式，并通过 MQTT 上传至平台。
+更多信息请参阅[什么是 IoT Gateway？](/docs/iot-gateway/what-is-iot-gateway/)。
 
 ## LoRaWAN
 
-It is possible to integrate ChirpStack network server with ThingsBoard Community Edition using this [guide](https://www.chirpstack.io/application-server/integrations/thingsboard/).
+可通过本[指南](https://www.chirpstack.io/application-server/integrations/thingsboard/)将 ChirpStack 网络服务器与 ThingsBoard社区版集成。
 
-[ThingsBoard PE](/products/thingsboard-pe/) supports ChirpStack and many other network servers via [Integrations](/docs/{{peDocsPrefix}}user-guide/integrations/).
-For example: [TheThingsStack](/docs/{{peDocsPrefix}}user-guide/integrations/ttn/), [TheThingsIndustries](/docs/{{peDocsPrefix}}user-guide/integrations/tti/),
-[LORIOT](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/),
-[Actility ThingPark](/docs/{{peDocsPrefix}}user-guide/integrations/thingpark/) or any other network server that supports the [webhooks](/docs/{{peDocsPrefix}}user-guide/integrations/http/) or [mqtt](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/).
-Big advantage of ThingsBoard PE integrations is the ability to define custom [data converter](/docs/{{peDocsPrefix}}user-guide/integrations/#data-converters) functions.
+[ThingsBoard PE](/products/thingsboard-pe/) 通过[集成](/docs/{{peDocsPrefix}}user-guide/integrations/)支持 ChirpStack 及多种其他网络服务器，
+例如：[TheThingsStack](/docs/{{peDocsPrefix}}user-guide/integrations/ttn/)、[TheThingsIndustries](/docs/{{peDocsPrefix}}user-guide/integrations/tti/)、
+[LORIOT](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/)、[Actility ThingPark](/docs/{{peDocsPrefix}}user-guide/integrations/thingpark/) 或支持 [webhooks](/docs/{{peDocsPrefix}}user-guide/integrations/http/) 或 [mqtt](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/) 的其他网络服务器。
+ThingsBoard PE 集成的显著优势在于可定义自定义[数据转换器](/docs/{{peDocsPrefix}}user-guide/integrations/#data-converters)函数。
 
 ## Sigfox
 
-[ThingsBoard PE](/products/thingsboard-pe/) supports Sigfox [integration](/docs/{{peDocsPrefix}}user-guide/integrations/sigfox/) out-of-the-box.
+[ThingsBoard PE](/products/thingsboard-pe/) 开箱支持 Sigfox [集成](/docs/{{peDocsPrefix}}user-guide/integrations/sigfox/)。
 
-## NB IoT and other protocols
+## NB IoT 及其他协议
 
-[ThingsBoard PE](/products/thingsboard-pe/) supports many [Integrations](/docs/{{peDocsPrefix}}user-guide/integrations/) that cover most of the devices on the market.
-Please [contact us](/docs/contact-us/) if you need help to connect your device.
+[ThingsBoard PE](/products/thingsboard-pe/) 支持多种[集成](/docs/{{peDocsPrefix}}user-guide/integrations/)，覆盖市场上大部分设备。
+如需帮助连接设备，请[联系我们](/docs/contact-us/)。

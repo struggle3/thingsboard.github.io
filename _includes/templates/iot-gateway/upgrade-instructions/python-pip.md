@@ -1,17 +1,17 @@
-### Step 1. Stop the Gateway
+### 步骤 1：停止 Gateway
 
-If the Gateway is running as a background service or a systemd service, stop it first:
+若 Gateway 以后台服务或 systemd 服务运行，请先停止：
 
 ```bash
 sudo systemctl stop thingsboard-gateway
 ```
 {: .copy-code}
 
-Or if you are running it manually in a terminal, stop it using `Ctrl + C`.
+若在终端手动运行，请使用 `Ctrl + C` 停止。
 
-### Step 2. Upgrade the ThingsBoard Gateway Package via pip
+### 步骤 2：通过 pip 升级 ThingsBoard Gateway 包
 
-Run the following command in your Python environment:
+在 Python 环境中执行以下命令：
 
 ```bash
 pip install --upgrade thingsboard-gateway
@@ -19,27 +19,27 @@ pip install --upgrade thingsboard-gateway
 {: .copy-code}
 
 {% capture difference %}
-You may need to use pip3 or python3 -m pip depending on your environment. Add `--user` if it's a user-level installation.
+根据环境不同，可能需要使用 pip3 或 python3 -m pip。若为用户级安装，请添加 `--user`。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Step 3. Restart the Gateway
+### 步骤 3：重启 Gateway
 
-Once the upgrade completes, start the Gateway again:
+升级完成后，再次启动 Gateway：
 
 ```bash
 sudo systemctl start thingsboard-gateway
 ```
 {: .copy-code}
 
-Or, if you run it manually:
+若为手动运行：
 
 ```bash
 thingsboard-gateway
 ```
 {: .copy-code}
 
-### Notes
+### 说明
 
-- If running in a virtual environment, ensure the `pip install` and service control commands are executed within that environment.
-- If you installed Gateway via systemd service, the service file may need to point to the correct environment or executable path.
+- 若在虚拟环境中运行，请确保 `pip install` 和服务控制命令在该环境中执行。
+- 若通过 systemd 服务安装 Gateway，服务文件可能需要指向正确的环境或可执行文件路径。

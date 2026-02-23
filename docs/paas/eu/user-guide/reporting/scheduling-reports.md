@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Scheduling reports
-description: Scheduling reports guide
+title: 报表调度
+description: 报表调度指南
 
 create-new-report-template:
     0:

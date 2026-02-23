@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-paas-eu
-title: Notifications and Alarms on your smartphone using Telegram Bot
+title: 使用 Telegram Bot 在手机上接收通知与告警
 
 ---
 {% assign docsPrefix = "paas/eu/" %}

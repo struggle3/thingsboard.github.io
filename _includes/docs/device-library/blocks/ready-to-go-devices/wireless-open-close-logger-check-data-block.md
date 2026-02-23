@@ -1,18 +1,18 @@
-Trigger the transmission in order to check if the device sends the data to your ThingsBoard instance.  
-Click on the menu (three dots in the upper right corner -> Trigger transmission.  
-If everything is set correctly, you should see the data in ThingsBoard. To do this click on the device and the most recent data from the device will be visible in the "Latest telemetry" tab.
+触发传输以检查设备是否向 ThingsBoard 实例发送数据。  
+点击菜单（右上角三个点 -> Trigger transmission）。  
+若配置正确，您将在 ThingsBoard 中看到数据。点击设备，设备的最新数据将显示在「最新遥测」选项卡中。
 
 {% assign checkEfentoSensorDataPE = '
     ===
         image: /images/devices-library/ready-to-go-devices/wireless-open-close-sensor/check-device-data-1-pe.png,
-        title: Click on the device and the most recent data from the device will be visible in the "Latest telemetry" tab.
+        title: 点击设备，设备的最新数据将显示在「最新遥测」选项卡中。
 '
 %}
 
 {% assign checkEfentoSensorDataCE = '
     ===
         image: /images/devices-library/ready-to-go-devices/wireless-open-close-sensor/check-device-data-1-ce.png,
-        title: Click on the device and the most recent data from the device will be visible in the "Latest telemetry" tab.
+        title: 点击设备，设备的最新数据将显示在「最新遥测」选项卡中。
 '
 %}
 
@@ -24,9 +24,9 @@ If everything is set correctly, you should see the data in ThingsBoard. To do th
 
 {% capture effento-offer %}
 
-**Important!**  
-For orders over 250 devices Efento can pre-configure the devices for you, so they will send the data to your ThingsBoard instance out-of-the-box and no configuration will be required on the sensor side.  
-Efento will provide you with a csv file, which allows you easily add and [provision all the devices at once](/docs/{{page.docsPrefix}}user-guide/bulk-provisioning/) on ThingsBoard instance.  
+**重要！**  
+订购超过 250 台设备时，Efento 可为您预配置设备，使设备开箱即可向 ThingsBoard 实例发送数据，无需在传感器端进行配置。  
+Efento 将提供 csv 文件，便于您在 ThingsBoard 实例上[批量配置所有设备](/docs/{{page.docsPrefix}}user-guide/bulk-provisioning/)。  
 
 {% endcapture %}
 

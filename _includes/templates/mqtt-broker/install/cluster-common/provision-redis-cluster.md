@@ -1,41 +1,41 @@
-TBMQ relies on **Valkey** to store messages for [DEVICE persistent clients](/docs/{{docsPrefix}}mqtt-broker/architecture/#persistent-device-client).
-The cache also improves performance by reducing the number of direct database reads, especially when authentication is enabled and multiple clients connect at once.
-Without caching, every new connection triggers a database query to validate MQTT client credentials, which can cause the unnecessary load under high connection rates.
+TBMQ 依赖 **Valkey** 存储[设备持久化客户端](/docs/{{docsPrefix}}mqtt-broker/architecture/#persistent-device-client)的消息。
+缓存还能减少直接数据库读取次数，提升性能，尤其是在启用认证且多客户端同时连接时。
+若不使用缓存，每次新连接都会触发数据库查询以验证 MQTT 客户端凭据，在高连接率下可能导致不必要的负载。
 
-To set up Valkey in Google Cloud, refer to the Google Memorystore for Valkey documentation:
+在 Google Cloud 中配置 Valkey，请参阅 Valkey 的 Google Memorystore 文档：
 
-* **Create Memorystore for Valkey instances**:
-  Instructions to provision both **Cluster Mode Enabled** and **Cluster Mode Disabled** instances, including prerequisites like service connection policies and networking setup.
+* **创建 Memorystore for Valkey 实例**：
+  预配**启用集群模式**和**禁用集群模式**实例的说明，包括服务连接策略和网络配置等前置条件。
   ([Google Cloud][1])
 
-* **General overview**:
-  Details on the managed Valkey service, architecture, and key concepts such as shards, endpoints, and supported Valkey versions (including 8.0).
+* **概述**：
+  托管 Valkey 服务的详细信息、架构及分片、端点和支持的 Valkey 版本（含 8.0）等核心概念。
   ([Google Cloud][2])
 
-* **Networking requirements**:
-  Guidance on Private Service Connect and service connection policy setup necessary for secure connectivity.
+* **网络要求**：
+  Private Service Connect 及服务连接策略设置的相关指导，用于建立安全连接。
   ([Google Cloud][3])
 
-* **Instance & node sizing**:
-  Recommendations for choosing node types according to workload (e.g., `standard-small`, `highmem-medium`), memory capacity, and performance characteristics.
+* **实例和节点 sizing**：
+  根据工作负载（如 `standard-small`、`highmem-medium`）选择节点类型的建议、内存容量及性能特点。
   ([Google Cloud][4])
 
-* **Cluster vs Standalone (Cluster Mode Enabled vs Disabled)**:
-  Comparison of horizontal scaling, throughput, and feature support—helpful in choosing the appropriate mode for your use case.
+* **集群 vs 单机（启用 vs 禁用集群模式）**：
+  水平扩展、吞吐量和功能支持的对比，有助于根据使用场景选择合适模式。
   ([Google Cloud][5])
 
-* **High Availability & Replicas**:
-  Best practices for multi-zone deployment, replica usage for read scaling, and resilience in production scenarios.
+* **高可用与副本**：
+  多可用区部署、副本用于读扩展及生产环境弹性相关的最佳实践。
   ([Google Cloud][6])
 
-* **Best practices & scaling guidance**:
-  Advice on memory management, eviction policies, when to scale, and how to handle growing workloads effectively.
+* **最佳实践与扩展指南**：
+  内存管理、淘汰策略、何时扩展及如何应对增长负载的建议。
   ([Google Cloud][7])
 
-Once your Valkey cluster is ready, update the cache configuration in `tbmq-cache-configmap.yml` with the correct endpoint values:
+Valkey 集群就绪后，在 `tbmq-cache-configmap.yml` 中更新缓存配置，填入正确的端点值：
 
-* **For standalone Valkey**:
-  Uncomment and set the following values. Make sure the `REDIS_HOST` value does **not** include the port (`:6379`).
+* **Valkey 单机**：
+  取消注释并设置以下值。请确保 `REDIS_HOST` 的值**不**包含端口（`:6379`）。
 
   ```yaml
   REDIS_CONNECTION_TYPE: "standalone"
@@ -43,14 +43,14 @@ Once your Valkey cluster is ready, update the cache configuration in `tbmq-cache
   #REDIS_PASSWORD: "YOUR_REDIS_PASSWORD"
   ```
 
-* **For Valkey cluster**:
-  Provide a comma-separated list of "host:port" node endpoints to bootstrap from.
+* **Valkey 集群**：
+  提供以逗号分隔的 "host:port" 节点端点列表，用于引导。
 
   ```yaml
   REDIS_CONNECTION_TYPE: "cluster"
   REDIS_NODES: "COMMA_SEPARATED_LIST_OF_NODES"
   #REDIS_PASSWORD: "YOUR_REDIS_PASSWORD"
-  # Recommended in Kubernetes for handling dynamic IPs and failover:
+  # Kubernetes 中处理动态 IP 和故障转移时建议启用：
   #REDIS_LETTUCE_CLUSTER_TOPOLOGY_REFRESH_ENABLED: "true"
   #REDIS_JEDIS_CLUSTER_TOPOLOGY_REFRESH_ENABLED: "true"
   ```

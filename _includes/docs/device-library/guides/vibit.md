@@ -1,4 +1,4 @@
-{% assign deviceName = "VIBit" %}
+﻿{% assign deviceName = "VIBit" %}
 {% assign deviceVendorLink = "https://machineastro.com/vibit/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign officialManualLink = "/docs/devices-library/resources/manuals/vibit.pdf" %}
@@ -8,140 +8,140 @@
   '
   %}
 
-## Introduction
+## 概述
 
-[VIBit]({{deviceVendorLink}}){:target="_blank"} is a compact, rugged, tri-axial vibration, temperature, and acoustic sensor designed for industrial anomaly detection. It supports Wi-Fi connectivity and integrates seamlessly with the MachineAstro VIBit Application for configuration and monitoring.<br><br><br><br><br>
+[VIBit]({{deviceVendorLink}}){:target="_blank"} 是一款紧凑、坚固的三轴振动、温度与声学传感器，适用于工业异常检测。支持 Wi-Fi 连接，可与 MachineAstro VIBit 应用无缝集成，用于配置与监控。<br><br><br><br><br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide, we will need the following:  
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+继续本指南需准备以下内容：  
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 {{ prerequisites }}
-- MachineAstro VIBit Application installed on a smartphone.
-- Wi-Fi network credentials for sensor connectivity.
-- MQTT Basic credentials:
-  - **Username**: sensor
-  - **Password**: cimcon
-  - **Client ID**: VIBit Device BLE MAC (Bluetooth MAC address of the sensor)
+- 手机上已安装 MachineAstro VIBit 应用。
+- 传感器连接所需的 Wi-Fi 网络凭证。
+- MQTT 基本凭证：
+  - **Username**：sensor
+  - **Password**：cimcon
+  - **Client ID**：VIBit 设备 BLE MAC（传感器蓝牙 MAC 地址）
 
 
-## Create Device profile on ThingsBoard
+## 在 ThingsBoard 中创建设备配置文件
 
-First, create a new device profile in ThingsBoard that uses the **MQTT transport** and the standard MQTT topics for telemetry and attributes.
+首先在 ThingsBoard 中创建新的设备配置文件，使用 **MQTT 传输**及标准 MQTT 主题发送遥测和属性。
 
-- Log in to your ThingsBoard instance.
-- Navigate to **Device profiles** page under the **Profiles** section.
-- Click the "**plus**" button, and then select "**Add new device profile**" from drop-down menu.
-- Enter **MQTT** as the device profile name.
-- Click "**Next: Transport configuration**" button.
-- Select **MQTT** as transport type.
-- Leave default **MQTT device topic filters**.
-- Click **Add** to create device profile.
+- 登录 ThingsBoard 实例。
+- 进入 **配置** 下的 **设备配置文件** 页面。
+- 点击「**+**」按钮，从下拉菜单中选择「**添加新设备配置文件**」。
+- 输入 **MQTT** 作为设备配置文件名称。
+- 点击「**下一步：传输配置**」按钮。
+- 选择 **MQTT** 作为传输类型。
+- 保留默认的 **MQTT 设备主题过滤器**。
+- 点击 **添加** 创建设备配置文件。
 
 {% assign createDeviceProfile = '
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-profile-1.png,
-        title: Navigate to **Device profiles** page under the **Profiles** section, click the "**plus**" button, and then select "**Add new device profile**" from drop-down menu.
+        title: 进入 **配置** 下的 **设备配置文件** 页面，点击「**+**」按钮，从下拉菜单中选择「**添加新设备配置文件**」。
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-profile-2.png,
-        title: Enter **MQTT** as the device profile name. Click "**Next: Transport configuration**" button.
+        title: 输入 **MQTT** 作为设备配置文件名称。点击「**下一步：传输配置**」按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-profile-3.png,
-        title: Select **MQTT** as transport type. Leave default **MQTT device topic filters**. Click **Add** to create device profile.
+        title: 选择 **MQTT** 作为传输类型。保留默认 **MQTT 设备主题过滤器**。点击 **添加** 创建设备配置文件。
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-profile-4.png,
-        title: The device profile is created.
+        title: 设备配置文件已创建。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=createDeviceProfile %}
 
-## Create Device on ThingsBoard
+## 在 ThingsBoard 中创建设备
 
-- Navigate to **Devices** page under the **Entities** section.
-- Click on "**+**" to add a new device, and then select "**Add new device**" from drop-down menu.
-- Enter a name using the VIBit Sensor BLE MAC address (e.g., "F4B3B1A1EFAC").
-- Select the previously created **MQTT** device profile in the "Device profile" field.
-- Click **Next: Credentials** button.
-- On the **Credentials** tab:
-    - Select **MQTT Basic** as the credential type.
-    - Use the **BLE MAC address of the VIBit device** as the **Client ID**.
-    - Enter **sensor** as the **Username**.
-    - Enter **cimcon** as the **Password**.
-- Click **Add** button to create the device.
+- 进入 **实体** 下的 **设备** 页面。
+- 点击「**+**」添加新设备，从下拉菜单中选择「**添加新设备**」。
+- 使用 VIBit 传感器 BLE MAC 地址作为名称（如 "F4B3B1A1EFAC"）。
+- 在「设备配置文件」字段中选择此前创建的 **MQTT** 设备配置文件。
+- 点击 **下一步：凭证** 按钮。
+- 在 **凭证** 选项卡中：
+    - 选择 **MQTT Basic** 作为凭证类型。
+    - 使用 **VIBit 设备的 BLE MAC 地址** 作为 **Client ID**。
+    - 输入 **sensor** 作为 **Username**。
+    - 输入 **cimcon** 作为 **Password**。
+- 点击 **添加** 创建设备。
 
 {% assign createDevice = '
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-device-1.png,
-        title: Navigate to **Devices** page under the **Entities** section. Click on "**+**" to add a new device, and then select "**Add new device**" from drop-down menu.
+        title: 进入 **实体** 下的 **设备** 页面。点击「**+**」添加新设备，从下拉菜单中选择「**添加新设备**」。
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-device-2.png,
-        title: Enter a name using the VIBit Sensor BLE MAC address (e.g., "F4B3B1A1EFAC"). Select the previously created **MQTT** device profile in the "Device profile" field. Click **Next: Credentials** button.
+        title: 使用 VIBit 传感器 BLE MAC 地址作为名称（如 "F4B3B1A1EFAC"）。在「设备配置文件」字段中选择此前创建的 **MQTT** 配置。点击 **下一步：凭证** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-device-3.png,
-        title: On the **Credentials** tab:<br> - Select **MQTT Basic** as the credential type.<br> - Use the **BLE MAC address of the VIBit device** as the **Client ID**.<br> - Enter **sensor** as the **Username**.<br> - Enter **cimcon** as the **Password**.<br> - Click **Add** button to create the device.
+        title: 在 **凭证** 选项卡中：<br> - 选择 **MQTT Basic** 作为凭证类型。<br> - 使用 **VIBit 设备的 BLE MAC 地址** 作为 **Client ID**。<br> - 输入 **sensor** 作为 **Username**。<br> - 输入 **cimcon** 作为 **Password**。<br> - 点击 **添加** 创建设备。
     ===
         image: /images/devices-library/ready-to-go-devices/machine-astro/vibit-bp/vibit-create-device-4.png,
-        title: The device is created.
+        title: 设备已创建。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=createDevice %}
 
-## Connect device to ThingsBoard via VIBit Mobile Application
+## 通过 VIBit 移动应用连接设备到 ThingsBoard
 
-### Prerequisites
+### 前置条件
 
-- A user must be present on Thingsboard platform.
-- VIBit Device must be present on Thingsboard platform.
+- ThingsBoard 平台上需存在用户。
+- ThingsBoard 平台上需存在 VIBit 设备。
 <br>
 
-- Power on the VIBit sensor.
-- Open the VIBit Mobile Application on your smartphone.
-- The VIBit mobile application can connect to any ThingsBoard platform by selecting the "**Custom**" option from the drop-down menu and entering either the static public IP address or the HTTPS domain name. Below is one sample image.
+- 为 VIBit 传感器上电。
+- 在手机上打开 VIBit 移动应用。
+- VIBit 移动应用可选择「**自定义**」选项并输入静态公网 IP 或 HTTPS 域名，连接任意 ThingsBoard 平台。下方为示例截图。
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-1.png)
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-2.png)
 
-- Go to Connect Section on the application. It will display list of VIBit sensors available in the Bluetooth Range.
+- 进入应用中的连接部分。将显示蓝牙范围内的 VIBit 传感器列表。
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-3.png)
 
-- Search the respective device and click on the **Connect** button. (Assuming that Device is already exists on the Thingsboard.)
+- 搜索对应设备并点击 **连接** 按钮。（前提是设备已在 ThingsBoard 中存在。）
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-4.png)
 
-- Configure the sensor&#39;s Wi-Fi settings using the app:
-  - Enter the Wi-Fi SSID and password.
-  - Input the ThingsBoard server URL.
-  - Enter the MQTT **Username** as sensor, **Password** as cimcon, and **Client ID** as the BLE MAC address.
-  - Save the settings to apply the configurations.
+- 在应用中配置传感器的 Wi-Fi 设置：
+  - 输入 Wi-Fi SSID 和密码。
+  - 输入 ThingsBoard 服务器 URL。
+  - MQTT **Username** 填 sensor，**Password** 填 cimcon，**Client ID** 填 BLE MAC 地址。
+  - 保存设置以应用配置。
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-5.png)
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-6.png)
 
-- Check Cloud and Wi-Fi Connectivity Status in the Mobile Application.
+- 在移动应用中查看云与 Wi-Fi 连接状态。
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-7.png)
 
-### Check Data on ThingsBoard
+### 在 ThingsBoard 上查看数据
 
-- In ThingsBoard, navigate to the "**Devices**" section and select your VIBit device.
-- Access the "**Latest telemetry**" tab to view real-time data such as:
-  - 3-axis acceleration and velocity RMS
-  - FFT Timeseries Data
-  - Temperature and acoustic readings
+- 在 ThingsBoard 中进入「**设备**」部分，选择您的 VIBit 设备。
+- 打开「**最新遥测**」选项卡查看实时数据，包括：
+  - 三轴加速度与速度 RMS
+  - FFT 时序数据
+  - 温度与声学读数
 
 ![image](/images/devices-library/ready-to-go-devices/machine-astro/vibit/vibit-mobile-app-8.png)
 
 {% capture difference %}
-Use the [Dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} to visualize data trends and analyze equipment health over time.
+使用[仪表板](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}可视化数据趋势并分析设备长期健康状况。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Conclusion
+## 总结
 
-Integrating VIBit with ThingsBoard using MQTT Basic authentication ensures secure and efficient monitoring of industrial equipment, facilitating predictive maintenance and reducing downtime. The combination of real-time data transmission and comprehensive dashboards empowers maintenance teams to make informed decisions.
+通过 MQTT Basic 认证将 VIBit 与 ThingsBoard 集成，可实现工业设备的可靠、高效监控，支持预测性维护并减少停机时间。实时数据传输与完整仪表板的结合，帮助运维团队做出更明智的决策。
 {% include add-device-banner.liquid %}

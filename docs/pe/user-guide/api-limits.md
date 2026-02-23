@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: API & Rate Limits
-description: Configuring API Limits
+title: API 与速率限制
+description: 配置 API 限制
 
 ---
 

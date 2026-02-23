@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Self-registration
-description:  
+title: 自助注册
+description: 自助注册  
 redirect_from: "/docs/user-guide/self-registration/"
 ---
 

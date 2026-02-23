@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-pe-edge
-title: ThingsBoard Edge Use Cases
+title: ThingsBoard Edge 应用案例
 
 ---
 

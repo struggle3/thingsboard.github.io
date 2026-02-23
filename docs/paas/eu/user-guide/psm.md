@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: PSM and eDRX support
-description: PSM and eDRX support
+title: PSM 与 eDRX 支持
+description: PSM 与 eDRX 支持
 
 ---
 

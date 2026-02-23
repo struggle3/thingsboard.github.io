@@ -1,6 +1,6 @@
 {% include templates/tbel-vs-js.md %}
 
-Now copy the following **TBEL** script:
+请复制以下 **TBEL** 脚本：
 
 ```javascript
 /** Decoder **/
@@ -29,7 +29,7 @@ return result;
 {:.copy-code.expandable-15}
 
 <br>
-If you want to use the **JavaScript decoder function**, use this script:
+若使用 **JavaScript decoder function**，请使用以下脚本：
 
 ```javascript
 /** Decoder **/
@@ -71,6 +71,6 @@ return result;
 {:.copy-code.expandable-10}
 
 <br>
-Paste the copied script to the decoder function section. Then, click "**Next**";
+将复制的脚本粘贴到 decoder function 区域，然后点击「**Next**」；
 
 ![image](/images/user-guide/integrations/tcp/tcp-create-uplink-converter-json-java-pe.png)

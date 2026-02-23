@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Devices
-description: ThingsBoard IoT Device management
+title: 设备
+description: ThingsBoard物联网设备管理
 
 add-device:
     0:

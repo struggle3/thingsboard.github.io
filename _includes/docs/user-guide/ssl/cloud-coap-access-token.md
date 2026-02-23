@@ -1,65 +1,64 @@
 * TOC
 {:toc}
 
-Access Token Based Authentication is the default device authentication type.
-The unique access token is generated once the device is created in ThingsBoard. It can be changed afterwards.
-The client must specify the access token as part of CoAP request URL.
+Access Token 认证是默认的设备认证方式。
+设备在 ThingsBoard 中创建后会生成唯一 access token，之后可修改。
+客户端必须在 CoAP 请求 URL 中指定 access token。
 
-### Plain CoAP (without TLS)
+### Plain CoAP（无 TLS）
 
-Let's review a simple command to upload temperature readings using Access Token **YOUR_ACCESS_TOKEN** to {{hostLabel}}.
-See [CoAP API](/docs/{{docsPrefix}}reference/coap-api/) for more details. The command is using plain CoAP without TLS:
+以下是一条使用 Access Token **YOUR_ACCESS_TOKEN** 向 {{hostLabel}} 上传温度读数的简单命令。
+详见 [CoAP API](/docs/{{docsPrefix}}reference/coap-api/)。该命令使用不带 TLS 的 Plain CoAP：
 
 ```bash
 coap-client -v 6 -m POST coap://{{coapHostName}}/api/v1/YOUR_ACCESS_TOKEN/telemetry -t json -e "{temperature:25}"
 ```
 {: .copy-code}
 
-The above command requires coap-client library that you can install using the following commands:
+上述命令需要 coap-client 库，可通过以下命令安装：
 
-- **Ubuntu 20.04:** sudo apt install libcoap2-bin
-- **Ubuntu 18.04:** sudo apt install libcoap1-bin
+- **Ubuntu 20.04：** sudo apt install libcoap2-bin
+- **Ubuntu 18.04：** sudo apt install libcoap1-bin
 
-Don't forget to replace **YOUR_ACCESS_TOKEN** with the access token of your device.
+请将 **YOUR_ACCESS_TOKEN** 替换为设备的 access token。
 
-### DTLS support (One-way TLS)
+### DTLS 支持（单向 TLS）
 
-CoAP access token-based authentication over DTLS is a standard authentication mode where the client device verifies the server’s identity using a server certificate.
+CoAP 在 DTLS 上的 access token 认证是标准模式，客户端通过服务器证书验证服务器身份。
 
-> **Note:** "One-way TLS" means the client verifies the server, but the server does not verify the client.
+> **注意：**「单向 TLS」表示客户端验证服务器，但服务器不验证客户端。
 
-When a CoAP client connects to a server, it ensures the server's authenticity by verifying that the certificate is not expired and is trusted by the client.
-A certificate is considered trusted if:
+CoAP 客户端连接服务器时，通过校验证书是否过期、是否受客户端信任来确认服务器身份。
+证书在以下情况下被视为受信任：
 
-- It is issued by a well-known Certificate Authority (CA), such as [Let’s Encrypt](https://letsencrypt.org/).
-- It is present in the client’s trust store.
+- 由知名证书颁发机构（CA）签发，如 [Let's Encrypt](https://letsencrypt.org/)；
+- 存在于客户端 trust store 中。
 
-To establish trust, the CoAP client must always provide the CA certificate used to sign the server’s certificate. Unlike some HTTPS implementations that rely on a system trust store, CoAP clients using DTLS require explicit CA certificate configuration.
+要建立信任，CoAP 客户端必须提供用于签署服务器证书的 CA 证书。与依赖系统 trust store 的 HTTPS 不同，使用 DTLS 的 CoAP 客户端需要显式配置 CA 证书。
 
-Before we explore usage examples, we need to install a CoAP client that supports DTLS.
+使用示例前，需安装支持 DTLS 的 CoAP 客户端。
 
-#### Install the CoAP client with DTLS support
+#### 安装支持 DTLS 的 CoAP 客户端
 
 {% include templates/coap-dtls/coap-client-dtls.md %}
 
-#### Example:
+#### 示例：
 
-Since the CoAP client must always provide the CA certificate for verification,
-use the `-R` flag followed by the path to a PEM file containing the trusted root CA certificates.
-ThingsBoard Team has already provisioned a valid certificate for [{{hostLabel}}](https://{{hostName}}/signup){:target="_blank"}.
+CoAP 客户端必须提供 CA 证书以进行验证，请使用 `-R` 标志并指定包含受信任根 CA 证书的 PEM 文件路径。
+ThingsBoard 团队已为 [{{hostLabel}}](https://{{hostName}}/signup){:target="_blank"} 配置有效证书。
 
-Please download the CA root certificate using this [**link**](/docs/{{docsPrefix}}user-guide/resources/coap-over-dtls/ca-root.pem) and save it to your working directory as "**ca-root.pem**".
+请通过此 [**链接**](/docs/{{docsPrefix}}user-guide/resources/coap-over-dtls/ca-root.pem) 下载 CA 根证书，并保存到工作目录，命名为「**ca-root.pem**」。
 
 ```bash
 wget https://thingsboard.io/docs/{{docsPrefix}}user-guide/resources/coap-over-dtls/ca-root.pem
 ```
 {: .copy-code}
 
-Now you may use the *ca-root.pem* to setup secure connection to {{hostLabel}} and Access Token **YOUR_ACCESS_TOKEN** to authenticate the device to upload telemetry:
+现在可使用 *ca-root.pem* 与 {{hostLabel}} 建立安全连接，并用 Access Token **YOUR_ACCESS_TOKEN** 认证设备以上传遥测：
 
 ```bash
 coap-client-openssl -v 6 -m POST  -R ca-root.pem -t "application/json" -e '{"temperature":42}' coaps://{{coapHostName}}/api/v1/YOUR_ACCESS_TOKEN/telemetry
 ```
 {: .copy-code}
 
-Don't forget to replace **YOUR_ACCESS_TOKEN** with the access token of your device.
+请将 **YOUR_ACCESS_TOKEN** 替换为设备的 access token。

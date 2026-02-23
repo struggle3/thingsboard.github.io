@@ -2,8 +2,8 @@
 layout: docwithnav-pe-mqtt-broker
 assignees:
 - stitenko
-title: Integration with ThingsBoard
-description: Integration guide of TBMQ with ThingsBoard
+title: 与 ThingsBoard 集成
+description: TBMQ 与 ThingsBoard 的集成指南
 
 create-client-credentials:
     0:

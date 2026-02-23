@@ -1,6 +1,6 @@
-Congratulations! You have successfully provisioned, installed and connected ThingsBoard **Edge** to ThingsBoard server.
+恭喜！您已成功配置、安装 ThingsBoard **Edge** 并连接到 ThingsBoard 服务器。
 
-You can continue with **Getting started guide** to get the basic knowledge of ThingsBoard **Edge** or you can jump directly to more advanced topics:
+可继续阅读 **入门指南** 了解 ThingsBoard **Edge** 基础知识，或直接进入更进阶主题：
 {% assign currentGuide = "InstallationGuides" %}
 {% assign docsPrefix = "edge/" %}
 {% include templates/edge/guides-banner-edge.md %}

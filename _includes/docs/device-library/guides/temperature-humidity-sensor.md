@@ -1,32 +1,32 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.lansitec.com/products/lora-temperature-humidity-sensor/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
 - <a href="' | append: deviceVendorLink | append: '" target="_blank">' | append: deviceName | append: '</a>
-- [LoRaWAN Gateway](https://www.lansitec.com/products/outdoor-lorawan-gateway/){:target="_blank"}
+- [LoRaWAN 网关](https://www.lansitec.com/products/outdoor-lorawan-gateway/){:target="_blank"}
 - [Bluetooth Beacon](https://www.lansitec.com/products/bluetooth-beacon/){:target="_blank"}
-- [Network Server account](https://www.chirpstack.io/){:target="_blank"}
+- [网络服务器账户](https://www.chirpstack.io/){:target="_blank"}
 '
 %}
 
-[Temperature & Humidity Sensor]({{deviceVendorLink}}){:target="_blank"} is designed based on the advanced LoRa modulation and powered by a lithium battery with a 5-year operation time. It offers a cost-effective LoRaWAN end device for a variety of applications.<br>
-Its IP65 enclosure and long operation time offer the benefit of low maintenance cost. Therefore, it is ideal for outdoor use. The sensor operation mode can be adjusted via LoRaWAN Network.<br>
-Lansitec sensor family is fully compatible and plug-andplay for LoRaWAN network operation. It can also work with the Lansitec wireless data transfer unit for the low-cost deployment.
+[温湿度传感器（Temperature & Humidity Sensor）]({{deviceVendorLink}}){:target="_blank"}基于先进LoRa调制设计，采用锂电池供电，可持续工作约 5 年，为多种应用提供高性价比的LoRaWAN终端设备。<br>
+其IP65防护外壳与长续航带来低维护成本，适合户外使用。传感器工作模式可通过LoRaWAN网络调整。<br>
+Lansitec传感器系列与LoRaWAN网络即插即用、完全兼容，也可与Lansitec无线数据传输单元配合实现低成本部署。
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
-Only ThingsBoard Cloud works when using direct communication from this device to ThingsBoard via MQTT.
+仅当该设备通过MQTT直接与ThingsBoard通信时，需使用ThingsBoard Cloud。
 
-You may use ThingsBoard PE on-premises or ThingsBoard Cloud when using ThingsBoard Integrations.
+使用ThingsBoard集成时，可使用本地部署的ThingsBoard PE或ThingsBoard Cloud。
 
-To create an integration with a network server please choose first one of the supported network servers:
+若要与网络服务器创建集成，请先选择所支持的网络服务器之一：
 
 {% assign targetIntegrationTypes = '
 ChirpStack,

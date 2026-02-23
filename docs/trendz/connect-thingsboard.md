@@ -2,17 +2,16 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Connect Trendz to the ThingsBoard
-description: Connect Trendz Analytics platform to the ThingsBoard
+title: 将 Trendz 连接到 ThingsBoard
+description: 将 Trendz Analytics 平台连接到 ThingsBoard
 ---
 
 * TOC
 {:toc}
 
-## Trendz with ThingsBoard 4.2.1 or Older
+## Trendz 与 ThingsBoard 4.2.1 或更早版本
 
-This guide explains how to connect Trendz with ThingsBoard 4.2.1 or older. We strongly recommend updating ThingsBoard
-to the latest version to access all Trendz and ThingsBoard features.
+本指南说明如何将 Trendz 连接到 ThingsBoard 4.2.1 或更早版本。强烈建议将 ThingsBoard 更新到最新版本，以使用全部 Trendz 与 ThingsBoard 功能。
 
 To install Trendz for ThingsBoard 4.2.1 or older:
 

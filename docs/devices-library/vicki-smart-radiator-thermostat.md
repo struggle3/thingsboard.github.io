@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Vicki Smart Radiator Thermostat to ThingsBoard?"
+title: "如何将Vicki智能暖气片温控器连接到ThingsBoard？"
 redirect_to: "/device-library/ce/vicki-smart-radiator-thermostat/"
 ---

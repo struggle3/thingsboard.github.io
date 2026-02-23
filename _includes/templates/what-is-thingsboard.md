@@ -1,4 +1,4 @@
-ThingsBoard is an open-source server-side platform that allows you to monitor and control IoT devices.
-It is free for both personal and commercial usage and you can deploy it anywhere. 
-If this is your first experience with the platform we recommend to review 
-[what-is-thingsboard](/docs/getting-started-guides/what-is-thingsboard/) page and [getting-started](/docs/getting-started-guides/helloworld/) guide.
+ThingsBoard 是一款开源服务端平台，可用于监控和操控IoT设备。
+可免费用于个人及商业用途，并可部署到任意环境。
+若首次使用该平台，建议先阅读
+[什么是 ThingsBoard](/docs/getting-started-guides/what-is-thingsboard/)页面和[快速入门](/docs/getting-started-guides/helloworld/)指南。

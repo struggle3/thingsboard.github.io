@@ -1,24 +1,24 @@
-If you want to add your device to Device Library, please follow the steps below:  
+若要将您的设备添加到设备库，请按以下步骤操作：
 
-1. Create a structured guide, preferable headers structure is the following:  
+1. 创建结构化的指南，建议采用以下标题结构：
     
 ```text 
-    ## Introduction  
-    ### Prerequisites
-    ## Create device on ThingsBoard  
-    ## Install required libraries and tools (Optional)  
-    ## Connect device to ThingsBoard  
-    ## Check data on ThingsBoard  
-    ## Synchronize device state using client and shared attribute requests (Optional)  
-    ## Control device using shared attributes (Optional)  
-    ## Control device using RPC (Optional)  
-    ## Conclusion
+    ## 简介  
+    ### 前置要求
+    ## 在 ThingsBoard 上创建设备  
+    ## 安装所需的库和工具（可选）  
+    ## 将设备连接到 ThingsBoard  
+    ## 在 ThingsBoard 上检查数据  
+    ## 使用客户端和共享属性请求同步设备状态（可选）  
+    ## 使用共享属性控制设备（可选）  
+    ## 使用 RPC 控制设备（可选）  
+    ## 结论
 ```  
     
-2. Use **docx**, regular **txt** or **markdown** to create you guides. **Markdown** is preferable.  
-3. If you decided to use **markdown** or **txt** format - please put your guide with **images/screenshots** to the archive or GitHub repository.  
-4. Submit the guide to [**devices@thingsboard.io**](mailto:devices@thingsboard.io) for review.  
-5. We will review your guide and may modify it, if necessary, to ensure its accuracy and quality.  
-6. The guide will be added to Device Library, and the rest of the community will be able to connect your device to ThingsBoard.  
+2. 使用 **docx**、普通 **txt** 或 **markdown** 格式创建指南。推荐使用 **markdown**。  
+3. 如使用 **markdown** 或 **txt** 格式，请将指南及**图片/截图**放入压缩包或 GitHub 仓库中。  
+4. 将指南提交至 [**devices@thingsboard.io**](mailto:devices@thingsboard.io) 以供审核。  
+5. 我们将审核您的指南，必要时会进行修改，以确保其准确性和质量。  
+6. 审核通过后，指南将被添加到设备库，社区其他用户将能够将您的设备连接到 ThingsBoard。  
 
-Please do not hesitate to contact us if you have any questions or feedback.  
+如有任何疑问或反馈，请随时与我们联系。

@@ -1,25 +1,25 @@
-- **On every message**: perform the action for every incoming message.
-- **Deduplicate**: groups messages from each originator into time intervals and only performs the action only for the first message within each interval. 
-  Duration of the interval is specified by **Deduplication interval** setting.
-  To determine the interval a message falls within, the system calculates a deduplication interval number using the following formula:
+- **每条消息均执行**：对每条入站消息执行操作。
+- **去重**：将来自同一来源实体的消息按时间间隔分组，仅在每个间隔内的第一条消息上执行操作。
+  间隔时长由**去重间隔**设置指定。
+  系统使用以下公式计算消息所属的去重间隔编号：
   ```java
   long intervalNumber = ts / deduplicationIntervalMillis;
   ```
-  Where:
-    - `ts` is the timestamp used for deduplication (in milliseconds).
-    - `deduplicationIntervalMillis` is the configured **Deduplication interval** (converted automatically to milliseconds).
-    - `intervalNumber` determines the logical time bucket the message belongs to.
+  其中：
+    - `ts` 为用于去重的时间戳（毫秒）。
+    - `deduplicationIntervalMillis` 为配置的**去重间隔**（自动转换为毫秒）。
+    - `intervalNumber` 决定消息所属的逻辑时间桶。
 
-  The timestamp `ts` is determined using the following priority:
-    1. If the message metadata contains a `ts` property (in UNIX milliseconds), it is used.
-    2. Otherwise, the time when the message was created is used.
+  时间戳 `ts` 按以下优先级确定：
+    1. 若消息元数据中包含 `ts` 属性（UNIX 毫秒），则使用该值。
+    2. 否则，使用消息创建时间。
 
-  All timestamps are UNIX milliseconds (in UTC).
+  所有时间戳均为 UNIX 毫秒（UTC）。
 
-  **Example** 
+  **示例**
 
-  With a 60-second deduplication interval:
-  - Device sends messages at 10:00:15, 10:00:45, and 10:01:10
-  - The first two messages (10:00:15 and 10:00:45) fall in the same interval - only the message at 10:00:15 is processed
-  - The message at 10:01:10 falls in the next interval, so it gets processed
-- **Skip**: never perform the action.
+  60 秒去重间隔下：
+  - 设备在 10:00:15、10:00:45、10:01:10 发送消息
+  - 前两条消息（10:00:15 和 10:00:45）落在同一间隔内，仅处理 10:00:15 的消息
+  - 10:01:10 的消息落在下一间隔，会被处理
+- **跳过**：永不执行操作。

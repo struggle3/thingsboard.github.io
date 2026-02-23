@@ -9,12 +9,12 @@
             var webSocket = new WebSocket("wss://thingsboard.cloud/api/ws");
 
             if (entityId === "$YOUR_DEVICE_ID") {
-                alert("Invalid device id!");
+                alert("设备ID无效！");
                 webSocket.close();
             }
 
             if (token === "$YOUR_JWT_TOKEN") {
-                alert("Invalid JWT token!");
+                alert("JWT令牌无效！");
                 webSocket.close();
             }
 
@@ -36,16 +36,16 @@
                 };
                 var data = JSON.stringify(object);
                 webSocket.send(data);
-                alert("Message is sent: " + data);
+                alert("消息已发送：" + data);
             };
 
             webSocket.onmessage = function (event) {
                 var received_msg = event.data;
-                alert("Message is received: " + received_msg);
+                alert("已收到消息：" + received_msg);
             };
 
             webSocket.onclose = function (event) {
-                alert("Connection is closed!");
+                alert("连接已关闭！");
             };
         }
     </script>
@@ -54,7 +54,7 @@
 <body>
 
 <div id="sse">
-    <a href="javascript:WebSocketAPIExample()">Run WebSocket</a>
+    <a href="javascript:WebSocketAPIExample()">运行 WebSocket</a>
 </div>
 
 </body>

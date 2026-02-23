@@ -2,9 +2,9 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: AWS cluster setup
+title: AWS 集群设置
 notitle: "true"
-description: ThingsBoard IoT platform  AWS cluster setup guide
+description: ThingsBoard IoT 平台 AWS 集群设置指南
 
 ---
 
@@ -13,10 +13,10 @@ description: ThingsBoard IoT platform  AWS cluster setup guide
        <div class="install-options-hero">
           <div class="container">
             <div class="install-options-hero-content">
-                <h1>ThingsBoard Setup options on AWS</h1>
+                <h1>AWS 上的 ThingsBoard 设置选项</h1>
                 <div class="install-options-description">
                     <p>
-                        You may deploy ThingsBoard IoT Platform using different tools and platforms
+                        您可使用不同的工具和平台部署 ThingsBoard IoT 平台
                     </p>
                 </div>
             </div>

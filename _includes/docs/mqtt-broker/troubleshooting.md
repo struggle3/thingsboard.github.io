@@ -1,63 +1,61 @@
 * TOC
 {:toc}
 
-## Troubleshooting Tools and Tips
+## 排查工具与技巧
 
-### Kafka Queue: Consumer Group Message Lag 
+### Kafka 队列：Consumer Group 消息滞后
 
-You can use the log shown below to identify any issues with the processing of messages or other parts of TBMQ infrastructure. 
-Since Kafka is used for MQTT message processing and other major parts of the system, such as `client sessions`, `client subscriptions`, `retained messages`, etc., 
-you can analyze the overall state of the broker.
+可使用下文所示日志识别消息处理或 TBMQ 基础设施其他部分的问题。
+由于 Kafka 用于 MQTT 消息处理及系统其他主要部分（如 `client sessions`、`client subscriptions`、`retained messages` 等），
+可据此分析 broker 的整体状态。
 
-TBMQ provides the ability to monitor whether the rate of producing messages to Kafka is faster than the rate of consuming and processing them. 
-In such cases, you will experience a growing latency for message processing. 
-To enable this functionality, ensure that Kafka consumer-stats are enabled (see the **queue.kafka.consumer-stats** section of the [Configuration properties](/docs/{{docsPrefix}}mqtt-broker/install/config/)).
+TBMQ 支持监控向 Kafka 生产消息的速率是否快于消费与处理的速率。
+若存在该情况，消息处理延迟将逐渐增大。
+要启用此功能，请确保开启 Kafka consumer-stats（参见[配置属性](/docs/{{docsPrefix}}mqtt-broker/install/config/)中的 **queue.kafka.consumer-stats** 节）。
 
-Once Kafka consumer-stats are enabled, logs (see [Troubleshooting](#logs)) about offset lag for consumer groups will be generated.
+开启 Kafka consumer-stats 后，将生成 consumer group 的 offset lag 相关日志（参见[故障排查](#logs)）。
 
-Here is an example of the log message:
+以下为日志示例：
 
 ```bash
 2022-11-27 02:33:23,625 [kafka-consumer-stats-1-thread-1] INFO  o.t.m.b.q.k.s.TbKafkaConsumerStatsService - [msg-all-consumer-group] Topic partitions with lag: [[topic=[tbmq.msg.all], partition=[2], lag=[5]]].
 ```
 
-From this message we can see that there are five messages pushed to the `tbmq.msg.all` topic but not yet processed.
+由此可知有 5 条消息已推入 `tbmq.msg.all` 主题但尚未处理。
 
-In general, the logs have the following structure:
+一般而言，日志结构如下：
 
 ```bash
 TIME [STATS_PRINTING_THREAD_NAME] INFO  o.t.m.b.q.k.s.TbKafkaConsumerStatsService - [CONSUMER_GROUP_NAME] Topic partitions with lag: [[topic=[KAFKA_TOPIC], partition=[KAFKA_TOPIC_PARTITION], lag=[LAG]],[topic=[ANOTHER_TOPIC], partition=[], lag=[]],...].
 ```
 
-Where:
-- `CONSUMER_GROUP_NAME` - Name of the consumer group that is processing messages.
-- `KAFKA_TOPIC` - Name of the exact Kafka topic.
-- `KAFKA_TOPIC_PARTITION` - Number of the topic's partition.
-- `LAG` - The amount of unprocessed messages.
+其中：
+- `CONSUMER_GROUP_NAME` - 正在处理消息的消费者组名称。
+- `KAFKA_TOPIC` - Kafka 主题名称。
+- `KAFKA_TOPIC_PARTITION` - 主题分区号。
+- `LAG` - 未处理消息数量。
 
-**NOTE:** Logs about consumer lag are printed only if there is a lag for this consumer group.
+**注意：**仅当该消费者组存在滞后时才打印 consumer lag 相关日志。
 
-### CPU/Memory Usage
+### CPU/内存使用
 
-Sometimes, a problem arises due to a lack of resources for a particular service. 
-You can view CPU and Memory usage by logging into your `server/container/pod` and executing the `top` Linux command.
+有时问题源于某服务的资源不足。可登录 `server/container/pod` 并执行 `top` 命令查看 CPU 和内存使用情况。
 
-For more convenient monitoring, it is better to configure Prometheus and Grafana.
+为便于监控，建议配置 Prometheus 和 Grafana。
 
-If you see that some services sometimes use 100% of the CPU, you should either scale the service horizontally by creating new nodes 
-in the cluster or scale it vertically by increasing the total amount of CPU.
+若发现某服务 CPU 使用率时常达到 100%，可通过在集群中创建新节点进行水平扩展，或通过增加 CPU 总量进行垂直扩展。
 
-## Logs
+## 日志
 
-### Reading Logs
+### 查看日志
 
-Regardless of the deployment type, TBMQ logs are stored in the following directory:
+无论部署类型如何，TBMQ 日志均存储在以下目录：
 
 ```bash
 /var/log/thingsboard-mqtt-broker
 ```
 
-Different deployment tools provide different ways to view logs:
+不同部署工具提供不同的日志查看方式：
 
 {% capture contenttogglespecdeploymenttype %}
 Docker-Compose Deployment%,%docker-compose%,%templates/mqtt-broker/troubleshooting/logs/view-logs/docker-compose-view-logs.md%br%
@@ -65,18 +63,17 @@ Kubernetes Deployment%,%kubernetes%,%templates/mqtt-broker/troubleshooting/logs/
 
 {% include content-toggle.liquid content-toggle-id="deploymentType" toggle-spec=contenttogglespecdeploymenttype %}
 
-### Enabling Certain Logs
+### 启用特定日志
 
-To facilitate troubleshooting, TBMQ allows users to enable or disable logging for specific parts of the system. 
-This can be achieved by modifying the **logback.xml** file, which is located in the following directory:
+为便于故障排查，TBMQ 允许用户为系统特定部分启用或禁用日志。可通过修改以下目录中的 **logback.xml** 文件实现：
 
 ```bash
 /usr/share/thingsboard-mqtt-broker/conf
 ```
 
-Please note that there are separate files for **k8s** and **Docker** deployments.
+注意，**k8s** 和 **Docker** 部署使用不同的配置文件。
 
-Here's an example of the **logback.xml** configuration:
+以下为 **logback.xml** 配置示例：
 
 ```bash
 <!DOCTYPE configuration>
@@ -107,14 +104,11 @@ Here's an example of the **logback.xml** configuration:
 </configuration>
 ```
 
-The configuration files contain _loggers_ which are the most useful for troubleshooting, as they allow you to enable or disable logging for a certain class or group of classes. 
-In the example given above, the default logging level is set to **INFO**, which means that the logs will contain general information, warnings, and errors. 
-However, for the `org.thingsboard.mqtt.broker.actors.client.service.connect` package, the most detailed level of logging is enabled. 
-You can also completely disable logs for a part of the system, as is done for the `org.thingsboard.mqtt.broker.actors.DefaultTbActorSystem` class using the **OFF** log-level.
+配置文件中的 _loggers_ 对故障排查最为有用，可为特定类或类组启用或禁用日志。上述示例中，默认日志级别为 **INFO**，即日志包含一般信息、警告和错误。对于 `org.thingsboard.mqtt.broker.actors.client.service.connect` 包则启用最详细级别。也可通过 **OFF** 级别完全禁用某部分的日志，如 `org.thingsboard.mqtt.broker.actors.DefaultTbActorSystem`。
 
-To enable or disable logging for a certain part of the system, you need to add the appropriate `</logger>` configuration and wait for up to 10 seconds.
+要为系统某部分启用或禁用日志，需添加相应的 `</logger>` 配置并等待最多 10 秒。
 
-Different deployment tools have different ways to update logs:
+不同部署工具的日志更新方式不同：
 
 {% capture contenttogglespecdeploymenttype2 %}
 Docker-Compose Deployment%,%docker-compose%,%templates/mqtt-broker/troubleshooting/logs/enable-logs/docker-compose-enable-logs.md%br%
@@ -122,21 +116,21 @@ Kubernetes Deployment%,%kubernetes%,%templates/mqtt-broker/troubleshooting/logs/
 
 {% include content-toggle.liquid content-toggle-id="deploymentType" toggle-spec=contenttogglespecdeploymenttype2 %}
 
-## Metrics
+## 指标
 
-To enable Prometheus metrics in TBMQ you must: 
-- Set the `STATS_ENABLED` environment variable to `true`.
-- Set the `METRICS_ENDPOINTS_EXPOSE` environment variable to `prometheus` in the configuration file.
+在 TBMQ 中启用 Prometheus 指标需： 
+- 将 `STATS_ENABLED` 环境变量设为 `true`。
+- 在配置文件中将 `METRICS_ENDPOINTS_EXPOSE` 环境变量设为 `prometheus`。
 
-The metrics can then be accessed via the following path: `https://<yourhostname>/actuator/prometheus`, and scraped by Prometheus (authentication is not required).
+此后可通过 `https://<yourhostname>/actuator/prometheus` 访问指标，并由 Prometheus 抓取（无需认证）。
 
-## Prometheus metrics
+## Prometheus 指标
 
-The Spring Actuator in TBMQ can expose some internal state metrics through Prometheus.
+TBMQ 中的 Spring Actuator 可通过 Prometheus 暴露部分内部状态指标。
 
-Here is a list of the metrics that TBMQ pushes to Prometheus:
+以下是 TBMQ 推送到 Prometheus 的指标列表：
 
-### TBMQ-specific metrics:
+### TBMQ 专用指标：
 
 - <i>incomingPublishMsg_published</i> (statsNames - <i>totalMsgs, successfulMsgs, failedMsgs</i>): stats about incoming Publish messages to be persisted in the general queue.
 - <i>incomingPublishMsg_consumed</i> (statsNames - <i>totalMsgs, successfulMsgs, timeoutMsgs, failedMsgs, tmpTimeout,
@@ -184,24 +178,24 @@ Here is a list of the metrics that TBMQ pushes to Prometheus:
 - <i>activeSharedAppProcessors</i>: stats about active APPLICATION processors count for shared subscriptions.
 - <i>runningActors</i>: stats about running actors count.
 
-### PostgreSQL-specific metrics:
+### PostgreSQL 专用指标：
 - <i>sqlQueue_InsertUnauthorizedClientQueue_${index_of_queue}</i> (statsNames - <i>totalMsgs, failedMsgs, successfulMsgs</i>): stats about updating **unauthorized clients** to the database.
 - <i>sqlQueue_DeleteUnauthorizedClientQueue_${index_of_queue}</i> (statsNames - <i>totalMsgs, failedMsgs, successfulMsgs</i>): stats about removing **unauthorized clients** to the database.
 - <i>sqlQueue_LatestTimeseriesQueue_${index_of_queue}</i> (statsNames - <i>totalMsgs, failedMsgs, successfulMsgs</i>): stats about **latest historical stats persistence** to the database.
 - <i>sqlQueue_TimeseriesQueue_${index_of_queue}</i> (statsNames - <i>totalMsgs, failedMsgs, successfulMsgs</i>): stats about **historical stats persistence** to the database.
 
-Please note that in order to achieve maximum performance, **TBMQ uses several queues (threads)** per each of the specified queues above.
+注意，为达到最佳性能，**TBMQ 对上述每个队列使用多个队列（线程）**。
 
-## Getting help
+## 获取帮助
 
 <section id="talkToUs">
     <div class="doc-features row mt-4">
         <div class="col-12 col-sm-6 col-lg col-xxl-6 col-4xl mb-4">
             <a class="feature-card" href="https://join.slack.com/t/tbmq/shared_invite/zt-31kk3315e-5jtPw8YAKskq1KkUqTrTyQ">
                 <img class="feature-logo" style="filter: unset" src="/images/mqtt-broker/slack-logo.svg" alt="Slack logo">
-                <div class="feature-title">Slack Community</div>
+                <div class="feature-title">Slack 社区</div>
                 <div class="feature-text">
-                    Ask questions and get quick tips from other users and contributors.
+                    向其他用户和贡献者提问，获取快速解答。
                 </div>
             </a>
         </div>
@@ -210,13 +204,13 @@ Please note that in order to achieve maximum performance, **TBMQ uses several qu
                 <img class="feature-logo" style="filter: unset" src="/images/mqtt-broker/github-logo.svg" alt="Github logo">
                 <div class="feature-title">Github Issues</div>
                 <div class="feature-text">
-                    Found a bug or have a question? Open an issue on our GitHub repo.
+                    发现 bug 或有疑问？在我们的 GitHub 仓库中提交 issue。
                 </div>
             </a>
         </div>
     </div>
 </section>
 
-If you are unable to find a solution to your problem from any of the guides provided above, please do not hesitate to contact the ThingsBoard team for further assistance.
+若上述指南均无法解决您的问题，请联系 ThingsBoard 团队获取进一步帮助。
 
-<a class="button" href="/docs/contact-us/?subject=TBMQ">Contact us</a>
+<a class="button" href="/docs/contact-us/?subject=TBMQ">联系我们</a>

@@ -1,15 +1,15 @@
 * TOC
 {:toc}
 
-This guide will help you to set up TBMQ in cluster mode using Minikube.
+本指南将帮助您使用 Minikube 以集群模式部署 TBMQ。
 
-## Prerequisites
+## 前置条件
 
-You need to have a Kubernetes cluster, and the `kubectl` command-line tool must be configured to communicate with your cluster.
-If you don't have Minikube installed, please follow [these instructions](https://kubernetes.io/docs/setup/learning-environment/minikube/).
-Additionally, you will need [helm](https://helm.sh/docs/intro/install/) to be installed.
+您需要拥有 Kubernetes 集群，并且 `kubectl` 命令行工具必须配置为与您的集群通信。
+如果尚未安装 Minikube，请遵循[这些说明](https://kubernetes.io/docs/setup/learning-environment/minikube/)。
+此外，您需要安装 [helm](https://helm.sh/docs/intro/install/)。
 
-## Step 1. Clone TBMQ repository
+## 步骤 1. 克隆 TBMQ 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -17,26 +17,26 @@ cd tbmq/k8s/minikube
 ```
 {: .copy-code}
 
-## Step 2. Installation
+## 步骤 2. 安装
 
-To install TBMQ execute the following command:
+要安装 TBMQ，执行以下命令：
 
 ```bash
 ./k8s-install-tbmq.sh
 ```
 {: .copy-code}
 
-## Step 3. Running
+## 步骤 3. 运行
 
-Execute the following command to deploy TBMQ:
+执行以下命令部署 TBMQ：
 
 ```bash
 ./k8s-deploy-tbmq.sh
 ```
 {: .copy-code}
 
-After a while when all resources will be successfully started you can open `http://{your-cluster-ip}:30001` in your browser (e.g. **http://192.168.49.2:30001**).
-You can check your cluster IP using command:
+当所有资源成功启动后，您可以在浏览器中打开 `http://{your-cluster-ip}:30001`（例如 **http://192.168.49.2:30001**）。
+您可以使用以下命令检查集群 IP：
 ```bash
 minikube ip
 ```
@@ -44,106 +44,106 @@ minikube ip
 
 {% include templates/mqtt-broker/login.md %}
 
-## Step 4. Logs, delete statefulsets and services
+## 步骤 4. 日志、删除 statefulset 和服务
 
-In case of any issues, you can examine service logs for errors.
-For example to see TBMQ node logs execute the following commands:
+如有任何问题，您可以检查服务日志以查找错误。
+例如，要查看 TBMQ 节点日志，执行以下命令：
 
-1) Get the list of the running tb-broker pods:
+1) 获取正在运行的 tb-broker pod 列表：
 
 ```bash
 kubectl get pods -l app=tb-broker
 ```
 {: .copy-code}
 
-2) Fetch logs of the tb-broker pod:
+2) 获取 tb-broker pod 的日志：
 
 ```bash
 kubectl logs -f TB_BROKER_POD_NAME
 ```
 {: .copy-code}
 
-Where:
+其中：
 
-- `TB_BROKER_POD_NAME` - tb-broker pod name obtained from the list of the running tb-broker pods.
+- `TB_BROKER_POD_NAME` - 从正在运行的 tb-broker pod 列表中获取的 tb-broker pod 名称。
 
-Or use the next command to see the state of all the pods.
+或使用以下命令查看所有 pod 的状态。
 ```bash
 kubectl get pods
 ```
 {: .copy-code}
 
-Use the next command to see the state of all the services.
+使用以下命令查看所有服务的状态。
 ```bash
 kubectl get services
 ```
 {: .copy-code}
 
-Use the next command to see the state of all the deployments.
+使用以下命令查看所有 deployment 的状态。
 ```bash
 kubectl get deployments
 ```
 {: .copy-code}
 
-Use the next command to see the state of all the statefulsets.
+使用以下命令查看所有 statefulset 的状态。
 ```bash
 kubectl get statefulsets
 ```
 {: .copy-code}
 
-See [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) command reference for more details.
+有关更多详细信息，请参阅 [kubectl 速查表](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)命令参考。
 
-Execute the following command to delete TBMQ nodes:
+执行以下命令删除 TBMQ 节点：
 
 ```bash
 ./k8s-delete-tbmq.sh
 ```
 {: .copy-code}
 
-Execute the following command to delete all resources (including database):
+执行以下命令删除所有资源（包括数据库）：
 
 ```bash
 ./k8s-delete-all.sh
 ```
 {: .copy-code}
 
-## Upgrading
+## 升级
 
 {% include templates/mqtt-broker/upgrade/upgrading.md %}
 
-### Backup and restore (Optional)
+### 备份和恢复（可选）
 
-While backing up your PostgreSQL database is highly recommended, it is optional before proceeding with the upgrade.
-For further guidance, follow the [next instructions](https://github.com/thingsboard/tbmq/blob/main/k8s/minikube/backup-restore/README.md).
+强烈建议备份 PostgreSQL 数据库，但在进行升级之前这是可选的。
+有关进一步指导，请遵循[以下说明](https://github.com/thingsboard/tbmq/blob/main/k8s/minikube/backup-restore/README.md)。
 
-### Upgrade to 2.2.0
+### 升级到 2.2.0
 
-In this release, the MQTT authentication mechanism was migrated from YAML/env configuration into the database.
-During upgrade, TBMQ needs to know which authentication providers are enabled in your deployment.
-This information is provided through environment variables passed to the **upgrade pod**.
+在此版本中，MQTT 认证机制已从 YAML/env 配置迁移到数据库。
+升级期间，TBMQ 需要了解部署中启用了哪些认证提供程序。
+此信息通过传递给 **upgrade pod** 的环境变量提供。
 
-The upgrade script requires a file named **`database-setup.yml`** that explicitly defines these variables.
-Environment variables from your `tb-broker.yml` file are not applied during the upgrade — only the values in `database-setup.yml` will be used.
+升级脚本需要一个名为 **`database-setup.yml`** 的文件，该文件明确定义这些变量。
+您的 `tb-broker.yml` 文件中的环境变量在升级期间不会应用——仅使用 `database-setup.yml` 中的值。
 
-> **Tips**
-> If you use only Basic authentication, set `SECURITY_MQTT_SSL_ENABLED=false`.
-> If you use only X.509 authentication, set `SECURITY_MQTT_BASIC_ENABLED=false` and `SECURITY_MQTT_SSL_ENABLED=true`.
+> **提示**
+> 如果仅使用 Basic 认证，请设置 `SECURITY_MQTT_SSL_ENABLED=false`。
+> 如果仅使用 X.509 认证，请设置 `SECURITY_MQTT_BASIC_ENABLED=false` 和 `SECURITY_MQTT_SSL_ENABLED=true`。
 
-**Supported variables**
+**支持的变量**
 
 * `SECURITY_MQTT_BASIC_ENABLED` (`true|false`)
 * `SECURITY_MQTT_SSL_ENABLED` (`true|false`)
-* `SECURITY_MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT` (`true|false`) — usually `false`.
+* `SECURITY_MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT` (`true|false`) — 通常为 `false`。
 
-Once the file is prepared and the values verified, proceed with the [upgrade process](#run-upgrade).
+准备好文件并验证值后，继续[升级过程](#run-upgrade)。
 
-### Upgrade to 2.1.0
+### 升级到 2.1.0
 
 {% include templates/mqtt-broker/upgrade/update-to-2.1.0-release-cluster.md %}
 
-### Run upgrade
+### 执行升级
 
-In case you would like to upgrade, please pull the recent changes from the latest release branch:
+如果您想升级，请从最新 release 分支拉取最新更改：
 
 ```bash
 git pull origin {{ site.release.broker_branch }}
@@ -152,11 +152,11 @@ git pull origin {{ site.release.broker_branch }}
 
 {% include templates/mqtt-broker/upgrade/upgrade-to-custom-release.md %}
 
-**Note**: Make sure custom changes of yours if available are not lost during the merge process.
+**注意**：确保您的自定义更改（如有）在合并过程中不会丢失。
 
 {% include templates/mqtt-broker/install/upgrade-hint.md %}
 
-After that, execute the following command:
+之后，执行以下命令：
 
 {% capture tabspec %}tbmq-upgrade
 tbmq-upgrade-without-from-version,Since v2.1.0,shell,resources/upgrade-options/k8s-upgrade-tbmq-without-from-version.sh,/docs/mqtt-broker/install/cluster/resources/upgrade-options/k8s-upgrade-tbmq-without-from-version.sh
@@ -165,6 +165,6 @@ tbmq-upgrade-with-from-version,Before v2.1.0,markdown,resources/upgrade-options/
 
 {% include templates/mqtt-broker/upgrade/stop-tbmq-pods-before-upgrade.md %}
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/mqtt-broker-guides-banner.md %}

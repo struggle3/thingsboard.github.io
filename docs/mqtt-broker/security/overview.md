@@ -1,20 +1,20 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Security Overview
-description: Security Overview
+title: 安全概述
+description: 安全概述
 
 authentication-provider-control:
   0:
     image: /images/mqtt-broker/security/auth-providers/provider-home-switch.png
-    title: 'Go to the Broker Settings card on the Home page to switch authentication providers.'
+    title: '在首页进入 Broker Settings 卡片以切换认证提供方。'
   1:
     image: /images/mqtt-broker/security/auth-providers/provider-table-switch.png
-    title: 'On the Authentication > Providers page, use the switch button in the table’s right column to enable or disable providers.'
+    title: '在 Authentication > Providers 页面，使用表格右侧的开关按钮启用或禁用提供方。'
 
 authentication-settings:
   0:
     image: /images/mqtt-broker/security/auth-providers/authentication-settings.png
-    title: 'Navigate to the Settings > Security page to check the MQTT Authentication Settings.'
+    title: '进入 Settings > Security 页面查看 MQTT Authentication Settings。'
 
 ---
 

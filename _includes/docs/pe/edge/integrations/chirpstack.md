@@ -5,57 +5,57 @@
 {% assign integrationUrl = "chirpstack" %}
 {% include templates/edge/integrations/edge-pe-reference.md %}
 
-### Overview
+### 概述
 
-[ChirpStack](https://www.chirpstack.io/){: target="_blank"} is an **open-source LoRaWAN Network Server** which can be used to setup LoRaWAN networks.
-After integrating ChirpStack with **ThingsBoard Edge**, you can locally connect, process, and visualize device data at the edge, ensuring low-latency insights and offline capabilities.
+[ChirpStack](https://www.chirpstack.io/){: target="_blank"} 是一款 **开源 LoRaWAN Network Server**，可用于搭建 LoRaWAN 网络。
+将 ChirpStack 与 **ThingsBoard Edge** 集成后，可在边缘本地连接、处理并可视化设备数据，实现低延迟洞察与离线能力。
 
-To learn more, please see the integration diagram.
+详情请参阅集成示意图。
 
 ![image](/images/pe/edge/integrations/chirpstack/chirpstack-diagram.webp){: style="display: block; margin: auto; max-height: 400px"}
 
-### Prerequisites
+### 前置条件
 
-* **ThingsBoard Edge Professional Edition** up and running.
-* Install **ChirpStack Network Server** via [Docker Compose](https://www.chirpstack.io/project/guides/docker-compose/){: target="_blank"} or [Ubuntu](https://www.chirpstack.io/project/guides/debian-ubuntu/){: target="_blank"}.
-* Have a device connected to the network. Read how to connect the **LoRaWAN device** with [ChirpStack](https://www.chirpstack.io/project/guides/connect-device/){: target="_blank"}.
+* **ThingsBoard Edge Professional Edition** 已运行。
+* 通过 [Docker Compose](https://www.chirpstack.io/project/guides/docker-compose/){: target="_blank"} 或 [Ubuntu](https://www.chirpstack.io/project/guides/debian-ubuntu/){: target="_blank"} 安装 **ChirpStack Network Server**。
+* 设备已连接至网络。连接 **LoRaWAN 设备** 与 [ChirpStack](https://www.chirpstack.io/project/guides/connect-device/){: target="_blank"} 的方法请参阅相关文档。
 
-### Create converter and integration templates
+### 创建 converter 与 integration 模板
 
-Only the **ThingsBoard Professional Edition** creates converters and integration templates.
-So please use [**ThingsBoard Cloud**](https://thingsboard.cloud/signup){: target="_blank"} or [**install**](/docs/user-guide/install/pe/installation-options/){: target="_blank"} your own platform instance to log in as a **Tenant administrator**.
+仅 **ThingsBoard Professional Edition** 可创建 converter 和 integration 模板。
+因此请使用 [**ThingsBoard Cloud**](https://thingsboard.cloud/signup){: target="_blank"} 或 [**安装**](/docs/user-guide/install/pe/installation-options/){: target="_blank"} 自有平台实例，以 **Tenant administrator** 身份登录。
 
-#### Basic settings
+#### 基本设置
 
-To add the **ChirpStack integration**:
-- Go to the **Edge management > Integration templates** section and click the **"Add"** button to add a new integration.
-- Select the **ChirpStack** type and enter the **integration name**. 
-- Click the **"Next"** button.
+添加 **ChirpStack 集成**：
+- 进入 **Edge management > Integration templates** 部分，点击 **"Add"** 按钮添加新集成。
+- 选择 **ChirpStack** 类型并输入 **integration name**。
+- 点击 **"Next"** 按钮。
 
 {% include images-gallery.html imageCollection="basic-settings" %}
 
 {% capture debug-mode %}
-**Debug mode** is extremely useful for development and troubleshooting. However, having it on all the time can significantly increase the disk space used by the database since all the debug data is stored there.
-<p>Therefore, starting from <b>version 3.9</b>, <b>ThingsBoard</b> stores all debug events for integrations only during the first <b>15 minutes</b>. After that, only failure events are retained. These settings can be combined or completely disabled.</p>
+**Debug mode** 对开发和排查非常有用。但长期开启会显著增加数据库占用的磁盘空间，因为所有调试数据都会保存其中。
+<p>因此，自 <b>version 3.9</b> 起，<b>ThingsBoard</b> 仅在集成的前 <b>15 分钟</b> 内保存所有 debug 事件。之后仅保留失败事件。这些设置可组合或完全禁用。</p>
 {% endcapture %}
 {% include templates/info-banner.md content=debug-mode %}
 
-#### Uplink data converter
+#### Uplink 数据 converter
 
-**Uplink** is necessary to convert the incoming data from the device into the required format for displaying them in **ThingsBoard**.
+**Uplink** 用于将设备传入数据转换为在 **ThingsBoard** 中显示所需的格式。
 
-* Select the **"Create new"** tab
-* Enter the **Converter name**
-* The **Main decoding configuration** block:
-  * Select the **Entity type** (_Device or Asset_) from the drop down-menu and enter the **entity name**. The corresponding entity will be created as a result of the integration.
+* 选择 **"Create new"** 选项卡
+* 输入 **Converter name**
+* **Main decoding configuration** 区块：
+  * 从下拉菜单选择 **Entity type**（_Device 或 Asset_）并输入 **entity name**。集成执行后将创建对应实体。
 
 {% capture placeholder %}
-<b>$eui</b> is a placeholder that will automatically be replaced by the device's <b>unique identifier</b> (_e.g., 70B3D57ED003B6F5_) from the <b>Loriot</b> (or ChirpStack, similar MQTT message) payload.
-<br>For example, if the device entity is named <b>"Loriot Device $eui"</b>, the created device name may look like <b>"Loriot Device 70B3D57ED003B6F5"<b>.
+<b>$eui</b> 占位符会自动替换为设备的 <b>唯一标识符</b>（_例如 70B3D57ED003B6F5_），来源为 <b>Loriot</b>（或 ChirpStack、类似 MQTT 消息）的 payload。
+<br>例如，若设备实体命名为 <b>"Loriot Device $eui"</b>，创建的设备名可能为 <b>"Loriot Device 70B3D57ED003B6F5"<b>。
 {% endcapture %}
 {% include templates/info-banner.md content=placeholder %}
 
-* Enter the script into the **"function payloadDecoder"** field. For the **Edge version 3.9 and older**, the following script can be used:
+* 在 **"function payloadDecoder"** 字段中输入脚本。**Edge 3.9 及更早版本** 可使用以下脚本：
 {% capture chirpstackuplinkconverterconfig %}
 TBEL<small>Recommended</small>%,%accessToken%,%templates/integration/chirpstack/chirpstack-uplink-converter-config-tbel.md%br%
 JavaScript<small></small>%,%anonymous%,%templates/integration/chirpstack/chirpstack-uplink-converter-config-javascript.md{% endcapture %}
@@ -63,116 +63,116 @@ JavaScript<small></small>%,%anonymous%,%templates/integration/chirpstack/chirpst
 
 {% include images-gallery.html imageCollection="uplink-data-converter-script" %}
 
-Starting with **Edge version 4.0**, you can:
-* Select the **"Library"** tab, choose the **Vendor** and find the appropriate model in the **"Model"** from the drop-down menus.
-* Or use the default script provided in the converter. 
+自 **Edge 4.0** 起，可以：
+* 选择 **"Library"** 选项卡，在 **"Vendor"** 和 **"Model"** 下拉菜单中选择厂商并找到对应型号。
+* 或使用 converter 中提供的默认脚本。
 
 {% include images-gallery.html imageCollection="uplink-data-converter-library" %}
 
-* The **Advanced decoding parameters** block:
-  - The **"Device profile"**, **"Device label"**, **"Customer name"**, and **"Device group name"** fields are not mandatory, and you can also use the **$-pattern** to fill them dynamically.
-  - In the **Attributes** and **Telemetry** sections specify the keys that should be interpreted as attributes and telemetry, respectively.
-  - In the **Update only keys list** section, define keys whose values will be saved to the database only if they have changed from the previous incoming message. This applies to both Attributes and Telemetry, helping optimize data storage.
-- Click the **"Next"** button.
+* **Advanced decoding parameters** 区块：
+  - **"Device profile"**、**"Device label"**、**"Customer name"** 和 **"Device group name"** 字段非必填，也可使用 **$-pattern** 动态填充。
+  - 在 **Attributes** 和 **Telemetry** 部分指定应解释为属性或遥测的 keys。
+  - 在 **Update only keys list** 部分，定义仅在值相对上一条消息发生变化时才保存到数据库的 keys。适用于 Attributes 和 Telemetry，有助于优化数据存储。
+- 点击 **"Next"** 按钮。
 
 {% include images-gallery.html imageCollection="uplink-data-converter-advanced-parameters" %}
 
-#### Downlink data converter (optional)
+#### Downlink 数据 converter（可选）
 
-Configuring a **Downlink data converter** is optional and can be omitted if not required.
-To proceed without configuring the downlink converter, select the **"Skip"** tab and click the **"Skip"** button.
+配置 **Downlink data converter** 为可选，若不需要可省略。
+要跳过 downlink converter 配置，选择 **"Skip"** 选项卡并点击 **"Skip"** 按钮。
 
 {% include images-gallery.html imageCollection="downlink-data-converter" %}
 
-#### Connection {#connection}
+#### 连接 {#connection}
 
-Before you proceed with the **Connection** configuration, create the **Application server API Token** at the **ChirpStack UI**.
-* Open the **ChirpStack UI** at **http://chipstack-server-ip:8080** (_e.g., http://10.7.2.193:8080/_) and login with your credentials.
-  * If the credentials are unmodified, use:
+在配置 **Connection** 之前，请在 **ChirpStack UI** 中创建 **Application server API Token**。
+* 在 **http://chipstack-server-ip:8080**（_例如 http://10.7.2.193:8080/_）打开 **ChirpStack UI** 并使用凭据登录。
+  * 若未修改凭据，可使用：
     <br>Username: **admin**
     <br>Password: **admin**
-* Go to the **Tennant > API Keys** section and click the **"Add API Key"** button.
-* Enter the **API key name** and click the **"Submit"** button.
-* Once the **API key name** is created, copy and paste it into the **"Application server API Token"** field in the **ThingsBoard UI**.
+* 进入 **Tennant > API Keys** 部分，点击 **"Add API Key"** 按钮。
+* 输入 **API key name** 并点击 **"Submit"** 按钮。
+* 创建 **API key name** 后，复制并粘贴到 **ThingsBoard UI** 的 **"Application server API Token"** 字段。
 
 {% include images-gallery.html imageCollection="chirpstack-api-key" %}
 
-On the **ThingsBoard UI**, continue with the **Connection** configuration. Fill in the following fields:
-* **Base URL:** Enter the URL in the format: **http://edge-ip:edge-port** (_e.g., http://10.7.2.193:8080_).
-* **HTTP endpoint URL:** Copy to use it while configuring the [ChirpStack application](#integration-on-chirpstack).
-* **Application server URL:** Enter the address of the application server or the REST API service in the format: **http://chipstack-server-ip:8090** (_e.g., http://10.7.2.193:8090_).
-* **Application server API Token:** Paste the **API Token** obtained from the **ChirpStack UI**.
-* Click the **"Add"** button.
+在 **ThingsBoard UI** 中继续 **Connection** 配置。填写以下字段：
+* **Base URL：** 按格式输入：**http://edge-ip:edge-port**（_例如 http://10.7.2.193:8080_）。
+* **HTTP endpoint URL：** 复制以备配置 [ChirpStack application](#integration-on-chirpstack) 时使用。
+* **Application server URL：** 输入 application server 或 REST API 服务的地址，格式：**http://chipstack-server-ip:8090**（_例如 http://10.7.2.193:8090_）。
+* **Application server API Token：** 粘贴从 **ChirpStack UI** 获取的 **API Token**。
+* 点击 **"Add"** 按钮。
 
 {% include images-gallery.html imageCollection="connection" %}
 
-### Configure the integration on the ChirpStack application {#integration-on-chirpstack}
+### 在 ChirpStack 应用中配置集成 {#integration-on-chirpstack}
 
-To forward device data from **ChirpStack** to **ThingsBoard**, the **ChirpStack Application Integration** should be configured as well.
-Log in to the **ChirpStack UI** at **http://chipstack-server-ip:8080** to proceed.
+要将设备数据从 **ChirpStack** 转发到 **ThingsBoard**，还需配置 **ChirpStack Application Integration**。
+在 **http://chipstack-server-ip:8080** 登录 **ChirpStack UI** 继续。
 
-#### Add a device profile
+#### 添加 device profile
 
-Create a device profile before, before configuring the **ChirpStack Application**. Fill in the mandatory fields:
-* Go to the **Tenant > Device Profiles** section and click the **"Add device profile"** button.
-* On the **"General"** tab, fill in the following fields:
-  * **Name:** Enter the device profile name.
-  * **Region:** Enter the LoRaWAN regional parameters.
-  * **MAC Version:** The LoRaWAN MAC version the device uses.
-  * **Regional parameters revision:** Parameter set version for your region.
-  * **ADR Algorithm:** Adaptive Data Rate logic.
-  * **Expect uplink interval (secs):** Enter the number of seconds ChirpStack expects the device to send an uplink message.
-* Click the **"Submit"** button.
+在配置 **ChirpStack Application** 之前先创建 device profile。填写必填项：
+* 进入 **Tenant > Device Profiles** 部分，点击 **"Add device profile"** 按钮。
+* 在 **"General"** 选项卡中填写以下字段：
+  * **Name：** 输入 device profile 名称。
+  * **Region：** 输入 LoRaWAN 区域参数。
+  * **MAC Version：** 设备使用的 LoRaWAN MAC 版本。
+  * **Regional parameters revision：** 您所在区域的参数集版本。
+  * **ADR Algorithm：** 自适应数据速率逻辑。
+  * **Expect uplink interval (secs)：** 输入 ChirpStack 预期设备发送 uplink 消息的秒数。
+* 点击 **"Submit"** 按钮。
 
 {% include images-gallery.html imageCollection="chirpstack-device-profile" %}
 
-#### Add integration
+#### 添加 integration
 
-To configure an integration in the **ChirpStack** application:
-* Go to the **Tenant > Applications** section and click the **"Add application"** button.
-* Enter the **application name** and click the **"Submit"** button.
-* Select the **"Integrations"** tab.
-* Find the **HTTP integration** in the list and click the **"+"** button to add it to the application.
-* Paste the **HTTP endpoint URL** obtained at the [Connection](#connection) configuration step in the **ThingsBoard UI**.
-* Click the **"Submit"** button.
+在 **ChirpStack** 应用中配置 integration：
+* 进入 **Tenant > Applications** 部分，点击 **"Add application"** 按钮。
+* 输入 **application name** 并点击 **"Submit"** 按钮。
+* 选择 **"Integrations"** 选项卡。
+* 在列表中找到 **HTTP integration**，点击 **"+"** 按钮将其添加到 application。
+* 将 **ThingsBoard UI** [Connection](#connection) 配置步骤中获取的 **HTTP endpoint URL** 粘贴到对应字段。
+* 点击 **"Submit"** 按钮。
 
 {% include images-gallery.html imageCollection="chirpstack-applications" %}
 
-#### Add the device
+#### 添加设备
 
-Once the integration is added, add the device:
-* Select the **"Devices"** tab and click the **"Add device"** button.
-* On the **"Device"** tab, enter the device **name**.
-* **Device EUI (EUI64):** Enter the unique 64-bit (8-byte) identifier assigned to a LoRaWAN device.
-  * Select the byte order in which a DevEUI is represented or transmitted (_MSB or LSB_).
-* **Device profile:** Select the device profile from the drop-down menu.
-* Click the **"Submit"** button.
+添加 integration 后添加设备：
+* 选择 **"Devices"** 选项卡，点击 **"Add device"** 按钮。
+* 在 **"Device"** 选项卡中输入设备 **name**。
+* **Device EUI (EUI64)：** 输入分配给 LoRaWAN 设备的唯一 64 位（8 字节）标识符。
+  * 选择 DevEUI 表示或传输的字节序（_MSB 或 LSB_）。
+* **Device profile：** 从下拉菜单选择 device profile。
+* 点击 **"Submit"** 按钮。
 
 {% include images-gallery.html imageCollection="chirpstack-device" %}
 
-#### Add the gateway (optional)
+#### 添加 gateway（可选）
 
-In a testing environment, adding gateway can be omitted.
-However, the device itself will send data through the gateway. To add the gateway:
-* Go to the **Tenant > Gateways** section and click the **"Add gateways"** button.
-* Enter the **gateway name**, **gateway ID** and the **number of seconds** at which gateway is expected to send its statistics.
+在测试环境中可省略添加 gateway。
+但设备本身会通过 gateway 发送数据。添加 gateway：
+* 进入 **Tenant > Gateways** 部分，点击 **"Add gateways"** 按钮。
+* 输入 **gateway name**、**gateway ID** 以及 gateway 预期发送统计信息的秒数。
 
 {% include images-gallery.html imageCollection="chirpstack-gateway" %}
 
-### Assign the integration to Edge 
+### 将 integration 分配到 Edge 
 
-Once the **integration template** is created and the **ChirpStack Application Integration** is configured, assign the **integration template** to the **Edge** instance:
-* Go to the **Edge management > Instances** section and click the **"Manage edge integrations"** button.
-* On the **"Integration"** page, click the **"Assign to edge"** button. In the **"Assign the Integration to the Edge"** pop-up window, select the integration from the drop-down menu and click the **"Assign"** button.
-* To confirm the **ChirpStack** integration on the **Edge**, login to your **ThingsBoard Edge** instance and go to the **Integrations center > Integrations** section. 
+创建 **integration 模板** 并完成 **ChirpStack Application Integration** 配置后，将 **integration 模板** 分配到 **Edge** 实例：
+* 进入 **Edge management > Instances** 部分，点击 **"Manage edge integrations"** 按钮。
+* 在 **"Integration"** 页面点击 **"Assign to edge"** 按钮。在 **"Assign the Integration to the Edge"** 弹窗中，从下拉菜单选择 integration 并点击 **"Assign"** 按钮。
+* 要确认 **ChirpStack** 集成在 **Edge** 上，请登录 **ThingsBoard Edge** 实例并进入 **Integrations center > Integrations** 部分。
 
 {% include images-gallery.html imageCollection="assign-to-edge" %}
 
-### Send an uplink message
+### 发送 uplink 消息
 
-To simulate uplinks, use [ChirpStack Device Simulator](https://github.com/brocaar/chirpstack-simulator){: target="_blank"} or manually send **HTTP message** to the **ChirpStack Application Server**.
+要模拟 uplink，可使用 [ChirpStack Device Simulator](https://github.com/brocaar/chirpstack-simulator){: target="_blank"} 或手动向 **ChirpStack Application Server** 发送 **HTTP 消息**。
 
-The example of the **HTTP message:**
+**HTTP 消息** 示例：
 
 ```bash
 curl -v -X POST -d '{
@@ -224,36 +224,36 @@ curl -v -X POST -d '{
 }'  $YOUR_HTTP_ENDPOINT_URL -H "Content-Type:application/json"
 ```
 {: .copy-code.expandable-7}
-Where:
-* **deduplicationId:** For testing purposes, you may generate any valid UUID v4. It's used for simulation realism only and helps debug integrations that rely on it.
-* **tenantId:** Replace the value with your ChirpStack tenant ID.
-* **applicationId:** Replace the value with the ChirpStack Application ID.
-* **applicationName:** Replace the value with the ChirpStack Application name.
-* **deviceProfileId:** Replace the value with the ChirpStack device profile ID.
-* **deviceProfileName:** Replace the value with the ChirpStack device profile name.
-* **devEui:** Replace the value with the Device EUI you add in the ChirpStack device.
-* **gatewayId:** Replace the value with the ChirpStack gateway ID.
-* **$YOUR_HTTP_ENDPOINT_URL:** Replace it with the actual value obtained from the ThingsBoard integration.
+其中：
+* **deduplicationId：** 测试用途可生成任意有效 UUID v4。仅用于模拟真实性和调试依赖它的集成。
+* **tenantId：** 替换为您的 ChirpStack 租户 ID。
+* **applicationId：** 替换为 ChirpStack Application ID。
+* **applicationName：** 替换为 ChirpStack Application 名称。
+* **deviceProfileId：** 替换为 ChirpStack device profile ID。
+* **deviceProfileName：** 替换为 ChirpStack device profile 名称。
+* **devEui：** 替换为在 ChirpStack 设备中添加的 Device EUI。
+* **gatewayId：** 替换为 ChirpStack gateway ID。
+* **$YOUR_HTTP_ENDPOINT_URL：** 替换为 ThingsBoard 集成中获取的实际值。
 
-In production environments, devices **automatically** send uplink messages at regular intervals or in response to events, without manual intervention.
+在生产环境中，设备会**自动**定期发送 uplink 消息或在事件触发时发送，无需人工干预。
 
-After the message is sent, a new device will be created in the **ThingsBoard Edge** user interface. 
-* To view the received time-series data, go to the **Entities > Devices** section, click the **device** and select the **"Latest telemetry"** tab.
+发送消息后，**ThingsBoard Edge** 用户界面将创建新设备。
+* 查看接收的时序数据：进入 **Entities > Devices** 部分，点击 **device** 并选择 **"Latest telemetry"** 选项卡。
 
 {% include images-gallery.html imageCollection="device" %}
 
-To view the received uplink message:
-* Go to the **Integrations center > Integrations** section, click the **ChirpStack integration** and select the **"Events"** tab.
+查看接收的 uplink 消息：
+* 进入 **Integrations center > Integrations** 部分，点击 **ChirpStack integration** 并选择 **"Events"** 选项卡。
 
 {% include images-gallery.html imageCollection="uplink-integration" %}
 
-The received data can be viewed in the **Uplink converter**:
-- Go to the **Integrations center > Data converters** section and click the **Uplink converter**.
-- On the **"Data converter details"** page, select the **"Events"** tab.
-- View the message details in the **"In"** and **"Out"** columns.
+接收的数据可在 **Uplink converter** 中查看：
+- 进入 **Integrations center > Data converters** 部分，点击 **Uplink converter**。
+- 在 **"Data converter details"** 页面选择 **"Events"** 选项卡。
+- 在 **"In"** 和 **"Out"** 列查看消息详情。
 
 {% include images-gallery.html imageCollection="uplink-converter" %}
 
-### Next steps
+### 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

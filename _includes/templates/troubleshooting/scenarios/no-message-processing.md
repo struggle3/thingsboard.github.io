@@ -1,15 +1,15 @@
-If you are using <code>RETRY_ALL, RETRY_FAILED, RETRY_TIMED_OUT</code> or <code>RETRY_FAILED_AND_TIMED_OUT</code> strategy for some rule-engine queue, it is possible that some failed node could block the whole processing of the messages in this queue.
+若某规则引擎队列使用 <code>RETRY_ALL、RETRY_FAILED、RETRY_TIMED_OUT</code> 或 <code>RETRY_FAILED_AND_TIMED_OUT</code> 策略，某个失败节点可能阻塞该队列中所有消息的处理。
 
-Here what you can do to find the reason of the issue:
+可按以下步骤排查原因：
 
-- Analyze [Rule Engine Statistics Dashboard](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-statistics). Here you can find out if some of your messages failed or timed-out.
-Also in the bottom side of the dashboard you can find description of the exceptions inside the rule-engine with the name of the problematic rule-node.
+- 分析 [Rule Engine Statistics Dashboard](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-statistics)，查看是否有消息失败或超时。
+  仪表盘底部会显示规则引擎中的异常描述及问题规则节点名称。
 
-- After finding out what rule-node is failing you can [enable DEBUG](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#debugging) and see what messages cause the failure of the rule-node and look at the detailed error description.
+- 确定失败规则节点后，可[启用 DEBUG](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#debugging)，查看导致该节点失败的消息及详细错误描述。
 
-**Tip:** Separate unstable and test use-cases from other rule-engine by creating a separate queue. In this case failure will only affect the processing of this separate queue, and not the whole system.
-You can configure this logic to happen automatically for the device by using [Device Profile](/docs/{{docsPrefix}}user-guide/device-profiles/#queue-name) feature. 
+**提示：** 可为不稳定或测试用例创建独立队列，与其它规则引擎分开。这样失败只会影响该独立队列，不会影响整个系统。
+可通过 [Device Profile](/docs/{{docsPrefix}}user-guide/device-profiles/#queue-name) 的 queue-name 功能，为设备自动配置该逻辑。
 
-**Tip:** Handle <b>Failure</b> events for all rule-nodes that connect to some external service (REST API call, Kafka, MQTT etc).
-This way you guaranty that your rule-engine processing won't stop in case of some failure on the side of external system.
-You can store failed message in DB, send some notification or just <b>log</b> message.
+**提示：** 对连接外部服务（REST API 调用、Kafka、MQTT 等）的规则节点，务必处理 <b>Failure</b> 事件。
+这样可在外部系统出现故障时，保证规则引擎处理不会中断。
+可将失败消息存入 DB、发送通知，或仅<b>记录</b>消息。

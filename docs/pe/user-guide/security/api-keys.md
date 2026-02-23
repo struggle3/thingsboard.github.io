@@ -2,26 +2,26 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: API keys
-description: Managing API keys
+title: API 密钥
+description: 管理 API 密钥
 redirect_from: "docs/pe/user-guide/ui/api-keys"
 
 creating-api-key-for-our-account:
     0:
         image: /images/user-guide/security/api-keys/creating-api-key-for-our-account-1-pe.png
-        title: 'In the top-right corner, click the <b>three-dot</b> menu and select <b>Account</b>.'
+        title: '点击右上角 <b>三点</b> 菜单，选择 <b>账户</b>。'
     1:
         image: /images/user-guide/security/api-keys/creating-api-key-for-our-account-2-pe.png
-        title: 'Navigate to the <b>Security</b> tab. In the <b>API keys</b> section, click the <b>Manage</b> button.'
+        title: '进入 <b>安全</b> 选项卡。在 <b>API 密钥</b> 部分点击 <b>管理</b> 按钮。'
     2:
         image: /images/user-guide/security/api-keys/creating-api-key-for-our-account-3-pe.png
-        title: 'Click the <b>+ Generate</b> button.'
+        title: '点击 <b>+ 生成</b> 按钮。'
     3:
         image: /images/user-guide/security/api-keys/creating-api-key-for-our-account-4-pe.png
-        title: 'Enter a <b>description</b> for the API key, select the expiration period, and click <b>Generate</b>.'
+        title: '输入 API 密钥的 <b>描述</b>，选择过期时间，点击 <b>生成</b>。'
     4:
         image: /images/user-guide/security/api-keys/creating-api-key-for-our-account-5-pe.png
-        title: '<b>Copy and save</b> the generated API key — it will not be displayed again.'
+        title: '<b>复制并保存</b> 生成的 API 密钥 — 将不会再次显示。'
     5:
         image: /images/user-guide/security/api-keys/creating-api-key-for-our-account-6-pe.png
         title: ''
@@ -29,13 +29,13 @@ creating-api-key-for-our-account:
 creating-api-key-for-another-user:
     0:
         image: /images/user-guide/security/api-keys/creating-api-key-for-another-user-1-pe.png
-        title: 'Navigate to the <b>Customers</b>/<b>Users</b> section.<br>Click on the desired user to open their <b>details</b>.<br>Navigate to the <b>API keys</b> tab and click the <b>+ Generate</b> button.'
+        title: '进入 <b>客户</b>/<b>用户</b> 部分。<br>点击目标用户打开其 <b>详情</b>。<br>进入 <b>API 密钥</b> 选项卡并点击 <b>+ 生成</b> 按钮。'
     1:
         image: /images/user-guide/security/api-keys/creating-api-key-for-another-user-2-pe.png
-        title: 'Enter a <b>description</b> for the API key, select the expiration period, and click <b>Generate</b>.'
+        title: '输入 API 密钥的 <b>描述</b>，选择过期时间，点击 <b>生成</b>。'
     2:
         image: /images/user-guide/security/api-keys/creating-api-key-for-another-user-3-pe.png
-        title: '<b>Copy and save</b> the generated API key — it will not be displayed again.'
+        title: '<b>复制并保存</b> 生成的 API 密钥 — 将不会再次显示。'
     3:
         image: /images/user-guide/security/api-keys/creating-api-key-for-another-user-4-pe.png
         title: ''
@@ -43,20 +43,20 @@ creating-api-key-for-another-user:
 authentication-in-swagger-ui:
     0:
         image: /images/user-guide/security/api-keys/authentication-in-swagger-ui-1.png
-        title: 'You can manually authenticate or authorize as another user by clicking the <b>Authorize</b> button on the right side of the Swagger page.'
+        title: '可在 Swagger 页面右侧点击 <b>Authorize</b> 按钮，以其他用户身份进行认证或授权。'
     1:
         image: /images/user-guide/security/api-keys/swagger-ui-2.png
-        title: 'Paste your API key In the API key form (apiKey) section.<br>Then, click "Authorize".'
+        title: '在 API 密钥表单（apiKey）部分粘贴您的 API 密钥。<br>然后点击「Authorize」。'
 
 managing-api-keys-1:
     0:
         image: /images/user-guide/security/api-keys/managing-api-keys-1-pe.png
-        title: 'In the API keys table, each key displays its creation time, description, status, and expiration date.'
+        title: '在 API 密钥表中，每个密钥显示其创建时间、描述、状态和过期日期。'
 
 managing-api-keys-2:
     0:
         image: /images/user-guide/security/api-keys/managing-api-keys-2-pe.png
-        title: 'For each API key, the following actions are available: enable or disable the key, delete the key, or edit its description.'
+        title: '对每个 API 密钥可执行：启用或禁用、删除、编辑描述。'
 
 ---
 

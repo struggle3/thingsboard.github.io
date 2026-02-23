@@ -1,10 +1,10 @@
 {% capture pem_files_location %}
-**Make sure the certificate files are reachable by ThingsBoard process:**
+**确保证书文件可被 ThingsBoard 进程访问：**
 
-* Linux: use */etc/thingsboard/conf* folder. Make sure the files have same permissions as *thingsboard.conf*; Use relative file path, e.g. *server.pem*;
-* Docker Compose: mount or use existing volume to */config* folder of the container; Use full file path, e.g. */config/server.pem*;
-* K8S: mount separate volume to */https-config* or similar folder. Use full file path, e.g. */https-config/server.pem*;
-* Windows: use *C:\Program Files (x86)\thingsboard\conf\\* folder. Make sure the files have same permissions as *thingsboard.conf*; Use relative file path, e.g. *server.pem*;
+* Linux：使用 */etc/thingsboard/conf* 目录。确保文件权限与 *thingsboard.conf* 一致；使用相对路径，如 *server.pem*；
+* Docker Compose：将卷挂载或使用现有卷至容器的 */config* 目录；使用完整路径，如 */config/server.pem*；
+* K8S：将独立卷挂载至 */https-config* 或类似目录；使用完整路径，如 */https-config/server.pem*；
+* Windows：使用 *C:\Program Files (x86)\thingsboard\conf\\* 目录。确保文件权限与 *thingsboard.conf* 一致；使用相对路径，如 *server.pem*；
 
 {% endcapture %}
 {% include templates/warn-banner.md content=pem_files_location %}

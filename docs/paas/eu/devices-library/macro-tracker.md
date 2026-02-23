@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect Macro Tracker to ThingsBoard?"
+title: "如何将Macro Tracker连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/macro-tracker/"
 ---

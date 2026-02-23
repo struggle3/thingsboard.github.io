@@ -289,7 +289,7 @@ smart-city:
       companyImageHeight: 42
       text:
         0: 'iiOOTE is an independent systems integrator with deep knowledge and broad international network in the IoT LPWAN ecosystem.'
-        1: 'During our evaluation of several different IoT platforms we decided using ThingsBoard Community Edition to quickly get started with testing of our concept solutions. Since it offers an easy way to get access to data from all our sensors and supports building dashboards for visualization.'
+        1: 'During our evaluation of several different IoT platforms we decided using ThingsBoard社区版to quickly get started with testing of our concept solutions. Since it offers an easy way to get access to data from all our sensors and supports building dashboards for visualization.'
         2: 'However, we soon discovered that ThingsBoard also fulfilled our need to build commercial services. With increasing number of sensors, customers and requirements we have migrated to ThingsBoard Professional Edition with a lot more functionality for larger deployments and multiple customers. And we will add additional servers as our customers grow.'
     - author: Dr. Michael Schwerter
       position: Head of Product

@@ -1,4 +1,4 @@
-Send POST request to the following URL:
+向以下 URL 发送 POST 请求：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 ```shell
@@ -16,17 +16,17 @@ coap://{{coapHostName}}/api/v1/$ACCESS_TOKEN/rpc
 
 {% endif %}
 
-> Where {% unless docsPrefix contains "paas/" %}   
-&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> is your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> is your device&#39;s access token.
+> 其中 {% unless docsPrefix contains "paas/" %}   
+&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 为你的 ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} 主机名或 IP 地址。   
+&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> 为设备的 access token。
 
-Both request and response body should be valid JSON documents. The content of the documents is specific to the rule node that will handle your request.
+请求体和响应体均需为有效 JSON 文档，文档内容取决于处理请求的规则节点。
 
 <br>
-**Example**
+**示例**
 
-- In the {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}**Edge** {% endif %}**Root Rule Chain** add two nodes: [transformation script](/docs/user-guide/rule-engine-2-0/nodes/transformation/script){:target="_blank"} and [rpc call reply](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply){:target="_blank"}. Connect them to "[Log RPC from Device](/docs/user-guide/rule-engine-2-0/nodes/action/log){:target="_blank"}" action node with "**Success**" link.
-- In the **script** node enter the function:
+- 在 {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}**Edge** {% endif %}**根规则链**中添加两个节点：[transformation script](/docs/user-guide/rule-engine-2-0/nodes/transformation/script){:target="_blank"} 和 [rpc call reply](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply){:target="_blank"}，并用「**Success**」连线将它们连接到「[Log RPC from Device](/docs/user-guide/rule-engine-2-0/nodes/action/log){:target="_blank"}」操作节点。
+- 在 **script** 节点中输入函数：
 
 ```shell
 return {msg: {time: new Date()}, metadata: metadata, msgType: msgType};
@@ -52,11 +52,11 @@ cat rpc-client-request.json | coap post coap://{{coapHostName}}/api/v1/$ACCESS_T
 {: .copy-code}
 {% endif %}
 
-> ⚠️ Replace {% unless docsPrefix contains "paas/" %}   
-&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请将 {% unless docsPrefix contains "paas/" %}   
+&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 替换为你的 ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} 主机名或 IP 地址。   
+&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> 替换为设备的 access token。
 
-- You should receive a response from the server:
+- 将收到服务器响应：
 
 ```shell
 {"time":"Thursday, February 5, 2026, 9:08:22 AM Coordinated Universal Time"}

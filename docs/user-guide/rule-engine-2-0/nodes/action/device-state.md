@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: device state
-description: Sends device connectivity events for the message originator.
+description: 发送消息 originator 的 device 连接事件。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -1,6 +1,6 @@
-bigheader: "Getting Started"
-abstract: "Getting Started with ThingsBoard IoT Platform."
+bigheader: "快速入门"
+abstract: "ThingsBoard IoT平台快速入门。"
 hidetoc: "true"
 toc:
-- title: Getting Started
+- title: 快速入门
   path: /docs/getting-started-guides/helloworld/

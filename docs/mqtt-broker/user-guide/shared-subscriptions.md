@@ -1,12 +1,12 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Shared Subscriptions
-description: TBMQ Shared Subscriptions feature overview
+title: 共享订阅
+description: TBMQ 共享订阅功能概览
 
 shared-subscription-group:
   0:
     image: /images/mqtt-broker/user-guide/shared-sub-group.png
-    title: 'Shared Subscription group'
+    title: '共享订阅组'
 
 shared-subscription-groups:
   0:

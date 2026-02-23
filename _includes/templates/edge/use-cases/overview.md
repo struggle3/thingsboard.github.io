@@ -1,29 +1,29 @@
 * TOC
 {:toc}
 
-**ThingsBoard Edge** offers the flexibility to address the variety of challenges faced in IoT deployments, from connectivity and latency concerns to security and regulatory compliance.
-The choice of deploying **ThingsBoard Edge** depends on the specific business needs and constraints.
+**ThingsBoard Edge** 能灵活应对 IoT 部署中的多种挑战，包括连接性、延迟、安全性和法规遵从等。
+是否部署 **ThingsBoard Edge** 取决于具体业务需求和约束。
 
-## Deployment Scenarios
+## 部署场景
 
-* **Limited Connectivity and Resilience:** In remote areas with intermittent connectivity, edge deployments can continue to operate even if the central server is down or unreachable. This ensures that critical applications and machines continue to operate. Synchronize with the main ThingsBoard server when connectivity is restored.
+* **有限连接与弹性**：在连接不稳的偏远地区，即使中央服务器宕机或无法访问，边缘部署仍可持续运行。这确保关键应用和设备持续工作，并在恢复连接后与主 ThingsBoard 服务器同步。
 
-* **Data Volume and Cost Savings:** In scenarios where devices generate massive amounts of data, Edge can aggregate and pre-process data locally and then, send only necessary or processed data to the main server, saving bandwidth and storage. Thereby, businesses can reduce the amount of data sent to the cloud, leading to potential cost savings in terms of data storage and transfer.
+* **数据量与成本节约**：当设备产生海量数据时，Edge 可在本地聚合和预处理数据，仅将必要或已处理的数据发送至主服务器，从而节省带宽和存储，减少上传云端的数据量，降低数据存储与传输成本。
 
-* **Low Latency Operations:** For operations that require real-time reactions, Edge can process data and act on it immediately, without waiting for a response from the central server. Response time can be critical in industries such as manufacturing or real-time monitoring.
+* **低延迟操作**：对需实时响应的场景，Edge 可立即处理数据并执行操作，无需等待中央服务器响应。在制造业或实时监控等行业，响应时间至关重要。
 
-* **Regulatory Compliance and Security:** Some regions may have regulations that prevent certain data from being sent outside a specific geographic boundary. Edge can process and store the data locally, ensuring that sensitive or regulated data doesn't leave the premises. In addition to that, sensitive information can be kept within a local network, reducing exposure to potential external threats.
+* **法规遵从与安全**：部分地区法规可能禁止某些数据离开特定地理边界。Edge 可在本地处理并存储数据，确保敏感或受管制数据不出园区。此外，可将敏感信息保留在本地网络，减少外泄风险。
 
-* **Firmware Updates:** Edge can facilitate firmware updates for IoT devices. In environments with numerous devices, managing updates can be challenging. Edge deployment can help streamline this process.
+* **固件更新**：Edge 可促进 IoT 设备的固件更新。在设备众多的环境中，集中管理更新较困难，Edge 部署有助于简化该流程。
 
-* **Integration with Local Systems:** In some scenarios, IoT data might need to be integrated with local databases or systems. ThingsBoard Edge can serve as an integration point, communicating with both IoT devices and local systems.
+* **与本地系统集成**：部分场景下，IoT 数据需与本地数据库或系统集成。ThingsBoard Edge 可作为集成点，同时与 IoT 设备和本地系统通信。
 
-* **Distributed Architecture:** For organizations with multiple locations or branches, deploying ThingsBoard Edge at each location ensures local processing and management while maintaining a connection to the central server for consolidated data views and management.
+* **分布式架构**：对多地点或分支组织的部署，在各处部署 ThingsBoard Edge 可实现本地处理和管理，同时保持与中央服务器的连接，实现统一数据视图和管理。
 
-## Edge Use Cases
+## Edge 使用场景
 
-The following guides can help you learn about the **use cases of ThingsBoard Edge functionality**:
+以下指南可帮助您了解 **ThingsBoard Edge 功能的使用场景**：
 
-* [**Manage alarms and RPC requests on edge devices**](/docs/{{docsPrefix}}use-cases/manage-alarms-rpc-requests/){: target="_blank"}: Learn how to manage local work environments, even without an Internet connection to the Cloud.
+* [**在边缘设备上管理告警和 RPC 请求**](/docs/{{docsPrefix}}use-cases/manage-alarms-rpc-requests/){: target="_blank"}：学习如何在无云端互联网连接的情况下管理本地工作环境。
 
-* [**Data filtering and traffic reduction**](/docs/{{docsPrefix}}use-cases/data-filtering-traffic-reduce/){: target="_blank"}: Learn how to reduce the amount of data sent from edge devices to the Cloud and save traffic costs.
+* [**数据过滤与流量削减**](/docs/{{docsPrefix}}use-cases/data-filtering-traffic-reduce/){: target="_blank"}：学习如何减少边缘设备向云端发送的数据量，节约流量成本。

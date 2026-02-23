@@ -2,84 +2,77 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Business Entities
-description: Business Entities 
+title: 业务实体
+description: 业务实体
 ---
 
-This guide describes how Trendz uses entities from ThingsBoard, like asset, device, relation, etc.
+本指南介绍 Trendz 如何使用 ThingsBoard 中的实体，如资产、设备、关系等。
 
 * TOC
 {:toc}
 
-## Business Entities Topology
-Let's assume that we have a Smart Building solution. Our topology contains Buildings, Apartments and different Meters that are connected with each other using relations.
-Here is how our topology will look like:
+## 业务实体拓扑
+
+假设我们有一个智能楼宇解决方案。我们的拓扑包含建筑物、公寓和不同的表计，它们通过关系相互连接。拓扑结构如下：
 
 ![image](/images/reference/pe-demo/smart-metering-model.svg)
 
+实际上，Trendz 将此拓扑作为扁平表处理，表中包含此拓扑内所有设备/资产的属性和遥测的列。实体之间的关系用于连接来自不同业务实体的字段。
 
-In fact, Trendz operates with this topology as with the flat table that has columns for all attributes/telemetry from all Devices/Assets in this topology.
-The Relation between entities used to join fields from different Business Entities.
+## 工作原理
 
-## How it works
+下面通过以下报告检查 Trendz 如何从 ThingsBoard 解析数据：我们仅使用智能楼宇拓扑中的 2 个字段：
 
-Now let's check how Trendz resolves data from ThingsBoard using following report: we are using only 2 fields from Smart Building topology: 
+- 属于 Building 资产的 `building name`
+- 属于 Energy Meter 设备的 `energy` 遥测
+- 聚合类型 `SUM`
+- 时间范围 - 上月
 
-- `building name` that belongs to the Building Asset
-- `energy` telemetry, that belongs to the Energy Meter Device
-- aggregation type `SUM`
-- time range - last month
+* Trendz 将在 ThingsBoard 中找到所有可用建筑物。
+* 然后找到每个建筑物的所有公寓。
+* 最后找到属于公寓的所有 Energy Meter。
+* 之后，对于每个建筑物的所有 Energy Meter，Trendz 将加载上月所有 energy 遥测
+* Trendz 使用 `SUM` 聚合加载的所有遥测。
+* 最终可以查看每个建筑物的能耗。
 
+以上并非精确的算法描述，后台有大量优化。但这有助于理解 Trendz 内部处理的复杂性，让您专注于分析而非数据获取。
 
-* Trendz will find all available buildings in the ThingsBoard. 
-* Then all Apartments for each Building.
-* Finally, all Energy Meters that belong to the apartment.
-* After that, for all Energy Meters for each building, Trendz will load all energy telemetry for the last month 
-* Trendz aggregates all loaded telemetry using `SUM` aggregation. 
-* As a result we can see how much energy was consumed by each building.
+## 管理业务实体之间的关系
 
-It is not an exact algorithm description and there are a lot of optimizations performed in the background. But it allows to understand how much complexity handled inside Trendz, so you can focus on analytics but not on data fetching.
+ThingsBoard 允许用户在设备和资产之间创建多种关系且无限制。然而在 Trendz Analytics 中，关系基于底层 ThingsBoard 关系在业务实体（设备/资产配置）之间建立。这种方法对 Trendz 中关系的处理引入了一些限制，特别是关于设备/资产配置之间允许的关系数量。
 
-## Managing Relations Between Business Entities
+在 Trendz Analytics 中，存在一个关键约束：**设备/资产配置之间仅允许一种关系类型**。此限制对于确保稳定的项加载顺序是必要的。当同一设备/资产配置之间存在多种关系时，Trendz 无法确定使用哪种关系，导致影响数据检索的未定义行为。
 
-ThingsBoard allows users to create multiple relationships between devices and assets without limitations. In Trendz Analytics, however, relationships are established between business entities (device/asset profiles) based on the underlying ThingsBoard relations. 
-This approach introduces some constraints on how relations are handled within Trendz, specifically regarding the number of allowable relations between device/asset profiles.
+**示例场景：**
 
-In Trendz Analytics, a key constraint exists: **only one relation type is permitted between device/asset profiles**. This limitation is necessary to ensure a stable sequence of item loading. 
-When there are multiple relations between the same device/asset profiles, Trendz is unable to determine which relation to use, leading to an undefined behavior that impacts data retrieval.
+考虑以下配置和关系的示例：
 
-**Example Scenario:**
-
-Let's consider an example with the following profiles and relations:
-
-* **Profiles:**
+* **配置：**
   * `Building`
   * `Apartment`
   * `EnergyMeter`
-* **Relations:**
+* **关系：**
   * `contains (Building → Apartment)`
   * `contains (Apartment → EnergyMeter)`
   * `connected (Apartment → EnergyMeter)`
 
-In this scenario, if a query is made to retrieve all `EnergyMeters` associated with a particular `Building`, Trendz would face uncertainty in determining which `EnergyMeters` to include in the result set—those connected directly to the `Building` or those that the `Building` contains through the intermediary `Apartment`. 
-This uncertainty arises because of the multiple relationships between `Apartment` and `EnergyMeter`.
+在此场景中，若查询要获取与特定 `Building` 关联的所有 `EnergyMeter`，Trendz 将面临不确定性——是包含直接连接至 `Building` 的 `EnergyMeter`，还是包含 `Building` 通过中间 `Apartment` 所包含的 `EnergyMeter`。这种不确定性源于 `Apartment` 与 `EnergyMeter` 之间的多种关系。
 
-**Solution:**
+**解决方案：**
 
-To resolve this issue and ensure correct query results, users must review and configure the relationships of their business entities using the **Enabled** checkbox feature on the Business Entity page. 
-Follow the steps below:
+要解决此问题并确保正确的查询结果，用户必须使用业务实体页面上的 **Enabled** 复选框功能审视和配置业务实体的关系。请按以下步骤操作：
 
-1. **Navigate to the Business Entity Page:** Click on the button located in the bottom-left corner of the page to access the Business Entity configuration.
-2. **Select the Relevant Business Entity:** Choose the business entity for which you want to modify the relations (e.g., `EnergyMeters` and `Apartment`).
-3. **Open the Relations Tab:** Once inside the selected business entity, go to the `Relations` tab to view all associated relationships.
-4. **Disable Unwanted Relations:** For each unwanted relation, uncheck the **Enabled** checkbox to deactivate it.
-5. **Save Changes:** Click the **Save** button to apply your changes.
+1. **导航至业务实体页面：** 点击页面左下角的按钮访问业务实体配置。
+2. **选择相关业务实体：** 选择要修改关系的业务实体（如 `EnergyMeters` 和 `Apartment`）。
+3. **打开关系选项卡：** 进入所选业务实体后，进入 `Relations` 选项卡查看所有关联关系。
+4. **禁用不需要的关系：** 对于每个不需要的关系，取消勾选 **Enabled** 复选框以停用。
+5. **保存更改：** 点击 **Save** 按钮应用更改。
 
 ![image](/images/trendz/be-enable-relation.png)
 
-This process ensures that only the necessary relations are active, preventing conflicts and enabling accurate report generation.
+此过程确保仅必要的关系处于活动状态，避免冲突并支持准确生成报告。
 
-By following these steps, you can eliminate uncertainty and stabilize data queries in Trendz Analytics, making use of the “Enabled” checkbox feature to manage relationships effectively.
+按照以上步骤，您可以消除不确定性并稳定 Trendz Analytics 中的数据查询，有效利用“Enabled”复选框功能管理关系。
 
 ## Next Steps
 

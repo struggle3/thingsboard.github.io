@@ -2,17 +2,17 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: CoAP Device API Reference 
-description: Supported CoAP API Reference for IoT Devices
+title: CoAP 设备 API 参考
+description: IoT 设备支持的 CoAP API 参考
 redirect_from: "/docs/paas/eu/reference/coap-api"
 
 server-side-rpc:
     0:
         image: /images/reference/device-connectivity-apis/server-side-rpc-coap-1-paas.png 
-        title: 'Use RPC debug terminal widget in your ThingsBoard instance'
+        title: '在 ThingsBoard 实例中使用 RPC 调试终端部件'
     1:
         image: /images/reference/device-connectivity-apis/server-side-rpc-coap-2-paas-eu.png
-        title: 'Subscribe to RPC commands from the server. To do this, in the first terminal window send GET request with observe flag'
+        title: '订阅服务端 RPC 命令。在第一个终端窗口发送带 observe 标志的 GET 请求'
     2:
         image: /images/reference/device-connectivity-apis/server-side-rpc-coap-3-paas.png
         title: 'Send an RPC request "connect" to the device using RPC debug terminal widget'

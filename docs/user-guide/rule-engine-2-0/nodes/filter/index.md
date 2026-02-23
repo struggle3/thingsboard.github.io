@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Filter nodes
-description: Rule engine filter nodes
+title: Filter 节点
+description: 规则引擎 filter 节点
 hidetoc: "true"
 breadcrumbs: "true"
 breadcrumbs_steps: "1"

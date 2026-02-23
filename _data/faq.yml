@@ -1,6 +1,6 @@
-bigheader: "Frequently Asked Questions"
-abstract: "frequently asked questions"
+bigheader: "常见问题"
+abstract: "常见问题解答"
 hidetoc: "true"
 toc:
-- title: FAQ
+- title: 常见问题
   path: /docs/faq/

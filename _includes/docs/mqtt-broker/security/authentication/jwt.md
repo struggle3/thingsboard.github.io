@@ -36,12 +36,11 @@ This behavior may become configurable in a future release.
 {% endcapture %}
 {% include templates/info-banner.md content=future-release-tip %}
 
-## Configure provider
+## 配置提供者
 
-JWT authentication for MQTT clients is configured through the TBMQ user interface. 
-This section explains how to configure signature verification, define optional authentication claim checks, 
-set up dynamic client type classification, and manage authorization rules. Once the configuration is complete, 
-you can enable the provider to start authenticating clients using JWT tokens.
+MQTT 客户端的 JWT 认证通过 TBMQ 用户界面配置。
+本节说明如何配置签名验证、定义可选认证声明校验、设置动态客户端类型分类以及管理授权规则。配置完成后，
+可启用提供者以开始使用 JWT 令牌认证客户端。
 
 {% include images-gallery.html imageCollection="configure-jwt-auth-provider" %}
 

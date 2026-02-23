@@ -1,30 +1,30 @@
-| **Parameter**          | **Default value**                    | **Description**                                                                                                                                                       |
+| **参数**          | **默认值**                    | **说明**                                                                                                                                                       |
 |:-----------------------|:-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| url                    | **localhost:4840/freeopcua/server/** | Hostname or ip address of OPC-UA server.                                                                                                                              |
-| timeoutInMillis        | **5000**                             | Timeout in seconds for connecting to OPC-UA server.                                                                                                                   |
-| scanPeriodInMillis     | **3600000**                          | Period in milliseconds to rescan the server.                                                                                                                          |
-| pollPeriodInMillis     | **5000**                             | Period in milliseconds to poll the server.                                                                                                                            |
-| enableSubscriptions    | **false**                            | If true - the gateway will subscribe to interesting nodes and wait for data update and if false - the gateway will rescan OPC-UA server every **scanPeriodInMillis**. |
-| subCheckPeriodInMillis | **100**                              | Period to check the subscriptions in the OPC-UA server.                                                                                                               |
-| showMap                | **true**                             | Show nodes on scanning **true** or **false**.                                                                                                                         |
-| security               | **Basic128Rsa15**                    | Security policy (**Basic128Rsa15**, **Basic256**, **Basic256Sha256**).                                                                                                |
+| url                    | **localhost:4840/freeopcua/server/** | OPC-UA 服务器的主机名或 IP 地址。                                                                                                                              |
+| timeoutInMillis        | **5000**                             | 连接 OPC-UA 服务器的超时时间（秒）。                                                                                                                   |
+| scanPeriodInMillis     | **3600000**                          | 重新扫描服务器的周期（毫秒）。                                                                                                                          |
+| pollPeriodInMillis     | **5000**                             | 轮询服务器的周期（毫秒）。                                                                                                                            |
+| enableSubscriptions    | **false**                            | 若为 true，网关将订阅相关节点并等待数据更新；若为 false，网关将每 **scanPeriodInMillis** 重新扫描 OPC-UA 服务器。 |
+| subCheckPeriodInMillis | **100**                              | 检查 OPC-UA 服务器中 subscription 的周期。                                                                                                               |
+| showMap                | **true**                             | 扫描时是否显示节点：**true** 或 **false**。                                                                                                                         |
+| security               | **Basic128Rsa15**                    | 安全策略（**Basic128Rsa15**、**Basic256**、**Basic256Sha256**）。                                                                                                |
 | ---                    |                                      |                                                                                                                                                                       |
 
 <br>
-**Let's look at an example.**
+**示例说明。**
 <br>
-This example uses the Prosys OPC-UA Simulation Server to demonstrate how to configure the OPC-UA connector.
+本例使用 Prosys OPC-UA Simulation Server 演示如何配置 OPC-UA connector。
 <br>
 
 {:refdef: style="text-align: left;"}
 ![image](/images/gateway/opc-ua-simulation-server-1.png)
 {: refdef}
 
-On the main **"Status"** tab, copy connection address (UA TCP).
+在"**Status**"主标签页中，复制连接地址（UA TCP）。
 
-To connect your OPC-UA server to ThingsBoard, open the OPC-UA Connector configuration file (opcua.json) and replace the "url" value with the copied connection address.
+要将 OPC-UA 服务器连接到 ThingsBoard，打开 OPC-UA Connector 配置文件（opcua.json），将 "url" 值替换为复制的连接地址。
 
-Our **server** section would look like this:
+**server** 部分如下所示：
 
 ```json
 "server": {

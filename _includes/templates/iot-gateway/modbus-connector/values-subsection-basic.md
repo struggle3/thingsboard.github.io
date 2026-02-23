@@ -1,25 +1,24 @@
 ![image](/images/gateway/modbus-connector/values-subsection-1-ce.png)
 
 {% capture difference %}
-All configuration parameters list, and their detailed description can be found in the 
-[Advanced configuration](/docs/iot-gateway/config/modbus/#device-rpc-methods) section.
+所有配置参数列表及详细说明请参见[高级配置](/docs/iot-gateway/config/modbus/#device-rpc-methods)部分。
 
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/modbus/#usage-examples-2) section.
+更多使用示例请参见[使用示例](/docs/iot-gateway/config/modbus/#usage-examples-2)部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To add new value to the gateway slave, use the following steps:
+要向网关 slave 添加新值，请按以下步骤操作：
 
 {% assign maxTemperatureAttribute = '
     ===
         image: /images/gateway/modbus-connector/add-new-value-to-gateway-slave-1-ce.png,
-        title: Click on "**pencil**" icon in the row of the selected section;
+        title: 在所选部分的行中点击 "**pencil**"（铅笔）图标；
     ===
         image: /images/gateway/modbus-connector/add-new-value-to-gateway-slave-2-ce.png,
-        title: In the opened window click "**Add attribute**" or other (depends on selected section);
+        title: 在打开的窗口中点击 "**Add attribute**" 或其他（取决于所选部分）；
     ===
         image: /images/gateway/modbus-connector/add-new-value-to-gateway-slave-3-ce.png,
-        title: Fill in key, type, function code, objects count, address and value fields. Click "Apply".
+        title: 填写 key、type、function code、objects count、address 和 value 字段。点击 "Apply"。
 '
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=maxTemperatureAttribute %}

@@ -2,41 +2,41 @@
 * TOC
 {:toc}
 
-TBMQ MQTT Integration enables forwarding messages to **external MQTT brokers**, allowing real-time data delivery to third-party platforms. This is useful in scenarios such as:
+TBMQ MQTT 集成支持将消息转发至**外部 MQTT 代理**，实现与第三方平台的实时数据投递。适用于以下场景：
 
-- Data from TBMQ needs to be **forwarded** to an external MQTT broker or IoT platform.
-- TBMQ is used as an **intermediary to route data** between internal sources and external MQTT-based systems.
+- 需将 TBMQ 数据**转发**至外部 MQTT 代理或IoT平台。
+- 将 TBMQ 用作**内部源与外部基于 MQTT 的系统**之间的路由中间层。
 
-## Data Flow Overview
+## 数据流概述
 
-MQTT Integration processes messages and forwards them to an external MQTT broker or system in the following steps:
+MQTT 集成按以下步骤处理消息并转发至外部 MQTT 代理或系统：
 
-1. **Device (client) publishes an MQTT message** to a topic that matches the Integration's **Topic Filters**.
-2. **TBMQ broker receives the message** and forwards to TBMQ Integration Executor.
-3. **TBMQ Integration Executor processes the message**, formats it accordingly, and forwards it to the external MQTT broker or system.
-4. **External system receives the message** and processes the data as needed.
+1. **设备（客户端）发布 MQTT 消息**到匹配集成**主题过滤器**的主题。
+2. **TBMQ 代理接收消息**并转发至 TBMQ Integration Executor。
+3. **TBMQ Integration Executor 处理消息**，按需格式化并转发至外部 MQTT 代理或系统。
+4. **外部系统接收消息**并按需处理数据。
 
 ![image](/images/mqtt-broker/integrations/tbmq-mqtt-integration.png)
 
-## Prerequisites
+## 前置条件
 
-Before setting up the integration, ensure the following:
+设置集成前，请确保：
 
-- A running **[TBMQ](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/) instance**.
-- A client capable of publishing MQTT messages (e.g., **TBMQ WebSocket Client**).
-- A client capable of receiving MQTT messages (e.g., **TBMQ WebSocket Client**).
+- 有正在运行的 **[TBMQ](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/) 实例**。
+- 有可发布 MQTT 消息的客户端（如 **TBMQ WebSocket Client**）。
+- 有可接收 MQTT 消息的客户端（如 **TBMQ WebSocket Client**）。
 
-## Create TBMQ MQTT Integration
+## 创建 TBMQ MQTT 集成
 
-1. Navigate to the **Integrations** page and click the **"+"** button to create a new integration.
-2. Select **MQTT** as the integration type and click **Next**.
-3. On the **Topic Filters** subscribe to the topic `tbmq/mqtt-integration` and click **Next**.
-4. In the **Configuration** step:
-   * Enter the **Host** (`localhost`);
-   * Enter the **Port** (`1883`);
-   * Set 'Dynamic topic name' to `false` and 'Topic name' to `sensors/mqtt-integration`;
-   * Set 'Credentials' type to `Basic` and 'Username' to `tbmq_websockets_username`;
-5. Click **Add** to save the integration.
+1. 进入**集成**页面，点击 **"+"** 创建新集成。
+2. 选择 **MQTT** 作为集成类型，点击**下一步**。
+3. 在**主题过滤器**中订阅主题 `tbmq/mqtt-integration`，点击**下一步**。
+4. 在**配置**步骤：
+   * 输入 **Host**（`localhost`）；
+   * 输入 **Port**（`1883`）；
+   * 将“动态主题名”设为 `false`，“主题名”设为 `sensors/mqtt-integration`；
+   * 将“凭证”类型设为 `Basic`，“用户名”设为 `tbmq_websockets_username`；
+5. 点击**添加**保存集成。
 
 {% include images-gallery.html imageCollection="add-mqtt-integration" %}
 
@@ -52,13 +52,13 @@ Before setting up the integration, ensure the following:
 
 {% include templates/mqtt-broker/user-guide/integrations/topic-filters.md %}
 
-### Configuration
+### 配置
 
-|**Field**|**Description**|
+|**字段**|**描述**|
 |:-|:-|-
-| **Send only message payload** | If enabled, the incoming message's payload is forwarded as is. If disabled, a JSON object with the payload and other properties is sent. |
-| **Host** | MQTT broker host. |
-| **Port** | MQTT broker port. |
+| **仅发送消息负载** | 启用时，传入消息的负载按原样转发。禁用时，发送包含负载及其他属性的 JSON 对象。 |
+| **Host** | MQTT 代理主机。 |
+| **Port** | MQTT 代理端口。 |
 | **Client ID** | Client identifier used for connecting to the external broker. |
 | **Dynamic topic name** | If enabled, the message will be forwarded with the topic name from the incoming message. |
 | **Topic name** | If **Dynamic topic name** is disabled, this Topic name is used to send message. |

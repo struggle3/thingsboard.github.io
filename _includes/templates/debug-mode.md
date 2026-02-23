@@ -1,11 +1,11 @@
-<b><font size="3">Debug mode</font></b>
+<b><font size="3">调试模式</font></b>
 
-Enabling debug mode allows you to track events, states, and potential errors related to the execution of {{ feature }}. This greatly simplifies development and troubleshooting.
+启用调试模式可追踪与{{ feature }}执行相关的事件、状态及潜在错误，便于开发和排障。
 
 {% capture difference %}
-**Note:** Debug mode can quickly increase disk usage because all debug events are stored in the database.
-Starting from **ThingsBoard 3.9**, the platform stores the full set of debug events only during the first **15 minutes** after the {{ feature }} is created; afterward, only error events are retained.
+**注意：**调试模式可能迅速增加磁盘占用，因为所有调试事件都会存入数据库。
+自**ThingsBoard 3.9**起，平台仅在{{ feature }}创建后的前**15分钟**内存储完整调试事件，之后仅保留错误事件。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Debug mode settings can be combined or disabled entirely.
+调试模式设置可组合使用或完全关闭。

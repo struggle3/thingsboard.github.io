@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - vparomskiy
-title: Core/rule engine deployment parameters
-description: ThingsBoard configuration parameters and environment variables
+title: Core/规则引擎部署参数
+description: ThingsBoard 配置参数与环境变量
 
 ---
 

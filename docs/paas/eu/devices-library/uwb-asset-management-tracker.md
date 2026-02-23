@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect UWB Asset Management Tracker to ThingsBoard?"
+title: "如何将UWB Asset Management Tracker连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/uwb-asset-management-tracker/"
 ---

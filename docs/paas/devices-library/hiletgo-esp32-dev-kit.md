@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect HiLetgo ESP32 Development Board to ThingsBoard?"
+title: "如何将HiLetgo ESP32 Development Board连接到ThingsBoard？"
 redirect_to: "/device-library/paas/hiletgo-esp32-dev-kit/"
 ---

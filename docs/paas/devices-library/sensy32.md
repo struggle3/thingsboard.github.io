@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Sensy32 to ThingsBoard?"
+title: "如何将Sensy32连接到ThingsBoard？"
 redirect_to: "/device-library/paas/sensy32/"
 ---

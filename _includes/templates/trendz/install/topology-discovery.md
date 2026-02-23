@@ -1,19 +1,19 @@
-After the first login to Trendz, you need to discover topology to allow Trendz to know about assets, devices, their profiles and relations:
+首次登录 Trendz 后，需发现拓扑以使 Trendz 识别资产、设备、其配置与关系：
 
-* Click the **Discover Topology** button to start topology discovery process.
-* Wait until your topology will be discovered.
-* Click the **Finish** button to close topology discovery page and unlock the main Trendz functionality.
+* 点击 **Discover Topology** 按钮开始拓扑发现。
+* 等待拓扑发现完成。
+* 点击 **Finish** 按钮关闭拓扑发现页面并解锁 Trendz 主要功能。
 
 {% assign topology-discovery = '
 ===
 image: /images/trendz/install/topology/topology-discovery-1.png,
-title: Click the <b>Discover Topology</b> button to start topology discovery process.
+title: 点击 <b>Discover Topology</b> 按钮开始拓扑发现。
 ===
 image: /images/trendz/install/topology/topology-discovery-2.png,
-title: Click the <b>Finish</b> button to close topology discovery page and unlock the main Trendz functionality.
+title: 点击 <b>Finish</b> 按钮关闭拓扑发现页面并解锁 Trendz 主要功能。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=topology-discovery %}
 
-You could read more about how Trendz uses this topology [here](/docs/trendz/business-entities).
+更多关于 Trendz 如何使用拓扑的信息，请参阅[此处](/docs/trendz/business-entities)。

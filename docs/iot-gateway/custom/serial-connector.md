@@ -1,24 +1,24 @@
 ---
 layout: docwithnav-gw
-title: Custom IoT Gateway serial connector
+title: 自定义 IoT Gateway 串口连接器
 
 ---
 
 * TOC
 {:toc}
 
-## Custom connector implementation
+## 自定义连接器实现
 
-Connectors are Gateway components that connect to external system or directly to devices. Gateway has many built-in connectors (e.g. MQTT, OPC-UA server, Modbus, BLE, etc).  
-Once connected, connector is either poll data from those systems or subscribe for updates. Poll vs subscribe depends on the protocol capabilities.  
+连接器是网关中连接外部系统或直接连接设备的组件。网关内置多种连接器（如 MQTT、OPC-UA 服务器、Modbus、BLE 等）。  
+连接后，连接器通过轮询或订阅从这些系统获取数据，具体取决于协议能力。  
 
-Main goal of the custom connector is opportunity to connect to any device with any protocol. Connectors are written in Python language.  
+自定义连接器的主要目的是支持以任意协议连接任意设备。连接器使用 Python 编写。  
 
-We will demonstrate how to create custom connector by example.  
-Let's assume we want our connector to connect to serial port on your device and read the data in bytes and device can receive some commands in bytes as well.  
-Connector will be able to push data to device over serial. We will call this connector **SerialConnector**.  
-Please see step-by-step guide how we have added **SerialConnector** to the Gateway.  
-You can create your custom connector, based on this example.  
+下面通过示例演示如何创建自定义连接器。  
+假设我们需要连接器连接设备串口、以字节形式读取数据，且设备也能接收字节形式的命令。  
+连接器可通过串口向设备推送数据。我们将该连接器命名为 **SerialConnector**。  
+请参阅将 **SerialConnector** 添加到网关的逐步指南。  
+您可基于此示例创建自己的自定义连接器。  
 
 **Note: The gateway already contains this connector, you can find it in the extensions folder**
 

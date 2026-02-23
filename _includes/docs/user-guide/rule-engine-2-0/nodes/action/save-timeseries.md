@@ -1,10 +1,10 @@
-Stores the incoming message data as time series data of the message originator.
+将传入消息数据存储为消息发起者的时序数据。
 
-## Preconditions
+## 前置条件
 
-The node accepts messages of type `POST_TELEMETRY_REQUEST` and supports the following three **message data formats**:
+节点接受 `POST_TELEMETRY_REQUEST` 类型的消息，支持以下三种**消息数据格式**：
 
-1. Key-value pairs: an object where each property name represents a time series key, and its corresponding value is the time series value.
+1. 键值对：对象中每个属性名表示时序 key，对应值为时序值。
     ```json
     {
       "temperature": 42.2,
@@ -12,7 +12,7 @@ The node accepts messages of type `POST_TELEMETRY_REQUEST` and supports the foll
     }
     ```
 
-2. Timestamped key-value pairs: an object that includes a `ts` property for the timestamp and a `values` property containing key-value pairs (defined in format 1).
+2. 带时间戳的键值对：对象包含时间戳的 `ts` 属性和键值对的 `values` 属性（格式 1 定义）。
     ```json
     {
       "ts": 1737963587742,
@@ -23,7 +23,7 @@ The node accepts messages of type `POST_TELEMETRY_REQUEST` and supports the foll
     }
     ```
 
-3. Multiple timestamped key-value pairs: an array of timestamped key-value pair objects (defined in format 2).
+3. 多条带时间戳的键值对：带时间戳的键值对对象数组（格式 2 定义）。
     ```json
     [
       {
@@ -43,26 +43,26 @@ The node accepts messages of type `POST_TELEMETRY_REQUEST` and supports the foll
     ]
     ```
 
-## Configuration
+## 配置
 
-### Processing settings
+### 处理设置
 
-The save time series node can perform four distinct actions, each governed by configurable processing strategies:
+保存时序节点可执行四项操作，每项由可配置的处理策略控制：
 
-- **Time series**: saves time series data to the `ts_kv` table in the database.
-- **Latest values**: updates time series data in the `ts_kv_latest` table in the database, if new data is more recent.
-- **WebSockets**: notifies WebSocket subscriptions about updates to the time series data.
-- **Calculated fields**: notifies calculated fields about updates to the time series data.
+- **Time series**：将时序数据保存到数据库的 `ts_kv` 表。
+- **Latest values**：若新数据较新，则更新数据库 `ts_kv_latest` 表中的时序数据。
+- **WebSockets**：通知 WebSocket 订阅关于时序数据的更新。
+- **Calculated fields**：通知计算字段关于时序数据的更新。
 
-For each of these actions, you can choose from the following **processing strategies**:
+对每项操作，可从以下**处理策略**中选择：
 {% include docs/user-guide/rule-engine-2-0/processing-strategies-explanation.md %}
 
 {% capture processing_strategies_availability_note %}
-**Note**: Processing strategies are available since TB version 4.0. "Skip latest persistence" toggle from earlier TB versions corresponds to "Skip" strategy for Latest values.
+**注意**：处理策略自 TB 4.0 起可用。早期 TB 版本的「Skip latest persistence」开关对应 Latest values 的「Skip」策略。
 {% endcapture %}
 {% include templates/info-banner.md content=processing_strategies_availability_note %}
 
-Processing strategies can be set using either **Basic** or **Advanced processing settings**.
+处理策略可通过**基础**或**高级**处理设置配置。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-processing-settings-modes-switcher-ce.png)
@@ -70,11 +70,11 @@ Processing strategies can be set using either **Basic** or **Advanced processing
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-processing-settings-modes-switcher-pe.png)
 {% endif %}
 
-- **Basic processing settings** - provide predefined strategies for all actions:
-    - On every message: applies the **On every message** strategy to all actions. All actions are performed for all messages.
-    - Deduplicate: applies the **Deduplicate** strategy (with a specified interval) to all actions.
-    - WebSockets only: applies the **Skip** strategy to Time series and Latest values, and the **On every message** strategy to WebSockets.
-      Effectively, nothing is stored in a database; data is available only in real-time via WebSocket subscriptions.
+- **Basic processing settings** - 为所有操作提供预定义策略：
+    - On every message：对所有操作应用**每条消息**策略。所有消息都会执行所有操作。
+    - Deduplicate：对所有操作应用**去重**策略（指定间隔）。
+    - WebSockets only：对 Time series 和 Latest values 应用 **Skip** 策略，对 WebSockets 应用 **每条消息** 策略。
+      实际上不会写入数据库；数据仅通过 WebSocket 订阅实时可用。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-basic-processing-settings-options-ce.png)
@@ -90,14 +90,13 @@ Processing strategies can be set using either **Basic** or **Advanced processing
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-timeseries-advanced-processing-settings-pe.png)
 {% endif %}
 
-When configuring the processing strategies in advanced mode, certain combinations can lead to unexpected behavior. Consider the following scenarios:
+在高级模式下配置处理策略时，某些组合可能导致意外行为。请考虑以下场景：
 
 {% include docs/user-guide/rule-engine-2-0/advanced-processing-strategies-hazards.md %}
 
-Due to the scenarios described above, the ability to configure each persistence action independently—including setting different deduplication intervals—should be treated as a
-performance optimization rather than a strict processing guarantee.
+鉴于上述场景，独立配置每项持久化操作（包括不同去重间隔）应视为性能优化，而非严格的处理保证。
 
-### Advanced settings
+### 高级设置
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-timeseries-advanced-settings-ce.png)
@@ -105,17 +104,16 @@ performance optimization rather than a strict processing guarantee.
 ![image](/images/user-guide/rule-engine-2-0/nodes/action-save-timeseries-advanced-settings-pe.png)
 {% endif %}
 
-* **Use server timestamp** - if enabled, rule node will use current server time when time series data does not have an explicit timestamp associated with it (**data format 1** is
-  used).
+* **Use server timestamp** - 启用时，当时序数据无显式时间戳时（使用**数据格式 1**），规则节点将使用当前服务器时间。
 
-  Using server time is particularly important in sequential processing scenarios where messages may arrive with out-of-order timestamps from multiple sources.
-  The DB layer has certain optimizations to ignore the updates of the attributes and latest values if the new record has a timestamp that is older than the previous record.
-  So, to make sure that all the messages will be processed correctly, one should enable this parameter for sequential message processing scenarios.
+  在顺序处理场景中，多条消息可能来自不同源且时间戳乱序，使用服务器时间尤为重要。
+  数据库层有优化：若新记录时间戳早于前一条，会忽略属性和最新值的更新。
+  因此，为确保所有消息被正确处理，在顺序消息处理场景中应启用此参数。
 
-* **Default TTL** - determines how long the stored data remains in the database.
+* **Default TTL** - 决定存储数据在数据库中的保留时长。
 
 {% capture zero_ttl_note %}
-**Note**: TTL value of 0 means that the data never expires.
+**注意**：TTL 为 0 表示数据永不过期。
 {% endcapture %}
 {% include templates/info-banner.md content=zero_ttl_note %}
 
@@ -302,29 +300,29 @@ performance optimization rather than a strict processing guarantee.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node verifies that the message type is `POST_TELEMETRY_REQUEST`. If not, the processing fails and message is routed to the `Failure` connection.
-2. For time series data without an explicit timestamp (**data format 1**), the node determines the timestamp using the following priority:
-    - Current server time, if **Use server timestamp** is enabled in configuration
-    - Message metadata `ts` property (expected in UNIX milliseconds), if present.
-    - Message creation timestamp, as fallback.
-3. The node calculates the TTL for the data using the following priority:
-    - Message metadata `TTL` property (expected in seconds), if present.
-    - Node's configured **Default TTL**, if it is not set to 0.
-    - Tenant profile's default storage TTL, as fallback.
-4. Saves the time series data to the database according to the configured processing strategy.
-    - Once the data is saved, the message is routed to the `Success` connection.
-    - If any error occurs during processing, the message is routed to the `Failure` connection.
+1. 节点验证消息类型为 `POST_TELEMETRY_REQUEST`。若非此类型，处理失败，消息路由到 `Failure`。
+2. 对无显式时间戳的时序数据（**数据格式 1**），节点按以下优先级确定时间戳：
+    - 若配置中启用了 **Use server timestamp**，则使用当前服务器时间
+    - 若存在，使用消息元数据的 `ts` 属性（UNIX 毫秒）
+    - 否则使用消息创建时间戳
+3. 节点按以下优先级计算数据 TTL：
+    - 若存在，使用消息元数据的 `TTL` 属性（秒）
+    - 若节点配置的 **Default TTL** 非 0，则使用该值
+    - 否则使用租户配置文件的默认存储 TTL
+4. 按配置的处理策略将时序数据保存到数据库。
+    - 数据保存后，消息路由到 `Success`
+    - 处理过程中发生任何错误时，消息路由到 `Failure`
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - Message was successfully processed.
+    - 消息已成功处理。
 - `Failure`
-    - Message type is not `POST_TELEMETRY_REQUEST`.
-    - Message data is empty (for example, `{}` or `[]` or even `[{}, {}, {}]`).
-    - Unexpected error occurs during message processing.
+    - 消息类型不是 `POST_TELEMETRY_REQUEST`。
+    - 消息数据为空（如 `{}`、`[]` 或 `[{}, {}, {}]`）。
+    - 消息处理过程中发生意外错误。
 
 ## Examples
 

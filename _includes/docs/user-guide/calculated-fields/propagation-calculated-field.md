@@ -1,37 +1,37 @@
 * TOC
 {:toc}
 
-**Propagation** automatically transfers data from the current entity to one or more related entities resolved through entity relations. 
-It can either **copy values as-is** or **compute a new value before sending**, which makes it ideal for synchronizing telemetry and attributes across entity hierarchies.
+**Propagation**（传播）自动将当前实体的数据传送到一个或多个通过实体关系解析出的关联实体。
+可**原样复制值**，也可**发送前先计算新值**，适合在实体层级间同步遥测与属性。
 
-Use "Propagation" when you need to:
-- Mirror device telemetry to a parent asset (e.g., battery level, signal quality, last known status)
-- Push configuration attributes from an asset to child devices (e.g., HVAC mode, setpoints, operating profiles)
-- Transform data before sharing it (e.g., calculate dew point on a device and store it on the greenhouse asset)
-- Propagate to multiple entities (e.g., update all devices managed by a building or a group)
+在以下场景使用「Propagation」：
+- 将设备遥测镜像到父级资产（如电池电量、信号强度、最近状态）
+- 将配置属性从资产推送到子设备（如 HVAC 模式、设定点、运行配置）
+- 共享前转换数据（如在设备上计算露点并存储到温室资产）
+- 向多个实体传播（如更新某建筑或分组管理的所有设备）
 
 <hr>
 
-## Configuration
+## 配置
 
 {% assign calculatedFieldType = "**Propagation**" %}
 {% include /docs/user-guide/calculated-fields/blocks/creating-calculated-field.md %}
 
 <hr>
 
-### Propagation path to related entities
+### 向关联实体的传播路径
 
-<b><font size="3">Relation direction</font></b>   
-Define the path from the current entity to the entity to which the data will be propagated:
-- **Up to parent** — data is propagated to the parent entity.
-- **Down to child** — data is propagated to the child entity.
+<b><font size="3">关系方向</font></b>   
+定义从当前实体到数据传播目标实体的路径：
+- **Up to parent** — 数据传播到父实体。
+- **Down to child** — 数据传播到子实体。
 
-> Propagation works only with direct (single-level) relationships — without recursion or multi-level traversal.
+> Propagation 仅支持直接（单层）关系，不支持递归或多层遍历。
 
-<b><font size="3">Relation type</font></b>   
-Defines the relationship type between the target entity and the related entities (for example, _Contains_, _Manages_, or any other type).
+<b><font size="3">关系类型</font></b>   
+定义目标实体与关联实体间的关系类型（如 _Contains_、_Manages_ 或任意类型）。
 
-> If multiple entities match the selected relationship direction and relationship type, the data will be propagated to each of them.
+> 若多个实体符合所选关系方向与关系类型，数据将传播到其中每一个。
 
 {% assign propagationPathToRelatedEntities = '
     ===
@@ -44,15 +44,15 @@ Defines the relationship type between the target entity and the related entities
 
 <hr>
 
-### Data to propagate
+### 要传播的数据
 
-Define which data will be propagated to the related entity.   
-The data to propagate is configured as arguments. For details on argument types and configuration, see the [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} section.
+定义将传播到关联实体的数据。   
+传播数据以 arguments 形式配置，详见 [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} 章节。
 
-Two modes are available:
+支持两种模式：
 
 <b><font size="3">1. Arguments only</font></b>   
-  Works as direct data copying data ([attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} or [latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"}) from the _current entity_ to the related entity, with the option to rename the propagated key before storing it.
+  直接复制数据：将 [attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} 或 [latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"} 从_当前实体_复制到关联实体，可在存储前重命名传播的 key。
 
 {% assign propagationArgument = '
     ===
@@ -67,14 +67,14 @@ Two modes are available:
 {% include images-gallery.liquid imageCollection=propagationArgument %}
 
 <b><font size="3">2. Calculation result</font></b>   
-  Allows you to compute or transform data ([attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"}, [latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"}, or [time series rolling](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=timeSeriesRolling#arguments){:target="_blank"}) from multiple entities (_Current entity / Device / Asset / Customer / Current tenant / Current owner_) before propagating it to the related entity.
+  在传播到关联实体前，基于多实体数据（_Current entity / Device / Asset / Customer / Current tenant / Current owner_）的 [attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"}、[latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"} 或 [time series rolling](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=timeSeriesRolling#arguments){:target="_blank"} 进行计算或转换。
 
-The sequence of actions is as follows:
-- Configure the arguments that will provide input data  from the selected entity for further processing.
-- Provide a [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} script that will calculate a new value based on the defined arguments.
-- The computed result is then propagated to the related entity.
+操作顺序如下：
+- 配置从所选实体提供输入数据的 arguments。
+- 提供 [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} 脚本，根据定义的 arguments 计算新值。
+- 将计算结果传播到关联实体。
 
-> The variable name that stores the computed result must be defined directly in the function body.
+> 存储计算结果的变量名须在函数体内直接定义。
 
 {% assign propagationArgument = '
     ===
@@ -99,43 +99,43 @@ The sequence of actions is as follows:
 
 <hr>
 
-### Output
+### 输出
 
-Data is propagated to each related entity and stored there as either [time series](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"} or [attributes](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"}.
+数据传播到各关联实体，并以 [time series](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"} 或 [attributes](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"} 形式存储。
 
-For more details about output types and processing strategies, see the [Output](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#output){:target="_blank"} section.
+输出类型与处理策略详见 [Output](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#output){:target="_blank"} 章节。
 
 <hr>
 
-## Examples
+## 示例
 
-To help you get started, here are three common configuration patterns applied to real-world scenarios.
+以下为三个常见配置模式的实用示例。
 
-### Example 1: Propagate device battery level to the parent Asset
+### 示例 1：将设备电池电量传播到父级资产
 
-<b><font size="4">Use case</font></b>   
-The Tracker A device sends its battery charge level (<span class="code-light">batteryLevel</span>) to ThingsBoard as telemetry.
+<b><font size="4">场景</font></b>   
+Tracker A 设备以遥测形式向 ThingsBoard 发送电池电量（<span class="code-light">batteryLevel</span>）。
 
-<b><font size="4">Goal</font></b>   
-Automatically propagate the device battery level to the related Truck 1 asset and store it as a server-side attribute under a new key: <span class="code-light">deviceBatteryLevel</span>.
+<b><font size="4">目标</font></b>   
+自动将设备电池电量传播到关联的 Truck 1 资产，并以服务端属性存储，使用新 key：<span class="code-light">deviceBatteryLevel</span>。
 
-<b><font size="4">Calculated field configuration</font></b>   
-[Download the "Battery level propagation" calculated field configuration (JSON)](/docs/user-guide/resources/calculated-fields/propagation/battery_level_propagation_cf.json){:target="_blank" download="battery_level_propagation_cf.json"}.
+<b><font size="4">计算字段配置</font></b>   
+[下载「电池电量传播」计算字段配置 (JSON)](/docs/user-guide/resources/calculated-fields/propagation/battery_level_propagation_cf.json){:target="_blank" download="battery_level_propagation_cf.json"}。
 
-<br><b><font size="4">Configuration steps</font></b>
+<br><b><font size="4">配置步骤</font></b>
 
-<b><font size="3">1. Import demo device</font></b>
+<b><font size="3">1. 导入示例设备</font></b>
 
-Import a device that publishes battery telemetry.
+导入发布电池遥测的设备。
 1. Download the CSV file: [battery-level-device-data.csv](/docs/user-guide/resources/calculated-fields/propagation/battery-level-device-data.csv){:target="_blank" download="battery-level-device-data.csv"}
 2. Go to the **Devices** and [import](/docs/user-guide/bulk-provisioning/){:target="_blank"} the CSV file.
 
-**CSV includes:**
+**CSV 包含：**
 - **Name:** Tracker A
 - **Type:** tracker
 - **Time series:** <span class="code-light">batteryLevel</span>
 
-> **Important note about the CSV:** the column type for the <span class="code-light">batteryLevel</span> key must be set to "**Time series**".
+> **CSV 注意事项：** <span class="code-light">batteryLevel</span> 的列类型须设为「**Time series**」。
 
 {% assign examplePropagateDeviceBattery1 = '
     ===
@@ -146,13 +146,13 @@ Import a device that publishes battery telemetry.
 
 {% include images-gallery.liquid imageCollection=examplePropagateDeviceBattery1 %}
 
-<br><b><font size="3">2. Import demo asset</font></b>
+<br><b><font size="3">2. 导入示例资产</font></b>
 
-Import an asset that represents the tracked truck.
+导入代表被追踪卡车的资产。
 1. Download the CSV file: [battery-level-asset-data.csv](/docs/user-guide/resources/calculated-fields/propagation/battery-level-asset-data.csv){:target="_blank" download="battery-level-asset-data.csv"}
 2. Go to **Assets** and [import](/docs/user-guide/bulk-provisioning/){:target="_blank"} the CSV file.
 
-**CSV includes:**
+**CSV 包含：**
 - **Name:** Truck 1
 - **Type:** truck
 
@@ -165,15 +165,15 @@ Import an asset that represents the tracked truck.
 
 {% include images-gallery.liquid imageCollection=examplePropagateDeviceBattery2 %}
 
-<br><b><font size="3">3. Create a relation between the asset and the device</font></b>
+<br><b><font size="3">3. 在资产与设备间创建关系</font></b>
 
-Create a relation so the calculated field can resolve the target asset.
+创建关系以便计算字段能解析到目标资产。
 
-Create a relationship between the **Track 1** asset and the **Tracker A** device:
-- Relation direction: **From**
-- Relation type: **Contains**
+在 **Track 1** 资产与 **Tracker A** 设备间创建关系：
+- 关系方向：**From**
+- 关系类型：**Contains**
 
-This relation is used by the propagation calculated field to locate the parent entity.
+Propagation 计算字段通过此关系定位父实体。
 
 {% assign examplePropagateDeviceBattery3 = '
     ===
@@ -184,13 +184,13 @@ This relation is used by the propagation calculated field to locate the parent e
 
 {% include images-gallery.liquid imageCollection=examplePropagateDeviceBattery3 %}
 
-<br><b><font size="3">4. Apply the Propagation calculated field to the device profile</font></b>
+<br><b><font size="3">4. 将 Propagation 计算字段应用于设备配置</font></b>
 
-Configure a **Propagation** calculated field in the **tracker** device profile (automatically created during device import) so that it works for Tracker A.
+在 **tracker** 设备配置（设备导入时自动创建）中配置 **Propagation** 计算字段，使其对 Tracker A 生效。
 1. [Download the calculated field configuration file](/docs/user-guide/resources/calculated-fields/propagation/battery_level_propagation_cf.json){:target="_blank" download="battery_level_propagation_cf.json"}.
 2. Go to the "Calculated fields" tab and [import](/docs/user-guide/calculated-fields/#export--import-calculated-field){:target="_blank"} the configuration.
 
-This configuration propagates the latest telemetry value of <span class="code-light">batteryLevel</span> to the parent asset (**Truck 1**).
+此配置将 <span class="code-light">batteryLevel</span> 的最新遥测值传播到父资产（**Truck 1**）。
 
 {% assign examplePropagateDeviceBattery4 = '
     ===
@@ -210,9 +210,9 @@ This configuration propagates the latest telemetry value of <span class="code-li
 
 {% include images-gallery.liquid imageCollection=examplePropagateDeviceBattery4 %}
 
-<br><b><font size="4">Result</font></b>
+<br><b><font size="4">结果</font></b>
 
-The <span class="code-light">deviceBatteryLevel</span> attribute is propagated and stored on the **Truck 1** asset as a **server-side attribute**.
+<span class="code-light">deviceBatteryLevel</span> 属性已传播并作为**服务端属性**存储在 **Truck 1** 资产上。
 
 {% assign examplePropagateDeviceBattery5 = '
     ===
@@ -225,13 +225,13 @@ The <span class="code-light">deviceBatteryLevel</span> attribute is propagated a
 
 <hr>
 
-### Example 2: Dew point calculation and propagation to a parent Asset
+### 示例 2：露点计算并传播到父级资产
 
-<b><font size="4">Scenario</font></b>   
-A Smart Device sends <span class="code-light">temperature</span> and <span class="code-light">humidity</span> telemetry to ThingsBoard and is linked to the Greenhouse A asset via the _Contains_ relation.
+<b><font size="4">场景</font></b>   
+Smart Device 向 ThingsBoard 发送 <span class="code-light">temperature</span> 与 <span class="code-light">humidity</span> 遥测，并通过 _Contains_ 关系关联到 Greenhouse A 资产。
 
-<b><font size="4">Goal</font></b>   
-Calculate the **dew point**, propagate the result to the related asset (**Greenhouse A**), and store it as a **telemetry**.
+<b><font size="4">目标</font></b>   
+计算**露点**，将结果传播到关联资产（**Greenhouse A**），并以**遥测**形式存储。
 
 <b><font size="4">Calculated field configuration</font></b>   
 [Download the "Dew point propagation" calculated field configuration (JSON)](/docs/user-guide/resources/calculated-fields/propagation/dew_point_propagation_cf.json){:target="_blank" download="dew_point_propagation_cf.json"}.
@@ -340,13 +340,13 @@ The calculated value is propagated to the **Greenhouse A** asset and stored as a
 
 <hr>
 
-### Example 3: Propagate HVAC mode to multiple child devices
+### 示例 3：将 HVAC 模式传播到多个子设备
 
-<b><font size="4">Scenario</font></b>   
-The Building A asset manages multiple child HVAC devices linked via the _Manages_ relation. The asset-level <span class="code-light">hvacMode</span> server attribute defines the operating mode for all devices (for example, _cooling_, _heating_, _off_).
+<b><font size="4">场景</font></b>   
+Building A 资产通过 _Manages_ 关系管理多个子 HVAC 设备。资产级 <span class="code-light">hvacMode</span> 服务端属性为所有设备定义运行模式（如 _cooling_、_heating_、_off_）。
 
-<b><font size="4">Goal</font></b>   
-Automatically propagate the <span class="code-light">hvacMode</span> attribute from Building A to all related HVAC devices.
+<b><font size="4">目标</font></b>   
+将 <span class="code-light">hvacMode</span> 属性从 Building A 自动传播到所有关联 HVAC 设备。
 
 <b><font size="4">Calculated field configuration</font></b>   
 [Download the "Propagate HVAC mode" calculated field configuration (JSON)](/docs/user-guide/resources/calculated-fields/propagation/cooling_propagation_cf.json){:target="_blank" download="cooling_propagation_cf.json"}.
@@ -453,29 +453,26 @@ Each HVAC device received the <span class="code-light">hvacMode</span> attribute
 
 <hr>
 
-## Troubleshooting
+## 故障排查
 
-### Propagation path settings do not apply after the update
+### 更新后传播路径设置未生效
 
-**Problem:** When editing an existing Calculated Field to change the **Relation direction** or **Relation type** (e.g., switching from *Contains* to *Manages*), the field ignores these changes and continues to propagate data using the originally configured path.
+**现象：** 编辑现有计算字段并修改 **关系方向** 或 **关系类型**（例如从 *Contains* 改为 *Manages*）时，字段忽略这些变更，仍按原路径传播数据。
 
-**Cause:** The Calculated Field logic caches the **Propagation path to related entities** defined during the initial creation. It does not correctly detect updates made specifically to the relation direction or relation type in the configuration, resulting in the field failing to re-initialize the path.
+**原因：** 计算字段逻辑会缓存首次创建时定义的**向关联实体的传播路径**。对关系方向或关系类型的专项修改不会被正确识别，导致路径未能重新初始化。
 
-**Solution:** To force the Calculated Field to apply the new propagation path settings,
-the system requires a configuration change to the **Data to propagate** section.
-Any modification to the arguments will trigger the necessary re-initialization.
+**解决：** 强制计算字段应用新的传播路径时，需修改 **Data to propagate** 区域配置。对 arguments 的任何改动都会触发必要的重新初始化。
 
-Choose one of the following safe methods:
+可选以下两种方式之一：
 
-1. Re-create the Field (Cleanest)
-   If you must keep your current arguments exactly as they are (e.g., you cannot change default values), the only way to trigger the update is to delete the existing Calculated Field and create a new one with the correct propagation path settings.
+1. 重新创建字段（最干净）
+   若必须保持现有 arguments 不变（如不能修改默认值），则需删除原计算字段并新建一个，使用正确的传播路径设置。
 
-2. Modify Default Value (Recommended Workaround)
-   If you want to fix the issue without re-creating the field,
-   edit an existing argument and change its **Default value** (e.g., set a value if it was empty, or update it).
-   > If the source data is missing, the new default value will be used. However, if the source data is always present, this is the smartest method as it forces the update with zero impact on your data.
+2. 修改默认值（推荐变通）
+   若希望在不断建字段的前提下修复，可编辑已有 argument 并修改其 **Default value**（例如由空改为有值，或更新值）。
+   > 若源数据缺失，将使用新默认值。若源数据始终存在，这是最稳妥方式，可在不影响数据的前提下强制更新。
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎为 ThingsBoard 在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 加星。
+如有疑问，请 [联系我们](/docs/contact-us/){:target="_blank"}。

@@ -9,7 +9,7 @@
          <div class="install-options-hero">
             <div class="container">
               <div class="install-options-hero-content">
-                  <h1>TBMQ Professional Edition upgrade options</h1>
+                  <h1>TBMQ Professional Edition 升级选项</h1>
               </div>
               <div class="deployment-container one-line-deployment-container">
                   <div class="deployment-div">
@@ -28,7 +28,7 @@
          <div class="install-options-hero">
             <div class="container">
               <div class="install-options-hero-content">
-                  <h1>TBMQ upgrade options</h1>
+                  <h1>TBMQ 升级选项</h1>
               </div>
               <div class="deployment-container one-line-deployment-container">
                   <div class="deployment-div">
@@ -44,7 +44,7 @@
 
 {% if docsPrefix == "pe/" %}
 
-### Upgrade from TBMQ CE to TBMQ PE (v2.2.0)
+### 从 TBMQ CE 升级至 TBMQ PE（v2.2.0）
 
 {% capture difference %}
 **NOTE**:
@@ -54,42 +54,41 @@ These steps are applicable for 2.2.0 TBMQ CE version. In order to upgrade to TBM
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-#### Notice: Third-Party Component Updates in TBMQ PE v2.2.0
+#### 说明：TBMQ PE v2.2.0 中的第三方组件更新
 
 We’d like to inform you about several **third-party component updates** introduced in **TBMQ Professional Edition (PE) v2.2.0** compared to the Community Edition (CE).
-These changes improve performance, stability, and align TBMQ with officially supported open-source technologies.
+这些更改提升了性能与稳定性，并使 TBMQ 与官方支持的开源技术保持一致。
 
-These updates follow the modernization plan outlined here:
+更新遵循此处所述的现代化规划：
 [Bitnami Image Migration](https://github.com/thingsboard/thingsboard-ce-k8s/blob/master/BITNAMI-IMAGE-MIGRATION.md#3-long-term-production-solution).
 
-#### What’s Changed
+#### 变更说明
 
-| Component          | TBMQ CE v2.2.0              | TBMQ PE v2.2.0       | What Changed & Why                                                                                                                                                                                                                                                      |
+| Component          | TBMQ CE v2.2.0              | TBMQ PE v2.2.0       | 变更说明与原因                                                                                                                                                                                                                                                      |
 | ------------------ | --------------------------- | -------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **PostgreSQL**     | `postgres:16`               | `postgres:17`        | Upgraded to a newer major version with improved performance, reliability, and better resource efficiency. Existing data volumes remain fully compatible.                                                                                                                |
-| **Kafka**          | `bitnamilegacy/kafka:3.7.0` | `apache/kafka:4.0.0` | Updated according to the plan to migrate from Bitnami to official open-source images. New volumes were introduced and all of them are mapped to new paths required by the Apache Kafka image.                                                                           |
-| **Redis → Valkey** | `bitnamilegacy/redis:7.2.5` | `valkey/valkey:8.0`  | Updated according to the plan to migrate from Bitnami to open-source images. Redis was replaced by Valkey (a community-driven fork of Redis 7). A new volume (`tbmq-valkey-data`) was introduced and mapped to the appropriate data directory used by the Valkey image. |
+| **PostgreSQL**     | `postgres:16`               | `postgres:17`        | 升级至更新主版本，提升性能、可靠性与资源效率。现有数据卷保持完全兼容。                                                                                                                |
+| **Kafka**          | `bitnamilegacy/kafka:3.7.0` | `apache/kafka:4.0.0` | 根据从 Bitnami 迁移至官方开源镜像的计划更新。引入新卷并映射至 Apache Kafka 镜像所需路径。                                                                           |
+| **Redis → Valkey** | `bitnamilegacy/redis:7.2.5` | `valkey/valkey:8.0`  | 根据从 Bitnami 迁移至开源镜像的计划更新。Redis 由 Valkey（Redis 7 的社区驱动分支）替代。引入新卷 `tbmq-valkey-data` 并映射至 Valkey 镜像使用的数据目录。 |
 
-#### Important Notes
+#### 重要说明
 
-Upgrading from TBMQ CE 2.2.0 to TBMQ PE 2.2.0 introduces several component changes that require attention before and during the migration process.
+从 TBMQ CE 2.2.0 升级至 TBMQ PE 2.2.0 会引入多项组件变更，迁移前后需注意。
 
-Before starting the upgrade, it is **strongly recommended to create full backups** of your existing environment.
-This includes the **PostgreSQL database** (for example, using `pg_dump`), as well as your **Kafka** and **Redis** data volumes if you plan to migrate them.
-Backups ensure that your environment can be safely restored in case of configuration or compatibility issues during the upgrade.
+开始升级前，**强烈建议对现有环境进行完整备份**。
+包括 **PostgreSQL 数据库**（例如使用 `pg_dump`），以及计划迁移的 **Kafka** 和 **Redis** 数据卷。
+备份可确保在升级过程中出现配置或兼容性问题时安全恢复环境。
 
-The PostgreSQL version is upgraded from **16 to 17**, providing improved performance, reliability, and resource efficiency.
-Although existing data volumes remain compatible, you still need to perform a proper database version upgrade (for example, using `pg_upgrade`)
-to ensure data integrity and full compatibility with the new version.
+PostgreSQL 版本从 **16 升级至 17**，提升性能、可靠性与资源效率。
+虽然现有数据卷保持兼容，但仍需执行正确的数据库版本升级（例如使用 `pg_upgrade`），以确保数据完整性与新版本的完全兼容。
 
-Both Kafka and Redis have been migrated from Bitnami images to official open-source ones — **Apache Kafka** and **Valkey**, respectively.
-This migration is part of the long-term modernization plan to move away from Bitnami images.
-Along with this change, **Kafka was upgraded from version 3.7.0 to 4.0.0**, introducing improvements in performance, scalability, and message handling efficiency.
-The new images use **different internal data directories and volume mappings**, so existing Bitnami volumes cannot be reused directly.
-You must either **migrate your Kafka and Redis data manually** or **start from new, empty volumes**.
-> **⚠️ Be cautious:** starting from new volumes will remove all data currently stored in Kafka and Redis, including client session states, undelivered and retained messages, and any other persisted broker data.
+Kafka 和 Redis 已从 Bitnami 镜像迁移至官方开源镜像——分别为 **Apache Kafka** 和 **Valkey**。
+该迁移是远离 Bitnami 镜像的长期现代化规划的一部分。
+伴随此次变更，**Kafka 从 3.7.0 升级至 4.0.0**，提升性能、扩展性与消息处理效率。
+新镜像使用**不同的内部数据目录和卷映射**，因此无法直接复用现有 Bitnami 卷。
+您需要**手动迁移 Kafka 和 Redis 数据**，或**从新的空卷开始**。
+> **⚠️ 注意**：使用新卷将清除 Kafka 和 Redis 中当前存储的所有数据，包括客户端会话状态、未送达与保留消息及其他持久化代理数据。
 
-The standard upgrade script focuses only on updating the PostgreSQL database schema and does not include data migration logic for Kafka or Valkey.
+标准升级脚本仅负责更新 PostgreSQL 数据库模式，不包含 Kafka 或 Valkey 的数据迁移逻辑。
 
 {% capture difference %}
 **NOTE:** You may [contact us](/docs/pe/mqtt-broker/help/) if you require additional guidance for the migration. While we do not provide direct or fully managed migration assistance, we can offer general recommendations and insights to help facilitate a smoother upgrade experience.
@@ -98,19 +97,18 @@ The standard upgrade script focuses only on updating the PostgreSQL database sch
 
 ---
 
-Navigate to the appropriate documentation to proceed with the next upgrade steps by [choosing one of the cards](/docs/{{docsPrefix}}mqtt-broker/install/upgrade-instructions/)
-on top of the page.
+请通过页面顶部的[选择卡片](/docs/{{docsPrefix}}mqtt-broker/install/upgrade-instructions/)进入相应文档以继续升级步骤。
 
 {% else %}
 
 {% if docsPrefix != 'pe/' %}
 {% capture difference %}
-Interested in the **TBMQ Professional Edition**? Upgrade your TBMQ CE to [TBMQ PE](/docs/pe/mqtt-broker/install/upgrade-instructions/){:target="_blank"}.
+关注 **TBMQ Professional Edition**？可将 TBMQ CE 升级至 [TBMQ PE](/docs/pe/mqtt-broker/install/upgrade-instructions/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 {% endif %}
 
-### Upgrading to 2.2.0
+### 升级至 2.2.0
 
 {% capture difference %}
 **NOTE**:
@@ -119,9 +117,9 @@ These steps are applicable for 2.1.0 TBMQ version. In order to upgrade to 2.2.0 
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-#### Notice About Bitnami Images in TBMQ Deployments
+#### 关于 TBMQ 部署中的 Bitnami 镜像
 
-In our TBMQ deployments, we use **Bitnami images** for third-party components such as PostgreSQL, Redis, and Kafka. 
+在 TBMQ 部署中，我们使用 **Bitnami 镜像**作为 PostgreSQL、Redis 和 Kafka 等第三方组件。 
 The Bitnami team [**has announced important upcoming changes**](https://github.com/bitnami/charts/issues/35164) to their catalog that affect these images.
 
 **What’s happening:**
@@ -142,7 +140,7 @@ We are currently evaluating a **long-term strategy** for TBMQ third-party images
 Navigate to the appropriate documentation to proceed with the next upgrade steps by [choosing one of the cards](/docs/{{docsPrefix}}mqtt-broker/install/upgrade-instructions/)
 on top of the page.
 
-### Upgrading to 2.1.0
+### 升级至 2.1.0
 
 {% capture difference %}
 **NOTE**:
@@ -152,24 +150,23 @@ In order to upgrade to 2.1.0, your current version should be greater or equal to
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-#### Pull TBMQ image (Optional)
+#### 拉取 TBMQ 镜像（可选）
 
-Pull 2.1.0 version TBMQ image depending on your current installation.
+根据当前安装方式拉取 2.1.0 版 TBMQ 镜像。
 
 {% capture tabspec %}tbmq-pull-2-1-0
 tbmq-pull-2-1-0-single,Single node,shell,resources/2.1.0/tbmq-single-node-pull.sh,/docs/{{docsPrefix}}mqtt-broker/install/resources/2.1.0/tbmq-single-node-pull.sh
 tbmq-pull-2-1-0-cluster,Cluster mode,shell,resources/2.1.0/tbmq-cluster-mode-pull.sh,/docs/{{docsPrefix}}mqtt-broker/install/resources/2.1.0/tbmq-cluster-mode-pull.sh{% endcapture %}
 {% include tabs.html %}
 
-#### From version (automatically detected since 2.1.0)
+#### 起始版本（2.1.0 起自动检测）
 
-Starting from version 2.1.0, the _fromVersion_ parameter has been removed from the upgrade script and is no longer supported.
-As of 2.1.0, the upgrade script automatically detects the currently installed version and determines whether the upgrade can proceed based on a predefined list of supported versions.
+自 2.1.0 起，升级脚本已移除 _fromVersion_ 参数，不再支持。
+2.1.0 起，升级脚本会自动检测当前安装版本，并根据预定义的支持版本列表判断是否可继续升级。
 
-Navigate to the appropriate documentation to proceed with the next upgrade steps by [choosing one of the cards](/docs/{{docsPrefix}}mqtt-broker/install/upgrade-instructions/)
-on top of the page.
+请通过页面顶部的[选择卡片](/docs/{{docsPrefix}}mqtt-broker/install/upgrade-instructions/)进入相应文档以继续升级步骤。
 
-### Upgrading to 2.0.1
+### 升级至 2.0.1
 
 {% capture difference %}
 **NOTE**:

@@ -6,33 +6,33 @@
 
 {% include templates/edge/install/prerequisites.md %}
 
-### Edge Installation and Configuration
+### Edge安装与配置
 
-#### Guided Installation with ThingsBoard Server Pre-configured Instructions
+#### 使用ThingsBoard Server预配置说明进行引导式安装
 
 {% include templates/edge/install/tb-server-pre-configured-install-instructions.md %}
 
 {% capture local-deployment %}
-If for any reason you are unable to access and/or use **Edge preset configurations**, please refer to the [manual installation instructions](/docs/user-guide/install/{{docsPrefix}}installation-options/){: target="_blank"}.
+如因任何原因无法访问和/或使用**Edge预设配置**，请参阅 [手动安装说明](/docs/user-guide/install/{{docsPrefix}}installation-options/){: target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 
-### Accessing User Interfaces: URLs and Credentials
+### 访问用户界面：URL与凭据
 
 {% if currentThingsBoardVersion == "ThingsBoard Professional Edition" %}
 {% assign peDocsPrefix = "pe/" %}
 {% capture contenttogglespec %}
-ThingsBoard Cloud<br><small>Connect Edge to<br>https://thingsboard.cloud</small>%,%cloud%,%templates/edge/pe-cloud.md%br%
-On-premise Server<br><small>Connect Edge to local server</small>%,%on-premise%,%templates/edge/on-premise-cloud.md{% endcapture %}
+ThingsBoard Cloud<br><small>将Edge连接到<br>https://thingsboard.cloud</small>%,%cloud%,%templates/edge/pe-cloud.md%br%
+On-premise Server<br><small>将Edge连接到本地服务器</small>%,%on-premise%,%templates/edge/on-premise-cloud.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="cloudType" toggle-spec=contenttogglespec %}
 {% endif %}
 {% if currentThingsBoardVersion == "ThingsBoard Community Edition" %}
-Once **Edge** is installed, you’ll be able to access the interface via [http://localhost:18080](http://localhost:18080){:target="_blank"}.
-This URL will be referred to as **EDGE_URL** throughout the rest of this tutorial.
+**Edge**安装完成后，您可通过 [http://localhost:18080](http://localhost:18080){:target="_blank"} 访问界面。
+在本教程后续内容中，该URL将称为 **EDGE_URL**。
 
-To log in, use the same credentials as **SERVER_URL**:
-* **Username:** tenant@thingsboard.org
-* **Password:** tenant
+请使用与 **SERVER_URL** 相同的凭据登录：
+* **用户名：** tenant@thingsboard.org
+* **密码：** tenant
 {% endif %}
 
 {% include templates/edge/oauth2-not-supported.md %}

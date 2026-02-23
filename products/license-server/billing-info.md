@@ -2,36 +2,36 @@
 layout: docwithnav-license
 assignees:
 - ashvayka
-title: Billing info
-description: Billing options via ThingsBoard License Server
+title: 账单信息
+description: 通过 ThingsBoard License Server 的计费选项
 
 ---
 * TOC
 {:toc}
 
-## New billing provider
+## 新的计费服务商
 
-The **ThingsBoard License Server** is a proprietary billing solution that allows **ThingsBoard Professional Edition (TB PE)** customers to easily purchase license keys online. The online payment processing is secured by [Stripe](https://stripe.com/), which allows both credit/debit cards and wire transfer. ThingsBoard Inc. has no access to your card data. 
-Now you can easily pay for the subscription or purchase a perperual license online, without manual paperwork. 
+**ThingsBoard License Server** 是专有的计费解决方案，允许 **ThingsBoard Professional Edition (TB PE)** 客户轻松在线购买许可证密钥。在线支付处理由 [Stripe](https://stripe.com/) 保障，支持信用卡/借记卡和电汇。ThingsBoard Inc. 无法访问您的卡数据。
+现在您可以轻松在线支付订阅或购买永久许可证，而无需繁琐的纸质流程。
 
-Notice: payments are non-refundable. Although if you decide to terminate (***Cancel***) the subscription before the end time, remain amount of units will be reserved upon your account. In the Billing section you will see the ***Account credit*** notice next to ***Payment method*** and ***Billing information***. These credits will be deducted from the total sum of your next purchasing.  
+注意：付款不可退款。但如果您决定在到期前终止（***取消***）订阅，剩余数量将保留在您的账户中。在账单部分，您将在 ***付款方式*** 和 ***账单信息*** 旁看到 ***账户额度*** 通知。这些额度将从您下次购买的总金额中扣除。
 
 ![image](/images/license/accountcredit.png) 
 
-All invoices are automatically generated and available for download in the License portal in a PDF-format.
+所有发票将自动生成，并可在 License 门户中以 PDF 格式下载。
 
 ![image](/images/license/billing.png) 
  
-## Payment method
+## 付款方式
 
-ThingsBoard Inc. wants the customer get most of the product and the way to get it was as comfortable as possible.  Launching of License portal allowed to use credit/debit cards for online payments. But we continue diversifying payment methods and this section will constantly extend.
+ThingsBoard Inc. 希望客户获得最多的产品价值，并以尽可能舒适的方式获取产品。License 门户的推出使得可以使用信用卡/借记卡进行在线支付。但我们继续多样化付款方式，本部分将不断扩展。
 
-In order to pay with the card the ***Owner name***, ***Country***, ***Card number*** and ***Expiry date*** should be populated either after registration on License portal or during first purchasing. Stripe provides charging silently (no need to confirm).
+若使用信用卡付款，***持卡人姓名***、***国家***、***卡号*** 和 ***有效期*** 应在 License 门户注册后或首次购买时填写。Stripe 提供静默扣款（无需确认）。
 
-In order to proceed with wire transfer you should create the Subscription or a Perpetual license without adding card details. In that case the license will be inactive until the invoice is payed.  
+若要通过电汇进行付款，您应在不添加卡信息的情况下创建订阅或永久许可证。在这种情况下，许可证将在发票支付之前处于未激活状态。
 
-**Couponing.** License Server allows administrator to provision coupons (promo codes). This coupons may be used by partners, distributors and for marketing campaigns. They provide occasional discounts either for Pay-as-you-go or Perpetual licenses.
+**优惠券。** License Server 允许管理员配置优惠券（促销码）。这些优惠券可供合作伙伴、分销商和营销活动使用。它们可为按量付费或永久许可证提供不定期折扣。
  
-## Billing information
+## 账单信息
 
-Billing information is used by Stripe to generate the invoice. You may easily update this info.
+账单信息由 Stripe 用于生成发票。您可以轻松更新此信息。

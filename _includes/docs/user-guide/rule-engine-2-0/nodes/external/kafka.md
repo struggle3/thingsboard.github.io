@@ -1,56 +1,47 @@
-Publishes messages to [Apache Kafka](https://kafka.apache.org/){:target="_blank"} topics, sending the incoming message data as the record value.
+向 [Apache Kafka](https://kafka.apache.org/){:target="_blank"} 主题发布消息，入站消息 data 作为 record value 发送。
 
-## Configuration
+## 配置
 
-### Topic and key configuration
+### Topic and key configuration（主题与 key 配置）
 
-Define the target Kafka topic and optional partition key for message routing.
+定义目标 Kafka 主题及可选的分区 key 以路由消息。
 
-- **Topic pattern** – The name of the Kafka topic to publish messages to. Supports [templates](/docs/{{docsPrefix}}user-guide/templatization/).
-- **Key pattern** – The partition key used to determine which partition receives the message. Supports templates. Leave empty if no specific partitioning is required.
+- **Topic pattern** — 发布消息的 Kafka 主题名称。支持 [templates](/docs/{{docsPrefix}}user-guide/templatization/)。
+- **Key pattern** — 用于决定消息写入分区的 partition key。支持模板。若无需特定分区，可留空。
 
-### Producer configuration
+### Producer configuration（Producer 配置）
 
-Configure Kafka producer behavior for message delivery, batching, and reliability.
+配置 Kafka producer 的消息投递、批处理和可靠性行为。
 
-- **Automatically retry times if fails** – The number of retries (`retries`) for the Kafka producer if the record send fails.
-  Producer will retry sending records that failed due to transient errors. Set to `0` to disable retries.
+- **Automatically retry times if fails** — record 发送失败时 Kafka producer 的重试次数（`retries`）。producer 会重试因临时错误失败的 record。设为 `0` 禁用重试。
 
-- **Produces batch size in bytes** – The batch size (`batch.size`) for the Kafka producer. The producer attempts to batch records together into fewer requests whenever multiple
-  records are being sent to the same partition. This helps improve throughput. A batch size of `0` will disable batching.
+- **Produces batch size in bytes** — Kafka producer 的 batch 大小（`batch.size`）。向同一分区发送多条 record 时，producer 会尝试合并为更少的请求以提高吞吐量。batch 大小为 `0` 时禁用批处理。
 
-- **Time to buffer locally (ms)** – The linger time (`linger.ms`) for the Kafka producer. The amount of time the producer waits before sending a batch to allow more records to
-  accumulate. Setting this to a value greater than `0` will add a delay to allow more records to accumulate, improving batching at the cost of increased latency.
+- **Time to buffer locally (ms)** — Kafka producer 的 linger 时间（`linger.ms`）。producer 在发送 batch 前等待以积累更多 record 的时间。设大于 `0` 会增加延迟，但有助于批处理。
 
-- **Client buffer max size in bytes** – The buffer memory (`buffer.memory`) for the Kafka producer. The total bytes of memory the producer can use to buffer records waiting to be
-  sent to the server.
+- **Client buffer max size in bytes** — Kafka producer 的 buffer 内存（`buffer.memory`）。producer 可用于缓冲待发送 record 的总字节数。
 
-- **Number of acknowledgments** – The number of acknowledgments (`acks`) the producer requires the broker to receive before considering a request complete.
-  Available options:
-    - **-1 (all)** – The producer waits for the full set of in-sync replicas to acknowledge the record. This provides the strongest durability guarantee but has the highest
-      latency.
-    - **0** – The producer does not wait for any acknowledgment from the broker. Messages may be lost if the broker fails, but this provides the lowest latency.
-    - **1** – The producer waits for the leader to write the record to its local log but does not wait for full acknowledgment from followers. This is a balance between durability
-      and latency.
+- **Number of acknowledgments** — producer 认为请求完成前 broker 需收到的确认数（`acks`）。
+  可用选项：
+    - **-1 (all)** — producer 等待所有 in-sync 副本确认 record。持久性最强，但延迟最高。
+    - **0** — producer 不等待 broker 确认。broker 故障时可能丢消息，但延迟最低。
+    - **1** — producer 等待 leader 将 record 写入本地 log，但不等待 follower 的完整确认。在持久性和延迟之间取得平衡。
 
-### Connection configuration
+### Connection configuration（连接配置）
 
-Configure the connection to your Kafka cluster.
+配置与 Kafka 集群的连接。
 
-- **Bootstrap servers** – A comma-separated list of Kafka broker addresses in the format `host:port`. The producer uses these addresses to establish a connection to the cluster.
+- **Bootstrap servers** — Kafka broker 地址列表，逗号分隔，格式为 `host:port`。producer 使用这些地址建立与集群的连接。
 
-### Advanced settings
+### Advanced settings（高级设置）
 
-Configure additional Kafka producer properties, message headers, and character encoding.
+配置额外 Kafka producer 属性、消息头和字符编码。
 
-- **Other properties** – Custom key-value pairs for advanced Kafka producer configuration.
-  These properties are passed directly to the Kafka producer client. Common use cases include SSL/TLS configuration (e.g., `ssl.keystore.location`, `ssl.truststore.location`).
+- **Other properties** — 高级 Kafka producer 配置的自定义键值对。这些属性直接传递给 Kafka producer 客户端。常见用途包括 SSL/TLS 配置（如 `ssl.keystore.location`、`ssl.truststore.location`）。
 
-- **Add Message metadata key-value pairs to Kafka record headers** – When enabled, all message metadata key-value pairs are added to the Kafka record headers with the prefix
-  `tb_msg_md_`.
+- **Add Message metadata key-value pairs to Kafka record headers** — 启用时，所有消息 metadata 键值对会以 `tb_msg_md_` 为前缀添加到 Kafka record headers。
 
-- **Charset encoding** – The character encoding used when converting message metadata values to byte arrays for Kafka headers.
-  Only applies when **Add Message metadata key-value pairs to Kafka record headers** is enabled.
+- **Charset encoding** — 将消息 metadata 值转换为 Kafka headers 的字节数组时使用的字符编码。仅当启用 **Add Message metadata key-value pairs to Kafka record headers** 时生效。
 
 ### JSON Schema
 
@@ -131,23 +122,23 @@ Configure additional Kafka producer properties, message headers, and character e
 ```
 {: .copy-code.expandable-3 }
 
-## Output message format
+## 输出消息格式
 
-The node preserves the original message data in both success and failure cases. Metadata is updated with Kafka-specific information or error details.
+无论成功或失败，节点均保留原始消息 data。Metadata 会更新为 Kafka 相关信息或错误详情。
 
-### Success case
+### Success case（成功时）
 
-When a message is successfully published to Kafka, the following fields are added to the outgoing message metadata:
+消息成功发布到 Kafka 时，以下字段会添加到出站消息 metadata：
 
-- `offset` – The offset assigned to the record in the Kafka partition. This is a unique identifier for the record's position in the partition log.
-- `partition` – The partition number where the record was stored.
-- `topic` – The name of the topic where the record was published.
+- `offset` — record 在 Kafka 分区中的 offset，表示 record 在分区 log 中的位置。
+- `partition` — 存储 record 的分区号。
+- `topic` — 发布 record 的主题名。
 
-The original message data remains unchanged.
+原始消息 data 保持不变。
 
-**Example:**
+**示例：**
 
-Original message metadata:
+原始消息 metadata：
 
 ```json
 {
@@ -156,7 +147,7 @@ Original message metadata:
 }
 ```
 
-After successful publishing (e.g., to partition 2, offset 12345 in topic "telemetry"), metadata becomes:
+成功发布后（例如到主题 "telemetry" 的分区 2、offset 12345），metadata 变为：
 
 ```json
 {
@@ -168,15 +159,15 @@ After successful publishing (e.g., to partition 2, offset 12345 in topic "teleme
 }
 ```
 
-### Failure case
+### Failure case（失败时）
 
-When publishing fails, the following field is added to the outgoing message metadata:
+发布失败时，在出站消息 metadata 中添加以下字段：
 
-- `error` – Contains the exception class name and error message in the format: `class <ExceptionClass>: <error message>`
+- `error` — 以 `class <ExceptionClass>: <error message>` 格式包含异常类名和错误信息
 
-**Example:**
+**示例：**
 
-Original message metadata:
+原始消息 metadata：
 
 ```json
 {
@@ -184,7 +175,7 @@ Original message metadata:
 }
 ```
 
-After a failure (e.g., connection timeout), metadata becomes:
+失败后（如连接超时），metadata 变为：
 
 ```json
 {
@@ -193,18 +184,16 @@ After a failure (e.g., connection timeout), metadata becomes:
 }
 ```
 
-The message data remains unchanged.
+消息 data 保持不变。
 
-## Message acknowledgement behavior
+## 消息确认行为
 
-The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable:
+节点的消息确认行为由环境变量 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 控制：
 
-- **When set to `true`** – The incoming message is acknowledged and marked as successfully processed immediately upon receipt. A new message is created with the updated metadata
-  and is enqueued for processing by the next node.
-- **When set to `false`** (default) – The incoming message remains in an in-processing state throughout the entire Kafka publish operation. The message is transformed in place, its
-  metadata is updated after the publish completes, and the modified message is passed to the next node.
+- **设为 `true`** — 入站消息在接收后立即被确认并标记为已成功处理。创建包含更新 metadata 的新消息并加入队列供下一节点处理。
+- **设为 `false`**（默认）— 入站消息在整个 Kafka 发布操作期间保持处理中状态。消息就地转换，发布完成后更新 metadata，修改后的消息传递至下一节点。
 
-## Message processing algorithm
+## 消息处理算法
 
 1. The node constructs a Kafka producer record:
     - If the **topic pattern** is configured, templates are resolved using values from the incoming message data and metadata to determine the target topic.
@@ -223,25 +212,25 @@ The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EX
     - Error details are added to the outgoing message metadata under the `error` key.
     - The message is forwarded via the `Failure` connection.
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The message was successfully published to Kafka.
-    - The message metadata includes `offset`, `partition`, and `topic` fields.
+    - 消息已成功发布到 Kafka。
+    - 消息 metadata 包含 `offset`、`partition` 和 `topic` 字段。
 - **Failure**
-    - **Publishing error**: The Kafka broker rejected the message, the topic doesn't exist, or the producer encountered a timeout.
-    - **Initialization error**: The Kafka producer failed to initialize (e.g., invalid configuration, SSL certificate issues).
-    - **Unexpected error**: An unexpected error occurred during message processing.
+    - **Publishing error**：Kafka broker 拒绝消息、主题不存在或 producer 超时。
+    - **Initialization error**：Kafka producer 初始化失败（如配置无效、SSL 证书问题）。
+    - **Unexpected error**：消息处理过程中发生意外错误。
 
-## Examples
+## 示例
 
-### Example 1 — Basic telemetry publishing
+### 示例 1 — 基本 telemetry 发布
 
-Publish telemetry data to a dedicated telemetry topic without a partition key.
+将 telemetry 数据发布到专用 telemetry 主题，不指定 partition key。
 
-**Incoming message**
+**入站消息**
 
-Data:
+Data：
 
 ```json
 {
@@ -250,7 +239,7 @@ Data:
 }
 ```
 
-Metadata:
+Metadata：
 
 ```json
 {
@@ -259,7 +248,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -277,11 +266,11 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：未更改。
 
-Metadata:
+Metadata：
 
 ```json
 {
@@ -293,9 +282,8 @@ Metadata:
 }
 ```
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The telemetry data was successfully published to the "telemetry" topic. The Kafka broker assigned the record to partition 2 at offset 12345. Since no key was specified, the Kafka
-client used default distribution across available partitions. The producer waited for all in-sync replicas to acknowledge the record (acks=-1), ensuring durability.
+telemetry 数据已成功发布到 "telemetry" 主题。Kafka broker 将 record 分配到分区 2、offset 12345。因未指定 key，Kafka 客户端使用默认分区分布。producer 等待所有 in-sync 副本确认 record（acks=-1），确保持久性。

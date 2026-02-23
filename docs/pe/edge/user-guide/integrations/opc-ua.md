@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: OPC-UA Integration
-description: OPC-UA Integration Guide
+title: OPC-UA 集成
+description: OPC-UA 集成指南
 addConverter:
     0:
         image: /images/pe/edge/integrations/opc-ua/add-converter-step-1.webp

@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: CoAP over DTLS
-description: Launching ThingsBoard with secure CoAP protocol to connect your IoT devices and projects.
+title: 基于 DTLS 的 CoAP
+description: 使用安全的 CoAP 协议启动 ThingsBoard 以连接 IoT 设备和项目。
 
 ---
 

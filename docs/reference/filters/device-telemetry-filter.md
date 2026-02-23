@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Device Telemetry Filter
+title: 设备遥测过滤器
 
 ---
 

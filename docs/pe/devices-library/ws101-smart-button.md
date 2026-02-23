@@ -1,5 +1,6 @@
 ---
 layout: docwithnav-pe
-title: "How to connect WS101 LoRaWAN® Smart Button to ThingsBoard?"
+title: "如何将 WS101 LoRaWAN® 智能按钮连接到 ThingsBoard？"
+description: WS101 LoRaWAN® 智能按钮与 ThingsBoard 的连接指南
 redirect_to: "/device-library/pe/ws101-smart-button/"
 ---

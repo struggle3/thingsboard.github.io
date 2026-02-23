@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: add to group
-description: Adds the message originator to the entity group found by group name pattern.
+title: 加入分组
+description: 将消息 originator 加入按分组名模式匹配的 entity 分组。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

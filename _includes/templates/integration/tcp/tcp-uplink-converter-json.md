@@ -1,4 +1,4 @@
-Now copy & paste the following script to the Decoder function section:
+请将以下脚本复制并粘贴到 Decoder function 区域：
 
 ```javascript
 /** Decoder **/
@@ -39,6 +39,6 @@ return result;
 ```
 {: .copy-code}
 
-The purpose of the decoder function is to parse the incoming data and metadata to a format that ThingsBoard can consume. 
-**deviceName** and **deviceType** are required, while **attributes** and **telemetry** are optional.
-**attributes** and **telemetry** are flat key-value objects. Nested objects are not supported.
+Decoder function 用于将入站数据和 metadata 解析为 ThingsBoard 可消费的格式。
+**deviceName** 和 **deviceType** 为必填，**attributes** 和 **telemetry** 为可选。
+**attributes** 和 **telemetry** 为扁平键值对象，不支持嵌套对象。

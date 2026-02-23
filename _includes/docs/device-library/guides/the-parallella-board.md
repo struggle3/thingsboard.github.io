@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign prerequisites = "
 - " | append: deviceName | append: "
 - [tb-mqtt-client library](https://pypi.org/project/tb-mqtt-client/)
@@ -7,43 +7,41 @@
 - [Adafruit-Blinka](https://pypi.org/project/Adafruit-Blinka/) "
  %}
 
-## Introduction
+## 概述
 
-The Parallella Board is a single-board computer based on the Xilinx Zynq Z-7010 SoC, featuring a dual-core ARM Cortex-A9 CPU and an FPGA.
- It was designed for parallel processing and is ideal for high-performance computing applications.
+Parallella 是一款基于 Xilinx Zynq Z-7010 SoC 的单板计算机，配备双核 ARM Cortex-A9 CPU 与 FPGA。
+专为并行处理设计，适合高性能计算应用。
 
 {% include /docs/device-library/blocks/basic/introduction-block.md %}
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 {% include /docs/device-library/blocks/basic/thingsboard-create-device-block.md %}
 
-## Install required libraries and tools
+## 安装所需库和工具 {#install-required-libraries-and-tools}
 
 {% include /docs/device-library/blocks/single-board-computers/install-required-libraries-and-tools-block.md %}
 
-## Connect device to ThingsBoard
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 {% include /docs/device-library/blocks/basic/thingsboard-provide-device-access-token-block.md %}
 
 {% include /docs/device-library/blocks/single-board-computers/general-code-to-program-block.md %}
 
-## Synchronize device state using client and shared attribute requests
+## 使用客户端和共享属性请求同步设备状态 {#synchronize-device-state-using-client-and-shared-attribute-requests}
 {% include /docs/device-library/blocks/single-board-computers/thingsboard-synchronize-device-state-using-attribute-requests-block.md %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/single-board-computers/check-data-on-thingsboard-block.md %}
 
-## Control device using shared attributes
+## 使用共享属性控制设备 {#control-device-using-shared-attributes}
 
 {% include /docs/device-library/blocks/single-board-computers/update-shared-attributes-block.md %}
 
-## Control device using RPC
+## 使用 RPC 控制设备 {#control-device-using-rpc}
 
 {% include /docs/device-library/blocks/single-board-computers/using-rpc-block.md %}
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

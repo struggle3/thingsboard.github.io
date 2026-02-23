@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Get ThingsBoard Professional Edition
-description: ThingsBoard Professional Edition Installation
+title: 获取 ThingsBoard 专业版
+description: ThingsBoard 专业版安装
 hidetoc: "true"
 
 ---
@@ -50,11 +50,11 @@ hidetoc: "true"
 <section id="install-pe">
     <div class="tabs">
         <input name="tabs" type="radio" id="tab-trial" checked="checked" class="tab-input">
-        <label for="tab-trial" class="tab-label label-premise">Free trial</label>
+        <label for="tab-trial" class="tab-label label-premise">免费试用</label>
         <div class="tab-panel">
             <div id="trial-marketplace" class="choose-marketplace">
                 <p>
-                    Signup for free month trial on ThingsBoard PE Cloud
+                    在 ThingsBoard PE Cloud 注册免费月度试用
                 </p>
                 <div class="marketplace" style="padding-bottom: 10px;">
                     <div id="pe-cloud-trial" class="pricing-image-wrapper clickable" style="max-width: 50%;">
@@ -64,16 +64,16 @@ hidetoc: "true"
                 </div>
                 <div style="font-size: 20px;">
                 <p style="padding-top: 20px; font-size: 20px;">
-                    ThingsBoard PE Cloud is a shared enviroment with multiple limitations, such as:
+                    ThingsBoard PE Cloud 为共享环境，存在多项限制，例如：
                 </p>
                 <ul style="margin: 10px 10px 10px 60px;">
-                    <li>amount of active device connections</li>
-                    <li>amount of REST API calls per user</li>
-                    <li>amount of websocket subscriptions per user</li>
-                    <li>disabled white-labeling feature</li>
+                    <li>活跃设备连接数</li>
+                    <li>每用户 REST API 调用数</li>
+                    <li>每用户 WebSocket 订阅数</li>
+                    <li>禁用白标功能</li>
                 </ul>
                 <p style="padding-top: 0px; font-size: 20px;">
-                    To get the maximum of ThingsBoard PE, we recommend to install your dedicated server using one of the available options below.
+                    要充分发挥 ThingsBoard PE 的能力，我们建议使用下列选项之一安装您的专用服务器。
                 </p>
                 </div>
                 <div class="marketplace">
@@ -212,15 +212,15 @@ hidetoc: "true"
             </div>
         </div>
         <input name="tabs" type="radio" id="tab-on-premise" class="tab-input">
-        <label for="tab-on-premise" class="tab-label label-premise">Pay yearly</label>
+        <label for="tab-on-premise" class="tab-label label-premise">年付</label>
         <div class="tab-panel">
             <div id="pay-yearly-option" class="choose-marketplace">
                 <p>
-                    Please choose your deployment option
+                    请选择您的部署选项
                 </p>
                 <div class="marketplace">
                     <div id="pay-yearly-premise" class="pricing-image-wrapper">
-                        <span>On-premises</span>
+                        <span>本地部署</span>
                     </div>
                     <div id="aws-pay-yearly-market" class="pricing-image-wrapper clickable">
                         <img src="/images/pe/aws_logo.svg" alt="aws logo">
@@ -298,11 +298,11 @@ hidetoc: "true"
             </div>
         </div>
         <input name="tabs" type="radio" id="tab-cloud" class="tab-input">
-        <label for="tab-cloud" class="tab-label label-cloud">Pay as you go</label>
+        <label for="tab-cloud" class="tab-label label-cloud">按需付费</label>
         <div class="tab-panel">
             <div id="pay-go-marketplace" class="choose-marketplace">
                 <p>
-                    Please choose your cloud provider
+                    请选择您的云提供商
                 </p>
                 <div class="marketplace">
                     <div id="aws-pay-go-market" class="pricing-image-wrapper clickable">
@@ -449,7 +449,7 @@ hidetoc: "true"
         </div>
     </div>
     <div class="questions">
-        Questions about deployment options? <a href="/docs/contact-us/?subject=Deployment%20Options">Contact us.</a>
+        有关部署选项的问题？<a href="/docs/contact-us/?subject=Deployment%20Options">联系我们</a>。
     </div>
 </section>
 <script src="https://static.mailerlite.com/js/w/webforms.min.js?v3772b61f1ec61c541c401d4eadfdd02f"></script>

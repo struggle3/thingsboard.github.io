@@ -116,12 +116,12 @@ function selectDropDown(type,tag)
 }
 </style>
 
-Click tags or use the drop downs to filter. Click table headers to sort or reverse sort.
+点击标签或使用下拉框筛选。点击表头进行排序或倒序。
 
 <p id="filters">
-Filter by Concept: <span id="conceptFilter" /><br/>
-Filter by Object: <span id="objectFilter" /><br/>
-Filter by Command: <span id="commandFilter" />
+按概念筛选：<span id="conceptFilter" /><br/>
+按对象筛选：<span id="objectFilter" /><br/>
+按命令筛选：<span id="commandFilter" />
 </p>
 
 <div id="output" />

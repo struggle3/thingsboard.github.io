@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect LattePanda to ThingsBoard?"
+title: "如何将LattePanda连接到ThingsBoard？"
 redirect_to: "/device-library/paas/lattepanda/"
 ---

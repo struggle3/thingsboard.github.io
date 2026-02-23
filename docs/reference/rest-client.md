@@ -3,7 +3,7 @@ layout: docwithnav
 assignees:
 - ashvayka
 title: REST Client
-description: Supported REST API Reference for server-side integration of your java projects
+description: 用于 Java 项目服务端集成的 REST API 参考
 
 ---
  * TOC

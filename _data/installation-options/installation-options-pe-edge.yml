@@ -1,64 +1,64 @@
 peEdge:
   0:
-    title: Docker (Linux or Mac OS)
-    description: This guide provides step-by-step instructions for running ThingsBoard Edge on Linux or Mac OS using Docker.
+    title: Docker (Linux或Mac OS)
+    description: 本指南提供在Linux或Mac OS上使用Docker运行ThingsBoard Edge的步骤说明。
     link: /docs/user-guide/install/pe/edge/docker/
     icon: /images/install/platform/docker-linux-macos.svg
-    alt: Docker logo with Linux and macOS icons
+    alt: Docker标识（含Linux与macOS图标）
     imageTitleAttribute: Install ThingsBoard Edge using Docker on Linux or macOS
     imageWidth: 170
     imageHeight: 36
   1:
     title: Docker (Windows)
-    description: This guide will help you to install and start ThingsBoard Edge using Docker on Windows.
+    description: 本指南帮助您在Windows上使用Docker安装并启动ThingsBoard Edge。
     link: /docs/user-guide/install/pe/edge/docker-windows/
     icon: /images/install/platform/docker-windows.svg
-    alt: Docker logo with Windows icon
+    alt: Docker标识（含Windows图标）
     imageTitleAttribute: Install ThingsBoard Edge using Docker on Windows
     imageWidth: 96
     imageHeight: 36
   2:
     title: Ubuntu Server
-    description: This guide provides step-by-step instructions for installing ThingsBoard Edge on Ubuntu 18.04 LTS and 20.04 LTS.
+    description: 本指南介绍在Ubuntu 18.04 LTS与20.04 LTS上安装ThingsBoard Edge的步骤。
     link: /docs/user-guide/install/pe/edge/deb-installation/
     icon: /images/install/platform/ubuntu.svg
-    alt: Ubuntu logo
+    alt: Ubuntu标识
     imageTitleAttribute: Install ThingsBoard Edge on Ubuntu Server
     imageWidth: 36
     imageHeight: 36
   3:
     title: CentOS/RHEL Server
-    description: This guide provides step-by-step instructions for installing ThingsBoard Edge on RHEL/CentOS 7 and 8.
+    description: 本指南介绍在RHEL/CentOS 7与8上安装ThingsBoard Edge的步骤。
     link: /docs/user-guide/install/pe/edge/rhel/
     icon: /images/install/platform/centos-redhat.svg
-    alt: CentOS and Red Hat logos
+    alt: CentOS与Red Hat标识
     imageTitleAttribute: Install ThingsBoard Edge on CentOS, RHEL.
     imageWidth: 94
     imageHeight: 36
   4:
     title: Windows
-    description: This guide provides instructions for installing ThingsBoard Edge on Windows.
+    description: 本指南介绍在Windows上安装ThingsBoard Edge的说明。
     link: /docs/user-guide/install/pe/edge/windows/
     icon: /images/install/platform/windows.svg
-    alt: Windows logo
+    alt: Windows标识
     imageTitleAttribute: Install ThingsBoard Edge on Windows.
     imageWidth: 35
     imageHeight: 36
   5:
     title: Raspberry Pi
-    description: This guide provides step-by-step instructions for installing ThingsBoard Edge on RaspberryPi.
+    description: 本指南介绍在Raspberry Pi上安装ThingsBoard Edge的步骤。
     link: /docs/user-guide/install/pe/edge/rpi/
     icon: /images/install/platform/rpi3.svg
-    alt: Raspberry Pi logo
+    alt: Raspberry Pi标识
     imageTitleAttribute: Install ThingsBoard Edge on Raspberry Pi
     imageWidth: 36
     imageHeight: 36
   6:
-    title: Docker Cluster setup
-    description: This guide will help you to setup ThingsBoard Edge in cluster mode using Docker Compose tool.
+    title: Docker集群部署
+    description: 本指南帮助您使用Docker Compose以集群模式部署ThingsBoard Edge。
     link: /docs/pe/edge/config/edge-cluster-setup/
     icon: /images/install/cluster/docker-compose.svg
-    alt: Docker Compose logo
+    alt: Docker Compose标识
     imageTitleAttribute: Set up ThingsBoard Edge in cluster mode using Docker Compose
     imageWidth: 36
     imageHeight: 36

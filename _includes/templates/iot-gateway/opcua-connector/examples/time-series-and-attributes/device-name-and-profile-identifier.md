@@ -1,57 +1,51 @@
-The device name and profile can be set dynamically using node values. In this example, we will use identifier to
-specify the device name and profile. [Identifier](/docs/iot-gateway/config/opc-ua/#identifier-types) can be **numeric**,
-**string**, **byte string** or **GUID** identifier of the node in the OPC-UA server.
+设备名和配置文件可根据节点值动态设置。本示例使用标识符指定设备名和配置文件。[Identifier](/docs/iot-gateway/config/opc-ua/#identifier-types) 可为 OPC-UA 服务器中节点的**数字**、**字符串**、**字节串**或 **GUID** 标识符。
 
-As an example, we will use Prosys OPC-UA Simulation Server, which is available at
-`opc.tcp://0.0.0.0:53530/OPCUA/SimulationServer`. The server has the following structure:
+以下示例使用 Prosys OPC-UA 仿真服务器，地址为 `opc.tcp://0.0.0.0:53530/OPCUA/SimulationServer`。服务器结构如下：
 
 ![image](/images/gateway/opc-ua-connector/examples/opc-ua-server-structure-overview.png)
 
-We are interested in nodes: "**DeviceModelName**" that have `ns=3;i=1014` identifier and "**DeviceSeries**" that 
-have `ns=3;i=1015` identifier. We will use these nodes to set the device name and profile, respectively.
+我们关注节点 "**DeviceModelName**"（标识符 `ns=3;i=1014`）和 "**DeviceSeries**"（标识符 `ns=3;i=1015`）。将用它们分别设置设备名和配置文件。
 
-Let's configure the device name and profile in the OPC-UA connector. For this purpose, follow these steps:
+在 OPC-UA 连接器中配置设备名和配置文件。按以下步骤操作：
 
 {% assign deviceNameAndProfileIdentifierPath = '
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-1.png,
-        title: Go to "**Entities**" → "**Gateways**" in the right sidebar and select your gateway.
+        title: 在右侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-3.png,
-        title: Select the created OPC-UA connector, click on the "**Data mapping**" tab. Firstly, we need to configure parent (or device) node. Click on the "**+ Add mapping**" button.
+        title: 选择已创建的 OPC-UA 连接器，点击“**数据映射**”标签。首先配置父（或设备）节点。点击“**+ 添加映射**”按钮。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-4.png,
-        title: In the opened window, fill in "**Device node**" field with `Root\.Objects\.DemoDevice`, also select "**[Path](/docs/iot-gateway/config/opc-ua/#absolute-path)**" in "**Source**" field. This is an absolute path to the parent node of the device we want to create.
+        title: 在打开的窗口中，“**设备节点**”填 `Root\.Objects\.DemoDevice`，“**来源**”选“**[Path](/docs/iot-gateway/config/opc-ua/#absolute-path)**”。这是要创建设备的父节点的绝对路径。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-identifier-path-5.png,
-        title: In the "**Name**" field, enter `${ns=3;i=1014}`, also select "**[Identifier](/docs/iot-gateway/config/opc-ua/#identifier-types)**" in "**Source**" field.
+        title: “**名称**”填 `${ns=3;i=1014}`，“**来源**”选“**[Identifier](/docs/iot-gateway/config/opc-ua/#identifier-types)**”。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-identifier-path-6.png,
-        title: In the "**Profile name**" field, enter `${ns=3;i=1015}`, also select "**[Identifier](/docs/iot-gateway/config/opc-ua/#identifier-types)**" in "**Source**" field. This is an absolute path to the node that contains the device profile.
+        title: “**配置文件名称**”填 `${ns=3;i=1015}`，“**来源**”选“**[Identifier](/docs/iot-gateway/config/opc-ua/#identifier-types)**”。这是包含设备配置文件的节点的绝对路径。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-identifier-path-7.png,
-        title: Also, we need to add one attribute/time series because the connector will not add a device without any data to read (you can use any pre-installed Prosys OPC-UA Simulation Server node). Click on the "**pencil**" icon next to the "**Attributes**" section.
+        title: 还需至少添加一个属性/时序数据，因为连接器不会添加无可读数据的设备（可使用任意预装的 Prosys OPC-UA 仿真服务器节点）。点击“**属性**”旁的“**铅笔**”图标。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-absolute-path-8.png,
-        title: In the opened window, click on the "**Add attribute**" button and fill the fields as on the corresponding image.
+        title: 在打开的窗口中，点击“**添加属性**”按钮并按对应图片填写字段。
     ===
         image: /images/gateway/opc-ua-connector/examples/device-name-and-profile-identifier-path-9.png,
-        title: Remember to save your changes by clicking the "**Save**" button.
+        title: 记得点击“**保存**”按钮保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceNameAndProfileIdentifierPath %}
 
-Now we can check if the device name and profile are set correctly. Go to "**Entities**" > "**Devices**" and as you can see, the device
-name is set to `Demo Device` and the profile is set to `Demo Series`.
+可以检查设备名和配置文件是否正确设置。进入“**实体**”→“**设备**”，设备名应为 `Demo Device`，配置文件为 `Demo Series`。
 
 ![image](/images/gateway/opc-ua-connector/examples/result-device-overview.png)
 
-If you are using advanced configuration mode and want to set the device name and profile using an identifier, you can
-use the following configuration:
+若使用高级配置模式并需用标识符设置设备名和配置文件，可使用以下配置：
 
 ```json
 {

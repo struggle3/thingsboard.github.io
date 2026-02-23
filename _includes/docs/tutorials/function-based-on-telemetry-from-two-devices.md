@@ -1,85 +1,85 @@
 * TOC
 {:toc}
 
-This guide demonstrates how to calculate a telemetry delta using data from two different devices in ThingsBoard and store the result as asset telemetry.
+本指南演示如何在 ThingsBoard 中基于两台不同设备的遥测数据计算遥测 delta，并将结果存储为 asset telemetry。
 
-As an example, we will calculate the temperature difference between indoor and outdoor thermometers installed in a warehouse. The calculated value is stored as a new telemetry key and can be used for monitoring, visualization, or alerting.
+以仓库中安装的室内和室外温度计之间的温度差为例。计算得到的值作为新的遥测键存储，可用于监控、可视化或告警。
 
-This guide is introductory and focuses on demonstrating the core capabilities of the platform, rather than building configurations from scratch.   
-For this reason, predefined calculated field configurations are provided and imported during the setup.
+本指南为入门级，重点演示平台核心能力，而非从零构建配置。   
+因此，在设置过程中将提供并导入预设的 calculated field 配置。
 
-After importing these configurations into your ThingsBoard instance, you can examine their structure, logic, and behavior, and then adapt them to suit your own use cases.
+将上述配置导入 ThingsBoard 实例后，可查看其结构、逻辑和行为，并据此适配自己的使用场景。
 
 <hr>
 
-## Use case
+## 使用场景
 
-Assume you have a warehouse equipped with two temperature sensors:
+假设仓库配备两台温度传感器：
 - Indoor Thermometer
 - Outdoor Thermometer
 
-Your objective is to:
-- Collect telemetry from both devices 
-- Calculate the absolute temperature difference between the indoor and outdoor readings 
-- Store the result as telemetry on the warehouse asset 
-- Visualize and monitor this value in real time
+目标是：
+- 从两台设备采集遥测
+- 计算室内与室外读数的绝对温度差
+- 将结果作为仓库 asset 的遥测存储
+- 实时可视化和监控该值
 
-This example demonstrates cross-entity data aggregation, where telemetry from multiple devices is processed at the asset level.
-
-<hr>
-
-## Prerequisites
-
-Before proceeding, it is recommended to review the ThingsBoard [Calculated fields](/docs/{{docsPrefix}}user-guide/calculated-fields/){:target="_blank"} documentation.
-
-This topic provides the necessary foundation for understanding entity relationships and data processing mechanisms used in this example.
+该示例展示跨实体数据聚合，即在 asset 层级处理来自多台设备的遥测。
 
 <hr>
 
-## 1. Provision asset and devices
+## 前置条件
 
-In ThingsBoard, an asset is an abstract entity used to represent logical objects such as buildings, warehouses, or production lines.   
-In this example, the asset represents a warehouse and is used to store aggregated telemetry from multiple devices.
+在继续前，建议先阅读 ThingsBoard [Calculated fields](/docs/{{docsPrefix}}user-guide/calculated-fields/){:target="_blank"} 文档。
 
-**Create the asset:**
-1. Navigate to **Entities** **&#8702;** **Assets**.
-2. Click the **"&#43; Add asset"** button in the top-right corner, select **"Add new asset"** and create:   
+该主题提供了理解本示例中实体关系与数据处理机制所需的基础。
+
+<hr>
+
+## 1. 创建 asset 与设备
+
+在 ThingsBoard 中，asset 是用于表示建筑物、仓库或生产线等逻辑对象的抽象实体。   
+本示例中，asset 代表仓库，用于存储来自多台设备的聚合遥测。
+
+**创建 asset：**
+1. 进入 **Entities** **&#8702;** **Assets**。
+2. 点击右上角 **「&#43; Add asset」** 按钮，选择 **「Add new asset」** 并创建：   
 &#8194;&#8226;&#8194;**Asset name**: Warehouse A   
 &#8194;&#8226;&#8194;**Asset profile**: warehouse
 
-**Create two devices:**
-1. Download the CSV file containing the device configuration:   
+**创建两台设备：**
+1. 下载包含设备配置的 CSV 文件：   
    [thermometers_device_data.csv](/docs/user-guide/resources/guides/thermometers_device_data.csv){:target="_blank" download="thermometers_device_data.csv"}
-2. Navigate to **Entities** **&#8702;** **Devices**.
-3. Click the **"&#43; Add device"** button in the top-right corner and select **"Import device"**.
-4. [Upload the CSV file](/docs/{{docsPrefix}}user-guide/bulk-provisioning/#upload-file){:target="_blank"} and follow the import wizard instructions.
+2. 进入 **Entities** **&#8702;** **Devices**。
+3. 点击右上角 **「&#43; Add device」** 按钮，选择 **「Import device」**。
+4. [上传 CSV 文件](/docs/{{docsPrefix}}user-guide/bulk-provisioning/#upload-file){:target="_blank"} 并按照导入向导操作。
 
-**CSV configuration details:**
-- **CSV delimiter**: <span class="code-light">,</span>
+**CSV 配置详情：**
+- **CSV delimiter**：<span class="code-light">,</span>
 - **Column mapping**:
    - **Name**: Indoor Thermometer, Outdoor Thermometer
    - **Type**: thermometer
 
 <hr>
 
-## 2. Emulate telemetry using Rule Engine
+## 2. 使用 Rule Engine 模拟遥测
 
-Since this example uses virtual devices, telemetry must be generated artificially.
+由于本示例使用虚拟设备，遥测需 artificially 生成。
 
-Use [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"} to periodically publish random temperature values.
+使用 [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/){:target="_blank"} 定期发布随机温度值。
 
-> For simplicity, the generators are added to the Root Rule Chain, although in production setups a dedicated rule chain should be used instead.
+> 为简化说明，将 generator 添加到 Root Rule Chain，但在生产环境中应使用 dedicated rule chain。
 
-- Navigate to **Rule chains**.
-- Open the **Root Rule Chain**. 
-- Drag and drop a [Generator node](/docs/user-guide/rule-engine-2-0/nodes/action/generator){:target="_blank"} onto the canvas. 
-- Select **Indoor Thermometer** as the originator. 
-- Replace the generator function with the appropriate emulator script. 
-- Repeat the same steps for the **Outdoor Thermometer** device. 
-- Connect both Generator nodes to the [Entity type filter node](/docs/user-guide/rule-engine-2-0/nodes/filter/entity-type-filter){:target="_blank"} using the **Success** relation.
-- Apply changes.
+- 进入 **Rule chains**。
+- 打开 **Root Rule Chain**。 
+- 将 [Generator node](/docs/user-guide/rule-engine-2-0/nodes/action/generator){:target="_blank"} 拖拽到画布上。 
+- 选择 **Indoor Thermometer** 作为 originator。 
+- 使用相应的模拟脚本替换 generator 函数。 
+- 对 **Outdoor Thermometer** 设备重复上述步骤。 
+- 使用 **Success** 关系将两个 Generator 节点连接到 [Entity type filter node](/docs/user-guide/rule-engine-2-0/nodes/filter/entity-type-filter){:target="_blank"}。
+- 应用更改。
 
-**Indoor Thermometer emulator script:**
+**Indoor Thermometer 模拟脚本：**
 ```javascript
 var indoorTemperature = toFixed(Math.random()*10 + 18, 2);
 var msg = { indoorTemperature: indoorTemperature };
@@ -89,9 +89,9 @@ return { msg: msg, metadata: metadata, msgType: msgType };
 ```
 {:.copy-code}
 
-This generator simulates indoor temperatures in the range of approximately 18–28 °C.
+该 generator 模拟约 18–28 °C 范围内的室内温度。
 
-**Outdoor Thermometer emulator script:**
+**Outdoor Thermometer 模拟脚本：**
 ```javascript
 var outdoorTemperature = toFixed(Math.random()*10 + 16, 2);
 var msg = { outdoorTemperature: outdoorTemperature };
@@ -101,28 +101,28 @@ return { msg: msg, metadata: metadata, msgType: msgType };
 ```
 {:.copy-code}
 
-This generator simulates outdoor temperatures in the range of approximately 16–26 °C.
+该 generator 模拟约 16–26 °C 范围内的室外温度。
 
-**Verification**
+**验证**
 
-After the generators start running:
-1. Open **Entities &#8702; Devices &#8702; Indoor Thermometer &#8702; Latest telemetry**.
-2. Open **Entities &#8702; Devices &#8702; Outdoor Thermometer &#8702; Latest telemetry**.
+Generator 运行后：
+1. 打开 **Entities &#8702; Devices &#8702; Indoor Thermometer &#8702; Latest telemetry**。
+2. 打开 **Entities &#8702; Devices &#8702; Outdoor Thermometer &#8702; Latest telemetry**。
 
-You should see continuously updated <span class="code-light">temperature</span> values.
+应能看到持续更新的 <span class="code-light">temperature</span> 值。
 
 <hr>
 
-## 3. Import a calculated field on the asset
+## 3. 在 asset 上导入 calculated field
 
-Calculate the temperature difference between the two thermometers and store it as asset telemetry.
-1. Download the calculated field configuration file:   
-   [temperature_delta_based_on_2_devices_cf.json](/docs/user-guide/resources/guides/temperature_delta_based_on_2_devices_cf.json){:target="_blank" download="temperature_delta_based_on_2_devices_cf.json"}.
-2. Navigate to the **Calculated fields** page.
-3. Click the **"&#43; Add calculated field"** button in the top-right corner and select **"Import calculated field"**.
-4. [Upload the calculated field configuration file](/docs/{{docsPrefix}}user-guide/calculated-fields/#export--import-calculated-field){:target="_blank"}.
-5. Select the **warehouse** [asset profile](/docs/{{docsPrefix}}user-guide/asset-profiles/){:target="_blank"} as the target entity so the calculated field is applied automatically to all relevant assets.
-6. Update the calculated field arguments as follows:   
+计算两台温度计的温度差，并将其作为 asset telemetry 存储。
+1. 下载 calculated field 配置文件：   
+   [temperature_delta_based_on_2_devices_cf.json](/docs/user-guide/resources/guides/temperature_delta_based_on_2_devices_cf.json){:target="_blank" download="temperature_delta_based_on_2_devices_cf.json"}。
+2. 进入 **Calculated fields** 页面。
+3. 点击右上角 **「&#43; Add calculated field」** 按钮，选择 **「Import calculated field」**。
+4. [上传 calculated field 配置文件](/docs/{{docsPrefix}}user-guide/calculated-fields/#export--import-calculated-field){:target="_blank"}。
+5. 选择 **warehouse** [asset profile](/docs/{{docsPrefix}}user-guide/asset-profiles/){:target="_blank"} 作为目标实体，以便 calculated field 自动应用到所有相关 assets。
+6. 按如下方式更新 calculated field 参数：   
    &#8226;&#8194;**First argument**:   
    &#8194;&#8194;&#8226;&#8194;**Entity type**: Device   
    &#8194;&#8194;&#8226;&#8194;**Device name**: Indoor Thermometer   
@@ -135,44 +135,44 @@ Calculate the temperature difference between the two thermometers and store it a
    &#8194;&#8194;&#8226;&#8194;**Argument type**: Latest telemetry   
    &#8194;&#8194;&#8226;&#8194;**Time series key**: outdoorTemperature   
    &#8194;&#8194;&#8226;&#8194;**Argument name**: outdoorTemperature
-7. Click **Add** to complete the import.
+7. 点击 **Add** 完成导入。
 
-<b><font size="3">Calculation logic</font></b>
+<b><font size="3">计算逻辑</font></b>
 
 ```javascript
 abs(indoorTemperature - outdoorTemperature)
 ```
 {: .copy-code}
 
-This calculates the absolute temperature difference regardless of which value is higher.
+无论哪个值更高，都会计算绝对温度差。
 
-Once saved, the asset automatically receives updated deltaTemperature telemetry.
-
-<hr>
-
-## 4. Verify the configuration
-
-1. Open **Entities &#8702; Assets &#8702; Warehouse A &#8702; Latest telemetry**.
-2. Confirm that the <span class="code-light">deltaTemperature</span> key is present and updates in real time.
-
-This confirms that:
-- Telemetry is received from both devices
-- The calculated field executes correctly
-- The result is stored on the asset
+保存后，asset 会自动接收更新后的 deltaTemperature 遥测。
 
 <hr>
 
-## 5. Visualize data using a dashboard (optional)
+## 4. 验证配置
 
-To monitor temperature differences visually:
-- [Download the prepared Warehouse dashboard JSON file](/docs/user-guide/resources/guides/warehouse_dashboard.json){:target="_blank" download="warehouse_dashboard.json"}.
-- [Import](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"} it into ThingsBoard.
-- After the import, update the [entity alias](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"} by setting Warehouse A as the target entity to ensure its data is displayed correctly.
+1. 打开 **Entities &#8702; Assets &#8702; Warehouse A &#8702; Latest telemetry**。
+2. 确认存在 <span class="code-light">deltaTemperature</span> 键并实时更新。
 
-The dashboard should display a real-time chart and table showing the temperature difference between the indoor and outdoor thermometers.
+这表明：
+- 两台设备的遥测均被接收
+- Calculated field 正确执行
+- 结果存储在 asset 上
 
 <hr>
 
-## Next steps
+## 5. 使用 dashboard 可视化数据（可选）
+
+要可视化监控温度差：
+- [下载准备好的 Warehouse dashboard JSON 文件](/docs/user-guide/resources/guides/warehouse_dashboard.json){:target="_blank" download="warehouse_dashboard.json"}。
+- [导入](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"} 到 ThingsBoard。
+- 导入后，更新 [entity alias](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"}，将 Warehouse A 设为目标实体以正确显示数据。
+
+Dashboard 应显示室内与室外温度计之间温度差的实时图表和表格。
+
+<hr>
+
+## 后续步骤
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}

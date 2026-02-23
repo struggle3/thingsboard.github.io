@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Related entities aggregation calculated field
-description: For complex calculations, TBEL is used. It enables advanced operations such as conditional statements, loops, and access to historical data.
+title: 关联实体聚合计算字段
+description: 对关联实体的数据进行聚合计算。TBEL支持条件语句、循环及历史数据访问等高级操作。
 breadcrumbs: "true"
 breadcrumbs-steps: "1"
 hidetoc: "true"

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: aws lambda
-description: Invokes AWS Lambda function with incoming message data as the payload and returns the function's response as outgoing message data.
+description: 以入站消息数据为负载调用 AWS Lambda 函数，并将函数响应作为出站消息数据返回。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

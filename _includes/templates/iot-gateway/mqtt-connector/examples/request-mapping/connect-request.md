@@ -1,72 +1,72 @@
-For a Connect request, the gateway must know which device name to target. You can extract it either from the `Message` payload using [json-path](/docs/iot-gateway/config/mqtt/#json-path)
-or from the topic using a [regex](/docs/iot-gateway/config/mqtt/#regular-expressions). Choose [json-path](/docs/iot-gateway/config/mqtt/#json-path) when the device name is inside the JSON message; choose [regex](/docs/iot-gateway/config/mqtt/#regular-expressions) when it's encoded in the topic.
+对于连接请求，网关需要知道目标设备名。可使用 [json-path](/docs/iot-gateway/config/mqtt/#json-path) 从 `Message` 负载提取，
+也可用 [正则表达式](/docs/iot-gateway/config/mqtt/#regular-expressions) 从主题提取。设备名在 JSON 消息中时选择 [json-path](/docs/iot-gateway/config/mqtt/#json-path)；编码在主题中时选择 [正则表达式](/docs/iot-gateway/config/mqtt/#regular-expressions)。
 
-Device `SN-001` hasn't sent telemetry for 10 minutes and is marked inactive, but you still need to send an RPC (and you're not planning to resume telemetry).
-Let's configure a Connect request in the MQTT connector to (re)announce the device so RPC can be delivered. We'll demonstrate two ways to extract the device name:
+设备 `SN-001` 已 10 分钟未发送遥测且被标记为不活跃，但您仍需发送 RPC（且暂不打算恢复遥测）。
+在 MQTT 连接器中配置连接请求，以（重新）宣告设备，使 RPC 能下发。演示两种提取设备名的方式：
 
-- From message (`JSON` payload).
-- From topic (e.g., `sensor/SN-001/connect`).
+- 从消息（`JSON` 负载）。
+- 从主题（如 `sensor/SN-001/connect`）。
 
-Follow these steps:
+按以下步骤操作：
 
 {% assign deviceNameAndProfileTopicAndConstantJson = '
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-1.png,
-        title: Go to "**Entities**" - "**Gateways**" on the left sidebar and select your gateway.
+        title: 在左侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/mqtt-connector/examples/connect-request-gateway.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/mqtt-gateway-configuring-11-ce.png,
-        title: Select the MQTT connector, click on the "**Basic**". Click the "**Add mapping**" under "**Requests mapping**" section to add new connect request mapping.
+        title: 选择 MQTT 连接器，点击“**基本**”。在“**请求映射**”下点击“**添加映射**”以添加新的连接请求映射。
     ===
         image: /images/gateway/mqtt-connector/examples/connect-request-1.png,
-        title: Select `Connect request` in the **Request type** field then fill the "**Topic filter**" with `sensor/connect`.
+        title: 在**请求类型**中选择 `Connect request`，将“**主题过滤器**”填为 `sensor/connect`。
     ===
         image: /images/gateway/mqtt-connector/examples/connect-request-2.png,
-        title: Select **Name** - source `Message` and **Profile name** - source `Constant`. In Value, enter `${serialNumber}` for the device name and `Thermometer` for the device profile.
+        title: **名称**来源选 `Message`，**配置文件名称**来源选 `Constant`。值中设备名填 `${serialNumber}`，设备配置文件填 `Thermometer`。
     ===
         image: /images/gateway/mqtt-connector/examples/connect-request-3.png,
-        title: Remember to save your changes by clicking the designated button.
+        title: 记得点击相应按钮保存更改。
     ===
         image: /images/gateway/mqtt-connector/examples/connect-request-4.png,
-        title: Select `Connect request` in the **Request type** field then fill the "**Topic filter**" with `sensor/+/connect`.
+        title: 在**请求类型**中选择 `Connect request`，将“**主题过滤器**”填为 `sensor/+/connect`。
     ===
         image: /images/gateway/mqtt-connector/examples/connect-request-5.png,
-        title: Select **Name** - source `Topic` and **Profile name** - source `Constant`. In Value, enter `(?<=sensor/)(.*?)(?=/connect)` for the device name and `Thermometer` for the device profile.
+        title: **名称**来源选 `Topic`，**配置文件名称**来源选 `Constant`。值中设备名填 `(?<=sensor/)(.*?)(?=/connect)`，设备配置文件填 `Thermometer`。
     ===
         image: /images/gateway/mqtt-connector/examples/connect-request-6.png,
-        title: Remember to save your changes by clicking the designated button.
+        title: 记得点击相应按钮保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceNameAndProfileTopicAndConstantJson %}
 
-After 10 minutes without sending telemetry, device `SN-001` is marked as inactive in ThingsBoard, as shown below:
+10 分钟无遥测后，设备 `SN-001` 在 ThingsBoard 中被标记为不活跃，如下图所示：
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-1-connect.png)
 
-To reactivate the device so it can receive RPC commands, we need to send a Connect request. Let's demonstrate this with two examples:
+为重新激活设备以接收 RPC 命令，需发送连接请求。下面用两个示例演示：
 
-### Example 1: Device name from message payload
+### 示例 1：设备名来自消息负载
 
-Use a terminal to simulate sending a message from the device to the MQTT broker with the device name in the JSON payload:
+在终端模拟设备向 MQTT 代理发送包含设备名的 JSON 负载消息：
 
 ```bash
 mosquitto_pub -h 127.0.0.1 -p 1884 -t "sensor/connect" -m '{"serialNumber": "SN-001"}'
 ```
 {: .copy-code}
 
-After sending this message, ThingsBoard updates both the lastActivityTime and lastConnectTime of the `SN-001` device, and its status changes to `Active`:
+发送后，ThingsBoard 会更新设备 `SN-001` 的 lastActivityTime 和 lastConnectTime，其状态变为 `Active`：
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-connect-2.png)
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-connect-3.png)
 
 
-### Example 2: Device name from topic
+### 示例 2：设备名来自主题
 
-The same reactivation can be achieved using the second mapping configuration, where the device name is extracted from the topic instead of the message payload:
+使用第二种映射配置也可实现同样效果，设备名从主题而非消息负载中提取：
 
 ```bash
 mosquitto_pub -h 127.0.0.1 -p 1884 -t "sensor/SN-001/connect" -m ''
@@ -74,8 +74,7 @@ mosquitto_pub -h 127.0.0.1 -p 1884 -t "sensor/SN-001/connect" -m ''
 {: .copy-code}
 
 
-If you are using advanced configuration mode, you can
-use the following configuration:
+若使用高级配置模式，可使用以下配置：
 
 ```json
 {

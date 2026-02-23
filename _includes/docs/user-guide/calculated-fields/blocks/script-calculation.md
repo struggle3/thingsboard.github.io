@@ -1,15 +1,15 @@
-Define the calculation logic using a [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} function based on the variables configured in [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments).
+使用基于 [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments) 中配置变量的 [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} 函数定义计算逻辑。
 
-Script calculated fields must implement:
+Script 计算字段必须实现：
 
 ```js
 function calculate(ctx, arg1, arg2, ...): object | object[]
 ```
-The function can return a single JSON object (multiple output keys) or an array of JSON objects (multiple time series records).
+函数可返回单个 JSON 对象（多个输出 key）或 JSON 对象数组（多条 time series 记录）。
 
-> The output variable names are defined directly in the returned object.
+> 输出变量名在返回对象内直接定义。
 
-Example: Dew point calculation
+示例：露点计算
 
 ```js
 // Constants for Magnus formula
@@ -23,17 +23,17 @@ return {"dewPoint": dewPoint};
 ```
 {: .copy-code}
 
-The function uses the <span class="code-light">temperature</span> and <span class="code-light">humidity</span> arguments to calculate the dew point value.
-The calculation result will be stored in the variable <span class="code-light">dewPoint</span>, rounding the value to one decimal places.
+函数使用 <span class="code-light">temperature</span> 与 <span class="code-light">humidity</span> 参数计算露点值。
+结果将存储在变量 <span class="code-light">dewPoint</span> 中，保留一位小数。
 
-<b><font size="4">Direct argument access</font></b>   
-Arguments are also passed as function parameters (`arg1`, `arg2`, ...), so you can use them directly (for example, temperature, humidity) for cleaner scripts.
+<b><font size="4">直接访问参数</font></b>   
+Arguments 也作为函数参数（`arg1`、`arg2`...）传入，可直接使用（如 temperature、humidity）以简化脚本。
 
-> Use either direct parameters or `ctx.args.<arg>` depending on clarity and your preferred style.
+> 可按清晰度与个人习惯选择直接参数或 `ctx.args.<arg>`。
 
-<br><b><font size="4">Context object (ctx)</font></b>
+<br><b><font size="4">上下文对象 (ctx)</font></b>
 
-The `ctx` object provides metadata and access to argument values:
+`ctx` 对象提供元数据及对 argument 值的访问：
 - `ctx.latestTs` — the most recent timestamp (milliseconds) from telemetry-based arguments. Useful for storing results with the same timestamp as incoming data.
 - `ctx.args` — an object containing all configured arguments, accessible via dot (`.`) notation:
     - **Single-value arguments** <i>(attributes or latest telemetry)</i>

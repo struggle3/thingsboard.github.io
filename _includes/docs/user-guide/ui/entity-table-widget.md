@@ -2,52 +2,51 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Entity Table widget displays the latest values with list of entities that matches selected alias and filter with ability of additional full text search and pagination options.
-Highly customizable using [widget styles](/docs/{{docsPrefix}}user-guide/ui/entity-table-widget/#settings), [data source keys](/docs/{{docsPrefix}}user-guide/ui/advanced-data-key-configuration/), and 
-[widget actions](/docs/{{docsPrefix}}user-guide/ui/widget-actions/).
+实体表（Entity Table）部件显示与所选别名和筛选器匹配的实体列表及其最新值，支持附加全文搜索和分页选项。
+可通过[部件样式](/docs/{{docsPrefix}}user-guide/ui/entity-table-widget/#settings)、[数据源键](/docs/{{docsPrefix}}user-guide/ui/advanced-data-key-configuration/)和
+[部件操作](/docs/{{docsPrefix}}user-guide/ui/widget-actions/)进行高度自定义。
 
-## Setting up Entities Table widget
+## 配置实体表部件
 
-To get started with the Entities table widget, you first need to create a dashboard and add a widget to it.
+要开始使用实体表部件，需先创建仪表板并向其添加部件。
 
-### Creating a dashboard
+### 创建仪表板
 
-So let's [create a dashboard](/docs/{{docsPrefix}}user-guide/dashboards/#adding-a-dashboard) that will visualize our telemetry.  
-You can use an existing one or create a new dashboard for a new use case.
-In our example, we've created a new dashboard called “Entity Table” for the purposes of our tutorial.
+首先[创建仪表板](/docs/{{docsPrefix}}user-guide/dashboards/#adding-a-dashboard)以可视化我们的遥测数据。
+可使用现有仪表板或为新用例创建新仪表板。本示例中，我们为教程创建了名为“Entity Table”的新仪表板。
 
-### Adding a widget to the dashboard
+### 向仪表板添加部件
 
-The next step is to visualize telemetry. To add the Entity table widget to your dashboard, you should:
+下一步是可视化遥测数据。要向仪表板添加实体表部件，请执行：
 
 {% include images-gallery.html imageCollection="add-widget" showListImageTitles="true" %}
 
-Learn how to [add alias](/docs/{{docsPrefix}}user-guide/ui/aliases/) to your widget.
+学习如何向部件[添加别名](/docs/{{docsPrefix}}user-guide/ui/aliases/)。
 
-## Settings
+## 设置
 
-To start customizing your widget, you should go to widget edit mode by clicking the pencil icon in the upper right corner of the widget while in the dashboard edit mode.
+要开始自定义部件，应在仪表板编辑模式下点击部件右上角的铅笔图标进入部件编辑模式。
 
 {% include images-gallery.html imageCollection="entity-edit" %}
 
-### 1. Title style
+### 1. 标题样式
 
-You can change widget title tooltip, and title style. Title itself you should change via [Advanced title settings](/docs/{{docsPrefix}}user-guide/ui/entity-table-widget/#1-entities-table-title).
-Also, you are able to add an icon to the title and adjust its color, opacity, and size. See configuration and the corresponding result below.
+可更改部件标题 tooltip 和标题样式。标题本身需通过[高级标题设置](/docs/{{docsPrefix}}user-guide/ui/entity-table-widget/#1-entities-table-title)修改。
+还可为标题添加图标并调整其颜色、不透明度和大小。下方为配置及对应效果。
 
 {% include images-gallery.html imageCollection="entity-title" showListImageTitles="true" %}
 
-The checkboxes are responsible for displaying/hiding the widget title, widget shadow, and enabling/disabling fullscreen mode.
+复选框负责显示/隐藏部件标题、部件阴影及启用/禁用全屏模式。
 
-### 2. Widget style
+### 2. 部件样式
 
-You can customize personal style for the widget using CSS properties. 
-This style will be applied to the main div element of the widget. 
-You can also change the background color, text color, padding, and margin. See the configuration and the corresponding result below.
+可使用 CSS 属性为部件自定义样式。
+该样式将应用于部件的主 div 元素。
+还可更改背景色、文字颜色、内边距和外边距。下方为配置及对应效果。
 
-Please note that the style and background color are just an example and are definitely not part of our guidelines.
+请注意，样式和背景色仅为示例，并非我们的指导规范。
 
 ```json
 {
@@ -59,128 +58,121 @@ Please note that the style and background color are just an example and are defi
 
 {% include images-gallery.html imageCollection="entity-style" showListImageTitles="true" %}
 
-### 3. Special symbol and number of digits after floating point
+### 3. 特殊符号和浮点数位数
 
-You can add a special symbol that will be displayed next to the entity values of your widget. Also, you can customize the number of digits to be displayed after the floating point number of your value.
-See the configuration and the corresponding result below.
+可为部件实体值添加将显示在旁的特殊符号。还可自定义值浮点数后显示的位数。
+下方为配置及对应效果。
 
 {% include images-gallery.html imageCollection="entity-digits" showListImageTitles="true" %}
 
-### 4. Legend settings
+### 4. 图例设置
 
-Legend settings make sense configure only in time series widgets where this option is enabled by default. You can read more about Legend settings [here](/docs/{{docsPrefix}}user-guide/dashboards/#3-legend-settings).
+图例设置仅在默认启用此选项的时序部件中有意义。此处了解更多[图例设置](/docs/{{docsPrefix}}user-guide/dashboards/#3-legend-settings)。
 
-## Advanced settings
+## 高级设置
 
-Advanced settings of the Entities Table widget allows [adjusting the title of the widget](#1-entities-table-title), [changing visibility of objects on widget](#2-checkbox-settings), 
-[customizing the columns](#3-the-columns-settings), [setting up the pagination](#4-the-pagination),
-[sorting the data](#5-sorting-data-in-the-table-widget) and [changing style of widget rows](#6-row-style-function).
+实体表部件的高级设置允许[调整部件标题](#1-entities-table-title)、[更改部件上对象的可见性](#2-checkbox-settings)、
+[自定义列](#3-the-columns-settings)、[设置分页](#4-the-pagination)、
+[表格数据排序](#5-sorting-data-in-the-table-widget)以及[更改部件行样式](#6-row-style-function)。
 
-To enter the advanced mode and start adjusting the settings above, you should:
+要进入高级模式并开始调整上述设置，请执行：
 
 {% include images-gallery.html imageCollection="enter-advanced-mode" showListImageTitles="true" %}
 
 
-### 1. Entities table title
+### 1. 实体表标题
 
-ThingsBoard has no name restrictions, either in symbols or in a number of characters.
-Nevertheless, in case the title is too long, it will not display completely in the Entity Table widget, but will be terminated with three dots.
-However, after applying the changes and opening the widget in full-screen mode, you will be able to see the full name of the widget.
-For example, let’s use something simple for the title like “The New Widget Title”:
+ThingsBoard 对名称无符号或字符数量限制。但若标题过长，在实体表部件中将无法完整显示，会以省略号截断。不过，应用更改并全屏打开部件后，将能看到完整标题。例如，为标题使用简单内容如“The New Widget Title”：
 
 
 {% include images-gallery.html imageCollection="entities-table-title" showListImageTitles="true" %}
 
-### 2. Checkbox settings
+### 2. 复选框设置
 
 {% include images-gallery.html imageCollection="checkboxes" %}
 
-- Enable entities search
+- 启用实体搜索
 
-If the checkbox is checked, the magnifying glass in the upper right corner of the widget allows you to search for widget entities.
+勾选此复选框后，部件右上角的放大镜可用于搜索部件实体。
 
 {% include images-gallery.html imageCollection="entities-search" %}
 
-- Enable select columns to display
+- 启用选择要显示的列
 
-If the checkbox is checked, the black bars in the upper right corner of the widget allow you to choose which columns you prefer to hide and which to display.
+勾选此复选框后，部件右上角的黑条可用于选择隐藏和显示哪些列。
 
 {% include images-gallery.html imageCollection="columns-to-display" %}
 
-- Always display header
+- 始终显示表头
 
-If the checkbox is checked, the widget header is always visible when we scroll through the list of entities. If the box is not checked, the widget header remains at the top.
+勾选此复选框后，滚动实体列表时部件表头始终可见。若不勾选，表头将停留在顶部。
 
 {% include images-gallery.html imageCollection="display-header" %}
 
-- Always display actions column
+- 始终显示操作列
 
-If the checkbox is checked, the row action cell is always visible when we scroll through the widget's telemetry. When unchecked, the row action cell remains at the end of the row.
+勾选此复选框后，滚动部件遥测数据时行操作单元格始终可见。若不勾选，行操作单元格将停留在行末。
 
 {% include images-gallery.html imageCollection="actions-column" %}
 
-- Display entity name column
+- 显示实体名称列
 
-If the checkbox is checked, the entity name column is visible. If it's unchecked, it will be hidden.
+勾选此复选框后，实体名称列可见。若不勾选，将隐藏。
 
 {% include images-gallery.html imageCollection="entity-name-column" %}
 
-### 3. The columns settings
+### 3. 列设置
 
-#### 3.1. Entity column title
+#### 3.1. 实体列标题
 
-To change the title of the column, you should:
+要更改列标题，请执行：
 
 {% include images-gallery.html imageCollection="entity-column-title" showListImageTitles="true" %}
 
-#### 3.2. Displaying an entity label column
+#### 3.2. 显示实体标签列
 
-If the checkbox “Display entity label column” is checked, you can add the label column and name it.
-After clicking on the orange checkmark in the upper right corner, the label column with the custom name will appear in the widget.
+勾选“显示实体标签列”复选框后，可添加标签列并命名。
+点击右上角的橙色勾选标记后，将出现带自定义名称的标签列。
 
 {% include images-gallery.html imageCollection="entity-label-column" %}
 
-#### 3.3. Displaying an entity type column
+#### 3.3. 显示实体类型列
 
-The checkbox "Displaying entity type column" is responsible for showing the type of the entity on the widget (e.g. "device").
-By default, an entity type column is shown, but you can hide it by unchecking the box.
+“显示实体类型列”复选框负责在部件上显示实体类型（如“device”）。默认显示实体类型列，取消勾选可隐藏。
 
-### 4. The Pagination
+### 4. 分页
 
-By default, the widget shows how many items per page can be visible and how many pages there are in general. Displaying this information is optional.
-It changes by checking/unchecking the checkbox called “Display pagination”.
-If the checkbox is disabled, the information about items per page and number of pages won’t be displayed.
-To apply the changes, click the orange checkmark in the upper right corner.
+默认情况下，部件显示每页可见条数及总页数。显示该信息为可选。
+通过勾选/取消“显示分页”复选框可更改。禁用该复选框后，将不显示每页条数和页数信息。
+要应用更改，请点击右上角的橙色勾选标记。
 
 {% include images-gallery.html imageCollection="paggination-off" %}
 
-**Please, note:** to understand the next settings, we need to enable the “Display pagination” checkbox to see the number of items per a page.
+**请注意：**要理解以下设置，需启用“显示分页”复选框以查看每页条数。
 
-By default, **the page size** is set to 10 items per page.
-If you need to change this number, you should:
+默认**每页大小**为 10 条。若要更改该数值，请执行：
 
 {% include images-gallery.html imageCollection="page-size" %}
 
-### 5. Sorting data in the table widget
+### 5. 表格部件中的数据排序
 
-By default, the data in the Table widget is sorted in ascending order.
-If the values in the column are not numeric (for example name and type), then the sorting will be done according to the alphabetical ordering rules.
+默认情况下，表格部件中的数据按升序排序。
+若列中的值非数值（如名称和类型），则按字母顺序规则排序。
 
 {% include images-gallery.html imageCollection="sortingorder-name" %}
 
-If you’d like to sort the data, for instance, by the telemetry data key type (temperature, humidity, etc.),
-you can do this by inputting the name of your value in the default sort order row.
-In the example, the temperature is used.
-If you need to make the sort order descending, you should:
+若要按遥测数据键类型（temperature、humidity 等）排序，可在默认排序顺序行中输入值的名称。
+示例中使用 temperature。
+若需改为降序排序，请执行：
 
 {% include images-gallery.html imageCollection="sorting-data" showListImageTitles="true" %}
 
-### 6. Row style function
+### 6. 行样式函数
 
-Since version 3.2.2, the opportunity to change style of widget rows depending on their conditions appeared. Let's see how it works on the simple example:  
-assume, we need to observe which device is active and which is not. To make our mission easier, we should use the Row style function.
+自 3.2.2 版本起，可根据条件更改部件行样式。通过简单示例说明：
+假设需要观察哪些设备处于活跃状态、哪些不活跃。为简化任务，应使用行样式函数。
 
-An example of it and the corresponding results:
+示例及对应效果：
 
 ```ruby
 result = {background:"white"};
@@ -195,12 +187,11 @@ return result;
 {% include images-gallery.html imageCollection="style-function" %}
 
 
-## Saving changes
+## 保存更改
 
-For the changes to be applied and saved, you have to click the orange checkmark in the lower right corner of the dashboard.
+要使更改生效并保存，需点击仪表板右下角的橙色勾选标记。
 
-Then you can be sure that the changes to the table widget are applied and saved correctly.
+即可确认表格部件的更改已正确应用并保存。
 
 {% include images-gallery.html imageCollection="saving-changes" %}
-
 

@@ -1,40 +1,31 @@
-This configuration section contains settings of the MQTT broker connection, such as:
-- **Host** - MQTT broker hostname or ip address;
-- **Port** - listening port on the MQTT broker that will be used for establishing connection;
-- **MQTT version** - MQTT protocol version (there are three versions currently supported by gateway - **3.1**, **3.11**, **5**);
-- **Client ID** ** - Unique identifier for each client’s session on the broker;
-- **Security** - configuration for client authorization at MQTT Broker (anonymous, basic, or certificates).
+本配置部分包含 MQTT Broker 连接相关设置，例如：
+- **Host（主机）** - MQTT Broker 的主机名或 IP 地址；
+- **Port（端口）** - MQTT Broker 上用于建立连接的监听端口；
+- **MQTT version（MQTT 版本）** - MQTT 协议版本（网关当前支持 **3.1**、**3.11**、**5** 三个版本）；
+- **Client ID（客户端 ID）** - 每个客户端在 Broker 上会话的唯一标识符；
+- **Security（安全）** - 在 MQTT Broker 端配置客户端认证（匿名、基本认证或证书）。
 
 {% capture difference %}
-**Please note:**
-\** -- The broker (or broker cluster) does not allow two simultaneous sessions with the same **Client ID**. If a second connection uses that ID, 
-the broker closes the existing session and accepts the new one (session takeover). The **Client ID** can be any valid UTF-8 string; 
-if you don’t have a descriptive one, you can generate it in the MQTT connector configuration UI—see the last screenshots under this subsection.
+**请注意：**
+Broker（或 Broker 集群）不允许使用相同 **Client ID** 的两个会话同时存在。若第二个连接使用了该 ID，
+Broker 会关闭已有会话并接受新连接（会话接管）。**Client ID** 可为任意有效 UTF-8 字符串；
+若暂无描述性 ID，可在 MQTT connector 配置界面中生成——见本小节下方的最后几张截图。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% capture difference %}
-All configuration parameters list, and their detailed description can be found in the 
-[Advanced configuration](/docs/iot-gateway/config/mqtt/#advanced-configuration) section.
+所有配置参数列表及其详细说明参见
+[高级配置](/docs/iot-gateway/config/mqtt/#advanced-configuration) 章节。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 ![image](/images/gateway/mqtt-connector/connection-to-broker-basic-section-1-ce.png)
 
-If you want the UI to generate a **Client ID**, leave the **Client ID** field blank and click *Generate Client ID* (see the screenshot below). 
-The gateway will create a unique identifier.
+若希望由界面生成 **Client ID**，请将 **Client ID** 字段留空并点击 *Generate Client ID*（见下方截图）。
+网关会创建唯一的标识符。
 
 ![image](/images/gateway/mqtt-connector/generate-clientID-from-UI.png)
 
-UI form with generated **Client ID** identifier e.g., *tb_gw_rfpev* — this is just an example; your value will be different.
+生成 **Client ID** 后的界面表单，例如 *tb_gw_rfpev*——仅为示例，您的实际值会不同。
 
 ![image](/images/gateway/mqtt-connector/generated-clientID-from-UI.png)
-
-
-
-
-
-
-
-
-

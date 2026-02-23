@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Cat-1 Compact Bluetooth Gateway to ThingsBoard?
-category: Other devices
+title: 如何将 Cat-1 Compact Bluetooth Gateway 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LTE
 vendor: Lansitec
 deviceImageFileName: cat1-compact-bluetooth-gateway.png

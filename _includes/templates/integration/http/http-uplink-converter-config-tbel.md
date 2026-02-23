@@ -5,7 +5,7 @@
 ![image](/images/user-guide/integrations/http/data-converters-2-tbel-pe.png)
 {% endif %}
 
-**Example for the Uplink converter:**
+**Uplink converter 示例：**
 
 ```ruby
 // Decode an uplink message from a buffer
@@ -42,7 +42,7 @@ return result;
 ```
 {: .copy-code}
 
-You can change the decoder function while creating the converter or after creating it. If the converter has already been created, then click on the “pencil” icon to edit it.
-Copy the configuration example for the converter (or your own configuration) and insert it into the decoder function. Save changes by clicking on the “checkmark” icon.
+可在创建 converter 时或创建后修改 decoder function。若 converter 已存在，点击「铅笔」图标进行编辑。
+复制 converter 的配置示例（或您自己的配置）并插入到 decoder function 中。点击「勾选」图标保存更改。
 
 {% include images-gallery.html imageCollection="converter-tbel" %}

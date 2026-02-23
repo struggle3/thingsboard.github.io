@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Performance test tools
-description: ThingsBoard IoT Platform data collection performance test tools
+title: 性能测试工具
+description: ThingsBoard 物联网平台数据采集性能测试工具
 
 ---
 

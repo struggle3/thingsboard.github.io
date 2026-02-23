@@ -1,14 +1,14 @@
 
  
-Anonymous auth is the most simple option. It is useful for testing.  
+匿名认证是最简单的选项，适合用于测试。  
 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|-
-| type               | **anonymous**                      | Type of authorization.      |
+| type               | **anonymous**                      | 授权类型。      |
 |---
 
-Security subsection in configuration file will look like this: 
+配置文件中的 security 配置小节将如下所示： 
 
 ```yaml
     "security": {

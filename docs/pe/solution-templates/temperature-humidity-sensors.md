@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Temperature & Humidity sensors template
-description: Temperature & Humidity sensors template overview
+title: 温湿度传感器模板
+description: 温湿度传感器模板概览
 
 solution-highlights:
     0:

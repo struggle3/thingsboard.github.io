@@ -1,11 +1,11 @@
 * TOC
 {:toc}
 
-The TBMQ WebSocket Client is a browser-accessible tool aimed at simplifying the debugging process and testing of MQTT clients across various scenarios. 
-Leveraging the [MQTT over WebSocket](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-over-ws/) feature, it's designed with principles of simplicity and ease of use in mind.
-It offers seamless management of MQTT clients, subscription to topics, and message reception or publication.
+TBMQ WebSocket Client 是一款可在浏览器中访问的工具，旨在简化各类场景下的 MQTT 客户端调试与测试。
+借助 [MQTT over WebSocket](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-over-ws/) 特性，以简洁易用为设计原则。
+支持 MQTT 客户端管理、主题订阅、消息接收与发布的无缝操作。
 
-TBMQ WebSocket Client utilizes the [MQTT.js](https://github.com/mqttjs/MQTT.js) library for communication between client and broker.
+TBMQ WebSocket Client 使用 [MQTT.js](https://github.com/mqttjs/MQTT.js) 库实现客户端与 broker 的通信。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/pe/mqtt-broker/user-guide/ui/ws-overview.png)
@@ -15,106 +15,105 @@ TBMQ WebSocket Client utilizes the [MQTT.js](https://github.com/mqttjs/MQTT.js) 
 
 ## Connections
 
-TBMQ WebSocket Client allows managing multiple MQTT client connections simultaneously.
-It provides an interface where you can conveniently initiate, monitor and terminate multiple MQTT clients.
+TBMQ WebSocket Client 支持同时管理多个 MQTT 客户端连接。
+提供可便捷发起、监控和终止多个 MQTT 客户端的界面。
 
-### Add connection
+### 添加连接
 
-To add a new Connection, please follow these steps:
+添加新连接，请按以下步骤操作：
 
-1. Go to the _WebSocket Client_ page and click the _Select Connection_, represented by the _expand more_ icon.
-2. Click on the _Add new connection_ button. Fill in the necessary fields to create and connect an MQTT client, then click _Connect_.
+1. 进入 _WebSocket Client_ 页面，点击以 _expand more_ 图标表示的 _Select Connection_。
+2. 点击 _Add new connection_ 按钮。填写必要字段以创建并连接 MQTT 客户端，然后点击 _Connect_。
 
 {% include images-gallery.html imageCollection="ws-connection-add" %}
 
-### Edit connection
+### 编辑连接
 
-TBMQ enables modification of WebSocket Client connection parameters even after the connection has been established.
-It is important to understand that changes made to the connection parameters will have immediate effect.
+TBMQ 支持在连接建立后修改 WebSocket Client 连接参数。
+需注意的是，对连接参数的修改会立即生效。
 
-If the client is connected at the time of modifications, TBMQ will gracefully disconnect the current session first. After it will initiate a new session with the updated settings.
-This ensures that the changes you make are applied instantly, providing seamless adaptability while maintaining the integrity of the client's ongoing activities.
+若修改时客户端已连接，TBMQ 会先优雅断开当前会话，然后使用更新后的设置发起新会话。
+这确保您的修改即时应用，在保持客户端正在进行的活动完整性的同时，实现无缝适配能力。
 
-In order to modify your WebSocket Client connection, please follow these steps:
-1. Go to the _WebSocket Client_ page and click on the arrow icon to expand the list of connections.
-2. Click on the edit icon of the connection you wish to change.
-3. Make changes and click Connect to save changes.
+修改 WebSocket Client 连接，请按以下步骤操作：
+1. 进入 _WebSocket Client_ 页面，点击箭头图标展开连接列表。
+2. 点击待修改连接的编辑图标。
+3. 进行修改后点击 Connect 保存。
 
 {% include images-gallery.html imageCollection="ws-connection-edit" %}
 
-### Delete connection
+### 删除连接
 
-In order to delete the WebSocket Client connection, please follow these steps:
-1. Go to the _WebSocket Client_ page and click on the arrow icon to expand the list of connections.
-2. Click on the trash icon of the connection you wish to delete.
-3. A confirmation prompt will appear. Click _Yes_ to finalize the deletion.
+删除 WebSocket Client 连接，请按以下步骤操作：
+1. 进入 _WebSocket Client_ 页面，点击箭头图标展开连接列表。
+2. 点击待删除连接的垃圾桶图标。
+3. 出现确认提示后，点击 _Yes_ 完成删除。
 
 {% include images-gallery.html imageCollection="ws-connection-delete" %}
 
-### Connection settings
+### 连接设置
 
-WebSocket connections allow users to establish and configure various parameters, including client credentials, session settings, and last will settings.
+WebSocket 连接允许用户建立并配置多种参数，包括客户端凭据、会话设置和 Last Will 设置。
 
-#### Connection details
-* **Name**. Name of the WebSocket Client connection, must be unique.
-* **URL**. Typically, contains the protocol (e.g., 'ws', 'wss'), followed by the hostname and port number of your MQTT broker. 
-/mqtt is standard path that should be used for MQTT over Websockets. Example: 'ws://localhost:8084/mqtt'.
-* **Authentication**. TBMQ allows to create websocket connection with different types of handling credentials details like clientID (required), username, password:
-  * **Auto-generated credentials**. Credentials with random Client ID, random Username and empty Password. Please note that corresponding Credentials will be created.
-  * **Custom authentication**. Credentials with custom Client ID, Username, Password.
-  * **Use existing credentials**. User selects existing credentials of the [Basic](/docs/{{docsPrefix}}mqtt-broker/security/#basic-authentication) type and, if required, input Password.
+#### 连接详情
+* **Name**。 WebSocket Client 连接名称，必须唯一。
+* **URL**。 通常包含协议（如 'ws'、'wss'）、MQTT broker 的主机名和端口。/mqtt 是 MQTT over WebSockets 的标准路径。示例：'ws://localhost:8084/mqtt'。
+* **Authentication**。 TBMQ 支持以不同方式处理 clientID（必填）、username、password 等凭据的 WebSocket 连接：
+  * **Auto-generated credentials**。 随机 Client ID、随机 Username、空 Password 的凭据。请注意将创建对应的 Credentials。
+  * **Custom authentication**。 自定义 Client ID、Username、Password 的凭据。
+  * **Use existing credentials**。 用户选择已有的 [Basic](/docs/{{docsPrefix}}mqtt-broker/security/#basic-authentication) 类型凭据，并按需输入 Password。
 
-Password input field appears when the selected credentials require password to establish the connection.
+当选定的凭据需要密码建立连接时，会显示 Password 输入框。
 
 {% include images-gallery.html imageCollection="ws-connection-details" %}
 
-#### Advanced settings
+#### 高级设置
 
-* **Clean start**. When enabled (true), the broker will discard any previous session and will start a new one. This means that all subscriptions will be removed and all undelivered messages will be lost.
-* **Keep alive**.  This is the idle time the MQTT client is willing to wait between control packets (PUBLISH, PINGREQ, etc.) sent to the server. It allows you to keep the connection alive during periods of inactivity.
-* **Connect timeout**. This is the maximum wait time the client should wait for the MQTT CONNACK packet that acknowledges the connection. If the acknowledgement is not received within this time, the connection is considered unsuccessful.
-* **Reconnect period**. This is the interval between two reconnection attempts when the MQTT client gets disconnected from the broker.
-* **MQTT version**.  Determines which version of MQTT protocol to be used - MQTT 3.1 (3), MQTT 3.1.1 (4), or MQTT 5.0 (5).
+* **Clean start**。 启用（true）时，broker 将丢弃所有先前会话并启动新会话，即移除所有订阅并丢失所有未投递消息。
+* **Keep alive**。 MQTT 客户端愿意在发送给服务器的控制包（PUBLISH、PINGREQ 等）之间等待的空闲时间，用于在无活动期间保持连接。
+* **Connect timeout**。 客户端应等待 MQTT CONNACK 包以确认连接的最大等待时间。若在此时间内未收到确认，则视为连接失败。
+* **Reconnect period**。 MQTT 客户端与 broker 断开后，两次重连尝试之间的间隔。
+* **MQTT version**。 指定使用的 MQTT 协议版本：MQTT 3.1 (3)、MQTT 3.1.1 (4) 或 MQTT 5.0 (5)。
 
-If you select MQTT Version 5, additional parameters are available:
-* **Session Expiry Interval**. Sets the time (in seconds) the broker should keep the session alive after a client disconnects.
-* **Max Packet Size**. The maximum payload size (in bytes) that the client is willing to accept from the broker.
-* **Topic Alias Maximum**. The highest value that the client will accept as a Topic Alias sent by the broker.
-* **Receive Maximum**. The maximum number of QoS 1 and QoS 2 messages that can be processed concurrently.
-* **Request Response Information**. When set to true, MQTT broker will return additional information about the publish operations in the response.
+若选择 MQTT Version 5，将提供以下额外参数：
+* **Session Expiry Interval**。 设置客户端断开后 broker 应保留会话的时间（秒）。
+* **Max Packet Size**。 客户端愿意从 broker 接收的最大 payload 大小（字节）。
+* **Topic Alias Maximum**。 客户端愿意接受的 broker 发送的 Topic Alias 最高值。
+* **Receive Maximum**。 可并发处理的 QoS 1 和 QoS 2 消息的最大数量。
+* **Request Response Information**。 设为 true 时，MQTT broker 将在响应中返回发布操作的额外信息。
 
 {% include images-gallery.html imageCollection="ws-connection-advanced" %}
 
 #### Last will
 
-The Last Will (optional) is the feature in MQTT that lets user specify a message to be sent by the MQTT broker, in the event of an ungraceful disconnection of the client.
-Here's a closer look at the Last will properties:
-* **Topic**. MQTT topic on which your Last Will message will be published.
-* **QoS**. Quality of Service level for the Last Will message.
-* **Payload**. The content of the Last Will message.
-* **Retain**. Determines whether the broker should keep the last will message after it's been delivered. If true, the will message is stored by the broker and delivered to any future subscribers to the topic.
+Last Will（可选）是 MQTT 的一项特性，允许用户在客户端非正常断开时，由 MQTT broker 代为发送指定消息。
+以下是 Last Will 属性的说明：
+* **Topic**。 Last Will 消息将发布到的 MQTT topic。
+* **QoS**。 Last Will 消息的 Quality of Service 级别。
+* **Payload**。 Last Will 消息内容。
+* **Retain**。 控制 broker 在投递后是否保留 Last Will 消息。为 true 时，broker 将存储 will 消息并投递给该 topic 的未来订阅者。
 
-In case you select MQTT Version 5, please configure additional features:
-* **Payload Format Indicator**. When set to true, it indicates the payload is UTF-8 encoded character data. If false or unset, the payload is assumed to be unspecified binary data.
-* **Content Type**. Describes the form of the content carried by the will message.
-* **Will Delay Interval**. The time period the broker needs to wait after the client gets disconnected ungracefully, before publishing the will message.
-* **Message Expiry Interval**. The duration within which the will message can be delivered since it was published.
-* **Response Topic**. A topic to which the broker may publish a response after broadcasting the will message.
-* **Correlation Data**. Binary data used to match the response message from the broker after it broadcasts the will message.
-* **User Properties**. It allows the client to include additional customized metadata to the Will message, in the form of an object of key-value pairs.
+若选择 MQTT Version 5，请配置以下额外特性：
+* **Payload Format Indicator**。 为 true 时，表示 payload 为 UTF-8 编码字符数据。为 false 或未设置时，视为未指定的二进制数据。
+* **Content Type**。 描述 will 消息所承载内容的格式。
+* **Will Delay Interval**。 客户端非正常断开后，broker 在发布 will 消息前需等待的时间。
+* **Message Expiry Interval**。 自发布之日起 will 消息可被投递的有效期。
+* **Response Topic**。 broker 在广播 will 消息后可发布响应消息的 topic。
+* **Correlation Data**。 用于将 broker 广播 will 消息后的响应消息进行关联的二进制数据。
+* **User Properties**。 允许客户端以 key-value 对形式为 Will 消息添加自定义元数据。
 
 {% include images-gallery.html imageCollection="ws-connection-will" %}
 
-### Connection status
+### 连接状态
 
-In TBMQ, we provide a feature to store the temporary logs of the WebSocket Client statuses for your convenience. This allows you to monitor and troubleshoot the behavior of your client connections more effectively.
-To access these logs, simply hover your cursor over the current status label. This action brings up a detailed status update history, providing vital insight into the sequence of connection-related events.
+TBMQ 提供保存 WebSocket Client 状态临时日志的功能，便于您监控和排查客户端连接行为。
+访问这些日志：将光标悬停在当前状态标签上，即可显示详细的状态更新历史，了解连接相关事件的时间顺序。
 
-The status of the WebSocket Client may be one of the following:
-1. **Connected**. Shows successfully established connection to the broker.
-2. **Disconnected**. Indicated the WebSocket client has closed the connection with the broker.
-3. **Reconnecting** This status is displayed when the client is in the process of re-establishing a connection with the broker. The reconnecting can be cancelled clicking on the button Cancel in the top right corner.
-4. **Connection failed**. Indicates that the client was unable to establish a connection with the broker. This status may also include additional information such as the cause of the failure - for instance, authentication issues, session taken over, among others.
+WebSocket Client 的状态可能为以下之一：
+1. **Connected**。 表示已成功与 broker 建立连接。
+2. **Disconnected**。 表示 WebSocket 客户端已与 broker 关闭连接。
+3. **Reconnecting**。 客户端正在尝试与 broker 重新建立连接时显示。点击右上角 Cancel 按钮可取消重连。
+4. **Connection failed**。 表示客户端无法与 broker 建立连接。该状态可能附带失败原因，如认证问题、会话被接管等。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/pe/mqtt-broker/user-guide/ui/ws-logs.png)
@@ -124,72 +123,71 @@ The status of the WebSocket Client may be one of the following:
 
 ## Subscriptions
 
-MQTT subscriptions are an integral part of the MQTT publish-subscribe messaging protocol, allowing clients to subscribe to one or more topics.
-Users can manage subscriptions by creating new ones, modifying existing ones, or deleting unnecessary ones.
+MQTT subscriptions 是 MQTT 发布-订阅消息协议的重要组成部分，允许客户端订阅一个或多个主题。
+用户可通过创建、修改或删除来管理 subscriptions。
 
-### Add subscription
+### 添加订阅
 
-In order to add Subscription please follow next steps:
-1. Go to the _WebSocket Client_ page and click on the button _Add Subscription_, represented by the _plus_ icon.
-2. Make changes and click _Add_ to save them.
+添加 Subscription 步骤：
+1. 进入 _WebSocket Client_ 页面，点击以 _plus_ 图标表示的 _Add Subscription_ 按钮。
+2. 进行修改后点击 _Add_ 保存。
 
 {% include images-gallery.html imageCollection="ws-subscription-add" %}
 
-### Edit subscription
+### 编辑订阅
 
-To modify a subscription, select the edit icon located in the respective row to open the dialog _Edit subscription_.
-After making necessary changes,  remember to confirm by clicking on the _Save_ button.
+修改订阅时，点击对应行的编辑图标打开 _Edit subscription_ 对话框。
+完成修改后，记得点击 _Save_ 按钮确认。
 
-Please note that if you modify an existing subscription while the client is connected, TBMQ will first unsubscribe from the existing topic before subscribing to the updated one. 
-After successfully resubscribing, the client will begin receiving messages published to the new topic.
+请注意，若客户端已连接时修改现有订阅，TBMQ 会先取消旧 topic 的订阅，再订阅更新后的 topic。
+成功重新订阅后，客户端将开始接收发布到新 topic 的消息。
 
 {% include images-gallery.html imageCollection="ws-subscription-edit" %}
 
-### Delete subscription
+### 删除订阅
 
-Below are the steps to remove a subscription:
-1. Identify the specific subscription in the Subscriptions list. Click on the delete icon situated in the corresponding row.
-2. A confirmation prompt will appear. To complete the deletion process, click _Yes_.
+删除订阅步骤：
+1. 在 Subscriptions 列表中定位到要删除的订阅，点击对应行的删除图标。
+2. 出现确认提示后，点击 _Yes_ 完成删除。
    
 {% include images-gallery.html imageCollection="ws-subscription-delete" %}
 
-### Subscription settings
+### 订阅设置
 
-Subscription settings encompass various configurations related to how a client subscribes to MQTT topics. 
-These settings typically include parameters such as the topic filter, QoS (Quality of Service) level, and any additional options specific to the MQTT client or broker being used.
+订阅设置涵盖客户端如何订阅 MQTT 主题的相关配置。
+通常包括 topic filter、QoS (Quality of Service) 级别等参数，以及 MQTT 客户端或 broker 特有的额外选项。
 
-* **Topic filter**. The MQTT topic filter that you want to subscribe to. **Must be unique per connection.**
-* **QoS**. Quality of Service of the subscription.
-* **Retain as Published**. When true, messages forwarded using this subscription keep the RETAIN flag they were published with.
-If false, messages have the RETAIN flag set to 0.
-* **Retain Handling** This option determines how the broker should handle retained messages when the client subscribes to a topic.
-  * 0 - send retained messages at subscription time;
-  * 1 - send retained messages at subscription time if the subscription does not already exist;
-  * 2 - do not send retained messages at subscription time.
-* **No local**. When set to true, the broker will not forward messages from this client back to the connection on which this subscription was made.
-* **Color**. Color is used for easier differentiation of the messages in the messages table. Can be changed.
-* **Subscription Identifier**. A unique identifier (numeric value greater than 0) assigned to a subscription. It is used to track, manage, and reference a specific subscription, ensuring that each subscription can be uniquely distinguished from others.
+* **Topic filter**。 要订阅的 MQTT topic filter。**每条连接内必须唯一。**
+* **QoS**。 订阅的 Quality of Service。
+* **Retain as Published**。 为 true 时，通过该订阅转发的消息保留发布时的 RETAIN 标志；为 false 时，消息的 RETAIN 标志设为 0。
+* **Retain Handling**。 该选项决定客户端订阅 topic 时 broker 如何处理 retained 消息。
+  * 0 - 订阅时发送 retained 消息；
+  * 1 - 若订阅尚不存在，则在订阅时发送 retained 消息；
+  * 2 - 订阅时不发送 retained 消息。
+* **No local**。 为 true 时，broker 不会将该客户端发布的消息转发回建立该订阅的连接。
+* **Color**。 用于在消息表中更好区分消息的颜色，可修改。
+* **Subscription Identifier**。 分配给订阅的唯一标识符（大于 0 的数值），用于跟踪、管理和引用特定订阅，确保每条订阅可被唯一区分。
 
 {% include images-gallery.html imageCollection="ws-subscription-overview" %}
 
 ## Messages
 
-The Messages table functions as a message log, displaying the most recent messages for your review and reference. 
-Each row in this table corresponds to a single published or received message and provides a snapshot of key message attributes:
-1. **Type**. Identifies whether a message was Received or Published.
-2. **Topic**. Lists the topic associated with the message.
-3. **QoS**. Displays the Quality of Service level associated with the message.
-4. **Retain**. Shows whether the message has been marked as _Retain_ by the sender.
-5. **Payload**. Lays out the preview of the content embedded within the message.
-   If your message contains a payload, you can inspect it in detail by clicking on the Info icon button. This action will open a dialog that will not only allow you to read the payload but also gives you the option to copy it to your clipboard if needed.
-6. **Properties** icon button extends access to further settings contained within a message, such as User properties, Content type, Topic Alias and other.
+Messages 表用作消息日志，显示最近的消息供查看和参考。
+表中每行对应一条发布或接收的消息，并展示关键消息属性的快照：
+1. **Type**。 标识消息是 Received 还是 Published。
+2. **Topic**。 消息关联的 topic。
+3. **QoS**。 消息关联的 Quality of Service 级别。
+4. **Retain**。 显示发送方是否将消息标记为 _Retain_。
+5. **Payload**。 消息内嵌内容的预览。
+   若消息包含 payload，可点击 Info 图标按钮查看详情。该操作将打开对话框，除可阅读 payload 外，还可复制到剪贴板。
+6. **Properties** 图标按钮可访问消息中的更多设置，如 User properties、Content type、Topic Alias 等。
 
 {% include images-gallery.html imageCollection="ws-table-msg" %}
 
-### Messages filtering
-The table messages can be filtered by:
-* **Type 'All/Received/Published'** - click on the type label in the header of the Messages table.
-* **Topic/QoS/Retain** - click on the _filter_ icon next to _Clear messages_ button.
+### 消息筛选
+消息表可按以下方式筛选：
+* **Type 'All/Received/Published'** - 点击 Messages 表表头的 type 标签。
+* **Topic/QoS/Retain** - 点击 _Clear messages_ 按钮旁的 _filter_ 图标。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/pe/mqtt-broker/user-guide/ui/ws-table-filter.png)
@@ -197,28 +195,28 @@ The table messages can be filtered by:
 ![image](/images/mqtt-broker/user-guide/ui/ws-table-filter.png)
 {% endif %}
 
-### Publish a message
+### 发布消息
 
-The WebSocket Client page includes a user-friendly interface features that allow users to publish messages using the WebSocket MQTT protocol.
-In order to successfully publish a message using TBMQ, please make sure that:
-* **Client is connected**.
-* **Topic is specified**. The topic might not be specified in case the Topic Alias feature is used.
-* **Message is valid**, if selected JSON format.
+WebSocket Client 页面提供易于使用的发布消息界面。
+使用 TBMQ 成功发布消息需满足：
+* **客户端已连接**。
+* **已指定 Topic**。 使用 Topic Alias 特性时可不必指定。
+* **消息格式有效**，若选择 JSON 格式。
 
-Here is a list of basic options for publishing a message, along with brief explanations of their usage:
-* **Topic**. The MQTT topic to which your message will be published.
-* **QoS**. Quality of Service level guaranteeing the delivery of your message:
-  * 0 - At most once (the message may or may not be delivered);
-  * 1 - At least once (the message will be delivered, but duplicates can occur);
-  * 2 - Exactly once (the message will be delivered exactly once).
-* **Retain**. When set to true, the broker stores the last message and its QoS for this topic. All future subscribers for a topic will receive the last retained message for that topic.
-* **Color**. Used to mark the published messages in the messages table for easier recognition.
-* **Format**. Used to specify formatting for displaying the message.
-    * JSON. Has validation of the JSON format of the message content.
-    * String. Has no validation.
+以下是发布消息的基本选项及简要说明：
+* **Topic**。 消息将发布到的 MQTT topic。
+* **QoS**。 保证消息投递的 Quality of Service 级别：
+  * 0 - At most once（消息可能投递也可能不投递）；
+  * 1 - At least once（消息会投递，但可能重复）；
+  * 2 - Exactly once（消息 Exactly once 投递）。
+* **Retain**。 为 true 时，broker 存储该 topic 的最后一条消息及其 QoS，该 topic 的未来订阅者将收到该 topic 的最后一条 retained 消息。
+* **Color**。 用于在消息表中标记发布的消息以便区分。
+* **Format**。 指定消息显示格式。
+    * JSON。 对消息内容进行 JSON 格式校验。
+    * String。 不进行校验。
 
-After filling out the necessary information and settings, locate and **click on the Send icon** to publish your message.
-The message will now be dispatched to the broker and relayed to all clients who are subscribed to the given topic.
+填写必要信息和设置后，找到并**点击 Send 图标**发布消息。
+消息将发送到 broker 并转发给订阅该 topic 的所有客户端。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/pe/mqtt-broker/user-guide/ui/ws-publish-msg.png)
@@ -226,18 +224,18 @@ The message will now be dispatched to the broker and relayed to all clients who 
 ![image](/images/mqtt-broker/user-guide/ui/ws-publish-msg.png)
 {% endif %}
 
-For MQTT clients utilizing **MQTT Version 5**, there are also additional parameters available to further customize your message publishing experience. 
-The combination of these features provides a comprehensive and flexible environment for MQTT message handling.
+使用 **MQTT Version 5** 的 MQTT 客户端还可使用额外参数进一步自定义消息发布。
+这些特性组合提供了灵活的 MQTT 消息处理环境。
 
-To set the published message properties please click on the button _Properties_ in the bottom left corner to open dialog.
-Below is a brief explanation of each setting:
-* **Payload Format Indicator**. When set to true, indicates that the payload is UTF-8 encoded character data. The default false signifies unspecified binary data.
-* **Content Type**. Describes the format of the application message’s data.
-* **Message Expiry Interval** The lifetime of the application message in seconds.
-* **Topic Alias**. Integer value that can be used as a shorthand notation for the topic. If WebSocket connection has Topic Alias Max value 0 - the usage of topic alias is forbidden.
-* **Correlation Data**. Binary data used as correlation identifier.
-* **Response Topic**. String which is used as the Topic Name for a response message.
-* **User Properties**. Allows user-defined metadata in form of key-value pairs.
+设置发布消息属性：点击左下角 _Properties_ 按钮打开对话框。
+以下为各设置简要说明：
+* **Payload Format Indicator**。 为 true 时，表示 payload 为 UTF-8 编码字符数据。默认 false 表示未指定的二进制数据。
+* **Content Type**。 描述应用消息数据的格式。
+* **Message Expiry Interval**。 应用消息的有效期（秒）。
+* **Topic Alias**。 可用作 topic 简写的整数值。若 WebSocket 连接的 Topic Alias Max 为 0，则禁止使用 topic alias。
+* **Correlation Data**。 用作关联标识符的二进制数据。
+* **Response Topic**。 用作响应消息 Topic Name 的字符串。
+* **User Properties**。 允许以 key-value 对形式添加用户定义的元数据。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/pe/mqtt-broker/user-guide/ui/ws-publish-advanced-params.png)

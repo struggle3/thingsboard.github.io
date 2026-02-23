@@ -1,107 +1,107 @@
 * TOC
 {:toc}
 
-## ThingsBoard extensions
+## ThingsBoard Extensions
 
-[ThingsBoard extensions](https://github.com/thingsboard/thingsboard-extensions){:target="_blank"} is our additional project that allows you to create your own angular components and use them in your widgets and actions.
-We highly recommend using this feature for any complex logic in your solutions, because it provides you an opportunity to reuse your code, using all functionality of TypeScript, RXJS, Angular, etc.
-In this topic, we will cover how to connect your extensions in ThingsBoard 3.6 and higher using our UI.
+[ThingsBoard extensions](https://github.com/thingsboard/thingsboard-extensions){:target="_blank"} 是我们的附加项目，允许你创建自己的 Angular 组件并在部件和操作中使用它们。
+我们强烈建议在解决方案的任何复杂逻辑中使用此功能，因为它让你能够复用代码，并充分利用 TypeScript、RXJS、Angular 等的全部功能。
+本文介绍如何在 ThingsBoard 3.6 及更高版本中通过 UI 连接你的 extensions。
 
 {% capture difference %}
-**Important remark**: you can use **extensions** even if you use previous versions of ThingsBoard(before 3.6). For this, you will need to load the extension file manually to your server and restart it. All the necessary information can be found in the **README** file in the corresponding branches of the extensions project. [This branch](https://github.com/thingsboard/thingsboard-extensions/tree/release-3.1) is used for the ThingsBoard 3.1.0 - 3.4.1 version and [this one](https://github.com/thingsboard/thingsboard-extensions/tree/release-3.5) is for 3.5 - 3.5.1 version.
+**重要说明**：即使你使用的 ThingsBoard 版本早于 3.6，仍可使用 **extensions**。此时需要将 extension 文件手动加载到服务器并重启。相关信息请参阅 extensions 项目对应分支中的 **README** 文件。[此分支](https://github.com/thingsboard/thingsboard-extensions/tree/release-3.1)适用于 ThingsBoard 3.1.0 - 3.4.1 版本，[此分支](https://github.com/thingsboard/thingsboard-extensions/tree/release-3.5)适用于 3.5 - 3.5.1 版本。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-First of all, you need a file with your compiled components. By default, it is called **thingsboard-extension-widgets.js**. All instructions on how to create it can be found inside the **README** file to [ThingsBoard extensions](https://github.com/thingsboard/thingsboard-extensions){:target="_blank"}.
+首先需要准备包含已编译组件的文件。默认文件名为 **thingsboard-extension-widgets.js**。创建该文件的说明请参阅 [ThingsBoard extensions](https://github.com/thingsboard/thingsboard-extensions){:target="_blank"} 的 **README** 文件。
 
-Once you have the file with your components, let's proceed to load them into ThingsBoard:
+准备好包含组件的文件后，将其加载到 ThingsBoard：
 
-- Go to the "**JavaScript library**" page inside "**Resources**" section;
-- Click the "**Add JavaScript resource**" button (the "plus" icon in the upper-right corner of the window);
-- In the open pop-up, select "**Extension**" in the "**JavaScript type**" selector (or "**Module**" to paste a piece of code);
-- Enter title for your module;
-- Drag the file with your compiled components;
-- Click "Add".
+- 进入「**Resources**」下的「**JavaScript library**」页面；
+- 点击「**Add JavaScript resource**」按钮（窗口右上角的「加号」图标）；
+- 在弹出窗口中，在「**JavaScript type**」选择器中选择「**Extension**」（或选择「**Module**」以粘贴代码片段）；
+- 输入模块标题；
+- 拖拽包含已编译组件的文件；
+- 点击「Add」。
 
-Congratulations, your components have been added to the ThingsBoard!
+你的组件已成功添加到 ThingsBoard。
 
 {% include images-gallery.html imageCollection="add-js-module" %}
 
 <br>
-Now, let's use them in some widget. We shall create a simple latest value widget that will use components from our extensions (in case you have questions about how to create a new widget, you should read [this topic](#creating-new-widget-definition)):
+下面介绍如何在部件中使用这些组件。我们将创建一个简单的 Latest value 部件，使用 extensions 中的组件（若对创建新部件有疑问，请参阅 [创建新部件定义](#creating-new-widget-definition)）：
 
-- Go to the "**Widgets library**" page of the "**Resources**" section;
-- Click the "**plus**" icon in the upper-right corner of the window, and select the "**Create new widget**" option;
-- Select widget type - "**Latest value**";
-- Enter widget name;
-- Navigate to the "**Resources**" tab, and click "**Add**" button;
-- Check the "**Is extension**" box;
-- Choose your extension module from the drop-don menu;
+- 进入「**Resources**」下的「**Widgets library**」页面；
+- 点击窗口右上角的「**plus**」图标，选择「**Create new widget**」；
+- 选择部件类型「**Latest value**」；
+- 输入部件名称；
+- 进入「**Resources**」选项卡，点击「**Add**」按钮；
+- 勾选「**Is extension**」；
+- 从下拉菜单中选择你的 extension 模块；
 
-Your module is connected to your widget. Now, you can use your angular components:
+模块已与部件连接。现在可以在部件中使用你的 Angular 组件：
 
-- Go to the "**HTML**" tab, and add the custom component. In our case it will be **tb-example-table** (don't forget to add **ctx**);
-- Clean the default content of **self.onInit**, **self.onDataUpdated**, **self.onResize** functions;
-- Add to the onDataUpdated function next code:
+- 进入「**HTML**」选项卡，添加自定义组件。示例中为 **tb-example-table**（别忘了添加 **ctx**）；
+- 清空 **self.onInit**、**self.onDataUpdated**、**self.onResize** 的默认内容；
+- 在 onDataUpdated 函数中添加如下代码：
   ```javascript
   self.ctx.$scope.exampleTableComponent.onDataUpdated();
   ```
   {: .copy-code}
-  It will trigger the update function inside a custom component when the widget receives new data;
-- Add next function:
+  当部件收到新数据时，会触发自定义组件中的更新函数；
+- 添加以下函数：
   ```javascript
   self.typeParameters = function() {
     return {
-        maxDatasources: 1, //Maximum number of datasources 1
-        singleEntity: true, //Allow only one entity
-        previewWidth: '250px', //Default size of preview X axis 
-        previewHeight: '250px', //Default size of preview Y axis 
-        embedTitlePanel: true, //Hided title panel
+        maxDatasources: 1, //最大数据源数量为 1
+        singleEntity: true, //仅允许一个实体
+        previewWidth: '250px', //预览 X 轴默认尺寸 
+        previewHeight: '250px', //预览 Y 轴默认尺寸 
+        embedTitlePanel: true, //隐藏标题栏
     };
   };
   ```
   {: .copy-code}
-  It sets behavior rules for the widget
-- Click the "Run" button to preview how your widget will look;
-- To apply the changes, click the "Save" button.
+  该函数设置部件的行为规则；
+- 点击「Run」按钮预览部件效果；
+- 点击「Save」保存修改。
 
-Now, your component is used inside your widget.
+现在部件中已使用你的组件。
 
 {% include images-gallery.html imageCollection="select-extensions-module" %}
 
-In general, [ThingsBoard extensions](https://github.com/thingsboard/thingsboard-extensions){:target="_blank"} allow you to create any possible widgets in the scope of ThingsBoard platforms.
+[ThingsBoard extensions](https://github.com/thingsboard/thingsboard-extensions){:target="_blank"} 允许你在 ThingsBoard 平台范围内创建任意类型的部件。
 
-Good luck with your future awesome solutions!
+祝你开发顺利！
 
 
-## Integrating existing code to create widget definition
+## 集成现有代码创建部件定义
 
-Below are some examples demonstrating how external JavaScript libraries or existing code can be reused/integrated to create new widgets.
+以下示例演示如何复用/集成外部 JavaScript 库或现有代码来创建新部件。
 
-### Using external JavaScript library
+### 使用外部 JavaScript 库
 
-#### Latest Values Example
+#### Latest Values 示例
 
-In this example, **Latest Values** gauge widget will be created using external [gauge.js](http://bernii.github.io/gauge.js/) library.
+本示例使用外部 [gauge.js](http://bernii.github.io/gauge.js/) 库创建 **Latest Values** 仪表类部件。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen, then click the “Create new widget type” button.
-Click the **Latest Values** button on the **Select widget type** pop-up.
-The **Widget Editor** will be opened, pre-populated with the content of default **Latest Values** template widget.
+在 **Widgets Bundle** 视图中，点击屏幕右下角的大 “+” 「+」按钮，然后点击 “Create new widget type” 。
+在 **Select widget type** 弹窗中点击 **Latest Values**。
+**Widget Editor** 将打开，并预填充默认 **Latest Values** 模板部件的内容。
 
-- Open **Resources** tab and click "Add" then insert the following link:
+- 打开 **Resources** 选项卡，点击「Add」，插入以下链接：
 
 ```
 https://bernii.github.io/gauge.js/dist/gauge.min.js
 ```
 
-- Clear content of the CSS tab of "Resources" section.
-- Put the following HTML code inside the HTML tab of "Resources" section:
+- 清空「Resources」区域中 CSS 选项卡的内容。
+- 在「Resources」的 HTML 选项卡中放入以下 HTML 代码：
 
 ```html
   {% raw  %}<canvas id="my-gauge"></canvas>{% endraw %}
 ```
 
-- Put the following JavaScript code inside the "JavaScript" section:
+- 在「JavaScript」区域中放入以下 JavaScript 代码：
 
 ```javascript
 var canvasElement;
@@ -131,35 +131,35 @@ self.onDataUpdated = function() {
 }
 ```
 
-- Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+- 点击 **Widget Editor Toolbar** 上的 **Run** 按钮，在 **Widget preview** 区域查看结果。
 
 ![image](/images/user-guide/contribution/widgets/external-js-widget-sample.png)
 
-In this example, the external JS library API was used, which becomes available after injecting the corresponding URL in **Resources** section.
-The displayed value was obtained from [subscription](/docs/{{docsPrefix}}user-guide/contribution/ui/basic-widget-api/#subscription-object) **data** property for the first dataKey.
+本示例使用了外部 JS 库 API，在 **Resources** 区域注入对应 URL 后即可使用。
+显示值来自 [subscription](/docs/{{docsPrefix}}user-guide/contribution/ui/basic-widget-api/#subscription-object) **data** 属性中第一个 dataKey 的数据。
 
-#### Time-Series Example
+#### Time-Series 示例
 
-In this example, **Time-Series** line chart widget will be created using external [Chart.js](https://www.chartjs.org/) library.
+本示例使用外部 [Chart.js](https://www.chartjs.org/) 库创建 **Time-Series** 折线图部件。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen, then click the “Create new widget type” button.
-Click the **Time-Series** button on the **Select widget type** pop-up.
-The **Widget Editor** will be opened, pre-populated with the content of default **Time-Series** template widget.
+在 **Widgets Bundle** 视图中，点击屏幕右下角的大 “+” 「+」按钮，然后点击 “Create new widget type” 。
+在 **Select widget type** 弹窗中点击 **Time-Series**。
+**Widget Editor** 将打开，并预填充默认 **Time-Series** 模板部件的内容。
 
-- Open **Resources** tab and click "Add" then insert the following link:
+- 打开 **Resources** 选项卡，点击「Add」，插入以下链接：
 
 ```  
 https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js
 ```
 
-- Clear content of the CSS tab of "Resources" section.
-- Put the following HTML code inside the HTML tab of "Resources" section:
+- 清空「Resources」区域中 CSS 选项卡的内容。
+- 在「Resources」的 HTML 选项卡中放入以下 HTML 代码：
 
 ```html
   {% raw  %}<canvas id="myChart"></canvas>{% endraw %}
 ```
 
-- Put the following JavaScript code inside the "JavaScript" section:
+- 在「JavaScript」区域中放入以下 JavaScript 代码：
 
 ```javascript
 var myChart;
@@ -230,24 +230,24 @@ self.onDataUpdated = function() {
 }
 ```
 
-- Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+- 点击 **Widget Editor Toolbar** 上的 **Run** 按钮，在 **Widget preview** 区域查看结果。
 
 ![image](/images/user-guide/contribution/widgets/external-js-timeseries-widget-sample.png)
 
-In this example, the external JS library API was used, which becomes available after injecting the corresponding URL in **Resources** section.
-Initially chart datasets prepared using configured dataKeys from **data** property of **ctx**.
-In the **onDataUpdated** function datasources data converted to Chart.js line chart format and pushed to chart datasets.
-Please note that xAxis (time axis) is limited to current timewindow bounds obtained from **timeWindow** property of **ctx**.
+本示例使用了外部 JS 库 API，在 **Resources** 区域注入对应 URL 后即可使用。
+图表数据集根据 **ctx** 的 **data** 属性中配置的 dataKeys 进行准备。
+在 **onDataUpdated** 函数中，数据源数据被转换为 Chart.js 折线图格式并推入图表数据集。
+注意：xAxis（时间轴）限制在 **ctx** 的 **timeWindow** 属性得到的当前 timewindow 范围内。
 
-### Using existing JavaScript code
+### 使用现有 JavaScript 代码
 
-Another approach of creating widgets is to use existing bundled JavaScript code.
-In this case, you can create your own TypeScript class or Angular component and bundle it into the ThingsBoard UI code.
-In order to make this code accessible within the widget, you need to register corresponding Angular module or inject TypeScript class to a global variable (for ex. window object).
-Some of the ThingsBoard widgets already use this approach. Take a look at the [polyfills.ts](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/polyfills.ts#L106)
-or [widget-components.module.ts](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/widget-components.module.ts#L44).
-Here you can find how some bundled classes or components are registered for later use in ThingsBoard widgets.
-For example "Timeseries - Flot" widget (from "Charts" Widgets Bundle) uses [**TbFlot**](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/lib/flot-widget.ts#L63) TypeScript class which is injected as window property inside **polyfills.ts**:
+另一种创建部件的方式是使用已打包的 JavaScript 代码。
+此时可以创建自己的 TypeScript 类或 Angular 组件，并将其打包进 ThingsBoard UI 代码。
+要使该代码在部件中可访问，需要注册对应的 Angular 模块或将 TypeScript 类注入到全局变量（例如 window 对象）。
+部分 ThingsBoard 部件已采用此方式。可参考 [polyfills.ts](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/polyfills.ts#L106)
+或 [widget-components.module.ts](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/widget-components.module.ts#L44)。
+其中说明了如何将 bundled 类或组件注册以供 ThingsBoard 部件使用。
+例如「Timeseries - Flot」部件（来自「Charts」Widgets Bundle）使用 [**TbFlot**](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/lib/flot-widget.ts#L63) TypeScript 类，该类在 **polyfills.ts** 中作为 window 属性注入：
 
 ```typescript
 ...
@@ -260,8 +260,8 @@ import { TbFlot } from '@home/components/widget/lib/flot-widget';
 
 ```
 
-Another example is "Timeseries table" widget (from "Cards" Widgets Bundle) that uses Angular component [**tb-timeseries-table-widget**](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/lib/timeseries-table-widget.component.ts#L99) which is registered as dependency of **WidgetComponentsModule** Angular module inside **widget-components.module.ts**.
-Thereby this component becomes available for use inside the widget template HTML.
+另一个例子是「Timeseries table」部件（来自「Cards」Widgets Bundle），使用 Angular 组件 [**tb-timeseries-table-widget**](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/lib/timeseries-table-widget.component.ts#L99)，该组件在 **widget-components.module.ts** 中注册为 **WidgetComponentsModule** 的依赖。
+因此该组件可在部件模板 HTML 中使用。
 
 ```typescript
 ...

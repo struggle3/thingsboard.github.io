@@ -1,37 +1,37 @@
-Action nodes are the execution components of ThingsBoard's rule engine that perform concrete operations and side effects based on the messages flowing through the rule chain.
+动作节点是 ThingsBoard 规则引擎的执行组件，根据流经规则链的消息执行具体操作和副作用。
 
-These nodes can automate various system operations like persisting time series and attributes to the database, managing alarms, controlling device commands and modifying system state. 
+这些节点可自动执行各类系统操作，如将时序和属性持久化到数据库、管理告警、控制设备指令和修改系统状态。
 
-Action nodes allow you to automate your workflows by executing operations based on your data without requiring manual interaction.
+动作节点使您能够根据数据自动执行操作，无需人工干预，从而实现工作流自动化。
 
-- <span class="item-ce product-label-padding">[assign to customer](/docs/user-guide/rule-engine-2-0/nodes/action/assign-to-customer)</span> — assigns the message originator to a specified customer.
-- <span class="item-pe product-label-padding">[add to group](/docs/user-guide/rule-engine-2-0/nodes/action/add-to-group)</span> — adds the message originator to the entity group found by group name pattern.
-- [calculated fields](/docs/user-guide/rule-engine-2-0/nodes/action/calculated-fields) — triggers calculated field processing for time series or attribute data without persisting the original data to the database.
-- <span class="item-pe product-label-padding">[change owner](/docs/user-guide/rule-engine-2-0/nodes/action/change-owner)</span> — changes the ownership of the message originator to a specified tenant or customer.
-- [clear alarm](/docs/user-guide/rule-engine-2-0/nodes/action/clear-alarm) — clears existing active alarms for the message originator.
-- [copy to view](/docs/user-guide/rule-engine-2-0/nodes/action/copy-to-view) — replicates attribute changes from assets/devices to their associated entity views.
-- [create alarm](/docs/user-guide/rule-engine-2-0/nodes/action/create-alarm) — creates new alarms or updates existing active alarms for the message originator.
-- [create relation](/docs/user-guide/rule-engine-2-0/nodes/action/create-relation) — creates relation between the message originator and a specified target entity with configurable direction and type.
-- [delay (deprecated)](/docs/user-guide/rule-engine-2-0/nodes/action/delay) — delays incoming messages for a configurable period before forwarding them to the next rule node.
-- [delete attributes](/docs/user-guide/rule-engine-2-0/nodes/action/delete-attributes) — deletes specified attributes from message originator.
-- [delete relation](/docs/user-guide/rule-engine-2-0/nodes/action/delete-relation) — deletes the relation from the selected entity to originator of the message by type and direction.
-- [device profile](/docs/user-guide/rule-engine-2-0/nodes/action/device-profile) — evaluates incoming messages against [alarm rules](/docs/{{docsPrefix}}/user-guide/device-profiles/#alarm-rules){:target="_blank"} defined in the device profile of the message originator and creates, updates, or clears alarms based on the evaluation results.
-- [device state](/docs/user-guide/rule-engine-2-0/nodes/action/device-state) — sends device connectivity events for the message originator.
-- <span class="item-pe product-label-padding">[generate dashboard report](/docs/user-guide/rule-engine-2-0/nodes/action/generate-dashboard-report)</span> — generates a screenshot of a dashboard with specific configuration applied.
-- <span class="item-pe product-label-padding">[generate report](/docs/user-guide/rule-engine-2-0/nodes/action/generate-report)</span> — generates a report based on a report template and sends notifications to configured targets.
-- [generator](/docs/user-guide/rule-engine-2-0/nodes/action/generator) — generates messages at configurable time intervals using a custom script function.
-- [gps geofencing events](/docs/user-guide/rule-engine-2-0/nodes/action/gps-geofencing-events) — monitors GPS coordinates against polygon or circle geofences and routes messages based on entry, exit, and presence duration events.
-- <span class="item-pe product-label-padding">[integration downlink](/docs/user-guide/rule-engine-2-0/nodes/action/integration-downlink)</span> — pushes the incoming message as a downlink message to a selected integration.
-- [log](/docs/user-guide/rule-engine-2-0/nodes/action/log) — executes a user-defined script to transform message data, metadata, and type into a custom formatted string and logs that string to the ThingsBoard log file.
-- [math function](/docs/user-guide/rule-engine-2-0/nodes/action/math-function) — performs mathematical operations on numeric data retrieved from multiple sources (constants, message, metadata, attributes, or time series) and saves results to the message or database.
-- [message count](/docs/user-guide/rule-engine-2-0/nodes/action/message-count) — counts incoming messages over a specified time interval and outputs a message containing the count for each interval.
-- <span class="item-edge product-label-padding">[push to cloud](/docs/user-guide/rule-engine-2-0/nodes/action/push-to-cloud)</span> — sends the incoming message from ThingsBoard Edge instance to cloud ThinsBoard instance for further processing.
-- [push to edge](/docs/user-guide/rule-engine-2-0/nodes/action/push-to-edge) — sends the incoming message from cloud ThingsBoard instance to ThinsBoard Edge instance for further processing on Edge.
-- <span class="item-pe product-label-padding">[remove from group](/docs/user-guide/rule-engine-2-0/nodes/action/remove-from-group)</span> — removes the message originator entity from an entity group found by group name pattern.
-- [rest call reply](/docs/user-guide/rule-engine-2-0/nodes/action/rest-call-reply) — sends the incoming message data as an HTTP response to a REST API call made to the rule engine.
-- [rpc call reply](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply) — sends the incoming message data as a [reply]((/docs/{{docsPrefix}}user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial)) to a [Remote Procedure Call (RPC)](/docs/{{docsPrefix}}user-guide/rpc){:target="_blank"} from a device.
-- [rpc call request](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-request) — sends an RPC to a device, returning the device's response as outgoing message data.
-- [save attributes](/docs/user-guide/rule-engine-2-0/nodes/action/save-attributes) — stores the incoming message data as attribute data of the message originator.
-- [save time series](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries) — stores the incoming message data as time series data of the message originator.
-- [save to custom table](/docs/user-guide/rule-engine-2-0/nodes/action/save-to-custom-table) — stores the incoming message data in a custom Cassandra table.
-- <span class="item-ce product-label-padding">[unassign from customer](/docs/user-guide/rule-engine-2-0/nodes/action/unassign-from-customer)</span> — unassigns the message originator from a customer.
+- <span class="item-ce product-label-padding">[分配给客户](/docs/user-guide/rule-engine-2-0/nodes/action/assign-to-customer)</span> — 将消息来源分配给指定客户。
+- <span class="item-pe product-label-padding">[加入组](/docs/user-guide/rule-engine-2-0/nodes/action/add-to-group)</span> — 按组名称模式将消息来源加入找到的实体组。
+- [计算字段](/docs/user-guide/rule-engine-2-0/nodes/action/calculated-fields) — 触发时序或属性数据的计算字段处理，而无需将原始数据持久化到数据库。
+- <span class="item-pe product-label-padding">[更换所有者](/docs/user-guide/rule-engine-2-0/nodes/action/change-owner)</span> — 将消息来源的所有权更改为指定租户或客户。
+- [清除告警](/docs/user-guide/rule-engine-2-0/nodes/action/clear-alarm) — 清除消息来源的现有活跃告警。
+- [复制到视图](/docs/user-guide/rule-engine-2-0/nodes/action/copy-to-view) — 将资产/设备的属性变更复制到其关联的实体视图。
+- [创建告警](/docs/user-guide/rule-engine-2-0/nodes/action/create-alarm) — 为消息来源创建新告警或更新现有活跃告警。
+- [创建关系](/docs/user-guide/rule-engine-2-0/nodes/action/create-relation) — 在消息来源与指定目标实体之间创建关系，支持可配置的方向和类型。
+- [延迟（已废弃）](/docs/user-guide/rule-engine-2-0/nodes/action/delay) — 在将入站消息转发到下一规则节点前延迟可配置时长。
+- [删除属性](/docs/user-guide/rule-engine-2-0/nodes/action/delete-attributes) — 从消息来源删除指定属性。
+- [删除关系](/docs/user-guide/rule-engine-2-0/nodes/action/delete-relation) — 按类型和方向删除所选实体到消息来源的关系。
+- [设备配置](/docs/user-guide/rule-engine-2-0/nodes/action/device-profile) — 根据消息来源设备配置中定义的[告警规则](/docs/{{docsPrefix}}/user-guide/device-profiles/#alarm-rules){:target="_blank"}评估入站消息，并根据评估结果创建、更新或清除告警。
+- [设备状态](/docs/user-guide/rule-engine-2-0/nodes/action/device-state) — 发送消息来源的设备连接事件。
+- <span class="item-pe product-label-padding">[生成仪表盘报表](/docs/user-guide/rule-engine-2-0/nodes/action/generate-dashboard-report)</span> — 生成应用了特定配置的仪表盘截图。
+- <span class="item-pe product-label-padding">[生成报表](/docs/user-guide/rule-engine-2-0/nodes/action/generate-report)</span> — 根据报表模板生成报表并向配置的目标发送通知。
+- [生成器](/docs/user-guide/rule-engine-2-0/nodes/action/generator) — 使用自定义脚本函数在可配置时间间隔生成消息。
+- [GPS 地理围栏事件](/docs/user-guide/rule-engine-2-0/nodes/action/gps-geofencing-events) — 根据多边形或圆形地理围栏监控 GPS 坐标，并根据进入、离开和停留时长事件路由消息。
+- <span class="item-pe product-label-padding">[集成下行](/docs/user-guide/rule-engine-2-0/nodes/action/integration-downlink)</span> — 将入站消息作为下行消息推送到选定的集成。
+- [日志](/docs/user-guide/rule-engine-2-0/nodes/action/log) — 执行用户定义的脚本，将消息数据、元数据和类型转换为自定义格式字符串，并记录到 ThingsBoard 日志文件。
+- [数学函数](/docs/user-guide/rule-engine-2-0/nodes/action/math-function) — 对从多个来源（常量、消息、元数据、属性或时序）获取的数值执行数学运算，并将结果保存到消息或数据库。
+- [消息计数](/docs/user-guide/rule-engine-2-0/nodes/action/message-count) — 在指定时间间隔内统计入站消息，并输出包含每个间隔计数的消息。
+- <span class="item-edge product-label-padding">[推送到云端](/docs/user-guide/rule-engine-2-0/nodes/action/push-to-cloud)</span> — 将入站消息从 ThingsBoard Edge 实例发送到云端 ThingsBoard 实例进行后续处理。
+- [推送到边缘](/docs/user-guide/rule-engine-2-0/nodes/action/push-to-edge) — 将入站消息从云端 ThingsBoard 实例发送到 ThingsBoard Edge 实例以在边缘进行后续处理。
+- <span class="item-pe product-label-padding">[从组中移除](/docs/user-guide/rule-engine-2-0/nodes/action/remove-from-group)</span> — 按组名称模式从找到的实体组中移除消息来源实体。
+- [REST 调用回复](/docs/user-guide/rule-engine-2-0/nodes/action/rest-call-reply) — 将入站消息数据作为 HTTP 响应发送给对规则引擎发出的 REST API 调用。
+- [RPC 调用回复](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply) — 将入站消息数据作为[回复](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial)发送给设备发起的[远程过程调用 (RPC)](/docs/{{docsPrefix}}user-guide/rpc){:target="_blank"}。
+- [RPC 调用请求](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-request) — 向设备发送 RPC，将设备响应作为出站消息数据返回。
+- [保存属性](/docs/user-guide/rule-engine-2-0/nodes/action/save-attributes) — 将入站消息数据存储为消息来源的属性数据。
+- [保存时序](/docs/user-guide/rule-engine-2-0/nodes/action/save-timeseries) — 将入站消息数据存储为消息来源的时序数据。
+- [保存到自定义表](/docs/user-guide/rule-engine-2-0/nodes/action/save-to-custom-table) — 将入站消息数据存储到自定义 Cassandra 表。
+- <span class="item-ce product-label-padding">[取消分配客户](/docs/user-guide/rule-engine-2-0/nodes/action/unassign-from-customer)</span> — 从客户处取消分配消息来源。

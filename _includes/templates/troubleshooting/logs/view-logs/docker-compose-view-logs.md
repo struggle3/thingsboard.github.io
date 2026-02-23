@@ -1,18 +1,18 @@
-View last logs in runtime:
- 
+实时查看最新日志：
+
 ```bash
 docker compose logs -f tb-core1 tb-core2 tb-rule-engine1 tb-rule-engine2
 ```
 {: .copy-code}
 
 {% capture dockerComposeStandalone %}
-If you still rely on Docker Compose as docker-compose (with a hyphen) execute next command:
+若仍使用带连字符的 docker-compose，请执行：
 
 **docker-compose logs -f tb-core1 tb-core2 tb-rule-engine1 tb-rule-engine2**
 {% endcapture %}
 {% include templates/info-banner.md content=dockerComposeStandalone %}
 
-If you suspect the issue is related only to rule-engine, you can filter and view only the rule-engine logs:
+若怀疑问题仅与 rule-engine 相关，可只查看 rule-engine 日志：
 
 ```bash
 docker compose logs -f tb-rule-engine1 tb-rule-engine2
@@ -20,14 +20,14 @@ docker compose logs -f tb-rule-engine1 tb-rule-engine2
 {: .copy-code}
 
 {% capture dockerComposeStandalone %}
-If you still rely on Docker Compose as docker-compose (with a hyphen) execute next command:
+若仍使用带连字符的 docker-compose，请执行：
 
 **docker-compose logs -f tb-rule-engine1 tb-rule-engine2**
 {% endcapture %}
 {% include templates/info-banner.md content=dockerComposeStandalone %}
 
-You can use <b>grep</b> command to show only the output with desired string in it. 
-For example you can use the following command in order to check if there are any errors on the backend side:
+可使用 <b>grep</b> 命令仅显示包含指定字符串的输出。
+例如，可用以下命令检查后端是否存在错误：
 
 ```bash
 docker compose logs tb-core1 tb-core2 tb-rule-engine1 tb-rule-engine2 | grep ERROR
@@ -35,13 +35,13 @@ docker compose logs tb-core1 tb-core2 tb-rule-engine1 tb-rule-engine2 | grep ERR
 {: .copy-code}
 
 {% capture dockerComposeStandalone %}
-If you still rely on Docker Compose as docker-compose (with a hyphen) execute next command:
+若仍使用带连字符的 docker-compose，请执行：
 
 **docker-compose logs tb-core1 tb-core2 tb-rule-engine1 tb-rule-engine2 \| grep ERROR**
 {% endcapture %}
 {% include templates/info-banner.md content=dockerComposeStandalone %}
 
-**Tip:** you can redirect logs to file and then analyze with any text editor:
+**提示：** 可将日志重定向到文件后用任意文本编辑器分析：
 
 ```bash
 docker compose logs -f tb-rule-engine1 tb-rule-engine2 > rule-engine.log
@@ -49,13 +49,13 @@ docker compose logs -f tb-rule-engine1 tb-rule-engine2 > rule-engine.log
 {: .copy-code}
 
 {% capture dockerComposeStandalone %}
-If you still rely on Docker Compose as docker-compose (with a hyphen) execute next command:
+若仍使用带连字符的 docker-compose，请执行：
 
 **docker-compose logs -f tb-rule-engine1 tb-rule-engine2 > rule-engine.log**
 {% endcapture %}
 {% include templates/info-banner.md content=dockerComposeStandalone %}
 
-**Note:** you can always log into the ThingsBoard container and view logs there:
+**注意：** 可随时进入 ThingsBoard 容器内查看日志：
 
 ```bash
 docker ps

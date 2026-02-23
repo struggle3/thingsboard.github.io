@@ -1,23 +1,23 @@
 ---
 layout: case-studies
-title: How Schwarz Group Unified 500,000+ IoT Devices with ThingsBoard
+title: Schwarz Group 如何借助 ThingsBoard 统一 50 万+ IoT 设备
 notitle: "true"
 customTitle: "true"
-description: Discover how Schwarz Group, operating over 13,000 stores globally, streamlined its retail operations by integrating 500,000+ devices using ThingsBoard's IoT platform, enhancing efficiency and accelerating digital transformation.
+description: 了解在全球运营超过 13,000 家门店的 Schwarz Group 如何借助 ThingsBoard 物联网平台整合 50 万+ 设备、提升效率并加速数字化转型。
 ---
 
 <div class="case-study-page-wrapper">
     <section class="case-study-hero">
         <div class="card">
             <div class="text">
-                <p class="category">SMART RETAIL</p>
-                <h1>IoT in retail: how Schwarz Group accelerated digitalization with ThingsBoard</h1>
+                <p class="category">智慧零售</p>
+                <h1>零售业IoT：Schwarz Group 如何借助 ThingsBoard 加速数字化</h1>
                 <div class="image inner" style="background-image: url('/images/case-studies/schwarz.webp')">
                     <img src="/images/case-studies/schwarz.svg" title="Schwarz" alt="Schwarz logo" width="410" height="208">
                 </div>
-                <p>The Schwarz Group is one of the largest retail companies in the world, based in Neckarsulm, Germany. It operates in 32 countries, managing around 13,900 stores and employing approximately 575,000 people. Millions of people shop at Schwarz Group supermarkets every day.</p>
-                <p>The Schwarz Group owns two major supermarket chains. Beyond retail, the Schwarz Group also runs several other businesses.</p>
-                <p>The Schwarz Group controls the entire product cycle with these divisions—from production and retail to waste recycling and digital innovation. Their goal is to make everyday life more sustainable, healthy, and secure for billions of people worldwide.</p>
+                <p>Schwarz Group 总部位于德国内卡苏尔姆，是全球最大的零售企业之一，业务遍及 32 个国家，管理约 13,900 家门店，员工约 575,000 人。每天有数百万人在 Schwarz Group 超市购物。</p>
+                <p>Schwarz Group 拥有两大超市品牌。除零售外，还经营多项其他业务。</p>
+                <p>Schwarz Group 通过这些业务板块控制从生产、零售到废品回收与数字创新的完整产品周期，目标是为全球数十亿人创造更可持续、更健康、更安全的日常生活。</p>
             </div>
             <div class="image large" style="background-image: url('/images/case-studies/schwarz.webp')">
                 <img src="/images/case-studies/schwarz.svg" title="Schwarz Group" alt="Schwarz Group logo" width="410" height="208">
@@ -29,158 +29,158 @@ description: Discover how Schwarz Group, operating over 13,000 stores globally, 
             <p>
                 {% include number-animation.html startNum = 1 targetNum = 500000 useMobileMode = true useGrouping = true %}+
             </p>
-            <p>connected devices</p>
+            <p>已连接设备</p>
         </div>
         <div class="block">
             <p>
                 {% include number-animation.html startNum = 1 targetNum = 32 useGrouping = true %}
             </p>
-            <p>countries of operation</p>
+            <p>运营国家</p>
         </div>
         <div class="block">
             <p>
                 {% include number-animation.html startNum = 1 targetNum = 13900 useMobileMode = true useGrouping = true %}
             </p>
-            <p>stores</p>
+            <p>门店</p>
         </div>
     </section>
     <section class="problem">
         <div class="title-block">
-            <h2>What problem did they face?</h2>
-            <p>The Schwarz Group, a global retail company faced several challenges in managing the technology used in its supermarkets. These issues made daily operations less efficient and prevented the company from applying the same processes across all locations.</p>
+            <h2>他们面临哪些问题？</h2>
+            <p>全球零售企业 Schwarz Group 在管理超市所用技术时面临多项挑战。这些问题降低了日常运营效率，并阻碍了公司在所有门店推行统一流程。</p>
         </div>
         <div class="cards-row">
             <div class="card">
-                <h3>Challenges</h3>
+                <h3>挑战</h3>
                 <ul>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Different Types of Technology – Each store used different devices and systems from various manufacturers, making it hard to manage and standardize.</p>
+                        <p>技术类型一各门店使用不同厂商的设备与系统，难以统一管理与标准化。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Data Was Not Connected – Without a single platform, data was spread out and difficult to analyze properly.</p>
+                        <p>数据未打通——没有统一平台，数据分散，难以有效分析。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Difficult to Expand – As the company grew, it became harder to connect new stores and devices to the existing system.</p>
+                        <p>扩展困难——随着规模扩大，将新门店与新设备接入现有系统越来越难。</p>
                     </li>
                 </ul>
             </div>
             <div class="card">
-                <h3>Key results</h3>
+                <h3>主要成果</h3>
                 <ul>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>One System for All Devices – The ThingsBoard IoT platform helped interconnect over 500,000 devices in all supermarkets, even if they used different communication methods like LoRaWAN, SigFox, or MQTT.</p>
+                        <p>一套系统管理所有设备——ThingsBoard 物联网平台帮助所有超市互联 50 万+ 设备，无论使用 LoRaWAN、SigFox 还是 MQTT 等不同通信方式。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Better Access to Data – Each store now has secure and customized access to its own data, making it easier to make decisions and improve efficiency.</p>
+                        <p>数据访问更便捷——每家门店现均可安全、定制化访问自身数据，决策与效率提升更容易。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Faster Digitalization – The flexible platform allowed Schwarz Group to quickly introduce new features while keeping everything standardized. This also made maintenance easier and helped the company move toward a more digital future.</p>
+                        <p>数字化加速——灵活的平台使 Schwarz Group 能快速引入新功能并保持统一标准，维护更简单，并推动企业迈向更数字化的未来。</p>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
     <section class="tb-power">
-        <h2>How ThingsBoard powers Schwarz?</h2>
+        <h2>ThingsBoard 如何赋能 Schwarz？</h2>
         <div class="block">
             <div class="text">
-                <h3>Challenges in managing a large retail network</h3>
-                <p>The Schwarz Group, a global retail leader operating over 13,000 stores in 32 countries, faced significant challenges in managing the huge amount of technical equipment within its supermarket network. Each store utilised a variety of devices and systems from different manufacturers, leading to inconsistencies and complexities in management. Data was scattered across different systems, making it almost impossible to get a clear overview of operations. As the company expanded, integrating new stores and devices into the existing infrastructure became increasingly challenging. These issues slowed down operations, increased costs, and prevented the Schwarz Group from running all its stores in a smooth, standardised way.</p>
+                <h3>大型零售网络管理中的挑战</h3>
+                <p>Schwarz Group 是在 32 国运营超过 13,000 家门店的全球零售领先企业，在管理超市网络内大量技术设备方面面临显著挑战。各门店使用来自不同厂商的多种设备与系统，导致管理不一致、复杂度高。数据分散在不同系统中，几乎无法获得清晰的运营全景。随着公司扩张，将新门店与新设备接入现有基础设施越来越难。这些问题拖慢运营、推高成本，并阻碍 Schwarz Group 以顺畅、标准化的方式运营所有门店。</p>
             </div>
-            <img src="/images/case-studies/schwarz-1.webp" title="Challenges in managing a large retail network" alt="Supermarket" width="900" height="480">
+            <img src="/images/case-studies/schwarz-1.webp" title="大型零售网络管理中的挑战" alt="超市" width="900" height="480">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Transforming retail operations with ThingsBoard</h3>
-                <p>By partnering with ThingsBoard, the Schwarz Group achieved significant improvements. The ThingsBoard IoT platform was able to interconnect over 500,000 devices across all its supermarkets. No matter what communication protocols the devices used—LoRaWAN, SigFox, MQTT—ThingsBoard made sure they could all work together seamlessly. Each store now has secure, customized access to its data, facilitating better decision-making and operational efficiency. Moreover, the flexibility of ThingsBoard enabled the Schwarz Group to quickly introduce new digital solutions while keeping everything standardized. These outcomes not only improved current operations but also positioned the Schwarz Group for future growth and innovation.</p>
+                <h3>借助 ThingsBoard 变革零售运营</h3>
+                <p>与 ThingsBoard 合作后，Schwarz Group 取得显著改进。ThingsBoard 物联网平台实现了所有超市内 50 万+ 设备的互联。无论设备使用何种通信协议——LoRaWAN、SigFox、MQTT——ThingsBoard 都能让它们无缝协同。每家门店现均可安全、定制化访问自身数据，便于更好决策与运营效率。此外，ThingsBoard 的灵活性使 Schwarz Group 能快速引入新的数字方案并保持统一标准。这些成果不仅改善了当前运营，也为 Schwarz Group 的未来增长与创新奠定基础。</p>
             </div>
-            <img src="/images/case-studies/schwarz-2.webp" title="Challenges in managing a large retail network" alt="Retail operations" width="900" height="480">
+            <img src="/images/case-studies/schwarz-2.webp" title="大型零售网络管理中的挑战" alt="零售运营" width="900" height="480">
         </div>
         <div class="block">
             <div class="text">
-                <h3>A scalable and secure IoT solution</h3>
-                <p>ThingsBoard provided a comprehensive IoT platform that addressed the Schwarz Group's challenges through device integration, data visualization, scalability, and security. The platform's ability to connect a wide range of devices using multiple communication protocols ensured seamless integration across all stores. An intuitive IoT portal acted as a crucial visualization layer, presenting all relevant data from connected devices in an accessible format. ThingsBoard's scalable architecture allowed the Schwarz Group to expand its operations without compromising performance or manageability. The platform provided secure data access with customizable permissions tailored to the needs of each store. This partnership is an example of how customized IoT solutions can drive efficiency and innovation in large-scale retail operations.</p>
+                <h3>可扩展、安全的IoT方案</h3>
+                <p>ThingsBoard 提供全面的物联网平台，通过设备集成、数据可视化、可扩展性与安全性应对 Schwarz Group 的挑战。平台能使用多种通信协议连接各类设备，确保所有门店无缝集成。直观的物联网门户作为关键可视化层，以易用形式呈现所有连接设备的相关数据。ThingsBoard 的可扩展架构使 Schwarz Group 能在不牺牲性能或可管理性的前提下扩展运营。平台提供可针对每家门店需求定制的安全数据访问与权限。此次合作展示了定制化IoT方案如何驱动大规模零售运营的效率与创新。</p>
             </div>
-            <img src="/images/case-studies/schwarz-3.webp" title="Challenges in managing a large retail network" alt="Scalable and secure IoT solution" width="900" height="480">
+            <img src="/images/case-studies/schwarz-3.webp" title="大型零售网络管理中的挑战" alt="可扩展、安全的IoT方案" width="900" height="480">
         </div>
     </section>
     <section class="award">
         <div class="image-container">
-            <a href="/blog/top-supplier-retail-2024-2/"><img src="/images/case-studies/schwarz-award.svg" title="Top supplier retail award" alt="Top supplier retail award" width="228" height="330"></a>
+            <a href="/blog/top-supplier-retail-2024-2/"><img src="/images/case-studies/schwarz-award.svg" title="零售顶级供应商奖" alt="零售顶级供应商奖" width="228" height="330"></a>
         </div>
         <div class="text">
-            <h3><a href="/blog/top-supplier-retail-2024-2/">An Award-Winning Collaboration</a></h3>
-            <p>By solving these challenges, ThingsBoard has helped the Schwarz Group become more efficient, cost-effective, and digitally advanced. The impact of this transformation was so significant that ThingsBoard received the "TOP SUPPLIER RETAIL 2024" award from the EHI Retail Institute, proving how smart IoT solutions can revolutionize the retail industry.</p>
-            <p>This collaboration goes beyond just fixing technical issues—it represents a step towards the future of retail, where smart, flexible, and secure IoT solutions play a key role. With ThingsBoard, the Schwarz Group has created a more connected, efficient, and technology-driven shopping experience, setting new standards for innovation and digital transformation in the retail industry.</p>
+            <h3><a href="/blog/top-supplier-retail-2024-2/">获奖合作</a></h3>
+            <p>通过解决这些挑战，ThingsBoard 帮助 Schwarz Group 提升效率、降低成本并推进数字化。这一转型影响显著，ThingsBoard 因此获得 EHI 零售研究所颁发的「TOP SUPPLIER RETAIL 2024」奖项，证明了智慧IoT方案如何革新零售业。</p>
+            <p>此次合作不仅解决技术问题，更代表了迈向零售未来的一步——智慧、灵活、安全的IoT方案将扮演关键角色。借助 ThingsBoard，Schwarz Group 打造了更互联、更高效、更技术驱动的购物体验，为零售业的创新与数字化转型树立新标准。</p>
         </div>
     </section>
-    {% include contact-us-banner.liquid linkLabel='Use cases' link='/iot-use-cases/' %}
+    {% include contact-us-banner.liquid linkLabel='应用场景' link='/iot-use-cases/' %}
     <section class="tb-help">
-        <h2>How ThingsBoard helps retail businesses improve operations with IoT?</h2>
+        <h2>ThingsBoard 如何帮助零售企业用IoT改善运营？</h2>
         <div class="block">
             <div class="text">
-                <h3>Easy device management</h3>
-                <p>Retailers use thousands of smart devices in their stores. Managing them one by one is difficult. ThingsBoard makes it simple by allowing retailers to:</p>
+                <h3>便捷的设备管理</h3>
+                <p>零售商在门店使用大量智能设备，逐台管理十分困难。ThingsBoard 让零售商能够：</p>
                 <ul>
-                    <li><p>Monitor all devices from a single dashboard.</p></li>
-                    <li><p>Control equipment remotely, such as refrigerators, air conditioners, and smart shelves.</p></li>
-                    <li><p>Detect and fix problems before they cause major issues.</p></li>
+                    <li><p>在单一仪表盘上监控所有设备。</p></li>
+                    <li><p>远程控制冰箱、空调、智慧货架等设备。</p></li>
+                    <li><p>在问题酿成重大故障前发现并修复。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/entities-table.webp" title="Thingsboard entities table widget" alt="Thingsboard entities table widget" width="776" height="776">
-                <img src="/images/case-studies/control-widgets.webp" title="Thingsboard control widgets" alt="Thingsboard control widgets" width="776" height="776">
+                <img src="/images/case-studies/entities-table.webp" title="ThingsBoard 实体表部件" alt="ThingsBoard 实体表部件" width="776" height="776">
+                <img src="/images/case-studies/control-widgets.webp" title="ThingsBoard 控制部件" alt="ThingsBoard 控制部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Real-time data and reports</h3>
-                <p>To improve store operations, retailers need real-time data. ThingsBoard provides:</p>
+                <h3>实时数据与报表</h3>
+                <p>为改善门店运营，零售商需要实时数据。ThingsBoard 提供：</p>
                 <ul>
-                    <li><p>Custom dashboards to track important store data, such as temperature, energy use, and customer movement.</p></li>
-                    <li><p>Reports on past data, helping retailers improve store performance.</p></li>
-                    <li><p>Providing historical data analysis, which helps stores predict when they need to restock or service critical equipment.</p></li>
+                    <li><p>定制仪表盘追踪温度、能耗、客流等重要门店数据。</p></li>
+                    <li><p>历史数据报表，帮助零售商提升门店表现。</p></li>
+                    <li><p>历史数据分析，帮助门店预测补货或关键设备维保时机。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/time-series-chart.webp" title="Thingsboard time series chart widget" alt="Thingsboard time series chart widget" width="776" height="776">
-                <img src="/images/case-studies/image-map.webp" title="Thingsboard image map widget" alt="Thingsboard image map widget" width="776" height="776">
+                <img src="/images/case-studies/time-series-chart.webp" title="ThingsBoard 时序图部件" alt="ThingsBoard 时序图部件" width="776" height="776">
+                <img src="/images/case-studies/image-map.webp" title="ThingsBoard 图片地图部件" alt="ThingsBoard 图片地图部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Smart automation with alerts</h3>
-                <p>One of the biggest advantages of IoT is automation. ThingsBoard’s rule engine helps retailers:</p>
+                <h3>智慧自动化与告警</h3>
+                <p>IoT 的一大优势是自动化。ThingsBoard 的规则引擎帮助零售商：</p>
                 <ul>
-                    <li><p>Receive alerts when refrigerators are not working properly, preventing food from spoiling.</p></li>
-                    <li><p>Automatically adjust lighting and air conditioning, saving energy and reducing costs.</p></li>
-                    <li><p>Improve security by connecting with smart cameras and alarm systems.</p></li>
+                    <li><p>在冰箱异常时收到告警，避免食品变质。</p></li>
+                    <li><p>自动调节照明与空调，节能降本。</p></li>
+                    <li><p>与智慧摄像头、报警系统联动，提升安全。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/supermarkets.webp" title="Supermarkets widget" alt="Supermarkets widget" width="776" height="776">
-                <img src="/images/case-studies/analogue-gauge.webp" title="Thingsboard analogue gauge widget" alt="Thingsboard analogue gauge widget" width="776" height="776">
+                <img src="/images/case-studies/supermarkets.webp" title="超市部件" alt="超市部件" width="776" height="776">
+                <img src="/images/case-studies/analogue-gauge.webp" title="ThingsBoard 模拟表盘部件" alt="ThingsBoard 模拟表盘部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Scalable and grows with your business</h3>
-                <p>As retail businesses expand, they need a system that can grow with them. ThingsBoard can handle:</p>
+                <h3>可扩展，随业务增长</h3>
+                <p>零售业务扩张时，需要能同步成长的系统。ThingsBoard 可支撑：</p>
                 <ul>
-                    <li><p>Millions of devices without slowing down.</p></li>
-                    <li><p>Different communication systems (MQTT, HTTP, CoAP), making it easy to interconnect existing equipment.</p></li>
-                    <li><p>Custom dashboards and workflows, so retailers can adjust the system to fit their needs.</p></li>
+                    <li><p>数百万设备而不降速。</p></li>
+                    <li><p>多种通信方式（MQTT、HTTP、CoAP），便于接入现有设备。</p></li>
+                    <li><p>定制仪表盘与工作流，零售商可按需调整系统。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/maps-widgets.webp" title="Thingsboard maps widgets widget" alt="Thingsboard maps widgets widget" width="776" height="776">
-                <img src="/images/case-studies/scalable-2.webp" title="Scalable and grows with your business" alt="Thingsboard widget" width="776" height="776">
+                <img src="/images/case-studies/maps-widgets.webp" title="ThingsBoard 地图部件" alt="ThingsBoard 地图部件" width="776" height="776">
+                <img src="/images/case-studies/scalable-2.webp" title="可扩展，随业务增长" alt="ThingsBoard 部件" width="776" height="776">
             </div>
         </div>
         {% include services-banner.liquid %}
@@ -194,7 +194,7 @@ description: Discover how Schwarz Group, operating over 13,000 stores globally, 
                 </div>
             </div>
         </div>
-        <p>Real stories, real impact — share your experience with ThingsBoard!</p>
-        <a id="CaseStudy_Schwarz_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">Contact us</a>
+        <p>真实故事，真实影响——分享您与 ThingsBoard 的经验！</p>
+        <a id="CaseStudy_Schwarz_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">联系我们</a>
     </section>
 </div>

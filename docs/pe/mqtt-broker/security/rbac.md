@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Role-Based Access Control (RBAC)
-description: Role-Based Access Control
+title: 基于角色的访问控制（RBAC）
+description: 基于角色的访问控制
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: AI request
-description: Sends a request to a large language model with customizable prompts and optional file attachments, returning the AI-generated response as the outgoing message data.
+description: 向大语言模型发送请求，支持自定义提示词和可选文件附件，并将 AI 生成的响应作为出站消息数据返回。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: Claiming devices
-description: IoT device management using ThingsBoard claiming devices feature
+title: 认领设备
+description: 使用 ThingsBoard 设备认领功能进行 IoT 设备管理
 
 device-claiming-permissions-in-pe-carousel:
     0:

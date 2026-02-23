@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Assets
-description: Thingsboard IoT Asset management
+title: 资产
+description: ThingsBoard IoT 资产管理
 
 creating-asset:
     0:

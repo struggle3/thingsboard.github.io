@@ -1,4 +1,4 @@
 {% capture peFeatureContent %}
-Only **TBMQ Professional Edition** supports **{{ feature }}** feature.<br>
+仅 **TBMQ Professional Edition** 支持 **{{ feature }}** 功能。<br>
 {% endcapture %}
-{% include templates/info-banner.md title="TBMQ PE feature" content=peFeatureContent %}
+{% include templates/info-banner.md title="TBMQ PE功能" content=peFeatureContent %}

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect uPesy ESP32 Wroom DevKit v2 to ThingsBoard?"
+title: "如何将uPesy ESP32 Wroom DevKit v2连接到ThingsBoard？"
 redirect_to: "/device-library/ce/upesy-esp32-wroom-devkit/"
 ---

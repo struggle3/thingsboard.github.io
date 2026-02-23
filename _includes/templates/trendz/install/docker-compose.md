@@ -62,14 +62,14 @@ volumes:
 ```
 {: .copy-code}
 
-Where:
+说明：
 
-- `8888:8888` - connect local port 8888 to exposed internal HTTP port 8888
-- `trendz-conf:/trendz-config-files` - mounts the volume `trendz-conf` to Trendz directory with the configuration files
-- `trendz-data:/data` - mounts the volume `trendz-data` to Trendz data directory
-- `trendz-postgres-data:/var/lib/postgresql/data` - mounts the volume `trendz-postgres-data` to Postgres data directory
-- `trendz` - name of the Trendz Docker service
-- `--restart always` - automatically start Trendz in case of system reboot and restart in case of failure.
-- `thingsboard/trendz:{{ site.release.trendz_ver }}` - Trendz docker image
-- `thingsboard/trendz-python-executor:{{ site.release.trendz_ver }}` - Trendz python script executor docker image
-- `SCRIPT_ENGINE_TIMEOUT` - Python script execution timeout
+- `8888:8888`：将本地端口 8888 映射到内部 HTTP 端口 8888
+- `trendz-conf:/trendz-config-files`：将 `trendz-conf` 卷挂载到 Trendz 配置目录
+- `trendz-data:/data`：将 `trendz-data` 卷挂载到 Trendz 数据目录
+- `trendz-postgres-data:/var/lib/postgresql/data`：将 `trendz-postgres-data` 卷挂载到 Postgres 数据目录
+- `trendz`：Trendz Docker 服务名称
+- `--restart always`：系统重启或故障后自动启动 Trendz
+- `thingsboard/trendz:{{ site.release.trendz_ver }}`：Trendz Docker 镜像
+- `thingsboard/trendz-python-executor:{{ site.release.trendz_ver }}`：Trendz Python 脚本执行器 Docker 镜像
+- `SCRIPT_ENGINE_TIMEOUT`：Python 脚本执行超时时间

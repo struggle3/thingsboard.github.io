@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: output
-description: Publishes result of the message processing to the caller rule chain.
+description: 将消息处理结果发布到调用方 rule chain。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

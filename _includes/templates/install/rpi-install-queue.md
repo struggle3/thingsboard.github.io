@@ -1,1 +1,1 @@
-ThingsBoard uses queue services for API calls between micro-services and able to use next queue services: In Memory (default) and Kafka-based systems.
+ThingsBoard 使用队列服务进行微服务间的 API 调用，支持以下队列服务：In Memory（默认）和基于 Kafka 的系统。

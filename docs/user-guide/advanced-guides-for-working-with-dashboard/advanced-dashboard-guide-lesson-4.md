@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Lesson 4. Alarm management
+title: 课程4. 告警管理
 redirect_to: "/docs/pe/user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-4/"
 
 ---

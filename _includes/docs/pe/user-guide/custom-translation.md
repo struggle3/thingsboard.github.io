@@ -11,21 +11,21 @@
 * TOC
 {:toc}
 
-ThingsBoard supports a multilingual interface through its built-in internationalization (i18n) system. Select and use the interface in the language that suits you best.
+ThingsBoard 通过内置 i18n 系统支持多语言界面。可选择最适合的语言使用界面。
 
-However, for more specific requirements, the **Custom translation** feature is available, which allows you to:
-- [Add new languages](#adding-new-language);
-- [Modify or extend](#modify-current-translation) existing translations;
-- Use [custom translations](#custom-translation) for dashboard titles, widgets, devices, telemetry keys, and other interface elements.
+针对更细粒度需求，提供 **自定义翻译** 功能，支持：
+- [添加新语言](#adding-new-language)；
+- [修改或扩展](#modify-current-translation)现有翻译；
+- 为仪表板标题、部件、设备、遥测键及其他界面元素使用[自定义翻译](#custom-translation)。
 
-## Change platform language
+## 更改平台语言
 
-To change the language of your account, follow these steps:
-- Click the three-dot icon in the top-right corner of the screen and select "Account".
-- In the profile settings, choose the desired language from the dropdown list.
-- Apply the changes.
+更改账户语言的步骤：
+- 点击屏幕右上角的三点图标，选择「Account」。
+- 在个人资料设置中，从下拉列表选择所需语言。
+- 应用更改。
 
-After that, the ThingsBoard interface will switch to the selected language.
+之后，ThingsBoard 界面将切换为所选语言。
 
 {% assign changeLanguagePE = '
     ===
@@ -45,19 +45,19 @@ After that, the ThingsBoard interface will switch to the selected language.
 
 {% include images-gallery.liquid imageCollection=changeLanguagePE %}
 
-## Adding new language
+## 添加新语言
 
-If the desired language is not in the list, you can add a new one. To do this:
+若所需语言不在列表中，可添加新语言。操作步骤：
 
-- Go to the "Custom translation" tab of the "White labeling" page, and click the "Add new language" button in the upper-right corner.
-- In the window that opens, select the desired language from the list.
-- You can immediately upload a [JSON file](/docs/user-guide/resources/nl_custom_translation.json){:target="_blank"} with a translation map for quick localization setup, or leave this step for later and gradually fill in the translations.
-- Click "Add".
+- 前往「白标」页面的「自定义翻译」选项卡，点击右上角「Add new language」按钮。
+- 在打开的窗口中选择所需语言。
+- 可立即上传包含翻译映射的 [JSON 文件](/docs/user-guide/resources/nl_custom_translation.json){:target="_blank"} 快速完成本地化，或留待后续逐步填写翻译。
+- 点击「Add」。
 
-The new language has been successfully added. You and your users can now [use it as the interface language for your instance](#change-platform-language).
+新语言已成功添加。您和用户现可[将其用作实例的界面语言](#change-platform-language)。
 
-Since the JSON file I provided includes only a limited set of translation keys, the translation progress is currently at 5%.
-As you continue adding more translations, the progress indicator will automatically increase.
+由于提供的 JSON 文件仅包含有限的翻译键，当前翻译进度为 5%。
+随着继续添加更多翻译，进度条会自动增加。
 
 {% assign addNewLanguagePE = '
     ===
@@ -77,14 +77,14 @@ As you continue adding more translations, the progress indicator will automatica
 
 {% include images-gallery.liquid imageCollection=addNewLanguagePE %}
 
-## Translation editor
+## 翻译编辑器
 
-Go to the "**White labeling**" page and open the "**Custom translation**" tab. Here you&#39;ll see a list of available languages and their translation progress indicated in percentages.
+前往「**白标**」页面并打开「**自定义翻译**」选项卡。此处可见可用语言列表及以百分比显示的翻译进度。
 
 ![image](/images/user-guide/custom-translation/main-page-1-pe.png)
 
 {% capture difference %}
-**Please note:** The initial list of custom translations is created by the system administrator. A tenant cannot delete the system&#39;s custom translations but can make changes to them and add new translations.
+**请注意：** 自定义翻译初始列表由系统管理员创建。租户不能删除系统的自定义翻译，但可修改并添加新翻译。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -724,6 +724,6 @@ If at any time you need to delete a language or reset its translations to the de
 
 {% include images-gallery.liquid imageCollection=deleteLanguage %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: MQTT Device API Reference
-description: Supported MQTT API Reference for IoT Devices 
+title: MQTT设备API参考
+description: 支持的IoT设备MQTT API参考 
 redirect_from: "/docs/edge/reference/mqtt-api"
 ---
 

@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: ThingsBoard installation options
-description: ThingsBoard installation instructions for various operation systems and cloud platforms
+title: ThingsBoard 安装选项
+description: 适用于多种操作系统和云平台的 ThingsBoard 安装说明
 notitle: "true"
 ---
 
@@ -12,10 +12,10 @@ notitle: "true"
        <div class="install-options-hero">
           <div class="container">
             <div class="install-options-hero-content">
-                <h1>ThingsBoard installation options</h1>
+                <h1>ThingsBoard 安装选项</h1>
                 <div class="install-options-description">
                     <p>
-                        ThingsBoard is designed to run and utilize on majority of hardware, from local Raspberry PI to powerful servers in the cloud
+                        ThingsBoard 设计可在多种硬件上运行使用，从本地 Raspberry PI 到云端强劲服务器
                     </p>
                 </div>
             </div>
@@ -24,19 +24,19 @@ notitle: "true"
                     <ul id="menu-install-navigation-1" class="menu">
                         <li id="menu-item-liveDemo" class="menu-item tb-live-demo" data-tab="liveDemo">
                             <p>
-                                <img src="/images/livedemo-icon.svg" title="Try ThingsBoard Cloud" alt="Live demo icon" width="28" height="28">
+                                <img src="/images/livedemo-icon.svg" title="试用 ThingsBoard Cloud" alt="Live demo icon" width="28" height="28">
                                 <span>SaaS</span>
                             </p>
                         </li>
                         <li id="menu-item-onPremise" class="menu-item tb-on-premise" data-tab="onPremise">
                             <p>
-                                <img src="/images/pricing/self-icon.svg" title="Install ThingsBoard on your own server" alt="On-premise installation icon" width="28" height="28">
+                                <img src="/images/pricing/self-icon.svg" title="在自有服务器上安装 ThingsBoard" alt="On-premise installation icon" width="28" height="28">
                                 <span>On-premises</span>
                             </p>
                         </li>
                         <li id="menu-item-cloud" class="menu-item tb-cloud" data-tab="cloud">
                             <p>
-                                <img src="/images/pricing/cloud-icon.svg" title="Use ThingsBoard in the cloud" alt="Cloud deployment icon" width="28" height="28">
+                                <img src="/images/pricing/cloud-icon.svg" title="在云端使用 ThingsBoard" alt="Cloud deployment icon" width="28" height="28">
                                 <span>Cloud</span>
                             </p>
                         </li>

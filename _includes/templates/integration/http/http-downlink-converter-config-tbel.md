@@ -6,7 +6,7 @@
 {% endif %}
 
 <br>
-Add a converter to the integration. You can customize a downlink according to your configuration.
+向 integration 添加 converter。可根据您的配置自定义 downlink。
 Let’s consider an example where we send an attribute update message. So we should change code in the downlink encoder function under line **//downlink data** input:
 
 ```ruby
@@ -23,7 +23,7 @@ where **msg** is the message that we receive and send back to the device.
 {% endif %}
 
 <br>
-An example of downlink converter:
+Downlink converter 示例：
 
 ```ruby
 // Encode downlink data from incoming Rule Engine message

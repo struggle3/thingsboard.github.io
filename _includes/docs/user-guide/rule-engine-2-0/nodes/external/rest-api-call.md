@@ -1,168 +1,164 @@
-Sends HTTP requests to external endpoints with configurable request methods, headers, authentication, and proxy settings. Supports GET, POST, PUT, PATCH, and DELETE operations with
-multiple authentication methods including TLS/SSL encryption.
+向外部端点发送 HTTP 请求，支持可配置的请求方法、请求头、认证和代理设置。支持 GET、POST、PUT、PATCH 和 DELETE 操作，及包括 TLS/SSL 加密在内的多种认证方式。
 
-## Configuration
+## 配置
 
-### Endpoint URL pattern
+### 端点 URL 模式
 
-Specifies the endpoint URL where requests will be sent. Supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/).
+指定请求将发送到的端点 URL。支持[模板](/docs/{{docsPrefix}}user-guide/templatization/)。
 
-### Request method
+### 请求方法
 
-The HTTP method to use for the request. Available options: **GET**, **POST**, **PUT**, **PATCH**, **DELETE**.
+请求使用的 HTTP 方法。可用选项：**GET**、**POST**、**PUT**、**PATCH**、**DELETE**。
 
-### Headers
+### 请求头
 
-Key-value pairs of HTTP headers to include in the request. Both keys and values support [templatization](/docs/{{docsPrefix}}user-guide/templatization/).
+要包含在请求中的 HTTP 头键值对。键和值均支持[模板](/docs/{{docsPrefix}}user-guide/templatization/)。
 
-### Message settings
+### 消息设置
 
-#### Parse to plain text
+#### 解析为纯文本
 
-Controls how the message data is processed before sending:
+控制在发送前如何处理消息 data：
 
-- **Disabled** (default) – The message data is sent as-is
-- **Enabled** – If the message data is a JSON-encoded string (wrapped in double quotes), the outer JSON encoding is removed
+- **Disabled**（默认）— 消息 data 原样发送
+- **Enabled** — 若消息 data 为 JSON 编码的字符串（用双引号包裹），则移除外层 JSON 编码
 
-**Example**:
+**示例**：
 
-Message data: `"\"Temperature is 25.5°C\""`
+消息 data：`"\"Temperature is 25.5°C\""`
 
-- Parse to plain text **OFF**: Sends `"\"Temperature is 25.5°C\""` (with JSON encoding)
-- Parse to plain text **ON**: Sends `"Temperature is 25.5°C"` (without outer quotes)
+- Parse to plain text **OFF**：发送 `"\"Temperature is 25.5°C\""`（带 JSON 编码）
+- Parse to plain text **ON**：发送 `"Temperature is 25.5°C"`（无外层引号）
 
 {% capture parse_note %}
-**Note**: This setting only affects JSON-encoded strings (strings wrapped in double quotes). Regular JSON objects like `{"temperature":25.5}` are sent unchanged regardless of this
-setting.
+**注意**：此设置仅影响 JSON 编码的字符串（用双引号包裹的字符串）。普通 JSON 对象如 `{"temperature":25.5}` 无论如何设置均原样发送。
 {% endcapture %}
 {% include templates/info-banner.md content=parse_note %}
 
-#### Without request body
+#### 不包含请求体
 
-- **Disabled** (default) – Request body contains the message data for POST, PUT, PATCH, and DELETE methods
-- **Enabled** – No request body is sent, even for methods that typically include one
+- **Disabled**（默认）— POST、PUT、PATCH、DELETE 的请求体包含消息 data
+- **Enabled** — 不发送请求体，即使对于通常包含请求体的方法
 
 {% capture attachment_note %}
-**Note**: When request body is enabled, if the message metadata contains an `attachments` field with blob entity IDs, the content of the first blob entity will be used as the
-request body instead of the message data.
+**注意**：启用请求体时，若消息 metadata 包含 blob 实体 ID 的 `attachments` 字段，将使用第一个 blob 实体的内容作为请求体，而非消息 data。
 {% endcapture %}
 {% include templates/info-banner.md content=attachment_note %}
 
-### Connection settings
+### 连接设置
 
-#### Read timeout (ms)
+#### 读取超时（毫秒）
 
-The maximum time in milliseconds to wait for a response from the server.
+等待服务器响应的最大时间（毫秒）。
 
-- **0** (default) – Infinite timeout (waits indefinitely)
-- **> 0** – Timeout after the specified milliseconds
+- **0**（默认）— 无限超时（永久等待）
+- **> 0** — 在指定毫秒后超时
 
-#### Max number of parallel requests
+#### 最大并行请求数
 
-Limits the number of concurrent requests the node can make.
+限制节点可发送的并发请求数。
 
-- **0** (default) – No limit on parallel processing
-- **> 0** – Maximum number of requests that can be in-flight simultaneously
+- **0**（默认）— 并行处理无限制
+- **> 0** — 可同时进行中的最大请求数
 
-When the limit is reached, new messages wait until an in-flight request completes. If a message waits longer than the read timeout, it fails with a timeout error.
+达到限制时，新消息需等待有请求完成。若等待时间超过读取超时，消息将因超时错误失败。
 
-#### Max response size (in KB)
+#### 最大响应大小（KB）
 
-The maximum size of HTTP response body that can be buffered in memory. Responses exceeding this limit will fail with an error. Default: 256 KB
+可在内存中缓冲的 HTTP 响应体最大大小。超过此限制的响应将失败并报错。默认：256 KB
 
-The system enforces a maximum limit through the `tb.http.maxInMemoryBufferSizeInKb` system property (default: 25000 KB). If the configured value exceeds this limit, the node fails
-to initialize.
+系统通过 `tb.http.maxInMemoryBufferSizeInKb` 系统属性（默认：25000 KB）强制执行最大限制。若配置值超过该限制，节点将无法初始化。
 
-### Proxy settings
+### 代理设置
 
-#### Enable proxy
+#### 启用代理
 
-- **Disabled** (default) – Direct connection to the endpoint
-- **Enabled** – Routes requests through a proxy server
+- **Disabled**（默认）— 直接连接端点
+- **Enabled** — 通过代理服务器路由请求
 
-When enabled, you can choose between configuring proxy settings manually or using system proxy properties.
+启用后，可选择手动配置代理或使用系统代理属性。
 
 #### Use system proxy properties
 
-When **Enable proxy** is enabled, this option determines the proxy configuration source:
+当**Enable proxy**已启用时，此选项决定代理配置来源：
 
-- **Disabled** (default) – Manually configure proxy settings below
-- **Enabled** – Use system proxy properties
+- **Disabled**（默认）— 在下方手动配置代理
+- **Enabled** — 使用系统代理属性
 
-**System properties** (at least one set must be configured):
+**系统属性**（至少需配置一组）：
 
-HTTP proxy:
+HTTP 代理：
 
-- `http.proxyHost` – HTTP proxy hostname
-- `http.proxyPort` – HTTP proxy port
+- `http.proxyHost` — HTTP 代理主机名
+- `http.proxyPort` — HTTP 代理端口
 
-HTTPS proxy:
+HTTPS 代理：
 
-- `https.proxyHost` – HTTPS proxy hostname
-- `https.proxyPort` – HTTPS proxy port
+- `https.proxyHost` — HTTPS 代理主机名
+- `https.proxyPort` — HTTPS 代理端口
 
-SOCKS proxy:
+SOCKS 代理：
 
-- `socksProxyHost` – SOCKS proxy hostname
-- `socksProxyPort` – SOCKS proxy port
-- `socksProxyVersion` – SOCKS version (4 or 5, defaults to 5)
+- `socksProxyHost` — SOCKS 代理主机名
+- `socksProxyPort` — SOCKS 代理端口
+- `socksProxyVersion` — SOCKS 版本（4 或 5，默认 5）
 
-**Authentication properties** (for all proxy types):
+**认证属性**（用于所有代理类型）：
 
-- `tb.proxy.user` – Proxy username
-- `tb.proxy.password` – Proxy password
+- `tb.proxy.user` — 代理用户名
+- `tb.proxy.password` — 代理密码
 
 {% capture proxy_note %}
-**Note**: If system proxy properties are enabled but not configured, the node will fail to initialize.
+**注意**：若启用系统代理属性但未配置，节点将无法初始化。
 {% endcapture %}
 {% include templates/info-banner.md content=proxy_note %}
 
 #### Manual proxy configuration
 
-When **Use system proxy properties** is disabled, configure the proxy manually:
+当**Use system proxy properties**为禁用时，手动配置代理：
 
-- **Proxy host** – The hostname or IP address of the proxy server
-- **Proxy port** – The port number of the proxy server (1-65535)
-- **Proxy user** – Username for proxy authentication
-- **Proxy password** – Password for proxy authentication
+- **Proxy host** — 代理服务器的主机名或 IP 地址
+- **Proxy port** — 代理服务器的端口号（1-65535）
+- **Proxy user** — 代理认证用户名
+- **Proxy password** — 代理认证密码
 
 ### Credentials
 
-Authentication credentials for connecting to the endpoint. The available credential types are:
+连接端点的认证凭据。可用凭据类型：
 
 #### Anonymous
 
-No authentication is provided. Use this when the endpoint allows anonymous access or when authentication is handled via headers.
+不提供认证。当端点允许匿名访问或通过请求头处理认证时使用。
 
 #### Basic
 
-HTTP Basic authentication with username and password.
+使用用户名和密码的 HTTP Basic 认证。
 
-**Configuration**:
+**配置**：
 
-- **Username** – The username for authentication
-- **Password** – The password for authentication
+- **Username** — 认证用户名
+- **Password** — 认证密码
 
-The credentials are automatically encoded and sent in the `Authorization` header as `Basic <base64-encoded-credentials>`.
+凭据会自动编码并以 `Basic <base64-encoded-credentials>` 格式在 `Authorization` 头中发送。
 
 #### PEM Certificate
 
-Certificate-based authentication using PEM-encoded files. This provides mutual TLS authentication.
+使用 PEM 编码文件的基于证书认证。提供双向 TLS 认证。
 
-**Configuration**:
+**配置**：
 
-- **Server CA certificate file** – The Certificate Authority (CA) certificate that signed the server's certificate. Used to verify the server's identity.
-- **Client certificate file** – The client's public certificate. Sent to the server for client authentication.
-- **Client private key file** – The client's private key corresponding to the client certificate.
-- **Private key password** – Password if the private key file is encrypted.
+- **Server CA certificate file** — 签署服务器证书的证书颁发机构（CA）证书。用于验证服务器身份。
+- **Client certificate file** — 客户端的公钥证书。发送给服务器用于客户端认证。
+- **Client private key file** — 与客户端证书对应的客户端私钥。
+- **Private key password** — 私钥文件加密时的密码。
 
 {% capture cert_requirement_note %}
-**Note**: Provide either a Server CA certificate file or a pair of Client certificate and Client private key files when using PEM credentials.
+**注意**：使用 PEM 凭据时，需提供 Server CA 证书文件，或同时提供 Client 证书与 Client 私钥文件。
 {% endcapture %}
 {% include templates/info-banner.md content=cert_requirement_note %}
 
 {% capture credentials_note %}
-**Note**: Certificate and key files can be uploaded directly or referenced from [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} for enhanced security.
+**注意**：证书和密钥文件可直接上传，或从[Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"}引用以增强安全性。
 {% endcapture %}
 {% include templates/info-banner.md content=credentials_note %}
 
@@ -170,22 +166,21 @@ Certificate-based authentication using PEM-encoded files. This provides mutual T
 
 #### Force acknowledgement
 
-The force acknowledgement mechanism is controlled by the `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable. When this variable is set to `true`, it applies to all external
-nodes including this REST API call node.
+强制确认机制由 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 环境变量控制。当该变量设为 `true` 时，适用于包括本 REST API 调用节点在内的所有外部节点。
 
-**Behavior when force acknowledgement is enabled**:
+**启用强制确认时的行为**：
 
-- The incoming message is acknowledged immediately
-- The HTTP request executes
-- Once the request completes, the response is placed into a new message
-- The new message is added to the queue for processing by the next node
-- This prevents message processing timeouts for slow endpoints
+- 入站消息立即被确认
+- 执行 HTTP 请求
+- 请求完成后，响应放入新消息
+- 新消息加入队列供下一节点处理
+- 可避免慢速端点导致的消息处理超时
 
-**Behavior when force acknowledgement is disabled** (default):
+**禁用强制确认时**（默认）：
 
-- The original incoming message is held until the HTTP request completes
-- The original message is transformed with the response data
-- The transformed message is then passed to the next node
+- 原始入站消息在 HTTP 请求完成前保持占用
+- 原始消息用响应数据转换
+- 转换后的消息传递至下一节点
 
 ### JSON Schema
 
@@ -277,91 +272,88 @@ nodes including this REST API call node.
 ```
 {: .copy-code.expandable-4 }
 
-## Rule node initialization
+## 规则节点初始化
 
-When the rule node is initialized, it creates an HTTP client with the configured settings. The client uses a connection pool with a maximum number of connections that can be
-configured via the `TB_RE_HTTP_CLIENT_POOL_MAX_CONNECTIONS` environment variable (defaults to a value determined by the Reactor Netty library).
+规则节点初始化时，会创建具有已配置设置的 HTTP 客户端。客户端使用连接池，最大连接数可通过 `TB_RE_HTTP_CLIENT_POOL_MAX_CONNECTIONS` 环境变量配置（默认由 Reactor Netty 库决定）。
 
-Once initialization completes, the client is ready to process messages.
+初始化完成后，客户端即可处理消息。
 
-## Message processing
+## 消息处理
 
-For each incoming message, the node performs the following steps:
+对每条入站消息，节点执行以下步骤：
 
-1. If **Force acknowledgement** is enabled, the incoming message is acknowledged immediately.
-2. If **Max number of parallel requests** is configured, the node waits for an available slot. If no slot becomes available within the read timeout period, the message fails with a
-   timeout error.
-3. The node processes the **Endpoint URL pattern**, replacing templates with values from the incoming message data and metadata to construct the final URL.
-4. HTTP headers are prepared:
-    - Configured headers are added with template processing
-    - For Basic credentials, an `Authorization` header is added with base64-encoded credentials
-5. The request body is prepared:
-    - If **Without request body** is enabled, no body is sent
-    - Otherwise, for POST, PUT, PATCH, and DELETE methods:
-        - If the message metadata contains an `attachments` field with blob entity IDs, the content of the first blob entity is used as the request body
-        - Otherwise, the message data is used as the request body
-        - If **Parse to plain text** is enabled, JSON-encoded strings are unwrapped
-6. The HTTP request is sent to the endpoint.
-7. When the response is received:
-    - On success (2xx status code): The response information is added to the message and it is forwarded via the `Success` connection
-    - On failure (non-2xx status code or exception): The error information is added to the message and it is forwarded via the `Failure` connection
-    - See the "Outgoing message format" section for details on how the response/error information is structured
-8. If **Max number of parallel requests** is configured, the request slot is released for use by the next message.
+1. 若**Force acknowledgement**已启用，入站消息立即被确认。
+2. 若配置了**Max number of parallel requests**，节点等待可用槽位。若在读取超时时间内无可用槽位，消息将因超时错误失败。
+3. 节点处理**Endpoint URL pattern**，用入站消息 data 和 metadata 中的值替换模板以构建最终 URL。
+4. 准备 HTTP 头：
+    - 添加已配置的头并经模板处理
+    - 对于 Basic 凭据，添加带 base64 编码凭据的 `Authorization` 头
+5. 准备请求体：
+    - 若**Without request body**已启用，不发送请求体
+    - 否则，对于 POST、PUT、PATCH、DELETE 方法：
+        - 若消息 metadata 包含 blob 实体 ID 的 `attachments` 字段，使用第一个 blob 实体的内容作为请求体
+        - 否则使用消息 data 作为请求体
+        - 若**Parse to plain text**已启用，解除 JSON 编码字符串的外层包装
+6. 将 HTTP 请求发送至端点。
+7. 收到响应后：
+    - 成功（2xx 状态码）：将响应信息添加到消息，并经 `Success` 连接转发
+    - 失败（非 2xx 状态码或异常）：将错误信息添加到消息，并经 `Failure` 连接转发
+    - 响应/错误信息的结构详见「Outgoing message format」部分
+8. 若配置了**Max number of parallel requests**，释放请求槽位供下一条消息使用。
 
-## Outgoing message format
+## 出站消息格式
 
-**On success** (2xx response):
+**成功**（2xx 响应）：
 
-Message metadata is enriched with the following keys:
+消息 metadata 中添加以下键：
 
-- `status` – HTTP status name (e.g., "OK", "CREATED")
-- `statusCode` – HTTP status code (e.g., "200", "201")
-- `statusReason` – HTTP status reason phrase
-- Response headers – Each response header is added as a metadata key-value pair
-    - Single-value headers: Added as string values
-    - Multi-value headers: Added as JSON array strings
+- `status` — HTTP 状态名称（如 "OK"、"CREATED"）
+- `statusCode` — HTTP 状态码（如 "200"、"201"）
+- `statusReason` — HTTP 状态原因短语
+- 响应头 — 每个响应头作为 metadata 键值对添加
+    - 单值头：作为字符串值添加
+    - 多值头：作为 JSON 数组字符串添加
 
-Message data is replaced with the response body. If the response has no body, the data is set to `{}`.
+消息 data 替换为响应体。若无响应体，data 设为 `{}`。
 
-**On failure** (non-2xx response or exception):
+**失败**（非 2xx 响应或异常）：
 
-Message metadata is enriched with the following keys:
+消息 metadata 中添加以下键：
 
-- `error` – Error description in format `ExceptionClass: error message`
-- `status` – HTTP status name (if available)
-- `statusCode` – HTTP status code (if available)
-- `statusReason` – HTTP status reason phrase (if available)
-- `error_body` – Response body from failed request (if available)
-- Response headers – Each response header (if available)
+- `error` — 格式为 `ExceptionClass: error message` 的错误描述
+- `status` — HTTP 状态名称（若有）
+- `statusCode` — HTTP 状态码（若有）
+- `statusReason` — HTTP 状态原因短语（若有）
+- `error_body` — 失败请求的响应体（若有）
+- 响应头（若有）
 
-Message data remains unchanged from the original message.
+消息 data 保持与原始消息相同。
 
-**Force acknowledgement behaviour:**
+**强制确认行为**：
 
-When **Force acknowledgement** is disabled, the original incoming message is transformed with the response information described above.
+当**Force acknowledgement**禁用时，原始入站消息用上述响应信息转换。
 
-When **Force acknowledgement** is enabled, a new message is created with the response information described above.
+当**Force acknowledgement**启用时，创建包含上述响应信息的新消息。
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The HTTP request completed successfully with a 2xx status code
+    - HTTP 请求成功完成且状态码为 2xx
 - **Failure**
-    - The HTTP request returned a non-2xx status code
-    - The request failed due to network issues, timeout, or connection errors
-    - An unexpected error occurred during processing
-    - Timeout occurred while waiting for an available request slot
+    - HTTP 请求返回非 2xx 状态码
+    - 因网络问题、超时或连接错误导致请求失败
+    - 处理过程中发生意外错误
+    - 等待可用请求槽位时超时
 
-## Examples
+## 示例
 
-### Example 1
+### 示例 1
 
-A smart device needs to send a control command to an external device management system and receive the execution result. The endpoint requires Basic authentication and expects a
-JSON command in the request body. Force acknowledgement is disabled.
+智能设备需向外部设备管理系统发送控制命令并接收执行结果。端点需要 Basic 认证，期望请求体为 JSON 命令。强制确认已禁用。
 
-**Incoming message**
+**入站消息**
 
-Originator: `DEVICE` (Smart Lock)
+Originator: `DEVICE`（Smart Lock）
 
 Data:
 
@@ -382,7 +374,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -405,7 +397,7 @@ Metadata:
 }
 ```
 
-**Outgoing message** (assuming successful response with status 200)
+**出站消息**（假设成功响应，状态码 200）
 
 Data:
 
@@ -436,14 +428,13 @@ Metadata:
 }
 ```
 
-**Result**
+**结果**
 
-The node constructs the endpoint URL as `https://api.smart-home.com/v1/devices/lock-bedroom-01/commands` and prepares the following headers:
+节点构建端点 URL 为 `https://api.smart-home.com/v1/devices/lock-bedroom-01/commands`，准备以下请求头：
 
 - `Content-Type: application/json`
 - `Authorization: Basic YXBpLWNsaWVudDpzZWN1cmUtcGFzc3dvcmQ=`
 
-The request body contains the command: `{"command":"unlock","duration":30,"reason":"owner_request"}` and a POST request is sent.
+请求体包含命令：`{"command":"unlock","duration":30,"reason":"owner_request"}`，发送 POST 请求。
 
-The command was successfully sent to the external endpoint. The response confirms command execution and provides the current lock state. The message is routed via the `Success`
-connection with the execution result available for further processing by downstream nodes.
+命令已成功发送至外部端点。响应确认命令执行并返回当前锁状态。消息经 `Success` 连接路由，执行结果可供下游节点进一步处理。

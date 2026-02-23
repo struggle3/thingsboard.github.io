@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-gw
-title: MQTT Connector Configuration
-description: MQTT protocol support for ThingsBoard IoT Gateway
+title: MQTT 连接器配置
+description: ThingsBoard IoT Gateway 的 MQTT 协议支持
 redirect_from: 
   - "/docs/iot-gateway/mqtt/"  
   - "/docs/iot-gateway/resources/mqtt-gui-extension-configuration.json"

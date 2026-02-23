@@ -1,39 +1,31 @@
-Pushes the incoming message from edge to cloud by converting it into a cloud event and storing it in the cloud queue. The message is routed to either the `Success` connection (if
-the cloud event is successfully pushed to persistent storage) or the `Failure` connection (if an error occurs during processing or the message type is unsupported).
+通过将传入消息转换为 cloud event 并存储到 cloud queue，将消息从 Edge 推送到云端。消息路由至 `Success` 连接（cloud event 成功推送到持久存储时）或 `Failure` 连接（处理期间发生错误或消息类型不支持时）。
 
-## Usage
+## 用法
 
-This node is used exclusively on edge instances to synchronize data from edge to cloud. Most configuration changes made on edge instances (such as updating device names or
-relations) are automatically synchronized with the cloud. However, certain types of data synchronization would be resource-intensive if done automatically - for
-example, streaming all local telemetry data to the cloud. This node enables selective synchronization of such data, allowing you to explicitly control
-which messages are pushed to the cloud.
+此节点专门用于 Edge 实例，以同步 Edge 到云端的数据。Edge 实例上的大多数配置更改（如更新设备名称或关系）会自动与云端同步。但某些类型的数据同步若自动执行会消耗大量资源——例如将所有本地遥测数据流式传输到云端。此节点支持 selectively 同步此类数据，让您显式控制哪些消息推送到云端。
 
-When a message arrives at this node, it's converted into a cloud event and saved to the local edge database in a cloud queue. The actual delivery to the cloud happens
-asynchronously - the edge synchronization service retrieves these queued events and transmits them to the cloud.
+当消息到达此节点时，会转换为 cloud event 并保存到本地 Edge 数据库的 cloud queue。实际投递到云端是异步进行的——Edge 同步服务从队列检索这些事件并传输到云端。
 
-The typical workflow for pushing messages to cloud follows these steps:
+将消息推送到云端的典型流程如下：
 
-1. A message arrives at the "push to cloud" node on the edge instance containing data that needs to be synchronized to the cloud (telemetry, attributes, alarms, etc.).
+1. 消息到达 Edge 实例上的「push to cloud」节点，包含需要同步到云端的数据（遥测、属性、告警等）。
 
-2. The node converts the message into a cloud event based on the message type and stores it in persistent storage (cloud queue).
+2. 节点根据消息类型将消息转换为 cloud event，并存储到持久存储（cloud queue）。
 
-3. The edge synchronization service retrieves pending cloud events from the queue and transmits them to the cloud platform.
+3. Edge 同步服务从队列检索待处理的 cloud events 并传输到云端平台。
 
-4. If the cloud event is successfully pushed to persistent storage, the message is routed via the `Success` connection. If an error occurs, it's routed via the `Failure`
-   connection.
+4. 若 cloud event 成功推送到持久存储，消息经 `Success` 连接路由。若发生错误，经 `Failure` 连接路由。
 
 {% capture async_note %}
-**Asynchronous processing:** The `Success` connection indicates that the cloud event was successfully pushed to persistent storage on the edge, not that it was delivered to the
-cloud. The actual delivery to the cloud happens asynchronously through the edge synchronization process.
+**异步处理**：`Success` 连接表示 cloud event 已成功推送到 Edge 上的持久存储，而非已投递到云端。实际投递到云端通过 Edge 同步过程异步进行。
 {% endcapture %}
 {% include templates/warn-banner.md content=async_note %}
 
-## Configuration
+## 配置
 
-The configuration specifies the default attribute scope for attribute-related messages.
+配置指定属性相关消息的默认属性作用域。
 
-- **Attributes scope** - The default scope for attributes (`SERVER_SCOPE`, `CLIENT_SCOPE`, or `SHARED_SCOPE`). This value can be dynamically overridden by including a `scope` key
-  in the message metadata.
+- **Attributes scope（属性作用域）** - 属性的默认作用域（`SERVER_SCOPE`、`CLIENT_SCOPE` 或 `SHARED_SCOPE`）。可通过在消息元数据中包含 `scope` 键动态覆盖此值。
 
 ### JSON Schema
 
@@ -61,47 +53,47 @@ The configuration specifies the default attribute scope for attribute-related me
 ```
 {: .copy-code.expandable-3 }
 
-## Supported message types
+## 支持的消息类型
 
-The node supports the following message types:
+节点支持以下消息类型：
 
-- `POST_TELEMETRY_REQUEST` - Time series data posted to the device
-- `TIMESERIES_UPDATED` - Time series data has been updated
-- `TIMESERIES_UPDATED` - Time series data has been deleted
-- `POST_ATTRIBUTES_REQUEST` - Attribute data posted to the device
-- `ATTRIBUTES_UPDATED` - Device attributes have been updated
-- `ATTRIBUTES_DELETED` - Device attributes have been deleted
+- `POST_TELEMETRY_REQUEST` - 发布给设备的时序数据
+- `TIMESERIES_UPDATED` - 时序数据已更新
+- `TIMESERIES_DELETED` - 时序数据已删除
+- `POST_ATTRIBUTES_REQUEST` - 发布给设备的属性数据
+- `ATTRIBUTES_UPDATED` - 设备属性已更新
+- `ATTRIBUTES_DELETED` - 设备属性已删除
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node validates that the message type is supported. If not, the message is routed via the `Failure` connection.
+1. 节点验证消息类型是否受支持。若不受支持，消息经 `Failure` 连接路由。
 
-2. Based on the message type, the node builds an appropriate cloud event.
+2. 根据消息类型，节点构建适当的 cloud event。
 
-3. The cloud event is saved to persistent storage.
+3. cloud event 保存到持久存储。
 
-4. The message is routed via the `Success` connection if the cloud event is successfully pushed to persistent storage, or via the `Failure` connection if any error occurs.
+4. 若 cloud event 成功推送到持久存储，消息经 `Success` 连接路由；若发生任何错误，经 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The cloud event was successfully pushed to persistent storage on the edge. The outgoing message is the same as the incoming message.
+    - cloud event 已成功推送到 Edge 上的持久存储。传出消息与传入消息相同。
 - `Failure`
-    - An error occurred during processing, such as:
-        - Unsupported message type
-        - Unexpected error
+    - 处理过程中发生错误，例如：
+        - 不支持的消息类型
+        - 意外错误
 
-## Examples
+## 示例
 
-### Example 1 — Push device time series to cloud
+### 示例 1 — 将设备时序数据推送到云端
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-Type: `POST_TELEMETRY_REQUEST`.
+类型：`POST_TELEMETRY_REQUEST`。
 
-Data:
+数据：
 
 ```json
 {
@@ -110,7 +102,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -118,7 +110,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -126,11 +118,10 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is the same as the incoming message. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-A cloud event is created and pushed to persistent storage in the edge's cloud queue. The event contains the telemetry data and timestamp. When the edge synchronization service
-retrieves this event, it will be transmitted to the cloud platform where it will be processed.
+创建 cloud event 并推送到 Edge cloud queue 的持久存储。事件包含遥测数据和时间戳。Edge 同步服务检索此事件时，将传输到云端平台并处理。

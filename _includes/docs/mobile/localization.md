@@ -6,28 +6,28 @@
 * TOC
 {:toc}
 
-Make the {{appPrefix}} mobile app more accessible for your users—add their language to the build or improve the existing translations.
+让{{appPrefix}}移动应用更易于用户使用——添加其语言到构建中或改进现有翻译。
 
-## Supported languages
+## 支持的语言
 
-Out of the box, the {{appPrefix}} mobile app supports the following languages:
+开箱即用，{{appPrefix}}移动应用支持以下语言：
 
 - **English**
 - **Arabic**
 - **Chinese (Taiwan)**
 - **Chinese (Simplified)**
 
-## Add or Improve localization
+## 添加或改进本地化
 
-**How localization works (Flutter + ARB)**
+**本地化如何工作（Flutter + ARB）**
 
-The app reads localized strings from `.arb` files in `lib/l10n`. Each `.arb` file represents one locale (e.g., `intl_en.arb` for English). Keys stay the same across all languages; values change per locale.
+应用从`lib/l10n`中的`.arb`文件读取本地化字符串。每个`.arb`文件代表一个语言环境（例如`intl_en.arb`表示English）。所有语言的key保持一致；value按语言环境变化。
 
-For detailed information about Flutter&#39;s internationalization system, we recommend reading the official [Internationalizing Flutter apps](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization){:target="_blank"} guide.
+有关Flutter国际化系统的详细信息，我们建议阅读官方[Internationalizing Flutter apps](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization){:target="_blank"}指南。
 
-### Step 1: Open the localization folder
+### 步骤1：打开本地化文件夹
 
-Go to your project&#39;s `lib/l10n` directory. You&#39;ll see files like:
+进入项目的`lib/l10n`目录。您将看到如下文件：
 
 ```bash
 intl_ar.arb
@@ -37,90 +37,90 @@ intl_en.arb
 
 ![image](/images/mobile/localization-l10n-folder.png)
 
-### Step 2: Create a language file
+### 步骤2：创建语言文件
 
-Add a new `.arb` file with translation using the format:
+添加使用以下格式的新`.arb`翻译文件：
 ```
 intl_<languageCode>.arb
 ```
 
-For example:
-- `intl_es.arb` for Spanish
-- `intl_fr.arb` for French
-- `intl_de.arb` for German
+例如：
+- `intl_es.arb`表示Spanish
+- `intl_fr.arb`表示French
+- `intl_de.arb`表示German
 
-**Tip:** If you need a region-specific variant, use BCP-47 style (e.g., `intl_pt_BR.arb`).
+**提示：**如需区域特定变体，请使用BCP-47格式（例如`intl_pt_BR.arb`）。
 
-### Step 3: Add translations
+### 步骤3：添加翻译
 
-1. **Copy** the contents of the `intl_en.arb` into a new file.
-2. **Translate only the values** (the text on the right of each key) into your target language. **Do not change the keys.**
+1. **复制**`intl_en.arb`的内容到新文件。
+2. **仅翻译values**（每个key右侧的文本）为目标语言。**不要更改keys。**
 
-Example structure:
+示例结构：
 ```json
 {
-  "appTitle": "Your App Title Translation",
-  "login": "Your Login Translation",
-  "password": "Your Password Translation"
+  "appTitle": "您的应用标题翻译",
+  "login": "您的登录翻译",
+  "password": "您的密码翻译"
 }
 ```
 
-### Step 4: Generate localization file
+### 步骤4：生成本地化文件
 
-#### If app version is before 1.7.0
+#### 如果应用版本早于1.7.0
 
-Execute the command:
+执行命令：
 
 ```bash
 flutter gen-l10n
 ```
 {: .copy-code}
 
-This command will generate the necessary localization files for added language or update existing localizations.
+此命令将为添加的语言生成必要的本地化文件或更新现有本地化。
 
-#### If app version is 1.7.0 or later
+#### 如果应用版本为1.7.0或更高
 
-We recommend installing the **Flutter Intl extension**, which automatically tracks localization changes and regenerates localization files.
+我们建议安装**Flutter Intl扩展**，它会自动跟踪本地化更改并重新生成本地化文件。
 
-**Available Extensions:**
-- [VS Code](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl){:target="_blank"}: Flutter Intl extension
-- [IntelliJ / Android Studio](https://plugins.jetbrains.com/plugin/13666-flutter-intl){:target="_blank"}: Flutter Intl plugin
+**可用扩展：**
+- [VS Code](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl){:target="_blank"}：Flutter Intl扩展
+- [IntelliJ / Android Studio](https://plugins.jetbrains.com/plugin/13666-flutter-intl){:target="_blank"}：Flutter Intl插件
 
-#### Alternative method (without extension)
+#### 替代方法（不使用扩展）
 
-If you prefer not to install the extension, you can use the manual approach:
+如果您不想安装扩展，可以使用手动方式：
 
-1. **Add intl_utils to your project&#39;s dev dependencies:**
+1. **将intl_utils添加到项目的dev依赖：**
    ```bash
    flutter pub add -d intl_utils
    ```
    {: .copy-code}
 
-2. **Generate localization files after each change:**
+2. **每次更改后生成本地化文件：**
    ```bash
    dart run intl_utils:generate
    ```
    {: .copy-code}
 
-Run this command after each change in your localization files to integrate those changes into mobile app.
+每次更改本地化文件后运行此命令，将更改集成到移动应用中。
 
-## Testing custom localization
+## 测试自定义本地化
 
-- **Change device/simulator language** to your target locale and relaunch the app.
-- If your language is **right-to-left** (e.g., Arabic), verify layout mirroring and text direction.
-- Confirm **pluralization**, **placeholders**, and **date/number formatting** look correct.
+- **将设备/模拟器语言**更改为您的目标语言环境并重新启动应用。
+- 如果您的语言为**从右到左**（如Arabic），请验证布局镜像和文本方向。
+- 确认**复数**、**占位符**和**日期/数字格式**显示正确。
 
-## Contributing back to the community
+## 回馈社区
 
-We welcome community contributions to improve {{appPrefix}} mobile localization.
+我们欢迎社区贡献以改进{{appPrefix}}移动应用本地化。
 
-How to contribute:
-- Open a **pull request** to the repository with your updated or new `.arb` files.
-- Or submit an improvement request with the `.arb` files attached.
+如何贡献：
+- 向仓库提交**pull request**，附带您更新或新增的`.arb`文件。
+- 或提交改进请求并附上`.arb`文件。
 
-Your contributions help make the app accessible to users worldwide, and we&#39;ll add new localizations to the app globally for everyone to benefit from.
+您的贡献有助于让应用面向全球用户，我们会将新的本地化全局添加到应用中，惠及所有人。
 
 {% capture contribution_note %}
-**Note:** When contributing translations, please ensure they are accurate and culturally appropriate for the target language and region.
+**注意：**贡献翻译时，请确保其对目标语言和地区准确且符合文化习惯。
 {% endcapture %}
 {% include templates/info-banner.md content=contribution_note %}

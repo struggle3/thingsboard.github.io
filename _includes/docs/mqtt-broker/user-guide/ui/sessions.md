@@ -2,63 +2,61 @@
 * TOC
 {:toc}
 
-The respective page offers the capability to observe and analyze all the sessions stored within the broker's system. 
-This encompasses both the existing online sessions, representing clients currently connected to the broker, and the disconnected sessions of persistent clients. 
-By accessing this page, users can gain a comprehensive overview of all stored sessions, enabling them to monitor and 
-manage both the active and historical records of client interactions with the broker.
+该页面用于查看和分析 broker 系统中存储的所有会话。
+包括当前在线的已连接会话（表示当前已连接到 broker 的客户端），以及持久化客户端的已断开会话。
+通过该页面，用户可全面了解所有已存储会话，便于监控并管理客户端与 broker 的活跃及历史交互记录。
 
-To access the detailed information of the current TBMQ sessions, please follow these steps:
+查看当前 TBMQ 会话的详细信息，请按以下步骤操作：
 
-1. Open the 'Sessions' page in the left-hand menu.
-2. Click on the Session table row to open a window with session details.
+1. 在左侧菜单打开 "Sessions" 页面。
+2. 点击会话表行，打开会话详情窗口。
 
-In the "Session Details" users can disconnect or remove client session:
-* To **disconnect** a client, click on the "Disconnect client" button. Please note that only `Connected` clients can be disconnected.
-* To **remove** a client session, click on the "Remove session" button. Keep in mind that only `Disconnected` clients can be removed.
+在 "Session Details" 中，用户可以断开或移除客户端会话：
+* 要**断开**客户端，点击 "Disconnect client" 按钮。请注意，仅可断开 `Connected` 状态的客户端。
+* 要**移除**客户端会话，点击 "Remove session" 按钮。请注意，仅可移除 `Disconnected` 状态的客户端。
 
 {% include images-gallery.html imageCollection="sessions-details" %}
 
 ## Session Details
 
-The **Details** tab contains the next information: 
-   * **Connected Status** (Connected/Disconnected).
-   * **Connected At** - timestamp when the client connected.
-   * **Disconnected At** - for persistent disconnected clients, timestamp when the client disconnected.
-   * **Keep Alive** (seconds) - indicates the duration for which the broker and client can remain without communication before the session is closed.
-   * **Node ID** - broker node to which the client is/was connected to.
-   * **Clean Start** (clean/persistent session) - if true, the broker will discard any available previous session info and messages, and start a new one.
-   * **Session expiry interval** - for persistent disconnected clients, for how long the client session information is stored after the connection is lost.
-   * **Session end** - for persistent disconnected clients, when the session info and messages will be removed.
-   * **Client ID** - the identifier of the client.
-   * **Client IP** - the IP address of the client.
-   * [**Client type**](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type) (Device/Application).
-   * [**Client Credentials**](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/mqtt-client-credentials/) that authenticated current session.
-   * **MQTT version** - determines which version of MQTT protocol to be used - MQTT 3.1 (3), MQTT 3.1.1 (4), or MQTT 5.0 (5).
+**Details** 选项卡包含以下信息： 
+   * **Connected Status**（Connected/Disconnected）。
+   * **Connected At** - 客户端连接的时间戳。
+   * **Disconnected At** - 对于已断开的持久化客户端，显示客户端断开的时间戳。
+   * **Keep Alive**（秒）- 表示 broker 与客户端在会话关闭前可无通信的持续时间。
+   * **Node ID** - 客户端当前/曾经连接的 broker 节点。
+   * **Clean Start**（clean/persistent session）- 为 true 时，broker 将丢弃所有可用的先前会话信息与消息，并启动新会话。
+   * **Session expiry interval** - 对于已断开的持久化客户端，表示连接丢失后客户端会话信息保留的时长。
+   * **Session end** - 对于已断开的持久化客户端，表示会话信息与消息何时被移除。
+   * **Client ID** - 客户端标识符。
+   * **Client IP** - 客户端 IP 地址。
+   * [**Client type**](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type)（Device/Application）。
+   * 用于认证当前会话的 [**Client Credentials**](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/mqtt-client-credentials/)。
+   * **MQTT version** - 指定使用的 MQTT 协议版本：MQTT 3.1 (3)、MQTT 3.1.1 (4) 或 MQTT 5.0 (5)。
 
 ## Subscriptions
 
-On the **Subscriptions** tab users can view various details about the subscriptions associated with a session, such as:
+在 **Subscriptions** 选项卡中，用户可查看与会话关联的订阅的详细信息，例如：
 {% include templates/mqtt-broker/subscription-options.md %}
 
-While session details are generally read-only, users can effectively manage their subscriptions within the session, making additions, removals, and edits as needed. 
-Here are the available actions for managing subscriptions:
-* To **add** a new subscription, click on the "Add Subscription" button. 
-* To **remove** a subscription, click on the "Delete" icon associated with the specific subscription. 
-* To **edit** existing Topic filter or QoS, make the desired changes in the provided form and click the "Update" button.
+会话详情通常为只读，但用户可在会话内有效管理订阅，包括添加、删除和编辑。
+管理订阅的可用操作如下：
+* 要**添加**新订阅，点击 "Add Subscription" 按钮。
+* 要**删除**订阅，点击该订阅旁的 "Delete" 图标。
+* 要**编辑**已有的主题过滤器或 QoS，在表单中修改后点击 "Update" 按钮。
 
 {% include images-gallery.html imageCollection="sessions-subscriptions" %}
 
 ## Metrics
 
-The **Metrics** tab provide detailed insights into the flow of MQTT messages within the session that may be helpful in monitoring the performance and reliability of message delivery:
-* **Received PUBLISH Messages**. The total number of PUBLISH messages received by the client.
-* **Received QoS 0 Messages**. The count of received messages with QoS level 0 ("AT_MOST_ONCE").
-* **Received QoS 1 Messages**. The count of received messages with QoS level 1 ("AT_LEAST_ONCE").
-* **Received QoS 2 Messages**. The count of received messages with QoS level 2 ("EXACTLY_ONCE").
-* **Sent PUBLISH Messages**. The total number of PUBLISH messages sent by the client.
-* **Sent QoS 0 Messages**. The count of sent messages with QoS level 0 ("AT_MOST_ONCE").
-* **Sent QoS 1 Messages**. The count of sent messages with QoS level 1 ("AT_LEAST_ONCE").
-* **Sent QoS 2 Messages**. The count of sent messages with QoS level 2 ("EXACTLY_ONCE").
+**Metrics** 选项卡提供该会话内 MQTT 消息流转的详细洞察，有助于监控消息投递的性能与可靠性：
+* **Received PUBLISH Messages**。 客户端接收的 PUBLISH 消息总数。
+* **Received QoS 0 Messages**。 接收的 QoS 0（"AT_MOST_ONCE"）消息数量。
+* **Received QoS 1 Messages**。 接收的 QoS 1（"AT_LEAST_ONCE"）消息数量。
+* **Received QoS 2 Messages**。 接收的 QoS 2（"EXACTLY_ONCE"）消息数量。
+* **Sent PUBLISH Messages**。 客户端发送的 PUBLISH 消息总数。
+* **Sent QoS 0 Messages**。 发送的 QoS 0（"AT_MOST_ONCE"）消息数量。
+* **Sent QoS 1 Messages**。 发送的 QoS 1（"AT_LEAST_ONCE"）消息数量。
+* **Sent QoS 2 Messages**。 发送的 QoS 2（"EXACTLY_ONCE"）消息数量。
 
 {% include images-gallery.html imageCollection="sessions-metrics" %}
-

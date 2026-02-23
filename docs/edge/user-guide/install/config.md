@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Edge Core/Rule engine deployment parameters
-description: ThingsBoard Edge configuration properties and environment variables
+title: Edge核心/规则引擎部署参数
+description: ThingsBoard Edge配置属性与环境变量
 
 ---
 

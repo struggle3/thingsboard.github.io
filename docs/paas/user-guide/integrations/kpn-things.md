@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: KPN Things Integration
-description: KPN Things integration guide
+title: KPN Things 集成
+description: KPN Things 集成指南
 
 kpn-create-integration:
     0:

@@ -1,185 +1,185 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-TBMQ Professional Edition allows you to provide Single Sign-On (SSO) functionality for your users and automatically create Administrators or Viewers using external user management platforms that support the OAuth 2.0 protocol.
-Examples of platforms that support OAuth 2.0 include: [Google](#login-with-google), [Auth0](#login-with-auth0), [Keycloak](#login-with-keycloak), [Okta](https://www.okta.com/){:target="_blank"}, [Azure](https://portal.azure.com/){:target="_blank"}, etc.
+TBMQ 专业版支持基于支持 OAuth 2.0 协议的外部用户管理平台，为用户提供单点登录（SSO），并自动创建 Administrator 或 Viewer。
+支持 OAuth 2.0 的平台示例：[Google](#login-with-google)、[Auth0](#login-with-auth0)、[Keycloak](#login-with-keycloak)、[Okta](https://www.okta.com/){:target="_blank"}、[Azure](https://portal.azure.com/){:target="_blank"}等。
 
-## OAuth 2.0 authentication flow
+## OAuth 2.0 认证流程
 
-TBMQ supports the Authorization Code grant type to exchange an authorization code for an access token.
-Once the user is redirected back to the TBMQ client, the platform retrieves the authorization code from the URL and uses it to request an access token from the external user management platform.
-Using the [basic mapper](#basic-mapper) or [custom mapper](#custom-mapper), the external user info object is converted from the external platform into a TBMQ internal OAuth 2.0 user.
-After this, the regular TBMQ authorization flow takes place.
+TBMQ 支持授权码（Authorization Code）许可类型，用授权码换取访问令牌。
+用户被重定向回 TBMQ 客户端后，平台从 URL 获取授权码，并向外部用户管理平台请求访问令牌。
+通过[基础映射器](#basic-mapper)或[自定义映射器](#custom-mapper)，将外部平台的用户信息转换为 TBMQ 内部 OAuth 2.0 用户。
+随后执行常规 TBMQ 授权流程。
 
-## Setting up authentication via an external provider
+## 通过外部提供商配置认证
 
-OAuth 2.0 clients are configured separately from domains, allowing reuse of the configured client and making the settings clearer.
-To use authentication through an external provider, first configure an OAuth 2.0 client with the necessary credentials.
-Then, either add a new domain or use an existing one, and update the OAuth 2.0 client list with the new client.
+OAuth 2.0 客户端与域名分开配置，可复用已配置客户端并简化设置。
+要通过外部提供商认证，需先配置带必要凭据的 OAuth 2.0 客户端。
+然后添加新域名或使用已有域名，并将新客户端加入该域名的 OAuth 2.0 客户端列表。
 
-### Operations with domain
+### 域名操作
 
-**Adding a domain**
+**添加域名**
 
-Follow these steps to add a new domain:
+添加新域名按以下步骤：
 
-* On the "Domains" tab of the "OAuth 2.0" page, click the "plus" icon to add a new domain;
-* Provide your domain name and OAuth 2.0 client;
-* Click "Add" to finalize.
+* 在“OAuth 2.0”页的“域名”标签中，点击“加号”图标添加新域名；
+* 填写域名及 OAuth 2.0 客户端；
+* 点击“添加”完成。
 
 {% include images-gallery.html imageCollection="adding-domain-1" %}
 
-**Editing a domain**
+**编辑域名**
 
-To update the settings for an existing domain, follow these steps:
+更新已有域名设置，按以下步骤：
 
-* Click on the domain to view its details;
-* Switch to editing mode by clicking the large orange button;
-* Make the required modifications;
-* Save your changes by clicking the "Apply changes" button.
+* 点击域名查看详情；
+* 点击大橙色按钮进入编辑模式；
+* 进行所需修改；
+* 点击“应用更改”保存。
 
 {% include images-gallery.html imageCollection="editing-domain-1" %}
 
-**Deleting a domain**
+**删除域名**
 
-To remove a domain, follow these steps:
+删除域名，按以下步骤：
 
-* Click the "trash" icon in the row of the domain you wish to remove;
-* Confirm the deletion by clicking "Yes".
+* 点击要删除域名行的“垃圾桶”图标；
+* 在确认对话框中点击“是”。
 
 {% include images-gallery.html imageCollection="deleting-domain-1" %}
 
-### Operations with OAuth 2.0 client
+### OAuth 2.0 客户端操作
 
-**Adding an OAuth 2.0 client**
+**添加 OAuth 2.0 客户端**
 
-Follow these steps to add a new OAuth 2.0 client to TBMQ:
+在 TBMQ 中添加新 OAuth 2.0 客户端，按以下步骤：
 
-* Navigate to the "OAuth 2.0 clients" tab on the "OAuth 2.0" page, and click the "plus" icon;
-* Enter a descriptive title for the client;
-* Select the authentication provider from the dropdown menu;
-* Provide the Client ID and Client Secret obtained from your authentication provider;
-* Configure advanced settings as necessary;
-* Click "Add" to finalize.
+* 进入“OAuth 2.0”页的“OAuth 2.0 客户端”标签，点击“加号”图标；
+* 输入客户端描述性标题；
+* 从下拉菜单选择认证提供商；
+* 填写从认证提供商获取的 Client ID 和 Client Secret；
+* 按需配置高级设置；
+* 点击“添加”完成。
 
 {% include images-gallery.html imageCollection="adding-oauth2-client-1" %}
 
-**Editing an OAuth 2.0 client**
+**编辑 OAuth 2.0 客户端**
 
-To update an existing OAuth 2.0 client:
+更新已有 OAuth 2.0 客户端：
 
-* Click on the client to view its details;
-* Switch to editing mode by clicking the large orange button;
-* Make the required modifications;
-* Save your changes by clicking the "Apply changes" button.
+* 点击客户端查看详情；
+* 点击大橙色按钮进入编辑模式；
+* 进行所需修改；
+* 点击“应用更改”保存。
 
 {% include images-gallery.html imageCollection="editing-oauth2-client-1" %}
 
-**Deleting an OAuth 2.0 client**
+**删除 OAuth 2.0 客户端**
 
-To remove obsolete or unused clients:
+删除不再使用的客户端：
 
-* Click the "trash" icon in the row of the client you wish to remove;
-* Confirm the deletion by clicking "Yes".
+* 点击要删除客户端行的“垃圾桶”图标；
+* 在确认对话框中点击“是”。
 
 {% include images-gallery.html imageCollection="deleting-oauth2-client-1" %}
 
-## Login with Google
+## 使用 Google 登录
 
-In this example, we will use [Google](https://developers.google.com/identity/protocols/oauth2/openid-connect){:target="_blank"} for authentication.
+本示例使用 [Google](https://developers.google.com/identity/protocols/oauth2/openid-connect){:target="_blank"} 进行认证。
 
-To map external user information from Google to the OAuth platform, use the built-in [basic mapper](#basic-mapper).
-If the [basic mapper](#basic-mapper) does not fit your business needs, you can configure a [custom mapper](#custom-mapper) for more flexibility.
+将 Google 外部用户信息映射到 OAuth 平台时，可使用内置[基础映射器](#basic-mapper)。
+若[基础映射器](#basic-mapper)不满足业务需求，可配置[自定义映射器](#custom-mapper)以获得更多灵活性。
 
-### Preparations
+### 准备工作
 
-To use Google OAuth 2.0 authentication, you must set up a project in the [Google API Console](https://console.developers.google.com/){:target="_blank"} to obtain OAuth 2.0 credentials.
+使用 Google OAuth 2.0 认证前，需在 [Google API Console](https://console.developers.google.com/){:target="_blank"} 中创建项目以获取 OAuth 2.0 凭据。
 
-Follow the instructions on the [OpenID Connect](https://developers.google.com/identity/protocols/oauth2/openid-connect){:target="_blank"} page or the steps below to configure the OAuth 2.0 client.
-After completing this setup, you will have a Client ID and a Client Secret.
+参考 [OpenID Connect](https://developers.google.com/identity/protocols/oauth2/openid-connect){:target="_blank"} 页面说明或下方步骤配置 OAuth 2.0 客户端。
+配置完成后将获得 Client ID 和 Client Secret。
 
-* Go to the "Credentials" page in the left menu and select "OAuth client ID" from the "Create credentials" dropdown;
-* Enter an OAuth client name and add the TBMQ redirect URI in the "Authorized Redirect URIs" section using the format:
+* 在左侧菜单进入“凭据”页，在“创建凭据”下拉中选择“OAuth 客户端 ID”；
+* 输入 OAuth 客户端名称，并在“已授权的重定向 URI”中加入 TBMQ 重定向 URI，格式如下：
 
 ```
 http(s)://domain:port/login/oauth2/code/
 ```
 {: .copy-code}
 
-* Replace `domain` with your TBMQ domain and specify the port used for HTTP access.
-  For example, if your domain is *my.tbmq.org*:
+* 将 `domain` 替换为您的 TBMQ 域名，并指定 HTTP 访问端口。
+  若域名为 *my.tbmq.org*，示例：
 
 ```
 https://my.tbmq.org/login/oauth2/code/
 ```
 
-* Click "Create".
+* 点击“创建”。
 
-The OAuth client is now created. You have credentials consisting of a *Client ID* and a *Client Secret*.
+OAuth 客户端已创建，您将获得 *Client ID* 和 *Client Secret*。
 
 {% include images-gallery.html imageCollection="google-credentials-for-oauth-1" %}
 
-### Configuring Google as an OAuth 2.0 authentication provider in TBMQ
+### 在 TBMQ 中将 Google 配置为 OAuth 2.0 认证提供商
 
-To configure OAuth 2.0 authentication in TBMQ via Google, follow these steps:
+在 TBMQ 中通过 Google 配置 OAuth 2.0 认证，按以下步骤：
 
-* Log in to your TBMQ instance;
-* Go to the "OAuth 2.0" page in the "Security" section;
-* On the "Domains" tab, click the "plus" icon;
-* Enter your domain name or IP address of your TBMQ instance;
-* Click "Create new" in the "OAuth 2.0 clients" section to add one.
+* 登录 TBMQ 实例；
+* 进入“安全”下的“OAuth 2.0”页面；
+* 在“域名”标签中点击“加号”图标；
+* 输入 TBMQ 实例的域名或 IP 地址；
+* 在“OAuth 2.0 客户端”中点击“创建新”添加客户端。
 
 {% include images-gallery.html imageCollection="google-configuration-of-thingsboard-google-1" %}
 
-Adding a new OAuth 2.0 client:
+添加新 OAuth 2.0 客户端：
 
-* Enter "Google" as the title;
-* Set the provider to "Google";
-* Enter the Client ID and Client Secret from the [Google API Console](https://console.developers.google.com/){:target="_blank"}.
+* 标题输入“Google”；
+* 提供商选择“Google”；
+* 填入 [Google API Console](https://console.developers.google.com/){:target="_blank"} 中的 Client ID 和 Client Secret。
 
-Then expand the "Advanced settings" section and configure the "General" block:
+展开“高级设置”并配置“通用”区块：
 
-* Use this [link](https://developers.google.com/identity/protocols/oauth2/openid-connect#discovery){:target="_blank"} to see the latest URLs such as "Access Token URI" and "Authorization URI";
-* Select "POST" as the client authentication method;
-* Enable the "Allow user creation" option;
-* Add the following to the scope field: `email`, `openid`, `profile`.
+* 使用此[链接](https://developers.google.com/identity/protocols/oauth2/openid-connect#discovery){:target="_blank"}查看最新 URL（如“Access Token URI”“Authorization URI”）；
+* 客户端认证方法选择“POST”；
+* 启用“允许创建用户”；
+* 在 scope 字段添加：`email`、`openid`、`profile`。
 
 {% include images-gallery.html imageCollection="google-configuration-of-thingsboard-google-2" %}
 
-Go to the "Mapper" block:
+在“映射器”区块：
 
-* Keep the mapper type as "BASIC";
-* Specify the role to be assigned;
-* Click "Add".
+* 映射器类型保持“BASIC”；
+* 指定要分配的角色；
+* 点击“添加”。
 
 {% include images-gallery.html imageCollection="google-configuration-of-thingsboard-google-3" %}
 
-* The OAuth client has been added successfully. Click "Add" again to confirm the addition of the domain.
+* OAuth 客户端已成功添加。再次点击“添加”确认域名添加。
 
-A new domain has now been added.
+新域名已添加完成。
 
 {% include images-gallery.html imageCollection="google-configuration-of-thingsboard-google-4" %}
 
-### Sign in
+### 登录
 
-Now, go to the TBMQ login screen. You will see a new "Login with Google" option.
-Select one of your Google accounts, and you will be logged into TBMQ using your Google email.
+进入 TBMQ 登录页后，将出现“使用 Google 登录”选项。
+选择您的 Google 账户，即可使用该邮箱登录 TBMQ。
 
 {% include images-gallery.html imageCollection="login-with-google-1" %}
 
-Go to the "Users" page to find the newly created user.
+在“用户”页面可查看新创建的用户。
 
 {% include images-gallery.html imageCollection="login-with-google-2" %}
 
-## Login with Auth0
+## 使用 Auth0 登录
 
-In this sample, we will configure **OAuth** authentication using an external provider – [Auth0](https://auth0.com/){:target="_blank"}.
+本示例通过外部提供商 [Auth0](https://auth0.com/){:target="_blank"} 配置 **OAuth** 认证。
 
-To map external user information from Auth0 to the OAuth platform, we use the built-in [basic mapper](#basic-mapper).
+将 Auth0 外部用户信息映射到 OAuth 平台时，使用内置[基础映射器](#basic-mapper)。
 
-If the [basic mapper](#basic-mapper) does not fit your business needs, you can configure the [custom mapper](#custom-mapper) to implement mapping that suits your requirements.
+若[基础映射器](#basic-mapper)不满足需求，可配置[自定义映射器](#custom-mapper)以实现所需映射。
 
 ### Preparations
 
@@ -265,13 +265,13 @@ Go to the "Users" page. There you will find that a new user has been created.
 
 {% include images-gallery.html imageCollection="login-with-oauth0-2" %}
 
-## Login with Keycloak
+## 使用 Keycloak 登录
 
-In this sample, we will use [Keycloak](https://www.keycloak.org/){:target="_blank"} for authentication.
+本示例使用 [Keycloak](https://www.keycloak.org/){:target="_blank"} 进行认证。
 
-To map external user information from Keycloak to the OAuth platform, we use the built-in [basic mapper](#basic-mapper).
+将 Keycloak 外部用户信息映射到 OAuth 平台时，使用内置[基础映射器](#basic-mapper)。
 
-If the [basic mapper](#basic-mapper) does not fit your business needs, you can configure the [custom mapper](#custom-mapper) to implement a mapping that fits your requirements.
+若[基础映射器](#basic-mapper)不满足需求，可配置[自定义映射器](#custom-mapper)以实现所需映射。
 
 ### Preparations
 
@@ -432,64 +432,64 @@ Go to the "Users" page. There you will find that a new user has been created.
 
 {% include images-gallery.html imageCollection="login-with-keycloak-2" %}
 
-## Mapping of the external user into the TBMQ internal user structure
+## 将外部用户映射到 TBMQ 内部用户结构
 
-Mapping an external user info object into a TBMQ user can be achieved using the [Basic](#basic-mapper), [Custom](#custom-mapper), GitHub, and Apple mappers.
+将外部用户信息对象映射为 TBMQ 用户时，可使用 [Basic](#basic-mapper)、[Custom](#custom-mapper)、GitHub 和 Apple 映射器。
 
-### Basic mapper
+### 基础映射器
 
-The basic mapper merges an external OAuth 2.0 user info object into the TBMQ OAuth 2.0 user with a predefined set of rules.
+基础映射器按预定义规则将外部 OAuth 2.0 用户信息对象合并为 TBMQ OAuth 2.0 用户。
 
-To use the basic mapper, set the mapper type to **Basic**.
+使用基础映射器时，将映射器类型设为 **Basic**。
 
 {% include images-gallery.html imageCollection="mapper-basic-1" %}
 
-Details of the available properties:
+可用属性说明：
 
-* **Allow user creation** – If enabled, and the user account does not yet exist in TBMQ, it will be created automatically.
-  If disabled, the user will receive an *access denied* error when trying to log in with an external OAuth 2.0 provider, if no corresponding TBMQ user exists.
+* **允许创建用户**：启用后，若 TBMQ 中尚不存在该用户账户，将自动创建。
+  禁用时，若没有对应的 TBMQ 用户，使用外部 OAuth 2.0 提供商登录将返回 *access denied* 错误。
 
-* **Email attribute key** – The attribute key from the external OAuth 2.0 user info that will be used for the TBMQ user email property.
+* **邮箱属性键**：外部 OAuth 2.0 用户信息中用于 TBMQ 用户邮箱的属性键。
 
-* **First name attribute key** – The attribute key from the external OAuth 2.0 user info that will be used for the TBMQ user first name property.
+* **名属性键**：外部 OAuth 2.0 用户信息中用于 TBMQ 用户名的属性键。
 
-* **Last name attribute key** – The attribute key from the external OAuth 2.0 user info that will be used for the TBMQ user last name property.
+* **姓属性键**：外部 OAuth 2.0 用户信息中用于 TBMQ 用户姓的属性键。
 
-* **Role** – Choose from the predefined roles to be assigned to the user.
+* **角色**：从预定义角色中选择分配给用户的角色。
 
 > {% include templates/mqtt-broker/security/user-password.md %}
 
-### Custom mapper
+### 自定义映射器
 
-If the basic mapper functionality does not meet your business needs, you can configure a custom mapper to implement logic that fits your specific goals.
+若基础映射器不满足业务需求，可配置自定义映射器以实现所需逻辑。
 
-A custom mapper is designed as a separate microservice running alongside the TBMQ microservice.
-TBMQ forwards all mapping requests to this microservice and expects a TBMQ OAuth 2.0 user object in response.
+自定义映射器为与 TBMQ 微服务并列运行的独立微服务。
+TBMQ 将所有映射请求转发至该微服务，并期望返回 TBMQ OAuth 2.0 用户对象。
 
-Refer to this [base implementation](https://github.com/thingsboard/tbmq-custom-oauth2-mapper){:target="_blank"} as a starting point for your custom mapper.
+可参考此[基础实现](https://github.com/thingsboard/tbmq-custom-oauth2-mapper){:target="_blank"}作为自定义映射器起点。
 
-To use the custom mapper, set the mapper type to **Custom**.
+使用自定义映射器时，将映射器类型设为 **Custom**。
 
 {% include images-gallery.html imageCollection="mapper-custom-1" %}
 
-Details of the available properties:
+可用属性说明：
 
-* **URL** – The URL of the custom mapper endpoint;
-* **username** – If the custom mapper endpoint is configured with basic authentication, specify the *username* here;
-* **password** – If the custom mapper endpoint is configured with basic authentication, specify the *password* here.
+* **URL**：自定义映射器端点的 URL；
+* **username**：若自定义映射器端点启用了基本认证，在此填写 *username*；
+* **password**：若自定义映射器端点启用了基本认证，在此填写 *password*。
 
-## HAProxy configuration
+## HAProxy 配置
 
-If TBMQ is running behind a load balancer such as HAProxy, configure the balancing algorithm properly to ensure that the correct session is maintained on the TBMQ instance:
+若 TBMQ 运行在 HAProxy 等负载均衡器之后，需正确配置均衡算法以确保会话落在同一 TBMQ 实例：
 
 ```bash
 backend tbmq-api-backend
   ...
-  balance source # balance must be set to 'source'
+  balance source # balance 必须设为 'source'
   ...
 ```
 
-Also, configure ACL mapping for HTTP and HTTPS requests:
+同时为 HTTP 和 HTTPS 请求配置 ACL 映射：
 
 ```bash
 frontend http-in

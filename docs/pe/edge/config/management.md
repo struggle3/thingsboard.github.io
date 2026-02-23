@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge 
-description: Edge 
+title: Edge
+description: Edge 管理
 
 downlinks:
     0:

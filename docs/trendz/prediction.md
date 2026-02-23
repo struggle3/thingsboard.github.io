@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Build prediction model for time series data
-description: How to build accurate prediction of time series data. Explore available ML models for forecasting and visualizing predicted data.
+title: 为时序数据构建预测模型
+description: 构建时序数据的预测模型，了解可用 ML 模型及预测数据可视化。
 
 trendz-models-page:
   0:

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: tenant details
-description: Enriches messages by adding details (such as name, email, country, address, etc.) from the message originator's tenant.
+description: 通过添加消息 originator 所属 tenant 的详情（如名称、邮箱、国家、地址等）来丰富消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -1,61 +1,59 @@
 * TOC
 {:toc}
 
-## Feature Overview
+## 功能概述
 
-ThingsBoard (TB) Entity Views (EVs) are available since v2.2. This feature was requested by many TB users. 
-Similar to SQL database views, which limits the degree of exposure of the underlying tables to the outer world, 
-TB EVs limit the degree of exposure of the Device or Asset [telemetry](/docs/{{docsPrefix}}user-guide/telemetry/) and [attributes](/docs/{{docsPrefix}}user-guide/attributes/) to the [Customers](/docs/{{docsPrefix}}user-guide/ui/customers/).
-As a Tenant Administrator, you are able to create multiple EVs per Device or Asset and assign them to different Customers.
+ThingsBoard (TB) 实体视图 (EV) 自 v2.2 起可用。该功能为许多 TB 用户所需求。
+类似于 SQL 数据库视图限制底层表对外暴露程度，TB EV 限制设备或资产的 [遥测](/docs/{{docsPrefix}}user-guide/telemetry/) 和 [属性](/docs/{{docsPrefix}}user-guide/attributes/) 向 [客户](/docs/{{docsPrefix}}user-guide/ui/customers/) 的暴露程度。
+作为租户管理员，您可为每台设备或资产创建多个 EV，并分配给不同客户。
 
-Supported use cases:
+支持的用例：
 
- - **Share** specific device or asset data with multiple Customers simultaneously. Prior EVs feature was not possible due to restrictions of the TB security model.
- - Allow particular Customer users to see collected data (e.g. sensor readings), but **hide debug info** like battery level, system errors, etc.
- - Device-as-a-Service (**DaaS**) model where data collected by the device at different periods of time belongs to different Customers.
+ - **同时共享** 特定设备或资产数据给多个客户。之前的 EV 功能因 TB 安全模型限制而无法实现。
+ - 允许特定客户用户查看收集的数据（如传感器读数），但 **隐藏** 电池电量、系统错误等调试信息。
+ - 设备即服务（**DaaS**）模型，其中设备在不同时间段收集的数据属于不同客户。
 
-## Architecture
+## 架构
 
-Entity View contains the following information:
+实体视图包含以下信息：
 
- - **TenantId** - represents a link to the owner of the view;
- - **CustomerId** - represents a link to the customer that has access to the view;
- - **EntityId** - represents a link to the target device or asset;
- - **Name and type** - regular ThingsBoard entity fields that are used for display and search purposes;
- - **Start and end time** - represents the time interval that is used to limit access to target device telemetry. Customer will not be able to see entity telemetry that is outside the specified interval; 
- - **Time series keys** - list of time series data keys that are accessible to the viewer;
- - **Attribute keys** - list of attribute names that are accessible to the viewer;
+ - **TenantId** - 表示与视图所有者的链接；
+ - **CustomerId** - 表示与有权访问视图的客户的链接；
+ - **EntityId** - 表示与目标设备或资产的链接；
+ - **Name and type** - 用于显示和搜索的常规 ThingsBoard 实体字段；
+ - **Start and end time** - 表示用于限制对目标设备遥测的访问的时间间隔。客户无法看到指定间隔之外的实体遥测；
+ - **Time series keys** - 可被查看者访问的时序数据 key 列表；
+ - **Attribute keys** - 可被查看者访问的属性名称列表；
 
-![image](/images/user-guide/entity-views/new-entity-view.png) 
+![image](/images/user-guide/entity-views/new-entity-view.png)
 
-It is important to understand how TB handles telemetry and attribute updates, and how these changes affect Entity Views.
+理解 TB 如何处理遥测和属性更新以及这些更改如何影响实体视图很重要。
 
-### Time series data view
+### 时序数据视图
 
-All time series data is stored in the database on behalf of the target entity. There is no time series data duplication to any of the Entity Views.
-When a user opens a dashboard or performs a REST API call on behalf of the entity view ID, the following actions take place:
+所有时序数据以目标实体名义存储在数据库中。不会向任何实体视图复制时序数据。
+当用户代表实体视图 ID 打开仪表板或执行 REST API 调用时，发生以下操作：
 
- - Request start and end timestamps are validated and adjusted to fit into Entity View start and end time.
- Thus, if Dashboard tries to fetch 1 year of data, but EV is configured to access only 6 months of data, it will fail to do so.
- - Request time series data keys are validated and adjusted based on time series data keys provisioned in the Entity View.
- Thus, if Dashboard tries to fetch the telemetry keys that are forbidden for this particular view, it will fail to do so.
+ - 请求的开始和结束时间戳被验证并调整以符合实体视图的开始和结束时间。
+ 因此，若仪表板尝试获取 1 年的数据，但 EV 仅配置为访问 6 个月的数据，则会失败。
+ - 请求的时序数据 key 根据实体视图中配置的时序数据 key 进行验证和调整。
+ 因此，若仪表板尝试获取此视图不允许的遥测 key，则会失败。
 
-### Attributes view
+### 属性视图
 
-Entity View automatically copies specified attributes from Target Entity each time you save or update this entity view.
-For performance reasons, target entity attributes are not propagated to entity view on each attribute change.
-You can enable automatic propagation by configuring a "copy to view" rule node in your rule chain and linking "Post attributes" and "Attributes Updated"
-messages to the new rule node.
+每次保存或更新此实体视图时，实体视图会自动从目标实体复制指定属性。
+出于性能考虑，目标实体属性的更改不会每次传播到实体视图。
+可通过在 Rule Chain 中配置「copy to view」规则节点并将「Post attributes」和「Attributes Updated」消息链接到该规则节点来启用自动传播。
 
 ![image](/images/user-guide/entity-views/rule-chain.png)
 
-## Future improvements
+## 未来改进
 
-There are the following features in ThingsBoard Road Map:
+ThingsBoard 路线图中有以下功能：
 
- - Add the ability to enable/disable RPC requests to the device view;
- - Add the ability to configure a list of alarms that are accessible(propagated) for a particular view.
+ - 为设备视图启用/禁用 RPC 请求；
+ - 为特定视图配置可访问（传播）的告警列表。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}

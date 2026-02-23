@@ -1,89 +1,89 @@
 * TOC
 {:toc}
 
-This document provides step-by-step instructions for configuring the mail server in ThingsBoard.
-Using email allows you to send [notifications](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}, password recovery messages, scheduled reports, and other important system messages.
+本文档提供在 ThingsBoard 中配置邮件服务器的分步说明。
+使用邮件可发送[通知](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}、密码找回消息、定时报告及其他重要系统消息。
 
 {% if docsPrefix == null %}
-ThingsBoard system administrator defines global mail server settings, which apply to all customers.
+ThingsBoard 系统管理员定义全局邮件服务器设置，适用于所有客户。
 {% endif %}
 {% if docsPrefix == "pe/" %}
 
-ThingsBoard allows configuring the mail server at two levels:
+ThingsBoard 支持在两个层级配置邮件服务器：
 
-- System administrator level – Defines global SMTP settings that apply to all tenants unless overridden.
-- Tenant administrator level – Allows individual tenants to set up their own SMTP settings, overriding the global configuration if needed.
+- 系统管理员层级 – 定义适用于所有租户的全局 SMTP 设置（除非被覆盖）。
+- 租户管理员层级 – 允许各租户设置自己的 SMTP，需要时可覆盖全局配置。
 {% endif %}
 
 {% unless docsPrefix == null %}
-By default, if a Tenant mail server is not configured, the system will use the system administrator level mail server settings. However, tenants who require custom email configurations (e.g., company-specific SMTP servers) can define their own settings.
+默认情况下，若未配置租户邮件服务器，系统将使用系统管理员层级的邮件服务器设置。但需要自定义邮件配置（如公司专用 SMTP 服务器）的租户可定义自己的设置。
 {% endunless %}
 
 {% capture difference %}
-**Note:** The tenant administrator can [configure the email rule node](/docs/user-guide/rule-engine-2-0/tutorials/send-email/){:target="_blank"} to send emails using the [rule engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){:target="_blank"}.
+**注意：** 租户管理员可[配置邮件规则节点](/docs/user-guide/rule-engine-2-0/tutorials/send-email/){:target="_blank"}，通过[规则引擎](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){:target="_blank"}发送邮件。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Mail server configuration
+## 邮件服务器配置
 
-Following steps are required to configure Mail server settings:
+配置邮件服务器设置需执行以下步骤：
 {% if docsPrefix == null %}
-**Step 1.** Log in to your ThingsBoard instance WEB UI as system administrator;
+**步骤 1.** 以系统管理员身份登录 ThingsBoard 实例 WEB UI；
 
-**Step 2.** Go to the "Mail server" tab on the "Settings" page. You will be taken directly to the mail server settings;
+**步骤 2.** 进入“Settings”页面的“Mail server”选项卡。将直接进入邮件服务器设置；
 {% endif %}
 {% if docsPrefix == "pe/" %}
-**Step 1.** Log in to your ThingsBoard instance WEB UI;
+**步骤 1.** 登录 ThingsBoard 实例 WEB UI；
 
-**Step 2.** Go to the "Mail server" tab on the "Settings" page. If you are logged in as a sysadmin, you will be taken directly to the mail server settings. If you are logged in as a tenant administrator, uncheck the "Use System Mail Server Settings" option to configure your own mail server settings;
+**步骤 2.** 进入“Settings”页面的“Mail server”选项卡。若以系统管理员身份登录，将直接进入邮件服务器设置。若以租户管理员身份登录，需取消勾选“Use System Mail Server Settings”以配置自己的邮件服务器设置；
 {% endif %}
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-**Step 1.** Log in to your ThingsBoard instance WEB UI;
+**步骤 1.** 登录 ThingsBoard 实例 WEB UI；
 
-**Step 2.** Go to the "Mail server" tab on the "Settings" page. Uncheck the "Use System Mail Server Settings" option to configure your own mail server settings;
+**步骤 2.** 进入“Settings”页面的“Mail server”选项卡。取消勾选“Use System Mail Server Settings”以配置自己的邮件服务器设置；
 {% endif %}
 
-**Step 3.** Mail server configuration:
-  - Fill in the "Mail From" field;
-  - Select an SMTP provider;
-  - Proceed to the connection settings: 
-    - Choose the SMTP protocol;
-    - Specify host and port of the SMTP server;
-    - Set the timeout;
-    - Optionally, enable TLS and Proxy;
-  - Authentication: Enter credentials for SMTP authentication. Use either the "Basic" or "OAuth 2.0" authentication method. 
+**步骤 3.** 邮件服务器配置：
+  - 填写“Mail From”字段；
+  - 选择 SMTP 提供商；
+  - 进入连接设置： 
+    - 选择 SMTP 协议；
+    - 指定 SMTP 服务器主机和端口；
+    - 设置超时；
+    - 可选：启用 TLS 和 Proxy；
+  - 身份验证：输入 SMTP 身份验证凭据。使用“Basic”或“OAuth 2.0”身份验证方式。
 
-**Step 4.** You can send a test email to verify the settings;
+**步骤 4.** 可发送测试邮件验证设置；
 
-**Step 5.** Finally, click "Save" to complete the mail server configuration.
+**步骤 5.** 最后，点击“Save”完成邮件服务器配置。
 
 {% include images-gallery.html imageCollection="mail-server-configuration-1" %}
 
-## Examples of mail server settings
+## 邮件服务器设置示例
 
-Starting from ThingsBoard 3.5.2 we have added mail settings templates for such providers: [Sendgrid](#sendgrid-configuration-example), [Gmail](#gmail-configuration-with-basic-authentication-example) and [Office 365](#office-365-configuration-with-oauth2-authentication-example). 
-So users don't have to fill in connection settings like SMTP server host, port and TLS configuration.
-If you want to use a different SMTP server, use the SMTP provider type "Custom".
+自 ThingsBoard 3.5.2 起，新增了以下提供商的邮件设置模板：[Sendgrid](#sendgrid-configuration-example)、[Gmail](#gmail-configuration-with-basic-authentication-example)和[Office 365](#office-365-configuration-with-oauth2-authentication-example)。
+因此用户无需手动填写 SMTP 服务器主机、端口和 TLS 等连接设置。
+若需使用其他 SMTP 服务器，请选择 SMTP 提供商类型“Custom”。
 
-### Sendgrid configuration example
+### Sendgrid 配置示例
 
-A SendGrid configuration is fairly simple and straightforward. First, you need to create [SendGrid](https://sendgrid.com/) account. 
-You can try it for free and the free plan is most likely enough for platform evaluation.
+SendGrid 配置相对简单直接。首先需创建 [SendGrid](https://sendgrid.com/) 账户。
+可免费试用，免费套餐通常足以进行平台评估。
 
-**ㅤ1. Setup SendGrid configuration**
+**ㅤ1. 设置 SendGrid 配置**
 
 {% include images-gallery.html imageCollection="sendgrid-configuration" showListImageTitles="true" %}
 
-**ㅤ2. Setup ThingsBoard mail server settings**
+**ㅤ2. 设置 ThingsBoard 邮件服务器**
 
-Now navigate to the "Settings" page -> "Mail Server" tab your ThingsBoard instance and fill in the form:
+在 ThingsBoard 实例中进入“Settings”页面 -> “Mail Server”选项卡并填写表单：
 
-- Fill in the "Mail From" field;
-- Select SMTP provider - **SendGrid**;
-- Enter username: **apikey**;
-- Enter password: previously generated **password**.
+- 填写“Mail From”字段；
+- 选择 SMTP 提供商 - **SendGrid**；
+- 输入用户名：**apikey**；
+- 输入密码：此前生成的**密码**。
 
-Click "Save" button.
+点击“Save”按钮。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/sendgrid-settings-ce.png)
@@ -93,35 +93,35 @@ Click "Save" button.
 {% endif %}
 
 <br>
-**ㅤ3. Send test email**
+**ㅤ3. 发送测试邮件**
 
-Optional, you can receive test mail on your email.
-In case of error in configuration, you should receive a popup with the error log.
+可选，可在邮箱接收测试邮件。
+若配置有误，将收到包含错误日志的弹窗。
 
-You can also complete verification on the SendGrid website.
+您也可在 SendGrid 网站上完成验证。
 
 ![image](/images/user-guide/ui/mail/sendgrid-it-works.png)
 
-### Gmail configuration with basic authentication example
+### 使用基本身份验证的 Gmail 配置示例
 
-In order to use Gmail, you will need to enable two-step verification (this step is not mandatory, but it is highly recommended.) and generate an [**app password**](https://support.google.com/accounts/answer/185833?hl=en).
+要使用 Gmail，需启用两步验证（非强制，但强烈建议）并生成[**应用密码**](https://support.google.com/accounts/answer/185833?hl=en)。
 
-**ㅤ1. Setup Google Account configuration**
+**ㅤ1. 设置 Google 账户配置**
 
 {% include images-gallery.html imageCollection="gmail-generate-an-app-password" showListImageTitles="true" %}
 
-**ㅤ2. Setup ThingsBoard mail server settings**
+**ㅤ2. 设置 ThingsBoard 邮件服务器**
 
-Once this is ready, you should be able to set up mail server using the information below.
-Navigate to the "Settings" page -> "Mail Server" tab your ThingsBoard instance and fill in the form:
+准备就绪后，可使用以下信息配置邮件服务器。
+在 ThingsBoard 实例中进入“Settings”页面 -> “Mail Server”选项卡并填写表单：
 
-- Fill in the "Mail From" field;
-- Select SMTP provider - **Google**;
-- Enter your email as **username**;
-- Leave **basic** authentication type;
-- Enter previously copied **app password**.
+- 填写“Mail From”字段；
+- 选择 SMTP 提供商 - **Google**；
+- 输入您的邮箱作为**用户名**；
+- 保持**basic**身份验证类型；
+- 输入此前复制的**应用密码**。
 
-Click "Save" button.
+点击“Save”按钮。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/gmail-settings-basic-ce.png)
@@ -131,27 +131,27 @@ Click "Save" button.
 {% endif %}
 
 <br>
-**ㅤ3. Send test email**
+**ㅤ3. 发送测试邮件**
 
-Optional, you can receive test mail on your email.
-In case of error in configuration, you should receive a popup with the error log.
+可选，可在邮箱接收测试邮件。
+若配置有误，将收到包含错误日志的弹窗。
 
-### Gmail configuration with OAuth2 authentication example
+### 使用 OAuth2 身份验证的 Gmail 配置示例
 
-Starting from ThingsBoard 3.5.2 it is possible to use OAuth2 authorization for Gmail SMTP server. 
-Using OAuth 2.0 protocol, user can do authentication by Gmail Web OAuth instead of inputting user and password directly in application. 
-This way is more secure, but a little bit complex.
+自 ThingsBoard 3.5.2 起，支持对 Gmail SMTP 服务器使用 OAuth2 授权。
+使用 OAuth 2.0 协议，用户可通过 Gmail Web OAuth 进行身份验证，而无需在应用中直接输入用户名和密码。
+此方式更安全，但稍复杂。
 
-To use Gmail OAuth2 you need to create a project in Google Developers Console but first let's set up ThingsBoard mail server settings.
+要使用 Gmail OAuth2，需在 Google Developers Console 创建项目，但先设置 ThingsBoard 邮件服务器。
 
-**ㅤ1. Setup ThingsBoard mail server settings**
+**ㅤ1. 设置 ThingsBoard 邮件服务器**
 
-- In your ThingsBoard instance, go to the "Settings" page -> "Mail Server" tab;
-- Fill in the "mail From" field;
-- Select SMTP provider - "**Google**";
-- In the "Authentication" block, fill in username with email address you are going to use for sending mail from;
-- Toggle the authentication type to **OAuth2**;
-- Copy and save the "**Redirect URI template**". It will be needed while set up Google project credentials.
+- 在 ThingsBoard 实例中，进入“Settings”页面 -> “Mail Server”选项卡；
+- 填写“mail From”字段；
+- 选择 SMTP 提供商 - “**Google**”；
+- 在“Authentication”块中，使用将用于发送邮件的邮箱地址填写用户名；
+- 将身份验证类型切换为 **OAuth2**；
+- 复制并保存“**Redirect URI template**”。设置 Google 项目凭据时需要用到。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/google-oauth-settings-1-ce.png)
@@ -161,18 +161,18 @@ To use Gmail OAuth2 you need to create a project in Google Developers Console bu
 {% endif %}
 
 <br>
-**ㅤ2. Now let's create a project in [Google Developers Console](https://console.developers.google.com/projectcreate)**
+**ㅤ2. 在 [Google Developers Console](https://console.developers.google.com/projectcreate) 创建项目**
 
 {% include images-gallery.html imageCollection="create-gmail-project" showListImageTitles="true" %}
 
-**ㅤ3. Then you need to create credentials**
+**ㅤ3. 创建凭据**
 
 {% include images-gallery.html imageCollection="create-gmail-credentials" showListImageTitles="true" %}
 
 <br>
-**ㅤ4. Complete ThingsBoard settings setup**
+**ㅤ4. 完成 ThingsBoard 设置**
 
-Back to the Thingsboard portal and paste **Client ID** and **Client secret** from the previous steps into the appropriate fields. Click "Save".
+返回 Thingsboard 门户，将此前步骤的 **Client ID** 和 **Client secret** 粘贴到对应字段。点击“Save”。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/google-oauth-settings-2-ce.png)
@@ -182,11 +182,11 @@ Back to the Thingsboard portal and paste **Client ID** and **Client secret** fro
 {% endif %}
 
 <br>
-**ㅤ5. Generate access token**
+**ㅤ5. 生成访问令牌**
 
-Finally, we can get access token. For this click on the **Generate access token** and your browser will redirect you to provider login page. 
-Please follow the steps in your browser and after acceptance we will automatically save Refresh Token and Access Token and redirect you back to ThingsBoard portal. 
-If access token was successfully generated you will see status "generated".
+最后，可获取访问令牌。点击 **Generate access token**，浏览器将重定向至提供商登录页。
+请按浏览器中的步骤操作，授权后系统将自动保存 Refresh Token 和 Access Token 并重定向回 ThingsBoard 门户。
+若成功生成访问令牌，将看到状态“generated”。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/google-oauth-settings-3-ce.png)
@@ -196,38 +196,38 @@ If access token was successfully generated you will see status "generated".
 {% endif %}
 
 <br>
-**ㅤ6. Send test email**
+**ㅤ6. 发送测试邮件**
 
-To check if everything works click "Send test email" button. Keep in mind that each time you change provider info system will drop refresh and access token and you will need to generate it again.
+点击“Send test email”按钮检查是否正常。请注意，每次更改提供商信息时系统会清除 refresh 和 access token，需重新生成。
 
-### Office 365 configuration with OAuth2 authentication example
+### 使用 OAuth2 身份验证的 Office 365 配置示例
 
-Starting from ThingsBoard 3.6 it is possible to use OAuth2 authorization for Office 365 SMTP server. 
+自 ThingsBoard 3.6 起，支持对 Office 365 SMTP 服务器使用 OAuth2 授权。
 
 {% capture difference %}
-**Please note:**
+**请注意：**
 <br>
-Take a note that OAuth 2.0 is supported for Microsoft 365 accounts, but NOT for personal Outlook accounts (e.g. @outlook.com or @hotmail.com accounts). 
+OAuth 2.0 仅支持 Microsoft 365 账户，**不支持**个人 Outlook 账户（如 @outlook.com 或 @hotmail.com 账户）。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-First, go to the "Azure directory" to save user principal name of user you want to use for mail sending (if not exists, please create or invite from external services):
+首先，进入“Azure directory”保存用于发送邮件的用户主体名称（若不存在，请创建或从外部服务邀请）：
 
- - Sign in to the [Azure portal](https://portal.azure.com/) and select Microsoft Entra ID;
- - Select microsoft user and copy user principal name.
+ - 登录 [Azure portal](https://portal.azure.com/) 并选择 Microsoft Entra ID；
+ - 选择 microsoft 用户并复制用户主体名称。
 
 {% include images-gallery.html imageCollection="microsoft-azure-with-oauth2" %}
 
-To use Office 365 OAuth2 you need to register an application in the Azure portal but first let’s set up ThingsBoard mail server settings.
+要使用 Office 365 OAuth2，需在 Azure portal 注册应用，但先设置 ThingsBoard 邮件服务器。
 
-**ㅤ1. Setup ThingsBoard mail server settings**:
+**ㅤ1. 设置 ThingsBoard 邮件服务器**：
 
- - In your ThingsBoard instance, go to the "Settings" page -> "Mail Server" tab;
- - Enter previously copied Microsoft user principal name (e.g. app_user@onmicrosoft.com);
- - Select SMTP provider - "**Office 365**";
- - In the "Authentication" block, fill in username with microsoft user principal name (the same as you used for mail from);
- - Toggle the authentication type to **OAuth2**;
- - Copy and save the "**Redirect URI template**". It will be needed while set up the Azure portal credentials.
+ - 在 ThingsBoard 实例中，进入“Settings”页面 -> “Mail Server”选项卡；
+ - 输入此前复制的 Microsoft 用户主体名称（如 app_user@onmicrosoft.com）；
+ - 选择 SMTP 提供商 - “**Office 365**”；
+ - 在“Authentication”块中，使用与 Mail From 相同的 Microsoft 用户主体名称填写用户名；
+ - 将身份验证类型切换为 **OAuth2**；
+ - 复制并保存“**Redirect URI template**”。设置 Azure portal 凭据时需要用到。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/microsoft-azure-oauth-settings-1-ce.png)
@@ -237,24 +237,24 @@ To use Office 365 OAuth2 you need to register an application in the Azure portal
 {% endif %}
 
 <br>
-**ㅤ2. Now let's register an application in the Azure portal**:
+**ㅤ2. 在 Azure portal 注册应用**：
 
 {% include images-gallery.html imageCollection="azure-portal" showListImageTitles="true" %}
 
 <br>
-**ㅤ3. Then you need to create a "Client secret"**:
+**ㅤ3. 创建“Client secret”**：
 
 {% include images-gallery.html imageCollection="azure-portal-2" showListImageTitles="true" %}
 
 <br>
-**ㅤ4. To finish the authentication set up you need add API permissions for SMTP**:
+**ㅤ4. 为 SMTP 添加 API 权限以完成身份验证设置**：
 
 {% include images-gallery.html imageCollection="add-api-permissions" showListImageTitles="true" %}
 
 <br>
-**ㅤ5. Complete ThingsBoard settings setup**:
+**ㅤ5. 完成 ThingsBoard 设置**：
 
-Back to the ThingsBoard portal and paste **Client ID**, **Client secret** and **Directory (tenant) ID** from the previous steps into the appropriate fields. Click "Save".
+返回 ThingsBoard 门户，将此前步骤的 **Client ID**、**Client secret** 和 **Directory (tenant) ID** 粘贴到对应字段。点击“Save”。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/microsoft-azure-oauth-settings-2-ce.png)
@@ -264,11 +264,11 @@ Back to the ThingsBoard portal and paste **Client ID**, **Client secret** and **
 {% endif %}
 
 <br>
-**ㅤ6. Generate access token**:
+**ㅤ6. 生成访问令牌**：
 
-Finally, we can get access token. For this click on the "Generate access token" button and your browser will redirect you to provider login page. Please follow the steps
-in your browser and after acceptance we will automatically save Refresh Token and Access Token and redirect you back to ThingsBoard portal. 
-If access token was successfully generated you will see status "generated".
+最后，可获取访问令牌。点击“Generate access token”按钮，浏览器将重定向至提供商登录页。请按浏览器中的步骤操作，
+授权后系统将自动保存 Refresh Token 和 Access Token 并重定向回 ThingsBoard 门户。
+若成功生成访问令牌，将看到状态“generated”。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/mail/microsoft-azure-oauth-settings-3-ce.png)
@@ -278,18 +278,18 @@ If access token was successfully generated you will see status "generated".
 {% endif %}
 
 <br>
-**ㅤ7. Send test email**:
+**ㅤ7. 发送测试邮件**：
 
-To check if everything works click "Send test email" button. Keep in mind that each time you change provider info system will drop refresh and access token and you will need to generate it again.
+点击“Send test email”按钮检查是否正常。请注意，每次更改提供商信息时系统会清除 refresh 和 access token，需重新生成。
 
 <br>
-**Office 365 troubleshooting**
+**Office 365 故障排查**
 
-If you see authentication errors while sending email (e.x. 5.7.3):
+若发送邮件时出现身份验证错误（如 5.7.3）：
 
-1. Make sure SMTP settings are enabled for user. For this go to [here](https://portal.office.com/adminportal/home#/users). Then select user →  Mail → Manage email apps → Authenticate SMTP (if enabled - disable and enable again);
-2. In Azure portal make sure Security defaults are disabled.
+1. 确认已为用户启用 SMTP 设置。前往[此处](https://portal.office.com/adminportal/home#/users)。选择用户 → Mail → Manage email apps → Authenticate SMTP（若已启用，先禁用再启用）；
+2. 在 Azure portal 中确认已禁用 Security defaults。
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

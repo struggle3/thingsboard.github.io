@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect RN172plus series to ThingsBoard?"
+title: "如何将RN172plus series连接到ThingsBoard？"
 redirect_to: "/device-library/paas/rn172wcd/"
 ---

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: Water Metering solution template
-description: Water Metering template overview
+title: 水表计量解决方案模板
+description: 水表计量模板概述
 solution-highlights:
     0:
         image: /images/solutions/water_metering/water-metering-1.png

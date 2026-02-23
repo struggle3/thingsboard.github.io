@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Vicki Smart Radiator Thermostat to ThingsBoard?
-category: Other devices
+title: 如何将 Vicki Smart Radiator Thermostat 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: MClimate
 hasIntegrationDeviceConfiguration: true

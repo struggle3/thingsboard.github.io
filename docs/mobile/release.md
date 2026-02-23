@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-mobile
-title: Build and release ThingsBoard Mobile Application
+title: 构建并发布ThingsBoard移动应用
 
 ---
 

@@ -1,4 +1,4 @@
-If minikube tunnel is running, you should notice that a new service appears in the list, exposing MQTT traffic externally:
+若 minikube tunnel 已运行，您会看到列表中多出一个新服务，用于对外暴露 MQTT 流量：
 
 ```text
 Status:	
@@ -9,14 +9,14 @@ Status:
 	services: [nginx-ingress-ingress-nginx-controller, my-tbmq-cluster-mqtt-lb]
 ```
 
-The service `my-tbmq-cluster-mqtt-lb` is the LoadBalancer used for MQTT communication. You can retrieve its `EXTERNAL-IP` with:
+服务 `my-tbmq-cluster-mqtt-lb` 为用于 MQTT 通信的 LoadBalancer。可使用以下命令获取其 `EXTERNAL-IP`：
 
 ```bash
 kubectl get svc my-tbmq-cluster-mqtt-lb
 ```
 {: .copy-code}
 
-You should see the similar picture:
+输出应类似：
 
 ```text
 NAME                      TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                                                       AGE
@@ -24,4 +24,4 @@ my-tbmq-cluster-mqtt-lb   LoadBalancer   10.101.27.40   *******        1883:3104
 ```
 {: .copy-code}
 
-Use `EXTERNAL-IP` field of the load-balancer to connect to the cluster via MQTT protocol.
+使用负载均衡器的 `EXTERNAL-IP` 字段通过 MQTT 协议连接集群。

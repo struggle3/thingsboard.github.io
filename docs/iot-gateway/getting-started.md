@@ -1,38 +1,37 @@
 ---
 layout: docwithnav-gw
-title: Getting started with ThingsBoard IoT Gateway
-description: Configure MQTT, OPC-UA, and Modbus connectors to establish connections with their respective demo servers in the Docker container and retrieve data.
+title: ThingsBoard IoT Gateway 快速入门
+description: 配置 MQTT、OPC-UA、Modbus connector，在 Docker 容器中连接各自演示服务器并采集数据。
 
 ---
 
 * TOC
 {:toc}
 
-The ThingsBoard IoT Gateway is an open-source solution, designed to serve as a bridge between IoT devices connected to 
-legacy and third-party systems with ThingsBoard.
+ThingsBoard IoT Gateway 是开源方案，作为接入传统与第三方系统的 IoT 设备与 ThingsBoard 之间的桥梁。
 
-This guide covers initial IoT Gateway installation and configuration, we will do the following things:
-- Create a new gateway device;
-- Launch the gateway using Docker command;
-- Configure different connector types ([MQTT](/docs/iot-gateway/config/mqtt/), [OPC-UA](/docs/iot-gateway/config/opc-ua/), [Modbus](/docs/iot-gateway/config/modbus/)) in order to connect to a local demo servers and read data from them;
-- Check received device data on ThingsBoard.
+本指南覆盖 IoT Gateway 的初始安装与配置，将完成：
+- 创建新的网关设备；
+- 使用 Docker 命令启动网关；
+- 配置多种 connector（[MQTT](/docs/iot-gateway/config/mqtt/)、[OPC-UA](/docs/iot-gateway/config/opc-ua/)、[Modbus](/docs/iot-gateway/config/modbus/)），连接本地演示服务器并读取数据；
+- 在 ThingsBoard 中查看收到的设备数据。
 
-## Prerequisites
+## 前置条件
 
-- Before initiating the Gateway setup, ensure that the ThingsBoard server is up and running. The simplest approach is to use [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"}. Alternatively, you can install ThingsBoard manually by following the steps outlined in the [Installation Guide](/docs/user-guide/install/installation-options/).
-- Before moving forward, ensure Docker is installed and properly configured on your machine. If you haven't installed Docker yet, you can download it from the [official Docker website](https://docs.docker.com/engine/install/) and follow their installation guide for your specific operating system.
+- 开始配置网关前，确保 ThingsBoard 服务器已启动运行。最简便的方式是使用 [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"}。也可按 [安装指南](/docs/user-guide/install/installation-options/) 手动安装 ThingsBoard。
+- 确保已安装并正确配置 Docker。若未安装，可从 [Docker 官网](https://docs.docker.com/engine/install/) 下载，并按对应操作系统的安装指南进行安装。
 
-## Step 1. Create a new gateway device on ThingsBoard
+## 步骤 1. 在 ThingsBoard 上创建新的网关设备
 
-First, add a gateway device to your ThingsBoard instance by following these steps:
+首先，按下列步骤在你的 ThingsBoard 实例中添加网关设备：
 
 {% assign createNewGatewayDevice = '
     ===
         image: /images/gateway/dashboard/gateway-getting-started-1-ce.png,
-        title: Go to "**Entities**" > "**Gateways**" tab.
+        title: 进入「**实体**」>「**网关**」标签页。
     ===
         image: /images/gateway/dashboard/gateway-getting-started-2-ce.png,
-        title: Click the "**+**" button, enter the gateway device name (e.g., "My Gateway"), and select the device profile. Click on "**Create**" button.
+        title: 点击「**+**」按钮，输入网关设备名称（如「My Gateway」），选择设备配置文件，点击「**创建**」。
 '
 %}
 
@@ -41,54 +40,52 @@ First, add a gateway device to your ThingsBoard instance by following these step
 {% capture info %}
 <div>
   <p>
-    <span style="color:black">If you've previously configured the gateway, create a backup, as the new remote configuration will overwrite existing settings files.  
-    <br>For those who used a gateway version earlier than 3.4, the gateway will automatically generate a new configuration file in JSON format.</span>
+    <span style="color:black">若此前已配置过网关，请先备份，新的远程配置会覆盖现有设置文件。  
+    <br>若曾使用 3.4 之前的网关版本，网关将自动生成新的 JSON 格式配置文件。</span>
   </p>
 </div>
 {% endcapture %}
 {% include templates/info-banner.md content=info %}
 
-To launch the gateway, use the following steps:
+启动网关的步骤如下：
 
 {% assign remoteCreateGatewayDocker = '
     ===
         image: /images/gateway/dashboard/gateway-getting-started-3-ce.png,
-        title: Select and click on newly created gateway, click on **"Launch command"** button in the top right corner.
+        title: 选中并点击新建的网关，在右上角点击 **「启动命令」** 按钮。
     ===
         image: /images/gateway/dashboard/gateway-getting-started-4-ce.png,
-        title: Click to download `docker-compose.yml` file to your PC, copy command and execute it in your terminal.
+        title: 点击下载 `docker-compose.yml` 到本机，复制命令并在终端中执行。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=remoteCreateGatewayDocker %}
 
-After running gateway docker image, you can see the following logs in your terminal:
+运行网关 Docker 镜像后，终端中可看到如下日志：
 
 ![](/images/gateway/dashboard/launch-gateway-docker.png)
 
-## Step 2. Enable remote logging
+## 步骤 2：启用远程日志
 
-To view gateway and connector logs on the platform side, you need to enable remote logging. For this purpose, 
-use the following steps:
+要在平台侧查看网关与 connector 的日志，需启用远程日志。操作步骤如下：
 
 {% assign enableRemoteLogging = '
     ===
         image: /images/gateway/dashboard/general-configuration-1-ce.png,
-        title: On selected gateway page, click on **"General configuration"** button on the right panel.
+        title: 在选中的网关页面上，点击右侧面板的 **「通用配置」** 按钮。
     ===
         image: /images/gateway/dashboard/general-configuration-2-ce.png,
-        title: Navigate to the "**Logs**" tab. Enable the "**Remote logging**" toggle. Select "**DEBUG**" in the "**Log level**" drop-down menu. Click on the "**Save**" button to apply changes.
+        title: 进入「**日志**」标签，开启「**远程日志**」开关，在「**日志级别**」下拉框中选择「**DEBUG**」，点击「**保存**」应用更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=enableRemoteLogging %}
 
-## Step 3. Add new connector
+## 步骤 3：添加新 connector
 
-By choosing the type of connector, you determine the specific method of connection you will use to ensure the 
-interaction of your gateway with other systems or devices.
+选择 connector 类型即确定网关与其他系统或设备交互所使用的具体连接方式。
 
-To see how the connector works, you can choose one of the following connectors:
+了解 connector 工作方式，可从以下 connector 中选择一个：
 
 {% capture connectorscreationspec %}
 MQTT<small></small>%,%mqtt%,%templates/iot-gateway/remote-creating-connector-mqtt.md%br%
@@ -97,26 +94,25 @@ OPC-UA<small></small>%,%opcua%,%templates/iot-gateway/remote-creating-connector-
 
 {% include content-toggle.liquid content-toggle-id="connectorsCreation" toggle-spec=connectorscreationspec %}
 
-## Step 4. Check device data
+## 步骤 4：查看设备数据
 
-To review the data uploaded from your gateway, use the following steps:
+要查看网关上报的数据，按下列步骤操作：
 
 {% assign checkDeviceData = '
     ===
         image: /images/gateway/dashboard/review-gateway-statistics-1-ce.png,
-        title: Navigate to the **Entities** > **Devices** page and click on the created device. This will open the device details page. From there, switch to the **"Attributes"** tab to view the attributes that were configured in the connector.
+        title: 进入 **实体** > **设备** 页面，点击已创建设备，打开设备详情页。切换到 **「属性」** 标签查看 connector 中配置的属性。
     ===
         image: /images/gateway/dashboard/review-gateway-statistics-2-ce.png,
-        title: To view real-time telemetry data from the device, navigate to the "**Latest Telemetry**" tab. Here, you will find the telemetry data being sent by the device, including metrics like "**humidity**" and "**temperature**". This tab provides real-time device telemetry updates.
+        title: 要查看设备实时遥测数据，进入「**最新遥测**」标签。此处可见设备发送的遥测数据，如「**humidity**」「**temperature**」等指标。此标签提供设备遥测的实时更新。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=checkDeviceData %}
 
-## Configure other connectors
+## 配置其他 connector
 
-After the successful installation and configuration of your first connector, you can configure other connectors to 
-connect to different devices. You can find more information about connectors in the following articles:  
+在第一个 connector 安装并配置成功后，可继续配置其他 connector 连接不同设备。更多 connector 说明见以下文章：  
  - [**MQTT** connector](/docs/iot-gateway/config/mqtt/)
  - [**OPC-UA** connector](/docs/iot-gateway/config/opc-ua/)
  - [**Modbus** connector](/docs/iot-gateway/config/modbus/)
@@ -133,14 +129,14 @@ connect to different devices. You can find more information about connectors in 
  - [**SNMP** connector](/docs/iot-gateway/config/snmp/)
  - [**Custom** connector](/docs/iot-gateway/custom/)
 
-More about *ThingsBoard IoT Gateways* Dashboard, you can [read here](/docs/iot-gateway/guides/how-to-enable-remote-configuration/).
+关于 *ThingsBoard IoT Gateway* 仪表板，可[在此阅读](/docs/iot-gateway/guides/how-to-enable-remote-configuration/)。
 
-## Next steps
+## 下一步
 
-Explore guides related to main ThingsBoard features:
+查阅 ThingsBoard 主要功能的相关指南：
 
- - [Data Visualization](/docs/user-guide/visualization/) - how to visualize collected data.
- - [Device attributes](/docs/user-guide/attributes/) - how to use device attributes.
- - [Telemetry data collection](/docs/user-guide/telemetry/) - how to collect telemetry data.
- - [Using RPC capabilities](/docs/user-guide/rpc/) - how to send commands to/from devices.
- - [Rule Engine](/docs/user-guide/rule-engine/) - how to use rule engine to analyze data from devices.
+ - [数据可视化](/docs/user-guide/visualization/) - 如何可视化采集的数据。
+ - [设备属性](/docs/user-guide/attributes/) - 如何使用设备属性。
+ - [遥测数据采集](/docs/user-guide/telemetry/) - 如何采集遥测数据。
+ - [RPC 功能](/docs/user-guide/rpc/) - 如何向设备发送及从设备接收命令。
+ - [规则引擎](/docs/user-guide/rule-engine/) - 如何使用规则引擎分析设备数据。

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Sessions
-description: Sessions management
+title: 会话
+description: 会话管理
 
 sessions-details:
   0:

@@ -1,7 +1,7 @@
 ---
 layout: thingsboard-paas
 title: ThingsBoard Cloud
-description:
+description: ThingsBoard 全托管云平台
 ---
 
 <div id="background">
@@ -9,44 +9,44 @@ description:
 </div>
 <section id="intro">
 	<main>
-		<h1 class="intro_title"><a href="what-is-thingsboard-cloud/">ThingsBoard Cloud</a> is a fully managed, scalable and fault-tolerant platform for your IoT applications</h1>
+		<h1 class="intro_title"><a href="what-is-thingsboard-cloud/">ThingsBoard Cloud</a> 是面向物联网应用的全托管、可扩展、高可用平台</h1>
 		<div id="labeling">
-      <p>ThingsBoard Cloud is for everyone who would like to use ThingsBoard Professional Edition but don’t want to host their own instance of the platform.</p>
+      <p>ThingsBoard Cloud 面向希望使用 ThingsBoard Professional Edition 但不想自行托管平台实例的用户。</p>
 		</div>
       <div id="cards" class="row">
         <div class="col-lg-6">
           <div>
             <img src="/images/paas/improved-time.svg" alt="Improved time to market" width="98" height="103">
-            <h2>Improved time to market</h2>
-            <p>Save time on maintenance of the platform or configuration of the features.</p>
+            <h2>更快上市</h2>
+            <p>节省平台维护与功能配置时间。</p>
           </div>
         </div>
         <div class="col-lg-6">
           <div>
             <img src="/images/paas/advanced-features.svg" alt="Advanced features" width="96" height="104">
-            <h2>Advanced features</h2>
-            <p>Platform supports all <a href="/products/thingsboard-pe/">Professional Edition</a> features and advanced <a href="/docs/paas/domains/">domain management</a>.</p>
+            <h2>高级功能</h2>
+            <p>平台支持全部 <a href="/products/thingsboard-pe/">Professional Edition</a> 功能及高级 <a href="/docs/paas/domains/">域管理</a>。</p>
           </div>
         </div>
         <div class="col-lg-6">
           <div>
             <img src="/images/paas/reduced-costs.svg" alt="Reduced costs" width="100" height="106">
-            <h2>Reduced costs</h2>
-            <p>The cost of the cluster infrastructure is shared between the users of the platform.</p>
+            <h2>降低成本</h2>
+            <p>集群基础设施成本由平台用户共同分担。</p>
           </div>
         </div>
         <div class="col-lg-6">
           <div>
             <img src="/images/paas/high-availability.svg" alt="High availability" width="100" height="106">
-            <h2>High availability</h2>
-            <p>ThingsBoard Cloud uses microservices architecture and is deployed in multiple availability zones.</p>
+            <h2>高可用</h2>
+            <p>ThingsBoard Cloud 采用微服务架构，部署于多可用区。</p>
           </div>
         </div>
         <div class="col-lg-6">
           <div>
-            <img src="/images/paas/data-durability.svg" alt="Data durability" width="92" height="106">
-            <h2>Data durability</h2>
-            <p>Platform uses data replication and backup procedures to make sure you don’t lose the data.</p>
+            <img src="/images/paas/data-durability.svg" alt="数据持久化" width="92" height="106">
+            <h2>数据持久化</h2>
+            <p>平台通过数据复制与备份流程确保数据不丢失。</p>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@ description:
       <div class="prof"><div class="coln"><div class="head"></div></div></div>
       <div class="cloud"><div class="coln"><div class="head"></div></div></div>
     </div>
-    <h2>Feature Comparison Matrix</h2>
+    <h2>功能对比矩阵</h2>
     <table>
       <thead>
         <tr>
@@ -71,19 +71,19 @@ description:
       </thead>
       <tbody>
         <tr>
-          <th>Asset management & Data collection</th>
+          <th>资产管理与数据采集</th>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
         </tr>
         <tr>
-          <th>End-user real-time dashboards</th>
+          <th>终端用户实时仪表板</th>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
         </tr>
         <tr>
-          <th>Customizable rule chains, widgets</th>
+          <th>可定制规则链与部件</th>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
@@ -95,7 +95,7 @@ description:
           <td><i class="fa fa-check"></i></td>
         </tr>
         <tr>
-          <th>Integrations with BigData systems</th>
+          <th>与大数据系统集成</th>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
           <td><i class="fa fa-check"></i></td>
@@ -167,7 +167,7 @@ description:
 
 <section id="bottom">
   <main>
-    <a id="Products_Cloud_GetItNow" href="/pricing/" class="try-paas gtm_button">Get it now</a><br><br><br><br>
-    <a href="/products/paas/privacy-policy/" >ThingsBoard Cloud Privacy policy</a>
+    <a id="Products_Cloud_GetItNow" href="/pricing/" class="try-paas gtm_button">立即获取</a><br><br><br><br>
+    <a href="/products/paas/privacy-policy/" >ThingsBoard Cloud 隐私政策</a>
   </main>
 </section>

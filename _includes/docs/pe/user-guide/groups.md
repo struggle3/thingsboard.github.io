@@ -1,59 +1,59 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-ThingsBoard allows you to configure multiple custom Entity Groups.
-You can create an entity group for the devices, assets, entity views, customers, users, dashboards and edge instances
-Each entity may belong to multiple groups simultaneously.
-Special group "All" always contains all entities that belong to specific tenant account.
+ThingsBoard 支持配置多个自定义实体组。
+可为设备、资产、实体视图、客户、用户、仪表板和 Edge 实例创建实体组。
+每个实体可同时属于多个组。
+特殊组「All」始终包含属于指定租户账户的所有实体。
 
-For each entity group, ThingsBoard user may configure different columns to visualize specific telemetry or attributes values.
-ThingsBoard user may also define custom actions to be present for each entity: open dashboard or send RPC call, etc.
-Bulk operations to delete entities, add them to the group or remove are also supported.
+针对每个实体组，ThingsBoard 用户可配置不同列以可视化特定遥测或属性值。
+用户也可为每个实体定义自定义操作：如打开仪表板、发送 RPC 调用等。
+还支持批量删除实体、将实体加入组或从组中移除。
 
-## Create new entity group
+## 创建新实体组
 
-In this tutorial, we will create an entity group for devices.
-The steps below are identical for any entities.
+本教程以创建设备实体组为例。
+以下步骤适用于各类实体。
 
 {% include images-gallery.html imageCollection="create-entity-group-1" showListImageTitles="true" %}
 
-You can share an entity group during the process of creating a group. Let’s create another group and share it with your customer.
+创建组的过程中可共享实体组。我们再创建一个组并共享给客户。
 
 {% include images-gallery.html imageCollection="create-entity-group-2" showListImageTitles="true" %}
 
-## Entity group configuration
+## 实体组配置
 
-### Edit general information
+### 编辑基本信息
 
-You can edit the general information of the entity group. For example, you can change the group name, firmware and software for your entity group.
+可编辑实体组的基本信息，例如修改组名、固件和软件等。
 
-Let’s see how to do this:
+操作步骤如下：
 
 {% include images-gallery.html imageCollection="edit-entity-group-1" showListImageTitles="true" %}
 
-### Columns configuration
+### 列配置
 
-You can add, delete, move columns, change their title and type.
-You can also use a special style function and content function for column cell.
+可添加、删除、移动列，并修改其标题和类型。
+还可为列单元格使用样式函数和内容函数。
 
-For this example, we have device group with two devices that post temperature values.
-This group has 4 columns which display devices data: "Created time", "Name", "Device profile", and "Label". 
+本示例中，设备组有两个上报温度值的设备。
+该组有 4 列显示设备数据：「创建时间」「名称」「设备配置」「标签」。
 
-Let's **add** a new column that will display temperature values for each device.
+先**添加**一列显示每个设备的温度值。
 
 {% include images-gallery.html imageCollection="column-configuration-add" showListImageTitles="true" %}
 
-Now let's **delete** the "Label" column from this device group.
+接着**删除**该设备组中的「标签」列。
 
 {% include images-gallery.html imageCollection="column-configuration-delete" showListImageTitles="true" %}
 
-Now let's **set a style function** for the "Temperature" column so that when the temperature value is greater than or equal to 45, the values turn orange, and if the temperature value is less than 45, the values turn blue.
+再为「温度」列**设置样式函数**：温度 ≥ 45 显示橙色，< 45 显示蓝色。
 
 {% include images-gallery.html imageCollection="column-configuration-style function" showListImageTitles="true" %}
 
-Style function:
+样式函数：
 
 ```javascript
 return value >= 45 ? {
@@ -66,122 +66,122 @@ return value >= 45 ? {
 ```
 {: .copy-code}
 
-Let's **set a content function** to display the symbol "℃" after the temperature value of the device.
+**设置内容函数**，在设备温度值后显示「℃」符号。
 
 {% include images-gallery.html imageCollection="column-configuration-content function" showListImageTitles="true" %}
 
-Content function:
+内容函数：
 
 ```javascript
 return value ? value + ' ℃' : '-';
 ```
 {: .copy-code}
 
-You can also **move** columns according to your preference.
+也可按需**移动**列。
 
 {% include images-gallery.html imageCollection="column-configuration-move" showListImageTitles="true" %}
 
-### Entity group display setting
+### 实体组显示设置
 
-On the "Settings" tab, you can enable/disable the following function: search entity, add new entity, delete entity, and manage entity's credentials.
-You can also configure pagination and select the action that will open entity details.
+在「设置」选项卡中，可启用或禁用：搜索实体、添加新实体、删除实体、管理实体凭证。
+还可配置分页，以及选择打开实体详情的操作。
 
-To go to the group settings, you need to:
+进入组设置的方法：
 
 {% include images-gallery.html imageCollection="setting" showListImageTitles="true" %}
 
-### Entity group actions configuration
+### 实体组操作配置
 
-Actions allow quickly and easily configure the navigating to the selected dashboard, or create custom action.
-For example, let's create an action to quickly go to the dashboard with full information about thermometers.
+操作可快速配置跳转到指定仪表板，或创建自定义操作。
+例如，创建一项操作以快速进入显示温度计完整信息的仪表板。
 
 {% include images-gallery.html imageCollection="action-configuration" showListImageTitles="true" %}
 
-### Group permissions
-Use the Permissions tab to define who can access the entities inside this group and what actions they can perform.
-A permission links a Group role to a User group and applies only to the entities inside this group.
-Permissions supplement tenant-wide RBAC and do not override global restrictions. See [Group roles in RBAC](/docs/{{docsPrefix}}user-guide/rbac/#group-role){:target="_blank"}.
+### 组权限
+使用 Permissions 选项卡定义谁可访问此组内的实体，以及可执行的操作。
+权限将组角色与用户组关联，仅作用于该组内实体。
+组权限是对租户级 RBAC 的补充，不会覆盖全局限制。参见 [RBAC 中的组角色](/docs/{{docsPrefix}}user-guide/rbac/#group-role){:target="_blank"}。
 
-**How to add group permissions:**
-- Open **Entity group details** → **Permissions** tab.
-- Click "**+**" (Plus icon) to add a group permission. 
-- Select **Role** (Group role) from dropdown list.
-- Select **User group owner** [Tenant](/docs/{{docsPrefix}}user-guide/ui/tenants){:target="_blank"} or a specific [Customer](/docs/{{docsPrefix}}user-guide/ui/customers){:target="_blank"}, and **User group** 
-- Click "**Add**" to save. The group permission appears in the table.
+**如何添加组权限：**
+- 打开 **实体组详情** → **Permissions** 选项卡。
+- 点击「**+**」（加号图标）添加组权限。 
+- 从下拉列表中选择 **角色**（组角色）。
+- 选择 **用户组所有者** [Tenant](/docs/{{docsPrefix}}user-guide/ui/tenants){:target="_blank"} 或指定 [Customer](/docs/{{docsPrefix}}user-guide/ui/customers){:target="_blank"}，以及 **用户组**。
+- 点击「**添加**」保存。组权限会出现在列表中。
 
-You can **Edit** or **Delete** existing group permissions at any time from **Permissions** tab:
-- **Edit**: click "**Edit**" (pencil icon) of the target permission → update fields → "**Save**".
-- **Delete**: click "**Delete**" (trash icon) of the target permission → "**Confirm**".
+可在 **Permissions** 选项卡中随时**编辑**或**删除**已有组权限：
+- **编辑**：点击目标权限的「**编辑**」（铅笔图标）→ 修改字段 →「**保存**」。
+- **删除**：点击目标权限的「**删除**」（垃圾桶图标）→「**确认**」。
 
-Changes take effect immediately for all members who can access the group.
+更改对可访问该组的所有成员立即生效。
 
-To review assigned permissions from the [user side](/docs/{{docsPrefix}}user-guide/ui/users/#assigning-permissions-to-user-group): Open **Users group** details → **Roles** tab.
+从[用户端](/docs/{{docsPrefix}}user-guide/ui/users/#assigning-permissions-to-user-group)查看已分配权限：打开 **用户组** 详情 → **Roles** 选项卡。
 
-## Batch operations
+## 批量操作
 
-Over each entity of the group, you can perform operations such as: change the owner of the entity, move it to another group, add or remove an entity from the group.
+对组内每个实体可执行：更改实体所有者、移至其他组、将实体加入或移出组等操作。
 
 {% include images-gallery.html imageCollection="batch-operations" showListImageTitles="true" %}
 
-## Share entity group
+## 共享实体组
 
-Sharing a group provides access to all entities inside the group at once and creates a permission entry that links this entity group to the selected user group.
+共享组可一次性授予组内所有实体的访问权限，并创建将该实体组与所选用户组关联的权限条目。
 
-**How to share an entity group:**
-- In **Groups** tab, click "**Share**" icon in the row of the target group.
-- Choose [**Customer**](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"} from dropdown list.
-- (Optional) Enable **All users** checkbox to provide access to every user of that customer.
-- Choose the Permissions access: Read, Write, or Other (Roles).
-- Click "**Share**" to apply. The access is propagated to all entities within the group.
+**如何共享实体组：**
+- 在 **Groups** 选项卡中，点击目标组的「**Share**」图标。
+- 从下拉列表选择 [**Customer**](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"}。
+- （可选）勾选 **All users** 以授予该客户下所有用户访问权限。
+- 选择权限：Read、Write 或 Other（Roles）。
+- 点击「**Share**」应用。访问权限将传递到组内所有实体。
 
-To update or revoke access, open the group [permissions](#group-permissions) tab and edit/delete the corresponding permission.
+要更新或撤销访问，打开组的 [permissions](#group-permissions) 选项卡并编辑/删除相应权限。
 
-## Make group public or private
+## 将组设为公开或私有
 
-Public groups provide read-only access to anyone (no sign-in). Use it for non-sensitive data only. When you set a group as Public, 
+公开组向任何人（无需登录）提供只读访问。 Use it for non-sensitive data only. When you set a group as Public, 
 the platform adds permissions to that entity group for the Public customer’s "Public users" group.
 
-**Make public:**
+**设为公开：**
 
-- In the **Groups** tab, click "**Make public**" icon of the target group.
+- 在 **Groups** 选项卡中，点击目标组的「**Make public**」图标。
 
-- Confirm in the dialog.
+- 在对话框中确认。
 
-The Public checkbox becomes enabled for this group.
+该组的 Public 复选框将被启用。
 
 {% capture public %}
-**Note:** Public dashboards that use device data, require the dashboard and the related device group must be public.
+**注意：** 使用设备数据的公开仪表板，要求仪表板和相关设备组均为公开。
 {% endcapture %}
 {% include templates/info-banner.md content=public %}
 
-**Make private (revoke public access):**
+**设为私有（撤销公开访问）：**
 
-- In the Groups tab, click "**Make private**" icon of the target group.
+- 在 Groups 选项卡中，点击目标组的「**Make private**」图标。
 
-- Confirm in the dialog. Public access is removed.
+- 在对话框中确认。公开访问将被移除。
 
-If you need controlled access for specific customers or users, use [Share entity group](#share-entity-group) 
-or configure entries on the [Permissions](#group-permissions) tab.
+若需为指定客户或用户提供受控访问，请使用 [共享实体组](#share-entity-group) 
+或在 [Permissions](#group-permissions) 选项卡中配置条目。
 
-## Delete entity group
+## 删除实体组
 
-You can delete an entity group along with all its entities using one of the following ways:
+可通过以下任一方式删除实体组及其所有实体：
 
-First way:
+方式一：
 
 {% include images-gallery.html imageCollection="delete-entity-group-1" showListImageTitles="true" %}
 
-Second way:
+方式二：
 
 {% include images-gallery.html imageCollection="delete-entity-group-2" showListImageTitles="true" %}
 
-You and your customers can also delete multiple entity groups at once.
+您和客户也可一次性删除多个实体组。
 
 {% include images-gallery.html imageCollection="delete-entity-group-3" showListImageTitles="true" %}
 
-## Video tutorial
+## 视频教程
 
-Watch the detailed video tutorial with examples of how you can configure the entity group to suit your needs.
+观看详细视频教程，了解如何按需配置实体组。
 
 <br>
 <div id="video">
@@ -190,6 +190,6 @@ Watch the detailed video tutorial with examples of how you can configure the ent
     </div>
 </div>
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}

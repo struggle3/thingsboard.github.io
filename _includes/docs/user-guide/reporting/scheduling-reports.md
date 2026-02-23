@@ -6,44 +6,44 @@
 
 {% assign feature = "Scheduling" %}{% include templates/pe-feature-banner.md %}
 
-The **Scheduler** is a mechanism for automating report generation. It allows you to set up automatic creation and distribution of reports at a specified time — based on a pre-defined [report template](/docs/{{docsPrefix}}user-guide/reporting/reporting-key-concepts/){:target="_blank"}.
+**调度器**是用于自动化报表生成的机制。它允许您基于预定义的[报表模板](/docs/{{docsPrefix}}user-guide/reporting/reporting-key-concepts/){:target="_blank"}在指定时间设置报表的自动创建和分发。
 
-With the Scheduler, you can:
-- <b>Receive reports regularly without manual execution</b> — no need to trigger them yourself.
-- <b>Set custom intervals</b> — daily, weekly, monthly, or any custom schedule.
-- <b>Define recipients and formats</b> — choose who gets the report and in what format (PDF, CSV).
-- <b>Use one template for multiple recipients with different data filters</b> — tailor the same report for different audiences.
+通过调度器，您可以：
+- <b>定期接收报表而无需手动执行</b> — 无需亲自触发。
+- <b>设置自定义间隔</b> — 每日、每周、每月或任意自定义调度。
+- <b>定义收件人和格式</b> — 选择谁收到报表以及以什么格式（PDF、CSV）。
+- <b>使用一个模板为具有不同数据筛选器的多个收件人生成报表</b> — 针对不同受众定制同一报表。
 
-## Creating a new scheduler event
+## 创建新的调度器事件
 
-- Open the "**Reporting**" page from the left-hand sidebar and go to the "**Scheduling**" tab.
-- Click the "**+ Scheduled report**" button in the top-right corner.
-- In the scheduling dialog, configure the following:
-    - Specify the **schedule name**.
-    - **General configuration**:
-        - **Event type** – is always set to "Generate Report".
-        - **Report template** – select a [predefined report](#report-templates) template to use.
-        - **User** – select the user whose credentials will be used for report generation.
-        - **Time zone** – choose the time zone  for report generation.
-        - **Recipients**:
-            - **Recipients** — specify the users who will receive the report.
-            - **Template** — select the template that defines the report delivery method.
-    - **Schedule settings**:
-        - **Start time** – set the initial trigger time.
-        - **Time zone** – select the time zone in which the schedule will operate.
-        - **Repeat** – toggle to enable recurrence: choose intervals like daily, weekly, or monthly.
+- 从左侧边栏打开"**报表**"页面，进入"**调度**"标签页。
+- 点击右上角的"**+ 定时报表**"按钮。
+- 在调度对话框中配置以下内容：
+    - 指定**调度名称**。
+    - **常规配置**：
+        - **事件类型** – 始终设为"生成报表"。
+        - **报表模板** – 选择要使用的[预定义报表](#report-templates)模板。
+        - **用户** – 选择将用于报表生成的凭据所属用户。
+        - **时区** – 选择报表生成的时区。
+        - **收件人**：
+            - **收件人** — 指定将收到报表的用户。
+            - **模板** — 选择定义报表推送方式的模板。
+    - **调度设置**：
+        - **开始时间** – 设置首次触发时间。
+        - **时区** – 选择调度运行的时区。
+        - **重复** – 切换启用重复：选择每日、每周或每月等间隔。
 
-You&#39;ll find all generated reports under the "[Reports](#reports)" tab.
+您可在"[报表](#reports)"标签页下找到所有生成的报表。
 
 {% include images-gallery.html imageCollection="create-schedule-report" %}
 
-## Reports
+## 报表
 
-The "**Reports**" tab stores all your generated reports. Here you can:
-- Download reports.
-- Filter reports by report template or by the user whose credentials were used to generate the report.
-- Delete reports you no longer need.
+"**报表**"标签页存储所有生成的报表。在此您可以：
+- 下载报表。
+- 按报表模板或用于生成报表的凭据所属用户筛选报表。
+- 删除不再需要的报表。
 
-> The number of generated reports can be limited per tenant via [tenant profile](/docs/{{docsPrefix}}user-guide/tenant-profiles/){:target="_blank"} configuration.
+> 可通过[租户配置](/docs/{{docsPrefix}}user-guide/tenant-profiles/){:target="_blank"}限制每个租户生成的报表数量。
 
 {% include images-gallery.html imageCollection="reports" %}

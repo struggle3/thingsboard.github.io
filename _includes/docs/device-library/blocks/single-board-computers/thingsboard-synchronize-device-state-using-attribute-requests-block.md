@@ -1,10 +1,9 @@
 {% capture difference %}
-**Make sure to create the shared attribute `blinkingPeriod` on your device.** 
+**请确保在设备上创建共享属性 `blinkingPeriod`。** 
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-The example code includes functionality to retrieve the device state from {% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}**ThingsBoard Edge**{% else %}**ThingsBoard**{% endif %}
-during boot. The relevant code sections are shown below.
+示例代码支持在启动时从 {% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}**ThingsBoard Edge**{% else %}**ThingsBoard**{% endif %} 获取设备状态。相关代码片段如下。
 
 Attribute callback:
 ```python
@@ -27,8 +26,6 @@ def main():
 ```
 {:.copy-code}
 
-In order for the callback to receive the shared attribute data from 
-{% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}**ThingsBoard Edge**{% else %}**ThingsBoard**{% endif %}, 
-the device must explicitly request it after connecting. 
-This functionality allows the device to restore the correct attribute values after a reboot, preserving the actual state.
+为使回调能从 {% if page.docsPrefix == "pe/edge/" or page.docsPrefix == "edge/" %}**ThingsBoard Edge**{% else %}**ThingsBoard**{% endif %} 接收共享属性数据，
+设备在连接后需显式请求。此功能使设备在重启后能恢复正确的属性值，保持实际状态。
 

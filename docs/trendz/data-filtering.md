@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Data Filtering
-description: How to filter and clear dataset in Trendz Analytics 
+title: 数据筛选
+description: 如何在 Trendz Analytics 中筛选与清理数据集
 
 date-filtering-example:
   0: 
@@ -15,11 +15,10 @@ date-filtering-example:
 * TOC
 {:toc}
 
-To get better results during analysis it is required to filter data from noisy sources or we want to focus on a concrete subset of entities. 
-Drag-n-drop fields that you want to filter on into **Filter** section and apply the required filter. 
+为获得更好的分析效果，需从噪声数据源筛选数据，或聚焦于特定实体子集。
+将待筛选字段拖拽到「**Filter**」区域并设置所需筛选条件。
 
-You can apply filters even on fields that are not used for actual data visualization. For example, during energy consumption analysis, we want to filter out all 
-empty apartments and focus on apartments located on the second and third floors. Here is how our config will look like:
+即使字段未用于数据可视化，也可以应用筛选。例如，在能耗分析中，筛选掉所有空置公寓，只关注二、三楼的公寓。配置示例如下：
 
 ![image](/images/trendz/filter-example.png)
 

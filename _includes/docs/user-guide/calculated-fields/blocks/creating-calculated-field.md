@@ -1,4 +1,4 @@
-Open the [create calculated field](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#creating-a-calculated-field){:target="_blank"} dialog and specify:
-- the calculated field **title**,
-- the **entity or entity profile** to which the calculated field will be applied,
-- Select "{{ calculatedFieldType }}" as a calculated field **type**.
+打开 [创建计算字段](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#creating-a-calculated-field){:target="_blank"} 对话框并指定：
+- 计算字段 **title**；
+- 将应用计算字段的 **entity 或 entity profile**；
+- 选择 "{{ calculatedFieldType }}" 作为计算字段 **type**。

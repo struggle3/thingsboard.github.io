@@ -1,11 +1,11 @@
 
 
-##  HTTP server parameters
+## HTTP 服务端参数
 
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>

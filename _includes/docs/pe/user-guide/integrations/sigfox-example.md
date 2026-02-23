@@ -5,20 +5,19 @@
 
 {% assign feature = "Platform Integrations" %}{% include templates/pe-feature-banner.md %}
 
-This tutorial will show how to push downlink messages to devices connected via Sigfox integration
- when user updates device attribute using ThingsBoard UI
+本教程演示当用户通过ThingsBoard UI更新设备属性时，如何向通过Sigfox集成连接的设备推送下行消息。
 
 * TOC
 {:toc}
  
-## Use case
+## 用例
 
-In this tutorial we will get a shared attribute of specified device using SigFox integration.
-SigFox backend will be simulated using Postman.
+本教程将使用SigFox集成获取指定设备的共享属性。
+SigFox后端将使用Postman模拟。
 
-## Prerequisites
+## 前置条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+我们假设您已完成以下指南并阅读了以下文章：
 
   * [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/) guide.
   * [Rule Engine Overview](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/).

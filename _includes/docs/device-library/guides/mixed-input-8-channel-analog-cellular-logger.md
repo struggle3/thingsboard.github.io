@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://fusiondaq.com/product/mixed-input-8-channel-analog-cellular-logger/" %} 
 {% assign prerequisites = '
 - <a href="' | append: deviceVendorLink | append: '" target="_blank">' | append: deviceName | append: '</a>
@@ -7,40 +7,37 @@
 '
  %}
 
-## Introduction
+## 概述
 
 
-The FDQ-99900 MI-8 is a compact, 24-bit data acquisition system (DAQ) designed to measure up to ten external sensors then log values locally to an SD card or push data to the cloud over a cellular data connection.  
-Advanced triggering functionality allows the MI-8 to conserve storage space and network data by only transmitting events of interest.  
-The low power consumption and wide operating temperature range are designed to allow outdoor and remote installations.  
-The MI-8 is available with and without an enclosure to support custom packaging solutions. For example, the enclosureless (OEM) configuration is often mounted into an IP-67 rated NEMA enclosure along with supporting sensors and hardware.  
+FDQ-99900 MI-8 是一款紧凑型 24 位数据采集系统（DAQ），可连接最多 10 个外接传感器，将数据本地记录到 SD 卡或通过蜂窝网络推送至云端。  
+高级触发功能使 MI-8 仅上传关注事件，节省存储与流量。  
+低功耗与宽工作温度范围，适合户外与远程部署。  
+MI-8 可选带壳或裸板，支持定制包装；裸板（OEM）常与传感器等一起安装于 IP-67 NEMA 防护壳内。  
 
-In this guide, we will learn how to [create device on Thingsboard](#create-device-on-thingsboard).  
-After this we will [configure and connect the device](#connect-device-to-thingsboard), and [check the data on ThingsBoard](#check-data-on-thingsboard).  
+本指南将介绍如何[在 ThingsBoard 中创建设备](#create-device-on-thingsboard)、[配置并连接设备](#connect-device-to-thingsboard)、以及[在 ThingsBoard 上查看数据](#check-data-on-thingsboard)。  
 
-### Prerequisites
+### 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前需准备以下内容：  
 {{ prerequisites }}
 
-- [ThingsBoard account](https://{{hostName}})
+- [ThingsBoard 账户](https://{{hostName}})
 
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 {% include /docs/device-library/blocks/basic/thingsboard-create-device-block.md %}
 
-## Connect device to ThingsBoard 
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 {% include /docs/device-library/blocks/basic/thingsboard-provide-device-access-token-block.md %}
 
 {% include /docs/device-library/blocks/ready-to-go-devices/mixed-input-8-channel-analog-cellular-logger-configuration-block.md %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/ready-to-go-devices/mixed-input-8-channel-analog-cellular-logger-check-data-block.md %}
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

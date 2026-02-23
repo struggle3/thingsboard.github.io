@@ -32,4 +32,4 @@ return result;
 {% include images-gallery.html imageCollection="text-converter" %}
 * After adding the uplink converter, click the **"Next"** button.
 
-If you want to develop functions using JavaScript, please use [the text payload script for JS](/docs/pe/edge/user-guide/resources/text-payload-converter.json){:target="_blank"}.
+若需使用 JavaScript 开发转换函数，请使用 [适用于 JS 的 text payload 脚本](/docs/pe/edge/user-guide/resources/text-payload-converter.json){:target="_blank"}。

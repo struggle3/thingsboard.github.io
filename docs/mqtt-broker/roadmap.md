@@ -1,21 +1,21 @@
 ---
 layout: docwithnav-mqtt-broker
-title: TBMQ Roadmap
-description: TBMQ upcoming releases
+title: TBMQ 路线图
+description: TBMQ 即将发布的版本
 
 ---
 
 * TOC
 {:toc}
 
-The product roadmap listed below covers only main features and does not cover small improvements and bug fixes.
+以下产品路线图仅涵盖主要功能，不包含小幅改进与 bug 修复。
 
-## Upcoming Releases
+## 即将发布
 
-* **Externalized Client Authentication via Webhooks**
-    * **Focus:** Security & Enterprise Integration
-    * **Value:** This feature allows TBMQ to delegate MQTT client authentication (Client ID, Username, Password) to any external custom identity service or enterprise IAM system using a webhook call. It provides **flexible security policies** and simplifies integration with existing IT infrastructure.
+* **通过 Webhook 外部化客户端认证**
+    * **重点：**安全与企业集成
+    * **价值：**该特性使 TBMQ 可通过 webhook 调用将 MQTT 客户端认证（Client ID、Username、Password）委托给任意外部自定义身份服务或企业 IAM 系统，提供**灵活的安全策略**并简化与现有 IT 基础设施的集成。
 
-* **Real-Time Client Lifecycle Event Sourcing**
-    * **Focus:** Operational Monitoring & Data Pipeline
-    * **Value:** Enable the broker to push all critical client lifecycle events (e.g., Connect, Disconnect, etc.) directly to external systems (via built-in TBMQ Integrations like Kafka, HTTP, etc.). This ensures **real-time operational awareness**, facilitating accurate logging, auditing, and usage/billing calculations.
+* **实时客户端生命周期事件溯源**
+    * **重点：**运维监控与数据管道
+    * **价值：**使 broker 能将所有关键客户端生命周期事件（如连接、断开等）直接推送至外部系统（通过内置 TBMQ 集成如 Kafka、HTTP 等），确保**实时运维可见性**，便于准确的日志记录、审计及用量/计费计算。

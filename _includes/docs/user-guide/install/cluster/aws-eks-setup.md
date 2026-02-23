@@ -1,7 +1,4 @@
-Here you can find scripts for different deployment scenarios using AWS EKS platform:
+以下为基于AWS EKS平台的不同部署场景脚本：
 
-- [**monolith**](/docs/user-guide/install/{{docsPrefix}}cluster/aws-monolith-setup/) - simplistic deployment of ThingsBoard with only one service and
-  Amazon RDS for PostgreSQL;
-- [**microservices**](/docs/user-guide/install/{{docsPrefix}}cluster/aws-microservices-setup/) (recommended) - deployment of ThingsBoard in a microservices mode 
-  with Amazon RDS for PostgreSQL, Amazon MSK for Kafka
-  and ElastiCache for Redis;
+- [**monolith**](/docs/user-guide/install/{{docsPrefix}}cluster/aws-monolith-setup/) - 仅包含单服务及Amazon RDS for PostgreSQL的简化部署；
+- [**microservices**](/docs/user-guide/install/{{docsPrefix}}cluster/aws-microservices-setup/)（推荐）- 以微服务模式部署ThingsBoard，使用Amazon RDS for PostgreSQL、Amazon MSK for Kafka和ElastiCache for Redis；

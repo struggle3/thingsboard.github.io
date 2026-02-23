@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: entity type filter
-description: Routes messages based on whether the originator entity type matches configured types.
+description: 根据 originator entity 类型是否匹配配置的类型来路由消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

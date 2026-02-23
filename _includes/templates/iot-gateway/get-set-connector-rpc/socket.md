@@ -1,24 +1,24 @@
-### SET method
+### SET 方法
 
-With the SET method you can send a data to the socket.
+使用 SET 方法可向 socket 发送数据。
 
 ```bash
 set address=<address>;port=<port>;value=<value>;
 ```
 
-Where:
-- `<address>` - the address of the socket;
-- `<port>` - the port of the socket;
-- `<value>` - the value to send.
+其中：
+- `<address>` - socket 地址；
+- `<port>` - socket 端口；
+- `<value>` - 要发送的值。
 
-For example, in our case, we know that we can send the room light level to the sensor that has TCP connection and 
-is listening on port 50003. To send the value of the room light level to the sensor, run the query:
+例如，本示例中可向使用 TCP 连接并在 50003 端口监听的传感器发送房间光照度。
+要向传感器发送房间光照度值，请运行以下查询：
 
 ```bash
 set address=192.168.0.200;port=50003;value=80;
 ```
 
-**Response:**
+**响应：**
 
 ```json
 {"result":  "ok"}
@@ -28,7 +28,7 @@ set address=192.168.0.200;port=50003;value=80;
 ![image](/images/gateway/get-set-connector-rpc/socket-get-set-rpc-1.png)
 {: refdef}
 
-Also, let's see the result on the sensor's side:
+下面查看传感器端的结果：
 
 {:refdef: style="text-align: left;"}
 ![image](/images/gateway/get-set-connector-rpc/socket-get-set-rpc-2.jpeg)

@@ -1,26 +1,22 @@
-Retrieves time series data for the message originator within a specified time range and adds the result to the message metadata.
+在指定时间范围内获取消息来源实体的时序数据，并将结果添加到消息 metadata。
 
-## Configuration
+## 配置
 
-The node's configuration is divided into three main sections: selecting the data, defining the time window, and specifying the fetching strategy.
+节点配置分为三大部分：选择数据、定义时间窗口、指定获取策略。
 
-- **Time series keys** - A list of time series keys to fetch from the message originator. You can use substitution patterns to use keys from the message data (`$[dataKey]`) or
-  metadata (`$[metadataKey]`).
-- **Fetch interval** - Defines the time window for the time series query.
-    - **Relative time window** (default): Fetches data from a time range relative to the current moment. For example, setting **Interval start** to *2 Minutes* and **Interval end**
-      to *1 Minute* will fetch data from two minutes ago up to one minute ago.
-    - **Use dynamic interval**: When enabled, the start and end of the interval are determined by values from the message or metadata. The substituted values must be a Unix
-      timestamp in milliseconds.
-        - **Interval start**: The template for the start of the interval (e.g., `${startMillis}`).
-        - **Interval end**: The template for the end of the interval (e.g., `${endMillis}`).
-- **Fetch strategy** - Determines how data points are selected from the specified interval.
-    - **First**: Retrieves the single data point with the earliest timestamp within the interval.
-    - **Last**: Retrieves the single data point with the latest timestamp within the interval.
-    - **All**: Retrieves a set of data points from the interval. This mode enables additional query parameters:
-        - **Data aggregation function**: An optional function to apply to all data points within the interval. Options include *None*, *Min*, *Max*, *Average*, *Sum*, *Count*. When
-          an aggregation function is used, the node returns a single aggregated data point.
-        - **Order by timestamp**: Sorts the fetched data by timestamp in *Ascending* or *Descending* order. This is used only if an aggregation function *None* is selected.
-        - **Limit**: Sorts the fetched data by timestamp in *Ascending* or *Descending* order. This is used only if an aggregation function *None* is selected.
+- **Time series keys** — 从消息来源实体获取的时序键列表。可使用替换模式从消息 data（`$[dataKey]`）或 metadata（`$[metadataKey]`）获取键。
+- **Fetch interval** — 定义时序查询的时间窗口。
+    - **Relative time window**（默认）：获取相对于当前时刻的时间范围内的数据。例如，将 **Interval start** 设为 *2 Minutes*、**Interval end** 设为 *1 Minute* 将获取两分钟前到一分钟前的数据。
+    - **Use dynamic interval**：启用后，区间起止由消息或 metadata 中的值确定。替换后的值必须为毫秒级 Unix 时间戳。
+        - **Interval start**：区间起点的模板（如 `${startMillis}`）。
+        - **Interval end**：区间终点的模板（如 `${endMillis}`）。
+- **Fetch strategy** — 决定如何从指定区间选择数据点。
+    - **First**：获取区间内时间戳最早的单条数据点。
+    - **Last**：获取区间内时间戳最晚的单条数据点。
+    - **All**：获取区间内的数据点集合。此模式启用额外查询参数：
+        - **Data aggregation function**：可选，应用于区间内所有数据点的函数。选项包括 *None*、*Min*、*Max*、*Average*、*Sum*、*Count*。使用聚合函数时，节点返回单一聚合数据点。
+        - **Order by timestamp**：按时间戳以 *Ascending* 或 *Descending* 排序获取的数据。仅在聚合函数选择 *None* 时使用。
+        - **Limit**：按时间戳以 *Ascending* 或 *Descending* 排序获取的数据。仅在聚合函数选择 *None* 时使用。
 
 ### JSON Schema
 
@@ -120,32 +116,29 @@ The node's configuration is divided into three main sections: selecting the data
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node identifies the **originator** of the incoming message (e.g., a specific Device or Asset).
-2. It determines the fetch interval `[startTs, endTs]` based on the configuration:
-    * If using a **relative time window**, it calculates the timestamps based on the current time (e.g., `now - startInterval` to `now - endInterval`).
-    * If using a **dynamic interval**, it resolves the patterns from the message or metadata to get the start and end timestamps.
-3. The node asynchronously queries the database for the specified telemetry keys within the calculated interval, applying the configured **fetch strategy**.
-4. The fetched data is added to the message **metadata**. The value added is always a string.
-    * For `First` and `Last` strategies, the result is the single telemetry value, converted to a string (e.g., `"25.5"`).
-    * For the `All` strategy, the result is a JSON array of data points, which is then converted into a single string (e.g.,
-      `'[{"ts":1672531200000,"value":25.5},{"ts":1672531260000,"value":26.1}]'`).
-    * If an aggregation function is used, the result is a stringified JSON array containing a single aggregated data point.
-5. The enriched message is passed to the `Success` connection. If an error occurs (e.g., an invalid interval where `startTs > endTs`), the original message is
-   passed to the `Failure` connection.
+1. 节点识别入站消息的**来源实体**（如具体 Device 或 Asset）。
+2. 根据配置确定获取区间 `[startTs, endTs]`：
+    * 若使用**相对时间窗口**，根据当前时间计算时间戳（如 `now - startInterval` 到 `now - endInterval`）。
+    * 若使用**动态区间**，从消息或 metadata 解析模式得到起止时间戳。
+3. 节点在计算得到的区间内异步查询数据库获取指定的遥测键，应用配置的**获取策略**。
+4. 将获取的数据添加到消息 **metadata**。添加的值始终为字符串。
+    * 对于 `First` 和 `Last` 策略，结果为单一遥测值，转为字符串（如 `"25.5"`）。
+    * 对于 `All` 策略，结果为数据点的 JSON 数组，随后转为单一字符串（如 `'[{"ts":1672531200000,"value":25.5},{"ts":1672531260000,"value":26.1}]'`）。
+    * 若使用聚合函数，结果为包含单一聚合数据点的字符串化 JSON 数组。
+5. 丰富后的消息传递给 `Success` 连接。若发生错误（如无效区间 `startTs > endTs`），原始消息传递给 `Failure` 连接。
 
-## Output connections
+## 输出连接
 
-- `Success`: The message is successfully enriched with the requested telemetry data.
-- `Failure`: An error occurred during processing. This can happen if the time interval is invalid (e.g., start time is after end time) or if there is a database communication
-  issue.
+- `Success`：消息已成功使用请求的遥测数据丰富。
+- `Failure`：处理过程中发生错误。时间区间无效（如开始时间晚于结束时间）或数据库通信问题时可能发生。
 
-## Examples
+## 示例
 
-### Example 1 — Fetching the first value in an interval
+### 示例 1 — 获取区间内第一个值
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -156,7 +149,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -172,13 +165,13 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The device `Thermostat-A7` has several temperature readings in the last hour. The earliest one is `22.4`.
+设备 `Thermostat-A7` 在过去一小时内有多条温度读数。最早的一条为 `22.4`。
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one, but its metadata is enriched with the fetched value. It is sent via the `Success` connection.
+出站消息与入站消息相同，但其 metadata 已使用获取的值丰富。经 `Success` 连接发送。
 
 Metadata:
 
@@ -190,9 +183,9 @@ Metadata:
 }
 ```
 
-### Example 2 — Fetching all values in an interval
+### 示例 2 — 获取区间内所有值
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -202,7 +195,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -221,9 +214,9 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The `humidity` key is added to the metadata. Its value is a string containing a JSON array of all data points found in the interval.
+将 `humidity` 键添加到 metadata。其值为包含区间内所有找到数据点的 JSON 数组的字符串。
 
 Metadata:
 
@@ -234,13 +227,13 @@ Metadata:
 }
 ```
 
-### Example 3 — Aggregating data over an interval
+### 示例 3 — 对区间内数据聚合
 
-**Incoming message**
+**入站消息**
 
 Metadata: `{}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -259,9 +252,9 @@ Metadata: `{}`
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The result of the aggregation is returned as a stringified JSON array containing a single object.
+聚合结果以包含单一对象的字符串化 JSON 数组返回。
 
 Metadata:
 
@@ -272,13 +265,13 @@ Metadata:
 ```
 
 {% capture aggregation_timestamp_note %}
-**Note**: The timestamp (`ts`) in the result corresponds to the start of the aggregation interval.
+**注意**：结果中的时间戳（`ts`）对应聚合区间的起点。
 {% endcapture %}
 {% include templates/info-banner.md content=aggregation_timestamp_note %}
 
-### Example 4 — Using a dynamic interval from message data
+### 示例 4 — 使用消息 data 中的动态区间
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -289,7 +282,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -306,9 +299,9 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The node uses `start` and `end` from the message data to define the query interval. The fetched `vibration` data is added to the metadata.
+节点使用消息 data 中的 `start` 和 `end` 定义查询区间。获取的 `vibration` 数据添加到 metadata。
 
 Metadata:
 

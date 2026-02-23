@@ -1,15 +1,15 @@
 
-One type of security configuration is Basic authentication.
-The Request Connector sends HTTP requests with the Authorization header that contains the word Basic word followed by a space and a base64-encoded string username:password.
+Basic 认证是一种安全配置方式。
+Request Connector 发送带有 Authorization 头的 HTTP 请求，该头包含 "Basic" 后跟空格及 base64 编码的 username:password 字符串。
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|-
-| type               | **basic**                      | Type of authorization.      |
-| username           | **username**                   | Username for authorization. |
-| password           | **password**                   | Password for authorization. |
+| type               | **basic**                      | 授权类型。      |
+| username           | **username**                   | 授权用户名。 |
+| password           | **password**                   | 授权密码。 |
 |---
 
-Security section in configuration file will look like this: 
+配置文件中的 security 部分将如下所示： 
 
 ```yaml
     "security": {

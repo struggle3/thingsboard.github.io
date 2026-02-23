@@ -1,15 +1,15 @@
-In **ThingsBoard**, the **device** is the key entity that generates telemetry data, which is stored and processed for dashboards and analytics. 
-**ThingsBoard** also provides a **virtual device shell** for sending telemetry on behalf of the physical device for testing purposes.
+在**ThingsBoard**中，**设备**是生成遥测数据的核心实体，这些数据被存储和处理以供仪表盘和分析使用。
+**ThingsBoard**还提供**虚拟设备shell**，用于代表物理设备发送遥测数据以便进行测试。
 
-To add a new device on the **Edge**, log in to your **ThingsBoard Edge** instance at **EDGE_URL** and follow these steps:
+要在**Edge**上添加新设备，请登录您的**ThingsBoard Edge**实例（**EDGE_URL**）并按以下步骤操作：
 
 {% include images-gallery.html imageCollection="step1" showListImageTitles="true" %}
 
-In addition, the following may be used:
-* [Bulk provisioning](/docs/{{peDocsPrefix}}user-guide/bulk-provisioning/){: target="_blank"}: Use to deploy multiple devices from a CSV file via user interface.
-* [REST API](/docs/{{peDocsPrefix}}api/){: target="_blank"}: Use to add devices and other entities programmatically.
+此外，还可使用以下方式：
+* [Bulk provisioning（批量配置）](/docs/{{peDocsPrefix}}user-guide/bulk-provisioning/){: target="_blank"}：通过用户界面从CSV文件部署多个设备。
+* [REST API](/docs/{{peDocsPrefix}}api/){: target="_blank"}：以编程方式添加设备及其他实体。
 
 {% capture local-deployment %}
-Once a device is created on the **Edge**, it will be **automatically provisioned** to the **ThingsBoard server**. To view the Edge device on the Server, visit the **SERVER_URL** and navigate to the **Entities > Devices** section.
+在**Edge**上创建设备后，它将**自动配置**到**ThingsBoard Server**。要在Server上查看Edge设备，请访问**SERVER_URL**并进入**Entities > Devices**（实体 > 设备）部分。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}

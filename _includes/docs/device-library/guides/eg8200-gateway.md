@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.iotrouter.com/product/eg8200-competitive-edge-computing-gateway/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -19,17 +19,17 @@
 **Industrial Protocol**: IEC104 / Modbus / OPC UA/ BACnet..<br>
 **Network Protocol**: MQTT / HTTP / TCP
 
-## Introduction
+## 概述
 
 [EG8200]({{deviceVendorLink}}){: target="_blank"} series products are edge computing gateways launched by IOTRouter Chengdu. With its rich hardware interfaces, drag-and-drop programming method, Zero Code designconcept, convenient remote management and other characteristics, It can quickly, flexibly, accurately and efficiently respond to various IOT industry needs. 
 
 EG series products abstract complex hardware interfaces, different industrial network protocols, etc. into Nodes one by one. Users can use these Nodes flexibly to replace the traditional complex and inefficient coding process by dragging and connecting. Really let customers focus on business logic and quickly create their own gateway equipment. The mission of EG series products is to continuously develop new Nodes to serve industry customers to adapt to the fragmentation of IOT industry needs.
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前，需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
 ## Gateway connection
@@ -149,7 +149,7 @@ Click the created device and find the latest telemetry data received by the plat
 
 {% include images-gallery.liquid imageCollection=verifyDataTransmission %}
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

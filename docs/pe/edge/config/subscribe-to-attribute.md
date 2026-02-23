@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Bidirectional Attribute Subscription And Update with Post-Processing
-description: Bidirectional Attribute Subscription And Update with Post-Processing
+title: 带后处理的双向属性订阅与更新
+description: 带后处理的双向属性订阅与更新
 
 routeMessagesToCloud:
     0:

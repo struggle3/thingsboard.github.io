@@ -4,76 +4,76 @@
 
 {% include templates/solution-templates.md %}
 
-The **Temperature & Humidity sensors** solution template provides a ready-to-use monitoring system for tracking environmental conditions. With a single installation action, the template deploys a fully functional solution that includes dashboards, devices, alarms, users, and access control.
+**Temperature & Humidity sensors**解决方案模板提供即用型环境条件监测系统。通过一次安装操作，模板将部署包含仪表板、设备、告警、用户与访问控制的完整功能解决方案。
 
-This template allows you to evaluate and demonstrate the solution from an End User perspective immediately, without configuring rule chains, dashboards, or device profiles manually.
+该模板使您可立即从最终用户角度评估并演示解决方案，而无需手动配置规则链、仪表板或设备配置文件。
 
-The solution is suitable for proof-of-concept deployments as well as a foundation for production IoT applications such as smart buildings, offices, retail, and cold chain monitoring.
+该方案适用于概念验证部署，也可作为智能建筑、办公、零售及冷链监测等生产IoT应用的基础。
 
 {% include images-gallery.html imageCollection="solution-highlights" %}
 
-## Key application areas
+## 主要应用场景
 
-This solution template can be used as a baseline for:
-- **Smart Home**. Monitoring indoor climate conditions and automating HVAC systems.
-- **Smart Office**. Improving comfort and productivity by maintaining optimal temperature and humidity levels.
-- **Retail and Cold Chain**. Monitoring refrigerators and storage units to detect temperature violations and prevent product spoilage.
+该解决方案模板可作为以下场景的基线：
+- **智能家居**。监测室内气候并实现HVAC系统自动化。
+- **智能办公**。通过维持最佳温湿度提升舒适度与生产力。
+- **零售与冷链**。监测冰箱与储藏单元以检测温度违规并防止产品变质。
 
-## Install solution template
+## 安装解决方案模板
 
-To understand how the Temperature & Humidity sensors solution works, start by installing the solution template.
+要了解Temperature & Humidity sensors解决方案的工作方式，请先安装解决方案模板。
 
-You will need access to ThingsBoard Professional Edition. The easiest way is to use the [ThingsBoard Cloud](/installations/choose-region/){:target="_blank"}. Alternatively, you can install ThingsBoard using the [Professional Edition installation guide](/docs/user-guide/install/pe/installation-options/){:target="_blank"}.
+您需要ThingsBoard专业版访问权限。最简单的方式是使用[ThingsBoard Cloud](/installations/choose-region/){:target="_blank"}，或按[专业版安装指南](/docs/user-guide/install/pe/installation-options/){:target="_blank"}安装。
 
-- Go to the **Solution templates** page.
-- Find **Temperature & Humidity sensors** and click **Install**.
-- Follow the provided configuration instructions.
-- Once the installation is complete, click **Close**.
-- The **Temperature & Humidity** dashboard opens automatically.
+- 进入**Solution templates**页面。
+- 找到**Temperature & Humidity sensors**并点击**Install**。
+- 按提供的配置说明操作。
+- 安装完成后点击**Close**。
+- **Temperature & Humidity**仪表板将自动打开。
 
-After installation, a fully functional simulation for monitoring environmental conditions is created automatically. No devices, integrations, or custom code are required to start exploring the solution.
+安装后，会自动创建环境条件监测的完整模拟，无需设备、集成或自定义代码即可开始体验。
 
 {% include images-gallery.html imageCollection="install-solution-template" %}
 
-## System components
+## 系统组件
 
-Temperature & Humidity sensors template includes:
-- **Dashboard**. The Temperature & Humidity dashboard provides real-time visualization of sensor telemetry, alarm management, sensor configuration, and an interactive map with device locations.
-- **Devices**. The solution includes two pre-provisioned demo temperature sensor devices that are already connected and immediately provide demo telemetry data.
-- **Device Profile and Logic**. A predefined Temperature Sensor device profile is included with built-in logic and preconfigured alarms for high temperature and low humidity conditions. 
-- **Customers and Users**. The system contains one demo customer (Customer D) and two read-only customer users with predefined role-based access control.
+Temperature & Humidity sensors模板包含：
+- **仪表板**。Temperature & Humidity仪表板提供传感器遥测的实时可视化、告警管理、传感器配置及带设备位置的交互地图。
+- **设备**。解决方案包含两台已连接并立即提供演示遥测的预配置演示温度传感器。
+- **设备配置文件与逻辑**。包含内置逻辑及高温与低湿条件预配置告警的Temperature Sensor设备配置文件。
+- **Customers与Users**。系统包含一个演示customer（Customer D）及两位具有预定义基于角色的访问控制的只读customer用户。
 
-**Edge Support.** The solution can optionally be deployed to [ThingsBoard Edge](/docs/edge/){:target="_blank"} for local data processing and reduced latency.
+**Edge支持**。该解决方案可选择性部署至[ThingsBoard Edge](/docs/edge/){:target="_blank"}以进行本地数据处理并降低延迟。
 
-## Dashboard
+## 仪表板
 
-The Temperature & Humidity dashboard displays telemetry data from multiple sensors and provides tools for alarm management and device configuration.
+Temperature & Humidity仪表板展示来自多传感器的遥测数据，并提供告警管理与设备配置工具。
 
 ![image](/images/solutions/temperature-sensors/temperature-humidity-sensors-template-1.png)
 
-Using the dashboard, you can:
-- Add new sensors
-- Place sensors on the map
-- Configure alarm thresholds
-- Browse historical telemetry data
-- Manage sensor settings
+通过仪表板可：
+- 添加新传感器
+- 在地图上放置传感器
+- 配置告警阈值
+- 浏览历史遥测数据
+- 管理传感器设置
 
-<b><font size="3">Dashboard states</font></b>
+<b><font size="3">仪表板状态</font></b>
 
-The dashboard consists of two states:
-- **Main state.** Displays a table of all sensors and their locations on the map.
-- **Sensor Details state.** Opens when a sensor row is selected.   
-  Allows viewing historical temperature and humidity data, editing sensor parameters, and changing location.
+仪表板包含两种状态：
+- **Main state**。在地图上展示所有传感器表格及位置。
+- **Sensor Details state**。选择传感器行时打开。
+  支持查看历史温度与湿度数据、编辑传感器参数并更改位置。
 
-The dashboard can be fully customized using the ThingsBoard [dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} development tools.
+仪表板可使用ThingsBoard[仪表板](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}开发工具完全自定义。
 
-## Devices
+## 设备
 
-Two demo devices are created automatically: 
-- **Sensor T1** (owned by **Tenant**) 
-- **Sensor C1** (owned by **Customer D**)
+自动创建两台演示设备：
+- **Sensor T1**（属于**Tenant**）
+- **Sensor C1**（属于**Customer D**）
 
-The solution expects devices to publish telemetry data in JSON format using the following keys:
+解决方案要求设备使用以下键以JSON格式发布遥测数据：
 
 ```json
 {
@@ -83,41 +83,41 @@ The solution expects devices to publish telemetry data in JSON format using the 
 ```
 {: .copy-code}
 
-[Other connectivity options](/docs/{{docsPrefix}}getting-started-guides/connectivity/){:target="_blank"} (MQTT, CoAP, LwM2M, etc.) are supported as well.
+也支持[其他连接方式](/docs/{{docsPrefix}}getting-started-guides/connectivity/){:target="_blank"}（MQTT、CoAP、LwM2M等）。
 
-## Alarms
+## 告警
 
-Alarm generation is handled by [alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"} configured in the **Temperature Sensor** [device profile](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}.
+告警生成由**Temperature Sensor**[设备配置文件](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}中配置的[告警规则](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"}处理。
 
 | Entity Profile     | Alarm Type       | Severity |
 | ------------------ | ---------------- | -------- |
 | Temperature Sensor | High Temperature | Critical |
 | Temperature Sensor | Low Humidity     | Major    |
 
-Alarm thresholds and enable/disable state can be modified directly from the dashboard using the **Edit Sensor** action.
+告警阈值及启用/禁用状态可直接通过仪表板使用**Edit Sensor**操作修改。
 
 {% include images-gallery.html imageCollection="solution-alarms" %}
 
 ## Customers
 
-To demonstrate multi-tenancy and data isolation, the solution creates a sample customer:
-- Customer name: Customer D
-- Assigned device: Sensor C1
+为演示多租户与数据隔离，解决方案创建了示例customer：
+- Customer名称：Customer D
+- 分配设备：Sensor C1
 
-**Customer users**
+**Customer用户**
 
-The following users are created and assigned to Customer D:
+以下用户已创建并分配给Customer D：
 - Toni Collier (toni.collier@thingsboard.io)
 - Sheri Addison (sheri.addison@thingsboard.io)
 
-These users:
-- Have read-only access to the dashboard
-- Can only see devices owned by **Customer D**
-- Do not have permissions to modify dashboards or tenant-level entities
+这些用户：
+- 对仪表板具有只读权限
+- 仅可见**Customer D**所拥有的设备
+- 无权修改仪表板或租户级实体
 
-Additional [Customers](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"} and [Users](/docs/{{docsPrefix}}user-guide/ui/users/){:target="_blank"} can be created via the administration UI. Device ownership can be reassigned to make sensors visible to specific customers.
+可通过管理界面创建更多[Customers](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"}和[Users](/docs/{{docsPrefix}}user-guide/ui/users/){:target="_blank"}。可重新分配设备归属以使传感器对特定customers可见。
 
-## Conclusion
+## 总结
 
-The Temperature & Humidity Sensors solution template delivers an out-of-the-box monitoring solution with real-time visualization, configurable alarms, and built-in access control. 
-It enables fast onboarding and serves as a solid foundation for both demonstrations and production environmental monitoring use cases.
+Temperature & Humidity Sensors解决方案模板提供开箱即用的监测解决方案，含实时可视化、可配置告警与内置访问控制。
+支持快速上手，既是演示也是生产环境监测用例的坚实基础。

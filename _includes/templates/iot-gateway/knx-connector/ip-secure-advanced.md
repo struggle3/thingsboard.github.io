@@ -1,14 +1,14 @@
-Protects data transmitted over Ethernet/IP-based networks to prevent unauthorized access and tampering.
+保护通过基于以太网/IP 的网络传输的数据，防止未授权访问和篡改。
 
-These parameters are available for configuration in the "**security**" subsection:
+这些参数可在 "**security**" 子节中配置：
 
-| **Parameter** | **Description**                                    |
+| **参数** | **说明**                                    |
 |:--------------|----------------------------------------------------|
-| backbone_key  | Used for KNX Secure Routing in hex representation. |
-| latency_ms    | Latency in milliseconds for KNX Secure Routing.    |
+| backbone_key  | 用于 KNX Secure Routing，以十六进制表示。 |
+| latency_ms    | KNX Secure Routing 的延迟（毫秒）。    |
 | ---           |                                                    |
 
-This subsection in the configuration file looks like:
+配置文件中此子节如下所示：
 
 ```json
 "security": {

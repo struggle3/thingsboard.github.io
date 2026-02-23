@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Installing ThingsBoard Edge on Windows
-description: Installing ThingsBoard Edge on Windows
+title: 在 Windows 上安装 ThingsBoard Edge
+description: 在 Windows 上安装 ThingsBoard Edge
 ---
 
 * TOC

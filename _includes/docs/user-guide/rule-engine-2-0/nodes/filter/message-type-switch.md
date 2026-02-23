@@ -1,11 +1,10 @@
-Routes incoming messages based on their message type. The message is forwarded through the output connection whose label exactly matches the message type **rule node connection
-label**.
+根据消息类型路由入站消息。消息经其标签与消息类型**规则节点连接标签**完全匹配的输出连接转发。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-There are no available configuration fields.
+无可配置字段。
 
 ### JSON Schema
 
@@ -20,22 +19,21 @@ There are no available configuration fields.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Determines the incoming message's type and looks up its rule node connection label.
-2. Routes the message to downstream nodes using the connection with a label that **exactly matches** the rule node connection label.
+1. 确定入站消息的类型并查找其规则节点连接标签。
+2. 使用标签与规则节点连接标签**完全匹配**的连接将消息路由至下游节点。
 
-## Output connections
+## 输出连接
 
-* Message type connection label
-    * Used for all standard message types; the message is routed via the connection whose label corresponds to the specific message type (e.g., `Post telemetry`, `Post attributes`,
-      `RPC Request from Device`)
-* `Other`:
-    * If the message type is custom or does not have a specific connection defined.
-* `Failure`:
-    * If an unexpected error occurred during message processing.
+* 消息类型连接标签
+    * 适用于所有标准消息类型；消息经与具体消息类型对应的连接路由（如 `Post telemetry`、`Post attributes`、`RPC Request from Device`）。
+* `Other`：
+    * 当消息类型为自定义或没有特定连接定义时。
+* `Failure`：
+    * 消息处理过程中发生意外错误时。
 
-### Predefined connection labels
+### 预定义连接标签
 
 | Message type                     | Connection label            |
 |----------------------------------|-----------------------------|
@@ -81,46 +79,46 @@ There are no available configuration fields.
 | `REMOVED_FROM_ENTITY_GROUP`      | Removed from Group          |
 | `generateReport`                 | Generate Report             |
 
-## Examples
+## 示例
 
-### Example 1 — Message type is `POST_TELEMETRY_REQUEST` → routed via `Post telemetry`
+### 示例 1 — 消息类型为 `POST_TELEMETRY_REQUEST` → 经 `Post telemetry` 路由
 
-**Incoming message**
+**入站消息**
 
-Type: `POST_TELEMETRY_REQUEST`.
+类型：`POST_TELEMETRY_REQUEST`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**Result**
+**结果**
 
-Routed via `Post telemetry`.
+经 `Post telemetry` 路由。
 
-**Explanation**
+**说明**
 
-For `POST_TELEMETRY_REQUEST`, the rule node connection label is `Post telemetry`. The node routes the message via the connection with that exact label.
+`POST_TELEMETRY_REQUEST` 的规则节点连接标签为 `Post telemetry`。节点通过具有该标签的连接路由消息。
 
 ---
 
-### Example 2 — Custom message type → routed via `Other`
+### 示例 2 — 自定义消息类型 → 经 `Other` 路由
 
-**Incoming message**
+**入站消息**
 
-Type: `CUSTOM_MESSAGE_TYPE`.
+类型：`CUSTOM_MESSAGE_TYPE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**Result**
+**结果**
 
-Routed via `Other`.
+经 `Other` 路由。
 
-**Explanation**
+**说明**
 
-Custom message types that don't have a predefined rule node connection label are routed via the `Other` connection.
+没有预定义规则节点连接标签的自定义消息类型经 `Other` 连接路由。

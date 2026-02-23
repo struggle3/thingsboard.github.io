@@ -1,5 +1,5 @@
 
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.mokosmart.com/lorawan-tracker-lw001-bg-pro/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign officialManualLink = "https://docs.mokosmart.com/wp-content/uploads/2025/06/LW001-BG-PRO-product-brief.pdf" %}
@@ -9,24 +9,24 @@
   '
   %}
 
-## Introduction
+## 概述
 
-The [LW001-BG PRO]({{deviceVendorLink}}){: target="_blank"} is a wireless, smart, ultra–low-power indoor and outdoor LoRaWAN tracker.   
-It integrates **GPS**, **Bluetooth**, and **WiFi** positioning, supports multiple operating modes, and is suitable for a wide range of tracking applications.<br>
+[LW001-BG PRO]({{deviceVendorLink}}){: target="_blank"} 是一款无线、智能、超低功耗的室内外 LoRaWAN 定位器。  
+集成 **GPS**、**Bluetooth**、**Wi-Fi** 定位，支持多种工作模式，适用于各类追踪应用。<br>
 
-It supports two LoRaWAN network access modes: **ABP** and **OTAA**, and can be easily configured or updated through the **MKLoRa** app.   
-This device is ideal for optimizing logistics processes, asset management, warehouse and inventory scenarios, outdoor tracking, theft protection, livestock tracking and much more.<br>
+支持 **ABP** 与 **OTAA** 两种 LoRaWAN 入网方式，可通过 **MKLoRa** 应用轻松配置或更新。  
+适用于物流优化、资产管理、仓储盘点、户外追踪、防盗、牲畜追踪等场景。<br>
 
 {% assign feature = "Platform Integrations" %}{% include templates/pe-feature-banner.md %}
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
 ![{{deviceName}}](/images/devices-library/ready-to-go-devices/lw001-bg-pro/mklora-app-qr-code.png){: style="float: left; max-width: 150px; max-height: 150px; margin: 0px 10px 0px 0px"}
 To connect the device and start sending data, both the device and the network server must be configured. Users can configure the device using the MKLora application.   
@@ -67,39 +67,38 @@ TheThingsStack<small></small>%,%%,%templates/docs/device-library/blocks/integrat
 TheThingsIndustries<small></small>%,%%,%templates/docs/device-library/blocks/integrations/devices-configuration/lw001-bg-pro-thethingsindustries-block.md%br%
 Loriot<small></small>%,%%,%templates/docs/device-library/blocks/integrations/devices-configuration/lw001-bg-pro-loriot-block.md{% endcapture %}
 
-## Create Dashboard on ThingsBoard  
+## 在 ThingsBoard 上创建仪表板 {#create-dashboard-on-thingsboard}
 
-In order to get more user-friendly view - you can use dashboards.  
+为获得更直观的展示，可使用仪表板。
 
-To add the dashboard to ThingsBoard, follow the next steps:  
+在 ThingsBoard 中添加仪表板请按以下步骤操作：
 
-- Fill the **dashboard title** and click **Add** button  
-- Click **Add widget** button to add widget in dashboard  
-- 
+- 填写**仪表板标题**并点击 **Add** 按钮
+- 点击**添加部件**按钮在仪表板中添加部件
 
 {% assign CreateDashboardOnThingsBoard  = '
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/46.png,
-        title: Navigate to the **Dashboards** page. By default, you navigate to the dashboard group **All**. Click on the "plus" icon in the top right corner. Select **Create new dashboard**.
+        title: 进入 **仪表板** 页面。默认进入仪表板组「全部」。点击右上角「+」图标，选择 **创建新仪表板**。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/47.png,
-        title: Fill the **dashboard title** and click **Add** button. 
+        title: 填写**仪表板标题**并点击 **Add** 按钮。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/48.png,
-        title: The dashboard will opened. Click **Add widget** button to add new widget.
+        title: 仪表板将打开。点击**添加部件**按钮添加新部件。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/49.png,
-        title: For example, for the location info, the **Maps** widget is suitable.
+        title: 例如，要展示位置信息，可使用 **Maps** 部件。
     ===
         image: /images/devices-library/ready-to-go-devices/lw001-bg-pro/50.png,
-        title: And then select the data source as the device that just created, and choose the variable that you want to display.
+        title: 然后将数据源选为刚创建设备，并选择要展示的变量。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=CreateDashboardOnThingsBoard %}
 
 
-<br><b><font size="4">Import Dashboard</font></b>
+<br><b><font size="4">导入仪表板</font></b>
 
-You can [download this example dashboard in JSON format](/docs/devices-library/resources/dashboards/lw001-bg-pro/lw001-bg_pro_lorawan_tracker_dashboard.json){:target="_blank" download="lw001-bg_pro_lorawan_tracker_dashboard.json"} and [import](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"} it into your ThingsBoard instance.
+您可[下载此示例仪表板（JSON 格式）](/docs/devices-library/resources/dashboards/lw001-bg-pro/lw001-bg_pro_lorawan_tracker_dashboard.json){:target="_blank" download="lw001-bg_pro_lorawan_tracker_dashboard.json"}并[导入](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"}到您的 ThingsBoard 实例。
 {% include add-device-banner.liquid %}

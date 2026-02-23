@@ -1,8 +1,8 @@
 
-The whole configuration of Efento sensors is done with a free mobile application for Android.  
-Application can be downloaded from [Google Play](https://play.google.com/store/apps/details?id=pl.efento.cloud&hl=en).  
-Before you start configuration make sure the sensor is able to register in the NB-IoT network and the APN settings are right. 
-Detailed user manual of Efento NB-IoT sensors and Efento mobile application can be found in the [support section of Efento website](https://getefento.com/support/).  
+Efento 传感器的全部配置通过 Android 免费移动应用完成。  
+应用可从 [Google Play](https://play.google.com/store/apps/details?id=pl.efento.cloud&hl=en) 下载。  
+配置前请确保传感器能够注册到 NB-IoT 网络且 APN 设置正确。  
+Efento NB-IoT 传感器及 Efento 移动应用的详细用户手册见 [Efento 官网支持页面](https://getefento.com/support/)。  
 
 {% assign thingsboardHost = coapHostName %}
 
@@ -27,7 +27,7 @@ Detailed user manual of Efento NB-IoT sensors and Efento mobile application can 
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=efentoSensorConfiguration %}
 
-Set the CoAP endpoints, to which the sensor will send the data. Click on the menu (three dots in the upper right corner) -> Power user -> CoAP endpoints. Set the endpoints to the following values:
+设置传感器发送数据所用的 CoAP 端点。点击菜单（右上角三个点）-> Power user -> CoAP endpoints，将端点设置为以下值：
 
 - Data: “efento/m”
 - Time: “efento/t”

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: TBMQ Cluster Supports 100M MQTT Connections
-description: TBMQ cluster-mode 100M MQTT connections performance test
+title: TBMQ 集群支持 1 亿 MQTT 连接
+description: TBMQ 集群模式 1 亿 MQTT 连接性能测试
 
 broker-aws-monitoring:
     0:

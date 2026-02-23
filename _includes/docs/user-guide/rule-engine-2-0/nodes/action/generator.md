@@ -1,67 +1,67 @@
-Periodically generates messages with configurable content and timing.
+按可配置的内容和间隔定期生成消息。
 
-## Configuration
+## 配置
 
-### Generation parameters
+### 生成参数
 
-- **Generated messages limit**: Number of messages to generate before stopping. Set to 0 for unlimited message generation.
-- **Generation frequency in seconds**: Time interval between message generations in seconds.
+- **Generated messages limit（生成消息限制）**：停止前要生成的消息数。设为 0 表示不限制。
+- **Generation frequency in seconds（生成频率（秒））**：消息生成之间的时间间隔（秒）。
 
-### Originator
+### 发起者
 
-Specifies the originator entity for generated messages. The configuration depends on the selected entity type:
+指定生成消息的发起者实体。配置取决于所选实体类型：
 
-- **Type**: The entity type that will be set as the originator of generated messages. Supported types include:
+- **Type（类型）**：将作为生成消息发起者的实体类型。支持类型包括：
     - Device
     - Asset
     - Entity View
-    - Current Tenant
+    - Current Tenant（当前租户）
     - Customer
     - User
     - Dashboard
     - Edge
-    - Current Rule Node
+    - Current Rule Node（当前 Rule 节点）
     - Converter
     - Integration
     - Scheduler Event
     - Blob Entity
     - Role
-    - Entity Group
+    - Entity Group（实体组）
 
-#### Configuration by originator type:
+#### 按发起者类型配置：
 
-- **Current Tenant / Current Rule Node**: No additional configuration required. Uses the current tenant or the generator node itself as the originator.
+- **Current Tenant / Current Rule Node**：无需额外配置。使用当前租户或生成器节点本身作为发起者。
 
-- **Entity Group**: Requires additional group configuration:
-    - **Group Owner**: The owner of the group
-    - **Entity Type**: The type of entities contained within the group
-    - **Group**: The specific entity group to use
+- **Entity Group**：需要额外组配置：
+    - **Group Owner（组所有者）**：组的所有者
+    - **Entity Type（实体类型）**：组内实体的类型
+    - **Group（组）**：要使用的具体实体组
 
-- **All other types**: Requires selecting the specific entity to use as the originator.
+- **所有其他类型**：需要选择用作发起者的具体实体。
 
-### Generator function
+### 生成器函数
 
-The code entered into the script editor acts as the body of a generator function. This function implicitly receives three arguments that are available as variables in your script:
+在脚本编辑器中输入的代码作为生成器函数体。该函数隐式接收三个参数，在脚本中作为变量可用：
 
-- `prevMsg` - the data of the previously generated message, typically as a JSON object.
-- `prevMetadata` - the metadata of the previously generated message, as a key-value object where all values are strings.
-- `prevMsgType` - the type of the previously generated message, as a string.
+- `prevMsg` - 先前生成消息的数据，通常为 JSON 对象。
+- `prevMetadata` - 先前生成消息的元数据，为键值对象，所有值为字符串。
+- `prevMsgType` - 先前生成消息的类型，为字符串。
 
-For the very first generated message, when no previous message exists:
+对于第一条生成的消息（无先前消息时）：
 
-- `prevMsg` will be an empty JSON object `{}`
-- `prevMetadata` will be an empty JSON object `{}`
-- `prevMsgType` will be an empty string `""`
+- `prevMsg` 为空 JSON 对象 `{}`
+- `prevMetadata` 为空 JSON 对象 `{}`
+- `prevMsgType` 为空字符串 `""`
 
-The function must **return** an object containing the following keys:
+函数必须 **return** 包含以下键的对象：
 
-- `msg` - the data for the new outgoing message.
-- `metadata` - the metadata for the new message.
-- `msgType` - the type for the new message.
+- `msg` - 新传出消息的数据。
+- `metadata` - 新消息的元数据。
+- `msgType` - 新消息的类型。
 
-### Queue
+### 队列
 
-- **Queue**: Selects the queue where the generated message will be placed for persistence and durability. The "Main" queue is used when not selected.
+- **Queue（队列）**：选择用于持久化和可靠性的队列。未选择时使用「Main」队列。
 
 ### JSON Schema
 
@@ -125,32 +125,32 @@ The function must **return** an object containing the following keys:
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-The generator node operates independently of incoming messages, meaning it does not accept messages from other rule nodes (only self-scheduled messages trigger generation).
-The processing follows this cycle:
+生成器节点独立于传入消息运行，即不接受来自其他 Rule 节点的消息（仅自调度消息触发生成）。
+处理遵循以下周期：
 
-1. Node receives a self-scheduled `GENERATOR_NODE_SELF_MSG` message
-2. Executes the generator function with access to previous generated message
-3. Creates a new message with:
-    - Originator set to the configured entity
-    - Data, metadata, and type from script execution result
-4. Routes the generated message through the `Success` connection
-5. If message count limit not reached, schedules the next generation cycle
-6. Increments the current message count
+1. 节点收到自调度的 `GENERATOR_NODE_SELF_MSG` 消息
+2. 执行生成器函数，可访问先前生成的消息
+3. 创建新消息：
+    - 发起者设为配置的实体
+    - 数据、元数据和类型来自脚本执行结果
+4. 经 `Success` 连接路由生成的消息
+5. 若未达到消息数限制，调度下一生成周期
+6. 增加当前消息计数
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - Generated messages
+    - 生成的消息
 - `Failure`
-    - Self-scheduled message if generator script fails or another unexpect error occurs during generation
+    - 生成器脚本失败或生成期间发生其他意外错误时的自调度消息
 
-## Examples
+## 示例
 
-### Example 1 — Basic daily message generation
+### 示例 1 — 基本每日消息生成
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -162,31 +162,31 @@ The processing follows this cycle:
 }
 ```
 
-**Generated message**
+**生成的消息**
 
-Type: `CUSTOM`
+类型：`CUSTOM`
 
-Data:
-
-```json
-{}
-```
-
-Metadata:
+数据：
 
 ```json
 {}
 ```
 
-Originator: `RULE_NODE` (the generator node itself)
+元数据：
 
-**Result**
+```json
+{}
+```
 
-Once per day (every 86400 seconds), the node generates an empty message, running indefinitely.
+发起者：`RULE_NODE`（生成器节点本身）
 
-### Example 2 — Sequential counter messages
+**结果**
 
-**Node configuration**
+每天一次（每 86400 秒），节点生成空消息，无限运行。
+
+### 示例 2 — 顺序计数器消息
+
+**节点配置**
 
 ```json
 {
@@ -199,13 +199,13 @@ Once per day (every 86400 seconds), the node generates an empty message, running
 }
 ```
 
-**Outgoing messages**
+**传出消息**
 
-**1st message**
+**第 1 条消息**
 
-Type: `POST_TELEMETRY_REQUEST`
+类型：`POST_TELEMETRY_REQUEST`
 
-Data:
+数据：
 
 ```json
 {
@@ -213,13 +213,13 @@ Data:
 }
 ```
 
-Originator: `DEVICE` with ID `3bc2eb60-8d77-11f0-8a6c-59050cd4204f`
+发起者：ID 为 `3bc2eb60-8d77-11f0-8a6c-59050cd4204f` 的 `DEVICE`
 
-**2nd message**
+**第 2 条消息**
 
-Type: `POST_TELEMETRY_REQUEST`
+类型：`POST_TELEMETRY_REQUEST`
 
-Data:
+数据：
 
 ```json
 {
@@ -227,13 +227,13 @@ Data:
 }
 ```
 
-Originator: `DEVICE` with ID `3bc2eb60-8d77-11f0-8a6c-59050cd4204f`
+发起者：ID 为 `3bc2eb60-8d77-11f0-8a6c-59050cd4204f` 的 `DEVICE`
 
-**3rd message**
+**第 3 条消息**
 
-Type: `POST_TELEMETRY_REQUEST`
+类型：`POST_TELEMETRY_REQUEST`
 
-Data:
+数据：
 
 ```json
 {
@@ -241,8 +241,8 @@ Data:
 }
 ```
 
-Originator: `DEVICE` with ID `3bc2eb60-8d77-11f0-8a6c-59050cd4204f`
+发起者：ID 为 `3bc2eb60-8d77-11f0-8a6c-59050cd4204f` 的 `DEVICE`
 
-**Result**
+**结果**
 
-The node generates exactly 3 messages, one per minute, with a counter field that increments from 1 to 3, then stops.
+节点恰好生成 3 条消息，每分钟一条，counter 字段从 1 递增到 3，然后停止。

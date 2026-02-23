@@ -1,7 +1,7 @@
 ---
 layout: smart-farming-demo
-title: Smart Farming Monitoring
-description: Smart Farming Monitoring with ThingsBoard IoT Platform
+title: 智慧农业监控
+description: 基于 ThingsBoard 物联网平台的智慧农业监控
 notitle: "true"
 
 --- 

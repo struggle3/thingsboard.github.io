@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Temco T3E-6CT to ThingsBoard?
-category: Other devices
+title: 如何将 Temco T3E-6CT 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [HTTP, Ethernet, WIFI, BACnet, RS485]
 vendor: Temco Controls
 deviceImageFileName: temco-t3e-6ct.jpg

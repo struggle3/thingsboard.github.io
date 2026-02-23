@@ -1,51 +1,51 @@
 ---
 layout: docwithnav-pe 
-title: Loriot integration
-description: Loriot integration guide
+title: Loriot 集成
+description: Loriot 集成指南
 
 create-loriot-account:
     0:
         image: /images/user-guide/integrations/loriot/create-loriot-account-1.png
-        title: 'Visit the Loriot website. Choose a service package — for example, select the <b>Community Public Network Server</b>.'
+        title: '访问 Loriot 网站。选择服务套餐，例如选择 <b>Community Public Network Server</b>。'
     1:
         image: /images/user-guide/integrations/loriot/create-loriot-account-2.png
-        title: 'Pick your preferred region and country.'
+        title: '选择您偏好的区域和国家。'
     2:
         image: /images/user-guide/integrations/loriot/create-loriot-account-3.png
-        title: 'Complete the registration process.'
+        title: '完成注册流程。'
     3:
         image: /images/user-guide/integrations/loriot/create-loriot-account-4.png
-        title: 'Log in to your Loriot account.'
+        title: '登录 Loriot 账户。'
 
 create-loriot-application-output-1:
     0:
         image: /images/user-guide/integrations/loriot/loriot-server.png
-        title: 'Open the Loriot UI. The URL contains the server name that we selected during the registration process. This server needs to be specified in the integration settings.'
+        title: '打开 Loriot UI。URL 中包含注册时选择的 server 名称。此 server 需在 integration 设置中指定。'
 
 create-loriot-application-output-2:
     0:
         image: /images/user-guide/integrations/loriot/loriot-application-id.png
-        title: 'Locate the <b>Application ID</b> associated with your project. This value needs to be specified in the integration settings.'
+        title: '找到与项目关联的 <b>Application ID</b>。此值需在 integration 设置中指定。'
 
 create-loriot-application-output-3:
     0:
         image: /images/user-guide/integrations/loriot/thingsboard_add_integration_output_basic.png
-        title: 'Select the "Basic" credential type and enter your Loriot account credentials. Click "Add" to confirm creating integration.'
+        title: '选择 "Basic" 凭证类型并输入 Loriot 账户凭证。点击 "Add" 确认创建 integration。'
 
 endpoint-url:
     0:
         image: /images/user-guide/integrations/loriot/loriot-copy-http-endpoint-pe.png
-        title: 'Go to the "Integrations" page in ThingsBoard. Find your Loriot integration and click on it. There you can find the "HTTP endpoint URL".'
+        title: '在 ThingsBoard 进入 "Integrations" 页面。找到 Loriot integration 并点击。此处可找到 "HTTP endpoint URL"。'
 
 downlink_server:
     0:
         image: /images/user-guide/integrations/loriot/loriot-server.png
-        title: 'Open the Loriot UI. The URL contains the server name that we selected during the registration process. This server needs to be specified in the integration settings.'
+        title: '打开 Loriot UI。URL 中包含注册时选择的 server 名称。此 server 需在 integration 设置中指定。'
 
 downlink_applications:
     0:
         image: /images/user-guide/integrations/loriot/loriot-application-id.png
-        title: 'Locate the <b>Application ID</b> associated with your project. This value needs to be specified in the integration settings.'
+        title: '找到与项目关联的 <b>Application ID</b>。此值需在 integration 设置中指定。'
 
 access_token:
     0:
@@ -108,27 +108,27 @@ send_downlink:
 loriot-output:
     0:
         image: /images/user-guide/integrations/loriot/loriot-http-push-1.png
-        title: 'Go to the "<b>Applications</b>" page and click on the application.'
+        title: '进入 "<b>Applications</b>" 页面并点击 application。'
     1:
         image: /images/user-guide/integrations/loriot/loriot-http-push-2.png
-        title: 'Go to the "<b>Output</b>" page.'
+        title: '进入 "<b>Output</b>" 页面。'
     2:
         image: /images/user-guide/integrations/loriot/loriot-http-push-3.png
-        title: 'Click on the "<b>Add new output</b>" button.'
+        title: '点击 "<b>Add new output</b>" 按钮。'
     3:
         image: /images/user-guide/integrations/loriot/loriot-http-push-4.png
-        title: 'Select the output type as "<b>HTTP Push</b>" and enter the "<b>HTTP endpoint URL</b>" taken from the integration. Then, click "<b>Add output</b>" button.'
+        title: '将 output 类型选为 "<b>HTTP Push</b>"，输入从 integration 获取的 "<b>HTTP endpoint URL</b>"。然后点击 "<b>Add output</b>" 按钮。'
     4:
         image: /images/user-guide/integrations/loriot/loriot-http-push-5.png
-        title: 'Output created successfully.'
+        title: 'Output 创建成功。'
 
 enable-security:
     0:
         image: /images/user-guide/integrations/loriot/enable-security-1-pe.png
-        title: 'To do this, turn on the "<b>Enable security</b>" option. Click "<b>Add</b>" and enter an arbitrary value for the "<b>Header</b>" and "<b>Value</b>" fields. Then, save the changes.'
+        title: '为此，启用 "<b>Enable security</b>" 选项。点击 "<b>Add</b>"，为 "<b>Header</b>" 和 "<b>Value</b>" 字段输入任意值。然后保存更改。'
     1:
         image: /images/user-guide/integrations/loriot/enable-security-2-pe.png
-        title: 'Also need to specify this credentials in Loriot UI.'
+        title: '还需在 Loriot UI 中指定此凭证。'
 
 security_token:
     0:
@@ -162,24 +162,24 @@ terminal_1:
 device:
     0:
         image: /images/user-guide/integrations/loriot/loriot-device-attributes-1-pe.png
-        title: 'The created device and its data can be found on the "Devices" page in the "Entities" section. On the "Attributes" tab, you will find the attributes sent by the device to ThingsBoard.'
+        title: '可在 "Entities" 部分的 "Devices" 页面找到创建的设备及其数据。在 "Attributes" 选项卡可见设备发送给 ThingsBoard 的属性。'
     1:
         image: /images/user-guide/integrations/loriot/loriot-device-attributes-2-pe.png
-        title: 'On the "Latest telemetry" tab, you will find the telemetry data transmitted by the device to ThingsBoard.'
+        title: '在 "Latest telemetry" 选项卡可见设备发送给 ThingsBoard 的 telemetry 数据。'
 
 uplink_events:
     0:
         image: /images/user-guide/integrations/loriot/loriot-uplink-converter-events-1-pe.png
-        title: 'You can view the data in the Uplink converter under the "<b>Events</b>" tab, within the "<b>In</b>", "<b>Out</b>", and "<b>Metadata</b>" blocks.'
+        title: '可在 Uplink converter 的 "<b>Events</b>" 选项卡下，于 "<b>In</b>"、"<b>Out</b>" 和 "<b>Metadata</b>" 块中查看数据。'
     1:
         image: /images/user-guide/integrations/loriot/loriot-uplink-converter-events-2-pe.png
-        title: '"Input" block.'
+        title: '"Input" 块。'
     2:
         image: /images/user-guide/integrations/loriot/loriot-uplink-converter-events-3-pe.png
-        title: '"Output" block.'
+        title: '"Output" 块。'
     3:
         image: /images/user-guide/integrations/loriot/loriot-uplink-converter-events-4-pe.png
-        title: '"Metadata" block.'
+        title: '"Metadata" 块。'
 
 event_out:
     0:

@@ -1,18 +1,18 @@
 {% if currentGuide != "GettingStartedGuide" %}
-- [**Getting started guide**](/docs/{{docsPrefix}}mqtt-broker/getting-started/) - This guide provide quick overview of TBMQ.
+- [**快速入门指南**](/docs/{{docsPrefix}}mqtt-broker/getting-started/) - 本指南提供 TBMQ 的快速概览。
 {% endif %}
 {% if currentGuide != "InstallationGuides" %}
-- [**Installation guides**](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/) - Learn how to set up TBMQ using Docker or deploy it in K8S environments on AWS, GCP, and Azure.
+- [**安装指南**](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/) - 学习如何使用 Docker 配置 TBMQ 或在 AWS、GCP、Azure 的 K8S 环境中部署。
 {% endif %}
 {% if currentGuide != "SecurityGuide" %}
-- [**Security guide**](/docs/{{docsPrefix}}mqtt-broker/security/overview/) - Learn how to enable authentication and authorization for MQTT clients.
+- [**安全指南**](/docs/{{docsPrefix}}mqtt-broker/security/overview/) - 学习如何为 MQTT 客户端启用认证与授权。
 {% endif %}
 {% if currentGuide != "ConfigurationGuide" %}
-- [**Configuration guide**](/docs/{{docsPrefix}}mqtt-broker/install/config/) - Learn about TBMQ configuration files and parameters.
+- [**配置指南**](/docs/{{docsPrefix}}mqtt-broker/install/config/) - 了解 TBMQ 配置文件和参数。
 {% endif %}
 {% if currentGuide != "MQTTClientTypeGuide" %}
-- [**MQTT client type guide**](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/) - Learn about TBMQ client types.
+- [**MQTT 客户端类型指南**](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/) - 了解 TBMQ 客户端类型。
 {% endif %}
 {% if currentGuide != "TBIntegrationGuide" %}
-- [**Integration with ThingsBoard**](/docs/{{docsPrefix}}mqtt-broker/user-guide/integrations/how-to-connect-thingsboard-to-tbmq/) - Learn about how to integrate TBMQ with ThingsBoard.
+- [**与 ThingsBoard 集成**](/docs/{{docsPrefix}}mqtt-broker/user-guide/integrations/how-to-connect-thingsboard-to-tbmq/) - 了解如何将 TBMQ 与 ThingsBoard 集成。
 {% endif %}

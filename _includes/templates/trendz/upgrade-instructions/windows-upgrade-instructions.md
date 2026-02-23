@@ -21,57 +21,57 @@
 {%- assign platform_hash = "#upgrading-trendz-analytics-to-" -%}
 
 {% capture tb_haproxy_note %}
-**NOTE:**
+**注意：**
 <br>
-If you are using Trendz behind **HAProxy**, make sure that the paths **`/trendz/`** and **`/apiTrendz/`** are routed to the Trendz backend instead of **`/trendz`** and **`/apiTrendz`**.
-Additionally, we highly recommend adding Trendz to the **ThingsBoard HAProxy configuration** so that Trendz is accessible from the **same domain as ThingsBoard**.
+若 Trendz 部署在 **HAProxy** 之后，请确保将 **`/trendz/`** 和 **`/apiTrendz/`** 路径路由到 Trendz 后端，而非 **`/trendz`** 和 **`/apiTrendz`**。
+此外，建议将 Trendz 加入 **ThingsBoard HAProxy 配置**，使 Trendz 可通过 **与 ThingsBoard 相同的域名**访问。
 {% endcapture %}
 {% include templates/warn-banner.md content=tb_haproxy_note %}
 
-#### Trendz Analytics package download
+#### 下载 Trendz Analytics 安装包
 
-Download Trendz Analytics installation package for Windows: [trendz-windows-{{ current_version }}.zip](https://dist.thingsboard.io/trendz-windows-{{ current_version }}.zip).
+下载适用于 Windows 的 Trendz Analytics 安装包：[trendz-windows-{{ current_version }}.zip](https://dist.thingsboard.io/trendz-windows-{{ current_version }}.zip)。
 
-#### Trendz Analytics service upgrade
+#### 升级 Trendz Analytics 服务
 
-* Stop Trendz service if it is running.
+* 若 Trendz 服务正在运行，请先停止。
 
 ```text
 net stop trendz
 ```
 {: .copy-code}
 
-* Make a backup of previous Trendz Analytics configuration located in \<Trendz install dir\>\conf (for ex. C:\trendz\conf).
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old Trendz configuration files (from the backup you made in the first step) with new ones.
+* 备份原有 Trendz Analytics 配置（位于 \<Trendz install dir\>\conf，如 C:\trendz\conf）。
+* 删除 ThingsBoard 安装目录。
+* 将安装包解压到 ThingsBoard 安装目录。
+* 将备份的旧 Trendz 配置文件与新版本对比。
 
 {% assign base_version_parts = base_version | split: "." %}
 {% assign patch_part = base_version_parts[2] %}
 {% if patch_status == "true" %}
 {% capture update_note %}
-**NOTE:**
-If you are upgrading from version {{ family | append: "." | append: patch_part | append: ".x" }}, **DO NOT** run the upgrade script; proceed directly to starting the service.
+**注意：**
+若从 {{ family | append: "." | append: patch_part | append: ".x" }} 版本升级，**请勿**运行升级脚本，直接启动服务即可。
 {% endcapture %}
 {% include templates/info-banner.md content=update_note %}
 {% endif %}
 
-* Finally, run **upgrade.bat** script to upgrade Trendz to the new version.
+* 最后运行 **upgrade.bat** 脚本将 Trendz 升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role. 
+**注意** 以上脚本需以管理员权限执行。 
 
 ```text
 C:\trendz>upgrade.bat
 ```
 {: .copy-code}
 
-#### Start the service
+#### 启动服务
 
 ```text
 net start trendz
 ```
 {: .copy-code}
 
-#### Sync Trendz with ThingsBoard
+#### 同步 Trendz 与 ThingsBoard
 
-After upgrade, it's necessary to sync Trendz with ThingsBoard. You can find out how to do it [here](/docs/trendz/install/windows#step-6-sync-thingsboard-with-trendz).
+升级后需将 Trendz 与 ThingsBoard 同步。操作步骤见[此处](/docs/trendz/install/windows#step-6-sync-thingsboard-with-trendz)。

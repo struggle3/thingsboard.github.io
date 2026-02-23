@@ -1,25 +1,25 @@
-### Add a gateway on The Things Stack Community Edition
+### 在 The Things Stack 社区版上添加网关
 
-We need to add a gateway on [The Things Stack Community Edition](https://console.cloud.thethings.network){:target="_blank"}.  
+我们需要在 [The Things Stack 社区版](https://console.cloud.thethings.network){:target="_blank"} 上添加网关。
 
-To add a gateway, you can follow next steps:  
+要添加网关，请按以下步骤操作：
 
 {% assign addGatewaySteps = '
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/1-tts-login.png,
-        title: Login to the cloud and open your console.
+        title: 登录云端并打开控制台。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/2-welcome-screen.png,
-        title: Select the "**Register a gateway**".
+        title: 选择「**注册网关**」。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/3-gateway-list.png,
-        title: Press the "**Register gateway**" button.
+        title: 点击「**注册网关**」按钮。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/4-register-gateway.png,
-        title: Put information about the gateway (gateway EUI) and click the "**Register gateway**" button.
+        title: 填写网关信息（网关 EUI）并点击「**注册网关**」按钮。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/5-gateway-info.png,
-        title: The gateway is added. You can see its status - disconnected.
+        title: 网关已添加。您可看到其状态为已断开连接。
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addGatewaySteps %}
@@ -33,34 +33,34 @@ To add a gateway, you can follow next steps:
 
 {% endif %}
 
-### Configure application on The Things Stack Community Edition
+### 在 The Things Stack 社区版上配置应用
 
-Now we need to configure application on The Things Stack. To do this please follow next steps:  
+现在需要在 The Things Stack 上配置应用。请按以下步骤操作：
 
 {% assign addIntegrationSteps = '
     === 
         image: /images/devices-library/basic/integrations/thethingsstack/2-welcome-screen-application.png,
-        title: Open your console and click on the "<b>Create an application</b>".
+        title: 打开控制台，点击「<b>创建应用</b>」。
     === 
         image: /images/devices-library/basic/integrations/thethingsstack/3-create-application.png,
-        title: Fill in the required fields about the application. Then click "**Create application**" button.
+        title: 填写应用所需字段。然后点击「**创建应用**」按钮。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/5-generate-new-api-key.png,
-        title: Go to the "<b>Integrations</b>" -> open the "<b>MQTT</b>" page in the left menu. Then, click on the "<b>Generate new API key</b>" button.
+        title: 进入「<b>集成</b>」-> 在左侧菜单中打开「<b>MQTT</b>」页面。然后点击「<b>生成新 API 密钥</b>」按钮。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/6-copy-access-key.png,
-        title: Copy and save the <b>password</b> (API key) (after leaving the page it won&#39;t be displayed).
+        title: 复制并保存 <b>密码</b>（API 密钥）（离开页面后将无法再次查看）。
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addIntegrationSteps %}
 
-Now we can move to ThingsBoard to configure integration.  
+现在可以前往 ThingsBoard 配置集成。
 
-### Create integration in ThingsBoard
+### 在 ThingsBoard 中创建集成
 
-Next we will create "**The Things Stack**" (TTS) integration inside the ThingsBoard.
+接下来，我们将在 ThingsBoard 中创建「**The Things Stack**」（TTS）集成。
 
-At first, copy the code, we will need it to create the uplink converter:
+首先，复制以下代码，创建上行数据转换器时需要用到：
 
 {% capture converterCode %}
 var data = decodeToJson(payload);
@@ -147,42 +147,42 @@ return result;
 
 {% include code-toggle.liquid code=converterCode params="javascript|.copy-code.expandable-15" %}
 
-In the "**Connect**" step, you will need the following parameters:
+在「**连接**」步骤中，您需要以下参数：
 
-- **Region**: *eu1* (region where your application was registered inside The Things Stack Community)
-- **Username**: *thingsboard-application@ttn* (use ***Username*** from integration on TTS)
-- **Password**: use ***Password*** from integration on The Things Stack Community
+- **Region（区域）**：*eu1*（在 The Things Stack 社区中注册应用所在区域）
+- **Username（用户名）**：*thingsboard-application@ttn*（使用 TTS 集成中的 ***用户名***）
+- **Password（密码）**：使用 The Things Stack 社区集成中的 ***密码***
 
 {% assign createTTSIntegration = '
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/1-create-tts-integration.png,
-        title: Click "**plus**" icon in the upper right corner to add new integration. Select type "**The Things Stack Community**". Then, click "**Next**".
+        title: 点击右上角的「**加号**」图标添加新集成。选择类型「**The Things Stack 社区**」。然后点击「**下一步**」。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/2-create-tts-integration-uplink.png,
-        title: Paste the previously copied script to the Decoder function section. Click "**Next**".
+        title: 将先前复制的脚本粘贴到解码器函数区域。点击「**下一步**」。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/3-create-tts-integration-downlink.png,
-        title: Leave the "**Downlink data converter**" field empty. Click on "**Skip**" button.
+        title: 将「**下行数据转换器**」字段留空。点击「**跳过**」按钮。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/4-create-tts-integration-configuration.png,
-        title: Next, fill in the fields with your parameters. After, press "**Add**" button.
+        title: 填写您的参数，然后点击「**添加**」按钮。
 '
 %}
 
 <br>
-Now, open the "**Integration center**" section -> "**Integrations**" page and follow this steps:  
+现在，打开「**集成中心**」部分 ->「**集成**」页面，按以下步骤操作：
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=createTTSIntegration %} 
 
-Integration is created.
+集成已创建。
 
 <br>
-To check integration connection you can do the following:
+可按以下方式检查集成连接状态：
 
-- Click on integration row in the list;
-- Go to the "**Events**" tab;
-- Select "**Lifecycle events**" from **Event type** dropdown list.
+- 点击集成列表中的某一行；
+- 进入「**事件**」选项卡；
+- 在 **事件类型** 下拉列表中选择「**生命周期事件**」。
 
-If you see event **STARTED** and status **Success** it means that integration is successfully started and ready to receive messages.
+若看到 **STARTED** 事件且状态为 **Success**，则表示集成已成功启动，可以接收消息。
 
-![Check integration connection](/images/devices-library/basic/integrations/check-integration-started.png)
+![检查集成连接](/images/devices-library/basic/integrations/check-integration-started.png)

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Message Delivery Strategies
-description: TBMQ Message Delivery Strategies documentation
+title: 消息投递策略
+description: TBMQ 消息投递策略文档
 
 ---
 

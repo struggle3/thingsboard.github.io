@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect ALPON X4 Edge Computer to ThingsBoard?
-category: Other devices
+title: 如何将 ALPON X4 Edge Computer 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [Ethernet, WIFI, Bluetooth, LTE]
 vendor: Sixfab
 hasIntegrationDeviceConfiguration: true

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Compact Bluetooth Gateway to ThingsBoard?"
+title: "如何将Compact Bluetooth Gateway连接到ThingsBoard？"
 redirect_to: "/device-library/paas/compact-bluetooth-gateway/"
 ---

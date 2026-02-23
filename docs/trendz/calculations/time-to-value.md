@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Calculate time to value
-description: Calculate time to value based on predicted telemetry
+title: 计算到达目标值的时间
+description: 基于预测遥测计算到达目标值的时间
 
 calc-time-to-value-chart:
   0:
@@ -35,62 +35,62 @@ calc-time-to-value-alarm:
 * TOC
 {:toc}
 
-The most common use case for predicted telemetry is estimating the time remaining until a specific event occurs. For example, predicting when fuel will run out in a tank or when a battery will be fully discharged. 
-These events can typically be defined as conditions based on telemetry values. For instance, fuel running out can be represented by the condition: fuel_in_tank <= minimal_fuel_threshold. The same logic applies to battery levels or similar cases.
+预测遥测最常见的用途是估算直到特定事件发生所需的剩余时间。例如，预测油箱中的燃料何时耗尽或电池何时完全放电。
+这些事件通常可定义为基于遥测值的条件。例如，燃料耗尽可表示为条件：fuel_in_tank <= minimal_fuel_threshold。电池电量或类似情况也适用相同逻辑。
 
-The key aspect of such tasks is that the telemetry value we evaluate must be predicted, meaning it is a future value. Once we have the prediction, we can determine when the value meets the threshold and calculate how much time remains until the event occurs.
+此类任务的关键在于，我们评估的遥测值必须是预测值，即未来的值。获得预测后，我们可以确定值何时达到阈值，并计算直到事件发生还需多长时间。
 
-We can also create an alarm rule to trigger notifications or alerts if the critical value is expected to be reached soon. To achieve this, we need to generate "countdown telemetry," which can be implemented using **Calculation Fields**.
+我们还可创建告警规则，在即将达到临界值时触发通知或告警。为此，我们需要生成“倒计时遥测”，可使用 **计算字段** 实现。
 
-**Steps to Calculate Time to Event**
+**计算到达事件时间的步骤**
 
-1. Create a prediction model for the required telemetry.
-2. Define a logical condition based on the telemetry value.
-3. Create a Calculated Field to generate countdown telemetry for the event.
-4. Configure alarm rules based on the countdown telemetry.
+1. 创建所需遥测的预测模型。
+2. 基于遥测值定义逻辑条件。
+3. 创建计算字段以生成事件的倒计时遥测。
+4. 基于倒计时遥测配置告警规则。
 
-**Example: Predicting Energy Consumption Threshold**
+**示例：预测能耗阈值**
 
-Let’s consider an example of the usage of the feature. Today is the 1st of January 2025, you have an Energy Meter device, and it measures “Energy Consumption” telemetry in kWh. We have historical telemetry for the whole 2024 year. 
+让我们考虑此功能的使用示例。今天是 2025 年 1 月 1 日，您有能源表设备，测量 kWh 单位的“能耗”遥测。我们拥有 2024 年全年的历史遥测。
 
-## Build prediction model 
+## 构建预测模型
 
-Start with creating a prediction model with the following parameters:
+从创建具有以下参数的预测模型开始：
 
-  * **Name:** Energy Consumption Prediction
-  * **Business entity:** Energy Meter
-  * **ThingsBoard key:** energy_consumption_prediction
-  * **Training range:** 01/01/2024 - 31/12/2024
-  * **Prediction range:** 30 days
+  * **名称：** 能耗预测
+  * **业务实体：** 能源表
+  * **ThingsBoard 键：** energy_consumption_prediction
+  * **训练范围：** 2024/01/01 - 2024/12/31
+  * **预测范围：** 30 天
 
-After successfully training the model, you see predictions for the next 30 days. You also build a view to display these predictions (as shown in the screenshot). Configure automated forecast generation task with the required frequency.
+模型成功训练后，您可看到未来 30 天的预测。您还构建了视图以显示这些预测（如截图中所示）。配置具有所需频率的自动化预测生成任务。
 
 {% include images-gallery.html imageCollection="calc-time-to-value-chart" %}
 
-## Define a logical condition based on the telemetry value 
+## 基于遥测值定义逻辑条件
 
-You know that energy consumption higher than 15 kWh is too much for the meter (for example) and you want to react right before it will happen, let it be 3 days. So, we have 15 kWh as a telemetry threshold and 3 days as the time threshold. So, your condition is “Energy Consumption Prediction” >= 15000.
+您知道能耗超过 15 kWh 对表来说过高（例如），并希望在其发生前 3 天做出反应。因此，15 kWh 为遥测阈值，3 天为时间阈值。故条件为“能耗预测”>= 15000。
 
-## Compute time to event
+## 计算到达事件时间
 
-Next, you need to create a **Calculated Field**:
-  * **Name:** Energy Consumption Prediction Countdown
-  * **ThingsBoard key:** energy_consumption_prediction_countdown
+接下来，您需要创建 **计算字段**：
+  * **名称：** 能耗预测倒计时
+  * **ThingsBoard 键：** energy_consumption_prediction_countdown
 
-In this Calculated Field, you will load all predicted telemetry points and find the first point that meets your threshold condition. Use the following settings:
-* **Field type:** BATCH
-* **Aggregation:** AVG
-* **Grouping interval:** days (for the countdown calculation).
-* **Time strategy:** FIXED (to specify a future time range for loading prediction telemetry).
+在此计算字段中，您将加载所有预测遥测点并找到第一个满足阈值条件的点。使用以下设置：
+* **字段类型：** BATCH
+* **聚合：** AVG
+* **分组间隔：** days（用于倒计时计算）
+* **时间策略：** FIXED（指定加载预测遥测的未来时间范围）
 
-I will use This Year to load all prediction points for the 2025 year (we have points only in January anyway). For the script, you can use this universal configurable template attached below - there are some parameters you need to change to make it work:
-* **inputTelemetry** - specify prediction telemetry of the created prediction model
-* **limit** - specify the value threshold of your event condition
-* **up** - specify “true” if it is the top limit, “false” - if it is the bottom limit.
-* **timeUnit** - specify the time-unit you want to use for the countdown, left “groupBy” if you want to make it dependent on the context (time unit of calculation field)
-* **timeUnitDefault** - specify the time-unit you want to use when the calculation field depends on the context, but the context does not provide value - it will be default value.
+我将使用“今年”来加载 2025 年所有预测点（反正我们只有 1 月的数据）。对于脚本，您可使用下面附带的通用可配置模板——需要更改一些参数才能使其工作：
+* **inputTelemetry** - 指定创建的预测模型的预测遥测
+* **limit** - 指定事件条件的值阈值
+* **up** - 指定“true”表示上限，“false”表示下限
+* **timeUnit** - 指定用于倒计时的时间单位，若要根据上下文（计算字段的时间单位）设定，则保留“groupBy”
+* **timeUnitDefault** - 当计算字段依赖上下文但上下文未提供值时使用的默认时间单位
 
-The template with need parameters :
+包含所需参数的模板：
 
 ```js
 /// Inputs
@@ -190,28 +190,28 @@ if (groupBy === 'null') {
 return 'Error during calculation Time To Value'; 
 ```
 
-In the end, you will have the calculation field that looks like the next one on the screenshot below.
+最后，您将得到如下截图所示的计算字段。
 
 {% include images-gallery.html imageCollection="calc-time-to-value-script" %}
 
-Also, you can use the test feature of the calculation field and see the result
+您还可使用计算字段的测试功能查看结果
 
 {% include images-gallery.html imageCollection="calc-time-to-value-output" %}
 
-Now you need to enable the calculation field to make the countdown telemetry available in the ThingsBoard and keep it actual for each new day.
+现在需要启用计算字段，以使倒计时遥测在 ThingsBoard 中可用并针对每天保持最新。
 
 {% include images-gallery.html imageCollection="calc-time-to-value-job" %}
 
-Now you can return to your visualization and add the new telemetry with the prediction. You may change the view template to Table to make it simpler for end users to analyze time to event. 
+现在您可以返回可视化并添加带有预测的新遥测。您可将视图模板更改为表格，以便最终用户更简单地分析到达事件时间。
 
-**WARNING:** pay attention that the countdown telemetry will exist only for future time for the first launch and since time only future values will be updated.
+**警告：** 请注意，首次启动时倒计时遥测仅存在于未来时间，此后仅会更新未来的值。
 
 {% include images-gallery.html imageCollection="calc-time-to-value-table" %}
 
-## Configure alert generation 
+## 配置告警生成
 
-Now when we have countdown telemetry, and it is available on the ThingsBoard we can create an alarm rule to ask the system to notify us about the problem in the future. For this purpose, we need to find the device/asset profile of the needed device.
+现在我们有了倒计时遥测，且其在 ThingsBoard 中可用，我们可以创建告警规则，让系统在未来出现问题时通知我们。为此，我们需要找到所需设备的设备/资产配置文件。
 
-After that, we need to go to the Edit mode, go to the “Alarm Rules” tab, and click the “Add alarm rule” button, and you will see a template of the new alarm rule.
+然后，进入编辑模式，打开“告警规则”选项卡，点击“添加告警规则”按钮，您将看到新告警规则的模板。
 
 {% include images-gallery.html imageCollection="calc-time-to-value-alarm" %}

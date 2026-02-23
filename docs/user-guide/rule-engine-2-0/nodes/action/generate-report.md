@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: generate report
-description: Generates a report based on a report template and sends notifications to configured targets.
+description: 根据报告模板生成报告，并向配置的目标发送通知。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

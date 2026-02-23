@@ -1,20 +1,20 @@
-The configuration in this unit provides settings for processing data on Modbus server. These settings will be interpreted in ThingsBoard platform instance as attributes/time series of the device.
+本单元中的配置用于 Modbus 服务器上的数据处理。这些设置将在 ThingsBoard 平台实例中被解析为设备的属性/时序数据。
 
-The table below describes the attributes and time series parameters:
+下表描述了属性和时序参数：
 
-| **Parameter** | **Description**                                                       |
+| **参数** | **描述**                                                       |
 |:--------------|:----------------------------------------------------------------------
-| tag           | Key name                                                              |
-| type          | Type of value                                                         | 
-| functionCode  | The function to use in data processing, specifically Modbus functions |
-| objectsCount  | Count of objects to write                                             | 
-| address       | Object address                                                        |
+| tag           | 键名                                                              |
+| type          | 值类型                                                         | 
+| functionCode  | 数据处理中使用的功能，即 Modbus 功能码 |
+| objectsCount  | 写入对象数量                                             | 
+| address       | 对象地址                                                        |
 | ---           
 
 ![image](/images/gateway/modbus-connector/attributes-advanced-1-ce.png)
 
 <br>
-Example of attributes section:
+属性部分示例：
 
 ```json
 "attributes": [
@@ -28,7 +28,7 @@ Example of attributes section:
 ]
 ```
 
-Example of time series section:
+时序部分示例：
 
 ```json
 "timeseries": [

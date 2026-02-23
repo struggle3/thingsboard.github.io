@@ -2,16 +2,16 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Managing domain
-description: Domain managing through EU ThingsBoard Cloud
+title: 域名管理
+description: 通过 EU ThingsBoard Cloud 管理域名
 
 register-domain:
     0:
         image: /images/user-guide/domain/adding-new-domain-1-paas-eu.png
-        title: 'Go to the "OAuth 2.0" page of the "Security" section. On the "Domains" tab click the "plus" icon;'
+        title: '进入「安全」部分的「OAuth 2.0」页面，在「Domains」标签页点击「+」图标；'
     1:
         image: /images/user-guide/domain/adding-new-domain-2-paas-eu.png
-        title: 'Enter valid domain name in the "Domain name" field and click "Add" button;'
+        title: '在「Domain name」字段输入有效域名，点击「Add」按钮；'
     2:
         image: /images/user-guide/domain/adding-new-domain-3-paas-eu.png
         title: 'Here you will find a reminder to add CNAME records to the DNS configuration of your domain. Click the "I&#39;ve added CNAME records" button. The domain verification and certificate provisioning will start;'

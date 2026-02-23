@@ -1,42 +1,42 @@
-bigheader: "ThingsBoard API reference"
-abstract: "Device connectivity and server-side APIs."
+bigheader: "ThingsBoard API参考"
+abstract: "设备连接与服务端API。"
 toc:
-- title: ThingsBoard API reference
+- title: ThingsBoard API参考
   path: /docs/api/
-- title: Device Connectivity Protocols
+- title: 设备连接协议
   path: /docs/reference/protocols/
 - title: MCP Server
   new: true
   path: /docs/reference/mcp-server/
-- title: Device Connectivity APIs
+- title: 设备连接API
   section:
-  - title: MQTT Device API
+  - title: MQTT设备API
     path: /docs/reference/mqtt-api/
-  - title: MQTT Gateway API Reference
+  - title: MQTT网关API参考
     path: /docs/reference/gateway-mqtt-api/
   - title: MQTT Sparkplug API
     path: /docs/reference/mqtt-sparkplug-api/
     new: true
-  - title: CoAP Device API
+  - title: CoAP设备API
     path: /docs/reference/coap-api/
-  - title: HTTP Device API
+  - title: HTTP设备API
     path: /docs/reference/http-api/
-  - title: LWM2M Transport API
+  - title: LWM2M传输API
     path: /docs/reference/lwm2m-api/
-  - title: SNMP Transport API
+  - title: SNMP传输API
     path: /docs/reference/snmp-api/
     new: true
-- title: REST APIs and clients
+- title: REST API与客户端
   section:
-  - title: Administration REST API
+  - title: 管理REST API
     path: /docs/reference/rest-api/
-  - title: Java REST Client
+  - title: Java REST客户端
     path: /docs/reference/rest-client/
-  - title: Python REST Client
+  - title: Python REST客户端
     path: /docs/reference/python-rest-client/
-  - title: Dart API Client
+  - title: Dart API客户端
     path: /docs/reference/dart-client/
-- title: Software development kits
+- title: 软件开发套件
   new: true
   section:
     - title: Python Client SDK

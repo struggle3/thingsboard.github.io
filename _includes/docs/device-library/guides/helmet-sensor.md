@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.lansitec.com/products/helmet-tracker-sensor/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -12,14 +12,14 @@
 [Helmet Sensor]({{deviceVendorLink}}){:target="_blank"} is designed based on GNSS, Bluetooth5.0 and LoRaWAN technology. It supports indoor and outdoor tracking.<br>
 It supports various features which contribute to easy management in industrial settings. Its built-in 3-axis accelerator could be used for determining the motion status of the terminal. Therefore, it can help save battery and enhance user experience. It is suitable for the following use cases: visitor management, factory worker tracking, construction worker tracking, vehicle tracking etc.<br><br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
 Only ThingsBoard Cloud works when using direct communication from this device to ThingsBoard via MQTT.
 

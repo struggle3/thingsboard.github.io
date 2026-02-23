@@ -2,33 +2,33 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Enable Trendz Analytics in ThingsBoard Cloud 
-description: Activate Trendz Analytics add-on
+title: 在 ThingsBoard Cloud 中启用 Trendz 分析
+description: 激活 Trendz 分析插件
 
 ---
 
 * TOC
 {:toc}
 
-## Trendz Analytics in ThingsBoard Cloud
+## ThingsBoard Cloud 中的 Trendz 分析
 
-Trendz Analytics in ThingsBoard Cloud is a fully managed, scalable, and fault-tolerant version of the [Trendz Analytics add-on](/products/trendz/).
-It is already integrated into ThingsBoard Cloud and can be used to analyze your data.
+ThingsBoard Cloud 中的 Trendz 分析是 [Trendz 分析插件](/products/trendz/) 的全托管、可扩展且高可用的版本。
+其已集成到 ThingsBoard Cloud 中，可用于分析您的数据。
 
-* **Improved time to market.** Save time on maintaining the platform or configuring its features.
-* **Reduced costs.** Infrastructure costs are shared between platform users.
-* **High availability.** The Trendz Analytics uses a microservices architecture and is deployed across multiple availability zones.
-* **Data durability.** The platform uses data replication and backup procedures to ensure you don't lose data.
+* **缩短上市时间。** 节省维护平台或配置其功能的时间。
+* **降低成本。** 基础设施成本在平台用户间分摊。
+* **高可用性。** Trendz 分析采用微服务架构，跨多个可用区部署。
+* **数据持久性。** 平台使用数据复制和备份程序确保您不会丢失数据。
 
-## Prerequisites
+## 前置条件
 
-You need an active ThingsBoard Cloud account to activate the Trendz Analytics. If you don't have a ThingsBoard Cloud account yet, please [sign up](https://thingsboard.cloud/signup).
+您需要有效的 ThingsBoard Cloud 账户才能激活 Trendz 分析。若尚无 ThingsBoard Cloud 账户，请[注册](https://thingsboard.cloud/signup)。
 
-## Activate Trendz Analytics
+## 激活 Trendz 分析
 
-Trendz Analytics is already connected to the ThingsBoard Cloud infrastructure, so the only step required to use Trendz is to activate it. 
-You can find out how to do this [here](/docs/trendz/activation/public-cloud)
+Trendz 分析已连接到 ThingsBoard Cloud 基础设施，因此使用 Trendz 只需激活。 
+您可在[此处](/docs/trendz/activation/public-cloud)了解如何操作
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationOptions" %}{% include templates/trndz-guides-banner.md %}

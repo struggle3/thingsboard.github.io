@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Live Demo Server
-description: ThingsBoard IoT Platform Live Demo Server
+title: Live Demo 服务器
+description: ThingsBoardIoT平台 Live Demo 服务器
 
 ---
 
@@ -12,8 +12,8 @@ description: ThingsBoard IoT Platform Live Demo Server
 * TOC
 {:toc}
 
-The Live Demo is a pre-configured, single-node instance designed for rapid evaluation and testing. You can access the environment immediately at [**demo.thingsboard.io**](https://demo.thingsboard.io).
-Once logged in, you'll have full access to our "Hello World" resources to jumpstart your project.
+Live Demo 为预配置的单节点实例，用于快速评估与测试。可立即访问 [**demo.thingsboard.io**](https://demo.thingsboard.io)。
+登录后可完整使用「Hello World」资源快速启动项目。
 
-**Note:** New user registration is now directed to [ThingsBoard Cloud](https://thingsboard.io/installations/), which offers a permanent free-tier account with better reliability.
+**说明：** 新用户注册现已引导至 [ThingsBoard Cloud](https://thingsboard.io/installations/)，提供永久免费层级账户及更高可靠性。
 

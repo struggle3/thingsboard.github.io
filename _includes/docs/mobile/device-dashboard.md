@@ -4,23 +4,23 @@
 {% assign appPrefix = "ThingsBoard" %}
 {% endif %}
 
-{{appPrefix}} allows configuring device details dashboard to be displayed when tapping on the device with the specific type.
-Device details dashboard is configurable in the device profile form:
+{{appPrefix}}允许配置点击特定类型设备时显示的设备详情仪表板。
+设备详情仪表板可在设备配置文件中配置：
 
-1. Go to the **Device profiles** through the main menu on the left of the screen;
-2. Click on the device profile you want to modify;
-3. In the opened device profile details click **edit** button;
-4. Select desired dashboard in the **Mobile dashboard** field;
-5. Click **Apply changes** button;
+1. 通过屏幕左侧主菜单进入**设备配置**；
+2. 点击要修改的设备配置；
+3. 在打开的设备配置详情中点击**编辑**按钮；
+4. 在**移动仪表板**字段中选择所需仪表板；
+5. 点击**应用更改**按钮；
 
 {% include images-gallery.html imageCollection="device-dashboard" %}
 
 {% capture dashboard_state_parameter %}
-**Note:** In order to display specific device data, dashboard should be configured to use [**Entity from dashboard state**](/docs/{{docsPrefix}}user-guide/ui/aliases/#entity-from-dashboard-state) alias in widgets datasources.
+**注意：**要显示特定设备数据，仪表板需要配置为在部件数据源中使用[**仪表板状态中的实体**](/docs/{{docsPrefix}}user-guide/ui/aliases/#entity-from-dashboard-state)别名。
 {% endcapture %}
 {% include templates/info-banner.md content=dashboard_state_parameter %}
 
-To verify your configuration run the mobile app. Then navigate to the devices list. Tap on the device having type for which dashboard was configured.
+要验证配置，请运行移动应用。然后导航到设备列表，点击已配置仪表板类型的设备。
 
 <br>
 

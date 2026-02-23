@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://teltonika-networks.com/ua/products/routers/rut955/" %}
 {% assign controllerName = "Siemens LOGO!" %}
 {% assign controllerVendorLink = "https://www.siemens.com/ua/uk/produkty/avtomatyzatsiya-promyslovosti/systemy-avtomatyzatsiyi/systemy-promyslovoyi-avtomatyzatsiyi-simatic/plc-kontrolery-simatic/lohichnyy-modul-logo.html" %}
@@ -9,18 +9,18 @@
 {% assign thingsboardInstanceLink = "https://" | append: hostName %}
 
 
-## Introduction
+## 概述
 [{{deviceName}}]({{deviceVendorLink}}){: target="_blank"} offers dual-SIM cellular 
 connectivity, four Ethernet ports and Wi-Fi combined with RS232, RS485, USB interfaces and I/O for a wide variety of 
 professional application scenarios. This router is equipped with advanced RutOS software features such as Modbus, SNMP, 
 TR-069, NTRIP, MQTT protocol support and GNSS tracking capabilities.
 <br><br>
 
-## Prerequisites
+## 前置条件
 
 To continue with this guide, we will need the following:  
 {{ prerequisites }}
-- [ThingsBoard account]({{thingsboardInstanceLink}}){: target="_blank"}
+- [ThingsBoard 账户]({{thingsboardInstanceLink}}){: target="_blank"}
 
 
 ## Import Rule chain
@@ -212,8 +212,7 @@ If you did everything right, you have to receive the following MQTT message:
 {"data": 299, "reg": 300003, "ts": 1696838802}
 ```
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/ready-to-go-devices/check-data-on-thingsboard-block.md %}
 
 {% capture readytogodevicestogglespec %}
@@ -222,7 +221,7 @@ New Dashboard%,%newDashboard%,%templates/device-library/ready-to-go-devices/gate
 
 {% include content-toggle.liquid content-toggle-id="minicomputersDashboard" toggle-spec=readytogodevicestogglespec %}
 
-## Conclusion
+## 总结
 
 With the knowledge in this guide, you can easily connect your {{deviceName}} and use the built-in 
 integration to retrieve data from devices connected to {{deviceName}}.

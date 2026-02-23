@@ -8,56 +8,56 @@
 * TOC
 {:toc}
 
-ThingsBoard Platform integrations feature was designed for two primary use cases / deployment options:
+ThingsBoard 平台集成功能面向两大用例/部署方式：
 
-- Connect existing NB IoT, LoRaWAN, SigFox and other devices with specific payload formats directly to ThingsBoard platform.
-- Stream data from devices connected to existing IoT Platforms to enable real-time interactive dashboards and efficient data processing.
+- 将采用特定负载格式的 NB IoT、LoRaWAN、SigFox 等设备直接接入 ThingsBoard 平台。
+- 从已接入现有物联网平台的设备流式传输数据，以支持实时交互式仪表板及高效数据处理。
   
-Both use cases have few things in common. There is a server-side component in the deployment topology that prevents direct access to device and provides set of APIs to interact with the device in the field instead.
-The payload format of the device is not well-defined. Often two devices that have similar sensors have different payload formats depending on a vendor or even software version.  
+两类用例有若干共同点。部署拓扑中均有服务端组件阻止直接访问设备，并提供一组 API 与现场设备交互。
+设备负载格式未统一，同类传感器的不同厂商甚至不同版本往往使用不同格式。
 
-The job of ThingsBoard Integration is to provide secure and reliable API bridge between core platform features (telemetry collection, attributes and RPC calls) and specific third-party platform APIs.    
+ThingsBoard 集成的职责是在核心平台能力（遥测采集、属性与 RPC 调用）与特定第三方平台 API 之间提供安全、可靠的 API 桥接。
 
-## How it works?
+## 工作原理
 
-At the moment ThingsBoard supports various integration protocols. Most popular are HTTP, MQTT and OPC-UA. 
-Platform also support integration with specific LoRaWAN Network servers, Sigfox backend, various NB IoT devices using raw UDP and TCP integrations. 
-AWS IoT, IBM Watson and Azure Event Hub allows to subscribe to the data feed from devices via MQTT or AMQP.
+ThingsBoard 目前支持多种集成协议，以 HTTP、MQTT、OPC-UA 最为常用。
+平台也支持与 LoRaWAN 网络服务器、Sigfox 后端、各类 NB IoT 设备等的集成，可通过原始 UDP 和 TCP 集成。
+AWS IoT、IBM Watson、Azure Event Hub 等支持通过 MQTT 或 AMQP 订阅设备数据流。
 
 ![image](/images/user-guide/integrations/overview/create-integration-1.png)
 
-The list of platform integrations is constantly growing, however, the general integration concepts are the same and explained below.  
+平台集成列表持续增加，但整体集成概念相同，说明如下。
 
-Once message arrives from External Platform to ThingsBoard it passes validation according to platform specific payload format and security rules. 
-Once message is validated ThingsBoard Integration invokes assigned [**Uplink data converter**](#uplink-data-converter) to extract sub-set of meaningful information out of the incoming message.
-The message is basically transformed from device and platform specific payload to the format that ThingsBoard uses.
+消息从外部平台到达 ThingsBoard 后，会按平台特定负载格式和安全规则进行校验。
+校验通过后，ThingsBoard 集成会调用已配置的[**上行数据转换器**](#uplink-data-converter)，从入站消息中提取有效信息子集。
+消息将设备及平台特定的负载转换为 ThingsBoard 所需格式。
 
-Since TB PE v2.0, Rule Engine is also able to push Downlink messages to the integrations. The example of such message may be:
+自 TB PE v2.0 起，规则引擎也可向集成推送下行消息。此类消息示例包括：
  
- - notification about [shared attribute](/docs/{{docsPrefix}}user-guide/attributes/#device-specific-attribute-types){:target="_blank"} (configuration) update;
- - notification about [oneway RPC call](/docs/{{docsPrefix}}user-guide/rpc/#server-side-rpc-api){:target="_blank"} to trigger some action on the device;
- - any custom message from the rule engine.
+ - [共享属性](/docs/{{docsPrefix}}user-guide/attributes/#device-specific-attribute-types){:target="_blank"}（配置）更新的通知；
+ - [单向 RPC 调用](/docs/{{docsPrefix}}user-guide/rpc/#server-side-rpc-api){:target="_blank"}以触发设备侧操作的通知；
+ - 来自规则引擎的任意自定义消息。
  
-The most common use cases are:
+常见用例包括：
  
- - changing data upload frequency based on shared attribute value change
- - triggering firmware update procedure based on shared attribute value change
- - changing device state based on rpc call;    
+ - 根据共享属性变化调整数据上报频率；
+ - 根据共享属性变化触发固件更新；
+ - 根据 RPC 调用改变设备状态；
  
-Once message is pushed by the rule engine, ThingsBoard invokes assigned [**Downlink data converter**](#downlink-data-converter) and transforms the rule engine message to the specific data format that is used by the Integration.
+规则引擎推送消息后，ThingsBoard 会调用已配置的[**下行数据转换器**](#downlink-data-converter)，将规则引擎消息转换为集成所需的数据格式。
 
 <br>
 
 <object width="100%" data="/images/user-guide/integrations/integrations-overview.svg"></object>
  
-## Uplink data converter
+## 上行数据转换器
 
-The primary function of the Uplink data converter is to parse the payload of incoming messages from devices (e.g., MQTT, HTTP, CoAP, or other protocols) and convert it into a format that ThingsBoard can process.
+上行数据转换器的主要作用是将来自设备的入站消息负载（如 MQTT、HTTP、CoAP 等协议）解析并转换为 ThingsBoard 可处理的格式。
 
-Starting from ThingsBoard version 4.0, we have simplified the process of writing converters for certain integrations that receive payload messages with the same structure.
-You can now easily choose where the message fields from the integration should go (attributes or telemetry) without manually defining this in the decoder function.
+自 ThingsBoard 4.0 起，对于接收具有相同结构的负载消息的集成，编写转换器的流程已简化。
+您可直接在界面中选择集成消息字段应写入属性还是遥测，无需在解码函数中手动定义。
 
-This feature applies to uplink converters for the following integrations:
+该功能适用于下列集成的上行转换器：
 
 - [ChirpStack](/docs/{{peDocsPrefix}}user-guide/integrations/chirpstack/){:target="_blank"}
 - [Loriot](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/){:target="_blank"}
@@ -66,67 +66,67 @@ This feature applies to uplink converters for the following integrations:
 - **ThingPark**
 - **ThingPark Enterprise**
 
-> Converters created before the release of ThingsBoard 4.0 will still be available and will continue to function properly.
+> 4.0 之前创建的转换器仍可使用并正常工作。
 
-### Generic Uplink data converter
+### 通用上行数据转换器
 
-To create a generic Uplink data converter suitable for all integration types, follow these steps:
+创建适用于所有集成类型的通用上行数据转换器，请按下列步骤操作：
 
-- Navigate to the "**Data converters**" section in the "**Integration center**", click the "**plus**" icon button, and In the dropdown menu, select "**Create new converter**".
-- In the new window:
-  - Make sure the converter type selector is set to "**Uplink**".
-  - Select the **integration type** where this converter will be used (e.g., [MQTT](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/){:target="_blank"}, [OPC-UA](/docs/{{peDocsPrefix}}user-guide/integrations/opc-ua/){:target="_blank"}, etc.), or leave it set to "All" if it will be used across multiple integrations.
-  - Enter a name for the converter.
-  - (Optional) Enable **Debug mode** if you need to troubleshoot the converter during development or testing.
+- 进入「**Integration center**」的「**Data converters**」部分，点击「**plus**」图标，在下拉菜单中选择「**Create new converter**」。
+- 在新窗口中：
+  - 将转换器类型选择器设为「**Uplink**」。
+  - 选择使用该转换器的** integration type**（如 [MQTT](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/){:target="_blank"}、[OPC-UA](/docs/{{peDocsPrefix}}user-guide/integrations/opc-ua/){:target="_blank"} 等），若在多种集成中使用则保持「All」。
+  - 输入转换器名称。
+  - （可选）开发或测试时启用 **Debug mode** 以便排查问题。
 
 {% assign feature = "uplink converter" %}
 {% include templates/debug-mode.md %}
 
-- In the **Main decoding configuration** section, define the decoding logic: use the provided default script or enter your custom script to parse and transform the incoming data.
+- 在 **Main decoding configuration** 部分定义解码逻辑：使用提供的默认脚本或输入自定义脚本解析并转换入站数据。
 
 {% include templates/tbel-vs-js.md %}
 
 ![image](/images/user-guide/integrations/overview/adding-uplink-converter-1.png)
 
-- Configure **advanced decoding parameters**:
-  - To prevent unnecessary updates for telemetry or attribute values, you can use the "**Update only keys list**" field. Keys specified in this list will only be updated if their values have changed compared to the previous ones. If a listed key appears in the converted message but its value remains the same, the update will be skipped.
-  > **Please note** that in a cluster setup, values, associated with keys specified in the "Update only keys list" field may be updated more than once if a message is received by a different integration executor nodes. The same behavior is expected if the converter configuration has been updated.  
-- Once everything is set up, click the "**Add**" button to create and save the new converter.
+- 配置 **advanced decoding parameters**：
+  - 为避免遥测或属性值的不必要更新，可使用「**Update only keys list**」字段。该列表中指定的键仅在其值与先前不同时才会更新。若某键出现在转换后的消息中但值未变，则跳过更新。
+  > **注意**：集群环境下，若消息由不同集成执行节点接收，或转换器配置已更新，「Update only keys list」中键对应的值可能会被多次更新。  
+- 配置完成后，点击「**Add**」创建并保存新转换器。
 
 ![image](/images/user-guide/integrations/overview/adding-uplink-converter-2.png)
 
-### Typed Uplink data converter
+### 类型化上行数据转换器
 
-The typed Uplink data converter is designed for use with a specific integration type.
-To create the Uplink data converter for an integration that supports the **new uplink converter functionality** ([ChirpStack](/docs/{{peDocsPrefix}}user-guide/integrations/chirpstack/){:target="_blank"}, [Loriot](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/){:target="_blank"}, [The Things Stack Community](/docs/{{peDocsPrefix}}user-guide/integrations/ttn/){:target="_blank"}, [The Things Stack Industries](/docs/{{peDocsPrefix}}user-guide/integrations/tti/){:target="_blank"}, ThingPark, ThingPark Enterprise), follow these steps:
+类型化上行数据转换器面向特定集成类型。
+为支持**新版上行转换器功能**的集成（[ChirpStack](/docs/{{peDocsPrefix}}user-guide/integrations/chirpstack/){:target="_blank"}、[Loriot](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/){:target="_blank"}、[The Things Stack Community](/docs/{{peDocsPrefix}}user-guide/integrations/ttn/){:target="_blank"}、[The Things Stack Industries](/docs/{{peDocsPrefix}}user-guide/integrations/tti/){:target="_blank"}、ThingPark、ThingPark Enterprise）创建上行数据转换器，请按下列步骤：
 
-- The "**Integration type**" field lists all supported integrations. For this example, I&#39;ll use [Loriot](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/){:target="_blank"}.
-- Specify a name for the converter.
-- Go to the "**Main decoding configuration**" section: 
-  - Select the entity type (**Device** or **Asset**) that will be created as a result of the integration, and specify the entity name.
-  > The Entity name field is mandatory, so it cannot be left empty. By default, the entity name follows the pattern **Device $eui** (or **Asset $eui**). Here you need to underline the pattern **$** in the device name. As you type **$**, a list of available keys from the Loriot message will appear. This list is standardized and does not depend on the specific message content. The **$eui** pattern will dynamically fetch the device&#39;s unique identifier from the Loriot message.
-- In the **Main decoding configuration** section, define the decoding logic: use the provided default script or enter your custom script to parse and transform the incoming data.
+- 「**Integration type**」字段列出所有支持的集成。本例使用 [Loriot](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/){:target="_blank"}。
+- 指定转换器名称。
+- 进入「**Main decoding configuration**」部分： 
+  - 选择集成将创建的实体类型（**Device** 或 **Asset**）并指定实体名称。
+  > Entity name 字段必填。默认遵循 **Device $eui**（或 **Asset $eui**）模式。在设备名称中需突出 **$** 模式。输入 **$** 时将出现 Loriot 消息的可用键列表，该列表为标准格式且不依赖具体消息内容。**$eui** 模式将动态从 Loriot 消息获取设备唯一标识。
+- 在 **Main decoding configuration** 部分定义解码逻辑：使用提供的默认脚本或输入自定义脚本解析并转换入站数据。
 
 {% include templates/tbel-vs-js.md %}
 
 ![image](/images/user-guide/integrations/overview/uplink-converter-20-1.png)
 
-- Configure **advanced decoding parameters**:
-  - The **Device profile**, **Device label**, **Customer name**, and **Device group name** fields are not mandatory, and you can also use the **$** pattern to populate them dynamically.
-  If the Device profile field is left empty, the device profile will be set to "default".
-  - In the **Attributes** and **Telemetry** sections specify the keys that should be interpreted as attributes and telemetry, respectively.
-  If a specified key is not present in the incoming message, it will be ignored by the converter.
-  - To prevent unnecessary updates for telemetry or attribute values, you can use the "**Update only keys list**" field. Keys specified in this list will only be updated if their values have changed compared to the previous ones. If a listed key appears in the converted message but its value remains the same, the update will be skipped.
-  > **Please note** that in a cluster setup, values, associated with keys specified in the "Update only keys list" field may be updated more than once if a message is received by a different integration executor nodes. The same behavior is expected if the converter configuration has been updated.
-- Once everything is set up, click the "**Add**" button to create and save the new converter.
+- 配置 **advanced decoding parameters**：
+  - **Device profile**、**Device label**、**Customer name**、**Device group name** 字段非必填，可使用 **$** 模式动态填充。
+  若 Device profile 为空，将使用「default」。
+  - 在 **Attributes** 和 **Telemetry** 部分分别指定应解释为属性和遥测的键。
+  若入站消息中缺少某指定键，转换器将忽略。
+  - 为避免不必要更新，可使用「**Update only keys list**」字段。该列表中指定的键仅在其值发生变化时更新；若某键在转换消息中出现但值相同，则跳过更新。
+  > **注意**：集群环境下，若消息由不同集成执行节点接收，或转换器配置已更新，「Update only keys list」中键对应的值可能会被多次更新。
+- 配置完成后，点击「**Add**」创建并保存新转换器。
 
 ![image](/images/user-guide/integrations/overview/uplink-converter-20-2.png)
 
-### Test decoder function
+### 测试解码函数
 
-When creating the Uplink data converter, you can validate the decoding logic used to process incoming device data.
-To get started, click the "**Test payload decoder**" button. 
-This allows you to simulate how your converter will handle real payloads and fine-tune your decoding function accordingly.
+创建上行数据转换器时，可验证用于处理入站设备数据的解码逻辑。
+点击「**Test payload decoder**」开始。
+可模拟转换器如何处理实际负载，并据此微调解码函数。
 
 {% assign testDecoderFunctionWindow = '
     ===
@@ -142,41 +142,41 @@ This allows you to simulate how your converter will handle real payloads and fin
 
 #### Payload
 
-The **Payload** - this represents the encoded input data received from your device. 
+**Payload** 表示从设备接收到的编码输入数据。
 
-> Note: Each supported integration has a pre-filled sample payload. You can use this as a starting point, or modify it to match the specific message format used by your integration.
+> 注意：各集成类型有预填示例负载。可作为起点，或修改以匹配您集成的消息格式。
 
-The format can vary depending on the integration type and may be:
+格式因集成类型而异，可为：
 - **JSON**
 - **TEXT**
 - **Binary (Base64)**
-  > For the **Binary (Base64) payload content type**, the payload is automatically decoded into a byte array, so there&#39;s no need to decode it manually in your script.
+  > 对于 **Binary (Base64) payload content type**，负载会自动解码为字节数组，无需在脚本中手动解码。
 
-You can access the payload in your decoder script using the *payload* keyword.
+可在解码脚本中使用 *payload* 关键字访问负载。
 
 #### Metadata
 
-The **Metadata** is a key-value map that contains special fields provided by the integration.
-You can reference these values in your decoder script using the metadata keyword.
+**Metadata** 是包含集成提供的特殊字段的键值映射。
+可在解码脚本中使用 metadata 关键字引用这些值。
 
-Additionally, you can configure custom metadata parameters for each integration in its settings.
-For example, you may define a metadata parameter such as deviceType and then use it in your script to automatically assign the appropriate device type when new devices are created.
+此外，可在各集成设置中配置自定义 metadata 参数。
+例如，可定义 deviceType 等 metadata 参数，并在脚本中用于在创建设备时自动分配设备类型。
 
 #### Converter output
 
-The **Converter output** displays the result in JSON format returned by your decoder function. This includes device value arrays (such as telemetry or attributes) and may also contain timestamps in telemetry values.
-This allows you to compare and verify how the decoded data is ultimately interpreted and processed by ThingsBoard.
+**Converter output** 以 JSON 展示解码函数返回的结果，包括设备值数组（如遥测或属性），也可包含遥测时间戳。
+便于比对和验证解码数据如何被 ThingsBoard 解释与处理。
 
-> The only mandatory parameters in the output JSON are **deviceName** and **deviceType**.
+> 输出 JSON 中仅 **deviceName** 和 **deviceType** 为必填。
 
 {% capture difference %}
-**NOTE**: Starting version 2.4.2, ThingsBoard also supports **assetName** and **assetType** instead of deviceName and deviceType.
+**注意**：自 2.4.2 起，ThingsBoard 也支持使用 **assetName** 和 **assetType** 替代 deviceName 和 deviceType。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% capture difference %}
-**NOTE**: Starting version 2.4.2, ThingsBoard also support optional **customerName** and **groupName**.
-Those parameters will cause ThingsBoard to automatically create customer and/or entity group and assign those entities to the customer and/or group.
+**注意**：自 2.4.2 起，ThingsBoard 支持可选的 **customerName** 和 **groupName**。
+这些参数将使 ThingsBoard 自动创建客户和/或实体组，并将实体分配给客户和/或组。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -211,27 +211,27 @@ Example of converter output data:
 }
 ```
 
-## Downlink data converter
+## 下行数据转换器
 
-The main function of **downlink data converter** is to transform the incoming rule engine message and its metadata to the format that is used by corresponding Integration.
+**下行数据转换器**的主要作用是将规则引擎的入站消息及其 metadata 转换为对应集成使用的格式。
 
 {% capture difference %}
-**NOTE**: A Downlink Converter is generally optional. It is required only if your integration needs ThingsBoard to send outgoing messages, such as RPCs, attribute updates, or other commands. If your integration only involves receiving data without initiating outbound communication, you can skip creating a Downlink Converter.
+**注意**：下行转换器通常为可选。仅在集成需要 ThingsBoard 发送出站消息（如 RPC、属性更新或其他命令）时需创建。若集成仅接收数据而不发起出站通信，可跳过创建下行转换器。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To create the Downlink data converter, follow these steps:
-- Navigate to the "**Data converters**" section in the "**Integration center**", click the "**plus**" icon button, and In the dropdown menu, select "**Create new converter**".
-- In the new window:
-  - Switch the converter type selector to "**Downlink**".
-  - Select the **integration type** where this converter will be used (e.g., [MQTT](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/){:target="_blank"}, [OPC-UA](/docs/{{peDocsPrefix}}user-guide/integrations/opc-ua/){:target="_blank"}, etc.), or leave it set to "All" if it will be used across multiple integrations.
-  - Enter a name for the converter.
-  - (Optional) Enable **Debug mode** if you need to troubleshoot the converter during development or testing.
+创建下行数据转换器步骤：
+- 进入「**Integration center**」的「**Data converters**」部分，点击「**plus**」图标，在下拉菜单中选择「**Create new converter**」。
+- 在新窗口中：
+  - 将转换器类型选择器切换为「**Downlink**」。
+  - 选择使用该转换器的 **integration type**（如 [MQTT](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/){:target="_blank"}、[OPC-UA](/docs/{{peDocsPrefix}}user-guide/integrations/opc-ua/){:target="_blank"} 等），若在多种集成中使用则保持「All」。
+  - 输入转换器名称。
+  - （可选）开发或测试时启用 **Debug mode** 以便排查问题。
 
 {% assign feature = "downlink converter" %}
 {% include templates/debug-mode.md %}
 
-- In the **Main encoding configuration** section, define the decoding logic: enter **script** for parsing and transforming the output data.
+- 在 **Main encoding configuration** 部分定义编码逻辑：输入用于解析并转换输出数据的**script**。
 
 {% include templates/tbel-vs-js.md %}
 
@@ -246,16 +246,16 @@ Downlink Converter is basically a user defined function with the following signa
 function encoder(msg, metadata, msgType, integrationMetadata);
 ```
 
-where
+其中
 
-ㅤ**&#42; msg** - JSON with rule engine msg<br>
-ㅤ**&#42; metadata** - list of key-value pairs with additional data about the message (produced by the rule engine)<br>
-ㅤ**&#42; msgType** - Rule Engine message type. See [predefined message types](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types){:target="_blank"} for more details<br>
-ㅤ**&#42; integrationMetadata** - key-value map with some integration specific fields. You can configure additional metadata for each integration in the integration details
+ㅤ**&#42; msg** — 规则引擎消息的 JSON<br>
+ㅤ**&#42; metadata** — 与消息相关的键值对列表（由规则引擎产生）<br>
+ㅤ**&#42; msgType** — 规则引擎消息类型。详见[预定义消息类型](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#predefined-message-types){:target="_blank"}<br>
+ㅤ**&#42; integrationMetadata** — 包含集成特定字段的键值映射。可在集成详情中为各集成配置额外 metadata
   
 ### Converter output
 
-Converter output should be a valid JSON document with the following structure:
+转换器输出应为符合以下结构的有效 JSON 文档：
 
 ```json
 {
@@ -267,27 +267,26 @@ Converter output should be a valid JSON document with the following structure:
 }
 ```
 
-where
+其中
 
-ㅤ**&#42; contentType** - JSON, TEXT or BINARY (Base64 string) and is specific to your Integration type<br>
-ㅤ**&#42; data** - data string according to the content type<br>
-ㅤ**&#42; metadata** - list of key-value pairs with additional data about the message. For example, topic to use for MQTT integration, etc.
+ㅤ**&#42; contentType** — JSON、TEXT 或 BINARY（Base64 字符串），与集成类型相关<br>
+ㅤ**&#42; data** — 按 contentType 的字符串数据<br>
+ㅤ**&#42; metadata** — 与消息相关的键值对。例如 MQTT 集成使用的 topic 等
 
-### Synchronous vs asynchronous downlinks
+### 同步与异步下行
 
-Most of the integrations are able to process downlink messages to devices asynchronously.
-For example, each message pushed by the rule engine to MQTT based integration is immediately pushed to the corresponding external MQTT broker.
+多数集成可异步处理发往设备的下行消息。
+例如，规则引擎推送到基于 MQTT 的集成的每条消息会立即推送到对应外部 MQTT broker。
 
-However, some integrations, like SigFox or generic HTTP integration are not able to push message asynchroniously.
-These integrations, due to the nature of underlying HTTP protocol, are only able to push downlink information synchronously in reply to uplink message request.
-In this case, the last downlink message originated by rule engine will be stored in the queue until the new uplink message arrives for particular device.
+但 SigFox 或通用 HTTP 集成等无法异步推送消息。
+由于底层 HTTP 协议特性，这些集成只能在响应上行消息请求时同步推送下行信息。
+此时，由规则引擎产生的最后一条下行消息会保存在队列中，直至该设备收到新的上行消息。
 
-### Example
+### 示例
 
-Let&#39;s assume an example where temperature and humidity upload frequency attributes are updated via ThingsBoard REST API and 
-you would like to push this update to an external MQTT broker (TTN, Mosquitto, AWS IoT, etc.). 
-You may also want to include the "firmwareVersion" attribute value that was configured long time ago and is not present in this particular request.
-The topic to push the update should contain the device name.
+假设通过 ThingsBoard REST API 更新了温度与湿度上报频率属性，并希望将该更新推送到外部 MQTT broker（TTN、Mosquitto、AWS IoT 等）。
+您可能还想包含先前配置的「firmwareVersion」属性值，而该值在本次请求中并不存在。
+推送更新使用的 topic 应包含设备名称。
 
 {% include templates/tbel-vs-js.md %}
 
@@ -297,32 +296,32 @@ JavaScript<small></small>%,%anonymous%,%templates/integration/overview/downlink-
 
 {% include content-toggle.liquid content-toggle-id="downlinkdataconverterexample1" toggle-spec=downlinkdataconverterexample1 %}
 
-In order to invoke the downlink processing by the integration, tenant administrator should configure the rule chain similar to the one below:
+为使集成执行下行处理，租户管理员需配置与下图类似的规则链：
 
 ![image](/images/user-guide/integrations/downlink-rule-chain-example-pe.png)
 
-The full rule chain configuration is available [**here**](/docs/user-guide/resources/downlink-example-rule-chain.json){:target="_blank"}.
+完整规则链配置见[此处](/docs/user-guide/resources/downlink-example-rule-chain.json){:target="_blank"}。
 
-## Converters library
+## 转换器库
 
-ThingsBoard Converters library is a built-in collection of ready-to-use uplink decoder functions for over 100 devices, supporting six popular LoRaWAN network servers.   
-It significantly simplifies integration setup with various sensors and vendors.
+ThingsBoard 转换器库是内置的上行解码函数集合，支持 100 多种设备及六种主流 LoRaWAN 网络服务器。
+可显著简化与各类传感器和厂商的集成配置。
 
-Currently, the converters library is supported by the following integrations: [ChirpStack](/docs/{{peDocsPrefix}}user-guide/integrations/chirpstack/){:target="_blank"}, [Loriot](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/){:target="_blank"}, [The Things Stack Community](/docs/{{peDocsPrefix}}user-guide/integrations/ttn/){:target="_blank"}, [The Things Stack Industries](/docs/{{peDocsPrefix}}user-guide/integrations/tti/){:target="_blank"}, **ThingPark**, and **ThingPark Enterprise**.   
-In the future, the list of integrations that support the converters library will be expanded.
+目前支持转换器库的集成有：[ChirpStack](/docs/{{peDocsPrefix}}user-guide/integrations/chirpstack/){:target="_blank"}、[Loriot](/docs/{{peDocsPrefix}}user-guide/integrations/loriot/){:target="_blank"}、[The Things Stack Community](/docs/{{peDocsPrefix}}user-guide/integrations/ttn/){:target="_blank"}、[The Things Stack Industries](/docs/{{peDocsPrefix}}user-guide/integrations/tti/){:target="_blank"}、**ThingPark**、**ThingPark Enterprise**。
+未来将支持更多集成。
 
-To access the Converters library:
+访问转换器库：
 
-- Navigate to the "**Integrations**" page under the "**Integrations center**" section. Click the "**plus**" icon button to start creating a new integration.
-  - Select one of the integrations that currently support the Converters library. 
-  - Click "**Next**" to proceed.
-- In the "**Uplink data converter**" tab:
-  - Switch to the "**Library**" option.
-  - From the dropdown menu, choose the **device vendor**.
-  - Then select the specific **sensor model** you are using. The corresponding decoder function will be automatically loaded into the editor.
-  - If needed, configure advanced decoding options.
-  - Click "**Next**".
-- Continue the process to finalize the integration setup.
+- 进入「**Integrations center**」下的「**Integrations**」页面，点击「**plus**」图标开始创建新集成。
+  - 选择当前支持转换器库的集成之一。 
+  - 点击「**Next**」继续。
+- 在「**Uplink data converter**」标签：
+  - 切换到「**Library**」选项。
+  - 从下拉菜单中选择**设备厂商**。
+  - 选择您使用的具体**传感器型号**，对应解码函数将自动加载到编辑器。
+  - 如需要，配置高级解码选项。
+  - 点击「**Next**」。
+- 继续完成集成配置。
 
 {% assign convertersLibrary = '
     ===
@@ -339,109 +338,109 @@ To access the Converters library:
 
 {% include images-gallery.liquid imageCollection=convertersLibrary %}
 
-The Converters library is open-source and actively maintained by the ThingsBoard team. It is hosted on GitHub at the [following link](https://github.com/thingsboard/data-converters){:target="_blank"}.
+转换器库为开源项目，由 ThingsBoard 团队维护，托管在 GitHub：[链接](https://github.com/thingsboard/data-converters){:target="_blank"}。
 
 {% if docsPrefix == "pe/" %}
-<br>**Using a custom converters repository**
+<br>**使用自定义转换器仓库**
 
-You can [configure](/docs/user-guide/install/pe/how-to-change-config/){:target="_blank"} ThingsBoard to use your own repository with personalized decoders for your specific devices instead of using the default converters library.
+可[配置](/docs/user-guide/install/pe/how-to-change-config/){:target="_blank"} ThingsBoard 使用包含针对您设备的个性化解码器的自有仓库，以替代默认转换器库。
 
-Set new environment variables in ThingsBoard configuration file to define your custom repository and branch:
+在 ThingsBoard 配置文件中设置以下环境变量以指定自定义仓库与分支：
 
 ```text
 export TB_INTEGRATIONS_CONVERTERS_LIBRARY_REPO_URL=https://github.com/my-github-account/my-repo-name.git
 export TB_INTEGRATIONS_CONVERTERS_LIBRARY_REPO_BRANCH=my-branch
 ```
 
-where
+其中
 
-ㅤ**&#42; TB_INTEGRATIONS_CONVERTERS_LIBRARY_REPO_URL** – URL of your GitHub (or other Git-based) repository<br>
-ㅤ**&#42; TB_INTEGRATIONS_CONVERTERS_LIBRARY_REPO_BRANCH** – The branch name you want ThingsBoard to pull the converters from (e.g., main, develop, or any custom branch name)
+ㅤ**&#42; TB_INTEGRATIONS_CONVERTERS_LIBRARY_REPO_URL** — 您的 GitHub（或其他 Git）仓库 URL<br>
+ㅤ**&#42; TB_INTEGRATIONS_CONVERTERS_LIBRARY_REPO_BRANCH** — ThingsBoard 拉取转换器的分支名（如 main、develop 或任意自定义分支）
 
 ![image](/images/user-guide/integrations/overview/terminal-custom-repo-converters-library.png)
 
-Once configured, ThingsBoard will pull device decoder functions directly from your custom Git repository.
+配置后，ThingsBoard 将直接从您的自定义 Git 仓库拉取设备解码函数。
 {% endif %}
 
 ## Debug mode
 
-**Debug mode** is extremely useful for development and troubleshooting.
-However, having it on all the time can significantly increase the disk space used by the database since all the debug data is stored there.
-Therefore, starting from version 3.9, ThingsBoard stores all debug events only during the first 15 minutes. After that, only failure events are retained.
-These settings can be combined or completely disabled.
+**Debug mode** 对开发和故障排查非常有用。
+但长期开启会显著增加数据库占用的磁盘空间，因为所有调试数据都会写入数据库。
+因此自 3.9 起，ThingsBoard 仅在前 15 分钟内保存全部调试事件，之后只保留失败事件。
+这些设置可组合或完全关闭。
 
-## Deployment options
+## 部署方式
 
-ThingsBoard Integration has two deployment options: embedded and remote. See details and architecture diagrams below.
+ThingsBoard 集成有两种部署方式：嵌入式与远程。详见下方说明与架构图。
 
-### Embedded integrations
+### 嵌入式集成
 
-Embedded integration is running in the main ThingsBoard server process. Basically it is part of a monolith deployment scenario.
+嵌入式集成运行在主 ThingsBoard 服务进程中，本质上属于单体部署。
 
-Pros:
-* simplifies deployment of new integration (just few clicks on ThingsBoard UI);
-* minimize latency for message delivery;
+优点：
+* 部署新集成简便（在 ThingsBoard UI 中几步即可）；
+* 消息交付延迟低；
 
-Cons:
-* consume resources allocated to main ThingsBoard process: network connections, OS threads and CPU cycles;
-* low level of isolation;
-* can&#39;t access local MQTT brokers or OPC-UA servers if ThingsBoard is deployed in the cloud.
+缺点：
+* 占用主 ThingsBoard 进程资源：网络连接、OS 线程、CPU；
+* 隔离程度低；
+* 若 ThingsBoard 部署在云端，无法访问本地 MQTT broker 或 OPC-UA 服务器。
 
 <object width="100%" data="/images/user-guide/integrations/embeded-integrations-overview.svg"></object>
 
-### Remote integrations
+### 远程集成
 
-Remote integration become available since ThingsBoard PE v2.4.1 and enables new deployment scenario.
-One can install remote integration in the local network and stream data to the cloud.
+自 ThingsBoard PE v2.4.1 起支持远程集成，支持新的部署模式。
+可在本地网络安装远程集成，将数据流式传输到云。
 
-Let&#39;s assume you have local MQTT broker or OPC-UA server deployed on-premises.
-Those brokers and/or servers don&#39;t have dedicated external IP address, so ThingsBoard instance in the cloud can&#39;t connect to them directly.
-However, you can install remote integration close to this server, in the same local network.
-This integration will connect to the broker/server, pull the data and store it in the local file system.
-Remote integration will stream the data to the ThingsBoard instance deployed in the cloud once the internet connection is available.
+假设您有本地部署的 MQTT broker 或 OPC-UA 服务器。
+这些 broker 或服务器无独立公网 IP，云端 ThingsBoard 实例无法直接连接。
+但可将远程集成安装在本地网络内、靠近该服务器。
+该集成会连接 broker/服务器，拉取数据并存储在本地文件系统。
+网络可用时，远程集成会将数据流式传输到云端的 ThingsBoard 实例。
 
-Pros:
-* enables integration with servers deployed in the local network;
-* isolates the integration process from main ThingsBoard process;
+优点：
+* 支持与本地网络中的服务器集成；
+* 将集成进程与主 ThingsBoard 进程隔离；
 
-Cons:
-* requires installation of a separate package;
+缺点：
+* 需额外安装独立包；
 
-Learn how to configure integration to run remotely using [this guide](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}.
+按[本指南](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}配置远程运行集成。
 
 <object width="100%" data="/images/user-guide/integrations/remote-integrations-overview.svg"></object>
 
-## Platform Integrations vs IoT Gateway
+## 平台集成与 IoT Gateway
 
-Experienced ThingsBoard users may notice that functionality of Integrations feature partially overlap with functionality of [IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){:target="_blank"}.
-However, there are key differences between these two systems/features:
+熟悉 ThingsBoard 的用户可能注意到，集成功能与 [IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){:target="_blank"} 有部分重叠。
+但两者有重要差异：
 
-  - IoT Gateway is designed for local network deployments, Integrations are designed for server-to-server integrations.
-  - IoT Gateway is designed to support < 1000 devices, while Integrations are designed for high throughput, scalability and cluster deployments as part of ThingsBoard server.
-  - Gateway recompilation and restart is required to add custom payload decoder while Integration Converter is a JS function that may be modified in real time. 
+  - IoT Gateway 面向本地网络部署，集成面向服务到服务集成。
+  - IoT Gateway 面向 < 1000 设备规模，集成面向高吞吐、可扩展及作为 ThingsBoard 服务一部分的集群部署。
+  - Gateway 添加自定义负载解码器需重新编译并重启，而 Integration Converter 是可在运行中修改的 JS 函数。 
   
-As you can see, both systems are important and applicable in different use cases.
+两者都重要，适用于不同场景。
 
-## Feature Roadmap
+## 功能规划
 
-### Usage statistics
+### 使用统计
  
-We plan to log statistics for amount of messages processed by each integration with possible limitations of messages processed on a tenant / system levels.
+计划记录各集成处理的消息数量统计，并可设置租户/系统级别的处理量限制。
 
-### More integrations and protocols
+### 更多集成与协议
 
-We plan to provide specific integrations for different platforms, and also for different communication protocols, like gRPC.
+计划为不同平台及通信协议（如 gRPC）提供更多专门集成。
 
-### More data converters
+### 更多数据转换器
 
-We plan to collect and maintain data converters for most popular devices on the market to simplify integration path even more. 
-Please note that you can share your converters with community and send them to us to make part of official ThingsBoard distributive.   
+计划收集并维护市面主流设备的数据转换器，进一步简化集成。
+您可将自己的转换器分享给社区或提交给我们，以便纳入官方发行版。   
 
-[Contact us](/docs/contact-us/) to suggest missing feature for your use case.
+[联系我们](/docs/contact-us/)为您的用例建议缺失功能。
 
-## See also
+## 另见
 
-Explore guides and video tutorials related to specific integrations:
+查看与具体集成相关的指南和视频教程：
 
  - [HTTP](/docs/{{peDocsPrefix}}user-guide/integrations/http/)
  - [MQTT](/docs/{{peDocsPrefix}}user-guide/integrations/mqtt/)
@@ -464,9 +463,9 @@ Explore guides and video tutorials related to specific integrations:
  - [ChirpStack](/docs/{{peDocsPrefix}}user-guide/integrations/chirpstack/)
  - [CoAP](/docs/{{peDocsPrefix}}user-guide/integrations/coap/)
 
-## Video tutorial
+## 视频教程
 
-See the video tutorial below for step-by-step instructions on how to set up an Uplink data converter.
+观看下方视频，了解如何分步配置上行数据转换器。
 
 <br>
 <div id="video">  
@@ -476,7 +475,7 @@ See the video tutorial below for step-by-step instructions on how to set up an U
 </div>
 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}
 

@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Predict remaining time
-description: Guide how to predict remaining time to specific event
+title: 预测剩余时间
+description: 如何预测至特定事件的剩余时间
 ---
 Trendz introduces a powerful feature for calculating time-to-event using calculated fields and prediction models. This functionality allows users to predict when a specific event is likely to occur based on telemetry data.
 

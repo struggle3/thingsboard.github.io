@@ -1,12 +1,12 @@
-Let's assume you have a warehouse with two devices connected to ThingsBoard **Edge**: 
-* DHT22 temperature sensor
-* Air Conditioner 
+假设您有一个仓库，其中两台设备连接到 ThingsBoard **Edge**：
+* DHT22 温度传感器
+* 空调
 
-ThingsBoard Edge has the following responsibilities:
- * **Collects temperature readings** from the DHT22 sensor
- * **Creates and updates alarms** if the temperature in the warehouse is higher than 50 °C
- * In case if the temperature becomes critical, ThingsBoard Edge turns on the cooler system by **sending RPC call requests** to the Air Conditioner device
- * **Pushes telemetry to the cloud**
+ThingsBoard Edge 的职责包括：
+ * 从 DHT22 传感器 **采集温度读数**
+ * 若仓库温度超过 50 °C，**创建并更新告警**
+ * 当温度达到临界值时，ThingsBoard Edge 通过 **发送 RPC 调用请求** 至空调设备开启制冷系统
+ * **将遥测数据推送至云端**
 
-Please note that this is just a simple theoretical use case to demonstrate the capabilities of the platform. 
-You can use this tutorial as a basis for much more complex scenarios.
+请注意，这仅为演示平台能力的简单理论场景。
+您可将本教程作为更复杂场景的基础。

@@ -1,7 +1,7 @@
-### Prepare for upgrading Trendz Analytics
+### 升级 Trendz Analytics 前的准备
 
-**Stop Trendz Analytics**
-Check if Trendz and database services are stopped.
+**停止 Trendz Analytics**
+检查 Trendz 与数据库服务是否已停止。
 ```bash
 sudo systemctl stop trendz
 ```
@@ -12,33 +12,33 @@ sudo systemctl status trendz
 ```
 {: .copy-code}
 
-#### Backup Database
-Make a backup of the database before upgrading.
+#### 备份数据库
+升级前请备份数据库。
 
-Check PostgreSQL status. It is unnecessary to stop PostgreSQL for the backup.
+检查 PostgreSQL 状态。备份时无需停止 PostgreSQL。
 ```bash
 sudo systemctl status postgresql
 ```
 {: .copy-code}
 
-***Make sure you have enough space to place a backup of the database***
+***请确保有足够空间存放数据库备份***
 
-Check database size
+检查数据库大小
 ```bash
 sudo -u postgres psql -c "SELECT pg_size_pretty( pg_database_size('trendz') );"
 ```
 {: .copy-code}
-Check free space
+检查可用空间
 
 ```bash
 df -h /
 ```
 {: .copy-code}
 
-If there is enough free space - make a backup.
+若有足够可用空间，请执行备份。
 ```bash
 sudo -Hiu postgres pg_dump trendz > trendz.sql.bak
 ```
 {: .copy-code}
 
-Check backup file being created.
+确认备份文件已生成。

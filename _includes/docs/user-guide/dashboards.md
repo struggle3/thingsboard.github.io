@@ -2,15 +2,15 @@
 {:toc}
 
 {% capture difference %}
-Before proceeding with this guide, it&#39;s recommended that you follow [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"} guide to become familiar with ThingsBoard devices and widgets. This will enhance your learning experience and understanding of the concepts presented here.
+在继续阅读本指南之前，建议您先完成[入门指南](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"}，以熟悉ThingsBoard设备和部件。这将帮助您更好地理解本文介绍的概念。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Introduction
+## 简介
 
-ThingsBoard offers a powerful feature – the ability to create and customize interactive visualizations, also known as dashboards. These dashboards are instruments for monitoring and managing your data and devices efficiently.
-With ThingsBoard dashboards, users can adapt interfaces to their specific needs, making it easier than ever to inspect their IoT devices and data. What's brilliant is that each dashboard can be populated with numerous widgets, offering flexibility and customization.
-These dashboards aren't limited to a single data source; they can display data from various entities, including devices, assets, and more. Plus, you can assign dashboards to specific Customers, ensuring that the right individuals or teams have access to the data they need.
+ThingsBoard提供强大功能——创建和自定义交互式可视化界面，即仪表板。仪表板是用于高效监控和管理数据与设备的工具。
+借助ThingsBoard仪表板，用户可根据自身需求调整界面，更便捷地查看物联网设备和数据。每个仪表板可以放置多个部件，具有良好的灵活性和可定制性。
+仪表板不限于单一数据源，可展示来自设备、资产等多种实体的数据。您还可以将仪表板分配给指定客户，确保相关人员或团队能访问所需数据。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/dashboards/overview/dashboard-introduction-ce.png)
@@ -19,94 +19,94 @@ These dashboards aren't limited to a single data source; they can display data f
 ![image](/images/user-guide/dashboards/overview/dashboard-introduction.png)
 {% endif %}
 
-Dashboards in ThingsBoard provide users with the following capabilities:
+ThingsBoard仪表板为用户提供以下能力：
 
- - **Data Visualization**: Users can create various widgets such as charts, graphs, tables, and more to visualize data obtained from connected devices. This enables operators and analysts to easily analyze information and track device statuses.
+ - **数据可视化**：用户可创建图表、图形、表格等各种部件，可视化来自已连接设备的数据，便于运维人员和分析师分析信息、跟踪设备状态。
 
- - **Device Management**: Dashboards can be used to perform management operations on devices, such as turning devices on or off, changing parameters, and so on. Users can set actions and respond to real-time data from devices.
+ - **设备管理**：仪表板可用于对设备执行管理操作，如开关设备、修改参数等。用户可设置操作并响应设备的实时数据。
 
- - **Interactivity**: Dashboards can be designed with interactive elements such as buttons, switches, allowing users to interact with devices and data.
+ - **交互性**：仪表板可设计按钮、开关等交互元素，使用户能与设备和数据交互。
 
- - **Display Customization**: Users can customize the arrangement and size of widgets, choose color palettes, fonts, and other visualization aspects to create a user-friendly and informative interface.
+ - **显示定制**：用户可自定义部件的布局与尺寸、配色、字体等可视化选项，打造友好且信息丰富的界面。
 
- - **Role-Based Access**: ThingsBoard allows controlling access to dashboards with different levels of privileges based on user [roles](/docs/{{docsPrefix}}user-guide/rbac/). This ensures data security and confidentiality.
+ - **基于角色的访问**：ThingsBoard支持根据用户[角色](/docs/{{docsPrefix}}user-guide/rbac/)控制对仪表板的访问权限。这有助于保障数据安全与保密性。
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-ThingsBoard also offers convenient IoT solution templates to reduce time-to-market for your IoT products. 
-These templates include interactive dashboards, processing logic, sample devices, users, and all other necessary entities. Think of these templates as a complete PoC/MVP. 
-Read more about solution templates [here](/docs/{{docsPrefix}}solution-templates/overview/).
+ThingsBoard还提供便捷的物联网解决方案模板，缩短产品上市时间。
+这些模板包含交互式仪表板、处理逻辑、示例设备、用户及所有其他必要实体，相当于完整的PoC/MVP。
+更多关于解决方案模板的信息请参阅[此处](/docs/{{docsPrefix}}solution-templates/overview/)。
 {% endif %}
 
-This guide covers main concepts and various dashboard settings.
+本指南介绍主要概念及各种仪表板设置。
 
-## Create new dashboard
+## 创建新仪表板
 
-To add a new dashboard, you should:
+要添加新仪表板，请执行以下步骤：
 
 {% include images-gallery.html imageCollection="creating-dashboard" showListImageTitles="true" %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-At the stage of creating a dashboard, you can specify it to a different owner and a specific dashboard group right away.
-How to create a new group of dashboards, read [here](/docs/{{docsPrefix}}user-guide/groups/#create-new-entity-group).
+创建仪表板时可同时指定所属所有者和仪表板分组。
+如何创建新仪表板组，请参阅[此处](/docs/{{docsPrefix}}user-guide/groups/#create-new-entity-group)。
 
 {% include images-gallery.html imageCollection="creating-dashboard-2" showListImageTitles="true" %}
 
-By default, the list of dashboards displays all dashboards, including those of your customers.
-To view only your dashboards, disable the "Include customer entities" option.
+默认情况下，仪表板列表显示全部仪表板，包括客户的仪表板。
+若仅查看自己的仪表板，请关闭「包含客户实体」选项。
 
 {% include images-gallery.html imageCollection="creating-dashboard-3" %}
 {% endif %}
 
-## Dashboard toolbar
+## 仪表板工具栏
 
-Before starting working with a dashboard, get familiar with its interface to understand which features are responsible for what actions.
+开始使用仪表板前，请先熟悉界面及各功能的用途。
 
-The dashboard toolbar allows you to 
-[add new widgets](#add-new-widget),
-manage [states](/docs/{{docsPrefix}}user-guide/dashboards/#states),
-[layouts](/docs/{{docsPrefix}}user-guide/dashboards/#layouts),
-[settings](/docs/{{docsPrefix}}user-guide/dashboards/#settings),
-[aliases](/docs/{{docsPrefix}}user-guide/dashboards/#entity-aliases),
-[filters](/docs/{{docsPrefix}}user-guide/dashboards/#filters),
-[version control](/docs/{{docsPrefix}}user-guide/version-control/), {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}[generate report from dashboard, ](/docs/pe/user-guide/dashboards/#generate-report-from-dashboard){% endif %}and configure [time window](/docs/{{docsPrefix}}user-guide/dashboards/#time-window) using the corresponding icons in the toolbar.
+仪表板工具栏可让您
+[添加新部件](#add-new-widget)、
+管理[状态](/docs/{{docsPrefix}}user-guide/dashboards/#states)、
+[布局](/docs/{{docsPrefix}}user-guide/dashboards/#layouts)、
+[设置](/docs/{{docsPrefix}}user-guide/dashboards/#settings)、
+[实体别名](/docs/{{docsPrefix}}user-guide/dashboards/#entity-aliases)、
+[过滤器](/docs/{{docsPrefix}}user-guide/dashboards/#filters)、
+[版本控制](/docs/{{docsPrefix}}user-guide/version-control/)，{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %} [从仪表板生成报告](/docs/pe/user-guide/dashboards/#generate-report-from-dashboard)，{% endif %}以及通过工具栏对应图标配置[时间窗口](/docs/{{docsPrefix}}user-guide/dashboards/#time-window)。
 
-Some of these icons (states, layout, settings, entity aliases, filters, version control, add new widget) are visible only in the "Edit" mode. All other icons are visible in both "View" and "Edit" modes.
-You can hide these icons or configure the toolbar to be minimized by default using [settings](/docs/{{docsPrefix}}user-guide/dashboards/#settings).
+部分图标（状态、布局、设置、实体别名、过滤器、版本控制、添加新部件）仅在「编辑」模式下可见，其余图标在「查看」和「编辑」模式下均可见。
+您可通过[设置](/docs/{{docsPrefix}}user-guide/dashboards/#settings)隐藏这些图标或将工具栏默认设为最小化。
 
 {% include images-gallery.html imageCollection="dashboard-toolbar" %}
 
-### Edit mode
+### 编辑模式
 
-To enter dashboard edit mode, simply open the dashboard you wish to edit and click the "Edit mode" button found in the upper right corner of the screen.
+进入仪表板编辑模式：打开要编辑的仪表板，点击屏幕右上角的「编辑模式」按钮。
 
-Once you've switched to edit mode, you access the dashboard toolbar to add new elements and access controls. 
-Don't forget to save your changes using the "Save" button, or if you decide to discard any unsaved edits, you can do so by clicking the "Cancel" button.
+进入编辑模式后，可通过仪表板工具栏添加新元素和控件。
+请使用「保存」按钮保存更改；若需放弃未保存的修改，可点击「取消」按钮。
 
 {% include images-gallery.html imageCollection="edit-mode" %}
 
-### Add new widget
+### 添加新部件
 
-All IoT dashboards are constructed using ThingsBoard widgets.
-A widget is an element that displays a specific type of information or functionality on a dashboard.
-Widgets are used to visualize data, remote device control, alarms management, and display static custom HTML content.
+所有物联网仪表板均由ThingsBoard部件构成。
+部件是在仪表板上展示特定信息或功能的元素。
+部件用于数据可视化、远程设备控制、告警管理以及展示静态自定义HTML内容。
 
-To add a widget to a dashboard, you should:
+向仪表板添加部件的步骤：
 
 {% include images-gallery.html imageCollection="add-new-widget" showListImageTitles="true" %}
 
-Each widget typically has specific settings and parameters that allow users to customize its behavior and appearance according to their needs.
-For more information about widgets, how to create them, and their settings, click the button below:
+每个部件通常都有特定设置和参数，可按需自定义其行为与外观。
+更多关于部件、如何创建部件及其设置的说明，请点击下方按钮：
 
 <br>
-<p><a href="/docs/{{docsPrefix}}user-guide/widgets/" class="button">Widgets documentation</a></p>
+<p><a href="/docs/{{docsPrefix}}user-guide/widgets/" class="button">部件文档</a></p>
 
 <br>
 
-### Time window
+### 时间窗口
 
-The Time window is a tool used to define time intervals when working with telemetry data. 
-The time window is used by all time series and alarm widgets unless they are configured to use their own [widget time window](/docs/{{docsPrefix}}user-guide/widgets/#widget-time-window){:target="_blank"}.
-In the case of a time series widget, ThingsBoard fetches telemetry with a timestamp that matches the time window. In the case of an alarm widget, ThingsBoard fetches alarms with the created time that matches the time window.
+时间窗口用于在处理遥测数据时定义时间区间。
+所有时序部件和告警部件均使用时间窗口，除非配置为使用各自的[部件时间窗口](/docs/{{docsPrefix}}user-guide/widgets/#widget-time-window){:target="_blank"}。
+对于时序部件，ThingsBoard会拉取时间戳落在时间窗口内的遥测数据；对于告警部件，会拉取创建时间落在时间窗口内的告警。
 
 &nbsp;
 <div id="video">  
@@ -117,153 +117,153 @@ In the case of a time series widget, ThingsBoard fetches telemetry with a timest
 
 <br>
 
-**The time window can work in two modes**:
+**时间窗口可有两种模式**：
 
-- In the **real-time mode**, widgets constantly receive updates from the server and automatically show you only the data that matches the time window for a current timestamp;
-- In the **history mode**, widgets receive data only during the initial load and no updates are issued over WebSockets.
+- **实时模式**：部件持续从服务器接收更新，自动显示当前时间戳下落在时间窗口内的数据；
+- **历史模式**：部件仅在首次加载时接收数据，不再通过WebSocket接收更新。
 
 {% include images-gallery.html imageCollection="time-window" %}
 
 <br>
-**Key parameters of the time window:**
+**时间窗口主要参数：**
 
-- **Last**: Displays real-time data for a specified time interval (e.g., the last 5 minutes, the last hour, or the last 24 hours).
-- **Range**: Displays data for a fixed period, such as from December 1, 2024, to December 7, 2024.
-- **Relative**: Uses predefined intervals, such as the current day, the previous day, or the previous month.
+- **最近**：显示指定时间区间内的实时数据（如最近5分钟、最近1小时或最近24小时）。
+- **范围**：显示固定时段的数据，如2024年12月1日至12月7日。
+- **相对**：使用预设区间，如当天、前一天或前一个月。
 
 {% include images-gallery.html imageCollection="time-window-key-parameters" %}
 
 <br>
-To display data for your desired time period, set the time range in the time window and click "Update".
+要显示所需时间段的数据，请在时间窗口内设置时间范围并点击「更新」。
 
 {% include images-gallery.html imageCollection="displaying-data-for-desired-time-period" %}
 
 {% capture difference %}
-**Please note:**
+**请注意：**
 <br>
-that the **Current day** interval means 24 hours (12 am at night to 12 am the next night), whereas the **Current day so far** means from 12 am at night until the time when the time window was updated.
-All other intervals are distinguished in the same way.
+**当天**区间表示24小时（当日0点到次日0点），而**当天至今**表示从当日0点到时间窗口更新的时刻。
+其他区间以此类推区分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% include images-gallery.html imageCollection="time-window-interval" %}
 
-**Aggregation**
+**聚合**
 
-The data aggregation function is applied to time series data and does not apply to alarms. Currently, six aggregation functions are available:
+数据聚合函数应用于时序数据，不适用于告警。当前提供六种聚合函数：
 
-- **Min**: Identifies the smallest value among all data in the selected time interval. Useful for displaying the minimum value, such as the lowest temperature recorded in an hour.
-- **Max**: Identifies the largest value among all data in the selected time interval. This is useful for displaying the maximum value, such as the highest energy consumption level.
-- **Average**: Calculates the arithmetic mean of all data in the selected interval. Useful for analyzing average metrics, such as the average humidity over a day.
-- **Sum**: Computes the total sum of all values in the selected time interval. This can be helpful for calculating the total volume of water or electricity consumed.
-- **Count**: Counts the number of records in the selected interval. Useful for assessing the volume of data received or to count the number of events.
-- **None**: Transmits raw data without applying any aggregation functions. Used when access to each unaltered value is required.
+- **最小值**：在所选时间区间内取所有数据的最小值。适用于显示最小值，如一小时内最低温度。
+- **最大值**：在所选时间区间内取所有数据的最大值。适用于显示最大值，如最高能耗。
+- **平均值**：计算所选区间内所有数据的算术平均值。适用于分析平均指标，如日平均湿度。
+- **求和**：计算所选时间区间内所有值的总和。适用于统计用水量、用电量等总量。
+- **计数**：统计所选区间内的记录数。适用于评估接收数据量或事件数量。
+- **无**：不应用任何聚合函数，传输原始数据。适用于需要每个未处理值的场景。
 
-Data aggregation is useful when you do not want to retrieve all raw time series data to the user interface but prefer to pre-aggregate it at the database level.
+当您不希望将所有原始时序数据拉到用户界面、而希望在数据库层面预聚合时，可使用数据聚合。
 
-Using aggregation functions helps save network bandwidth and reduces the computational load on the client's browser. We recommend using aggregation functions whenever possible, especially when dealing with a large amount of raw data points.
+使用聚合函数有助于节省网络带宽、降低客户端浏览器的计算负担。建议尽量使用聚合函数，尤其在处理大量原始数据点时。
 
 {% include images-gallery.html imageCollection="time-window-aggregation" %}
 
 <br>
-**Grouping interval**
+**分组间隔**
 
-Group time series values by the specified time interval. This enables data analysis within a defined period and provides a more structured and convenient approach to handling large volumes of data.
+按指定时间间隔对时序值分组，可在既定周期内分析数据，更清晰、更高效地处理大量数据。
 
-For example, if a device sends temperature data every 10 minutes, but you need hourly average values, set the grouping interval to 1 hour and use the "Average" aggregation function. This will provide the desired result without additional processing on the client side.
+例如，若设备每10分钟发送一次温度数据，但需要按小时的平均值，可将分组间隔设为1小时并选用「平均值」聚合函数，即可在客户端无需额外处理的情况下获得结果。
 
 {% include images-gallery.html imageCollection="time-window-grouping-interval" %}
 
-There are times when the time intervals are long, and you'd like to see the data closer without changing timestamps, therefore, you need to zoom in.
-Move the two sliders towards each other to specify the time period for displaying the data.
-To zoom out to the original size of the chart, move the sliders back to their default position.
+当时间区间较长且希望在不修改时间戳的前提下放大查看数据时，可进行缩放。
+将两个滑块向中间移动以指定要显示数据的时段。
+要恢复图表原始大小，将滑块移回默认位置即可。
 
 {% include images-gallery.html imageCollection="time-window-zoom-in" %}
 
-The ThingsBoard introduces time zone configurations. By default, the dashboard uses the time zone provided by the browser.
-Now it is possible to set the time of your browser or a specific country. To quickly find the needed time zone, start typing its name in the time zone bar.
+ThingsBoard支持时区配置。默认情况下，仪表板使用浏览器提供的时区。
+您可以设置为浏览器时区或指定国家时区。在时区栏输入名称可快速查找所需时区。
 
 {% include images-gallery.html imageCollection="time-window-time-zone" %}
 
 <br>
-**Time window settings**
+**时间窗口设置**
 
-You can customize the time window for the end-user by hiding certain configuration elements. Enter the editing mode of the dashboard, click the "edit time window" icon on the dashboard toolbar. In the popup window, click the "gear" icon. The time window configuration window will open.
+可通过隐藏部分配置项为最终用户定制时间窗口。进入仪表板编辑模式，点击仪表板工具栏上的「编辑时间窗口」图标。在弹出窗口中点击「齿轮」图标，即可打开时间窗口配置界面。
 
 {% include images-gallery.html imageCollection="time-window-settings" %}
 
-Here, you can perform the following configurations:
+在此可进行以下配置：
 
-*For time window*:
+*时间窗口*：
 
-- **Hide the time window section from end-users**: Users will not be able to change the set time interval.
+- **向最终用户隐藏时间窗口区域**：用户无法修改已设置的时间区间。
 
 {% include images-gallery.html imageCollection="hide-time-window-section" %}
 
-You can also hide the "Last", "Range" (History) or "Relative" intervals from end-users.
+也可向最终用户隐藏「最近」、「范围」（历史）或「相对」区间。
 
 {% include images-gallery.html imageCollection="hide-only-last-or-relative-interval" %}
 
-Edit the list of intervals available to users. Additionally, for each interval, you can configure the grouping intervals and set a default grouping interval.
+可编辑用户可用的区间列表。此外，每个区间都可配置分组间隔并设置默认分组间隔。
 
 {% include images-gallery.html imageCollection="edit-list-of-intervals" %}
 
-*For aggregation function*:
+*聚合函数*：
 
-- **Hide the aggregation from end-users**: Users will not be able to change or disable the aggregation function you set during configuration.
+- **向最终用户隐藏聚合**：用户无法修改或禁用您在配置阶段设置的聚合函数。
 
 {% include images-gallery.html imageCollection="hide-aggregation" %}
 
-You can edit the list of available aggregation functions. List the available aggregation functions for the end-user.
+可编辑可用聚合函数列表，指定最终用户可用的聚合函数。
 
 {% include images-gallery.html imageCollection="edit-aggregation-list" %}
 
-*For grouping interval*:
+*分组间隔*：
 
-- **Hide the grouping interval from end-users**: Users will not be able to change the grouping interval set during configuration.
+- **向最终用户隐藏分组间隔**：用户无法修改配置阶段设置的分组间隔。
 
 {% include images-gallery.html imageCollection="hide-grouping-interval" %}
 
-- **Hide the time zone from end-users**: Restrict users from changing the timezone.
+- **向最终用户隐藏时区**：禁止用户修改时区。
 
 {% include images-gallery.html imageCollection="hide-time-zone" %}
 
-*Available only when Aggregation is None*:
+*仅在聚合为「无」时可用*：
 
 {% if docsPrefix == null or docsPrefix == "pe/" %}
-- **Max values**: Limits the number of data points rendered in time-series widgets within the selected time window. For self-hosted installations, this limit is configurable via the DASHBOARD_MAX_DATAPOINTS_LIMIT [parameter](/docs/user-guide/install/{{docsPrefix}}config/#ui-settings-parameters){:target="_blank"}.
+- **最大数据点数**：限制所选时间窗口内时序部件渲染的数据点数量。对于自托管安装，此限制可通过 DASHBOARD_MAX_DATAPOINTS_LIMIT [参数](/docs/user-guide/install/{{docsPrefix}}config/#ui-settings-parameters){:target="_blank"}配置。
 {% endif %}
 
 {% if docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-- **Max values**: Limits the number of data points rendered in time-series widgets within the selected time window.
+- **最大数据点数**：限制所选时间窗口内时序部件渲染的数据点数量。
 {% endif %}
 
 {% include images-gallery.html imageCollection="max-values" %}
 
-### Filters
+### 过滤器
 
-Entity filters allow you to specify a filter for the list of entities resolved by the entity alias.
+实体过滤器用于为实体别名解析出的实体列表指定过滤条件。
 
-Let's look at an example. Suppose you have thousands of "Thermometer" devices, and you would like to display thermometers of a specific model and with certain battery levels.
-Let's also assume that thermometer model is stored as an attribute, and the battery level is stored as a time series data.
-We will define a filter that checks if the sensor model is "DHT22" and the battery level is less than 20 percent.
+举例：假设有数千台「温度计」设备，希望仅显示特定型号且电池电量在某一范围内的设备。
+假设温度计型号存储在属性中，电池电量存储在时序数据中。
+可定义过滤器：传感器型号为「DHT22」且电池电量低于20%。
 
 {% capture difference %}
-**Please note:**
+**请注意：**
 <br>
-while adding the filter, you can configure the ability to edit it for users by moving the slider opposite the Filter name.
+添加过滤器时，可通过移动过滤器名称旁的滑块，配置用户是否可编辑该过滤器。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% include images-gallery.html imageCollection="filters" showListImageTitles="true" %}
 
-Filters are applied only to the "latest" value of the attribute or time series key. Don't use this feature to "filter out" historical time series values.
+过滤器仅作用于属性或时序键的「最新」值。请勿用此功能过滤历史时序值。
 
-You can combine different logical expressions over one key using "complex" filters. For example: "(A > 0 and A < 20) or (A > 50 and A < 100)".
-Also, you can combine two expressions for different keys using the "and" relation. For example: "(A > 0 and A < 20) and (B > 50 and B < 100)".
-It's not possible to use "or" in relation to combining different keys yet. For example: "(A > 0 and A < 20) or (B > 50 and B < 100)".
+可使用「复杂」过滤器在同一键上组合多个逻辑表达式，例如：「(A > 0 and A < 20) or (A > 50 and A < 100)」。
+也可用「and」关系组合不同键的两个表达式，例如：「(A > 0 and A < 20) and (B > 50 and B < 100)」。
+目前尚不支持对不同键使用「or」组合，例如：「(A > 0 and A < 20) or (B > 50 and B < 100)」不可用。.
 
-See more examples of how to use filters in this video:
+更多过滤器使用示例请参见以下视频：
 
 <br>
 <div id="video">
@@ -272,268 +272,268 @@ See more examples of how to use filters in this video:
   </div>
 </div>
 
-### Entity aliases
+### 实体别名
 
-Entity Aliases determine which entities (devices, assets, etc.) you would like to display on the dashboard.
-An alias can be thought of as a reference to one or more devices. These references can be static or dynamic.
+实体别名决定仪表板上要显示的实体（设备、资产等）。
+可把别名视为对一个或多个设备的引用，这类引用可以是静态或动态的。
 
-An example of the static alias is the [Single entity](/docs/{{docsPrefix}}user-guide/ui/aliases/#single-entity) alias. An entity is configured once in the alias dialog box.
-All users see the same data if they have permission to access this device.
+静态别名的示例：[单实体](/docs/{{docsPrefix}}user-guide/ui/aliases/#single-entity)别名。在别名对话框中一次性配置实体。
+具有访问权限的用户看到的都是相同数据。
 
 An example of a dynamic alias is the [Device type](/docs/{{docsPrefix}}user-guide/ui/aliases/#device-type) alias, which displays all devices of a certain type (e.g. "Thermometer").
 This alias is dynamic because the list of devices depends on the user using the dashboard.
 If you are logged in as a Tenant administrator, this alias will be allowed for all Thermometer devices.
 However, if you are logged in as a Customer user, this alias will be resolved to Thermometer devices that are assigned/owned by that Customer.
 
-Let’s create a dynamic alias, which displays all devices of a certain "Smart sensors" type.
+下面创建一个动态别名，用于显示「智能传感器」类型的所有设备。
 
 {% include images-gallery.html imageCollection="aliases" showListImageTitles="true" %}
 
-Please see the [Entity aliases documentation](/docs/{{docsPrefix}}user-guide/ui/aliases) for more information.
+更多信息请参阅[实体别名文档](/docs/{{docsPrefix}}user-guide/ui/aliases)。
 
-### Settings
+### 设置
 
-Dashboard settings allow adjusting and altering the overall look of the Dashboard. You can change the title, logo, and customize the toolbar.
+仪表板设置用于调整整体外观，可修改标题、徽标并定制工具栏。
 
-To start customizing the Dashboard enter [Edit mode](#edit-mode), then click the "gear" icon in the upper right corner of the dashboard window to open the dashboard settings window.
+定制仪表板时，进入[编辑模式](#edit-mode)，然后点击仪表板窗口右上角的「齿轮」图标打开仪表板设置窗口。
 
 {% include images-gallery.html imageCollection="settings" %}
 
-**Title settings**
+**标题设置**
 
-If you want the Title to be displayed on the dashboard, you need to enable the "Display dashboard title" checkbox. The default text color is black. 
-Color and transparency are easily adjusted using the Title color parameter by clicking the colored circle and choosing the desired color for the title by moving the slider. 
-The changed title appears on the top left of the Dashboard.
+若要在仪表板上显示标题，需勾选「显示仪表板标题」。默认文字颜色为黑色。
+可点击色圈，通过标题颜色参数中的滑块调整颜色和透明度。
+修改后的标题会显示在仪表板左上角。
 
 {% include images-gallery.html imageCollection="title-settings" %}
 
-**Dashboard logo settings**
+**仪表板徽标设置**
 
-You can set dashboard logo which displayed in dashboard fullscreen mode. For this, check the box "Display logo in dashboard fullscreen mode" and add dashboard logo image.
+可设置在全屏模式下显示的仪表板徽标：勾选「在仪表板全屏模式下显示徽标」并上传徽标图片。
 
 {% include images-gallery.html imageCollection="dashboard-logo-settings" %}
 
-**Toolbar settings**
+**工具栏设置**
 
-The checkboxes "Display dashboard selection", "Display entities selection", "Display filters", "Display time window", "Display export" and "Display update dashboard image" are responsible for the visibility of the appropriate options on the Dashboard toolbar panel.
+「显示仪表板选择」「显示实体选择」「显示过滤器」「显示时间窗口」「显示导出」和「显示更新仪表板图片」这些勾选项控制仪表板工具栏面板中对应选项的显示与否。
 
-The "Display filters" option is shown on the toolbar panel only if at least one filter has been created. 
-If the filter was created, but you'd like to limit the customer's opportunity to modify the device's indicators, we disable the ability to see filters on the toolbar panel by unchecking the corresponding checkbox.
+「显示过滤器」仅当至少创建一个过滤器后才会出现在工具栏上。
+若已创建过滤器，但希望限制客户修改设备指标的能力，可取消勾选相应选项以在工具栏上隐藏过滤器。
 
-You can display/hide toolbar icons. Let's hide "Display dashboards selection", "Display time window" and "Display export" icons on the dashboard page.
+可显示或隐藏工具栏图标。例如，在仪表板页面上隐藏「显示仪表板选择」「显示时间窗口」和「显示导出」图标。
 
 {% include images-gallery.html imageCollection="toolbar-dashboard-1" %}
 
-The "Hide Toolbar" option will hide the toolbar from the dashboard page.
-Instead of it, on the upper right of the screen, you will find "Enter edit mode" icon.
+「隐藏工具栏」会将工具栏从仪表板页面隐藏。
+此时屏幕右上角会出现「进入编辑模式」图标。
 
 {% include images-gallery.html imageCollection="toolbar-dashboard-2" %}
 
-The "Keep toolbar opened" option is responsible for displaying the toolbar on the dashboard page. 
-If we disable it, the toolbar will be closed. Instead of it, on the upper right of the screen you find the three-dots icon. 
-By clicking on it, the hidden toolbar will be opened.
+「保持工具栏展开」控制仪表板页面上工具栏的显示方式。
+若取消勾选，工具栏将收起。此时屏幕右上角会显示三点图标。
+点击该图标可展开隐藏的工具栏。
 
 {% include images-gallery.html imageCollection="toolbar-dashboard-3" %}
 
-### Layouts
+### 布局
 
-Layouts determine how widgets will be displayed and organized on the dashboard grid. [Read more about layouts in a separate documentation](/docs/{{docsPrefix}}user-guide/ui/layouts/){:target="_blank"}.
+布局决定部件在仪表板网格上的显示与排布方式。[更多布局说明请参阅单独文档](/docs/{{docsPrefix}}user-guide/ui/layouts/){:target="_blank"}。
 
-### States
+### 状态
 
-The States feature exists to create a layered hierarchy in your Dashboard. To use States properly, you need to assign a specific action to a widget that will help you fast "travel" among the required states.
-To do this, you should enter [edit mode](#edit-mode) and click the button two-layered squares "Manage dashboard states" in the upper left corner of the dashboard window. The Manage dashboard states configuration window will open.
+状态功能用于在仪表板中建立层级结构。要正确使用状态，需为部件分配特定操作，以便在不同状态之间快速切换。
+操作步骤：进入[编辑模式](#edit-mode)，点击仪表板窗口左上角双叠方块的「管理仪表板状态」按钮，将打开管理仪表板状态配置窗口。
 
 {% include images-gallery.html imageCollection="states-1" %}
 
-Since you haven't created any states yet, you have only your "Root state", namely your Dashboard. Root state defines the main state of your hierarchy.
-After creating additional states, you easily can change a root state by clicking the "Pencil" icon (Edit dashboard state) and selecting the “Root state” checkbox.
+由于尚未创建任何状态，当前只有「根状态」即仪表板本身。根状态定义层级的主状态。
+创建额外状态后，可点击「铅笔」图标（编辑仪表板状态）并勾选「根状态」复选框来更改根状态。
 
 {% include images-gallery.html imageCollection="states-root" %}
 
-To add a new state, you need to click on the "+" icon in the right upper of the window, it will open the Add dashboard state window.
-Assign a name, and the State ID will automatically generate based on that name, though you have the option to modify it. Click "Add" and then save all changes.
+要添加新状态，点击窗口右上角的「+」图标，将打开添加仪表板状态窗口。
+输入名称后，状态ID会根据名称自动生成，您也可手动修改。点击「添加」后保存所有更改。
 
 {% include images-gallery.html imageCollection="states-2" %}
 
-Giving a corresponding action to a particular widget allows traveling between states.
-To add an action, you should click the "pencil" icon (Edit widget) in the upper right corner of the widget to enter the widget configuration mode.
-There you need to navigate to the "Action" tab and click the "+" icon to add a new action.
+为特定部件设置对应操作后，即可在不同状态间切换。
+添加操作时，点击部件右上角的「铅笔」图标（编辑部件）进入部件配置模式。
+进入「操作」标签页，点击「+」图标添加新操作。
 
 {% include images-gallery.html imageCollection="states-3" %}
 
-It will open the "Add action" window.
+将打开「添加操作」窗口。
 
-- The _Action source_ is a particular act that needs to be done to achieve an aim.
-- The _Name_ means a preferred title to an action.
-- The _Icon_ defines a symbol for action.
-- The _Type_ determines an aim of the action.
+- _操作来源_：为达成目标需执行的具体动作。
+- _名称_：操作的自定义标题。
+- _图标_：操作对应的符号。
+- _类型_：操作的意图。
 
-In our case, a _Type_ should be "Navigate to new dashboard state". After choosing this option, the line "Target dashboard state" will appear, where we have to choose a newly created state.
-When the configuration for a new action is done, click the "Add" button. The new action appears in the actions list. Click the "Apply" button at the upper right of the window to apply changes.
+本例中，_类型_ 应选择「导航到新仪表板状态」。选择后会出现「目标仪表板状态」选项，需选择新创建的状态。
+配置完成后点击「添加」。新操作将出现在操作列表中。点击窗口右上角的「应用」按钮以保存更改。
 
-As we have chosen the "On row click" action, we need to click on the row of our widget to bring the action into effect. After clicking, we immediately transfer to the chosen state.
+由于选择的是「行点击」操作，需点击部件的行来触发操作。点击后会立即切换到所选状态。
 
 {% include images-gallery.html imageCollection="states-4" %}
 
-For the state to be named after the entity, use **${entityName}** as the name of the state. Thus during the action, you will be transitioned to a state that is called the same as the entity that took part in the action.
+若要让状态以实体命名，可在状态名称中使用 **${entityName}**。这样，在执行操作时，将跳转到以参与操作的实体名称命名的状态。
 
 {% include images-gallery.html imageCollection="states-entity-name" %}
 
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-### Generate report from dashboard
+### 从仪表板生成报告
 
-A Tenant Administrator or Customer User can **generate a report** from the currently opened dashboard in **PDF**, **PNG**, or **JPEG** format.
-- Click the "**Export Dashboard**" button, located on the right side of the dashboard toolbar.
+租户管理员或客户用户可从当前打开的仪表板以**PDF**、**PNG**或**JPEG**格式**生成报告**。
+- 点击仪表板工具栏右侧的「**导出仪表板**」按钮。
 
 <object width="40%" data="/images/user-guide/dashboards/overview/generate-report-from-dashboard-1-pe.png"></object>
 
-- In the expanded drop-down menu, select the desired export format. 
+- 在展开的下拉菜单中选择所需的导出格式。
 
 <object width="40%" data="/images/user-guide/dashboards/overview/generate-report-from-dashboard-2-pe.png"></object>
 
-- The report generation process will start automatically.
+- 报告生成过程将自动开始。
 
 <object width="40%" data="/images/user-guide/dashboards/overview/generate-report-from-dashboard-3-pe.png"></object>
 
-And finally, the report file will be automatically downloaded and saved to your PC.
+最后，报告文件将自动下载并保存到您的电脑。
 
-**Generate dashboard report by schedule**
+**按计划生成仪表板报告**
 
-Report generation can also be automated on a schedule using the [event scheduler](/docs/{{docsPrefix}}user-guide/scheduler/#generate-report){:target="_blank"} with the "**Generate Dashboard Report**" event type.
+报告生成也可通过[事件调度器](/docs/{{docsPrefix}}user-guide/scheduler/#generate-report){:target="_blank"}，选择「**生成仪表板报告**」事件类型实现自动化。
 {% endif %}
 
-## Managing dashboard
+## 管理仪表板
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-With your dashboards, you can perform operations such as [export dashboard in the JSON format](#export-dashboard), [share dashboard group](#share-dashboard-group), [make dashboard group public](#make-dashboard-group-public), [edit dashboard](#edit-dashboard) and [delete dashboard](#delete-dashboard) using the corresponding icon next to the dashboard.
+对仪表板可执行以下操作：[导出JSON格式仪表板](#export-dashboard)、[共享仪表板组](#share-dashboard-group)、[将仪表板组设为公开](#make-dashboard-group-public)、[编辑仪表板](#edit-dashboard)和[删除仪表板](#delete-dashboard)，通过仪表板旁的对应图标操作。
 {% endif %}
 
 {% if docsPrefix == null %}
-With your dashboards, you can perform operations such as [export dashboard in the JSON format](#export-dashboard), [make dashboard public](#make-dashboard-public), [manage assigned customers](#manage-assigned-customers), [edit dashboard](#edit-dashboard) and [delete dashboard](#delete-dashboard) using the corresponding icon next to the dashboard.
+对仪表板可执行以下操作：[导出JSON格式仪表板](#export-dashboard)、[将仪表板设为公开](#make-dashboard-public)、[管理已分配客户](#manage-assigned-customers)、[编辑仪表板](#edit-dashboard)和[删除仪表板](#delete-dashboard)，通过仪表板旁的对应图标操作。
 {% endif %}
 
-Let's look at each operation.
+以下逐项说明各操作。
 
-### Export dashboard
+### 导出仪表板
 
-In the ThingsBoard you can export a dashboard as a configuration file in JSON format.
-You can use this file to transfer your Dashboard or widget configuration to another instance.
+在ThingsBoard中可将仪表板导出为JSON格式的配置文件。
+此文件可用于将仪表板或部件配置迁移到另一实例。
 
-To export a dashboard, go to the “Dashboards” page. Find the dashboard you want to export in the list and click on the "Export dashboard" button located next to the dashboard's name. The configuration file in JSON format with all settings on the control panel will be saved on your PC.
+导出仪表板：进入 “Dashboards” 页面， 在列表中找到要导出的仪表板，点击其名称旁的「导出仪表板」按钮。包含控制面板所有设置的JSON格式配置文件将保存到您的电脑。
 
 {% include images-gallery.html imageCollection="export-dashboard" %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-To export the dashboard directly from the toolbar, open the dashboard and click the "Export dashboard" button in the upper right corner of the screen and select "Export JSON configuration".
-The dashboard is exported to the configuration file in JSON format.
+也可从工具栏直接导出：打开仪表板，点击屏幕右上角的「导出仪表板」按钮，选择「导出JSON配置」。
+仪表板将导出为JSON格式的配置文件。
 
 {% include images-gallery.html imageCollection="dashboard-toolbar-export" %}
 
-Dashboard export is also possible in several additional formats: PDF, PNG or JPEG.
-This is useful when you need to send the data displayed in your dashboard by email or print.
+仪表板还可导出为PDF、PNG或JPEG等其他格式。
+适用于通过邮件发送或打印仪表板中显示的数据。
 
 {% include images-gallery.html imageCollection="pro-export" %}
 
 {% endif %}
 {% if docsPrefix == null %}
-To export the dashboard directly from the toolbar, open the dashboard and click the "Export dashboard" button in the upper right corner of the screen.
-Dashboard is exported to the configuration file in JSON format.
+也可从工具栏直接导出：打开仪表板，点击屏幕右上角的「导出仪表板」按钮。
+仪表板将导出为JSON格式的配置文件。
 
 {% include images-gallery.html imageCollection="dashboard-toolbar-export" %}
 
-In **ThingsBoard Professional Edition**, in addition to exporting the dashboard in JSON format, dashboard export is possible in several additional formats: PDF, PNG & JPEG. This is useful when you need to send the data displayed in your dashboard by email or print.
+在**ThingsBoard专业版**中，除JSON格式外，仪表板还可导出为PDF、PNG和JPEG等格式。适用于通过邮件发送或打印仪表板中显示的数据。
 
 {% include images-gallery.html imageCollection="pro-export" %}
 
 {% endif %}
 
-### Import dashboard
+### 导入仪表板
 
-You can import a dashboard from a JSON configuration file. This can be useful when you are migrating your dashboard configuration from another instance.
+可从JSON配置文件导入仪表板，适用于从其他实例迁移仪表板配置。
 
-To import a dashboard, follow these steps:
+导入仪表板步骤如下：
 
 {% include images-gallery.html imageCollection="import-dashboard" showListImageTitles="true" %}
 
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-### Manage dashboard owner and groups
+### 管理仪表板所有者和分组
 
-You can change the <b>dashboard owner</b> to ensure that only users associated with the selected customer have access to the dashboard.
+可更改<b>仪表板所有者</b>，确保仅与所选客户相关的用户能访问该仪表板。
 
-> <b>Note</b>: This step is essential for maintaining strict [access control](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}. Each customer user will only have access to the data explicitly granted to them.   
-<b>Keep in mind</b> that granting access to a dashboard gives the customer access only to the dashboard itself, <b>not</b> to the data displayed on it. For the widgets to display data, the customer must also be granted access to the corresponding devices or other entities.
+> <b>注意</b>：此步骤对维护严格的[访问控制](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}至关重要。每位客户用户仅能访问明确授予其的数据。
+<b>请记住</b>：授予仪表板访问权限只会让客户访问仪表板本身，<b>不包括</b>其上显示的数据。若要让部件显示数据，还需授予客户对相应设备或其他实体的访问权限。
 
-<b>Changing the dashboard owner:</b>
+<b>更改仪表板所有者：</b>
 
-- Open the dashboard details by clicking the "<b>pencil</b>" icon in the dashboard list.
-- Click the "<b>Manage owner and groups</b>" button.
-- Select a new dashboard owner from the list. If needed, add the dashboard to an existing group or create a new one. 
-- Confirm the changes to update the owner information.
+- 在仪表板列表中点击「<b>铅笔</b>」图标打开仪表板详情。
+- 点击「<b>管理所有者和分组</b>」按钮。
+- 从列表中选择新的仪表板所有者。如需，可将仪表板加入现有分组或创建新分组。
+- 确认更改以更新所有者信息。
 
-In the <b>"Customer name" column</b>, you can see the current owner of the dashboard.
+在<b>「客户名称」列</b>中可查看仪表板当前所有者。
 
-> <b>Note</b>: A Tenant Administrator always has the right to reassign or revoke dashboard ownership.
+> <b>注意</b>：租户管理员始终有权重新分配或撤销仪表板所有权。
 
 {% include images-gallery.html imageCollection="dashboard-manage-owner-and-groups" %}
 
-#### Include customer entities
+#### 包含客户实体
 
-The "<b>Include customer entities</b>" option on the "<b>Dashboards</b>" page determines whether dashboards owned by customers are shown or hidden in the list.
+「<b>仪表板</b>」页面上的「<b>包含客户实体</b>」选项决定是否在列表中显示客户拥有的仪表板。
 
 {% include images-gallery.html imageCollection="include-customer-dashboards" showListImageTitles="true" %}
 
-### Share dashboard group
+### 共享仪表板组
 
-You can share a dashboard group with your customers, granting them permissions such as "Read", "Write", or using a previously created role.
-Roles are sets of permissions that define what actions users can perform. For more information about roles read [here](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}.
+可将仪表板组共享给客户，授予「读取」「写入」等权限，或使用已有角色。
+角色是定义用户可执行操作的权限集合。更多关于角色的信息请参阅[此处](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}。
 
-To share a dashboard group, follow these steps:
+共享仪表板组步骤如下：
 
 {% include images-gallery.html imageCollection="share-dashboard-group" showListImageTitles="true" %}
 
 {% endif %}
 
 {% if docsPrefix == null %}
-### Make dashboard public
+### 将仪表板设为公开
 
-You can make the dashboard public and share a link to it with other users.
+可将仪表板设为公开，并与他人共享链接。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-### Make dashboard group public
+### 将仪表板组设为公开
 
-You can make the dashboard group and all its dashboards public and then share links to those dashboards with other users.
+可将仪表板组及其全部仪表板设为公开，并与他人共享这些仪表板的链接。
 {% endif %}
 
-For this you should:
+操作步骤如下：
 
 {% include images-gallery.html imageCollection="make-public" showListImageTitles="true" %}
 
-To make a dashboard private again, follow these steps:
+若要将仪表板恢复为私有，请按以下步骤操作：
 
 {% include images-gallery.html imageCollection="make-private" showListImageTitles="true" %}
 
 {% capture difference %}
-**Please note:**
+**请注意：**
 <br>
-To display data on a public dashboard, the associated entities must also be made public. This can be done by making the device or asset group public for Professional Edition or by making individual devices or assets for Community Edition.
+要在公开仪表板上显示数据，关联的实体也需设为公开。专业版可将设备或资产组设为公开，社区版可将单个设备或资产设为公开。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% if docsPrefix == null %}
-### Manage assigned customers
+### 管理已分配客户
 
-You can assign a dashboard to your client. The customer will only have the ability to view the dashboard and won't be able to perform any other operations on the dashboard.
+可将仪表板分配给客户。客户仅能查看仪表板，无法对其进行其他操作。
 
-To assign a dashboard to a customer you should:
+将仪表板分配给客户的步骤：
 
 {% include images-gallery.html imageCollection="manage-assigned-customers" showListImageTitles="true" %}
 
-You can unassign a dashboard from a customer. For this:
+也可取消客户的仪表板分配。操作如下：
 
 {% include images-gallery.html imageCollection="manage-unassigned-customers" showListImageTitles="true" %}
 
-To assign/unassign multiple dashboards to a customer(s) simultaneously, select the desired dashboards and use the "Assign Dashboards" and "Unassign Dashboards" buttons.
+要同时向客户分配/取消分配多个仪表板，可选中目标仪表板，使用「分配仪表板」和「取消分配仪表板」按钮。
 
 {% include images-gallery.html imageCollection="assigned-multiple-dashboards" showListImageTitles="true" %}
 
@@ -541,33 +541,33 @@ To assign/unassign multiple dashboards to a customer(s) simultaneously, select t
 
 ### Edit dashboard
 
-Edit the fields you need, such as the title or description of the dashboard. After making the edits, remember to save all changes.
-With these steps, you will have successfully updated the dashboard information.
+可编辑标题、描述等字段。修改后请记得保存。
+完成以上步骤即可成功更新仪表板信息。
 
-Let’s see how to do this:
+操作步骤示例：
 
 {% include images-gallery.html imageCollection="dashboard-details" showListImageTitles="true" %}
 
-### Delete dashboard
+### 删除仪表板
 
-You can delete a dashboard using one of the following ways:
+可通过以下任一方式删除仪表板：
 
-First way:
+方式一：
 
 {% include images-gallery.html imageCollection="delete-dashboard-1" showListImageTitles="true" %}
 
-Second way:
+方式二：
 
 {% include images-gallery.html imageCollection="delete-dashboard-2" showListImageTitles="true" %}
 
-You can also delete multiple dashboards at once.
+也可批量删除多个仪表板。
 
 {% include images-gallery.html imageCollection="delete-dashboard-3" showListImageTitles="true" %}
 
-## Next steps
+## 后续步骤
 
- - [Widgets](/docs/{{docsPrefix}}user-guide/widgets) - This guide contains instructions for configuring ThingsBoard widgets.
+ - [部件](/docs/{{docsPrefix}}user-guide/widgets) - 本指南介绍如何配置ThingsBoard部件。
 
- - [Data visualization](/docs/{{docsPrefix}}guides/#AnchorIDDataVisualization) - These guides contain instructions how to configure complex ThingsBoard dashboards.
+ - [数据可视化](/docs/{{docsPrefix}}guides/#AnchorIDDataVisualization) - 这些指南介绍如何配置复杂的ThingsBoard仪表板。
 
- - [Data processing & actions](/docs/{{docsPrefix}}guides/#AnchorIDDataProcessing) - Learn how to use ThingsBoard Rule Engine.
+ - [数据处理与操作](/docs/{{docsPrefix}}guides/#AnchorIDDataProcessing) - 了解如何使用ThingsBoard规则引擎。

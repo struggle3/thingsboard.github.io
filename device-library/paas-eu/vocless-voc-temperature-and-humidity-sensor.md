@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Vocless VOC temperature and humidity Sensor to ThingsBoard?
-category: Other devices
+title: 如何将 Vocless VOC temperature and humidity Sensor 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: NanoSensorics
 hasIntegrationDeviceConfiguration: true

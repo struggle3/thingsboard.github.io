@@ -1,19 +1,19 @@
-Now let's start the ThingsBoard Edge service!
-Open the command prompt as an Administrator and execute the following command:
+现在启动 ThingsBoard Edge 服务！
+以管理员身份打开命令提示符并执行以下命令：
 
 ```shell
 net start tb-edge
 ```
 {: .copy-code}
 
-Expected output:
+预期输出：
 
 ```text
 The ThingsBoard Edge Server Application service is starting.
 The ThingsBoard Edge Server Application service was started successfully.
 ```
 
-In order to restart the ThingsBoard Edge service you can execute following commands:
+要重启 ThingsBoard Edge 服务，可执行以下命令：
 
 ```shell
 net stop tb-edge

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Version control
-description: Version control
+title: 版本控制
+description: 使用 Git 导出与恢复 ThingsBoard 实体的版本控制
 gitConfiguration:
     0:
         image: /images/user-guide/version-control/version-control-1-ce.png 

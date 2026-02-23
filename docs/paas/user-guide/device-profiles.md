@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Device profiles
-description: IoT device profiles
+title: 设备档案
+description: IoT 设备档案
 redirect_from: "/docs/paas/user-guide/ui/device-profiles"
 
 create-device-profile:

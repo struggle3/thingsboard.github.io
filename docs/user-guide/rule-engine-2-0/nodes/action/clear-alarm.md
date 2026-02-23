@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: clear alarm
-description: Clears existing active alarms for the message originator.
+title: 清除 alarm
+description: 清除消息 originator 的现有活动 alarms。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

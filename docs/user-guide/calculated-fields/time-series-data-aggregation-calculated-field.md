@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Time series data aggregation calculated field
-description: Simple calculated fields use basic arithmetic operations (+, -, *, /) and standard functions such as sqrt (square root), pow (power), abs (absolute value), etc.
+title: 时间序列数据聚合计算字段
+description: 对时间序列数据进行聚合计算，支持sum、avg、min、max等聚合函数。
 breadcrumbs: "true"
 breadcrumbs-steps: "1"
 hidetoc: "true"

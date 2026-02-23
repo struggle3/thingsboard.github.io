@@ -1,14 +1,14 @@
-### Thingsboard performance charts
+### ThingsBoard性能图表
 
-Open your browser and go http://localhost:8080/dashboards and login. Use your instance IP address instead.  
-Default login for demo instance is `tenant@thingsboard.org`, password is `tenant`.
+在浏览器中打开 http://localhost:8080/dashboards 并登录。请使用您的实例IP地址替换。  
+演示实例默认登录为`tenant@thingsboard.org`，密码为`tenant`。
 
 ![Thingsboard dashboard list with Rule Engine Statistics](/images/reference/performance-aws-instances/method/chart-examples/performance_test_thingsboard_dashboard_list.png "Thingsboard dashboard list with Rule Engine Statistics")
 
-Choose the "Rule Engine Statistics" dashboard. You can see how the system perform under the load.
+选择"Rule Engine Statistics"仪表板，可查看系统在负载下的性能表现。
 
 ![Thingsboard rule engine statistics](/images/reference/performance-aws-instances/method/chart-examples/performance_test_thingsboard_rule_engine_statistics_queue_stats.png "Thingsboard rule engine statistics")
 
-Another fancy feature is the API usage page
+另一功能为API使用页面
 
-![Thingsboard API usage feature](/images/reference/performance-aws-instances/method/chart-examples/performance_test_thingsboard_api_usage_feature.png "Thingsboard API usage feature")
+![ThingsBoard API usage feature](/images/reference/performance-aws-instances/method/chart-examples/performance_test_thingsboard_api_usage_feature.png "ThingsBoard API usage feature")

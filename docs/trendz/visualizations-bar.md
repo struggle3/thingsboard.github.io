@@ -2,15 +2,15 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Bar & Histogram
-description: Bar Chart and Histogram
+title: 柱状图与直方图
+description: 柱状图与直方图
 ---
 
 * TOC
 {:toc}
 
-Details about basic Bar chart you can find in [Line Chart Configuration](/docs/trendz/visualizations-line/)
-Main concept for line and bar charts are the same. In this tutorial we will focus on differences.
+Bar chart基础详情见[Line Chart Configuration](/docs/trendz/visualizations-line/)
+Line和Bar chart的核心概念相同。本教程侧重差异说明。
 
 ## Video Tutorial
 
@@ -24,40 +24,38 @@ Main concept for line and bar charts are the same. In this tutorial we will focu
 
 ## Horizontal Bars
 
-By default bar chart is vertical. In some cases it is required to show data using vertical bars. For making it:
+默认Bar chart为竖向。若需以水平柱状图展示数据：
 
-* Open View Settings
-* Enable **Horizontal Bar** mode
+* 打开View Settings
+* 启用**Horizontal Bar**模式
 
 ![image](/images/trendz/bar-horizontal.png)
 ![image](/images/trendz/bar-horizontal-conf.png)
 
-**Note** horizontal mode available only when **Y-axis** contains one field. When multiple fields added to **Y-axis** and there are fields 
-in **Series** section - horizontal bar would not display. 
+**注意**：仅当**Y-axis**包含一个字段时支持水平模式。若**Y-axis**有多个字段且**Series**区域有字段，则不显示水平柱状图。
 
 ## Stacked Bars
 
-When bar chart contains multiple timeseries or series fields - each seria showed independently. And it is possible to enable 
-stacked mode for bar charts. Here are few examples: stacking disabled, stacking enabled and 100% stacked bars. 
+当Bar chart包含多个timeseries或series字段时，每个series独立显示。可为Bar chart启用stacked模式。示例如下： stacking关闭、stacking开启、100% stacked bars。
 
 ![image](/images/trendz/bar-stack-off.png)
 ![image](/images/trendz/bar-stack-onn.png)
 ![image](/images/trendz/bar-stack-100.png)
 
-You can control stack options in View Settings
+可在View Settings中控制stack选项
 
 ![image](/images/trendz/bar-stack-conf.png)
 
 ## Group By telemetry value
 
-This option used when you need to group and aggregate data based on telemetry field value. 
-For example we have machine that produce different cups. Machine submit telemetry that contains info:
+当需要按telemetry字段值分组和聚合数据时使用该选项。
+例如设备生产不同杯子，上报的telemetry包含：
 
-* How many products were produced (amount)
-* What type of product was produced (product category)
-* How many resources were utilised (energy)
+* 生产数量(amount)
+* 产品类型(product category)
+* 消耗资源(energy)
 
-Raw payload format is the following:
+原始payload格式如下：
 
 {% highlight javascript %}
   {
@@ -68,20 +66,19 @@ Raw payload format is the following:
   }
 {% endhighlight %}
 
-What we want to find - how many products with different types were produced. Or how much energy was consumed for producing products 
-of certain type.
+目标：按不同产品类型统计产量，或统计特定类型产品的能耗。
 
-In both cases we need to group telemetry by **product** value and then apply required aggregation (in our case - SUM):
+两种情况均需按**product**值分组telemetry，然后应用所需聚合（本例为SUM）：
 
-* Add **product** field into **Series** section and select **UNIQ** aggregation - in this step we will group telemetry.
-* Add **product** field into **Y-axis** section and select **SUM** aggregation - in this step we apply aggregation for each group.
-* Add **Machine** field into **X-axis** section - we will see a breakdown for each machine
+* 将**product**字段加入**Series**区域，聚合选**UNIQ**——分组telemetry
+* 将**product**字段加入**Y-axis**区域，聚合选**SUM**——对每组应用聚合
+* 将**Machine**字段加入**X-axis**区域——按机器拆分展示
 
-Now we now how much products in different categories were produced by different machines.
+即可看到不同机器生产各类型产品的数量。
 
 ![image](/images/trendz/bar-group-ts.png)
 
 ## Labels
-You can add/hide labels from the bar chart using checkbex in View Settings. 
+可在View Settings中通过复选框添加/隐藏Bar chart的标签。
 
 ![image](/images/trendz/bar-labels.png)

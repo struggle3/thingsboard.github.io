@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect UG67 LoRaWAN® Gateway to ThingsBoard?"
+title: "如何将UG67 LoRaWAN® Gateway连接到ThingsBoard？"
 redirect_to: "/device-library/paas/ug67-lorawan-gateway/"
 ---

@@ -3,24 +3,24 @@
 * TOC
 {:toc}
 
-Tuya is an IoT platform that enables device manufacturers and solution providers to connect, manage, and control smart devices through the Tuya Cloud.
+Tuya是使设备制造商和方案提供商能通过Tuya Cloud连接、管理和控制智能设备的IoT平台。
 
-The Tuya Cloud Integration in ThingsBoard allows you to:
-- Connect Tuya-managed devices to ThingsBoard
-- Receive telemetry and device state updates
-- Send control commands from ThingsBoard to Tuya devices
-- Visualize device data and manage devices centrally
+ThingsBoard中的Tuya Cloud集成支持：
+- 将Tuya管理的设备连接至ThingsBoard
+- 接收遥测与设备状态更新
+- 从ThingsBoard向Tuya设备发送控制命令
+- 可视化设备数据并集中管理设备
 
-This guide describes how to configure an end-to-end integration using a real device - **Tuya Smart Plug**.   
-Also, you can use a [virtual Tuya device](https://developer.tuya.com/en/docs/iot/manage-virtual-devices?id=Ka4725tiyfhg0){:target="_blank"} for testing.
+本指南描述如何使用真实设备**Tuya Smart Plug**配置端到端集成。
+您也可使用[Tuya虚拟设备](https://developer.tuya.com/en/docs/iot/manage-virtual-devices?id=Ka4725tiyfhg0){:target="_blank"}进行测试。
 
-## Prerequisites
+## 前置条件
 
-Before starting, ensure you have:
-- A ThingsBoard account with permission to create integrations 
-- A Tuya IoT Platform account 
-- At least one Tuya device (physical or virtual)
-- Tuya Smart App installed and logged in
+开始前请确保具备：
+- 具有创建集成权限的ThingsBoard账户
+- Tuya IoT Platform账户
+- 至少一台Tuya设备（实体或虚拟）
+- 已安装并登录的Tuya Smart App
 
 ## Install smart device control application
 

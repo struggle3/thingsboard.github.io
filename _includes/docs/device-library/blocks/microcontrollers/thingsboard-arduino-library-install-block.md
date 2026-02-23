@@ -1,12 +1,12 @@
-To install ThingsBoard Arduino SDK - we will need to do the following steps:  
+安装 ThingsBoard Arduino SDK 需执行以下步骤：  
 
 {% assign libraryInstallation = '
     ===
         image: /images/devices-library/basic/arduino-ide/tools-manage-libraries.png
-        title: Go to "**Tools**" tab and click on "**Manage libraries**".
+        title: 进入 **工具** 选项卡，点击 **管理库**。
     ===
         image: /images/devices-library/basic/arduino-ide/manage-libraries-thingsboard.png
-        title: Put "**ThingsBoard**" into the search box and press "***INSTALL***" button for the found library.
+        title: 在搜索框中输入 **ThingsBoard** 并点击找到的库的 **安装** 按钮。
 ' 
 %}
 
@@ -14,7 +14,7 @@ To install ThingsBoard Arduino SDK - we will need to do the following steps:
 
 {% capture libraryVersion %}
 
-All provided code examples require ThingsBoard Library version {% if wifininaInstallationRequired == "true" %}**0.10.2**{% else %}**0.14.0**{% endif %}.  
+所有示例代码均需 ThingsBoard 库版本 {% if wifininaInstallationRequired == "true" %}**0.10.2**{% else %}**0.14.0**{% endif %}.  
 
 {% endcapture %}
 
@@ -22,15 +22,15 @@ All provided code examples require ThingsBoard Library version {% if wifininaIns
 
 {% if mbedtlsInstallationRequired == "true" %}
 
-Also, for boards, based on ESP8266 or RP2040 chip we should install the "mbedtls" and "arduino-timer" libraries.  
+基于 ESP8266 或 RP2040 芯片的开发板还需安装 "mbedtls" 和 "arduino-timer" 库。  
 
 {% assign mbedtlsInstallation='
     ===
         image: /images/devices-library/basic/arduino-ide/install-mbedtls.png,
-        title: Put into library search field "**mbedtls**" and install the library - "***Seeed_Arduino_mbedtls by Peter Yang***"
+        title: 在库搜索框中输入 **mbedtls** 并安装 **Seeed_Arduino_mbedtls by Peter Yang** 库
     ===
         image: /images/devices-library/basic/arduino-ide/install-arduino-timer.png,
-        title: Put into library search field "**arduino-timer**" and install the library - "***arduino-timer by Michael Contreras***"
+        title: 在库搜索框中输入 **arduino-timer** 并安装 **arduino-timer by Michael Contreras** 库
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=mbedtlsInstallation %}
@@ -39,12 +39,12 @@ Also, for boards, based on ESP8266 or RP2040 chip we should install the "mbedtls
 
 {% if OLEDInstallationRequired == "true" %}
 
-Also, to control display we should install the Adafruit SSD1306 library.  
+控制显示屏还需安装 Adafruit SSD1306 库。  
 
 {% assign oledInstallation='
     ===
         image: /images/devices-library/basic/arduino-ide/install-adafruit-ssd1306.png,
-        title: Put into library search field "**Adafruit SSD1306**" and install the library - "**Adafruit SSD1306 by Adafruit**"
+        title: 在库搜索框中输入 **Adafruit SSD1306** 并安装 **Adafruit SSD1306 by Adafruit** 库
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=oledInstallation %}
@@ -53,16 +53,16 @@ Also, to control display we should install the Adafruit SSD1306 library.
 
 {% if wifininaInstallationRequired == "true" %}
 
-Also, for boards, based on RP2040 chip we should install the "WiFiNINA" library.  
+基于 RP2040 芯片的开发板还需安装 "WiFiNINA" 库。  
 
 {% assign wifininaInstallation='
     ===
         image: /images/devices-library/basic/arduino-ide/install-wifinina.png,
-        title: Put into library search field "**WiFiNINA**" and install the library - "**WiFiNINA by Arduino**"
+        title: 在库搜索框中输入 **WiFiNINA** 并安装 **WiFiNINA by Arduino** 库
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=wifininaInstallation %}
 
 {% endif %}
 
-At this point, we have installed all required libraries and tools.  
+至此已安装全部所需库与工具。  

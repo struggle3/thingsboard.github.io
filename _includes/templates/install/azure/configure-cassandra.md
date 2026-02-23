@@ -1,16 +1,16 @@
-Using Cassandra is an optional step. 
-We recommend to use Cassandra if you plan to insert more than 5K data points per second or would like to optimize storage space.
+使用 Cassandra 为可选步骤。
+如计划每秒插入超过 5K 数据点或希望优化存储空间，建议使用 Cassandra。
 
-#### Provision additional node pools
+#### 预置附加节点池
 
-Provision additional node pools that will be hosting Cassandra instances. 
-You may change the machine type. At least 4 vCPUs and 16GB of RAM is recommended.
+预置将托管 Cassandra 实例的附加节点池。
+您可以更改机器类型。建议至少 4 个 vCPU 和 16GB 内存。
 
-We will create **3** separate node pools with **1** node per zone. 
-Since we plan to use zonal disks, we don't want k8s to launch a pod on the node where the corresponding disk is not available.
-Those zones will have the same node label. We will use this label to target deployment of our stateful set.
+我们将在三个可用区各创建 **3** 个独立节点池，每个 zone **1** 个节点。
+由于计划使用区域磁盘，我们不希望 k8s 在对应磁盘不可用的节点上启动 Pod。
+这些 zone 将具有相同的节点标签。我们将使用此标签来定位 StatefulSet 的部署。
 
-So,  define **3** node pools in three zones for your location:
+因此，为您所在位置在三个 zone 中定义 **3** 个节点池：
 
 ```bash
 az aks nodepool add --resource-group $AKS_RESOURCE_GROUP --cluster-name $TB_CLUSTER_NAME --name tbcassandra1 --node-count 1 --zones 1 --labels role=cassandra

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: Fuel level monitoring template
-description: Fuel level monitoring template overview
+title: 油位监控模板
+description: 油位监控模板概览
 
 solution-highlights:
     0:

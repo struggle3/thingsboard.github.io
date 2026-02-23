@@ -1,6 +1,5 @@
-To enable SSL, you will need to obtain a valid or generate a self-signed SSL certificate.
-Once added, you will need to specify the SSL credentials information in **thingsboard.conf** file.
-We recommend to use valid, wildcard SSL certificates for your setup. 
-We have seen many companies to waste hours    
-See the instructions on how to generate SSL certificate and use it in your ThingsBoard installation below.
-You can skip certificate generation step if you already have a certificate.
+启用 SSL 需要获取有效证书或生成自签名 SSL 证书。
+添加后，需在 **thingsboard.conf** 中配置 SSL 凭据信息。
+建议使用有效的泛域 SSL 证书进行部署。
+下文说明如何生成 SSL 证书并在 ThingsBoard 安装中使用。
+若已有证书，可跳过证书生成步骤。

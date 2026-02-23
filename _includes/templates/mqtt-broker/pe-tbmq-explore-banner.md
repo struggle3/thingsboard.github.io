@@ -1,6 +1,6 @@
 {% if docsPrefix != 'pe/' %}
 {% capture difference %}
-Interested in the **TBMQ Professional Edition**? Explore the TBMQ PE documentation [here](/docs/pe/mqtt-broker/){:target="_blank"}.
+对 **TBMQ Professional Edition** 感兴趣？请在此处 [查看](/docs/pe/mqtt-broker/){:target="_blank"} TBMQ PE 文档。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 {% endif %}

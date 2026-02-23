@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Send email on alarm
-description: Send email Workflow
+title: 告警时发送邮件
+description: 告警时发送邮件 Workflow
 
 add-recipients:
     0:

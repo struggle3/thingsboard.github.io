@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Tenants
-description: ThingsBoard Tenants management
+title: 租户
+description: ThingsBoard租户管理
 
 create-tenants-ce:
     0:

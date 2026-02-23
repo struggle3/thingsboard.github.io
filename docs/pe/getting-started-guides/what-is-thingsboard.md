@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: What is ThingsBoard?
-description: ThingsBoard key features and advantages for the rapid development of IoT projects and applications.
+title: 什么是 ThingsBoard？
+description: ThingsBoard 的核心特性与优势，助力物联网项目与应用快速开发。
 ---
 
 {% assign docsPrefix = "pe/" %}

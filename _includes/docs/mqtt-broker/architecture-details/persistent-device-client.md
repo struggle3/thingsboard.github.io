@@ -2,18 +2,18 @@
 * TOC
 {:toc}
 
-In TBMQ 1.x, persistent DEVICE clients relied on PostgreSQL for message persistence and retrieval,
-ensuring that messages were delivered when a client reconnected.
-While PostgreSQL performed well initially, it had a fundamental limitation — it could only scale vertically.
-We anticipated that as the number of persistent MQTT sessions grew, PostgreSQL’s architecture would eventually become a bottleneck.
-To address this, we explored more scalable alternatives capable of handling the increasing demands of our MQTT broker.
-Redis was quickly chosen as the best fit due to its horizontal scalability, native clustering support, and widespread adoption.
+在 TBMQ 1.x 中，持久 DEVICE 客户端依赖 PostgreSQL 进行消息持久化和检索，
+确保客户端重连时能投递消息。
+PostgreSQL 初期表现良好，但存在根本性限制——只能垂直扩展。
+我们预计，随着持久 MQTT 会话数量的增长，PostgreSQL 的架构最终将成为瓶颈。
+为解决此问题，我们探索了更易扩展的替代方案，以应对 MQTT broker 日益增长的需求。
+鉴于 Redis 的水平扩展能力、原生集群支持及广泛采用，我们很快选择其作为最佳方案。
 
-## Postgres Usage and Limitations
+## PostgreSQL 使用与限制
 
-To fully understand the reasoning behind this shift, it’s important to first examine how MQTT clients operated within the PostgreSQL architecture. This architecture was built around two key tables.
+要充分理解这一迁移的原因，首先需要了解 MQTT 客户端在 PostgreSQL 架构中的工作方式。该架构围绕两个关键表构建。
 
-The `device_session_ctx` table was responsible for maintaining the session state of each persistent MQTT client:
+`device_session_ctx` 表负责维护每个持久 MQTT 客户端的会话状态：
 
 ```postgresql
                       Table "public.device_session_ctx"
@@ -27,12 +27,12 @@ Indexes:
     "device_session_ctx_pkey" PRIMARY KEY, btree (client_id)
 ```
 
-The key columns are `last_packet_id` and `last_serial_number`, which is used to maintain message order for persistent MQTT clients:
+关键列为 `last_packet_id` 和 `last_serial_number`，用于维护持久 MQTT 客户端的消息顺序：
 
-- `last_packet_id` represents the packet ID of the last MQTT message received.
-- `last_serial_number` acts as a continuously increasing counter, preventing message order issues when the MQTT packet ID wraps around after reaching its limit of `65535`.
+- `last_packet_id` 表示收到的最后一条 MQTT 消息的 packet ID。
+- `last_serial_number` 作为持续递增的计数器，防止 MQTT packet ID 在达到 65535 限制后回绕时出现消息顺序问题。
 
-The `device_publish_msg` table was responsible for storing messages that must be published to persistent MQTT clients (subscribers).
+`device_publish_msg` 表负责存储必须发布给持久 MQTT 客户端（订阅者）的消息：
 
 ```postgresql
                          Table "public.device_publish_msg"
@@ -58,113 +58,112 @@ Indexes:
     "idx_device_publish_msg_packet_id" btree (client_id, packet_id)
 ```
 
-The key columns to highlight:
+需要强调的关键列：
 
-- `time` – captures the system time (timestamp) when the message is stored. This field is used for periodic cleanup of expired messages.
-- `msg_expiry_interval` – represents the expiration time (in seconds) for a message.
-  This is set only for incoming MQTT 5.0 messages that include an expiry property.
-  If the expiry property is absent, the message does not have a specific expiration time and remains valid until it is removed by time or size-based cleanup.
+- `time` – 记录消息存储时的系统时间（时间戳）。该字段用于定期清理过期消息。
+- `msg_expiry_interval` – 表示消息的过期时间（秒）。
+  仅对包含过期属性的传入 MQTT 5.0 消息设置。
+  若缺少过期属性，消息没有特定过期时间，在基于时间或大小的清理移除前一直有效。
 
-Together, these tables managed message persistence and session state.
-The `device_session_ctx` table was designed for fast retrieval of the last MQTT packet ID and serial number stored for each persistent MQTT client.
-When messages for a client are received from a shared Kafka topic, the broker queries this table to fetch the latest values.
-These values are incremented sequentially and assigned to each message before being saved to the `device_publish_msg` table.
+这两个表共同管理消息持久化和会话状态。
+`device_session_ctx` 表设计用于快速检索为每个持久 MQTT 客户端存储的最后 MQTT packet ID 和 serial number。
+当从共享 Kafka topic 收到客户端消息时，broker 会查询该表以获取最新值。
+这些值依次递增并分配给每条消息，然后保存到 `device_publish_msg` 表。
 
-While this design ensured reliable message delivery, it also introduced performance constraints.
-Based on the TimescaleDB blog [post](https://www.timescale.com/blog/postgresql-timescaledb-1000x-faster-queries-90-data-compression-and-much-more#ingest-performance)
-vanilla PostgreSQL can handle up to 300k inserts per second under ideal conditions.
-However, this performance depends on factors such as hardware, workload, and table schema.
-While vertical scaling can provide some improvement, PostgreSQL’s per-table insert throughput eventually reaches a hard limit.
+虽然该设计确保了可靠的消息投递，但也引入了性能限制。
+根据 TimescaleDB 博客 [文章](https://www.timescale.com/blog/postgresql-timescaledb-1000x-faster-queries-90-data-compression-and-much-more#ingest-performance)，
+在理想条件下，vanilla PostgreSQL 每秒最多可处理约 30 万次插入。
+然而，该性能取决于硬件、工作负载和表结构等因素。
+虽然垂直扩展可带来一定提升，但 PostgreSQL 的每表插入吞吐量最终会达到硬性上限。
 
-## Redis as a Scalable Alternative
+## Redis 作为可扩展替代方案
 
-Our decision to migrate to Redis was driven by its ability to address the core performance bottlenecks encountered with PostgreSQL.
-Unlike PostgreSQL, which relies on disk-based storage and vertical scaling, Redis operates primarily in memory, significantly reducing read and write latency.
-Additionally, Redis’s distributed architecture allows TBMQ to scale horizontally, keeping the retrieval and delivery of persistent messages efficient even as the number of client sessions and stored messages grows.
+我们选择迁移到 Redis 的动机，是其能够解决 PostgreSQL 遇到的核心性能瓶颈。
+PostgreSQL 依赖基于磁盘的存储和垂直扩展，而 Redis 主要在内存中运行，显著降低读写延迟。
+此外，Redis 的分布式架构使 TBMQ 能够水平扩展，即便客户端会话和存储消息数量增长，也能保持持久消息的检索和投递高效。
 
-With these benefits in mind, we started our migration process with an evaluation of data structures that could preserve the functionality of the PostgreSQL approach
-while aligning with Redis Cluster constraints to enable efficient horizontal scaling.
-This also presented an opportunity to improve certain aspects of the original design, such as periodic cleanups, by leveraging Redis features like built-in expiration mechanisms.
+鉴于上述优势，我们开始迁移并评估可与 Redis Cluster 约束对齐、同时保留 PostgreSQL 方案功能的数据结构，以实现高效水平扩展。
+这也为我们提供机会，通过利用 Redis 的内置过期机制等特性，改进原设计的某些方面（如定期清理）。
 
-### Redis Cluster Constraints
+### Redis Cluster 约束
 
-When migrating from PostgreSQL to Redis, we recognized that replicating the existing data model would require multiple Redis data structures to efficiently handle message persistence and ordering.
-This, in turn, meant using multiple keys for each persistent MQTT Client session.
+从 PostgreSQL 迁移到 Redis 时，我们意识到复制现有数据模型需要多种 Redis 数据结构才能高效处理消息持久化和排序。
+这意味着每个持久 MQTT 客户端会话需要使用多个 key。
 
 {% include images-gallery.html imageCollection="redis-cluster-constraints" %}
 
-Redis Cluster distributes data across multiple slots to enable horizontal scaling.
-However, multi-key operations must access keys within the same slot.
-If the keys reside in different slots, the operation triggers a cross-slot error, preventing the command from executing.
-We used the persistent MQTT client ID as a [hash tag](https://redis.io/docs/latest/operate/oss_and_stack/reference/cluster-spec/#hash-tags) in our key names to address this.
-By enclosing the client ID in curly braces `{}`, Redis ensures that all keys for the same client are hashed to the same slot.
-This guarantees that related data for each client stays together, allowing multi-key operations to proceed without errors.
+Redis Cluster 将数据分布在多个 slot 以实现水平扩展。
+但多 key 操作必须访问同一 slot 内的 key。
+若 key 位于不同 slot，操作将触发跨 slot 错误，导致命令无法执行。
+我们在 key 名称中使用持久 MQTT 客户端 ID 作为 [hash tag](https://redis.io/docs/latest/operate/oss_and_stack/reference/cluster-spec/#hash-tags) 来解决此问题。
+通过将 client ID 用花括号 `{}` 包裹，Redis 确保同一客户端的所有 key 被哈希到同一 slot。
+这保证每个客户端的相关数据集中在一起，使多 key 操作能够无错误执行。
 
-### Atomic Operations via Lua Scripts
+### 通过 Lua 脚本实现原子操作
 
-Consistency is critical in a high-throughput environment like TBMQ, where many messages can arrive simultaneously for the same MQTT client.
-Hashtagging helps to avoid cross-slot errors, but without atomic operations, there is a risk of race conditions or partial updates.
-This could lead to message loss or incorrect ordering. It is important to make sure that operations updating the keys for the same MQTT client are atomic.
+在 TBMQ 这样的高吞吐量环境中，一致性至关重要，同一 MQTT 客户端可能同时收到多条消息。
+Hash tag 有助于避免跨 slot 错误，但若无原子操作，仍存在竞态条件或部分更新的风险。
+这可能导致消息丢失或顺序错误。确保更新同一 MQTT 客户端 key 的操作为原子操作非常重要。
 
-Redis is designed to execute individual commands atomically.
-However, in our case, we need to update multiple data structures as part of a single operation for each MQTT client.
-Executing these sequentially without atomicity opens the door to inconsistencies if another process modifies the same data in between commands.
-That’s where [Lua scripting](https://redis.io/docs/latest/develop/interact/programmability/eval-intro/) comes in. Lua script executes as a single, isolated unit.
-During script execution, no other commands can run concurrently, ensuring that the operations inside the script happen atomically.
+Redis 设计为原子执行单条命令。
+但在我们场景中，需要在单次操作中为每个 MQTT 客户端更新多个数据结构。
+若按顺序执行且不具备原子性，若另一进程在命令之间修改同一数据，则会引入不一致。
+这时 [Lua 脚本](https://redis.io/docs/latest/develop/interact/programmability/eval-intro/) 派上用场。Lua 脚本作为单一、隔离单元执行。
+脚本执行期间，不允许其他命令并发运行，确保脚本内操作原子执行。
 
-Based on this information, we decided that for any operation, such as saving messages or retrieving undelivered messages upon reconnection, we will execute a separate Lua script.
-This ensures that all operations within a single Lua script reside in the same hash slot, maintaining atomicity and consistency.
+基于此，我们决定：对任何操作（如保存消息或重连时检索未投递消息），均执行独立的 Lua 脚本。
+这确保单个 Lua 脚本内的所有操作位于同一 hash slot，保持原子性和一致性。
 
-### Redis Data Structures
+### Redis 数据结构
 
-One of the key requirements of the migration was maintaining message order, a task previously handled by the `serial_number` column in PostgreSQL’s `device_publish_msg` table.
-After evaluating various Redis data structures, we determined that [sorted sets](https://redis.io/docs/latest/develop/data-types/sorted-sets/) (ZSETs) were the ideal replacement.
+迁移的关键要求之一是保持消息顺序，此前由 PostgreSQL 的 `device_publish_msg` 表中的 `serial_number` 列处理。
+在评估多种 Redis 数据结构后，我们确定 [sorted sets](https://redis.io/docs/latest/develop/data-types/sorted-sets/)（ZSET）是最佳替代方案。
 
-Redis sorted sets naturally organize data by score, enabling quick retrieval of messages in ascending or descending order.
-While sorted sets provided an efficient way to maintain message order, storing full message payloads directly in sorted sets led to excessive memory usage.
-Redis does not support per-member TTL within sorted sets. As a result, messages persisted indefinitely unless explicitly removed.
-Similar to PostgreSQL, we had to perform periodic cleanups using `ZREMRANGEBYSCORE` to delete expired messages.
-This operation carries a complexity of `O(log N + M)`, where `M` is the number of elements removed.
-To overcome this limitation, we decided to store message payloads using strings data structure while storing in the sorted set references to these keys.
+Redis sorted set 按 score 自然组织数据，支持快速按升序或降序检索消息。
+虽然 sorted set 提供了维护消息顺序的高效方式，但将完整消息 payload 直接存入 sorted set 会导致内存占用过高。
+Redis 不支持 sorted set 内单成员的 TTL。因此，除非显式移除，消息会无限持久。
+与 PostgreSQL 类似，我们须使用 `ZREMRANGEBYSCORE` 执行定期清理以删除过期消息。
+该操作复杂度为 `O(log N + M)`，其中 `M` 为移除的元素数。
+为克服此限制，我们决定将消息 payload 存储为 string 数据结构，而在 sorted set 中存储对这些 key 的引用。
 
 {% include images-gallery.html imageCollection="redis-data-structures" %}
 
-In the image above, you can see that each key follows the pattern `{client_id}_messages`,
-where `client_id` is a placeholder for the actual client ID,
-while the curly braces `{}` around it are added to create a hashtag.
-Also, you may notice that the score continues to grow even when the MQTT packet ID wraps around.
+上图可见，每个 key 遵循 `{client_id}_messages` 模式，
+其中 `client_id` 为实际 client ID 的占位符，
+其周围的花括号 `{}` 用于创建 hashtag。
+还可注意到，即使 MQTT packet ID 回绕，score 仍持续增长。
 
-Let’s take a closer look at the details illustrated in this image.
-At first, the reference for the message with the MQTT packet ID equal to `65534` was added to the sorted set:
+让我们更详细地查看图中内容。
+首先，将 MQTT packet ID 等于 `65534` 的消息引用加入 sorted set：
 
 ```bash
 ZADD {client_id}_messages 65534 {client_id}_messages_65534
 ```
 {: .copy-code}
 
-Here, `{client_id}_messages` is the sorted set key name, where `{client_id}` acts as a hashtag derived from the persistent MQTT client’s unique ID.
-The suffix `_messages` is a constant added to each sorted set key name for consistency.
-Following the sorted set key name, the score value `65534` corresponds to the MQTT packet ID of the message received by the client.
-Finally, we see the reference key that points to the actual payload of the MQTT message.
-Similar to the sorted set key, the message reference key uses the MQTT client’s ID as a hashtag, followed by the `_messages` suffix and the MQTT packet ID value.
+此处，`{client_id}_messages` 为 sorted set 的 key 名，`{client_id}` 作为从持久 MQTT 客户端唯一 ID 派生的 hashtag。
+后缀 `_messages` 是为一致性添加的常量。
+在 sorted set key 名之后，score 值 `65534` 对应客户端收到的消息的 MQTT packet ID。
+最后是引用 key，指向 MQTT 消息的实际 payload。
+与 sorted set key 类似，消息引用 key 使用 MQTT 客户端 ID 作为 hashtag，后跟 `_messages` 后缀和 MQTT packet ID 值。
 
-In the next iteration, we add the message reference for the MQTT message with a packet ID equal to `65535` into the sorted set. This is the maximum packet ID, as the range is limited to `65535`.
+下一次迭代中，将 packet ID 等于 `65535` 的 MQTT 消息的引用加入 sorted set。这是最大 packet ID，范围为 65535。
 
 ```bash
 ZADD {client_id}_messages 65535 {client_id}_messages_65535
 ```
 {: .copy-code}
 
-So at the next iteration MQTT packet ID should be equal to `1`, while the score should continue to grow and be equal to `65536`.
+因此在下一迭代中，MQTT packet ID 应为 `1`，而 score 应继续增长至 `65536`。
 
 ```bash
 ZADD {client_id}_messages 65536 {client_id}_messages_1
 ```
 {: .copy-code}
 
-This approach ensures that the message’s references will be properly ordered in the sorted set regardless of the packet ID’s limited range.
+该方法确保消息引用在 sorted set 中正确排序，不受 packet ID 范围限制影响。
 
-Message payloads are stored as string values with `SET` commands that support expiration `(EX)`, providing `O(1)` complexity for writes and `TTL` applications:
+消息 payload 使用支持过期 `(EX)` 的 `SET` 命令存储为 string 值，提供 `O(1)` 复杂度的写入和 TTL 应用：
 
 ```bash
 SET {client_id}_messages_1 "{
@@ -180,23 +179,23 @@ SET {client_id}_messages_1 "{
 ```
 {: .copy-code}
 
-Another benefit aside from efficient updates and `TTL` applications is that the message payloads can be retrieved:
+除高效更新和 TTL 应用外，另一好处是消息 payload 可被检索：
 
 ```bash
 GET {client_id}_messages_1
 ```
 {: .copy-code}
 
-or removed:
+或删除：
 
 ```bash
 DEL {client_id}_messages_1
 ```
 {: .copy-code}
 
-with constant complexity `O(1)` without affecting the sorted set structure.
+均为常数复杂度 `O(1)`，不影响 sorted set 结构。
 
-Another very important element of our Redis architecture is the use of a string key to store the last MQTT packet ID processed:
+我们 Redis 架构的另一重要元素是使用 string key 存储已处理的最后 MQTT packet ID：
 
 ```bash
 GET {client_id}_last_packet_id
@@ -204,16 +203,16 @@ GET {client_id}_last_packet_id
 ```
 {: .copy-code}
 
-This approach serves the same purpose as in the PostgreSQL solution.
-When a client reconnects, the server must determine the correct packet ID to assign to the next message that will be saved in Redis.
-Initially, we considered using the sorted set’s highest score as a reference.
-However, since there are scenarios where the sorted set could be empty or completely removed,
-we concluded that the most reliable solution is to store the last packet ID separately.
+该方法与 PostgreSQL 方案中的用途相同。
+客户端重连时，服务器必须确定正确的 packet ID，分配给将保存到 Redis 的下一条消息。
+最初我们考虑使用 sorted set 的最高 score 作为参考。
+但由于 sorted set 可能为空或完全被移除的场景，
+我们得出结论：最可靠的做法是单独存储最后 packet ID。
 
-### Managing Sorted Set Size Dynamically
+### 动态管理 Sorted Set 大小
 
-This hybrid approach, leveraging sorted sets and string data structures, eliminates the need for periodic cleanups based on time, as per-message TTLs are now applied.
-In addition, following the PostgreSQL design we needed to address somehow the cleanup of the sorted set based on the messages limit set in the configuration.
+这种结合 sorted set 和 string 的混合方法，消除了基于时间的定期清理需求，因为现已对每条消息应用 TTL。
+此外，沿用 PostgreSQL 设计，我们需要以某种方式处理基于配置中设置的消息限制的 sorted set 清理。
 
 ```yaml
 # Maximum number of PUBLISH messages stored for each persisted DEVICE client
@@ -221,9 +220,9 @@ limit: "${MQTT_PERSISTENT_SESSION_DEVICE_PERSISTED_MESSAGES_LIMIT:10000}"
 ```
 {: .copy-code}
 
-This limit is an important part of our design, allowing us to control and predict the memory allocation required for each persistent MQTT client.
-For example, a client might connect, triggering the registration of a persistent session, and then rapidly disconnect.
-In such scenarios, it is essential to ensure that the number of messages stored for the client (while waiting for a potential reconnection) remains within the defined limit, preventing unbounded memory usage.
+此限制是我们设计的重要部分，使我们能控制和预测每个持久 MQTT 客户端所需的内存分配。
+例如，客户端可能连接后触发持久会话注册，随后迅速断开。
+在此类场景中，必须确保为该客户端存储的消息数（在等待可能的重连期间）保持在定义的限制内，防止无限内存使用。
 
 ```java
 if (messagesLimit > 0xffff) {
@@ -232,10 +231,10 @@ if (messagesLimit > 0xffff) {
 ```
 {: .copy-code}
 
-To reflect the natural constraints of the MQTT protocol, the maximum number of persisted messages for individual clients is set to `65535`.
+为反映 MQTT 协议的自然约束，单个客户端的最大持久消息数设为 `65535`。
 
-To handle this within the Redis solution, we implemented dynamic management of the sorted set’s size.
-When new messages are added, the sorted set is trimmed to ensure the total number of messages remains within the desired limit, and the associated strings are also cleaned up to free up memory.
+为在 Redis 方案中实现此逻辑，我们实现了 sorted set 大小的动态管理。
+添加新消息时，对 sorted set 进行裁剪，确保消息总数保持在所需限制内，并清理关联的 string 以释放内存。
 
 ```lua
 -- Get the number of elements to be removed
@@ -255,11 +254,11 @@ end
 ```
 {: .copy-code}
 
-### Message Retrieval and Cleanup
+### 消息检索与清理
 
-Our design not only ensures dynamic size management during the persistence of new messages but also supports cleanup during message retrieval,
-which occurs when a device reconnects to process undelivered messages.
-This approach keeps the sorted set clean by removing references to expired messages.
+我们的设计不仅确保在持久化新消息时的动态大小管理，还支持在消息检索时的清理，
+即设备重连以处理未投递消息时。
+该方法通过移除过期消息的引用来保持 sorted set 的整洁。
 
 ```lua
 -- Define the sorted set key
@@ -288,30 +287,30 @@ return messages
 ```
 {: .copy-code}
 
-By leveraging Redis’ sorted sets and strings, along with Lua scripting for atomic operations, our new design achieves efficient message persistence and retrieval, as well as dynamic cleanup.
-This design addresses the scalability limitations of the PostgreSQL-based solution.
+通过利用 Redis 的 sorted set 和 string，以及 Lua 脚本实现原子操作，我们的新设计实现了高效的消息持久化、检索和动态清理。
+该设计解决了基于 PostgreSQL 方案的可扩展性限制。
 
-## Migration from Jedis to Lettuce
+## 从 Jedis 迁移到 Lettuce
 
-To validate the scalability of the new Redis-based architecture for persistent message storage, we selected a point-to-point (P2P) MQTT communication pattern as a performance testing scenario.
-Unlike fan-in (many-to-one) or fan-out (one-to-many) scenarios, the P2P pattern typically involves one-to-one communication and creates a new persistent session for each communicating pair.
-This makes it well-suited for evaluating how the system scales as the number of sessions grows.
+为验证基于 Redis 的新架构在持久消息存储方面的可扩展性，我们选择点对点（P2P）MQTT 通信模式作为性能测试场景。
+与 fan-in（多对一）或 fan-out（一对多）场景不同，P2P 模式通常涉及一对一通信，并为每对通信创建新的持久会话。
+这使其非常适合评估系统随会话数量增长的扩展能力。
 
-Before starting large-scale tests, we conducted a prototype test that revealed the limit of 30k msg/s throughput when using PostgreSQL for persistence message storage.
-At the moment of migration to Redis, we used the Jedis library for Redis interactions, primarily for cache management.
-As a result, we initially decided to extend Jedis to handle message persistence for persistent MQTT clients.
-However, the initial results of the Redis implementation with Jedis were unexpected.
-While we anticipated Redis would significantly outperform PostgreSQL, the performance improvement was modest, reaching only 40k msg/s throughput compared to the 30k msg/s limit with PostgreSQL.
+在开始大规模测试之前，我们进行了原型测试，发现使用 PostgreSQL 做持久消息存储时吞吐量上限为 30k msg/s。
+迁移到 Redis 时，我们使用 Jedis 库进行 Redis 交互，主要用于缓存管理。
+因此，我们最初决定扩展 Jedis 以处理持久 MQTT 客户端的消息持久化。
+然而，使用 Jedis 的 Redis 实现的初步结果出乎意料。
+尽管我们预计 Redis 会显著优于 PostgreSQL，但性能提升有限，仅达到 40k msg/s 吞吐量，而 PostgreSQL 的上限为 30k msg/s。
 
-This led us to investigate the bottlenecks, where we discovered that Jedis was a limiting factor.
-While reliable, Jedis operate synchronously, processing each Redis command sequentially.
-This forces the system to wait for one operation to complete before executing the next.
-In high-throughput environments, this approach significantly limited Redis’s potential, preventing the full utilization of system resources.
-To overcome this limitation, we migrated to [Lettuce](https://github.com/redis/lettuce), an asynchronous Redis client built on top of [Netty](https://github.com/netty/netty).
-With Lettuce, our throughput increased to 60k msg/s, demonstrating the benefits of non-blocking operations and improved parallelism.
+这促使我们排查瓶颈，发现 Jedis 是限制因素。
+Jedis 虽然可靠，但以同步方式操作，按顺序处理每条 Redis 命令。
+这迫使系统在执行下一条操作前等待当前操作完成。
+在高吞吐量环境中，这种方式显著限制了 Redis 的潜力，无法充分利用系统资源。
+为克服此限制，我们迁移到 [Lettuce](https://github.com/redis/lettuce)，一个基于 [Netty](https://github.com/netty/netty) 的异步 Redis 客户端。
+使用 Lettuce 后，我们的吞吐量提升至 60k msg/s，展示了非阻塞操作和更高并行度的好处。
 
 {% include images-gallery.html imageCollection="jedis-to-lettuce" %}
 
-Lettuce allows multiple commands to be sent and processed in parallel, fully exploiting Redis’s capacity for concurrent workloads.
-Ultimately, the migration unlocked the performance gains we expected from Redis, paving the way for successful P2P testing at scale.
-For a deep dive into the testing architecture, methodology, and results, check out our detailed performance testing [article](/docs/{{docsPrefix}}mqtt-broker/reference/1m-throughput-p2p-performance-test).
+Lettuce 允许多条命令并行发送和处理，充分利用 Redis 的并发工作负载能力。
+最终，该迁移释放了我们预期的 Redis 性能提升，为成功的规模化 P2P 测试铺平了道路。
+有关测试架构、方法和结果的深入了解，请参阅我们详细的性能测试 [文章](/docs/{{docsPrefix}}mqtt-broker/reference/1m-throughput-p2p-performance-test)。

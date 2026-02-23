@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: SCADA symbols development guide
-description: SCADA symbols development guide
+title: SCADA 符号开发指南
+description: SCADA 符号开发指南
 
 upload-svg-file-1:
     0:

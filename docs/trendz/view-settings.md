@@ -1,269 +1,270 @@
 ---
 layout: docwithnav-trendz
-title: View Settings
-description: Trendz View Settings
+assignees:
+- vparomskiy
+title: 视图设置
+description: Trendz 视图设置
 ---
 
 * TOC
 {:toc}
 
-The **View Settings** icon is located in the bottom-right corner of each view. These settings let you control how the
-visualization is displayed and how data behaves in different view types.
+**View Settings**图标位于每个视图右下角。通过这些设置可控制可视化的展示方式及不同视图类型下的数据行为。
 
 ## General Settings
 
-- **Title** – Text shown at the top of the view
-- **Size** – Title font size (vh units, default: 1)
+- **Title** – 视图顶部显示的文本
+- **Size** – 标题字体大小（vh单位，默认：1）
 
-Common to most views:
+多数视图通用：
 
-- **Enable filter auto refresh** – Updates filter values in real-time. By default, filters load only when "Build" is clicked
-- **Remove empty series** – Hides entries without telemetry
-- **Hide legend** – Toggle legend display  
-  If shown:
-  - **Legend position** – top, right, bottom, or left
+- **Enable filter auto refresh** – 实时更新过滤器值。默认仅在点击"Build"时加载
+- **Remove empty series** – 隐藏无telemetry的条目
+- **Hide legend** – 切换图例显示  
+  若显示：
+  - **Legend position** – top、right、bottom或left
 
-- **Show toolbox export** – Adds export options (CSV, XLS, XLSX)  
-  If enabled:
-  - **Show date range and filters** – Include filter context in exported files
-    - **Filter to show in XLS** – Select which filters to include
-  - **Rotate export result** – Flip rows and columns in export
+- **Show toolbox export** – 添加导出选项（CSV、XLS、XLSX）  
+  若启用：
+  - **Show date range and filters** – 在导出文件中包含过滤器上下文
+    - **Filter to show in XLS** – 选择要包含的过滤器
+  - **Rotate export result** – 导出结果行列互换
 
 ### Card View
 
-- **Size Content** – Main content font size (vh units, default: 1)
-- **Show label** – Display field label on the card
-- **Show icon** – Display selected icon on the card
+- **Size Content** – 主内容字体大小（vh单位，默认：1）
+- **Show label** – 在卡片上显示字段标签
+- **Show icon** – 在卡片上显示所选图标
 
 ### Table View
 
-- **Sort order** – Enable sorting by column. Click once to enable, again to disable  
-  Options:
-  - **Order way** – Ascending or descending
-  - **Sort column** – Pick a column to sort by
-  - **Select top** – Show top N rows by sort
+- **Sort order** – 启用按列排序。单击一次启用，再击禁用  
+  选项：
+  - **Order way** – 升序或降序
+  - **Sort column** – 选择排序列
+  - **Select top** – 按排序显示前N行
 
-- **Column fit** – Adjust column sizing  
-  Options:
-  - Fit headers – Based on column headers
-  - Fit cells – Based on content
-  - Fit screen – Fill full width
+- **Column fit** – 调整列宽  
+  选项：
+  - Fit headers – 基于列标题
+  - Fit cells – 基于内容
+  - Fit screen – 填满全宽
 
-- **Show total row** – Adds a summary row with totals for numeric columns
+- **Show total row** – 为数值列添加合计行
 
 ### Bar View
 
-- **Dashed line** – Make bar outlines dashed
-- **Horizontal bar** – Display bars horizontally
-- **Stacked bar** – Stack values on top of each other  
-  If enabled:
-  - **100% stacked** – Normalize bars to the same height (proportional display)
+- **Dashed line** – 使柱 outline 为虚线
+- **Horizontal bar** – 水平显示柱
+- **Stacked bar** – 将值堆叠  
+  若启用：
+  - **100% stacked** – 将柱归一为相同高度（比例显示）
 
-- **Tooltip type** – How tooltip behaves on hover  
-  Options:
-  - axis – Show by X-axis value
-  - item – Show by X-axis and series
-  - none – No tooltip
+- **Tooltip type** – 悬停时tooltip行为  
+  选项：
+  - axis – 按X-axis值显示
+  - item – 按X-axis和series显示
+  - none – 不显示tooltip
 
-- **Show labels** – Show values directly on bars
-- **Show timeline** – Add timeline for time selection (useful with date fields)
-- **Use single Y-axis** – Share one scale if values use same units
-  - **Y-axis label** – Label for shared Y-axis
+- **Show labels** – 在柱上直接显示数值
+- **Show timeline** – 添加时间选择timeline（配合date字段使用）
+- **Use single Y-axis** – 若数值单位相同则共享同一刻度
+  - **Y-axis label** – 共享Y-axis的标签
 
-- **Hide Y-axis label** – Remove Y-axis label
-- **Hide X-axis label** – Remove X-axis label  
-  If shown:
-  - **X-axis position** – Choose top or bottom
+- **Hide Y-axis label** – 隐藏Y-axis标签
+- **Hide X-axis label** – 隐藏X-axis标签  
+  若显示：
+  - **X-axis position** – 选择top或bottom
 
-- **Sort bars** – Enable bar sorting  
-  Options:
-  - **Order way** – Ascending or descending
-  - **Target field** – Pick a field to sort by
-  - **Select top** – Limit to top N bars
+- **Sort bars** – 启用柱排序  
+  选项：
+  - **Order way** – 升序或降序
+  - **Target field** – 选择排序字段
+  - **Select top** – 限制为前N个柱
 
-- **Manual Y/X axis range** – Set axis boundaries
-  - **Y-axis min / max** – Define vertical limits
-  - **X-axis min / max** – Define range of bars shown
+- **Manual Y/X axis range** – 设置轴边界
+  - **Y-axis min / max** – 纵轴范围
+  - **X-axis min / max** – 显示的柱范围
 
 ### Line View
 
-- **Dashed line** – Use dashed style for line borders
-- **Stroke type** – Controls how data points are connected  
-  Options:
-  - smooth – Curved connections
-  - straight – Angular connections
-  - stepline – 90° stepwise connections (like stairs)
+- **Dashed line** – 线条边框使用虚线
+- **Stroke type** – 数据点连接方式  
+  选项：
+  - smooth – 曲线连接
+  - straight – 直线连接
+  - stepline – 90°阶梯连接（阶梯状）
 
-- **Show labels** – Show values directly on the line
-- **Show timeline** – Add timeline for time selection (useful with date fields)
-- **Use single Y-axis** – Share one scale if values use the same units
-  - **Y-axis label** – Label for shared Y-axis
+- **Show labels** – 在线上直接显示数值
+- **Show timeline** – 添加时间选择timeline（配合date字段使用）
+- **Use single Y-axis** – 若数值单位相同则共享同一刻度
+  - **Y-axis label** – 共享Y-axis的标签
 
-- **Hide Y-axis label** – Remove Y-axis label
-- **Hide X-axis label** – Remove X-axis label  
-  If shown:
-  - **X-axis position** – Choose top or bottom
+- **Hide Y-axis label** – 隐藏Y-axis标签
+- **Hide X-axis label** – 隐藏X-axis标签  
+  若显示：
+  - **X-axis position** – 选择top或bottom
 
-- **Trend line** – Add a straight line showing the overall trend
+- **Trend line** – 添加表示整体趋势的直线
 
-- **Manual Y/X axis range** – Set axis boundaries
-  - **Y-axis min / max** – Define vertical limits
-  - **X-axis min / max** – Define horizontal limits
+- **Manual Y/X axis range** – 设置轴边界
+  - **Y-axis min / max** – 纵轴范围
+  - **X-axis min / max** – 横轴范围
 
 ### Pie View
 
-- **Show labels** – Show values near each sector  
-  If enabled:
-  - **Show sector name** – Display sector name on label
-  - **Show sector value** – Display sector value on label
-  - **Show sector percent** – Display sector percent on label
+- **Show labels** – 在每个扇区旁显示数值  
+  若启用：
+  - **Show sector name** – 标签上显示扇区名称
+  - **Show sector value** – 标签上显示扇区值
+  - **Show sector percent** – 标签上显示扇区百分比
 
-- **Sort order** – Enable sorting by field. Click once to enable, again to disable  
-  Options:
-  - **Order way** – Ascending or descending
-  - **Target field** – Pick a field to sort by
-  - **Select top** – Show top N values by sort
+- **Sort order** – 启用按字段排序。单击一次启用，再击禁用  
+  选项：
+  - **Order way** – 升序或降序
+  - **Target field** – 选择排序字段
+  - **Select top** – 按排序显示前N个值
 
 ### Scatter Plot View
 
-- **Tooltip type** – How tooltip behaves on hover  
-  Options:
-  - axis – Show values for all items from series with a specific X-axis value
-  - item – Show value for specific item
-  - none – No tooltip
+- **Tooltip type** – 悬停时tooltip行为  
+  选项：
+  - axis – 显示特定X-axis值下series中所有item的值
+  - item – 显示特定item的值
+  - none – 不显示tooltip
 
-- **Hide Y-axis label** – Remove Y-axis label
-- **Hide X-axis label** – Remove X-axis label  
-  If shown:
-  - **X-axis position** – Choose top or bottom
+- **Hide Y-axis label** – 隐藏Y-axis标签
+- **Hide X-axis label** – 隐藏X-axis标签  
+  若显示：
+  - **X-axis position** – 选择top或bottom
 
-- **Trend line** – Add a straight line showing the overall trend
+- **Trend line** – 添加表示整体趋势的直线
 
-- **Manual Y/X axis range** – Set axis boundaries
-  - **Y-axis min / max** – Define vertical limits
-  - **X-axis min / max** – Define horizontal limits
+- **Manual Y/X axis range** – 设置轴边界
+  - **Y-axis min / max** – 纵轴范围
+  - **X-axis min / max** – 横轴范围
 
 ### Heat Map
 
-- **Show labels** – Show values directly on each cell
-- **Hide Y-axis label** – Remove Y-axis label
-- **Hide X-axis label** – Remove X-axis label  
-  If shown:
-  - **X-axis position** – Choose top or bottom
+- **Show labels** – 在每个单元格上直接显示数值
+- **Hide Y-axis label** – 隐藏Y-axis标签
+- **Hide X-axis label** – 隐藏X-axis标签  
+  若显示：
+  - **X-axis position** – 选择top或bottom
 
-- **Sort order** – Enable sorting by column. Click once to enable, again to disable  
-  Options:
-  - **Order way** – Ascending or descending
-  - **Target field** – Pick a field to sort by
-  - **Select top** – Show top N values from X-axis by sort
+- **Sort order** – 启用按列排序。单击一次启用，再击禁用  
+  选项：
+  - **Order way** – 升序或降序
+  - **Target field** – 选择排序字段
+  - **Select top** – 按排序显示X-axis前N个值
 
 ### Heat Map Calendar
 
-- **Range** – How much data will be shown  
-  Options:
-  - full – All data
-  - trim to current day – Data after the current day will not be shown
-  - trim all – Empty months will not be shown (borderless)
+- **Range** – 显示的数据范围  
+  选项：
+  - full – 全部数据
+  - trim to current day – 不显示当前日之后的数据
+  - trim all – 不显示空月份（无边框）
 
-- **Stretch** – If enabled, heat map calendar will take full view width
+- **Stretch** – 若启用，heat map calendar占满视图宽度
 
 ### Card With Line
 
-- **Size Content** – Main content font size (vh units, default: 1)
-- **Enable comparison** – If enabled, shows percentage increase/decrease of the last value compared to the first one in the defined time range  
-  If enabled:
-  - **Reverse comparison colors** – If enabled, positive changes are shown in red and negative in green
+- **Size Content** – 主内容字体大小（vh单位，默认：1）
+- **Enable comparison** – 若启用，显示定义时间范围内最后一个值与第一个值相比的百分比增减  
+  若启用：
+  - **Reverse comparison colors** – 若启用，正向变化显示红色，负向显示绿色
 
 ## Query Params
 
-Let’s say we have 2 buildings and 2 sensors registered in ThingsBoard with the following relationships:
+假设ThingsBoard中已注册2栋建筑和2个传感器，关系如下：
 
-- **Building A** contains **Sensor_1**
-- **Building B** has no sensors
-- **Sensor_2** is not assigned to any building
+- **Building A**包含**Sensor_1**
+- **Building B**无传感器
+- **Sensor_2**未分配到任何建筑
 
-We want to create a view showing how many sensors are in each building. The result depends on the **root entity** used for the calculation:
+要创建显示每栋建筑传感器数量的视图。结果取决于计算所用的**root entity**：
 
-- If **Building** is the root – Building A shows 1 sensor, Building B shows 0
-- If **Sensor** is the root – Sensor_1 is linked to 1 building, Sensor_2 is unassigned
+- 若**Building**为root——Building A显示1个，Building B显示0个
+- 若**Sensor**为root——Sensor_1关联1栋建筑，Sensor_2未分配
 
-You can control how the query is built using these parameters:
+可通过以下参数控制查询构建：
 
-- **Preview mode** – Load a limited set of data to preview how the view will look
-  - **Preview item count** – Number of root items to load for preview
+- **Preview mode** – 加载有限数据集预览视图效果
+  - **Preview item count** – 预览时加载的root item数量
 
-- **Entities Root** – Override the default root entity automatically selected by Trendz
+- **Entities Root** – 覆盖Trendz自动选择的默认root entity
 
-- **Topology Entities** – Trendz builds a query plan using the Topology Graph by finding the shortest path between all used entities  
-  For complex graphs, shortest path may not be optimal — you can manually define which entities to include
+- **Topology Entities** – Trendz通过Topology Graph查找所有已用实体间最短路径构建查询计划  
+  对于复杂图，最短路径可能不是最优——可手动指定包含的实体
 
-- **Raw data loading** – Load unaggregated data directly from the ThingsBoard
+- **Raw data loading** – 直接从ThingsBoard加载未聚合数据
 
-- **Enable multi-root items loading** – Allows multiple root-level entities to be processed in the same view
+- **Enable multi-root items loading** – 允许同一视图中处理多个root级实体
 
 ## View Mode Fields
 
-These settings apply only when the view is shown in full-screen mode or embedded in a Trendz Widget on the ThingsBoard dashboard. [More details here](/docs/trendz/widget-actions/)
+这些设置仅在视图全屏显示或嵌入ThingsBoard dashboard的Trendz部件时生效。[更多说明](/docs/trendz/widget-actions/)
 
-- **Hide filters** – Hide the filter section
-- **Hide date filters** – Hide the date picker
-- **Hide group by** – Hide the group-by dropdown
-- **Hide AI Summary button** – Hide the AI summary option
-- **Get filter values from URL** – Load filter parameters from browser URL query string
-- **Set filter values to URL** – Save selected filter values into the browser URL
-- **Hidden filters** – Hide specific filters
-- **Row click entities** – On clicking a chart or table item, send the selected entity to ThingsBoard alias  
-  (commonly used for triggering filter updates in other widgets)  
-  [Read more here](/docs/trendz/widget-actions/#configure-onrowclick-action)
+- **Hide filters** – 隐藏过滤器区域
+- **Hide date filters** – 隐藏日期选择器
+- **Hide group by** – 隐藏group-by下拉
+- **Hide AI Summary button** – 隐藏AI summary选项
+- **Get filter values from URL** – 从浏览器URL查询参数加载过滤器
+- **Set filter values to URL** – 将所选过滤器值保存到浏览器URL
+- **Hidden filters** – 隐藏指定过滤器
+- **Row click entities** – 点击chart或表格项时，将选中实体发送到ThingsBoard alias  
+  常用于触发其他部件的过滤器更新  
+  [详见](/docs/trendz/widget-actions/#configure-onrowclick-action)
 
 ### Anomalies View
 
-- **Hide anomalies list** – Hide the anomalies list section from the view
-- **Hide anomalies chart** – Hide the anomalies chart section from the view
+- **Hide anomalies list** – 隐藏视图中的anomalies列表
+- **Hide anomalies chart** – 隐藏视图中的anomalies chart
 
 ## AI Assistant
 
-- **Prompt** – Select the AI prompt used when the **AI Summary** button is clicked  
-  Learn more about the AI Summary button [here](/docs/trendz/ai-widget-summary#trendz-widgets)  
-  To create your own prompts, see [this guide](/docs/trendz/ai-assistance-prompts)
+- **Prompt** – 选择点击**AI Summary**按钮时使用的AI prompt  
+  更多关于AI Summary按钮[见](/docs/trendz/ai-widget-summary#trendz-widgets)  
+  自定义prompt见[本指南](/docs/trendz/ai-assistance-prompts)
 
 ## Colors
 
-- **Annotations** – Highlight background ranges on the chart to indicate levels  
-  You can add multiple annotations, each with:
-  - **From Y** – Start value on the Y-axis
-  - **To Y** – End value on the Y-axis
-  - **Color** – Background color of the annotation
+- **Annotations** – 在chart上高亮背景范围以表示级别  
+  可添加多个annotations，每个包含：
+  - **From Y** – Y-axis上的起始值
+  - **To Y** – Y-axis上的结束值
+  - **Color** – annotation的背景色
 
-- **Theme** – Choose the widget theme:
-  - **Default**, **Light**, **Dark**, or **Custom**
-  - If **Custom** is selected:
-    - **Background** – Widget background color
-    - **Text** – Text color
+- **Theme** – 选择部件主题：
+  - **Default**、**Light**、**Dark**或**Custom**
+  - 若选**Custom**：
+    - **Background** – 部件背景色
+    - **Text** – 文本颜色
 
 ## Cache
 
-[Read more about caching here](/docs/trendz/cache-settings/)
+[cache说明](/docs/trendz/cache-settings/)
 
-- **Cache Report** – Use the cached View Report when the query plan and time range haven't changed (default: enabled).
-- **Enable caching** – Enables Metrics Long-Term Cache.
-  - **Caching Time Unit** – Choose data aggregation level.
-  - **Auto Refresh** – Preloads the cache in the background on a schedule:
-    - **Every** – Interval value
-    - **Time Unit** – Time unit (e.g. hour, day)
+- **Cache Report** – 当查询计划和时间范围未变时使用缓存的View Report（默认启用）
+- **Enable caching** – 启用Metrics Long-Term Cache
+  - **Caching Time Unit** – 选择数据聚合粒度
+  - **Auto Refresh** – 按计划在后台预加载cache：
+    - **Every** – 间隔值
+    - **Time Unit** – 时间单位（如hour、day）
 
 ## Chart Option
 
-You can fine-tune all chart settings using JSON format.
+可使用JSON格式微调所有chart设置。
 
-**Left Panel (Editor):**
-- **Merged** – Shows the full chart configuration. You can edit this directly.
-- **Delta** – Displays only your changes (differences) from the default configuration.
-- **Cancel changes** – Clears all unsaved modifications.
-- **Hide data** – Hides actual data values from items. Useful for privacy or when sharing configuration.
-- **Save** – Applies and stores your changes.
+**左侧面板（Editor）：**
+- **Merged** – 显示完整chart配置，可直接编辑
+- **Delta** – 仅显示相对默认配置的变更
+- **Cancel changes** – 清除所有未保存修改
+- **Hide data** – 隐藏item中的实际数值。适用于隐私或分享配置
+- **Save** – 应用并保存修改
 
-**Right Panel (Preview):** Shows a live preview of how your JSON changes affect the chart.
+**右侧面板（Preview）：** 实时预览JSON修改对chart的影响。
 
 ## Next Steps
 

@@ -2,64 +2,64 @@
 * TOC 
 {:toc}
 
-ThingsBoard provides IoT Solution Templates to significantly reduce the time-to-market for your IoT products.   
-Each solution template represents a ready-to-use PoC or MVP and includes:
-- Preconfigured interactive dashboards
-- Data processing and business logic
-- Sample devices and users
-- All required platform [entities](/docs/{{docsPrefix}}user-guide/entities-and-relations/) and relations
+ThingsBoard提供IoT解决方案模板，可显著缩短物联网产品的上市时间。
+每个解决方案模板代表一个可即用的PoC或MVP，包含：
+- 预配置的交互式仪表板
+- 数据处理与业务逻辑
+- 示例设备和用户
+- 所需平台[实体](/docs/{{docsPrefix}}user-guide/entities-and-relations/)及关系
 
-Solution templates allow you to quickly evaluate a use case, demonstrate functionality, or use them as a baseline for further customization.
+解决方案模板可助您快速评估用例、演示功能，或作为进一步定制的基础。
 
 {% include templates/solution-templates.md %}
 
-Browse available solution templates by navigating to the "<b>Solution templates</b>" menu item.
+通过导航至“<b>Solution templates</b>”菜单项浏览可用解决方案模板。
 
 {% include images-gallery.html imageCollection="open-solution-templates-page" %}
 
-## Managing solution templates
+## 管理解决方案模板
 
-> Only Tenant Administrators can manage solution templates.
+> 仅租户管理员可管理解决方案模板。
 
-For each solution template, the following actions are available:
+每个解决方案模板提供以下操作：
 
-### View details
+### 查看详情
 
-Open the template description using the **Details** button.
+使用**Details**按钮打开模板说明。
 
 {% include images-gallery.html imageCollection="view-details" %}
 
-### Install solution
+### 安装解决方案
 
-Install the template using the **Install** button.   
+使用**Install**按钮安装模板。
 
-Once solution is installed, you will be automatically forwarded to the main dashboard of the corresponding template, and the instructions dialog will appear.   
-Browse the instructions and use **Close** button to start using the solution.
+安装完成后，将自动跳转至对应模板的主仪表板，并弹出说明对话框。
+浏览说明后点击**Close**按钮开始使用解决方案。
 
 {% include images-gallery.html imageCollection="install-solution" %}
 
-### View instructions
+### 查看说明
 
-Solution instructions are auto-generated once the template is installed. You may open them using **Instructions** button.
+解决方案安装后会自动生成说明文档，可通过**Instructions**按钮打开。
 
 {% include images-gallery.html imageCollection="view-instructions" %}
 
-### Delete solution
+### 删除解决方案
 
-Remove the installed solution and all [entities](/docs/{{docsPrefix}}user-guide/entities-and-relations/){:target="_blank"} created during the installation using the **Delete** button.
+使用**Delete**按钮可移除已安装的解决方案以及安装过程中创建的所有[实体](/docs/{{docsPrefix}}user-guide/entities-and-relations/){:target="_blank"}。
 
-> Please note that entities that you might have created through the solution dashboard (users, devices, etc) will not be deleted automatically.
+> 请注意，您可能通过解决方案仪表板创建的用户、设备等实体不会自动删除。
 
 {% include images-gallery.html imageCollection="delete-solution" %}
 
-## Connecting Real Devices
+## 连接真实设备
 
-Each solution template includes detailed instructions describing:
-- Expected telemetry and attribute payload formats
-- Required keys and data structure
-- Example commands for sending data to the platform
+每个解决方案模板均包含详细说明，描述：
+- 预期的遥测与属性负载格式
+- 必需的键与数据结构
+- 向平台发送数据的示例命令
 
-The provided examples use **auto-generated devices and credentials** created during template installation.   
-We recommend using these examples first to understand how the solution works.
+所提供示例使用**模板安装时自动生成的设备和凭据**。
+建议先使用这些示例了解解决方案的工作方式。
 
-Afterwards, refer to the [How to connect your device](/docs/{{docsPrefix}}getting-started-guides/connectivity/){:target="_blank"} guide to connect real devices using production credentials.
+随后，请参考[如何连接设备](/docs/{{docsPrefix}}getting-started-guides/connectivity/){:target="_blank"}指南，使用生产环境凭据连接真实设备。

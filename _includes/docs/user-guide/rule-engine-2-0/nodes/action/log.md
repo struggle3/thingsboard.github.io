@@ -1,24 +1,22 @@
-Executes user-defined function to transform an incoming message into a string for logging purposes. The script can access the message data, metadata, and type to create custom log
-entries that are written to the ThingsBoard log file.
-Supports **TBEL** and **JavaScript**.
+执行用户自定义函数，将传入消息转换为字符串以用于日志记录。脚本可访问消息数据、元数据和类型以创建自定义日志条目，写入 ThingsBoard 日志文件。
+支持 **TBEL** 和 **JavaScript**。
 
-## Configuration
+## 配置
 
-The node provides a choice of scripting language and a code editor to write the logging logic.
+节点提供脚本语言选择和代码编辑器以编写日志逻辑。
 
-- **Language Selector** - choose between **TBEL** (ThingsBoard Expression Language) or **JavaScript**.
-- **Script Editor** - a text area where you write the body of the log formatting function.
+- **Language Selector（语言选择器）** - 在 **TBEL**（ThingsBoard Expression Language）和 **JavaScript** 之间选择。
+- **Script Editor（脚本编辑器）** - 编写日志格式化函数体的文本区域。
 
-### Log formatting function
+### 日志格式化函数
 
-The code entered into the script editor acts as the body of a log formatting function. This function implicitly receives three arguments that are available as variables in your
-script:
+在脚本编辑器中输入的代码作为日志格式化函数体。该函数隐式接收三个参数，在脚本中作为变量可用：
 
-- `msg` - the data of the incoming message, typically as a JSON object.
-- `metadata` - the metadata of the incoming message, as a key-value object where all values are strings.
-- `msgType` - the type of the incoming message, as a string.
+- `msg` - 传入消息的数据，通常为 JSON 对象。
+- `metadata` - 传入消息的元数据，为键值对象，所有值为字符串。
+- `msgType` - 传入消息的类型，为字符串。
 
-The function must **return** a string that will be written to the ThingsBoard log file using the INFO log level.
+函数必须 **return** 一个字符串，该字符串将以 INFO 日志级别写入 ThingsBoard 日志文件。
 
 ### JSON Schema
 
@@ -53,28 +51,28 @@ The function must **return** a string that will be written to the ThingsBoard lo
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node executes the user-defined script, passing the incoming message's `msg`, `metadata`, and `msgType` as arguments.
-2. The script returns a string value that represents the log message.
-3. The returned string is written to the ThingsBoard log file using the INFO log level.
-4. After successful logging, the original message is passed through to the `Success` chain unchanged.
-5. If the script encounters an error during execution (e.g., a syntax error or runtime exception), the processing fails and message is routed to the `Failure` chain.
+1. 节点执行用户自定义脚本，传入传入消息的 `msg`、`metadata` 和 `msgType` 作为参数。
+2. 脚本返回表示日志消息的字符串值。
+3. 返回的字符串以 INFO 日志级别写入 ThingsBoard 日志文件。
+4. 成功记录后，原始消息原样传递给 `Success` 链。
+5. 若脚本执行期间遇到错误（如语法错误或运行时异常），处理失败，消息路由至 `Failure` 链。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - The original incoming message is sent through this chain after successful logging.
-- `Failure`:
-    - If the script execution fails with an error.
+- `Success`：
+    - 成功记录后，原始传入消息经此链发送。
+- `Failure`：
+    - 脚本执行失败并报错时。
 
-## Examples
+## 示例
 
-### Example 1 - Basic logging
+### 示例 1 — 基本日志记录
 
-**Incoming message**
+**传入消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -83,7 +81,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -93,9 +91,9 @@ Metadata:
 }
 ```
 
-Type: `POST_TELEMETRY_REQUEST`
+类型：`POST_TELEMETRY_REQUEST`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -104,13 +102,13 @@ Type: `POST_TELEMETRY_REQUEST`
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The script execution results in the following log entry in thingsboard.log:
+脚本执行在 thingsboard.log 中产生以下日志条目：
 
 ```
 Message Type: POST_TELEMETRY_REQUEST | Device: Sensor-01 | Temperature: 24.3°C | Humidity: 58.7%

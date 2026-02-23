@@ -1,6 +1,6 @@
-Define environment variables that you will use in various commands later in this guide.
+定义本指南后续命令中将使用的环境变量。
 
-We assume you are using Linux. Execute the following command:
+假设您使用 Linux，请执行以下命令：
 
 ```bash
 export GCP_PROJECT=$(gcloud config get-value project)
@@ -16,9 +16,9 @@ echo "You have selected project: $GCP_PROJECT, region: $GCP_REGION, gcp zones: $
 ```
 {: .copy-code}
 
-where:
+参数说明：
 
-* first line uses gcloud command to fetch your current GCP project id. We will refer to it later in this guide using **$GCP_PROJECT**;
-* *us-central1* is one of the available compute [regions](https://cloud.google.com/compute/docs/regions-zones#available). We will refer to it later in this guide using **$GCP_REGION**;
-* *default* is a default GCP network name; We will refer to it later in this guide using **$GCP_NETWORK**;
-* *tbmq-cluster* is the name of your cluster. You may input a different name. We will refer to it later in this guide using **$TB_CLUSTER_NAME**;
+* 第一行使用 gcloud 命令获取当前 GCP 项目 ID，本指南后续以 **$GCP_PROJECT** 引用；
+* *us-central1* 为可用计算 [regions](https://cloud.google.com/compute/docs/regions-zones#available) 之一，本指南后续以 **$GCP_REGION** 引用；
+* *default* 为默认 GCP 网络名称，本指南后续以 **$GCP_NETWORK** 引用；
+* *tbmq-cluster* 为集群名称，可改为其他名称，本指南后续以 **$TB_CLUSTER_NAME** 引用；

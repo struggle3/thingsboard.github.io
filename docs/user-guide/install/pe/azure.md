@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Installing ThingsBoard PE on Azure
-description: Installing ThingsBoard PE on Azure
+title: 在 Azure 上安装 ThingsBoard PE
+description: 在 Azure 上安装 ThingsBoard PE
 
 ---
 

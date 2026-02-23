@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Create and clear alarms
-description: Create and clear alarms using an Alarm rules feature
+title: 创建与清除告警
+description: 使用 Alarm rules 功能创建与清除告警
 
 ---
 

@@ -1,58 +1,58 @@
 ---
 layout: docwithnav-edge
-title: Bidirectional Attribute Subscription And Update with Post-Processing
-description: Bidirectional Attribute Subscription And Update with Post-Processing
+title: 具有后处理的双向属性订阅与更新
+description: 具有后处理的双向属性订阅与更新
 
 routeMessagesToCloud:
     0:
         image: /images/edge/config/subscribe-to-attribute/1-rule-chain-templates.webp
-        title: 'Log in to the <b>ThingsBoard Cloud</b> and go to the <b>Edge management > Rule chain templates</b> section and click on the <b>Rule chain</b> assigned to your <b>Edge instance.</b><ul><li>If you are using <b>Edge 4.0</b> or later, stay in your <b>Edge</b> instance and go to the <b>Rule chains</b> section. To edit a rule chain, click the appropriate <b>Rule Chain</b>.</li></ul>'
+        title: '登录<b>ThingsBoard Cloud</b>，进入<b>Edge管理 > 规则链模板</b>区域，点击分配给<b>Edge实例</b>的<b>规则链</b>。<ul><li>若使用<b>Edge 4.0</b>或更高版本，请在<b>Edge</b>实例中进入<b>规则链</b>区域。要编辑规则链，点击相应的<b>规则链</b>。</li></ul>'
     1:
         image: /images/edge/config/subscribe-to-attribute/2-add-push-to-cloud.webp
-        title: 'On the <b>Rule Chain</b> edit page, in the Node search bar find the <b>"push to cloud"</b> node. It pushes messages from Edge to Cloud. Drag and drop the node onto the <b>Rule Chain</b> sheet. Then, in the <b>"Add rule node"</b> pop-up window enter the node title and select the <b>"Client attributes"</b> option in the <b>"Entity attributes scope"</b> field. Click the <b>"Add"</b> button to proceed.'
+        title: '在<b>规则链</b>编辑页面的节点搜索栏中找到<b>"push to cloud"</b>节点。该节点将消息从Edge推送到云端。将节点拖放到<b>规则链</b>画布上。然后在<b>"添加规则节点"</b>弹出窗口中输入节点标题，在<b>"实体属性范围"</b>框中选择<b>"Client attributes"</b>选项。点击<b>"添加"</b>按钮继续。'
     2:
         image: /images/edge/config/subscribe-to-attribute/3-save.webp
-        title: 'Connect the <b>“save attributes”</b> and <b>“save time series”</b> nodes to the <b>"push to cloud"</b> node and set the <b>"Success"</b> link label. Click the <b>“Apply changes”</b> button on the <b>Rule Chain</b> sheet.'
+        title: '将<b>"save attributes"</b>和<b>"save time series"</b>节点连接到<b>"push to cloud"</b>节点，并设置<b>"Success"</b>链接标签。点击<b>规则链</b>画布上的<b>"Apply changes"</b>按钮。'
 
 backToEdge:
     0:
         image: /images/edge/config/subscribe-to-attribute/4-rule-chain.webp
-        title: 'Go to the <b>Rule Chains</b> section, to modify the <b>Rule Chain.</b>'
+        title: '进入<b>规则链</b>区域以修改<b>规则链</b>。'
     1:
         image: /images/edge/config/subscribe-to-attribute/5-add-script.webp
-        title: 'On the <b>Rule Chain</b> edit page, in the Node search bar find the <b>"script"</b> node. It allows modification of message payload, metadata or message type with JavaScript. Drag and drop the node onto the <b>Rule Chain</b> sheet. Then, in the <b>"Add rule node: script"</b> pop-up window enter the node title and enter the script below. Click the <b>"Add"</b> button to proceed.'
+        title: '在<b>规则链</b>编辑页面的节点搜索栏中找到<b>"script"</b>节点。该节点允许使用JavaScript修改消息载荷、元数据或消息类型。将节点拖放到<b>规则链</b>画布上。然后在<b>"添加规则节点：script"</b>弹出窗口中输入节点标题及下方脚本。点击<b>"添加"</b>按钮继续。'
     2:
         image: /images/edge/config/subscribe-to-attribute/5-add-push-to-edge.webp
-        title: 'On the <b>Rule Chain</b> edit page, in the Node search bar find the <b>"push to edge"</b> node. It pushes messages from Cloud to Edge. Drag and drop the node onto the <b>Rule Chain</b> sheet. Then, in the <b>"Add rule node"</b> pop-up window enter the node title and select the <b>"Shared attributes"</b> option in the <b>"Entity attributes scope"</b> field. Click the <b>"Add"</b> button to proceed.'
+        title: '在<b>规则链</b>编辑页面的节点搜索栏中找到<b>"push to edge"</b>节点。该节点将消息从云端推送到Edge。将节点拖放到<b>规则链</b>画布上。然后在<b>"添加规则节点"</b>弹出窗口中输入节点标题，在<b>"实体属性范围"</b>框中选择<b>"Shared attributes"</b>选项。点击<b>"添加"</b>按钮继续。'
     3:
         image: /images/edge/config/subscribe-to-attribute/6-save.webp
-        title: 'Connect the <b>“save attributes”</b> and <b>“save time series”</b> nodes to the <b>"push to edge"</b> node and set the <b>"Success"</b> link label. Click the <b>“Apply changes”</b> button on the <b>Rule Chain</b> sheet.'
+        title: '将<b>"save attributes"</b>和<b>"save time series"</b>节点连接到<b>"push to edge"</b>节点，并设置<b>"Success"</b>链接标签。点击<b>规则链</b>画布上的<b>"Apply changes"</b>按钮。'
 
 terminal:
     0:
         image: /images/edge/config/subscribe-to-attribute/10-subscribe-post-update-attributes-mqtt.webp
-        title: 'Once you have subscribed to attribute updates, you will receive updates as the attributes change. We have used the <b>MQTT protocol</b> as an example. The updates were received after new attributes were published.'
+        title: '订阅属性更新后，属性变化时您将收到更新。我们以<b>MQTT</b>协议为例，新属性发布后收到了更新。'
 
 checkResultOnDevice:
     0:
         image: /images/edge/config/subscribe-to-attribute/7-confirm-on-device-1.webp
-        title: 'To confirm if the <b>client-side attributes</b> are received, go to the <b>Entities > Devices</b> section of your <b>Edge</b> and click on the <b>device</b>. On the <b>"Device details"</b> page, select the <b>"Attributes"</b> tab and select the <b>"Client attributes"</b> option in the <b>"Entity attributes scope"</b> drop-down menu.'
+        title: '要确认<b>客户端属性</b>是否已接收，请进入<b>Edge</b>的<b>实体 > 设备</b>区域并点击<b>设备</b>。在<b>"设备详情"</b>页面，选择<b>"Attributes"</b>选项卡，在<b>"实体属性范围"</b>下拉菜单中选择<b>"Client attributes"</b>选项。'
 
 checkResultOnEdge:
     0:
         image: /images/edge/config/subscribe-to-attribute/8-confirm-on-edge-node-1.webp
-        title: 'To confirm if the attributes message is received and pushed to Cloud, go to the <b>Rule chains</b> section of your Edge instance and click on the <b>Rule chain</b>. Click on the <b>"push to cloud"</b> node.'
+        title: '要确认属性消息是否已接收并推送到云端，请进入Edge实例的<b>规则链</b>区域，点击<b>规则链</b>。点击<b>"push to cloud"</b>节点。'
     1:
         image: /images/edge/config/subscribe-to-attribute/8-confirm-on-edge-node-2.webp
-        title: 'On the <b>"Push to cloud"</b> page, select the <b>"Events"</b> tab. If you have debug mode enabled, select the <b>"Debug"</b> option in the <b>"Event type"</b> drop-down menu. You should see the new records - <b>"IN"</b> and <b>"OUT"</b>, where the <b>"IN"</b> record defines the attributes received from the device, and the <b>"OUT"</b> record defines the attributes message pushed to the <b>Cloud</b>.'
+        title: '在<b>"Push to cloud"</b>页面，选择<b>"Events"</b>选项卡。若已启用调试模式，在<b>"Event type"</b>下拉菜单中选择<b>"Debug"</b>选项。您应能看到新记录 - <b>"IN"</b>和<b>"OUT"</b>，其中<b>"IN"</b>记录表示从设备接收的属性，<b>"OUT"</b>记录表示推送到<b>云端</b>的属性消息。'
 
 checkResultOnCloud:
     0:
         image: /images/edge/config/subscribe-to-attribute/9-confirm-on-cloud-node-1.webp
-        title: 'To confirm if the attributes message is received on the Cloud and pushed back to the Edge, go to the <b>Rule chains</b> section of your Cloud and click on the <b>Rule chain</b>. Click twice on the <b>"push to edge"</b> node.'
+        title: '要确认云端的属性消息是否已接收并推送回Edge，请进入云端的<b>规则链</b>区域，点击<b>规则链</b>。双击<b>"push to edge"</b>节点。'
     1:
         image: /images/edge/config/subscribe-to-attribute/9-confirm-on-cloud-node-2.webp
-        title: 'On the <b>"Push to edge"</b> page, select the <b>"Events"</b> tab. If you have debug mode enabled, select the <b>"Debug"</b> option from the <b>"Event type"</b> drop-down menu. You should see two new records - <b>"IN"</b> and <b>"OUT"</b>, where the <b>"IN"</b> record defines the attributes received from Edge, and the <b>"OUT"</b> record defines the attributes message pushed back to <b>Edge</b>.'
+        title: '在<b>"Push to edge"</b>页面，选择<b>"Events"</b>选项卡。若已启用调试模式，在<b>"Event type"</b>下拉菜单中选择<b>"Debug"</b>选项。您应能看到两条新记录 - <b>"IN"</b>和<b>"OUT"</b>，其中<b>"IN"</b>记录表示从Edge接收的属性，<b>"OUT"</b>记录表示推送回<b>Edge</b>的属性消息。'
 
 ---
 {% assign docsPrefix = "edge/" %}

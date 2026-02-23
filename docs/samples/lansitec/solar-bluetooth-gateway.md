@@ -1,36 +1,36 @@
 ---
 layout: docwithnav
 title: Solar Bluetooth Gateway
-description: Solar Bluetooth Gateway
+description: 太阳能蓝牙网关
 hidetoc: "true"
 ---
 
 * TOC
 {:toc}
 
-<img src="/images/samples/lansitec/solar-bluetooth-gateway.png" alt="LoRaWAN Solar Bluetooth Gateway" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px" />[**Solar Bluetooth Gateway**](https://www.lansitec.com/products/lorawan-solar-bluetooth-gateway/){:target="_blank"} is designed based on LoRaWAN and Bluetooth 5.0 technology. It receives nearby [**Bluetooth beacon**](https://www.lansitec.com/products/bluetooth-beacon/){:target="_blank"} messages, and then transmit to a LoRaWAN gateways through LoRaWAN after restructure the data. It is powered with robust solar film and a 5300mAh rechargeable battery.
+<img src="/images/samples/lansitec/solar-bluetooth-gateway.png" alt="LoRaWAN Solar Bluetooth Gateway" style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px" />[**Solar Bluetooth Gateway**](https://www.lansitec.com/products/lorawan-solar-bluetooth-gateway/){:target="_blank"} 基于 LoRaWAN 与 Bluetooth 5.0 技术设计，接收附近 [**Bluetooth beacon**](https://www.lansitec.com/products/bluetooth-beacon/){:target="_blank"} 消息，经数据重构后通过 LoRaWAN 传输到 LoRaWAN 网关。采用耐用太阳能膜与 5300mAh 可充电电池供电。
 
 <br><br><br><br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南需准备：
 
 - [Solar Bluetooth Gateway](https://www.lansitec.com/products/lorawan-solar-bluetooth-gateway/){:target="_blank"}
 - [LoRaWAN Gateway](https://www.lansitec.com/products/outdoor-lorawan-gateway/){:target="_blank"}
 - [Bluetooth beacon](https://www.lansitec.com/products/bluetooth-beacon/){:target="_blank"}
-- [Network Server account](https://www.chirpstack.io/){:target="_blank"}
-- [ThingsBoard account](https://thingsboard.io/installations/choose-region/){:target="_blank"}
+- [Network Server 账户](https://www.chirpstack.io/){:target="_blank"}
+- [ThingsBoard 账户](https://thingsboard.io/installations/choose-region/){:target="_blank"}
 
-## Configuration
+## 配置
 
-To create integration with the network server Chirpstack
+创建与 Chirpstack 网络服务器的集成
 
-### Add a LoRaWAN Gateway on Chirpstack
+### 在 Chirpstack 添加 LoRaWAN 网关
 
-First, we need to add a LoRaWAN gateway on the [Chirpstack](https://chirpstack.io/){:target="_blank"}.
+首先在 [Chirpstack](https://chirpstack.io/){:target="_blank"} 上添加 LoRaWAN 网关。
 
-Step to add a gateway:
+添加网关步骤：
 
 {% assign solarGateway = '
     ===
@@ -47,9 +47,9 @@ Step to add a gateway:
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=solarGateway %}
 
-### Configure the LoRaWAN Gateway to send data
+### 配置 LoRaWAN 网关发送数据
 
-To connect the gateway and transmit data to ChirpStack, follow these steps:
+按以下步骤连接网关并将数据传到 ChirpStack：
 
 {% assign solarRak = '
     ===
@@ -62,7 +62,7 @@ To connect the gateway and transmit data to ChirpStack, follow these steps:
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=solarRak %}
 
-### Add a device profile on Chirpstack
+### 在 Chirpstack 添加设备配置
 
 {% assign solarDeviceProfile = '
     ===
@@ -78,7 +78,7 @@ To connect the gateway and transmit data to ChirpStack, follow these steps:
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=solarDeviceProfile %}
 
-**Solar Bluetooth Gateway decoder**:
+**Solar Bluetooth Gateway decoder**：
 
 ```javascript
   // Decode uplink function.
@@ -388,7 +388,7 @@ To connect the gateway and transmit data to ChirpStack, follow these steps:
 ```
 {:.copy-code.expandable-10}
 
-### Add a device on Chirpstack
+### 在 Chirpstack 添加设备
 
 {% assign solarApplication = '
     ===
@@ -413,7 +413,7 @@ To connect the gateway and transmit data to ChirpStack, follow these steps:
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=solarApplication %}
 
-### Configure Application Integration with ThingsBoard
+### 配置应用与 ThingsBoard 集成
 
 {% assign solarThingsboard = '
     ===
@@ -426,7 +426,7 @@ To connect the gateway and transmit data to ChirpStack, follow these steps:
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=solarThingsboard %}
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 创建设备
 
 {% assign solarDevices = '
     ===
@@ -451,8 +451,8 @@ To connect the gateway and transmit data to ChirpStack, follow these steps:
 %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=solarDevices %}
 
-## Conclusion
+## 总结
 
-With the information provided in this guide, you can easily connect your Solar Bluetooth Gateway and transmit data to ThingsBoard.
+根据本指南，可轻松连接 Solar Bluetooth Gateway 并将数据发送到 ThingsBoard。
 
-For further learning about key concepts and features, explore the platform&#39;s [documentation](/docs/pe/){:target="_blank"}. You can also configure [alarm rules](/docs/pe/user-guide//device-profiles/#alarm-rules){:target="_blank"}{:target="_blank"} or set up [dashboards](/docs/pe/user-guide//dashboards/){:target="_blank"}.
+进一步了解核心概念与功能，请参阅平台的[文档](/docs/pe/){:target="_blank"}。也可配置[告警规则](/docs/pe/user-guide//device-profiles/#alarm-rules){:target="_blank"}{:target="_blank"}或设置[仪表板](/docs/pe/user-guide//dashboards/){:target="_blank"}。

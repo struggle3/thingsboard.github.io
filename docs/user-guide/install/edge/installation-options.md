@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-edge
-title: ThingsBoard Edge installation options
+title: ThingsBoard Edge 安装选项
 notitle: "true"
 
 ---
@@ -10,10 +10,10 @@ notitle: "true"
        <div class="install-options-hero">
           <div class="container">
             <div class="install-options-hero-content">
-                <h1>ThingsBoard Edge installation options</h1>
+                <h1>ThingsBoard Edge 安装选项</h1>
                 <div class="install-options-description">
                     <p>
-                        ThingsBoard Edge installation instructions for various operation systems
+                        适用于多种操作系统的 ThingsBoard Edge 安装说明
                     </p>
                 </div>
             </div>

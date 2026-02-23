@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Simple calculated field
-description: Simple calculated fields use basic arithmetic operations (+, -, *, /) and standard functions such as sqrt (square root), pow (power), abs (absolute value), etc.
+title: 简单计算字段
+description: 简单计算字段使用基本算术运算（+、-、*、/）及标准函数，如sqrt（平方根）、pow（幂）、abs（绝对值）等。
 breadcrumbs: "true"
 breadcrumbs-steps: "1"
 hidetoc: "true"
@@ -9,15 +9,15 @@ hidetoc: "true"
 expression-simple-calculated-fields-1:
   0:
     image: /images/user-guide/calculated-fields/expression-simple-calculated-fields-1-ce.png
-    title: 'In the "Expression" section, enter the mathematical expression for the calculation using the variables defined in the "Arguments" section.'
+    title: '在「表达式」部分，使用「参数」部分定义的变量输入用于计算的数学表达式。'
     
 output-simple-1:
   0:
     image: /images/user-guide/calculated-fields/output-simple-1-ce.png
-    title: 'Select the output type as "Time series". Set a name to the variable that will store the calculation result. Optionally, specify the number of decimal places.'
+    title: '将输出类型选为「时间序列」。为存储计算结果的变量设置名称。可选指定小数位数。'
   1:
     image: /images/user-guide/calculated-fields/output-simple-2-ce.png
-    title: 'Select the output type as "Attribute" and choose its scope: "Server attributes", "Client attributes", or "Shared attributes". Set a name to the variable that will store the calculation result. Optionally, set the number of decimal places.'
+    title: '将输出类型选为「属性」并选择其作用域：「服务器属性」「客户端属性」或「共享属性」。为存储计算结果的变量设置名称。可选指定小数位数。'
 
 ---
 

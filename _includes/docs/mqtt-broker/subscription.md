@@ -1,107 +1,103 @@
-TBMQ Professional Edition provides dedicated [Private Cloud](/pricing/?section=tbmq-options&product=tbmq-private-cloud) instances based on a **flexible, pay-as-you-go model**. 
-Our interactive calculator allows you to define your exact capacity, ensuring you only pay for the performance and scale you need. 
-Once your core capacity is set, your private broker instance operates under the following **default and configurable limits**. 
-The values are monthly limits, unless stated otherwise.
+TBMQ 专业版基于**灵活按需计费**模式提供专用[私有云](/pricing/?section=tbmq-options&product=tbmq-private-cloud)实例。
+我们的交互式计算器可让您定义所需容量，按需付费。
+核心容量确定后，私有 broker 实例将按以下**默认与可配置限制**运行。
+除另有说明外，数值均为月度限制。
 
 <table>
   <thead>
       <tr>
-          <td><b>Parameter name</b></td>
-          <td><b>Value</b></td>
-          <td><b>Description</b></td>
+          <td><b>参数名</b></td>
+          <td><b>值</b></td>
+          <td><b>说明</b></td>
       </tr>
   </thead>
   <tbody>
       <tr>
           <td>Sessions</td>
           <td>From 5K to Unlimited</td>
-          <td>Maximum number of client sessions managed by the broker, including both active connections and persistent sessions that are temporarily disconnected but still maintained by the broker for quick reconnection. 
-Once a session is expired or explicitly removed, it no longer counts toward the session limit and the slot becomes available for a new session</td>
+          <td>Broker 管理的最大客户端会话数，包括活跃连接及暂时断开但由 broker 保留用于快速重连的持久化会话。会话过期或被显式移除后不再计入会话限制，该槽位可供新会话使用</td>
       </tr>
       <tr>
           <td>Throughput (msg/sec)</td>
           <td>From 1K to Unlimited</td>
-          <td>Total throughput of messages processed per second, including both incoming and outgoing `MQTT_PUBLISH` packets. 
-It does not include acknowledgment packets used in QoS 1 and 2 flows (such as `PUBACK`, `PUBREC`, etc.), nor other MQTT control packets like `CONNECT`, `SUBSCRIBE`, `UNSUBSCRIBE`, etc.</td>
+          <td>每秒处理的消息总吞吐量，包括入站和出站的 `MQTT_PUBLISH` 包。不包含 QoS 1 和 2 流程中的确认包（如 `PUBACK`、`PUBREC` 等），也不包含 `CONNECT`、`SUBSCRIBE`、`UNSUBSCRIBE` 等 MQTT 控制包</td>
       </tr>
       <tr>
           <td>Monthly traffic</td>
           <td>From 200 GB to Unlimited</td>
-          <td>Monthly traffic refers to the total amount of data transmitted through the TBMQ broker, including both incoming and outgoing MQTT messages.
-Traffic is measured as the sum of all MQTT packet payloads sent and received by clients. If the monthly allowance is exceeded, additional usage is billed at $0.1 per GB</td>
+          <td>月度流量指通过 TBMQ broker 传输的数据总量，包括入站和出站 MQTT 消息。流量按客户端发送和接收的所有 MQTT 包 payload 之和计算。超出月度额度后，额外使用按 $0.1/GB 计费</td>
       </tr>
       <tr>
           <td>Application topic size</td>
           <td>1 GB</td>
-          <td>Maximum size of the Kafka topic used to store persisted messages for a disconnected Application client. Each client has a dedicated topic, and messages are retained until delivered or the size limit is reached</td>
+          <td>用于为断开连接的 Application 客户端存储持久化消息的 Kafka topic 最大大小。每个客户端有独立 topic，消息保留至投递或达到大小限制</td>
       </tr>
       <tr>
           <td>Application topic TTL</td>
           <td>1 day</td>
-          <td>Time-to-live for messages stored in Kafka topics for Application clients. If a client remains disconnected beyond this period, undelivered messages will be discarded automatically</td>
+          <td>为 Application 客户端存储在 Kafka topics 中的消息的存活时间。若客户端在此时间内保持断开，未投递消息将被自动丢弃</td>
       </tr>
       <tr>
           <td>Integration topic size</td>
           <td>1 GB</td>
-          <td>Maximum size of the Kafka topic used to store persisted messages for a disconnected Integration. Each Integration has a dedicated topic, and messages are retained until delivered or the size limit is reached</td>
+          <td>用于为断开连接的 Integration 存储持久化消息的 Kafka topic 最大大小。每个 Integration 有独立 topic，消息保留至投递或达到大小限制</td>
       </tr>
       <tr>
           <td>Integration topic TTL</td>
           <td>1 day</td>
-          <td>Time-to-live for messages stored in dedicated Kafka topics for each Integration. If the Integration remains disconnected beyond this period, undelivered messages will be automatically discarded</td>
+          <td>为每个 Integration 存储在专用 Kafka topics 中的消息的存活时间。若 Integration 在此时间内保持断开，未投递消息将被自动丢弃</td>
       </tr>
       <tr>
           <td>Messages storage for default ('Device') persistent sessions</td>
           <td>100 per session</td>
-          <td>Maximum number of messages that can be stored for each Device client with a persistent session while it is offline. Once the limit is reached, older messages are dropped to make room for new ones</td>
+          <td>每个具有持久化会话的 Device 客户端离线时可存储的最大消息数。达到限制后，旧消息将被丢弃以腾出空间</td>
       </tr>
       <tr>
           <td>Device persisted messages TTL</td>
           <td>1 day</td>
-          <td>"Time to live" parameter for messages stored for Device persisted clients while they are offline</td>
+          <td>Device 持久化客户端离线时为其存储的消息的存活时间参数</td>
       </tr>
       <tr>
           <td>Stats TTL</td>
           <td>1 month</td>
-          <td>"Time to live" parameter for statistics persistence. This includes metrics visible on the UI: sessions, subscriptions, incoming messages, outgoing messages, etc.</td>
+          <td>统计持久化的存活时间参数。包括 UI 可见的指标：sessions、subscriptions、入站消息、出站消息等</td>
       </tr>
       <tr>
           <td>Session TTL</td>
           <td>1 day</td>
-          <td>"Time to live" parameter for the persistent session that is disconnected. If a client remains disconnected beyond this duration, its session data will be automatically removed from the broker</td>
+          <td>已断开持久化会话的存活时间参数。若客户端在此时间内保持断开，其会话数据将被 broker 自动移除</td>
       </tr>
       <tr>
           <td>Client incoming messages rate limit</td>
           <td>Up to 50 per second, not exceeding 3000 per minute</td>
-          <td>Total number of incoming messages per publisher client with any Quality of Service (QoS) level</td>
+          <td>每个发布者客户端任意 Quality of Service (QoS) 级别的入站消息总数</td>
       </tr>
       <tr>
           <td>Client outgoing messages rate limit</td>
           <td>Up to 50 per second, not exceeding 3000 per minute</td>
-          <td>Total number of outgoing messages per non-persistent subscriber client with Quality of Service (QoS) level equal to 0 ("AT_MOST_ONCE")</td>
+          <td>每个非持久化订阅者客户端 Quality of Service (QoS) 为 0（"AT_MOST_ONCE"）时的出站消息总数</td>
       </tr>
       <tr>
           <td>In-flight messages per publisher</td>
           <td>100</td>
-          <td>Maximum number of incoming QoS 1 and QoS 2 messages from a publisher that can be awaiting acknowledgment. Acknowledgment is sent after the message is successfully persisted by the broker. 
-If this limit is exceeded, the client is disconnected to prevent overload</td>
+          <td>来自发布者的入站 QoS 1 和 QoS 2 消息在等待确认时的最大数量。消息由 broker 成功持久化后发送确认。超过此限制时，客户端将被断开以防止过载</td>
       </tr>
       <tr>
           <td>Client pre-connect messages</td>
           <td>100</td>
-          <td>Maximum number of messages the broker will queue per client during the connection handshake phase. If this limit is exceeded before the client completes the connection, the client will be disconnected</td>
+          <td>broker 在连接握手阶段为每个客户端排队的最大消息数。若客户端完成连接前超过此限制，客户端将被断开</td>
       </tr>
       <tr>
           <td>Message size</td>
           <td>1 MB</td>
-          <td>Maximum size of the payload in an MQTT_PUBLISH packet that the broker will accept. Larger messages will be rejected</td>
+          <td>broker 接受的 MQTT_PUBLISH 包中 payload 的最大大小。超出大小的消息将被拒绝</td>
       </tr>
       <tr>
           <td>Uptime SLA</td>
           <td>99.9% or 99.99%</td>
-          <td>Represents the percentage of time a broker is expected to be fully operational and accessible</td>
+          <td>表示 broker 预期完全运行且可访问的时间百分比</td>
       </tr>
   </tbody>
 </table>
 
-where "**K**" means 1 thousand, "**M**" means 1 million, "**B**" means 1 billion.
+其中 "**K**" 表示一千，"**M**" 表示一百万，"**B**" 表示十亿。

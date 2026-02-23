@@ -6,12 +6,12 @@ tocs:
 - how-to-activate-trendz
 docs-header:
 - toc: getting-started
-  title: Getting Started
+  title: 入门
 - toc: docs-home
-  title: Documentation
+  title: 文档
 - toc: guides
-  title: Guides
+  title: 指南
 - toc: installation
-  title: Installation
+  title: 安装
 - toc: how-to-activate-trendz
-  title: How To Activate Trendz
+  title: 如何激活Trendz

@@ -1,17 +1,17 @@
 * TOC
 {:toc}
 
-The ThingsBoard REST API Client helps you interact with ThingsBoard REST API from your Java application.
-With Rest Client you can programmatically create assets, devices, customers, users and other entities and their relations in ThingsBoard.
+ThingsBoard REST API Client帮助您从Java应用与ThingsBoard REST API交互。
+通过Rest Client可编程创建资产、设备、customers、用户及其它实体及其在ThingsBoard中的关系。
  
-The recommended method for installing the Rest Client is with a build automation tool, like Maven. 
-The version of the REST Client depends on the version of the platform that you are using.   
+推荐使用Maven等构建自动化工具安装Rest Client。
+REST Client的版本取决于您使用的平台版本。   
 
 <hr>
 
-## Professional Edition REST Client
+## 专业版REST Client
 
-In order to add REST Client to your Maven/Gradle project, you should use the following dependency:
+要将REST Client添加到Maven/Gradle项目，请使用以下依赖：
  
 ```xml
 <dependencies>
@@ -24,9 +24,9 @@ In order to add REST Client to your Maven/Gradle project, you should use the fol
 ```
 {: .copy-code}
 
-Note: The REST Client is built on top of Spring RestTemplate and thus depends on Spring Web (5.1.5.RELEASE at the moment of writing this article).
+说明：REST Client基于Spring RestTemplate构建，因此依赖Spring Web（撰写本文时版本为5.1.5.RELEASE）。
 
-In order to download the REST Client dependency, you should add the following repository to your project. 
+要下载REST Client依赖，需将以下仓库添加到项目中。 
 
 ```xml
 <repositories>
@@ -40,14 +40,14 @@ In order to download the REST Client dependency, you should add the following re
 
 <hr>
 
-### Basic Usage
+### 基本用法
 
-#### Authentication with API Key
+#### 使用API Key认证
 
 {% assign sinceVersion = "4.3" %}
 {% include templates/since.md %}
 
-You can authenticate using an API key without the need for login/logout operations:
+您可使用API key认证，而无需执行login/logout操作：
 
 ```java
 // ThingsBoard REST API URL
@@ -69,9 +69,9 @@ client.close();
 
 <hr>
 
-#### Authentication with credentials (deprecated)
+#### 使用凭据认证（已弃用）
 
-Alternatively, you can create a ThingsBoard Client instance, authenticate, and retrieve the data of the currently logged-in user.
+或者，您可创建ThingsBoard Client实例、进行认证并获取当前登录用户数据。
 
 ```java
 // ThingsBoard REST API URL
@@ -96,14 +96,14 @@ client.close();
 
 <hr>
 
-## Examples
+## 示例
 
-#### Authentication with API Key
+#### 使用API Key认证
 
 {% assign sinceVersion = "4.3" %}
 {% include templates/since.md %}
 
-Alternatively, you can authenticate using an API key without the need for login/logout operations:
+或者，您可使用API key认证，而无需执行login/logout操作：
 
 ```java
 // ThingsBoard REST API URL
@@ -125,39 +125,10 @@ client.close();
 
 <hr>
 
-## Examples
+## 示例
 
-The examples below demonstrate how to use the API with standard username/password authentication.
-If you prefer to use an API key, simply replace the lines:
-
-```java
-String username = "tenant@thingsboard.org";
-String password = "tenant";
-RestClient client = new RestClient(url);
-client.login(username, password);
-```
-
-with the API key initialization:
-
-```java
-String apiKey = "YOUR_API_KEY_VALUE";
-RestClient client = RestClient.withApiKey(url, apiKey);
-```
-
-The rest of the logic remains exactly the same.
-
-### Get user permissions
-
-The examples below demonstrate authentication using an API key.
-
-If you prefer to use username/password authentication, simply replace the following lines:
-
-```java
-String apiKey = "YOUR_API_KEY_VALUE";
-RestClient client = RestClient.withApiKey(url, apiKey);
-```
-
-with:
+以下示例演示如何结合标准用户名/密码认证使用API。
+若更倾向使用API key，只需将以下行：
 
 ```java
 String username = "tenant@thingsboard.org";
@@ -166,13 +137,42 @@ RestClient client = new RestClient(url);
 client.login(username, password);
 ```
 
-The rest of the logic remains exactly the same.
+替换为API key初始化：
 
-> Don&#39;t forget to replace <span class="code-light">YOUR_API_KEY_VALUE</span> with your actual [API key](/docs/{{docsPrefix}}user-guide/security/api-keys/){:target="_blank"}.
+```java
+String apiKey = "YOUR_API_KEY_VALUE";
+RestClient client = RestClient.withApiKey(url, apiKey);
+```
 
-### Get user permissions
+其余逻辑完全相同。
 
-The following sample code shows how to get allowed permissions of current logged in user and then check sample permission.
+### 获取用户权限
+
+以下示例演示使用API key认证。
+
+若更倾向使用用户名/密码认证，只需将以下行：
+
+```java
+String apiKey = "YOUR_API_KEY_VALUE";
+RestClient client = RestClient.withApiKey(url, apiKey);
+```
+
+替换为：
+
+```java
+String username = "tenant@thingsboard.org";
+String password = "tenant";
+RestClient client = new RestClient(url);
+client.login(username, password);
+```
+
+其余逻辑完全相同。
+
+> 别忘了将<span class="code-light">YOUR_API_KEY_VALUE</span>替换为您的实际[API key](/docs/{{docsPrefix}}user-guide/security/api-keys/){:target="_blank"}。
+
+### 获取用户权限
+
+以下示例代码展示如何获取当前登录用户的允许权限并检查示例权限。
 
 ```java
 // ThingsBoard REST API URL
@@ -195,9 +195,9 @@ client.close();
 
 <hr>
 
-### Fetch user devices
+### 获取用户设备
 
-The following sample code shows how to fetch tenant devices via page link.
+以下示例代码展示如何通过分页链接获取租户设备。
 
 ```java
 // ThingsBoard REST API URL
@@ -225,9 +225,9 @@ client.close();
 
 <hr>
 
-### Fetch tenant dashboards
+### 获取租户仪表板
 
-The following sample code shows how to fetch tenant dashboards via page link.
+以下示例代码展示如何通过分页链接获取租户仪表板。
 
 ```java
 // ThingsBoard REST API URL
@@ -255,9 +255,9 @@ client.close();
 
 <hr>
 
-### Fetch entity groups
+### 获取实体组
 
-The following sample code shows how to fetch entity groups.
+以下示例代码展示如何获取实体组。
 
 ```java
 // ThingsBoard REST API URL
@@ -281,9 +281,9 @@ client.close();
 
 <hr>
 
-### Count entities using Entity Data Query API
+### 使用Entity Data Query API统计实体
 
-The following sample code shows how to use Entity Data Query API to count total devices, total active devices.
+以下示例代码展示如何使用Entity Data Query API统计总设备数、活跃设备数。
 ```java
 // ThingsBoard REST API URL
 String url = "http://localhost:8080";
@@ -329,9 +329,9 @@ client.close();
 
 <hr>
 
-### Query entities using Entity Data Query API
+### 使用Entity Data Query API查询实体
 
-The following sample code shows how to use Entity Data Query API to get all active devices.
+以下示例代码展示如何使用Entity Data Query API获取所有活跃设备。
 
 ```java
 // ThingsBoard REST API URL
@@ -393,9 +393,9 @@ client.close();
 
 <hr>
 
-### Manage Device example
+### 设备管理示例
 
-The following sample code demonstrates basic concepts of device management API (add/get/delete device, get/save device attributes).
+以下示例代码演示设备管理API的基本概念（添加/获取/删除设备，获取/保存设备属性）。
 ```java
 // ThingsBoard REST API URL
 String url = "http://localhost:8080";
@@ -443,7 +443,7 @@ client.close();
 
 <hr>
 
-## Some useful code snippets
+## 实用代码片段
 
 ```java
 // ThingsBoard REST API URL
@@ -562,6 +562,6 @@ restClient.addEntitiesToEntityGroup(customer1Administrators.getId(), Collections
 
 <hr>
 
-### More examples
+### 更多示例
 
-You can find the example application [here](https://github.com/thingsboard/tb-pe-rest-client-example){:target="_blank"}.
+示例应用可[在此处](https://github.com/thingsboard/tb-pe-rest-client-example){:target="_blank"}找到。

@@ -1,6 +1,6 @@
-### Create device profile
+### 创建设备配置
 
-Before you add an Efento sensor to the platform you need to create a new Device profile for Efento device.
+在将 Efento 传感器添加到平台前，需为 Efento 设备创建新的设备配置。
 
 {% assign deviceProfileCreationPE = '
     ===
@@ -40,12 +40,12 @@ Before you add an Efento sensor to the platform you need to create a new Device 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceProfileCreationCE %}
 {% endif %}
 
-Configuration of the “Alarm rules” and “Device provisioning” tabs is optional.  
-If you want to learn more about these features please refer to the [documentation](/docs/getting-started-guides/helloworld/){:target="_blank"}.  
+「告警规则」和「设备配置」选项卡的配置为可选。  
+更多说明请参阅[文档](/docs/getting-started-guides/helloworld/){:target="_blank"}。  
 
-### Create a device
+### 创建设备
 
-In order to save a data from the sensor we should also create a device on ThingsBoard.  
+为保存传感器数据，还需在 ThingsBoard 上创建设备。  
 
 {% assign deviceAddingPE = '
     ===

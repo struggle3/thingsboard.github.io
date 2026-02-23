@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Attaching report to notification
-description: How to attach report to a notification
+title: 将报告附加到通知
+description: 如何将报告附加到通知
 redirect_from: "/docs/user-guide/reporting/attaching-report-to-notification/"
 
 reporting-getting-started-save-report-1:

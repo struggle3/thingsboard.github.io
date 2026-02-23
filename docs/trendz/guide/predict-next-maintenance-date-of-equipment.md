@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Predict remaining time to next maintenance of the equipment
-description: Predictive maintenance system for industrial equipment
+title: 预测设备下次维护的剩余时间
+description: 工业设备预测性维护系统
 
 predictive-maintenance-dashboard:
   0:
@@ -76,53 +76,53 @@ predictive-maintenance-notify-maintenance-team:
 
 ## Introduction
 
-Our FRTB-ZH3 cap assembly machines can produce between 200-350 pieces per hour, but varying loads make preventive maintenance scheduling difficult. 
-To reduce unplanned downtime and minimize the risk of breakdowns, we plan to perform maintenance after each machine produces 500,000 caps. 
-To ensure that we have enough time to order parts and schedule the maintenance team, we need to be notified two weeks before the scheduled maintenance. 
-With Trendz Analytics, we implement predictive maintenance solution that can predict when each machine needs maintenance and receive notifications with enough lead time, 
-allowing us to keep our machines running efficiently and reducing unplanned downtime.
+FRTB-ZH3瓶盖组装设备每小时可生产200–350件，但负载波动使预防性维护排期困难。
+为减少计划外停机、降低故障风险，计划在每台设备生产50万个瓶盖后进行维护。
+为有足够时间订购配件和安排维护团队，需在计划维护前两周收到通知。
+借助Trendz Analytics，我们实现了可预测每台设备维护时间并在足够提前量下接收通知的预测性维护方案，
+使设备保持高效运行、减少计划外停机。
 
-**Task definition** - predict the number of days until each cap assembly machine produces 500,000 caps and create an alarm to notify 14 days before the predicted date.
+**任务定义** - 预测每台瓶盖组装设备生产50万个瓶盖的天数，并创建提前14天通知的告警。
 
 {% include images-gallery.html imageCollection="predictive-maintenance-dashboard" %}
 
 ### Implementation plan
-* Create a forecast for the amount of caps produced by each machine using Trendz Analytics.
-* Calculate the number of days remaining until each machine produces 500,000 caps.
-* Save the calculated remaining days as machine telemetry.
-* Create an alarm in ThingsBoard if remaining time less than 14 days.
-* Send email to the maintenance team once alarm created.
+* 使用Trendz Analytics创建每台设备瓶盖产量预测
+* 计算每台设备生产50万个瓶盖的剩余天数
+* 将计算出的剩余天数保存为设备telemetry
+* 在ThingsBoard创建剩余时间小于14天时的告警
+* 告警触发后向维护团队发送邮件
 
 ### Key outcomes
-* Reduce unplanned downtime by 24%.
-* Reduce maintenance costs by 10%.
-* Improve maintenance team efficiency by 18%.
+* 计划外停机减少24%
+* 维护成本降低10%
+* 维护团队效率提升18%
 
 ## Getting started:
 
 ### Prerequisites
 
-Assembly machines already connected to ThingsBoard via OPC-UA integration and telemetry data is available in ThingsBoard. You can find more details how to do this in our [connectivity guides](https://thingsboard.io/docs/pe/guides/#AnchorIDConnectYourDevice).
-Equipment reports a lot of useful telemetry data, but for this use case we will use only `capsProduced` telemetry.
+组装设备已通过OPC-UA integration连接ThingsBoard，telemetry数据可在ThingsBoard中获取。详见[connectivity guides](https://thingsboard.io/docs/pe/guides/#AnchorIDConnectYourDevice)。
+设备上报多种telemetry，本例仅使用`capsProduced`。
 
 
 ### Step 1: Create a forecast for the amount of caps produced by machine
-We start with creating a forecast for the amount of caps produced by each machine. Machine reports the number of produced caps every 5 minutes in the format `{ts: 1675421880000, values: { capsProduced: 738}}`.
-Submitted value always increments and reset once maintenance performed. Let's start with a prediction of `capsProduced` telemetry for the next 3 months.
+首先创建每台设备的瓶盖产量预测。设备每5分钟上报一次产量，格式为`{ts: 1675421880000, values: { capsProduced: 738}}`。
+该值持续累加，维护后重置。我们先预测未来3个月的`capsProduced` telemetry。
 
-* Create table.
-* Add `machine name` into columns section - this step will create a separate forecast for each machine.
-* Add calculated field into columns section.
-* Enable batch calculation checkbox.
-* Enable checkbox `Prediction`
-    * Prediction method - **Fourier transformation**
-    * Prediction range - 3
-    * Prediction unit - months
+* 创建table
+* 在columns区域添加`machine name`——为每台设备生成独立预测
+* 在columns区域添加计算字段
+* 勾选batch calculation
+* 勾选`Prediction`
+    * Prediction method——**Fourier transformation**
+    * Prediction range——3
+    * Prediction unit——months
 
-After enabling prediction for batch calculated field Trendz will build a forecast for tha raw telemetry from machine and then use it as an input parameter for calculation function. 
-In that function we need to find when threshold would be reached and return remaining time to that point in days. If threshold would not be reached in next 3 months then we need to return -1.
+为batch calculated字段启用prediction后，Trendz会基于设备原始telemetry构建预测，并将其作为计算函数的输入。
+在计算函数中需找到达到阈值的时点并返回距该点的剩余天数。若未来3个月内未达到阈值则返回-1。
 
-* Write function that returns remaining time to next maintenance
+* 编写返回下次维护剩余时间的函数
 
 ```javascript
 var threshold = 500000;
@@ -141,63 +141,64 @@ for(var i = 0; i < data.length; i++) {
 return [{ts: 1, value: remainingDays}];
 ```
 
-After pressing `Build Report` button we will see table with estimated time in days to next maintenance for each machine.
+点击`Build Report`后，将看到每台设备的预计下次维护剩余天数。
 
 {% include images-gallery.html imageCollection="predictive-maintenance-forecast-next-maintenance-time" %}
 
 ### Step 2: Save remaining time as a machine telemetry
-Next step is to save calculated remaining time as a telemetry of the machine. In this case Trendz periodically executes calculation function on fresh data and saves result as a telemetry of the machine back to ThingsBoard.
-We need to tell how frequently we want to execute calculation function. In our case it would be once per hour.
+下一步将计算出的剩余时间保存为设备telemetry。Trendz会定期对新数据执行计算函数，并将结果作为设备telemetry写回ThingsBoard。
+需设置计算函数的执行频率。本例为每小时一次。
 
-* Change label of calculated field to **capsForecast**  - Trendz will save result of calculation function as telemetry with this name.
-* Open view settings and enable telemetry save in `Tb calculated telemetry save` section.
-    * Enabled - true
-    * Save interval - 1
-    * Save unit - hours
-* In settings open `View mode fields` section and **Machine** entity in `Row click entity` dropdown - this step tells Trendz under what entity calculated telemetry should be saved.
-* Set default time range to **Last 7 days**
-* Save view with name **Machine maintenance remaining days forecast job**
+* 将计算字段的label改为**capsForecast**——Trendz会以该名称将计算结果保存为telemetry
+* 在view settings的`Tb calculated telemetry save`中启用telemetry保存
+    * Enabled——true
+    * Save interval——1
+    * Save unit——hours
+* 在settings中打开`View mode fields`区域，在`Row click entity`下拉选择**Machine**——告诉Trendz计算telemetry应保存到哪个实体下
+* 默认时间范围——**Last 7 days**
+* 以名称**Machine maintenance remaining days forecast job**保存视图
 
-Once view saved, Trendz would schedule background job that will periodically execute calculation function and save result as telemetry of the machine. On each run Trendz would fetch new data from ThingsBoard and execute calculation function on it.
+视图保存后，Trendz会安排后台任务定期执行计算函数并将结果保存为设备telemetry。每次运行会从ThingsBoard拉取新数据并在其上执行计算。
 
 {% include images-gallery.html imageCollection="predictive-maintenance-save-remaining-time-as-telemetry" %}
 
 ### Step 3: Create alarm if remaining time less than 14 days
-At this moment we already have `capsForecast` telemetry for each machine in the ThingsBoard which tells as how many days left until next maintenance. It means that we can create Alarm Rule in ThignsBoard to raise an alarm if remaining time less than 14 days.
+此时每台设备在ThingsBoard已有`capsForecast` telemetry，表示距下次维护的天数。可在ThingsBoard创建Alarm Rule，当剩余时间小于14天时告警。
 
-* In ThingsBoard open machine's device profile and add new Alarm Rule
-* Alarm type - **Maintenance required**
+* 在ThingsBoard打开设备device profile，添加Alarm Rule
+* Alarm type——**Maintenance required**
 * Create alarm rule
-  * Severity - `Warning`
-  * Condition - `capsForecast` is less than `14`
+  * Severity——`Warning`
+  * Condition——`capsForecast`小于`14`
 * Clear alarm rule
-  * Condition - `capsForecast` is greater than `14`
+  * Condition——`capsForecast`大于`14`
 
-Once alarm rule created, ThingsBoard will raise an alarm if remaining time less than 14 days and clear it once remaining time greater than 14 days.
+Alarm rule创建后，剩余时间小于14天时ThingsBoard会触发告警，大于14天时清除。
 
 {% include images-gallery.html imageCollection="predictive-maintenance-create-alarm" %}
 
 ### Step 4: Send notification once alarm created
-Final step is to send notification to the maintenance team once alarm created. We will use ThingsBoard Rule Engine to send email notification to the maintenance team. If Alarm Rule in device profile raised an alarm, we can catch this event and add steps to send an email.
+最后一步是告警触发后通知维护团队。使用ThingsBoard Rule Engine发送邮件。
+若device profile中的Alarm Rule触发告警，可捕获该事件并添加发送邮件步骤。
 
-* Open Root rule chain in ThingsBoard
-* add `toEmail` rule node after `Device profile` node and connect it with `Alarm Created` relation.
-* Open `toEmail` node settings and configure it to send email to the maintenance team.
-  * `From template` - info@testmail.org
-  * `To template` - maintenance@testmail.com
-  * `Subject template` - Maintenance required for ${entityName}
-  * `Body template` - Maintenance required for ${entityName}. Remaining time: ${capsForecast} days
-* add `send email` rule node after `toEmail` node and connect it with `Successfull` relation.
-* Save rule chain.
+* 在ThingsBoard打开Root rule chain
+* 在`Device profile`节点后添加`toEmail` rule node，并与`Alarm Created` relation连接
+* 打开`toEmail`节点settings，配置向维护团队发送邮件
+  * `From template`——info@testmail.org
+  * `To template`——maintenance@testmail.com
+  * `Subject template`——Maintenance required for ${entityName}
+  * `Body template`——Maintenance required for ${entityName}. Remaining time: ${capsForecast} days
+* 在`toEmail`节点后添加`send email` rule node，并与`Successfull` relation连接
+* 保存rule chain
 
-With this configuration ThingsBoard will send notification to the maintenance team once alarm created.
+如此配置后，告警触发时ThingsBoard会向维护团队发送通知。
 
 {% include images-gallery.html imageCollection="predictive-maintenance-notify-maintenance-team" %}
 
 ## Summary
-Implementing a predictive maintenance strategy using Trendz Analytics can help reduce unplanned downtime of the equipment on manufacturing site and increase the efficiency of cap assembly machines. 
-By predicting when each machine will produce 500,000 caps and creating an alarm to notify the maintenance team 14 days before the scheduled maintenance, 
-you can ensure that the necessary parts and resources are available to perform maintenance and prevent machine breakdowns.
+使用Trendz Analytics实施预测性维护策略，有助于减少制造现场设备计划外停机、提高瓶盖组装设备效率。
+通过预测每台设备何时生产50万个瓶盖，并在计划维护前14天通知维护团队，
+可确保配件和资源就位，完成维护并预防设备故障。
 
-Overall, predictive maintenance strategies using advanced analytics tools like Trendz Analytics can help organizations reduce costs and improve operational 
-efficiency by identifying potential problems before they occur, preventing equipment downtime, and minimizing the need for unscheduled maintenance.
+总体而言，借助Trendz Analytics等高级分析工具的预测性维护策略，
+能通过事前识别潜在问题、减少设备停机、降低计划外维护需求，帮助企业降低成本、提升运营效率。

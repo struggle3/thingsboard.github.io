@@ -1,32 +1,32 @@
 ---
 layout: docwithnav-pe
-title: MQTT Integration
-description: MQTT Integration guide
+title: MQTT 集成
+description: MQTT 集成指南
 create_dashboard:
     0:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-1-pe.png
-        title: 'Go to Dashboards page and create a new dashboard named MQTT RPC. Open this dashboard;'
+        title: '进入 Dashboards 页面，创建名为 MQTT RPC 的仪表板并打开；'
     1:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-2-pe.png
-        title: 'Add an alias by clicking on Entity Aliases icon on the top-right. Name the alias (Sensor, for example), select filter type "Single Entity", type "Device" and choose our SN-001 sensor. Press Add and then Save;'
+        title: '点击右上角 Entity Aliases 图标添加别名。命名别名（如 Sensor），选择筛选类型「Single Entity」、类型「Device」，选择 SN-001 传感器。点击 Add 再 Save；'
     2:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-4-pe.png
-        title: 'Now Add New Widget;'
+        title: '点击 Add New Widget；'
     3:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-5-pe.png
-        title: 'Select Control Widgets from drop down menu;'
+        title: '从下拉菜单选择 Control Widgets；'
     4:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-6-pe.png
-        title: 'Select Knob Control widget;'
+        title: '选择 Knob Control 部件；'
     5:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-7-pe.png
-        title: 'On the Data field select created alias (Sensor). Set Number of digits after floating point to 0;'
+        title: '在 Data 字段选择创建的别名（Sensor）。将 Number of digits after floating point 设为 0；'
     6:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-8-pe.png
-        title: 'Go to Advanced tab and set Minimum value to 15 and Maximum value to 45. Leave the rest by default. Click Add to create widget;'
+        title: '进入 Advanced 标签，将 Minimum value 设为 15、Maximum value 设为 45，其余保持默认。点击 Add 创建部件；'
     7:
         image: /images/user-guide/integrations/mqtt/mqtt-integration-create-new-dashboard-9-pe.png
-        title: 'Save the changes to the dashboard.'
+        title: '保存仪表板更改。'
 
 edit_rule_node:
     0:

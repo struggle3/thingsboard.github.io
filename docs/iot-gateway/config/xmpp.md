@@ -1,18 +1,18 @@
 ---
 layout: docwithnav-gw
-title: XMPP Connector Configuration
-description: XMPP protocol support for ThingsBoard IoT Gateway
+title: XMPP 连接器配置
+description: ThingsBoard IoT Gateway 的 XMPP 协议支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you get familiar with XMPP Connector configuration for ThingsBoard IoT Gateway.
-Use [general configuration](/docs/iot-gateway/configuration/) to enable this Connector.
-The purpose of this connector is to collect data from IoT devices using XMPP protocol.
+本指南将帮助您熟悉 ThingsBoard IoT Gateway 的 XMPP 连接器配置。
+请使用 [通用配置](/docs/iot-gateway/configuration/) 启用此连接器。
+该连接器的用途是使用 XMPP 协议从物联网设备采集数据。
 
-We will describe the connector configuration file below.
+下面将说明连接器配置文件。
 
 ## Connector configuration: xmpp.json
 Connector configuration is a JSON file that contains information about how to connect to devices, process

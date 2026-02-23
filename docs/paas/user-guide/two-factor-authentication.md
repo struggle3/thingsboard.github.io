@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Two-factor authentication
-description: Two-factor authentication using ThingsBoard
+title: 双因素认证
+description: 使用 ThingsBoard 进行双因素认证
 
 2fa-password-and-authentication:
     0:

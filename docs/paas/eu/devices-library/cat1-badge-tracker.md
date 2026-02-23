@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect Cat-1 Badge Tracker to ThingsBoard?"
+title: "如何将Cat-1 Badge Tracker连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/cat1-badge-tracker/"
 ---

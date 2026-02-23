@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: "Smart Farming with ThingsBoard: Scalable IoT for Agriculture"
-description: Smart farming IoT solution powered by ThingsBoard. Real-time monitoring, automation, and analytics for crops, silos, and climate control. Ideal for agriculture, logistics, and agritech businesses.
+title: "ThingsBoard 智慧农业：可扩展的农业物联网"
+description: 基于 ThingsBoard 的智慧农业物联网解决方案。作物、筒仓和气候控制的实时监测、自动化和分析。适用于农业、物流和农业科技企业。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -11,7 +11,7 @@ contactUsModal: "true"
 
 {% include usecase-nav.html usecase="smart-farming" %}
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Smart farming & IoT agriculture solution</h1>
+<h1 class="usecase-title">智慧农业与物联网农业解决方案</h1>
 <section class="smart-farming-about">
     <div class="about-text">
         <div class="short">
@@ -19,7 +19,7 @@ contactUsModal: "true"
                 <p class="text">Modern agriculture is undergoing a digital transformation driven by the need for sustainability, efficiency, and resilience. Farmers and agricultural enterprises face increasing pressure to optimize yield, reduce resource consumption, and mitigate risks related to climate and storage. ThingsBoard easily handles this task by providing real-time data collection, automation, and intuitive visualization tailored for smart farming needs.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_SmartFarming_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/1f9828d0-058e-11e7-87f7-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0" class="button gtm_button">View live demo</a>     
+                <a id="UseCases_SmartFarming_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/1f9828d0-058e-11e7-87f7-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0" class="button gtm_button">查看实时演示</a>     
             </div>
         </div>
         <div class="long">
@@ -43,7 +43,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="smart-farming-solution-structure">
-    <h2>Solution structure of smart farming</h2>
+    <h2>智慧农业解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
@@ -61,7 +61,7 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Smart farming dashboard structure</h2>
+        <h2>智慧农业仪表板结构</h2>
         <p>
             Effective data visualization is critical for smart farming. ThingsBoard dashboards are designed to be intuitive, modular, and informative, helping users quickly identify anomalies and make informed decisions.
         </p>
@@ -124,7 +124,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header">
-        <h2>Applications of smart farming & IoT agriculture solution</h2>
+        <h2>智慧农业与物联网农业解决方案的应用</h2>
         <p>The Smart Farming solution built on the ThingsBoard platform is highly adaptable and addresses specific needs across various sectors of agriculture and agritech. Its powerful features — real-time telemetry, rule-based automation, multi-protocol support, customizable dashboards, and scalable architecture — make it ideal for a wide range of applications:</p>
     </div>
     <div class="applications-container-large">
@@ -201,11 +201,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of smart farming</h2>
+        <h2>智慧农业总结</h2>
         <p>Smart farming with ThingsBoard offers a complete end-to-end IoT solution for agricultural operations. From field to storage, it unifies device connectivity, real-time analytics, control systems, and user-friendly dashboards. By adopting this solution, agri-businesses can boost productivity, ensure compliance, minimize losses, and gain full transparency over their entire value chain.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -306,8 +306,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_SmartFarming_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/1f9828d0-058e-11e7-87f7-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0" class="button gtm_button">View live demo</a>     
-                <a id="UseCases_SmartFarming_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_SmartFarming_ViewLiveDemo" target="_blank" href="https://demo.thingsboard.io/dashboard/1f9828d0-058e-11e7-87f7-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0" class="button gtm_button">查看实时演示</a>     
+                <a id="UseCases_SmartFarming_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
     
             applyImageBg(block);

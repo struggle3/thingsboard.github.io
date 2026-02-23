@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: LWM2M Device API Reference
-description: Supported LwM2M API Reference for IoT Devices
+title: LwM2M设备API参考
+description: 支持的IoT设备LwM2M API参考
 
 started:
     0:

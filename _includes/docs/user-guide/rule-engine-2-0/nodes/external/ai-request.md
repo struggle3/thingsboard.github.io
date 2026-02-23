@@ -1,28 +1,24 @@
-Sends a request to a large language model (LLM) using configured system and user prompts, optionally including file resources. Prompts can be dynamically populated with data from
-the incoming message. Returns AI-generated content as the data of the outgoing message.
+使用配置的 system 和 user prompt 向大语言模型（LLM）发送请求，可选包含文件资源。Prompt 可根据入站消息动态填充。将 AI 生成内容作为出站消息的 data 返回。
 
-## Configuration
+## 配置
 
-### AI model
+### AI model（AI 模型）
 
-Select the specific Large Language Model (LLM) that will process requests. The **Model** dropdown lists all AI models previously configured on
-the [AI models](/docs/{{docsPrefix}}samples/analytics/ai-models/){:target="_blank"} page. When you select a model, the node automatically applies all settings defined for that
-model, including provider credentials, model ID, and optional parameters.
+选择处理请求的 LLM。**Model** 下拉列表显示 [AI models](/docs/{{docsPrefix}}samples/analytics/ai-models/){:target="_blank"} 页面中已配置的模型。选择模型后，节点会自动应用该模型的所有设置，包括 provider 凭据、model ID 及可选参数。
 
-You can add a new AI model directly from this interface by clicking the **Create new** button.
+可点击 **Create new** 按钮在界面中直接添加新 AI 模型。
 
-### Prompt settings
+### Prompt settings（Prompt 设置）
 
-Prompts define the context and task for the AI model. Both fields support [templatization](/docs/{{docsPrefix}}user-guide/templatization/) to dynamically incorporate data from
-incoming messages.
+Prompt 定义 AI 模型的上下文与任务。两个字段均支持 [templatization](/docs/{{docsPrefix}}user-guide/templatization/) 以动态融入入站消息数据。
 
 #### System prompt
 
-Sets the high-level context, personality, and constraints for the AI. This field is optional but cannot be blank if specified. Maximum length: 500,000 characters.
+设置 AI 的高级上下文、人设和约束。该字段可选，若指定则不可为空。最大长度：500,000 字符。
 
-The system prompt establishes rules that influence the entire interaction, such as the desired tone, response format, or a specific area of expertise.
+System prompt 建立影响整次交互的规则，如期望语气、响应格式或 expertise 领域。
 
-**Example**:
+**示例**：
 
 ```
 You are a helpful agricultural expert. Your goal is to analyze sensor data and provide farming advice. Respond only in valid JSON.
@@ -30,24 +26,24 @@ You are a helpful agricultural expert. Your goal is to analyze sensor data and p
 
 #### User prompt
 
-Contains the specific, immediate task or question for the AI to answer. This field is required and cannot be blank. Maximum length: 500,000 characters.
+包含 AI 需回答的具体任务或问题。该字段必填且不可为空。最大长度：500,000 字符。
 
-**Example**:
+**示例**：
 
 ```
 Based on these readings, is the soil moisture optimal for planting corn? Readings: $[*]
 ```
 
-#### Templatization
+#### Templatization（模板化）
 
-You can make prompts dynamic using [templatization](/docs/{{docsPrefix}}user-guide/templatization/). The following templates are available:
+可使用 [templatization](/docs/{{docsPrefix}}user-guide/templatization/) 使 prompt 动态化。可用模板：
 
-- `$[*]` – Replaced by the entire message data as a JSON string
-- `${*}` – Replaced by all message metadata as a JSON string
-- `$[key]` – Replaced by a specific value from message data
-- `${key}` – Replaced by a specific value from message metadata
+- `$[*]` — 用完整消息 data 的 JSON 字符串替换
+- `${*}` — 用所有消息 metadata 的 JSON 字符串替换
+- `$[key]` — 用消息 data 中的指定值替换
+- `${key}` — 用消息 metadata 中的指定值替换
 
-**Example**: If the user prompt is `Telemetry readings: $[*]` and the incoming data is:
+**示例**：若 user prompt 为 `Telemetry readings: $[*]`，入站 data 为：
 
 ```json
 {
@@ -56,71 +52,67 @@ You can make prompts dynamic using [templatization](/docs/{{docsPrefix}}user-gui
 }
 ```
 
-The template will produce: `Telemetry readings: {"temperature":25.5,"humidity":62}`
+模板将生成：`Telemetry readings: {"temperature":25.5,"humidity":62}`
 
-### AI resources
+### AI resources（AI 资源）
 
-Attach files to provide additional context to the AI model. Resources are sent alongside the prompts and can include documents, images, or other supported file types.
+附加文件以向 AI 模型提供额外上下文。资源与 prompt 一起发送，可包含文档、图片或其它支持的文件类型。
 
-#### Adding resources
+#### Adding resources（添加资源）
 
-Click the **AI resources** field and select one or more files from your resource library, or click **Create new** to upload new files. Resources must be of type **General**.
+点击 **AI resources** 字段，从资源库选择一个或多个文件，或点击 **Create new** 上传新文件。资源类型须为 **General**。
 
-#### Supported resource types
+#### Supported resource types（支持的资源类型）
 
-To include attached resources in the AI request, the node must convert them to one of three supported content types. The conversion is determined by the resource's media type:
+要在 AI 请求中包含附加资源，节点需将其转换为三种支持的内容类型之一。转换由资源的 media type 决定：
 
 | Media Type        | Content Type | Description                                                       |
 |-------------------|--------------|-------------------------------------------------------------------|
-| `text/*`          | Text         | Plain text files, markdown, CSV, etc. Content is decoded as UTF-8 |
-| `application/pdf` | PDF          | PDF documents. Content is Base64-encoded                          |
-| `image/*`         | Image        | Image files (JPEG, PNG, GIF, etc.). Content is Base64-encoded     |
+| `text/*`          | Text         | 纯文本、markdown、CSV 等。内容以 UTF-8 解码 |
+| `application/pdf` | PDF          | PDF 文档。内容为 Base64 编码                          |
+| `image/*`         | Image        | 图片文件（JPEG、PNG、GIF 等）。内容为 Base64 编码     |
 
 {% capture resource_fallback_note %}
-**Note**: If a resource has a media type not listed in the table above, the node will attempt to decode its content as UTF-8 text.
+**注意**：若资源的 media type 不在上表中，节点会尝试将其内容解码为 UTF-8 文本。
 {% endcapture %}
 {% include templates/info-banner.md content=resource_fallback_note %}
 
 {% capture resource_support_note %}
-**Note**: The actual resource types supported (files, images, PDFs, etc.) depend on the specific AI model integration being used. 
-While the node can convert resources to the content types listed above, not all model providers support all content types.
+**注意**：实际支持的资源类型（文件、图片、PDF 等）取决于使用的 AI 模型集成。节点可将资源转换为上述内容类型，但并非所有模型 provider 都支持所有内容类型。
 {% endcapture %}
 {% include templates/info-banner.md content=resource_support_note %}
 
-### Response format
+### Response format（响应格式）
 
-Specifies the structure of the AI model's output.
+指定 AI 模型输出的结构。
 
-- **Text** – Most flexible format, supported by all models. The AI generates free-form text without structural constraints. While output is not guaranteed to be in any specific
-  format, you can guide the model to produce structured data (like JSON) through clear instructions in your prompts.
+- **Text** — 最灵活，所有模型均支持。AI 生成无结构约束的自由文本。输出不保证特定格式，但可通过 prompt 中的明确指示让模型生成结构化数据（如 JSON）。
 
-- **JSON** – Instructs the model to generate a response that is always syntactically valid JSON. The model decides the JSON structure based on the context of the prompts.
+- **JSON** — 指示模型生成语法有效的 JSON 响应。模型根据 prompt 上下文决定 JSON 结构。
 
-- **JSON Schema** – Forces the model to generate JSON that strictly conforms to a specific structure defined using a [JSON Schema](https://json-schema.org/). This ensures reliable,
-  predictable output.
+- **JSON Schema** — 强制模型生成严格符合 [JSON Schema](https://json-schema.org/) 定义结构的 JSON。确保可靠、可预测的输出。
 
 {% capture json_support_note %}
-**Note**: JSON and JSON Schema modes are not supported when using models from Amazon Bedrock, Anthropic, or GitHub Models. These providers only support Text mode.
+**注意**：使用 Amazon Bedrock、Anthropic 或 GitHub Models 的模型时，不支持 JSON 和 JSON Schema 模式。这些 provider 仅支持 Text 模式。
 {% endcapture %}
 {% include templates/info-banner.md content=json_support_note %}
 
-#### JSON Schema format
+#### JSON Schema format（JSON Schema 格式）
 
-When **JSON Schema** is selected, you must provide a schema that defines the structure of the expected response. The schema parser supports a specific subset of the JSON Schema
-specification:
+选择 **JSON Schema** 时，需提供定义期望响应结构的 schema。解析器支持 JSON Schema 规范的特定子集：
 
-**Supported features:**
+**支持的特性：**
 
-- **Types**: `string`, `integer`, `number`, `boolean`, `object`, `array`, `null`
-- **General keywords**: `title` (used as schema name), `description`, `enum` (must be an array of strings)
-- **Object keywords**: `properties`, `required`, `additionalProperties` (boolean, defaults to true)
-- **Array keywords**: `items`
+- **Types**：`string`、`integer`、`number`、`boolean`、`object`、`array`、`null`
+- **General keywords**：`title`（用作 schema 名）、`description`、`enum`（须为字符串数组）
+- **Object keywords**：`properties`、`required`、`additionalProperties`（boolean，默认 true）
+- **Array keywords**：`items`
 
-**Unsupported features:**
+**不支持的特性：**
 
-- Validation keywords such as `pattern`, `minLength`, `maxLength`, `minimum`, `maximum`, etc.
-- Advanced schema composition keywords like `allOf`, `anyOf`, `oneOf`, `not`
-- Conditional schemas and dependencies
+- 校验类关键字如 `pattern`、`minLength`、`maxLength`、`minimum`、`maximum` 等
+- 高级 schema 组合关键字如 `allOf`、`anyOf`、`oneOf`、`not`
+- 条件 schema 与 dependencies
 
 **Example schema:**
 
@@ -156,19 +148,19 @@ specification:
 The maximum time the node will wait for a response from the AI model before the request fails. Valid range: 1 to 600 seconds (10 minutes).
 
 {% capture timeout_warning %}
-**Important**: Complex tasks or slower models may require more time to generate responses. A timeout that is too short for your use case might cause requests to fail unnecessarily.
+**重要**：复杂任务或较慢模型可能需要更多时间生成响应。超时过短可能导致请求不必要失败。
 Consider the typical response time of your chosen model when configuring this value.
 {% endcapture %}
 {% include templates/warn-banner.md content=timeout_warning %}
 
-#### Force acknowledgement
+#### Force acknowledgement（强制确认）
 
-- **Enabled** – The incoming message is acknowledged immediately. A new message is created to carry the AI's response and is then added to the queue for processing by the next
+- **Enabled** — 入站消息立即被确认。 A new message is created to carry the AI's response and is then added to the queue for processing by the next
   node. This prevents message processing timeouts for long-running AI requests.
 - **Disabled** – The original incoming message is transformed. Its data is replaced with the AI's response, and this modified message is passed to the next node.
 
 {% capture force_ack_env_note %}
-**Note**: The `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable, when set to `true`, overrides this setting and forces immediate acknowledgement for all external nodes.
+**注意**：环境变量 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 设为 `true` 时，会覆盖此设置并强制对所有外部节点立即确认。
 {% endcapture %}
 {% include templates/info-banner.md content=force_ack_env_note %}
 
@@ -263,9 +255,9 @@ Consider the typical response time of your chosen model when configuring this va
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. If **Force acknowledgement** is enabled, the incoming message is acknowledged immediately.
+1. 若启用 **Force acknowledgement**，入站消息立即被确认。
 2. The node constructs an AI request:
     - The **system prompt** (if specified) and **user prompt** are processed, replacing templates with values from the incoming message data and metadata.
     - If resources are configured, each resource is loaded from the database and converted to the appropriate content type (text, PDF, or image) based on its media type.
@@ -278,30 +270,29 @@ Consider the typical response time of your chosen model when configuring this va
     - The originator, message type, and metadata from the incoming message remain unchanged.
 5. The resulting message is forwarded via the `Success` connection.
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The AI model processed the request successfully and returned a response within the configured timeout.
+    - AI 模型成功处理请求并在配置的超时内返回响应。
 - **Failure**
-    - The request to the AI model exceeded the configured **Timeout**.
-    - The configured AI model was not found.
-    - A configured resource was not found, has an unsupported type, or does not belong to the tenant.
-    - Failed to load resource data from the database.
-    - The AI model provider returned an error.
-    - An unexpected error occurred during processing.
+    - 对 AI 模型的请求超过配置的 **Timeout**。
+    - 未找到配置的 AI 模型。
+    - 配置的资源未找到、类型不受支持或不属于当前租户。
+    - 从数据库加载资源数据失败。
+    - AI 模型 provider 返回错误。
+    - 处理过程中发生意外错误。
 
-## Examples
+## 示例
 
-### Example 1 — Data analysis with technical documentation reference
+### 示例 1 — 带技术文档参考的数据分析
 
-Analyze telemetry data from a temperature sensor and provide recommendations in JSON format. A PDF resource containing the device's technical documentation is attached to help the
-AI understand the sensor's specifications and optimal operating ranges.
+分析温度传感器 telemetry 数据并以 JSON 格式提供建议。附加包含设备技术文档的 PDF 资源，帮助 AI 理解传感器规格和最佳工作范围。
 
-**Incoming message**
+**入站消息**
 
-Originator: `DEVICE` (Temperature Sensor)
+Originator：`DEVICE`（Temperature Sensor）
 
-Data:
+Data：
 
 ```json
 {
@@ -332,9 +323,9 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data:
+Data：
 
 ```json
 {
@@ -344,9 +335,8 @@ Data:
 }
 ```
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The AI model analyzed the sensor data in context with the device's technical documentation (PDF resource). It provided structured recommendations based on the manufacturer's
-specifications. The original message data was replaced with the AI's JSON response.
+AI 模型结合设备技术文档（PDF 资源）分析了传感器数据，根据厂商规格提供了结构化建议。原始消息 data 被 AI 的 JSON 响应替换。

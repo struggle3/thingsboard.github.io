@@ -1,11 +1,11 @@
-| **Parameter** | **Default value**                                 | **Description**                                                                                           |
+| **参数** | **默认值**                                 | **说明**                                                                                           |
 |:--------------|:--------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| key           | **deviceName**                                    | Shared attribute name on the platform.                                                                    |
-| type          | **path**                                          | Source of the shared attribute (can be [path](#path-types), [identifier](#identifier-types) or constant). |
-| value         | **Root\\\\.Objects\\\\.Device1\\\\.serialNumber** | Regular expression or identifier, which is used for looking up the node for the current device.           |
+| key           | **deviceName**                                    | 平台上的 shared attribute 名称。                                                                    |
+| type          | **path**                                          | shared attribute 来源（可为 [path](#path-types)、[identifier](#identifier-types) 或 constant）。 |
+| value         | **Root\\\\.Objects\\\\.Device1\\\\.serialNumber** | 用于查找当前设备节点的正则表达式或标识符。           |
 | ---           |                                                   |                                                                                                           |
 
-This subsection in configuration file looks like this:
+配置文件中此小节如下所示：
 
 ```json
 "attributes_updates": [

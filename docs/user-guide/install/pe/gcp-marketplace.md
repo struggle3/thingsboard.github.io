@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Installing ThingsBoard PE from GCP Marketplace
-description: Installing ThingsBoard PE from Google Cloud Platform Marketplace
+title: 从 GCP 应用市场安装 ThingsBoard PE
+description: 从 Google Cloud Platform 应用市场安装 ThingsBoard PE
 redirect_from: "/docs/user-guide/install/pe/gcp2/"
 ---
 

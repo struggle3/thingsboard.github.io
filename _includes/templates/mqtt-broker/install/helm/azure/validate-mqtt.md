@@ -1,15 +1,15 @@
-To connect to the cluster via MQTT you will need to get corresponding service IP. You can do this with the command:
+要通过 MQTT 连接集群，需获取对应服务的 IP。可使用以下命令：
 
 ```bash
 kubectl get services
 ```
 {: .copy-code}
 
-You should see the similar picture:
+输出应类似：
 
 ```text
 NAME                          TYPE           CLUSTER-IP       EXTERNAL-IP              PORT(S)                         AGE
 my-tbmq-cluster-mqtt-lb       LoadBalancer   10.100.119.170   *******                  1883:30308/TCP,8883:31609/TCP   6m58s
 ```
 
-Use `EXTERNAL-IP` field of the load-balancer to connect to the cluster via MQTT protocol.
+使用负载均衡器的 `EXTERNAL-IP` 字段通过 MQTT 协议连接集群。

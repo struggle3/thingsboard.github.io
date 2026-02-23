@@ -1,131 +1,131 @@
 liveDemo:
   0:
-    title: North America
-    description: ThingsBoard Cloud is a fully managed, scalable and fault-tolerant platform for your IoT applications.
+    title: 北美
+    description: ThingsBoard Cloud是面向IoT应用的完全托管、可扩展且高可用的平台。
     link: https://thingsboard.cloud/signup
     icon: /images/thingsboard_pe_small_icon.svg
-    alt: Thingsboard PE logo
+    alt: ThingsBoard PE标识
     imageTitleAttribute: ThingsBoard Professional Edition
     imageWidth: 39
     imageHeight: 36
   1:
-    title: Europe
-    description: ThingsBoard Cloud is a fully managed, scalable and fault-tolerant platform for your IoT applications.
+    title: 欧洲
+    description: ThingsBoard Cloud是面向IoT应用的完全托管、可扩展且高可用的平台。
     link: https://eu.thingsboard.cloud/signup
     icon: /images/thingsboard_pe_small_icon.svg
-    alt: Thingsboard PE logo
+    alt: ThingsBoard PE标识
     imageTitleAttribute: ThingsBoard Professional Edition
     imageWidth: 39
     imageHeight: 36
 onPremise:
   0:
-    title: Docker (Linux or Mac OS)
-    description: This guide will help you to install and start ThingsBoard Professional Edition using Docker and Docker Compose on Linux or Mac OS
+    title: Docker (Linux或Mac OS)
+    description: 本指南帮助您在Linux或Mac OS上使用Docker与Docker Compose安装并启动ThingsBoard专业版。
     link: /docs/user-guide/install/pe/docker/
     icon: /images/install/platform/docker-linux-macos.svg
-    alt: Docker logo with Linux and macOS icons
-    imageTitleAttribute: Install ThingsBoard Professional Edition using Docker on Linux or macOS
+    alt: Docker标识（含Linux与macOS图标）
+    imageTitleAttribute: 在Linux或macOS上使用Docker安装ThingsBoard专业版
     imageWidth: 170
     imageHeight: 36
   1:
     title: Docker (Windows)
-    description: This guide will help you to install and start ThingsBoard Professional Edition using Docker on Windows.
+    description: 本指南帮助您在Windows上使用Docker安装并启动ThingsBoard专业版。
     link: /docs/user-guide/install/pe/docker-windows/
     icon: /images/install/platform/docker-windows.svg
-    alt: Docker logo with Windows icon
-    imageTitleAttribute: Install ThingsBoard Professional Edition using Docker on Windows
+    alt: Docker标识（含Windows图标）
+    imageTitleAttribute: 在Windows上使用Docker安装ThingsBoard专业版
     imageWidth: 96
     imageHeight: 36
   2:
     title: Ubuntu Server
-    description: Install ThingsBoard Professional Edition on Ubuntu 20.04 / 22.04 / 24.04 with PostgreSQL or Cassandra, depending on your setup.
+    description: 在Ubuntu 20.04/22.04/24.04上安装ThingsBoard专业版，可根据环境选择PostgreSQL或Cassandra。
     link: /docs/user-guide/install/pe/ubuntu/
     icon: /images/install/platform/ubuntu.svg
-    alt: Ubuntu logo
-    imageTitleAttribute: Install ThingsBoard Professional Edition on Ubuntu Server
+    alt: Ubuntu标识
+    imageTitleAttribute: 在Ubuntu Server上安装ThingsBoard专业版
     imageWidth: 36
     imageHeight: 36
   3:
     title: CentOS/RHEL Server
-    description: Set up ThingsBoard Professional Edition on RHEL, CentOS, Alma, Rocky, or Oracle Linux with required system resources.
+    description: 在RHEL、CentOS、Alma、Rocky或Oracle Linux上部署ThingsBoard专业版，需满足系统资源要求。
     link: /docs/user-guide/install/pe/rhel/
     icon: /images/install/platform/centos-redhat.svg
-    alt: CentOS and Red Hat logos
-    imageTitleAttribute: Install ThingsBoard Professional Edition on CentOS, RHEL, Alma, Rocky, or Oracle Linux
+    alt: CentOS与Red Hat标识
+    imageTitleAttribute: 在CentOS、RHEL、Alma、Rocky或Oracle Linux上安装ThingsBoard专业版
     imageWidth: 94
     imageHeight: 36
   4:
     title: Windows
-    description: Install ThingsBoard Professional Edition on Windows 10/11 with at least PostgreSQL or Cassandra, depending on usage.
+    description: 在Windows 10/11上安装ThingsBoard专业版，至少需PostgreSQL或Cassandra，视使用情况而定。
     link: /docs/user-guide/install/pe/windows/
     icon: /images/install/platform/windows.svg
-    alt: Windows logo
-    imageTitleAttribute: Install ThingsBoard Professional Edition on Windows 10 or 11
+    alt: Windows标识
+    imageTitleAttribute: 在Windows 10或11上安装ThingsBoard专业版
     imageWidth: 35
     imageHeight: 36
   5:
-    title: Cluster setup
-    description: Set up ThingsBoard Professional Edition in cluster mode using Minikube, OpenShift, Docker Compose with Kubernetes.
+    title: 集群部署
+    description: 使用Minikube、OpenShift或Docker Compose与Kubernetes以集群模式部署ThingsBoard专业版。
     link: /docs/user-guide/install/pe/cluster-setup/
     icon: /images/install/platform/cluster-pe.svg
-    alt: Cluster and Kubernetes icons
-    imageTitleAttribute: Set up ThingsBoard Professional Edition cluster with Kubernetes or Minikube
+    alt: 集群与Kubernetes图标
+    imageTitleAttribute: 使用Kubernetes或Minikube部署ThingsBoard专业版集群
     imageWidth: 88
     imageHeight: 36
 cloud:
   0:
     title: AWS
-    description: This guide will help you to setup ThingsBoard Professional Edition in AWS EC2 instance & AWS EKS platform.
+    description: 本指南帮助您在AWS EC2实例与AWS EKS平台上部署ThingsBoard专业版。
     link: /docs/user-guide/install/pe/aws/
     icon: /images/install/cloud/aws.svg
-    alt: AWS logo
-    imageTitleAttribute: Set up ThingsBoard Professional Edition using AWS EC2 or EKS
+    alt: AWS标识
+    imageTitleAttribute: 使用AWS EC2或EKS部署ThingsBoard专业版
     imageWidth: 58
     imageHeight: 36
   1:
     title: Azure
-    description: Here you can find scripts for different deployment scenarios using Azure AKS platform.
+    description: 此处提供基于Azure AKS平台的不同部署场景脚本。
     link: /docs/user-guide/install/pe/azure/
     icon: /images/install/cloud/azure.svg
-    alt: Microsoft Azure logo
-    imageTitleAttribute: Deploy ThingsBoard Professional Edition on Microsoft Azure
+    alt: Microsoft Azure标识
+    imageTitleAttribute: 在Microsoft Azure上部署ThingsBoard专业版
     imageWidth: 123
     imageHeight: 36
   2:
     title: DigitalOcean
-    description: This guide describes how to install ThingsBoard Professional Edition on DigitalOcean.
+    description: 本指南介绍如何在DigitalOcean上安装ThingsBoard专业版。
     link: /docs/user-guide/install/pe/digital-ocean/
     icon: /images/install/cloud/digitalocean.svg
-    alt: DigitalOcean logo
-    imageTitleAttribute: Install ThingsBoard Professional Edition on DigitalOcean
+    alt: DigitalOcean标识
+    imageTitleAttribute: 在DigitalOcean上安装ThingsBoard专业版
     imageWidth: 36
     imageHeight: 36
   3:
     title: Google Cloud Platform
-    description: This guide will help you to setup ThingsBoard Professional Edition in GCP VM instance & scenarios using GCP infrastructure.
+    description: 本指南帮助您在GCP虚拟机实例及GCP基础设施上部署ThingsBoard专业版。
     link: /docs/user-guide/install/pe/gcp/
     icon: /images/install/cloud/gcp.svg
-    alt: Google Cloud Platform logo
-    imageTitleAttribute: Deploy ThingsBoard Professional Edition on Google Cloud infrastructure
+    alt: Google Cloud Platform标识
+    imageTitleAttribute: 在Google Cloud基础设施上部署ThingsBoard专业版
     imageWidth: 40
     imageHeight: 36
   4:
     title: IBM Cloud
-    description: Installing ThingsBoard Professional Edition from IBM Cloud Marketplace.
+    description: 从IBM Cloud Marketplace安装ThingsBoard专业版。
     link: /docs/user-guide/install/pe/ibm-cloud/
     icon: /images/install/cloud/ibm-cloud.svg
-    alt: IBM Cloud logo
-    imageTitleAttribute: IBM Cloud support coming soon
+    alt: IBM Cloud标识
+    imageTitleAttribute: IBM Cloud支持即将推出
     imageWidth: 40
     imageHeight: 36
     comingSoon: true
   5:
     title: Alibaba Cloud
-    description: Installing ThingsBoard Professional Edition on Alibaba Cloud.
+    description: 在阿里云上安装ThingsBoard专业版。
     link: /docs/user-guide/install/pe/alibaba-cloud/
     icon: /images/install/cloud/alibaba.svg
-    alt: Alibaba Cloud logo
-    imageTitleAttribute: Alibaba Cloud support coming soon
+    alt: 阿里云标识
+    imageTitleAttribute: 阿里云支持即将推出
     imageWidth: 58
     imageHeight: 36
     comingSoon: true

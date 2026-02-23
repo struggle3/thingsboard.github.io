@@ -1,46 +1,46 @@
 * TOC
 {:toc}
 
-## Possible performance issues
+## 常见性能问题
 
-Here we will describe different possible scenarios of what may go wrong.
+本节描述可能出现的各类问题场景。
 
 {% capture contenttogglespecscenario %}
-No Message Processing%,%no-message-processing%,%templates/troubleshooting/scenarios/no-message-processing.md%br%
-Growing Latency For Messages%,%growing-latency%,%templates/troubleshooting/scenarios/growing-latency.md{% endcapture %}
+无消息处理%,%no-message-processing%,%templates/troubleshooting/scenarios/no-message-processing.md%br%
+消息延迟增长%,%growing-latency%,%templates/troubleshooting/scenarios/growing-latency.md{% endcapture %}
 
 {% include content-toggle.liquid content-toggle-id="scenario" toggle-spec=contenttogglespecscenario %}
 
-## Troubleshooting instruments and tips
+## 故障排查工具与建议
 
 ### Rule Engine Statistics Dashboard
-You can see if there are any Failures, Timeouts or Exceptions during the processing of your rule-chain. More detailed information you can find [here](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-statistics).
+可查看 rule chain 处理过程中是否存在 Failures、Timeouts 或 Exceptions。更多详情见[此处](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-statistics)。
 
-### Consumer group message lag for Kafka Queue
+### Kafka Queue Consumer group 消息 lag
 
-**Note:** This method can be used only if Kafka is selected as a queue.
+**说明：** 仅在选择 Kafka 作为 queue 时适用。
 
-With this log you can identify if there's some issue with processing of your messages (since Queue is used for all messaging inside the system you can analyze not only rule-engine queues but also <b>transport</b>, <b>core</b> etc).
-For more detailed information about troubleshooting rule-engine processing using consumer-group lag click [here](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#troubleshooting).
+通过该 log 可判断消息处理是否存在问题（Queue 用于系统内所有消息传递，可分析 rule-engine queues 及 <b>transport</b>、<b>core</b> 等）。
+使用 consumer-group lag 排查 rule-engine 处理的更多说明见[此处](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#troubleshooting)。
 
-### CPU/Memory Usage
+### CPU/Memory 使用
 
-Sometimes the problem is that you don't have enough resources for some service. You can view CPU and Memory usage by logging into your server/container/pod and executing <code>top</code> linux command.
+有时问题源于某服务资源不足。可登录 server/container/pod 并执行 <code>top</code> 命令查看 CPU 和 Memory 使用情况。
 
-For the more convenient monitoring it is better to have configured Prometheus and Grafana.
+建议配置 Prometheus 和 Grafana 便于监控。
 
-If you see that some services sometimes use 100% of the CPU, you should either scale the service horizontally by creating new nodes in cluster or scale it vertically by increasing the total amount of CPU.
+若某服务偶尔占用 100% CPU，可横向扩展（在 cluster 中新增节点）或纵向扩展（增加 CPU 总量）。
 
-### Message Pack Processing Log
+### Message Pack 处理 Log
 
-You can enable logging of the slowest and most frequently called rule-nodes.
-To do this you need to [update your logging configuration](#enable-certain-logs) with the following <i>logger</i>:
+可启用对最慢且调用最频繁的 rule node 的日志记录。
+需在[日志配置](#enable-certain-logs)中添加以下 <i>logger</i>：
 
 ```bash
 <logger name="org.thingsboard.server.service.queue.TbMsgPackProcessingContext" level="DEBUG" />
 ```
 
-After this you can find the following messages in your [logs](#logs):
+配置后可在 [logs](#logs) 中看到如下消息：
 
 ```bash
 2021-03-24 17:01:21,023 [tb-rule-engine-consumer-24-thread-3] DEBUG o.t.s.s.q.TbMsgPackProcessingContext - Top Rule Nodes by max execution time:
@@ -54,46 +54,46 @@ After this you can find the following messages in your [logs](#logs):
 2021-03-24 17:01:21,028 [tb-rule-engine-consumer-24-thread-3] INFO  o.t.s.s.q.TbMsgPackProcessingContext - [Main][3f6debf0-8cc0-11eb-bcd9-d343878c0c7f] execution count: 1. [RuleChain: Thermostat|RuleNode: Message Type Switch(3f6debf0-8cc0-11eb-bcd9-d343878c0c7f)]
 ```
 
-### Clearing Redis/Valkey Cache
+### 清理 Redis/Valkey 缓存
 
-**Note:** This can be used only if Redis or Valkey is selected as a cache.
+**说明：** 仅在选择 Redis 或 Valkey 作为 cache 时适用。
 
-It is possible that the data inside the cache has become corrupted. Regardless of the reason, it is always safe to clear the cache — ThingsBoard will simply refill it at runtime. To clear the cache, you need to log into the server/container/pod where it is deployed, open the application command-line tool (<code>redis-cli</code> for Redis and <code>valkey-cli</code> for Valkey), and run the <code>FLUSHALL</code>command. To clear the cache in Sentinel mode, access the master container and execute the cache-clearing command.
+缓存内数据可能损坏。无论原因如何，清空缓存都是安全的 —— ThingsBoard 会在运行时重新填充。清空缓存需登录部署的 server/container/pod，打开应用命令行工具（Redis 用 <code>redis-cli</code>，Valkey 用 <code>valkey-cli</code>），执行 <code>FLUSHALL</code>。Sentinel 模式下，需访问 master container 执行清空命令。
 
-So if you are struggling with identifying the reason of some problem, you can safely clear cache to make sure it isn't the reason of the issue.
+若难以定位问题原因，可尝试清空缓存以排除缓存导致的问题。
 
 
 ## Logs
 
-### Read logs
+### 读取 logs
 
-Regardless of the deployment type, ThingsBoard logs are stored on the same server/container as ThingsBoard Server/Node itself in the following directory:
+无论部署方式如何，ThingsBoard logs 均存储在 ThingsBoard Server/Node 所在 server/container 的以下目录：
 
 ```bash
 /var/log/thingsboard
 ```
 
-Different deployment tools provide different ways to view logs:
+不同部署方式查看 logs 的方法不同：
 
 {% capture contenttogglespecdeploymenttype %}
-Standalone Deployment%,%standalone%,%templates/troubleshooting/logs/view-logs/standalone-view-logs.md%br%
-Docker-Compose Deployment%,%docker-compose%,%templates/troubleshooting/logs/view-logs/docker-compose-view-logs.md%br%
-Kubernetes Deployment%,%kubernetes%,%templates/troubleshooting/logs/view-logs/kubernetes-view-logs.md{% endcapture %}
+Standalone 部署%,%standalone%,%templates/troubleshooting/logs/view-logs/standalone-view-logs.md%br%
+Docker-Compose 部署%,%docker-compose%,%templates/troubleshooting/logs/view-logs/docker-compose-view-logs.md%br%
+Kubernetes 部署%,%kubernetes%,%templates/troubleshooting/logs/view-logs/kubernetes-view-logs.md{% endcapture %}
 
 {% include content-toggle.liquid content-toggle-id="deploymentType" toggle-spec=contenttogglespecdeploymenttype %}
 
 
-### Enable certain logs
+### 启用特定 logs
 
-ThingsBoard provides the ability to enable/disable logging for certain parts of the system depending on what information do you need for troubleshooting.
+ThingsBoard 可根据故障排查需求对系统各部分启用或禁用日志。
 
-You can do this by modifying <b>logback.xml</b> file. As logs itself, it is stored on the same server/container as ThingsBoard Server/Node in the following directory:
+通过修改 <b>logback.xml</b> 文件实现。该文件与 logs 同处 ThingsBoard Server/Node 所在 server/container 的以下目录：
 
 ```bash
 /usr/share/thingsboard/conf
 ```
 
-Here's an example of the <b>logback.xml</b> configuration:
+以下是 <b>logback.xml</b> 配置示例：
 
 ```bash
 <!DOCTYPE configuration>
@@ -124,36 +124,36 @@ Here's an example of the <b>logback.xml</b> configuration:
 </configuration>
 ```
 
-The most useful for the troubleshooting parts of the config files are <i>loggers</i>.
-They allow you to enable/disable logging for the certain class or group of classes.
-In the example above the default logging level is <b>INFO</b> (it means that logs will contain only general information, warnings and errors), but for the package <code>org.thingsboard.js.api</code> we enabled the most detailed level of logging.
-There's also a possibility to completely disable logs for some part of the system, in the example above we did it to <code>com.microsoft.azure.servicebus.primitives.CoreMessageReceiver</code> class using <b>OFF</b> log-level.
+配置文件中与故障排查最相关的是 <i>loggers</i>。
+可为特定类或类组启用/禁用日志。
+上例中默认日志级别为 <b>INFO</b>（仅包含一般信息、警告和错误），对包 <code>org.thingsboard.js.api</code> 启用了最详细级别。
+也可完全关闭某部分的日志，上例中通过 <b>OFF</b> 级别对 <code>com.microsoft.azure.servicebus.primitives.CoreMessageReceiver</code> 类进行了禁用。
 
-To enable/disable logging for some part of the system you need to add proper <code></logger></code> configuration and wait up to 10 seconds.
+为系统某部分启用/禁用日志需添加相应 <code></logger></code> 配置并等待最多 10 秒。
 
-Different deployment tools provide different ways to update logs:
+不同部署方式更新 logs 的方法不同：
 
 {% capture contenttogglespecdeploymenttype2 %}
-Standalone Deployment%,%standalone%,%templates/troubleshooting/logs/enable-logs/standalone-enable-logs.md%br%
-Docker-Compose Deployment%,%docker-compose%,%templates/troubleshooting/logs/enable-logs/docker-compose-enable-logs.md%br%
-Kubernetes Deployment%,%kubernetes%,%templates/troubleshooting/logs/enable-logs/kubernetes-enable-logs.md{% endcapture %}
+Standalone 部署%,%standalone%,%templates/troubleshooting/logs/enable-logs/standalone-enable-logs.md%br%
+Docker-Compose 部署%,%docker-compose%,%templates/troubleshooting/logs/enable-logs/docker-compose-enable-logs.md%br%
+Kubernetes 部署%,%kubernetes%,%templates/troubleshooting/logs/enable-logs/kubernetes-enable-logs.md{% endcapture %}
 
 {% include content-toggle.liquid content-toggle-id="deploymentType" toggle-spec=contenttogglespecdeploymenttype2 %}
 
 
 ## Metrics
 
-You may enable prometheus metrics by setting environment variables `METRICS_ENABLED` to value `true` and `METRICS_ENDPOINTS_EXPOSE` to value `prometheus` in the configuration file.
-If you are running ThingsBoard as microservices with separate services for MQTT and COAP transport, you also need to set environment variables `WEB_APPLICATION_ENABLE` to value `true`, 
-`WEB_APPLICATION_TYPE` to value `servlet` and `HTTP_BIND_PORT` to value `8081` for MQTT and COAP services in order to enable web-server with Prometheus metrics.
+在配置文件中将环境变量 `METRICS_ENABLED` 设为 `true`、`METRICS_ENDPOINTS_EXPOSE` 设为 `prometheus` 可启用 Prometheus metrics。
+若以 microservices 方式运行 ThingsBoard 且 MQTT 与 COAP transport 为独立服务，还须将 `WEB_APPLICATION_ENABLE` 设为 `true`、
+`WEB_APPLICATION_TYPE` 设为 `servlet`、`HTTP_BIND_PORT` 设为 `8081`，以启用带 Prometheus metrics 的 web-server。
 
-These metrics are exposed at the path: `https://<yourhostname>/actuator/prometheus` which can be scraped by prometheus (No authentication required).
+Metrics 暴露在 `https://<yourhostname>/actuator/prometheus`，可由 Prometheus 抓取（无需认证）。
 
 ## Prometheus metrics
 
-Some internal state metrics can be exposed by the Spring Actuator using Prometheus.
+Spring Actuator 可通过 Prometheus 暴露部分内部状态 metrics。
 
-Here's the list of metrics ThingsBoard pushes to Prometheus.
+以下是 ThingsBoard 推送到 Prometheus 的 metrics 列表。
 
 ### <b>tb-node</b> metrics
 - <i>attributes_queue_${index_of_queue}</i> (statsNames - <i>totalMsgs, failedMsgs, successfulMsgs</i>): stats about writing <b>attributes</b> to the database. 
@@ -214,17 +214,17 @@ Stats descriptions:
 ## Grafana Dashboards
 
 {% if docsPrefix == "pe/" %}
-You can import preconfigured Grafana dashboards from [here](https://github.com/thingsboard/thingsboard-pe-docker-compose/tree/master/basic/monitoring/grafana/provisioning/dashboards){: target="_blank"}.
+可从[此处](https://github.com/thingsboard/thingsboard-pe-docker-compose/tree/master/basic/monitoring/grafana/provisioning/dashboards){: target="_blank"}导入预配置的 Grafana dashboards。
 {% else %}
-You can import preconfigured Grafana dashboards from [here](https://github.com/thingsboard/thingsboard/tree/master/docker/monitoring/grafana/provisioning/dashboards){: target="_blank"}.
+可从[此处](https://github.com/thingsboard/thingsboard/tree/master/docker/monitoring/grafana/provisioning/dashboards){: target="_blank"}导入预配置的 Grafana dashboards。
 {% endif %}
 
-> **Note:** Depending on the cluster configuration, you may need to make changes to the dashboards.
+> **注意：** 根据集群配置，可能需对 dashboards 进行调整。
 
-You can also view Grafana dashboards after deploying the ThingsBoards docker-compose cluster configuration (for more information, please follow [this guide](/docs/user-guide/install/{{docsPrefix}}cluster/docker-compose-setup/){: target="_blank"}).
-Make sure that `MONITORING_ENABLED` environment variable is set to `true`. Once deployed, you can access Prometheus at [http://localhost:9090](http://localhost:9090){: target="_blank"} and Grafana at [http://localhost:3000](http://localhost:3000){: target="_blank"} (by default, the username is `admin` and the password is `foobar`).
+部署 ThingsBoard docker-compose 集群配置后也可查看 Grafana dashboards（更多信息请参考[本指南](/docs/user-guide/install/{{docsPrefix}}cluster/docker-compose-setup/){: target="_blank"}）。
+确保将 `MONITORING_ENABLED` 环境变量设为 `true`。部署完成后，可访问 [http://localhost:9090](http://localhost:9090){: target="_blank"} 的 Prometheus 和 [http://localhost:3000](http://localhost:3000){: target="_blank"} 的 Grafana（默认用户名为 `admin`，密码为 `foobar`）。
 
-Here are the screenshots of the default preconfigured Grafana dashboards:
+以下是默认预配置 Grafana dashboards 的截图：
 
 {% include images-gallery.html imageCollection="metrics-dashboards" %}
 
@@ -245,7 +245,7 @@ Base URL in "HOME" section should not contain "/" or other characters.
 > Settings -> Base URL should not contain “/” at the end (e.g. “https://
 > mycompany.com ” instead of “https://mycompany.com/”).
 
-For OAuth2 configuration click [here](/docs/{{docsPrefix}}user-guide/oauth-2-support/).
+OAuth2 配置请点击[此处](/docs/{{docsPrefix}}user-guide/oauth-2-support/)。
 
 ## Getting help
 
@@ -253,7 +253,7 @@ For OAuth2 configuration click [here](/docs/{{docsPrefix}}user-guide/oauth-2-sup
     <div id="gettingHelp">
         <a href="https://github.com/thingsboard/thingsboard">
             <span class="phrase-heading">Github Project</span>
-            <p>Check out the project and consider contributing.</p>
+            <p>查看项目并考虑贡献。</p>
         </a>
         <a href="https://stackoverflow.com/questions/tagged/thingsboard">
             <span class="phrase-heading">Stack Overflow</span>
@@ -262,6 +262,6 @@ For OAuth2 configuration click [here](/docs/{{docsPrefix}}user-guide/oauth-2-sup
     </div>
 </section>
 
-If your problem isn't answered by any of the guides above, feel free to contact ThingsBoard team.
+若以上指南均未解答您的问题，欢迎联系 ThingsBoard 团队。
 
 <a class="button" href="/docs/contact-us/">Contact us</a>

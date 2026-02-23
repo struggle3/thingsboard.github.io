@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: TBMQ Release Notes
-description: TBMQ Releases
+title: TBMQ 版本说明
+description: TBMQ 版本发布说明
 
 ---
 

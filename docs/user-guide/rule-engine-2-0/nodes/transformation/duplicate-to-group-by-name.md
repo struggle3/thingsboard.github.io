@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: duplicate to group by name
-description: Duplicates an incoming message to every entity within an entity group that is dynamically found by name.
+description: 将入站消息复制到按名称动态查找的 entity 分组中的每个 entity。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

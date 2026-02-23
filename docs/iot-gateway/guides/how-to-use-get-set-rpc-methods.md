@@ -1,15 +1,14 @@
 ---
 layout: docwithnav-gw
-title: How to use built-in GET/SET RPC methods
-description: How to use built-in GET/SET RPC methods
+title: 如何使用内置 GET/SET RPC 方法
+description: 如何使用内置 GET/SET RPC 方法
 
 ---
 
 * TOC
 {:toc}
 
-Built-in GET/SET RPC methods provide a way to get and set the values of telemetry and attribute parameters values without 
-additional configuration. The following connectors support built-in GET/SET RPC methods:
+内置 GET/SET RPC 方法可在无需额外配置的情况下读写遥测与属性参数值。以下连接器支持内置 GET/SET RPC 方法：
 
 {% capture getSetConnectorRPCType %}
 OPC-UA<small></small>%,%opcua%,%templates/iot-gateway/get-set-connector-rpc/opcua.md%br%
@@ -23,12 +22,12 @@ Socket<small></small>%,%socket%,%templates/iot-gateway/get-set-connector-rpc/soc
 
 {% include content-toggle.liquid content-toggle-id="getSetConnectorRPC" toggle-spec=getSetConnectorRPCType %}
 
-## Next steps
+## 下一步
 
-Explore guides related to main ThingsBoard features:
+探索 ThingsBoard 主要功能相关指南：
 
- - [Data Visualization](/docs/user-guide/visualization/) - how to visualize collected data.
- - [Device attributes](/docs/user-guide/attributes/) - how to use device attributes.
- - [Telemetry data collection](/docs/user-guide/telemetry/) - how to collect telemetry data.
- - [Using RPC capabilities](/docs/user-guide/rpc/) - how to send commands to/from devices.
- - [Rule Engine](/docs/user-guide/rule-engine/) - how to use rule engine to analyze data from devices.
+ - [数据可视化](/docs/user-guide/visualization/) - 如何可视化采集的数据
+ - [设备属性](/docs/user-guide/attributes/) - 如何使用设备属性
+ - [遥测数据采集](/docs/user-guide/telemetry/) - 如何采集遥测数据
+ - [使用 RPC 能力](/docs/user-guide/rpc/) - 如何向设备发送命令
+ - [规则引擎](/docs/user-guide/rule-engine/) - 如何使用规则引擎分析设备数据

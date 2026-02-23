@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Information page
-description: Edge Information page
+title: Edge 信息页
+description: Edge 信息页
 edgeInfo:
     0:
         image: /images/edge/edge-status.png

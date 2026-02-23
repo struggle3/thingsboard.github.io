@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: kafka
-description: Publishes messages to Apache Kafka topic, sending the incoming message data as the record value.
+description: 将消息发布到 Apache Kafka topic，以入站消息数据作为 record 值。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

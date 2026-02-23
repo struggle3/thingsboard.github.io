@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Lesson 3. Charts and card widgets
+title: 课程3. 图表和卡片部件
 redirect_to: "/docs/pe/user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-3/"
 
 ---

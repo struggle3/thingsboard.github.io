@@ -1,21 +1,21 @@
 ---
 layout: docwithnav
 title: ROLTEK
-description: ROLTEK guide
+description: ROLTEK 集成指南
 
 ---
 
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-This article contains instructions on how to configure ThingsBoard IoT platform and connect Roltek DC620 device. 
-[ThingsBoard IoT](https://thingsboard.io/) platform is an open-source IoT platform for data collection, processing, visualization, and device management. 
-It enables device connectivity via industry standard IoT protocols - MQTT, CoAP and HTTP and supports both cloud and on-premises deployments. 
-ThingsBoard combines scalability, fault-tolerance and performance so you will never lose your data.
+本文介绍如何配置 ThingsBoard 物联网平台并连接 Roltek DC620 设备。
+[ThingsBoard IoT](https://thingsboard.io/) 平台是开源物联网平台，用于数据采集、处理、可视化和设备管理。
+支持通过行业标准物联网协议（MQTT、CoAP 和 HTTP）实现设备连接，并支持云端和本地部署。
+ThingsBoard 兼具可扩展性、容错能力和性能，确保您的数据不会丢失。
 
-## Create Device On Thingsboard
+## 在 ThingsBoard 中创建设备
 
 Login to your ThingsBoard platform and ppen "**Devices**" page.
 
@@ -32,7 +32,7 @@ Enable "**Add credentials**" option. Enter the desirable **Access Token** and cl
 
 ![image](/images/samples/roltek/tb4.png)
 
-## Configuring Roltek DC620
+## 配置 Roltek DC620
 
 First connect your device to the Internet via WiFi or Ethernet as described in the user manual.
 
@@ -79,9 +79,9 @@ In new window enter values:
 
 ![image](/images/samples/roltek/tb9.png)
 
-## Adding Widget to the Dashboard
+## 在仪表板中添加部件
 
-The collected data can be displayed using various widgets. To create one you should be able to see gathered data in the Latest telemetry section.
+采集的数据可通过多种部件显示。要创建部件，需能在「最新遥测」部分查看已采集数据。
 
 To access it you should follow these steps:
  - Go to the **Devices** on the left menu;

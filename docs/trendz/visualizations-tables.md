@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Tables
-description: Trendz Table View 
+title: 表格
+description: Trendz 表格视图 
 ---
 
 * TOC
@@ -21,85 +21,84 @@ description: Trendz Table View
 
 
 ## Simple Table
-In this mode, you drag-n-drop fields only to the **Columns** section. Each field represents a column in the table. 
- You can sort and filter rows, change columns order, etc.  
+此模式下，仅需将字段拖放到**Columns**区域。每个字段对应表格一列。
+可排序、过滤行，调整列顺序等。
  
-Telemetry fields aggregation:
-* If there is no **Date** field in column list - Trendz will apply aggregation function for the whole time range.
+Telemetry字段聚合：
+* 若列中无**Date**字段——Trendz对整个时间范围应用聚合函数。
 
 ![image](/images/trendz/simple-table.png)
 
-* If **Date** field present in the column list - system will split time range into multiple time ranges and apply aggregation to each range separately. 
+* 若列中有**Date**字段——系统将时间范围拆分为多个时间段，分别对每个时间段应用聚合。
 
 ![image](/images/trendz/simple-table-with-date.png)
 
 ## Table With Dynamic Columns
-This table modification allows showing telemetry aggregation as additional columns instead os separate rows. 
-For making it - add the telemetry field into **Dynamic Value** section and Date field into **Dynamic Column** section with required date grouping.
+此表格变体可将telemetry聚合作为额外列显示，而非单独行。
+操作：将telemetry字段加入**Dynamic Value**区域，将Date字段加入**Dynamic Column**区域并设置日期分组。
  
 ![image](/images/trendz/table-dynamic-columns.png)
  
-You can add any field (date/attribute) into the **Dynamic Column** section to build required table. Here is an example when we want to show consumption for each building as a separate column and floor represent a row. 
+可将任意字段（date/attribute）加入**Dynamic Column**区域构建所需表格。例如：每栋建筑的能耗作为一列，楼层作为行。
 
 ![image](/images/trendz/table-dynamic-building.png)
 
-**Note** that when Dynamic Columns used only one field allowed in the **Dynamic Value** and **Dynamic Column** section. 
-If multiple fields added to one of those sections - table will be blank. In the same time you still allowed to add multiple fields into **Columns** section
+**注意**：使用Dynamic Columns时，**Dynamic Value**和**Dynamic Column**区域仅允许一个字段。
+若任一区域添加了多个字段，表格将为空。但**Columns**区域仍可添加多个字段。
 
 ## Table with Individual Time Range for Column
-To see a bigger picture sometimes is useful to compare different time ranges for the same entity. For example, we want to know 
-what is today consumption, yesterday and for the last month. In this case, we add the telemetry field into **Dynamic Value** section, enable and select **local date** for the field and leave 
-**Dynamic Column** section empty. Note that we can add same telemetry field few times with different local dates.
+有时为看到更大图景，需要对比同一实体在不同时间范围的数据。例如：今日、昨日和过去一个月的能耗。
+此时将telemetry字段加入**Dynamic Value**区域，为字段启用并选择**local date**，**Dynamic Column**区域留空。注意可将同一telemetry字段多次添加并设置不同local date。
 
 ![image](/images/trendz/table-local-date.png)
 
 ## Default Sorting
-For the rapid distinction of the raw data, while building the table, you can configure the sorting order for the columns.
+为快速区分原始数据，可在构建表格时配置列排序。
 
-To define sorting order to the column:
- 
-* navigate to the Setting section
-* choose the column and apply the order for sorting: descending or ascending
+设置列排序：
+
+* 进入Setting区域
+* 选择列并应用排序方式：descending或ascending
 
 ![image](/images/trendz/table-sort.png)
 
 ## Cell Colors
-Use color rules to apply colors to cells based on their values. 
+使用颜色规则根据单元格值着色。
 
-On the card of chosen telemetry, activate Color function and choose color type: Auto or Manual. You can create multiple custom color ranges.
+在所选telemetry的卡片上激活Color function，选择颜色类型：Auto或Manual。可创建多个自定义颜色范围。
 
-* Select field that should be colored
-* Open **Color Function** menu
-* Enable Colors
-* Choose color type: Auto or Manual
+* 选择要着色的字段
+* 打开**Color Function**菜单
+* 启用Colors
+* 选择颜色类型：Auto或Manual
 
-Trendz supports two types of color rules you can apply:
+Trendz支持两种颜色规则：
 
-* Auto Color Rule - Automatically divides the range of data into four grades and apply colors accordingly.
-* Manual Color Rule - Applies a specific color to a set range of values.                      
+* Auto Color Rule——自动将数据范围划分为四个等级并相应着色。
+* Manual Color Rule——对指定取值范围应用特定颜色。
 
 ![image](/images/trendz/table-color.png)
 
 
 ## Total Row
 
-Total row shown on the bottom of the table when aggregation type for the field is **SUM** or **COUNT**.
-In this case system will sum all cell values for each column and show total value.  
+当字段聚合类型为**SUM**或**COUNT**时，表格底部显示Total行。
+此时系统会对每列所有单元格求和并显示合计值。
 
 ## On row click action
-Trendz Table view support onRowClick action. You can configure what should happen when user click on a Row in a table 
-when it is embedded into ThingsBoard Dashobard. For example you can save entity to the Dashboard state alias or open new dashboard state.
+Trendz Table view支持onRowClick action。可配置嵌入ThingsBoard Dashboard后用户点击表格行时的行为，
+例如将实体保存到Dashboard state alias或打开新的dashboard state。
 
-To enable row click event:
-* Add Trendz Table View on ThingsBoard dashboard.
-* Open widget edit mode and switch to **Actions** tab.
-* Press **Add action** button.
-* In **Action source** field select **On row click**.
-* Proceed standard widget action configuration. 
+启用行点击事件：
+* 在ThingsBoard dashboard上添加Trendz Table View。
+* 打开部件编辑模式，切换到**Actions**选项卡。
+* 点击**Add action**按钮。
+* 在**Action source**中选择**On row click**。
+* 按标准部件action配置。
 
-Each row has multiple fields from on or multiple devices/assets. It means that 1 row can be connected with multiple items. 
-If you want to use 'onRowClick' action - you need to define what item is selected when row clicked.
-* Open **View Settings** in Trendz View edit mode.
-* Open **View Mode fields** section.
-* Select required Device/Asset type in **Row click entity** dropdown.
-* Save changes.
+每行可能包含来自一个或多个设备/assets的多个字段，即一行可与多个实体关联。
+若使用'onRowClick' action，需定义点击行时选中的实体。
+* 在Trendz View编辑模式下打开**View Settings**。
+* 打开**View Mode fields**区域。
+* 在**Row click entity**下拉中选择所需Device/Asset类型。
+* 保存更改。

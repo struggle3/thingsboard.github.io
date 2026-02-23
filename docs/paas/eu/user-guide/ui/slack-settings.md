@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Slack Settings
-description: ThingsBoard IoT platform Slack settings
+title: Slack 设置
+description: ThingsBoard IoT 平台 Slack 设置
 slackProviderSettings:
     0:
         image: /images/user-guide/ui/slack/create-slack-api-token-1.png

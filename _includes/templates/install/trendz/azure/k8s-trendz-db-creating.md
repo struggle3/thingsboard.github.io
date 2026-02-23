@@ -1,11 +1,11 @@
-Edit “trendz/trendz-secret.yml” and replace YOUR_AZURE_POSTGRES_ENDPOINT_URL, YOUR_AZURE_POSTGRES_USER and YOUR_AZURE_POSTGRES_PASSWORD and apply Kubernetes Job:
+编辑 “trendz/trendz-secret.yml” ，将 YOUR_AZURE_POSTGRES_ENDPOINT_URL、YOUR_AZURE_POSTGRES_USER 和 YOUR_AZURE_POSTGRES_PASSWORD 替换后执行 Kubernetes Job：
 ```text
 kubectl apply -f ./trendz/trendz-secret.yml
 kubectl apply -f ./trendz/trendz-create-db.yml
 ```
 {: .copy-code}
 
-You can see logs if you run the next command:
+执行以下命令可查看日志：
 ```text
 kubectl logs job/trendz-create-db -n thingsboard
 ```

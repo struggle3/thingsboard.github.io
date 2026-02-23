@@ -1,18 +1,18 @@
-Create a Trendz database in Postgres:
+在 Postgres 中创建 Trendz 数据库：
 
 ```bash
 docker compose -f docker-compose.yml exec -it postgres psql -U postgres -c "CREATE DATABASE trendz;"
 ```
 {: .copy-code}
 
-Create a separate docker compose file for Trendz Analytics:
+为 Trendz Analytics 创建独立的 docker compose 文件：
 
 ```text
 nano docker-compose-trendz.yml
 ```
 {: .copy-code}
 
-Add the following lines to the yml file.
+将以下内容添加到 yml 文件中。
 
 ```yml
 services:

@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Raspberry Pi 4 to ThingsBoard?
-category: Single-board computers
+title: 如何将 Raspberry Pi 4 连接至 ThingsBoard？
+category: 单板计算机
 chip: Broadcom BCM2711
 connectivity: [HTTP, MQTT, WIFI, BLE]
 vendor: Raspberry

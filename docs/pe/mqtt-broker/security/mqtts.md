@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: MQTT over SSL
-description: Launching TBMQ with secure MQTT protocol to connect your IoT devices and projects.
+title: 基于 SSL 的 MQTT
+description: 使用安全 MQTT 协议启动 TBMQ，连接 IoT 设备和项目。
 
 ---
 

@@ -2,27 +2,27 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Working with widgets
+title: 使用部件
 
 add-widget:
     0:
         image: /images/user-guide/widgets/overview/add-new-dashboard-1-pe.png
-        title: 'Open your dashboard and switch to <b>Edit mode</b>;'
+        title: '打开仪表板并切换到 <b>编辑模式</b>；'
     1:
         image: /images/user-guide/widgets/overview/add-new-dashboard-2-pe.png
-        title: 'Click the <b>+ Add widget</b> at the top of the screen. If this is your first widget on the dashboard, you can also click <b>Add new widget</b> in the center of the screen to open the Widget bundle dialog;'
+        title: '点击屏幕顶部的 <b>+ 添加部件</b>。若为首次添加，也可点击屏幕中央的 <b>添加新部件</b> 打开部件包对话框；'
     2:
         image: /images/user-guide/widgets/overview/add-new-dashboard-3-pe.png
-        title: 'Choose a <b>widget bundle</b> (for example, <b>Charts</b>). To quickly find your desired widget, use the search bar by clicking the magnifying glass icon and entering the widget&#39;s name;'
+        title: '选择 <b>部件包</b>（例如 <b>图表</b>）。可点击放大镜图标并在搜索栏输入部件名称快速查找；'
     3:
         image: /images/user-guide/widgets/overview/add-new-dashboard-4-pe.png
-        title: 'Select a widget (for example, <b>Time series chart</b>) to open the <b>Add widget</b> dialog;'
+        title: '选择部件（例如 <b>时间序列图表</b>）打开 <b>添加部件</b> 对话框；'
     4:
         image: /images/user-guide/widgets/overview/add-new-dashboard-5-pe.png
-        title: 'Specify the <b>data source</b>, add at least one <b>data key</b>, and click <b>Add</b>. Then <b>Apply changes</b>.'
+        title: '指定 <b>数据源</b>，添加至少一个 <b>数据键</b>，点击 <b>添加</b>。然后 <b>应用更改</b>。'
     5:
         image: /images/user-guide/widgets/overview/add-new-dashboard-6-pe.png
-        title: 'The widget is now created.'
+        title: '部件已创建。'
 
 add-widget-basic-mode:
     0:

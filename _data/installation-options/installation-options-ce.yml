@@ -111,7 +111,7 @@ cloud:
     imageHeight: 36
   2:
     title: DigitalOcean
-    description: This guide describes how to install ThingsBoard Community Edition on DigitalOcean.
+    description: This guide describes how to install ThingsBoard社区版on DigitalOcean.
     link: /docs/user-guide/install/digital-ocean/
     icon: /images/install/cloud/digitalocean.svg
     alt: DigitalOcean logo

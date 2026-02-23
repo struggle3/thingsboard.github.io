@@ -1,30 +1,30 @@
 {% include /templates/edge/user-guide/starting-edge-on-device.md %}
 
-To proceed with the **Edge installation** on the **{{deviceName}}**, you need to initiate an **SSH (Secure Shell)** connection.
+要在 **{{deviceName}}** 上继续 **Edge 安装**，需建立 **SSH (Secure Shell)** 连接。
 
 {% if page.url contains "raspberry-pi" %}
 {% include /templates/edge/devices-library/rpi-enable-ssh.md %}
 {% endif %}
 
-To initiate an **SSH (Secure Shell)** connection to the **{{deviceName}}**, open the Terminal and run the following command:
+要建立到 **{{deviceName}}** 的 **SSH (Secure Shell)** 连接，打开终端并执行以下命令：
 
 ```bash
 ssh {{userName}}@ip_address #Enter the actual IP address
 ```
 {: .copy-code}
 
-**ip_address:** Replace "_ip_address_" with the actual IP address of the **{{deviceName}}**.<br>
-**Password:** The Terminal will request the password. {% if page.url contains "raspberry-pi" %}_The default password is `raspberry`._{% endif %}
-{% if page.url contains "nvidia" %}_The default password is `nvidia`._{% endif %}
+**ip_address** 将 "_ip_address_" 替换为 **{{deviceName}}** 的实际 IP 地址。<br>
+**Password** 终端将提示输入密码。{% if page.url contains "raspberry-pi" %}_默认密码为 `raspberry`。_{% endif %}
+{% if page.url contains "nvidia" %}_默认密码为 `nvidia`。_{% endif %}
 
-Once connected, follow the installation instructions below. Start by creating a new directory:
+连接成功后，按以下安装说明操作。首先创建新目录：
 
 ```bash
 mkdir tb_edge
 ```
 {: .copy-code}
 
-Open this directory:
+进入该目录：
 
 ```bash
 cd /home/{{userName}}/tb_edge
@@ -33,13 +33,13 @@ cd /home/{{userName}}/tb_edge
 
 {% include /templates/edge/user-guide/preset-edge-config-for-docker.md %}
 
-To set up a local port forwarding via SSH, open **another terminal tab** and run the following command:
+要通过 SSH 设置本地端口转发，打开 **另一个终端标签页** 并执行以下命令：
 
 ```bash
 ssh -N -L 8080:127.0.0.1:8080 {{userName}}@ip_address #Enter the actual IP address
 ```
 {: .copy-code}
 
-Any connection to **localhost:8080** on your local machine will be forwarded to **127.0.0.1:8080** on the **{{deviceName}}**.
+您本机对 **localhost:8080** 的任何连接都将转发到 **{{deviceName}}** 上的 **127.0.0.1:8080**。
 
-The **ThingsBoard Edge** instance is available at [**http://127.0.0.1:8080**](http://127.0.0.1:8080){: target="_blank"}. Use your credentials to log in.
+**ThingsBoard Edge** 实例可通过 [**http://127.0.0.1:8080**](http://127.0.0.1:8080){: target="_blank"} 访问。使用您的凭证登录。

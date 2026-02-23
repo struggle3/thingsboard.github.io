@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Solar Bluetooth Gateway to ThingsBoard?"
+title: "如何将Solar Bluetooth网关连接到ThingsBoard？"
 redirect_to: "/device-library/ce/solar-bluetooth-gateway/"
 ---

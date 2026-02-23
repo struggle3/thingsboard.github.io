@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Use New Metrics in ThingsBoard 
-description: Step-by-step guide to use new Metrics in ThingsBoard
+title: 在 ThingsBoard 中使用新指标
+description: 在 ThingsBoard 中使用新指标的分步指南
 
 calculation-create:
   0:

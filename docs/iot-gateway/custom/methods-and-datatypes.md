@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-gw
-title: IoT Gateway service methods and data types
+title: IoT Gateway 服务方法及数据类型
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Upgrade instructions
-description: ThingsBoard Trendz Analytics upgrade instructions
+title: 升级说明
+description: ThingsBoard Trendz Analytics 升级说明
 
 ---
 

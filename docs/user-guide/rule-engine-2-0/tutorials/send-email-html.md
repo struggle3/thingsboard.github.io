@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Send HTML or image inside email
-description: Tutorial to send HTML page or image inside email message
+title: 在邮件中发送 HTML 或图片
+description: 在邮件正文中发送 HTML 页面或图片的教程
 
 to_email_node:
   0:
@@ -31,7 +31,7 @@ html_generator:
 
 ---
 
-This Tutorial is to show you how to send an email message with HTML page or image inside.
+本教程演示如何在邮件中发送 HTML 页面或图片。
 
 * TOC
 {:toc}

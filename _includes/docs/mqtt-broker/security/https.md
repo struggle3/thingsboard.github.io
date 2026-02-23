@@ -1,20 +1,20 @@
 * TOC
 {:toc}
 
-TBMQ provides the ability to run HTTP server that hosts Web UI and serves REST API calls over SSL.
+TBMQ 支持托管 Web UI 并通过 SSL 提供 REST API 调用的 HTTP 服务器。
 
-Most of the TBMQ environments use the load balancer as a termination point for the SSL connection between the client and the broker.
-In other words, internet traffic is encrypted between the user browser and the load balancer, but is decrypted between the load balancer and broker services.
-The advantage of such options is a simple configuration.
-Most of the cloud load balancers (AWS, Google Cloud, etc.) have built-in certificate generation tools and rich documentation on how to configure SSL.
+大多数 TBMQ 环境使用负载均衡器作为客户端与 broker 之间 SSL 连接的终止点。
+换言之，用户浏览器与负载均衡器之间的互联网流量已加密，但负载均衡器与 broker 服务之间已解密。
+此方式的优点是配置简单。
+大多数云负载均衡器（AWS、Google Cloud 等）具有内置证书生成工具和丰富的 SSL 配置文档。
 
-Nevertheless, it is possible to configure TBMQ to enable SSL and avoid SSL termination on the Load Balancer.
-We recommend using valid SSL certificates generated using trusted CA authorities and avoid spending time on resolving issues with [self-signed certificates](#self-signed-certificates-generation).
-See the instructions below on how to configure SSL for certificates stored in PEM file format or Java Keystore.
+尽管如此，仍可将 TBMQ 配置为启用 SSL，避免在 Load Balancer 上终止 SSL。
+建议使用受信任 CA 机构签发的有效 SSL 证书，避免在[自签名证书](#self-signed-certificates-generation)问题上耗费时间。
+以下说明如何为 PEM 文件格式或 Java Keystore 存储的证书配置 SSL。
 
-## SSL configuration using PEM certificates file
+## 使用 PEM 证书文件配置 SSL
 
-Configure the following environment variables via [configuration](/docs/{{docsPrefix}}mqtt-broker/install/config/#http-server-parameters) file, docker-compose or kubernetes scripts.
+通过[配置](/docs/{{docsPrefix}}mqtt-broker/install/config/#http-server-parameters)文件、docker-compose 或 kubernetes 脚本设置以下环境变量：
 
 ```bash
 ...
@@ -26,21 +26,21 @@ export SSL_PEM_KEY_PASSWORD=secret
 ...
 ```
 
-where:
+其中：
 
-* SSL_ENABLED — Enable/disable SSL support;
-* SSL_CREDENTIALS_TYPE — Server credentials type. PEM — pem certificate file; KEYSTORE — java keystore;
-* SSL_PEM_CERT — Path to the server certificate file. Holds server certificate or certificate chain, may also include the server private key;
-* SSL_PEM_KEY — Path to the server certificate private key file. Optional by default. Required if the private key is not present in the server certificate file;
-* SSL_PEM_KEY_PASSWORD — Optional server certificate private key password.
+* SSL_ENABLED — 启用/禁用 SSL 支持；
+* SSL_CREDENTIALS_TYPE — 服务器凭据类型。PEM — pem 证书文件；KEYSTORE — java keystore；
+* SSL_PEM_CERT — 服务器证书文件路径。包含服务器证书或证书链，亦可包含服务器私钥；
+* SSL_PEM_KEY — 服务器证书私钥文件路径。默认可选。若私钥未包含在服务器证书文件中则为必填；
+* SSL_PEM_KEY_PASSWORD — 可选服务器证书私钥密码。
 
-After completing the setup, start or restart the TBMQ server.
+完成配置后，启动或重启 TBMQ 服务器。
 
 {% include templates/mqtt-broker/ssl/pem_files_location.md %}
 
-## SSL configuration using Java Keystore
+## 使用 Java Keystore 配置 SSL
 
-Configure the following environment variables via [configuration](/docs/{{docsPrefix}}mqtt-broker/install/config/#http-server-parameters) file, docker-compose or kubernetes scripts.
+通过[配置](/docs/{{docsPrefix}}mqtt-broker/install/config/#http-server-parameters)文件、docker-compose 或 kubernetes 脚本设置以下环境变量：
 
 ```bash
 ...
@@ -53,16 +53,16 @@ export SSL_KEY_PASSWORD=tbmq
 ...
 ```
 
-where:
+其中：
 
-* SSL_ENABLED — Enable/disable SSL support;
-* SSL_CREDENTIALS_TYPE — Server credentials type. PEM — pem certificate file; KEYSTORE — java keystore;
-* SSL_KEY_STORE_TYPE — Type of the key store (JKS or PKCS12);
-* SSL_KEY_STORE — Path to the key store that holds the SSL certificate or certificate chain, also include the server private key;
-* SSL_KEY_STORE_PASSWORD — Password used to access the key store;
-* SSL_KEY_PASSWORD — Password used to access the server private key.
+* SSL_ENABLED — 启用/禁用 SSL 支持；
+* SSL_CREDENTIALS_TYPE — 服务器凭据类型。PEM — pem 证书文件；KEYSTORE — java keystore；
+* SSL_KEY_STORE_TYPE — 密钥库类型（JKS 或 PKCS12）；
+* SSL_KEY_STORE — 存放 SSL 证书或证书链的密钥库路径，亦可包含服务器私钥；
+* SSL_KEY_STORE_PASSWORD — 访问密钥库的密码；
+* SSL_KEY_PASSWORD — 访问服务器私钥的密码。
 
-After completing the setup, start or restart the TBMQ server.
+完成配置后，启动或重启 TBMQ 服务器。
 
 {% include templates/mqtt-broker/ssl/keystore_files_location.md %}
 

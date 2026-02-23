@@ -1,36 +1,36 @@
 * TOC
 {:toc}
 
-**Alarm rules** define the conditions for triggering alarms, the logic for setting severity levels, and the rules for clearing and automatically closing notifications. This enables administrators and developers to maintain full control over system behavior in real time and respond promptly to abnormal conditions.
+**Alarm rules** 定义告警触发条件、严重级别设置逻辑以及清除和自动关闭通知的规则，便于管理员和开发者在实时系统中保持控制并快速响应异常。
 
-Starting from ThingsBoard **4.3**, alarm rule configuration capabilities have been significantly enhanced. Rules can now be defined at the level of a [Device](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}, [Asset](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}, **their Profiles**, or even a [Customer](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"}, enabling a multi-layered monitoring system that respects organizational structure and contextual logic. This approach allows precise control over when and where an alarm should be raised — globally, at the profile level, or for a specific device or entity.
+自 ThingsBoard **4.3** 起，告警规则配置能力显著增强。规则可在 [Device](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}、[Asset](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}、**其 Profiles** 甚至 [Customer](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"} 级别定义，形成尊重组织结构与上下文逻辑的多层监控。可在全局、profile 或具体设备/实体上精确控制告警产生。
 
-Unified mechanisms for alarm uniqueness, severity levels, timestamps, and alarm propagation ensure consistent data handling and help operators efficiently analyze, filter, and process critical events.
+告警唯一性、严重级别、时间戳和告警传播的统一机制，保证数据处理一致，帮助运维高效分析、筛选和处理关键事件。
 
 <hr>
 
-## Create alarm rule
+## 创建告警规则
 
-The **alarm rules page** allows you to centrally manage all alarm rules in the system — both for individual entities and for profiles.
+**alarm rules 页面** 可集中管理系统中的全部告警规则（适用于单个实体和 profile）。
 
-> **Note:** The process of creating an alarm rule is the same for [Devices](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}, [Assets](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}, [Device profiles](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}, [Asset profiles](/docs/{{docsPrefix}}user-guide/asset-profiles/){:target="_blank"}, and [Customers](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"}.
+> **说明：** 在 [Devices](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}、[Assets](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}、[Device profiles](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}、[Asset profiles](/docs/{{docsPrefix}}user-guide/asset-profiles/){:target="_blank"} 和 [Customers](/docs/{{docsPrefix}}user-guide/ui/customers/){:target="_blank"} 中创建告警规则的流程相同。
  
-- Open the **Alarms** page from the left-hand menu.
-- Go to the **Alarm rules** tab.
-- Click the "**+**" button in the top-right corner.
-- Select **Create new alarm rule** from the dropdown menu.
+- 在左侧菜单中打开 **Alarms** 页面
+- 进入 **Alarm rules** 选项卡
+- 点击右上角「**+**」按钮
+- 在下拉菜单中选择 **Create new alarm rule**
 
 {% include images-gallery.html imageCollection="step-1-add-alarm-rule-1" %}
 
-> **Recommendation:** Create alarm rules in **Device profiles** or **Asset profiles** to avoid duplicating configurations across multiple entities.
+> **建议：** 在 **Device profiles** 或 **Asset profiles** 中创建告警规则，避免在多个实体间重复配置。
 
 <hr>
 
-### General
+### General（常规）
 
-The "General" section defines the basic configuration of the alarm rule:
-- **Alarm type** — the name and unique identifier of the alarm (for example, "High Temperature"). The alarm type defines which event the alarm represents and allows ThingsBoard to determine whether a new alarm should be created or an existing active one should be updated.
-- **Entity type** - the target entity or entity profile where the alarm rule will be applied.
+「General」部分定义告警规则的基本配置：
+- **Alarm type** — 告警的名称和唯一标识符（如「High Temperature」）。用于标识告警代表的事件，并决定是创建新告警还是更新已有活动告警。
+- **Entity type** — 告警规则将应用的目标实体或 entity profile。
 
 {% include images-gallery.html imageCollection="step-2-general-section-1" %}
 
@@ -41,46 +41,46 @@ The "General" section defines the basic configuration of the alarm rule:
 
 <hr>
 
-### Arguments
+### Arguments（参数）
 
-Before defining alarm conditions, you must add at least one **argument** — a data source that the rule will use during evaluation.
+定义告警条件前，需至少添加一个 **argument** — 规则评估时使用的数据源。
 
-Click **Add argument** and configure the following parameters:
+点击 **Add argument** 并配置以下参数：
 
 {% include images-gallery.html imageCollection="step-3-arguments-1" %}
 
 <b><font size="3">Entity type</font></b>
 
-Defines where the argument value comes from:
-- **Current entity** — the entity you are configuring (device, asset, customer, or profile).   
-  If the rule is created at the **Device profile** or **Asset profile** level, it will apply to all entities that use this profile.
-- Another **Device or Asset** — references telemetry or attributes from a different device or asset.
-- **Customer** — retrieves data from the associated customer entity.
-- **Current tenant** — uses data from the tenant entity.
-- **Current owner** — data from the owner of the current entity.
+定义 argument 值的来源：
+- **Current entity** — 当前配置的实体（device、asset、customer 或 profile）。  
+  若规则在 **Device profile** 或 **Asset profile** 级创建，将应用于使用该 profile 的所有实体。
+- Another **Device or Asset** — 引用其他设备或资产的 telemetry 或 attributes
+- **Customer** — 从关联的 customer 实体获取数据
+- **Current tenant** — 使用 tenant 实体的数据
+- **Current owner** — 使用当前实体所有者的数据
 
 {% include images-gallery.html imageCollection="step-3-arguments-2" %}
 
 <b><font size="3">Argument type</font></b>
 
-Defines what kind of data the argument will represent:
-- **Attribute**. Uses a key–value attribute stored on the entity. (e.g., model, max temperature).   
-  You must specify:
-  - **Attribute scope**: **Server** attributes, **Client** attributes, or **Shared** attributes
+定义 argument 代表的数据类型：
+- **Attribute**，使用实体上存储的 key-value attribute（如 model、max temperature），  
+  需指定：
+  - **Attribute scope**：**Server** attributes、**Client** attributes 或 **Shared** attributes
   - **Attribute key**
-  - Optional: **Default value** (used when attribute value is missing)
-- **Latest telemetry**. Uses the latest time series value from the entity. (e.g., temperature, speed, voltage).
-  You must specify:
+  - 可选：**Default value**（attribute 值缺失时使用）
+- **Latest telemetry**，使用实体的最新时间序列值（如 temperature、speed、voltage），
+  需指定：
   - **Time series key**
-  - Optional: **Default value**
+  - 可选：**Default value**
 
 {% include images-gallery.html imageCollection="step-3-arguments-3" %}
 
 <b><font size="3">Argument name</font></b>
 
-Enter an argument name — the identifier you will use in formulas and conditions (e.g., temperature, maxThreshold, deviceEnabled).
+输入 argument 名称 — 在公式和条件中使用的标识符（如 temperature、maxThreshold、deviceEnabled）。
 
-After configuring the fields, click **Add**.
+配置完成后点击 **Add**。
 
 {% include images-gallery.html imageCollection="step-3-arguments-4" %}
 
@@ -88,12 +88,12 @@ After configuring the fields, click **Add**.
 
 ### Trigger conditions
 
-This step defines the core logic of the alarm rule:
-- **when** the alarm should be created,
-- **which severity** it receives, and
-- **when** the rule is active based on the schedule.
+本步骤定义告警规则的核心逻辑：
+- 告警**何时**创建
+- **何种严重级别**
+- 基于 schedule 的**规则生效时间**
 
-Click **Add trigger condition** and configure the following parameters:
+点击 **Add trigger condition** 并配置以下参数：
 
 {% include images-gallery.html imageCollection="step-4-creation-conditions-1" %}
 
@@ -101,22 +101,22 @@ Click **Add trigger condition** and configure the following parameters:
 
 #### Severity
 
-In ThingsBoard, **alarm severity** indicates how critical an alarm condition is and helps prioritize response actions.   
-The following severity levels are available:
-- <span style="color:#d12730">Critical</span> — Indicates a severe condition that requires **immediate action**, such as equipment failure, safety risks, or conditions that may cause data loss or system downtime. 
-- <span style="color:#f66716">Major</span> — Represents a significant issue that can impact system operation but is **not immediately critical**, for example, performance degradation or operation outside recommended parameters. 
-- <span style="color:#faa405">Minor</span> — Used for less severe problems that should be **monitored or addressed later**, such as temporary threshold violations or early warning conditions. 
-- <span style="color:#f2da05">Warning</span> — Indicates a **potential or emerging issue** that does not yet affect normal operation but may require attention if it persists. 
-- <span style="color:#9e9e9e">Indeterminate</span> — Used when an alarm is raised but the **severity cannot be clearly determined**, often due to incomplete data or ambiguous conditions.
+在 ThingsBoard 中，**alarm severity** 表示告警条件的严重程度，用于确定处理优先级。  
+可选严重级别：
+- <span style="color:#d12730">Critical</span> — 表示需要**立即处理**的严重情况，如设备故障、安全风险或可能导致数据丢失或系统停机的状态。
+- <span style="color:#f66716">Major</span> — 表示对系统运行有较大影响、但**非立即严重**的问题，如性能下降或超出推荐参数运行。
+- <span style="color:#faa405">Minor</span> — 用于**稍后监控或处理**的较轻问题，如临时超阈值或预警。
+- <span style="color:#f2da05">Warning</span> — 表示**潜在或正在形成**的问题，尚未影响正常运行，但若持续可能需关注。
+- <span style="color:#9e9e9e">Indeterminate</span> — 在告警已产生但**无法明确判定严重程度**时使用，常因数据不完整或条件模糊。
 
-Choosing the appropriate severity helps ensure effective monitoring, escalation, and response in IoT systems.
+合理选择严重级别有助于 IoT 系统的监控、升级和响应。
 
-<b><font size="3">How severity works</font></b>
+<b><font size="3">Severity 如何生效</font></b>
 
-The severity level applies to:
-- **New alarms** created by the rule
-- **Updates to an existing active alarm**, when the create condition triggers again with different criteria 
-  For example, if a *Warning* alarm remains active but the new condition qualifies as *Major*, the severity will be increased.
+严重级别应用于：
+- 由规则创建的**新告警**
+- 当创建条件以不同标准再次触发时**对已有活动告警的更新**  
+  例如，若 *Warning* 告警仍活动，但新条件达到 *Major*，严重级别将提升。
 
 {% include images-gallery.html imageCollection="step-4-creation-conditions-severity-1" %}
 
@@ -124,64 +124,63 @@ The severity level applies to:
 
 #### Condition
 
-The **Condition** defines the logic that determines whether an alarm should be created or updated.   
-This is the primary expression used to evaluate whether the rule is fulfilled.
+**Condition** 定义是否创建或更新告警的逻辑，是判断规则是否满足的主表达式。
 
-Examples use cases:
+示例用途：
 - <span class="code-light">temperature > 30</span>
 - <span class="code-light">device is offline</span>
-- complex expressions using multiple arguments, telemetry fields, or attributes   
-  (e.g., <span class="code-light">temperature > threshold AND doorState == open</span>)
+- 使用多个 arguments、telemetry 字段或 attributes 的复杂表达式  
+  （例如 <span class="code-light">temperature > threshold AND doorState == open</span>）
 
 <hr>
 
-<b><font size="3">Add create condition</font></b>
+<b><font size="3">添加创建条件</font></b>
 
-Click **Add condition**
+点击 **Add condition**
 
-Configure the alarm trigger logic by defining one or more filters.
+通过定义一个或多个 filter 配置告警触发逻辑。
 
-> You can create filters manually or use [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} script functions for more advanced expressions.
+> 可手动创建 filter，或使用 [TBEL](/docs/{{docsPrefix}}user-guide/tbel/){:target="_blank"} 脚本函数实现更复杂的表达式。
 
-Click **Add argument filter** and configure:
+点击 **Add argument filter** 并配置：
 
-**1. General configuration**   
-- **Argument** — the variable you want to compare (e.g., temperature)
-- **Value type** — the data type of the value being evaluated (Numeric, Boolean, String, etc.)
+**1. 常规配置（General configuration）**  
+- **Argument** — 要比较的变量（如 temperature）
+- **Value type** — 评估值的数据类型（Numeric、Boolean、String 等）
 
-**2. Configure filters**   
-Under **Filters**, click **Add** and specify:
-- **Operation** — the comparison operator, such as: *equal, not equal, missing for, greater than, less than, etc*.
-- **Value source** — select one of the following:
-  - **Static** — use a fixed predefined value 
-  - **Dynamic** — use a value retrieved from another argument 
-- **Value** — specify the value to compare against
+**2. Configure filters**  
+在 **Filters** 下点击 **Add** 并指定：
+- **Operation** — 比较运算符，如 *equal、not equal、missing for、greater than、less than* 等
+- **Value source** — 选择其一：
+  - **Static** — 使用固定预定义值
+  - **Dynamic** — 使用从另一 argument 获取的值
+- **Value** — 指定要比较的值
 
-**Combine multiple conditions**   
-If you add more than one filter, choose a logical operator:
-- **AND** — all conditions must be true
-- **OR** — at least one condition must be true
+**组合多个条件**  
+添加多个 filter 时，选择逻辑运算符：
+- **AND** — 所有条件为真
+- **OR** — 至少一个条件为真
 
-After adding all required filters, click **Add** to save the condition.
+添加所有需要的 filter 后点击 **Add** 保存条件。
 
 {% include images-gallery.html imageCollection="step-4-creation-condition-add-filter-1" %}
 
 <b><font size="3">Condition types</font></b>
 
-ThingsBoard supports **three types** of conditions:
+ThingsBoard 支持**三种**条件类型：
 
-- **Simple.**   
-  Triggers immediately when the expression becomes true.   
-  Used for instant threshold violations.   
-  *Example:* <span class="code-light">temperature > 10</span>
-- **Duration.**   
-  The condition must stay true continuously for a defined time period.   
-  Helps reduce false positives caused by short data spikes.   
-  *Example:* <span class="code-light">temperature > 10</span> for 60 seconds 
-- **Repeating.**   
-  Triggers only after the condition occurs a specified number of times.   
-  Useful when repeated errors matter more than a single event.   
-  *Example:* <span class="code-light">signalLost == true</span> three times in a row
+- **Simple**，  
+  表达式为真时立即触发，  
+  用于即时超阈值。  
+  *示例：* <span class="code-light">temperature > 10</span>
+- **Duration**，  
+  条件需在指定时间段内持续为真，  
+  可减少短暂数据尖峰带来的误报。  
+  *示例：* <span class="code-light">temperature > 10</span> 持续 60 秒
+- **Repeating**，  
+  条件满足指定次数后才触发，  
+  适用于重复错误比单次事件更重要。  
+  *示例：* <span class="code-light">signalLost == true</span> 连续三次
 
 {% include images-gallery.html imageCollection="step-4-creation-condition-types-1" %}
 
@@ -189,48 +188,48 @@ ThingsBoard supports **three types** of conditions:
 
 #### Schedule
 
-The **Schedule** defines the time periods during which the alarm creation rule is active.   
-The system evaluates create conditions only when the current time falls within an allowed interval.
+**Schedule** 定义告警创建规则的生效时间段。  
+系统仅在当前时间处于允许区间内时才评估创建条件。
 
-> If the create condition becomes true **outside the defined schedule**, the alarm **will not be created** — even if the logical expression evaluates to true.
+> 若创建条件在**定义的时间段之外**为真，告警**不会创建** — 即使逻辑表达式为真。
 
 {% include images-gallery.html imageCollection="step-4-schedule-1" %}
 
-<b><font size="3">Schedule types</font></b>
+<b><font size="3">Schedule 类型</font></b>
 
 **Static mode**
 
-ThingsBoard supports three schedule modes:
-- **Active all time** — always active
+ThingsBoard 支持三种 schedule 模式：
+- **Active all time** — 始终生效
 - **Active at a specific time range**
-  *Example:* Mon–Fri, 09:00–18:00 
-- **Custom schedule** - define different intervals for each day of the week
+  *示例：* 周一至周五 09:00–18:00
+- **Custom schedule** — 为每周每天定义不同时间区间
 
 {% include images-gallery.html imageCollection="step-4-schedule-types-1" %}
 
 **Dynamic mode**
 
-Instead of configuring the schedule manually, you can provide a JSON object through an attribute or telemetry.
-This is useful when the schedule needs to vary from one device to another or from one customer to another.
+除手动配置 schedule 外，可通过 attribute 或 telemetry 提供 JSON 对象。
+适用于不同设备或 Customer 需要不同 schedule 的场景。
 
-**How to enable dynamic mode**
-- In the **Schedule** section, choose **Dynamic mode**.
-- Select the argument (attribute or telemetry) that contains the JSON with the desired schedule configuration.
+**如何启用 Dynamic mode**
+- 在 **Schedule** 部分选择 **Dynamic mode**。
+- 选择包含所需 schedule 配置 JSON 的 argument（attribute 或 telemetry）。
 
 {% include images-gallery.html imageCollection="step-4-schedule-dynamic-mode-1" %}
 
-<b><font size="3">Examples of schedule JSON</font></b>
+<b><font size="3">schedule JSON 示例</font></b>
 
-**1. Active all time**
+**1. 始终生效（Active all time）**
 
-The JSON object may include:
+JSON 对象可为：
 
 ```json
 {}
 ```
 {:.copy-code}
 
-or
+或
 
 ```json
 {
@@ -240,12 +239,12 @@ or
 {:.copy-code}
 
 <br>
-**2. Specific time schedule**
+**2. 特定时间 schedule（Specific time schedule）**
 
-This format allows you to define an exact time range for selected days of the week.
+此格式可为选定星期几定义精确时间范围。
 
-**Example:**   
-Active all day on **Tuesday** and **Thursday**:
+**示例：**  
+**周二**和**周四**全天生效：
 
 ```json
 {
@@ -258,21 +257,21 @@ Active all day on **Tuesday** and **Thursday**:
 ```
 {:.copy-code}
 
-**Field explanation:**
-- **timezone** — the time zone in which the schedule is interpreted
-- **daysOfWeek** — days of the week in numeric format (1–7, where 1 = Monday)
-- **startsOn** — the start of the active period, in milliseconds from the beginning of the day 
-- **endsOn** — the end of the active period, in milliseconds from the beginning of the day
+**字段说明：**
+- **timezone** — 用于解释 schedule 的时区
+- **daysOfWeek** — 星期几的数字格式（1–7，1 = 周一）
+- **startsOn** — 生效时段开始时间，距当天开始的毫秒数
+- **endsOn** — 生效时段结束时间，距当天开始的毫秒数
 
-When both **startsOn** and **endsOn** are set to **0**, it means the rule is active for the entire day.
+当 **startsOn** 和 **endsOn** 均设为 **0** 时，表示规则全天生效。
 
 <br>
 **3. Custom schedule**
 
-Defines a separate time interval for each individual day.
+为每一天分别定义时间区间。
 
-**Example:**   
-The schedule is active every day for the full 24 hours:
+**示例：**  
+schedule 每天 24 小时生效：
 
 ```json
 {
@@ -291,187 +290,187 @@ The schedule is active every day for the full 24 hours:
 ```
 {:.copy-code}
 
-**Field explanation:**
+**字段说明：**
 
-- **timezone** — the time zone used for interpreting the schedule
-- **items** — an array containing the configuration for each day
+- **timezone** — 用于解释 schedule 的时区
+- **items** — 包含每天配置的数组
 
-Each item includes:
-- **daysOfWeek** - a list of days in numeric format (Monday = 1, Tuesday = 2, etc.) during which the schedule will be active.
-- **enabled** — whether the rule is active on that day
-- **startsOn** - a timestamp in milliseconds from which the schedule becomes active for the specified days.
-- **endsOn**: - a timestamp in milliseconds until which the schedule remains active for the specified days.
+每项包含：
+- **dayOfWeek** — 数字格式的星期（Monday = 1、Tuesday = 2 等），schedule 在该日生效
+- **enabled** — 规则在该日是否生效
+- **startsOn** — schedule 在指定日期生效的起始时间戳（毫秒）
+- **endsOn** — schedule 在指定日期生效的结束时间戳（毫秒）
 
-When both **startsOn** and **endsOn** are set to **0**, it means the rule is active for the entire day.
+当 **startsOn** 和 **endsOn** 均设为 **0** 时，表示规则全天生效。
 
 <hr>
 
 #### Additional info
 
-The **Additional info** field allows you to enrich an alarm with extra contextual data that may be useful for incident analysis or troubleshooting.
-This information is stored together with the alarm and displayed in the alarm details view, helping operators, technicians, and analysts work more efficiently.
+**Additional info** 字段可为告警补充有助于事件分析或故障排查的上下文数据。
+该信息与告警一并存储，并在告警详情视图中显示，便于运维、技术人员和分析师高效工作。
 
-**Examples of useful additions:**
-- operator notes
-- troubleshooting steps
-- links to documentation
-- contextual fields such as:
-  - zone ID 
-  - critical threshold description 
-  - responsible person
+**可添加的有用内容示例：**
+- 运维备注
+- 故障排查步骤
+- 文档链接
+- 上下文字段，如：
+  - zone ID
+  - 关键阈值说明
+  - 负责人
 
 <hr>
 
 #### Mobile dashboard
 
-This option defines which **mobile dashboard** will open in the ThingsBoard mobile app when a user views the alarm.
+该选项定义用户查看告警时，ThingsBoard 移动应用中将打开的 **mobile dashboard**。
 
-<b><font size="3">How it works</font></b>
+<b><font size="3">工作方式</font></b>
 
-After selecting a mobile dashboard:
-- the mobile app automatically opens it when navigating to the alarm 
-- the user immediately sees relevant widgets and indicators 
-- troubleshooting becomes much faster
+选择 mobile dashboard 后：
+- 进入告警时移动应用会自动打开该 dashboard
+- 用户可立即看到相关部件与指标
+- 故障排查更快捷
 
-<b><font size="3">Example use cases</font></b>
+<b><font size="3">示例场景</font></b>
 
-- Diagnostic dashboard for **High Temperature** alarms
-- Technician-focused dashboard with control buttons
-- Geolocation dashboard for mobile assets
+- **High Temperature** 告警的诊断 dashboard
+- 面向技术人员的带控制按钮的 dashboard
+- 移动 asset 的地理位置 dashboard
 
-<b><font size="3">Especially useful when:</font></b>
-- field engineers respond to alarms on-site
-- quick diagnostics is required
-- monitoring distributed devices (refrigerators, sensors, vehicles)
+<b><font size="3">特别适用于：</font></b>
+- 现场工程师响应告警
+- 需快速诊断
+- 监控分布式设备（如冰箱、传感器、车辆）
 
 <hr>
 
 ### Clear condition
 
-The **Clear condition** defines the logic by which ThingsBoard automatically transitions an alarm into the **Cleared** state.
+**Clear condition** 定义 ThingsBoard 将告警自动切换为 **Cleared（已清除）** 状态的逻辑。
 
-If no clear condition is configured, the alarm will **never** clear automatically, even if the monitored values return to normal.   
-In such cases, the alarm can only be cleared manually — via the UI or API.
+若未配置清除条件，告警**永远不会**自动清除，即使监控值已恢复正常。  
+此类情况下，告警只能通过 UI 或 API 手动清除。
 
-Click **Add clear condition** and configure the following parameters:
+点击 **Add clear condition** 并配置以下参数：
 
 {% include images-gallery.html imageCollection="step-5-clear-conditions-1" %}
 
-<br><b><font size="4">Step 5.1 Clear condition</font></b>
+<br><b><font size="4">步骤 5.1 清除条件</font></b>
 
-The Clear condition specifies **when an alarm is considered resolved** and can safely transition into the *Cleared* state.
+清除条件规定**何时将告警视为已解决**，并可安全切换至 *Cleared* 状态。
 
-**Examples of clear conditions:**
+**清除条件示例：**
  - <span class="code-light">temperature ≤ 30</span>
-- values return to normal ranges 
-- device connection restored 
-- complex expressions involving multiple arguments
+- 值恢复正常范围
+- device 连接恢复
+- 涉及多个 argument 的复杂表达式
 
 <hr>
 
-<b><font size="3">Add clear condition</font></b>
+<b><font size="3">添加清除条件</font></b>
 
-Click **Add condition** to define the logic for clearing the alarm.
+点击 **Add condition** 定义告警清除逻辑。
 
-Configure the clear condition by adding one or more filters.   
-Filters can be created manually or using TBEL script functions for more advanced scenarios.
+通过添加一个或多个 filter 配置清除条件。  
+可手动创建 filter，或使用 TBEL 脚本函数实现更复杂场景。
 
-**1. General configuration**   
-Click **Add argument filter** and specify:
-- **Argument** — the variable to evaluate (e.g., temperature)
-- **Value type** — the expected input type (Numeric, Boolean, String, etc.)
+**1. 常规配置**   
+点击 **Add argument filter** 并指定：
+- **Argument** — 要评估的变量（如 temperature）
+- **Value type** — 期望的输入类型（Numeric、Boolean、String 等）
 
-**2. Configure filters**   
-In the **Filters** section, click **Add** and set:
-- **Operation** — the comparison operator, for example: *equal, not equal, missing for, greater than, less than, greater or equal, less or equal, starts with, ends with, contains, not contains, in, not in*.
-- **Value source:**
-  - **Static** — use a fixed value 
-  - **Dynamic** — use a value retrieved from another argument
-- **Value** — the value to compare against
+**2. 配置 filters**   
+在 **Filters** 部分点击 **Add** 并设置：
+- **Operation** — 比较运算符，如 *equal、not equal、missing for、greater than、less than、greater or equal、less or equal、starts with、ends with、contains、not contains、in、not in*
+- **Value source：**
+  - **Static** — 使用固定值
+  - **Dynamic** — 使用从另一 argument 获取的值
+- **Value** — 要比较的值
 
-**Combine multiple conditions**   
-If you add more than one filter, choose a logical operator:
-- **AND** — all conditions must be true 
-- **OR** — at least one condition must be true
+**组合多个条件**   
+若添加多个 filter，选择逻辑运算符：
+- **AND** — 所有条件必须为真
+- **OR** — 至少一个条件必须为真
 
-After adding all required filters, click **Add** to save the clear condition.
+添加所有需要的 filter 后点击 **Add** 保存清除条件。
 
 {% include images-gallery.html imageCollection="step-5-clearing-condition-add-filter-1" %}
 
-**Condition types**
+**条件类型**
 
-ThingsBoard supports the same condition types as for alarm creation:
-- **Simple** — clears immediately when the condition becomes true
-- **Duration** — must remain true for a specified period before clearing
-- **Repeating** — the condition must be satisfied a certain number of times before clearing
+ThingsBoard 支持与告警创建相同的条件类型：
+- **Simple** — 条件为真时立即清除
+- **Duration** — 需持续满足指定时长后才清除
+- **Repeating** — 条件需满足指定次数后才清除
 
 {% include images-gallery.html imageCollection="step-5-clearing-condition-types-1" %}
 
-After completing all required configurations, click **Save** to store the clear condition.
+完成所有必要配置后，点击 **Save** 保存清除条件。
 
 <hr>
 
-<b><font size="4">Step 5.2 Schedule</font></b>
+<b><font size="4">步骤 5.2 Schedule</font></b>
 
-The **Clear Schedule** defines *when* a clear condition is allowed to trigger.
+**Clear Schedule（清除 Schedule）** 定义清除条件**何时**允许触发。
 
-**Example use cases:**
-- callow automatic clearing only during working hours 
-- allow clearing only at night 
-- restrict clearing during specific time intervals
+**示例场景：**
+- 仅在工作时间允许自动清除
+- 仅在夜间允许清除
+- 限定在特定时间段内才能清除
 
-> If the clear condition becomes true outside the allowed schedule, the alarm will not be cleared 
+> 若清除条件在允许的 schedule 之外为真，告警将不会被清除
 
 {% include images-gallery.html imageCollection="step-5-schedule-1" %}
 
 <hr>
 
-<b><font size="4">Step 5.3 Additional info</font></b>
+<b><font size="4">步骤 5.3 Additional info</font></b>
 
-This block allows you to attach extra data that will be stored in **Alarm Details** at the moment the alarm is cleared.
+此区块用于附加将在告警清除时存储于 **Alarm Details** 中的额外数据。
 
-Useful for:
-- keeping a structured event log
-- adding operator notes 
-- saving additional diagnostic context 
-- providing hints for follow-up actions
+适用于：
+- 维护结构化事件日志
+- 添加运维备注
+- 保存额外诊断上下文
+- 提供后续操作提示
 
-Supports dynamic placeholders using *${attributeName}*.
-
-<hr>
-
-<b><font size="4">Step 5.4 Mobile dashboard</font></b>
-
-Defines which mobile dashboard is opened in the ThingsBoard mobile app when viewing a cleared alarm.
-
-This is useful when:
-- additional diagnostics should be shown after clearance
-- the operator must confirm system recovery
-- the user needs to be redirected to another scenario or dashboard
+支持使用 *${attributeName}* 动态占位符。
 
 <hr>
 
-### Configure the advanced settings
+<b><font size="4">步骤 5.4 Mobile dashboard</font></b>
 
-In this step, you can define **alarm propagation** — how the alarm is distributed across other entities in the system.      
-Propagation determines **who can see the alarm** and at **which level of the entity hierarchy** it becomes visible.
+定义在 ThingsBoard 移动应用中查看已清除告警时打开的 mobile dashboard。
 
-This is especially important for multi-level asset structures, customer hierarchies, enterprise environments, and MSP deployments.
+适用于以下场景：
+- 清除后需展示额外诊断信息
+- 运维人员需确认系统恢复
+- 用户需跳转至其他场景或 dashboard
 
 <hr>
 
-<b><font size="3">Available propagation options</font></b>
+### 配置高级设置
+
+在此步骤中，可定义**alarm propagation（告警传播）** — 告警如何在系统内其他实体间分布。  
+传播决定了**谁可以看到告警**以及告警在**实体层级的哪一层**可见。
+
+这对于多级 asset 结构、customer 层级、企业环境和 MSP 部署尤为重要。
+
+<hr>
+
+<b><font size="3">可用的传播选项</font></b>
 
 <b><font size="3">Propagate alarm to related entities</font></b>
 
-When enabled, the alarm becomes visible to **all entities related** to the originator, regardless of the relation type.
+启用后，告警对 originator 的**所有相关实体**可见，与关系类型无关。
 
-Useful when:
-- a **Device** is assigned to an **Asset**
-- an **Asset** is linked to a **Customer**
-- you want alarms to be visible across interconnected entities
+适用于：
+- **Device** 已分配给 **Asset**
+- **Asset** 已关联至 **Customer**
+- 希望告警在互连实体间可见
 
-This ensures that all entities within the relation graph—such as *Device &#8702; Office &#8702; Building* — can view and process the alarm.
+这确保关系图中的所有实体（如 *Device &#8702; Office &#8702; Building*）均可查看和处理告警。
 
 {% include images-gallery.html imageCollection="step-6-propagate-alarm-1" %}
 
@@ -479,9 +478,9 @@ This ensures that all entities within the relation graph—such as *Device &#870
 
 <b><font size="3">Propagate alarm to the owner (Customer / Tenant)</font></b>
 
-Makes the alarm visible to the **direct owner** of the originator — either a **Customer** or the **Tenant**.
+使告警对 originator 的**直接所有者**可见 — 即 **Customer** 或 **Tenant**。
 
-This allows owners to see alarms from all their managed devices/assets **without needing to set up additional relations**.
+所有者可查看其管理的所有 devices/assets 的告警，**无需额外建立关系**。
 
 {% include images-gallery.html imageCollection="step-6-propagate-alarm-2" %}
 
@@ -490,15 +489,15 @@ This allows owners to see alarms from all their managed devices/assets **without
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
 <b><font size="3">Propagate alarm to entity owners hierarchy</font></b>
 
-Propagates the alarm **up the entire ownership chain**, ensuring visibility at every parent level:   
+将告警**沿完整所有权链向上传播**，确保在每一级父级都可见：  
 **Asset &#8702; Customer &#8702; Tenant**
 
-**Useful for:**
-- **B2B platforms** with nested customer structures
-- **MSP (Managed Service Provider)** deployments
-- **Large enterprises** with multi-level organizational hierarchies
+**适用于：**
+- 具有嵌套 customer 结构的 **B2B 平台**
+- **MSP（托管服务提供商）** 部署
+- 具有多级组织层级的**大型企业**
 
-All higher-level owners will be able to see the alarm, even if they do not have a direct relation to the originator.
+所有上级所有者均可看到告警，即使与 originator 无直接关系。
 
 {% include images-gallery.html imageCollection="step-6-propagate-alarm-3" %}
 
@@ -507,553 +506,553 @@ All higher-level owners will be able to see the alarm, even if they do not have 
 
 <b><font size="3">Propagate alarm to Tenant</font></b>
 
-Makes the alarm visible **at the Tenant level**, regardless of ownership or relations.
+使告警在 **Tenant 级别**可见，与所有权或关系无关。
 
-**Use this when:**
-- the Tenant Administrator needs visibility into **all critical events**
-- a **centralized overview** of the entire infrastructure is required
+**适用于：**
+- Tenant 管理员需查看**所有关键事件**
+- 需要**整个基础设施的集中概览**
 
-This is the most global visibility option.
+此为最全局的可见性选项。
 
 {% include images-gallery.html imageCollection="step-6-propagate-alarm-4" %}
 
 <hr>
 
-### Save the rule
+### 保存规则
 
-Click **Add** to save the rule configuration.
+点击 **Add** 保存规则配置。
 
-After saving, ThingsBoard will automatically begin creating, updating, and processing alarms according to the conditions, schedule, and propagation settings you defined.
+保存后，ThingsBoard 将根据您定义的条件、schedule 和传播设置自动创建、更新和处理告警。
 
 {% include images-gallery.html imageCollection="step-7-save-rule-1" %}
 
 <hr>
 
-## Managing alarm rules
+## 管理告警规则
 
-After you create an alarm rule, it appears in the table on the **Alarms &#8702; Alarm rules** page.    
-Here, you can quickly view the key parameters of each rule — alarm type, target entity, severity levels, and whether a clear condition is configured — and manage the rule using a set of available actions.
+创建告警规则后，其会出现在 **Alarms &#8702; Alarm rules** 页面的表格中。  
+在此可快速查看每条规则的关键参数 — alarm type、目标实体、严重级别、是否配置清除条件 — 并使用一组可用操作管理规则。
 
-Each rule row includes an action panel that lets you copy, export, debug, edit, or delete the configuration.
+每条规则行都包含操作面板，用于复制、导出、调试、编辑或删除配置。
 
-Each alarm rule includes an action bar for managing it:
-1. **Copy alarm rule configuration**. Copies the rule configuration, allowing you to quickly create a new rule based on the existing one.
-2. **Export**. Exports the rule as a JSON file for backup or migration to another ThingsBoard instance.
-3. **Events**. Opens the event log associated with the rule, including triggers, clears, state changes, and errors.
-4. **Debug configuration**. Enables debug mode and provides access to detailed execution information for troubleshooting.
-5. **Edit**. Opens the rule editor where you can modify any configuration parameters.
-6. **Delete**. Removes the alarm rule from the system.
+每条告警规则都包含用于管理的操作栏：
+1. **Copy alarm rule configuration** — 复制规则配置，便于基于现有规则快速创建新规则
+2. **Export** — 将规则导出为 JSON 文件，用于备份或迁移至其他 ThingsBoard 实例
+3. **Events** — 打开与规则关联的事件日志，包括触发、清除、状态变更和错误
+4. **Debug configuration** — 启用调试模式，提供详细执行信息用于故障排查
+5. **Edit** — 打开规则编辑器，可修改任意配置参数
+6. **Delete** — 从系统中移除告警规则
 
 {% include images-gallery.html imageCollection="alarm-rules-parameters-1" %}
 
-<br><b><font size="4">View alarm rule details</font></b>
+<br><b><font size="4">查看告警规则详情</font></b>
 
-Click an alarm rule to view its detailed information.
+点击告警规则可查看其详细信息。
 
 {% include images-gallery.html imageCollection="alarm-rules-parameters-2" %}
 
-<br><b><font size="4">Edit the alarm rule</font></b>
+<br><b><font size="4">编辑告警规则</font></b>
 
-To modify the alarm rule, click the rule. The alarm rule details window will open.
-Click the **orange pencil** icon to switch to **edit mode**.
+要修改告警规则，点击该规则，告警规则详情窗口将打开。  
+点击 **橙色铅笔** 图标切换到 **edit mode**。
 
-After making the required changes, click the **orange checkmark** icon to apply and save the changes.
+完成所需修改后，点击 **橙色对勾** 图标应用并保存更改。
 
 {% include images-gallery.html imageCollection="alarm-rules-parameters-3" %}
 
 <hr>
 
-## Export / Import alarm rule
+## 导出 / 导入告警规则
 
-You can **export** the alarm rule to a JSON file and **import** it into the same or another ThingsBoard instance.
+可将告警规则**导出**为 JSON 文件，并**导入**到同一或其他 ThingsBoard 实例中。
 
-<br><b><font size="4">Export alarm rule</font></b>
+<br><b><font size="4">导出告警规则</font></b>
 
-- Navigate to **Alarms** page &#8702; **Alarm rules** tab.
-- Click the **Export** button located in the corresponding alarm rule row.
+- 进入 **Alarms** 页面 &#8702; **Alarm rules** 选项卡
+- 在对应告警规则行中点击 **Export** 按钮
 
 {% include images-gallery.html imageCollection="export-alarm-rule-1" %}
 
-<br><b><font size="4">Import alarm rule</font></b>
+<br><b><font size="4">导入告警规则</font></b>
 
-ThingsBoard allows you to import previously exported alarm rules in JSON format. This simplifies configuration migration between instances, rapid deployment of standard alarm templates, and restoration from backups.
+ThingsBoard 支持以 JSON 格式导入此前导出的告警规则，便于实例间配置迁移、快速部署标准告警模板以及从备份恢复。
 
-Steps to import:
-- Navigate to **Alarms** page &#8702; **Alarm rules** tab.
-- Click the "**+**" button in the upper-right corner and select **Import alarm rule** from the drop-down menu. 
-- In the import dialog, drag and drop the JSON file or choose it manually with the alarm rule configuration.
-- Click **Import** to upload the configuration.
-- In the dialog that opens, specify the entity or profile to which the alarm rule will be applied.
-- Click **Add** to save the rule.
+导入步骤：
+- 进入 **Alarms** 页面 &#8702; **Alarm rules** 选项卡
+- 点击右上角「**+**」按钮，在下拉菜单中选择 **Import alarm rule**
+- 在导入对话框中拖放 JSON 文件或手动选择包含告警规则配置的文件
+- 点击 **Import** 上传配置
+- 在打开的对话框中指定告警规则将应用到的实体或 profile
+- 点击 **Add** 保存规则
 
-After saving, the rule becomes active immediately and ThingsBoard starts applying it according to its configured logic.
+保存后，规则将立即生效，ThingsBoard 将根据其配置逻辑开始应用。
 
 {% include images-gallery.html imageCollection="import-alarm-rule-1" %}
 
 <hr>
 
-## Examples of alarm rule configurations
+## 告警规则配置示例
 
-To better understand how alarm rules work, let&#39;s review several practical examples. Each example demonstrates a specific scenario, condition type, or alarm rule feature that can be used in real-world projects.
+为更好地理解告警规则的工作方式，下面介绍若干实用示例。每个示例演示特定场景、条件类型或可在实际项目中使用的告警规则功能。
 
-In the scenarios below, we will create alarm rules **directly on a device**.
+在以下场景中，我们将在**设备上直接**创建告警规则。
 
 {% capture difference %}
-**Recommendation:** If the same rule should apply to multiple devices, create it at the **Device Profile** level.   
-This ensures centralized alarm logic, reduces duplication, and simplifies ongoing maintenance.
+**建议：** 若同一规则需应用于多个设备，请在 **Device Profile** 级别创建。  
+这可实现告警逻辑集中管理、减少重复并简化持续维护。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-<b><font size="4">Preparation</font></b>
+<b><font size="4">准备工作</font></b>
 
-For the following examples, you need a device named **Thermometer** that sends **temperature** telemetry.
-1. Download the CSV file: [thermometer-device-data.csv](/docs/user-guide/resources/alarm-rules/thermometer-device-data.csv){:target="_blank" download="thermometer-device-data.csv"}
-2. Go to the "Devices" and [import](/docs/user-guide/bulk-provisioning/){:target="_blank"} the CSV file.
+以下示例需要一台名为 **Thermometer**、发送 **temperature** telemetry 的设备。
+1. 下载 CSV 文件：[thermometer-device-data.csv](/docs/user-guide/resources/alarm-rules/thermometer-device-data.csv){:target="_blank" download="thermometer-device-data.csv"}
+2. 进入「Devices」并[导入](/docs/user-guide/bulk-provisioning/){:target="_blank"} CSV 文件。
 
-**CSV includes:**
-- **Name:** Thermometer
-- **Type:** thermostat
-- **Time series:** <span class="code-light">temperature</span>
+**CSV 包含：**
+- **Name：** Thermometer
+- **Type：** thermostat
+- **Time series：** <span class="code-light">temperature</span>
 
-> **Important note about the CSV:** the column type for the <span class="code-light">temperature</span> key must be set to "**Time series**".
+> **关于 CSV 的重要说明：**<span class="code-light">temperature</span> 键的列类型必须设为「**Time series**」。
 
 {% include images-gallery.html imageCollection="alarm-rules-example-prepare-device-1" %}
 
 <hr>
 
-### Example 1. Simple alarm condition: temperature monitoring
+### 示例1. 简单告警条件：
+*温度监控 {: #example-1-simple-alarm-condition-temperature-monitoring }*
 
-**Scenario:**   
-A refrigeration chamber is used to store perishable goods.   
-The temperature inside must be continuously monitored to prevent product loss and maintain proper storage conditions.
+**场景：**   
+冷库用于存储易腐商品，内部温度需持续监控以防止货损并维持适宜存储条件。
 
-**Goal:**   
-Create a **critical alarm** when the temperature exceeds **10°C**.
-
-<hr>
-
-<b><font size="3">Step 1. Create the alarm rule</font></b>
-
-- Open the **Alarms** page from the left-hand menu.
-- Go to the **Alarm rules** tab.
-- Click the "**+**" button in the top-right corner.
-- Select **Create new alarm rule** from the dropdown menu.
-
-<b><font size="3">Step 2. General section</font></b>
-
-In the **General** section, specify:
-- **Alarm type:** *High Temperature*
-- Select the **Target entity type** - Device 
-- Specify the specific **entity** that the rule should apply to - Thermometer
-
-<b><font size="3">Step 3. Add argument</font></b>
-
-- In the **Arguments** section, click **Add argument** and fill in:
-  - **Argument name:** temperature
-  - **Entity type:** *Current entity*
-  - **Argument type:** *Latest telemetry*
-  - **Time series key:** <span class="code-light">temperature</span>
-- Click **Add** when finished.
-
-This creates a <span class="code-light">temperature</span> variable that you will use in the rule&#39;s logical condition.
-
-<b><font size="3">Step 4. Configure the trigger condition</font></b>
-
-In the **Trigger condition** section, click **Add trigger condition**.
-
-**Step 4.1 Severity**
-- **Severity:** *Critical*
-
-**Step 4.2 Condition**
-
-Click "<b>Add condition</b>".   
-
-In the filter configuration window, click **Add argument filter** and specify:
-- **Argument:** <span class="code-light">temperature</span>
-- **Value type:** *Numeric*
-- **Operation:** *greater than* 
-- **Value:** 10
-- Click **Add**
-
-**Type:** *Simple*
-- Click **Save**
-
-As a result, the alarm will be created immediately once the temperature exceeds **10°C**.
-
-<b><font size="3">Step 5. Save the rule</font></b>
-
-Click **Add** to save the rule.
+**目标：**   
+当温度超过 **10°C** 时创建 **critical** 告警。
 
 <hr>
 
-<b><font size="4">Result</font></b>
+<b><font size="3">步骤 1. 创建告警规则</font></b>
 
-After saving, ThingsBoard will automatically create a critical alarm whenever the <span class="code-light">temperature</span> value exceeds **10°C**.
+- 从左侧菜单打开 **Alarms** 页面
+- 进入 **Alarm rules** 选项卡
+- 点击右上角「**+**」按钮
+- 在下拉菜单中选择 **Create new alarm rule**
+
+<b><font size="3">步骤 2. General 部分</font></b>
+
+在 **General** 部分指定：
+- **Alarm type：** *High Temperature*
+- 选择 **Target entity type** — Device
+- 指定规则应用的 **entity** — Thermometer
+
+<b><font size="3">步骤 3. 添加 argument</font></b>
+
+- 在 **Arguments** 部分点击 **Add argument** 并填写：
+  - **Argument name：** temperature
+  - **Entity type：** *Current entity*
+  - **Argument type：** *Latest telemetry*
+  - **Time series key：** <span class="code-light">temperature</span>
+- 完成后点击 **Add**
+
+这将创建可在规则逻辑条件中使用的 <span class="code-light">temperature</span> 变量。
+
+<b><font size="3">步骤 4. 配置触发条件</font></b>
+
+在 **Trigger condition** 部分点击 **Add trigger condition**。
+
+**步骤 4.1 Severity**  
+- **Severity：** *Critical*
+
+**步骤 4.2 Condition**
+
+点击「**Add condition**」。
+
+在 filter 配置窗口中点击 **Add argument filter** 并指定：
+- **Argument：** <span class="code-light">temperature</span>
+- **Value type：** *Numeric*
+- **Operation：** *greater than*
+- **Value：** 10
+- 点击 **Add**
+
+**Type：** *Simple*  
+- 点击 **Save**
+
+配置完成后，温度超过 **10°C** 时将立即创建告警。
+
+<b><font size="3">步骤 5. 保存规则</font></b>
+
+点击 **Add** 保存规则。
+
+<hr>
+
+<b><font size="4">结果</font></b>
+
+保存后，当 <span class="code-light">temperature</span> 值超过 **10°C** 时，ThingsBoard 将自动创建 critical 告警。
 
 {% include images-gallery.html imageCollection="alarm-rules-example-simple-1" %}
 
 <hr>
 
-### Example 2. Alarm clear condition
+### 示例2. 告警清除条件
 
-*Continuation of the example "[Simple alarm condition: temperature monitoring](#example-1-simple-alarm-condition-temperature-monitoring)"*
+*延续示例[简单告警条件：温度监控](#example-1-simple-alarm-condition-temperature-monitoring)*
 
-**Scenario**   
-A refrigerator is used to store perishable products. After the critical **High Temperature** alarm is triggered, it must be cleared automatically once the temperature returns to a safe level.
+**场景**   
+冰箱用于存储易腐产品。critical **High Temperature** 告警触发后，当温度恢复至安全水平时必须自动清除。
 
-**Goal**   
-Update the existing **High Temperature** rule by adding a clear condition that sets the alarm to **Cleared** when the temperature is **≤ 4°C**.
-
-<hr>
-
-<b><font size="3">Step 1. Open the High Temperature rule</font></b>
-
-- In the side menu, go to **Alarm** &#8702; **Alarm rules**.
-- Find the **High Temperature** rule in the list.
-- Click the **Edit** icon (pencil) to open the rule editor.
-
-<b><font size="3">Step 2. Configure clear condition</font></b>
-
-Scroll down to the **Clear condition** section:
-- Click **Add clear condition**.
-- Click "**Add condition**" to open the configuration window.
-
-<b><font size="3">Step 2.1 Add a filter</font></b>
-
-In the configuration window, click **Add argument filter** and specify:
-- **Argument:** <span class="code-light">temperature</span>
-- **Value type:** *Numeric*
-- **Operation:** *less or equal*
-- **Value:** 4
-
-This condition defines the moment when the temperature returns to a safe level. Click **Add**
-
-**Type:** *Simple*
-- Click **Save**
-
-After this, the alarm will be cleared as soon as the temperature drops to **4°C or below**.
-
-<b><font size="3">Step 3. Save the rule</font></b>
-
-Click **Apply** to save the updated rule.
+**目标**   
+在现有 **High Temperature** 规则中添加清除条件，当温度为 **≤ 4°C** 时将告警设为 **Cleared**。
 
 <hr>
 
-<b><font size="4">Result</font></b>
+<b><font size="3">步骤 1. 打开 High Temperature 规则</font></b>
 
-After saving, ThingsBoard will:
-- create a **Critical** — **High Temperature** alarm when the temperature exceeds **10°C**
-- automatically clear the alarm when the temperature is **≤ 4°C**
+- 在侧边菜单中进入 **Alarm** &#8702; **Alarm rules**
+- 在列表中找到 **High Temperature** 规则
+- 点击 **Edit** 图标（铅笔）打开规则编辑器
 
-This configuration forms a complete alarm lifecycle, keeps the system state accurate, and eliminates the need for manual intervention.
+<b><font size="3">步骤 2. 配置清除条件</font></b>
+
+滚动到 **Clear condition** 部分：
+- 点击 **Add clear condition**
+- 点击「**Add condition**」打开配置窗口
+
+<b><font size="3">步骤 2.1 添加 filter</font></b>
+
+在配置窗口中点击 **Add argument filter** 并指定：
+- **Argument：** <span class="code-light">temperature</span>
+- **Value type：** *Numeric*
+- **Operation：** *less or equal*
+- **Value：** 4
+
+此条件定义温度恢复至安全水平的时刻。点击 **Add**
+
+**Type：** *Simple*  
+- 点击 **Save**
+
+此后，温度降至 **4°C 或以下**时将立即清除告警。
+
+<b><font size="3">步骤 3. 保存规则</font></b>
+
+点击 **Apply** 保存更新后的规则。
+
+<hr>
+
+<b><font size="4">结果</font></b>
+
+保存后，ThingsBoard 将：
+- 温度超过 **10°C** 时创建 **Critical** — **High Temperature** 告警
+- 温度为 **≤ 4°C** 时自动清除告警
+
+此配置形成完整的告警生命周期，保持系统状态准确，无需人工干预。
 
 {% include images-gallery.html imageCollection="alarm-rule-example-clear-condition-1" %}
 
 <hr>
 
-### Example 3. Alarm condition with a duration
+### 示例3. 带持续时长的告警条件
 
-*Continuation of the example "[Simple alarm condition: temperature monitoring](#example-1-simple-alarm-condition-temperature-monitoring)".*
+*延续示例[简单告警条件：温度监控](#example-1-simple-alarm-condition-temperature-monitoring)*
 
-**Goal:**   
-Update the existing **High Temperature** rule so that it triggers only when the temperature exceeds the threshold for a specified duration — for example, **1 minute**.
-This mechanism helps avoid false alarms caused by short-term temperature spikes.
-
-<hr>
-
-<b><font size="3">Step 1. Open the High Temperature rule</font></b>
-
-- In the side menu, go to **Alarm** &#8702; **Alarm rules**.
-- Find the **High Temperature** rule in the list.
-- Click the **Edit** icon (pencil) to open the rule editor.
-
-<b><font size="3">Step 2. Configure trigger condition</font></b>
-
-Scroll down to the **Trigger condition** section and edit the existing condition:
-- **Condition type:** change *Simple* &#8702; **Duration**
-- **Duration value:** 1
-- **Time unit:** *Minutes*
-- Click **Save** to apply the updated alarm condition settings.
-
-The alarm will now be triggered only if the temperature exceeds the threshold **continuously for 60 seconds**.
-
-<b><font size="3">Step 3. Save the updated rule</font></b>
-
-Click **Apply** to save the updated rule configuration.
+**目标：**   
+更新现有 **High Temperature** 规则，使其仅在温度超过阈值并持续指定时长（如 **1 分钟**）时触发。  
+此机制有助于避免因短暂温度尖峰引起的误报。
 
 <hr>
 
-<b><font size="4">Result</font></b>
+<b><font size="3">步骤 1. 打开 High Temperature 规则</font></b>
 
-After saving, ThingsBoard will:
-- create the **High Temperature** alarm only when the temperature exceeds the threshold for **1 full minute**
-- ignore short, random temperature spikes
-- provide a more stable alarm system with fewer false alerts
+- 在侧边菜单中进入 **Alarm** &#8702; **Alarm rules**
+- 在列表中找到 **High Temperature** 规则
+- 点击 **Edit** 图标（铅笔）打开规则编辑器
+
+<b><font size="3">步骤 2. 配置触发条件</font></b>
+
+滚动到 **Trigger condition** 部分，编辑现有条件：
+- **Condition type：** 将 *Simple* 改为 **Duration**
+- **Duration value：** 1
+- **Time unit：** *Minutes*
+- 点击 **Save** 应用更新后的告警条件设置
+
+此后，告警仅在温度**连续 60 秒**超过阈值时才会触发。
+
+<b><font size="3">步骤 3. 保存更新后的规则</font></b>
+
+点击 **Apply** 保存更新后的规则配置。
+
+<hr>
+
+<b><font size="4">结果</font></b>
+
+保存后，ThingsBoard 将：
+- 仅在温度超过阈值并持续 **整整 1 分钟**时创建 **High Temperature** 告警
+- 忽略短暂的随机温度尖峰
+- 提供更稳定、误报更少的告警系统
 
 {% include images-gallery.html imageCollection="alarm-rules-example-condition-duration-1" %}
 
 <hr>
 
-### Example 4. Alarm with dynamic duration (based on an attribute value)
+### 示例4. 带动态持续时长的告警
 
-*Continuation of the example "[Alarm condition with a duration](#example-3-alarm-condition-with-a-duration)".*
+*延续示例[带持续时长的告警条件](#example-3-alarm-condition-with-a-duration)*
 
-**Scenario**   
-You already have a **High Temperature** alarm configured to trigger when the temperature exceeds the threshold for **1 minute**.   
-In this example, we extend that logic by making the duration **dynamic** — meaning the duration required to trigger the alarm will be defined by a **server attribute** on the device.
+**场景**   
+已配置 **High Temperature** 告警，在温度超过阈值并持续 **1 分钟**时触发。  
+本示例将该逻辑扩展为**动态** duration — 即触发告警所需的时长由设备上的 **server attribute** 定义。
 
-**Goal**   
-Update the High Temperature rule so that:
-- the alarm is created only when the temperature stays above the critical threshold for the duration specified in the device&#39;s <span class="code-light">highTemperatureDurationThreshold</span> [server attribute](/docs/{{docsPrefix}}user-guide/attributes/#server-side-attributes){:target="_blank"}
-- the duration can be changed without editing the alarm rule — simply by updating the device’s attribute value
+**目标**   
+更新 High Temperature 规则，使：
+- 仅在温度在设备 <span class="code-light">highTemperatureDurationThreshold</span> [server attribute](/docs/{{docsPrefix}}user-guide/attributes/#server-side-attributes){:target="_blank"} 中指定的时长内持续高于临界阈值时创建告警
+- 无需编辑告警规则即可调整 duration，仅需更新设备的 attribute 值
 
 <hr>
 
-**Preparation**   
-Add a **server attribute** to the **Thermometer** device:
-- **Key:** <span class="code-light">highTemperatureDurationThreshold</span>
-- **Value type** *Integer*
-- **Value:** 2
+**准备工作**   
+为 **Thermometer** 设备添加 **server attribute**：
+- **Key：** <span class="code-light">highTemperatureDurationThreshold</span>
+- **Value type：** *Integer*
+- **Value：** 2
 
 {% include images-gallery.html imageCollection="alarm-rules-example-condition-with-dynamic-duration-1" %}
 
-This value will be used by the alarm rule as the duration requirement.
+此值将作为 duration 要求供告警规则使用。
 
 <hr>
 
-<b><font size="3">Step 1. Open the High Temperature rule</font></b>
+<b><font size="3">步骤 1. 打开 High Temperature 规则</font></b>
 
-- In the side menu, go to **Alarm** &#8702; **Alarm rules**.
-- Find the **High Temperature** rule in the list.
-- Click the **Edit** icon (pencil) to open the rule editor.
+- 在侧边菜单中进入 **Alarm** &#8702; **Alarm rules**
+- 在列表中找到 **High Temperature** 规则
+- 点击 **Edit** 图标（铅笔）打开规则编辑器
 
-<b><font size="3">Step 2. Add argument</font></b>
+<b><font size="3">步骤 2. 添加 argument</font></b>
 
-In the **Arguments** section:
-- Click **Add argument**
-- Fill in the fields:
-  - **Entity type:** *Current entity* 
-  - **Argument type:** *Attribute*
-  - **Attribute scope:** *Server attributes* 
-  - **Attribute key:** <span class="code-light">highTemperatureDurationThreshold</span>
-  - **Argument name:** highTemperatureDurationThreshold
-- Click **Add**
+在 **Arguments** 部分：
+- 点击 **Add argument**
+- 填写字段：
+  - **Entity type：** *Current entity*
+  - **Argument type：** *Attribute*
+  - **Attribute scope：** *Server attributes*
+  - **Attribute key：** <span class="code-light">highTemperatureDurationThreshold</span>
+  - **Argument name：** highTemperatureDurationThreshold
+- 点击 **Add**
 
-You now have a dynamic variable that can be used in the **Duration** condition.
+现在拥有可在 **Duration** 条件中使用的动态变量。
 
-<b><font size="3">Step 3. Configure trigger condition</font></b>
+<b><font size="3">步骤 3. 配置触发条件</font></b>
 
-Scroll to the **Trigger condition** section and edit the existing condition:
-- **Condition type:** *Duration* 
-- **Value type:** change *Static* to **Dynamic** 
-- **Value:** specify the argument <span class="code-light">highTemperatureDurationThreshold</span>
-- **Unit:** *Minutes*
-- Click **Save** inside the condition block.
+滚动到 **Trigger condition** 部分，编辑现有条件：
+- **Condition type：** *Duration*
+- **Value type：** 将 *Static* 改为 **Dynamic**
+- **Value：** 指定 argument <span class="code-light">highTemperatureDurationThreshold</span>
+- **Unit：** *Minutes*
+- 在条件块内点击 **Save**
 
-From now on, the duration required to trigger the alarm is determined by the device attribute rather than a fixed number.
+此后，触发告警所需的 duration 由设备 attribute 决定，而非固定数值。
 
-<b><font size="3">Step 4. Save the rule</font></b>
+<b><font size="3">步骤 4. 保存规则</font></b>
 
-Click **Apply** to save the updated configuration.
+点击 **Apply** 保存更新后的配置。
 
 <hr>
 
-<b><font size="4">Result</font></b>
+<b><font size="4">结果</font></b>
 
-After saving, ThingsBoard will:
-- create a **High Temperature** alarm if the temperature:
-  - exceeds the threshold (e.g., >10°C), **and**
-  - remains above it for the period defined in the <span class="code-light">highTemperatureDurationThreshold</span> attribute (e.g., 2 minutes)
+保存后，ThingsBoard 将：
+- 在以下情况下创建 **High Temperature** 告警：温度
+  - 超过阈值（如 >10°C），**且**
+  - 在 <span class="code-light">highTemperatureDurationThreshold</span> attribute 定义的时长内（如 2 分钟）保持高于阈值
 
-This ensures the alarm responds only to **sustained deviations**, not to short-term sensor spikes.
+这确保告警仅响应**持续偏差**，而非短期传感器尖峰。
 
 {% include images-gallery.html imageCollection="alarm-rules-example-condition-with-dynamic-duration-2" %}
 
 <hr>
 
-### Example 5. Alarm with repeating condition
+### 示例5. 带重复条件的告警
 
-*Continuation of the example "[Simple alarm condition: temperature monitoring](#example-1-simple-alarm-condition-temperature-monitoring)".*
+*延续示例[简单告警条件：温度监控](#example-1-simple-alarm-condition-temperature-monitoring)*
 
-**Goal:**   
-Update the **High Temperature** rule so that the alarm is created only when the threshold condition occurs a specified number of times in a row.
-This helps filter out random sensor spikes and react only to repeated or consistent deviations.
-
-<hr>
-
-<b><font size="3">Step 1. Open the High Temperature rule</font></b>
-
-- In the side menu, go to **Alarm** &#8702; **Alarm rules**.
-- Find the **High Temperature** rule in the list.
-- Click the **Edit** icon (pencil) to open the rule editor.
-
-<b><font size="3">Step 2. Edit the trigger condition</font></b>
-
-Update the existing trigger condition by changing the following parameters:
-- **Condition type:** *Repeating*
-- **Count of events:** 3   
-Click **Save** to apply the changes.
-
-With this configuration, ThingsBoard will check whether the threshold condition occurs **three times in a row** before creating the alarm.
-
-<b><font size="3">Step 3. Save the rule</font></b>
-
-Click **Apply** to save the updated configuration.
+**目标：**   
+更新 **High Temperature** 规则，使告警仅在阈值条件连续满足指定次数时创建。  
+有助于过滤随机传感器尖峰，仅响应重复或持续的偏差。
 
 <hr>
 
-<b><font size="4">Result</font></b>
+<b><font size="3">步骤 1. 打开 High Temperature 规则</font></b>
 
-After saving, ThingsBoard behaves as follows:
-- create the **High Temperature** alarm only when the condition is met **3 times in a row**
-- Single or random temperature spikes will not trigger an alarm
+- 在侧边菜单中进入 **Alarm** &#8702; **Alarm rules**
+- 在列表中找到 **High Temperature** 规则
+- 点击 **Edit** 图标（铅笔）打开规则编辑器
+
+<b><font size="3">步骤 2. 编辑触发条件</font></b>
+
+更改以下参数以更新现有触发条件：
+- **Condition type：** *Repeating*
+- **Count of events：** 3  
+点击 **Save** 应用更改。
+
+此配置下，ThingsBoard 将在创建告警前检查阈值条件是否**连续三次**满足。
+
+<b><font size="3">步骤 3. 保存规则</font></b>
+
+点击 **Apply** 保存更新后的配置。
+
+<hr>
+
+<b><font size="4">结果</font></b>
+
+保存后，ThingsBoard 行为如下：
+- 仅在条件**连续 3 次**满足时创建 **High Temperature** 告警
+- 单次或随机温度尖峰不会触发告警
 
 {% include images-gallery.html imageCollection="alarm-rules-example-condition-repeating-1" %}
 
 <hr>
 
-### Example 6. Define alarm rule schedule
+### 示例6. 定义告警规则 schedule
 
-*Continuation of the example "[Simple alarm condition: temperature monitoring](#example-1-simple-alarm-condition-temperature-monitoring)".*
+*延续示例[简单告警条件：温度监控](#example-1-simple-alarm-condition-temperature-monitoring)*
 
-**Goal:**   
-Update the **High Temperature** rule so that the alarm triggers **only during working hours**.
-This is useful when monitoring is required only at certain times—for example, during staff working hours.
-
-<hr>
-
-<b><font size="3">Step 1. Open the High Temperature rule</font></b>
-
-- In the side menu, go to **Alarm** &#8702; **Alarm rules**.
-- Find the **High Temperature** rule in the list.
-- Click the **Edit** icon (pencil) to open the rule editor.
-
-<b><font size="3">Step 2. Configure the alarm rule schedule</font></b>
-
-Scroll to the **Trigger condition** section and open the **Schedule** settings.
-- **Select the schedule type:** *Active at a specific time*
-- Configure the working hours:
-  - **Timezone:** Europe/Kiev (UTC+02:00)
-  - **Days**: Monday, Tuesday, Wednesday, Thursday, Friday
-  - **Time range:**
-    - **From:** 10:00
-    - **To:** 19:00
-- Click **Save** to apply the schedule configuration.
-
-With this setup, the rule is active **only on weekdays from 10:00 to 19:00**.
-Outside this interval, the system will **not** create a **High Temperature** alarm, even if <span class="code-light">temperature > 10°C</span> is true.
-
-<b><font size="3">Step 3. Save the rule</font></b>
-
-Click **Apply** to save the updated configuration.
+**目标：**   
+更新 **High Temperature** 规则，使告警**仅在工作时间**触发。  
+适用于仅在特定时段（如员工工作时间）需要监控的场景。
 
 <hr>
 
-<b><font size="4">Result</font></b>
+<b><font size="3">步骤 1. 打开 High Temperature 规则</font></b>
 
-After saving, ThingsBoard will:
-- activate the **High Temperature** rule only on weekdays **from 10:00 to 19:00**
-- ignore temperature threshold violations that occur outside this time window
+- 在侧边菜单中进入 **Alarm** &#8702; **Alarm rules**
+- 在列表中找到 **High Temperature** 规则
+- 点击 **Edit** 图标（铅笔）打开规则编辑器
+
+<b><font size="3">步骤 2. 配置告警规则 schedule</font></b>
+
+滚动到 **Trigger condition** 部分，打开 **Schedule** 设置。
+- **选择 schedule 类型：** *Active at a specific time*
+- 配置工作时间：
+  - **Timezone：** Europe/Kiev (UTC+02:00)
+  - **Days：** Monday、Tuesday、Wednesday、Thursday、Friday
+  - **Time range：**
+    - **From：** 10:00
+    - **To：** 19:00
+- 点击 **Save** 应用 schedule 配置。
+
+此配置下，规则**仅在工作日 10:00 至 19:00** 生效。  
+在此时间区间外，即使 <span class="code-light">temperature > 10°C</span> 为真，系统也**不会**创建 **High Temperature** 告警。
+
+<b><font size="3">步骤 3. 保存规则</font></b>
+
+点击 **Apply** 保存更新后的配置。
+
+<hr>
+
+<b><font size="4">结果</font></b>
+
+保存后，ThingsBoard 将：
+- 仅在工作日 **10:00 至 19:00** 激活 **High Temperature** 规则
+- 忽略发生在此时间窗口外的温度阈值违规
 
 {% include images-gallery.html imageCollection="alarm-rules-example-schedule-1" showListImageTitles="true" %}
 
 <hr>
 
-### Example 7. Advanced thresholds
+### 示例7. 高级阈值
 
-*Continuation of the example "[Simple alarm condition: temperature monitoring](#example-1-simple-alarm-condition-temperature-monitoring)".*
+*延续示例[简单告警条件：温度监控](#example-1-simple-alarm-condition-temperature-monitoring)*
 
-**Goal:**   
-Update the **High Temperature** rule by adding the ability to enable or disable the alarm using a server attribute at the device level.
+**目标：**   
+更新 **High Temperature** 规则，添加通过设备级 server attribute 启用或禁用告警的能力。
 
-In this example, the alarm should trigger **only when both conditions are true**:
+本示例中，告警应**仅当以下两个条件均为真**时触发：
 1. <span class="code-light">temperatureAlarmFlag == true</span>
 2. <span class="code-light">temperature > 10°C</span>
 
-This allows you to flexibly control whether the alarm should be active for a specific device — **without editing the rule**.
+这使您可灵活控制特定设备的告警是否激活 — **无需编辑规则**。
 
 <hr>
 
-**Preparation**   
-Add a **server attribute** to the **Thermometer** device:
-- **Key:** <span class="code-light">temperatureAlarmFlag</span>
-- **Type:** Boolean 
-- **Value:** `true`
+**准备工作**   
+为 **Thermometer** 设备添加 **server attribute**：
+- **Key：** <span class="code-light">temperatureAlarmFlag</span>
+- **Type：** Boolean
+- **Value：** `true`
 
-This attribute determines whether the alarm rule is active for the device.
+此 attribute 决定告警规则对该设备是否生效。
 
 {% include images-gallery.html imageCollection="alarm-rules-example-advanced-thresholds-1" %}
 
 <hr>
 
-<b><font size="3">Step 1. Open the High Temperature alarm rule</font></b>
+<b><font size="3">步骤 1. 打开 High Temperature 告警规则</font></b>
 
-- In the side menu, go to **Alarm** &#8702; **Alarm rules**.
-- Find the **High Temperature** rule in the list.
-- Click the **Edit** icon (pencil) to open the rule editor.
+- 在侧边菜单中进入 **Alarm** &#8702; **Alarm rules**
+- 在列表中找到 **High Temperature** 规则
+- 点击 **Edit** 图标（铅笔）打开规则编辑器
 
-- <b><font size="3">Step 2. Add an argument</font></b>
+<b><font size="3">步骤 2. 添加 argument</font></b>
 
-In the **Arguments** section:
-- Click **Add argument**
-- Fill in the fields:
-  - **Entity type:** *Current entity* 
-  - **Argument type:** *Attribute*
-  - **Attribute scope:** *Server attributes*
-  - **Attribute key:** <span class="code-light">temperatureAlarmFlag</span>
-  - **Argument name:** temperatureAlarmFlag
-- Click **Add**
+在 **Arguments** 部分：
+- 点击 **Add argument**
+- 填写字段：
+  - **Entity type：** *Current entity*
+  - **Argument type：** *Attribute*
+  - **Attribute scope：** *Server attributes*
+  - **Attribute key：** <span class="code-light">temperatureAlarmFlag</span>
+  - **Argument name：** temperatureAlarmFlag
+- 点击 **Add**
 
-You now have a boolean variable that can be used in the alarm conditions.
+现在拥有可在告警条件中使用的布尔变量。
 
-<b><font size="3">Step 3. Configure the trigger condition</font></b>
+<b><font size="3">步骤 3. 配置触发条件</font></b>
 
-Scroll to the **Trigger condition** section and edit the existing condition.
+滚动到 **Trigger condition** 部分，编辑现有条件。
 
-Add another condition:
-- Click **Add argument filter** and configure:
-  - **Argument:** <span class="code-light">temperatureAlarmFlag</span>
-  - **Value type:** *Boolean* 
-  - **Operation:** *equal* 
-  - **Value:** `true`
-- Click **Add**.
+添加另一条件：
+- 点击 **Add argument filter** 并配置：
+  - **Argument：** <span class="code-light">temperatureAlarmFlag</span>
+  - **Value type：** *Boolean*
+  - **Operation：** *equal*
+  - **Value：** `true`
+- 点击 **Add**
 
-This filter determines whether the alarm is allowed to trigger for the specific device.
+此 filter 决定告警是否允许针对该设备触发。
 
-<b><font size="3">Step 4. Save the rule</font></b>
+<b><font size="3">步骤 4. 保存规则</font></b>
 
-Click **Apply** to save the updated configuration.
+点击 **Apply** 保存更新后的配置。
 
 <hr>
 
-<b><font size="4">Result</font></b>
+<b><font size="4">结果</font></b>
 
-After saving, ThingsBoard will:
-- create the High Temperature alarm only if:
-  - <span class="code-light">temperatureAlarmFlag == true</span>, and 
-  - the <span class="code-light">temperature</span> exceeds **10°C**
-- ignore the rule entirely for this device if temperatureAlarmFlag == false, even when the threshold is exceeded
+保存后，ThingsBoard 将：
+- 仅在以下情况下创建 High Temperature 告警：
+  - <span class="code-light">temperatureAlarmFlag == true</span>，且
+  - <span class="code-light">temperature</span> 超过 **10°C**
+- 若 temperatureAlarmFlag == false，则对该设备完全忽略该规则，即使超过阈值
 
 {% include images-gallery.html imageCollection="alarm-rules-example-advanced-thresholds-2" %}
 
 <hr>
 
-<b><font size="4">Benefits of this approach</font></b>
+<b><font size="4">此方法的优势</font></b>
 
-- You can enable or disable alarms **without editing a rule**
-- Each device can have its own alarm activation state 
-- Ideal for large projects with varying alerting policies across devices 
-- Easy to integrate with dashboards — operators can toggle the alarm using a simple switch
+- 可**无需编辑规则**即启用或禁用告警
+- 每台设备可有各自的告警激活状态
+- 适用于设备间告警策略各异的大型项目
+- 便于与 dashboard 集成 — 运维人员可通过简单开关切换告警
 
 <hr>
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/multi-project-guides-banner.md %}
 
 <hr>
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 上为 ThingsBoard 点赞，帮助我们传播。  
+如有任何问题，请[联系我们](/docs/contact-us/){:target="_blank"}。

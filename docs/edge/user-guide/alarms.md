@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Edge Alarms
-description: Edge Alarms Overview
+title: Edge告警
+description: Edge告警概述
 
 push-to-edge:
     0:

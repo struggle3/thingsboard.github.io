@@ -97,8 +97,8 @@
 %}
 
 {% capture difference %}
-Don't forget to expose port **47808** in the docker compose file. 
-Also, add device host to the **Alternative responses address** array in the **device advanced configuration section**.
+别忘了在 docker compose 文件中暴露端口 **47808**。
+同时，在**设备高级配置**中，将设备 host 添加到 **Alternative responses address** 数组。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -108,7 +108,7 @@ Also, add device host to the **Alternative responses address** array in the **de
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=creatingGatewayCE %}
 {% endif %}
 
-Furthermore, the Temco T3E-6CT provides two output relays that can be controlled using the gateway. Let's create a new RPC command to control the relay. To do this, follow these steps:
+此外，Temco T3E-6CT 提供两个可通过网关控制输出继电器。我们将创建新的 RPC 命令以控制继电器。请按以下步骤操作：
 
 {% assign creatingGatewayRPCCE = '
     ===

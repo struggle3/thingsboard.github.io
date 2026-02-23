@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Trendz post-installation steps
-description: Trendz post-installation steps description
+title: Trendz 安装后步骤
+description: Trendz 安装后步骤说明
 ---
 
 * TOC

@@ -1,122 +1,121 @@
 ---
 layout: docwithnav
-title: Aggregate incoming data stream 
-description: Aggregate data about water consumption in the building
+title: 聚合入站数据流 
+description: 聚合建筑物内用水量数据
 hidetoc: "true"
 
 ---
 
 {% assign feature = "Analytics Rule Nodes" %}{% include templates/pe-feature-banner.md %}
 
-This tutorial will show how to calculate total water consumption in the building based on incoming data from all water meter sensors in the building. 
+本教程演示如何根据楼内所有水表传感器上报的数据，计算楼内总用水量。 
 
 * TOC
 {:toc}
 
-## Use case
+## 使用场景
 
-Let's assume you have buildings with multiple water meter sensors inside each building. For example, one per each apartment or similar.
+假设每栋楼内有多个水表传感器（例如每户一个）。
 
-In this tutorial we will configure ThingsBoard Rule Engine to automatically calculate total water consumption in the building based on readings from multiple water meters and within certain time intervals.
-We will use 1 building, 2 sensors and 10 seconds interval just for demo purposes.
-You can use this tutorial as a basis for much more complex scenarios.
+本教程将配置ThingsBoard Rule Engine，根据多个水表的读数，在设定时间间隔内自动计算楼内总用水量。
+为演示方便，仅使用 1 栋楼、2 个传感器和 10 秒间隔。
+您可将本教程作为基础，实现更复杂的场景。
 
-## Prerequisites
+## 前置条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+请确保已完成以下指南并阅读所列文章：
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
+  * [Getting Started](/docs/getting-started-guides/helloworld/) 指南。
+  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/)。
 
-## Model definition
+## 模型定义
 
-We will create one asset that has name "Building A" and type "building". We will add this asset to an asset group called "Buildings".
+创建一个名为「Building A」、类型为「building」的 asset，并将其加入名为「Buildings」的 asset 分组。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/add-asset.png)
 
-We will create two devices that has names "Water Meter A1" and "Water Meter A2" and type "water-meter". We will add this devices to device group called "Water Meters".
+创建两个设备，名称分别为「Water Meter A1」和「Water Meter A2」，类型为「water-meter」，并将其加入名为「Water Meters」的设备分组。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/add-meters.png)
 
-We must also create relations between the building asset and water meters. This relation will be used in the rule chain to associate water meters readings with the building itself. 
-It is also convenient to use relations in the dashboards to provide drill-down capabilities. You may notice two outbound relations from the building asset to water meters on the screenshot below:
+还需在 building asset 与水表设备之间创建 relations。rule chain 将用这些 relation 将水表读数关联到楼宇本身。 
+relations 也可用于 dashboard 中实现下钻。下面截图中可看到 building asset 到水表的两条出向 relation：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/add-relations.png)
 
-**Note**: Please review the following [**documentation page**](/docs/user-guide/entities-and-relations/) to learn how to create assets and relations.
+**说明**：请参阅 [**文档页面**](/docs/user-guide/entities-and-relations/) 了解如何创建 assets 和 relations。
 
-## Message Flow
+## 消息流
 
-In this section, we explain the purpose of each node in this tutorial. There will be three rule chains involved:
+本节说明本教程中各节点的作用。涉及三个 rule chain：
 
-  * "Emulators" - optional rule chain to simulate data from two water meters; 
-  * "Water consumption" - rule chain that actually aggregates the water consumption readings;
-  * "Root Rule Chain" - main, default, rule chain that dispatches all messages. In our case Root Rule Chain consumes data produced by "Emulators", store them to the database and pushes to "Water consumption" rule chain for further processing. 
+  * 「Emulators」— 可选，用于模拟两个水表的数据； 
+  * 「Water consumption」— 负责聚合用水量读数的 rule chain；
+  * 「Root Rule Chain」— 主默认 rule chain，负责分发所有消息。本示例中 Root Rule Chain 处理「Emulators」产生的数据，存入数据库并推送到「Water consumption」rule chain 进一步处理。 
 
 
 ### Emulators rule chain
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/emulator-rule-chain.png)
 
-  * **Nodes A and B**: Generator nodes
+  * **Nodes A 和 B**：Generator 节点
 
-    * Two similar nodes that periodically generate a very simple message with random water consumption.
+    * 两个类似节点，定期生成包含随机用水量的简单消息。
 
     ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/nodes-a-and-b.png)
 
-  * **Node C**: Rule Chain node
+  * **Node C**：Rule Chain 节点
 
-    * Forwards all messages to default rule chain
+    * 将所有消息转发到默认 rule chain
 
 ### Root rule chain
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/root-rule-chain.png)
 
-  * **Node D**:  Rule Chain node
+  * **Node D**： Rule Chain 节点
 
-    * Forwards all telemetry messages to aggregation rule chain. 
-    Please note that we intentionally do not introduce and filtering nodes to simplify the guide. 
-    Typically you should filter incoming telemetry before you forward it to more complex nodes. 
-    For example check that incoming telemetry contains water meter readings.
+    * 将所有 telemetry 消息转发到聚合 rule chain。 
+    为简化指南，我们刻意未添加过滤节点。 
+    实际使用时通常应在转发到复杂节点前对入站 telemetry 做过滤，例如检查是否包含水表读数。
 
 
 ### Water consumption rule chain
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/aggregation-rule-chain.png)
 
-  * **Node E**: Change originator
+  * **Node E**：Change originator 节点
 
-    * Updates the entity id that is associated with the message. 
-      Updates the entity id from particular water meter to the parent asset.
+    * 更新与消息关联的实体 id。 
+      将实体 id 从具体水表更新为父 asset。
 
     ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/node-e.png)
 
-  * **Node F**: Aggregate stream node
+  * **Node F**：Aggregate stream 节点
 
-    * Transforms aggregated incoming data stream of "waterConsumption" readings to "totalWaterConsumption" value once per 10 seconds.
-    * Persists new telemetry after particular interval is over and on each new message that belongs to this interval afterwards. 
-      This is useful if some telemetry readings may be delayed. 
+    * 每 10 秒将「waterConsumption」入站数据流聚合为「totalWaterConsumption」值。
+    * 在指定间隔结束后及之后属于该间隔的每条新消息到达时，持久化新 telemetry。 
+      适用于 telemetry 读数可能延迟的情况。 
 
     ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/aggregate-stream.png)
 
-  * **Node G**: Save telemetry node
+  * **Node G**：Save telemetry 节点
 
-    * Simple node that stores incoming message to the database and dispatches updates to the subscribers.
+    * 简单节点，将入站消息写入数据库并分发给订阅者。
 
 
-## Configuring the Rule Chains
+## 配置 Rule Chains
 
-Download and [**import**](/docs/user-guide/ui/rule-chains/#rule-chains-importexport) attached emulators rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/aggregation_emulators.json) as a new "Emulators" rule chain and 
-attached water consumption rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/aggregation_water_consumption.json) as a new "Water Consumption" rule chain. 
-Please note that some nodes have debug enabled. This affects performance. Create Node C and Node D as shown on the image above in the root rule chain to forward telemetry to new rule chain.
+下载并 [**import**](/docs/user-guide/ui/rule-chains/#rule-chains-importexport) 附带的模拟器 rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/aggregation_emulators.json) 作为新的「Emulators」rule chain，以及
+用水量 rule chain [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/aggregation_water_consumption.json) 作为新的「Water Consumption」rule chain。 
+注意部分节点已开启 debug，会影响性能。在 root rule chain 中按上图创建 Node C 和 Node D，将 telemetry 转发到新 rule chain。
 
-## Validating the flow
+## 验证流程
 
-Download and [**import**](/docs/user-guide/ui/dashboards/#iot-dashboard-importexport) attached dashboard [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/building_water_meters.json) as a new "Building Water Meters" dashboard.
+下载并 [**import**](/docs/user-guide/ui/dashboards/#iot-dashboard-importexport) 附带的 dashboard [**file**](/docs/user-guide/rule-engine-2-0/pe/tutorials/building_water_meters.json) 作为新的「Building Water Meters」dashboard。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/dashboard-part1.png)
 
-Note that you can drill down to the chart for particular warehouse by clicking on the corresponding row.
+可点击对应行下钻到具体仓库的图表。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/aggregation/dashboard-part2.png)
 

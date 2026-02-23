@@ -1,27 +1,26 @@
-Sends device connectivity events for the message originator.
+为消息发起者发送设备连接性事件。
 
-## Configuration
+## 配置
 
-- **Device connectivity event**: Specifies the type of connectivity event to send.
-    - *Connect Event*: Sends a device connection event
-    - *Activity Event*: Sends a device activity event
-    - *Disconnect Event*: Sends a device disconnection event
-    - *Inactivity Event*: Sends a device inactivity event
+- **Device connectivity event（设备连接性事件）**：指定要发送的连接性事件类型。
+    - *Connect Event*：发送设备连接事件
+    - *Activity Event*：发送设备活动事件
+    - *Disconnect Event*：发送设备断开连接事件
+    - *Inactivity Event*：发送设备非活动事件
 
-### Device connectivity event types
+### 设备连接性事件类型
 
-Each connectivity event type performs specific actions when triggered. The keys mentioned below can be stored as either attributes or time series data depending on system
-configuration.
+每种连接性事件类型在触发时执行特定操作。以下提到的键可根据系统配置存储为属性或时序数据。
 
 #### Connect Event
 
-- **Updates**: `lastConnectTime` key with event timestamp
-- **Sends**: `CONNECT_EVENT` message to device default rule chain
-- **Activity status**: Does not affect device activity status
+- **更新**：`lastConnectTime` 键为事件时间戳
+- **发送**：向设备默认 Rule Chain 发送 `CONNECT_EVENT` 消息
+- **活动状态**：不影响设备活动状态
 
-**Example `CONNECT_EVENT` message:**
+**`CONNECT_EVENT` 消息示例：**
 
-Data:
+数据：
 
 ```json
 {
@@ -33,7 +32,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -46,13 +45,13 @@ Metadata:
 
 #### Activity Event
 
-- **Updates**: `lastActivityTime` key with event timestamp
-- **Sends**: `ACTIVITY_EVENT` message to device default rule chain (only if device activity status changed from `false` to `true`)
-- **Activity status**: Changes device activity status to `true`
+- **更新**：`lastActivityTime` 键为事件时间戳
+- **发送**：向设备默认 Rule Chain 发送 `ACTIVITY_EVENT` 消息（仅当设备活动状态从 `false` 变为 `true` 时）
+- **活动状态**：将设备活动状态设为 `true`
 
-**Example `ACTIVITY_EVENT` message:**
+**`ACTIVITY_EVENT` 消息示例：**
 
-Data:
+数据：
 
 ```json
 {
@@ -65,17 +64,17 @@ Data:
 }
 ```
 
-Metadata: same as above
+元数据：同上
 
 #### Disconnect Event
 
-- **Updates**: `lastDisconnectTime` key with event timestamp
-- **Sends**: `DISCONNECT_EVENT` message to device default rule chain
-- **Activity status**: Does not affect device activity status
+- **更新**：`lastDisconnectTime` 键为事件时间戳
+- **发送**：向设备默认 Rule Chain 发送 `DISCONNECT_EVENT` 消息
+- **活动状态**：不影响设备活动状态
 
-**Example `DISCONNECT_EVENT` message:**
+**`DISCONNECT_EVENT` 消息示例：**
 
-Data:
+数据：
 
 ```json
 {
@@ -88,17 +87,17 @@ Data:
 }
 ```
 
-Metadata: same as above
+元数据：同上
 
 #### Inactivity Event
 
-- **Updates**: `lastInactivityAlarmTime` key with event timestamp
-- **Sends**: `INACTIVITY_EVENT` message to device default rule chain
-- **Activity status**: Changes device activity status from `true` to `false`
+- **更新**：`lastInactivityAlarmTime` 键为事件时间戳
+- **发送**：向设备默认 Rule Chain 发送 `INACTIVITY_EVENT` 消息
+- **活动状态**：将设备活动状态从 `true` 变为 `false`
 
-**Example `INACTIVITY_EVENT` message:**
+**`INACTIVITY_EVENT` 消息示例：**
 
-Data:
+数据：
 
 ```json
 {
@@ -135,37 +134,36 @@ Data:
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. **Validate originator**: Checks if the message originator is a device entity. If not, processing fails and message is routed to `Failure`.
-2. **Rate limiting check**: Applies rate limiting per device to prevent excessive connectivity events. Uses configurable (using `DEVICE_STATE_NODE_RATE_LIMIT_CONFIGURATION`
-   environment variable) rate limits (default: `1:1,30:60,60:3600` - 1 event per second, 30 events per minute, 60 events per hour).
-3. **Extract timestamp**: Uses the `ts` metadata property if present, otherwise uses the message timestamp as the event timestamp.
-4. **Triggers event**: Triggers the connectivity event based on the configured type.
-5. **Route message**: Routes the original message based on the result:
-    - `Success` if event was triggered successfully
-    - `Failure` if an error occurred during processing
-    - `Rate limited` if the rate limit was exceeded
+1. **验证发起者**：检查消息发起者是否为设备实体。若不是，处理失败，消息路由至 `Failure`。
+2. **限流检查**：对每台设备应用限流以防连接性事件过多。使用可配置的（通过 `DEVICE_STATE_NODE_RATE_LIMIT_CONFIGURATION` 环境变量）限流（默认：`1:1,30:60,60:3600` — 每秒 1 次、每分钟 30 次、每小时 60 次）。
+3. **提取时间戳**：若存在 `ts` 元数据属性则使用，否则使用消息时间戳作为事件时间戳。
+4. **触发事件**：根据配置的类型触发连接性事件。
+5. **路由消息**：根据结果路由原始消息：
+    - 若事件成功触发则 `Success`
+    - 若处理期间发生错误则 `Failure`
+    - 若超出限流则 `Rate limited`
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - Device connectivity event was successfully triggered
+    - 设备连接性事件已成功触发
 - `Failure`
-    - Message originator is not a `DEVICE`
-    - Unexpected error occurred during processing
+    - 消息发起者不是 `DEVICE`
+    - 处理过程中发生意外错误
 - `Rate limited`
-    - Rate limit for connectivity events was exceeded for this device
+    - 该设备的连接性事件超出限流
 
-## Examples
+## 示例
 
-### Example 1 — Activity event
+### 示例 1 — 活动事件
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`
+发起者：`DEVICE`
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -173,7 +171,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -181,19 +179,19 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-- Originator device is inactive (`active` is set to `false`)
-- `lastActivityTime` is set to `1694887100000`
+- 发起者设备为非活动（`active` 设为 `false`）
+- `lastActivityTime` 设为 `1694887100000`
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The following actions occur:
+发生以下操作：
 
-- `lastActivityTime` is updated to `1694887200000`
-- Activity status changes from `false` to `true`
-- `ACTIVITY_EVENT` message is sent to the device's default rule chain.
+- `lastActivityTime` 更新为 `1694887200000`
+- 活动状态从 `false` 变为 `true`
+- 向设备默认 Rule Chain 发送 `ACTIVITY_EVENT` 消息。

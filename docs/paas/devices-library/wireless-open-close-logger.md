@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect Wireless open/close logger to ThingsBoard?"
+title: "如何将Wireless open/close logger连接到ThingsBoard？"
 redirect_to: "/device-library/paas/wireless-open-close-logger/"
 ---

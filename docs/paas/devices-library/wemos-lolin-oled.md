@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect WeMos Lolin ESP32 OLED to ThingsBoard?"
+title: "如何将WeMos Lolin ESP32 OLED连接到ThingsBoard？"
 redirect_to: "/device-library/paas/wemos-lolin-oled/"
 ---

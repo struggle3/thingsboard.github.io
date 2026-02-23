@@ -3,11 +3,11 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Sigfox Integration allows to stream data from Sigfox Backend to ThingsBoard and converts binary device payloads to the ThingsBoard format.
+Sigfox集成可从Sigfox后端向ThingsBoard流式传输数据，并将二进制设备负载转换为ThingsBoard格式。
 
-Please review the integration diagram to learn more.
+请参阅集成示意图了解更多。
 
  ![image](/images/user-guide/integrations/sigfox-integration.svg)
 
@@ -16,7 +16,7 @@ Please review the integration diagram to learn more.
 In this tutorial, we will use:
 
 {% if docsPrefix == "pe/" %}
- - The instance of [ThingsBoard Professional Edition](https://thingsboard.io/docs/user-guide/install/pe/installation-options/) installed locally;
+ - The instance of [ThingsBoard专业版](https://thingsboard.io/docs/user-guide/install/pe/installation-options/) installed locally;
   {% endif %}
   {% if docsPrefix contains "paas/" %}
  - ThingsBoard Professional Edition instance — [{{hostName}}](https://{{hostName}});

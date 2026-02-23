@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Overview
-description: Introduction to anomaly detection in Trendz
+title: 概述
+description: Trendz 异常检测简介
 
 page-anomaly-models:
   0:
@@ -47,23 +47,18 @@ page-task-tab:
 * TOC
 {:toc}
 
-## Anomaly Detection Theory
+## 异常检测理论
 
-**Anomaly detection** is the process of identifying unexpected behavior in telemetry data - patterns that differ 
-significantly from what is considered normal. These anomalies can indicate system malfunctions, equipment degradation, 
-security breaches, or operational inefficiencies.
+**异常检测**是指识别遥测数据中意外行为的过程——即与正常情况显著不同的模式。这些异常可能预示着系统故障、设备退化、安全漏洞或运行低效。
 
-In modern monitoring and analytics, anomaly detection is essential for:
-- Predictive maintenance
-- Early fault detection
-- Operational efficiency
+在现代监测与分析中，异常检测对于以下方面至关重要：
+- 预测性维护
+- 早期故障检测
+- 运行效率
 
-**Trendz** provides a powerful, out-of-the-box solution for anomaly detection, capable of automatically finding abnormal 
-patterns in time-series data without requiring manual thresholding or expert labeling. For advanced users, Trendz also 
-offers full control over the model configuration process - including input preparation, feature extraction, distance 
-function tuning, and scoring logic - all within a convenient and intuitive interface.
+**Trendz** 提供开箱即用的强大异常检测解决方案，能自动发现时序数据中的异常模式，无需人工设定阈值或专家标注。对于高级用户，Trendz 还提供对模型配置流程的全面控制——包括输入准备、特征提取、距离函数调优和评分逻辑——均通过便捷直观的界面完成。
 
-You can find details how to use Trendz Analytics to create anomaly detection models here:
+您可在此了解如何使用 Trendz Analytics 创建异常检测模型：
 &nbsp;
 <div id="video">  
     <div id="video_wrapper">
@@ -71,225 +66,221 @@ You can find details how to use Trendz Analytics to create anomaly detection mod
     </div>
 </div>
 
-### Key Concepts in Trendz Anomaly Detection
+### Trendz 异常检测核心概念
 
-In Trendz, anomaly detection is based on two core metrics:
+在 Trendz 中，异常检测基于两个核心指标：
 
-- **Anomaly Score**  
-  A numeric value representing how far a data segment deviates from expected (normal) behavior. Think of it as measuring the **intensity** of the anomaly.
+- **异常分数（Anomaly Score）**  
+  表示数据段偏离预期（正常）行为的数值，可理解为衡量异常的**强度**。
 
-- **Anomaly Score Index**  
-  A composite metric that combines **anomaly score** with the **duration** of the anomaly. It helps prioritize anomalies that may have a **greater impact** over time.
+- **异常分数指数（Anomaly Score Index）**  
+  将**异常分数**与异常的**持续时间**结合的综合指标，有助于优先发现随时间**影响更大**的异常。
 
-**Real-World Example: Pump Vibration Analysis**
+**实际示例：泵振动分析**
 
-Let’s explore a real-world example showing pump vibrations right after startup:
+以下示例展示泵启动后的振动情况：
 
 ![image](/images/trendz/anomaly/without-preview/score_vs_index.png)
 
-- **Anomaly A**
-  - Characterized by a **sharp vibration spike** lasting ~5 seconds.
-  - Results in a **high anomaly score** due to the sudden deviation.
-  - Since it's short-lived, its **score index remains low**.
+- **异常 A**
+  - 表现为持续约 5 秒的**剧烈振动尖峰**。
+  - 因突然偏离导致**异常分数较高**。
+  - 持续时间短，故**分数指数较低**。
 
-- **Anomaly B**
-  - Shows a **longer-lasting deviation** without large spikes.
-  - The **anomaly score is lower**, but the **score index is higher** due to extended duration.
-  - This suggests a **greater long-term impact on pump health**.
+- **异常 B**
+  - 无大幅尖峰，但**偏离持续时间更长**。
+  - **异常分数较低**，但因时长增加使**分数指数更高**。
+  - 提示对泵健康的**长期影响更大**。
 
-While **Anomaly A** may appear more critical at first glance due to its spike, **Anomaly B** is likely *more important* 
-to investigate due to its prolonged effect - this is exactly what the **Anomaly Score Index** helps reveal.
-- Use **Anomaly Score** to detect sharp, short-term deviations.  
-- Use **Anomaly Score Index** to surface sustained anomalies that may cause greater damage over time.
+虽然**异常 A** 因尖峰乍看更严重，但**异常 B** 因持续影响往往*更需要*调查——这正是**异常分数指数**要揭示的内容。
+- 使用**异常分数**检测剧烈、短期偏离。  
+- 使用**异常分数指数**发现可能随时间造成更大损害的持续异常。
 
-### Supervised vs Unsupervised Anomaly Detection
+### 监督式与非监督式异常检测
 
-- **Supervised Anomaly Detection:**  
-  Requires labeled datasets where normal and anomalous segments are identified in advance.  
-  Models learn to classify data points based on these labels. Common algorithms include KNN, SVM, Logistic Regression, Decision Trees, and LSTM.  
-  *Limitations:* Needs extensive labeled data, struggles to detect new anomaly types not present in training.
+- **监督式异常检测：**  
+  需要预先标注正常与异常片段的标注数据集。  
+  模型根据标签学习分类数据点。常见算法包括 KNN、SVM、逻辑回归、决策树和 LSTM。  
+  *局限：* 需要大量标注数据，难以检测训练集中未出现的新异常类型。
 
-- **Unsupervised Anomaly Detection:**  
-  Does not require labeled data. Models learn normal behavior patterns by grouping similar data segments into clusters and detect anomalies as points that deviate significantly from these clusters.  
-  Common algorithms include K-Means, DBSCAN, Gaussian Mixture Models, and Hierarchical Clustering.  
-  *Advantages:* Automatically detects unknown anomaly types, suitable for real-world scenarios with limited labeled data.
+- **非监督式异常检测：**  
+  无需标注数据。模型通过将相似数据段分组为簇来学习正常行为模式，并将显著偏离这些簇的点视为异常。  
+  常见算法包括 K-Means、DBSCAN、高斯混合模型和层次聚类。  
+  *优势：* 自动检测未知异常类型，适用于标注数据有限的现实场景。
 
-**Trendz currently supports only unsupervised machine learning algorithms** for anomaly detection, leveraging clustering-based methods to detect anomalies in time-series data.
+**Trendz 目前仅支持非监督式机器学习算法**进行异常检测，采用基于聚类的方法在时序数据中检测异常。
 
-### How Unsupervised Anomaly Detection Works in Trendz
+### Trendz 中非监督式异常检测的工作流程
 
-1. Collect and segment telemetry data.
-2. Normalize and preprocess data.
-3. Extract features describing each segment.
-4. Cluster segments into groups representing normal behavior.
-5. Compute anomaly scores based on distance from cluster centroids.
-6. Apply model in real-time for continuous anomaly detection.
+1. 收集并分割遥测数据。
+2. 数据规范化与预处理。
+3. 提取描述各段的特征。
+4. 将数据段聚类为代表正常行为的组。
+5. 根据与簇质心的距离计算异常分数。
+6. 实时应用模型以实现持续异常检测。
 
-## Tabs Overview
+## 标签页概述
 
-### Anomaly Models Tab
+### 异常模型标签页
 
-To access the **Anomaly Models** page, click on the icon labeled *Anomaly Models* located on the left side of the workspace.
+访问**异常模型**页面：在工作区左侧点击标有 *Anomaly Models* 的图标。
 
-This page displays key characteristics of each model:
+该页面展示各模型的主要属性：
 
-- **Creation Date**
-- **Name**
-- **Type** – Currently, only *CLUSTERING* is supported
-- **Status**:
-  - **READY** – The model is ready for anomaly detection
-  - **QUEUED** – Waiting for the training job to start
-  - **IN PROGRESS** – Currently being trained
-  - **CANCELLED** – Training was canceled; needs rebuilding
-  - **FAILED** – Training failed; needs rebuilding
-- **Anomaly autodiscovery** – [Read more here](/docs/trendz/anomaly/refresh-reprocess)
-- **Saving telemetry** – [Read more here](/docs/trendz/anomaly/save-to-tb)
-- **Alarm auto creation** – [Read more here](/docs/trendz/anomaly/alarms)
+- **创建日期**
+- **名称**
+- **类型** – 当前仅支持 *CLUSTERING*
+- **状态**：
+  - **READY** – 模型已就绪，可进行异常检测
+  - **QUEUED** – 等待训练任务启动
+  - **IN PROGRESS** – 正在训练
+  - **CANCELLED** – 训练已取消，需重新构建
+  - **FAILED** – 训练失败，需重新构建
+- **异常自动发现** – [了解更多](/docs/trendz/anomaly/refresh-reprocess)
+- **遥测保存** – [了解更多](/docs/trendz/anomaly/save-to-tb)
+- **告警自动创建** – [了解更多](/docs/trendz/anomaly/alarms)
 
-**Available Actions:**
+**可用操作：**
 
-- **Create Model**
-  - Click the *Create model* button in the top-right corner of the screen to create a new anomaly model.
-  - You will be navigated to the **Input** tab to configure the model.
-  - [Read more about the Input tab here](/docs/trendz/anomaly/overview#input-tab)
+- **创建模型**
+  - 点击屏幕右上角的 *Create model* 按钮创建新异常模型。
+  - 将跳转到**输入**标签页配置模型。
+  - [了解输入标签页详情](/docs/trendz/anomaly/overview#input-tab)
 
-- **Check Model**
-  - Click on any model row to open and inspect it.
-  - This will redirect you to the **Input** tab.
-  - [Read more about the Input tab here](/docs/trendz/anomaly/overview#input-tab)
+- **查看模型**
+  - 点击任意模型行以打开并查看。
+  - 将跳转到**输入**标签页。
+  - [了解输入标签页详情](/docs/trendz/anomaly/overview#input-tab)
 
-- **Delete Model**
-  - Click the three-dot menu in the *Actions* column and select **Delete**.
-  - Confirm the deletion in the confirmation dialog.
+- **删除模型**
+  - 在 *Actions* 列点击三点菜单，选择 **Delete**。
+  - 在确认对话框中确认删除。
 
-- **Rename Model**
-  - Click the three-dot menu in the *Actions* column and select **Rename**.
-  - A text field will appear in the *Name* column.
-  - Type the new name and press **Enter** to save changes.
+- **重命名模型**
+  - 在 *Actions* 列点击三点菜单，选择 **Rename**。
+  - *Name* 列将出现文本框。
+  - 输入新名称并按 **Enter** 保存。
 
 {% include images-gallery.html imageCollection="page-anomaly-models" %}
 
-### Input Tab
+### 输入标签页
 
-The **Input** tab allows you to manage and configure core aspects of your anomaly model. You can:
+**输入**标签页可用于管理和配置异常模型的核心方面，支持：
 
-- **Rename the Model**
-  - Click the pencil icon next to the model name, enter a new name, and press **Enter**.
-  - To apply the new name, click **Save Model**. A rebuild is **not** required for this change.
+- **重命名模型**
+  - 点击模型名称旁的铅笔图标，输入新名称并按 **Enter**。
+  - 要应用新名称，点击 **Save Model**。此更改**无需**重新构建。
 
-- **Revert Model**
-  - Click the **Revert** button in the upper-right corner of the screen to discard unsaved changes and restore the last saved state of the model.
+- **恢复模型**
+  - 点击屏幕右上角的 **Revert** 按钮可放弃未保存更改并恢复到上次保存状态。
 
-- **Configure Jobs**
-  - Job configuration is available only for models in the **READY** state.
-  - Click the **Jobs** button in the upper section of the screen to open the Jobs configuration popup.
-  - Here, you can configure the **refresh job** (read more about refresh jobs [here](/docs/trendz/anomaly/refresh-reprocess#anomaly-refresh)).
+- **配置作业**
+  - 仅 **READY** 状态的模型可配置作业。
+  - 点击屏幕上方的 **Jobs** 按钮打开作业配置弹窗。
+  - 在此可配置**刷新作业**（[了解刷新作业详情](/docs/trendz/anomaly/refresh-reprocess#anomaly-refresh)）。
 
-- **Change Properties**
-  - You can update various anomaly model properties in the **Input** tab (read more about model properties [here](/docs/trendz/anomaly/build)).
-  - To apply changes, click **Save Model**. A rebuild is **not** required unless you change:
+- **修改属性**
+  - 可在**输入**标签页更新多种异常模型属性（[了解模型属性详情](/docs/trendz/anomaly/build)）。
+  - 要应用更改，点击 **Save Model**。除非修改以下内容，否则**无需**重新构建：
     - **Anomaly Model Name**
     - **Telemetry key**
     - **Telemetry storage frequency**
     - **Alarm Configuration**
 
-- **Save Model**
-  - Use the **Save Model** button to save changes or initiate a rebuild.
-  - If a rebuild is necessary, a confirmation popup will appear.
-  - **Caution**: Rebuilding the model will delete all existing anomalies and disable the refresh job.
+- **Save Model（保存模型）**
+  - 使用 **Save Model** 按钮保存更改或发起重新构建。
+  - 若需要重新构建，将出现确认弹窗。
+  - **注意：** 重新构建模型将删除所有现有异常并禁用刷新作业。
 
 {% include images-gallery.html imageCollection="page-input-tab" %}
 
-### Summary Tab
+### 摘要标签页
 
-The **Summary** tab provides an overview of anomalies grouped by device.
+**Summary** 标签页提供按设备分组的异常概览。
 
-You can:
+您可以：
 
-- View anomaly statistics for **all devices** or a **specific device**.
-- Select or deselect devices using the table below the graph.
-- Choose the display mode using the **Review**, **Dynamic**, and **Calendar** buttons located in the upper-right corner of the screen.
+- 查看**所有设备**或**特定设备**的异常统计。
+- 使用图表下方表格选择或取消选择设备。
+- 使用屏幕右上角的 **Review**、**Dynamic** 和 **Calendar** 按钮选择显示模式。
 
-**Available Modes**
+**可用模式**
 
-- **Calendar Mode (All Devices):**
-  - Displays the total anomaly index per day across all items.
-  - Only months with anomalies are shown by default.
-  - Enable the *Full Range* toggle to view the entire year.
+- **Calendar Mode（日历模式，全部设备）：**
+  - 显示所有项目的每日异常指数总和。
+  - 默认仅显示有异常的月份。
+  - 启用 *Full Range* 开关可查看全年。
 
-- **Dynamic Mode (Selected Device Only):**
-  - Visualizes monthly distribution of anomalies for the selected item.
-  - Green bars represent the **total anomaly score index for the current device**.
-  - The blue line represents the **average total score index** per month **for all devices**.
+- **Dynamic Mode（动态模式，仅所选设备）：**
+  - 可视化所选设备的月度异常分布。
+  - 绿色柱表示**当前设备的异常分数指数总和**。
+  - 蓝色线表示**所有设备**的月度**平均分数指数总和**。
 
-- **Review Mode (Selected Device Only):**
-  - Shows the **latest detected anomaly**.
-  - You can zoom out to explore the full history of anomalies discovered on the current device.
+- **Review Mode（审阅模式，仅所选设备）：**
+  - 显示**最新检测到的异常**。
+  - 可放大或缩小查看当前设备的完整异常历史。
 
 {% include images-gallery.html imageCollection="page-summary-tab" %}
 
-### Review Tab
+### 审阅标签页
 
-The **Review** tab allows you to inspect all anomalies detected during the **build**, **refresh**, or **reprocess** operations.
+**Review** 标签页可查看**构建**、**刷新**或**重新处理**期间检测到的所有异常。
 
-You can use this tab to:
+您可在此标签页：
 
-- **Validate** the anomalies discovered by the anomaly model.
-- **Fine-tune** the model by reviewing results and retraining if necessary.
-- **Determine optimal thresholds** for alarm creation (read more about alarms [here](/docs/trendz/anomaly/alarms)).
+- **验证**异常模型发现的异常。
+- 通过查看结果并在需要时重新训练来**微调**模型。
+- **确定告警创建的最优阈值**（[了解更多告警说明](/docs/trendz/anomaly/alarms)）。
 
-You can **sort anomalies** by various fields to better analyze the results:
-  - Total Duration
-  - Score
-  - Score Index
-  - Item
-  - End Timestamp
+可按以下字段**排序异常**以便更好分析：
+  - Total Duration（总持续时间）
+  - Score（分数）
+  - Score Index（分数指数）
+  - Item（设备）
+  - End Timestamp（结束时间戳）
 
 {% include images-gallery.html imageCollection="page-review-tab" %}
 
-### Cluster Info Tab
+### 簇信息标签页
 
-In this tab, you can validate the clusters that were created during the model build process.
+在此标签页可验证模型构建过程中创建的簇。
 
-The **Cluster Info** tab provides insight into how many clusters were formed, what shape or pattern they represent, 
-and how segments were distributed across them.
+**Cluster Info** 标签页显示形成了多少簇、它们代表的形状或模式，以及数据段在各簇间的分布。
 
-**Cluster Table**
+**簇表**
 
-At the bottom of the screen, a table is displayed with the following columns:
+屏幕底部显示包含以下列的表：
 
-- **Cluster ID** – Unique identifier of the cluster.
-- **Segments Count** – Number of anomaly segments that are closest to this cluster.
-- **Segments Percent** – Percentage of anomaly segments that fall into this cluster.
-- **Total Duration** – Combined duration of all anomaly segments that are closest to this cluster.
-- **Min Score** – Minimum anomaly score among segments that are closest to this cluster.
-- **Max Score** – Maximum anomaly score among segments that are closest to this cluster.
+- **Cluster ID** – 簇的唯一标识符。
+- **Segments Count** – 最接近该簇的异常段数量。
+- **Segments Percent** – 落入该簇的异常段百分比。
+- **Total Duration** – 最接近该簇的所有异常段的总持续时间。
+- **Min Score** – 最接近该簇的段中的最小异常分数。
+- **Max Score** – 最接近该簇的段中的最大异常分数。
 
-**Centroid Visualization**
+**质心可视化**
 
-At the top of the screen, you can view the **centroids** of all clusters. Each centroid represents the average pattern 
-of all segments that belong to a cluster. These curves help users understand typical shapes or behaviors captured by each cluster.
+屏幕顶部可查看所有簇的**质心**。每个质心代表属于该簇的所有段的平均模式。这些曲线有助于理解各簇捕获的典型形状或行为。
 
-You can also **click on any row in the cluster table** to open a detailed view. This view shows:
+也可**点击簇表中的任意行**打开详情视图。该视图显示：
 
-- The selected **centroid**, and
-- **20+ random segments** that belong to this cluster.
+- 选中的**质心**，以及
+- 属于该簇的**20+ 个随机段**。
 
-This feature is useful for visually comparing segment variability within the cluster and validating clustering accuracy.
+此功能便于在簇内直观比较段的可变性并验证聚类准确性。
 
 {% include images-gallery.html imageCollection="page-cluster-info-tab" %}
 
-### Tasks Tab
+### 任务标签页
 
-In the Tasks tab, you can review tasks that are associated with the current anomaly model. Here you can validate tasks such as:
-- Anomaly model build
-- Anomaly model refresh
-- Anomaly model reprocess
+在任务标签页中可查看与当前异常模型关联的任务。可在此验证如下任务：
+- 异常模型构建
+- 异常模型刷新
+- 异常模型重新处理
 
-You can see their results, last executions, and more. Read more about Trendz tasks [here](/docs/trendz/tasks-service).
+可查看其结果、上次执行时间等。[更多 Trendz 任务说明](/docs/trendz/tasks-service)。
 
-It is also possible to run the anomaly model reprocess task directly from this tab by clicking the **Run Reprocess Task** 
-button located in the upper right corner of the screen (read more about anomaly reprocess [here](/docs/trendz/anomaly/refresh-reprocess#anomaly-reprocess)).
+也可通过点击屏幕右上角的 **Run Reprocess Task** 按钮，直接从此标签页运行异常模型重新处理任务（[更多异常重新处理说明](/docs/trendz/anomaly/refresh-reprocess#anomaly-reprocess)）。
 
 {% include images-gallery.html imageCollection="page-task-tab" %}
 

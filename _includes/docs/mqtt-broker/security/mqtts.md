@@ -1,21 +1,21 @@
 * TOC
 {:toc}
 
-TBMQ provides the ability to run MQTT server and MQTT over WebSocket over SSL. Both one-way and two-way SSL are supported.
+TBMQ 支持在 SSL 上运行 MQTT 服务器与 MQTT over WebSocket，支持单向和双向 SSL。
 
-Most of the TBMQ environments use the load balancer as a termination point for the SSL connection between the devices and the broker.
-In other words, MQTT traffic is encrypted between the device and the load balancer but is decrypted between the load balancer and broker services.
-The advantage of such an option is the simplicity of configuration.
-Most of the cloud load balancers (AWS, Google Cloud, etc.) have built-in certificate generation tools and rich documentation on how to configure SSL over TCP.
-The disadvantage of such an option is that two-way SSL is not possible. The information about the client certificate is not passed from the load balancer to the broker services.
+大多数 TBMQ 环境将负载均衡器作为设备与代理之间 SSL 连接的终止点。
+即 MQTT 流量在设备与负载均衡器之间加密，在负载均衡器与代理服务之间解密。
+该方式的优点为配置简单。
+多数云负载均衡器（AWS、Google Cloud 等）内置证书生成工具，并提供 TCP 上 SSL 的详细配置文档。
+缺点为无法实现双向 SSL，客户端证书信息不会从负载均衡器传递至代理服务。
 
-Nevertheless, it is possible to configure TBMQ to two-way SSL for MQTT and avoid SSL termination on the Load Balancer.
-We recommend using valid SSL certificates generated using trusted CA authorities and avoid spending time on resolving issues with [self-signed certificates](#self-signed-certificates-generation).
-See the instructions below on how to configure SSL for certificates stored in PEM file format or Java Keystore.
+尽管如此，仍可将 TBMQ 配置为 MQTT 的双向 SSL，并避免在负载均衡器上终止 SSL。
+建议使用受信任 CA 签发的有效 SSL 证书，并避免在[自签名证书](#self-signed-certificates-generation)问题上花费时间。
+下方说明如何为 PEM 文件格式或 Java Keystore 中存储的证书配置 SSL。
 
-## SSL configuration using PEM certificates file
+## 使用 PEM 证书文件配置 SSL
 
-Configure the following environment variables via [configuration](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters) file, docker-compose or kubernetes scripts.
+通过[配置](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters)文件、docker-compose 或 kubernetes 脚本配置以下环境变量：
 
 ```bash
 ...
@@ -27,21 +27,21 @@ export LISTENER_SSL_PEM_KEY_PASSWORD=secret
 ...
 ```
 
-where:
+其中：
 
-* LISTENER_SSL_ENABLED — Enable/disable SSL support;
-* LISTENER_SSL_CREDENTIALS_TYPE — Server credentials type. PEM — pem certificate file; KEYSTORE — java keystore;
-* LISTENER_SSL_PEM_CERT — Path to the server certificate file. Holds server certificate or certificate chain, may also include the server private key;
-* LISTENER_SSL_PEM_KEY — Path to the server certificate private key file. Optional by default. Required if the private key is not present in the server certificate file;
-* LISTENER_SSL_PEM_KEY_PASSWORD — Optional server certificate private key password.
+* LISTENER_SSL_ENABLED — 启用/禁用 SSL 支持；
+* LISTENER_SSL_CREDENTIALS_TYPE — 服务器凭证类型。PEM 为 pem 证书文件；KEYSTORE 为 java keystore；
+* LISTENER_SSL_PEM_CERT — 服务器证书文件路径。包含服务器证书或证书链，也可包含服务器私钥；
+* LISTENER_SSL_PEM_KEY — 服务器证书私钥文件路径。默认可选。若服务器证书文件中未包含私钥则为必填；
+* LISTENER_SSL_PEM_KEY_PASSWORD — 服务器证书私钥密码（可选）。
 
-After completing the setup, start or restart the TBMQ server.
+完成设置后，启动或重启 TBMQ 服务。
 
 {% include templates/mqtt-broker/ssl/pem_files_location.md %}
 
-## SSL configuration using Java Keystore
+## 使用 Java Keystore 配置 SSL
 
-Configure the following environment variables via [configuration](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters) file, docker-compose or kubernetes scripts.
+通过[配置](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters)文件、docker-compose 或 kubernetes 脚本配置以下环境变量：
 
 ```bash
 ...
@@ -54,26 +54,26 @@ export LISTENER_SSL_KEY_PASSWORD=tbmq
 ...
 ```
 
-where:
+其中：
 
-* LISTENER_SSL_ENABLED — Enable/disable SSL support;
-* LISTENER_SSL_CREDENTIALS_TYPE — Server credentials type. PEM - pem certificate file; KEYSTORE — java keystore;
-* LISTENER_SSL_KEY_STORE_TYPE — Type of the key store (JKS or PKCS12);
-* LISTENER_SSL_KEY_STORE — Path to the key store that holds the SSL certificate or certificate chain, also include the server private key;
-* LISTENER_SSL_KEY_STORE_PASSWORD — Password used to access the key store;
-* LISTENER_SSL_KEY_PASSWORD — Password used to access the server private key.
+* LISTENER_SSL_ENABLED — 启用/禁用 SSL 支持；
+* LISTENER_SSL_CREDENTIALS_TYPE — 服务器凭据类型。PEM 为 pem 证书文件；KEYSTORE 为 java keystore；
+* LISTENER_SSL_KEY_STORE_TYPE — 密钥库类型（JKS 或 PKCS12）；
+* LISTENER_SSL_KEY_STORE — 存放 SSL 证书或证书链的密钥库路径，亦可包含服务器私钥；
+* LISTENER_SSL_KEY_STORE_PASSWORD — 访问密钥库的密码；
+* LISTENER_SSL_KEY_PASSWORD — 访问服务器私钥的密码。
 
-After completing the setup, start or restart the TBMQ server.
+完成配置后，启动或重启 TBMQ 服务器。
 
 {% include templates/mqtt-broker/ssl/keystore_files_location.md %}
 
-## Additional configuration properties
+## 额外配置属性
 
-You may configure following additional environment variables via [configuration](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters) file, docker-compose or kubernetes scripts.
+可通过[配置](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters)文件、docker-compose 或 kubernetes 脚本配置以下环境变量：
 
-* LISTENER_SSL_BIND_ADDRESS — the bind address for the MQTT server. Default value *0.0.0.0* indicates all interfaces;
-* LISTENER_SSL_BIND_PORT — the bind port for the MQTT server. The default value is *8883*;
-* LISTENER_SSL_PROTOCOL — ssl protocol name. The default value is *TLSv1.2*. See [java doc](https://docs.oracle.com/en/java/javase/17/docs/specs/security/standard-names.html#sslcontext-algorithms) for more details.
+* LISTENER_SSL_BIND_ADDRESS — MQTT 服务器的绑定地址。默认 *0.0.0.0* 表示所有接口；
+* LISTENER_SSL_BIND_PORT — MQTT 服务器的绑定端口。默认 *8883*；
+* LISTENER_SSL_PROTOCOL — SSL 协议名。默认 *TLSv1.2*。详见 [java doc](https://docs.oracle.com/en/java/javase/17/docs/specs/security/standard-names.html#sslcontext-algorithms)。
 
 {% include docs/user-guide/ssl/self-signed-ecc.md %}
 
@@ -81,49 +81,49 @@ You may configure following additional environment variables via [configuration]
 > This is especially important if you plan to issue client certificates signed by the same CA that signed the server certificate.
 > By doing so, TBMQ will be able to validate these client certificates during the TLS handshake, allowing secure MQTT client connections.
 
-To achieve this, you need to create a certificate chain by concatenating the server certificate and the CA certificate:
+为此，需将服务器证书与 CA 证书拼接以创建证书链：
 
 ```bash
 cat server.pem ca.pem > serverChain.pem
 ```
 {: .copy-code}
 
-The resulting `serverChain.pem` file should then be configured in TBMQ by setting the following environment variable:
+然后将生成的 `serverChain.pem` 文件在 TBMQ 中配置，设置以下环境变量：
 
 ```bash
 LISTENER_SSL_PEM_CERT=serverChain.pem
 ```
 {: .copy-code}
 
-This ensures that both the server certificate and the CA certificate are properly recognized, enabling secure mutual authentication when client certificates are used.
+这可确保服务器证书与 CA 证书被正确识别，在使用客户端证书时启用安全双向认证。
 
 {% include templates/mqtt-broker/ssl/pem-to-keystore.md %}
 
-## Adding certificate into Java Truststore
+## 将证书添加到 Java Truststore
 
-In Java-based applications, a **truststore** is a special keystore that contains certificates of entities (Certificate Authorities or servers) that the application trusts.
-Adding a certificate to the truststore ensures that Java applications running with that truststore will accept SSL/TLS connections signed by that certificate or its issuing CA.
+在基于 Java 的应用中，**truststore** 是包含应用信任实体（证书颁发机构或服务器）证书的特殊密钥库。
+将证书加入 truststore 可确保使用该 truststore 运行的 Java 应用会接受由该证书或其颁发 CA 签名的 SSL/TLS 连接。
 
 ```bash
 keytool -importcert -file CERT.pem -alias ALIAS -keystore keystore.p12 -storepass KEYSTOREPASS
 ```
 {: .copy-code}
 
-**Explanation of parameters:**
+**参数说明：**
 
-* `-importcert` — tells `keytool` to import a certificate into the specified keystore/truststore.
-* `-file CERT.pem` — the path to the certificate file you want to import.
-* `-alias ALIAS` — a unique name to reference this certificate within the keystore.
-* `-keystore keystore.p12` — the Java keystore/truststore file (.jks or .p12) to which the certificate will be added. If it doesn’t exist, it will be created.
-* `-storepass KEYSTOREPASS` — the password protecting the keystore.
+* `-importcert` — 告知 `keytool` 将证书导入指定 keystore/truststore。
+* `-file CERT.pem` — 要导入的证书文件路径。
+* `-alias ALIAS` — 密钥库中引用该证书的唯一名称。
+* `-keystore keystore.p12` — 将添加证书的 Java keystore/truststore 文件（.jks 或 .p12）。若不存在则会创建。
+* `-storepass KEYSTOREPASS` — 保护密钥库的密码。
 
-> Ensure you configure TBMQ to enable MQTTS using the appropriate [Keystore parameters](#ssl-configuration-using-java-keystore).
+> 请确保使用相应的 [Keystore 参数](#ssl-configuration-using-java-keystore) 在 TBMQ 中启用 MQTTS。
  
-To use the *keytool* command, a Java Development Kit (JDK) must be installed on your system.
+使用 *keytool* 命令前，系统需安装 Java Development Kit (JDK)。
 
-## MQTT over WebSocket Secure
+## MQTT over WebSocket 安全连接
 
-To enable secure MQTT over WebSockets (WSS), you can follow the same SSL configuration steps described above. 
-Just make sure to use the corresponding WebSocket-specific environment variables (e.g., `LISTENER_WSS_ENABLED`, `LISTENER_WSS_CREDENTIALS_TYPE`, etc.) in your configuration file, Docker Compose, or Kubernetes manifests.
+要启用 MQTT over WebSockets (WSS)，可按上述相同 SSL 配置步骤操作。
+在配置文件、Docker Compose 或 Kubernetes 清单中使用对应的 WebSocket 专用环境变量（如 `LISTENER_WSS_ENABLED`、`LISTENER_WSS_CREDENTIALS_TYPE` 等）即可。
 
-The SSL setup using PEM or Keystore works identically for both raw MQTT over TLS and WebSocket over TLS endpoints.
+使用 PEM 或 Keystore 的 SSL 配置对原始 MQTT over TLS 和 WebSocket over TLS 端点同样适用。

@@ -1,17 +1,17 @@
 ---
 layout: docwithnav-pe
-title: Provisioning devices
-description: IoT device management using ThingsBoard provisioning devices feature
+title: 设备预配置
+description: 使用 ThingsBoard 设备预配置功能进行 IoT 设备管理
 deviceProfileConfiguration:
     0:
         image: /images/user-guide/device-provisioning/device-provisioning-step-1.png 
-        title: 'You can either create a new device profile or open the existing one. To create a new one you should open the Device profiles page and click on the "+" icon in the table header.'
+        title: '您可创建新设备档案或打开现有档案。创建新档案时，请打开设备档案页面并点击表头的「+」图标。'
     1:
         image: /images/user-guide/device-provisioning/device-provisioning-step-2.png 
-        title: 'Input a name of the new device profile and click on Step 4 of the "Add device profile" wizard. We will use name "Device Provisioning Test" in this example. However, typically this should be your device model or similar.' 
+        title: '输入新设备档案名称并点击「添加设备档案」向导的第 4 步。本例使用「Device Provisioning Test」作为名称，通常应为您的设备型号或类似名称。' 
     2:
         image: /images/user-guide/device-provisioning/device-provisioning-step-3.png 
-        title: 'Choose one of the provisioning strategies, copy the provisioning key and secret, and finally click "Add". ' 
+        title: '选择预配置策略之一，复制预配置密钥和密钥，最后点击「添加」。' 
          
 ---
 

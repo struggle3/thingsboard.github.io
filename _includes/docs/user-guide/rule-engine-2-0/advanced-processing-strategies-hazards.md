@@ -1,33 +1,33 @@
-- **Skipping database storage**
+- **跳过数据库存储**
 
-  Choosing to disable one or more persistence actions (for instance, skipping database storage for Time series or Latest values while keeping WS updates enabled) introduces the risk of having only partial data available:
-    - If a message is processed only for real-time notifications (WebSockets) and not stored in the database, historical queries may not match data on the dashboard.
-    - When processing strategies for Time series and Latest values are out-of-sync, telemetry data may be stored in one table (e.g., Time series) while the same data is absent in the other (e.g., Latest values).
+  选择禁用一个或多个持久化操作（例如跳过 Time series 或 Latest values 的数据库存储，同时保持 WebSocket 更新启用）会带来仅部分数据可用的风险：
+    - 若消息仅用于实时通知（WebSocket）且未存入数据库，历史查询可能与仪表板上的数据不一致。
+    - 当 Time series 和 Latest values 的处理策略不同步时，遥测数据可能只存入一个表（如 Time series），而另一个表（如 Latest values）中缺失相同数据。
 
-- **Disabling WebSocket (WS) updates**
+- **禁用 WebSocket (WS) 更新**
 
-  If WS updates are disabled, any changes to the time series data won’t be pushed to dashboards (or other WS subscriptions).
-  This means that even if a database is updated, dashboards may not display the updated data until browser page is reloaded.
+  若禁用 WS 更新，对时序数据的任何更改不会推送到仪表板（或其他 WS 订阅）。
+  这意味着即使数据库已更新，仪表板可能不会显示更新后的数据，直到重新加载浏览器页面。
 
-- **Skipping calculated field recalculation**
+- **跳过计算字段重新计算**
 
-  If telemetry data is saved to the database while bypassing calculated field recalculation, the aggregated value may not update to reflect the latest data.
-  Conversely, if the calculated field is recalculated with new data but the corresponding telemetry value is not persisted in the database, the calculated field's value might include data that isn’t stored.
+  若遥测数据保存到数据库但绕过了计算字段重新计算，汇总值可能不会更新以反映最新数据。
+  反之，若计算字段用新数据重新计算但对应的遥测值未持久化到数据库，计算字段的值可能包含未存储的数据。
 
-- **Different deduplication intervals across actions**
+- **跨操作的不同去重间隔**
 
-  When you configure different deduplication intervals for actions, the same incoming message might be processed differently for each action.
-  For example, a message might be stored immediately in the Time series table (if set to *On every message*) while not being stored in the Latest values table because its deduplication interval hasn’t elapsed.
-  Also, if the WebSocket updates are configured with a different interval, dashboards might show updates that do not match what is stored in the database.
+  为各操作配置不同的去重间隔时，同一传入消息可能对不同操作进行不同处理。
+  例如，消息可能立即存入 Time series 表（若设为 *On every message*），而因 Latest values 表的去重间隔未到而不存入。
+  若 WebSocket 更新配置了不同间隔，仪表板显示的更新可能与数据库中的存储内容不一致。
 
-- **Deduplication cache clearing**
+- **去重缓存清理**
 
-  The deduplication mechanism uses an in-memory cache to track processed messages by interval. This cache retains up to 100 intervals for a maximum of 2 days, but entries may be cleared at any time due to its use of soft references.
-  As a result, deduplication is not guaranteed, even under light loads. For example, with a deduplication interval of one day and messages arriving once per hour, each message may still be processed if the cache is cleared between arrivals.
-  Deduplication should be treated as a performance optimization, not a strict guarantee of single processing per interval.
+  去重机制使用内存缓存按间隔跟踪已处理消息。此缓存最多保留 100 个间隔，最长 2 天，但因其使用软引用，条目可能随时被清理。
+  因此，即使负载较轻，去重也不保证。例如，去重间隔为一天且每小时收到一条消息，若在两次到达之间缓存被清理，每条消息仍可能被处理。
+  去重应视为性能优化，而非每间隔单次处理的严格保证。
 
-- **Whole message deduplication**
+- **整条消息去重**
 
-  It’s important to note that deduplication is applied to the entire incoming message rather than to individual time series keys.
-  For example, if the first message contains key A and is processed, and a subsequent message (received within the deduplication interval) contains key B, the second message will be skipped—even though it includes a new key.
-  To safely leverage deduplication, ensure that your messages maintain a consistent structure so that all required keys are present in the same message, avoiding unintended data loss.
+  需注意的是，去重应用于整条传入消息，而非单个时序 key。
+  例如，若第一条消息包含 key A 并已处理，第二条消息（在去重间隔内收到）包含 key B，第二条消息将被跳过——尽管包含新 key。
+  要安全利用去重，请确保消息保持一致结构，使所有必需 key 出现在同一条消息中，避免意外数据丢失。

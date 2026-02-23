@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Access Token based authentication for CoAP
-description: ThingsBoard Access Token based authentication for CoAP transport.
+title: CoAP 的 Access Token 认证
+description: ThingsBoard CoAP 传输的 Access Token 认证。
 
 ---
 

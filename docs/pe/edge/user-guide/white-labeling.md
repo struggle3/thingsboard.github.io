@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: White Labeling
-description: White Labeling on the Edge Instance
+title: 白标
+description: Edge 实例上的白标
 
 
 ---

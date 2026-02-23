@@ -2,21 +2,21 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Calculated Fields
-description: Trendz Calculated Fields
+title: 计算字段
+description: Trendz 计算字段
 ---
 
 * TOC
 {:toc}
 
-Calculated fields are a powerful feature in Trendz for KPI monitoring and prediction. They allow you to apply statistical functions and create new data items based on your input data, all while processing calculations on the fly.
-This ensures that no data in the ThingsBoard database is damaged or subjected to additional load. Trendz offers a robust tool for creating and managing these calculated fields, enabling complex calculations and custom formulas for data analysis and visualization.
-Additionally, you can store your calculations as telemetry in ThingsBoard, enhancing the utility and integration of your data.
+计算字段是 Trendz 中用于 KPI 监控和预测的强力功能。可应用统计函数、基于输入数据创建新数据项，并实时完成计算。
+这确保 ThingsBoard 数据库中的数据不会被破坏或承受额外负载。Trendz 提供用于创建和管理这些计算字段的工具，支持复杂计算和自定义公式，用于数据分析与可视化。
+此外，可将计算结果作为遥测存储到 ThingsBoard，提升数据的可用性和集成性。
 
-To access the calculated fields tool, click on the icon **√x**  labeled "Calculation Fields" located on the left side of the workspace.
+访问计算字段工具：点击工作区左侧标有 "Calculation Fields" 的 **√x** 图标。
 
-Within this section, a table lists all created calculated fields, along with key details. You can open, modify, or perform other actions on any of these fields.
-To create a new calculated field, click the "Create Calculation Field" button.
+该区域中，表格列出所有已创建的计算字段及主要信息。可对任意字段进行打开、修改或其他操作。
+要创建新计算字段，点击 "Create Calculation Field" 按钮。
 
 ![image](/images/trendz/calculations/calculated-field-create.png)
 

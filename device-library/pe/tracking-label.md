@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect Tracking Label to ThingsBoard?
-category: Other devices
+title: 如何将 Tracking Label 连接至 ThingsBoard？
+category: 其他设备
 connectivity: LoRaWAN
 vendor: Lansitec
 deviceImageFileName: tracking-label.png

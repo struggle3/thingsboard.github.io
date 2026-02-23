@@ -2,213 +2,213 @@
 {:toc}
 
 
-[MQTT](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-protocol/) is a lightweight, publish/subscribe messaging protocol widely used in the Internet of Things (IoT) and other distributed systems. 
-It is specifically designed to work efficiently in environments with limited resources, low bandwidth, high latency, or unreliable network connections.
+[MQTT](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-protocol/) 是一种轻量级的发布/订阅消息协议，广泛应用于物联网(IoT)及其他分布式系统。
+它专为在资源受限、低带宽、高延迟或不可靠网络环境中高效运行而设计。
 
-At the heart of every MQTT architecture lies the <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT broker</a> — 
-the central server that manages all communication between clients. 
-The broker is responsible for receiving messages from publishers, determining which subscribers are interested in those messages, and reliably delivering them according to the protocol’s rules. 
-In this way, the broker acts as the backbone of the MQTT system, ensuring seamless, secure, and efficient message exchange.
+每个 MQTT 架构的核心是 <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT broker</a>——
+负责管理客户端之间所有通信的中心服务器。 
+broker 负责接收发布者的消息、确定订阅者对哪些消息感兴趣，并根据协议规则可靠地投递它们。 
+broker 由此成为 MQTT 系统的骨干，确保消息交换无缝、安全且高效。
 
 ![image](/images/mqtt-broker/user-guide/mqtt/mqtt_broker.svg)
 
-### MQTT Clients
+### MQTT 客户端
 
-An <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT client</a> is any device, application, or service that connects to the broker to send or receive messages.
-Clients can range from small, resource-constrained IoT sensors to complex enterprise applications.
-Common examples include:
+<a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT client</a> 是连接 broker 以发送或接收消息的任何设备、应用或服务。
+客户端可以是小型资源受限的 IoT 传感器，也可以是复杂的企业级应用。
+常见示例包括：
 
-* **IoT devices** that publish sensor data, such as temperature, humidity, or GPS location.
-* **Mobile or web applications** that subscribe to updates from connected devices.
-* **Back-end services** that collect, process, or visualize incoming data streams.
+* **IoT 设备**：发布传感器数据，如温度、湿度或 GPS 位置。
+* **移动端或 Web 应用**：订阅来自连接设备的更新。
+* **后端服务**：收集、处理或可视化入站数据流。
 
-Each client can take on one or more roles:
+每个客户端可承担一个或多个角色：
 
-* **Publisher**: Sends (publishes) messages to a defined topic.
-* **Subscriber**: Receives (subscribes to) messages from one or more topics.
-* **Hybrid**: Acts as both a publisher and a subscriber, depending on the use case.
+* **发布者(Publisher)**：向指定主题发送（发布）消息。
+* **订阅者(Subscriber)**：从一个或多个主题接收（订阅）消息。
+* **混合(Hybrid)**：根据用例同时充当发布者和订阅者。
 
-By separating publishers and subscribers through the broker, MQTT clients remain loosely coupled, making systems more flexible, scalable, and easier to maintain.
+通过 broker 分离发布者和订阅者，MQTT 客户端保持松耦合，使系统更灵活、可扩展且更易维护。
 
-### MQTT Topics
+### MQTT 主题
 
-An <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT topic</a> is a structured string used by the broker to **route messages** between publishers and subscribers. 
-Topics define the subject or channel of communication and are the backbone of the publish/subscribe model.
+<a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT topic</a> 是 broker 用于在发布者和订阅者之间**路由消息**的结构化字符串。
+主题定义通信的主旨或通道，是发布/订阅模型的骨干。
 
-Key characteristics:
+主要特性：
 
-* **Hierarchical structure**: Topics are organized in levels separated by slashes (`/`).
-  Example: `home/livingroom/temperature`
-* **Message flow**:
+* **层级结构**：主题按斜杠(`/`)分隔的层级组织。
+  示例：`home/livingroom/temperature`
+* **消息流**：
 
-   * **Publishers** send messages to a specific topic.
-   * **Subscribers** register their interest in one or more topics and receive all messages published to them.
+   * **发布者**向特定主题发送消息。
+   * **订阅者**在一个或多个主题上注册兴趣，并接收发布到这些主题的所有消息。
 
-#### Wildcards in Topics
+#### 主题中的通配符
 
-MQTT supports special characters called <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT wildcards</a> to simplify subscription patterns:
+MQTT 支持称为 <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT wildcards</a> 的特殊字符以简化订阅模式：
 
-* `+` (single-level wildcard) — matches exactly one level in the topic hierarchy.
-  Example: `home/+/temperature` → matches `home/livingroom/temperature` and `home/kitchen/temperature`.
-* `#` (multi-level wildcard) — matches all remaining levels in the topic hierarchy.
-  Example: `home/#` → matches `home/livingroom/temperature`, `home/kitchen/humidity`, and anything else under `home/`.
+* `+`（单层通配符）——匹配主题层级中恰好一层。
+  示例：`home/+/temperature` → 匹配 `home/livingroom/temperature` 和 `home/kitchen/temperature`。
+* `#`（多层通配符）——匹配主题层级中所有剩余层。
+  示例：`home/#` → 匹配 `home/livingroom/temperature`、`home/kitchen/humidity` 以及 `home/` 下任何内容。
 
-This flexible topic system allows clients to filter messages with precision, making MQTT highly efficient for large-scale, event-driven communication.
+这套灵活的主题系统使客户端能够精确过滤消息，使 MQTT 在大规模事件驱动通信中极为高效。
 
-### Role of the MQTT Broker
+### MQTT Broker 的角色
 
-The **MQTT broker** is the central component that enables communication in an MQTT system. 
-Clients never communicate directly with each other — all messages flow through the broker. 
-By acting as the trusted intermediary, the broker guarantees that messages are delivered securely, reliably, and according to the rules of the protocol.
+**MQTT broker** 是 MQTT 系统中实现通信的核心组件。
+客户端之间从不直接通信——所有消息都经由 broker 流转。
+作为可信中介，broker 保证消息按协议规则安全、可靠地投递。
 
-Key responsibilities of the broker include:
+broker 的主要职责包括：
 
-* **Managing client connections**: Establishing, monitoring, and maintaining sessions with MQTT clients.
-* **Authentication and authorization**: Validating client identities and enforcing access control policies to ensure only authorized clients can publish or subscribe.
-* **Message routing**: Receiving published messages and efficiently distributing them to all clients subscribed to the relevant topics.
-* **Session and state management**: Tracking client subscriptions and, if configured, storing undelivered messages for clients that are offline.
-* **Quality of Service (QoS)**: Guaranteeing message delivery according to the selected <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT QoS</a> level — *At most once (QoS 0)*, *At least once (QoS 1)*, or *Exactly once (QoS 2)*.
+* **管理客户端连接**：建立、监控和维护与 MQTT 客户端的会话。
+* **认证与授权**：验证客户端身份并执行访问控制策略，确保只有授权客户端可以发布或订阅。
+* **消息路由**：接收已发布的消息并有效分发给订阅相关主题的所有客户端。
+* **会话与状态管理**：跟踪客户端订阅，若已配置，则为离线客户端存储未投递消息。
+* **服务质量(QoS)**：按所选 <a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">MQTT QoS</a> 级别保证消息投递——*至多一次(QoS 0)*、*至少一次(QoS 1)* 或 *恰好一次(QoS 2)*。
 
-In short, the broker serves as the **backbone of the MQTT network**, ensuring that communication between clients is scalable, secure, and dependable.
+简言之，broker 是 **MQTT 网络的骨干**，确保客户端间通信可扩展、安全且可靠。
 
-### How It Works
+### 工作原理
 
-The operation of an MQTT system can be broken down into distinct stages — from the moment a client connects to the broker, through authentication and authorization, to message publishing and distribution.
+MQTT 系统的运行可拆分为若干阶段——从客户端连接 broker，到认证与授权，再到消息发布与分发。
 
-#### Client Connection
+#### 客户端连接
 
-* A client (device, app, or service) initiates a connection to the broker using the **CONNECT** packet.
-* This packet typically includes:
+* 客户端（设备、应用或服务）使用 **CONNECT** 报文发起与 broker 的连接。
+* 该报文通常包含：
 
-    * Client identifier (`clientId`)
-    * Protocol version (e.g., MQTT 3.1.1 or MQTT 5.0)
-    * Optional username and password
-    * Clean session flag or session expiry interval (for session persistence)
-    * Last Will and Testament (LWT) message, if defined
+    * 客户端标识符（`clientId`）
+    * 协议版本（如 MQTT 3.1.1 或 MQTT 5.0）
+    * 可选的用户名和密码
+    * 清洁会话标志或会话过期间隔（用于会话持久化）
+    * 若已定义，Last Will and Testament(LWT) 消息
 
-#### Authentication & Authorization
+#### 认证与授权
 
-* The broker validates the connection request by checking credentials (username/password, certificates for SSL/TLS, or token-based mechanisms).
-* Once authenticated, the broker enforces **authorization policies**, determining which topics the client is allowed to **publish** to and **subscribe** from.
-* If the connection is accepted, the broker replies with a **CONNACK** packet confirming session parameters. If not, the connection is refused.
+* broker 通过校验凭证（用户名/密码、SSL/TLS 证书或基于 token 的机制）验证连接请求。
+* 认证通过后，broker 执行**授权策略**，确定客户端允许**发布**和**订阅**的主题。
+* 若连接被接受，broker 返回 **CONNACK** 报文确认会话参数；否则拒绝连接。
 
-#### Subscribing to Topics
+#### 订阅主题
 
-* To receive messages, the client sends a **SUBSCRIBE** packet specifying one or more topics (with optional wildcards) and the desired **QoS level**.
-* The broker registers the client’s subscription and replies with a **SUBACK** packet that confirms which QoS levels were granted.
+* 为接收消息，客户端发送 **SUBSCRIBE** 报文，指定一个或多个主题（可含通配符）及期望的 **QoS 级别**。
+* broker 登记客户端订阅，并以 **SUBACK** 报文回复确认授予的 QoS 级别。
 
-#### Publishing Messages
+#### 发布消息
 
-* When a client wants to send data, it sends a **PUBLISH** packet to the broker.
-* The packet contains:
+* 当客户端要发送数据时，向 broker 发送 **PUBLISH** 报文。
+* 报文包含：
 
-    * The topic name
-    * The message payload
-    * The QoS level for delivery reliability
-    * Retain flag (if the message should be stored as the last known good value for that topic)
-* Depending on QoS, the broker and client may exchange acknowledgment packets (**PUBACK**, **PUBREC**, **PUBREL**, **PUBCOMP**) to guarantee delivery.
+    * 主题名称
+    * 消息负载
+    * 投递可靠性所用的 QoS 级别
+    * 保留标志（若消息应存储为该主题的最后已知有效值）
+* 根据 QoS，broker 与客户端可能交换确认报文（**PUBACK**、**PUBREC**、**PUBREL**、**PUBCOMP**）以保证投递。
 
-#### Message Distribution
+#### 消息分发
 
-* The broker receives the published message and looks up all active subscriptions that match the topic.
-* For each matching subscriber, the broker forwards the message:
+* broker 接收已发布的消息并查找匹配该主题的所有活动订阅。
+* 对每个匹配的订阅者，broker 转发消息：
 
-    * Respecting the **QoS level** agreed upon with each subscriber.
-    * Delivering retained messages where applicable.
-    * Storing messages for offline subscribers if persistent sessions are enabled.
+    * 遵守与各订阅者约定的 **QoS 级别**。
+    * 在适用处投递保留消息。
+    * 若启用持久化会话，则为离线订阅者存储消息。
 
-#### Receiving Messages
+#### 接收消息
 
-* Subscribers receive the message in a **PUBLISH** packet from the broker.
-* Based on QoS, the subscriber may need to send back acknowledgment packets to confirm receipt.
-* Once processed, subscribers can act on the message — logging it, storing it, visualizing it, or triggering actions.
+* 订阅者从 broker 收到的 **PUBLISH** 报文中获取消息。
+* 根据 QoS，订阅者可能需要回复确认报文以确认收到。
+* 处理完成后，订阅者可以对消息采取操作——记录、存储、可视化或触发动作。
 
-#### Disconnecting
+#### 断开连接
 
-* When a client no longer needs the connection, it sends a **DISCONNECT** packet.
-* If the client disconnects unexpectedly, the broker triggers the **Last Will and Testament (LWT)** message (if configured) and may keep the session alive based on the persistence settings.
+* 当客户端不再需要连接时，发送 **DISCONNECT** 报文。
+* 若客户端意外断开，broker 触发 **Last Will and Testament(LWT)** 消息（如已配置），并可根据持久化设置保持会话。
 
-This end-to-end lifecycle — from connection and authentication to message delivery and disconnection — 
-makes MQTT a lightweight but **robust messaging protocol** for everything from simple IoT gadgets to massive distributed systems.
+从连接到认证、从消息投递到断开的端到端生命周期，
+使 MQTT 成为从简单 IoT 设备到大规模分布式系统的轻量而**稳健的消息协议**。
 
-### Key Features of an MQTT Broker
+### MQTT Broker 的主要特性
 
-An MQTT broker combines **protocol-level features** of MQTT with **system-level capabilities** to ensure efficient, secure, and reliable messaging.
+MQTT broker 将 MQTT 的**协议级特性**与**系统级能力**相结合，确保消息传递高效、安全且可靠。
 
-#### MQTT Protocol Features Supported by the Broker
+#### broker 支持的 MQTT 协议特性
 
-* **Quality of Service (QoS)**: Guarantees message delivery at different levels — *at most once (0)*, *at least once (1)*, or *exactly once (2)*.
-* **Keep Alive mechanism**: Ensures the connection between client and broker stays active by requiring periodic communication, helping detect broken connections quickly.
-* **Last Will and Testament (LWT)**: Sends a predefined message if a client disconnects unexpectedly, helping detect failures automatically.
-* **Retained messages**: Stores the last message on a topic so new subscribers receive the most recent state instantly.
-* **Topic-based routing**: Efficiently matches published messages to subscribers using hierarchical topics and wildcards.
-* **Session persistence**: Maintains subscriptions and undelivered messages for clients that reconnect, allowing reliable communication even after temporary disconnections.
-* **Shared subscriptions** (MQTT 5.0): Distributes messages among a group of subscribers to balance load.
+* **服务质量(QoS)**：在不同级别保证消息投递——*至多一次(0)*、*至少一次(1)* 或 *恰好一次(2)*。
+* **Keep Alive 机制**：通过要求周期性通信，确保客户端与 broker 之间的连接保持活跃，快速检测断开连接。
+* **Last Will and Testament(LWT)**：若客户端意外断开则发送预定义消息，自动帮助检测故障。
+* **保留消息**：存储主题上的最后一条消息，使新订阅者立即收到最新状态。
+* **基于主题的路由**：使用层级主题和通配符，将已发布消息高效匹配给订阅者。
+* **会话持久化**：为重连客户端保留订阅和未投递消息，即使在短暂断连后也能可靠通信。
+* **共享订阅**(MQTT 5.0)：在订阅者组内分发消息以实现负载均衡。
 
-These are some of the most important MQTT features supported by brokers. 
-Depending on the version of the protocol (MQTT 3.1.1 or 5.0) and the specific broker implementation, many more features may be available to enhance reliability, efficiency, and security.
+以上是 broker 支持的部分最重要 MQTT 特性。
+根据协议版本（MQTT 3.1.1 或 5.0）及具体 broker 实现，可能还有更多特性用于提升可靠性、效率和安全性。
 
-> TBMQ supports the full range of MQTT 3.x and MQTT 5.0 protocol features.
+> TBMQ 支持完整的 MQTT 3.x 和 MQTT 5.0 协议特性。
 
-#### Broker Capabilities
+#### broker 能力
 
-* **Scalability**: Handles thousands or millions of simultaneous client connections and messages with consistent reliability.
-* **Performance**: Optimized for low latency and high throughput, even in large distributed systems.
-* **Durability**: Ensures that critical messages and session data are stored persistently (e.g., in databases or disk-backed queues), so they survive restarts or crashes.
-* **Security**: Provides TLS/SSL encryption, authentication, and fine-grained access control to ensure safe communication.
-* **High availability & clustering**: Supports clustering, load balancing, and fault tolerance for production-grade deployments.
-* **Integration**: Connects seamlessly with external systems such as databases, Kafka, or cloud services for data processing and analytics.
+* **可扩展性**：以稳定可靠性处理成千上万或数百万的并发客户端连接及消息。
+* **性能**：针对低延迟和高吞吐量优化，即使在大规模分布式系统中。
+* **持久性**：确保关键消息和会话数据持久存储（如数据库或磁盘队列），在重启或崩溃后仍可恢复。
+* **安全性**：提供 TLS/SSL 加密、认证及细粒度访问控制，保障通信安全。
+* **高可用与集群**：支持集群、负载均衡和容错，适用于生产级部署。
+* **集成**：与数据库、Kafka 或云服务等外部系统无缝对接，用于数据处理和分析。
 
-> TBMQ provides all of these capabilities out of the box: horizontal scalability to millions of clients, high throughput with low latency, persistence and durability powered by Redis/Kafka, 
-> built-in TLS/SSL security, clustering with fault tolerance, and integration with external systems like Kafka, other MQTT brokers, and HTTP-based services.
+> TBMQ 开箱即用提供所有上述能力：支持数百万客户端的水平扩展、高吞吐与低延迟、由 Redis/Kafka 驱动的持久化、
+> 内置 TLS/SSL 安全、带容错的集群，以及与 Kafka、其他 MQTT broker 和 HTTP 服务等外部系统的集成。
 
-### Types of MQTT Brokers
+### MQTT Broker 类型
 
-MQTT brokers come in different forms depending on how they are deployed, licensed, and used. The main categories are:
+MQTT broker 根据部署、许可和使用方式分为不同形式。主要类别包括：
 
-1. **Open-source brokers**
+1. **开源 broker**
 
-    * Free to use and highly customizable, with active developer communities.
-    * Suitable for prototyping, self-hosted deployments, and integration into larger systems.
+    * 免费使用且高度可定制，拥有活跃的开发者社区。
+    * 适用于原型开发、自托管部署及集成到更大系统。
 
-2. **Commercial brokers**
+2. **商业 broker**
 
-    * Provide enterprise-grade features such as clustering, monitoring dashboards, advanced security, and SLA-backed support.
-    * Ideal for organizations that need guaranteed reliability, high availability, and professional support.
+    * 提供企业级特性，如集群、监控仪表板、高级安全及 SLA 保障支持。
+    * 适合需要可靠保障、高可用性和专业支持的组织。
 
-3. **Cloud-based brokers (MQTT-as-a-Service)**
+3. **云托管 broker（MQTT-as-a-Service）**
 
-    * Fully managed services where the provider handles deployment, scaling, maintenance, and uptime.
-    * Great for rapid adoption and use cases where infrastructure management should be outsourced.
+    * 完全托管的服务，提供商负责部署、扩缩、维护和可用性。
+    * 适合快速采用及需要将基础设施管理外包的场景。
 
-4. **Embedded brokers**
+4. **嵌入式 broker**
 
-    * Extremely lightweight brokers that run directly on edge devices, gateways, or inside applications.
-    * Useful for local processing, offline-first scenarios, or edge computing environments where low latency is critical.
+    * 极轻量的 broker，可直接运行在边缘设备、网关或应用内部。
+    * 适用于本地处理、离线优先场景或对低延迟有要求的边缘计算环境。
 
-### How to Choose the Right MQTT Broker
+### 如何选择合适的 MQTT Broker
 
-Selecting the right MQTT broker depends on your project’s scale, requirements, and long-term goals. The following criteria can help guide the decision:
+选择适合的 MQTT broker 取决于项目规模、需求和长期目标。以下标准可供参考：
 
-* **Scalability**: Ensure the broker can handle your projected number of client connections and message throughput, with room to grow as your system expands.
-* **High availability & clustering**: Look for features like clustering, replication, and load balancing to guarantee uptime and fault tolerance in production environments.
-* **Performance**: Evaluate latency, throughput, and resource efficiency under real-world load conditions to ensure the broker meets your responsiveness needs.
-* **Security**: Check for support of TLS/SSL encryption, authentication, authorization, and fine-grained access controls to protect data and devices.
-* **Persistence**: Consider whether the broker provides durable message storage — including retained messages, offline queues, or integration with external databases.
-* **Integration capabilities**: Verify compatibility with your ecosystem, such as Kafka, SQL/NoSQL databases, monitoring tools, or cloud platforms.
-* **Community & support**: An active open-source community or available enterprise support can make a big difference in troubleshooting and long-term maintenance.
-* **Cost**: Balance your budget against needs — choosing between open-source (free, DIY), commercial (license + support), or cloud (subscription-based, managed) options.
+* **可扩展性**：确保 broker 能处理预计的客户端连接数和消息吞吐量，并留有扩展空间。
+* **高可用与集群**：寻找集群、复制和负载均衡等特性，以保证生产环境的可用性和容错。
+* **性能**：在真实负载条件下评估延迟、吞吐量和资源效率，确保 broker 满足响应性需求。
+* **安全性**：确认支持 TLS/SSL 加密、认证、授权及细粒度访问控制，保护数据和设备。
+* **持久化**：考虑 broker 是否提供持久化消息存储——包括保留消息、离线队列或与外部数据库集成。
+* **集成能力**：验证与生态系统的兼容性，如 Kafka、SQL/NoSQL 数据库、监控工具或云平台。
+* **社区与支持**：活跃的开源社区或企业支持对问题排查和长期维护至关重要。
+* **成本**：根据需求平衡预算——在开源（免费、DIY）、商业（许可证+支持）或云（订阅制、托管）之间选择。
 
-By weighing these factors, you can select a broker that not only meets your current needs but also scales with your system as it evolves.
+综合权衡这些因素，可选出既能满足当前需求又能随系统演进而扩展的 broker。
 
-> <a href="/pricing/?section=tbmq-options" target="_blank" style="color: inherit; text-decoration: none;">TBMQ</a> is built to meet all these criteria — 
-> it offers enterprise-level scalability, clustering, persistence, strong security, and deep integration options while remaining easy to operate and cost-efficient. 
-> This makes it a strong choice for both open-source adopters and enterprises looking for a production-ready MQTT platform.
+> <a href="/pricing/?section=tbmq-options" target="_blank" style="color: inherit; text-decoration: none;">TBMQ</a> 即为满足上述标准而设计——
+> 提供企业级可扩展性、集群、持久化、强安全及深度集成能力，同时保持易用和成本效益。
+> 是开源使用者和寻求生产级 MQTT 平台的企业的不错选择。
 
-### Final Words
+### 总结
 
-The MQTT broker is the backbone of any MQTT-based system, enabling efficient and reliable communication between distributed devices and services. 
-It plays a critical role in diverse domains such as IoT ecosystems, smart homes, industrial automation, connected vehicles, and large-scale data infrastructures.
+MQTT broker 是任何基于 MQTT 的系统的骨干，实现分布式设备与服务间高效可靠的通信。
+在 IoT 生态、智能家居、工业自动化、车联网及大规模数据基础设施等诸多领域发挥关键作用。
 
-By offloading responsibilities like message routing, delivery guarantees, and connection management to the broker, client devices remain simple, lightweight, and resource-efficient. 
-This not only reduces device complexity but also improves scalability, security, and overall system reliability — making the MQTT broker a cornerstone of modern connected applications.
+将消息路由、投递保证和连接管理等职责交由 broker 承担，客户端设备可保持简单、轻量且资源高效。
+这不仅降低了设备复杂度，还提升了可扩展性、安全性和整体系统可靠性——使 MQTT broker 成为现代连接应用的基础。

@@ -1,49 +1,49 @@
-The process of configuring the load balancer using Google-managed SSL certificates is described on the official [documentation page](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs).
-The instructions below are extracted from the official documentation. Make sure you read [prerequisites](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs#prerequisites) carefully before proceeding.
+使用 Google 托管 SSL 证书配置负载均衡器的过程在官方[文档页面](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs)中有描述。
+以下说明摘自官方文档。请务必在继续操作前仔细阅读[先决条件](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs#prerequisites)。
 
 ```bash
 gcloud compute addresses create {{staticIP}} --global
 ```
 {: .copy-code}
 
-Replace the *PUT_YOUR_DOMAIN_HERE* with a valid domain name in the *https-load-balancer.yml* file:
+在 *https-load-balancer.yml* 文件中将 *PUT_YOUR_DOMAIN_HERE* 替换为有效域名：
 
 ```bash
 nano receipts/https-load-balancer.yml
 ```
 {: .copy-code}
 
-Execute the following command to deploy secure http load balancer:
+执行以下命令部署安全 HTTP 负载均衡器：
 
 ```bash
  kubectl apply -f receipts/https-load-balancer.yml
 ```
 {: .copy-code}
 
-The process of load balancer provisioning may take some time. You may periodically check the status of the load balancer using the following command:
+负载均衡器配置过程可能需要一些时间。您可以使用以下命令定期检查负载均衡器状态：
 
 ```bash
 kubectl get ingress
 ```
 {: .copy-code}
 
-Once provisioned, you should see a similar output:
+配置完成后，您将看到类似的输出：
 
 ```text
 NAME                      CLASS    HOSTS   ADDRESS         PORTS   AGE
 tbmq-https-loadbalancer   gce      *       34.111.24.134   80      7m25s
 ```
 
-Now, **assign the domain name** you have used to the load balancer IP address (the one you see instead of 34.111.24.134 in the command output).
+现在，将您使用的**域名**指向负载均衡器 IP 地址（即命令输出中替代 34.111.24.134 的地址）。
 
-Check that the domain name is configured correctly using dig:
+使用 dig 检查域名是否配置正确：
 
 ```bash
 dig YOUR_DOMAIN_NAME
 ```
 {: .copy-code}
 
-Sample output:
+示例输出：
 
 ```text
 
@@ -68,11 +68,11 @@ YOUR_DOMAIN_NAME. 36 IN	A	34.111.24.134
 
 ```
 
-Once assigned, wait for the Google-managed certificate to finish provisioning. This might take up to 60 minutes. You can check the status of the certificate using the following command:
+域名指向后，等待 Google 托管证书完成配置。此过程可能需要长达 60 分钟。您可以使用以下命令检查证书状态：
 
 ```bash
 kubectl describe managedcertificate managed-cert
 ```
 {: .copy-code}
 
-Certificate will be eventually provisioned if you have configured domain records properly.
+如果您已正确配置域名解析记录，证书最终将配置完成。

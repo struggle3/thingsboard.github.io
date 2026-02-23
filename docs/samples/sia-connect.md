@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
 title: SIA Connect
-description: SIA Connect Guide
+description: SIA Connect 指南
 
 creating-device-on-thingsboard:
     0:

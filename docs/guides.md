@@ -1,6 +1,6 @@
 ---
 layout: docwithnav
-title: Guides
+title: 指南
 notitle: "true"
 redirect_from: 
   - "/docs/iot-video-tutorials/"

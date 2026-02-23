@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard on Raspberry Pi
-description: Installing ThingsBoard IoT Platform on Raspberry Pi
+title: 在 Raspberry Pi 上安装 ThingsBoard
+description: 在 Raspberry Pi 上安装 ThingsBoardIoT平台
 
 ---
 

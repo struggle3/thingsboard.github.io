@@ -1,57 +1,55 @@
-
+﻿
 {% assign boardLedCount = 1 %}
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign arduinoBoardPath = "**ESP32** > **ESP32 Dev Module**" %}
 {% assign prerequisites = "
 - " | append: deviceName | append: "
 - [Arduino IDE](https://www.arduino.cc/en/software)"
  %}
 
-## Introduction
+## 概述
 
 
-The ESP32 Dev Kit V4 dev kit is built on the ESP-WROOM-32U module, a new miniature high-performance Wi-Fi + BT + BLE chip from Espressif, designed for a wide range of applications, from micro-power network sensors to the most complex applications, such as encoding, streaming music and MP3 encoding.  
-The module contains all the necessary minimum peripherals, sufficient for a quick and comfortable start of the work with ESP-WROOM-32.  
-ESP-WROOM-32 is based on the popular ESP32 dual-core chipset, with a variable clock frequency from 80 MHz to 240 MHz, with the possibility of individual control and power supply.  
-The module is designed for portable and autonomous electronics and Internet of Things applications, made in a miniature 25.5 mm x 18 mm package. It has on-board Flash memory, 40 MHz quartz and with connection point for external WiFi antenna.
+ESP32 Dev Kit V4 开发板基于 ESP-WROOM-32U 模块，这是乐鑫推出的一款微型高性能 Wi-Fi + BT + BLE 芯片，适用于多种应用场景，从微功耗网络传感器到复杂的应用（如编码、流媒体及 MP3 编码）均可胜任。  
+该模块具备所需的基础外设，便于快速上手使用 ESP-WROOM-32。  
+ESP-WROOM-32 采用广受欢迎的 ESP32 双核芯片组，主频可在 80 MHz 至 240 MHz 间调节，支持独立控制和供电。  
+模块面向便携式及自主式电子设备与物联网应用设计，采用 25.5 mm × 18 mm 微型封装，板载 Flash 存储、40 MHz 晶振，并提供外接 Wi-Fi 天线接口。
   
 {% include /docs/device-library/blocks/basic/introduction-block.md %}
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 {% include /docs/device-library/blocks/basic/thingsboard-create-device-block.md %}
 
-## Install required libraries and tools
+## 安装所需库和工具 {#install-required-libraries-and-tools}
 
 {% include /docs/device-library/blocks/microcontrollers/esp32-arduino-library-install-block.md %}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-arduino-library-install-block.md %}
 
-## Connect device to ThingsBoard 
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 {% include /docs/device-library/blocks/basic/thingsboard-provide-device-access-token-block.md %}
 
 {% include /docs/device-library/blocks/microcontrollers/general-code-to-program-block.md %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/basic/thingsboard-upload-example-dashboard.md %}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-check-example-data-block.md %}
 
-## Synchronize device state using client and shared attribute requests
+## 使用客户端和共享属性请求同步设备状态 {#synchronize-device-state-using-client-and-shared-attribute-requests}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-synchronize-device-state-using-attribute-requests-block.md %}
 
-## Control device using shared attributes
+## 使用共享属性控制设备 {#control-device-using-shared-attributes}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-update-shared-attributes-device-block.md %}
 
-## Control device using RPC
+## 使用 RPC 控制设备 {#control-device-using-rpc}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-send-rpc-to-device-block.md %}
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

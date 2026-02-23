@@ -1,11 +1,10 @@
-Checks the incoming message’s originator entity type against the configured set of entity types. If the type is in the set, the message is routed via `True`; otherwise, via
-`False`.
+将入站消息的来源实体类型与配置的实体类型集合进行比对。若类型在集合中，消息经 `True` 路由；否则经 `False` 路由。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Select entity types** - a set of entity types to check against; at least one must be specified.
+* **选择实体类型** — 用于比对的实体类型集合；至少需指定一个。
 
 ### JSON Schema
 
@@ -33,63 +32,34 @@ Checks the incoming message’s originator entity type against the configured se
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Determine whether the incoming message’s originator entity type matches one of the configured entity types.
-    1. If it matches, route the message to downstream nodes via `True`.
-    2. If it does not match, route the message to downstream nodes via `False`.
+1. 判断入站消息的来源实体类型是否匹配任一已配置的实体类型。
+    1. 若匹配，则通过 `True` 将消息路由至下游节点。
+    2. 若不匹配，则通过 `False` 将消息路由至下游节点。
 
-## Output connections
+## 输出连接
 
-* `True`:
-    * If incoming message’s originator entity type matches any of the entity types configured for the node.
-* `False`:
-    * If incoming message’s originator entity type does not match any of the entity types configured for the node.
-* `Failure`:
-    * If unexpected error occurred during message processing.
+* `True`：
+    * 当入站消息的来源实体类型匹配节点配置的任一实体类型时。
+* `False`：
+    * 当入站消息的来源实体类型不匹配节点配置的任一实体类型时。
+* `Failure`：
+    * 消息处理过程中发生意外错误时。
 
-## Examples
+## 示例
 
-The examples below show only the **relevant** fields of the incoming message. Unless explicitly stated otherwise, other message fields may have any values.
+以下示例仅展示入站消息的**相关**字段。除非另有说明，其他消息字段可为任意值。
 
 ---
 
-### Example 1 — Entity type matches → `True`
+### 示例 1 — 实体类型匹配 → `True`
 
-**Incoming message**
+**入站消息**
 
-Originator entity type is an `ASSET`.
+来源实体类型为 `ASSET`。
 
-**Node configuration**
-
-```json
-{
-  "originatorTypes": [
-    "ASSET",
-    "DEVICE"
-  ]
-}
-```
-
-**State of the system**
-
-Not relevant.
-
-**Result**
-
-Routed via **`True`**.
-
-**Explanation**
-
-Incoming message originator entity type is in the configured set, so the message is routed via `True`.
-
-### Example 2 — Entity type does not match → `False`
-
-**Incoming message**
-
-Originator entity type is a `TENANT`.
-
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -100,14 +70,43 @@ Originator entity type is a `TENANT`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-Incoming message originator entity type is not in the configured set, so the message is routed via `False`.
+入站消息的来源实体类型在配置的集合中，因此消息经 `True` 路由。
+
+### 示例 2 — 实体类型不匹配 → `False`
+
+**入站消息**
+
+来源实体类型为 `TENANT`。
+
+**节点配置**
+
+```json
+{
+  "originatorTypes": [
+    "ASSET",
+    "DEVICE"
+  ]
+}
+```
+
+**系统状态**
+
+不相关。
+
+**结果**
+
+经 **`False`** 路由。
+
+**说明**
+
+入站消息的来源实体类型不在配置的集合中，因此消息经 `False` 路由。

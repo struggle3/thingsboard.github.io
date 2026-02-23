@@ -1,11 +1,8 @@
-Every telemetry and attribute parameter has `GET` and `SET` RPC methods out of the box, so you don’t need to configure 
-them manually.
+每个遥测和属性参数默认都有 `GET` 和 `SET` RPC 方法，因此您无需手动配置。
 
-As an example, we will use a BACnet controller to which a relay is connected. We also know that the relay has the 
-following object ID: `Binary Input:1`.
+例如，我们将使用连接了继电器的 BACnet 控制器。我们还知道该继电器的对象 ID 为：`Binary Input:1`。
 
-We will use this object ID to read the value of the relay using the `GET` RPC method and to set the value of the relay 
-using the `SET` RPC method. The configuration for this telemetry will look like this:
+我们将使用此对象 ID 通过 `GET` RPC 方法读取继电器值，并通过 `SET` RPC 方法设置继电器值。此遥测的配置如下：
 
 ```json
 {
@@ -16,14 +13,13 @@ using the `SET` RPC method. The configuration for this telemetry will look like 
 }
 ```
 
-Let’s check the value of the relay using the reserved `GET` method. To get the current value of the relay, run the query
-in the RPC debug terminal:
+让我们使用保留的 `GET` 方法检查继电器值。要获取继电器当前值，请在 RPC 调试终端中运行以下查询：
 
 ```bash
 get objectType=binaryInput;objectId=1;propertyId=presentValue;
 ```
 
-Response:
+响应：
 
 ```json
 {"result": {"value":  "inactive"}}
@@ -31,36 +27,36 @@ Response:
 
 ![image](/images/gateway/bacnet-connector/examples/reserved-rpc-result-1.png)
 
-So, the `GET` method returns the current value of the relay, and we can see that the relay is off.
+因此，`GET` 方法返回继电器的当前值，我们可以看到继电器处于关闭状态。
 
 {% capture difference %}
-The RPC Debug Terminal is used only for example purpose, so you can use any other widget that supports RPC calls.
+RPC 调试终端仅用于示例目的，您可以使用任何支持 RPC 调用的部件。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To set the value of the relay and turn it on, run the query:
+要设置继电器值并打开继电器，请运行以下查询：
 
 ```bash
 set objectType=binaryInput;objectId=1;propertyId=presentValue;value=1;
 ```
 
-Response:
+响应：
 
 ```json
 {"result": {"value": 1}}
 ```
 
-And as you can see, from the screenshot below, the relay telemetry value has changed to `1`:
+如您从下方截图所见，继电器遥测值已变为 `1`：
 
 ![image](/images/gateway/bacnet-connector/examples/reserved-rpc-result-2.png)
 
-Also, let’s check the value of the relay telemetry again:
+此外，让我们再次检查继电器遥测值：
 
 ```bash
 get objectType=binaryInput;objectId=1;propertyId=presentValue;
 ```
 
-Response:
+响应：
 
 ```json
 {"result": {"value":  "active"}}
@@ -68,8 +64,8 @@ Response:
 
 ![image](/images/gateway/bacnet-connector/examples/reserved-rpc-result-3.png)
 
-Full configuration for BACnet connector for the examples above will look like this 
-(**make sure to use the right device host and port**):
+上述示例的 BACnet 连接器完整配置如下
+**（请务必使用正确的设备 host 和 port）**：
 
 ```json
 {

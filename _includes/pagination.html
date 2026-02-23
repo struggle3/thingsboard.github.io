@@ -13,7 +13,7 @@
     data-search="{{ searchControl }}"
 >
     <div class="pagination-container">
-        <button id="showMoreBtn" class="show-more-btn">Show More</button>
+        <button id="showMoreBtn" class="show-more-btn">显示更多</button>
         <nav class="pagination-nav">
             <ul id="pagination-controls" class="pagination"></ul>
             <div id="paginationStatus" class="pagination-status"></div>
@@ -109,8 +109,8 @@
 
                     if (paginationStatus) {
                         paginationStatus.textContent = activePages.length > 1
-                            ? `Pages ${minPage}-${maxPage} of ${pageCount}`
-                            : `Page ${minPage} of ${pageCount}`;
+                            ? `第 ${minPage}-${maxPage} 页，共 ${pageCount} 页`
+                            : `第 ${minPage} 页，共 ${pageCount} 页`;
                     }
 
                     if (!paginationControls) return;

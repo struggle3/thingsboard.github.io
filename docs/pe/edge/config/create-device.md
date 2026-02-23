@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Device Management
-description: Seamlessly create Edge devices and assign them to the Cloud
+title: Edge 设备管理
+description: 无缝创建 Edge 设备并分配至云端
 
 create-device:
     0:

@@ -1,8 +1,8 @@
 {% capture update_server_first %}
-Ensure your <b>ThingsBoard Server is up to date</b> before updating ThingsBoard Edge.
+更新ThingsBoard Edge前，请确保 <b>ThingsBoard Server 已更新至最新版本</b>。
 
-If your Server version is outdated, [upgrade it first](/docs/{{peDocsPrefix}}user-guide/install/upgrade-instructions/{{updateServerLink}}/){:target="_blank"}.
+若Server版本过旧，请[先升级](/docs/{{peDocsPrefix}}user-guide/install/upgrade-instructions/{{updateServerLink}}/){:target="_blank"}。
 
-The following instructions are applicable for <b>ThingsBoard Edge {{previousVersion}}</b> version.
+以下说明适用于 <b>ThingsBoard Edge {{previousVersion}}</b> 版本。
 {% endcapture %}
 {% include templates/warn-banner.md content=update_server_first %}

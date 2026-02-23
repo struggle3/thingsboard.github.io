@@ -1,7 +1,7 @@
-#### Authorization Rules
+#### 授权规则
 
-Authorization rule patterns allow controlling what topics clients can publish/subscribe to based on **regular expression syntax**:
+授权规则模式可根据**正则表达式语法**控制客户端可发布/订阅的主题：
 
-* **Allowing particular topic(s)** - the rule `country/.*` will allow clients to publish/subscribe messages only to topics that start with `country/`.
-* **Allowing any topic** - the rule `.*` (default) will allow clients to publish/subscribe messages to any topic.
-* **Forbidding all topics** - if the rule is `empty`, the client is forbidden to publish/subscribe to any topic.
+* **允许特定主题** - 规则 `country/.*` 将使客户端只能发布/订阅以 `country/` 开头的主题。
+* **允许任意主题** - 规则 `.*`（默认）将使客户端能发布/订阅任意主题。
+* **禁止所有主题** - 若规则为 `empty`，则禁止客户端发布/订阅任意主题。

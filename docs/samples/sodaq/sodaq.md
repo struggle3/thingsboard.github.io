@@ -1,16 +1,16 @@
 ---
 layout: docwithnav-pe
-title: SODAQ Universal Tracker telemetry upload
-description: SODAQ Universal Tracker telemetry upload
+title: SODAQ 通用追踪器遥测上传
+description: SODAQ 通用追踪器遥测上传
 hidetoc: "true"
 
 ---
 
 {% assign feature = "Platform Integrations" %}{% include templates/pe-feature-banner.md %}
 
-This guide contains step-by-step instruction how to connect your SODAQ NB-IoT boards to ThingsBoard Professional Edition (PE) through the T-Mobile NB IoT network.
-We will use free ThingsBoard PE demo server [thingsboard.cloud](https://thingsboard.cloud/signup) in this guide.
-This guide will be useful for anyone who wants to connect their SODAQ NB-IoT boards or other hardware to T-Mobile NB IoT network.
+本指南包含分步说明，介绍如何通过 T-Mobile NB IoT 网络将 SODAQ NB-IoT 开发板连接到 ThingsBoard 专业版（PE）。
+本指南使用免费的 ThingsBoard PE 演示服务器 [thingsboard.cloud](https://thingsboard.cloud/signup)。
+适用于希望将 SODAQ NB-IoT 开发板或其他硬件连接到 T-Mobile NB IoT 网络的用户。
 
 * TOC
 {:toc}

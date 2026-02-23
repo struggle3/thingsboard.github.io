@@ -1,13 +1,13 @@
-As an example, we will use ThingsBoard Modbus Demo Server, which can be run using Docker and the following command:
+我们以 ThingsBoard Modbus 演示服务器为例，可使用 Docker 运行以下命令：
 
 ```bash
 docker run -it -p 5021:5021 thingsboard/tb-gw-modbus-server:latest
 ```
 {:.copy-code}
 
-The server available at `0.0.0.0:5021`. The server has the following structure:
+服务器在 `0.0.0.0:5021` 可用。服务器结构如下：
 
-| Variable Name  | Register Type   | Data Type  | Address    |
+| 变量名  | 寄存器类型   | 数据类型  | 地址    |
 |:---------------|:----------------|------------|:-----------|
 | Temperature    | Holding         | 16int      | 0          |
 | Humidity       | Holding         | 16int      | 1          |
@@ -16,22 +16,14 @@ The server available at `0.0.0.0:5021`. The server has the following structure:
 | Relay          | Coil            | bits       | 1          |
 | -------------- | --------------- | ---------- | ---------- |
 
-For optimizing the number of requests sent to the Modbus server, you can use the **Batch reading** feature available 
-in the advanced configuration mode. This feature allows reading multiple registers in a single request, which can 
-significantly reduce the load on the Modbus server and improve performance.
+为优化发送到 Modbus 服务器的请求数量，可使用高级配置模式下的**批量读取**功能。该功能允许在单次请求中读取多个寄存器，从而显著降低 Modbus 服务器负载并提升性能。
 
-Let’s look at an example of how to properly configure batch reading to read the `temperature`, `humidity`, `power`, 
-and `pressure` registers from the Modbus server.
+下面举例说明如何正确配置批量读取，以从 Modbus 服务器读取 `temperature`、`humidity`、`power` 和 `pressure` 寄存器。
 
-From the table above, we can see that all the required registers are of the same type (`16int`) and have the same
-function code (`03 - Read Holding Registers`). This means that we can group them into a single batch read request.
-We need to read registers from address `0` to address `3`, so our address range will be `0-3`. 
-Also, you need to use, for examples `${address}` variable in the `tag` field to uniquely identify each register within 
-the batch read. In our case, we will use the following expression for the `tag` field: 
-`${unitId}.${type}.${address}` (you can find more information about variables in the corresponding [section of 
-the documentation](/docs/iot-gateway/config/modbus/#batch-reading-advanced-configuration-mode-only)).
+从上表可知，所需寄存器类型相同（`16int`）且功能码相同（`03 - 读保持寄存器`）。因此可将它们合并为一次批量读取请求。需要读取地址 `0` 到 `3` 的寄存器，地址范围为 `0-3`。
+此外，需在 `tag` 字段中使用 `${address}` 等变量以唯一标识批量读取中的每个寄存器。本示例在 `tag` 字段中使用以下表达式：`${unitId}.${type}.${address}`（更多变量信息请参阅[文档相应章节](/docs/iot-gateway/config/modbus/#batch-reading-advanced-configuration-mode-only)）。
 
-Copy and paste the following configuration into the Modbus connector advanced configuration mode:
+将以下配置复制粘贴到 Modbus 连接器高级配置模式：
 
 ```json
 {
@@ -76,7 +68,6 @@ Copy and paste the following configuration into the Modbus connector advanced co
 ```
 {:.copy-code}
 
-After saving the changes and starting the connector, you see that the corresponding telemetry is being updated 
-correctly:
+保存更改并启动连接器后，可以看到对应遥测数据正确更新：
 
 ![image](/images/gateway/modbus-connector/examples/batch-reading-overview.png)

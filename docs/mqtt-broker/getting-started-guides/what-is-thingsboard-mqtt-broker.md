@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: What is TBMQ?
-description: TBMQ key features, architecture, etc.
+title: 什么是 TBMQ？
+description: TBMQ 主要特性、架构等
 ---
 
 {% assign tbmqSuffix = "CE" %}

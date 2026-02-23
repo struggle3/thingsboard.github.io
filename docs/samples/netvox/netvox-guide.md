@@ -1,17 +1,17 @@
 ---
 layout: docwithnav
-title: Netvox LoRaWAN Devices and ThingsBoard
+title: Netvox LoRaWAN 设备与 ThingsBoard
 
 ---
 
 * TOC
 {:toc}
 
-Netvox has more than 400 LoRaWAN end devices that can be integrated into systems supporting the LoRaWAN protocol and are widely used in IoT solutions. By integrating data from Netvox devices into ThingsBoard, users can easily visualize and monitor data through the ThingsBoard [dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}.
+Netvox 拥有 400 多款 LoRaWAN 终端设备，可集成到支持 LoRaWAN 协议的系统，广泛应用于物联网解决方案。将 Netvox 设备数据集成到 ThingsBoard 后，用户可通过 ThingsBoard [仪表板](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} 轻松可视化和监控数据。
 
-## Register Netvox devices on a third-party platform
+## 在第三方平台上注册 Netvox 设备
 
-To register a Netvox device, we will use The Things Stack Cloud Discovery. This is a free plan of [The Things Stack Cloud](https://www.thethingsindustries.com/stack/plans/){:target="_blank"} that allows you to connect up to 10 devices and 10 gateways with no time restrictions, making it ideal for testing your device.
+要注册 Netvox 设备，我们将使用 The Things Stack Cloud Discovery。这是 [The Things Stack Cloud](https://www.thethingsindustries.com/stack/plans/){:target="_blank"} 的免费方案，允许您连接多达 10 个设备和 10 个网关，无时间限制，非常适合设备测试。
 
 ### Create application
 

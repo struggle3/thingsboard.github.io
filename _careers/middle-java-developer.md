@@ -1,63 +1,63 @@
 ---
-position: Middle Java Developer
+position: 中级 Java 开发工程师
 tag:
-location: Kyiv, Ukraine
+location: 乌克兰基辅
 dateString:
 layout: career
 ---
-##### ThingsBoard Inc. (Open-Source IoT platform) is looking for a Middle Java developer to join our team on a full-time basis in the Kyiv office.
-##### ThingsBoard, Inc. is a US corporation founded in 2016 with RnD center in Kyiv, Ukraine. We are the main contributor and maintainer of ThingsBoard open-source IoT Platform. We deliver and constantly improve scalable, robust and affordable IoT Platform that dramatically reduces time-to-market for life-changing IoT solutions. We also help companies to deliver great IoT products based on ThingsBoard.
+##### ThingsBoard Inc.（开源 IoT 平台）诚聘中级 Java 开发工程师，全职，工作地点为基辅办公室。
+##### ThingsBoard, Inc. 是一家于 2016 年成立的美国公司，研发中心位于乌克兰基辅。我们是 ThingsBoard 开源 IoT 平台的主要贡献者和维护者。我们提供并持续改进可扩展、稳定且经济实惠的 IoT 平台，大幅缩短改变生活的 IoT 解决方案的上线时间。我们也帮助企业在 ThingsBoard 基础上打造出色的 IoT 产品。
 
-### Requirements:
-2+ years of hands-on experience in various Java technologies and frameworks;
+### 任职要求：
+2 年以上各类 Java 技术与框架的实战经验；
 
-Working knowledge of software development practices and technologies;
+具备软件开发实践与技术的应用经验；
 
-Experience in Spring (Core, Boot, MVC, Security, Data);
+熟悉 Spring（Core、Boot、MVC、Security、Data）；
 
-Experience with relational database systems (PostgreSQL, MySQL);
+熟悉关系型数据库（PostgreSQL、MySQL）；
 
-Experience with NoSQL (MongoDB, Redis);
+熟悉 NoSQL（MongoDB、Redis）；
 
-Experience with message brokers (Kafka);
+熟悉消息中间件（Kafka）；
 
-Experience with Docker/Kubernetes;
+熟悉 Docker/Kubernetes；
 
-Experience with multithreading;
+熟悉多线程编程；
 
-Deep understanding of OOP;
+深入理解 OOP；
 
-Knowledge in Git and Linux.
+掌握 Git 与 Linux。
 
-### Nice to have:
-Experience with cloud services: AWS, GCE, or Azure;
+### 加分项：
+有云服务经验：AWS、GCE 或 Azure；
 
-Technical education.
+技术相关学历。
 
-### Responsibilities:
-Design and development of the new features and APIs;
+### 工作职责：
+新功能与 API 的设计与开发；
 
-Writing clean and reusable code;
+编写清晰、可复用的代码；
 
-Support the existing functionality and improve it;
+维护并改进现有功能；
 
-Deep dive into Java performance improvements during heavy load testing.
+在高压负载测试中深入进行 Java 性能优化。
 
-### We offer:
-Working on an open-source IoT platform that has thousands of installations all over the world and 16000+ stars on GitHub;
+### 我们提供：
+参与在全球拥有数千部署、GitHub 16000+ star 的开源 IoT 平台开发；
 
-Full-time office work with flexible work hours;
+全职办公室工作，弹性工作时间；
 
-Modern cutting-edge development stack;
+现代化的前沿技术栈；
 
-A high-professional team without bureaucracy and management overhead;
+高素质团队，无官僚与冗杂管理；
 
-Career growth opportunities and regular salary review;
+职业发展机会与定期薪资评估；
 
-Medical insurance;
+医疗保险；
 
-Free English classes;
+免费英语课程；
 
-Comfortable office and fridge with free beverages;
+舒适办公室与免费饮料冰箱；
 
-Team-buildings and corporate events.
+团建与公司活动。

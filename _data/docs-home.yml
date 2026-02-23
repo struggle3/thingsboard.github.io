@@ -1,138 +1,138 @@
-bigheader: "ThingsBoard Documentation"
-abstract: "Documentation for using ThingsBoard IoT Platform."
+bigheader: "ThingsBoard文档"
+abstract: "ThingsBoard IoT平台使用文档。"
 toc:
-- title: Community Edition
+- title: 社区版
   path: /docs/
-- title: What is ThingsBoard?
+- title: 介绍
   path: /docs/getting-started-guides/what-is-thingsboard/
-- title: How to connect your device?
+- title: 连接设备
   path: /docs/getting-started-guides/connectivity/
-- title: Key concepts
+- title: 核心概念
   section:
-  - title: Alarms
+  - title: 告警
     path: /docs/user-guide/alarms/
-  - title: Alarm rules
+  - title: 告警规则
     path: /docs/user-guide/alarm-rules/
     new: true
-  - title: Calculated fields
+  - title: 计算字段
     path: /docs/user-guide/calculated-fields/
     new: true
-  - title: Notification center
+  - title: 通知中心
     path: /docs/user-guide/notifications/
-  - title: Entities and Relations
+  - title: 实体与关系
     path: /docs/user-guide/entities-and-relations/
-  - title: Device profiles
+  - title: 设备配置
     path: /docs/user-guide/device-profiles/
-  - title: Asset profiles
+  - title: 资产配置
     path: /docs/user-guide/asset-profiles/
-  - title: Tenant profiles
+  - title: 租户配置
     path: /docs/user-guide/tenant-profiles/
-  - title: Attributes
+  - title: 属性
     path: /docs/user-guide/attributes/
-  - title: Time-series data
+  - title: 时序数据
     path: /docs/user-guide/telemetry/
-  - title: Remote commands to devices
+  - title: 设备远程指令
     path: /docs/user-guide/rpc/
-  - title: OTA updates
+  - title: OTA 更新
     path: /docs/user-guide/ota-updates/
-- title: Dashboards
+- title: 仪表盘
   section:
-  - title: Overview
+  - title: 概述
     path: /docs/user-guide/dashboards/
-  - title: Aliases
+  - title: 别名
     path: /docs/user-guide/ui/aliases/
-  - title: Unit conversion
+  - title: 单位换算
     path: /docs/user-guide/ui/unit-conversion/
     new: true
-  - title: Layouts
+  - title: 布局
     path: /docs/user-guide/ui/layouts/
   - title: SCADA
     new: true
     section:
-      - title: Overview
+      - title: 概述
         path: /docs/user-guide/scada/
-      - title: SCADA symbols development guide
+      - title: SCADA符号开发指南
         path: /docs/user-guide/scada/scada-symbols-dev-guide/
-- title: Widgets
+- title: 部件
   section:
-    - title: Overview
+    - title: 概述
       path: /docs/user-guide/widgets/
-    - title: Widget actions
+    - title: 部件操作
       path: /docs/user-guide/ui/widget-actions/
-    - title: Widgets library
+    - title: 部件库
       path: /docs/user-guide/ui/widget-library/
-    - title: Chart widgets
+    - title: 图表部件
       path: /docs/user-guide/ui/chart-widget/
-    - title: Markdown/HTML Card widget
+    - title: 卡片部件
       path: /docs/user-guide/widgets/cards/markdown-html-card/
-    - title: Map widgets
+    - title: 地图部件
       path: /docs/user-guide/widgets/map-widgets/
-    - title: Entities table widget
+    - title: 实体表部件
       path: /docs/user-guide/ui/entity-table-widget/
-    - title: Advanced data key configuration
+    - title: 高级数据键配置
       path: /docs/user-guide/ui/advanced-data-key-configuration/
-- title: Rule engine
+- title: 规则引擎
   section:
-    - title: Overview
+    - title: 概述
       path: /docs/user-guide/rule-engine-2-0/overview/
-    - title: Getting started with Rule Engine
+    - title: 入门
       path: /docs/user-guide/rule-engine-2-0/re-getting-started/
-    - title: Queues
+    - title: 队列
       path: /docs/user-guide/rule-engine-2-5/queues/
-    - title: Rule nodes
+    - title: 规则节点
       path: /docs/user-guide/rule-engine-2-0/nodes/
-    - title: Data processing & actions
+    - title: 数据处理与操作
       section:
-        - title: Transform telemetry using previous record
+        - title: 使用前一条记录转换遥测数据
           path: /docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/
-        - title: Working with Alarm details
+        - title: 处理告警详情
           path: /docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/
-        - title: Send email to Customer
+        - title: 向客户发送邮件
           path: /docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/
-        - title: Notifications and Alarms on your smartphone using Telegram Bot
+        - title: 使用Telegram Bot在手机上接收通知与告警
           path: /docs/user-guide/rule-engine-2-0/tutorials/integration-with-telegram-bot/
-        - title: Create Alarm when the Device is offline
+        - title: 设备离线时创建告警
           path: /docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/
-        - title: Check Relation between Entities
+        - title: 检查实体间关系
           path: /docs/user-guide/rule-engine-2-0/tutorials/check-relation-tutorial/
-        - title: Send RPC Request to the Related Device
+        - title: 向关联设备发送RPC请求
           path: /docs/user-guide/rule-engine-2-0/tutorials/rpc-request-tutorial/
-        - title: Weather reading using REST API calls
+        - title: 使用REST API获取天气数据
           path: /docs/user-guide/rule-engine-2-0/tutorials/get-weather-using-rest-api-call/
-        - title: Add & remove devices to group dynamically
+        - title: 动态添加或移除设备到组
           path: /docs/user-guide/rule-engine-2-0/tutorials/add-devices-to-group/
           pe: true
-        - title: Send data to external MQTT brokers
+        - title: 向外部MQTT代理发送数据
           path: /docs/user-guide/integrations/send-data-external-mqtt-brokers/
           pe: true
-        - title: Using queues for synchronization
+        - title: 使用队列实现同步
           path: /docs/user-guide/rule-engine-2-5/tutorials/queues-for-synchronization/
-        - title: Using queues for message reprocessing
+        - title: 使用队列进行消息重处理
           path: /docs/user-guide/rule-engine-2-5/tutorials/queues-for-message-reprocessing/
-    - title: Custom rule nodes
+    - title: 自定义规则节点
       path: /docs/user-guide/contribution/rule-node-development/
-    - title: Templatization
+    - title: 模板化
       path: /docs/user-guide/templatization/
-- title: White labeling
+- title: 白标定制
   pe: true
   section:
-    - title: Overview
+    - title: 概述
       path: /docs/pe/user-guide/white-labeling/
-    - title: Self-registration
+    - title: 自助注册
       path: /docs/pe/user-guide/self-registration/
-    - title: Mail templates
+    - title: 邮件模板
       path: /docs/pe/user-guide/mail-templates/
-    - title: Custom translation
+    - title: 自定义翻译
       path: /docs/pe/user-guide/custom-translation/
-    - title: Custom menu
+    - title: 自定义菜单
       path: /docs/pe/user-guide/custom-menu/
       new: true
-- title: Integrations
+- title: 集成
   pe: true
   section:
-  - title: Overview
+  - title: 概述
     path: /docs/user-guide/integrations/
-  - title: Remote Integrations
+  - title: 远程集成
     path: /docs/user-guide/integrations/remote-integrations/
   - title: HTTP
     path: /docs/user-guide/integrations/http/
@@ -189,197 +189,197 @@ toc:
     path: /docs/user-guide/integrations/rabbitmq/
   - title: T-Mobile – IoT CDP
     path: /docs/user-guide/integrations/t-mobile-iot-cdp/
-  - title: Custom Integration development guide
+  - title: 自定义集成开发指南
     path: /docs/user-guide/integrations/custom/
-  - title: Notifications and Alarms on your smartphone using Telegram Bot
+  - title: 使用Telegram Bot在手机上接收通知与告警
     path: /docs/user-guide/rule-engine-2-0/tutorials/integration-with-telegram-bot/
-- title: Analytics
+- title: 分析
   new: true
   section:
-  - title: IoT Anomaly Detection with AI
+  - title: AI物联网异常检测
     path: /docs/samples/analytics/ai-predictive-maintenance/
     new: true
   - title: MCP Server
     path: /docs/samples/analytics/mcp-server-ai-insights/
-  - title: n8n node
+  - title: n8n节点
     path: /docs/samples/analytics/n8n-node/
     new: true
-  - title: AI models
+  - title: AI模型
     path: /docs/samples/analytics/ai-models/
     new: true
-  - title: Local AI with Ollama
+  - title: 基于Ollama的本地AI
     path: /docs/samples/analytics/ollama/
     new: true
   - title: Trendz Analytics
     path: /docs/trendz/
   - title: Kafka Streams
     path: /docs/samples/analytics/kafka-streams/
-- title: Reporting
+- title: 报表
   pe: true
   section:
-    - title: Overview
+    - title: 概述
       path: /docs/pe/user-guide/reporting/reporting-key-concepts/
-    - title: Getting started with Reporting
+    - title: 报表入门
       path: /docs/pe/user-guide/reporting/reporting-getting-started/
-    - title: Scheduling reports
+    - title: 报表调度
       path: /docs/pe/user-guide/reporting/scheduling-reports/
-    - title: Embedding subreports
+    - title: 嵌入子报表
       path: /docs/pe/user-guide/reporting/subreport/
-    - title: Embedding charts
+    - title: 嵌入图表
       path: /docs/pe/user-guide/reporting/embedding-charts/
-    - title: Embedding dashboards
+    - title: 嵌入仪表盘
       path: /docs/pe/user-guide/reporting/embedding-dashboards-widgets/
-    - title: Attaching report to notification
+    - title: 将报表附加到通知
       path: /docs/pe/user-guide/reporting/attaching-report-to-notification/
-- title: Mobile center
+- title: 移动中心
   section:
-    - title: Overview
+    - title: 概述
       path: /docs/mobile-center/mobile-center/
-    - title: Applications
+    - title: 应用
       path: /docs/mobile-center/applications/
-    - title: Mobile application QR code
+    - title: 移动应用二维码
       path: /docs/user-guide/ui/mobile-qr-code/
-- title: Other features
+- title: 其他功能
   section:
-    - title: Edge computing
+    - title: 边缘计算
       path: /docs/user-guide/edge-computing/
-    - title: Device connectivity status
+    - title: 设备连接状态
       path: /docs/user-guide/device-connectivity-status/
-    - title: Claiming devices
+    - title: 设备认领
       path: /docs/user-guide/claiming-devices/
-    - title: Device provisioning
+    - title: 设备预配置
       path: /docs/user-guide/device-provisioning/
-    - title: Image gallery
+    - title: 图片库
       path: /docs/user-guide/image-gallery/
       new: true
-    - title: Entity views
+    - title: 实体视图
       path: /docs/user-guide/entity-views/
-    - title: API limits
+    - title: API限制
       path: /docs/user-guide/api-limits/
-    - title: Advanced filters
+    - title: 高级筛选
       path: /docs/user-guide/advanced-filters/
-    - title: Version control
+    - title: 版本控制
       path: /docs/user-guide/version-control/
-    - title: PSM and eDRX Support
+    - title: PSM和eDRX支持
       path: /docs/user-guide/psm/
-    - title: Bulk provisioning
+    - title: 批量预配置
       path: /docs/user-guide/bulk-provisioning/
-    - title: Entity groups
+    - title: 实体组
       path: /docs/pe/user-guide/groups/
       pe: true
-    - title: Scheduler
+    - title: 调度器
       path: /docs/pe/user-guide/scheduler/
       pe: true
-    - title: CSV/XLS data export
+    - title: CSV/XLS数据导出
       path: /docs/pe/user-guide/csv-xls-data-export/
       pe: true
-    - title: File storage
+    - title: 文件存储
       path: /docs/pe/user-guide/file-storage/
       pe: true
-    - title: ThingsBoard Expression Language (TBEL)
+    - title: ThingsBoard表达式语言(TBEL)
       path: /docs/user-guide/tbel/
       new: true
-- title: Security
+- title: 安全
   section:
-    - title: Security settings
+    - title: 安全设置
       path: /docs/user-guide/ui/security-settings/
-    - title: Enable HTTPS
+    - title: 启用HTTPS
       path: /docs/user-guide/ssl/http-over-ssl/
-    - title: Audit logs
+    - title: 审计日志
       path: /docs/user-guide/audit-log/
-    - title: Advanced RBAC for IoT
+    - title: IoT高级RBAC
       path: /docs/pe/user-guide/rbac/
       pe: true
-    - title: Secrets storage
+    - title: 密钥存储
       path: /docs/pe/user-guide/secrets-storage/
       pe: true
-    - title: API keys
+    - title: API密钥
       path: /docs/user-guide/security/api-keys/
       new: true
-    - title: Two-factor authentication
+    - title: 双因素认证
       path: /docs/user-guide/two-factor-authentication/
     - title: OAuth 2.0
       path: /docs/user-guide/oauth-2-support/
-    - title: Domains
+    - title: 域
       path: /docs/domains/
-    - title: HTTP transport
+    - title: HTTP传输
       section:
         - title: HTTP over SSL
           path: /docs/user-guide/ssl/http-transport-over-ssl/
-        - title: Access token based authentication
+        - title: 基于访问令牌的认证
           path: /docs/user-guide/ssl/http-access-token/
-    - title: MQTT transport
+    - title: MQTT传输
       section:
       - title: MQTT over SSL
         path: /docs/user-guide/mqtt-over-ssl/
-      - title: Device authentication options
+      - title: 设备认证选项
         path: /docs/user-guide/device-credentials/
-      - title: Access token based authentication
+      - title: 基于访问令牌的认证
         path: /docs/user-guide/access-token/
-      - title: Basic MQTT credentials
+      - title: 基本MQTT凭据
         path: /docs/user-guide/basic-mqtt/
-      - title: X.509 certificate based authentication
+      - title: 基于X.509证书的认证
         path: /docs/user-guide/certificates/
-    - title: CoAP transport
+    - title: CoAP传输
       section:
       - title: CoAP over DTLS
         path: /docs/user-guide/coap-over-dtls/
-      - title: Access token based authentication
+      - title: 基于访问令牌的认证
         path: /docs/user-guide/ssl/coap-access-token/
-      - title: X.509 certificate based authentication
+      - title: 基于X.509证书的认证
         path: /docs/user-guide/ssl/coap-x509-certificates/
-    - title: LwM2M transport
+    - title: LwM2M传输
       section:
         - title: LwM2M over DTLS
           path: /docs/user-guide/ssl/lwm2m-over-dtls/
-- title: Administration UI
+- title: 管理界面
   section:
-  - title: Tenants
+  - title: 租户
     path: /docs/user-guide/ui/tenants/
-  - title: Customers
+  - title: 客户
     path: /docs/user-guide/ui/customers/
-  - title: Users
+  - title: 用户
     path: /docs/user-guide/ui/users/
-  - title: Assets
+  - title: 资产
     path: /docs/user-guide/ui/assets/
-  - title: Devices
+  - title: 设备
     path: /docs/user-guide/ui/devices/
-  - title: Entity groups
+  - title: 实体组
     path: /docs/pe/user-guide/groups/
     pe: true
-  - title: SMS provider settings
+  - title: SMS提供商设置
     path: /docs/user-guide/ui/sms-provider-settings/
-  - title: Slack settings
+  - title: Slack设置
     path: /docs/user-guide/ui/slack-settings/
-  - title: Microsoft Teams settings
+  - title: Microsoft Teams设置
     path: /docs/user-guide/ui/microsoft-teams-settings/
-  - title: Mail server
+  - title: 邮件服务器
     path: /docs/user-guide/ui/mail-settings/
-- title: Contribution guide
+- title: 贡献指南
   section:
-    - title: How to contribute
+    - title: 如何贡献
       path: /docs/user-guide/contribution/how-to-contribute/
-    - title: How to contribute your device integration guide
+    - title: 如何贡献设备集成指南
       path: /docs/user-guide/contribution/how-to-contribute-your-device-integration-guide/
-    - title: Rule Node development
+    - title: 规则节点开发
       path: /docs/user-guide/contribution/rule-node-development/
-    - title: Widgets development
+    - title: 部件开发
       section:
-        - title: Overview
+        - title: 概述
           path: /docs/user-guide/contribution/widgets-development/
-        - title: Basic widget API
+        - title: 基本部件API
           path: /docs/user-guide/contribution/ui/basic-widget-api/
-        - title: Custom subscriptions
+        - title: 自定义订阅
           path: /docs/user-guide/contribution/ui/custom-subscriptions/
-        - title: Advanced widget development
+        - title: 高级部件开发
           path: /docs/user-guide/contribution/ui/advanced-development/
-- title: Versions & Support
+- title: 版本与支持
   section:
-    - title: Releases
+    - title: 版本发布
       path: /docs/releases/releases-table/
-    - title: Release & Support Policy
+    - title: 发布与支持策略
       path: /docs/releases/release-policy/
-    - title: Roadmap
+    - title: 路线图
       path: /docs/releases/roadmap/
-- title: Troubleshooting
+- title: 故障排除
   path: /docs/user-guide/troubleshooting/

@@ -2,56 +2,54 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Apply filter from alias
-description: Apply filter from alias
+title: 从 alias 应用 filter
+description: 从 alias 应用 filter 说明
 
 ---
 
-In this guide we will describe how to connect standard ThingsBoard widgets located on the dashboard with Trendz View. 
-You can do this using ThingsBoard dashboard aliases and **Trendz View Latest** from **Trendz widget Bundle**.
+本指南说明如何将dashboard上的标准ThingsBoard部件与Trendz View连接。
+可通过ThingsBoard dashboard aliases和**Trendz widget Bundle**中的**Trendz View Latest**实现。
 
-**Example**: we have 10 **Machine** devices in ThingsBoard. We want to create a dashboard that will show all **Machine** devices 
-in a list and once device selected - other widget on the dashboard should show details about selected device. In total we will have 2 widgets 
-on the dashboard:
-* Entity List - will show list of devices
-* Trendz view - line chart that will show temperature of selected device 
+**示例**：ThingsBoard中有10台**Machine**设备。希望创建一个dashboard，在列表中显示所有**Machine**设备，
+选择某一台设备后，dashboard上其他部件显示该设备详情。最终dashboard上有2个部件：
+* Entity List——显示设备列表
+* Trendz view——显示选中设备温度的折线图 
  
-On ThingsBoard side we setup a dashboard and add 2 widgets. Detailed instruction how to do this is not part of this tutorial, 
-so here are brief steps:
-* Create **all_devices** alias that resolves all devices with type **Machine**
-* Create **selected_device** alias with type **entity form dashboard state** - this alias hold reference to selected device
+ThingsBoard侧需设置dashboard并添加2个部件。详细步骤不在本教程范围内，简要如下：
+* 创建**all_devices** alias，解析类型为**Machine**的所有设备
+* 创建**selected_device** alias，类型为**entity form dashboard state**——该alias保存选中设备的引用
 
 ![image](/images/trendz/embed-tb-alias.png)
  
-* Add **Entity List** widget and use **all_devices** alias as a datasource
-* Configure **On row click** action that will save selected device to **selected_device** alias 
-* Save dashboard
+* 添加**Entity List**部件，以**all_devices** alias作为数据源
+* 配置**On row click**动作，将选中设备保存到**selected_device** alias
+* 保存dashboard
 
-On **Trendz View** side:
-* Open view in Trendz
-* Add **Machine** field to filter section - it will allow us to filter Machines by name
-* Save View
-* Copy Link to this view
+**Trendz View**侧：
+* 在Trendz中打开视图
+* 在filter区域添加**Machine**字段，以便按名称过滤Machine
+* 保存视图
+* 复制该视图链接
 
-Return to ThingsBoard Dashboard:
-* Edit dashboard
-* Add  **Trendz View Latest** from **Trendz widget Bundle** to the dashboard
-* Set **selected_device** as a datasource for Trendz View
-* Use **name** as a key from alias
+返回ThingsBoard Dashboard：
+* 编辑dashboard
+* 从**Trendz widget Bundle**添加**Trendz View Latest**到dashboard
+* 将**selected_device**设为Trendz View的数据源
+* 从alias使用**name**作为键
 
 ![image](/images/trendz/embed-trndz-alias.png)
 
-* Switch to **Advanced** tab
-* Insert link to view into **View URL**
-* Insert **Machine** into **Filter Name** - content of this field should be the same as it typed in Trendz View Filter
-* Save Dashboard
+* 切换到**Advanced**选项卡
+* 在**View URL**中填入视图链接
+* 在**Filter Name**中填入**Machine**——该字段内容需与Trendz View Filter中一致
+* 保存Dashboard
 
 ![image](/images/trendz/embed-trndz-filter-name.png)
 ![image](/images/trendz/embed-tb-filter-name.png)
 
-Now, every time when **selected_device** alias updated, value if its Entity Name would be inserted into Trendz View filter.
+此后，每当**selected_device** alias更新时，其Entity Name的值会传入Trendz View过滤器。
 
-If multiple filters configured in Trendz View - system will match required filter by name.
+若Trendz View中配置了多个过滤器，系统会按名称匹配对应过滤器。
 
 <div class="image-block">
     <div class="image-wrapper">

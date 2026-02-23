@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Trendz Analytics Releases table
-description: Trendz architecture
+title: Trendz Analytics 版本表
+description: Trendz 版本与架构
 table-of-contents: "false"
 effective-url: '/docs/trendz/releases/releases-table/'
 ---

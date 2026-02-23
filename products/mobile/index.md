@@ -1,14 +1,14 @@
 ---
 layout: mobile
-title: ThingsBoard Mobile Application
+title: ThingsBoard 移动应用
 description:
 ---
 
 <section id="intro">
     <main>
-        <h1><a href="/docs/mobile/">ThingsBoard Mobile Application</a> is an open-source <a href="https://github.com/thingsboard/flutter_thingsboard_app">project</a> based on Flutter</h1>
-        <h2 class="second">Build your own IoT mobile application with minimum coding efforts</h2>
-        <h3 class="second" style="text-align: center">Powered by ThingsBoard IoT Platform</h3>
+        <h1><a href="/docs/mobile/">ThingsBoard 移动应用</a> 是基于 Flutter 的开源 <a href="https://github.com/thingsboard/flutter_thingsboard_app">项目</a></h1>
+        <h2 class="second">以最少编码投入构建您自己的物联网移动应用</h2>
+        <h3 class="second" style="text-align: center">由 ThingsBoard 物联网平台驱动</h3>
     </main>
 </section>
 
@@ -19,9 +19,9 @@ description:
                 <div class="main1"></div><div class="small1"></div><div class="small2"></div><div class="small3"></div><div class="small4"></div>
             </div>
             <div class="block">
-                <div class="feature-des"><h2>Home screen with flexible navigation</h2>
-                    <p>Browse everything from home screen. Use Platform to configure dashboard icons, order and visibility.</p>
-                    <a class="read-more-button" href="/docs/mobile/customize-dashboards/">Read more<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
+                <div class="feature-des"><h2>灵活导航的首页</h2>
+                    <p>从首页浏览一切。使用平台配置仪表板图标、顺序和可见性。</p>
+                    <a class="read-more-button" href="/docs/mobile/customize-dashboards/">了解更多<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
                 </div>
                 <div class="preview">
                     <div class="mobile-frame ios">
@@ -57,9 +57,9 @@ description:
                         </div>
                     </div>
                 </div>
-                <div class="feature-des"><h2>Simple and convenient alarms management</h2>
-                    <p>Manage alarms in one place. Navigate to related dashboards configurable from the Platform.</p>
-                    <a class="read-more-button" href="/docs/mobile/alarm-dashboard/">Read more<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
+                <div class="feature-des"><h2>简单便捷的告警管理</h2>
+                    <p>一处管理所有告警。可导航到从平台配置的相关仪表板。</p>
+                    <a class="read-more-button" href="/docs/mobile/alarm-dashboard/">了解更多<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
                 </div>
             </div>
         </div>
@@ -73,9 +73,9 @@ description:
                 <div class="main2"></div><img src="/images/grid.svg" alt="grid"><div class="small5"></div><div class="small6"></div>
             </div>
             <div class="block dark">
-                <div class="feature-des"><h2>Structured devices navigation</h2>
-                    <p>Browse devices grouped by their type and online status. On ThingsBoard, assign device specific dashboard and image.</p>
-                    <a class="read-more-button" href="/docs/mobile/customize-devices/">Read more<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
+                <div class="feature-des"><h2>结构化的设备导航</h2>
+                    <p>按类型和在线状态分组浏览设备。在 ThingsBoard 上，为设备分配专属仪表板和图片。</p>
+                    <a class="read-more-button" href="/docs/mobile/customize-devices/">了解更多<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
                 </div>
                 <div class="preview">
                     <div class="mobile-frame ios">
@@ -111,9 +111,9 @@ description:
                         </div>
                     </div>
                 </div>
-                <div class="feature-des"><h2>Rich set of mobile actions</h2>
-                    <p>Use mobile device to take photo, scan QR code, update location and more within dashboard. Extend the action with your own processing logic using ThingsBoard.</p>
-                    <a class="read-more-button" href="/docs/mobile/mobile-actions/">Read more<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
+                <div class="feature-des"><h2>丰富的移动操作</h2>
+                    <p>使用移动设备在仪表板内拍照、扫描二维码、更新位置等。使用 ThingsBoard 通过自己的处理逻辑扩展操作。</p>
+                    <a class="read-more-button" href="/docs/mobile/mobile-actions/">了解更多<img class="arrow first" src="/images/pe/read-more-arrow.svg" alt="arrow first"><img class="arrow second" src="/images/pe/read-more-arrow.svg" alt="arrow second"><img class="arrow third" src="/images/pe/read-more-arrow.svg" alt="arrow third"></a>
                 </div>
             </div>
             <div class="background bottom">
@@ -125,6 +125,6 @@ description:
 
 <section id="bottom">
     <main>
-        <a id="Products_MobApp_GetStart" href="/docs/mobile/getting-started/" class="getting-started gtm_button">Getting started</a>
+        <a id="Products_MobApp_GetStart" href="/docs/mobile/getting-started/" class="getting-started gtm_button">快速开始</a>
     </main>
 </section>

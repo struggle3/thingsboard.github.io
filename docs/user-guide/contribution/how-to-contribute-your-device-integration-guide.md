@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ddiachenko
-title: How to contribute your device integration guide
-description: Integration sample
+title: 如何贡献设备集成指南
+description: 网站与设备库贡献指南
 
 ---
 

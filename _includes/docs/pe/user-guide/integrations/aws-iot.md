@@ -3,12 +3,9 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-AWS IoT Integration allows to stream data from AWS IoT Backend to ThingsBoard and converts device payloads 
-to the ThingsBoard format. AWS IoT will be primarily responsible for receiving all messages (as a broker - 
-messaging server), filtering them, deciding who is interested, and then sending the message to all 
-subscribers, in our case of integration.
+AWS IoT集成可从AWS IoT后端向ThingsBoard流式传输数据，并将设备负载转换为ThingsBoard格式。AWS IoT主要负责接收所有消息（作为broker——消息服务器）、过滤、判断订阅者，然后将消息发送给所有订阅者，本集成即为其订阅者之一。
 
 <object width="100%" style="max-width: max-content;" data="/images/user-guide/integrations/aws-iot-integration.svg"></object>
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Thingsboard performance charts
-description: Thingsboard performance charts
+title: ThingsBoard 性能图表
+description: ThingsBoard 性能图表
 
 ---
 

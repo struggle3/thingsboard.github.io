@@ -1,17 +1,17 @@
-| **Parameter**                     | **Description**                                                                                                                       |
+| **参数**                     | **描述**                                                                                                                               |
 |:----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| host                              | The host of the device.                                                                                                               |
-| port                              | The port of the device.                                                                                                               |
-| pollPeriod                        | The period of time when the connector will try to poll the BACnet device.                                                             |
-| altResponsesAddresses             | Array of alternative addresses for device responses (you can find detail examples [here](#examples-alternative-responses-addresses)). |
+| host                              | 设备主机。                                                                                                                             |
+| port                              | 设备端口。                                                                                                                             |
+| pollPeriod                        | 连接器轮询 BACnet 设备的时间周期。                                                                                                     |
+| altResponsesAddresses             | 设备响应的替代地址数组（详细示例见[此处](#examples-alternative-responses-addresses)）。                                                  |
 | deviceInfo                        |                                                                                                                                       |
-| ... deviceNameExpressionSource    | The source of the device name: constant, expression.                                                                                  |
-| ... deviceNameExpression          | The device name (you can find detail examples [here](#examples-device-name-expression-and-device-profile-expression)).                |
-| ... deviceProfileExpressionSource | The source of the device profile: constant, expression.                                                                               |
-| ... deviceProfileExpression       | The device profile name (you can find detail examples [here](#examples-device-name-expression-and-device-profile-expression)).        |
+| ... deviceNameExpressionSource    | 设备名称来源：constant、expression。                                                                                                   |
+| ... deviceNameExpression          | 设备名称（详细示例见[此处](#examples-device-name-expression-and-device-profile-expression)）。                                         |
+| ... deviceProfileExpressionSource | 设备配置文件来源：constant、expression。                                                                                              |
+| ... deviceProfileExpression       | 设备配置文件名称（详细示例见[此处](#examples-device-name-expression-and-device-profile-expression)）。                                |
 | ---                               |                                                                                                                                       |
 
-Example:
+示例：
  
 ```json
 {

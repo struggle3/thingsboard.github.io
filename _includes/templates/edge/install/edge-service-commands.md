@@ -1,23 +1,23 @@
 
-Start the **ThingsBoard Edge** service:
+启动 **ThingsBoard Edge** 服务：
 ```bash
 sudo service tb-edge start
 ```
 {: .copy-code}
 
-Stop the **ThingsBoard Edge** service:
+停止 **ThingsBoard Edge** 服务：
 ```bash
 sudo service tb-edge stop
 ```
 {: .copy-code}
 
-Restart the **ThingsBoard Edge** service:
+重启 **ThingsBoard Edge** 服务：
 ```bash
 sudo service tb-edge restart
 ```
 {: .copy-code}
 
-Check the status of the **ThingsBoard Edge** service:
+查看 **ThingsBoard Edge** 服务状态：
 ```bash
 sudo service tb-edge status
 ```

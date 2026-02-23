@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Over-the-air firmware and software updates
-description: IoT device firmware updates
+title: 空中固件与软件更新
+description: IoT 设备固件更新
  
 createFirmware:
     0:

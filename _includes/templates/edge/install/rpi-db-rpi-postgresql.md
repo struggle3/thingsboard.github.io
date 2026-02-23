@@ -1,23 +1,23 @@
 {% capture postgresql-info %}
-The ThingsBoard team recommends using **PostgreSQL** for development and production environments with **moderate load (less than 5000 msg/sec)**.
-Many cloud providers offer managed **PostgreSQL** services, making it a cost-effective solution for most ThingsBoard deployments.
+ThingsBoard 团队建议在 **中等负载（低于 5000 msg/sec）** 的开发和生产环境中使用 **PostgreSQL**。
+多数云服务商提供托管 **PostgreSQL** 服务，对大多数 ThingsBoard 部署来说性价比较高。
 {% endcapture %}
 {% include templates/info-banner.md content=postgresql-info %}
 
-**ThingsBoard Edge** uses **PostgreSQL** database as a local storage.
+**ThingsBoard Edge** 使用 **PostgreSQL** 作为本地存储。
 
 {% include templates/install/postgres-install-rpi.md %}
 
-Finally, create a new PostgreSQL database named **tb_edge** by running the following command:
+最后，执行以下命令创建名为 **tb_edge** 的 PostgreSQL 数据库：
 
 ```bash
 echo "CREATE DATABASE tb_edge;" | psql -U postgres -d postgres -h 127.0.0.1 -W
 ```
 {: .copy-code}
 
-### ThingsBoard Configuration
+### ThingsBoard 配置
 
-Edit **ThingsBoard Edge** configuration file: 
+编辑 **ThingsBoard Edge** 配置文件： 
 
 ```bash 
 sudo bash -c 'echo "export DATABASE_TS_TYPE=sql
@@ -28,5 +28,5 @@ export SQL_POSTGRES_TS_KV_PARTITIONING=MONTHS" >> /etc/tb-edge/conf/tb-edge.conf
 ``` 
 {: .copy-code}
 
-* **PUT_YOUR_POSTGRESQL_PASSWORD_HERE:** Replace with your **actual PostgreSQL password**.
-* **SQL_POSTGRES_TS_KV_PARTITIONING:** Specify partitioning size for timestamp key-value storage. Allowed values: DAYS, MONTHS, YEARS, INDEFINITE.
+* **PUT_YOUR_POSTGRESQL_PASSWORD_HERE：** 替换为 **实际的 PostgreSQL 密码**。
+* **SQL_POSTGRES_TS_KV_PARTITIONING：** 指定时间序列 key-value 存储的分区大小。可选值：DAYS、MONTHS、YEARS、INDEFINITE。

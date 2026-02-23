@@ -1,40 +1,39 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-This article explains the architectural structure of TBMQ, breaking down how data moves between different components and outlining the core architectural choices.
-TBMQ is designed with great care to implement the following attributes:
+本文介绍 TBMQ 的架构结构，说明数据在各组件间的流转及核心架构决策。
+TBMQ 经精心设计，具备以下特性：
 
-* **Scalability**: it is a horizontally scalable platform constructed using cutting-edge open-source technologies;
-* **Fault tolerance**: no single point of failure; each broker (node) within the cluster is identical in terms of functionality;
-* **Robustness and efficiency**: can manage millions of clients and process millions of messages per second;
-* **Durability**: provides high message durability, ensuring that data is never lost.
+* **可扩展性**：采用先进开源技术构建的水平可扩展平台；
+* **容错性**：无单点故障，集群内每个 broker（节点）在功能上相同；
+* **健壮高效**：可管理数百万客户端，每秒处理数百万条消息；
+* **持久性**：提供高消息持久性，确保数据不丢失。
 
-### Architecture diagram
+### 架构图
 
-The following diagram shows the pivotal parts of the broker and the route of message transmission.
+下图展示 broker 的核心部分及消息传输路径。
 
 ![image](/images/mqtt-broker/architecture/tbmq-architecture.png)
 
-## Motivation
+## 设计动机
 
-At ThingsBoard, we've gained a lot of experience in building scalable IoT applications, which has helped us identify three main scenarios for MQTT-based solutions.
+在 ThingsBoard，我们积累了丰富的可扩展 IoT 应用构建经验，从而识别出基于 MQTT 解决方案的三大主要场景。
 
-* In the first scenario, numerous devices generate a large volume of messages that are consumed by specific applications, resulting in a **fan-in** pattern. 
-Normally, a few applications are set up to handle these lots of incoming data. It must be ensured that they do not miss any single message. 
+* 第一种场景中，大量设备产生海量消息，由特定应用消费，形成 **扇入（fan-in）** 模式。 
+通常由少数应用处理这些海量入站数据，必须确保不丢失任何一条消息。
 
-* The second scenario involves numerous devices subscribing to specific updates or notifications that must be delivered. 
-This leads to a few incoming requests that cause a high volume of outgoing data. 
-This case is known as a **fan-out (broadcast)** pattern. 
+* 第二种场景中，大量设备订阅需送达的特定更新或通知。
+少量入站请求引发大量出站数据。
+此场景称为 **扇出（广播，fan-out）** 模式。
 
-* The third scenario, **point-to-point (P2P)** communication, is a targeted messaging pattern, primarily used for one-to-one communication.
-Ideal for use cases such as private messaging or command-based interactions where messages are routed between a single publisher and a specific subscriber through uniquely defined topics.
+* 第三种场景为 **点对点（P2P）** 通信，针对性强的一对一 messaging 模型。
+适用于私信或命令-响应交互等用例，消息通过唯一定义的主题在单个发布者与特定订阅者之间路由。
 
-> In all scenarios, persistent clients with a Quality of Service (QoS) level set to 1 or 2 are often utilized to ensure
-> reliable message delivery, even when they're temporarily offline due to restarts or upgrades.
+> 在上述所有场景中，通常使用将服务质量（QoS）设为 1 或 2 的持久客户端，以确保可靠的消息投递，即便因重启或升级而暂时离线亦然。
 
-Acknowledging these scenarios, we intentionally designed TBMQ to be exceptionally well-suited for all three.
+基于上述场景，我们有意将 TBMQ 设计为对三者均表现优异。
 
 Our design principles focused on ensuring the broker’s fault tolerance and high availability. 
 Thus, we deliberately avoided reliance on master or coordinated processes. 
@@ -45,18 +44,11 @@ We wanted our broker to support high-throughput and guarantee low-latency delive
 Ensuring data durability and replication was crucial in our design. 
 We aimed for a system where once the broker acknowledges receiving a message, it remains safe and won’t be lost.
 
-To ensure the fulfillment of the above requirements and prevent message loss in the case of clients or some of the broker instances failures, 
-TBMQ uses the powerful capabilities of [Kafka](https://kafka.apache.org/) as its underlying infrastructure.
+为确保满足上述要求，并防止在客户端或部分 broker 实例故障时丢失消息，TBMQ 采用 [Kafka](https://kafka.apache.org/) 作为底层基础设施。
 
-## How does TBMQ work in a nutshell?
+## TBMQ 工作原理概览
 
-Kafka plays a crucial role in various stages of the MQTT message processing. 
-All unprocessed published messages, client sessions, and subscriptions are stored within dedicated Kafka topics. 
-A comprehensive list of Kafka topics used within TBMQ is available [here](#kafka-topics). 
-All broker nodes can readily access the most up-to-date state of client sessions and subscriptions by utilizing these topics. 
-They maintain local copies of sessions and subscriptions for efficient message processing and delivery. 
-When a client loses connection to a specific broker node, other nodes can seamlessly continue operations based on the latest state. 
-Additionally, newly added broker nodes to the cluster get this vital information upon their activation.
+Kafka 在 MQTT 消息处理的各个阶段扮演关键角色。所有未处理的已发布消息、客户端会话和订阅均存储在专用 Kafka 主题中。TBMQ 使用的 Kafka 主题完整列表见[此处](#kafka-topics)。所有 broker 节点均可通过这些主题访问最新的客户端会话和订阅状态，并在本地维护副本以高效处理与投递消息。当客户端与某 broker 节点断开时，其它节点可基于最新状态无缝继续运作。此外，新加入集群的 broker 节点在启动时即可获得这些关键信息。
 
 Client subscriptions hold significant importance within the MQTT publish/subscribe pattern. 
 TBMQ employs the [Trie](#subscriptions-trie) data structure to optimize performance, 
@@ -71,89 +63,73 @@ utilize the Subscription Trie data structure to identify the intended recipients
 Depending on the client type (**DEVICE** or **APPLICATION**) and the persistence options described below, 
 the broker either redirects the message to another specific Kafka topic or directly delivers it to the recipient.
 
-### Non-persistent client
+### 非持久客户端
 
 ![image](/images/mqtt-broker/architecture/tbmq-non-persistent-dev.png)
 
-A client is classified as a non-persistent one when the following conditions are met in the _CONNECT_ packet:
+当 _CONNECT_ 包满足以下条件时，客户端被归类为非持久客户端：
 
-For **MQTT v3.x**:
-* `clean_session` flag is set to _true_.
+对于 **MQTT v3.x**：
+* 将 `clean_session` 标志设为 _true_。
 
-For **MQTT v5**:
-* `clean_start` flag is set to _true_ and `sessionExpiryInterval` is set to _0_ or not specified.
+对于 **MQTT v5**：
+* 将 `clean_start` 标志设为 _true_，且 `sessionExpiryInterval` 为 _0_ 或未指定。
 
-In the case of non-persistent clients, all messages intended for them are published directly without undergoing additional persistence.
-It is important to note that non-persistent clients can only be of type **DEVICE**.
+对于非持久客户端，发往它们的消息直接发布，无需额外持久化。
+需注意的是，非持久客户端仅能为 **DEVICE** 类型。
 
-**Non-persistent DEVICE processing in cluster mode**
+**集群模式下的非持久 DEVICE 处理**
 
 ![image](/images/mqtt-broker/architecture/tbmq-non-persist-dev-cluster.png)
 
-In cluster mode, multiple TBMQ nodes can operate together, each running Kafka consumers in the same consumer group for the **tbmq.msg.all** topic. 
-This approach ensures efficient load balancing and message distribution across nodes. 
-However, it can result in scenarios where a published message is processed by one TBMQ node while the intended subscriber is connected to another.
-To handle this, **downlink.basic** Kafka topic is used for communication between TBMQ nodes. 
-This ensures that the node processing the message forwards it to the target node, which then delivers it to the subscriber via the established connection.
+在集群模式下，多个 TBMQ 节点可协同运行，各自在 **tbmq.msg.all** 主题的同一消费者组中运行 Kafka 消费者。
+该方式实现节点间的负载均衡和消息分发。
+但可能出现消息由某一 TBMQ 节点处理，而目标订阅者连接在另一节点的场景。
+为此，使用 **downlink.basic** Kafka 主题在 TBMQ 节点间通信。
+确保处理消息的节点将消息转发给目标节点，再由其通过已建立连接投递给订阅者。
 
-### Persistent client
+### 持久客户端
 
-MQTT clients that do not meet the non-persistent conditions mentioned above are categorized as persistent clients. 
-Let's delve into the conditions for persistent clients:
+不满足上述非持久条件的 MQTT 客户端归类为持久客户端。持久客户端的条件如下：
 
-For **MQTT v3.x**:
-* `clean_session` flag is set to _false_.
+对于 **MQTT v3.x**：
+* 将 `clean_session` 标志设为 _false_。
 
-For **MQTT v5 clients**:
-* `sessionExpiryInterval` is greater than _0_ (regardless of the `clean_start` flag).
-* `clean_start` flag is set to _false_ and `sessionExpiryInterval` is set to _0_ or not specified.
+对于 **MQTT v5 客户端**：
+* `sessionExpiryInterval` 大于 _0_（无论 `clean_start` 为何）。
+* 将 `clean_start` 标志设为 _false_，且 `sessionExpiryInterval` 为 _0_ 或未指定。
 
-Building on our knowledge within the IoT ecosystem and the successful implementation of numerous IoT use cases, we have classified MQTT clients into two distinct categories:
+基于我们在 IoT 生态中的实践及大量用例的成功落地，我们将 MQTT 客户端划分为两类：
 
-* The _DEVICE_ clients primarily engaged in publishing a significant volume of messages while subscribing to a limited number of topics with relatively low message rates. 
-  These clients are typically associated with IoT devices or sensors.
+* _DEVICE_ 客户端：主要大量发布消息，订阅的 topic 数量有限、消息速率较低，通常对应 IoT 设备或传感器。
 
-* The _APPLICATION_ clients specialize in subscribing to topics with high message rates. 
-  They often require messages to be persisted when the client is offline with later delivery, ensuring the availability of crucial data. 
-  These clients are commonly used for real-time analytics, data processing, or other application-level functionalities.
+* _APPLICATION_ 客户端：专注于订阅高消息速率的 topic，通常需要离线时持久化消息并在稍后投递，确保关键数据不丢失，常用于实时分析、数据处理等应用层功能。
 
-Consequently, we made a strategic decision to optimize performance by separating the processing flow for these two types of clients.
+因此，我们通过为这两类客户端分离处理流程来优化性能。
 
-#### Persistent DEVICE client
+#### 持久 DEVICE 客户端
 
 ![image](/images/mqtt-broker/architecture/tbmq-persistent-dev.png)
 
-For DEVICE persistent clients, we use the **tbmq.msg.persisted** Kafka topic as a means of processing published messages that are extracted from the **tbmq.msg.all** topic. 
-This design separates the handling of persistent messages from other message types, ensuring a clear and efficient workflow.
-Dedicated threads, functioning as Kafka consumers, retrieve these messages and store them in a [Redis](#redis) database utilized for persistence storage. 
-This method is particularly suitable for DEVICE clients, as they typically do not require extensive message reception. 
-This approach helps us recover stored messages smoothly when a client reconnects. At the same time, it ensures great performance for scenarios involving a moderate incoming message rate.
+对于持久 DEVICE 客户端，我们使用 **tbmq.msg.persisted** Kafka 主题处理从 **tbmq.msg.all** 提取的已发布消息。该设计将持久消息与其他类型消息分离处理，保证流程清晰高效。作为 Kafka 消费者的专用线程拉取这些消息并存入用于持久化的 [Redis](#redis)。此方法尤其适合 DEVICE 客户端，因其通常不需要接收大量消息，在客户端重连时可顺畅恢复已存消息，同时在中等到达速率场景下保持良好性能。
 
-A detailed breakdown of how we use Redis as persistent message storage for DEVICE clients is available [here](/docs/{{docsPrefix}}mqtt-broker/architecture-details/persistent-device-client/).
+关于 Redis 作为 DEVICE 客户端持久消息存储的详细说明见[此处](/docs/{{docsPrefix}}mqtt-broker/architecture-details/persistent-device-client/)。
 
-**Persistent DEVICE processing in cluster mode**
+**集群模式下的持久 DEVICE 处理**
 
 ![image](/images/mqtt-broker/architecture/tbmq-persist-dev-cluster.png)
 
-Similarly to non-persistent clients, TBMQ nodes in cluster mode operate together, running Kafka consumers in the same group for the **tbmq.msg.persisted** topic.
-To handle cases where a message is processed by one node but the subscriber is connected to another, **downlink.persisted** Kafka topic is used to forward the message to the appropriate node.
-This ensures seamless delivery to the subscriber via its established connection.
+与非持久客户端类似，集群模式下 TBMQ 节点协同运行，在 **tbmq.msg.persisted** 主题的同一消费者组中运行 Kafka 消费者。若消息由一节点处理而订阅者连接在另一节点，则通过 **downlink.persisted** Kafka 主题将消息转发到目标节点，确保通过已建立连接将消息无缝投递给订阅者。
 
-#### Persistent APPLICATION client
+#### 持久 APPLICATION 客户端
 
 ![image](/images/mqtt-broker/architecture/tbmq-app.png)
 
-The number of APPLICATION clients corresponds to the number of Kafka topics used. 
-The latest version of Kafka can handle millions of topics, making this design suitable even for the largest enterprise use cases.
+APPLICATION 客户端数量与所用 Kafka 主题数量一一对应。最新版 Kafka 可支持数百万主题，使该设计即使面对最大规模企业用例仍适用。
 
-Any message read from the **tbmq.msg.all** topic meant for a specific APPLICATION client is then stored in the corresponding Kafka topic. 
-A separate thread (Kafka consumer) is assigned to each APPLICATION. 
-These threads retrieve messages from the corresponding Kafka topics and deliver them to the respective clients. 
-This approach significantly improves performance by ensuring efficient message delivery.
-Additionally, the nature of the Kafka consumer group makes the [MQTT 5 shared subscription](/docs/{{docsPrefix}}mqtt-broker/user-guide/shared-subscriptions/#application-client-type) feature extremely efficient for APPLICATION clients.
+从 **tbmq.msg.all** 主题中读取的、发往特定 APPLICATION 客户端的消息会存入对应 Kafka 主题。每个 APPLICATION 客户端分配一个独立线程（Kafka 消费者），这些线程从对应 Kafka 主题拉取消息并投递给相应客户端。该方式通过高效投递显著提升性能。此外，Kafka 消费者组的特性使 [MQTT 5 共享订阅](/docs/{{docsPrefix}}mqtt-broker/user-guide/shared-subscriptions/#application-client-type) 对 APPLICATION 客户端极为高效。
 
-APPLICATION clients can handle a large volume of received messages, reaching millions per second.
-It is important to note that APPLICATION clients can only be classified as [persistent](#persistent-client).
+APPLICATION 客户端可处理大量接收消息，可达每秒数百万条。需注意，APPLICATION 客户端仅能归类为[持久客户端](#persistent-client)。
 
 > For both types of clients, we provide configurable instruments to control the persistence of messages per client and the duration for which they are stored.
 > You can refer to the following environment variables to adjust these settings:
@@ -172,164 +148,111 @@ The processing of the message occurs directly on the target node, as a dedicated
 This design ensures seamless and rapid message delivery.
 By avoiding additional message transmission steps, this approach ensures significantly improved performance, even as the system scales horizontally.
 
-### Kafka topics
+### Kafka 主题
 
-Below is a comprehensive list of Kafka topics used within TBMQ, along with their respective descriptions.
+以下是 TBMQ 使用的 Kafka 主题及说明。
 
-* **tbmq.msg.all** - topic to store all published messages to the broker from MQTT clients.
-* **tbmq.msg.app. + ${client_id}** - topic to store messages the APPLICATION client should receive based on its subscriptions.
-* **tbmq.msg.app.shared. + ${topic_filter}** - topic to store messages the APPLICATION clients should receive based on their common shared subscription.
-* **tbmq.msg.persisted** - topic to store messages the DEVICE persistent clients should receive based on their subscriptions.
-* **tbmq.msg.retained** - topic to store all retained messages. Related to MQTT Retain messages feature.
-* **tbmq.client.session** - topic to store sessions of all clients.
-* **tbmq.client.subscriptions** - topic to store subscriptions of all clients.
-* **tbmq.client.session.event.request** - topic to store events like _CONNECTION_REQUEST_, _DISCONNECTION_REQUEST_, _CLEAR_SESSION_REQUEST_, etc. for sessions of all clients. 
-* **tbmq.client.session.event.response. + ${service_id}** - topic to store responses to events of the previous topic sent to specific broker node where target client is connected.
-* **tbmq.client.disconnect. + ${service_id}** - topic to store force client disconnection events (by admin request from UI/API or on sessions conflicts).
-* **tbmq.msg.downlink.basic. + ${service_id}** - topic used to send messages from one broker node to another to which the DEVICE subscriber is currently connected.
-* **tbmq.msg.downlink.persisted. + ${service_id}** - topic used to send messages from one broker node to another to which the DEVICE persistent subscriber is currently connected.
-* **tbmq.sys.app.removed** - topic for events to process removal of APPLICATION client topic. Used when the client changes its type from APPLICATION to DEVICE.
-* **tbmq.sys.historical.data** - topic for historical data statistics (e.g., number of incoming messages, outgoing messages, etc.) published from each broker node in the cluster to calculate the total values per cluster.
-* **tbmq.client.blocked** - topic used to distribute and store the list of blocked clients, preventing them from establishing connections to the broker.
-* **tbmq.sys.internode.notifications + ${service_id}** - topic for system-level notifications sent between broker nodes to synchronize authentication provider settings, authentication admin settings, and to trigger local client session cache cleanup.
+* **tbmq.msg.all** - 存储来自 MQTT 客户端的全部已发布消息的主题。
+* **tbmq.msg.app. + ${client_id}** - 存储 APPLICATION 客户端根据其订阅应接收的消息。
+* **tbmq.msg.app.shared. + ${topic_filter}** - 存储 APPLICATION 客户端根据共同共享订阅应接收的消息。
+* **tbmq.msg.persisted** - 存储 DEVICE 持久客户端根据订阅应接收的消息。
+* **tbmq.msg.retained** - 存储所有保留消息，与 MQTT 保留消息功能相关。
+* **tbmq.client.session** - 存储所有客户端会话。
+* **tbmq.client.subscriptions** - 存储所有客户端订阅。
+* **tbmq.client.session.event.request** - 存储客户端会话事件，如 _CONNECTION_REQUEST_、_DISCONNECTION_REQUEST_、_CLEAR_SESSION_REQUEST_ 等。
+* **tbmq.client.session.event.response. + ${service_id}** - 存储对上一主题事件的响应，发往目标客户端所连接的 broker 节点。
+* **tbmq.client.disconnect. + ${service_id}** - 存储强制断开客户端连接事件（由 UI/API 管理员请求或会话冲突触发）。
+* **tbmq.msg.downlink.basic. + ${service_id}** - 用于在 broker 节点间转发消息至 DEVICE 订阅者当前所连节点。
+* **tbmq.msg.downlink.persisted. + ${service_id}** - 用于在 broker 节点间转发消息至 DEVICE 持久订阅者当前所连节点。
+* **tbmq.sys.app.removed** - 处理 APPLICATION 客户端主题移除的事件，在客户端从 APPLICATION 转为 DEVICE 时使用。
+* **tbmq.sys.historical.data** - 存储各 broker 节点发布的集群历史统计（如入站/出站消息数等）以计算集群总值。
+* **tbmq.client.blocked** - 存储和分发已封禁客户端列表，阻止其连接 broker。
+* **tbmq.sys.internode.notifications + ${service_id}** - broker 节点间系统通知，用于同步认证提供方设置、认证管理员设置，并触发本地客户端会话缓存清理。
 
 ### Redis
 
-[Redis](https://redis.io/) is a powerful, in-memory data store that excels in scenarios requiring low-latency and high-throughput data access, making it an ideal choice for storing real-time data. 
+[Redis](https://redis.io/) 是强大的内存数据存储，在需要低延迟与高吞吐数据访问的场景中表现优异，是存储实时数据的理想选择。
 
-In TBMQ, we utilize Redis to store messages for DEVICE persistent clients, allowing us to achieve high performance when handling the message persistence and delivery for these clients.
-Redis's ability to manage large datasets in memory with lightning-fast read and write operations, combined with the scalability of Redis Cluster, 
-ensures that persistent messages can be retrieved and delivered efficiently, even as the volume of stored messages grows and system demands increase. 
-This scalability allows Redis to seamlessly handle larger workloads by distributing data across multiple nodes, maintaining high performance and reliability.
+TBMQ 使用 Redis 存储 DEVICE 持久客户端的消息，为这些客户端实现高效的持久化与投递。Redis 能以极快读写在内存中管理大数据集，结合 Redis Cluster 的可扩展性，确保持久消息在存储量增长、系统需求提升时仍能高效检索与投递。该可扩展性使 Redis 可通过多节点分发数据，无缝处理更大工作负载，保持高性能与可靠性。
 
 {% capture tbmq-redis-postgresql %}
-Before TBMQ v2.0, PostgreSQL was used for saving messages for DEVICE persistent clients.
-We migrated to Redis in v2.0 to provide a more scalable and performant solution for message persistence due to PostgreSQL limitations in terms of handling a high volume of write operations.
-This migration to Redis enables us to handle much higher throughput while ensuring fast, reliable message storage and delivery for DEVICE persistent clients.
+TBMQ v2.0 之前使用 PostgreSQL 存储 DEVICE 持久客户端的消息。因 PostgreSQL 在大量写入场景下存在局限，v2.0 迁至 Redis 以提供更具可扩展性和性能的持久化方案。该迁移使我们能处理更高吞吐，同时为 DEVICE 持久客户端提供快速可靠的消息存储与投递。
 {% endcapture %}
 {% include templates/info-banner.md content=tbmq-redis-postgresql %}
 
-### PostgreSQL database
+### PostgreSQL 数据库
 
-TBMQ uses a [PostgreSQL](https://www.postgresql.org/) database to store different entities such as users, user credentials, MQTT client credentials, statistics, 
-WebSocket connections, WebSocket subscriptions, and others.
+TBMQ 使用 [PostgreSQL](https://www.postgresql.org/) 存储用户、用户凭据、MQTT 客户端凭据、统计数据、WebSocket 连接、WebSocket 订阅等各类实体。
 
-PostgreSQL, known for its reliability, robustness, and flexibility, is a powerful open-source relational database management system that ensures data integrity while supporting high transaction throughput.
-In TBMQ, PostgreSQL serves as the primary storage layer for persisting critical metadata about the system.
-Given the nature of MQTT applications, which involve high message volumes and frequent read/write operations, 
-PostgreSQL's transaction management and ACID compliance provide strong consistency guarantees, 
-ensuring that important data is safely stored and retrievable in any scenarios.
+PostgreSQL 以可靠、健壮、灵活著称，是确保数据完整性并支持高事务吞吐的强大开源关系型数据库。在 TBMQ 中，PostgreSQL 作为系统关键元数据的主存储层。鉴于 MQTT 应用的高消息量与频繁读写特性，PostgreSQL 的事务管理与 ACID 合规提供强一致性保证，确保重要数据在任何场景下都能安全存储与检索。
 
 ### Web UI
 
-TBMQ offers a user-friendly and lightweight graphical user interface (GUI) 
-that simplifies the administration of the broker in an intuitive and efficient manner. 
-This GUI provides several key features to facilitate broker management:
+TBMQ 提供轻量友好的图形界面（GUI），以直观高效的方式简化 broker 管理。该 GUI 具备以下核心功能：
 
-* MQTT Client Credential Management: users can easily manage MQTT client credentials through the GUI, allowing for the creation, modification, and deletion of client credentials as needed.
-* Client Session and Subscriptions Control: the GUI enables administrators to monitor and control the state of client sessions, including terminating, and managing active client connections. 
-  It also provides functionality to manage client subscriptions, allowing for the addition, removal, and modification of subscriptions.
-* Shared Subscription Management: the GUI includes tools for managing shared subscriptions. 
-  Administrators can create and manage Application shared subscription entities, facilitating efficient message distribution to multiple subscribed clients of type APPLICATION.
-* Retained Message Management: the GUI allows administrators to manage retained messages, which are messages that are saved by the broker and delivered to new subscribers.
-* WebSocket Client: The GUI provides support for WebSocket client, allowing administrators to establish, monitor, and manage WebSocket connections.
-  This feature allows users to interact with TBMQ via MQTT over WebSocket, enabling them to efficiently debug and test their connections and message flows in real-time.
+* MQTT 客户端凭据管理：用户可通过 GUI 创建、修改和删除 MQTT 客户端凭据。
+* 客户端会话与订阅控制：管理员可监控和控制客户端会话状态，包括终止和管理活跃连接，并管理客户端订阅（添加、移除、修改）。
+* 共享订阅管理：管理员可创建和管理 Application 共享订阅实体，实现向多个 APPLICATION 类型订阅客户端的消息高效分发。
+* 保留消息管理：管理员可管理 broker 保存并投递给新订阅者的保留消息。
+* WebSocket 客户端：GUI 支持 WebSocket 客户端，管理员可建立、监控和管理 WebSocket 连接，用户可通过 MQTT over WebSocket 与 TBMQ 交互，实时调试和测试连接与消息流。
 
-In addition to these administrative features, the GUI provides monitoring dashboards that offer comprehensive statistics and insights into the broker's performance. 
-These dashboards provide key metrics and visualizations to facilitate real-time monitoring of essential broker statistics, 
-enabling administrators to gain a better understanding of the system's health and performance.
-
-The combination of these features makes the GUI an invaluable tool for managing, configuring, and monitoring TBMQ in a user-friendly and efficient manner.
+除上述管理功能外，GUI 还提供监控仪表板，展示 broker 性能的全面统计与洞察，帮助管理员更好理解系统健康与性能。
 
 ### Netty
 
-In our pursuit of leveraging cutting-edge technologies, we selected [Netty](https://netty.io/) for implementing the TCP server that facilitates the MQTT protocol, owing to its proven performance and flexibility.
+为采用成熟高效的技术，我们选择 [Netty](https://netty.io/) 实现支持 MQTT 协议的 TCP 服务端。
 
-Netty is a high-performance, asynchronous event-driven network framework well-suited for building scalable and robust network applications, making it an excellent fit for handling MQTT traffic in TBMQ.
-One of the primary reasons for choosing Netty is its efficient handling of large numbers of simultaneous connections. 
-In IoT environments, where thousands or even millions of devices are constantly connected and exchanging data, Netty's ability to handle concurrent connections with low resource consumption is invaluable.
+Netty 是高性能异步事件驱动网络框架，适用于构建可扩展、健壮的网络应用，非常适合 TBMQ 处理 MQTT 流量。选择 Netty 的重要原因之一是其高效处理大量并发连接的能力——在成千上万甚至数百万设备持续连接并交换数据的 IoT 环境中，Netty 以较低资源消耗处理并发连接的能力非常关键。
 
-Netty uses non-blocking I/O (NIO), allowing it to efficiently manage resources without needing a dedicated thread for each connection, greatly reducing overhead. 
-This approach ensures high throughput and low-latency communication, even under heavy loads, making it ideal for the high demands of an MQTT broker like TBMQ.
+Netty 使用非阻塞 I/O（NIO），无需为每个连接分配独立线程即可高效管理资源，显著降低开销。该方式在重负载下仍能保证高吞吐与低延迟，适合 TBMQ 这类 MQTT broker 的高要求场景。Netty 具备高度灵活性，支持按协议需求定制网络栈；其模块化设计便于实现协议处理、消息解析和连接管理，并提供 TLS 加密选项，满足安全性与未来扩展需求。
 
-Netty is highly flexible, allowing developers to customize the networking stack to meet specific protocol requirements.
-With its modular design, Netty provides the building blocks to easily implement protocol handling, message parsing, and connection management, while offering TLS encryption options, making it secure and extensible for future needs.
+### Actor 系统
 
-### Actor system
+TBMQ 使用 Actor 系统作为底层机制，实现负责处理 MQTT 客户端的 Actor。采用 Actor 模型可实现客户端消息的高效并发处理，确保高性能运行。
 
-TBMQ utilizes an Actor System as the underlying mechanism for implementing actors responsible for handling MQTT clients.
-The adoption of the Actor model enables efficient and concurrent processing of messages received from clients, thereby ensuring high-performance operation.
+broker 使用专为 TBMQ 定制的 Actor 系统实现。系统中存在两类 Actor：
 
-The broker uses its own custom implementation of an Actor System, specifically designed to meet the requirements of TBMQ.
-Within this system, two distinct types of actors are present:
+* **Client Actors**：为每个连接的 MQTT 客户端创建对应的 Client Actor，负责处理 _CONNECT_、_SUBSCRIBE_、_UNSUBSCRIBE_、_PUBLISH_ 等主要消息类型，处理与 MQTT 客户端的交互并执行相关消息操作。
+* **Persisted Device Actors**：除 Client Actor 外，为所有持久类型的 DEVICE 客户端额外创建 Persisted Device Actor，专门管理持久化相关操作及持久 DEVICE 客户端的消息存储与检索。
 
-* **Client Actors**: for every connected MQTT client, a corresponding Client actor is created.
-  These actors are responsible for processing the main message types, such as _CONNECT_, _SUBSCRIBE_, _UNSUBSCRIBE_, _PUBLISH_, and others.
-  The Client actors handle the interactions with the MQTT clients and help the execution of the associated message operations.
-* **Persisted Device Actors**: in addition to the Client actors, an extra Persisted Device actor is created for all DEVICE clients that are categorized as persistent.
-  These actors are specifically designated to manage the persistence-related operations and handle the storage and retrieval of messages for persistent DEVICE clients.
+凭借 Actor 系统与多种 Actor 类型，TBMQ 高效并发处理消息，在与客户端交互时保持最优性能与快速响应。更多关于 Actor 模型的介绍见[链接](https://en.wikipedia.org/wiki/Actor_model)。
 
-With the Actor System and various actor types, TBMQ efficiently processes messages concurrently, ensuring optimal performance and quick responses when dealing with client interactions.
+### 消息分发服务
 
-For further insights into the Actor model, you can refer to the provided [link](https://en.wikipedia.org/wiki/Actor_model).
+消息分发服务（Message dispatcher service）是 TBMQ 架构的另一核心组件，负责管理发布客户端与 Kafka 之间的消息流，确保安全处理、持久化及向正确订阅者的高效投递。
 
-### Message dispatcher service
+消息分发服务在通过 Actor 系统收到发布者的消息后开始工作。服务将消息发布到 Kafka，保证其持久存储以安全处理与持久化。该步骤保证即便节点故障或临时断开，消息也不会丢失，使 Kafka 成为处理大量 MQTT 流量的可靠骨干。
 
-The Message dispatcher service is another core component of TBMQ's architecture, responsible for managing the flow of messages between publisher clients and Kafka, 
-ensuring safe processing, persistence, and efficient delivery to the appropriate subscribers.
+Kafka 确认消息已存储后，消息分发服务拉取消息并利用 [Subscription Trie](#subscriptions-trie) 分析哪些订阅者有资格接收。确定订阅者后，根据订阅者类型决定处理方式：
 
-The primary role of the Message dispatcher service begins once the message from the publisher is received via the Actor system. 
-The service takes this message and publishes it to Kafka, ensuring that it is durably stored for safe processing and persistence. 
-This step guarantees that messages are not lost, even in the event of node failures or temporary disconnections, making Kafka a reliable backbone for handling high volumes of MQTT traffic.
+* [DEVICE 非持久客户端](#non-persistent-client)：消息可立即投递给客户端。
+* [DEVICE 持久客户端](#persistent-device-client)：消息发布到 DEVICE 客户端 Kafka 主题，随后存入 Redis。
+* [APPLICATION 持久客户端](#persistent-application-client)：消息发布到专用 Application Kafka 主题。
 
-Once Kafka confirms the message is stored, the Message dispatcher service retrieves the message and leverages the [Subscription Trie](#subscriptions-trie) to analyze which subscribers are eligible to receive it.
-After identifying the appropriate subscribers, the Message dispatcher service determines how to handle the message based on the type of subscriber:
+为每个订阅者确定并完成处理路由后，消息交给 Netty 进行实际网络传输，投递给相应的在线客户端。
 
-* [DEVICE Non-Persistent Client](#non-persistent-client): The message can be immediately delivered to the client.
-* [DEVICE Persistent Client](#persistent-device-client): The message is published to DEVICE clients Kafka topic and later stored in Redis. 
-* [APPLICATION Persistent Client](#persistent-application-client): The message is published to dedicated Application Kafka topic.
+### 订阅 Trie
 
-Once the appropriate handling route is determined and done for each subscriber, the message is passed to Netty, which manages the actual network transmission, 
-ensuring the message is delivered to the appropriate online clients.
+Trie 数据结构因其层次化组织与基于前缀的匹配，非常利于快速查找。仅存储一次共同前缀即可快速匹配 topic，减少搜索空间与内存占用。其时间复杂度取决于 topic 长度而非 topic 数量，即便在有数百万订阅的大规模环境中仍能保持稳定快速的查找。
 
-### Subscriptions Trie
+在 TBMQ 中，所有客户端订阅从 Kafka 主题消费，并存入内存中的 Trie 数据结构。Trie 按层级组织 topic 过滤器，每个节点代表 topic 过滤器的一级。
 
-The Trie data structure is highly efficient for fast lookups due to its hierarchical organization and prefix-based matching.
-It allows for quick identification of matching topics by storing common prefixes only once, which minimizes search space and reduces memory usage.
-Its predictable time complexity, which depends on the length of the topic rather than the number of topics, ensures consistent and fast lookups even in large-scale environments with millions of subscriptions.
+从 Kafka 读取 _PUBLISH_ 消息时，broker 需识别所有与消息 topic 匹配的订阅客户端并确保其收到消息。Trie 可根据 topic 名称高效检索客户端订阅。一旦确定相关订阅，消息副本将转发给各对应客户端。
 
-Within TBMQ, all client subscriptions are consumed from a Kafka topic and stored in a Trie data structure in the memory. 
-The Trie organizes the topic filters hierarchically, with each node representing a level in the topic filter.
+该方式可实现高性能消息处理，快速精确确定需接收特定消息的客户端。需注意的是，因 Trie 存储在内存中，该方法会增加 broker 的内存占用。更多 Trie 数据结构信息见[链接](https://en.wikipedia.org/wiki/Trie)。
 
-When a _PUBLISH_ message is read from Kafka, the broker needs to identify all clients with relevant subscriptions for the topic name of the published message to ensure they receive the message. 
-The Trie data structure enables efficient retrieval of client subscriptions based on the topic name. 
-Once the relevant subscriptions are identified, a copy of the message is forwarded to each respective client.
+## 单机模式与集群模式
 
-This approach ensures high-performance message processing as it allows for quick and precise determination of the clients that need to receive a specific message. 
-However, it is worth noting that this method requires increased memory consumption by the broker due to the storage of the Trie data structure.
+TBMQ 设计为可水平扩展，支持自动向集群添加新的 broker 节点。集群内所有节点功能相同，共同承担整体负载，实现客户端连接与消息处理的均衡分布。
 
-For more detailed information on the Trie data structure, you can refer to the provided [link](https://en.wikipedia.org/wiki/Trie).
+broker 设计无需「主节点」或「协调进程」，无层级或中央节点管理其他节点。该去中心化设计消除了单点故障，提升系统整体健壮性与容错能力。
 
-## Standalone vs cluster mode
+处理客户端连接请求时，可使用自选的负载均衡器，将入站连接分发到所有可用 TBMQ 节点，均衡工作负载并提高资源利用率。
 
-TBMQ is designed to be horizontally scalable, allowing for the addition of new broker nodes to the cluster automatically. 
-All nodes within the cluster are identical and share the overall load, ensuring a balanced distribution of client connections and message processing.
+若客户端与某 broker 节点断开（如节点关闭、移除或网络故障），可轻松重连至集群内任意健康节点。该无缝重连能力确保持续运行与不中断服务，客户端可与集群内任意可用节点建立连接。
 
-The design of the broker eliminates the need for "master" or "coordinator" processes, as there is no hierarchy or central node responsible for managing the others. 
-This decentralized approach removes the presence of a single point of failure, enhancing the system's overall robustness and fault tolerance.
+通过水平扩展、负载均衡与新节点自动发现，TBMQ 为大规模部署中的 MQTT 通信提供可扩展且 resilient 的架构。
 
-To handle client connection requests, a load balancer of your choice can be used. 
-The load balancer distributes incoming client connections across all available TBMQ nodes, 
-evenly distributing the workload and maximizing resource utilization.
+## 编程语言
 
-In the event that a client loses its connection with a specific broker node (e.g., due to node shutdown, removal, or network failure), 
-it can easily reconnect to any other healthy node within the cluster. 
-This seamless reconnection capability ensures continuous operation and uninterrupted service for connected clients, 
-as they can establish connections with any available node in the cluster.
-
-By leveraging horizontal scalability, load balancing, and automatic discovery of new nodes, 
-TBMQ provides a highly scalable and resilient architecture for handling MQTT communication in large-scale deployments.
-
-## Programming languages
-
-The back end of TBMQ is implemented in Java 17. The front end of TBMQ is developed as a SPA using the Angular 19 framework.
+TBMQ 后端使用 Java 17 实现，前端以 Angular 19 框架开发为 SPA。

@@ -1,10 +1,10 @@
-To install the `thingsboard-python-client-sdk`, use the command below.
-We recommend installing packages outside the global environment:
+安装 `thingsboard-python-client-sdk` 可使用以下命令。
+建议在全局环境外安装依赖：
 
 ```bash
 pip3 install tb-mqtt-client
 ```
 {:.copy-code}
 
-Also, you should have tools that allow editing code. 
-For example, you can use the Nano editor, which comes pre-installed, or install any other code editor you prefer.
+此外需具备代码编辑工具。
+例如可使用预装的 Nano 编辑器，或安装其它您偏好的编辑器。

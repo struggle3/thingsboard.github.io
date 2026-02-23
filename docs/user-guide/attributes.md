@@ -2,29 +2,29 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Working with IoT device attributes
-description: IoT device management using ThingsBoard attributes feature
+title: IoT 设备属性管理
+description: 使用 ThingsBoard 属性功能管理 IoT 设备
 server-side-attrs-ui:
     0:
         image: /images/user-guide/attributes/add-server-side-ce-src.png
-        title: 'Go to Entities → Devices and open the device you want to edit by clicking its row. In the device details, open the "Attributes" tab, select the "Server attributes" scope, and click the "+" icon to add a new attribute.'
+        title: '进入 Entities → Devices，点击要编辑的设备行打开详情。在设备详情中打开「Attributes」选项卡，选择「Server attributes」scope，点击「+」添加新属性。'
     1:
         image: /images/user-guide/attributes/add-server-side-ce2-src.png
-        title: 'In the dialog, enter the attribute key, select the value type (for example, String), and provide a value.'
+        title: '在弹窗中输入 attribute key，选择 value type（如 String），并填写 value。'
     2:
         image: /images/user-guide/attributes/add-server-side-ce3-src.png
-        title: 'After saving, the new attribute appears in the list with its key, value, and last update time. Sort using "Last update time" to quickly locate the newly created attribute.'
+        title: '保存后，新属性将出现在列表中，包含 key、value 和 last update time。可按「Last update time」排序快速找到新建属性。'
 
 shared-attrs-ui:
     0:
         image: /images/user-guide/attributes/add-shared-ce-src.png
-        title: 'Go to Entities → Devices and open the device you want to edit by clicking its row. In the device details, open the "Attributes" tab, select the "Shared attributes" scope, and click the "+" icon to add a new attribute.'
+        title: '进入 Entities → Devices，点击要编辑的设备行打开详情。在设备详情中打开「Attributes」选项卡，选择「Shared attributes」scope，点击「+」添加新属性。'
     1:
         image: /images/user-guide/attributes/add-shared-ce2-src.png
-        title: 'In the dialog, enter the attribute key, select the value type (for example, Double), and provide a value.'
+        title: '在弹窗中输入 attribute key，选择 value type（如 Double），并填写 value。'
     2:
         image: /images/user-guide/attributes/add-shared-ce3-src.png
-        title: 'After saving, the new attribute appears in the list with its key, value, and last update time.'
+        title: '保存后，新属性将出现在列表中，包含 key、value 和 last update time。'
 
 ---
 

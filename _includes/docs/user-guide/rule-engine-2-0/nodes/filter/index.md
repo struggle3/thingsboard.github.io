@@ -1,19 +1,18 @@
-Filter nodes are the routing and conditional logic components of ThingsBoard's rule engine that examine messages and determine how they should be routed to downstream nodes 
-based on various criteria.
+过滤节点是 ThingsBoard 规则引擎的路由与条件逻辑组件，用于检查消息并根据不同条件决定消息如何路由到下游节点。
 
-These nodes do not modify messages or perform any actions in the system - they are purely for determining which processing path a message should take. 
-Filter nodes typically have multiple output relations like "True/False" for boolean evaluations or named connections corresponding to the filtering criteria, 
-allowing messages to flow to different processing paths based on the evaluation results.
+这些节点不会修改消息或执行系统中的任何操作——它们仅用于确定消息应走哪条处理路径。
+过滤节点通常具有多个输出关系，如布尔判断的「True/False」，或与过滤条件对应的命名连接，
+使消息可根据评估结果流向不同处理路径。
 
-- [alarm status filter](/docs/user-guide/rule-engine-2-0/nodes/filter/alarm-status-filter) — routes messages based on whether the alarm status matches configured statuses.
-- [asset profile switch](/docs/user-guide/rule-engine-2-0/nodes/filter/asset-profile-switch) — routes messages based on the profile name of the originator asset.
-- [check fields presence](/docs/user-guide/rule-engine-2-0/nodes/filter/check-fields-presence) — routes messages based on whether specified fields are present in the message data or metadata.
-- [check relation presence](/docs/user-guide/rule-engine-2-0/nodes/filter/check-relation-presence) — routes messages based on whether a specified relation exists between the message originator and a target entity.
-- [device profile switch](/docs/user-guide/rule-engine-2-0/nodes/filter/device-profile-switch) — routes messages based on the profile name of the originator device.
-- [entity type filter](/docs/user-guide/rule-engine-2-0/nodes/filter/entity-type-filter) — routes messages based on whether the originator entity type matches configured types.
-- [entity type switch](/docs/user-guide/rule-engine-2-0/nodes/filter/entity-type-switch) — routes messages to different connections based on the originator entity type.
-- [gps geofencing filter](/docs/user-guide/rule-engine-2-0/nodes/filter/gps-geofencing-filter) — routes messages based on whether GPS coordinates fall within a configured geofence boundary.
-- [message type filter](/docs/user-guide/rule-engine-2-0/nodes/filter/message-type-filter) — routes messages based on whether the originator entity type matches configured types.
-- [message type switch](/docs/user-guide/rule-engine-2-0/nodes/filter/message-type-switch) — routes messages to different connections based on the message type.
-- [script](/docs/user-guide/rule-engine-2-0/nodes/filter/script) — routes messages based on the result of a boolean script.
-- [switch](/docs/user-guide/rule-engine-2-0/nodes/filter/switch) — routes messages to one or more connections returned by a script.
+- [告警状态过滤](/docs/user-guide/rule-engine-2-0/nodes/filter/alarm-status-filter) — 根据告警状态是否匹配配置的状态路由消息。
+- [资产配置切换](/docs/user-guide/rule-engine-2-0/nodes/filter/asset-profile-switch) — 根据来源资产的配置名称路由消息。
+- [检查字段存在](/docs/user-guide/rule-engine-2-0/nodes/filter/check-fields-presence) — 根据消息数据或元数据中是否存在指定字段路由消息。
+- [检查关系存在](/docs/user-guide/rule-engine-2-0/nodes/filter/check-relation-presence) — 根据消息来源与目标实体间是否存在指定关系路由消息。
+- [设备配置切换](/docs/user-guide/rule-engine-2-0/nodes/filter/device-profile-switch) — 根据来源设备的配置名称路由消息。
+- [实体类型过滤](/docs/user-guide/rule-engine-2-0/nodes/filter/entity-type-filter) — 根据来源实体类型是否匹配配置类型路由消息。
+- [实体类型切换](/docs/user-guide/rule-engine-2-0/nodes/filter/entity-type-switch) — 根据来源实体类型将消息路由到不同连接。
+- [GPS 地理围栏过滤](/docs/user-guide/rule-engine-2-0/nodes/filter/gps-geofencing-filter) — 根据 GPS 坐标是否落在配置的地理围栏范围内路由消息。
+- [消息类型过滤](/docs/user-guide/rule-engine-2-0/nodes/filter/message-type-filter) — 根据来源实体类型是否匹配配置类型路由消息。
+- [消息类型切换](/docs/user-guide/rule-engine-2-0/nodes/filter/message-type-switch) — 根据消息类型将消息路由到不同连接。
+- [脚本](/docs/user-guide/rule-engine-2-0/nodes/filter/script) — 根据布尔脚本的执行结果路由消息。
+- [切换](/docs/user-guide/rule-engine-2-0/nodes/filter/switch) — 根据脚本返回值将消息路由到一个或多个连接。

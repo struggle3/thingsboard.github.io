@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: duplicate to related
-description: Duplicates an incoming message to all entities related to the message originator (found via a configurable relations query).
+description: 将入站消息复制到与消息 originator 相关的所有 entity（通过可配置的 relation 查询查找）。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

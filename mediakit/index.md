@@ -1,102 +1,102 @@
 ---
 layout: common
-title: Media Kit
+title: ThingsBoard商标
 notitle: "true"
-description: ThingsBoard Media Kit
+description: ThingsBoard商标
 
 ---
 
-<h1 class="media-kit-title">ThingsBoard Media Kit</h1>
-<p class="media-kit-subtitle">Company overview and official visuals — all in one place</p>
-<h2 class="media-kit-assets-title">Media assets</h2>
+<h1 class="media-kit-title">ThingsBoard商标</h1>
+<p class="media-kit-subtitle">公司概览与官方视觉素材</p>
+<h2 class="media-kit-assets-title">媒体素材</h2>
 <div class="thingsboard-logos">
-    <h3>The ThingsBoard logo</h3>
-    <p>The ThingsBoard logo is available in three colors. Use black and deep blue on light backgrounds,</p>
-    <p>and white on dark backgrounds.</p>
-    <p>Do not modify the logo colors and use only the logos provided you by ThingsBoard.</p>
-    <p class="mb">Official ThingsBoard logos are trademarks of ThingsBoard, inc.</p>
+    <h3>ThingsBoard商标</h3>
+    <p>ThingsBoard商标提供三种颜色版本请在浅色背景上使用黑色与深蓝色版本，</p>
+    <p>在深色背景上使用白色版本。</p>
+    <p>请勿修改标志颜色且仅使用ThingsBoard提供的官方标志。</p>
+    <p class="mb">官方ThingsBoard标志为ThingsBoard inc的商标。</p>
     <div class="logos-images">
-        <div><img src="/images/thingsboard_logo_white.svg" alt="White Thingsboard logo"></div>
-        <div><img src="/images/thingsboard_logo_blue_media.svg" alt="Blue Thingsboard logo"></div>
-        <div><img src="/images/thingsboard_logo_black.svg" alt="Black Thingsboard logo"></div>
+        <div><img src="/images/thingsboard_logo_white.svg" alt="ThingsBoard 白色标志"></div>
+        <div><img src="/images/thingsboard_logo_blue_media.svg" alt="ThingsBoard 蓝色标志"></div>
+        <div><img src="/images/thingsboard_logo_black.svg" alt="ThingsBoard 黑色标志"></div>
     </div>
     <div class="logos-images">
-        <div><img src="/images/thingsboard_logo_white_l.svg" alt="White Thingsboard logo"></div>
-        <div><img src="/images/thingsboard_logo_blue_l.svg" alt="Blue Thingsboard logo"></div>
-        <div><img src="/images/thingsboard_logo_black_l.svg" alt="Black Thingsboard logo"></div>
+        <div><img src="/images/thingsboard_logo_white_l.svg" alt="ThingsBoard 白色标志"></div>
+        <div><img src="/images/thingsboard_logo_blue_l.svg" alt="ThingsBoard 蓝色标志"></div>
+        <div><img src="/images/thingsboard_logo_black_l.svg" alt="ThingsBoard 黑色标志"></div>
     </div>
-    <h4>How to use our logo</h4>
-    <p>Always provide a protected area of isolation around the logo, as illustrated in the diagram. </p>
-    <p class="mb">This ensures the logo remains prominent and legible without interference from other design elements.</p>
+    <h4>标志使用规范</h4>
+    <p>请始终在标志周围保留足够的留白区域；如图所示。</p>
+    <p class="mb">以确保标志清晰醒目，不受其他设计元素干扰。</p>
     <div class="logos-examples">
-        <div><img src="/images/thingsboard_logo_example.svg" alt="Thingsboard logo padding example"></div>
-        <div><img src="/images/thingsboard_logo_example_sm.svg" alt="Small Thingsboard logo padding example"></div>
+        <div><img src="/images/thingsboard_logo_example.svg" alt="ThingsBoard 标志留白示例"></div>
+        <div><img src="/images/thingsboard_logo_example_sm.svg" alt="ThingsBoard 标志小尺寸留白示例"></div>
     </div>
-    <a class="download" href="ThingsBoard_Logos.zip">Download logo kit <img src="/images/download-icon.svg" alt=""></a>
+    <a class="download" href="ThingsBoard_Logos.zip">下载标志包<img src="/images/download-icon.svg" alt=""></a>
 </div>
 <div class="thingsboard-colors">
-    <h3>Brand colors</h3>
-    <p>Our brand palette reflects the versatility and clarity of the ThingsBoard platform.</p>
-    <p>Please use these colors consistently when referencing our products or visual identity.</p>
-    <p class="mb">Deep blue color used for our Community Edition, Green color represents our Professional Edition.</p>
+    <h3>品牌色彩</h3>
+    <p>我们的品牌色板体现了 ThingsBoard 平台的多功能性与清晰度。</p>
+    <p>在引用我们的产品或视觉形象时，请一致使用以下颜色。</p>
+    <p class="mb">深蓝色用于Community Edition（社区版），绿色代表Professional Edition（专业版）。</p>
     <div>
         <div class="color-block">
             <div class="color">CE</div>
             <div class="color-values">
-                <p><span>HEX</span>#305680 <img src="/images/copy-icon.svg" alt="Copy icon"><span>Copy value</span></p>
-                <p><span>RGB</span>48, 86, 128 <img src="/images/copy-icon.svg" alt="Copy icon"><span>Copy value</span></p>
-                <p><span>CMYK</span>62.5, 32.81, 0, 49.8 <img src="/images/copy-icon.svg" alt="Copy icon"><span>Copy value</span></p>
+                <p><span>HEX</span>#305680 <img src="/images/copy-icon.svg" alt="复制图标"><span>复制值</span></p>
+                <p><span>RGB</span>48, 86, 128 <img src="/images/copy-icon.svg" alt="复制图标"><span>复制值</span></p>
+                <p><span>CMYK</span>62.5, 32.81, 0, 49.8 <img src="/images/copy-icon.svg" alt="复制图标"><span>复制值</span></p>
             </div>
         </div>
         <div class="color-block">
             <div class="color pe">PE</div>
             <div class="color-values">
-                <p><span>HEX</span>#00695C <img src="/images/copy-icon.svg" alt="Copy icon"><span>Copy value</span></p>
-                <p><span>RGB</span>0, 105, 92 <img src="/images/copy-icon.svg" alt="Copy icon"><span>Copy value</span></p>
-                <p><span>CMYK</span>100, 0, 12.38, 58.82 <img src="/images/copy-icon.svg" alt="Copy icon"><span>Copy value</span></p>
+                <p><span>HEX</span>#00695C <img src="/images/copy-icon.svg" alt="复制图标"><span>复制值</span></p>
+                <p><span>RGB</span>0, 105, 92 <img src="/images/copy-icon.svg" alt="复制图标"><span>复制值</span></p>
+                <p><span>CMYK</span>100, 0, 12.38, 58.82 <img src="/images/copy-icon.svg" alt="复制图标"><span>复制值</span></p>
             </div>
         </div>
     </div>
 </div>
 <div class="trademarks">
-    <h3>Using the ThingsBoard trademarks</h3>
+    <h3>ThingsBoard 商标使用</h3>
     <div class="block">
         <div class="text">
-            <h4>To identify ThingsBoard platform and link to website</h4>
-            <p>You needn't ask us for permission to use the ThingsBoard logo on your own website solely as a hyperlink to <a target="_blank" href="https://thingsboard.io">thingsboard.io</a>  or to an appropriate ThingsBoard project, or in other materials, such as presentations and slides, solely as a means to refer to the ThingsBoard itself. All other uses of the ThingsBoard logo must be <a href="https://www.apache.org/foundation/marks/contact#other">approved in writing</a> by the ThingsBoard, inc.</p>
+            <h4>用于标识 ThingsBoard 平台并链接至官网</h4>
+            <p>若您仅在自己的网站上使用 ThingsBoard 标志作为指向 <a target="_blank" href="https://thingsboard.io">thingsboard.io</a> 或相应 ThingsBoard 项目的超链接，或仅在其他材料（如演示文稿和幻灯片）中用于指代 ThingsBoard 本身，则无需向我们申请许可。所有其他对 ThingsBoard 标志的使用均须经 ThingsBoard, inc. <a href="https://www.apache.org/foundation/marks/contact#other">书面批准</a>。</p>
         </div>
-        <img src="/images/tb-trademarks-1.webp" title="To identify ThingsBoard platform and link to website" alt="To identify ThingsBoard platform and link to website" width="450" height="241">
+        <img src="/images/tb-trademarks-1.webp" title="用于标识 ThingsBoard 平台并链接至官网" alt="用于标识 ThingsBoard 平台并链接至官网" width="450" height="241">
     </div>
     <div class="block">
         <div class="text">
-            <h4>In software product branding</h4>
-            <p>In general, you may not use ThingsBoard trademarks in any software product branding for software products except "Powered By ThingsBoard" in the dashboard footer. For example, it is not permitted to name a product either "MyCompany distribution of ThingsBoard", "ThingsBoard MyCompany Edition", or any similar kind of name. You may contact us to get a written permission to use ThingsBoard trademarks in your software product branding.</p>
+            <h4>在软件产品品牌中</h4>
+            <p>一般而言，除在仪表板页脚使用“Powered By ThingsBoard”外，您不得在任何软件产品的品牌中使用 ThingsBoard 商标。例如，不得将产品命名为“MyCompany distribution of ThingsBoard”、“ThingsBoard MyCompany Edition”或任何类似名称。如需在软件产品品牌中使用 ThingsBoard 商标，可联系我们获取书面许可。</p>
         </div>
-        <img src="/images/tb-trademarks-2.webp" title="In software product branding" alt="In software product branding" width="450" height="241">
+        <img src="/images/tb-trademarks-2.webp" title="在软件产品品牌中" alt="在软件产品品牌中" width="450" height="241">
     </div>
     <div class="block">
         <div class="text">
-            <h4>The following uses of ThingsBoard trademarks are probably infringing:</h4>
+            <h4>以下对 ThingsBoard 商标的使用可能构成侵权：</h4>
             <ul>
-                <li><p>Confusingly similar software product names.</p></li>
-                <li><p>Software service offerings that are for anything other than official ThingsBoard-distributed software.</p></li>
-                <li><p>Company names that may be associated in customer's minds with ThingsBoard or its trademarked project software.</p></li>
+                <li><p>容易引起混淆的相似软件产品名称。</p></li>
+                <li><p>用于非官方 ThingsBoard 分发软件以外的软件服务产品。</p></li>
+                <li><p>可能使客户联想到 ThingsBoard 或其商标项目软件的公司名称。</p></li>
             </ul>
         </div>
-        <img src="/images/tb-trademarks-3.webp" title="Uses of ThingsBoard trademarks" alt="Uses of ThingsBoard trademarks" width="450" height="241">
+        <img src="/images/tb-trademarks-3.webp" title="ThingsBoard 商标使用" alt="ThingsBoard 商标使用" width="450" height="241">
     </div>
 </div>
 <div class="contact-us-banner">
     <div class="contact-us-banner-content">
-        <h2>Read more about ThingsBoard</h2>
-        <p>ThingsBoard is continuously evolving to deliver more scalable, efficient, and future-proof solutions. Learn more about us and explore how we're helping companies solve real-world challenges and accelerate their IoT transformation.</p>
+        <h2>了解更多关于 ThingsBoard</h2>
+        <p>ThingsBoard 持续演进，以提供更可扩展、更高效、更面向未来的解决方案。了解我们如何帮助企业在现实中应对挑战并加速其 IoT 转型。</p>
         <div class="contact-us-banner-buttons">
-            <a class="gtm_button" href="/company/">About company</a>
-            <a class="gtm_button" href="/iot-use-cases/">Use cases</a>
-            <a class="gtm_button" href="/case-studies/">Case studies</a>
+            <a class="gtm_button" href="/company/">关于公司</a>
+            <a class="gtm_button" href="/iot-use-cases/">应用场景</a>
+            <a class="gtm_button" href="/case-studies/">案例展示</a>
         </div>
     </div>
-    <img src="/images/logo-fade.svg" width="380" height="267" alt="Thingsboard icon">
+    <img src="/images/logo-fade.svg" width="380" height="267" alt="ThingsBoard 图标">
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -110,9 +110,9 @@ description: ThingsBoard Media Kit
                 document.execCommand("copy");
                 $temp.remove();
                 const tooltipEl = elem.nextElementSibling;
-                tooltipEl.innerHTML = "Copied";
+                tooltipEl.innerHTML = "已复制";
                 setTimeout(() => {
-                    tooltipEl.innerHTML = 'Copy value'
+                    tooltipEl.innerHTML = '复制值'
                 }, 1500);
             }
         })

@@ -3,23 +3,23 @@
 * TOC
 {:toc}
 
-A versatile widget for static or dynamic content on a ThingsBoard dashboard. It renders **Markdown** or **free‑form HTML**, and it can work **with or without data sources**. 
-Use it for notes, contextual hints, KPIs, banners, or compact info cards alongside charts, tables, and maps.
+适用于 ThingsBoard 仪表板静态或动态内容的多用途部件。它支持渲染 **Markdown** 或 **自由格式 HTML**，且可**带或不带数据源**使用。
+可用于注释、上下文提示、KPI、横幅，或与图表、表格、地图并列的紧凑信息卡片。
 
 <br><b><font size="3">Markdown vs HTML</font></b>
 
-- **Markdown** is a simple syntax for formatting text. Its advantages are **speed and simplicity** — you don&#39;t need to know HTML to produce clean formatting.   
-- **HTML** — choose this when you need precise control over layout, styling, or interactive elements (tables, icons, embedded media, complex grids).
+- **Markdown** 是一种简单的文本格式语法，其优点是**快速易用**——无需了解 HTML 即可实现清晰排版。
+- **HTML** —— 当需要精确控制布局、样式或交互元素（表格、图标、嵌入媒体、复杂网格）时选用。
 
 <hr>
 
-## Key capabilities
+## 主要能力
 
-- **Dynamic or static content.** Author in Markdown or HTML; mix text, lists, tables, links, images, icons.
-- **Optional data.** Pull telemetry/attributes via **entity alias** and **data keys** to inject values in a template or process them in a value function.
-- **Actions & navigation.** Handle clicks on HTML elements (by *id*) to navigate to dashboard states, open dialogs/popovers, or trigger other actions.
-- **Styling.** Add styles in the dedicated **Markdown/HTML CSS** section (recommended) or place inline styles in your markup.
-- **Fast integration.** Works well alongside other widgets (time series, tables, maps) and is ideal for notes, contextual explanations, and compact info cards.
+- **动态或静态内容。** 使用 Markdown 或 HTML 编写，可混合文本、列表、表格、链接、图片、图标。
+- **可选数据。** 通过 **entity alias** 和 **data keys** 拉取 telemetry/attributes，注入模板或通过 value function 处理。
+- **操作与导航。** 处理 HTML 元素（按 *id*）点击，可跳转到 dashboard 状态、打开对话框/弹出框或触发其他操作。
+- **样式。** 在 **Markdown/HTML CSS** 专区添加样式（推荐），或在标记中内联样式。
+- **快速集成。** 与其它部件（时序、表格、地图）协同良好，适合注释、上下文说明和紧凑信息卡片。
 
 <hr>
 
@@ -31,44 +31,44 @@ Use it for notes, contextual hints, KPIs, banners, or compact info cards alongsi
 
 ## Data sources (optional)
 
-The {{widgetName}} can work with **no data sources** (purely static content) or with **one or more [data sources](/docs/{{docsPrefix}}user-guide/widgets/#data-source-types){:target="_blank"}**.
+{{widgetName}} 可在**无数据源**（纯静态内容）或 **一个或多个 [data sources](/docs/{{docsPrefix}}user-guide/widgets/#data-source-types){:target="_blank"}** 下工作。
 
-In the **Data** tab:
+在 **Data** 选项卡中：
 
-1. Choose the data source type: [Entity](/docs/{{docsPrefix}}user-guide/widgets/#entity-as-datasource){:target="_blank"}, [Device](/docs/{{docsPrefix}}user-guide/widgets/#device-as-datasource){:target="_blank"}, [Entities count](/docs/{{docsPrefix}}user-guide/widgets/#entities-count){:target="_blank"}, [Alarms count](/docs/{{docsPrefix}}user-guide/widgets/#alarms-count){:target="_blank"} or [Function](/docs/{{docsPrefix}}user-guide/widgets/#function-as-datasource){:target="_blank"}. 
-2. Configure [filters](/docs/{{docsPrefix}}user-guide/widgets/#filters){:target="_blank"} and **data keys** ([attributes](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"} / [latest telemetry](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"}).   
-  The added keys become available to the widget&#39;s content logic.
+1. 选择数据源类型：[Entity](/docs/{{docsPrefix}}user-guide/widgets/#entity-as-datasource){:target="_blank"}、[Device](/docs/{{docsPrefix}}user-guide/widgets/#device-as-datasource){:target="_blank"}、[Entities count](/docs/{{docsPrefix}}user-guide/widgets/#entities-count){:target="_blank"}、[Alarms count](/docs/{{docsPrefix}}user-guide/widgets/#alarms-count){:target="_blank"} 或 [Function](/docs/{{docsPrefix}}user-guide/widgets/#function-as-datasource){:target="_blank"}。
+2. 配置 [filters](/docs/{{docsPrefix}}user-guide/widgets/#filters){:target="_blank"} 和 **data keys**（[attributes](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"} / [latest telemetry](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"}）。  
+  添加的键将在部件的 content 逻辑中可用。
 
 <hr>
 
 ## Configuration
 
-Go to the widget&#39;s **Appearance** tab to manage its content and styles.
-- [Static Markdown/HTML template:](#static-markdownhtml-template) best for static layouts with a few dynamic placeholders.  
-- [Dynamic Markdown/HTML content:](#dynamic-markdownhtml-content) best for conditions/loops/calculations, combining multiple keys, or switching layouts based on data.  
-- [Markdown/HTML CSS](#content-styling-css) — central place to add CSS for maintainable styling; inline styles remain supported for quick tweaks.
+进入部件的 **Appearance** 选项卡管理其内容和样式。
+- [Static Markdown/HTML template:](#static-markdownhtml-template) 适用于带少量动态占位符的静态布局。
+- [Dynamic Markdown/HTML content:](#dynamic-markdownhtml-content) 适用于条件/循环/计算、合并多键或基于数据切换布局。
+- [Markdown/HTML CSS](#content-styling-css) —— 集中添加 CSS 便于维护；内联样式仍支持快速调整。
 
 <hr>
 
 ### Static Markdown/HTML template
 
-Create static layouts with multiple variables, like `${key}`, where `key` is the data key&#39;s **label**.
+使用 `${key}` 等变量创建静态布局，其中 `key` 为 data key 的 **label**。
 
-Basic numeric formatting for a data key&#39;s value is supported via `${key:n}`, where `n` is the number of **decimal places**. For example:
-  - `${key}` — display key value **as is** (no formatting).
-  - `${key:0}` — display key value with **no decimal places**.
-  - `${key:2}` — display key value with **two decimal places**.
+通过 `${key:n}` 支持 data key 值的基本数值格式，`n` 为**小数位数**。例如：
+  - `${key}` —— 原样显示键值（无格式）。
+  - `${key:0}` —— 以**无小数位**显示键值。
+  - `${key:2}` —— 以**两位小数**显示键值。
 
-**Example:** 
+**示例：**
 
-The Smart Device sends a temperature value to ThingsBoard. Display the temperature value in a card.
+Smart Device 向 ThingsBoard 发送温度值。在卡片中显示该温度值。
 
-**Datasource:**
-- **Type**: Device
-- **Device**: Smart Device
-- **Data key**: temperature
+**Datasource：**
+- **Type**：Device
+- **Device**：Smart Device
+- **Data key**：temperature
 
-Use the following **Markdown/HTML pattern**:
+使用以下 **Markdown/HTML pattern**：
 
 ```markdown
 ### Temperature value card
@@ -77,39 +77,39 @@ Use the following **Markdown/HTML pattern**:
 ```
 {:.copy-code}
 
-**Notes**
-- `${entityName}` – the **system name** of the entity from the data source.
-- `${temperature:1}` - value of the temperature telemetry with **one digit after the decimal point**.
+**说明**
+- `${entityName}` —— 数据源中实体的**系统名称**。
+- `${temperature:1}` —— 温度 telemetry 的值，**小数点后一位**。
 
-**Result:**
+**效果：**
 
 ![image](/images/user-guide/widgets/cards/markdown-html-card/markdown-html-pattern.png)
 
-[Download this widget](/docs/pe/user-guide/widgets/resources/markdown_html_card_temperature_value_card.json){:target="_blank" download="markdown_html_card_temperature_value_card.json"} and [import](/docs/{{docsPrefix}}user-guide/widgets/#import-widget){:target="_blank"} it into your dashboard.
+[下载此部件](/docs/pe/user-guide/widgets/resources/markdown_html_card_temperature_value_card.json){:target="_blank" download="markdown_html_card_temperature_value_card.json"} 并 [导入](/docs/{{docsPrefix}}user-guide/widgets/#import-widget){:target="_blank"} 到您的 dashboard。
 
 <hr>
 
 ### Dynamic Markdown/HTML content
 
-Best for conditions, calculations, combining multiple keys, or switching layouts.
+适用于条件、计算、合并多键或切换布局。
 
-**To use:**
-1. Turn on **Markdown/HTML value function** to generate the card content via JavaScript.
-2. Implement a JavaScript function that receives data and the widget context `ctx`, then returns a **string** with Markdown or HTML.
+**使用方法：**
+1. 开启 **Markdown/HTML value function**，通过 JavaScript 生成卡片内容。
+2. 实现一个接收 data 和部件上下文 `ctx` 的 JavaScript 函数，返回 Markdown 或 HTML **字符串**。
 
-**Example:** 
+**示例：**
 
-The Smart Device sends a temperature value to ThingsBoard. Display the temperature in a card with color rules:
-- If the temperature is below 20 °C, the value is shown <span style="color:blue">blue</span>.
-- If it&#39;s between 20 °C and 25 °C, the value is <span style="color:green">green</span>.
-- If it&#39;s above 25 °C, the value is <span style="color:red">red</span>.
+Smart Device 向 ThingsBoard 发送温度值。在卡片中按颜色规则显示温度：
+- 温度低于 20 °C 时，值显示为 <span style="color:blue">蓝色</span>。
+- 介于 20 °C 与 25 °C 之间时，值为 <span style="color:green">绿色</span>。
+- 高于 25 °C 时，值为 <span style="color:red">红色</span>。
 
-**Datasource:**
-- **Type**: Device
-- **Device**: Smart Device
-- **Data key**: temperature
+**Datasource：**
+- **Type**：Device
+- **Device**：Smart Device
+- **Data key**：temperature
 
-**Use the following value function**:
+**使用以下 value function**：
 
 ```js
 const entity = data[0];
@@ -120,45 +120,45 @@ return entityName + temp;
 ```
 {:.copy-code}
 
-**What it does**
+**说明**
 
-1. Use the first **datasource**: entity is `data[0]`.
-2. Choose a value **color** based on temperature:
+1. 使用第一个 **datasource**：entity 为 `data[0]`。
+2. 按温度选择 **color**：
 - **> 25 →** <span style="color:red">"red"</span>
-- **> 20 (and ≤ 25) →** <span style="color:green">"green"</span>.
-- **≤ 20 →** <span style="color:blue">"blue"</span>.
-3. **Build strings with Markdown + HTML:**
-- `entityName` - the **entity&#39;s name**.
-- `temp` a string with the temperature value, colored** according to the selected rule.
-- `toFixed(1)` - rounds the temperature to **one decimal place**.
+- **> 20（且 ≤ 25）→** <span style="color:green">"green"</span>
+- **≤ 20 →** <span style="color:blue">"blue"</span>
+3. **用 Markdown + HTML 构建字符串：**
+- `entityName` —— **实体名称**。
+- `temp` —— 温度值字符串，**按所选规则着色**。
+- `toFixed(1)` —— 将温度四舍五入至**一位小数**。
 
-**Result:**
+**效果：**
 
 ![image](/images/user-guide/widgets/cards/markdown-html-card/markdown-html-value-function.png)
 
-[Download this widget](/docs/pe/user-guide/widgets/resources/markdown_html_card_temperature_value_card_2.json){:target="_blank" download="markdown_html_card_temperature_value_card.json"} and [import](/docs/{{docsPrefix}}user-guide/widgets/#import-widget){:target="_blank"} it into your dashboard.
+[下载此部件](/docs/pe/user-guide/widgets/resources/markdown_html_card_temperature_value_card_2.json){:target="_blank" download="markdown_html_card_temperature_value_card.json"} 并 [导入](/docs/{{docsPrefix}}user-guide/widgets/#import-widget){:target="_blank"} 到您的 dashboard。
 
 <hr>
 
 ### Content styling (CSS)
 
-<br><b><font size="3">Apply default Markdown style</font></b>
+<br><b><font size="3">应用默认 Markdown 样式</font></b>
 
-Applies ThingsBoard&#39;s **built‑in Markdown typography** (headings, paragraphs, lists, tables, code) aligned with the current dashboard theme.
-- **ON (recommended for most cases):** you get clean defaults that match the dashboard look & feel.
-- **OFF:** minimal browser defaults — choose this when you want full visual control via your own CSS.
+应用 ThingsBoard 的**内置 Markdown 排版**（标题、段落、列表、表格、代码），与当前 dashboard 主题一致。
+- **ON（多数情况推荐）：** 获得与 dashboard 风格匹配的默认样式。
+- **OFF：** 最小化浏览器默认 —— 需要完全通过自有 CSS 控制视觉效果时选此。
 
-You can still **override** default styles in **Markdown/HTML CSS**.
+您仍可在 **Markdown/HTML CSS** 中**覆盖**默认样式。
 
 <br><b><font size="3">Markdown/HTML CSS</font></b>
 
-Use the **Markdown/HTML CSS** section to style your card—tune headings, spacing, fonts, colors, and icons so the card matches your design system.
+使用 **Markdown/HTML CSS** 区域为卡片定义样式——调整标题、间距、字体、颜色和图标，使卡片符合设计系统。
 
-These rules apply only inside this widget’s container, so they won’t leak into other widgets.
+这些规则仅作用于本部件容器内，不会影响其它部件。
 
-**Example:**
+**示例：**
 
-**1.** Wrap your content in a container class and target everything through it.
+**1.** 将内容包裹在容器类中，并通过该类作用于所有元素。
 
 ```markdown
 <div class="office-card">
@@ -175,7 +175,7 @@ These rules apply only inside this widget’s container, so they won’t leak in
 ```
 {:.copy-code}
 
-**2.** Write CSS in **Markdown/HTML CSS** section using selectors.
+**2.** 在 **Markdown/HTML CSS** 区域使用选择器编写 CSS。
 
 ```css
 .office-card {
@@ -218,43 +218,43 @@ These rules apply only inside this widget’s container, so they won’t leak in
 ```
 {:.copy-code.expandable-10}
 
-**How it works**
-- `.office-card { … }` — **root scope**. Any selector prefixed with .office-card applies **only inside this card**.
-- `h3` rule — increases the **title size** and adds spacing under it (margin: 0 0 12px).
-- `p` rule — adds a gray **background**, **borders**, and **rounded corners**.
-- `.temp-value` — targets just the numeric value:
-  - `color: #2e7d32` highlights the telemetry value in <span style="color:green">green</span>.
-  - `font-weight: 600` makes the value stand out.
+**说明**
+- `.office-card { … }` —— **根作用域**。以 .office-card 为前缀的选择器**仅作用于本卡片内部**。
+- `h3` 规则 —— 增大**标题尺寸**并在下方留出间距（margin: 0 0 12px）。
+- `p` 规则 —— 添加灰色**背景**、**边框**和**圆角**。
+- `.temp-value` —— 仅作用于数值：
+  - `color: #2e7d32` 将 telemetry 值高亮为 <span style="color:green">绿色</span>。
+  - `font-weight: 600` 使数值更突出。
 
-**Result:**
+**效果：**
 
 ![image](/images/user-guide/widgets/cards/markdown-html-card/content-styling-css.png)
 
-[Download this widget](/docs/pe/user-guide/widgets/resources/markdown_html_card_with_css.json){:target="_blank" download="markdown_html_card_with_css.json"} and [import](/docs/{{docsPrefix}}user-guide/widgets/#import-widget){:target="_blank"} it into your dashboard.
+[下载此部件](/docs/pe/user-guide/widgets/resources/markdown_html_card_with_css.json){:target="_blank" download="markdown_html_card_with_css.json"} 并 [导入](/docs/{{docsPrefix}}user-guide/widgets/#import-widget){:target="_blank"} 到您的 dashboard。
 
 <hr>
 
 ## Card styling
 
-In the **Widget card** tab:
+在 **Widget card** 选项卡中：
 
-- **Title & Icon** — set a descriptive title/icon consistent with your dashboard.
-- **Card styles** — configure text color, background, padding, margin, border radius, and shadow.
-- **Card buttons** — optionally disable **Enable fullscreen** and **Enable data export** for purely informational cards.
+- **Title & Icon** —— 设置与 dashboard 一致的描述性标题/图标。
+- **Card styles** —— 配置文字颜色、背景、padding、margin、圆角和阴影。
+- **Card buttons** —— 纯信息卡片可关闭 **Enable fullscreen** 和 **Enable data export**。
 
 <hr>
 
 ## Actions & navigation
 
-The {{widgetName}} widget supports the following actions:
-- [Widget header button](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#widget-header-button){:target="_blank"} — adds an action button to the widget header; clicking it triggers the configured action.
-- [On HTML element click](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#on-html-element-click){:target="_blank"} — clicking a specific HTML element inside the widget (by its **id**) triggers the configured action.
+{{widgetName}} 部件支持以下操作：
+- [Widget header button](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#widget-header-button){:target="_blank"} —— 在部件标题栏添加操作按钮；点击触发已配置的操作。
+- [On HTML element click](/docs/{{docsPrefix}}user-guide/ui/widget-actions/#on-html-element-click){:target="_blank"} —— 点击部件内指定 HTML 元素（按其 **id**）时触发已配置的操作。
 
 <hr>
 
-## Example: Office information card
+## 示例：办公信息卡片
 
-Create a compact office info card.
+创建紧凑的办公信息卡片。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/widgets/cards/markdown-html-card/office-information-card-ce.png)
@@ -265,13 +265,13 @@ Create a compact office info card.
 
 <br><b><font size="4">Step 1. Prepare the entity</font></b>
 
-Create the [Asset](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"} named "**Office A**" with the following attributes:
+创建名为 "**Office A**" 的 [Asset](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"}，并设置以下 attributes：
 - **address**: 645 5th Ave, New York 
 - **officeManager**: Emma Johnson
 - **phone**: +1 121 333 4455 
 - **email**: office.a@mail.com
 
-(You can also [import](/docs/{{docsPrefix}}user-guide/bulk-provisioning/#import-entities){:target="_blank"} a prefilled Asset from [CSV](/docs/pe/user-guide/widgets/resources/office_a_asset.csv){:target="_blank" download="office-a-asset.csv"}).
+（也可从 [CSV](/docs/pe/user-guide/widgets/resources/office_a_asset.csv){:target="_blank" download="office-a-asset.csv"} [导入](/docs/{{docsPrefix}}user-guide/bulk-provisioning/#import-entities){:target="_blank"} 预填 Asset）。
 
 {% include images-gallery.html imageCollection="example-markdown-html-card-1" %}
 
@@ -279,20 +279,20 @@ Create the [Asset](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"} 
 
 <b><font size="4">Step 2.1 Add the widget</font></b>
 
-- Open or [create](/docs/{{docsPrefix}}user-guide/dashboards/#create-new-dashboard){:target="_blank"} a dashboard, then [add the **Markdown/HTML Card** widget](#add-the-widget).
+- 打开或 [create](/docs/{{docsPrefix}}user-guide/dashboards/#create-new-dashboard){:target="_blank"} dashboard，然后 [添加 **Markdown/HTML Card** 部件](#add-the-widget)。
 
 <b><font size="4">Step 2.2 Configure data ("Data" tab)</font></b>
 
-- **Define the entity and data keys to pull data from.**
-  - Create a new [Entity alias](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"} with the filter type [Single entity](/docs/{{docsPrefix}}user-guide/ui/aliases/#single-entity){:target="_blank"}, choose the **Office A** asset, and click "**Add**".
-  - In the **Data keys** section, add the following keys: **address**, **officeManager**, **email**, and **phone**.
+- **定义实体与 data keys 以拉取数据。**
+  - 新建 [Entity alias](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"}，filter type 选 [Single entity](/docs/{{docsPrefix}}user-guide/ui/aliases/#single-entity){:target="_blank"}，选择 **Office A** asset，点击 "**Add**"。
+  - 在 **Data keys** 区域添加：**address**、**officeManager**、**email**、**phone**。
 
 {% include images-gallery.html imageCollection="example-markdown-html-card-2" %}
 
 <b><font size="4">Step 2.3 Enable dynamic content ("Appearance" tab)</font></b>
 
-- Turn on the "**Use markdown/HTML value function**" option.
-- Paste the **Markdown/HTML value function** provided below:
+- 开启 "**Use markdown/HTML value function**" 选项。
+- 粘贴下方提供的 **Markdown/HTML value function**：
 
 ```js
 if (data.length) {
@@ -366,7 +366,7 @@ if (data.length) {
 ```
 {:.copy-code.expandable-10}
 
-- Scroll to **Markdown/HTML CSS** and insert the CSS provided below:
+- 滚动到 **Markdown/HTML CSS** 并粘贴下方提供的 CSS：
 
 ```css
 .card, .no-data-card {
@@ -463,21 +463,21 @@ if (data.length) {
 
 <b><font size="4">Step 2.4 Card settings ("Widget card" tab)</font></b>
 
-- Optionally disable "**Enable fullscreen**" and "**Enable data export**" if the card is informational only.
-- Click "**Add**".
+- 若卡片仅作信息展示，可关闭 "**Enable fullscreen**" 和 "**Enable data export**"。
+- 点击 "**Add**"。
 
 <b><font size="4">Step 2.5 Save</font></b>
 
-- **Resize the card** freely within your dashboard layout. Then, **save the dashboard**.
+- 在 dashboard 布局中**自由调整**卡片大小，然后**保存 dashboard**。
 
-<b><font size="4">Expected result</font></b>
+<b><font size="4">预期效果</font></b>
 
-You&#39;ll see a compact, clean office contact card on the dashboard. Missing attributes display as "Not found". Resize the card freely within your dashboard layout.
+dashboard 上将显示紧凑、清晰的办公联系卡片。缺失的 attributes 显示为 "Not found"。可在 dashboard 布局中自由调整卡片大小。
 
 {% include images-gallery.html imageCollection="example-markdown-html-card-4" %}
 
 <br><b><font size="4">Download the configured widget</font></b>
 
-You can download the configured [Office information card](/docs/pe/user-guide/widgets/resources/markdown_html_card_office_information_card.json){:target="_blank" download="markdown_html_card_office_information_card.json"} and reuse it on your dashboards.
+可下载已配置的 [Office information card](/docs/pe/user-guide/widgets/resources/markdown_html_card_office_information_card.json){:target="_blank" download="markdown_html_card_office_information_card.json"} 并在 dashboards 上复用。
 
-**Important:** After importing, update the **target entity** and **data keys** in the **entity alias**.
+**重要：** 导入后，请在 **entity alias** 中更新 **target entity** 和 **data keys**。

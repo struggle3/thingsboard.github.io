@@ -1,107 +1,91 @@
 ---
 layout: docwithnav-gw
-title: BACnet Connector Configuration
-description: BACnet protocol support for ThingsBoard IoT Gateway
+title: BACnet 连接器配置
+description: ThingsBoard IoT Gateway 的 BACnet 协议支持
 
 ---
 
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-This documentation will help you set up the BACnet connector for the ThingsBoard IoT Gateway. We’ll explain the
-configuration parameters in simple terms to make it easy for you to understand and follow. The BACnet protocol is
-widely used in building automation and control systems for applications such as heating, ventilation, air conditioning 
-(HVAC), lighting control, access control, and fire detection systems. Use
-[general configuration](/docs/iot-gateway/configuration/){:target="_blank"} to enable this extension.
+本文档将帮助您为 ThingsBoard IoT Gateway 配置 BACnet 连接器。我们将用简单易懂的方式解释配置参数，便于您理解与操作。BACnet 协议广泛应用于楼宇自动化与控制系统，如暖通空调（HVAC）、照明控制、门禁控制以及消防检测系统等。请使用 [通用配置](/docs/iot-gateway/configuration/){:target="_blank"} 启用此扩展。
 
-The BACnet connector allows the ThingsBoard IoT Gateway to communicate with BACnet devices, enabling data exchange and 
-control capabilities. The connector can be configured via the user interface form, which helps you set up a connection 
-to the BACnet devices, collect data and write data to devices. Let’s look at all the available settings and explain 
-each one clearly. This will help you understand how everything works.
+BACnet 连接器使 ThingsBoard IoT Gateway 能够与 BACnet 设备通信，实现数据交换与控制。该连接器可通过用户界面表单进行配置，帮助您建立与 BACnet 设备的连接、采集数据并写入设备。下面我们将逐一说明所有可用设置，便于您理解整体工作方式。
 
 {% capture difference %}
-**Please note**:
-Connect the gateway before creating the connector. Otherwise, the UI will display the old configuration fields for
-backward compatibility.
+**请注意**：
+在创建连接器之前，请先连接网关。否则界面将显示旧版配置字段以保持向后兼容。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Configuration modes
+## 配置模式
 
-The BACnet connector can be configured in two modes: **Basic** and **Advanced**.
+BACnet 连接器支持两种配置模式：**基本**（Basic）和**高级**（Advanced）。
 
-- **Basic** mode is designed for users who are new to ThingsBoard IoT Gateway and want to quickly set up the connector
-  with minimal configuration. It provides a simplified interface with essential settings.
-- **Advanced** mode is intended for experienced users who need more control over the configuration. It offers additional
-  options and flexibility for advanced use cases.
+- **基本**模式面向不熟悉 ThingsBoard IoT Gateway 的用户，通过最少配置快速完成连接器设置，提供简化的界面和必要选项。
+- **高级**模式面向需要更细致配置控制的用户，提供更多选项和高级使用场景的灵活性。
 
 {% capture difference %}
-**Please note:**
-If you are new to IoT Gateway, use the "**Basic**" configuration mode. If you are familiar with configuring IoT Gateway,
-you can use the "**Advanced**" configuration mode.
+**请注意：**
+若不熟悉 IoT Gateway，请使用「**基本**」配置模式；若您熟悉 IoT Gateway 配置，则可使用「**高级**」配置模式。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-You can switch between these modes using the toggle button at the top of the configuration page:
+您可通过配置页面顶部的切换按钮在两种模式间切换：
 
 ![image](/images/gateway/bacnet-connector/bacnet-modes-toggle.png)
 
-## General settings
+## 通用设置
 
 {% include /templates/iot-gateway/connector-commons/general-settings.md %}
 
 ![image](/images/gateway/bacnet-connector/bacnet-general-basic-1-ce.png)
 
 {% capture difference %}
-The General tab in settings is the same for both the basic and advanced configurations.
+设置中的「通用」标签页在基本和高级配置中相同。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Application
+## 应用
 
-Configuration in this section is used to configure the gateway in the BACnet network.
-The following parameters are used to configure application settings:
+本部分配置用于在 BACnet 网络中配置网关。以下参数用于配置应用设置：
 
 {% include /templates/iot-gateway/bacnet-connector/bacnet-application-section-basic.md %}
 
-## Advanced application settings
+## 高级应用设置
 
-You can configure additional application settings like: APDU length, segmentation, network number and discovering timeout.
+可配置额外的应用参数，如：APDU 长度、分段、网络号及发现超时。
 
-| **Parameter**                | **Default value** | **Description**                                                                                                  |
+| **参数**                     | **默认值** | **说明**                                                                                                        |
 |:-----------------------------|:------------------|------------------------------------------------------------------------------------------------------------------|
-| APDU Length (in bytes)       | **1476**          | Maximal length of the APDU.                                                                                      |
-| Segmentation                 | **Both**          | Segmentation type for transmitting large BACnet messages. Can be: **Both**, **Transmit**, **Receive**, **None**. |
-| Network number               | **3**             | Identifier of the network segment.                                                                               |
-| Discovering timeout (in sec) | **5**             | Period of time when the connector will try to discover BACnet devices.                                           |
+| APDU 长度（字节）            | **1476**          | APDU 的最大长度。                                                                                                |
+| 分段                         | **Both**          | 传输大型 BACnet 消息的分段类型。可选：**Both**、**Transmit**、**Receive**、**None**。                             |
+| 网络号                       | **3**             | 网络段的标识符。                                                                                                 |
+| 发现超时（秒）               | **5**             | 连接器尝试发现 BACnet 设备的时长。                                                                               |
 | ---                          |                   |                                                                                                                  |
 
 {% capture difference %}
-All configuration parameters list, and their detailed description can be found in the 
-[Advanced configuration](/docs/iot-gateway/config/bacnet/#advanced-configuration) section.
+所有配置参数及其详细说明请参阅 [高级配置](/docs/iot-gateway/config/bacnet/#advanced-configuration) 部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 ![image](/images/gateway/bacnet-connector/bacnet-advanced-application-settings.png)
 
-## Data mapping
+## 数据映射
 
-This configuration section contains an array of BACnet devices that can be connected to the connector and send data.
-Any BACnet device not included in this array will be rejected by the connector.
+本配置部分包含可连接至连接器并发送数据的 BACnet 设备数组。未包含在此数组中的 BACnet 设备将被连接器拒绝。
 
 {% include /templates/iot-gateway/bacnet-connector/bacnet-device-subsection-basic.md %}
 
-### Attributes and Time series
+### 属性和时序数据
 
-This configuration section includes the parameters for handling incoming data. You can specify which data will be
-treated as device attributes and which as time series. Attributes are used for storing static or infrequently changing
-data, while time series are used for storing dynamic or frequently changing data.
+本配置部分包含处理传入数据的参数。您可指定哪些数据作为设备属性、哪些作为时序数据。属性用于存储静态或较少变化的数据，时序数据用于存储动态或频繁变化的数据。
 
 {% include /templates/iot-gateway/bacnet-connector/device-time-series-and-attributes-basic-section.md %}
 
-### Usage examples
+### 使用示例
 
 {% capture bacnet-attributes-timeseries-examples %}
 Dynamic device name/profile<small></small>%,%dynamicdevicenameandprofile%,%templates/iot-gateway/bacnet-connector/examples/time-series-and-attributes/dynamic-device-name-and-profile.md%br%
@@ -111,41 +95,31 @@ Reading all device objects<small>(advanced configuration mode only)</small>%,%re
 Filtering objects and properties<small>(advanced configuration mode only)</small>%,%filteringobjectsandproperties%,%templates/iot-gateway/bacnet-connector/examples/time-series-and-attributes/filtering-objects-and-properties.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="bacnet-attributes-timeseries-examples" toggle-spec=bacnet-attributes-timeseries-examples %}
 
-## Requests mapping
+## 请求映射
 
-The Requests mapping section allows you to configure how the ThingsBoard platform instance will interact with the 
-devices. That is, how the platform will request data from the devices, how it will update device attributes, and how 
-it will send RPC commands to the devices.
+请求映射部分用于配置 ThingsBoard 平台实例与设备的交互方式，即平台如何向设备请求数据、如何更新设备属性以及如何向设备发送 RPC 命令。
 
-BACnet connector supports the following requests mapping:
+BACnet 连接器支持以下请求映射：
 
-- **Attribute updates** - allows update device objects values from ThingsBoard platform instance.
-- **RPC methods** - allows sending RPC commands to devices. Using RPC methods, you can get or set values of the BACnet
-  device objects values. BACnet connector supports different types of RPC methods, such as:
-  - **Reserved GET/SET methods** - these methods are automatically created for each attribute and time series parameter. You
-    can use them to get or set values of the BACnet device objects values.
-  - **Configurable RPC to device** - these methods allow you to configure custom RPC commands in connector configuration
-    that can be sent to the devices.
+- **属性更新**：支持从 ThingsBoard 平台实例更新设备对象值。
+- **RPC 方法**：支持向设备发送 RPC 命令。使用 RPC 方法可读取或设置 BACnet 设备对象值。BACnet 连接器支持多种 RPC 方法，例如：
+  - **保留的 GET/SET 方法**：为每个属性和时序参数自动创建，可用于读取或设置 BACnet 设备对象值。
+  - **可配置的 RPC 到设备**：可在连接器配置中定义自定义 RPC 命令并发送至设备。
 
-### Attribute updates
+### 属性更新
 
-This subsection contains configuration for attribute updates request from ThingsBoard platform instance.
+本小节包含 ThingsBoard 平台实例发起属性更新请求的配置。
 
-ThingsBoard allows the provisioning of device attributes and fetches some of them from the device application. 
-You can treat this as a remote configuration for devices, enabling them to request shared attributes from 
-ThingsBoard. See [user guide](/docs/user-guide/attributes/) for more details.
+ThingsBoard 支持预配设备属性，并可从设备应用拉取部分属性。可将其视为设备的远程配置，使设备能够从 ThingsBoard 请求共享属性。详见 [用户指南](/docs/user-guide/attributes/)。
 
-The following parameters are used to configure attribute updates:
-- **Key** - the key of the shared attribute in ThingsBoard. It can be specified as a static value.
-- **Object ID** - the object id in the BACnet device.
-- **Object Type** - the object type in the BACnet device.
-- **Property ID** - the property id in the BACnet device.
+以下参数用于配置属性更新：
+- **Key**：ThingsBoard 中共享属性的键，可为静态值。
+- **Object ID**：BACnet 设备中的对象 ID。
+- **Object Type**：BACnet 设备中的对象类型。
+- **Property ID**：BACnet 设备中的属性 ID。
 
 {% capture difference %}
-All configuration parameters list, and their detailed description can be found in the
-[Advanced configuration](/docs/iot-gateway/config/bacnet/#device-attribute-updates) section.
-
-More usage examples can be found in the [Example usage](/docs/iot-gateway/config/bacnet/#usage-examples-1) section.
+所有配置参数及其详细说明请参阅 [高级配置](/docs/iot-gateway/config/bacnet/#device-attribute-updates) 部分。更多使用示例请参阅 [使用示例](/docs/iot-gateway/config/bacnet/#usage-examples-1) 部分。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
@@ -153,10 +127,9 @@ More usage examples can be found in the [Example usage](/docs/iot-gateway/config
 
 {% include /templates/iot-gateway/bacnet-connector/device-attribute-updates-basic-section.md %}
 
-### RPC methods
+### RPC 方法
 
-ThingsBoard allows sending [RPC commands](https://thingsboard.io/docs/user-guide/rpc/) to devices connected directly to ThingsBoard or via Gateway.
-The following parameters are used to configure RPC methods:
+ThingsBoard 支持向直接连接或经网关连接的设备发送 [RPC 命令](https://thingsboard.io/docs/user-guide/rpc/)。以下参数用于配置 RPC 方法：
 - **Method** - the RPC method name.
 - **Request Type** - “**writeProperty**” to write data and “**readProperty**” to read data.
 - **Object ID** - the object id in the BACnet device.
@@ -177,12 +150,12 @@ More usage examples can be found in the [Example usage](/docs/iot-gateway/config
 {% include /templates/iot-gateway/bacnet-connector/device-rpc-basic-section.md %}
 
 {% capture methodFilterOptions %}
-Also, every telemetry and attribute parameter has built-in GET and SET RPC methods out of the box, so you don’t need to configure
-it manually. See [the guide](/docs/iot-gateway/guides/how-to-use-get-set-rpc-methods).
+此外，每个遥测和属性参数均内置 GET 和 SET RPC 方法，
+无需手动配置。参见 [指南](/docs/iot-gateway/guides/how-to-use-get-set-rpc-methods)。
 {% endcapture %}
 {% include templates/info-banner.md content=methodFilterOptions %}
 
-### Usage examples
+### 使用示例
 
 {% capture bacnet-shared-attributes-rpc-examples %}
 Attribute Updates<small></small>%,%sharedattribute%,%templates/iot-gateway/bacnet-connector/examples/shared-attributes-and-rpc/attribute-updates.md%br%
@@ -190,25 +163,19 @@ RPC to Device<small></small>%,%rpctodevice%,%templates/iot-gateway/bacnet-connec
 Reserved RPCs<small></small>%,%reservedrpc%,%templates/iot-gateway/bacnet-connector/examples/shared-attributes-and-rpc/reserved-rpc.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="bacnet-shared-attributes-rpc-examples" toggle-spec=bacnet-shared-attributes-rpc-examples %}
 
-## EDE files parsing (Advanced configuration mode only)
+## EDE 文件解析（仅高级配置模式）
 
-The BACnet connector supports EDE files parsing. EDE (Engineering Data Exchange) files are used to describe the
-structure and properties of BACnet devices. By parsing EDE files, the BACnet connector can automatically configure
-itself to interact with the devices described in the files.
+BACnet 连接器支持 EDE 文件解析。 EDE（工程数据交换）文件用于描述 BACnet 设备的结构与属性。通过解析 EDE 文件，BACnet 连接器可自动配置自身，以与文件中描述的设备交互。
 
-To use EDE files parsing, you need to provide the path to the EDE file in the connector configuration. The connector
-will then read the file and extract the necessary information to communicate with the BACnet devices.
-The EDE file should be in CSV format and follow the BACnet EDE schema.
+要使用 EDE 文件解析，需在连接器配置中提供 EDE 文件路径。连接器将读取该文件并提取与 BACnet 设备通信所需的信息。EDE 文件应为 CSV 格式并符合 BACnet EDE 规范。
 
-Let’s look at the example of the EDE file parsing configuration.
+下面以 EDE 文件解析配置为例说明。
 
-We will use an EDE file exported from YABE (Yet Another BACnet Explorer) application. The file contains the
-description of a BACnet device with several objects. The file looks like this:
+我们将使用从 YABE（Yet Another BACnet Explorer）导出的 EDE 文件。该文件包含一个具有多个对象的 BACnet 设备描述，示例文件如下：
 
 ![image](/images/gateway/bacnet-connector/ede-file-overview.png)
 
-Now let’s configure the BACnet connector to use this EDE file. In the advanced configuration mode, paste the following
-connector configuration (**make sure to use the correct path to your EDE file**):
+现在配置 BACnet 连接器以使用此 EDE 文件。 在高级配置模式下，粘贴以下连接器配置（**请确保使用正确的 EDE 文件路径**）：
 
 ```json
 {
@@ -228,27 +195,23 @@ connector configuration (**make sure to use the correct path to your EDE file**)
 {:.copy-code}
 
 {% capture difference %}
-**Please note**:
-- The EDE file parsing is available only in the **Advanced** configuration mode.
-- The EDE file should be accessible by the IoT Gateway.
+**请注意**：
+- EDE 文件解析仅在**高级**配置模式下可用。
+- EDE 文件需可被 IoT Gateway 访问。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-After applying the configuration, the BACnet connector will parse the EDE file and automatically configure itself to
-interact with the BACnet device described in the file. You can then use the connector to read data from the device,
-update device attributes, and send RPC commands to the device. As you can see on the screenshot below, the connector
-has automatically created the device with the name and profile from the EDE file, as well as all the attributes and time
-series from the file:
+应用配置后，BACnet 连接器将解析 EDE 文件并自动配置自身，以与文件中描述的 BACnet 设备交互。随后可使用连接器从设备读取数据、更新设备属性并发送 RPC 命令。如下方截图所示，连接器已根据 EDE 文件自动创建设备名称与配置文件，以及文件中的全部属性和时序数据：
 
 ![image](/images/gateway/bacnet-connector/ede-device-overview.png)
 
-## Advanced configuration
+## 高级配置
 
-The advanced configuration section provides a detailed overview of all available parameters for the BACnet connector.
+高级配置部分提供 BACnet 连接器所有可用参数的详细说明。
 
-### Application
+### 应用
 
-The application configuration parameters are used to configure the gateway in the BACnet network.
+应用配置参数用于在 BACnet 网络中配置网关。
 
 | **Parameter**                                          | **Default value**       | **Description**                                                                                                       |
 |:-------------------------------------------------------|:------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -274,7 +237,7 @@ You can also find an example of such a proprietary device [here](https://github.
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Example of the application configuration:
+应用配置示例：
 
 ```json
 {
@@ -292,10 +255,9 @@ Example of the application configuration:
 }
 ```
 
-### Foreign device (v.3.7.6+)
+### 外部设备（v.3.7.6+）
 
-The foreign device configuration parameters are used to configure the gateway as a foreign device in the BACnet network.
-It is useful when the gateway is behind a NAT and needs to register with a BACnet Broadcast Management Device (BBMD).
+外部设备配置参数用于将网关配置为 BACnet 网络中的外部设备。当网关位于 NAT 后且需向 BACnet 广播管理设备（BBMD）注册时，此功能很有用。
 
 | **Parameter**              | **Default value** | **Description**                                   |
 |:---------------------------|-------------------|---------------------------------------------------|
@@ -303,10 +265,9 @@ It is useful when the gateway is behind a NAT and needs to register with a BACne
 | foreignDevice.address      | **0.0.0.0**       | The address of the BBMD to register with.         |
 | ---                        |                   |                                                   |
 
-### Devices
+### 设备
 
-The device list contains an array of BACnet devices that can be connected to the connector and interact with them. 
-Any BACnet device not included in this array will be rejected by the connector.
+设备列表包含可连接至连接器并与之交互的 BACnet 设备数组。未包含在此数组中的 BACnet 设备将被连接器拒绝。
 
 | **Parameter**                                      | **Description**                                                                                                                             |
 |:---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -324,7 +285,7 @@ Any BACnet device not included in this array will be rejected by the connector.
 | devices[].deviceInfo.deviceProfileExpression       | The device profile name (you can find detail examples [here](/docs/iot-gateway/config/bacnet/#usage-examples)).                             |
 | ---                                                |                                                                                                                                             |
 
-Example of the device mapping configuration:
+设备映射配置示例：
 
 ```json
 {
@@ -348,9 +309,9 @@ Example of the device mapping configuration:
 }
 ```
 
-#### Available variables for device name/profile expressions
+#### 设备名称/配置文件表达式可用变量
 
-You can use the following parameters for forming device name and profile:
+可使用以下参数构造设备名称和配置文件：
 - `${objectName}` - the device object name of the BACnet device.
 - `${objectId}` - the device object identifier of the BACnet device.
 - `${vendorId}` - the device vendor identifier of the BACnet device.
@@ -360,9 +321,9 @@ You can use the following parameters for forming device name and profile:
 - `${routerAddress}` - the device router address.
 - `${routerVendorId}` - the device router vendor identifier.
 
-You can find detail examples [here](/docs/iot-gateway/config/bacnet/#usage-examples).
+详细示例请参阅 [此处](/docs/iot-gateway/config/bacnet/#usage-examples)。
 
-#### Device attributes and time series
+#### 设备属性和时序数据
 
 | **Parameter**                         | **Description**                                                                                                 |
 |:--------------------------------------|-----------------------------------------------------------------------------------------------------------------|
@@ -380,7 +341,7 @@ You can find detail examples [here](/docs/iot-gateway/config/bacnet/#usage-examp
 | devices[].timeseries[].reportStrategy | Report strategy object using for configuring report strategy for device time series.                            |
 | ---                                   |                                                                                                                 |
 
-Example of the device attributes and time series configuration:
+设备属性和时序数据配置示例：
 
 ```json
 {
@@ -403,7 +364,7 @@ Example of the device attributes and time series configuration:
 }
 ```
 
-#### Device attribute updates
+#### 设备属性更新
 
 | **Parameter**                                | **Default value** | **Description**                                           |
 |:---------------------------------------------|-------------------|-----------------------------------------------------------|
@@ -415,7 +376,7 @@ Example of the device attributes and time series configuration:
 | devices[].attributeUpdates[].timeout (in ms) | **5000**          | Timeout in milliseconds for the attribute update request. |
 | ---                                          |                   |                                                           |
 
-Example of the device attribute updates configuration:
+设备属性更新配置示例：
 
 ```json
 {
@@ -431,7 +392,7 @@ Example of the device attribute updates configuration:
 }
 ```
 
-#### Device RPC methods
+#### 设备 RPC 方法
 
 | **Parameter**                             | **Default value** | **Description**                                                               |
 |:------------------------------------------|:------------------|-------------------------------------------------------------------------------|
@@ -445,7 +406,7 @@ Example of the device attribute updates configuration:
 | devices[].serverSideRpc[].timeout (in ms) | **5000**          | Timeout in milliseconds for the RPC method execution.                         |
 | ---                                       |                   |                                                                               |
 
-Example of the device RPC methods configuration:
+设备 RPC 方法配置示例：
 
 ```json
 {
@@ -462,11 +423,11 @@ Example of the device RPC methods configuration:
 }
 ```
 
-## Additional information
+## 附加信息
 
-### Supported Object Types
+### 支持的对象类型
 
-The BACnet connector support the following BACnet object types:
+BACnet 连接器支持以下 BACnet 对象类型：
 
 | **BACnet object id** | **ThingsBoard object id** |
 |----------------------|---------------------------|
@@ -479,9 +440,9 @@ The BACnet connector support the following BACnet object types:
 | **Schedule Object**  | **schedule**              |
 | ---                  | ---                       |
 
-### Supported Property Identifiers
+### 支持的属性标识符
 
-Property identifiers depend on type of the BACnet object, provided in camelCase, e.g:
+属性标识符取决于 BACnet 对象类型，以 camelCase 格式提供，例如：
 - presentValue
 - objectName
 - objectDescription
@@ -499,13 +460,11 @@ Property identifiers depend on type of the BACnet object, provided in camelCase,
 - listOfObjectPropertyReferences
 - location
 
-## Troubleshooting
+## 故障排查
 
-### Device discovery issues on Linux with Docker Compose
+### Linux 下 Docker Compose 设备发现问题
 
-If you are running Gateway via docker compose on Linux, and you have issues with device discovery, make sure that you 
-have set the correct network mode in the docker compose file. So you should add the following line to `tb-gateway` 
-service in your docker compose file:
+若在 Linux 上通过 Docker Compose 运行网关且出现设备发现问题时，请确认 docker compose 文件中已正确设置网络模式。请在 docker compose 文件的 `tb-gateway` 服务中添加以下行：
 
 ```yaml
 network_mode: "host"
@@ -514,17 +473,16 @@ extra_hosts:
 ```
 {: .copy-code}
 
-### Device discovery issues on Windows with Docker Compose
+### Windows 下 Docker Compose 设备发现问题
 
-BACnet connector doesn't support device discovery on Windows OS due to the limitations of the Docker networking stack 
-on Windows. Please use installation from source or other installation methods to run Gateway on Windows OS.
+受 Windows 上 Docker 网络栈限制，BACnet 连接器不支持 Windows 下的设备发现。请使用源码安装或其他安装方式在 Windows 上运行网关。
 
-## Next steps
+## 下一步
 
-Explore guides related to main ThingsBoard features:
+探索与 ThingsBoard 主要功能相关的指南：
 
- - [Data Visualization](/docs/user-guide/visualization/) - how to visualize collected data.
- - [Device attributes](/docs/user-guide/attributes/) - how to use device attributes.
- - [Telemetry data collection](/docs/user-guide/telemetry/) - how to collect telemetry data.
- - [Using RPC capabilities](/docs/user-guide/rpc/) - how to send commands to/from devices.
- - [Rule Engine](/docs/user-guide/rule-engine/) - how to use rule engine to analyze data from devices.
+ - [数据可视化](/docs/user-guide/visualization/) - 如何可视化采集的数据
+ - [设备属性](/docs/user-guide/attributes/) - 如何使用设备属性
+ - [遥测数据采集](/docs/user-guide/telemetry/) - 如何采集遥测数据
+ - [使用 RPC 功能](/docs/user-guide/rpc/) - 如何向/从设备发送命令
+ - [规则引擎](/docs/user-guide/rule-engine/) - 如何使用规则引擎分析设备数据

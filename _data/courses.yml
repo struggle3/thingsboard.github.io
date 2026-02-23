@@ -1,379 +1,379 @@
 0:
-  courseName: "Data visualization"
+  courseName: "数据可视化"
   id: "data-visualization"
-  courseDescription: "Learn how to effectively model and visualize data using the ThingsBoard platform. This training block covers the essentials of ThingsBoard's Web UI, entity management, and advanced data visualization techniques. You will gain hands-on experience with creating and customizing widgets, as well as building comprehensive dashboards that provide insightful data representations for your IoT projects."
-  carouselCourseDescription: "Clear and simple introduction to data visualization tools and how to create custom widgets"
+  courseDescription: "学习如何使用ThingsBoard平台有效建模与可视化数据。本培训涵盖ThingsBoard Web界面要点、实体管理与高级数据可视化技巧，您将动手创建与定制部件，并构建为IoT项目提供清晰数据展示的完整仪表盘。"
+  carouselCourseDescription: "清晰简明介绍数据可视化工具及如何创建自定义部件"
   courseSessions:
     0:
-      sessionName: "ThingsBoard UI fundamentals: data modeling and visual representation"
+      sessionName: "ThingsBoard界面基础：数据建模与可视化"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Learn how to navigate the ThingsBoard UI confidently, understanding its layout, navigation, and key features."
+          textContent: "学习自信地使用ThingsBoard界面，理解其布局、导航与主要功能。"
         1:
-          textContent: "Explore the ThingsBoard hierarchy: SysAdmin, Tenants, Customers, and Users, along with roles and permissions."
+          textContent: "了解ThingsBoard层级：系统管理员、租户、客户与用户，以及角色与权限。"
         2:
-          textContent: "Learn how to configure Tenant Profiles."
+          textContent: "学习如何配置租户配置。"
         3:
-          textContent: "Manage core entities like Devices, Assets, and Entity Views."
+          textContent: "管理设备、资产与实体视图等核心实体。"
         4:
-          textContent: "Learn how to group Devices and Assets for better scalability (PE Feature)."
+          textContent: "学习如何对设备与资产分组以实现更好扩展性（PE功能）。"
         5:
-          textContent: "Work with entity attributes and telemetry data to retrieve both real-time and historical insights."
+          textContent: "使用实体属性与遥测数据获取实时与历史洞察。"
         6:
-          textContent: "Understand entity relations, different relationship types, and how they define connections between entities."
+          textContent: "理解实体关系、不同关系类型及其如何定义实体间连接。"
         7:
-          textContent: "Explore real-world use cases of entity relations in ThingsBoard."
+          textContent: "探索ThingsBoard中实体关系的实际用例。"
         8:
-          textContent: "Identify common limitations and best practices to avoid performance bottlenecks."
+          textContent: "识别常见限制与最佳实践以避免性能瓶颈。"
         9:
-          textContent: "Apply knowledge through real-world scenarios."
+          textContent: "通过实际场景应用所学。"
         10:
-          textContent: "Discuss best practices for ThingsBoard UI and data management."
+          textContent: "讨论ThingsBoard界面与数据管理的最佳实践。"
     1:
-      sessionName: "ThingsBoard dashboard & widget mastery"
+      sessionName: "ThingsBoard仪表盘与部件精通"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Deep Dive into ThingsBoard Dashboards to understand Entity Aliases, Time Window selection, General Settings, and Dashboard States."
+          textContent: "深入ThingsBoard仪表盘，理解实体别名、时间窗口选择、通用设置与仪表盘状态。"
         1:
-          textContent: "Explore state transitions and how to enhance user experience."
+          textContent: "探索状态转换及如何提升用户体验。"
         2:
-          textContent: "Learn how to customize Chart, Markdown/HTML Card, and Map widgets."
+          textContent: "学习如何定制图表、Markdown/HTML卡片与地图部件。"
         3:
-          textContent: "Utilize Custom Tooltips and Dashboard Actions to improve usability and interaction."
+          textContent: "利用自定义提示与仪表盘操作提升可用性与交互。"
         4:
-          textContent: "Create dashboards with multiple states to display Asset hierarchy."
+          textContent: "创建多状态仪表盘以展示资产层级。"
         5:
-          textContent: "Implement drill-down functionality for detailed views of assets and devices."
+          textContent: "实现下钻功能以查看资产与设备详情。"
         6:
-          textContent: "Discuss advanced visualization strategies."
+          textContent: "讨论高级可视化策略。"
         7:
-          textContent: "Gain hands-on experience with dashboard configurations."
+          textContent: "动手实践仪表盘配置。"
     2:
-      sessionName: "ThingsBoard custom widget development (session 1)"
+      sessionName: "ThingsBoard自定义部件开发（第1部分）"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Recommended for users with JavaScript and Angular experience"
+          textContent: "建议具备JavaScript与Angular经验的用户学习"
           warning: "true"
         1:
-          textContent: "Learn how to use the ThingsBoard Widget Editor, its layout, and key features."
+          textContent: "学习如何使用ThingsBoard部件编辑器及其布局与主要功能。"
         2:
-          textContent: "Explore how to navigate, create, and configure widget bundles."
+          textContent: "探索如何浏览、创建与配置部件包。"
         3:
-          textContent: "Manage widgets efficiently through importing, modifying, and exporting."
+          textContent: "通过导入、修改与导出高效管理部件。"
         4:
-          textContent: "Learn how to build Control Widgets: develop widgets for real-time user interactions."
+          textContent: "学习如何构建控制类部件：为实时用户交互开发部件。"
         5:
-          textContent: "Develop Static Widgets: Create non-interactive elements for structured data display."
+          textContent: "开发静态部件：创建用于结构化数据展示的非交互元素。"
         6:
-          textContent: "Understand how to develop Markdown/HTML Widgets: Enhance dashboards with flexible content."
+          textContent: "理解如何开发Markdown/HTML部件：用灵活内容增强仪表盘。"
         7:
-          textContent: "Learn how to structure widgets for performance, scalability, and maintainability."
+          textContent: "学习如何为性能、扩展性与可维护性组织部件结构。"
         8:
-          textContent: "Troubleshoot common widget development challenges."
+          textContent: "排查常见部件开发问题。"
         9:
-          textContent: "Gain hands-on experience in custom widget creation."
+          textContent: "在自定义部件创建中获得动手经验。"
     3:
-      sessionName: "ThingsBoard custom widget development (session 2)"
+      sessionName: "ThingsBoard自定义部件开发（第2部分）"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Recommended for users with JavaScript and Angular experience"
+          textContent: "建议具备JavaScript与Angular经验的用户学习"
           warning: "true"
         1:
-          textContent: "Understand complex widget structures and custom logic implementation."
+          textContent: "理解复杂部件结构与自定义逻辑实现。"
         2:
-          textContent: "Work with the Last Values widgets for real-time data representation."
+          textContent: "使用最新值类部件进行实时数据展示。"
         3:
-          textContent: "Learn how to Develop Time-Series Widgets."
+          textContent: "学习如何开发时序部件。"
         4:
-          textContent: "Build a Time-Series Table to structure historical data."
+          textContent: "构建时序表以组织历史数据。"
         5:
-          textContent: "Create a Dynamic Line Chart to visualize trends in telemetry data."
+          textContent: "创建动态折线图以可视化遥测趋势。"
         6:
-          textContent: "Implement custom action templates for interactive dashboards."
+          textContent: "实现交互式仪表盘的自定义操作模板。"
         7:
-          textContent: "Use HTML extensions for advanced data manipulation."
+          textContent: "使用HTML扩展进行高级数据处理。"
         8:
-          textContent: "Discuss common custom widget challenges."
+          textContent: "讨论常见自定义部件难点。"
         9:
-          textContent: "Learn best practices for scalable and maintainable widget development."
+          textContent: "学习可扩展、可维护部件开发的最佳实践。"
 1:
-  courseName: "ThingsBoard administration"
+  courseName: "ThingsBoard管理"
   id: "administration"
-  courseDescription: "This training provides administrators with the skills needed to successfully deploy, configure, and manage ThingsBoard in various environments. You will learn monolithic and cluster-based deployment strategies, understand architecture components. This training covers hands-on AWS deployment, troubleshooting common issues using logs and diagnostic tools, and improving ThingsBoard’s performance and stability."
-  carouselCourseDescription: "Basic understanding of installation, configuration, and maintenance for effective platform administration."
+  courseDescription: "本培训为管理员提供在多环境中成功部署、配置与管理ThingsBoard所需的技能，包括单体与集群部署策略及架构组件。涵盖在AWS上的动手部署、使用日志与诊断工具排查常见问题，以及提升ThingsBoard性能与稳定性。"
+  carouselCourseDescription: "理解安装、配置与维护，以有效进行平台管理。"
   courseSessions:
     0:
-      sessionName: "ThingsBoard administration"
+      sessionName: "ThingsBoard管理"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Learn how to install and configure ThingsBoard in both monolithic and cluster deployments."
+          textContent: "学习如何在单体与集群部署中安装与配置ThingsBoard。"
         1:
-          textContent: "Understand the limitations and load capacity of each deployment option, and for which use cases they suit the best."
+          textContent: "理解各部署方式的限制与负载能力及其适用场景。"
         2:
-          textContent: "Explore ThingsBoard architecture and understand the role of key services and third-party applications."
+          textContent: "了解ThingsBoard架构及关键服务与第三方应用的角色。"
         3:
-          textContent: "Develop hands-on skills in deploying ThingsBoard on AWS including both basic monolithic and Docker-based microservice platforms."
+          textContent: "在AWS上动手部署ThingsBoard，包括基础单体与基于Docker的微服务平台。"
         4:
-          textContent: "Understand the advantages and limitations of different deployment types, including monolith and cluster setups."
+          textContent: "理解不同部署类型的优势与限制，包括单体与集群。"
         5:
-          textContent: "Discuss best practices for configuring ThingsBoard for optimal performance in different environments."
+          textContent: "讨论在不同环境中为最佳性能配置ThingsBoard的最佳实践。"
         6:
-          textContent: "Identify and troubleshoot common issues using logs and diagnostic tools."
+          textContent: "使用日志与诊断工具发现并排查常见问题。"
         7:
-          textContent: "Engage in Q&A discussions to clarify concepts and address real-world challenges."
+          textContent: "通过问答厘清概念并解决实际挑战。"
 2:
-  courseName: "SCADA system"
+  courseName: "SCADA系统"
   id: "scada"
-  courseDescription: "You will learn how to utilize existing SCADA symbols, add new ones, work with SVG tags, and define behaviors and properties with a full description of their capabilities. By the end of the course, participants will be able to build powerful dashboards that optimize process management and monitoring."
-  carouselCourseDescription: "Detailed guide to creating dashboards for SCADA systems, including layout and configuration settings."
-  warningMessage: 'Recommended for users with knowledge of the platform or after completing the "Data Visualization" training'
+  courseDescription: "您将学习如何使用现有SCADA符号、添加新符号、使用SVG标签，以及定义行为与属性并了解其能力。课程结束后，学员能够构建优化流程管理与监控的强大仪表盘。"
+  carouselCourseDescription: "SCADA系统仪表盘创建详解，包括布局与配置设置。"
+  warningMessage: '建议已了解平台或完成「数据可视化」培训的用户学习'
   courseSessions:
     0:
-      sessionName: "ThingsBoard and IoT gateway essentials – from connectivity to SCADA visualisation"
+      sessionName: "ThingsBoard与IoT网关要点——从连接到SCADA可视化"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Learn the main device connectivity possibilities and fundamentals of the ThingsBoard IoT Gateway option."
+          textContent: "了解主要设备连接方式及ThingsBoard IoT网关选项的基础。"
         1:
-          textContent: "Understand what ThingsBoard IoT Gateway is and explore the variety of capabilities and protocols it provides."
+          textContent: "理解ThingsBoard IoT网关是什么及其提供的多种能力与协议。"
         2:
-          textContent: "Learn about rule chains – what they are, how they work, and how to set them up with practical examples such as processing data with default rule chains, editing them, and assigning custom rule chains to devices."
+          textContent: "学习规则链：概念、工作原理及如何配置，包括使用默认规则链处理数据、编辑规则链与为设备分配自定义规则链等示例。"
         3:
-          textContent: "Dive into a quick overview of ThingsBoard IoT data visualisation."
+          textContent: "快速了解ThingsBoard IoT数据可视化。"
         4:
-          textContent: "Learning how to set up a dashboard with an example of SCADA systems in traditional and high-performance modes."
+          textContent: "学习如何以传统与高性能模式下的SCADA系统为例配置仪表盘。"
         5:
-          textContent: "Learn how to use acquired knowledge to develop a SCADA system from scratch or by utilising existing solution templates."
+          textContent: "学习如何运用所学从零开发SCADA系统或利用现有方案模板。"
         6:
-          textContent: "Review the SCADA water pool template, including setting up the solution, a walkthrough, and an explanation of its inner workings."
+          textContent: "回顾SCADA泳池模板，包括方案搭建、演示与内部原理说明。"
         7:
-          textContent: "Configure additional features on top of the SCADA pool template to create new solutions."
+          textContent: "在SCADA泳池模板基础上配置附加功能以创建新方案。"
         8:
-          textContent: "Engage in a Q&A session to ask questions and clarify any doubts."
+          textContent: "参与问答环节提出问题并澄清疑问。"
     1:
-      sessionName: "SCADA intro – fundamentals of SCADA interface and dashboard creation"
+      sessionName: "SCADA入门——SCADA界面与仪表盘创建基础"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Learn the core functions of the SCADA user interface."
+          textContent: "学习SCADA用户界面的核心功能。"
         1:
-          textContent: "Understand the structure and navigation of the SCADA platform."
+          textContent: "理解SCADA平台的结构与导航。"
         2:
-          textContent: "Discover how to create a basic dashboard using pre-configured symbols."
+          textContent: "了解如何使用预配置符号创建基础仪表盘。"
         3:
-          textContent: "Use layout settings—such as grid, toolbar, and scaling options—for effective dashboard customization."
+          textContent: "使用布局设置（如网格、工具栏与缩放）有效定制仪表盘。"
         4:
-          textContent: "Work with different configurations to adjust the user interface to various operational scenarios."
+          textContent: "通过不同配置将界面适配多种运营场景。"
         5:
-          textContent: "Engage in a Q&A session to clear up any doubts and strengthen your skills."
+          textContent: "参与问答环节澄清疑问并巩固技能。"
     2:
-      sessionName: "SCADA advanced - symbol management and tag configuration"
+      sessionName: "SCADA进阶——符号管理与标签配置"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Learn how to navigate and manage the library of existing SCADA symbols."
+          textContent: "学习如何浏览与管理现有SCADA符号库。"
         1:
-          textContent: "Understand the process of searching, configuring, and adding symbols to dashboards."
+          textContent: "理解搜索、配置与将符号添加到仪表盘的流程。"
         2:
-          textContent: "Discover how to create new SCADA symbols and integrate them into your dashboard."
+          textContent: "了解如何创建新SCADA符号并集成到仪表盘。"
         3:
-          textContent: "Use the built-in editor or XML to work with tags for real-time data visualization."
+          textContent: "使用内置编辑器或XML配置标签以实现实时数据可视化。"
         4:
-          textContent: "Work with tags effectively and ensure they update data correctly and interact smoothly."
+          textContent: "有效使用标签并确保数据正确更新与顺畅交互。"
         5:
-          textContent: "Engage in a Q&A session to better understand advanced topics."
+          textContent: "参与问答以更好理解进阶内容。"
     3:
-      sessionName: "SCADA mastery – advanced properties, behaviors, and widget engineering"
+      sessionName: "SCADA精通——高级属性、行为与部件工程"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Learn to set key behaviour parameters like “Value”, “Action,” and “Widget Action”."
+          textContent: "学习设置「值」「操作」「部件操作」等关键行为参数。"
         1:
-          textContent: "Understand the difference between static and dynamic properties and how to configure them."
+          textContent: "理解静态与动态属性的区别及配置方法。"
         2:
-          textContent: "Discover the principles of data binding, animations, and event reactions that drive interactive dashboard elements."
+          textContent: "了解数据绑定、动画与事件响应如何驱动交互式仪表盘元素。"
         3:
-          textContent: "Use custom widget development techniques to optimize dashboard performance."
+          textContent: "使用自定义部件开发技术优化仪表盘性能。"
         4:
-          textContent: "Work with custom widgets and bundles, integrating interactive elements into your dashboards."
+          textContent: "使用自定义部件与部件包，将交互元素集成到仪表盘。"
         5:
-          textContent: "Engage in a Q&A session to resolve any queries and ensure mastery of advanced development concepts."
+          textContent: "参与问答解决疑问并掌握进阶开发概念。"
 3:
-  courseName: "Platform management and security"
+  courseName: "平台管理与安全"
   id: "management"
-  courseDescription: "This training program helps participants gain a strong understanding of ThingsBoard’s main features through hands-on practice. It covers data automation using the Rule Engine, user access control with RBAC, alarm management, and API interaction. Advanced users will also learn custom rule node development to extend the system capabilities. This program is perfect for professionals who want to build scalable, secure, high-performing IoT solutions using ThingsBoard."
-  carouselCourseDescription: "Comprehensive overview of rule engine, alarm management, security model, and API usage."
+  courseDescription: "本培训通过动手实践帮助学员深入理解ThingsBoard主要功能，涵盖使用规则引擎的数据自动化、基于RBAC的访问控制、告警管理与API交互。进阶用户还将学习自定义规则节点开发以扩展系统能力，适合希望基于ThingsBoard构建可扩展、安全、高性能IoT方案的专业人员。"
+  carouselCourseDescription: "规则引擎、告警管理、安全模型与API使用的全面概览。"
   courseSessions:
     0:
-      sessionName: "Rule engine deep dive: data processing & automation in ThingsBoard"
+      sessionName: "规则引擎深入：ThingsBoard中的数据处理与自动化"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Learn what a Rule Engine is and how it helps process data automatically."
+          textContent: "了解规则引擎是什么以及如何自动处理数据。"
         1:
-          textContent: "Understand how messages flow through rule chains."
+          textContent: "理解消息如何在规则链中流动。"
         2:
-          textContent: "Understand the differences between regular and edge rule chains."
+          textContent: "理解普通规则链与边缘规则链的区别。"
         3:
-          textContent: "Discover how data arrives in the rule chains, including messages produced by the device and platform-generated events (e.g., lifecycle events)."
+          textContent: "了解数据如何进入规则链，包括设备产生的消息与平台事件（如生命周期事件）。"
         4:
-          textContent: "Explore what a Rule Node is and understand its purpose."
+          textContent: "了解规则节点是什么及其作用。"
         5:
-          textContent: "Understand why there are different types of nodes (filter, enrichment, transformation, actions, analytics, and external) and how they work together in a rule chain."
+          textContent: "理解为何存在不同类型的节点（过滤、丰富、转换、动作、分析、外部）以及它们如何在规则链中协同工作。"
         6:
-          textContent: "Learn how to filter, modify, and enrich incoming data, store telemetry, trigger alarms, and send REST API calls, using nodes."
+          textContent: "学习使用节点过滤、修改与丰富入站数据、存储遥测、触发告警与发送REST API调用。"
         7:
-          textContent: "Use script nodes (TBEL and JavaScript) to enable flexible message processing."
+          textContent: "使用脚本节点（TBEL与JavaScript）实现灵活的消息处理。"
         8:
-          textContent: "Understand how the Rule Engine operates on a deeper level, including message handling through queues."
+          textContent: "深入理解规则引擎运作，包括通过队列的消息处理。"
         9:
-          textContent: "Learn how different queue settings affect processing latency and throughput, and how incorrect configurations can cause failures."
+          textContent: "学习不同队列设置如何影响处理延迟与吞吐，以及错误配置如何导致故障。"
         10:
-          textContent: "Identify common mistakes when working with queues, such as Kafka consumer polling issues."
+          textContent: "识别使用队列时的常见错误，如Kafka消费者轮询问题。"
         11:
-          textContent: "Use debug mode and logging to track message flow and troubleshoot execution problems."
+          textContent: "使用调试模式与日志追踪消息流并排查执行问题。"
         12:
-          textContent: "Understand how to handle large-scale data loads while maintaining high system performance."
+          textContent: "理解如何在保持高系统性能的前提下处理大规模数据负载。"
         13:
-          textContent: "Optimize rule chains to reduce unnecessary actions and improve processing speed."
+          textContent: "优化规则链以减少不必要的动作并提升处理速度。"
     1:
-      sessionName: "Security model & access management"
+      sessionName: "安全模型与访问管理"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Explore the hierarchy model, including system administrators, tenants, customers, and sub-customers and permissions on different levels."
+          textContent: "了解层级模型，包括系统管理员、租户、客户与子客户及各层权限。"
         1:
-          textContent: "Learn how to use entity groups to efficiently manage access control for multiple users."
+          textContent: "学习如何使用实体组为多用户高效管理访问控制。"
         2:
-          textContent: "Understand how to use role-based access control (RBAC) and control user access and permissions."
+          textContent: "理解如何使用基于角色的访问控制（RBAC）控制用户访问与权限。"
         3:
-          textContent: "Understand the difference between generic and group roles."
+          textContent: "理解通用角色与组角色的区别。"
         4:
-          textContent: "Learn how to structure user roles, groups, and permissions to ensure secure access management."
+          textContent: "学习如何组织用户角色、组与权限以实现安全的访问管理。"
         5:
-          textContent: "Gain practical knowledge of how to configure access to dashboards and devices at different user levels."
+          textContent: "掌握如何在不同用户层级配置仪表盘与设备访问。"
         6:
-          textContent: "Discover how to create a clear separation between administrators and end users, allowing only limited access."
+          textContent: "了解如何在管理员与终端用户之间建立清晰隔离并限制访问。"
         7:
-          textContent: "Learn how to fix permission errors by setting correct roles."
+          textContent: "学习如何通过设置正确角色修复权限错误。"
         8:
-          textContent: "Configure security settings, including password policies, JWT settings, 2FA, and OAuth 2.0 authentication."
+          textContent: "配置安全设置，包括密码策略、JWT设置、双因素认证与OAuth 2.0。"
         9:
-          textContent: "Understand the importance of audit logs for tracking user activity and identifying security breaches."
+          textContent: "理解审计日志对追踪用户活动与发现安全漏洞的重要性。"
         10:
-          textContent: "Learn how to prevent common security risks, such as manipulating the Host header in login requests."
+          textContent: "学习如何防范常见安全风险，如登录请求中篡改Host头。"
         11:
-          textContent: "Discover how security is implemented in REST API (e.g., user authorities)."
+          textContent: "了解REST API中的安全实现（如用户权限）。"
     2:
-      sessionName: "Alarm management"
+      sessionName: "告警管理"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Understand what an alarm is in ThingsBoard and how it models real-life abnormal conditions."
+          textContent: "理解ThingsBoard中告警的含义及其如何对应现实异常状态。"
         1:
-          textContent: "Learn about alarm types and their intended usage(e.g. threshold-exceeded alarm)."
+          textContent: "了解告警类型及其用途（如超阈值告警）。"
         2:
-          textContent: "Explore alarm severity levels and how they help prioritize incidents."
+          textContent: "了解告警严重级别及其如何帮助对事件排序。"
         3:
-          textContent: "Understand alarm statuses and how they indicate whether the issue is happening now or is already over. "
+          textContent: "理解告警状态及其如何表示问题正在发生或已结束。"
         4:
-          textContent: "Learn how alarm uniqueness works to prevent duplicate alarms for the same real-life event."
+          textContent: "学习告警唯一性如何避免同一现实事件产生重复告警。"
         5:
-          textContent: "Discover alarm timing concepts, including created time, start time, and end time."
+          textContent: "了解告警时间概念，包括创建时间、开始时间与结束时间。"
         6:
-          textContent: "Learn how to assign responsibility for alarms using the assignee feature."
+          textContent: "学习如何使用负责人功能为告警分配责任。"
         7:
-          textContent: "Understand how alarm comments work, differentiating between user-defined and system-generated comments."
+          textContent: "理解告警评论机制，区分用户评论与系统生成评论。"
         8:
-          textContent: "Understand how alarm rules define when alarms are created and cleared."
+          textContent: "理解告警规则如何定义告警的创建与清除条件。"
         9:
-          textContent: "Explore different rule conditions and how they are evaluated."
+          textContent: "了解不同规则条件及其求值方式。"
         10:
-          textContent: "Learn how to configure alarm propagation settings for efficient alert management."
+          textContent: "学习如何配置告警传播设置以高效管理提醒。"
         11:
-          textContent: "Work with alarm-related Rule Engine nodes, including alarm status filters, create, count and clear alarm nodes."
+          textContent: "使用告警相关规则节点，包括告警状态过滤、创建、计数与清除告警节点。"
         12:
-          textContent: "Learn how to send alarm notifications via email, SMS, and the notification centre."
+          textContent: "学习如何通过邮件、短信与通知中心发送告警通知。"
         13:
-          textContent: "Configure an alarm escalation chain to ensure critical alarms receive the necessary attention."
+          textContent: "配置告警升级链以确保重要告警得到关注。"
         14:
-          textContent: "Manage alarms using the REST API, including creating, acknowledging, and clearing alarms programmatically."
+          textContent: "使用REST API管理告警，包括以编程方式创建、确认与清除告警。"
     3:
-      sessionName: "ThingsBoard platform API fundamentals (session 1)"
+      sessionName: "ThingsBoard平台API基础（第1部分）"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Understand how to interact with ThingsBoard using the REST API."
+          textContent: "理解如何使用REST API与ThingsBoard交互。"
         1:
-          textContent: "Learn how to use Swagger UI for testing, developing, and exploring APIs."
+          textContent: "学习如何使用Swagger UI进行API测试、开发与探索。"
         2:
-          textContent: "Discover how authentication and authorization work in REST API."
+          textContent: "了解REST API中的认证与授权机制。"
         3:
-          textContent: "Learn how to obtain and use JWT tokens for secure API access."
+          textContent: "学习如何获取并使用JWT令牌进行安全API访问。"
         4:
-          textContent: "Explore entity hierarchy access control."
+          textContent: "了解实体层级访问控制。"
         5:
-          textContent: "Understand user authorities and how RBAC applies to API interactions."
+          textContent: "理解用户权限及RBAC如何应用于API交互。"
         6:
-          textContent: "Learn how to troubleshoot API permission issues and handle errors."
+          textContent: "学习如何排查API权限问题并处理错误。"
         7:
-          textContent: "Work with CRUD APIs to create, update, and delete entities programmatically."
+          textContent: "使用CRUD API以编程方式创建、更新与删除实体。"
         8:
-          textContent: "Use Entity Data Query to efficiently fetch and aggregate data from multiple entities."
+          textContent: "使用实体数据查询高效从多实体获取与汇总数据。"
         9:
-          textContent: "Learn how to manage attributes via the Attributes API, including fetching, uploading, and subscribing to updates."
+          textContent: "学习如何通过属性API管理属性，包括获取、上传与订阅更新。"
         10:
-          textContent: "Work with Time Series API for fetching and uploading telemetry data."
+          textContent: "使用时序API获取与上传遥测数据。"
     4:
-      sessionName: "ThingsBoard platform API fundamentals (session 2)"
+      sessionName: "ThingsBoard平台API基础（第2部分）"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Get an overview of different data transport protocols such as MQTT, HTTP, CoAP, LwM2M, and SNMP."
+          textContent: "概览MQTT、HTTP、CoAP、LwM2M、SNMP等数据传输协议。"
         1:
-          textContent: "Learn how to send and receive data using MQTT, HTTP, and CoAP protocols."
+          textContent: "学习如何使用MQTT、HTTP与CoAP协议收发数据。"
         2:
-          textContent: "Understand how Remote Procedure Calls (RPC) work in ThingsBoard."
+          textContent: "理解ThingsBoard中远程过程调用（RPC）的工作方式。"
         3:
-          textContent: "Learn different ways to send RPC commands from server to device and vice versa."
+          textContent: "学习从服务端到设备及反向发送RPC命令的多种方式。"
         4:
-          textContent: "Discover how to use WebSockets for real-time communication with ThingsBoard."
+          textContent: "了解如何使用WebSocket与ThingsBoard进行实时通信。"
         5:
-          textContent: "Learn how to subscribe to WebSocket updates and integrate them into applications."
+          textContent: "学习如何订阅WebSocket更新并将其集成到应用中。"
     5:
-      sessionName: "Custom node development in rule engine"
+      sessionName: "规则引擎中的自定义节点开发"
       sessionLengthInHours: 2
       sessionTopics:
         0:
-          textContent: "Recommended for users with Java development experience."
+          textContent: "建议具备Java开发经验的用户学习。"
           warning: "true"
         1:
-          textContent: "Learn how to write a custom rule node from scratch and integrate it into ThingsBoard."
+          textContent: "学习如何从零编写自定义规则节点并集成到ThingsBoard。"
         2:
-          textContent: "Explore a prepared project template that includes a basic skeleton and sample custom nodes."
+          textContent: "了解包含基础骨架与示例自定义节点的项目模板。"
         3:
-          textContent: "Use internal ThingsBoard APIs to manipulate and execute various operations within the system."
+          textContent: "使用ThingsBoard内部API在系统内执行各类操作。"
         4:
-          textContent: "Manage entity data, update records, store information, and send data using custom nodes."
+          textContent: "使用自定义节点管理实体数据、更新记录、存储信息与发送数据。"
         5:
-          textContent: "Learn how to deploy a custom node to a self-hosted ThingsBoard instance."
+          textContent: "学习如何将自定义节点部署到自托管ThingsBoard实例。"
         6:
-          textContent: "Explore rule node versioning and upgrade mechanisms."
+          textContent: "了解规则节点版本与升级机制。"
         7:
-          textContent: "Work with the @RuleNode annotation and understand its role in ThingsBoard."
+          textContent: "使用@RuleNode注解并理解其在ThingsBoard中的作用。"
         8:
-          textContent: "Use the TbNode interface to define custom logic within a rule node."
+          textContent: "使用TbNode接口在规则节点内定义自定义逻辑。"
         9:
-          textContent: "Handle message transformations, including modifying message payloads and metadata."
+          textContent: "处理消息转换，包括修改消息负载与元数据。"
         10:
-          textContent: "Understand the lifecycle of a rule node, including initialization, updates, and deletion."
+          textContent: "理解规则节点的生命周期，包括初始化、更新与删除。"
         11:
-          textContent: "Optimize performance by utilizing asynchronous programming and efficient threading."
+          textContent: "通过异步编程与高效线程优化性能。"
         12:
-          textContent: "Learn how to avoid common mistakes when implementing custom nodes."
+          textContent: "学习在实现自定义节点时如何避免常见错误。"
 

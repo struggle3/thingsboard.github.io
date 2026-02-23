@@ -8,37 +8,37 @@
 * TOC
 {:toc}
 
-UDP Integration allows to stream data from devices which use a UDP protocol to ThingsBoard and converts payloads of these devices into the ThingsBoard format.
+UDP集成可从采用UDP协议的设备向ThingsBoard流式传输数据，并将这些设备的负载转换为ThingsBoard格式。
 
 {% capture difference %}
-**Please note** UDP Integration can be started only as [remote integration](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}. It could be started on the same machine, where TB instance is running, or you can start in on another machine, that has access over the network to the TB instance.
+**请注意**：UDP集成只能以[远程集成](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}方式启动。可在运行TB实例的同一台机器上启动，也可在能通过网络访问TB实例的另一台机器上启动。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Please review the integration diagram to learn more.
+请参阅集成示意图了解更多。
 
 ![image](/images/user-guide/integrations/udp-integration.svg)
 
-## Prerequisites
+## 前置条件
 
-In this tutorial, we will use:
+本教程将使用：
 
 {% if docsPrefix == "pe/" %}
-- The instance of the [ThingsBoard Professional Edition](https://thingsboard.io/docs/user-guide/install/pe/installation-options/){:target="_blank"} installed locally;
-- UDP integration, running externally and connected to the ThingsBoard PE instance;
+- 本地安装的[ThingsBoard专业版](https://thingsboard.io/docs/user-guide/install/pe/installation-options/){:target="_blank"}实例；
+- 在外部运行且已连接ThingsBoard PE实例的UDP集成；
 {% endif %}
 {% if docsPrefix contains "paas/" %}
-- ThingsBoard Professional Edition instance — [{{hostName}}](https://{{hostName}}){:target="_blank"};
-- UDP integration, running externally and connected to the ThingsBoard Cloud;
+- ThingsBoard Professional Edition实例 — [{{hostName}}](https://{{hostName}}){:target="_blank"};
+- 在外部运行且已连接ThingsBoard Cloud的UDP集成；
 {% endif %}
-- **echo** command which intended to display a line of text, and will redirect it's output to **netcat** (**nc**) utility;
-- **netcat** (**nc**) utility to establish UDP connections, receive data from there and transfer them;
+- **echo**命令，用于显示一行文本并将其输出重定向到**netcat**（**nc**）工具；
+- **netcat**（**nc**）工具，用于建立UDP连接、接收数据并传输；
 
-Suppose we have a sensor sending current temperature and humidity readings. 
-Sensor **SN-001** sends data to UDP integration on port **11560** of the machine where the UDP integration is running.
+假设我们有一台正在发送当前温度和湿度读数的传感器。
+传感器**SN-001**将数据发送到运行UDP集成的机器的**11560**端口。
 
-For demo purposes we assume that our device is smart enough to send data in 4 different payload types. 
-You can select payload type based on your device capabilities and business cases:
+为便于演示，我们假设设备能够以4种不同负载类型发送数据。
+可根据设备能力和业务场景选择负载类型：
  
 {% capture fourpayloadtypes %}
 Text payload<br>%,%text%,%templates/integration/udp/text-payload-type.md%br%
@@ -49,27 +49,27 @@ Hex payload<br>%,%hex%,%templates/integration/udp/hex-payload-type.md{% endcaptu
 {% include content-toggle.liquid content-toggle-id="fourpayloadtypes" toggle-spec=fourpayloadtypes %}
 
 {% capture difference %}
-**Please note**
+**请注意**
 <br>
-On the machine, where UDP Integration is running, port **11560** must be opened for incoming connections - **nc** utility must be able to connect to UDP socket. In case you are running it locally, it should be fine without any additional changes.
+在运行UDP集成的机器上，必须开放**11560**端口以接收入站连接——**nc**工具需能连接到UDP socket。若在本地运行，一般无需额外修改。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Add UDP integration
+## 添加UDP集成
 
-**1. Basic settings**.
+**1. 基本设置**
 
-Go to the "**Integrations**" page of the "**Integrations center**" section. Click "plus" button to start adding new integration. Select type "**UDP**" integration and click "**Next**";
+进入「**Integrations center**」的「**Integrations**」页面，点击「plus」按钮开始添加新集成。选择「**UDP**」类型并点击「**Next**」；
 
 ![image](/images/user-guide/integrations/udp/udp-integration-setup-1-pe.png)
 
 <br>
-**2. Uplink data converter**. 
+**2. 上行数据转换器**
 
-An uplink converter that is a script for parsing and transforming the data received by UDP integration to format that ThingsBoard uses. 
-**deviceName** and **deviceType** are required, while attributes and telemetry are optional. attributes and telemetry are flat key-value objects. Nested objects are not supported.
+上行转换器是用于解析并将UDP集成接收的数据转换为ThingsBoard格式的脚本。
+**deviceName**和**deviceType**为必填，attributes和telemetry为可选。attributes和telemetry为扁平键值对象，不支持嵌套对象。
 
-**Choose device payload type to for decoder configuration:**
+**选择设备负载类型以配置解码器：**
 
 {% capture uplinkdecoderconfiguration %}
 Text payload<br>%,%text%,%templates/integration/udp/uplink-decoder-text-payload.md%br%
@@ -79,25 +79,25 @@ Hex payload<br>%,%hex%,%templates/integration/udp/uplink-decoder-hex-payload.md{
 
 {% include content-toggle.liquid content-toggle-id="uplinkdecoderconfiguration" toggle-spec=uplinkdecoderconfiguration %}
 
-**3. Downlink data converter**.
+**3. 下行数据转换器**
 
-At the step of adding a downlink converter, you can also select a previously created or create a new downlink converter. But for now, leave the "**Downlink data converter**" field empty. Click "**Skip**";
+在添加下行转换器步骤，可选择已有或新建下行转换器。此处保持「**Downlink data converter**」为空。点击「**Skip**」；
 
 ![image](/images/user-guide/integrations/udp/udp-integration-setup-3-pe.png)
 
 <br>
-**4. Connection**.
+**4. 连接**
 
-As we mentioned earlier, "**Execute remotely**" option is checked and can not be modified - UDP Integration can be only remote type.
+如前所述，「**Execute remotely**」选项已勾选且不可修改——UDP集成只能为remote类型。
 
-By default, UDP Integration will use **11560** port, but you can change this to any available port in your case.
+默认情况下UDP集成使用**11560**端口，您可根据需要改为任意可用端口。
 
-Please note down **Integration key** and **Integration secret** - we will use these values later in the configuration on the remote UDP Integration itself.
+请记录**Integration key**和**Integration secret**——后续在远程UDP集成配置中将使用这些值。
 
-We leave the **Enable broadcast - integration will accepts broadcast address packets** options by default. This flag indicates that integration will accept UDP packets sent to the broadcast address.
+**Enable broadcast - integration will accepts broadcast address packets**选项保持默认。该标识表示集成将接受发往广播地址的UDP包。
 
 <br>
-Choose device payload type for **Handler Configuration**:
+选择**Handler Configuration**的设备负载类型：
 
 {% capture handlerconfiguration %}
 Text payload<br>%,%text%,%templates/integration/udp/udp-handler-configuration-text.md%br%
@@ -107,17 +107,17 @@ Hex payload<br>%,%hex%,%templates/integration/udp/udp-handler-configuration-hex.
 
 {% include content-toggle.liquid content-toggle-id="udpintegrationhandlerconfiguration" toggle-spec=handlerconfiguration %}
 
-## Installing and running external UDP integration
+## 安装并运行外部UDP集成
 
-Please refer to the [remote integration guide](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"} and install UDP integration service locally or on separate machine.
+请参阅[远程集成指南](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}，在本地或单独机器上安装UDP集成服务。
 
-Use **Integration key** and **Integration secret** from the above section for your UDP integration configuration.
+使用上文中的**Integration key**和**Integration secret**配置您的UDP集成。
 
-## Send uplink message
+## 发送上行消息
 
-Once ThingsBoard UDP integration has been created, the UDP server starts, and then it waits for data from the devices.
+创建ThingsBoard UDP集成后，UDP服务启动并等待设备数据。
 
-Choose device payload type to send uplink message:
+选择设备负载类型以发送上行消息：
 
 {% capture senduplink %}
 Text payload<br>%,%text%,%templates/integration/udp/udp-send-uplink-text.md%br%
@@ -127,16 +127,16 @@ Hex payload<br>%,%hex%,%templates/integration/udp/udp-send-uplink-hex.md{% endca
 
 {% include content-toggle.liquid content-toggle-id="udpintegrationsenduplink" toggle-spec=senduplink %}
 
-Once you go to "**Devices**" page you should find a **SN-001** device provisioned by the UDP integration.
-Click the device, navigate to the "**Latest telemetry**" tab to see the "temperature" key and its value (25.7) there and also the "humidity" key and its value (69) there as well.
+进入「**Devices**」页面，应能看到由UDP集成配置的**SN-001**设备。
+点击设备，进入「**Latest telemetry**」标签可查看「temperature」键及其值(25.7)以及「humidity」键及其值(69)。
 
 ![image](/images/user-guide/integrations/udp/udp-integration-add-device-pe.png)
 
-## Advanced usage: downlink
+## 高级用法：下行
 
-For sending Downlink messages from Thingsboard to the device, we need to define a downlink converter. 
+要从ThingsBoard向设备发送下行消息，需定义下行转换器。
 
-### Add downlink converter
+### 添加下行转换器
 
 {% include templates/tbel-vs-js.md %}
 
@@ -146,63 +146,63 @@ JavaScript<small></small>%,%anonymous%,%templates/integration/udp/udp-downlink-j
 
 {% include content-toggle.liquid content-toggle-id="udpdownlink" toggle-spec=udpdownlink %}
 
-To add a downlink data converter to the UDP integration, follow these steps:
+将下行数据转换器添加到UDP集成的步骤：
 
 {% assign udpAddDownlinkConverter = '
   ===
     image: /images/user-guide/integrations/udp/udp-add-downlink-converter-tbel-1-pe.png,
-    title: Go to the "**Integrations**" page, click UDP integration to open its details, and enter integration editing mode by clicking the "pencil" icon;
+    title: 进入「**Integrations**」页面，点击UDP集成打开详情，点击「pencil」图标进入编辑模式；
   ===
     image: /images/user-guide/integrations/udp/udp-add-downlink-converter-tbel-2-pe.png,
-    title: Enter a name for the downlink data converter and click "**Create new converter**";
+    title: 输入下行数据转换器名称并点击「**Create new converter**」；
   ===
     image: /images/user-guide/integrations/udp/udp-add-downlink-converter-tbel-3-pe.png,
-    title: Paste the script to the encoder function section, and click "Add";
+    title: 将脚本粘贴到encoder function区域，点击「Add」；
   ===
     image: /images/user-guide/integrations/udp/udp-add-downlink-converter-tbel-4-pe.png,
-    title: Apply changes.
+    title: 应用更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=udpAddDownlinkConverter %}
 
 {% capture difference %}
-Optionally, configure **Cache Size** and **Cache time to live in minutes** - features, that helps to avoid memory leak when we are storing connections (able just for UDP Downlink).<br>
-**Cache Size** - maximum size of messages for UDP client.<br>
-**Cache time to live in minutes** - time to storage messages.
+可选配置**Cache Size**和**Cache time to live in minutes**——用于在存储连接时避免内存泄漏（仅UDP下行支持）。<br>
+**Cache Size** — UDP客户端消息的最大数量。<br>
+**Cache time to live in minutes** — 消息存储时长（分钟）。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Modify Root Rule Chain
+### 修改Root Rule Chain
 
-When integration configured and ready to use, we need to go to "Rule Chains" page and configure the "**Root Rule Chain**" so that messages like "**Attributes updated**" and "**Post attributes**" are forwarded to the downlink data converter:
+集成配置就绪后，需进入「Rule Chains」页面并配置「**Root Rule Chain**」，使「**Attributes updated**」和「**Post attributes**」消息转发到下行数据转换器：
 
 {% assign ruleChainDownlink = '
   ===
     image: /images/user-guide/integrations/udp/rule-chain-downlink-1-pe.png,
-    title: In the Root Rule Chain editor, find the "**integration downlink**" node and drag it to the rule chain;
+    title: 在Root Rule Chain编辑器中找到「**integration downlink**」节点并拖入规则链；
   ===
     image: /images/user-guide/integrations/udp/rule-chain-downlink-2-pe.png,
-    title: Name it "**UDP Downlink**", specify our "**UDP integration**", and click "Add";
+    title: 命名为「**UDP Downlink**」，指定「**UDP integration**」，点击「Add」；
   ===
     image: /images/user-guide/integrations/udp/rule-chain-downlink-3-pe.png,
-    title: Drag the connection from the "message type switch" node to the "UDP integration" node with "**Attributes updated**" and "**Post attributes**" labels. Save all changes;
+    title: 从「message type switch」节点拖拽连线到「UDP integration」节点，标签为「**Attributes updated**」和「**Post attributes**」。保存所有更改；
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=ruleChainDownlink %}
 
-### Test downlink
+### 测试下行
 
-To test downlink, create some **shared attribute** on your device:
+要测试下行，请在设备上创建**shared attribute**：
 
 {% assign ruleChainDownlink = '
     ===
         image: /images/user-guide/integrations/udp/udp-add-shared-attribute-1-pe.png,
-        title: Go to the "**Devices**" page. Click your device and navigate to the "**Attributes**" tab. Select the "**Shared attributes**" option, and click the "**plus**" icon;
+        title: 进入「**Devices**」页面。点击设备，进入「**Attributes**」标签。选择「**Shared attributes**」，点击「**plus**」图标；
     ===
         image: /images/user-guide/integrations/udp/udp-add-shared-attribute-2-pe.png,
-        title: Enter the attribute name, and its value (for example, the key name is "**firmware**", value: "**v1.1**") and click "Save";
+        title: 输入属性名及其值（例如键名为「**firmware**」、值为「**v1.1**」）并点击「Save」；
     ===
         image: /images/user-guide/integrations/udp/udp-add-shared-attribute-3-pe.png,
 '
@@ -210,24 +210,24 @@ To test downlink, create some **shared attribute** on your device:
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=ruleChainDownlink %}
 
-To receive a downlink message you need to set the timeout for responses `-w10` (this option determines how long you will wait for a response) and send the uplink message again:
+要接收下行消息，需设置响应超时`-w10`（该选项决定等待响应的时长）并再次发送上行消息：
 
 ```shell
 echo -e 'SN-001,default,temperature,25.7,humidity,69' | nc -w10 -u 127.0.0.1 11560
 ```
 {: .copy-code}
 
-You should get the following response from the ThingsBoard in the terminal:
+终端中应能看到ThingsBoard的如下响应：
 
 ![image](/images/user-guide/integrations/udp/terminal-add-attribute.png)
 
 {% capture difference %}
-**Note**
+**注意**
 <br>
-When you use UDP integration, and your connection established for a long time, you will receive just one Downlink message. All other will be saved on server side and will be sent on next Uplink.
+使用UDP集成且连接建立较长时间时，您将只收到一条下行消息。其余消息将保存在服务端，并在下次上行时发送。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/guides-banner.md %}

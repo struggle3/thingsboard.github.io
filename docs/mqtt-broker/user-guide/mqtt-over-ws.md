@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: MQTT over WebSocket
-description: TBMQ MQTT Over WebSocket guide
+title: 基于 WebSocket 的 MQTT
+description: TBMQ 基于 WebSocket 的 MQTT 指南
 
 ---
 

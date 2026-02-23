@@ -3,24 +3,24 @@
 {:toc}
 
 
-This guide will help you set up TBMQ in cluster mode using Docker Compose.
+本指南将帮助您使用 Docker Compose 以集群模式部署 TBMQ。
 
-## Prerequisites
+## 前置条件
 
-- [Install Docker](https://docs.docker.com/engine/installation/)
+- [安装 Docker](https://docs.docker.com/engine/installation/)
 
 {% include templates/install/docker-install-note.md %}
 
-## Step 1. Pull TBMQ Image
+## 步骤 1. 拉取 TBMQ 镜像
 
-Make sure your have [logged in](https://docs.docker.com/engine/reference/commandline/login/) to docker hub using command line.
+请确保已通过命令行 [登录](https://docs.docker.com/engine/reference/commandline/login/) Docker Hub。
 
 ```bash
 docker pull thingsboard/tbmq-node:{{ site.release.broker_full_ver }}
 ```
 {: .copy-code}
 
-## Step 2. Clone TBMQ repository
+## 步骤 2. 克隆 TBMQ 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -28,134 +28,130 @@ cd tbmq/docker
 ```
 {: .copy-code}
 
-## Step 3. Installation
+## 步骤 3. 安装
 
-Execute the following command to create necessary volumes for all the services and to update the haproxy config in the created volume.
+执行以下命令为所有服务创建所需卷并更新所创建卷中的 haproxy 配置：
 
 ```bash
 ./scripts/docker-create-volumes.sh
 ```
 {: .copy-code}
 
-Execute the following command to run installation:
+执行以下命令运行安装：
 
 ```bash
 ./scripts/docker-install-tbmq.sh
 ```
 {: .copy-code}
 
-## Step 4. Running
+## 步骤 4. 运行
 
-Execute the following command to start services:
+执行以下命令启动服务：
 
 ```bash
 ./scripts/docker-start-services.sh
 ```
 {: .copy-code}
 
-After a while when all services will be successfully started you can make requests to `http://{your-host-ip}` 
-in you browser (e.g. **http://localhost**) and connect clients using MQTT protocol on 1883 port.
+当所有服务成功启动后，您可以在浏览器中访问 `http://{your-host-ip}`（例如 **http://localhost**），并在 1883 端口使用 MQTT 协议连接客户端。
 
 {% include templates/mqtt-broker/login.md %}
 
-## Step 5. Logs, stop and start commands
+## 步骤 5. 日志、停止与启动命令
 
-In case of any issues you can examine service logs for errors.
-For example to see TBMQ logs execute the following command:
+若遇问题可查看服务日志。例如查看 TBMQ 日志可执行：
 
 ```bash
 docker compose logs -f tbmq1
 ```
 {: .copy-code}
 
-Or use the following command to see the state of all the containers.
+或使用以下命令查看所有容器状态：
 ```bash
 docker compose ps
 ```
 {: .copy-code}
-Use next command to inspect the logs of all running services.
+使用以下命令查看所有运行中服务的日志：
 ```bash
 docker compose logs -f
 ```
 {: .copy-code}
-See [docker compose logs](https://docs.docker.com/compose/reference/logs/) command reference for more details.
+更多说明请参阅 [docker compose logs](https://docs.docker.com/compose/reference/logs/) 命令参考。
 
-Execute the following command to stop services:
+执行以下命令停止服务：
 
 ```bash
 ./scripts/docker-stop-services.sh
 ```
 {: .copy-code}
 
-Execute the following command to stop and completely remove deployed docker containers:
+执行以下命令停止并完全移除已部署的 Docker 容器：
 
 ```bash
 ./scripts/docker-remove-services.sh
 ```
 {: .copy-code}
 
-In case you want to remove docker volumes for all the containers, execute the following command.
-**Note:** it will remove all your data, so be careful before executing it.
+若要移除所有容器的 Docker 卷，请执行以下命令。
+**注意：** 将删除所有数据，执行前请谨慎。
 
 ```bash
 ./scripts/docker-remove-volumes.sh
 ```
 {: .copy-code}
 
-It could be useful to update logs (enable DEBUG/TRACE logs) in runtime or change TBMQ or Haproxy configs. In order to do
-this you need to make changes, for example, to the
-_haproxy.cfg_ or _logback.xml_ file.
-Afterward, execute the next command to apply the changes for the container:
+若需在运行时更新日志（启用 DEBUG/TRACE 日志）或修改 TBMQ、Haproxy 配置，请编辑 _haproxy.cfg_ 或 _logback.xml_ 等文件，
+然后执行以下命令使容器应用更改：
 
 ```bash
 ./scripts/docker-refresh-config.sh
 ```
 {: .copy-code}
 
-To reload HAProxy's configuration without restarting the Docker container you can send the HUP signal to this process (PID 1):
+若要在不重启 Docker 容器的情况下重载 HAProxy 配置，可向该进程（PID 1）发送 HUP 信号：
 
 ```
 docker exec -it haproxy-certbot sh -c "kill -HUP 1"
 ```
 {: .copy-code}
 
-## Upgrading
+## 升级
 
 {% include templates/mqtt-broker/upgrade/upgrading.md %}
 
-### Backup and restore (Optional)
+### 备份与恢复（可选）
 
-While backing up your PostgreSQL database is highly recommended, it is optional before proceeding with the upgrade.
-For further guidance, follow the [next instructions](https://github.com/thingsboard/tbmq/blob/main/docker/backup-restore/README.md).
+强烈建议在升级前备份 PostgreSQL 数据库，但此为可选步骤。
+更多说明请参阅 [后续说明](https://github.com/thingsboard/tbmq/blob/main/docker/backup-restore/README.md)。
 
-### Upgrade to 2.2.0
+### 升级至 2.2.0
 
-In this release, the MQTT authentication mechanism was migrated from YAML/env configuration into the database.
-During upgrade, TBMQ needs to know which authentication providers are enabled in your deployment.
-This information is provided through environment variables passed to the **upgrade container**.
+在此版本中，MQTT 认证机制已从 YAML/环境变量配置迁移到数据库。
+升级时，TBMQ 需要知道当前部署启用了哪些认证提供方。
+该信息通过传入 **升级容器** 的环境变量提供。
 
-The upgrade script requires a file named **`tb-mqtt-broker.env`** that explicitly defines these variables.
-Environment variables from your `docker-compose.yml` file are not applied during the upgrade — only the values in `tb-mqtt-broker.env` will be used.
+升级脚本要求存在名为 **`tb-mqtt-broker.env`** 的文件并在此文件中显式定义这些变量。
+升级过程中不会使用 `docker-compose.yml` 中的环境变量，仅使用 `tb-mqtt-broker.env` 中的值。
 
-> **Tips**
-> If you use only Basic authentication, set `SECURITY_MQTT_SSL_ENABLED=false`.
-> If you use only X.509 authentication, set `SECURITY_MQTT_BASIC_ENABLED=false` and `SECURITY_MQTT_SSL_ENABLED=true`.
+> **提示**
+> 若仅使用 Basic 认证，请设置 `SECURITY_MQTT_SSL_ENABLED=false`。
+> 若仅使用 X.509 认证，请设置 `SECURITY_MQTT_BASIC_ENABLED=false` 和 `SECURITY_MQTT_SSL_ENABLED=true`。
 
-**Supported variables**
+**支持的变量**
 
-  * `SECURITY_MQTT_BASIC_ENABLED` (`true|false`)
-  * `SECURITY_MQTT_SSL_ENABLED` (`true|false`)
-  * `SECURITY_MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT` (`true|false`) — usually `false`.
+  * `SECURITY_MQTT_BASIC_ENABLED`（`true|false`）
+  * `SECURITY_MQTT_SSL_ENABLED`（`true|false`）
+  * `SECURITY_MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT`（`true|false`）— 通常为 `false`。
 
-Once the file is prepared and the values verified, proceed with the [upgrade process](#run-upgrade).
+准备好该文件并确认取值后，请按 [升级流程](#run-upgrade) 执行。
 
-### Upgrade to 2.1.0
+### 升级至 2.1.0
 
 {% include templates/mqtt-broker/upgrade/update-to-2.1.0-release-docker-cluster.md %}
 
-### Run upgrade
+### 执行升级
 
-In case you would like to upgrade, please pull the recent changes from the latest release branch:
+若要升级，请从最新发布分支拉取最近更改：
 
 ```bash
 git pull origin {{ site.release.broker_branch }}
@@ -164,22 +160,22 @@ git pull origin {{ site.release.broker_branch }}
 
 {% include templates/mqtt-broker/upgrade/upgrade-to-custom-release.md %}
 
-**Note**: Make sure custom changes of yours if available are not lost during the merge process. 
-Make sure `TBMQ_VERSION` in .env file is set to the target version (e.g., set it to {{ site.release.broker_full_ver }} if you are upgrading to the latest).
+**注意：** 请确保在合并过程中不丢失您的自定义修改。
+确保 .env 文件中的 `TBMQ_VERSION` 已设置为目标版本（例如升级到最新版时设为 {{ site.release.broker_full_ver }}）。
 
 {% include templates/mqtt-broker/install/upgrade-hint.md %}
 
-After that, execute the following commands:
+然后执行以下命令：
 
 {% capture tabspec %}tbmq-upgrade
 tbmq-upgrade-without-from-version,Since v2.1.0,shell,resources/upgrade-options/docker-compose-upgrade-tbmq-without-from-version.md,/docs/{{docsPrefix}}mqtt-broker/install/cluster/resources/upgrade-options/docker-compose-upgrade-tbmq-without-from-version.md
 tbmq-upgrade-with-from-version,Before v2.1.0,markdown,resources/upgrade-options/docker-compose-upgrade-tbmq-with-from-version.md,/docs/{{docsPrefix}}mqtt-broker/install/cluster/resources/upgrade-options/docker-compose-upgrade-tbmq-with-from-version.md{% endcapture %}
 {% include tabs.html %}
 
-## Generate certificate for HTTPS
+## 为 HTTPS 生成证书
 
-We are using HAproxy for proxying traffic to containers and for web UI by default we are using 80 and 443 ports. 
-For using HTTPS with a valid certificate, execute these commands:
+我们使用 HAproxy 将流量代理到容器，Web 界面默认使用 80 和 443 端口。
+要使用有效证书启用 HTTPS，请执行：
 
 ```bash
 docker exec haproxy-certbot certbot-certonly --domain your_domain --email your_email
@@ -187,40 +183,40 @@ docker exec haproxy-certbot haproxy-refresh
 ```
 {: .copy-code}
 
-**Note**: Valid certificate is used only when you visit web UI by domain in URL.
+**注意：** 仅当通过 URL 中的域名访问 Web 界面时才会使用有效证书。
 
-## Enable MQTTS (MQTT over SSL/TLS)
+## 启用 MQTTS（基于 SSL/TLS 的 MQTT）
 
-**MQTTS** allows clients to connect to TBMQ over an encrypted TLS/SSL channel, ensuring the confidentiality and integrity of MQTT messages in transit.
-There are two common deployment options:
+**MQTTS** 允许客户端通过加密的 TLS/SSL 通道连接 TBMQ，确保 MQTT 消息在传输过程中的机密性与完整性。
+常见有两种部署方式：
 
-* **Two-way MQTTS (Mutual TLS)** – TBMQ terminates TLS, and clients must present valid certificates for authentication.
-* **One-way MQTTS (TLS termination at Load Balancer)** – HAProxy or another load balancer handles TLS termination, and forwards plain MQTT traffic to TBMQ over a trusted internal network.
+* **双向 MQTTS（双向 TLS）** – TBMQ 自行终止 TLS，客户端须提供有效证书进行认证。
+* **单向 MQTTS（在负载均衡器终止 TLS）** – 由 HAProxy 或其他负载均衡器终止 TLS，并通过可信内网将明文 MQTT 流量转发给 TBMQ。
 
-Both approaches protect external connections with encryption, but **two-way MQTTS** adds client certificate verification for higher security, 
-while **one-way MQTTS** simplifies broker configuration and can reuse existing HTTPS certificates on the load balancer.
+两种方式均能加密保护外部连接，**双向 MQTTS** 额外通过客户端证书校验提高安全性，
+**单向 MQTTS** 则简化 Broker 配置，并可在负载均衡器上复用现有 HTTPS 证书。
 
-### Two-way MQTTS
+### 双向 MQTTS
 
-In this configuration, TBMQ itself handles TLS termination and (optionally) client certificate authentication. 
-This approach is suitable when you want the broker to fully control SSL/TLS and mutual authentication without relying on a load balancer for security.
+在此配置下，由 TBMQ 自身处理 TLS 终止及（可选）客户端证书认证。
+适用于希望由 Broker 完全控制 SSL/TLS 与双向认证、而不依赖负载均衡器提供安全性的场景。
 
-To enable **MQTT over SSL (MQTTS)**, you need to provide valid SSL certificates and configure TBMQ to use them.
+要启用 **MQTT over SSL（MQTTS）**，需提供有效 SSL 证书并配置 TBMQ 使用它们。
 
-For more information on supported certificate formats and options, refer to the [MQTT over SSL](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/) documentation.
+有关支持的证书格式与选项，请参阅 [MQTT over SSL](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/) 文档。
 
-**Provide SSL Certificates**
+**提供 SSL 证书**
 
-Obtain a valid SSL certificate and private key. For example:
+获取有效 SSL 证书与私钥。例如：
 
-* `mqttserver.pem` – your public certificate (may include full chain);
-* `mqttserver_key.pem` – your private key.
+* `mqttserver.pem` – 公钥证书（可包含完整链）；
+* `mqttserver_key.pem` – 私钥。
 
-> Self-signed certificates are supported for testing, but we recommend using certificates from a trusted Certificate Authority for production environments.
+> 测试环境支持自签名证书，生产环境建议使用受信任 CA 签发的证书。
 
-**Mount Certificates into Containers**
+**将证书挂载到容器**
 
-Open your `docker-compose.yml` file and **uncomment** the volume line that mounts the certificate files:
+打开 `docker-compose.yml`，**取消注释**挂载证书文件的 volume 行：
 
 ```yaml
 volumes:
@@ -228,11 +224,11 @@ volumes:
 ```
 {: .copy-code}
 
-Replace `PATH_TO_CERTS` with the path to the folder containing your certificate files. Make sure TBMQ can access those file.
+将 `PATH_TO_CERTS` 替换为包含证书文件的目录路径，并确保 TBMQ 能访问这些文件。
 
-**Configure Environment Variables**
+**配置环境变量**
 
-Edit the `tb-mqtt-broker.env` file and **uncomment/configure** the following lines to enable SSL:
+编辑 `tb-mqtt-broker.env`，**取消注释/配置**以下行以启用 SSL：
 
 ```yaml
 LISTENER_SSL_ENABLED=true
@@ -242,27 +238,27 @@ LISTENER_SSL_PEM_KEY_PASSWORD=server_key_password
 ```
 {: .copy-code}
 
-> Adjust the file paths and password as needed. If your private key is not password-protected, you can leave `LISTENER_SSL_PEM_KEY_PASSWORD` empty.
+> 请按需调整文件路径和密码。若私钥未设密码，可将 `LISTENER_SSL_PEM_KEY_PASSWORD` 留空。
 
-**Restart Services**
+**重启服务**
 
-Apply the changes by restarting TBMQ services:
+通过重启 TBMQ 服务使更改生效：
 
 ```bash
 ./scripts/docker-start-services.sh
 ```
 {: .copy-code}
 
-Once started, your MQTT clients will be able to securely connect to port **8883** using TLS/SSL.
+启动后，MQTT 客户端即可通过 TLS/SSL 安全连接 **8883** 端口。
 
-### One-way MQTTS
+### 单向 MQTTS
 
-In this setup, TLS is terminated at the load balancer (HAProxy). 
-Clients connect securely to HAProxy over MQTTS (port 8883), and HAProxy forwards plain MQTT (unencrypted) to TBMQ over the internal network (port 1883).
-You can reuse the same certificate you already use for HTTPS.
+在此方式下，TLS 在负载均衡器（HAProxy）处终止。
+客户端通过 MQTTS（8883 端口）安全连接 HAProxy，HAProxy 通过内网将明文 MQTT 转发给 TBMQ（1883 端口）。
+可复用已用于 HTTPS 的证书。
 
-Point HAProxy to your certificate bundle (PEM with full chain + private key). If you reuse the HTTPS cert, reference the same bundle.
-Locate and update the _haproxy.cfg_ file:
+在 HAProxy 中指定证书包路径（含完整链的 PEM + 私钥）。若复用 HTTPS 证书，可引用同一证书包。
+找到并更新 _haproxy.cfg_ 文件：
 
 ```text
  listen mqtts-in
@@ -278,8 +274,8 @@ Locate and update the _haproxy.cfg_ file:
 ```
 {: .copy-code}
 
-> **Note:** Replace _fullchain-and-key.pem_ with the actual filename of your certificate bundle.
+> **注意：** 请将 _fullchain-and-key.pem_ 替换为您的证书包实际文件名。
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/mqtt-broker-guides-banner.md %}

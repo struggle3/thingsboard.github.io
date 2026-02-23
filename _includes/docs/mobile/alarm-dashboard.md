@@ -4,25 +4,25 @@
 {% assign appPrefix = "ThingsBoard" %}
 {% endif %}
 
-{{appPrefix}} allows configuring alarm details dashboard to be displayed when tapping on the alarm in the alarms screen.
-Alarm details dashboard is configurable in the alarm rules of the device profile form:
+{{appPrefix}}允许配置在告警屏幕点击告警时显示的告警详情仪表板。
+告警详情仪表板可在设备配置的告警规则中配置：
 
-1. Go to the **Device profiles** through the main menu on the left of the screen;
-2. Click on the device profile you want to modify;
-3. In the opened device profile details navigate to **Alarm rules** tab;
-4. Click **edit** button;
-5. In the **Create alarm rule** form select desired dashboard in the **Mobile dashboard** field;
-6. Click **Apply changes** button;
+1. 通过屏幕左侧主菜单进入**设备配置**；
+2. 点击要修改的设备配置；
+3. 在打开的设备配置详情中导航至**告警规则**选项卡；
+4. 点击**编辑**按钮；
+5. 在**创建告警规则**表单的**移动仪表板**字段中选择所需仪表板；
+6. 点击**应用更改**按钮；
 
 {% include images-gallery.html imageCollection="alarm-dashboard" %}
 
 {% capture dashboard_state_parameter %}
-**Note:** In order to display specific alarm originator data, dashboard should be configured to use [**Entity from dashboard state**](/docs/{{docsPrefix}}user-guide/ui/aliases/#entity-from-dashboard-state) alias in widgets datasources.
+**注意：**要显示特定告警发起者数据，仪表板需要配置为在部件数据源中使用[**仪表板状态中的实体**](/docs/{{docsPrefix}}user-guide/ui/aliases/#entity-from-dashboard-state)别名。
 {% endcapture %}
 {% include templates/info-banner.md content=dashboard_state_parameter %}
 
-To verify your configuration run the mobile app. Then navigate to the alarms list. Tap on the alarm having type for which dashboard was configured.
-**Note** that alarm dashboard configuration only applied to alarms generated after applying configuration.
+要验证配置，请运行移动应用。然后导航到告警列表，点击已配置仪表板类型的告警。
+**注意**，告警仪表板配置仅适用于应用配置后生成的告警。
 
 <br>
 

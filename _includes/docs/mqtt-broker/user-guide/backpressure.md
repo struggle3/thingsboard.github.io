@@ -1,10 +1,9 @@
 * TOC
 {:toc}
 
-In high-throughput messaging systems like TBMQ, [backpressure](https://medium.com/@jayphelps/backpressure-explained-the-flow-of-data-through-software-2350b3e77ce7) 
-handling is essential to ensure stability, maintain performance, and prevent out-of-memory (OOM) errors under heavy load. 
-Backpressure can occur in two directions: **inbound**, when data is flowing into the broker from publishers, and **outbound**, when the broker delivers data to subscribers. 
-TBMQ is designed to effectively handle both.
+在 TBMQ 这类高吞吐消息系统中，[背压（backpressure）](https://medium.com/@jayphelps/backpressure-explained-the-flow-of-data-through-software-2350b3e77ce7) 处理对保证稳定性、维持性能、避免高负载下 OOM 至关重要。
+背压可发生在两个方向：**入站**（数据从发布者流入 broker）和**出站**（broker 向订阅者投递数据）。
+TBMQ 针对两者均做了有效处理。
 
 TBMQ uses Netty as the backbone for its MQTT communication, handling all low-level networking and I/O operations. 
 While Netty provides high performance and scalability, it also requires careful control of inbound and outbound message flow.

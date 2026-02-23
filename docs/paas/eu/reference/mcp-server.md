@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: MCP Server
-description: Provides a **natural language interface** for LLMs and AI agents to interact with your ThingsBoard IoT platform
+title: MCP 服务器
+description: 为 LLM 与 AI 智能体提供**自然语言接口**，与 ThingsBoard IoT 平台交互
 
 ---
 

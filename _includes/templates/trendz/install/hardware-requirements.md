@@ -1,4 +1,4 @@
-Depends on the amount of analyzed data and the number of devices connected to the system.
-To run Trendz Analytics on a single machine, you will need at least 1Gb of free RAM.
+取决于分析数据量与接入系统的设备数量。
+单机运行 Trendz Analytics 至少需要 1GB 可用内存。
 
-In small and medium installations, Trendz can be installed **on the same** server with ThingsBoard.
+中小型部署中，Trendz 可与 ThingsBoard **安装在同一台**服务器上。

@@ -3,15 +3,15 @@
     <div class="calculator-body">
         <div class="card calculator">
             <div class="calculator-header">
-                <h2>TBMQ Perpetual license calculator</h2>
+                <h2>TBMQ永久许可证计价器</h2>
             </div>
             <div class="input-parameters">
                 <div class="input-group">
                     <div class="input-label-group xs-row">
                         <label for="tbmqPerp-sessions" class="label">
-                            Sessions
+                            会话数
                             <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Total unique logical states managed by the broker (identified by Client ID). Active connections and disconnected clients with persistent sessions both occupy quota slots.</span>
+                                <span class="tooltip-text">代理管理的唯一逻辑状态总数（由Client ID标识）。活动连接和具有持久会话的断开客户端均占用配额槽。</span>
                             </span>
                         </label>
                         <input id="tbmqPerp-sessions" type="number" value="10000" min="10000" class="input input-right">
@@ -31,9 +31,9 @@
                 <div class="input-group">
                     <div class="input-label-group xs-row">
                         <label for="tbmqPerp-throughput" class="label">
-                            Throughput (msg/sec)
+                            吞吐量（消息/秒）
                             <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Combined number of MQTT PUBLISH packets processed per second, including both incoming (publisher) and outgoing (subscriber) messages.</span>
+                                <span class="tooltip-text">每秒处理的MQTT PUBLISH包总数，包括入站（发布者）和出站（订阅者）消息。</span>
                             </span>
                         </label>
                         <input id="tbmqPerp-throughput" type="number" value="1000" min="1000" class="input input-right">
@@ -54,12 +54,12 @@
                     <div class="instance-group">
                         <div class="instance-info">
                             <h4>
-                                Production Instances
+                                生产实例
                                 <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                    <span class="tooltip-text">Dedicated compute instances for your production environment. Add instances to enable clustering and High Availability (HA).</span>
+                                    <span class="tooltip-text">生产环境的专用计算实例。添加实例以启用集群和高可用性(HA)。</span>
                                 </span>
                             </h4>
-                            <p>1 instance included. Add more for high availability (HA) and reliability.</p>
+                            <p>包含1个实例。添加更多以实现高可用性(HA)和可靠性。</p>
                         </div>
                         <div class="stepper-control unset-width" id="tbmqPerpProdStepper">
                             <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease production instances">−</button>
@@ -70,12 +70,12 @@
                     <div class="instance-group">
                         <div class="instance-info">
                             <h4>
-                                Development Instances
+                                开发实例
                                 <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                    <span class="tooltip-text">Compute instances used for development, testing, and CI/CD workflows.</span>
+                                    <span class="tooltip-text">用于开发、测试和CI/CD工作流的计算实例。</span>
                                 </span>
                             </h4>
-                            <p>Add dedicated instances for your dev, test, and CI/CD workflows. Keep your production data clean.</p>
+                            <p>为您的开发、测试和CI/CD工作流添加专用实例。保持生产数据独立。</p>
                         </div>
                         <div class="stepper-control unset-width" id="tbmqPerpDevStepper">
                             <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease development instances">−</button>
@@ -87,7 +87,7 @@
             </div>
             <div class="actions-container">
                 <div class="reset-container">
-                    <button id="tbmqPerpResetBtn" class="button reset">Reset</button>
+                    <button id="tbmqPerpResetBtn" class="button reset">重置</button>
                 </div>
             </div>
         </div>
@@ -247,7 +247,7 @@
         let resultsHtml = `
             <div class="card-header">
                 <div class="header-top">
-                    <h3>Calculation summary</h3>
+                    <h3>计算摘要</h3>
                     <div class="header-actions">
                         <div id="tbmqPerpCopyBtn" class="icon-button" title="Copy">${copyIcon}</div>
                         <div id="tbmqPerpDownloadBtn" class="icon-button" title="Download">${downloadIcon}</div>
@@ -302,7 +302,7 @@
                         <span class="tooltip">${infoIcon}<span class="tooltip-text">${tooltipText}</span></span>
                     </span>
                 </div>
-                <a id="tbmqPerpContactUs" href="/docs/contact-us/" class="button">Contact Us</a>
+                <a id="tbmqPerpContactUs" href="/docs/contact-us/" class="button">联系我们</a>
             </div>`;
 
         tbmqPerpUi.results.innerHTML = resultsHtml;

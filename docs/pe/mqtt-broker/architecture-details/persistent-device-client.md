@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Redis Architecture for Persistent DEVICE clients
-description: Redis Architecture Overview for Persistent DEVICE clients
+title: 持久化 DEVICE 客户端的 Redis 架构
+description: 持久化 DEVICE 客户端的 Redis 架构概览
 
 redis-cluster-constraints:
  0:

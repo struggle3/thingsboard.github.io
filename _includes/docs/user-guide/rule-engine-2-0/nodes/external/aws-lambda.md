@@ -1,12 +1,10 @@
-Invokes AWS Lambda functions, sending the incoming message data as the request payload. The node uses the RequestResponse invocation type to execute functions synchronously and
-returns the Lambda function's response as the data of the outgoing message. Function names and qualifiers can be dynamically populated with data from the incoming message.
+调用 AWS Lambda 函数，将入站消息 data 作为请求 payload 发送。节点使用 RequestResponse 调用类型同步执行函数，并将 Lambda 函数的响应作为出站消息的 data 返回。函数名和 qualifier 可根据入站消息动态填充。
 
-## Configuration
+## 配置
 
-### Function configuration
+### Function configuration（函数配置）
 
-Define the target Lambda function and how to invoke it. Both the function name and qualifier support [templatization](/docs/{{docsPrefix}}user-guide/templatization/) to dynamically
-incorporate data from incoming messages.
+定义目标 Lambda 函数及调用方式。函数名和 qualifier 均支持 [templatization](/docs/{{docsPrefix}}user-guide/templatization/) 以动态融入入站消息数据。
 
 #### Function name
 
@@ -142,9 +140,9 @@ Controls how the node handles Lambda function errors.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node constructs a Lambda invocation request:
+1. 节点构建 Lambda 调用请求：
     - The **function name** and **qualifier** (if specified) are processed, replacing templates with values from the incoming message data and metadata.
     - An `InvokeRequest` is created with the message data as the payload and the RequestResponse invocation type.
 2. The invocation request is sent asynchronously to AWS Lambda with the configured timeouts:
@@ -158,7 +156,7 @@ Controls how the node handles Lambda function errors.
     - The originator and message type from the incoming message remain unchanged.
 4. The resulting message is forwarded via the `Success` connection (or `Failure` if an error was detected and the setting is enabled).
 
-## Output connections
+## 输出连接
 
 - **Success**
     - The Lambda function was invoked successfully and returned a response within the configured timeout.
@@ -172,15 +170,15 @@ Controls how the node handles Lambda function errors.
     - The Lambda function execution resulted in an error and **Tell Failure if AWS Lambda function execution raises exception** is enabled.
     - An unexpected error occurred during processing.
 
-## Examples
+## 示例
 
-### Example 1 — Basic invocation
+### 示例 1 — 基本调用
 
-Invoke a Lambda function that processes incoming message data and returns a transformed result.
+调用处理入站消息数据并返回转换结果的 Lambda 函数。
 
-**Incoming message**
+**入站消息**
 
-Data:
+Data：
 
 ```json
 {
@@ -213,7 +211,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Metadata (with added `requestId`):
 
@@ -234,12 +232,11 @@ Data:
 
 Routed via the `Success` connection.
 
-**Result**
+**结果**
 
-The Lambda function received the incoming message data, performed a calculation, and returned the result. The original message data was replaced with the Lambda function's
-response, and the AWS request ID was added to the metadata.
+Lambda 函数收到入站消息数据并执行计算后返回结果。原始消息 data 被 Lambda 函数响应替换，AWS 请求 ID 已添加到 metadata。
 
-### Example 2 — Error handling
+### 示例 2 — 错误处理
 
 Invoke a Lambda function that validates input data. When the function detects invalid input and raises an exception, the node routes the message to the Failure connection.
 
@@ -276,7 +273,7 @@ The Lambda function detects that the value is negative and throws an exception:
 Validation error: Value must be positive
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data (original message data preserved):
 
@@ -297,7 +294,6 @@ Metadata:
 
 Routed via the `Failure` connection.
 
-**Result**
+**结果**
 
-The Lambda function raised an exception. Because **Tell Failure if AWS Lambda function execution raises exception** is enabled, the node captured this error and routed the message
-to the `Failure` connection with error details in the metadata.
+Lambda 函数抛出异常。因 **Tell Failure if AWS Lambda function execution raises exception** 已启用，节点捕获该错误并将消息路由到 `Failure` 连接，metadata 中包含错误详情。

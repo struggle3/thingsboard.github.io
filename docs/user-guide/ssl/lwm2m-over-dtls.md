@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - dshvaika
-title: LwM2M over DTLS
-description: Launching ThingsBoard with secure LwM2M protocol to connect your IoT devices and projects.
+title: 基于 DTLS 的 LwM2M
+description: 使用安全的 LwM2M 协议启动 ThingsBoard 以连接 IoT 设备和项目。
 
 ---
 

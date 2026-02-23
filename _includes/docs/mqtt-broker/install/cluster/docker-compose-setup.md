@@ -3,17 +3,17 @@
 {:toc}
 
 
-This guide will help you set up TBMQ {{tbmqSuffix}} in cluster mode using Docker Compose.
+本指南将帮助你在 Docker Compose 集群模式下部署 TBMQ {{tbmqSuffix}}。
 
-## Prerequisites
+## 前置要求
 
 - [Install Docker](https://docs.docker.com/engine/installation/)
 
 {% include templates/install/docker-install-note.md %}
 
-## Pull TBMQ {{tbmqSuffix}} Image
+## 拉取 TBMQ {{tbmqSuffix}} 镜像
 
-Make sure you have [logged in](https://docs.docker.com/engine/reference/commandline/login/) to docker hub using the command line.
+请确保已通过命令行[登录](https://docs.docker.com/engine/reference/commandline/login/) Docker Hub。
 
 {% if docsPrefix == null %}
 ```bash
@@ -30,7 +30,7 @@ docker pull thingsboard/tbmq-pe-integration-executor:{{ site.release.pe_broker_f
 {% endif %}
 
 {% if docsPrefix == null %}
-## Clone TBMQ repository
+## 克隆 TBMQ 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -38,7 +38,7 @@ cd tbmq/docker
 ```
 {: .copy-code}
 {% else %}
-## Clone TBMQ PE Docker Compose repository
+## 克隆 TBMQ PE Docker Compose 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq-pe-docker-compose.git
@@ -63,7 +63,7 @@ nano tbmq.env
 ```
 {: .copy-code}
 
-and put the license secret parameter instead of "YOUR_LICENSE_KEY_HERE":
+并将 license secret 参数填入，替换 "YOUR_LICENSE_KEY_HERE"：
 
 ```text
 # License info
@@ -72,87 +72,84 @@ TBMQ_LICENSE_SECRET=YOUR_LICENSE_KEY_HERE
 
 {% endif %}
 
-## Installation
+## 安装
 
-Execute the following command to create the necessary volumes for all the services and to update the haproxy config in the created volume.
+执行以下命令为所有服务创建所需卷，并更新创建卷中的 haproxy 配置。
 
 ```bash
 ./scripts/docker-create-volumes.sh
 ```
 {: .copy-code}
 
-Execute the following command to run the installation:
+执行以下命令进行安装：
 
 ```bash
 ./scripts/docker-install-tbmq.sh
 ```
 {: .copy-code}
 
-## Running
+## 运行
 
-Execute the following command to start services:
+执行以下命令启动服务：
 
 ```bash
 ./scripts/docker-start-services.sh
 ```
 {: .copy-code}
 
-After a while when all services will be successfully started you can make requests to `http://{your-host-ip}` 
-in you browser (e.g. **http://localhost**) and connect clients using MQTT protocol on 1883 port.
+所有服务成功启动后，可在浏览器中访问 `http://{your-host-ip}`（例如 **http://localhost**），并通过 1883 端口的 MQTT 协议连接客户端。
 
 {% include templates/mqtt-broker/login.md %}
 
-## Logs, stop and start commands
+## 日志、停止和启动命令
 
-In case of any issues, you can examine service logs for errors.
-For example, to see TBMQ logs, execute the following command:
+遇到问题时，可查看服务日志排查错误。
+例如，查看 TBMQ 日志可执行：
 
 ```bash
 docker compose logs -f tbmq1
 ```
 {: .copy-code}
 
-Or use the following command to see the state of all the containers.
+或使用以下命令查看所有容器状态。
 ```bash
 docker compose ps
 ```
 {: .copy-code}
 
-Use the next command to inspect the logs of all running services.
+使用以下命令查看所有运行中服务的日志。
 
 ```bash
 docker compose logs -f
 ```
 {: .copy-code}
 
-See [docker compose logs](https://docs.docker.com/compose/reference/logs/) command reference for more details.
+详见 [docker compose logs](https://docs.docker.com/compose/reference/logs/) 命令参考。
 
-Execute the following command to stop services:
+执行以下命令停止服务：
 
 ```bash
 ./scripts/docker-stop-services.sh
 ```
 {: .copy-code}
 
-Execute the following command to stop and completely remove deployed docker containers:
+执行以下命令停止并完全移除已部署的 Docker 容器：
 
 ```bash
 ./scripts/docker-remove-services.sh
 ```
 {: .copy-code}
 
-In case you want to remove docker volumes for all the containers, execute the following command.
-**Note:** it will remove all your data, so be careful before executing it.
+若要删除所有容器的 Docker 卷，执行以下命令。
+**注意**：会删除所有数据，执行前请谨慎。
 
 ```bash
 ./scripts/docker-remove-volumes.sh
 ```
 {: .copy-code}
 
-It could be useful to update logs (enable DEBUG/TRACE logs) in runtime or change TBMQ or Haproxy configs. In order to do
-this, you need to make changes, for example, to the
-_haproxy.cfg_ or _logback.xml_ file.
-Afterward, execute the next command to apply the changes for the container:
+在运行时更新日志级别（启用 DEBUG/TRACE）或修改 TBMQ、Haproxy 配置时，需编辑 _haproxy.cfg_ 或 _logback.xml_ 等文件。
+修改后执行以下命令使容器应用更改：
 
 ```bash
 ./scripts/docker-refresh-config.sh
@@ -250,10 +247,10 @@ tbmq-upgrade-with-from-version,Before v2.1.0,markdown,resources/upgrade-options/
 
 {% endif %}
 
-## Generate certificate for HTTPS
+## 为 HTTPS 生成证书
 
-We are using HAproxy for proxying traffic to containers and for web UI. By default, we are using 80 and 443 ports. 
-For using HTTPS with a valid certificate, execute these commands:
+使用 HAproxy 将流量代理到容器及 Web UI。默认使用 80 和 443 端口。
+使用有效证书启用 HTTPS 时，执行以下命令：
 
 ```bash
 docker exec haproxy-certbot certbot-certonly --domain your_domain --email your_email
@@ -261,40 +258,39 @@ docker exec haproxy-certbot haproxy-refresh
 ```
 {: .copy-code}
 
-**Note**: Valid certificate is used only when you visit web UI by domain in URL.
+**注意**：仅在通过 URL 中的域名访问 Web UI 时才会使用有效证书。
 
-## Enable MQTTS (MQTT over SSL/TLS)
+## 启用 MQTTS（MQTT over SSL/TLS）
 
-**MQTTS** allows clients to connect to TBMQ over an encrypted TLS/SSL channel, ensuring the confidentiality and integrity of MQTT messages in transit.
-There are two common deployment options:
+**MQTTS** 使客户端可通过加密 TLS/SSL 通道连接 TBMQ，保障传输中 MQTT 消息的机密性与完整性。
+常见部署方式有两种：
 
-* **Two-way MQTTS (Mutual TLS)** – TBMQ terminates TLS, and clients must present valid certificates for authentication.
-* **One-way MQTTS (TLS termination at Load Balancer)** – HAProxy or another load balancer handles TLS termination, and forwards plain MQTT traffic to TBMQ over a trusted internal network.
+* **双向 MQTTS（双向 TLS）**——TBMQ 负责 TLS 终结，客户端须出示有效证书进行认证。
+* **单向 MQTTS（负载均衡器 TLS 终结）**——HAProxy 或其他负载均衡器完成 TLS 终结，并通过可信内网将明文 MQTT 转发到 TBMQ。
 
-Both approaches protect external connections with encryption, but **two-way MQTTS** adds client certificate verification for higher security, 
-while **one-way MQTTS** simplifies broker configuration and can reuse existing HTTPS certificates on the load balancer.
+两种方式均加密外网连接，**双向 MQTTS** 额外通过客户端证书校验增强安全，**单向 MQTTS** 则简化 broker 配置并复用负载均衡器上的 HTTPS 证书。
 
-### Two-way MQTTS
+### 双向 MQTTS
 
-In this configuration, TBMQ itself handles TLS termination and (optionally) client certificate authentication. 
-This approach is suitable when you want the broker to fully control SSL/TLS and mutual authentication without relying on a load balancer for security.
+此配置下，TBMQ 自身完成 TLS 终结及（可选）客户端证书认证。
+适用于希望 broker 完全掌控 SSL/TLS 与双向认证、不依赖负载均衡器做安全时。
 
-To enable **MQTT over SSL (MQTTS)**, you need to provide valid SSL certificates and configure TBMQ to use them.
+要启用 **MQTT over SSL (MQTTS)**，需提供有效 SSL 证书并配置 TBMQ 使用。
 
-For more information on supported certificate formats and options, refer to the [MQTT over SSL](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/) documentation.
+支持的证书格式与选项详见 [MQTT over SSL](/docs/{{docsPrefix}}mqtt-broker/security/mqtts/) 文档。
 
-**Provide SSL Certificates**
+**提供 SSL 证书**
 
-Obtain a valid SSL certificate and private key. For example:
+获取有效的 SSL 证书和私钥。例如：
 
-* `mqttserver.pem` – your public certificate (may include full chain);
-* `mqttserver_key.pem` – your private key.
+* `mqttserver.pem` —— 公钥证书（可含完整链）；
+* `mqttserver_key.pem` —— 私钥。
 
-> Self-signed certificates are supported for testing, but we recommend using certificates from a trusted Certificate Authority for production environments.
+> 支持使用自签名证书进行测试，生产环境建议使用受信任 CA 签发的证书。
 
-**Mount Certificates into Containers**
+**挂载证书到容器**
 
-Open your `docker-compose.yml` file and **uncomment** the volume line that mounts the certificate files:
+打开 `docker-compose.yml`，**取消注释**挂载证书文件的 volume 行：
 
 ```yaml
 volumes:
@@ -302,11 +298,11 @@ volumes:
 ```
 {: .copy-code}
 
-Replace `PATH_TO_CERTS` with the path to the folder containing your certificate files. Make sure TBMQ can access those file.
+将 `PATH_TO_CERTS` 替换为存放证书的目录路径，确保 TBMQ 可访问。
 
-**Configure Environment Variables**
+**配置环境变量**
 
-Edit the `tbmq.env` file and **uncomment/configure** the following lines to enable SSL:
+编辑 `tbmq.env`，**取消注释并配置**以下行以启用 SSL：
 
 ```yaml
 LISTENER_SSL_ENABLED=true
@@ -316,27 +312,27 @@ LISTENER_SSL_PEM_KEY_PASSWORD=server_key_password
 ```
 {: .copy-code}
 
-> Adjust the file paths and password as needed. If your private key is not password-protected, you can leave `LISTENER_SSL_PEM_KEY_PASSWORD` empty.
+> 按需调整文件路径和密码。若私钥未加密，可将 `LISTENER_SSL_PEM_KEY_PASSWORD` 留空。
 
-**Restart Services**
+**重启服务**
 
-Apply the changes by restarting TBMQ services:
+重启 TBMQ 服务以应用更改：
 
 ```bash
 ./scripts/docker-start-services.sh
 ```
 {: .copy-code}
 
-Once started, your MQTT clients will be able to securely connect to port **8883** using TLS/SSL.
+启动后，MQTT 客户端可通过 TLS/SSL 安全连接 **8883** 端口。
 
-### One-way MQTTS
+### 单向 MQTTS
 
-In this setup, TLS is terminated at the load balancer (HAProxy). 
-Clients connect securely to HAProxy over MQTTS (port 8883), and HAProxy forwards plain MQTT (unencrypted) to TBMQ over the internal network (port 1883).
-You can reuse the same certificate you already use for HTTPS.
+此配置下，TLS 在负载均衡器（HAProxy）处终结。
+客户端通过 MQTTS（8883 端口）安全连接 HAProxy，HAProxy 通过内网（1883 端口）将明文 MQTT 转发到 TBMQ。
+可复用已用于 HTTPS 的证书。
 
-Point HAProxy to your certificate bundle (PEM with full chain + private key). If you reuse the HTTPS cert, reference the same bundle.
-Locate and update the _haproxy.cfg_ file:
+将 HAProxy 指向证书包（PEM 完整链 + 私钥）。若复用 HTTPS 证书，引用同一证书包。
+定位并更新 _haproxy.cfg_ 文件：
 
 ```text
  listen mqtts-in
@@ -352,8 +348,8 @@ Locate and update the _haproxy.cfg_ file:
 ```
 {: .copy-code}
 
-> **Note:** Replace _fullchain-and-key.pem_ with the actual filename of your certificate bundle.
+> **注意**：将 _fullchain-and-key.pem_ 替换为实际证书包文件名。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/mqtt-broker-guides-banner.md %}

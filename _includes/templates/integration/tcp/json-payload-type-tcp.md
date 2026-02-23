@@ -1,4 +1,4 @@
-In this case, the payload looks like this:
+此情况下，payload 格式如下：
 
 ```json
 [

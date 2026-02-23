@@ -1,16 +1,16 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://nanosensorics.com/temphu/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
 - <a href="' | append: deviceVendorLink | append: '" target="_blank">' | append: deviceName | append: '</a>
 - LoRaWAN® gateway (in our case [UG56 LoRaWAN® Gateway](/device-library/pe/ug56-lorawan-gateway/){:target="_blank"})
 - Configured integration on networks server and ThingsBoard
-- [Network Server account](#device-connection)
+- [网络服务器账户](#设备连接)
 '
  %}
 
-## Introduction
+## 概述
 
 [TempHu Temperature and Humidity Sensor]({{deviceVendorLink}}){: target="_blank"} TempHu is advanced technology indoor sensor applied for the full sensing of
 the temperature and humidity. TempHu is enclosed in a room sensor box and is
@@ -23,15 +23,15 @@ network.
 {% assign feature = "Platform Integrations" %}{% include templates/pe-feature-banner.md %}
 <br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前，需准备以下内容：  
 {{ prerequisites }}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
 
-## Device connection
+## 设备连接
 
 {% if page.hasIntegrationDeviceConfiguration | downcase == "true"%}
 
@@ -54,8 +54,7 @@ Loriot
 {% include /docs/device-library/blocks/basic/thingsboard-add-lorawan-device-through-integration-block.liquid target-integration-types=targetIntegrationTypes %}
 
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 After the device is connected to the network server and ThingsBoard, you can check received and converted data on the platform for this device.  
 
 To do this, open **Entities** menu section and select **Devices**.  
@@ -65,7 +64,7 @@ Go to the **Latest telemetry** tab to see the latest telemetry data received fro
 ![LoRaWAN device data](/images/devices-library/lorawan-temphu-data.png)
 
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

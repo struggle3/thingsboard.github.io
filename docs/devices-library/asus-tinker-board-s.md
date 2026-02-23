@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Asus Tinker Board S to ThingsBoard?"
+title: "如何将ASUS Tinker Board S连接到ThingsBoard？"
 redirect_to: "/device-library/ce/asus-tinker-board-s/"
 ---

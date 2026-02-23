@@ -1,2 +1,2 @@
-For docker-compose deployment we are mapping <code>/config</code> folder to your local system (<code>./tb-mqtt-broker/conf</code> folder).
-So in order to change logging configuration you need to update <code>./tb-mqtt-broker/conf/logback.xml</code> file.
+docker-compose 部署时，我们将 <code>/config</code> 目录映射到本地 <code>./tb-mqtt-broker/conf</code>。
+修改日志配置需编辑 <code>./tb-mqtt-broker/conf/logback.xml</code> 文件。

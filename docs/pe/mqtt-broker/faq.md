@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Frequently Asked Questions
-description: TBMQ PE FAQ
+title: 常见问题
+description: TBMQ PE 常见问题
 
 ---
 

@@ -1,58 +1,58 @@
-Now you can open ThingsBoard web interface in your browser using IP address of the load balancer.
+现在您可以在浏览器中使用负载均衡器的 IP 地址打开 ThingsBoard Web 界面。
 
-You can see DNS name (the `ADDRESS` column) of the HTTP load-balancer using command:
+您可以使用以下命令查看 HTTP 负载均衡器的 DNS 名称（`ADDRESS` 列）：
 ```
 kubectl get ingress
 ```
 
-You should see the similar picture:
+您应该看到类似的输出：
 
 ![image](/images/install/cloud/application-loadbalancers.png)
 
-To connect to the cluster via MQTT or COAP you'll need to get corresponding service, you can do it with command:
+要通过 MQTT 或 COAP 连接集群，需要获取对应的服务，可使用以下命令：
 
 ```
 kubectl get service
 ```
 {: .copy-code}
 
-You should see the similar picture:
+您应该看到类似的输出：
 
 ![image](/images/install/cloud/network-loadbalancers.png)
 
-There are two load-balancers:
-- tb-mqtt-loadbalancer - for TCP (MQTT) protocol
-- tb-udp-loadbalancer - for UDP (COAP/LwM2M) protocol
+有两个负载均衡器：
+- tb-mqtt-loadbalancer - 用于 TCP（MQTT）协议
+- tb-udp-loadbalancer - 用于 UDP（COAP/LwM2M）协议
 
-Use `EXTERNAL-IP` field of the load-balancers to connect to the cluster.
+使用负载均衡器的 `EXTERNAL-IP` 字段连接集群。
 
-Use the following default credentials:
+使用以下默认凭据：
 
-- **System Administrator**: sysadmin@thingsboard.org / sysadmin
+- **系统管理员**：sysadmin@thingsboard.org / sysadmin
 
-If you installed database with demo data (using `--loadDemo` flag) you can also use the following credentials:
+如果使用 `--loadDemo` 标志安装了带演示数据的数据库，您还可以使用以下凭据：
 
-- **Tenant Administrator**: tenant@thingsboard.org / tenant
-- **Customer User**: customer@thingsboard.org / customer
+- **租户管理员**：tenant@thingsboard.org / tenant
+- **客户用户**：customer@thingsboard.org / customer
 
-In case of any issues you can examine service logs for errors. For example to see ThingsBoard node logs execute the following command:
+如遇问题，可以检查服务日志以查找错误。例如，要查看 ThingsBoard 节点日志，请执行以下命令：
 
 ```
 kubectl logs -f tb-node-0
 ```
 
-Or use `kubectl get pods` to see the state of the pod.
-Or use `kubectl get services` to see the state of all the services.
-Or use `kubectl get deployments` to see the state of all the deployments.
-See [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) command reference for details.
+或使用 `kubectl get pods` 查看 Pod 状态。
+或使用 `kubectl get services` 查看所有服务状态。
+或使用 `kubectl get deployments` 查看所有部署状态。
+详见 [kubectl 速查表](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) 命令参考。
 
-Execute the following command to delete **tb-node** and **load-balancers**:
+执行以下命令删除 **tb-node** 和**负载均衡器**：
 
 ```
 ./k8s-delete-resources.sh
 ```
 
-Execute the following command to delete all data (including database):
+执行以下命令删除所有数据（包括数据库）：
 
 ```
 ./k8s-delete-all.sh

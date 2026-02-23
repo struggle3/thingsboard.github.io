@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Bulk Provisioning
-description: Bulk Provisioning entities guide
+title: 批量预配置
+description: 批量预配置实体指南
 
 ---
 

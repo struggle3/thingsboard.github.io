@@ -2,17 +2,17 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: HTTP Device API Reference
-description: Supported HTTP API Reference for IoT Devices
+title: HTTP 设备 API 参考
+description: IoT 设备支持的 HTTP API 参考
 redirect_from: "/docs/paas/eu/reference/http-api"
 
 server-side-rpc:
     0:
         image: /images/reference/device-connectivity-apis/server-side-rpc-http-1-paas.png
-        title: 'Use RPC debug terminal widget in your ThingsBoard instance'
+        title: '在 ThingsBoard 实例中使用 RPC 调试终端部件'
     1:
         image: /images/reference/device-connectivity-apis/server-side-rpc-http-2-paas.png
-        title: 'Subscribe to RPC commands from the server. To do this, in the first terminal window send GET request with observe flag'
+        title: '订阅服务端 RPC 命令。在第一个终端窗口发送带 observe 标志的 GET 请求'
     2:
         image: /images/reference/device-connectivity-apis/server-side-rpc-http-3-paas.png
         title: 'Send an RPC request "connect" to the device using RPC debug terminal widget'

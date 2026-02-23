@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Edge 
-description: Edge 
+title: Edge管理
+description: Edge管理
 
 downlinks:
     0:
@@ -14,7 +14,7 @@ forceSync:
 instancesSection:
     0:
         image: /images/edge/edge-management/2-instances.webp
-        title: 'The following <a href="/docs/pe/user-guide/entities-and-relations/" target="_blank">entities</a> and events can be managed: <ul><li><b>Make edge public:</b> The edge and all its data will be accessible by others.</li><li><b>Assign to customer:</b> Link a specific customer entity to the Edge instance.</li><li><b>Make edge private:</b> The edge and all its data will not be accessible by others.</li><li><b>Manage assets:</b> Monitor and control assets (e.g., buildings, equipment, or other entities) at the Edge. </li><li><b>Manage devices:</b> Administer devices that are managed by the Edge.</li><li><b>Manage entity views:</b> Manage filtered views of entities (e.g., devices or assets) at the Edge to display specific subsets of data or contextual information. Read more about the Entity views in <a href="/docs/user-guide/entity-views/" target="_blank">this article</a>.</li><li><b>Manage dashboards:</b> Customize, and manage dashboards at the Edge.</li><li><b>Manage rule chains:</b> Create, configure, and manage rule chains specifically for the Edge.</li><li><b>Delete:</b> Remove the Edge and all related data.</li></ul>'
+        title: '可管理以下<a href="/docs/pe/user-guide/entities-and-relations/" target="_blank">实体</a>及事件：<ul><li><b>设为公开：</b>Edge及其所有数据将对其他用户可见。</li><li><b>分配给客户：</b>将特定客户实体关联到Edge实例。</li><li><b>设为私有：</b>Edge及其所有数据将不对其他用户可见。</li><li><b>管理资产：</b>在Edge上监控和控制资产（如建筑物、设备或其他实体）。</li><li><b>管理设备：</b>管理由Edge管理的设备。</li><li><b>管理实体视图：</b>管理Edge上实体的筛选视图以显示特定数据子集或上下文信息。详见<a href="/docs/user-guide/entity-views/" target="_blank">此文</a>。</li><li><b>管理仪表板：</b>自定义和管理Edge上的仪表板。</li><li><b>管理规则链：</b>为Edge创建、配置和管理规则链。</li><li><b>删除：</b>移除Edge及所有相关数据。</li></ul>'
 
 edgeDetails:
     0:
@@ -23,7 +23,7 @@ edgeDetails:
 edgeStatus:
     0:
         image: /images/edge/edge-management/4-edge-status.webp
-        title: '<b>Status:</b> Edge current status (Connected, Disconnected).<li><b>Name:</b> The name of the current Edge instance.</li><li><b>ID:</b> The identification code of the current Edge instance.</li><li><b>Type:</b> The "default" Edge type is by design.</li><li><b>Routing Key:</b> The Edge key used to install the instance.</li><li><b>Last time connected to/disconnected from cloud:</b> The date and time the instance is connected to/disconnected from Cloud. Displayed in a format YYYY-MM-DD H:Min:Sec.</li>'
+        title: '<b>状态：</b>Edge当前状态（已连接、已断开）。<li><b>名称：</b>当前Edge实例的名称。</li><li><b>ID：</b>当前Edge实例的识别码。</li><li><b>类型：</b>“default” Edge类型为设计如此。</li><li><b>路由键：</b>用于安装实例的Edge密钥。</li><li><b>最近连接/断开云端时间：</b>实例连接/断开云端的日期时间，格式为 YYYY-MM-DD H:Min:Sec。</li>'
 
 cloudEvenets:
     0:

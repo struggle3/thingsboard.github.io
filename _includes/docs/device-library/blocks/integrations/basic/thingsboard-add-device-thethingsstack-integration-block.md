@@ -1,25 +1,25 @@
-### Add a device on The Things Stack Community Edition
+### 在 The Things Stack 社区版上添加设备
 
-We need to add a device on [The Things Stack Community Edition](https://console.cloud.thethings.network){:target="_blank"}.
+我们需要在 [The Things Stack 社区版](https://console.cloud.thethings.network){:target="_blank"} 上添加设备。
 
-To add a device, you can follow next steps:  
+要添加设备，请按以下步骤操作：
 
 {% assign addGatewaySteps = '
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/1-tts-login.png,
-        title: Login to the cloud and open your console.
+        title: 登录云端并打开控制台。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/create-device-step-0.png,
-        title: Go to the **Applications** page. Then select your application and click on its name.
+        title: 进入 **应用** 页面。然后选择您的应用并点击应用名称。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/create-device-step-1.png,
-        title: Click on the **Register end device** button.
+        title: 点击 **注册终端设备** 按钮。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/create-device-step-3.png,
-        title: Put the **APP EUI** value to the **JoinEUI** field. Press the **Confirm** button.
+        title: 将 **APP EUI** 值填入 **JoinEUI** 字段。点击 **确认** 按钮。
     ===
         image: /images/devices-library/basic/integrations/thethingsstack/create-device-step-4.png,
-        title: Fill the rest parameters and press **Register end device** button.
+        title: 填写其余参数并点击 **注册终端设备** 按钮。
 '%}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addGatewaySteps %}

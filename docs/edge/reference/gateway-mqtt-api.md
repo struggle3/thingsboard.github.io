@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: MQTT Gateway API Reference
-description: Supported MQTT Gateway API Reference for IoT Devices
+title: MQTT Gateway API参考
+description: 支持的IoT设备MQTT Gateway API参考
 
 ---
 

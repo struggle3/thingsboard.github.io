@@ -43,9 +43,9 @@
 {%- assign prev_minor = prev_parts[1] -%}
 
 {% if patch_status == "true" %}
-### Upgrading {{ platform }} to latest {{ base_version }} ({{ current_version }})
+### 将 {{ platform }} 升级到最新 {{ base_version }}（{{ current_version }}）
 {% else %}
-### Upgrading {{ platform }} to {{ current_version }}
+### 将 {{ platform }} 升级到 {{ current_version }}
 {% endif %}
 
 {%- if x_status == "true" -%}
@@ -70,13 +70,13 @@
 {%- endif -%}
 
 {% capture difference %}
-**NOTE:**
+**注意：**
 {% if curr_major > "4" or (curr_major == "4" and curr_minor >= "2") %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version }}{% if patch_status == "true" %} or any {{ base_version }} patch{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version }}{% if patch_status == "true" %} 或任意 {{ base_version }} 补丁{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version }}**]({{ prev_version_href }})。
 {% else %}
-These upgrade steps are applicable for ThingsBoard version {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} and ThingsBoard version {{ v | strip }}{% endfor %}{% endif %}.
-In order to upgrade to {{ current_version_with_platform | upcase }} you need to [**upgrade to {{ prev_version_label }} first**]({{ prev_version_href }}).
+本升级步骤适用于 ThingsBoard 版本 {{ prev_version_label }}{% if applicable_versions %}{% assign versions = applicable_versions | split: "," %}{% for v in versions %} 和 ThingsBoard 版本 {{ v | strip }}{% endfor %}{% endif %}。
+要升级到 {{ current_version_with_platform | upcase }}，需先[**升级到 {{ prev_version_label }}**]({{ prev_version_href }})。
 {% endif %}
 {% endcapture %}
 
@@ -109,7 +109,7 @@ In order to upgrade to {{ current_version_with_platform | upcase }} you need to 
 {% include templates/install/tb-350-update.md %}
 {% endif %}
 
-#### ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} package download
+#### 下载 ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} 安装包
 
 {% assign upgrade_package = "" %}
 {% if docsPrefix == "pe/" %}
@@ -119,47 +119,47 @@ In order to upgrade to {{ current_version_with_platform | upcase }} you need to 
 {% else %}
 {% assign upgrade_package = upgrade_package | append: "setup-" | append: current_version | append: "pe.exe" %}
 {% endif %}
-Download ThingsBoard PE installation package for Windows: [{{ upgrade_package }}](https://dist.thingsboard.io/{{ upgrade_package }}).
+下载 Windows 版 ThingsBoard PE 安装包：[{{ upgrade_package }}](https://dist.thingsboard.io/{{ upgrade_package }})。
 {% else %}
-Download ThingsBoard installation file for Windows: [thingsboard-windows-{{ current_version }}.zip](https://github.com/thingsboard/thingsboard/releases/download/v{{ current_version }}/thingsboard-windows-{{ current_version }}.zip).
+下载 Windows 版 ThingsBoard 安装文件：[thingsboard-windows-{{ current_version }}.zip](https://github.com/thingsboard/thingsboard/releases/download/v{{ current_version }}/thingsboard-windows-{{ current_version }}.zip)。
 {% endif %}
 
-#### ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} service upgrade
+#### ThingsBoard{% if docsPrefix == "pe/" %} PE{% endif %} 服务升级
 
-* Stop ThingsBoard service if it is running.
+* 若 ThingsBoard 服务正在运行，请先停止。
 
 ```text
 net stop thingsboard
 ```
 {: .copy-code}
 
-* Make a backup of previous ThingsBoard{% if docsPrefix == "pe/"%} PE{% endif %} configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 备份位于 \<ThingsBoard 安装目录\>\conf 的先前 ThingsBoard{% if docsPrefix == "pe/"%} PE{% endif %} 配置（例如 C:\thingsboard\conf）。
 {% if docsPrefix == "pe/" %}
 {% if zip == "true" %}
-* Copy content of the **{{ upgrade_package }}** to the same location.
+* 将 **{{ upgrade_package }}** 的内容复制到同一位置。
 {% else %}
-* Run the installation package **{{ upgrade_package }}**
+* 运行安装包 **{{ upgrade_package }}**
 {% endif %}
 {% endif %}
 {% if docsPrefix != "pe/" %}
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
+* 删除 ThingsBoard 安装目录。
+* 将安装压缩包解压到 ThingsBoard 安装目录。
 {% endif %}
-* Compare and merge your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
+* 将第一步备份的旧 ThingsBoard 配置文件与新配置进行比较和合并。
 
 
 {% capture update_note %}
 {% assign base_version_parts = base_version | split: "." %}
 {% assign patch_part = base_version_parts[2] %}
 {% if patch_status == "true" %}
-If you are upgrading from {{ previous_version }}, you **must** run the script below. However, if you are upgrading from version {{ family | append: "." | append: patch_part | append: ".x" }}, **DO NOT** run the upgrade script; proceed directly to starting the service.
+若从 {{ previous_version }} 升级，则**必须**运行下方脚本。若从 {{ family | append: "." | append: patch_part | append: ".x" }} 版本升级，则**不要**运行升级脚本，直接启动服务即可。
 {% else %}
-If you are upgrading from version {{ previous_version }}, you must run the script below
+若从 {{ previous_version }} 版本升级，必须运行下方脚本
 {% endif %}
 {% endcapture %}
 
 {% capture update_script %}
-Execute regular upgrade script:
+执行常规升级脚本：
 
 ```text
 C:\thingsboard>upgrade.bat{% if manual_version_upgrade == "true" %} --fromVersion={% if manual_version_upgrade_label %}{{ manual_version_upgrade_label }}{% else %}{{ previous_version }}{% endif %}{% endif %}
@@ -174,9 +174,9 @@ C:\thingsboard>upgrade.bat{% if manual_version_upgrade == "true" %} --fromVersio
 
 {% if update_status == "true" %}
 {% capture difference %}
-**NOTE:**
+**注意：**
 <br>
-Scripts listed above should be executed using Administrator Role.
+上述脚本应以管理员身份执行。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 {% endif %}
@@ -187,7 +187,7 @@ Scripts listed above should be executed using Administrator Role.
 
 {% endif %}
 
-#### Start the service
+#### 启动服务
 ```text
 net start thingsboard
 ```
@@ -195,7 +195,7 @@ net start thingsboard
 
 {% if current_version == "3.4.2" %}
 {% capture default-jwt %}
-Update the JWT signing key if you use the default one "thingsboardDefaultSigningKey" on production environments. See [JWT security settings](/docs/user-guide/ui/security-settings/#jwt-security-settings) for details.
+若在生产环境中使用默认 JWT 签名密钥 "thingsboardDefaultSigningKey"，请更新。详见 [JWT 安全设置](/docs/user-guide/ui/security-settings/#jwt-security-settings)。
 {% endcapture %}
 {% include templates/info-banner.md content=default-jwt %}
 {% endif %}

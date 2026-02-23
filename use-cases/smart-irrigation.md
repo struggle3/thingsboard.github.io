@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: Smart Irrigation with ThingsBoard for Farms and Cities
-description: Discover how ThingsBoard’s smart irrigation solution transforms water management through IoT. Ideal for agriculture, landscaping, urban systems, and research—with real-time monitoring, automation, and analytics at scale.
+title: ThingsBoard 面向农场和城市的智慧灌溉
+description: 了解 ThingsBoard 智慧灌溉解决方案如何通过物联网转变水资源管理。适用于农业、园林绿化、城市系统和研究——提供实时监测、自动化和规模化分析。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -12,7 +12,7 @@ contactUsModal: "true"
 {% include usecase-nav.html usecase="smart-irrigation" %}
 
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Smart irrigation solution</h1>
+<h1 class="usecase-title">智慧灌溉解决方案</h1>
 <section class="smart-irrigation-about">
     <div class="about-text">
         <div class="short">
@@ -20,7 +20,7 @@ contactUsModal: "true"
                 <p class="text">The global challenges of water scarcity, rising agricultural costs, and the need for sustainable farming have made smart irrigation not just a trend, but a necessity. Traditional watering systems often lack responsiveness, leading to water overuse and crop stress. Modern agriculture requires a platform that can bring automation, precision, and adaptability — exactly what ThingsBoard delivers.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_SmartIrrigation_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/a4640cc0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>            
+                <a id="UseCases_SmartIrrigation_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/a4640cc0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>            
             </div>
         </div>
         <div class="long">
@@ -37,7 +37,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="smart-irrigation-solution-structure">
-    <h2>Solution structure of smart irrigation</h2>
+    <h2>智慧灌溉解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
@@ -56,7 +56,7 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Smart irrigation dashboard structure</h2>
+        <h2>智慧灌溉仪表板结构</h2>
         <p>
             The smart irrigation dashboard on ThingsBoard provides a clear, real-time view of irrigation processes. It includes map-based tracking, sensor panels, scheduling tools, and alarm systems—enabling fast decisions, automation, and efficient water use across varied field conditions.
         </p>
@@ -136,7 +136,7 @@ contactUsModal: "true"
             <div class="expansion-block">
                 <div class="expansion-panel">
                     <div class="expansion-header">
-                        <h3>SI Field 2 dashboard statex</h3>
+                        <h3>智慧灌溉农田 2 仪表板状态</h3>
                     </div>
                     <div class="expansion-content">
                         <p>Similar to the first field dashboard, this view provides detailed monitoring for another crop zone (corn), showcasing ThingsBoard’s multi-field, multi-crop support. Supporting multiple field dashboards promotes centralized yet granular monitoring for large-scale operations.</p>
@@ -149,7 +149,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header">
-        <h2>Applications of smart irrigation solution</h2>
+        <h2>智慧灌溉解决方案的应用</h2>
         <p>This solution can be effectively used across multiple industries, addressing specific operational needs through real-time data, automation, and scalability powered by the ThingsBoard IoT platform:</p>
     </div>
     <div class="applications-container-large">
@@ -226,11 +226,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of smart irrigation</h2>
+        <h2>智慧灌溉总结</h2>
         <p>The smart irrigation solution built on ThingsBoard empowers users to manage irrigation processes intelligently, reduce water waste, and maintain crop health with precision. Leveraging real-time data collection, powerful automation, and rich visualizations, it enables scalable deployments across diverse sectors—from agriculture to urban landscapes. With its flexible architecture and low-code configurability, the solution can be rapidly deployed, customized, and expanded as needs grow.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -331,8 +331,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_SmartIrrigation_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/a4640cc0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">View live demo</a>            
-                <a id="UseCases_SmartIrrigation_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_SmartIrrigation_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/a4640cc0-8fa9-11ef-baa8-4521077809fd?publicId=7aa99e80-8acd-11ef-a59e-a9c993dbec14" class="button gtm_button">查看实时演示</a>            
+                <a id="UseCases_SmartIrrigation_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
 
             applyImageBg(block);

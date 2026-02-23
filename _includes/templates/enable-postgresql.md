@@ -1,4 +1,4 @@
-Uncomment '# PostgreSQL DAO Configuration' block.  Be sure to update the postgres databases username and password in the bottom two lines of the block (here, as shown, they are both "postgres").
+取消注释「# PostgreSQL DAO Configuration」配置块。请务必更新该块最下方两行的 postgres 数据库用户名和密码（此处示例中均为 "postgres"）。
 
 ```text
 # PostgreSQL DAO Configuration

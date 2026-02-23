@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect NVIDIA Jetson Xavier NX Developer Kit to ThingsBoard?
-category: Single-board computers
+title: 如何将 NVIDIA Jetson Xavier NX Developer Kit 连接至 ThingsBoard？
+category: 单板计算机
 chip: NVIDIA CUDA
 connectivity: [Ethernet, WIFI, Bluetooth]
 vendor: NVIDIA

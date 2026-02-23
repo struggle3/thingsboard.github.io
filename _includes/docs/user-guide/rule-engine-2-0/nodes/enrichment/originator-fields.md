@@ -1,17 +1,16 @@
-Adds fields from the message originator's entity (e.g., name, type, label) to either the message data or the message metadata.
+将消息来源实体的字段（如名称、类型、标签）添加到消息 data 或 metadata。
 
-## Configuration
+## 配置
 
-The node's configuration allows you to define a mapping from the originator's entity fields to new keys in the message.
+节点配置允许定义从来源实体字段到消息中新键的映射。
 
-- **Originator fields mapping** - This section defines the core logic of the node. Each entry maps a source field from the originator to a target key in the output.
-    - **Source field**: A dropdown list of available fields from the originator entity (e.g., *Name*, *Profile name*, *Label*, *Created time*).
-    - **Target key**: The new key that will be added to the message data or metadata. This field supports templatization, allowing you to dynamically create keys using values from
-      the message data (`$[dataKey]`) or metadata (`${metadataKey}`).
-- **Add mapped originator fields to** - Determines where the new key-value pairs will be placed.
-    - **Message**: Adds the fetched fields to the message data payload. The message data must be a JSON object.
-    - **Metadata**: Adds the fetched fields to the message metadata.
-- **Skip empty fields** - If checked, any source fields on the originator that are empty or have a null value will be ignored and not added to the message.
+- **来源实体字段映射** — 定义节点核心逻辑。每项将来源实体的源字段映射到输出的目标键。
+    - **Source field**：来源实体可用字段的下拉列表（如 *Name*、*Profile name*、*Label*、*Created time*）。
+    - **Target key**：将添加到消息 data 或 metadata 的新键。该字段支持模板，可使用消息 data（`$[dataKey]`）或 metadata（`${metadataKey}`）中的值动态创建键。
+- **Add mapped originator fields to** — 确定新键值对的放置位置。
+    - *Message*：将获取的字段添加到消息 data 负载。消息 data 必须为 JSON 对象。
+    - *Metadata*：将获取的字段添加到消息 metadata。
+- **Skip empty fields** — 若勾选，来源实体上为空或 null 的源字段将被忽略，不会添加到消息中。
 
 ### JSON Schema
 
@@ -50,35 +49,32 @@ The node's configuration allows you to define a mapping from the originator's en
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node identifies the originator of the incoming message (e.g., the specific Device or Asset).
-2. It reads the **Originator fields mapping** to determine which fields to retrieve.
-3. For each mapping, it processes any templates (e.g., `${metadataKey}`) in the **Target key** using the incoming message's data and metadata.
-4. The node then asynchronously fetches the values of the specified **Source fields** from the originator entity.
-5. If a source field does not exist on the originator, it is ignored. If **Skip empty fields** is enabled, fields with null or empty values are also ignored.
-6. Based on the **Add mapped originator fields to** setting, the node adds the resulting key-value pairs (processed target key and fetched field value) to either the message data
-   or the message metadata.
-7. The enriched message is forwarded via the `Success` connection. If an error occurs (e.g., attempting to add fields to a non-JSON message body), the original message is routed to
-   the `Failure` connection.
+1. 节点识别入站消息的来源实体（如具体 Device 或 Asset）。
+2. 读取**来源实体字段映射**以确定要获取的字段。
+3. 对每个映射，使用入站消息的 data 和 metadata 处理 **Target key** 中的模板（如 `${metadataKey}`）。
+4. 节点异步从来源实体获取指定**Source field**的值。
+5. 若来源实体上不存在源字段，则忽略。若**Skip empty fields**已启用，null 或空值字段也会被忽略。
+6. 根据**Add mapped originator fields to**设置，节点将结果键值对（处理后的目标键和获取的字段值）添加到消息 data 或 metadata。
+7. 丰富后的消息经 `Success` 连接转发。若发生错误（如尝试向非 JSON 消息体添加字段），原始消息经 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - The message has been successfully enriched with the originator's fields.
-- `Failure`:
-    - An error occurred during processing. For instance, if **Add mapped originator fields to** is set to `Message` but the message data is not a valid JSON object.
+- `Success`：
+    - 消息已成功使用来源实体字段丰富。
+- `Failure`：
+    - 处理过程中发生错误。例如，**Add mapped originator fields to** 设为 `Message` 但消息 data 不是有效 JSON 对象时。
 
-## Examples
+## 示例
 
-### Example 1 — Adding originator name and profile name to metadata
+### 示例 1 — 将来源实体名称和配置名称添加到 metadata
 
-This example shows how to enrich a message with the name and type of the device that sent it.
+本示例展示如何用发送消息的设备名称和类型丰富消息。
 
-**Scenario**: A thermostat sends a temperature reading. For subsequent processing, we need to know the name and profile name of this thermostat, so we add them to the message
-metadata.
+**场景**：温控器发送温度读数。为后续处理，需要知道该温控器的名称和配置名称，因此将其添加到消息 metadata。
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -88,9 +84,9 @@ Metadata:
 }
 ```
 
-Originator: The originator of the message is a device named **Thermostat-HVAC-1** which uses a device profile named **HVAC Thermostat**.
+Originator: 消息来源为名为 **Thermostat-HVAC-1** 的设备，使用名为 **HVAC Thermostat** 的设备配置。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -103,7 +99,7 @@ Originator: The originator of the message is a device named **Thermostat-HVAC-1*
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Metadata:
 
@@ -115,16 +111,15 @@ Metadata:
 }
 ```
 
-**Explanation**: The node fetched the `Name` and `Profile name` fields from the originator device and added them to the message metadata under the new keys `originatorName` and
-`originatorProfileName`.
+**说明**：节点从来源设备获取 `Name` 和 `Profile name` 字段，并以新键 `originatorName` 和 `originatorProfileName` 添加到消息 metadata。
 
-### Example 2 — Adding originator fields to the message data
+### 示例 2 — 将来源实体字段添加到消息 data
 
-This example demonstrates adding the originator's creation time to the message data.
+本示例展示将来源实体的创建时间添加到消息 data。
 
-**Scenario**: For auditing purposes, we need to include the timestamp of when the sending device was first created directly within the message data.
+**场景**：出于审计目的，需在消息 data 中直接包含发送设备的首次创建时间戳。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -134,7 +129,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -146,9 +141,9 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The message is sent via the `Success` connection with an updated data.
+消息经 `Success` 连接发送，data 已更新。
 
 Data:
 
@@ -159,4 +154,4 @@ Data:
 }
 ```
 
-**Explanation**: The node retrieved the `Created Time` of the originator (as a Unix timestamp string) and added it to the JSON message data with the key `deviceCreatedTime`.
+**说明**：节点获取来源实体的 `Created Time`（作为 Unix 时间戳字符串），并以键 `deviceCreatedTime` 添加到 JSON 消息 data。

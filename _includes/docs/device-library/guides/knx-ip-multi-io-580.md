@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://weinzierl.de/en/products/knx-ip-multi-io-580/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -9,16 +9,16 @@
 
 [The KNX IP Multi IO 580 (48I/O)](https://weinzierl.de/en/products/knx-ip-multi-io-580/){:target="_blank"} is a universal binary interface for building control. It provides 48 I/O lines. Each line can be used as binary input as well as binary output. The peripherals can be fed by an external voltage of 24 V⎓. Channels which are configured as inputs can be used to control lights or blinds via the KNX network. They also can be used to count impulses, e.g. as interface for energy meters. Channels which are configured as outputs can directly drive signal LEDs, external coupling relays.<br><br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
 - [Multi IO Extension Switch 590](https://weinzierl.de/en/products/multi-io-extension-switch-590/){: target="_blank"}
 - [Multi IO Extension Shutter 592](https://weinzierl.de/en/products/multi-io-extension-shutter-592/){: target="_blank"}
 - Coupling relay for Multi IO
 - [ETS software](https://support.knx.org/hc/en-us/articles/4409114300178-ETS-v5-7-7){: target="_blank"} installed
 - [ThingsBoard IoT Gateway](https://thingsboard.io/docs/iot-gateway/installation/){: target="_blank"} installed
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
 ## Devices connection
@@ -287,8 +287,7 @@ The last thing that we need to do is set group objects ability to read and write
 ```
 {:.copy-code.expandable-10}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 Once you have successfully done all the steps above and Gateway sent data, you can see it in the device telemetry tab:
 
 - Click on the device row in the table to open its details;
@@ -301,7 +300,7 @@ Once you have successfully done all the steps above and Gateway sent data, you c
 {% endif %}
 
 Let&#39;s display KNX IP Multi IO 580 time series on a dashboard. 
-For this purpose, you can create your own dashboard with your custom widgets or [use a ready-made dashboard](/docs/user-guide/resources/knx_ip_multi_io_580.json){:target="_blank" download="knx_ip_multi_io_580.json"} and simply [import](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"} it.
+For this purpose, you can create your own dashboard with your custom 部件 or [use a ready-made dashboard](/docs/user-guide/resources/knx_ip_multi_io_580.json){:target="_blank" download="knx_ip_multi_io_580.json"} and simply [import](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"} it.
 
 {% if page.docsPrefix == "pe/" or page.docsPrefix contains "paas/" or docsPrefix == "pe/" or docsPrefix contains "paas/" %}
 ![imagePe](/images/devices-library/ready-to-go-devices/knx-ip-multi-io/knx-ip-multi-dashboard-1-pe.png)
@@ -309,7 +308,7 @@ For this purpose, you can create your own dashboard with your custom widgets or 
 ![imageCe](/images/devices-library/ready-to-go-devices/knx-ip-multi-io/knx-ip-multi-dashboard-1-ce.png)
 {% endif %}
 
-## Conclusion
+## 总结
 
 With the knowledge in this guide, you can easily connect your KNX IP Multi IO 580 controller with switch, shutter, and relay to ThingsBoard. After connecting the devices to the gateway, you will be able to see and process the data coming from the devices on the ThingsBoard.
 

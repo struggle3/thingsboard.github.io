@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: HTTP Access Token based authentication
-description: ThingsBoard Access Token based authentication for HTTP transport.
+title: HTTP Access Token 认证
+description: ThingsBoard HTTP 传输的 Access Token 认证。
 
 ---
 

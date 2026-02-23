@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Edge upgrade instructions
-description: Edge upgrade instructions
+title: Edge 升级说明
+description: Edge 升级说明
 table-of-contents: "false"
 active-menu-item-click: "true"
 effective-url: '/docs/user-guide/install/edge/upgrade-instructions/'

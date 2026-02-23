@@ -1,6 +1,6 @@
 {% capture ui-aliases %}
-For simplicity we are going to refer to server UI URL as **SERVER_URL** despite if you installed ThingsBoard server on-previse or using cloud host version.
-Edge UI URL respectively as **EDGE_URL** below in tutorial.
+为简化表述，无论 ThingsBoard 服务器是在本地部署还是云端主机版本，本教程中将服务器 UI URL 统一称为 **SERVER_URL**。
+Edge UI URL 则统一称为 **EDGE_URL**。
 {% endcapture %}
 {% include templates/info-banner.md content=ui-aliases %}
 

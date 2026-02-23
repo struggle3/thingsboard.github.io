@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-paas-eu
-title: White labeling
+title: 白标
 description:
 
 white-labeling-default:

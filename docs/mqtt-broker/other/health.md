@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Health API
-description: TBMQ Health API description
+title: 健康检查 API
+description: TBMQ 健康检查 API 说明
 
 ---
 

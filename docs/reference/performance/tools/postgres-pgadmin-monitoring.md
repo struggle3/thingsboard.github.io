@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: PgAdmin for Postgres
-description: PgAdmin for Postgres
+title: PostgreSQL 的 PgAdmin
+description: PostgreSQL 的 PgAdmin 监控工具
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: How synchronization works
-description: How synchronization works
+title: 同步如何工作
+description: 同步机制说明
 
 edge-rule-chain:
   0:

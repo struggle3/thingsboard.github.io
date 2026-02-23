@@ -3,7 +3,7 @@ layout: docwithnav-pe
 assignees:
 - ashvayka
 title: REST API
-description: Supported REST API Reference for server-side integration of your IoT projects
+description: IoT 项目服务端集成支持的 REST API 参考
 
 swagger-ui:
     0:

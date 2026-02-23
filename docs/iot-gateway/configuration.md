@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-gw
-title: IoT Gateway Configuration
-description: Installation structure and configuration of ThingsBoard IoT Gateway 
+title: IoT Gateway 配置
+description: ThingsBoard IoT Gateway 安装结构与配置说明 
 
 ---
 
@@ -10,9 +10,9 @@ description: Installation structure and configuration of ThingsBoard IoT Gateway
 {:toc}
 
 
-## Directory structure
+## 目录结构
 
-Please see default directory structure below for daemon installation.
+daemon 安装的默认目录结构如下：
 
 ```text
 /etc/thingsboard-gateway/config                   - Configuration folder.
@@ -73,36 +73,33 @@ services:
     ...
 ```
 
-In the example above, we set the "**host.docker.internal**" as a host, **1883** as a port and "**YOUR_ACCESS_TOKEN**" 
-as an access token for the gateway using the "**TB_GW_HOST**", "**TB_GW_PORT**" and "**TB_GW_ACCESS_TOKEN**" 
-environment variables, respectively.
+上例中，通过 "**TB_GW_HOST**"、"**TB_GW_PORT**" 和 "**TB_GW_ACCESS_TOKEN**" 环境变量，分别将 "**host.docker.internal**" 设为 host，**1883** 设为 port，"**YOUR_ACCESS_TOKEN**" 设为 access token。
 
-The following environmental variables can be used to configure the ThingsBoard IoT Gateway:
+下列环境变量可用于配置 ThingsBoard IoT Gateway：
 
-| **ENV variable**     | **Default value**             | **Description**                                                                   |
+| **ENV variable**     | **Default value**             | **说明**                                                                   |
 |----------------------|-------------------------------|-----------------------------------------------------------------------------------|
-| TB_GW_HOST           | **host.docker.internal**      | Hostname or IP address of ThingsBoard server.                                     |
-| TB_GW_PORT           | **1883**                      | Port of MQTT service on ThingsBoard server.                                       |
-| TB_GW_ACCESS_TOKEN   | **YOUR_ACCESS_TOKEN**         | Access token for the gateway from ThingsBoard server.                             |
-| TB_GW_CA_CERT        |                               | Path to CA certificate file.                                                      |
-| TB_GW_PRIVATE_KEY    |                               | Path to private key file.                                                         |
-| TB_GW_CERT           |                               | Path to certificate file.                                                         |
-| TB_GW_CLIENT_ID      |                               | MQTT client id for the gateway form ThingsBoard server.                           |
-| TB_GW_USERNAME       |                               | MQTT username for the gateway form ThingsBoard server.                            |
-| TB_GW_PASSWORD       |                               | MQTT password for the gateway form ThingsBoard server.                            |
-| TB_GW_RATE_LIMITS    | **15:1,300:60,**              | Messages rate limit to ThingsBoard server in `MESSSAGE_COUNT:TIME,` format.       |
-| TB_GW_DP_RATE_LIMITS | **15:1,300:60,**              | Data points rate limit to ThingsBoard server in `DATA_POINTS_COUNT:TIME,` format. |
-| TB_GW_LOGS_PATH      | **/thingsboard_gateway/logs** | Path to the logs folder.                                                          |
+| TB_GW_HOST           | **host.docker.internal**      | ThingsBoard 服务器的主机名或 IP 地址。                                     |
+| TB_GW_PORT           | **1883**                      | ThingsBoard 服务器上的 MQTT 服务端口。                                       |
+| TB_GW_ACCESS_TOKEN   | **YOUR_ACCESS_TOKEN**         | ThingsBoard 中网关的访问令牌。                             |
+| TB_GW_CA_CERT        |                               | CA 证书文件路径。                                                      |
+| TB_GW_PRIVATE_KEY    |                               | 私钥文件路径。                                                         |
+| TB_GW_CERT           |                               | 证书文件路径。                                                         |
+| TB_GW_CLIENT_ID      |                               | ThingsBoard 端网关的 MQTT 客户端 ID。                           |
+| TB_GW_USERNAME       |                               | ThingsBoard 端网关的 MQTT 用户名。                           |
+| TB_GW_PASSWORD       |                               | ThingsBoard 端网关的 MQTT 密码。                           |
+| TB_GW_RATE_LIMITS    | **15:1,300:60,**              | 向 ThingsBoard 发送消息的速率限制，格式为 `MESSSAGE_COUNT:TIME,`。       |
+| TB_GW_DP_RATE_LIMITS | **15:1,300:60,**              | 向 ThingsBoard 发送数据点的速率限制，格式为 `DATA_POINTS_COUNT:TIME,`。 |
+| TB_GW_LOGS_PATH      | **/thingsboard_gateway/logs** | 日志目录路径。                                                          |
 
-## General configuration file
+## 通用配置文件
 
-The main configuration file that is used for connection to ThingsBoard platform instance and enable/disable connectors. 
+主配置文件用于连接 ThingsBoard 平台实例及启用/禁用 connector。 
 
-The example configuration file provided below sets a connection to the ThingsBoard instance located at 
-thingsboard.cloud and utilizes memory file storage, which is set up to hold a maximum of 100,000 records. There are 4 
-different connectors active. If you prefer to use only one, simply remove the others from the configuration.
+以下示例将连接位于 thingsboard.cloud 的 ThingsBoard 实例，使用内存存储，最多保存 100,000 条记录。
+示例中启用了 4 种 connector。若只需一种，可从配置中移除其余 connector。
 
-<b>Example of main configuration file. Press to show.</b>
+<b>主配置文件示例。点击展开。</b>
 
 {% capture genConf %}
 
@@ -180,38 +177,38 @@ different connectors active. If you prefer to use only one, simply remove the ot
 {% endcapture %}
 {% include code-toggle.liquid code=genConf params="conf|.copy-code.expandable-20" %}
 
-### Sections in config file
+### 配置文件各区块
 
-+ **thingsboard** -- Configuration for connecting to ThingsBoard platform.
-  - *security* -- Configuration for type of encryption and authorization.
-+ **storage** -- Configuration for local storage of incoming data from devices.
-+ **connectors** -- Array of Connectors and their configuration to use.
++ **thingsboard** -- 连接 ThingsBoard 平台的配置。
+  - *security* -- 加密与鉴权类型配置。
++ **storage** -- 设备上报数据的本地存储配置。
++ **connectors** -- connector 数组及其配置。
 
-### Connection to ThingsBoard
+### 连接 ThingsBoard
 
-|**Parameter**             | **Default value**                            | **Description**                                                                         |
+|**参数**             | **默认值**                            | **说明**                                                                         |
 |---                       |---                                           |-----------------------------------------------------------------------------------------|
-| ***thingsboard***        |                                              | Configuration for connection to server.                                                 |
-| host                     | **thingsboard.cloud**                        | Hostname or IP address of ThingsBoard server.                                           |
-| port                     | **1883**                                     | Port of MQTT service on ThingsBoard server.                                             |
-| qos                      | **1**                                        | QoS levels 0 (at most once) and 1 (at least once).                                      |
-| minPackSendDelayMS       | **200**                                      | Delay between sending packets (Decreasing this setting results in increased CPU usage). |
-| minPackSizeToSend        | **500**                                      | Minimum size of packs to send.                                                          |
+| ***thingsboard***        |                                              | 连接服务器的配置。                                                 |
+| host                     | **thingsboard.cloud**                        | ThingsBoard 服务器的主机名或 IP 地址。                                           |
+| port                     | **1883**                                     | ThingsBoard 服务器上的 MQTT 服务端口。                                             |
+| qos                      | **1**                                        | QoS 级别：0（最多一次）和 1（至少一次）。                                      |
+| minPackSendDelayMS       | **200**                                      | 发送数据包之间的延迟（降低此值将增加 CPU 占用）。 |
+| minPackSizeToSend        | **500**                                      | 发送数据包的最小大小。                                                          |
 
-#### Subsection "statistics"
+#### 子区块「statistics」
 
-This subsection is used to configure collecting statistics data and sending them to ThingsBoard Gateway device attributes.
+该子区块用于配置统计数据的采集及上报至 ThingsBoard 网关设备属性。
 
-|**Parameter**|**Default value**| **Description**                                                                |
+|**参数**|**默认值**| **说明**                                                                |
 |:-|:-|--------------------------------------------------------------------------------
-| statistics                   |                 | Configuration for enabling statistics collecting.                              |
-| ... enable                   | true            | A boolean value that is used to on/off collecting statistics.                  |
-| ... statsSendPeriodInSeconds | 3600            | An integer value is utilized for transmitting data at regular intervals.       |
-| ... configuration            | statistics.json | Name of a configuration file for additional user statistics data (in seconds). |
+| statistics                   |                 | 启用统计采集的配置。                              |
+| ... enable                   | true            | 布尔值，用于开启/关闭统计采集。                  |
+| ... statsSendPeriodInSeconds | 3600            | 整数，表示定期发送数据的间隔（秒）。       |
+| ... configuration            | statistics.json | 额外用户统计数据配置文件名（单位：秒）。 |
 |---
 
-You can define additional parameter "configuration" and provide your own command for collecting some additional data.
-This configuration file can look like the example below:
+可定义额外参数「configuration」，并提供自定义命令采集附加数据。
+配置文件示例如下：
 ```json
 [
   {
@@ -246,22 +243,22 @@ This configuration file can look like the example below:
   }
 ]
 ```
-Also, you can find example files for different OS (Linux, macOS, Windows) in `/config/statistics/` folder.
+不同操作系统（Linux、macOS、Windows）的示例文件可参见 `/config/statistics/` 目录。
 
-#### Subsection "deviceFiltering"
+#### 子区块「deviceFiltering」
 
-This subsection is optional and used to filter allowed devices to send data to ThingsBoard.
+该子区块为可选，用于过滤允许向 ThingsBoard 发送数据的设备。
 
-The Device Filtering feature allows you to define rules for filtering devices based on specific criteria.
+设备过滤功能可按指定条件定义过滤规则。
 
-| **Parameter**                    | **Default value** | **Description**                                       |
+| **参数**                    | **默认值** | **说明**                                       |
 |:---------------------------------|:------------------|------------------------------------------------------- 
-| deviceFiltering                  |                   | Configuration for device filtering                    |
-| ... enable                       | **false**         | Boolean value that is used to on/off device filtering |
-| ... filterFile                   | **list.json**     | Name of a configuration file                          |
+| deviceFiltering                  |                   | 设备过滤配置。                    |
+| ... enable                       | **false**         | 布尔值，用于开启/关闭设备过滤。 |
+| ... filterFile                   | **list.json**     | 配置文件名。                          |
 | ---                              
 
-Configuration file can look like the example below:
+配置文件示例如下：
 ```json
 {
   "deny": {
@@ -280,11 +277,9 @@ Configuration file can look like the example below:
   }
 }
 ```
-The configuration above consists of two main properties: "deny" and "allow". Each property contains a 
-set of connector types as keys, with corresponding arrays of device names as their values.
+上述配置包含两个主要属性：「deny」和「allow」。每个属性的键为 connector 类型，值为设备名称数组。
 
-The "deny" property is used to specify devices that should be denied access to certain connector names. 
-The devices listed under each connector name will be blocked from accessing the specified connector.
+「deny」用于指定哪些设备被禁止访问指定的 connector。列在各 connector 名称下的设备将被阻止访问该 connector。
 
 The structure of the "deny" property is as follows:
 ```json
@@ -310,12 +305,11 @@ Example:
 }
 ```
 
-In the above example, the following rules are defined:
-* The device named "Temperature Device" and any device with an email address format are denied access to the "MQTT Broker Connector".
-* The device named "My Modbus Device" is denied access to the "Modbus Connector".
+上例中定义的规则为：
+* 设备「Temperature Device」及任何符合邮箱格式的设备均被禁止访问「MQTT Broker Connector」。
+* 设备「My Modbus Device」被禁止访问「Modbus Connector」。
 
-The "allow" property is used to specify devices that should be explicitly allowed to access certain connector names. 
-The devices listed under each connector name will have unrestricted access to the specified connector.
+「allow」用于指定明确允许访问特定 connector 的设备。列在各 connector 下的设备将拥有该 connector 的完全访问权限。
 
 The structure of the "allow" property is as follows:
 ```json
@@ -338,30 +332,27 @@ Example:
 }
 ```
 
-In the above example, the following rule is defined:
-* The device named "My Temperature Sensor" is allowed access to the "MQTT Broker Connector".
+上例中定义的规则为：
+* 设备「My Temperature Sensor」被允许访问「MQTT Broker Connector」。
 
-The Device Filtering feature provides a flexible way to define rules for allowing or denying access 
-to connector types based on device names. By using the "deny" and "allow" properties, you can easily control device 
-access within your gateway.
+设备过滤功能通过设备名称灵活定义允许或禁止访问 connector 的规则。使用「deny」和「allow」可方便控制网关内设备的访问权限。
 
 
 #### Subsection “checkingDeviceActivity”
 
-This subsection is optional and used to monitor the activity of each connected device. 
+该子区块为可选，用于监控每个已连接设备的活跃度。
 
-If you define this section, the Gateway will check the activity of each device every n second that means, if the device 
-is inactive for n seconds, it will disconnect it.
+定义该区块后，网关将按间隔秒数检查各设备活跃度；若设备在指定秒数内无活动，网关将断开该设备。
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|- 
-| checkingDeviceActivity           |              | Configuration for checking devices activity                   |
-| ... checkDeviceInactivity        | **false**    | Boolean value that is used to on/off checking device activity |
-| ... inactivityTimeoutSeconds     | **120**      | Inactivity device time after whose Gateway will disconnect it |
-| ... inactivityCheckPeriodSeconds | **10**       | Periodicity of device activity check                          |
+| checkingDeviceActivity           |              | 设备活跃度检查配置。                   |
+| ... checkDeviceInactivity        | **false**    | 布尔值，用于开启/关闭设备活跃度检查。 |
+| ... inactivityTimeoutSeconds     | **120**      | 设备无活动时长，超过后网关将断开。 |
+| ... inactivityCheckPeriodSeconds | **10**       | 设备活跃度检查周期（秒）。                          |
 |---
 
-#### Subsection "security"
+#### 子区块「security」
 
 {% capture securitytogglespec %}
 Access Token<small>Basic security</small>%,%accessToken%,%templates/iot-gateway/security-accesstoken-config.md%br%
@@ -369,11 +360,11 @@ Username and password<small>Basic security</small>%,%usernamepassword%,%template
 TLS + Access Token<small>Advanced security</small>%,%tlsToken%,%templates/iot-gateway/security-tls-token-config.md%br%
 TLS + Private Key<small>Advanced security</small>%,%tls%,%templates/iot-gateway/security-tls-config.md{% endcapture %}
 
-There are 3 variants of security subsection:
+security 子区块共 3 种配置方式：
 
 {% include content-toggle.liquid content-toggle-id="securityConfig" toggle-spec=securitytogglespec %}
 
-#### Subsection "provisioning"
+#### 子区块「provisioning」
 
 {% capture provisioningtogglespec %}
 Auto<small>Server generated access token</small>%,%auto%,%templates/iot-gateway/provisioning-auto-config.md%br%
@@ -381,17 +372,17 @@ Access Token<small>Predefined access token</small>%,%accesstoken%,%templates/iot
 Basic MQTT<small>Basic MQTT Credentials</small>%,%basicmqtt%,%templates/iot-gateway/provisioning-basic-mqtt-config.md%br%
 X.509 Certificate<small></small>%,%x509%,%templates/iot-gateway/provisioning-x-509-config.md%br%{% endcapture %}
 
-There are 4 options of provisioning configuration (you can read more about provisioning in [the official documentation](/docs/user-guide/device-provisioning/)):
+供应配置共有 4 种选项（更多供应说明见[官方文档](/docs/user-guide/device-provisioning/)）：
 {% include content-toggle.liquid content-toggle-id="provisioningConfig" toggle-spec=provisioningtogglespec %}
 
-### Storage configuration
+### 存储配置
 
-Configs in storage subsection provides configuration for saving incoming data before it will be send to ThingsBoard platform.
-  
-There are 3 variants for this section: memory or file.
-1. **Memory** storage - Received data saving to the RAM memory.
-2. **File** storage - Received data saving to the hard drive.
-3. **SQLite** storage - Received data saving to the .db files.
+storage 子区块用于配置在将数据发送至 ThingsBoard 平台前的本地保存方式。
+
+该区块共有 3 种类型：memory、file、SQLite。
+1. **Memory** 存储 - 将接收的数据保存到内存。
+2. **File** 存储 - 将接收的数据保存到硬盘。
+3. **SQLite** 存储 - 将接收的数据保存到 .db 文件。
 
 {% capture storagetogglespec %}
 Memory storage<br> <small>(use for development or low-volume data when disk space is limited)</small>%,%memory%,%templates/iot-gateway/storage-memory-config.md%br%
@@ -400,22 +391,22 @@ File storage<br> <small>(simple on-disk persistence — good for small/medium wo
 
 {% include content-toggle.liquid content-toggle-id="storageConfig" toggle-spec=storagetogglespec %}
 
-### Connectors configuration
+### Connectors 配置
 
-Configs in connectors section configuration for connecting to devices by implemented protocols.
-Config for every connector in this section must have parameters as in table below:  
+connectors 区块用于配置通过已实现协议连接设备的 connector。
+每个 connector 的配置需包含下表所列参数：  
  
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|- 
-| useGRPC                  | **true**                                     | **OPTIONAL** parameter that is used to on/off GRPC transport for default connector realisation |
-| name                     | **MQTT Broker Connector**                    | Name of connector to broker.                                                                   |
-| type                     | **mqtt**                                     | Type of connector, must be like a name of folder, contained configuration file.                |
-| configuration            | **mqtt.json**                                | Name of the file with configuration in config folder.*                                         |
+| useGRPC                  | **true**                                     | **可选**，用于开启/关闭默认 connector 的 GRPC 传输 |
+| name                     | **MQTT Broker Connector**                    | connector 名称。                                                                   |
+| type                     | **mqtt**                                     | connector 类型，需与配置文件所在目录名一致。                |
+| configuration            | **mqtt.json**                                | config 目录下配置文件名。*                                         |
 |---
 
-\* -- Folder with this configuration file.  
+\* -- 配置文件所在目录。  
 
-Section connectors in your configuration file may differ from shown below, but they should have structure like this:  
+配置文件中的 connectors 区块可不同于下述示例，但结构应保持一致：  
 
 ```json
 ...
@@ -444,6 +435,6 @@ Section connectors in your configuration file may differ from shown below, but t
 ...
 ```
 
-**Note:** You can use several similar connectors at same time, but you should provide different names and configuration files to them. 
+**注意：** 可同时使用多个同类型 connector，但需为各自指定不同的名称和配置文件。
 
-If you need different type of connector, you can implement it using [customization guide](/docs/iot-gateway/custom/) or email us: <info@thingsboard.io>.
+如需其他类型的 connector，可参考[自定义指南](/docs/iot-gateway/custom/)自行实现，或发送邮件至：<info@thingsboard.io>。

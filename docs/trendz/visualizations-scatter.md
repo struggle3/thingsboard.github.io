@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Scatter Plot
-description: Trendz Scatter Plot 
+title: 散点图
+description: Trendz 散点图 
 ---
 
 * TOC
@@ -20,14 +20,14 @@ description: Trendz Scatter Plot
 </div>
 
 ## Compare 2 dimensions
-Scatter plot show dependency between few properties of your topology.
+Scatter plot展示topology若干属性之间的依赖关系。
 
-In this case you only use **X-axis** and **Y-axis** sections and drop there fields of interest.
+此情况下仅使用**X-axis**和**Y-axis**区域，将感兴趣字段拖入即可。
 ![image](/images/trendz/simple-scatter.png)
 
 ## Compare Many dimensions
-In case when more than 2 dimensions should be compared, we can group measurements by multiple fields and apply a different colors to each group. 
-Here is an example of how it can be used on the same dataset - we compare heat and energy consumption, but apply different color for each floor of each building.
-As a result, we see that the first and third floors of Retroville are most energy-efficient and the first floor in Astarta is less efficient.
+当需要比较超过2个维度时，可按多个字段对测量分组，并为每组应用不同颜色。
+示例：同一数据集上比较热能与能耗，但按每栋建筑每层着色。
+结果显示Retroville一层和三层最节能，Astarta一层效率较低。
 
 ![image](/images/trendz/complex-scatter.png)

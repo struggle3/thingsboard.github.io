@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Monitoring
-description: TBMQ Monitoring Tools
+title: 监控
+description: TBMQ 监控工具
 
 ---
 

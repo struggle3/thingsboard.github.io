@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - dskarzhynets
-description: Using templates for dynamic configuration
+description: 使用 templates 实现动态配置
 redirect_from: "/docs/user-guide/ui/templatization"
 title: Templatization
 ---

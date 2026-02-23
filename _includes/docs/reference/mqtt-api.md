@@ -8,30 +8,30 @@
 * TOC
 {:toc}
 
-[MQTT](https://en.wikipedia.org/wiki/MQTT){:target="_blank"} is a lightweight publish/subscribe messaging protocol,probably making it the most suitable for various IoT devices. 
+[MQTT](https://en.wikipedia.org/wiki/MQTT){:target="_blank"}是一种轻量级发布/订阅消息协议，可能是最适合各类物联网设备的协议。 
 
-ThingsBoard server nodes acts as an MQTT broker and supports:   
-&#8194;**&#8226;**&#8194;QoS 0 (at most once)   
-&#8194;**&#8226;**&#8194;QoS 1 (at least once)   
-&#8194;**&#8226;**&#8194;Configurable MQTT topics via [Device profiles](/docs/{{docsPrefix}}user-guide/device-profiles/#mqtt-device-topic-filters){:target="_blank"}
+ThingsBoard服务节点充当MQTT代理，支持：   
+&#8194;**&#8226;**&#8194;QoS 0（最多一次）   
+&#8194;**&#8226;**&#8194;QoS 1（至少一次）   
+&#8194;**&#8226;**&#8194;通过[设备配置](/docs/{{docsPrefix}}user-guide/device-profiles/#mqtt-device-topic-filters){:target="_blank"}配置MQTT主题
 
-Learn more about MQTT at [mqtt.org](https://mqtt.org/){:target="_blank"}.
+更多MQTT信息请见[mqtt.org](https://mqtt.org/){:target="_blank"}。
 
 <hr>
 
-## Client libraries setup
+## 客户端库配置
 
-Many MQTT client libraries are available for different platforms and languages.
+不同平台和语言有多种MQTT客户端库可用。
 
-The examples in this guide use:   
-&#8194;**&#8226;**&#8194;**Mosquitto** (command-line tools)   
-&#8194;**&#8226;**&#8194;**MQTT.js** (JavaScript)
+本指南示例使用：   
+&#8194;**&#8226;**&#8194;**Mosquitto**（命令行工具）   
+&#8194;**&#8226;**&#8194;**MQTT.js**（JavaScript）
 
-Use the instructions below to install the following command-line utilities:   
+按以下说明安装命令行工具：   
 &#8194;**&#8226;**&#8194;<span class="code-light">mosquitto_pub</span>   
 &#8194;**&#8226;**&#8194;<span class="code-light">mosquitto_sub</span>
 
-Select your operating system to continue with the installation steps:
+选择您的操作系统继续安装：
 
 {% capture connectdevicetogglespec %}
 MQTT<small>Linux or macOS</small>%,%mqtt-linux%,%templates/helloworld-pe/mqtt-linux.md%br%
@@ -40,37 +40,37 @@ MQTT<small>Windows</small>%,%mqtt-windows%,%templates/helloworld-pe/mqtt-windows
 
 <hr>
 
-## Authentication methods
+## 认证方式
 
-ThingsBoard supports multiple authentication mechanisms to secure MQTT connections.
+ThingsBoard支持多种认证方式以保护MQTT连接。
 
-**Supported methods**:
-- [Access token](/docs/{{docsPrefix}}user-guide/access-token/){:target="_blank"}. Uses a unique **device access token** as the MQTT **username** in the <span class="code-light">CONNECT</span> packet.   
-  This method provides a simple and secure way to authenticate devices without requiring certificates or additional credentials.
-- [X.509 certificates](/docs/{{docsPrefix}}user-guide/certificates/){:target="_blank"}. Uses digital certificates to authenticate devices and establish secure communication based on **public key infrastructure (PKI)**.
-- [Basic MQTT credentials](/docs/{{docsPrefix}}user-guide/basic-mqtt/){:target="_blank"} Uses authentication data—a combination of the optional client ID, username, and password—sent in the MQTT <span class="code-light">CONNECT</span> packet. 
+**支持的方式**：
+- [Access token](/docs/{{docsPrefix}}user-guide/access-token/){:target="_blank"}。使用唯一**设备访问令牌**作为<span class="code-light">CONNECT</span>包中的MQTT **username**。   
+  此方式无需证书或额外凭据即可简单、安全地认证设备。
+- [X.509 certificates](/docs/{{docsPrefix}}user-guide/certificates/){:target="_blank"}。使用数字证书认证设备，基于**公钥基础设施（PKI）**建立安全通信。
+- [Basic MQTT credentials](/docs/{{docsPrefix}}user-guide/basic-mqtt/){:target="_blank"}。使用MQTT <span class="code-light">CONNECT</span>包中发送的认证数据——可选的client ID、username和password组合。 
 
-Topic names and payload formats for MQTT communication are configured via the **Device profile**. For more details, see [here](/docs/user-guide/device-profiles/#mqtt-transport-type){:target="_blank"}.
+MQTT通信的主题名称和载荷格式通过**设备配置**配置。详见[此处](/docs/user-guide/device-profiles/#mqtt-transport-type){:target="_blank"}。
 
-> The examples in this guide use **access token–based authentication**.
+> 本指南示例采用**基于access token的认证**。
 
 <hr>
 
 ## Publish a test telemetry message
 
-Use the following command to publish test telemetry data.
+使用以下命令发布测试遥测数据。
 
 {% if docsPrefix contains 'paas/' %}
 
-> Make sure to replace <code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> 请将<code>$ACCESS_TOKEN</code>替换为您的设备访问令牌。
 
 ```bash
 mosquitto_pub -d -q 1 -h "{{mqttHostName}}" -p "1883" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -m {"temperature":25}
 ```
 {: .copy-code}
 
-**Example**   
-If the access token is <code>ABC123</code>, the command looks like this:
+**示例**   
+若access token为<code>ABC123</code>，命令如下：
 
 ```bash
 mosquitto_pub -d -q 1 -h "{{mqttHostName}}" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
@@ -80,17 +80,17 @@ mosquitto_pub -d -q 1 -h "{{mqttHostName}}" -p "1883" -t "v1/devices/me/telemetr
 {% endif %}
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} 
 
-> ⚠️ **Don&#39;t forget to replace:**   
-> &#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-> &#8194;&#8226;&#8194;<code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ **请勿忘记替换：**   
+> &#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 为您的ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}主机名或IP地址。   
+> &#8194;&#8226;&#8194;<code>$ACCESS_TOKEN</code> 为您的设备访问令牌。
 
 ```bash
 mosquitto_pub -d -q 1 -h "{{HOST_NAME}}" -p "1883" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -m {"temperature":25}
 ```
 {: .copy-code}
 
-**Example**   
-In this example, <code>{{HOST_NAME}}</code> refers to your <code>local</code> ThingsBoard {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}Edge {% endif %}installation, and <code>$ACCESS_TOKEN</code> is set to <code>ABC123</code>.
+**示例**   
+此例中<code>{{HOST_NAME}}</code>指您的<code>本地</code>ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge {% endif %}安装，<code>$ACCESS_TOKEN</code>设置为<code>ABC123</code>。
 
 ```bash
 mosquitto_pub -d -q 1 -h "localhost" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
@@ -99,7 +99,7 @@ mosquitto_pub -d -q 1 -h "localhost" -p "1883" -t "v1/devices/me/telemetry" -u "
 
 {% endif %}
 
-A successful telemetry publish produces output similar to the following:
+成功的遥测发布会产生类似以下输出：
 
 ```text
 Client mosqpub|xxx sending CONNECT
@@ -109,34 +109,34 @@ Client mosqpub|xxx received PUBACK (Mid: 1)
 Client mosqpub|xxx sending DISCONNECT
 ```
 
-<b><font size="3">Possible MQTT connection responses</font></b>
+<b><font size="3">可能的MQTT连接响应</font></b>
 
-During the connection process, the MQTT broker may return the following response codes:
+连接过程中，MQTT代理可能返回以下响应码：
 
-* **0x00 Connected** - Successfully connected to ThingsBoard MQTT server.
-* **0x04 Connection Refused, bad username or password** - Username is empty.
-* **0x05 Connection Refused, not authorized** - Username contains invalid access token.
+* **0x00 Connected** - 成功连接ThingsBoard MQTT服务器。
+* **0x04 Connection Refused, bad username or password** - 用户名为空。
+* **0x05 Connection Refused, not authorized** - 用户名包含无效access token。
 
 <hr>
 
 {% include templates/api/key-value-format.md %}
 
-However, it is also possible to send data via [Protocol Buffers](https://developers.google.com/protocol-buffers){:target="_blank"}.
-Please refer to the [MQTT transport type](/docs/{{docsPrefix}}user-guide/device-profiles/#mqtt-transport-type){:target="_blank"} configuration section in device profile article for more details.
+也可通过[Protocol Buffers](https://developers.google.com/protocol-buffers){:target="_blank"}发送数据。
+详见设备配置文档中的[MQTT传输类型](/docs/{{docsPrefix}}user-guide/device-profiles/#mqtt-transport-type){:target="_blank"}配置章节。
 
-Using custom binary format or some serialization framework is also possible. See [protocol customization](#protocol-customization) for more details.
+也可使用自定义二进制格式或序列化框架。详见[协议自定义](#protocol-customization)。
 
 <hr>
 
-## Telemetry upload API
+## 遥测上传API
 
-In order to publish telemetry data to ThingsBoard server node, send PUBLISH message to the following topic:
+向ThingsBoard服务节点发布遥测数据时，向以下主题发送PUBLISH消息：
  
 ```shell
 v1/devices/me/telemetry
 ```
 
-The simplest supported data formats are:
+支持的最简数据格式为：
 
 ```json
 {"key1":"value1", "key2":"value2"}
@@ -149,52 +149,52 @@ or
 ```
 
 {% capture difference %}
-**Please note** that in this case, the server-side timestamp will be assigned to uploaded data!
+**请注意**：在此情况下，将使用服务器端时间戳作为上传数据的时间戳！
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-In case your device is able to get the client-side timestamp, you can use following format:
+若设备能获取客户端时间戳，可使用以下格式：
 
 ```json
 {"ts":1451649600512, "values":{"key1":"value1", "key2":"value2"}}
 ```
 
-Where **1451649600512** is a [unix timestamp](https://en.wikipedia.org/wiki/Unix_time) with milliseconds precision. For example, the value '1451649600512' corresponds to 'Fri, 01 Jan 2016 12:00:00.512 GMT'
+其中 **1451649600512** 为毫秒精度的[Unix时间戳](https://en.wikipedia.org/wiki/Unix_time)。例如 '1451649600512' 对应 'Fri, 01 Jan 2016 12:00:00.512 GMT'。
 
-<br><b><font size="3">Examples</font></b>   
-Below are the examples of commands for publishing different types of telemetry data.
+<br><b><font size="3">示例</font></b>   
+以下为发布不同类型遥测数据的命令示例。
 
-> ⚠️ Don&#39;t forget to replace {% unless docsPrefix contains "paas/" %}   
-&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请勿忘记替换 {% unless docsPrefix contains "paas/" %}   
+&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 为您的ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}主机名或IP地址。   
+&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> 为您的设备访问令牌。
 
-**Example 1**.   
-Publish data as an object without timestamp (server-side timestamp will be used). 
+**示例1**。   
+以对象形式发布无时间戳数据（将使用服务器端时间戳）。 
 
-Execute the command:
+执行命令：
 
 {% capture tabspec %}mqtt-telemetry-upload-api
 A,Mosquitto,shell,resources/mosquitto-telemetry.sh,/docs/reference/resources/mosquitto-telemetry.sh
 B,MQTT.js,shell,resources/mqtt-js-telemetry.sh,/docs/reference/resources/mqtt-js-telemetry.sh{% endcapture %}
 {% include tabs.html %}
 
-Telemetry data:
+遥测数据：
 
 ```json
 {"temperature":42}
 ```
 
-**Example 2**.   
-Publish data as an object without timestamp (server-side timestamp will be used) using data from [telemetry-data-as-object.json](/docs/reference/resources/telemetry-data-as-object.json){:target="_blank" download="telemetry-data-as-object.json"} file.
+**示例2**。   
+以对象形式发布无时间戳数据（将使用服务器端时间戳），数据来自[telemetry-data-as-object.json](/docs/reference/resources/telemetry-data-as-object.json){:target="_blank" download="telemetry-data-as-object.json"}文件。
 
-Execute the command:
+执行命令：
 
 {% capture tabspec %}mqtt-telemetry-upload-api-data-as-object
 A,Mosquitto,shell,resources/mosquitto-telemetry-data-as-object.sh,/docs/reference/resources/mosquitto-telemetry-data-as-object.sh
 B,MQTT.js,shell,resources/mqtt-js-telemetry-data-as-object.sh,/docs/reference/resources/mqtt-js-telemetry-data-as-object.sh{% endcapture %}
 {% include tabs.html %}
 
-The content of the JSON file:
+JSON文件内容：
 
 ```json
 {
@@ -210,33 +210,33 @@ The content of the JSON file:
 }
 ```
 
-**Example 3**.   
-Publish data as an array of objects without timestamp (server-side timestamp will be used) using data from [telemetry-data-as-array.json](/docs/reference/resources/telemetry-data-as-array.json){:target="_blank" download="telemetry-data-as-array.json"} file.
+**示例3**。   
+以对象数组形式发布无时间戳数据（将使用服务器端时间戳），数据来自[telemetry-data-as-array.json](/docs/reference/resources/telemetry-data-as-array.json){:target="_blank" download="telemetry-data-as-array.json"}文件。
 
-Execute the command:
+执行命令：
 
 {% capture tabspec %}mqtt-telemetry-upload-api-data-as-array
 A,Mosquitto,shell,resources/mosquitto-telemetry-data-as-array.sh,/docs/reference/resources/mosquitto-telemetry-data-as-array.sh
 B,MQTT.js,shell,resources/mqtt-js-telemetry-data-as-array.sh,/docs/reference/resources/mqtt-js-telemetry-data-as-array.sh{% endcapture %}
 {% include tabs.html %}
 
-The content of the JSON file:
+JSON文件内容：
 
 ```json
 [{"key1":"value1"}, {"key2":true}]
 ```
 
-**Example 4**.   
-Publish data as an object with timestamp (telemetry timestamp will be used) using data from [telemetry-data-with-ts.json](/docs/reference/resources/telemetry-data-with-ts.json){:target="_blank" download="telemetry-data-with-ts.json"} file.
+**示例4**。   
+以带时间戳的对象形式发布数据（将使用遥测时间戳），数据来自[telemetry-data-with-ts.json](/docs/reference/resources/telemetry-data-with-ts.json){:target="_blank" download="telemetry-data-with-ts.json"}文件。
 
-Execute the command:
+执行命令：
 
 {% capture tabspec %}mqtt-telemetry-upload-api-data-with-ts
 A,Mosquitto,shell,resources/mosquitto-telemetry-data-with-ts.sh,/docs/reference/resources/mosquitto-telemetry-data-with-ts.sh
 B,MQTT.js,shell,resources/mqtt-js-telemetry-data-with-ts.sh,/docs/reference/resources/mqtt-js-telemetry-data-with-ts.sh{% endcapture %}
 {% include tabs.html %}
 
-The content of the JSON file:
+JSON文件内容：
 
 ```json
 {
@@ -261,41 +261,41 @@ The content of the JSON file:
 
 ## Attributes API
 
-ThingsBoard attributes API allows devices to
+ThingsBoard属性API允许设备
 
-* Upload [client-side](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes to the server.
-* Request [client-side](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} and [shared](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes from the server.
-* Subscribe to [shared](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes from the server.
+* 将[客户端](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性上传至服务器。
+* 从服务器请求[客户端](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}和[共享](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
+* 订阅服务器的[共享](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
 
 <hr>
 
-### Publish attribute update to the server
+### 向服务器发布属性更新
 
-In order to publish client-side device attributes to ThingsBoard server node, send PUBLISH message to the following topic:
+为将客户端设备属性发布至ThingsBoard服务节点，向以下主题发送PUBLISH消息：
 
 ```shell
 v1/devices/me/attributes
 ```
 {: .copy-code}
 
-<b><font size="3">Examples</font></b>   
-Below are the examples of how to publish client-side device attributes.
+<b><font size="3">示例</font></b>   
+以下为发布客户端设备属性的示例。
 
-> ⚠️ Don&#39;t forget to replace {% unless docsPrefix contains "paas/" %}   
-&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请勿忘记替换 {% unless docsPrefix contains "paas/" %}   
+&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 为您的ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}主机名或IP地址。   
+&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> 为您的设备访问令牌。
 
-**Example 1**.   
-Publish client-side attributes update.
+**示例1**。   
+发布客户端属性更新。
 
-Telemetry data:
+遥测数据：
 
 ```json
 {"attribute1": "value1", "attribute2": true}
 ```
 {: .copy-code}
 
-Execute the command:
+执行命令：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 ```shell
@@ -309,10 +309,10 @@ mosquitto_pub -d -h "{{mqttHostName}}" -t "v1/devices/me/attributes" -u "$ACCESS
 {: .copy-code}
 {% endif %}
 
-**Example 2**.   
-Publish client-side attributes update using data from [new-attributes-values.json](/docs/reference/resources/new-attributes-values.json){:target="_blank" download="new-attributes-values.json"} file.
+**示例2**。   
+使用[new-attributes-values.json](/docs/reference/resources/new-attributes-values.json){:target="_blank" download="new-attributes-values.json"}文件数据发布客户端属性更新。
 
-The content of the **"new-attributes-values.json"** file:
+**"new-attributes-values.json"** 文件内容：
 
 ```json
 {
@@ -328,7 +328,7 @@ The content of the **"new-attributes-values.json"** file:
 }
 ```
 
-Execute the command:
+执行命令：
 
 {% capture tabspec %}mqtt-attributes-upload
 A,Mosquitto,shell,resources/mosquitto-attributes-publish.sh,/docs/reference/resources/mosquitto-attributes-publish.sh
@@ -337,42 +337,41 @@ B,MQTT.js,shell,resources/mqtt-js-attributes-publish.sh,/docs/reference/resource
 
 <hr>
 
-### Request attribute values from the server
+### 从服务器请求属性值
 
-In order to request client-side or shared device attributes to ThingsBoard server node, send PUBLISH message to the following topic:
+为从ThingsBoard服务节点请求客户端或共享设备属性，向以下主题发送PUBLISH消息：
 
 ```shell
 v1/devices/me/attributes/request/$request_id
 ```
 {: .copy-code}
 
-where **$request_id** is your integer request identifier.
-Before sending PUBLISH message with the request, client needs to subscribe to 
+其中 **$request_id** 为整数请求标识符。
+发送带请求的PUBLISH消息前，客户端需订阅
 
 ```shell
 v1/devices/me/attributes/response/+
 ```
 
-<br><b><font size="3">Example</font></b>   
-The following example is written in javascript and is based on mqtt.js. 
-Pure command-line examples are not available because subscribe and publish need to happen in the same mqtt session.
+<br><b><font size="3">示例</font></b>   
+以下示例基于mqtt.js编写。纯命令行示例不可用，因订阅与发布须在同一MQTT会话中进行。
 
-**1.** Save the [mqtt-js-attributes-request.js](/docs/{{docsPrefix}}reference/resources/mqtt-js-attributes-request.js){:target="_blank" download="mqtt-js-attributes-request.js"} file to your PC.
+**1.** 将[mqtt-js-attributes-request.js](/docs/{{docsPrefix}}reference/resources/mqtt-js-attributes-request.js){:target="_blank" download="mqtt-js-attributes-request.js"}文件保存到您的电脑。
 
 {% unless docsPrefix contains 'paas/' %}
 
-> ⚠️ In this example, the hostname refers to a **local ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} installation**.   
-> If your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} instance is deployed on a different host, make sure to replace <code>localhost</code> with the appropriate hostname or IP address.
+> ⚠️ 此例中主机名指**本地ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}安装**。   
+> 若ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}实例部署在其他主机，请将<code>localhost</code>替换为对应主机名或IP地址。
 
 {% endunless %}
 
 {% capture tabspec %}mqtt-attributes-request
-A,The content of the "mqtt-js-attributes-request.js" file:,javascript,resources/mqtt-js-attributes-request.js,/docs/reference/resources/mqtt-js-attributes-request.js{% endcapture %}
+A,"mqtt-js-attributes-request.js"文件内容：,javascript,resources/mqtt-js-attributes-request.js,/docs/reference/resources/mqtt-js-attributes-request.js{% endcapture %}
 {% include tabs.html %}
 
-**2.** Execute the command.
+**2.** 执行命令。
 
-> ⚠️ Replace <code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请将<code>$ACCESS_TOKEN</code>替换为您的设备访问令牌。
 
 ```shell
 export TOKEN=$ACCESS_TOKEN
@@ -380,40 +379,40 @@ node mqtt-js-attributes-request.js
 ```
 {: .copy-code}
 
-Result:
+结果：
 
 ```text
 {"client":{"attribute1":"value1","attribute2":true}}
 ```
 
 {% capture difference %}
-**Please note**, the intersection of client-side and shared device attribute keys is a bad practice! 
-However, it is still possible to have same keys for client, shared or even server-side attributes.
+**请注意**：客户端与共享设备属性键存在交集是不佳实践！ 
+但仍可为client、shared甚至server-side属性使用相同键。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 <hr>
 
-### Subscribe to attribute updates from the server
+### 订阅来自服务器的属性更新
 
-In order to subscribe to shared device attribute changes, send SUBSCRIBE message to the following topic:
+为订阅共享设备属性变更，向以下主题发送SUBSCRIBE消息：
 
 ```shell
 v1/devices/me/attributes
 ```
 {: .copy-code}
 
-When a shared attribute is changed by one of the server-side components (such as the REST API or the Rule Chain), the client will receive the following update: 
+当共享属性被任一服务端组件（如REST API或规则链）修改时，客户端将收到以下更新： 
 
 ```json
 {"key1":"value1"}
 ```
 
-> ⚠️ Don&#39;t forget to replace {% unless docsPrefix contains "paas/" %}   
-&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> with your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} hostname or IP address.   
-&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请勿忘记替换 {% unless docsPrefix contains "paas/" %}   
+&#8194;&#8226;&#8194;<code>{{HOST_NAME}}</code> 为您的ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}主机名或IP地址。   
+&#8194;&#8226;&#8194;{% endunless %}<code>$ACCESS_TOKEN</code> 为您的设备访问令牌。
 
-Execute the command:
+执行命令：
 
 {% capture tabspec %}mqtt-attributes-subscribe
 A,Mosquitto,shell,resources/mosquitto-attributes-subscribe.sh,/docs/reference/resources/mosquitto-attributes-subscribe.sh
@@ -422,7 +421,7 @@ B,MQTT.js,shell,resources/mqtt-js-attributes-subscribe.sh,/docs/reference/resour
 
 <hr>
 
-## JSON value support
+## JSON值支持
 
 {% include templates/api/json.md %}
 
@@ -432,46 +431,45 @@ B,MQTT.js,shell,resources/mqtt-js-attributes-subscribe.sh,/docs/reference/resour
 
 ### Server-side RPC
 
-In order to subscribe to RPC commands from the server, send SUBSCRIBE message to the following topic:
+为订阅来自服务器的RPC命令，向以下主题发送SUBSCRIBE消息：
 
 ```shell
 v1/devices/me/rpc/request/+
 ```
 {: .copy-code}
 
-Once subscribed, the client will receive individual commands as a PUBLISH message to the corresponding topic:
+订阅后，客户端将在对应主题收到作为PUBLISH消息的单独命令：
 
 ```shell
 v1/devices/me/rpc/request/$request_id
 ```
 
-where **$request_id** is an integer request identifier.
+其中 **$request_id** 为整数请求标识符。
 
-The client should publish the response to the following topic:
+客户端应将响应发布至以下主题：
 
 ```shell
 v1/devices/me/rpc/response/$request_id
 ```
 
-<br><b><font size="3">Example</font></b>   
-The following example is written in javascript and is based on mqtt.js. 
-Pure command-line examples are not available because subscribe and publish need to happen in the same mqtt session.
+<br><b><font size="3">示例</font></b>   
+以下示例基于mqtt.js编写。纯命令行示例不可用，因订阅与发布须在同一MQTT会话中进行。
 
 {% if docsPrefix == nil or docsPrefix == "pe/" %}
-**1.** Save the [mqtt-js-rpc-from-server.js](/docs/pe/reference/resources/mqtt-js-rpc-from-server.js){:target="_blank" download="mqtt-js-rpc-from-server.js"} file to your PC.
+**1.** 将[mqtt-js-rpc-from-server.js](/docs/pe/reference/resources/mqtt-js-rpc-from-server.js){:target="_blank" download="mqtt-js-rpc-from-server.js"}文件保存到您的电脑。
 
-> ⚠️ In this example, the hostname refers to a **local ThingsBoard installation**.   
-> If your ThingsBoard instance is deployed on a different host, make sure to replace <code>localhost</code> with the appropriate hostname or IP address.
+> ⚠️ 此例中主机名指**本地ThingsBoard安装**。   
+> 若ThingsBoard实例部署在其他主机，请将<code>localhost</code>替换为对应主机名或IP地址。
 
 {% endif %}
 {% if docsPrefix contains "paas/" %}
-**1.** Save the [mqtt-js-rpc-from-server.js](/docs/paas/reference/resources/mqtt-js-rpc-from-server.js){:target="_blank" download="mqtt-js-rpc-from-server.js"} file to your PC.
+**1.** 将[mqtt-js-rpc-from-server.js](/docs/paas/reference/resources/mqtt-js-rpc-from-server.js){:target="_blank" download="mqtt-js-rpc-from-server.js"}文件保存到您的电脑。
 {% endif %}
 {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
-**1.** Save the [mqtt-js-rpc-from-server.js](/docs/edge/reference/resources/mqtt-js-rpc-from-server.js){:target="_blank" download="mqtt-js-rpc-from-server.js"} file to your PC.
+**1.** 将[mqtt-js-rpc-from-server.js](/docs/edge/reference/resources/mqtt-js-rpc-from-server.js){:target="_blank" download="mqtt-js-rpc-from-server.js"}文件保存到您的电脑。
 
-> ⚠️ In this example, the hostname refers to a **local ThingsBoard Edge installation**.   
-> If your ThingsBoard Edge instance is deployed on a different host, make sure to replace <code>localhost</code> with the appropriate hostname or IP address.
+> ⚠️ 此例中主机名指**本地ThingsBoard Edge安装**。   
+> 若ThingsBoard Edge实例部署在其他主机，请将<code>localhost</code>替换为对应主机名或IP地址。
 
 {% endif %}
 
@@ -479,11 +477,11 @@ Pure command-line examples are not available because subscribe and publish need 
 A,The content of the "mqtt-js-rpc-from-server.js" file,javascript,resources/mqtt-js-rpc-from-server.js,/docs/reference/resources/mqtt-js-rpc-from-server.js{% endcapture %}  
 {% include tabs.html %}
 
-**2.** Now, follow these steps:
-- Use **RPC debug terminal** widget in your ThingsBoard instance;
-- Execute the command to subscribe to RPC commands from the server using the command below. 
+**2.** 按以下步骤操作：
+- 在ThingsBoard实例中使用**RPC调试终端**部件；
+- 使用以下命令执行以订阅来自服务器的RPC命令。 
 
-> ⚠️ Replace <code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请将<code>$ACCESS_TOKEN</code>替换为您的设备访问令牌。
 
 ```shell
 export TOKEN=$ACCESS_TOKEN
@@ -491,54 +489,53 @@ node mqtt-js-rpc-from-server.js
 ```
 {: .copy-code}
 
-- Send an RPC request "connect" to the device using **RPC debug terminal** widget;
-- You should receive a response from the device.
+- 使用**RPC调试终端**部件向设备发送RPC请求 "connect"；
+- 您应能收到设备响应。
 
 {% unless docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
 {% include images-gallery.html imageCollection="server-side-rpc" %}
 {% endunless %}
 
-In case your MQTT device is a gateway, ThingsBoard will send a server-side RPC (notification) about changes on provisioned device entities.  
-Your MQTT gateway device will receive a service RPC about removal or renaming of device to [properly resolve such events](/docs/iot-gateway/how-device-removing-renaming-works/){:target="_blank"}. 
+若MQTT设备为网关，ThingsBoard会发送关于预配置设备实体变更的服务端RPC（通知）。  
+您的MQTT网关设备将收到关于设备移除或重命名的服务RPC，以便[正确处理此类事件](/docs/iot-gateway/how-device-removing-renaming-works/){:target="_blank"}。 
 
 <hr>
 
 ### Client-side RPC
 
-In order to send RPC commands to server, send PUBLISH message to the following topic:
+为向服务器发送RPC命令，向以下主题发送PUBLISH消息：
 
 ```shell
 v1/devices/me/rpc/request/$REQUEST_ID
 ```
 {: .copy-code}
 
-> Where <code>$REQUEST_ID</code> is an integer request identifier.
+> 其中<code>$REQUEST_ID</code>为整数请求标识符。
 
-The response from server will be published to the following topic:
+服务器响应将发布至以下主题：
 
 ```shell
 v1/devices/me/rpc/response/$request_id
 ```
 
-<br><b><font size="3">Example</font></b>   
-The following example is written in javascript and is based on mqtt.js. 
-Pure command-line examples are not available because subscribe and publish need to happen in the same mqtt session.
+<br><b><font size="3">示例</font></b>   
+以下示例基于mqtt.js编写。纯命令行示例不可用，因订阅与发布须在同一MQTT会话中进行。
 
 {% if docsPrefix == nil or docsPrefix == "pe/" %}
-**1.** Save the [mqtt-js-rpc-from-client.js](/docs/pe/reference/resources/mqtt-js-rpc-from-client.js){:target="_blank" download="mqtt-js-rpc-from-client.js"} file to your PC. 
+**1.** 将[mqtt-js-rpc-from-client.js](/docs/pe/reference/resources/mqtt-js-rpc-from-client.js){:target="_blank" download="mqtt-js-rpc-from-client.js"}文件保存到您的电脑。 
 
-> ⚠️ In this example, the hostname refers to a **local ThingsBoard installation**.   
-> If your ThingsBoard instance is deployed on a different host, make sure to replace <code>localhost</code> with the appropriate hostname or IP address.
+> ⚠️ 此例中主机名指**本地ThingsBoard安装**。   
+> 若ThingsBoard实例部署在其他主机，请将<code>localhost</code>替换为对应主机名或IP地址。
 
 {% endif %}
 {% if docsPrefix contains "paas/" %}
-**1.** Save the [mqtt-js-rpc-from-client.js](/docs/paas/reference/resources/mqtt-js-rpc-from-client.js){:target="_blank" download="mqtt-js-rpc-from-client.js"} file to your PC.
+**1.** 将[mqtt-js-rpc-from-client.js](/docs/paas/reference/resources/mqtt-js-rpc-from-client.js){:target="_blank" download="mqtt-js-rpc-from-client.js"}文件保存到您的电脑。
 {% endif %}
 {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
-**1.** Save the [mqtt-js-rpc-from-client.js](/docs/edge/reference/resources/mqtt-js-rpc-from-client.js){:target="_blank" download="mqtt-js-rpc-from-client.js"} file to your PC.
+**1.** 将[mqtt-js-rpc-from-client.js](/docs/edge/reference/resources/mqtt-js-rpc-from-client.js){:target="_blank" download="mqtt-js-rpc-from-client.js"}文件保存到您的电脑。
 
-> ⚠️ In this example, the hostname refers to a **local ThingsBoard Edge installation**.   
-> If your ThingsBoard Edge instance is deployed on a different host, make sure to replace <code>localhost</code> with the appropriate hostname or IP address.
+> ⚠️ 此例中主机名指**本地ThingsBoard Edge安装**。   
+> 若ThingsBoard Edge实例部署在其他主机，请将<code>localhost</code>替换为对应主机名或IP地址。
 
 {% endif %}
 
@@ -546,18 +543,18 @@ Pure command-line examples are not available because subscribe and publish need 
 A,The content of the "mqtt-js-rpc-from-client.js" file,javascript,resources/mqtt-js-rpc-from-client.js,/docs/reference/resources/mqtt-js-rpc-from-client.js{% endcapture %}
 {% include tabs.html %}
 
-**2.** Now, follow these steps:
-- In the {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}**Edge** {% endif %}**Root Rule Chain** add two nodes: [transformation script](/docs/user-guide/rule-engine-2-0/nodes/transformation/script){:target="_blank"} and [rpc call reply](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply){:target="_blank"}. Connect them to "[Log RPC from Device](/docs/user-guide/rule-engine-2-0/nodes/action/log){:target="_blank"}" action node with "**Success**" link.
-- In the **script** node enter the function:
+**2.** 按以下步骤操作：
+- 在{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}**Edge** {% endif %}**根规则链**中添加两个节点：[脚本转换](/docs/user-guide/rule-engine-2-0/nodes/transformation/script){:target="_blank"}和[RPC调用回复](/docs/user-guide/rule-engine-2-0/nodes/action/rpc-call-reply){:target="_blank"}。将它们通过“**成功**”链接连接到"[记录来自设备的RPC](/docs/user-guide/rule-engine-2-0/nodes/action/log){:target="_blank"}"动作节点。
+- 在**脚本**节点中输入函数：
 
 ```shell
 return {msg: {time: new Date()}, metadata: metadata, msgType: msgType};
 ```
 {: .copy-code}
 
-- Send request to the server.
+- 向服务器发送请求。
 
-> ⚠️ Replace <code>$ACCESS_TOKEN</code> with your device&#39;s access token.
+> ⚠️ 请将<code>$ACCESS_TOKEN</code>替换为您的设备访问令牌。
 
 ```shell
 export TOKEN=$ACCESS_TOKEN
@@ -565,7 +562,7 @@ node mqtt-js-rpc-from-client.js
 ```
 {: .copy-code}
 
-You should receive a response from the server:
+您将收到服务器响应：
 
 ```shell
 {"time":"Thursday, February 5, 2026, 9:08:22 AM Coordinated Universal Time"}
@@ -579,12 +576,12 @@ You should receive a response from the server:
 
 ### Get session limits RPC
 
-The **getSessionLimits** RPC method allows device manufacturers and developers to retrieve the **MQTT transport limits** enforced by ThingsBoard server.
+**getSessionLimits** RPC方法允许设备制造商和开发者获取ThingsBoard服务器强制执行的**MQTT传输限制**。
 
-Understanding these limits helps ensure that devices operate within supported parameters and prevents issues such as **message rejection, throttling**, or **connection loss**.
+了解这些限制有助于确保设备在支持的参数范围内运行，并避免**消息拒绝、限流**或**连接丢失**等问题。
 
-<b><font size="3">Request format</font></b>   
-To request session limits, the device sends the following RPC request:
+<b><font size="3">请求格式</font></b>   
+为请求会话限制，设备发送以下RPC请求：
 
 ```json
 {
@@ -593,8 +590,8 @@ To request session limits, the device sends the following RPC request:
 }
 ```
 
-<b><font size="3">Response format</font></b>   
-After processing the request, ThingsBoard returns the session limits in the RPC response using the following format:
+<b><font size="3">响应格式</font></b>   
+处理请求后，ThingsBoard以以下格式在RPC响应中返回会话限制：
 
 ```json
 {
@@ -608,31 +605,31 @@ After processing the request, ThingsBoard returns the session limits in the RPC 
 }
 ```
 
-<b><font size="3">Response fields description</font></b>   
-- **maxPayloadSize** - the maximum allowable size for an MQTT message payload, expressed in bytes.  
-- **maxInflightMessages** -  the maximum number of MQTT messages that can be sent but remain unacknowledged (in-flight) at any given time.
-- **rateLimits** - A nested object defining rate limits for different message categories:
-  - **messages** - the overall message rate limit.
-  - **telemetryMessages** - the maximum number of telemetry messages that can be sent.
-  - **telemetryDataPoints** - the number of telemetry data points a device can send.  
+<b><font size="3">响应字段说明</font></b>   
+- **maxPayloadSize** - MQTT消息负载的最大允许大小，单位为字节。  
+- **maxInflightMessages** - 任一时刻可发送但未确认（进行中）的MQTT消息最大数量。
+- **rateLimits** - 嵌套对象，定义不同消息类别的速率限制：
+  - **messages** - 整体消息速率限制。
+  - **telemetryMessages** - 可发送的遥测消息最大数量。
+  - **telemetryDataPoints** - 设备可发送的遥测数据点数量。  
 
-<b><font size="3">Rate Limit Format Explanation</font></b>   
-A rate limit value such as:
+<b><font size="3">速率限制格式说明</font></b>   
+速率限制值例如：
 
 ```text
 200:1,6000:60,14000:3600
 ```
 
-- **200:1** — up to 200 messages per second
-- **6000:60** — up to 6,000 messages per 60 seconds (1 minute)
-- **14000:3600** — up to 14,000 messages per 3,600 seconds (1 hour)
+- **200:1** — 每秒最多200条消息
+- **6000:60** — 60秒内最多6,000条消息
+- **14000:3600** — 3,600秒内最多14,000条消息
 
-These limits are enforced simultaneously.
+这些限制同时生效。
 
-<b><font size="4">Gateway-specific session limits</font></b>   
-If the device is a **gateway**, the response includes additional limits that apply to devices connected **through the gateway**.
+<b><font size="4">网关专用会话限制</font></b>   
+若设备为**网关**，响应会包含适用于**通过该网关连接的**设备的额外限制。
 
-<b><font size="3">Gateway response format</font></b>   
+<b><font size="3">网关响应格式</font></b>   
 
 ```json
 {
@@ -651,57 +648,57 @@ If the device is a **gateway**, the response includes additional limits that app
 }
 ```
 
-<b><font size="3">Gateway rate limits description</font></b>   
-- **rateLimits** - rate limits that apply to the gateway device itself.
-- **gatewayRateLimits** - rate limits that apply to individual devices connected through the gateway.
+<b><font size="3">网关速率限制说明</font></b>   
+- **rateLimits** - 适用于网关设备本身的速率限制。
+- **gatewayRateLimits** - 适用于通过网关连接的单个设备的速率限制。
 
-These limits help control load and ensure stable operation when multiple devices communicate through a single gateway connection.
+这些限制有助于在多设备通过单一网关连接通信时控制负载并确保稳定运行。
 
 <hr>
 
-## Claiming devices
+## 设备认领
 
-The Device Claiming feature allows end users to securely associate a device with their account after the device has been deployed and connected to ThingsBoard.
-For a detailed explanation of the device claiming workflow and supported scenarios, refer to the {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[Claiming devices](/docs/{{docsPrefix}}user-guide/claiming-devices){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[Claiming devices](/docs/user-guide/claiming-devices){:target="_blank"}{% endif %} documentation.
+设备认领功能允许终端用户在设备部署并连接到ThingsBoard后，安全地将其与自己的账户关联。
+设备认领流程及所支持场景的详细说明，请参阅{% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[设备认领](/docs/{{docsPrefix}}user-guide/claiming-devices){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[设备认领](/docs/user-guide/claiming-devices){:target="_blank"}{% endif %}文档。
 
-In order to initiate claiming device, send PUBLISH message to the following topic:
+为发起设备认领，向以下主题发送PUBLISH消息：
 
 ```shell
 v1/devices/me/claim
 ```
 {: .copy-code}
 
-The supported data format is:
+支持的数据格式为：
 
 ```json
 {"secretKey":"value", "durationMs":60000}
 ```
 
 {% capture difference %}
-**Please note** that the above fields are optional. In case the **secretKey** is not specified, the empty string as a default value is used.
-In case the **durationMs** is not specified, the system parameter **device.claim.duration** is used (in the file **/etc/thingsboard/conf/thingsboard.yml**).
+**请注意**：上述字段均为可选。若未指定**secretKey**，则默认使用空字符串。
+若未指定**durationMs**，则使用系统参数**device.claim.duration**（位于**/etc/thingsboard/conf/thingsboard.yml**文件中）。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 <hr>
 
-## Device provisioning
+## 设备预配置
 
-Device provisioning allows devices to be registered dynamically without manual creation in the ThingsBoard UI.
-For a detailed explanation of the provisioning process and supported scenarios, refer to the {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[Device provisioning](/docs/{{docsPrefix}}user-guide/device-provisioning){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[Device provisioning](/docs/user-guide/device-provisioning){:target="_blank"}{% endif %} documentation.
+设备预配置允许设备在无需于ThingsBoard界面手动创建的情况下动态注册。
+预配置流程及所支持场景的详细说明，请参阅{% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}[设备预配置](/docs/{{docsPrefix}}user-guide/device-provisioning){:target="_blank"}{% endif %}{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}[设备预配置](/docs/user-guide/device-provisioning){:target="_blank"}{% endif %}文档。
 
-**Provisioning request**   
-To initiate device provisioning, send Provisioning request to the following topic:
+**预配置请求**   
+为发起设备预配置，向以下主题发送预配置请求：
 
 ```shell
 /provision
 ```
 {: .copy-code}
 
-Also, you should set **username** or **clientId** to *provision*.
+同时，应将**username**或**clientId**设为*provision*。
 
-**Request Payload**   
-The provisioning request must use the following JSON format:
+**请求负载**   
+预配置请求必须使用以下JSON格式：
 
 ```json
 {
@@ -711,61 +708,61 @@ The provisioning request must use the following JSON format:
 }
 ```
 
-**Payload fields**
-- **deviceName** — the name of the device to be provisioned.
-- **provisionDeviceKey** — the provisioning key configured in ThingsBoard.
-- **provisionDeviceSecret** — the provisioning secret associated with the provisioning key.
+**负载字段**
+- **deviceName** — 待预配置设备的名称。
+- **provisionDeviceKey** — 在ThingsBoard中配置的预配置密钥。
+- **provisionDeviceSecret** — 与预配置密钥关联的预配置密文。
 
-If the provided credentials are valid, ThingsBoard automatically creates the device (if it does not already exist) and returns the device credentials, allowing the device to start communicating with the platform.
+若提供的凭证有效，ThingsBoard将自动创建设备（如尚不存在）并返回设备凭证，使设备得以开始与平台通信。
 
 <hr>
 
-## Firmware API
+## 固件API
 
-When ThingsBoard initiates an MQTT device firmware update, it sets the fw_title, fw_version, fw_checksum, fw_checksum_algorithm shared attributes.
-To receive the shared attribute updates, the device has to subscribe to 
+当ThingsBoard发起MQTT设备固件更新时，会设置fw_title、fw_version、fw_checksum、fw_checksum_algorithm共享属性。
+为接收共享属性更新，设备须订阅
 
 ```bash
 v1/devices/me/attributes/response/+
 ```
 {: .copy-code}
 
-Where
+其中
 
-**+** is the Wildcard character.
+**+** 为通配符。
 
-When the MQTT device receives updates for fw_title and fw_version shared attributes, it has to send PUBLISH message to
+当MQTT设备收到fw_title和fw_version共享属性更新后，须向以下主题发送PUBLISH消息
 
 ```bash
 v2/fw/request/${requestId}/chunk/${chunkIndex} 
 ```
 {: .copy-code}
 
-Where
+其中
 
-**${requestId}** - number corresponding to the number of firmware updates. The ${requestId} has to be different for each firmware update.  
-**${chunkIndex}** - number corresponding to the index of firmware chunks. The ${chunkID} are counted from 0. The device must increment the chunk index for each request until the received chunk size is zero.  
-And the MQTT payload should be the size of the firmware chunk in bytes.
+**${requestId}** - 对应固件更新次数的数字。每次固件更新${requestId}须不同。  
+**${chunkIndex}** - 对应固件块索引的数字。${chunkIndex}从0开始计数。设备须在每次请求中递增块索引，直至接收到的块大小为0。  
+MQTT负载应为固件块大小的字节数。
 
-For each new firmware update, you need to change the request ID and subscribe to 
+每次新的固件更新时，您需更改请求ID并订阅
 
 ```bash
 v2/fw/response/+/chunk/+
 ```
 {: .copy-code}
 
-Where
+其中
 
-**+** is the Wildcard character.
-
-<hr>
-
-## Protocol customization
-
-MQTT transport can be fully customized for specific use-case by changing the corresponding [module](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt){:target="_blank"}.
+**+** 为通配符。
 
 <hr>
 
-## Next steps
+## 协议自定义
+
+可通过修改对应的[模块](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt){:target="_blank"}，针对特定用例对MQTT传输进行完全定制。
+
+<hr>
+
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

@@ -1,4 +1,4 @@
-Install cURL for **Ubuntu**:
+在 **Ubuntu** 上安装 cURL：
 
 ```bash
 sudo apt-get install curl
@@ -6,45 +6,45 @@ sudo apt-get install curl
 {: .copy-code}
 
 
-Install cURL for **macOS**:
+在 **macOS** 上安装 cURL：
 
 ```bash
 brew install curl
 ```
 {: .copy-code}
 
-Install cURL for **Windows**:
+在 **Windows** 上安装 cURL：
 
-Starting from Windows 10 b17063, cURL is available by default. 
-More info is available in this MSDB blog [post](https://blogs.msdn.microsoft.com/commandline/2018/01/18/tar-and-curl-come-to-windows/).
-If you are using older version of Windows OS, you may find official installation guides [here](https://curl.haxx.se/).
+自 Windows 10 b17063 起，cURL 已默认可用。 
+更多信息请参阅 MSDB 博客 [文章](https://blogs.msdn.microsoft.com/commandline/2018/01/18/tar-and-curl-come-to-windows/)。
+若使用较早版本的 Windows，可在此处查看[官方安装指南](https://curl.haxx.se/)。
 
 <br>
 
-This command works for Windows, Ubuntu and macOS, assuming the cURL tool is already installed. 
+假设已安装 cURL，以下命令适用于 Windows、Ubuntu 和 macOS。 
 
-Replace $THINGSBOARD_HOST_NAME_AND_PORT and $ACCESS_TOKEN with corresponding values.
+将 $THINGSBOARD_HOST_NAME_AND_PORT 和$ACCESS_TOKEN替换为对应值。
 
 ```bash
 curl -v -X POST -d "{\"temperature\": 25}" $THINGSBOARD_HOST_NAME_AND_PORT/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 ```
 {: .copy-code}
 
-For example, $THINGSBOARD_HOST_NAME_AND_PORT reference ThingsBoard Cloud (North America), $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME_AND_PORT 为 ThingsBoard Cloud（北美），$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 echo -n '{"temperature": 25}' | coap post coap://thingsboard.cloud/api/v1/ABC123/telemetry
 ```
 {: .copy-code}
 
-For example, $THINGSBOARD_HOST_NAME_AND_PORT reference ThingsBoard Cloud (Europe), $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME_AND_PORT 为 ThingsBoard Cloud（欧洲），$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 echo -n '{"temperature": 25}' | coap post coap://eu.thingsboard.cloud/api/v1/ABC123/telemetry
 ```
 {: .copy-code}
 
-For example, $THINGSBOARD_HOST_NAME_AND_PORT reference your local installation, port is 8080, $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME_AND_PORT 为本地部署，端口 8080，$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 curl -v -X POST -d "{\"temperature\": 25}" http://localhost:8080/api/v1/ABC123/telemetry --header "Content-Type:application/json"

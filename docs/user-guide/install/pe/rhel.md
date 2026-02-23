@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Installing ThingsBoard PE on CentOS/RHEL
-description: Installing ThingsBoard PE on CentOS/RHEL
+title: 在 CentOS/RHEL 上安装 ThingsBoard PE
+description: 在 CentOS/RHEL 上安装 ThingsBoard PE
 
 ---
 

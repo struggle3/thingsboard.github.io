@@ -1,12 +1,12 @@
 ---
 layout: docwithnav
-title: Send RPC Request to the Related Device
-description: Send RPC Request to a Device
+title: 向关联设备发送 RPC 请求
+description: 向设备发送 RPC 请求
 
 ---
 
-ThingsBoard allows you to send remote procedure calls [**RPC**](/docs/user-guide/rpc/#server-side-rpc-api) from server-side applications to devices and vice versa. <br>
-This Tutorial is to show you how to send a remote request call to a Related Device using Rule Engine.
+ThingsBoard 支持从服务端向设备发送远程过程调用 [**RPC**](/docs/user-guide/rpc/#server-side-rpc-api)，反之亦可。<br>
+本教程演示如何使用 Rule Engine 向关联设备发送 RPC 请求。
 
 * TOC
 {:toc}

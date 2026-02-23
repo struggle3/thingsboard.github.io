@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: rpc call reply
-description: Sends the incoming message data as a reply to a Remote Procedure Call (RPC) from a device.
+title: RPC call reply
+description: 将入站消息数据作为对设备 RPC 的回复发送。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

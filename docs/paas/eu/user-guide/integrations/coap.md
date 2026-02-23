@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas-eu
-title: CoAP Integration
-description: CoAP Integration Guide 
+title: CoAP 集成
+description: CoAP 集成指南
 
 coap-integration-setup:
     0:

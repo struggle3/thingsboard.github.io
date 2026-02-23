@@ -1,12 +1,12 @@
 ---
 layout: mqtt-broker
-title: TBMQ - Open Source MQTT Broker - Scalable IoT Messaging
-description: Deliver 3M+ MQTT messages/sec with TBMQ — a fault-tolerant open-source MQTT broker with clustering and message durability.
+title: TBMQ - 开源 MQTT 消息代理 - 可扩展的物联网消息平台
+description: 使用 TBMQ 实现每秒 300 万+ MQTT 消息——具备集群与消息持久化的高可用开源 MQTT 消息代理。
 ---
 
 <section id="top-features">
     <main>
-        <h2 class="title">Core strengths & MQTT server capabilities</h2>
+        <h2 class="title">核心优势与 MQTT 服务器能力</h2>
         <div id="cards">
             <div class="col-lg-6">
                 <div class="block">

@@ -2,33 +2,32 @@
 {:toc}
 
   
-**Legacy Content**: This page documents subscription plans for accounts created prior to **January 20, 2026**. 
+**历史内容**：本页记录 **2026 年 1 月 20 日**之前创建账号的订阅计划。
 
-**Why upgrade?** Our new subscription plans offer greater flexibility, allowing you to [top-up](/docs/{{docsPrefix}}subscriptions/#top-ups) entity and API limits on demand. 
-They also let you enable ThingsBoard Edge and Trendz Analytics as [add-ons](/docs/{{docsPrefix}}subscriptions/#add-ons), so you can manage your entire IoT infrastructure in one place.
+**为何升级？** 新版订阅计划更灵活，可按需[充值](/docs/{{docsPrefix}}subscriptions/#top-ups)实体与 API 限制。
+还支持将 ThingsBoard Edge 和 Trendz Analytics 作为[插件](/docs/{{docsPrefix}}subscriptions/#add-ons)启用，便于在一处管理整个 IoT 基础设施。
 
-Ready to switch? Please refer to the [how-to switch to the new subscription plans](#how-to-switch-to-the-new-subscription-plans) page.
+准备切换？请参阅[如何切换到新订阅计划](#how-to-switch-to-the-new-subscription-plans)页面。
 
-These plans are no longer available for new subscriptions. 
-To view current tiers and limits, please visit the [**up-to-date subscriptions**](/docs/paas/subscription/) page.
+这些计划已不再接受新订阅。
+若需查看当前套餐与限制，请访问[**最新订阅**](/docs/{{docsPrefix}}subscriptions/)页面。
 
+订阅计划主要包含：[实体限制](/docs/{{docsPrefix}}user-guide/tenant-profiles/#entity-limits)、[API 限制](/docs/{{docsPrefix}}user-guide/tenant-profiles/#api-limits--usage)、[计算字段限制](#calculated-fields-limits)、[白标](#white-labeling)以及支持级别。
 
-Main characteristics of the subscription plan are: [entity limits](/docs/{{docsPrefix}}user-guide/tenant-profiles/#entity-limits), [api limits](/docs/{{docsPrefix}}user-guide/tenant-profiles/#api-limits--usage), [calculated fields limits](#calculated-fields-limits), [white labeling](#white-labeling) and the level of support you get.
+## 实体限制
 
-## Entity limits
-
-Please see table below to compare the entity limits of the **legacy** subscription plans.
+下表对比**历史**订阅计划的实体限制。
 
 <table>
   <thead>
       <tr>
-          <td style="width: 20%"><b>Parameter name</b></td>
+          <td style="width: 20%"><b>参数名</b></td>
           <td style="width: 10%"><b>Maker</b></td>
           <td style="width: 10%"><b>Prototype</b></td>
           <td style="width: 10%"><b>Startup</b></td>
           <td style="width: 10%"><b>Business</b></td>
           <td style="width: 10%"><b>Business+</b></td>
-          <td style="width: 30%"><b>Description</b></td>
+          <td style="width: 30%"><b>说明</b></td>
       </tr>
   </thead>
   <tbody>
@@ -39,7 +38,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>500</td>
           <td>1000</td>
           <td>2000</td>
-          <td>Maximum number of devices</td>
+          <td>设备最大数量</td>
       </tr>
       <tr>
           <td>Assets</td>
@@ -48,7 +47,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>500</td>
           <td>1000</td>
           <td>2000</td>
-          <td>Maximum number of assets</td>
+          <td>资产最大数量</td>
       </tr>
       <tr>
           <td>Customers</td>
@@ -57,7 +56,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>100</td>
           <td>500</td>
           <td>1000</td>
-          <td>Maximum number of customers</td>
+          <td>客户最大数量</td>
       </tr>
       <tr>
           <td>Users</td>
@@ -66,7 +65,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>100</td>
           <td>500</td>
           <td>1000</td>
-          <td>Maximum number of users</td>
+          <td>用户最大数量</td>
       </tr>
       <tr>
           <td>Dashboards</td>
@@ -75,7 +74,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>200</td>
           <td>500</td>
           <td>1000</td>
-          <td>Maximum number of dashboards</td>
+          <td>仪表板最大数量</td>
       </tr>
       <tr>
           <td>Rule chains</td>
@@ -84,7 +83,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>50</td>
           <td>100</td>
           <td>200</td>
-          <td>Maximum number of rule chains</td>
+          <td>规则链最大数量</td>
       </tr>
       <tr>
           <td>Integrations</td>
@@ -93,7 +92,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>10</td>
           <td>20</td>
           <td>40</td>
-          <td>Maximum number of integrations</td>
+          <td>集成最大数量</td>
       </tr>
       <tr>
           <td>Converters</td>
@@ -102,7 +101,7 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>50</td>
           <td>100</td>
           <td>200</td>
-          <td>Maximum number of converters</td>
+          <td>转换器最大数量</td>
       </tr>
       <tr>
           <td>Scheduler events</td>
@@ -111,25 +110,25 @@ Please see table below to compare the entity limits of the **legacy** subscripti
           <td>50</td>
           <td>100</td>
           <td>200</td>
-          <td>Maximum number of scheduler events</td>
+          <td>调度事件最大数量</td>
       </tr>            
   </tbody>
 </table>
 
-## API limits
+## API 限制
 
-Please see table below to compare the API limits of the **legacy** subscription plans. The values are monthly API limits, unless stated otherwise.
+下表对比**历史**订阅计划的 API 限制。除非另有说明，数值均为月度限制。
 
 <table>
   <thead>
       <tr>
-          <td style="width: 20%"><b>Parameter name</b></td>
+          <td style="width: 20%"><b>参数名</b></td>
           <td style="width: 10%"><b>Maker</b></td>
           <td style="width: 10%"><b>Prototype</b></td>
           <td style="width: 10%"><b>Startup</b></td>
           <td style="width: 10%"><b>Business</b></td>
           <td style="width: 10%"><b>Business+</b></td>
-          <td style="width: 30%"><b>Description</b></td>
+          <td style="width: 30%"><b>说明</b></td>
       </tr>
   </thead>
   <tbody>
@@ -140,7 +139,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>250M</td>
           <td>500M</td>
           <td>1B</td>
-          <td>Total number of messages received by any of the Transports (MQTT, HTTP, CoAP, etc) or Integrations</td>
+          <td>任一传输服务（MQTT、HTTP、CoAP 等）或集成接收的消息总数</td>
       </tr>
       <tr>
           <td>Transport data points</td>
@@ -149,7 +148,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>500M</td>
           <td>1B</td>
           <td>2B</td>
-          <td>Total number of key-value pairs that your telemetry or attribute transport messages contain</td>
+          <td>遥测或属性传输消息中包含的键值对总数</td>
       </tr>
       <tr>
           <td>Rule Engine executions</td>
@@ -158,7 +157,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>1B</td>
           <td>2B</td>
           <td>4B</td>
-          <td>Total number of any execution of the rule node.<br> Processing of a single telemetry message may cause multiple Rule Engine executions.<br> The platform will also count periodic messages produced by Generator nodes, etc.</td>
+          <td>规则节点任意执行的总次数。<br>单条遥测消息处理可能触发多次 Rule Engine 执行。<br>平台也会统计 Generator 节点产生的周期消息等。</td>
       </tr>
       <tr>
           <td>JavaScript executions</td>
@@ -167,7 +166,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>50M</td>
           <td>100M</td>
           <td>200M</td>
-          <td>Total number of any execution of user defined functions. For example, processing of the “Script” filter or transformation node, invocation of the data converter, etc.</td>
+          <td>用户自定义函数任意执行的总次数，如“Script”过滤器或转换节点的处理、数据转换器调用等。</td>
       </tr>
       <tr>
           <td>Default storage TTL</td>
@@ -176,10 +175,10 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>365 days</td>
           <td>365 days</td>
           <td>365 days</td>
-          <td>Default value of the "time to live" parameter that is used to store time-series data.<br>
-          You may overwrite the default value in the "Save Timeseries" rule node or using "TTL" metadata field of your message.<br>
-          This allows you to optimize storage consumption. The maximum allowed value of TTL is 5 years. <br>
-          For example, you may store "raw" data for 3 month and aggregated data for 3 years
+          <td>用于存储时序数据的“生存时间”参数默认值。<br>
+          可在“Save Timeseries”规则节点或消息的“TTL”元数据字段中覆盖。<br>
+          便于优化存储消耗。TTL 最大允许值为 5 年。<br>
+          例如：可将“原始”数据存 3 个月、聚合数据存 3 年
           </td>
       </tr>      
       <tr>
@@ -189,9 +188,9 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>100B</td>
           <td>200B</td>
           <td>400B</td>
-          <td>Data points storage days are calculated for all time-series data points that are stored to the database.<br>
-          Platform multiplies number of data points by the number of days those data points will be stored.<br> 
-          The TTL parameter is used to extract amount of days to store the data. For example, if you store 1M data points for 30 days, this is 30M data point storage days</td>
+          <td>针对所有存入数据库的时序数据点计算存储天数。<br>
+          平台将数据点数量乘以存储天数。<br> 
+          TTL 参数用于确定存储天数。例如：1M 数据点存 30 天即为 30M 数据点存储天数</td>
       </tr>
       <tr>
           <td>Alarms TTL</td>
@@ -200,7 +199,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>365 days</td>
           <td>365 days</td>
           <td>365 days</td>
-          <td>How many days to store alarms in the database</td>
+          <td>告警在数据库中保存的天数</td>
       </tr>
       <tr>
           <td>RPC TTL</td>
@@ -209,7 +208,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>365 days</td>
           <td>365 days</td>
           <td>365 days</td>
-          <td>How many days to store persistent RPC in the database</td>
+          <td>持久化 RPC 在数据库中保存的天数</td>
       </tr>
       <tr>
           <td>Alarms</td>
@@ -218,7 +217,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>20K</td>
           <td>40K</td>
           <td>60K</td>
-          <td>Total number of alarms created per month</td>
+          <td>每月创建的告警总数</td>
       </tr>
       <tr>
           <td>Emails</td>
@@ -227,7 +226,7 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>10K</td>
           <td>40K</td>
           <td>80K</td>
-          <td>Total number of emails sent</td>
+          <td>发送的邮件总数</td>
       </tr>
       <tr>
           <td>SMS</td>
@@ -236,27 +235,27 @@ Please see table below to compare the API limits of the **legacy** subscription 
           <td>500</td>
           <td>1000</td>
           <td>2000</td>
-          <td>Total number of SMS sent</td>
+          <td>发送的 SMS 总数</td>
       </tr>
   </tbody>
 </table>
 
-where "**K**" means 1 thousand, "**M**" means 1 million, "**B**" means 1 billion.
+其中“**K**”表示 1 千，“**M**”表示 1 百万，“**B**”表示 10 亿。
 
-## Calculated fields limits
+## 计算字段限制
 
-Please see the table below to compare the calculated fields limits across **legacy** subscription plans.
+下表对比**历史**订阅计划的计算字段限制。
 
 <table>
   <thead>
     <tr>
-      <td style="width: 20%"><b>Parameter name</b></td>
+      <td style="width: 20%"><b>参数名</b></td>
       <td style="width: 10%"><b>Maker</b></td>
       <td style="width: 10%"><b>Prototype</b></td>
       <td style="width: 10%"><b>Startup</b></td>
       <td style="width: 10%"><b>Business</b></td>
       <td style="width: 10%"><b>Business+</b></td>
-      <td style="width: 30%"><b>Description</b></td>
+      <td style="width: 30%"><b>说明</b></td>
     </tr>
   </thead>
   <tbody>
@@ -267,7 +266,7 @@ Please see the table below to compare the calculated fields limits across **lega
       <td>5</td>
       <td>5</td>
       <td>5</td>
-      <td>The maximum number of calculated fields allowed on an entity.</td>
+      <td>单实体允许的计算字段最大数量。</td>
     </tr>
     <tr>
       <td>Max data points number in rolling arguments</td>
@@ -276,7 +275,7 @@ Please see the table below to compare the calculated fields limits across **lega
       <td>1000</td>
       <td>1000</td>
       <td>1000</td>
-      <td>The maximum number of data points supported in rolling arguments.</td>
+      <td>滚动参数支持的数据点最大数量。</td>
     </tr>
     <tr>
       <td>Arguments per calculated field max number</td>
@@ -285,7 +284,7 @@ Please see the table below to compare the calculated fields limits across **lega
       <td>10</td>
       <td>10</td>
       <td>10</td>
-      <td>The maximum number of input arguments a single calculated field can use.</td>
+      <td>单个计算字段可使用的输入参数最大数量。</td>
     </tr>
     <tr>
       <td>State maximum size in KB</td>
@@ -294,7 +293,7 @@ Please see the table below to compare the calculated fields limits across **lega
       <td>32</td>
       <td>32</td>
       <td>32</td>
-      <td>The maximum allowed size of stored state data, measured in kilobytes.</td>
+      <td>存储状态数据允许的最大大小（以 KB 计）。</td>
     </tr>
     <tr>
       <td>Single value argument maximum size in KB</td>
@@ -303,33 +302,27 @@ Please see the table below to compare the calculated fields limits across **lega
       <td>2</td>
       <td>2</td>
       <td>2</td>
-      <td>The maximum size of a single argument value, in kilobytes.</td>
+      <td>单个参数值的最大大小（以 KB 计）。</td>
     </tr>
   </tbody>
 </table> 
 
-## Rate limits
+## 速率限制
 
-The platform’s rate-limiting policy preserves predictable service quality and reinforces operational resilience under peak
-load. Controls are enforced at both the tenant level (aggregate activity across all devices and users) and the individual
-device level, using consolidated time windows—per second, per minute, and per hour—to balance burst tolerance with
-sustained throughput ceilings. Thresholds are plan-dependent (Maker, Prototype, Startup, Business, Business+) and scale
-in line with expected traffic profiles to ensure fair multitenant consumption and SLA adherence.
+平台的速率限制策略旨在保证可预测的服务质量，并在峰值负载下保持运行韧性。限制在**租户层面**（所有设备与用户的聚合活动）和**单设备层面**同时生效，采用每秒、每分钟、每小时的统一时间窗口，在突发容忍与持续吞吐上限之间取得平衡。阈值随套餐（Maker、Prototype、Startup、Business、Business+）变化，与预期流量画像匹配，确保多租户公平使用及 SLA 达标。
 
-If the workload exceeds the allocated limits, the corresponding requests will be rejected by the platform for the time
-being until the rate limits return to within the policy. Additionally, the platform also notifies tenant administrators
-when a limit breach occurs.
+若工作负载超过分配限制，相应请求将被平台临时拒绝，直至速率恢复到策略范围内。此外，发生超限时平台会通知租户管理员。
 
 <table>
   <thead>
       <tr>
-          <td><b>Parameter name</b></td>
+          <td><b>参数名</b></td>
           <td><b>Maker</b></td>
           <td><b>Prototype</b></td>
           <td><b>Startup</b></td>
           <td><b>Business</b></td>
           <td><b>Business+</b></td>
-          <td><b>Description</b></td>
+          <td><b>说明</b></td>
       </tr>
   </thead>
   <tbody>
@@ -340,7 +333,7 @@ when a limit breach occurs.
           <td>Up to 10,000 per second,<br>not exceeding 300,000 per minute,<br>and capped at 6,000,000 per hour</td>
           <td>Up to 20,000 per second,<br>not exceeding 600,000 per minute,<br>and capped at 12,000,000 per hour</td>
           <td>Up to 40,000 per second,<br>not exceeding 1,200,000 per minute,<br>and capped at 24,000,000 per hour</td>
-          <td>Total number of messages received by any of the transport microservices for all devices that belong to the tenant</td>
+          <td>任一传输微服务为该租户下所有设备接收的消息总数</td>
       </tr>
       <tr>
           <td>Telemetry Transport messages (Tenant)</td>
@@ -349,7 +342,7 @@ when a limit breach occurs.
           <td>Up to 5,000 per second,<br>not exceeding 150,000 per minute,<br>and capped at 3,500,000 per hour</td>
           <td>Up to 10,000 per second,<br>not exceeding 300,000 per minute,<br>and capped at 7,000,000 per hour</td>
           <td>Up to 20,000 per second,<br>not exceeding 600,000 per minute,<br>and capped at 14,000,000 per hour</td>
-          <td>Total number of telemetry messages received by any of the transport microservices for all devices that belong to the tenant</td>
+          <td>任一传输微服务为该租户下所有设备接收的遥测消息总数</td>
       </tr>
       <tr>
           <td>Telemetry Transport data points (Tenant)</td>
@@ -358,7 +351,7 @@ when a limit breach occurs.
           <td>Up to 10,000 per second,<br>not exceeding 300,000 per minute,<br>and capped at 7,000,000 per hour</td>
           <td>Up to 20,000 per second,<br>not exceeding 600,000 per minute,<br>and capped at 14,000,000 per hour</td>
           <td>Up to 40,000 per second,<br>not exceeding 1,200,000 per minute,<br>and capped at 28,000,000 per hour</td>
-          <td>Total number of telemetry data points received by any of the transport microservices for all devices that belong to the tenant</td>
+          <td>任一传输微服务为该租户下所有设备接收的遥测数据点总数</td>
       </tr>            
       <tr>
           <td>All Transport messages (Device)</td>
@@ -367,7 +360,7 @@ when a limit breach occurs.
           <td>Up to 200 per second,<br>not exceeding 6,000 per minute,<br>and capped at 14,000 per hour</td>
           <td>Up to 200 per second,<br>not exceeding 6,000 per minute,<br>and capped at 14,000 per hour</td>
           <td>Up to 200 per second,<br>not exceeding 6,000 per minute,<br>and capped at 14,000 per hour</td>
-          <td>Total number of messages received by any of the transport microservices for each device separately</td>
+          <td>任一传输微服务为各设备单独接收的消息总数</td>
       </tr>
       <tr>
           <td>Telemetry Transport messages (Device)</td>
@@ -376,7 +369,7 @@ when a limit breach occurs.
           <td>Up to 100 per second,<br>not exceeding 3,000 per minute,<br>and capped at 7,000 per hour</td>
           <td>Up to 100 per second,<br>not exceeding 3,000 per minute,<br>and capped at 7,000 per hour</td>
           <td>Up to 100 per second,<br>not exceeding 3,000 per minute,<br>and capped at 7,000 per hour</td>
-          <td>Total number of telemetry messages received by any of the transport microservices for each device separately</td>
+          <td>任一传输微服务为各设备单独接收的遥测消息总数</td>
       </tr>
       <tr>
           <td>Telemetry Transport data points (Device)</td>
@@ -385,7 +378,7 @@ when a limit breach occurs.
           <td>Up to 200 per second,<br>not exceeding 6,000 per minute,<br>and capped at 14,000 per hour</td>
           <td>Up to 200 per second,<br>not exceeding 6,000 per minute,<br>and capped at 14,000 per hour</td>
           <td>Up to 200 per second,<br>not exceeding 6,000 per minute,<br>and capped at 14,000 per hour</td>
-          <td>Total number of telemetry data points received by any of the transport microservices for each device separately</td>
+          <td>任一传输微服务为各设备单独接收的遥测数据点总数</td>
       </tr>
       <tr>
           <td>Integration messages (Tenant)</td>
@@ -394,7 +387,7 @@ when a limit breach occurs.
           <td>Up to 5,000 per second,<br>not exceeding 150,000 per minute,<br>and capped at 3,500,000 per hour</td>
           <td>Up to 10,000 per second,<br>not exceeding 300,000 per minute,<br>and capped at 7,000,000 per hour</td>
           <td>Up to 20,000 per second,<br>not exceeding 600,000 per minute,<br>and capped at 14,000,000 per hour</td>
-          <td>Total number of messages received by any of the transport microservices for all devices that belong to the tenant</td>
+          <td>任一传输微服务为该租户下所有设备接收的消息总数</td>
       </tr>
       <tr>
           <td>Integration messages (Device)</td>
@@ -403,7 +396,7 @@ when a limit breach occurs.
           <td>Up to 100 per second,<br>not exceeding 3,000 per minute,<br>and capped at 7,000 per hour</td>
           <td>Up to 100 per second,<br>not exceeding 3,000 per minute,<br>and capped at 7,000 per hour</td>
           <td>Up to 100 per second,<br>not exceeding 3,000 per minute,<br>and capped at 7,000 per hour</td>
-          <td>Total number of telemetry messages received by any of the transport microservices for all devices</td>
+          <td>任一传输微服务为所有设备接收的遥测消息总数</td>
       </tr>
       <tr>
           <td>REST requests (Tenant)</td>
@@ -412,7 +405,7 @@ when a limit breach occurs.
           <td>Up to 100 per second,<br>not exceeding 2,000 per minute</td>
           <td>Up to 100 per second,<br>not exceeding 2,000 per minute</td>
           <td>Up to 100 per second,<br>not exceeding 2,000 per minute</td>
-          <td>Total number of REST API calls received by any of the users belong to the tenant</td>
+          <td>该租户下任一用户发起的 REST API 调用总数</td>
       </tr>
       <tr>
           <td>REST requests (Customer)</td>
@@ -421,7 +414,7 @@ when a limit breach occurs.
           <td>Up to 50 per second,<br>not exceeding 1,000 per minute</td>
           <td>Up to 50 per second,<br>not exceeding 1,000 per minute</td>
           <td>Up to 50 per second,<br>not exceeding 1,000 per minute</td>
-          <td>Total number of REST API calls received by any of the users belong to the particular customer</td>
+          <td>特定客户下任一用户发起的 REST API 调用总数</td>
       </tr>
       <tr>
           <td>WS updates per session</td>
@@ -430,7 +423,7 @@ when a limit breach occurs.
           <td>Up to 1,000 per second,<br>not exceeding 10,000 per minute</td>
           <td>Up to 1,000 per second,<br>not exceeding 10,000 per minute</td>
           <td>Up to 1,000 per second,<br>not exceeding 10,000 per minute</td>
-          <td>Total number of messages received by particular WebSocket session</td>
+          <td>特定 WebSocket 会话接收的消息总数</td>
       </tr>
       <tr>
           <td>WS Sessions (Tenant)</td>
@@ -439,7 +432,7 @@ when a limit breach occurs.
           <td>1K</td>
           <td>1K</td>
           <td>1K</td>
-          <td>Maximum number of Web socket sessions for the tenant</td>
+          <td>该租户的 WebSocket 会话最大数量</td>
       </tr>
       <tr>
           <td>WS Subscriptions (Tenant)</td>
@@ -448,7 +441,7 @@ when a limit breach occurs.
           <td>20K</td>
           <td>20K</td>
           <td>20K</td>
-          <td>Maximum number of Web socket subscriptions for the tenant</td>
+          <td>该租户的 WebSocket 订阅最大数量</td>
       </tr>
       <tr>
           <td>WS Sessions (Customer)</td>
@@ -457,7 +450,7 @@ when a limit breach occurs.
           <td>500</td>
           <td>500</td>
           <td>500</td>
-          <td>Maximum number of Web socket sessions for the сustomer</td>
+          <td>该客户的 WebSocket 会话最大数量</td>
       </tr>
       <tr>
           <td>WS Subscriptions (Customer)</td>
@@ -466,7 +459,7 @@ when a limit breach occurs.
           <td>10K</td>
           <td>10K</td>
           <td>10K</td>
-          <td>Maximum number of Web socket subscription for the сustomer</td>
+          <td>该客户的 WebSocket 订阅最大数量</td>
       </tr>
       <tr>
           <td>WS Sessions (Public user)</td>
@@ -475,7 +468,7 @@ when a limit breach occurs.
           <td>250</td>
           <td>250</td>
           <td>250</td>
-          <td>Maximum number of Sessions per public user</td>
+          <td>每位公开用户的会话最大数量</td>
       </tr>
       <tr>
           <td>WS Subscriptions (Public user)</td>
@@ -484,7 +477,7 @@ when a limit breach occurs.
           <td>5K</td>
           <td>5K</td>
           <td>5K</td>
-          <td>Maximum number of subscriptions per public user</td>
+          <td>每位公开用户的订阅最大数量</td>
       </tr> 
       <tr>
           <td>WS Sessions (Regular user)</td>
@@ -493,7 +486,7 @@ when a limit breach occurs.
           <td>100</td>
           <td>100</td>
           <td>100</td>
-          <td>Maximum number of Sessions per regular user</td>
+          <td>每位普通用户的会话最大数量</td>
       </tr>
       <tr>
           <td>WS Subscriptions (Regular user)</td>
@@ -502,7 +495,7 @@ when a limit breach occurs.
           <td>2K</td>
           <td>2K</td>
           <td>2K</td>
-          <td>Maximum number of subscriptions per regular user</td>
+          <td>每位普通用户的订阅最大数量</td>
       </tr>
       <tr>
           <td>WS queue message (Session)</td>
@@ -511,51 +504,50 @@ when a limit breach occurs.
           <td>500</td>
           <td>500</td>
           <td>500</td>
-          <td>Maximum size of queue message per session</td>
+          <td>每会话的队列消息最大大小</td>
       </tr>
   </tbody>
 </table>
 
-where "**K**" means 1 thousand, "**M**" means 1 million, "**B**" means 1 billion.
+其中“**K**”表示 1 千，“**M**”表示 1 百万，“**B**”表示 10 亿。
 
-## White labeling
+## 白标
 
-ThingsBoard web interface allows you to configure your company or product logo and color scheme in 2 minutes with zero coding efforts and no service restart required. 
-See feature [documentation](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"} for more details. ThingsBoard Cloud extends white-labeling feature with ability to configure own domain name easily. 
-See [managing domain](/products/{{docsPrefix}}domains/){:target="_blank"} for more details. 
+ThingsBoard Web 界面支持在 2 分钟内配置公司或产品 Logo 及配色，无需编码、无需重启服务。
+详见功能[文档](/docs/{{docsPrefix}}user-guide/white-labeling/){:target="_blank"}。ThingsBoard Cloud 扩展了白标能力，支持便捷配置自有域名。
+详见[域名管理](/products/{{docsPrefix}}domains/){:target="_blank"}。
 
-The white-labeling feature is available for **Prototype**, **Startup** and **Business** **legacy** subscription plans.
+白标功能在 **Prototype**、**Startup** 和 **Business** 的**历史**订阅计划中可用。
 
-## How to switch to the new subscription plans?
+## 如何切换到新订阅计划？
 
-While our research indicates that **90% of existing customers** are fully covered by their current legacy plans, many users may find the new **pay-as-you-go + top-ups** model more attractive and cost-effective.
+研究表明**约 90% 的现有客户**在现有历史计划下已能满足需求，但不少用户仍可能认为新的**按需付费 + 充值**模式更具吸引力且更经济。
 
-The main advantage of switching is **flexibility**. Instead of upgrading to a significantly higher subscription tier solely to increase a specific limit (e.g., API calls or SMS counts), the new model allows you to purchase Top-ups for the specific resources you need.
+切换的主要优势在于**灵活性**。无需为了提升某项限制（如 API 调用或 SMS 数量）而升级到明显更高级的套餐，新模型支持为所需资源单独购买充值。
 
-**Top-up Availability**:
+**充值可用范围**：
 
-* **General Top-ups**: The ability to top-up API limits and general entities (like Alarms, Rule Chains, etc.) is available starting from the Pilot plan.
+* **通用充值**：API 限制及通用实体（如告警、规则链等）的充值自 Pilot 套餐起可用。
+* **设备与资产充值**：设备与资产最大数量的充值仅在 Business 套餐中提供。
 
-* **Device & Asset Top-ups**: The ability to top-up the maximum number of Devices and Assets is exclusive to the Business plan.
+**两步即可切换**
 
-**Switch in 2 clicks**
+切换至新模型无需数据迁移，过程简单。
 
-Transitioning to the new model is seamless and requires no migration of data.
+1. 在左侧主导航进入**“计划与计费”**。
+2. 点击**“更新计划”**按钮。
+3. 选择目标套餐并确认。
 
-1. Navigate to **"Plan and Billing"** in the left main menu.
-2. Click the **"Update plan"** button.
-3. Select your desired new tier and confirm.
+## 如何取消订阅？
 
-## How to cancel my subscription?
+终止 ThingsBoard Cloud 订阅可按下述步骤操作：
 
-To terminate your ThingsBoard Cloud subscription, follow these steps:
+- 以租户管理员身份登录 ThingsBoard Cloud。
+- 点击屏幕右上角**三点图标**，在下拉菜单中选择**账户**进入账户设置。
+- 在**个人资料**标签下点击橙色**删除账户**按钮。
+- 按提示完成取消订阅流程。
+- 在确认对话框中点击**“我了解后果，删除账户”**完成确认。
 
-- Log in to ThingsBoard Cloud as Tenant Administrator.
-- Go to account settings by clicking the **three-dot icon** in the upper-right corner of the screen and selecting **Account** from the dropdown menu.
-- Under the **Profile** tab, click the orange **Delete account** button.
-- Follow the instructions to cancel your subscription.
-- Confirm the action by clicking the "**I understand the consequences, delete account**" button.
-
-In the future, the subscription termination button will be moved to the "**Plan and billing**" page in the ThingsBoard navigation menu.
+之后，订阅终止入口将迁移至 ThingsBoard 导航菜单中的**“计划与计费”**页面。
 
 {% include images-gallery.html imageCollection="cancel-my-subscription" %}

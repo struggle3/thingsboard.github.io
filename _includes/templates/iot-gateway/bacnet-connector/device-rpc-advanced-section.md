@@ -1,20 +1,20 @@
-Configuration, provided in this section is used for sending RPC requests from ThingsBoard to the device.
+本节的配置用于从 ThingsBoard 向设备发送 RPC 请求。
 
-| **Parameter**  | **Description**                                                               |
+| **参数**  | **描述**                                                               |
 |----------------|-------------------------------------------------------------------------------|
-| method         | RPC method name.                                                              |
-| requestType    | "**writeProperty**" to write data and "**readProperty**" to read data.        |
-| requestTimeout | Timeout to wait for a response from the BACnet device, in milliseconds.       |
-| objectType     | Object type in the BACnet device.                                             |
-| objectId       | Object id in the BACnet device.                                               |
-| propertyId     | Property id in the BACnet device.                                             |
-| priority       | Priority of the value to write (optional, should be an integer from 1 to 16). |
+| method         | RPC 方法名称。                                                              |
+| requestType    | "**writeProperty**" 用于写入数据，"**readProperty**" 用于读取数据。        |
+| requestTimeout | 等待 BACnet 设备响应的超时时间（毫秒）。       |
+| objectType     | BACnet 设备中的对象类型。                                             |
+| objectId       | BACnet 设备中的对象 ID。                                               |
+| propertyId     | BACnet 设备中的属性 ID。                                             |
+| priority       | 要写入值的优先级（可选，1 到 16 的整数）。 |
 | ---            | ---                                                                           |
 
-If value is None, BACnet connector will send relinquish command with Null value.
-Also, writing RPC should contain value or priority, or both.
+若 value 为 None，BACnet 连接器将发送带 Null 值的 relinquish 命令。
+此外，写入 RPC 应包含 value 或 priority，或两者都包含。
 
-This subsection in configuration file looks like this:
+配置文件中该子节示例如下：
 
 ```json
 "serverSideRpc": [

@@ -9,11 +9,11 @@
 {:toc}
 
 
-## Overview
-**AWS Kinesis** provides easily collect, process, and analyze video and data streams in real time, so you can get timely insights and react quickly to new information.
-After integrating **AWS Kinesis** with the **Thingsboard**, you can process and visualize data from **AWS Kinesis** streams in the **Thingsboard IoT platform**.
+## 概述
+**AWS Kinesis**可轻松实时采集、处理和分析视频与数据流，以便您及时获取洞察并快速响应新信息。
+将**AWS Kinesis**与**ThingsBoard**集成后，可在**ThingsBoard IoT平台**中处理和可视化**AWS Kinesis**流中的数据。
 
-Please make sure that you know [AWS Kinesis basics](https://docs.aws.amazon.com/streams/latest/dev/introduction.html){:target="_blank"} and what are the **AWS Kinesis streams** in general before continue with this topic.
+继续前请确保了解[AWS Kinesis基础知识](https://docs.aws.amazon.com/streams/latest/dev/introduction.html){:target="_blank"}以及**AWS Kinesis streams**的一般概念。
 
 ## AWS Kinesis setup
 

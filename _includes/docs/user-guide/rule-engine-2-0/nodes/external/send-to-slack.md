@@ -1,41 +1,41 @@
-Sends messages to [Slack](https://slack.com/){:target="_blank"} channels or users via Slack API.
+通过 Slack API 向 [Slack](https://slack.com/){:target="_blank"} 频道或用户发送消息。
 
-## Configuration
+## 配置
 
 ### Message Template
 
-The content of the Slack message to send. This field supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}.
+要发送的 Slack 消息内容。该字段支持 [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}。
 
 ### Use System Slack Settings
 
-When enabled, the node uses the [Slack token configured in the system settings](/docs/{{docsPrefix}}user-guide/ui/slack-settings/){:target="_blank"}.
-This allows centralized Slack configuration at the tenant or system level without configuring individual rule nodes.
+启用时，节点使用[系统设置中配置的 Slack 令牌](/docs/{{docsPrefix}}user-guide/ui/slack-settings/){:target="_blank"}。
+可在租户或系统层面集中配置 Slack，无需在单个规则节点中配置。
 
-When disabled, you must configure the Slack token directly in the rule node.
+禁用时，必须在规则节点中直接配置 Slack 令牌。
 
 ### Slack API Token
 
-The Slack token for authentication.
+用于认证的 Slack 令牌。
 
 ### Slack Channel Type
 
-Specifies the destination type for the message:
+指定消息的目标类型：
 
-- **Public channel** – Send to a public Slack channel (e.g., `#general`, `#alerts`)
-- **Private channel** – Send to a private Slack channel (e.g., `#private-alerts`)
-- **Direct message** – Send a direct message to a specific user (e.g., `@john.doe`)
+- **Public channel** — 发送到公共 Slack 频道（如 `#general`、`#alerts`）
+- **Private channel** — 发送到私有 Slack 频道（如 `#private-alerts`）
+- **Direct message** — 向指定用户发送私信（如 `@john.doe`）
 
 ### Conversation
 
-The target Slack conversation for the message. This field is required.
+消息的目标 Slack 会话。该字段为必填。
 
-The conversation is selected from a dropdown list that is dynamically populated from the Slack API. To configure this field:
+会话从下拉列表中选择，列表由 Slack API 动态填充。配置此字段时：
 
-1. First provide a valid Slack token in the **Slack API Token** field (or ensure system Slack settings are configured)
-2. The dropdown will fetch available conversations from your Slack workspace
-3. Select the desired channel or user from the list
+1. 先在 **Slack API Token** 字段中提供有效 Slack 令牌（或确保已配置系统 Slack 设置）
+2. 下拉列表将从 Slack 工作空间获取可用会话
+3. 从列表中选择目标频道或用户
 
-The conversation must be accessible by the configured Slack token.
+配置的 Slack 令牌必须能访问该会话。
 
 ### JSON Schema
 
@@ -115,46 +115,44 @@ The conversation must be accessible by the configured Slack token.
 ```
 {: .copy-code.expandable-3 }
 
-## Output message format
+## 输出消息格式
 
-The node does not modify the incoming message. Both message data and metadata are passed through unchanged to the next node in the chain.
+节点不修改入站消息。消息数据和 metadata 均原样传递给链中下一节点。
 
-## Message acknowledgement behavior
+## 消息确认行为
 
-The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable:
+节点的消息确认行为由环境变量 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 控制：
 
-- **When set to `true`** – The incoming message is acknowledged and marked as successfully processed immediately upon receipt. A new message is created as a copy.
-  The Slack sending operation proceeds asynchronously, and after completion, the copy is enqueued for processing by the next node.
-- **When set to `false`** (default) – The incoming message remains in an in-processing state throughout the entire Slack sending operation. The message is passed to the next node
-  after the Slack operation completes.
+- **设为 `true`** — 入站消息在接收后立即确认并标记为成功处理，创建副本。Slack 发送操作异步执行，完成后副本入队交由下一节点处理。
+- **设为 `false`**（默认）— 入站消息在整个 Slack 发送过程中保持处理中状态。Slack 操作完成后将消息传递给下一节点。
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node determines which Slack token to use:
-    - If **Use System Slack Settings** is enabled, the system-configured token is retrieved
-    - Otherwise, the token from the node configuration is used
-2. The node processes the message template to create the message content using values from the incoming message data and metadata.
-3. The message is sent asynchronously to the specified Slack conversation via the Slack API.
-4. When processing completes:
-    - **Success**: The message is routed to the `Success` connection.
-    - **Failure**: The message is routed to the `Failure` connection.
+1. 节点确定使用的 Slack 令牌：
+    - 若启用 **Use System Slack Settings**，使用系统配置的令牌
+    - 否则使用节点配置中的令牌
+2. 节点根据入站消息的数据和 metadata 处理消息模板，生成消息内容。
+3. 通过 Slack API 将消息异步发送到指定的 Slack 会话。
+4. 处理完成时：
+    - **Success**：消息路由到 `Success` 连接
+    - **Failure**：消息路由到 `Failure` 连接
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The message was successfully sent to the specified Slack conversation.
+    - 消息已成功发送到指定的 Slack 会话
 - **Failure**
-    - An unexpected error occurred during message sending.
+    - 发送消息时发生意外错误
 
-## Examples
+## 示例
 
-### Example 1 — Sending temperature alert to public channel
+### 示例 1 — 向公共频道发送温度告警
 
-Send a Slack alert to a public channel when a device reports high temperature.
+设备上报高温时向公共 Slack 频道发送告警。
 
-**Incoming message**
+**入站消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -163,7 +161,7 @@ Data:
 }
 ```
 
-Metadata:
+Metadata：
 
 ```json
 {
@@ -173,7 +171,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -188,17 +186,17 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+数据：未更改
 
-Metadata: unchanged.
+Metadata：未更改
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-A Slack message is sent to the `#alerts` channel:
+已向 `#alerts` 频道发送 Slack 消息：
 
 ```text
 ⚠️ High Temperature Alert

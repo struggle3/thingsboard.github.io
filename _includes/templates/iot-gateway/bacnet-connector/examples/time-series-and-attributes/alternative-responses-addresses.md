@@ -1,18 +1,13 @@
-Alternative response addresses field allows you to specify an alternative IP address for device responses.
-It is especially useful when the gateway and the BACnet device are located in different networks.
+替代响应地址字段允许您为设备响应指定替代 IP 地址。
+当网关和 BACnet 设备位于不同网络时，此功能尤其有用。
 
-For example, consider the following network setup:
+例如，考虑以下网络设置：
 
 ![image](/images/gateway/bacnet-connector/examples/alternative-responses-addresses-network-setup.png)
 
-In this setup, the gateway runs inside a Docker container and the BACnet device is located on a local network with IP 
-address `192.168.1.200:45606` and is not directly accessible from the Docker container. BACPypes sends APDUs to the 
-gateway without including the port number, making it impossible for the connector to determine whether a response came 
-from an allowed device. When you configure an alternative response address, the connector uses this IP to correctly 
-recognize and validate the device.
+在此设置中，网关运行在 Docker 容器内，BACnet 设备位于本地网络中，IP 地址为 `192.168.1.200:45606`，无法从 Docker 容器直接访问。BACPypes 向网关发送 APDU 时不包含端口号，导致连接器无法判断响应是否来自允许的设备。配置替代响应地址后，连接器将使用该 IP 正确识别和验证设备。
 
-To configure the alternative response address, you need to add the `altResponsesAddresses` field to the device 
-configuration. Here is an example configuration snippet:
+要配置替代响应地址，需要在设备配置中添加 `altResponsesAddresses` 字段。以下为配置示例片段：
 
 ```json
 {
@@ -50,9 +45,7 @@ configuration. Here is an example configuration snippet:
 ```
 {:.copy-code}
 
-After applying this configuration, the connector will use the specified alternative response address 
-`192.168.1.200:45606` to recognize and validate responses from the BACnet device. This ensures that the connector can
-communicate effectively with the device even when they are located in different networks. As a result, you should see 
-created device in ThingsBoard:
+应用此配置后，连接器将使用指定的替代响应地址
+`192.168.1.200:45606` 识别和验证来自 BACnet 设备的响应。这确保即使网关与设备位于不同网络，连接器也能有效与设备通信。因此，您应在 ThingsBoard 中看到已创建设备：
 
 ![image](/images/gateway/bacnet-connector/examples/alternative-responses-addresses-overview.png)

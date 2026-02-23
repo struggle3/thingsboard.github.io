@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Device Attributes Filter
+title: 设备属性过滤器
 
 ---
 

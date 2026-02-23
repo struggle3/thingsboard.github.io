@@ -1,24 +1,24 @@
 {% capture hybrid-info %}
-ThingsBoard team recommends to use Hybrid database approach if you do plan to have 1M+ devices in production or high data ingestion rate (> 5000 msg/sec).
-In this case, ThingsBoard will be storing timeseries data in Cassandra while continue to use PostgreSQL for main entities (devices/assets/dashboards/customers).  
+若您计划在生产环境中部署 100 万以上设备或具有高数据摄取率（> 5000 条消息/秒），ThingsBoard 团队建议使用混合数据库方案。
+在此情况下，ThingsBoard 将把时序数据存储在 Cassandra 中，同时继续使用 PostgreSQL 存储主要实体（设备/资产/仪表板/客户）。
 {% endcapture %}
 {% include templates/info-banner.md content=hybrid-info %}
 
-##### PostgreSQL Installation
+##### PostgreSQL 安装
 
-Download the installation file (PostgreSQL 12.17 or newer releases) [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows) and follow the installation instructions.
+从此处[下载](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)安装文件（PostgreSQL 12.17 或更新版本）并按照安装说明操作。
 
-During PostgreSQL installation, you will be prompted for superuser (postgres) password.
-Don't forget this password. It will be used later. For simplicity, we will substitute it with "postgres".
+在 PostgreSQL 安装过程中，系统会提示您输入超级用户 (postgres) 密码。
+请勿忘记此密码，后续将使用。为简便起见，我们将用 "postgres" 代替。
 
-##### Create ThingsBoard Database
+##### 创建 ThingsBoard 数据库
 
-Once installed, launch the "pgAdmin" software and login as superuser (postgres). 
-Open your server and create database "thingsboard" with owner "postgres".
+安装完成后，启动 "pgAdmin" 软件并以超级用户 (postgres) 登录。  
+打开服务器并创建数据库 "thingsboard"，所有者设置为 "postgres"。
 
-##### Cassandra Installation
+##### Cassandra 安装
 
-Instructions listed below will help you to install Cassandra.
+以下说明将帮助您安装 Cassandra。
 
 - Download DataStax Community Edition v3.0.9
     - [MSI Installer (32-bit)](http://downloads.datastax.com/community/datastax-community-32bit_3.0.9.msi)
@@ -55,10 +55,10 @@ Instructions listed below will help you to install Cassandra.
  
 - The primary interface into Cassandra is the CQL (Cassandra Query Language) shell utility, which can be used to execute CQL commands for the new Cassandra server.
 
-##### ThingsBoard Configuration
+##### ThingsBoard 配置
 
-Open the Notepad or other editor as administrator user (right click on the app icon and select "Run as administrator").  
-Open the following file for editing (select "All Files" instead of "Text Documents" in file choosing dialog, the encoding is UTF-8):
+以管理员身份打开记事本或其他编辑器（右键点击应用图标并选择“以管理员身份运行”）。  
+打开以下文件进行编辑（在文件选择对话框中选择“所有文件”而非“文本文档”，编码为 UTF-8）：
 
 ```text 
 C:\Program Files (x86)\thingsboard\conf\thingsboard.yml
@@ -66,7 +66,7 @@ C:\Program Files (x86)\thingsboard\conf\thingsboard.yml
 {: .copy-code}
 
 
-and locate "# SQL DAO Configuration" block. Don't forget to replace "postgres" with your real postgres user password:
+并找到 "# SQL DAO Configuration" 配置块。请勿忘记将 "postgres" 替换为您的实际 postgres 用户密码：
 
 ```yml
 # SQL DAO Configuration
@@ -89,13 +89,13 @@ spring:
 ``` 
 {: .copy-code}
 
-locate "DATABASE_TS_TYPE" parameter. Replace "sql" with "cassandra".
+找到 "DATABASE_TS_TYPE" 参数。将 "sql" 替换为 "cassandra"。
 
 ```yml
     type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
 ```
 
-You can optionally tune parameters inside "cassandra" configuration block.
+您可根据需要调整 "cassandra" 配置块内的参数。
 
 ```yml
 # Cassandra driver configuration parameters

@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Trendz Rest API
-description: Trendz Rest API
+title: Trendz REST API
+description: Trendz REST API 说明
 ---
 
 * TOC

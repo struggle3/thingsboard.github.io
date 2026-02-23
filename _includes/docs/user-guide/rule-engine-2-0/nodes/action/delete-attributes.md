@@ -1,23 +1,23 @@
-Deletes specified attributes from the message originator based on configured scope and attribute keys.
+根据配置的作用域和属性键，从消息发起者删除指定属性。
 
-## Configuration
+## 配置
 
-- **Attributes scope**: Defines the scope of attributes to delete from the message originator.
-    - *Server attributes*: Deletes attributes from server scope (`SERVER_SCOPE`)
-    - *Shared attributes*: Deletes attributes from shared scope (`SHARED_SCOPE`)
-    - *Client attributes*: Deletes attributes from client scope (`CLIENT_SCOPE`)
-- **Attributes keys**: Set of attribute keys to delete. Supports templatization using `${metadataKey}` and `$[dataKey]` patterns.
+- **Attributes scope（属性作用域）**：定义从消息发起者删除属性的作用域。
+    - *Server attributes（服务端属性）*：从服务端作用域（`SERVER_SCOPE`）删除
+    - *Shared attributes（共享属性）*：从共享作用域（`SHARED_SCOPE`）删除
+    - *Client attributes（客户端属性）*：从客户端作用域（`CLIENT_SCOPE`）删除
+- **Attributes keys（属性键）**：要删除的属性键集合。支持使用 `${metadataKey}` 和 `$[dataKey]` 模式进行模板化。
 
-### Advanced settings
+### 高级设置
 
-- **Send attributes deleted notification**: When enabled, sends an `ATTRIBUTES_DELETED` event to the default rule chain of the message originator after successful deletion.
-  Example of such event:
+- **Send attributes deleted notification（发送属性已删除通知）**：启用时，成功删除后向消息发起者的默认 Rule Chain 发送 `ATTRIBUTES_DELETED` 事件。
+  此类事件示例：
 
-Type: `ATTRIBUTES_DELETED`
+类型：`ATTRIBUTES_DELETED`
 
-Originator: same as original message originator
+发起者：与原始消息发起者相同
 
-Data contains a set of deleted attribute keys: 
+数据包含已删除属性键集合：
 
 ```json
 {
@@ -25,7 +25,7 @@ Data contains a set of deleted attribute keys:
 }
 ```
 
-Metadata contains the rule node ID that performed the deletion and the scope of the deleted attributes:
+元数据包含执行删除的 Rule 节点 ID 及已删除属性的作用域：
 
 ```json
 {
@@ -34,27 +34,26 @@ Metadata contains the rule node ID that performed the deletion and the scope of 
 }
 ```
 
-- **Force notification to the device**: When enabled, forces notification to be sent to the device. Only available for *Shared attributes* scope. Alternatively, device notification
-  can be triggered by setting the `notifyDevice` metadata key to `"true"` in the incoming message.
+- **Force notification to the device（强制通知设备）**：启用时，强制向设备发送通知。仅适用于 *Shared attributes* 作用域。或可通过在传入消息中将 `notifyDevice` 元数据键设为 `"true"` 触发设备通知。
 
-Notification contains a set of deleted attribute keys:
+通知包含已删除属性键集合：
 ```json
 {
   "deleted": ["key1", "key2"]
 }
 ```
 
-### Scope override
+### 作用域覆盖
 
-The attribute scope can be dynamically overridden using the `scope` metadata key in the incoming message. If provided, this overrides the scope configured in the node settings.
+可使用传入消息中的 `scope` 元数据键动态覆盖属性作用域。若提供，将覆盖节点设置中配置的作用域。
 
-Supported `scope` values:
+支持的 `scope` 值：
 
-- `SERVER_SCOPE` - Server attributes scope
-- `SHARED_SCOPE` - Shared attributes scope
-- `CLIENT_SCOPE` - Client attributes scope
+- `SERVER_SCOPE` - 服务端属性作用域
+- `SHARED_SCOPE` - 共享属性作用域
+- `CLIENT_SCOPE` - 客户端属性作用域
 
-If provided, value must exactly match one of these constants (case-sensitive).
+若提供，值必须与上述常量之一完全匹配（区分大小写）。
 
 ### JSON Schema
 
@@ -93,39 +92,39 @@ If provided, value must exactly match one of these constants (case-sensitive).
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. **Process attribute keys**: Processes each configured attribute key pattern, substituting any placeholders with values from message.
-2. **Filter valid keys**: Removes duplicate keys and filters out empty/blank keys from the processed list.
-3. **Determine attribute scope**:
-    - Uses `scope` metadata value from the message if present
-    - Falls back to configured scope if no metadata scope is provided
-4. **Skip processing if no keys**: If no valid keys remain after processing, routes message directly to `Success` without performing any deletions.
-5. **Delete attributes**: Deletes the specified attributes from the message originator using the processed key list and determined scope.
-6. **Handle notifications**:
-    - For shared scope: Applies device notification if configured or if `notifyDevice` metadata is set to true
-    - Sends `ATTRIBUTES_DELETED` event to default originator rule chain if `sendAttributesDeletedNotification` is enabled
-7. **Route message**: Routes the original message to `Success` or `Failure` based on deletion operation result.
+1. **处理属性键**：处理每个配置的属性键模式，用消息中的值替换占位符。
+2. **过滤有效键**：从处理后列表中移除重复键并过滤空/空白键。
+3. **确定属性作用域**：
+    - 若消息中有 `scope` 元数据值则使用
+    - 若无元数据作用域则回退到配置的作用域
+4. **无键时跳过处理**：若处理后无有效键剩余，直接将消息路由至 `Success`，不执行任何删除。
+5. **删除属性**：使用处理后的键列表和已确定的作用域从消息发起者删除指定属性。
+6. **处理通知**：
+    - 对于共享作用域：若已配置或 `notifyDevice` 元数据设为 true，则应用设备通知
+    - 若 `sendAttributesDeletedNotification` 已启用，向发起者默认 Rule Chain 发送 `ATTRIBUTES_DELETED` 事件
+7. **路由消息**：根据删除操作结果将原始消息路由至 `Success` 或 `Failure`。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - Attributes were successfully deleted from the message originator
-    - No attribute keys were provided (empty keys list after processing)
-    - If **Send attributes deleted notification** is enabled, `ATTRIBUTES_DELETED` event is sent to the originator's default rule chain
-    - If **Force notification to the device** is enabled and attributes scope is `SHARED_SCOPE`, notification about deleted attributes is sent to device
+    - 已从消息发起者成功删除属性
+    - 未提供属性键（处理后键列表为空）
+    - 若 **Send attributes deleted notification** 已启用，向发起者默认 Rule Chain 发送 `ATTRIBUTES_DELETED` 事件
+    - 若 **Force notification to the device** 已启用且属性作用域为 `SHARED_SCOPE`，向设备发送已删除属性的通知
 - `Failure`
-    - Unexpected error occurred during processing
+    - 处理过程中发生意外错误
 
-## Examples
+## 示例
 
-### Example 1 — Delete specific attributes
+### 示例 1 — 删除指定属性
 
-**Incoming message**
+**传入消息**
 
-Metadata: `{}`
+元数据：`{}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -139,24 +138,24 @@ Metadata: `{}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Originator has server attributes: `attribute1`, `attribute2`, `attribute3`
+发起者具有服务端属性：`attribute1`、`attribute2`、`attribute3`
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The `attribute1` and `attribute2` server attributes are deleted from the originator. The `attribute3` attribute remains unchanged.
-No events or notifications were sent.
+从发起者删除 `attribute1` 和 `attribute2` 服务端属性。`attribute3` 保持不变。
+未发送任何事件或通知。
 
-### Example 2 — Dynamic key deletion with patterns
+### 示例 2 — 使用模式的动态键删除
 
-**Incoming message**
+**传入消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -164,7 +163,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -172,9 +171,9 @@ Metadata:
 }
 ```
 
-Originator: `DEVICE`
+发起者：`DEVICE`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -189,25 +188,25 @@ Originator: `DEVICE`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Device has client attributes: `sensorReading=123`, `lastUpdate=2023-10-15`, `staticKey=value`, `keepThis=data`
+设备具有客户端属性：`sensorReading=123`、`lastUpdate=2023-10-15`、`staticKey=value`、`keepThis=data`
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The `attribute1`, `attribute2`, and `attribute3` server attributes are deleted from the originator. No events or notifications were sent.
+从发起者删除 `attribute1`、`attribute2` 和 `attribute3` 服务端属性。未发送任何事件或通知。
 
-### Example 3 — Scope override with shared attributes
+### 示例 3 — 共享属性作用域覆盖
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`
+发起者：`DEVICE`
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -215,7 +214,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -228,18 +227,18 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Device has shared attribute: `sharedAttribute`
+设备具有共享属性：`sharedAttribute`
 
-**Outgoing message**
+**传出消息**
 
-Same as incoming message, routed via `Success` connection.
+与传入消息相同，经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The following actions occur:
+发生以下操作：
 
-- **Scope override**: Despite being configured for `SERVER_SCOPE`, the node uses `SHARED_SCOPE` from message metadata
-- **Attribute deleted**: `sharedValue` is removed from the shared scope
-- **Device notification**: Device is notified of the attribute deletion due to shared scope and `notifyDevice` being set to `true`
+- **作用域覆盖**：尽管配置为 `SERVER_SCOPE`，节点使用消息元数据中的 `SHARED_SCOPE`
+- **属性已删除**：从共享作用域移除 `sharedValue`
+- **设备通知**：因共享作用域且 `notifyDevice` 设为 `true`，设备收到属性删除通知

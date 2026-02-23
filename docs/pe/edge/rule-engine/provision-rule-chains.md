@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Provision Rule Chains from cloud to edge
-description: Provision Rule Chains from cloud to edge
+title: 从云到 Edge 预置规则链
+description: 从云到 Edge 预置规则链
 
 ---
 

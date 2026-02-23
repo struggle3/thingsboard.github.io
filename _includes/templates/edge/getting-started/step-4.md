@@ -1,6 +1,6 @@
-Any real-world assets, devices, sensors or other logical components are represented within **ThingsBoard** as corresponding [entities](/docs/{{peDocsPrefix}}user-guide/entities-and-relations/){: target="_blank"}.
-Most of the entities can be created on the **Edge instance**. Once an entity is created on the **Edge instance**, it will be automatically published to the **ThingsBoard Server**, requiring no additional actions.
+任何现实世界的资产、设备、传感器或其他逻辑组件在**ThingsBoard**中以相应的[实体](/docs/{{peDocsPrefix}}user-guide/entities-and-relations/){: target="_blank"}表示。
+大多数实体可在**Edge实例**上创建。在**Edge实例**上创建实体后，它将自动发布到**ThingsBoard Server**，无需额外操作。
 
-To view the published entity (e.g., device), log in to the **{{currentThingsBoardVersion}}** at **SERVER_URL**:
+要查看已发布的实体（如设备），请登录**SERVER_URL**处的**{{currentThingsBoardVersion}}**：
 
 {% include images-gallery.html imageCollection="step4" showListImageTitles="true" %}

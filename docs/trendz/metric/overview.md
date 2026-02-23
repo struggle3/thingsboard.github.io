@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Metric Exploration Overview
-description: Introducing into metric exploration in Trendz
+title: 指标探索概览
+description: Trendz 中的指标探索介绍
 
 section-overview:
   0:

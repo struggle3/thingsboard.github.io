@@ -8,44 +8,41 @@
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-alarms-count.png)
 
-Periodically does count of alarms for selected set of entities.
+按周期对所选实体集统计 alarm 数量。
 
-Performs count of alarms for selected entities including their child entities if specified with configurable period.
+以可配置周期，对所选实体（含子实体，若已指定）执行 alarm 统计。
 
-Result of alarms count then set to specified target timeseries attribute of the entity.
+统计结果写入实体的指定目标时序属性。
 
-Message of type **POST_TELEMETRY_REQUEST** is generated for each entity and alarms count result.
+为每个实体及其 alarm 统计结果生成类型为 **POST_TELEMETRY_REQUEST** 的消息。
 
-Configuration:
+配置：
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-alarms-count-config.png)
 
-- **Execution period value/time unit** - specifies period of alarms count task.
-- **Entities** - specifies set of entities for which alarms count should be performed. Can be: 
-    - **Single entity** - one specific entity. 
-    - **Group of entities** - specific entity group. 
-    - **Relations query** - set of entities found by **Relations query** starting from the **Root entity**.
-- **Count alarms for child entities** - whether to perform alarms count for child entities of each found entity.    
-- **Child entities** - specifies **Relations query** used to find child entities starting from the parent entity.
-Should be specified only when **Count alarms for child entities** is checked and **Single entity** or **Relations query** is selected for entities.
-In case of **Group of entities** child entities selected from the entity group itself.
-- **Alarms count mappings** - table of mapping configurations specifying rules used to count alarms.
+- **Execution period value/time unit** — 指定 alarm 统计任务周期。
+- **Entities** — 指定执行 alarm 统计的实体集。可选：
+    - **Single entity** — 单个实体
+    - **Group of entities** — 指定实体组
+    - **Relations query** — 从 **Root entity** 起通过 **Relations query** 查到的实体集
+- **Count alarms for child entities** — 是否为每个所查实体的子实体执行 alarm 统计。
+- **Child entities** — 指定从父实体查找子实体的 **Relations query**。仅当勾选 **Count alarms for child entities** 且 entities 选择 **Single entity** 或 **Relations query** 时需配置。
+若选择 **Group of entities**，子实体从实体组本身选择。
+- **Alarms count mappings** — 映射配置表，指定 alarm 统计规则。
 
-Mapping Configuration:
+映射配置：
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-alarms-count-mapping-config.png)
 
-- **Target telemetry** - name of the target telemetry key of the entity used to store alarms count result.
-- **Status filter** - list of allowed alarm statuses used to filter alarms. If not specified alarms with any status will be selected. 
-- **Severity filter** - list of allowed alarm severities used to filter alarms. If not specified alarms with any severity will be selected. 
-- **Type filter** - list of allowed alarm types used to filter alarms. If not specified alarms with any type will be selected.
-- **Specify interval** - if checked only alarms created during specified interval will be selected otherwise alarms will be selected for the entire time.
+- **Target telemetry** — 实体用于存储 alarm 统计结果的目标 telemetry key 名。
+- **Status filter** — 用于过滤 alarm 的允许状态列表。未指定时选择任意状态的 alarm。
+- **Severity filter** — 用于过滤 alarm 的允许严重程度列表。未指定时选择任意严重程度的 alarm。
+- **Type filter** — 用于过滤 alarm 的允许类型列表。未指定时选择任意类型的 alarm。
+- **Specify interval** — 勾选后仅选择指定 interval 内创建的 alarm，否则选择全部时间内的 alarm。
 
-For each selected entity node will generate and forward via **Success** chain new messages of type **POST_TELEMETRY_REQUEST** 
-and json body containing target telemetry with alarms count value.
-In case when alarms count for some entity will fail node will generate failure message
-with failure reason and entity as originator. Failure message is forwarded via **Failure** chain.
+对每个所选实体，节点生成新消息（类型 **POST_TELEMETRY_REQUEST**，json body 含目标 telemetry 及 alarm 统计值）并通过 **Success** 链转发。
+若某实体 alarm 统计失败，节点生成失败消息（含失败原因，originator 为实体）并通过 **Failure** 链转发。
 
-**Since TB Version 3.3.3** you can select the queue name:
+**Since TB Version 3.3.3** 可选择队列名：
 
 ![image](/images/user-guide/rule-engine-2-0/pe/nodes/analytics-queue-name.png)

@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - zbeacon
-title: Python REST Client
-description: Supported REST API Reference for server-side integration of your python projects
+title: Python REST 客户端
+description: 用于 Python 项目服务端集成的 REST API 参考
 
 ---
 

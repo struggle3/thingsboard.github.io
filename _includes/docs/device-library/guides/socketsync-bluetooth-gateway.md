@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.lansitec.com/products/socket-sync-bluetooth-gateway/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -12,14 +12,14 @@
 [SocketSync Bluetooth Gateway]({{deviceVendorLink}}){:target="_blank"} is designed based on BLE and LoRa technology. With the advanced LoRa technology and built-in BLE module, the BLE gateway receivesand reports the Bluetooth devices messages to the LoRaWAN gateway.<br>
 The parameter settings, such as the heartbeat period, LoRaWAN work mode, and sensor data to send in a Bluetooth message, are adjustable as per customers&#39; requirements.<br><br>
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
 Only ThingsBoard Cloud works when using direct communication from this device to ThingsBoard via MQTT.
 

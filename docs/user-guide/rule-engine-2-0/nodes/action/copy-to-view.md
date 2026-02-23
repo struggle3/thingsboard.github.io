@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: copy to view
-description: Replicates attribute changes from assets/devices to their associated entity views.
+description: 将 asset 或 device 的 attribute 变更复制到其关联的 entity view。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

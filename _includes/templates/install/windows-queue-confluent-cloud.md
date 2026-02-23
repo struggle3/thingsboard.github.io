@@ -1,18 +1,18 @@
 {% include templates/install/queue-confluent-cloud-config.md %}
 
-##### ThingsBoard Configuration
+##### ThingsBoard 配置
 
-Open the Notepad or other editor as administrator user (right click on the app icon and select "Run as administrator").  
-Open the following file for editing (select "All Files" instead of "Text Documents" in file choosing dialog, the encoding is UTF-8):
+以管理员身份打开记事本或其他编辑器（右键点击应用图标并选择“以管理员身份运行”）。  
+打开以下文件进行编辑（在文件选择对话框中选择“所有文件”而非“文本文档”，编码为 UTF-8）：
 
 ```text 
 C:\Program Files (x86)\thingsboard\conf\thingsboard.yml
 ``` 
 {: .copy-code}
 
-and locate "queue:" block. Make sure the queue type is "kafka", replication factor is "3" and use confluent cloud is "true".
+并找到 "queue:" 配置块。确保队列类型为 "kafka"，副本因子为 "3"，use confluent cloud 为 "true"。
 
-**Don't forget** to replace "CLUSTER_API_KEY", "CLUSTER_API_SECRET" and "localhost:9092" with your real Confluent Cloud bootstrap servers:
+**请勿忘记**将 "CLUSTER_API_KEY"、"CLUSTER_API_SECRET" 和 "localhost:9092" 替换为您的实际 Confluent Cloud 引导服务器地址：
 
 ```yml
 queue:
@@ -28,34 +28,34 @@ queue:
       sasl.config: "${TB_QUEUE_KAFKA_CONFLUENT_SASL_JAAS_CONFIG:org.apache.kafka.common.security.plain.PlainLoginModule required username=\"CLUSTER_API_KEY\" password=\"CLUSTER_API_SECRET\";}"
 ```
 
-**These params affect the number of requests per second from each partitions per each queue.**
+**这些参数影响每个队列每个分区的每秒请求数。**
 
-Number of requests to particular Message Queue calculated based on the formula:
+发往特定消息队列的请求数按以下公式计算：
 
 ((Number of Rule Engine and Core Queues) * (Number of partitions per Queue) + 
 (Number of transport queues) + (Number of microservices) + (Number of JS executors)) * 1000 / POLL_INTERVAL_MS
 
-For example, number of requests based on default parameters is:
+例如，基于默认参数的请求数为：
 
-Rule Engine queues:
+规则引擎队列：
 
 Main **10** partitions + HighPriority **10** partitions + SequentialByOriginator **10** partitions = **30**
 
-Core queue **10** partitions
+核心队列 **10** 个分区
 
-Transport request Queue + response Queue = **2**
+传输请求队列 + 响应队列 = **2**
 
-Rule Engine Transport notifications Queue + Core Transport notifications Queue = **2**
+规则引擎传输通知队列 + 核心传输通知队列 = **2**
 
-Total = **44**
+总计 = **44**
 
-Number of requests per second = **44 * 1000 / 25 = 1760** requests
+每秒请求数 = **44 * 1000 / 25 = 1760** 个请求
 
-Based on the use case, you can compromise latency and decrease number of partitions/requests to the queue, if the message load is low.
+根据使用场景，若消息负载较低，您可在延迟与队列分区数/请求数之间权衡，减少分区或请求数。
 
-By UI set the parameters - interval (1000) and partitions (1) for Rule Engine queues.
+通过 UI 为规则引擎队列设置参数：interval (1000) 和 partitions (1)。
 
-Sample parameters to fit into **10** requests per second on a "monolith" deployment:
+以下为“单体”部署下实现每秒 **10** 个请求的示例参数：
 
 ```yml
 queue:
@@ -82,4 +82,4 @@ queue:
     poll_interval: "${TB_QUEUE_TRANSPORT_NOTIFICATIONS_POLL_INTERVAL_MS:1000}"
 ```
 
-You can update default Rule Engine queues configuration using UI. More about ThingsBoard Rule Engine queues see in [documentation](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/).
+您可通过 UI 更新默认规则引擎队列配置。有关 ThingsBoard 规则引擎队列的更多信息，请参阅[文档](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/)。

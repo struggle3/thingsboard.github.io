@@ -1,23 +1,23 @@
-You may want to configure HTTPS access using HAProxy.
-This is possible in case you are hosting Trendz in the cloud and have a valid DNS name assigned to your instance.
+可使用 HAProxy 配置 HTTPS 访问。
+若 Trendz 托管在云端并为实例分配了有效 DNS 名称，即可实现。
 
-### Trendz and ThingsBoard hosted on the same server
+### Trendz 与 ThingsBoard 同机部署
 
-Use this section if HAProxy/Let’s Encrypt already installed in the server and HTTPS enabled for ThingsBoard.
+若服务器已安装 HAProxy/Let's Encrypt 且 ThingsBoard 已启用 HTTPS，请参考本节。
 
-Open HAProxy configuration file
+打开 HAProxy 配置文件
 ```bash
 sudo nano /etc/haproxy/haproxy.cfg
 ```
 {: .copy-code}
 
-Locate **frontend https_in** section, add new access list that will match traffic by domain name and redirect this traffic to Trendz backend:
+找到 **frontend https_in** 段落，添加新的访问列表以按域名匹配流量并转发到 Trendz 后端：
 ```bash
 acl trendz_http hdr(host) -i new-trendz-domain.com
 use_backend tb-trendz if trendz_http
 ```
 
-In the same file register Trendz backend:
+在同一文件中注册 Trendz 后端：
 ```bash
 backend tb-trendz
   balance leastconn
@@ -27,46 +27,45 @@ backend tb-trendz
   http-request set-header X-Forwarded-Port %[dst_port]
 ```
 
-Generate SSL certificates for new domain:
+为新域名生成 SSL 证书：
 ```bash
 sudo certbot-certonly --domain new-trendz-domain.com --email some@email.io
 ```
 
-Refresh HAProxy configuration:
+刷新 HAProxy 配置：
 ```bash
 sudo haproxy-refresh
 ```
 
-That's it, HTTPS for Trendz UI configured and now you can access it via:
+至此 Trendz UI 的 HTTPS 已配置完成，可通过以下地址访问：
 https://new-trendz-domain.com
 
+### 新服务器全新安装
 
-### Fresh installation on new server
+请参阅此[指南](/docs/user-guide/install/pe/add-haproxy-ubuntu)安装 HAProxy 并使用 Let's Encrypt 生成有效 SSL 证书。
 
-Please follow this [guide](/docs/user-guide/install/pe/add-haproxy-ubuntu) to install HAProxy and generate valid SSL certificate using Let's Encrypt.
+### 同一域名下托管 ThingsBoard 与 Trendz
 
-### Host ThingsBoard and Trendz on the same domain
-
-ThingsBoard and Trendz can share same domain name. In this case ThingsBoard web page would be loaded using following link:
+ThingsBoard 与 Trendz 可共享同一域名。此时 ThingsBoard 页面通过以下链接加载：
 
 ```bash
 https://{my-domain}/
 ```
 
-and Trendz web page would be loaded using following link
+Trendz 页面通过以下链接加载
 
 ```bash
 https://{my-domain}/trendz/
 ```
 
-For enabling such configuration we have to update HAProxy config to route specific requests to Trendz service.
-Open HAProxy configuration file
+启用该配置需更新 HAProxy，将特定请求路由到 Trendz 服务。
+打开 HAProxy 配置文件
 ```bash
 sudo nano /etc/haproxy/haproxy.cfg
 ```
 {: .copy-code}
 
-Locate **frontend https_in** section, add new access list that will match traffic by URL path and redirect this traffic to Trendz backend:
+找到 **frontend https_in** 段落，添加新的访问列表以按 URL 路径匹配流量并转发到 Trendz 后端：
 
 ```bash
 ...

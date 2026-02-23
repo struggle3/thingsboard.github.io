@@ -1,20 +1,20 @@
 ![image](/images/gateway/modbus-connector/modbus-report-strategy-subsection-advanced.png)
 
-This subsection enabling report strategy for data sending, and you can use one of 3 behavior scenarios:
+此子部分用于启用数据发送的报告策略，您可以选择以下三种行为之一：
 
-- ON_REPORT_PERIOD - data will be collected and send every  period of time (in milliseconds).
-- ON_CHANGE - data will be send after change.
-- ON_CHANGE_OR_REPORT_PERIOD - data will be sent either when it changes or after a report period has passed since the last time it was sent.
+- ON_REPORT_PERIOD - 每隔一段时间（毫秒）收集并发送数据。
+- ON_CHANGE - 数据变化后发送。
+- ON_CHANGE_OR_REPORT_PERIOD - 在数据变化时或距上次发送超过报告周期时发送。
 
-The table below describes the parameters required to configure report strategy:
+下表描述了配置报告策略所需的参数：
 
-| **Parameter** | **Default value**    | **Description**                                                                           |
+| **参数** | **默认值**    | **描述**                                                                           |
 |:--------------|:---------------------|-------------------------------------------------------------------------------------------
-| type          | **ON_REPORT_PERIOD** | Report strategy type: ON_REPORT_PERIOD, ON_CHANGE_OR_REPORT_PERIOD, ON_CHANGE|
-| reportPeriod | **30000**            | Period in milliseconds to send data to platform                                 |
+| type          | **ON_REPORT_PERIOD** | 报告策略类型：ON_REPORT_PERIOD、ON_CHANGE_OR_REPORT_PERIOD、ON_CHANGE|
+| reportPeriod | **30000**            | 向平台发送数据的周期（毫秒）                                 |
 | ---                                 
 
-Configuration example:
+配置示例：
 
 ```text
 reportStrategy: {

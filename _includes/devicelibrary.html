@@ -32,7 +32,7 @@
 {% include head-header.html docsTag=docsTag %}
 
 <div id="searchBox">
-    <input type="text" id="search" placeholder="Search" onkeydown="if (event.keyCode==13) window.location.replace('{{ searchPath }}' + this.value)">
+    <input type="text" id="search" placeholder="搜索" onkeydown="if (event.keyCode==13) window.location.replace('{{ searchPath }}' + this.value)">
     <button class="searchButton"></button>
 </div>
 
@@ -125,14 +125,14 @@
     <div id="device-filters">
         <div class="header">
             <div class="indicator"></div>
-            <div class="title">Device Library</div>
+            <div class="title">设备库</div>
         </div>
         {% include device-filters.html %}
     </div>
     <div id="docsContent" class="{{ docContentClassList }}">
         <div id="table-of-contents">
             {% if hasTocContent == "true" %}
-            <span>On this page</span>
+            <span>目录</span>
             {% endif %}
         </div>
         <div id="top-spacer"></div>

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: rename keys
-description: Renames keys in either the message data or metadata based on a configured mapping that specifies which existing keys should be changed to new key names.
+description: 根据配置的映射在消息 data 或 metadata 中重命名键，指定将哪些现有键更改为新键名。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

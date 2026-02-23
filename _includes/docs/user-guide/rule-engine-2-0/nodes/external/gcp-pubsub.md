@@ -1,50 +1,49 @@
-Publishes messages to [Google Cloud Pub/Sub](https://cloud.google.com/pubsub){:target="_blank"} topics, sending the incoming message data as the message body. 
-The node returns the Pub/Sub response metadata as part of the outgoing message.
+将消息发布到 [Google Cloud Pub/Sub](https://cloud.google.com/pubsub){:target="_blank"} 主题，入站消息数据作为消息体发送。
+节点将 Pub/Sub 响应 metadata 作为出站消息的一部分返回。
 
-## Configuration
+## 配置
 
 ### GCP project ID
 
-The Google Cloud project ID where your Pub/Sub topic is deployed.
+Pub/Sub 主题所在的 Google Cloud 项目 ID。
 
-You can find your project ID in the Google Cloud Console or in your service account credentials file.
+可在 Google Cloud 控制台或服务账户凭据文件中找到项目 ID。
 
 ### Topic name
 
-The name of the Pub/Sub topic to publish messages to.
+要发布消息的 Pub/Sub 主题名称。
 
-Specify only the topic name, not the full resource path. The node automatically constructs the full topic path in the format: `projects/{projectId}/topics/{topicName}`
+仅指定主题名，不要包含完整资源路径。节点会自动构建完整路径，格式为：`projects/{projectId}/topics/{topicName}`
 
-The topic name can include templates to dynamically select topics based on message data:
+主题名可包含模板，以根据消息数据动态选择主题：
 
-- `${topicName}` - Substitutes values from message metadata
-- `$[severity]` - Substitutes values from message data
-- `notifications-$[severity]` - Combined with static text
+- `${topicName}` — 使用消息 metadata 中的值替换
+- `$[severity]` — 使用消息 data 中的值替换
+- `notifications-$[severity]` — 与静态文本组合
 
 ### Message attributes
 
-Define custom attributes to attach to each Pub/Sub message. Message attributes allow you to provide structured metadata about the message without modifying the message body.
+定义附加到每条 Pub/Sub 消息的自定义属性。消息属性可在不修改消息体的情况下提供结构化 metadata。
 
-Both attribute names and values support templates:
+属性名和值均支持模板：
 
-- `${key}` – Substitutes values from message metadata
-- `$[key]` – Substitutes values from message data
+- `${key}` — 使用消息 metadata 中的值替换
+- `$[key]` — 使用消息 data 中的值替换
 
-All message attributes are sent as string key-value pairs.
+所有消息属性以字符串键值对形式发送。
 
-### GCP credentials (service account key file)
+### GCP credentials（服务账户密钥文件）
 
-Provide your Google Cloud service account key in JSON format. The associated account must have permissions to publish messages to the Pub/Sub topic.
+以 JSON 格式提供 Google Cloud 服务账户密钥。对应账户须具备向 Pub/Sub 主题发布消息的权限。
 
 {% capture credentials_note %}
-**Note**: If you use Professional Edition, we highly recommend using [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} to securely store your service
-account key.
+**注意**：若使用 Professional Edition，建议使用 [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} 安全存储服务账户密钥。
 {% endcapture %}
 {% include templates/info-banner.md content=credentials_note %}
 
-### Timeout and retries
+### Timeout and retries（超时与重试）
 
-The node uses fixed timeout and retry settings for Google Cloud Pub/Sub operations:
+节点对 Google Cloud Pub/Sub 操作使用固定超时和重试设置：
 - **Total timeout**: 10 seconds for the entire publish operation
 - **Initial retry delay**: 50 milliseconds
 - **Maximum retry delay**: 2 seconds

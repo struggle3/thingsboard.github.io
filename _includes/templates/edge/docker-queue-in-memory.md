@@ -1,10 +1,10 @@
-Create the **docker compose file**:
+创建 **docker compose 文件**：
 ```bash
 nano docker-compose.yml
 ```
 {: .copy-code}
 
-Add the following lines to the **yml file**:
+在 **yml 文件** 中添加以下内容：
 ```
 version: '3.8'
 services:

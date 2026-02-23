@@ -6,18 +6,18 @@
 * TOC
 {:toc}
 
-This guide provides instructions on how to configure a custom mobile application to launch directly from a [QR code scan](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/) using your phone's camera. 
-Whether you're looking to customize an existing app with your own source code from {% if docsPrefix == "pe/" %}[GitHub](https://github.com/thingsboard/flutter_thingsboard_pe_app){:target="_blank"}{% endif %}{% if docsPrefix == null %}[GitHub](https://github.com/thingsboard/flutter_thingsboard_app){:target="_blank"}{% endif %} or direct it to a custom host, this document will walk you through the necessary steps.
+本指南介绍如何配置自定义移动应用，使其可通过手机相机[扫描QR code](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/)直接启动。
+无论您是从{% if docsPrefix == "pe/" %}[GitHub](https://github.com/thingsboard/flutter_thingsboard_pe_app){:target="_blank"}{% endif %}{% if docsPrefix == null %}[GitHub](https://github.com/thingsboard/flutter_thingsboard_app){:target="_blank"}{% endif %}使用自有源代码自定义现有应用，还是将其指向自定义主机，本文档都将引导您完成必要步骤。
 
-## Android app settings
+## Android应用设置
 
-### Direct Android application to your own host
+### 将Android应用指向您自己的主机
 
-To direct your custom application to your own host, you need to modify `AndroidManifest.xml` file:
+要将自定义应用指向您自己的主机，您需要修改`AndroidManifest.xml`文件：
 
-- Open the Flutter project with VS Code or Android Studio;
-- Navigate to `android/app/src/main/AndroidManifest.xml` file;
-- Modify **AndroidManifest.xml**. You have to update `android:host=` with your host:
+- 使用VS Code或Android Studio打开Flutter项目；
+- 导航至`android/app/src/main/AndroidManifest.xml`文件；
+- 修改**AndroidManifest.xml**。您需要更新`android:host=`为您的主机：
 
 ```text
 <!-- App Links -->
@@ -32,13 +32,13 @@ To direct your custom application to your own host, you need to modify `AndroidM
 </intent-filter>
 ```
 
-### Mobile app QR code widget settings for Android
+### Android的移动应用QR code部件设置
 
-To launch your custom mobile application when scanning a QR code, you need to specify the "[App package name](#app-package-name)" and "[SHA256 certificate fingerprints](#sha256-certificate-fingerprints)" in the [ThingsBoard Mobile app QR code widget settings](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/#configuring-qr-code-widget-on-home-page){:target="_blank"}.
+要在扫描QR code时启动自定义移动应用，您需要在[ThingsBoard移动应用QR code部件设置](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/#configuring-qr-code-widget-on-home-page){:target="_blank"}中指定"[App package name](#app-package-name)"和"[SHA256 certificate fingerprints](#sha256-certificate-fingerprints)"。
 
 #### App package name
 
-Find the app package name **applicationId** in **build.gradle** file located at `android/app/build.gradle`:
+在`android/app/build.gradle`的**build.gradle**文件中查找应用包名**applicationId**：
 
 ```text
     defaultConfig {
@@ -49,22 +49,22 @@ Find the app package name **applicationId** in **build.gradle** file located at 
 
 #### SHA256 certificate fingerprints
 
-If your app distributed via Google Play you need to use SHA-256 certificate fingerprint located in your developer account under **Release> Setup > App Integrity> App Signing tab:**
+如果您的应用通过Google Play分发，您需要使用开发者账户中**Release > Setup > App Integrity > App Signing**选项卡下的SHA-256证书指纹：
 
 ![image](/images/mobile/sha256-fingerprint.png)
 
-If you app distributed locally you need to use the sha256 key your apk signed with
+如果您的应用本地分发，您需要使用APK签名所用的sha256密钥
 
-Read more in the guide "[Set up app links for Android](https://docs.flutter.dev/cookbook/navigation/set-up-app-links#sha256-fingerprint){:target="_blank"}", available in the official Firebase documentation.
+更多信息请参阅Firebase官方文档中的指南"[Set up app links for Android](https://docs.flutter.dev/cookbook/navigation/set-up-app-links#sha256-fingerprint){:target="_blank"}"。
 
-## iOS app settings
+## iOS应用设置
 
-### Direct iOS application to your own host
+### 将iOS应用指向您自己的主机
 
-To direct your iOS application to your own host, you need to modify `entitlements.xml` file:
+要将iOS应用指向您自己的主机，您需要修改`entitlements.xml`文件：
 
-- Open and modify `ios/YOUR_APP_NAME/YOUR_APP_NAME.entitlements.xml` file in your preferred IDE;
-- Modify **entitlements.xml** with your domain: You have to update `applinks` with your host:
+- 在您喜欢的IDE中打开并修改`ios/YOUR_APP_NAME/YOUR_APP_NAME.entitlements.xml`文件；
+- 使用您的域名修改**entitlements.xml**：您需要更新`applinks`的主机：
 
 ```text
 <?xml version="1.0" encoding="UTF-8"?>
@@ -81,19 +81,19 @@ To direct your iOS application to your own host, you need to modify `entitlement
 </plist>
 ```
 
-### Mobile app QR code widget settings for iOS
+### iOS的移动应用QR code部件设置
 
-To launch your custom iOS mobile application when scanning a QR code, you need to specify the "[App ID](#app-id)" in the [ThingsBoard Mobile app QR code widget settings](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/#configuring-qr-code-widget-on-home-page){:target="_blank"}.
+要在扫描QR code时启动自定义iOS移动应用，您需要在[ThingsBoard移动应用QR code部件设置](/docs/{{peDocsPrefix}}user-guide/ui/mobile-qr-code/#configuring-qr-code-widget-on-home-page){:target="_blank"}中指定"[App ID](#app-id)"。
 
 #### App ID
 
-When you create your Xcode project from a template, the bundle ID ([CFBundleIdentifier](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier){:target="_blank"}) uniquely identifies your app throughout the system.
-This ID combines the organization ID and the app name that you enter in reverse-DNS format.
-For example, if you enter "Runner" as the app name for your organization, the bundle identifier will be `com.mycompany.app.Runner`.
+当您从模板创建Xcode项目时，bundle ID（[CFBundleIdentifier](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier){:target="_blank"}）在整个系统中唯一标识您的应用。
+此ID结合了您以反向DNS格式输入的组织ID和应用名称。
+例如，如果您为组织输入"Runner"作为应用名称，bundle identifier将为`com.mycompany.app.Runner`。
 
-To find the bundle ID (**App ID**), you need to:
-- Choose the target;
-- Click the "Signing & Capabilities" pane;
-- Find the bundle identifier (App ID) in the "Signing" section.
+要查找bundle ID（**App ID**），您需要：
+- 选择target；
+- 点击"Signing & Capabilities"窗格；
+- 在"Signing"部分找到bundle identifier（App ID）。
 
 ![image](/images/mobile/qr-code-app-id.png)

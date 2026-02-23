@@ -1,21 +1,20 @@
-Publishes messages to AWS Simple Notification Service (SNS) topics, sending the incoming message data as the notification payload. The node returns the SNS response metadata as
-part of the outgoing message.
+向 AWS Simple Notification Service (SNS) 主题发布消息，入站消息 data 作为通知 payload 发送。节点将 SNS 响应 metadata 作为出站消息的一部分返回。
 
-## Configuration
+## 配置
 
-### Topic configuration
+### Topic configuration（主题配置）
 
-Define the target SNS topic to publish messages to.
+定义要发布消息的目标 SNS 主题。
 
 #### Topic ARN pattern
 
-The Amazon Resource Name (ARN) of the SNS topic to publish to.
+要发布到的 SNS 主题的 Amazon Resource Name (ARN)。
 
-You can specify the topic ARN in the standard AWS format:
+可使用标准 AWS 格式指定 topic ARN：
 
-- **Full ARN**: `arn:aws:sns:us-east-1:123456789012:MyNewTopic`
+- **Full ARN**：`arn:aws:sns:us-east-1:123456789012:MyNewTopic`
 
-The ARN can include template expressions to dynamically select topics based on message data:
+ARN 可包含模板表达式，以根据消息数据动态选择主题：
 
 - `arn:aws:sns:${metadata.region}:123456789012:${topicName}`
 - `arn:aws:sns:us-east-1:123456789012:notifications-$[severity]`
@@ -33,8 +32,7 @@ The access key ID for your AWS account. This credential is used to sign requests
 The secret access key corresponding to your access key ID.
 
 {% capture credentials_note %}
-**Note**: If you use Professional Edition, we highly recommend using [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} to securely store your
-secret key.
+**注意**：若使用 Professional Edition，建议使用 [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} 安全存储私密密钥。
 {% endcapture %}
 {% include templates/info-banner.md content=credentials_note %}
 
@@ -43,8 +41,7 @@ secret key.
 The AWS region where your SNS topic is deployed. The region must match the location of your SNS topic.
 
 {% capture timeout_note %}
-**Note**: The node uses fixed timeout values for AWS SNS operations: 10 seconds for establishing a connection and 5 seconds for the SNS service to process and respond to the
-request.
+**注意**：节点对 AWS SNS 操作使用固定超时：建立连接 10 秒，SNS 服务处理并响应请求 5 秒。
 {% endcapture %}
 {% include templates/info-banner.md content=timeout_note %}
 
@@ -88,13 +85,13 @@ request.
 ```
 {: .copy-code.expandable-3 }
 
-## Output message format
+## 输出消息格式
 
-The node transforms the incoming message by adding AWS SNS response information to the message metadata while preserving the original message data.
+节点通过将 AWS SNS 响应信息添加到消息 metadata 来转换入站消息，同时保留原始消息 data。
 
-### Success case
+### Success case（成功时）
 
-When a message is successfully published to SNS, the following fields are added to the message metadata:
+消息成功发布到 SNS 时，以下字段会添加到消息 metadata：
 
 - **messageId** – Unique identifier assigned by AWS SNS to the published message. This ID can be used to track the message delivery status.
 - **requestId** – Unique identifier for the API request to AWS. Useful for troubleshooting and correlating with AWS CloudTrail logs.
@@ -157,9 +154,9 @@ The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EX
 - **When set to `false`** (default) – The incoming message remains in an in-processing state throughout the entire SNS publish operation.
   The message is transformed in place, its metadata is updated with the SNS response fields, and the modified message is passed to the next node after the publish completes.
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node constructs an SNS publish request:
+1. 节点构建 SNS 发布请求：
     - The **topic ARN pattern** is processed, replacing templates with values from the incoming message data and metadata.
     - A `PublishRequest` is created with the message data as the notification payload and the resolved topic ARN as the destination.
 2. The publish request is sent asynchronously to AWS SNS with the configured timeouts:
@@ -173,7 +170,7 @@ The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EX
     - Error details are added to the message metadata under the `error` key.
     - The message is forwarded via the `Failure` connection.
 
-## Output connections
+## 输出连接
 
 - **Success**
     - The message was successfully published to the SNS topic.
@@ -185,15 +182,15 @@ The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EX
     - **SNS error**: The AWS SNS service returned an error, such as invalid credentials, insufficient permissions, non-existent topic, or invalid topic ARN format.
     - **Unexpected error**: An unexpected error occurred during message processing.
 
-## Examples
+## 示例
 
-### Example 1 — Basic notification
+### 示例 1 — 基本通知
 
-Publish a simple notification message to an SNS topic for alert distribution.
+向 SNS 主题发布简单通知消息以分发告警。
 
-**Incoming message**
+**入站消息**
 
-Data:
+Data：
 
 ```json
 {
@@ -224,7 +221,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -235,11 +232,11 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：未更改。
 
-Metadata (only added fields shown):
+Metadata（仅显示新增字段）：
 
 ```json
 {
@@ -250,11 +247,11 @@ Metadata (only added fields shown):
 
 Routed via the `Success` connection.
 
-**Result**
+**结果**
 
-The alarm notification was successfully published to the SNS topic. The AWS message ID and request ID were added to the metadata.
+alarm 通知已成功发布到 SNS 主题。AWS 消息 ID 和请求 ID 已添加到 metadata。
 
-### Example 2 — Error handling for invalid topic
+### 示例 2 — 无效主题的错误处理
 
 Attempt to publish to a non-existent SNS topic, resulting in a failure.
 
@@ -291,7 +288,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -302,11 +299,11 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+Data：未更改。
 
-Metadata (only added fields shown):
+Metadata（仅显示新增字段）：
 
 ```json
 {
@@ -316,6 +313,6 @@ Metadata (only added fields shown):
 
 Routed via the `Failure` connection.
 
-**Result**
+**结果**
 
-The SNS publish operation failed because the specified topic does not exist. The error details were captured in the message metadata and routed to the `Failure` connection.
+SNS 发布操作失败，因为指定的主题不存在。错误详情已记录到消息 metadata 并经 `Failure` 连接路由。

@@ -1,97 +1,96 @@
-RPC to Device allows sending RPC commands to the device that is connected to ThingsBoard directly or via Gateway.
+RPC 到设备允许向直接或通过网关连接至 ThingsBoard 的设备发送 RPC 命令。
 
-Suppose we have a device `SN-001` that tracks the light level of the room and is connected to ThingsBoard via an MQTT Gateway. 
-We want to send an RPC command to know the current state of the light level with two options: in the first case we want to get a response back, and in the second case we don't need a response.
+假设有设备 `SN-001` 监测室内光照，并通过 MQTT 网关连接至 ThingsBoard。
+我们需发送 RPC 命令获取当前光照状态，有两种情况：一种需要响应，另一种不需要响应。
 
-As an example, we will use ThingsBoard MQTT Demo Broker, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard MQTT 演示代理，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 1884:1884 thingsboard/tb-gw-mqtt-broker:latest
 ```
 {:.copy-code}
 
-The demo broker runs at `0.0.0.0:1884` and simulates a device for our RPC examples. For configurable RPC, the device listens on topic `sensor/${deviceName}/request/${methodName}/${requestId}` for incoming commands and responds on topic `sensor/${deviceName}/response/${methodName}/${requestId}` when a response is expected.
+演示代理运行于 `0.0.0.0:1884`，为 RPC 示例模拟设备。对于可配置 RPC，设备在主题 `sensor/${deviceName}/request/${methodName}/${requestId}` 监听入站命令，在需要响应时于主题 `sensor/${deviceName}/response/${methodName}/${requestId}` 回复。
 
 {% capture difference %}
-**Please note:**
-The RPC Debug Terminal is used only for example purposes, so you can use any other widget that supports RPC calls.
-The custom MQTT publisher is used only to simulate the device behavior, but it is not applicable for real-production
-use cases.
+**请注意：**
+RPC 调试终端仅用于示例，您可使用任何支持 RPC 调用的其他部件。
+自定义 MQTT 发布器仅用于模拟设备行为，不适用于实际生产场景。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Let's configure RPC commands in the MQTT connector to allow ThingsBoard to send commands to devices.
+在 MQTT 连接器中配置 RPC 命令，使 ThingsBoard 能向设备发送命令。
 
-Follow these steps:
+按以下步骤操作：
 
 {% assign CustomRPC = '
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-1.png,
-        title: Go to "**Entities**" - "**Gateways**" on the left sidebar and select your gateway.
+        title: 在左侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/mqtt-connector/examples/disconnect-request-gateway.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/mqtt-gateway-configuring-11-ce.png,
-        title: Select the MQTT connector, click on the "**Basic**". Click the "**Add mapping**" under "**Requests mapping**" section to add new RPC mapping.
+        title: 选择 MQTT 连接器，点击“**基本**”。在“**请求映射**”下点击“**添加映射**”以添加新的 RPC 映射。
     ===
         image: /images/gateway/mqtt-connector/examples/server-side-rpc-commands-1.png,
-        title: Select "**RPC command**" in the **Request type** field. For two-way RPC (with response).
+        title: 在**请求类型**中选择“**RPC 命令**”。双向 RPC（需要响应）时。
     ===
         image: /images/gateway/mqtt-connector/examples/server-side-rpc-commands-2.png,
-        title: Configure the **Device name filter** as `.*` to apply to all devices, set the **Method filter** to `echo`, the **Request topic expression** to `sensor/${deviceName}/request/${methodName}/${requestId}`, the **Value expression** to `${params}`, the **Response topic expression** to `sensor/${deviceName}/response/${methodName}/${requestId}`, and set an appropriate **Response timeout** (e.g., 10000 ms).
+        title: **设备名过滤器**填 `.*` 以应用于所有设备，**方法过滤器**填 `echo`，**请求主题表达式**填 `sensor/${deviceName}/request/${methodName}/${requestId}`，**值表达式**填 `${params}`，**响应主题表达式**填 `sensor/${deviceName}/response/${methodName}/${requestId}`，**响应超时**设为合适值（如 10000 毫秒）。
     ===
         image: /images/gateway/mqtt-connector/examples/server-side-rpc-commands-3.png,
-        title: Remember to save your changes by clicking the designated button.
+        title: 记得点击相应按钮保存更改。
     ===
         image: /images/gateway/mqtt-connector/examples/server-side-rpc-commands-4.png,
-        title: For one-way RPC (without response), click on the **Without response** tab. Configure the **Device name filter** as `.*` to apply to all devices, set the **Method filter** to `no-reply`, the **Request topic expression** to `sensor/${deviceName}/request/${methodName}/${requestId}`, and the **Value expression** to `${params}`.
+        title: 单向 RPC（无需响应）时，点击“**无响应**”标签。**设备名过滤器**填 `.*`，**方法过滤器**填 `no-reply`，**请求主题表达式**填 `sensor/${deviceName}/request/${methodName}/${requestId}`，**值表达式**填 `${params}`。
     ===
         image: /images/gateway/mqtt-connector/examples/server-side-rpc-commands-5.png,
-        title: Remember to save your changes by clicking the designated button.
+        title: 记得点击相应按钮保存更改。
     '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=CustomRPC %}
 
-Let's demonstrate how to use this RPC configuration:
+下面演示如何使用该 RPC 配置：
 
-### Example 1: Two Way RPC (with response)
+### 示例 1：双向 RPC（有响应）
 
-In the RPC Debug Terminal widget, run the following command to send a two-way RPC request:
+在 RPC 调试终端部件中执行以下命令发送双向 RPC 请求：
 
 ```bash
 echo {"deviceName":"SN-001", "methodName":"echo"}
 ```
 {: .copy-code}
 
-The gateway will:
-1. Receive this RPC request
-2. Match it to the "echo" method configuration
-3. Send a message to the topic `sensor/SN-001/request/echo/12345` (where 12345 is a unique request ID)
-4. Subscribe to the topic `sensor/SN-001/response/echo/12345` to wait for a response
-5. Return the response to ThingsBoard when received
+网关将：
+1. 接收该 RPC 请求
+2. 匹配到 "echo" 方法配置
+3. 向主题 `sensor/SN-001/request/echo/12345` 发送消息（12345 为唯一请求 ID）
+4. 订阅主题 `sensor/SN-001/response/echo/12345` 等待响应
+5. 收到响应后返回给 ThingsBoard
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-rpc-1.png)
 
-### Example 2: One Way RPC (without response)
+### 示例 2：单向 RPC（无响应）
 
-In the RPC Debug Terminal widget, run the following command to send a one-way RPC request:
+在 RPC 调试终端部件中执行以下命令发送单向 RPC 请求：
 
 ```bash
 no-reply {"deviceName":"SN-001", "methodName":"no-reply"}
 ```
 {: .copy-code}
 
-The gateway will:
-1. Receive this RPC request
-2. Match it to the "no-reply" method configuration
-3. Send a message to the topic `sensor/SN-001/request/no-reply/12345` (where 12345 is a unique request ID)
-4. Not wait for any response
+网关将：
+1. 接收该 RPC 请求
+2. 匹配到 "no-reply" 方法配置
+3. 向主题 `sensor/SN-001/request/no-reply/12345` 发送消息（12345 为唯一请求 ID）
+4. 不等待响应
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-rpc-2.png)
 
-If you are using advanced configuration mode, you can use the following configuration:
+若使用高级配置模式，可使用以下配置：
 
 ```json
 {

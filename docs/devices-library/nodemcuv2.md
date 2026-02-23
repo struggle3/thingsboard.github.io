@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect NodeMCU V2 to ThingsBoard?"
+title: "如何将NodeMCU V2连接到ThingsBoard？"
 redirect_to: "/device-library/ce/nodemcuv2/"
 ---

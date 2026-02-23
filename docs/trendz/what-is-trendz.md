@@ -1,21 +1,21 @@
 ---
 layout: docwithnav-trendz
-title: What is Trendz Analytics?
-description: Trendz key features and advantages for the advanced telemetry analytics.
+title: 什么是 Trendz Analytics？
+description: Trendz 高级遥测分析的关键特性与优势。
 ---
-The **Trendz Analytics** is an add-on for ThingsBoard Platform that converts the IoT dataset into insights and simplifies the decision-making process.
+**Trendz Analytics**是ThingsBoard Platform的附加组件，可将IoT数据集转化为洞察，简化决策流程。
 
-With Trendz you can:
-- Easily explore any metric from any device
-- Analyse behavior patterns, outliers and trends
-- Predict system behavior and react beforehand
-- Identify anomalies in time series data
-- Define KPI using calculated fields, review dynamic and understand what affects it
-- Monitor how much time equipment spends in different states
-- Filter, group and aggregate data in different dimensions
-- Share the analysis with other users by embedding visualizations into a dashboard
+使用Trendz可以：
+- 轻松探索任意设备的任意指标
+- 分析行为模式、离群点和趋势
+- 预测系统行为并提前响应
+- 识别时序数据中的异常
+- 使用计算字段定义KPI，审视动态变化并理解影响因素
+- 监测设备在不同状态下的停留时间
+- 按不同维度过滤、分组和聚合数据
+- 通过将可视化嵌入dashboard与他人分享分析结果
 
-## Ready to get started?
+## 准备开始？
 
 <p><a href="/docs/trendz/getting-started/" class="button">Hello World analytics</a></p>
 

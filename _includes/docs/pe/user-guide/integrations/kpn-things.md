@@ -3,11 +3,11 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-KPN Things is an IoT (Internet of Things) platform provided by KPN, a telecommunications company.  
-This platform allows users to connect and manage their IoT devices, facilitating communication and data exchange between these devices and the cloud.  
-After integrating KPN Things with the ThingsBoard, you can connect, manage, communicate, process and visualize data from your devices in the ThingsBoard IoT platform.
+KPN Things是由电信公司KPN提供的IoT（物联网）平台。
+该平台支持用户连接并管理其IoT设备，促进设备与云之间的通信和数据交换。
+将KPN Things与ThingsBoard集成后，可在ThingsBoard IoT平台中连接、管理、通信、处理和可视化设备数据。
 
 <object width="100%" style="max-width: max-content;" data="/images/user-guide/integrations/http-integration.svg"></object>
 

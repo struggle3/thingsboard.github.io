@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: ThingsBoard n8n Node
-description: Seamless IoT workflow automation with ThingsBoard and n8n integration
+title: ThingsBoard n8n 节点
+description: 通过 ThingsBoard 与 n8n 集成实现无缝 IoT 工作流自动化
 ---
 
 {% assign docsPrefix = "pe/" %}

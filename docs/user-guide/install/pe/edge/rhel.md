@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Installing ThingsBoard Edge on CentOS/RHEL Server
-description: Installing ThingsBoard Edge on CentOS/RHEL Server
+title: 在 CentOS/RHEL Server 上安装 ThingsBoard Edge
+description: 在 CentOS/RHEL Server 上安装 ThingsBoard Edge
 ---
 
 * TOC

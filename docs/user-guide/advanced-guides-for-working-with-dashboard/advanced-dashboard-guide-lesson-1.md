@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Lesson 1. Visualizing assets data using OpenStreet Map and Entities table widgets
+title: 课程1. 使用OpenStreet Map和实体表部件可视化资产数据
 redirect_to: "/docs/pe/user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-1/"
 
 ---

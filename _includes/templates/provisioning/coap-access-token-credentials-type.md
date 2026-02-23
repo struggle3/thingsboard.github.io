@@ -1,14 +1,14 @@
 |---
-| **Parameter**             | **Example value**                            | **Description**                                                                |
+| **参数**             | **示例值**                            | **说明**                                                                |
 |:-|:-|-
-| *deviceName*              | **DEVICE_NAME**                              | Device name in ThingsBoard.                                                    |
-| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | Provisioning device key, you should take it from configured device profile.    |
-| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | Provisioning device secret, you should take it from configured device profile. | 
-| credentialsType           | **ACCESS_TOKEN**                             | Credentials type parameter.                                                    |
-| token                     | **DEVICE_ACCESS_TOKEN**                      | Access token for device in ThingsBoard.                                        |
+| *deviceName*              | **DEVICE_NAME**                              | ThingsBoard 中的设备名称。                                                    |
+| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | 设备 profile 中配置的 provisioning device key。                                |
+| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | 设备 profile 中配置的 provisioning device secret。 | 
+| credentialsType           | **ACCESS_TOKEN**                             | Credentials type 参数。                                                    |
+| token                     | **DEVICE_ACCESS_TOKEN**                      | ThingsBoard 中的设备 access token。                                        |
 |---
 
-Provisioning request data example:
+Provisioning 请求数据示例：
  
 ```json
 {
@@ -20,7 +20,7 @@ Provisioning request data example:
 }
 ```
 
-Provisioning response example:
+Provisioning 响应示例：
 
 ```json
 {
@@ -31,31 +31,30 @@ Provisioning response example:
 ```
 
 
-#### Sample script
+#### 示例脚本
 
-To communicate with ThingsBoard we will use asyncio and aiocoap modules, so we should install it:
+与 ThingsBoard 通信需使用 asyncio 和 aiocoap 模块，请先安装：
 
 ```bash
 pip3 install asyncio aiocoap --user
 ```
 {: .copy-code}
 
-The script source code is available below. You may copy-paste it to a file, for example:
+脚本源码如下，可复制到文件（例如 `device-provision-example.py`）中：
 
 ```bash
 device-provision-example.py
 ```
 {: .copy-code}
 
-Now you should run the script and follow the steps inside.  
-You may launch the script using python 3:  
+运行脚本并按提示操作。使用 Python 3 启动：
 
 ```bash 
 python3 device-provision-example.py
 ```
 {: .copy-code}
 
-The script source code: 
+脚本源码： 
 
 ```python
 import logging

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Rock960 to ThingsBoard?"
+title: "如何将Rock960连接到ThingsBoard？"
 redirect_to: "/device-library/ce/rock960/"
 ---

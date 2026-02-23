@@ -1,4 +1,4 @@
-The command to send a message to the UDP server that is running on localhost (127.0.0.1) will look like this:
+向运行在 localhost（127.0.0.1）上的 UDP 服务器发送消息的命令如下：
 
 ```shell
 echo -e -n '{"deviceName": "SN-001", "deviceType": "default", "temperature": 25.7, "humidity": 69}' | nc -w60 -u 127.0.0.1 11560

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: WebSocket Client
-description: MQTT tool
+title: WebSocket 客户端
+description: MQTT 工具
 
 ws-connection-add:
   0:

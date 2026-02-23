@@ -1,15 +1,14 @@
 ---
 layout: docwithnav-gw
-title: Get Support
-description: Gateway help links
+title: 获取支持
+description: IoT Gateway 帮助链接
 
 ---
 
 * TOC
 {:toc}
 
-If you have any questions or run into issues, the Gateway team is here to help. You can reach out through our community
-channels — including Discord and GitHub.
+如有任何疑问或遇到问题，Gateway 团队随时为你提供帮助。可通过 Discord、GitHub 等社区渠道联系我们。
 
 <div class="doc-features row mt-4">
     <div class="col-12 col-sm-6 col-lg col-xxl-6 col-4xl mb-4">
@@ -17,7 +16,7 @@ channels — including Discord and GitHub.
             <img class="feature-logo" style="filter: unset" src="/images/gateway/discord-logo.svg" alt="Discord logo">
             <div class="feature-title">Discord Community</div>
             <div class="feature-text">
-                Ask questions and get quick tips from other users and contributors.
+                向其他用户与贡献者提问，获取快速解答。
             </div>
         </a>
     </div>
@@ -26,7 +25,7 @@ channels — including Discord and GitHub.
             <img class="feature-logo" style="filter: unset" src="/images/mqtt-broker/github-logo.svg" alt="Github logo">
             <div class="feature-title">Github Issues</div>
             <div class="feature-text">
-                Found a bug or have a question? Open an issue on our GitHub repo.
+                发现 Bug 或有疑问？在 GitHub 仓库中提交 issue。
             </div>
         </a>
     </div>

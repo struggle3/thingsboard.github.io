@@ -1,20 +1,20 @@
 ---
 layout: docwithnav-edge
-title: Edge Information page
-description: Edge Information page
+title: Edge信息页面
+description: Edge信息页面
 edgeInfo:
     0:
         image: /images/edge/edge-status.png
 ---
 
-**Edge Info** page introduced to provide user information regarding basic edge configuration and ThingsBoard CE server information (URL and server version): 
-* Name, ID, Type, Routing Key
-* Connection status with the cloud: **Connected / Disconnected**
-* Last time connected to/disconnected from cloud
+**Edge信息**页面用于提供基本Edge配置及ThingsBoard CE服务器信息（URL和服务器版本）：
+* 名称、ID、类型、路由键
+* 与云端的连接状态：**已连接 / 已断开**
+* 最近连接/断开云端时间
 
 {% include images-gallery.html imageCollection="edgeInfo" %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "EdgeStatus" %}
 {% assign docsPrefix = "edge/" %}

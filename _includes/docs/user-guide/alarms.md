@@ -1,361 +1,361 @@
 * TOC
 {:toc}
 
-**Alarms** are a key tool for monitoring events related to your entities — devices, assets, customers, and other components of your system. The alarm mechanism allows you to quickly react to anomalies, condition violations, or critical state changes, helping prevent potential issues and ensuring stable, efficient system operation.
+**Alarms** 是监控与实体（设备、资产、Customer 等）相关事件的重要工具。告警机制可帮助快速响应异常、条件违规或关键状态变化，预防潜在问题并确保系统稳定运行。
 
-For example, you can configure ThingsBoard to automatically create an alarm when the temperature exceeds a defined threshold. This is only a simple example — real-world scenarios may involve complex conditions, combined parameters, time intervals, aggregated data, or context-dependent logic.
+例如，可在 ThingsBoard 中配置：温度超过设定阈值时自动创建告警。实际场景可能更复杂，涉及组合条件、时间间隔、聚合数据或上下文相关逻辑。
 
-The foundation of the alarm mechanism lies in the conditions and logic defined in [Alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules){:target="_blank"}. These rules determine when an alarm should be created, updated, or cleared. Once the rules are configured, the system begins generating the corresponding alarms, which you can view, filter, and manage through the dedicated interface. For more details on creating and configuring rules, see the [Alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"} section.
+告警机制的基础是 [Alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules){:target="_blank"} 中定义的条件和逻辑，用于决定何时创建、更新或清除告警。规则配置完成后，系统会按配置生成告警，并通过界面查看、筛选和管理。规则创建与配置详见 [Alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"} 部分。
 
-This section focuses on the practical use of alarms, the available interface tools, and the best practices for working with them.
+本文介绍告警的日常使用、界面工具及使用建议。
 
 <hr>
 
-## Notification about created or cleared an alarm
+## 告警创建或清除通知
 
-The [Notification center](/docs/{{docsPrefix}}user-guide/notifications){:target="_blank"} in ThingsBoard is responsible for delivering alerts about alarm events and other system activity to the appropriate users.
-By default, you receive notifications for all alarms originating from your devices, as well as alarms created by customer entities (for Tenant Administrators).
+ThingsBoard 的 [Notification center](/docs/{{docsPrefix}}user-guide/notifications){:target="_blank"} 负责向相关用户发送告警事件及系统活动通知。
+默认情况下，您会收到来自设备的告警以及 Customer 实体创建的告警（针对 Tenant Administrator）。
 
 {% include images-gallery.html imageCollection="notification-about-alarm" %}
 
-The Notification center allows you to flexibly configure notification rules, defining who should receive notifications, under which conditions, and through which delivery channels.   
-Available delivery channels include:
-- ThingsBoard web interface
+Notification center 支持灵活配置通知规则，定义通知对象、触发条件和送达渠道。
+可选送达渠道包括：
+- ThingsBoard Web 界面
 - Email
 - SMS
 - [Slack](/docs/{{docsPrefix}}user-guide/notifications/#slack){:target="_blank"}
 - [Microsoft Teams](/docs/{{docsPrefix}}user-guide/notifications/#microsoft-teams){:target="_blank"}
-- [ThingsBoard in-app notifications](/docs/{{docsPrefix}}mobile/){:target="_blank"}
+- [ThingsBoard 应用内通知](/docs/{{docsPrefix}}mobile/){:target="_blank"}
 
-Learn more about configuring the Notification сenter [here](/docs/{{docsPrefix}}user-guide/notifications){:target="_blank"}.
+更多配置说明见[此处](/docs/{{docsPrefix}}user-guide/notifications){:target="_blank"}。
 
 <hr>
 
-## View and manage alarms
+## 查看与管理告警
 
-<b><font size="4">Alarms page</font></b>
+<b><font size="4">Alarms 页面</font></b>
 
-Use the **Alarms** page in the left navigation menu to view and manage alarms. The page displays alarms related to your entities — devices, assets, customers, users — in a unified list that includes:
-- Creation time
-- Alarm source (Originator)
-- Alarm type
-- Severity
-- Assigned user
-- Status (active/cleared, acknowledged/unacknowledged)
+在左侧导航菜单中选择 **Alarms** 页面可查看和管理告警。页面以统一列表展示与实体相关的告警，包括：
+- 创建时间
+- 告警来源（Originator）
+- 告警类型
+- 严重程度
+- 指派用户
+- 状态（活动/已清除、已确认/未确认）
 
-To view more information about an alarm, click the three dots (…) in the **Details** column of the alarm you want to inspect.
+点击目标告警 **Details** 列中的省略号（…）可查看更多信息。
 
-By default, the page shows all active alarms. You can apply filters and time ranges to refine the results.
+默认显示所有活动告警，可按筛选条件和时间范围缩小结果。
 
 {% include images-gallery.html imageCollection="find-alarms" %}
 
 <hr>
 
-<b><font size="4">Alarm widgets</font></b>
+<b><font size="4">告警部件</font></b>
 
-ThingsBoard provides dedicated widgets for visualizing and managing alarms on dashboards:
+ThingsBoard 提供用于在 dashboard 上展示和管理告警的专用部件：
 
-<b><font size="3">Alarms table widget</font></b>
+<b><font size="3">Alarms table 部件</font></b>
 
-- Displays alarms for selected entities within a configurable time window
-- Supports filtering by type, severity, acknowledgment, and propagation
-- Allows performing alarm actions directly from the widget (acknowledge, clear, assign)
+- 在可配置时间范围内，为选定实体显示告警
+- 支持按类型、严重程度、确认状态和传播方式筛选
+- 可直接在部件中执行告警操作（确认、清除、指派）
 
 {% include images-gallery.html imageCollection="visualize-alarms-on-dashboard-1" %}
 
-<b><font size="3">Alarm count widget</font></b>
+<b><font size="3">Alarm count 部件</font></b>
 
-- Shows the number of alarms matching defined filters
-- Supports filtering by severity, status, and type
-- Commonly used for high-level monitoring dashboards
+- 显示符合筛选条件的告警数量
+- 支持按严重程度、状态和类型筛选
+- 常用于高层监控 dashboard
 
 {% include images-gallery.html imageCollection="visualize-alarms-on-dashboard-2" %}
 
-To learn how to add widgets to dashboards, see the [dashboard configuration](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} documentation.
+关于如何向 dashboard 添加部件，请参阅 [dashboard 配置](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} 文档。
 
 <hr>
 
-<b><font size="4">Alarms of a specific entity</font></b>
+<b><font size="4">特定实体的告警</font></b>
 
-View and manage alarms associated with a specific entity (for example, a device) directly on its details page.
-- Open the **Devices** page (or the corresponding entity type)
-- Select the desired entity
-- In the entity details view, go to the **Alarms** tab
+可在实体的详情页面（例如设备）直接查看和管理该实体的告警。
+- 打开 **Devices** 页面（或对应实体类型）
+- 选择目标实体
+- 在实体详情中切换到 **Alarms** 选项卡
 
-Here you can view and manage alarms that belong specifically to this entity.
+在此可查看和管理仅属于该实体的告警。
 
 {% include images-gallery.html imageCollection="find-alarm-for-specific-device" %}
 
-Now let&#39;s consider what operations you can perform on alarms.
+以下介绍可对告警执行的操作。
 
 <hr>
 
-## Alarm operations
+## 告警操作
 
-### Acknowledge and clear alarms
+### 确认与清除告警
 
-Each alarm can have the following status dimensions:
-- **Acknowledged** / **Unacknowledged**
-- **Active** / **Cleared**
+每条告警有两个状态维度：
+- **已确认** / **未确认**
+- **活动** / **已清除**
 
-You can acknowledge or clear alarms from:
-- The **Alarms** page
-- The **Alarms table** widget
-- The **Alarms** tab of an entity details page
+可在以下位置执行确认或清除：
+- **Alarms** 页面
+- **Alarms table** 部件
+- 实体详情页的 **Alarms** 选项卡
 
-<b><font size="3">Acknowledge</font></b>
+<b><font size="3">确认</font></b>
 
-Click **Acknowledge** to mark the alarm as reviewed. Acknowledgment does not affect alarm logic but helps operational workflows.
+点击 **Acknowledge** 将告警标记为已查看。确认不影响告警逻辑，仅便于运维流程。
 
 {% include images-gallery.html imageCollection="acknowledge-alarm" %}
 
-<b><font size="3">Clear</font></b>
+<b><font size="3">清除</font></b>
 
 {% include images-gallery.html imageCollection="clear-alarm" %}
 
-Click **Clear** to close the alarm. Clearing can be performed manually or automatically if a rule defines a clear condition.
+点击 **Clear** 可关闭告警。清除可手动完成，或在规则中定义了清除条件时自动执行。
 
 <hr>
 
-### Alarm comments
+### 告警评论
 
-To view or leave comments:
-- Open an **alarm&#39;s details** window by clicking the three dots (…) in the **Details** column.
-- Scroll to the **Activity** section.
+查看或添加评论：
+- 点击 **Details** 列中的省略号（…）打开**告警详情**窗口
+- 滚动至 **Activity** 区域
 
-There are two types of comments:
-- **User comments** — added manually, can be edited or deleted by the author.
-- **System comments** — generated automatically (for example, when severity changes or an alarm is assigned). These are read-only and displayed in gray.
+评论分两类：
+- **用户评论**：手动添加，作者可编辑或删除
+- **系统评论**：由系统生成（如严重程度变化、告警指派等），只读，以灰色显示
 
-Comments help maintain an audit trail of operator actions and system events.
+评论有助于记录操作和系统事件。
 
 {% include images-gallery.html imageCollection="alarm-comments-1" %}
 
 <hr>
 
-## Key concepts
+## 核心概念
 
-Let&#39;s review the main concepts of the alarm below:
+以下介绍告警的主要概念：
 
 ### Originator
 
-The **originator** is the entity that initiated the event leading to the alarm. For example, if a device sends telemetry that exceeds a configured threshold, that device becomes the originator of the alarm.
+**Originator** 是触发告警事件的实体。例如，设备上报的 telemetry 超过设定阈值时，该设备即为告警的 originator。
 
 ### Type
 
-The alarm type is a semantic identifier describing the nature of the event (e.g. *High Temperature* or *Low Humidity*). 
+告警类型是描述事件性质的语义标识（例如 *High Temperature* 或 *Low Humidity*）。
 
-Alarm type defines alarm uniqueness within an entity.
+告警类型决定同一实体内告警的唯一性。
 
 {% include images-gallery.html imageCollection="alarm-type" %}
 
 ### Severity
 
-Indicates the criticality of the event. ThingsBoard supports five levels, listed from highest to lowest priority:
+表示事件的严重程度。ThingsBoard 支持五个级别（从高到低）：
 - **Critical**
 - **Major**
 - **Minor**
 - **Warning**
 - **Indeterminate**
 
-Severity is assigned when an alarm is created and may be updated by rule logic.
+告警创建时分配 Severity，并可由规则逻辑更新。
 
 {% include images-gallery.html imageCollection="alarm-severity" %}
 
 ### Status
 
-An alarm has two primary dimensions:
-- **Active** / **Cleared**
-- **Acknowledged** / **Unacknowledged**
+告警有两个主要维度：
+- **活动** / **已清除**
+- **已确认** / **未确认**
 
-Together, these dimensions form four possible alarm states:
-- *Active & Unacknowledged*
-- *Active & Acknowledged*
-- *Cleared & Unacknowledged*
-- *Cleared & Acknowledged*
+组合后形成四种状态：
+- *活动 & 未确认*
+- *活动 & 已确认*
+- *已清除 & 未确认*
+- *已清除 & 已确认*
 
-Alarms can be cleared either manually by a user or automatically when a predefined clear condition is satisfied. Configuring a clear condition is optional.
+告警可由用户手动清除，或在满足预设清除条件时自动清除。清除条件为可配。
 
-### Alarm uniqueness
+### 告警唯一性
 
-ThingsBoard identifies an alarm using a combination of the **originator**, **type**, and **start time**.   
-This means that at any given moment, only one active alarm can exist with the same originator, type, and start time.
+ThingsBoard 通过 **originator**、**type** 和 **start time** 的组合识别告警。
+因此，同一时刻仅能存在一条具有相同 originator、type 和 start time 的活动告警。
 
-**Example:**   
-Suppose you configure a rule to create a "High Temperature" alarm when the temperature rises above 20, and a rule to clear the same alarm when the temperature is less than or equal to 20.
+**示例：**  
+假设配置规则：温度高于 20 时创建「High Temperature」告警，温度小于等于 20 时清除该告警。
 
-Event sequence:   
-12:00 — temperature = 18 → no alarm   
-12:30 — temperature = 22 → **alarm is created** (**startTime = 12:30**)   
-13:00 — temperature = 25 → existing alarm updated   
-13:30 — temperature = 18 → **the alarm is cleared** (**endTime = 13:30**)
+事件顺序：  
+12:00 — 温度 = 18 → 无告警  
+12:30 — 温度 = 22 → **告警创建**（**startTime = 12:30**）  
+13:00 — 温度 = 25 → 更新已有告警  
+13:30 — 温度 = 18 → **告警清除**（**endTime = 13:30**）
 
-As a result, the system produces a **single** "High Temperature" alarm with start time 12:30 and end time 13:30.
+结果是生成一条 startTime 为 12:30、endTime 为 13:30 的「High Temperature」告警。
 
-### Alarm timing details
+### 告警时间说明
 
-<b><font size="4">Alarm start time & Alarm creation time</font></b>
+<b><font size="4">告警开始时间与创建时间</font></b>
 
-An alarm includes two key timestamps:
-- **Start time**. The moment when the alarm condition first becomes true. This reflects the actual event time based on the incoming telemetry.
-- **Creation time**. The moment when ThingsBoard receives and processes the telemetry and creates the alarm.
+告警包含两个关键时间戳：
+- **Start time**：告警条件首次满足的时刻，基于上报的 telemetry 时间
+- **Creation time**：ThingsBoard 接收并处理 telemetry 后创建告警的时刻
 
-In most cases, these timestamps match. However, they may differ when devices send delayed or backdated telemetry — for example, when operating offline or uploading data in batches.
-In this situation, the alarm start time reflects the timestamp of the telemetry that crossed the threshold, while the creation time is the moment when ThingsBoard processed that message. As a result, the start time and creation time may differ.
+多数情况下两者一致。当设备发送延迟或回溯 telemetry（例如离线或批量上报）时可能不同。
+此时，start time 为超过阈值的 telemetry 时间戳，creation time 为 ThingsBoard 处理该消息的时刻，因而可能不同。
 
-**Example with delayed telemetry**
+**延迟 telemetry 示例**
 
-An air-quality monitoring system has a pollution threshold of 100 units.
+空气质量监控系统阈值为 100 单位。
 
-**12:00** — sensor reports 95 → no alarm condition.   
-**12:05** — sensor reports 105 → **alarm condition becomes true**.   
-**12:08** — ThingsBoard receives and processes the data, **creating an alarm**.
+**12:00** — 传感器上报 95 → 未触发告警条件  
+**12:05** — 传感器上报 105 → **告警条件满足**  
+**12:08** — ThingsBoard 接收并处理数据，**创建告警**
 
-Here:
-- **startTime = 12:05** (moment the threshold was actually exceeded)
-- **creationTime = 12:08** (moment the platform processed the telemetry)
+此时：
+- **startTime = 12:05**（实际超过阈值的时刻）
+- **creationTime = 12:08**（平台处理 telemetry 的时刻）
 
-This distinction is important for analyzing system reaction time and understanding event chronology.
+这种区分有助于分析系统响应时间和事件顺序。
 
-<b><font size="4">Alarm end time</font></b>
+<b><font size="4">告警结束时间</font></b>
 
-When an alarm is created, **endTime** initially equals startTime. If the condition continues triggering (e.g., additional telemetry crosses the threshold), the alarm’s endTime updates accordingly until the alarm is cleared.
+告警创建时，**endTime** 初始等于 startTime。若条件持续满足（例如后续 telemetry 再次超阈值），endTime 会相应更新，直至告警被清除。
 
-**Types of alarm trigger conditions**
+**告警触发条件类型**
 
-Alarm rules allow choosing how the alarm creation moment is evaluated.
-- **Simple** — the alarm is created immediately when the threshold is exceeded.
-- **Duration** — the alarm is created only if the condition remains true for a specified period (for example, temperature above threshold for 5 minutes).
-- **Repeating** — the alarm is created after the condition occurs a defined number of times (for example, on the fifth exceedance).
+告警规则可选择告警创建时刻的判定方式。
+- **Simple** — 超过阈值时立即创建告警
+- **Duration** — 条件持续满足指定时长（例如温度超阈值 5 分钟）时才创建告警
+- **Repeating** — 条件满足指定次数（例如第 5 次超阈值）时才创建告警
 
 ### Assignee
 
-Alarms can be assigned to users responsible for resolving them. Assignment is available:
+告警可指派给负责处理的用户。指派可在以下位置进行：
 
-- On the **Alarms page**
-- In the **Alarms table widget**
-- In an entity’s **Alarms tab**
+- **Alarms** 页面
+- **Alarms table** 部件
+- 实体的 **Alarms** 选项卡
 
 {% include images-gallery.html imageCollection="assignee-alarm-1" %}
 
 {% capture difference %}
-Note: A user can be assigned an alarm only if they have access rights to the corresponding entity.
+注意：用户只有在拥有对应实体访问权限时，才能被指派该告警。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Assigned users receive notifications according to their notification settings.
+被指派的用户将根据其通知设置接收通知。
 
 {% include images-gallery.html imageCollection="assignee-alarm-2" %}
 
-### Alarm propagation
+### 告警传播
 
-Alarm propagation makes an alarm visible not only on its originator but across related entities according to hierarchy and rule configuration.
+告警传播使告警不仅在其 originator 上可见，还可根据层次结构和规则配置在相关实体间可见。
 
-**How it works**
+**工作方式**
 
-When an alarm is created, ThingsBoard:
-1. Identifies the originator
-2. Analyzes entity relations
-3. Applies propagation filters defined in the rule
-4. Displays the alarm on all relevant entities
+告警创建时，ThingsBoard 会：
+1. 识别 originator
+2. 分析实体关系
+3. 应用规则中定义的传播筛选条件
+4. 在所有相关实体上展示告警
 
-Each propagated alarm is not an independent copy — it is a representation of the same alarm shown for a different entity. The alarm state stays fully synchronized with the originator.
+每条传播的告警并非独立副本，而是同一告警在不同实体上的展示，与 originator 完全同步。
 
-**Example scenario**
+**示例场景**
 
-Hierarchy: **Tenant → Customer A → Office A (Asset) → Device A1**
+层次：**Tenant → Customer A → Office A（资产）→ Device A1**
 
-If propagation is enabled and Device A1 triggers an alarm:
-- Alarm appears on **Device A1**
-- Propagates to **Office A**
-- Becomes visible to **Customer A**
-- May propagate further to **Tenant**
+若启用传播且 Device A1 触发告警：
+- 告警在 **Device A1** 上出现
+- 传播到 **Office A**
+- 对 **Customer A** 可见
+- 可继续传播到 **Tenant**
 
-This ensures centralized visibility across multi-level infrastructures.
+这样可在多级架构下实现集中可见性。
 
 <hr>
 
-## View and manage alarms
+## 查看与管理告警
 
-**Alarms page**
+**Alarms 页面**
 
-To view and manage alarms, use the "Alarms" page in the left menu.
-Here you will see all alarms related to your entities: devices, assets, customers, etc., and alarms of your customers and users in the form of a list form, as well as the following information: creation time, source, alarm type, severity, [to whom assigned](#assign-alarm-to-user), and status of the alarm.
-By default, only active alarms for all time are displayed here. If necessary, apply a filter and time interval to see other results.
-To view more information about an alarm, click on the ellipsis (...) in the "Details" column of the alarm you want to view.
+使用左侧菜单中的「Alarms」页面可查看和管理告警。
+页面以列表形式展示与实体相关的告警（设备、资产、Customer 等）以及您和 Customer 的告警，包括：创建时间、来源、告警类型、严重程度、[指派对象](#assign-alarm-to-user)和告警状态。
+默认显示所有时间的活动告警。可按筛选条件和时间范围查看其他结果。
+要查看告警详情，请点击该告警「Details」列中的省略号（…）。
 
 {% include images-gallery.html imageCollection="find-alarms" %}
 
 <br>
-**Alarm widgets**
+**告警部件**
 
-Also, the ThingsBoard has handy widgets for visualizing alarms on the dashboard.
+ThingsBoard 提供用于在 dashboard 上展示告警的部件。
 
-The "**Alarms table**" widget allows you to conveniently display and manage alarms for selected entities based on a defined time window and filters.
+「**Alarms table**」部件可按时间范围和筛选条件，为选定实体方便地展示和管理告警。
 
 {% include images-gallery.html imageCollection="visualize-alarms-on-dashboard-1" %}
 
-The "**Alarm count**" widget displays the number of alarms based on the selected filter.
+「**Alarm count**」部件根据所选筛选条件显示告警数量。
 
 {% include images-gallery.html imageCollection="visualize-alarms-on-dashboard-2" %}
 
-The filter setting allows you to:
+筛选设置支持：
 
-* Filter alarms by status using any combination of acknowledge/unacknowledge/active/clear;
-* Filter alarms by severity using any combination of severity levels;
-* Displaying a list of alarms by type;
-* Enable or disable search of the propagated alarms (only for "Alarms table" widget).
+* 使用 acknowledge/unacknowledge/active/clear 的任意组合按状态筛选告警；
+* 使用各严重级别组合按严重程度筛选告警；
+* 按类型显示告警列表；
+* 启用或禁用传播告警搜索（仅限「Alarms table」部件）。
 
-How to add a widget to the monitoring panel, see this [document](/docs/{{docsPrefix}}user-guide/widgets/#adding-a-widget-to-the-dashboard).
+如何向监控面板添加部件，请参阅[此文档](/docs/{{docsPrefix}}user-guide/widgets/#adding-a-widget-to-the-dashboard)。
 
 <br>
-**Alarms of a specific entity**
+**特定实体的告警**
 
-To find alarms for a specific entity (in our case, device), you should:
+要查看某实体（此处以设备为例）的告警：
 
-- Go to the entities page. In our case, these are the "Devices" page;
-- Click on the needed entity (device) to open its details;
-- Navigate to the "Alarms" tab.
+- 进入该实体类型的页面，此处为「Devices」；
+- 点击目标实体打开详情；
+- 切换到「Alarms」选项卡。
 
-Here you will see all alarms related to this entity. Optionally, apply a filter and time interval.
+此处可查看与该实体相关的所有告警，并可选择应用筛选条件和时间范围。
 
 {% include images-gallery.html imageCollection="find-alarm-for-specific-device" %}
 
-Now let's consider what operations you can perform on alarms.
+以下介绍可对告警执行的操作。
 
-### Acknowledge and/or clear alarm
+### 确认和/或清除告警
 
-Alarms have four statuses: acknowledged/unacknowledged/active/clear.
+告警有四种状态： acknowledged/unacknowledged/active/clear。
 
-To acknowledge the alarm, click on the "Acknowledge" icon in the Alarms table widget or click on the "Acknowledge" button in the alarm details window on the "Alarms" page, or on the "Alarms" tab of the entity details window.
+确认告警：在 Alarms table 部件中点击「Acknowledge」图标，或在「Alarms」页面的告警详情窗口中点击「Acknowledge」按钮，或在实体详情窗口的「Alarms」选项卡中点击。
 
 {% include images-gallery.html imageCollection="acknowledge-alarm" %}
 
-To clear the alarm, click on the "Clear" icon in the Alarms table widget or click on the "Clear" button in the alarm details window.
+清除告警：在 Alarms table 部件中点击「Clear」图标，或在告警详情窗口中点击「Clear」按钮。
 
 {% include images-gallery.html imageCollection="clear-alarm" %}
 
-### Alarm comments
+### 告警评论
 
-To find comments on a specific alarm, open the detailed information about the alarm by clicking on the ellipsis (...) in the "Details" column.
-Here you can view system comments, comments from other users, and leave your own.
+查看某告警的评论，请点击「Details」列中的省略号（…）打开告警详情。
+在此可查看系统评论、其他用户评论，并可添加自己的评论。
 
 {% include images-gallery.html imageCollection="alarm-comments-1" %}
 
-There are two types of comments: user and system.
-Authorized users may add, edit, and delete their comments. System comments are non-editable grey-colored comments that describe alarm events such as changes to severity, alarm assignee etc.
+评论分为用户评论和系统评论两类。
+有权限的用户可添加、编辑和删除自己的评论。系统评论为不可编辑的灰色评论，描述诸如严重程度变更、告警指派等事件。
 
-## Alarm management using REST API
+## 使用 REST API 管理告警
 
-ThingsBoard provides REST API to manage and query alarms. See [REST API](/docs/{{docsPrefix}}reference/rest-api/) documentation for more details.
+ThingsBoard 提供用于管理和查询告警的 REST API。详见 [REST API](/docs/{{docsPrefix}}reference/rest-api/) 文档。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/multi-project-guides-banner.md %}
 
 <hr>
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 上为 ThingsBoard 加星，帮助我们推广。
+如有问题，请[联系我们](/docs/contact-us/){:target="_blank"}。

@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard using Docker (Linux or Mac OS)
-description: Installing ThingsBoard IoT Platform using Docker (Linux or Mac OS)
+title: 使用 Docker 安装 ThingsBoard（Linux 或 Mac OS）
+description: 使用 Docker 安装 ThingsBoardIoT平台（Linux 或 Mac OS）
 
 ---
 

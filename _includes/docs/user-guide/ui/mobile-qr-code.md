@@ -22,100 +22,100 @@
 {% assign sinceVersion = "3.7" %}
 {% include templates/since.md %}
 
-We are excited to introduce a new QR code feature, designed to streamline the authorization process in the ThingsBoard mobile application. 
-This enhancement makes logging in faster and more secure, offering a user-friendly alternative to traditional username and password entry.
+我们新增了 QR 码功能，用于简化 ThingsBoard 移动应用中的授权流程。
+该功能使登录更快速、更安全，为用户提供比传统用户名密码输入更友好的方式。
 
 ## Scan to download the mobile app
 
 {% if docsPrefix == null %}
-If the {{THINGSBOARD_MOBILE_APP}} has not been installed yet, scanning the QR code will redirect the user to the application marketplace (available on [Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.demo.app){:target="_blank"} and [App Store](https://apps.apple.com/us/app/thingsboard-live/id1594355695){:target="_blank"}).
+若尚未安装 {{THINGSBOARD_MOBILE_APP}}，扫描 QR 码将引导用户前往应用商店（[Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.demo.app){:target="_blank"} 和 [App Store](https://apps.apple.com/us/app/thingsboard-live/id1594355695){:target="_blank"}）。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-If the {{THINGSBOARD_MOBILE_APP}} has not been installed yet, scanning the QR code will redirect the user to the application marketplace (available on [Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.cloud){:target="_blank"} and [App Store](https://apps.apple.com/us/app/thingsboard-cloud/id6499209395){:target="_blank"}).
+若尚未安装 {{THINGSBOARD_MOBILE_APP}}，扫描 QR 码将引导用户前往应用商店（[Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.cloud){:target="_blank"} 和 [App Store](https://apps.apple.com/us/app/thingsboard-cloud/id6499209395){:target="_blank"}）。
 {% endif %}
 
-Just follow these simple steps to get started:
+按下列简单步骤开始：
 
 {% include images-gallery.html imageCollection="download-app-with-qr-code" showListImageTitles="true" %}
 
-Additionally, by clicking the "App Store" or "Google Play" button in the "Connect mobile app" widget, you will be redirected to the ThingsBoard app page in the respective app store for further downloading to your device.
+此外，点击“Connect mobile app”部件中的“App Store”或“Google Play”按钮，可跳转到对应应用商店的 ThingsBoard 应用页面进行下载。
 
 {% include images-gallery.html imageCollection="clicking-button" %}
 
 ## Login with QR code
 
-Scan the QR code with the ThingsBoard mobile app, and you will instantly gain access to your account, without the need to manually enter your credentials.
+用 ThingsBoard 移动应用扫描 QR 码，即可无需手动输入凭据即时登录账户。
 
-The login process is simple and convenient:
+登录流程简单便捷：
 
 {% include images-gallery.html imageCollection="authorize-with-qr-code" showListImageTitles="true" %}
 
 ## Configuring QR code widget on Home page
 
 {% if docsPrefix == null %}
-The mobile application QR code widget settings configuration is available only on the **system level**.
-For this, log in as the **system administrator** and navigate to the "QR code widget" tab on the "Mobile center" page, and disable "Use system settings" toggle.
+移动应用 QR 码部件配置仅可在 **系统级别** 进行。
+请以 **系统管理员** 身份登录，进入“Mobile center”页面的“QR code widget”选项卡，关闭“Use system settings”开关。
 {% endif %}
 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}
-The mobile application QR code widget settings are inherited from the **system level** by default. [Tenant administrators](/docs/{{docsPrefix}}user-guide/ui/tenants/){:target="_blank"} are authorized to override system settings. For this, navigate to the "QR code widget" tab on the "Mobile center" page, and disable "Use system settings" toggle.
+移动应用 QR 码部件设置默认继承自 **系统级别**。[Tenant administrators](/docs/{{docsPrefix}}user-guide/ui/tenants/){:target="_blank"} 可覆盖系统设置。请进入“Mobile center”页面的“QR code widget”选项卡，关闭“Use system settings”开关。
 {% endif %}
 
 {% include images-gallery.html imageCollection="mobile-app-qr-code-widget-settings" %}
 
-There, you'll find two settings blocks: "Applications" and "Appearance on Home page".
+此处有两个设置块：“Applications”和“Appearance on Home page”。
 
-**Applications:**
+**Applications：**
 
-Two types of application are available for tenant: default and custom. 
+Tenant 可使用两种应用类型：默认和自定义。
 
 {% if docsPrefix == null %}
-* **Default**. Using the default app means using officially published {{OFFICIALLY_PUBLISHED_APPLICATION}} mobile application (available on [Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.demo.app){:target="_blank"} and [App Store](https://apps.apple.com/us/app/thingsboard-live/id1594355695){:target="_blank"}).
+* **Default**。使用默认应用表示使用官方发布的 {{OFFICIALLY_PUBLISHED_APPLICATION}} 移动应用（[Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.demo.app){:target="_blank"} 和 [App Store](https://apps.apple.com/us/app/thingsboard-live/id1594355695){:target="_blank"}）。
 {% endif %}
 {% if docsPrefix == "pe/" %}
-* **Default**. Using the default app means using officially published {{OFFICIALLY_PUBLISHED_APPLICATION}} mobile application (available on [Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.cloud){:target="_blank"} and [App Store](https://apps.apple.com/us/app/thingsboard-cloud/id6499209395){:target="_blank"}).
+* **Default**。使用默认应用表示使用官方发布的 {{OFFICIALLY_PUBLISHED_APPLICATION}} 移动应用（[Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.cloud){:target="_blank"} 和 [App Store](https://apps.apple.com/us/app/thingsboard-cloud/id6499209395){:target="_blank"}）。
 {% endif %}
 {% if docsPrefix contains "paas/" %}
-* **Default**. Using the default app means using officially published {{OFFICIALLY_PUBLISHED_APPLICATION}} mobile application (available on [Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.cloud){:target="_blank"} and [App Store](https://apps.apple.com/us/app/thingsboard-cloud/id6499209395){:target="_blank"}).
+* **Default**。使用默认应用表示使用官方发布的 {{OFFICIALLY_PUBLISHED_APPLICATION}} 移动应用（[Google Play](https://play.google.com/store/apps/details?id=org.thingsboard.cloud){:target="_blank"} 和 [App Store](https://apps.apple.com/us/app/thingsboard-cloud/id6499209395){:target="_blank"}）。
 {% endif %}
 
 {% include images-gallery.html imageCollection="application-settings-default" %}
 
 {% unless docsPrefix contains 'paas/' %}
 {% capture difference %}
-**Note:** The latest release of the {{OFFICIALLY_PUBLISHED_APPLICATION}} mobile application (version 1.2.0) includes the capability to switch its server host, allowing it to work with your ThingsBoard {{PREFIX}} instance. Simply select the "Login with scan QR code" option on the mobile application's login page, and the application will automatically switch its server host to your ThingsBoard {{PREFIX}} platform host.
+**注意：** {{OFFICIALLY_PUBLISHED_APPLICATION}} 移动应用最新版本 (1.2.0) 支持切换服务器 host，可与你的 ThingsBoard {{PREFIX}} 实例配合使用。在移动应用登录页选择“Login with scan QR code”选项，应用将自动切换服务器 host 到你的 ThingsBoard {{PREFIX}} 平台 host。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 {% endunless %}
 
-* **Custom**. If you prefer to use your {{CUSTOM_APPLICATION}}, switch to the custom settings, and specify the bundle preconfigured on the "[Bundle](/docs/{{docsPrefix}}mobile-center/mobile-center/#bundle){:target="_blank"}" tab. Then, save changes.
+* **Custom**。若希望使用自有 {{CUSTOM_APPLICATION}}，请切换到自定义设置，指定在“[Bundle](/docs/{{docsPrefix}}mobile-center/mobile-center/#bundle){:target="_blank"}”选项卡中预配置的 bundle。然后保存更改。
  
 {% include images-gallery.html imageCollection="application-settings-custom" %}
 
 {% unless docsPrefix == null or docsPrefix == "pe/" %}
 {% capture difference %}
-**Note:** To use a custom mobile application, the tenant must have a domain name configured in the [Domain settings](/docs/{{docsPrefix}}domains/){:target="_blank"}.
+**注意：** 使用自定义移动应用时，tenant 必须在 [Domain settings](/docs/{{docsPrefix}}domains/){:target="_blank"} 中配置域名。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 {% endunless %}
 
-If necessary, you can disable unused platforms.
+可按需禁用未使用的平台。
 
 {% include images-gallery.html imageCollection="disable-platforms" %}
 
 <br>
-[Scan the QR code](#login-with-qr-code) on the "Home" page with your mobile device to ensure it redirects to the specified application.
+在“Home”页面用移动设备[扫描 QR 码](#login-with-qr-code)，确认是否跳转到指定应用。
 
 <br>
-**Appearance on Home page:**
+**Appearance on Home page：**
 
-You can disable the QR code widget on the "Home" page, adjust the positioning of the badges, and update the QR code label to better suit your needs.
+可在“Home”页禁用 QR 码部件、调整徽章位置，以及修改 QR 码标签以满足需求。
 
 {% include images-gallery.html imageCollection="appearance-on-home-page" %}
 
 ## Mobile app QR code widget
 
-With the release of ThingsBoard 3.7, we've also introduced the "Mobile app QR code" widget. You can use this widget on your [dashboards](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} to simplify the login process for your customers on their mobile devices.
+ThingsBoard 3.7 发布后，新增了“Mobile app QR code”部件。可在 [dashboards](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} 中使用该部件，简化客户在移动设备上的登录流程。
 
-Let's add this widget to your dashboard:
+将此部件添加到 dashboard：
 
 {% include images-gallery.html imageCollection="add-qr-code-widget" showListImageTitles="true" %}

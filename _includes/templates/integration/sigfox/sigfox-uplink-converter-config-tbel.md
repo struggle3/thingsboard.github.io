@@ -1,4 +1,4 @@
-You can use the following code, copy it to the decoder function section:
+可使用以下代码，将其复制到 decoder function 区域：
 
 ```javascript
 /** Decoder **/

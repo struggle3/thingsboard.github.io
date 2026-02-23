@@ -2,9 +2,9 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard CE on GCP
+title: 在 GCP 上安装 ThingsBoard CE
 notitle: "true"
-description: Installing ThingsBoard CE on Google Cloud Platform
+description: 在 Google Cloud Platform 上安装 ThingsBoard CE
 
 ---
 

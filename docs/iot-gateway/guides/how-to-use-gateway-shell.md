@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-gw
-title: How to use Gateway Shell
-description: How to use Gateway Shell
+title: 如何使用 Gateway Shell
+description: 如何使用 Gateway Shell
 
 ---
 
@@ -9,66 +9,66 @@ description: How to use Gateway Shell
 {:toc}
 
 
-This guide explains how to use Gateway Shell and provide examples of how to use each command defined in Gateway Shell.
-The Gateway Shell feature allows users to interact with a gateway through a command-line interface.
-By using the provided commands and corresponding arguments, users can execute specific actions and retrieve information 
-from the Gateway. Refer to the usage examples outlined in this guide to effectively utilize the Gateway Shell feature.
+本指南说明如何使用 Gateway Shell，并提供其中各命令的使用示例。
+Gateway Shell 功能允许用户通过命令行与网关交互。
+借助提供的命令及对应参数，用户可执行指定操作并从网关获取信息。
+请参考本指南中的用法示例以有效利用 Gateway Shell 功能。
 
-For the purpose of this tutorial, you need:  
-1. Locally installed instance of ThingsBoard platform (In case you are new with ThingsBoard [use this 'how to install' documentation](/docs/user-guide/install/installation-options/)).
-2. [Installed](/docs/iot-gateway/installation/) and [configured](/docs/iot-gateway/configuration/) ThingsBoard IoT Gateway.
+本教程需要：  
+1. 本地安装的 ThingsBoard 平台实例（若为新用户请参考 [安装文档](/docs/user-guide/install/installation-options/)）。
+2. 已 [安装](/docs/iot-gateway/installation/) 并 [配置](/docs/iot-gateway/configuration/) ThingsBoard IoT Gateway。
 
-### Storage Command
-The `storage` command provides functionality related to storage operations.
+### Storage 命令
+`storage` 命令提供与存储操作相关的功能。
 
-#### Get Storage Name
-To retrieve the storage name, use the following command:
+#### 获取存储名称
+要获取存储名称，请使用以下命令：
 
 ```bash
 tb-gateway-shell storage -n
 ```
 {: .copy-code}
 
-#### Get Storage Events Count
-To obtain the count of storage events, use the following command:
+#### 获取存储事件数量
+要获取存储事件数量，请使用以下命令：
 
 ```bash
 tb-gateway-shell storage -c
 ```
 {: .copy-code}
 
-### Connector Command
-The `connector` command enables actions related to connectors.
+### Connector 命令
+`connector` 命令提供与连接器相关的操作。
 
-#### Get Available Connectors
-To list the available connectors, use the following command:
+#### 获取可用连接器
+要列出可用连接器，请使用以下命令：
 
 ```bash
 tb-gateway-shell connector -l
 ```
 {: .copy-code}
 
-#### Get Connector Status
-To retrieve the status of a specific connector, provide the connector name as follows:
+#### 获取连接器状态
+要获取指定连接器的状态，请按如下方式传入连接器名称：
 
 ```bash
 tb-gateway-shell connector -s <name>
 ```
 {: .copy-code}
 
-#### Get Connector Config
-To obtain the configuration of a specific connector, provide the connector name as follows:
+#### 获取连接器配置
+要获取指定连接器的配置，请按如下方式传入连接器名称：
 
 ```bash
 tb-gateway-shell connector -c <name>
 ```
 {: .copy-code}
 
-### Gateway Command
-The `gateway` command allows operations related to the gateway itself.
+### Gateway 命令
+`gateway` 命令提供与网关本身相关的操作。
 
-#### Get Gateway Status
-To retrieve the status of the gateway, use the following command:
+#### 获取网关状态
+要获取网关状态，请使用以下命令：
 
 ```bash
 tb-gateway-shell gateway -s

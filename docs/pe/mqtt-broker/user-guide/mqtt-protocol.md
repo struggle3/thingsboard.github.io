@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: MQTT protocol
-description: Description of MQTT protocol
+title: MQTT 协议
+description: MQTT 协议说明
 
 ---
 

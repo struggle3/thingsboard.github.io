@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Thank you!
+title: 感谢订阅！
 
 ---
 
-Thank you for your interest in ThingsBoard! Have a great day!
+感谢您对ThingsBoard的关注！祝您有美好的一天！

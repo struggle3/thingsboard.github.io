@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Microsoft Teams Settings
-description: ThingsBoard IoT platform Microsoft Teams settings
+title: Microsoft Teams 设置
+description: ThingsBoard IoT 平台 Microsoft Teams 设置
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Securing Ollama with an Nginx Reverse Proxy
-description: Secure your local Ollama LLM deployment with Nginx and Docker Compose. This step-by-step guide provides copy-paste commands to easily set up username/password or API key authentication.
+title: 使用 Nginx 反向代理保护 Ollama
+description: 通过 Nginx 与 Docker Compose 保护本地 Ollama LLM 部署。本分步指南提供可复制的命令，便于配置用户名/密码或 API 密钥认证。
 ---
 
 {% include get-hosts-name.html docsPrefix=docsPrefix %}

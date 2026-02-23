@@ -1,8 +1,8 @@
-### Prepare for upgrading ThingsBoard 
+### 升级 ThingsBoard 前的准备工作
 
-**Stop ThingsBoard**
-Check if ThingsBoard and database services are running
-Initially ThingsBoard, check status to ensure it is stopped and then databases.
+**停止 ThingsBoard**
+检查 ThingsBoard 及数据库服务是否在运行。
+先停止 ThingsBoard，检查状态确认已停止，再处理数据库。
 ```bash
 sudo systemctl stop thingsboard
 ```
@@ -13,87 +13,87 @@ sudo systemctl status thingsboard
 ```
 {: .copy-code}
 
-#### Backup Database
-Make a backup of the database before upgrading.
+#### 备份数据库
+升级前请对数据库进行备份。
 ##### PostgreSQL
-Check PostgreSQL status. It is unnecessary to stop PostgreSQL for the backup.
+检查 PostgreSQL 状态。备份时无需停止 PostgreSQL。
 ```bash
 sudo systemctl status postgresql
 ```
 {: .copy-code}
 
-***Make sure you have enough space to place a backup of the database***
-Check database size
+***请确保有足够的空间存放数据库备份***
+检查数据库大小
 ```bash
 sudo -u postgres psql -c "SELECT pg_size_pretty( pg_database_size('thingsboard') );"
 ```
 {: .copy-code}
-Check free space
+检查可用空间
 
 ```bash
 df -h /
 ```
 {: .copy-code}
 
-If there is enough free space - make a backup.
+如有足够可用空间，可执行备份。
 ```bash
 sudo -Hiu postgres pg_dump thingsboard > thingsboard.sql.bak
 ```
 {: .copy-code}
 
-Check backup file being created.
+确认备份文件已创建。
 
 ##### Cassandra
-Check Cassandra status. It is necessary to stop Cassandra for the backup.
+检查 Cassandra 状态。备份 Cassandra 需先停止服务。
 
 ```bash
 sudo systemctl status cassandra
 ```
 {: .copy-code}
 
-Flush all memtables from the node to SSTables on disk.
+将所有 memtable 从节点刷新到磁盘上的 SSTable。
 
 ```bash
 nodetool drain
 ```
 {: .copy-code}
 
-Stop Cassandra.
+停止 Cassandra。
 
 ```bash
 sudo systemctl stop cassandra
 ```
 {: .copy-code}
-And you have to check the status again to ensure they are surely stopped.
+需再次检查状态以确认已完全停止。
 
 ```bash
 sudo systemctl status cassandra
 ```
 {: .copy-code}
 
-***Make sure you have enough space to place a backup of the database***
-Check database size.
+***请确保有足够的空间存放数据库备份***
+检查数据库大小。
 ```bash
 du -h /var/lib/cassandra/ | tail -1
 ```
 {: .copy-code}
 
-Check free space.
+检查可用空间。
 ```bash
 df -h /
 ```
 {: .copy-code}
 
-Make a backup of Cassandra database.
+执行 Cassandra 数据库备份。
 ```bash
 mkdir backup
 sudo tar -cvf backup/cassandra.tar /var/lib/cassandra
 ```
 {: .copy-code}
 
-***Check archive being created***
+***确认归档是否正在创建***
 
-#### Start Database
+#### 启动数据库
 **Cassandra**
 ```bash
 sudo systemctl start cassandra
@@ -101,4 +101,4 @@ sudo systemctl start cassandra
 {: .copy-code}
 
 **PostgreSQL**
-Do nothing, postgresql is already running.
+无需操作，PostgreSQL 已在运行。

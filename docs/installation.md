@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: ThingsBoard Installation
-description: ThingsBoard installation instructions for various operation systems and cloud platforms
+title: ThingsBoard安装
+description: ThingsBoard在各操作系统及云平台上的安装说明
 notitle: "true"
 ---
 
@@ -10,25 +10,25 @@ notitle: "true"
        <div class="install-hero">
           <div class="container">
             <div class="install-hero-content">
-                <h1>Choose ThingsBoard product</h1>
+                <h1>选择ThingsBoard产品</h1>
             </div>
             <div class="cards">
                 <a href="/docs/user-guide/install/installation-options/" class="card thingsboard-ce">
                     <div class="card-title">
-                        <span class="title-text">ThingsBoard<br>Community Edition</span>
+                        <span class="title-text">ThingsBoard<br>社区版</span>
                     </div>
                     <div class="card-img product community-edition-bg"></div>
                     <div class="card-description">
-                        Installation options
+                        安装选项
                     </div>
                 </a>
                 <a href="/docs/user-guide/install/pe/installation-options/" class="card thingsboard-pe">
                     <div class="card-title">
-                        <span class="title-text">ThingsBoard<br>Professional Edition</span>
+                        <span class="title-text">ThingsBoard<br>专业版</span>
                     </div>
                     <div class="card-img product professional-edition-bg"></div>
                     <div class="card-description">  
-                        Installation options
+                        安装选项
                     </div>
                 </a>
                 <a href="/docs/iot-gateway/installation/" class="card thingsboard-gw">
@@ -37,7 +37,7 @@ notitle: "true"
                     </div>
                     <div class="card-img product gateway-bg"></div>
                     <div class="card-description">  
-                        Installation options
+                        安装选项
                     </div>
                 </a>
                 <a href="/docs/trendz/install/installation-options/" class="card trendz">
@@ -46,7 +46,7 @@ notitle: "true"
                     </div>
                     <div class="card-img product trendz-bg"></div>
                     <div class="card-description">  
-                        Installation options
+                        安装选项
                     </div>
                 </a>
             </div>

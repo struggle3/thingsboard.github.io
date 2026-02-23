@@ -1,33 +1,29 @@
-Sends the incoming message data as a [reply](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial) to a [Remote Procedure Call (RPC)](/docs/{{docsPrefix}}user-guide/rpc){:target="_blank"} from a device. 
-The reply is routed back to the originating service and session based on metadata attributes. 
-The message is routed to either the `Success` connection (if successful) or the `Failure` connection (if an error occurs).
+将传入消息数据作为[回复](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial)发送给设备的 [Remote Procedure Call (RPC)](/docs/{{docsPrefix}}user-guide/rpc){:target="_blank"}。
+回复根据元数据属性路由回发起服务和会话。
+消息路由至 `Success` 连接（成功时）或 `Failure` 连接（错误时）。
 
-## Usage
+## 用法
 
-The typical workflow for handling device RPC requests and sending replies follows these steps:
+处理设备 RPC 请求并发送回复的典型流程如下：
 
-1. When a device sends an RPC request to the platform, a rule engine message of type `TO_SERVER_RPC_REQUEST` is automatically created. The message data contains the RPC payload
-   from the device, and the metadata includes the service ID, session ID, and request ID needed for routing the reply.
+1. 当设备向平台发送 RPC 请求时，会自动创建类型为 `TO_SERVER_RPC_REQUEST` 的 Rule Engine 消息。消息数据包含设备的 RPC payload，元数据包含路由回复所需的服务 ID、会话 ID 和请求 ID。
 
-2. In your rule chain, process this message to prepare the response. This may involve enriching the message with additional data, transforming the payload, calling external
-   systems, or any other business logic required to generate the appropriate reply.
+2. 在 Rule Chain 中处理该消息以准备响应。可能涉及用附加数据丰富消息、转换 payload、调用外部系统或生成适当回复所需的任何其他业务逻辑。
 
-3. Once the response is ready in the message data, route the message to the RPC call reply node. The node will use the metadata to send the reply back to the originating device.
+3. 一旦消息数据中准备好响应，将消息路由至 RPC call reply 节点。节点将使用元数据将回复发送回发起设备。
 
-4. **Important**: Ensure that the service ID, session ID, and request ID metadata attributes are preserved throughout your message processing. If these values are lost or
-   overwritten, the reply cannot be routed back to the device.
+4. **重要**：确保在消息处理过程中保留服务 ID、会话 ID 和请求 ID 元数据属性。若这些值丢失或被覆盖，回复无法路由回设备。
 
-## Configuration
+## 配置
 
-The configuration parameters specify the metadata key names used to identify the service, session, and request for sending a reply back.
+配置参数指定用于识别服务、会话和请求的元数据键名，以便发送回复。
 
-- **Service Id** - Metadata key name for the service identifier. The default value is `serviceId`. This identifies the originating service that should receive the reply.
-- **Session Id** - Metadata key name for the session identifier. The default value is `sessionId`. This identifies the specific session within the service.
-- **Request Id** - Metadata key name for the request identifier. The default value is `requestId`. This identifies the specific RPC request being replied to.
+- **Service Id** - 服务标识符的元数据键名。默认值为 `serviceId`。标识应接收回复的发起服务。
+- **Session Id** - 会话标识符的元数据键名。默认值为 `sessionId`。标识服务内的具体会话。
+- **Request Id** - 请求标识符的元数据键名。默认值为 `requestId`。标识要回复的具体 RPC 请求。
 
 {% capture reasonable_defaults_note %}
-While these parameters can be customized for advanced use cases, the defaults work well for most scenarios and typically don't need to be changed. The RPC message already contains
-the routing parameters (service ID, session ID, and request ID) in the metadata.
+这些参数可为高级用例自定义，但默认值在大多数场景下工作良好，通常无需更改。RPC 消息的元数据中已包含路由参数（服务 ID、会话 ID、请求 ID）。
 {% endcapture %}
 {% include templates/info-banner.md content=reasonable_defaults_note %}
 
@@ -62,39 +58,39 @@ the routing parameters (service ID, session ID, and request ID) in the metadata.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node validates that the message*originator is a `DEVICE`. If validation fails, processing fails.
-2. The node extracts the service ID, session ID, and request ID from the message metadata using the configured key names. If any of these values are missing, processing fails.
-3. The node validates that the message data (reply body) is not empty. If empty, processing fails.
-4. The node checks if the message is from an edge device by looking for an `edgeId` in the metadata:
-    - If edge ID is present: The reply is saved to the edge event queue for asynchronous delivery to the edge.
-    - If edge ID is not present: The reply is sent directly to the device using the RPC service.
-5. When processing completes successfully, the message is forwarded via the `Success` connection.
+1. 节点验证消息发起者为 `DEVICE`。若验证失败，处理失败。
+2. 节点使用配置的键名从消息元数据中提取服务 ID、会话 ID 和请求 ID。若任一值缺失，处理失败。
+3. 节点验证消息数据（回复体）非空。若为空，处理失败。
+4. 节点通过检查元数据中是否存在 `edgeId` 判断消息是否来自 Edge 设备：
+    - 若存在 edge ID：将回复保存到 Edge 事件队列以便异步投递给 Edge。
+    - 若不存在 edge ID：使用 RPC 服务直接将回复发送给设备。
+5. 成功完成处理后，消息经 `Success` 连接转发。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The RPC reply was sent successfully (either directly or queued for edge delivery). The outgoing message is the same as the incoming message.
+    - RPC 回复已成功发送（直接发送或加入 Edge 投递队列）。传出消息与传入消息相同。
 - `Failure`
-    - An error occurred during processing, such as:
-        - The originator is not a `DEVICE`
-        - The service ID is missing from the metadata
-        - The session ID is missing from the metadata
-        - The request ID is missing from the metadata
-        - The message data (reply body) is empty
-        - Failed to parse edge ID or device ID from metadata
-        - Failed to save the edge event
+    - 处理过程中发生错误，例如：
+        - 发起者不是 `DEVICE`
+        - 元数据中缺少服务 ID
+        - 元数据中缺少会话 ID
+        - 元数据中缺少请求 ID
+        - 消息数据（回复体）为空
+        - 无法从元数据解析 edge ID 或设备 ID
+        - 保存 Edge 事件失败
 
-## Examples
+## 示例
 
-### Example 1 — Simple RPC reply
+### 示例 1 — 简单 RPC 回复
 
-**Incoming message**
+**传入消息**
 
-Originator: `DEVICE`.
+发起者：`DEVICE`。
 
-Data:
+数据：
 
 ```json
 {
@@ -102,7 +98,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -112,7 +108,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -122,11 +118,10 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-The outgoing message is the same as the incoming message. Routed via the `Success` connection.
+传出消息与传入消息相同。经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-The device requested the current server time, and the server responds with the current UNIX timestamp (in milliseconds). The RPC reply is sent back to service `monolith`, session
-`550e8400-e29b-41d4-a716-446655440000`, for request ID `12345`.
+设备请求当前服务器时间，服务器以当前 UNIX 时间戳（毫秒）回复。RPC 回复发送回服务 `monolith`、会话 `550e8400-e29b-41d4-a716-446655440000`，对应请求 ID `12345`。

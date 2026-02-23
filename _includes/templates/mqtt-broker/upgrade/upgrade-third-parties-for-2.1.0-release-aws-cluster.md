@@ -1,19 +1,19 @@
-With v2.1.0, TBMQ updates the versions of key third-party dependencies, including Redis, PostgreSQL, and Kafka.
-You can review the changes by visiting the following [link](https://github.com/thingsboard/tbmq/pull/218).
+v2.1.0 中，TBMQ 更新了关键第三方依赖版本，包括 Redis、PostgreSQL 和 Kafka。
+可通过以下 [链接](https://github.com/thingsboard/tbmq/pull/218) 查看变更详情。
 
-| Service        | Previous Version | Updated Version |
-|----------------|------------------|-----------------|
-| **Redis**      | 7.0              | 7.2.5           |
-| **PostgreSQL** | 15.x             | 16.x            |
-| **Kafka**      | 3.5.1            | 3.7.0           |
+| 服务         | 更新前版本 | 更新后版本 |
+|--------------|------------|------------|
+| **Redis**    | 7.0        | 7.2.5      |
+| **PostgreSQL** | 15.x     | 16.x       |
+| **Kafka**    | 3.5.1      | 3.7.0      |
 
-We **recommend** aligning your environment with the updated third-party versions to ensure full compatibility with this release.
-Alternatively, you may proceed without upgrading, but compatibility is only guaranteed with the recommended versions.
+**建议** 将环境中的第三方版本与上述更新版本对齐，以确保与本版本完全兼容。
+也可选择不升级，但兼容性仅在推荐版本下得到保证。
 
 {% capture third-party-upgrade %}
-We do not provide step-by-step upgrade instructions for third-party services. 
-For such procedures, please refer to the official documentation of the respective platform or, in the case of managed services, consult your service provider’s resources.
+我们不为第三方服务提供逐步升级说明。
+此类操作请参阅各平台的官方文档，或在使用托管服务时查阅服务提供商的资源。
 {% endcapture %}
 {% include templates/info-banner.md content=third-party-upgrade %}
 
-After addressing third-party service versions as needed, you can continue with the remaining steps of the [upgrade process](#run-upgrade).
+按需处理第三方服务版本后，可继续 [升级流程](#run-upgrade) 的剩余步骤。

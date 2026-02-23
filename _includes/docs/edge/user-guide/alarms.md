@@ -1,58 +1,58 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-The **ThingsBoard Alarm** is an essential feature for monitoring and responding to entity events and conditions. 
-For a comprehensive understanding of the **ThingsBoard Alarm** feature, please refer to the [Working with Alarms](/docs/{{cloudDocsPrefix}}user-guide/alarms/){: target="_blank"} documentation.
+**ThingsBoard 告警**是用于监控和响应实体事件及条件的重要功能。
+若要全面了解 **ThingsBoard 告警**功能，请参阅 [Working with Alarms](/docs/{{cloudDocsPrefix}}user-guide/alarms/){: target="_blank"} 文档。
 
-Although the **Alarm** feature for the **Edge** is designed similarly to that of the **Cloud**, it includes several notable additions: 
-* Alarms are processed locally on the **Edge** and focused on the immediate conditions for alarm triggering without relying on connectivity.
-* The Alarm data can be pushed from the **Edge** to the **Cloud** and can also be sent back from the **Cloud** to the **Edge**. This setup enables real-time monitoring and management of alarms across different locations.
-* Edge Alarms can be integrated with other local systems or software solutions for further processing, notifications, or actions.
+尽管 **Edge** 的 **告警** 功能设计与 **Cloud** 类似，但包含若干显著差异：
+* 告警在 **Edge** 上本地处理，侧重于触发告警的即时条件，不依赖连接性。
+* 告警数据可从 **Edge** 推送到 **Cloud**，也可从 **Cloud** 发回至 **Edge**。此设置支持跨不同位置的实时监控和告警管理。
+* Edge 告警可与本地其他系统或软件集成，用于进一步处理、通知或执行操作。
 
-In essence, the **ThingsBoard Edge Alarms** provide real-time, localized alarm management that can operate independently of **Cloud** connectivity.
+简而言之，**ThingsBoard Edge 告警**提供可独立于 **Cloud** 连接运行的实时、本地化告警管理。
 
-## Create an Alarm on the Edge Instance
+## 在 Edge 实例上创建告警
 
-The **Edge Alarms** are created and configured in the same way as the **Cloud Alarms**. Therefore, it is necessary to define the **parameters and the rules** according to which the alarm is to be triggered. 
+**Edge 告警**的创建和配置方式与 **Cloud 告警**相同。因此，需要根据告警触发条件定义 **参数和规则**。
 
-The easiest way to create an Alarm is to use the [Alarm Rules within the Device profile](/docs/{{cloudDocsPrefix}}user-guide/device-profiles/#alarm-rules){: target="_blank"}. The majority of tasks can be configured with **Alarm Rules** with minimal effort.
+创建告警最简单的方式是使用 [Device profile 中的告警规则](/docs/{{cloudDocsPrefix}}user-guide/device-profiles/#alarm-rules){: target="_blank"}。大多数任务可通过 **Alarm Rules** 以最少配置完成。
 
-If more complex logic is required, we suggest using the alternative option, namely the ["Create Alarm"](/docs/user-guide/rule-engine-2-0/nodes/action/create-alarm/){:target="_blank"} and ["Clear Alarm"](/docs/user-guide/rule-engine-2-0/nodes/action/clear-alarm/){: target="_blank"} rule nodes in the [Rule Engine](/docs/{{cloudDocsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){: target="_blank"}. This is a more advanced option that requires a certain level of programming expertise. Please refer to the [corresponding example](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/){: target="_blank"}.
+如需更复杂的逻辑，建议使用另一种方式，即在 [Rule Engine](/docs/{{cloudDocsPrefix}}user-guide/rule-engine-2-0/re-getting-started/){: target="_blank"} 中使用 ["Create Alarm"](/docs/user-guide/rule-engine-2-0/nodes/action/create-alarm/){:target="_blank"} 和 ["Clear Alarm"](/docs/user-guide/rule-engine-2-0/nodes/action/clear-alarm/){: target="_blank"} 规则节点。这是较高级选项，需要一定的编程能力。请参阅 [corresponding example](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/){: target="_blank"}。
 
-## Alarms Pushing from the Cloud to the Edge
+## 从 Cloud 推送告警到 Edge
 
-The **ThingsBoard system** allows for pushing **Alarms** from the **Cloud** to the **Edge** to enhance operational efficiency and reduce reliance on **Cloud** resources.
+**ThingsBoard 系统**支持将 **告警** 从 **Cloud** 推送到 **Edge**，以提高运营效率并减少对 **Cloud** 资源的依赖。
 
 {% capture prerequisite %}
-Determine the **Rule Chain** you intend to use in advance, as this will have a significant impact on the configuration process.
+请提前确定要使用的 **Rule Chain**，这将显著影响配置过程。
 {% endcapture %}
 {% include templates/info-banner.md content=prerequisite %}
 
-### Guidelines
+### 操作指南
 
-To push Alarms from the **Cloud** to the **Edge**, follow these steps:
+将告警从 **Cloud** 推送到 **Edge**，请按以下步骤操作：
 
 {% include images-gallery.html imageCollection="push-to-edge" showListImageTitles="true" %}
 
-## Alarms Pushing from the Edge to the Cloud
+## 从 Edge 推送告警到 Cloud
 
-**ThingsBoard** also allows for pushing alarms from the **Edge** to the **Cloud**.
+**ThingsBoard** 同样支持将告警从 **Edge** 推送到 **Cloud**。
 {% capture local-deployment %}
-**Please note!** <br>
-If you use **earlier versions** of Edge, you **cannot** create or edit a **Rule Chain** on the **Edge** itself. It must be configured as a template in the **Cloud (Server)**, and then assigned to the **Edge** instance. 
+**请注意！** <br>
+若使用 **较早版本** 的 Edge，您 **无法** 在 **Edge** 本身创建或编辑 **Rule Chain**。必须在 **Cloud (Server)** 中配置为模板，然后分配给 **Edge** 实例。
 
-Starting with **Edge version 4.0**, you can create and edit a **Rule Chain** on the **Edge**.
+从 **Edge 4.0** 起，您可以在 **Edge** 上创建和编辑 **Rule Chain**。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 
-### Guidelines
+### 操作指南
 
-To push Alarms from the **Edge** to the **Cloud**, follow these steps:
+将告警从 **Edge** 推送到 **Cloud**，请按以下步骤操作：
 
-{% include images-gallery.html imageCollection="push-to-cloud" showListImageTitles="true" %} 
+{% include images-gallery.html imageCollection="push-to-cloud" showListImageTitles="true" %}
 
-## Next steps
+## 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

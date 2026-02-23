@@ -1,35 +1,32 @@
-Creates, updates and clears alarms based on the [alarm rules](/docs/{{docsPrefix}}/user-guide/device-profiles/#alarm-rules) defined in the device profile of the message originator.
+根据消息发起者设备 Profile 中定义的 [告警规则](/docs/{{docsPrefix}}/user-guide/device-profiles/#alarm-rules) 创建、更新和清除告警。
 
-## Configuration
+## 配置
 
-- **Persist state of alarm rules**: When enabled, stores the state of alarm rules in the database.
-- **Fetch state of alarm rules**: Controls when alarm rule states are loaded from database.
-    - **Enabled**: Alarm rule states are preloaded during node startup.
-    - **Disabled**: Alarm rule states are loaded on-demand when the first message from device is received.
+- **Persist state of alarm rules（持久化告警规则状态）**：启用时，将告警规则状态存储到数据库。
+- **Fetch state of alarm rules（获取告警规则状态）**：控制何时从数据库加载告警规则状态。
+    - **Enabled（启用）**：节点启动时预加载告警规则状态。
+    - **Disabled（禁用）**：收到设备首条消息时按需加载告警规则状态。
 
 {% capture alarm_rules_both_options_note %}
-**Note**: If you decide to you these options, we recommend having both enabled at the same time, but when you have a large number of devices, it can be
-beneficial to disable the fetch option to improve startup time.
+**注意**：若使用这些选项，建议同时启用两者，但在设备数量较多时，禁用获取选项可缩短启动时间。
 {% endcapture %}
 {% include templates/info-banner.md content=alarm_rules_both_options_note %}
 
-### Persist state of alarm rules configuration
+### Persist state of alarm rules 配置说明
 
-This option addresses alarm rule evaluation continuity across server restarts. By default, the node tracks alarm rule states in memory, which are lost during restarts.
+此选项解决服务器重启后告警规则评估的连续性。默认情况下，节点在内存中跟踪告警规则状态，重启时丢失。
 
-Alarm rules require stateful evaluation over time:
+告警规则需要随时间进行有状态评估：
 
-- **Duration conditions**: "Temperature exceeds 100°C for 10 minutes" - requires tracking when the duration during which condition is true
-- **Repeating conditions**: "Temperature exceeds 100°C five times in a row" - requires counting consecutive occurrences
+- **Duration conditions（持续时间条件）**：「温度超过 100°C 持续 10 分钟」— 需跟踪条件为真的持续时间
+- **Repeating conditions（重复条件）**：「温度连续五次超过 100°C」— 需计数连续发生次数
 
-If the server restarts mid-evaluation (e.g., after 7 minutes of a 10-minute duration, or 3 out of 5 repetitions), the tracking state is lost and alarm evaluation restarts from
-zero.
+若服务器在评估过程中重启（例如 10 分钟持续的第 7 分钟，或 5 次重复中的第 3 次），跟踪状态会丢失，告警评估从零重新开始。
 
-To solve this, **Persist state of alarm rules** configuration option allows persisting alarm rule states to the database instead of keeping them only in memory, ensuring evaluation
-continuity across restarts.
+为解决此问题，**Persist state of alarm rules** 配置选项允许将告警规则状态持久化到数据库，而非仅在内存中保存，确保重启后评估的连续性。
 
 {% capture alarm_rules_persistence_cost_note %}
-**Note**: This comes at the cost of additional database writes for each message matching alarm conditions, which can be significant under high message volumes.
+**注意**：这会为每条符合告警条件的消息增加额外的数据库写入，在高消息量下可能明显。
 {% endcapture %}
 {% include templates/info-banner.md content=alarm_rules_persistence_cost_note %}
 
@@ -56,30 +53,28 @@ continuity across restarts.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. **Load device profile**: Retrieves the device profile associated with the message originator.
-2. **Extract alarm rules**: Gets all alarm rules configured in the device profile.
-3. **Rule evaluation**: Evaluates alarm rules configured for the originator device against the incoming message.
-4. **Alarm processing**: Creates, updates, or clears alarms based on the evaluation result.
-5. **Generate alarm messages**: Produces new alarm messages depending on evaluation result. The data of the generated message represents the alarm after the alarm changes were
-   applied (after create, update, or clear).
-6. **State persistence**: If **Persist state of alarm rules** is enabled and the message matches at least one alarm condition, persists the current processing state to the
-   database.
-7. **Route message**: Routes the original message to `Success` with no modifications.
+1. **加载设备 Profile**：获取与消息发起者关联的设备 Profile。
+2. **提取告警规则**：获取设备 Profile 中配置的所有告警规则。
+3. **规则评估**：针对传入消息评估发起者设备配置的告警规则。
+4. **告警处理**：根据评估结果创建、更新或清除告警。
+5. **生成告警消息**：根据评估结果生成新告警消息。生成消息的数据表示告警更改（创建、更新或清除）应用后的告警。
+6. **状态持久化**：若 **Persist state of alarm rules** 已启用且消息至少匹配一条告警条件，将当前处理状态持久化到数据库。
+7. **路由消息**：将原始消息无修改地路由至 `Success`。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - Message was successfully processed and alarm rules were evaluated
-    - The original message is routed here with no modifications
+    - 消息已成功处理且告警规则已评估
+    - 原始消息无修改地路由至此
 - `Alarm Created`
-    - Generated messages about alarm creation are routed here
+    - 告警创建相关的生成消息路由至此
 - `Alarm Updated`
-    - Generated messages about alarm updates are routed here
+    - 告警更新相关的生成消息路由至此
 - `Alarm Severity Updated`
-    - Generated messages about alarm severity updates are routed here
+    - 告警严重性更新相关的生成消息路由至此
 - `Alarm Cleared`
-    - Generated messages about alarm clearing are routed here
+    - 告警清除相关的生成消息路由至此
 - `Failure`
-    - Unexpected error occurred during alarm rule evaluation or processing
+    - 告警规则评估或处理过程中发生意外错误

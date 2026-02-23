@@ -1,7 +1,7 @@
 <table>
     <thead>
       <tr>
-          <td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+          <td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
       </tr>
     </thead>
     <tbody>
@@ -45,57 +45,56 @@
         <td>transport.lwm2m.server.security.credentials.type</td>
         <td>LWM2M_SERVER_CREDENTIALS_TYPE</td>
         <td>PEM</td>
-        <td>Server credentials type (PEM - pem certificate file; KEYSTORE - java keystore)</td>
+        <td>服务器凭证类型(PEM-pem证书;KEYSTORE-java keystore)</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.pem.cert_file</td>
         <td>LWM2M_SERVER_PEM_CERT</td>
         <td>lwm2mserver.pem</td>
-        <td>Path to the server certificate file (holds server certificate or certificate chain, may include server
-            private key)
+        <td>服务器证书文件路径（含证书或证书链，可含服务器私钥）
         </td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.pem.key_file</td>
         <td>LWM2M_SERVER_PEM_KEY</td>
         <td>lwm2mserver_key.pem</td>
-        <td>Path to the server certificate private key file (optional)</td>
+        <td>服务器证书私钥文件路径（可选）</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.pem.key_password</td>
         <td>LWM2M_SERVER_PEM_KEY_PASSWORD</td>
         <td>server_key_password</td>
-        <td>Server certificate private key password (optional)</td>
+        <td>服务器证书私钥密码（可选）</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.keystore.type</td>
         <td>LWM2M_SERVER_KEY_STORE_TYPE</td>
         <td>JKS</td>
-        <td>Type of the key store</td>
+        <td>Keystore类型</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.keystore.store_file</td>
         <td>LWM2M_SERVER_KEY_STORE</td>
         <td>lwm2mserver.jks</td>
-        <td>Path to the key store that holds the SSL certificate</td>
+        <td>存放SSL证书的keystore路径</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.keystore.store_password</td>
         <td>LWM2M_SERVER_KEY_STORE_PASSWORD</td>
         <td>server_ks_password</td>
-        <td>Password used to access the key store</td>
+        <td>访问keystore的密码</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.keystore.key_alias</td>
         <td>LWM2M_SERVER_KEY_ALIAS</td>
         <td>server</td>
-        <td>Key alias</td>
+        <td>密钥别名</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.credentials.keystore.key_password</td>
         <td>LWM2M_SERVER_KEY_PASSWORD</td>
         <td>server_ks_password</td>
-        <td>Password used to access the key</td>
+        <td>访问密钥的密码</td>
     </tr>
     <tr>
         <td>transport.lwm2m.server.security.skip_validity_check_for_client_cert</td>
@@ -152,57 +151,56 @@
         <td>transport.lwm2m.bootstrap.security.credentials.type</td>
         <td>LWM2M_BS_CREDENTIALS_TYPE</td>
         <td>PEM</td>
-        <td>Server credentials type (PEM - pem certificate file; KEYSTORE - java keystore)</td>
+        <td>服务器凭证类型(PEM-pem证书;KEYSTORE-java keystore)</td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.pem.cert_file</td>
         <td>LWM2M_BS_PEM_CERT</td>
         <td>lwm2mserver.pem</td>
-        <td>Path to the server certificate file (holds server certificate or certificate chain, may include server
-            private key)
+        <td>服务器证书文件路径（含证书或证书链，可含服务器私钥）
         </td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.pem.key_file</td>
         <td>LWM2M_BS_PEM_KEY</td>
         <td>lwm2mserver_key.pem</td>
-        <td>Path to the server certificate private key file (optional)</td>
+        <td>服务器证书私钥文件路径（可选）</td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.pem.key_password</td>
         <td>LWM2M_BS_PEM_KEY_PASSWORD</td>
         <td>server_key_password</td>
-        <td>Server certificate private key password (optional)</td>
+        <td>服务器证书私钥密码（可选）</td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.keystore.type</td>
         <td>LWM2M_BS_KEY_STORE_TYPE</td>
         <td>JKS</td>
-        <td>Type of the key store</td>
+        <td>Keystore类型</td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.keystore.store_file</td>
         <td>LWM2M_BS_KEY_STORE</td>
         <td>lwm2mserver.jks</td>
-        <td>Path to the key store that holds the SSL certificate</td>
+        <td>存放SSL证书的keystore路径</td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.keystore.store_password</td>
         <td>LWM2M_BS_KEY_STORE_PASSWORD</td>
         <td>server_ks_password</td>
-        <td>Password used to access the key store</td>
+        <td>访问keystore的密码</td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.keystore.key_alias</td>
         <td>LWM2M_BS_KEY_ALIAS</td>
         <td>bootstrap</td>
-        <td>Key alias</td>
+        <td>密钥别名</td>
     </tr>
     <tr>
         <td>transport.lwm2m.bootstrap.security.credentials.keystore.key_password</td>
         <td>LWM2M_BS_KEY_PASSWORD</td>
         <td>server_ks_password</td>
-        <td>Password used to access the key</td>
+        <td>访问密钥的密码</td>
     </tr>
     <tr>
         <td>transport.lwm2m.security.trust-credentials.enabled</td>
@@ -226,7 +224,7 @@
         <td>transport.lwm2m.security.trust-credentials.keystore.type</td>
         <td>LWM2M_TRUST_KEY_STORE_TYPE</td>
         <td>JKS</td>
-        <td>Type of the key store</td>
+        <td>Keystore类型</td>
     </tr>
     <tr>
         <td>transport.lwm2m.security.trust-credentials.keystore.store_file</td>
@@ -238,7 +236,7 @@
         <td>transport.lwm2m.security.trust-credentials.keystore.store_password</td>
         <td>LWM2M_TRUST_KEY_STORE_PASSWORD</td>
         <td>server_ks_password</td>
-        <td>Password used to access the key store</td>
+        <td>访问keystore的密码</td>
     </tr>
     <tr>
         <td>transport.lwm2m.security.recommended_ciphers</td>

@@ -1,14 +1,14 @@
-Attributes and time series data can be retrieved using [json-path](/docs/iot-gateway/config/mqtt/#json-path)
-in the MQTT Connector. This allows to extract the required field(s) from the `JSON` payload received on the subscribed topic(s).”.
+在 MQTT 连接器中，可使用 [json-path](/docs/iot-gateway/config/mqtt/#json-path) 获取属性和时序数据，
+从订阅主题收到的 `JSON` 负载中提取所需字段。
 
-As an example, we will use ThingsBoard MQTT Demo Broker, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard MQTT 演示代理，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 1884:1884 thingsboard/tb-gw-mqtt-broker:latest
 ```
 {:.copy-code}
 
-The broker available at `0.0.0.0:1884` and publishes data to the topic `sensor/data` with the following JSON payload:
+代理运行于 `0.0.0.0:1884`，向主题 `sensor/data` 发布以下 JSON 负载：
 
 ```json
 {
@@ -19,54 +19,51 @@ The broker available at `0.0.0.0:1884` and publishes data to the topic `sensor/d
     "hum": 59.3
 }
 ```
-We’ll map `sensorModel` → `model` and `temp` → timeseries `temperature`. Next, configure the device name and profile in the MQTT connector. 
-Follow these steps:
+将 `sensorModel` 映射为 `model`，`temp` 映射为时序数据 `temperature`。接下来在 MQTT 连接器中配置设备名和配置文件。
+按以下步骤操作：
 
 {% assign deviceNameAndProfileTopicAndConstantJson = '
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-1.png,
-        title: Go to "**Entities**" → "**Gateways**" on the left sidebar and select your gateway.
+        title: 在左侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-2.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/mqtt-connector/examples/device-name-and-profile-message-json-3.png,
-        title: Select the MQTT connector, click on the "**Data mapping**" tab. Select data mapping with device to which you want to add time series data (if you do not know how to add a new device, see the [Getting Started](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"} guide or [Data mapping](/docs/iot-gateway/config/opc-ua/#data-mapping) section of this guide with respective examples).
+        title: 选择 MQTT 连接器，点击“**数据映射**”标签。选择要添加时序数据的数据映射（若不清楚如何添加新设备，请参阅[入门指南](/docs/iot-gateway/getting-started/?connectorsCreation=opcua){:target="_blank"}或本指南的[数据映射](/docs/iot-gateway/config/opc-ua/#data-mapping)及相应示例）。
     ===
         image: /images/gateway/mqtt-connector/examples/attributes-time-series-json-path-2.png,
-        title: In the opened data mapping windows, click on the "**pencil**" icon next to the "**Attributes**" section.
+        title: 在打开的数据映射窗口中，点击“**属性**”旁的“**铅笔**”图标。
     ===
         image: /images/gateway/mqtt-connector/examples/attributes-time-series-json-path-3.png,
-        title: Click on the "**Add attribute**" button. Fill in the "**Key**" field with `model`, also select `String` in "**Type**" field, and fill in the "**Value**" field with `${sensorModel}`. This is a [json-path](/docs/iot-gateway/config/mqtt/#json-path).
+        title: 点击“**添加属性**”按钮。“**键**”填 `model`，“**类型**”选 `String`，“**值**”填 `${sensorModel}`。这来自 [json-path](/docs/iot-gateway/config/mqtt/#json-path)。
     ===
         image: /images/gateway/mqtt-connector/examples/attributes-time-series-json-path-4.png,
-        title: Remember to save your changes by clicking the designated button.
+        title: 记得点击相应按钮保存更改。
     ===
         image: /images/gateway/mqtt-connector/examples/attributes-time-series-json-path-5.png,
-        title: In the opened data mapping windows, click on the "**pencil**" icon next to the "**Time series**" section.
+        title: 在打开的数据映射窗口中，点击“**时序数据**”旁的“**铅笔**”图标。
     ===
         image: /images/gateway/mqtt-connector/examples/attributes-time-series-json-path-6.png,
-        title: Click on the "**Add time series**" button. Fill in the "**Key**" field with `temperature`, also select `Double` in "**Type**" field, and fill in the "**Value**" field with [json-path](/docs/iot-gateway/config/mqtt/#json-path) - `${temp}`. This is a [json-path](/docs/iot-gateway/config/mqtt/#json-path).
+        title: 点击“**添加时序数据**”按钮。“**键**”填 `temperature`，“**类型**”选 `Double`，“**值**”填 [json-path](/docs/iot-gateway/config/mqtt/#json-path) `${temp}`。
      ===
         image: /images/gateway/mqtt-connector/examples/attributes-time-series-json-path-7.png,
-        title: Remember to save your changes by clicking the designated button.
+        title: 记得点击相应按钮保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=deviceNameAndProfileTopicAndConstantJson %}
 
-Now we can check if the attribute data is set correctly. Go to "**Entities**" > "**Devices**", select a created device and as you
-can see, the humidity data is available in the "**Attributes**" section:
+可以检查属性数据是否正确设置。进入“**实体**”→“**设备**”，选择已创建设备，可在“**属性**”部分看到湿度数据：
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-2.png)
 
-Now we can check if the temperature data is sending correctly. Go to "**Entities**" > "**Devices**", select a created device and as you
-can see, the humidity data is available in the "**Latest telemetry**" section:
+可以检查温度数据是否发送正确。进入“**实体**”→“**设备**”，选择已创建设备，可在“**最新遥测**”部分看到湿度数据：
 
 ![image](/images/gateway/mqtt-connector/examples/result-device-overview-1.png)
 
-If you are using advanced configuration mode and want to set the `temperature` and `model` data using [json-path](/docs/iot-gateway/config/mqtt/#json-path), you can
-use the following configuration:
+若使用高级配置模式并需用 [json-path](/docs/iot-gateway/config/mqtt/#json-path) 设置 `temperature` 和 `model` 数据，可使用以下配置：
 
 ```json
 {

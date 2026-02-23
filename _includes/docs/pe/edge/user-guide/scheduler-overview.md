@@ -1,55 +1,55 @@
 * TOC
 {:toc}
 
-### Scheduler Overview
+### Scheduler 概述
 
 {% capture white-labeling-note %}
-The **scheduler** feature is supported only in the **Professional Edition**.
+**Scheduler** 功能仅在 **Professional Edition** 中支持。
 {% endcapture %}
 {% include templates/info-banner.md content=white-labeling-note %}
 
-The **ThingsBoard Scheduler** is a feature that allows users to automate periodic tasks, such as telemetry and attribute updates, RPC commands, and rule chain triggers.
+**ThingsBoard Scheduler** 是一项允许用户自动化周期任务的功能，例如遥测和属性更新、RPC 命令和规则链触发。
 
-The **Scheduler** feature for **Edge** is designed similarly to that of the **Platform**. 
-For a comprehensive understanding, please refer to the **ThingsBoard Platform** [Scheduler documentation](/docs/pe/user-guide/scheduler/){: target="_blank"}.
+**Edge** 的 **Scheduler** 功能与 **Platform** 设计类似。
+完整说明请参阅 **ThingsBoard Platform** [Scheduler 文档](/docs/pe/user-guide/scheduler/){: target="_blank"}。
 
-**Scheduler events** cannot be created or modified directly from **ThingsBoard Edge**, all scheduling must be configured in **ThingsBoard Platform** and then assigned to the **Edge** instance.
-These scheduled tasks are executed directly on the **Edge** instance, ensuring real-time automation even without a cloud connection.
+**Scheduler 事件** 无法在 **ThingsBoard Edge** 上直接创建或修改，所有调度必须在 **ThingsBoard Platform** 中配置后分配到 **Edge** 实例。
+这些计划任务直接在 **Edge** 实例上执行，确保即使无云连接也能实时自动化。
 
-### Configuring the Scheduler Feature 
+### 配置 Scheduler 功能 
 
-To create a **scheduler event**: 
+创建 **Scheduler 事件**：
 
 {% include images-gallery.html imageCollection="createSchedulerEvent" showListImageTitles="true" %}
 
-### Scheduled Irrigation Management Using ThingsBoard Edge (Use Case)
+### 使用 ThingsBoard Edge 进行计划灌溉管理（用例）
 
-To illustrate the **Scheduler** feature's role in automation and management efficiency, let’s look at the [Smart Irrigation solution template](/docs/pe/solution-templates/smart-irrigation/){: target="_blank"}.
+为说明 **Scheduler** 功能在自动化和管理效率中的作用，请参阅 [智能灌溉解决方案模板](/docs/pe/solution-templates/smart-irrigation/){: target="_blank"}。
 
-This solution enables automated irrigation based on **soil moisture sensor readings** and **predefined schedules**. 
-The goal is to sustain optimal soil moisture levels while **minimizing water consumption**.
+该解决方案基于 **土壤湿度传感器读数** 和 **预定义计划** 实现自动化灌溉。
+目标是在 **最小化用水** 的同时维持最佳土壤湿度水平。
 
-Since irrigation systems are often deployed in remote agricultural fields, the **ThingsBoard Edge** instance will run locally to ensure uninterrupted operation, even in cases of network disruptions.
+由于灌溉系统通常部署在偏远农田，**ThingsBoard Edge** 实例将在本地运行，确保即使在网络中断情况下也能持续运行。
 
-The **Smart Irrigation solution template** offers a solution to:
-* Ensure fields are irrigated twice a day at predefined times.
-* Monitor critical parameters in real-time, such as:
-  * Soil moisture levels.
-  * Daily water consumption.
-  * Irrigation duration.
-* Operate locally on **ThingsBoard Edge** to avoid reliance on constant internet connectivity.
+**智能灌溉解决方案模板** 可：
+* 确保每天在预定义时间灌溉两次。
+* 实时监控关键参数，例如：
+  * 土壤湿度。
+  * 日用水量。
+  * 灌溉时长。
+* 在 **ThingsBoard Edge** 上本地运行，避免依赖持续互联网连接。
 
-To install the solution template, log in to the **ThingsBoard Platform** and go to the **Solution templates** section. 
-Scroll down to the **Smart Irrigation** block and click the **"Install"** button.
+安装解决方案模板时，请登录 **ThingsBoard Platform** 并进入 **Solution templates** 部分。
+向下滚动到 **Smart Irrigation** 区块并点击 **"Install"** 按钮。
 
 {% include images-gallery.html imageCollection="installTemplate" %}
 
-#### Configuration Details
+#### 配置详情
 
-Let's take a look at the configuration details. 
-Since **rule chains** and **scheduler events** cannot be created directly on the **Edge**, all configurations are first completed on the **ThingsBoard Platform** and then synchronized with the **Edge** instance.
+查看配置详情。
+由于 **规则链** 和 **Scheduler 事件** 无法在 **Edge** 上直接创建，所有配置需先在 **ThingsBoard Platform** 完成后再与 **Edge** 实例同步。
 
-The **Smart Irrigation solution template** automatically creates **Edge** instance and assigns all required configurations.
+**智能灌溉解决方案模板** 会自动创建 **Edge** 实例并分配所有所需配置。
 
 {% include images-gallery.html imageCollection="remoteFarmR1" showListImageTitles="true" %}
 
@@ -57,21 +57,21 @@ The **Smart Irrigation solution template** automatically creates **Edge** instan
 
 {% include images-gallery.html imageCollection="schedulerParameters" showListImageTitles="true" %}
 
-##### Rule Chains
+##### 规则链
 
 {% include images-gallery.html imageCollection="ruleChainParameters" showListImageTitles="true" %}
 
-##### Visualisation
+##### 可视化
 
 {% include images-gallery.html imageCollection="dashboard" showListImageTitles="true" %}
 
-#### Benefits of the Scheduler
-The **scheduler** feature configured in the **Smart Irrigation solution template**:
-* Ensures autonomous irrigation in remote locations, independent of cloud dependency. 
-* Optimizes water usage by running irrigation based on a fixed schedule. 
-* Improves operational efficiency by reducing manual intervention. 
-* Enhances monitoring with real-time soil moisture telemetry updates.
+#### Scheduler 的优势
+**智能灌溉解决方案模板** 中配置的 **Scheduler** 功能：
+* 确保偏远地区自主灌溉，不依赖云。
+* 基于固定计划运行灌溉，优化用水。
+* 减少人工干预，提高运维效率。
+* 通过实时土壤湿度遥测更新增强监控。
 
-### Next steps
+### 下一步
 
 {% include templates/edge/guides-banner-edge.md %}

@@ -2,7 +2,7 @@
 {% assign raspberryPiPicoInstallation = '
     ===
         image: /images/devices-library/basic/microcontrollers/raspberry-pi-pico-w-arduino-ide-board-manager.png,
-        title: Go to the **Tools** > **Board** > **Board Manager** and install the ***Raspberry Pi Pico/RP2040 by Earle F. Philhower*** board.
+        title: 进入 **工具** > **开发板** > **开发板管理器** 并安装 ***Raspberry Pi Pico/RP2040 by Earle F. Philhower*** 开发板。
 '
 %}
 
@@ -11,9 +11,9 @@
         image: /images/devices-library/basic/arduino-ide/preferences.png
 '%}
 
-Install the board for Arduino IDE:
+为 Arduino IDE 安装开发板：
 
-Go to **File** > **Preferences** and add the following URL to the **Additional Boards Manager URLs** field.  
+进入 **文件** > **首选项**，将以下 URL 添加到 **附加开发板管理器网址** 字段。  
 
 ```bash
 https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
@@ -24,14 +24,14 @@ https://github.com/earlephilhower/arduino-pico/releases/download/global/package_
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=raspberryPiPicoInstallation %}
 
-After the installation is complete, select the board by Board menu: **Tools** > **Board** > {{ arduinoBoardPath }}.  
+安装完成后，通过 **工具** > **开发板** > {{ arduinoBoardPath }} 选择开发板。  
 
-Connect the device to computer using USB cable and select the port for the device: **Tools** > **Port** > **/dev/ttyUSB0**.  
+用 USB 线连接设备与电脑，并在 **工具** > **端口** > **/dev/ttyUSB0** 中选择设备端口。  
 
-Port depends on operation system and may be different:  
-- for Linux it will be **/dev/ttyUSB**X  
-- for MacOS it will be **usb.serial**X.. or **usb.modem**X..  
-- for Windows - **COM**X.  
+端口随操作系统不同而不同：  
+- Linux 下为 **/dev/ttyUSB**X  
+- MacOS 下为 **usb.serial**X.. 或 **usb.modem**X..  
+- Windows 下为 **COM**X。  
 
 {% assign wifininaInstallationRequired = "true" %}
 {% assign mbedtlsInstallationRequired="true" %}

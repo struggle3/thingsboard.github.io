@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Scheduler
-description: Edge Scheduler
+title: Edge 调度器
+description: Edge 调度器
 
 createSchedulerEvent:
   0:

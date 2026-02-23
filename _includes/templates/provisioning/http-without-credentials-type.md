@@ -1,11 +1,11 @@
-| **Parameter**             | **Example value**                            | **Description**                                                                |
+| **参数**             | **示例值**                            | **说明**                                                                |
 |:-|:-
-| *deviceName*              | **DEVICE_NAME**                              | Device name in ThingsBoard.                                                    |
-| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | Provisioning device key, you should take it from configured device profile.    |
-| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | Provisioning device secret, you should take it from configured device profile. | 
+| *deviceName*              | **DEVICE_NAME**                              | ThingsBoard 中的设备名称。                                                    |
+| *provisionDeviceKey*      | **PUT_PROVISION_KEY_HERE**                   | 设备 profile 中配置的 provisioning device key。                                |
+| *provisionDeviceSecret*   | **PUT_PROVISION_SECRET_HERE**                | 设备 profile 中配置的 provisioning device secret。 | 
 |-
 
-Provisioning request data example:
+Provisioning 请求数据示例：
  
 ```json
 {
@@ -16,7 +16,7 @@ Provisioning request data example:
 ```
 {: .copy-code}
 
-Provisioning response example:
+Provisioning 响应示例：
 
 ```json
 {
@@ -28,24 +28,23 @@ Provisioning response example:
 {: .copy-code}
 
 
-#### Sample script
+#### 示例脚本
 
-The script source code is available below. You may copy-paste it to a file, for example:
+脚本源码如下，可复制到文件（例如 `device-provision-example.py`）中：
 
 ```bash
 device-provision-example.py
 ```
 {: .copy-code}
 
-Now you should run the script and follow the steps inside.  
-You may launch the script using python 3:  
+运行脚本并按提示操作。使用 Python 3 启动：
 
 ```bash 
 python3 device-provision-example.py
 ```
 {: .copy-code}
 
-The script source code: 
+脚本源码： 
 ```python
 
 

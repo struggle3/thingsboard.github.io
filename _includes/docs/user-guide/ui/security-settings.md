@@ -1,7 +1,7 @@
 * TOC
 {:toc}
 
-Users log into ThingsBoard using a username and password. To improve account security, you can adjust your security settings. To configure these settings, sign in to **ThingsBoard** with a **System Administrator** account.
+用户使用用户名和密码登录 ThingsBoard。为提升账户安全，可调整安全设置。配置这些设置需使用 **System Administrator** 账户登录 **ThingsBoard**。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/security-settings/security-settings-general-ce.png)
@@ -10,63 +10,63 @@ Users log into ThingsBoard using a username and password. To improve account sec
 ![image](/images/user-guide/ui/security-settings/security-settings-general-pe.png)
 {% endif %}
 
-## General policy
+## 通用策略
 
-In this section, you can configure the overall security rules for user accounts:
+本部分可配置用户账户的整体安全规则：
 
-- **Maximum number of failed login attempts** – sets the number of unsuccessful login attempts allowed before the account is locked.
+- **Maximum number of failed login attempts** – 设置账户锁定前允许的失败登录次数。
 
-- **Notification on account lockout** – specify an email address to receive a notification if a user's account gets locked.
+- **Notification on account lockout** – 指定在用户账户被锁定时接收通知的邮箱地址。
 
-- **User activation link TTL** – defines the time-to-live for activation links(in hours) sent to new users. After this period, the link will expire.
+- **User activation link TTL** – 定义发送给新用户的激活链接有效期（单位：小时）。超过该时间后链接将失效。
 
-- **Password reset link TTL** – sets the expiration time(in hours) for password reset links sent via email.
+- **Password reset link TTL** – 设置通过邮件发送的密码重置链接的有效期（单位：小时）。
 
-- **Mobile secret key length** – determines the length of the secret key used for mobile authentication.
+- **Mobile secret key length** – 设定用于移动端认证的密钥长度。
 
 {% capture ttl-limit %}
-**Note**:
-The **TTL** value for **User Activation** and **Password Reset** links can be configured within the range of 1 to 24 hours. This range is fixed and cannot be modified.
+**注意**：
+**User Activation** 和 **Password Reset** 链接的 **TTL** 可在 1 至 24 小时范围内配置。该范围为固定值，不可修改。
 {% endcapture %}
 {% include templates/info-banner.md content=ttl-limit %}
 
-## Password policy
+## 密码策略
 
-The password policy sets the rules that passwords for the ThingsBoard must meet. You can specify the following options:
+密码策略规定 ThingsBoard 用户密码必须满足的规则。可配置以下选项：
 
-- **Minimum password length** - the parameter determines the minimum number of characters in the password. Minimum password length should be in a range from 6 to 50;
+- **Minimum password length** - 设置密码最少字符数。最小长度范围为 6 至 50；
 
-- **Maximum password length** - the parameter determines the maximum number of characters in the password. Maximum password length should be greater than minimum length;
+- **Maximum password length** - 设置密码最多字符数。最大长度须大于最小长度；
 
-- **Minimum number of uppercase letters** - set the minimum number of uppercase letters in the password;
+- **Minimum number of uppercase letters** - 设置密码中最少大写字母数；
 
-- **Minimum number of lowercase letters** - set the minimum number of lowercase letters in the password;
+- **Minimum number of lowercase letters** - 设置密码中最少小写字母数；
 
-- **Minimum number of digits** - specify minimum number of digits in the password;
+- **Minimum number of digits** - 设置密码中最少数字数；
 
-- **Minimum number of special characters** - specify the minimum number of special characters in the password;
+- **Minimum number of special characters** - 设置密码中最少特殊字符数；
 
-- **Password expiration period in days** - force expiration of the password. After the password expires, ThingsBoard will require the user to change it. This ensures users regularly update their passwords;
+- **Password expiration period in days** - 强制密码过期。密码过期后，ThingsBoard 将要求用户修改密码，以确保用户定期更新；
 
-- **Password reuse frequency in days** - disallow to use the same password for the defined number of days;
+- **Password reuse frequency in days** - 禁止在指定天数内使用相同密码；
 
-- **Allow whitespace** - if the checkbox is checked, spaces are allowed in the password;
+- **Allow whitespace** - 勾选后，密码中允许包含空格；
 
-- **Force to reset password if not valid** - users with a password that fails the validation will need to reset their password via email.
+- **Force to reset password if not valid** - 密码不符合验证规则的用户需通过邮件重置密码。
 
-After the settings, apply the changes by pressing the **Save** button.
+配置完成后，点击 **Save** 按钮应用更改。
 
-## JWT Security Settings
+## JWT 安全设置
 
-In this section, you can configure the **JSON Web Token** (JWT) parameters used by **ThingsBoard** for authentication and session management. The settings allow you to control token generation, expiration, and signing.
+本部分可配置 **ThingsBoard** 用于认证和会话管理的 **JSON Web Token** (JWT) 参数。可控制 token 的生成、过期和签名。
 
-- **Issuer name** – specify the name of the issuer for JWT tokens. This value will be included in all generated tokens and can be used to validate their source.
+- **Issuer name** – 指定 JWT token 的签发者名称。该值将包含在所有生成的 token 中，可用于验证其来源。
 
-- **Signing key** – enter a Base64-encoded string representing at least 512 bits of data. This key is used to sign JWT tokens and verify their integrity. You can also generate a new key using the "Generate key" button.
+- **Signing key** – 输入 Base64 编码字符串，表示至少 512 位数据。该密钥用于签名 JWT token 并验证完整性。也可使用“Generate key”按钮生成新密钥。
 
-- **Token expiration time** – set the lifetime of JWT tokens in seconds. After this period, the token will expire and the user will need to authenticate again.The default value is 9000 seconds. The minimal value is 60 seconds.
+- **Token expiration time** – 设置 JWT token 的有效期（秒）。过期后 token 失效，用户需重新认证。默认值为 9000 秒。最小值为 60 秒。
 
-- **Refresh token expiration time** – set the lifetime of refresh tokens in seconds. Refresh tokens allow users to obtain new JWT tokens without re-authenticating.The default value is 604800 seconds. The minimal value is 900 seconds.
+- **Refresh token expiration time** – 设置 refresh token 的有效期（秒）。Refresh token 允许用户在无需重新认证的情况下获取新的 JWT token。默认值为 604800 秒。最小值为 900 秒。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/ui/security-settings/security-settings-JWT-ce.png)
@@ -76,9 +76,9 @@ In this section, you can configure the **JSON Web Token** (JWT) parameters used 
 {% endif %}
 
 
-After the settings, apply the changes by pressing the **Save** button.
+配置完成后，点击 **Save** 按钮应用更改。
 
-## Practical recommendations
+## 实用建议
 
-- Configure the system so that users utilize strong passwords that contain uppercase and lowercase letters, numbers, and special characters;
-- Implement [two-factor authentication](/docs/{{docsPrefix}}user-guide/two-factor-authentication/){:target="_blank"} to enhance security.
+- 配置系统以要求用户使用包含大小写字母、数字和特殊字符的强密码；
+- 实施[双因素认证](/docs/{{docsPrefix}}user-guide/two-factor-authentication/){:target="_blank"}以增强安全性。

@@ -1,19 +1,19 @@
-The table below describes the parameters required to configure TCP connection for slave:
+下表描述了从站 UDP 连接配置参数：
 
-| **Parameter** | **Default value** | **Description**                                   |
+| **参数** | **默认值** | **描述**                                   |
 |:--------------|:------------------|---------------------------------------------------
-| host          | **127.0.0.1**     | Hostname or ip address of Modbus server           |
-| port          | **5021**          | Port of Modbus server for connection              |
-| method        | **Socket**        | Type of a framer **Socket** or **RTU**, if needed |
-| unitId        | **1**             | ID of current slave on Modbus                     |
-| deviceName    | **Temp Sensor**   | Name of the current slave                         |
-| deviceProfile | **default**       | Device profile of the current slave               |
+| host          | **127.0.0.1**     | Modbus 服务器的主机名或 IP 地址           |
+| port          | **5021**          | Modbus 服务器连接端口              |
+| method        | **Socket**        | 帧类型 **Socket** 或 **RTU**（如需要） |
+| unitId        | **1**             | Modbus 上当前从站的 ID                     |
+| deviceName    | **Temp Sensor**   | 当前从站名称                         |
+| deviceProfile | **default**       | 当前从站的设备配置文件               |
 | ---           
 
 ![image](/images/gateway/modbus-connector/udp-master-connections-advanced-ce.png)
 
 <br>
-Example:
+示例：
 
 ```json
 "master": {

@@ -2,300 +2,300 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Getting Started with ThingsBoard
-description: Getting started with ThingsBoard open-source IoT platform and simulated IoT devices
+title: ThingsBoard 快速入门
+description: ThingsBoard 开源IoT平台快速入门及模拟 IoT 设备
 redirect_from: "/docs/samples/"
 
 step1:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-1-1-provision-device-1-ce.png 
-        title: 'Log in to ThingsBoard and navigate to the "Devices" page of the "Entities" section.'
+        title: '登录 ThingsBoard 并进入「实体」下的「设备」页面。'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-1-1-provision-device-2-ce.png 
-        title: 'Click on the "+" icon in the top right corner of the table and select "Add new device" from drop-down menu.'
+        title: '点击表格右上角的「+」图标，从下拉菜单中选择「添加新设备」。'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-1-1-provision-device-3-ce.png 
-        title: 'Enter a device name (e.g., "My New Device") No other changes required at this time. Click "Add".'
+        title: '输入设备名称（如「My New Device」），其他保持默认。点击「添加」。'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-1-1-provision-device-4-ce.png
-        title: 'A window for checking the device connection will open — we&#39;ll skip this step for now and return to connection checking in the next step.'
+        title: '将打开设备连接检查窗口——我们暂时跳过此步，下一步再检查连接。'
     4:
         image: /images/helloworld/getting-started-ce/hello-world-1-1-provision-device-5-ce.png 
-        title: 'Congratulations, you&#39;ve added your first device! As you add more devices, they will be added at the top of the table, as the table automatically sorts devices by their creation time, with the newest ones listed first.'
+        title: '恭喜，您已添加第一个设备！后续添加的设备将出现在表格顶部，表格按创建时间自动排序，最新在最前。'
 
 step11:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-1-1-provision-device-6-ce.png 
-        title: 'You will also receive a notification upon adding devices. Click the bell icon (top right) to view notifications.'
+        title: '添加设备后您会收到通知。点击右上角铃铛图标查看通知。'
 
 step2:
     0:
         image: /images/helloworld/getting-started-ce/check-connectivity-device-1-ce.png
-        title: 'Click on your device, then click the "Check connectivity” button in the "Device details" window.'
+        title: '点击您的设备，在「设备详情」窗口中点击「检查连接」按钮。'
     1:
         image: /images/helloworld/getting-started-ce/check-connectivity-device-2-ce.png
-        title: 'In the opened window, choose your messaging protocol and operating system. Install any necessary client tools and copy the provided command.'
+        title: '在打开的窗口中选择消息协议和操作系统，安装所需客户端工具并复制提供的命令。'
     2:
         image: /images/helloworld/getting-started-ce/check-connectivity-device-3-ce.png
-        title: 'Execute the copied command in Terminal. Once telemetry data (e.g., temperature readings) is successfully published, the device status will change from "Inactive" to "Active," and you&#39;ll see the data displayed. You can now close the connectivity window.'
+        title: '在终端中执行复制的命令。遥测数据（如温度读数）成功发布后，设备状态将从「非活动」变为「活动」，并显示数据。此时可关闭连接窗口。'
 
 step21:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-2-1-connect-device-3-ce.png
-        title: 'Navigate to the "Latest telemetry" tab. You should see the previously published "temperature" readings.'
+        title: '进入「最新遥测」标签页，应能看到之前发布的「temperature」读数。'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-2-1-connect-device-4-ce.png
-        title: 'Close the device details tab and refresh the "Devices" table. The device state should be changed from "Inactive" to "Active".'
+        title: '关闭设备详情标签并刷新「设备」表格，设备状态应从「非活动」变为「活动」。'
 
 step31:
     0:
         image: /images/helloworld/getting-started-ce/create-dashboard-1-ce.png
-        title: 'Navigate to the "Dashboards" page through the main menu on the left of the screen. Then, click the "+" sign in the upper right corner of the screen, and select "Create new dashboard" from the drop-down menu.'
+        title: '通过屏幕左侧主菜单进入「仪表盘」页面，点击右上角「+」并从下拉菜单选择「创建新仪表盘」。'
     1:
         image: /images/helloworld/getting-started-ce/create-dashboard-2-ce.png
-        title: 'In the opened dialog, it is necessary to enter a dashboard title, description is optional. Click "Add".'
+        title: '在打开的对话框中输入仪表盘标题，描述可选。点击「添加」。'
     2:
         image: /images/helloworld/getting-started-ce/create-dashboard-3-ce.png
-        title: 'After creating the dashboard, it will open automatically, and you can immediately start adding widgets to it. To save the dashboard, click "Save" button in the upper right corner.'
+        title: '创建后仪表盘会自动打开，可立即添加部件。点击右上角「保存」按钮保存仪表盘。'
     3:
         image: /images/helloworld/getting-started-ce/create-dashboard-4-ce.png
-        title: 'Your first dashboard has been successfully created. As you continue to add new dashboards, they will appear at the top of the list. This default sorting is based on the creation timestamp.'
+        title: '首个仪表盘创建成功。新仪表盘将出现在列表顶部，默认按创建时间排序。'
 
 step32:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-0-ce.png
-        title: 'Enter dashboard edit mode. Simply open the dashboard and click the "Edit mode" button found in the upper right corner of the screen;'
+        title: '进入仪表盘编辑模式，打开仪表盘并点击屏幕右上角「编辑模式」按钮；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-1-ce.png
-        title: 'Click the "Add widget" button at the top of the screen or click the large "Add new widget" icon in the center of the screen (if this is your first widget on this dashboard);'
+        title: '点击屏幕顶部的「添加部件」按钮或中央的「添加新部件」大图标（若为仪表盘首个部件）；'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-2-ce.png
-        title: 'Find the "Tables" widget bundle and click on it;'
+        title: '找到「表格」部件组并点击；'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-3-ce.png
-        title: 'Select the "Entities table" widget;'
+        title: '选择「实体表格」部件；'
     4:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-4-ce.png
-        title: 'The "Add Widget" window will appear. Specify the previously created device "My New Device" as the data source in the "Device" field. The "name" key has already been added to the "Columns" section, which is responsible for the column with the device name. You need to add another column that will display the value of the "temperature" key. To do this, click "Add column" to add a new field to enter the data key;'
+        title: '将出现「添加部件」窗口。在「设备」字段中指定之前创建设备「My New Device」作为数据源。「name」键已添加至「列」区域，用于显示设备名称。需再添加一列显示「temperature」键的值，点击「添加列」添加数据键字段；'
     5:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-5-ce.png
-        title: 'Click on the newly appeared data key input field. A list of available data keys will open. Select "temperature" data key;'
+        title: '点击新出现的数据键输入框，将列出可用数据键，选择「temperature」；'
     6:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-6-ce.png
-        title: 'Click the "Add" button in the bottom right corner of the widget to complete adding the widget.'
+        title: '点击部件右下角「添加」按钮完成添加。'
     7:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-table-widget-7-ce.png
-        title: 'To make the widget slightly larger, simply grab the bottom right corner and drag it. Once you&#39;re happy with the new size, don&#39;t forget to click "Save" to save your changes to the dashboard.'
+        title: '可拖拽部件右下角放大。调整满意后点击「保存」保存仪表盘更改。'
 
 step33:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-chart-widget-1-ce.png
-        title: 'Enter edit mode and click the "Add new widget" button at the top of the screen;'
+        title: '进入编辑模式，点击屏幕顶部「添加新部件」按钮；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-chart-widget-2-ce.png
-        title: 'Find the "Charts" widget bundle and click on it;'
+        title: '找到「图表」部件组并点击；'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-chart-widget-3-ce.png
-        title: 'Select the "Time series сhart" widget;'
+        title: '选择「时间序列图表」部件；'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-chart-widget-4-ce.png
-        title: 'Specify the previously created device "My New Device" as the data source in the "Device" field. In the "Series" section, specify the data key "temperature" to start monitoring the temperature values of the device. Then, click "Add";'
+        title: '在「设备」字段指定之前创建设备「My New Device」为数据源。在「系列」中指定数据键「temperature」以监控设备温度。然后点击「添加」；'
     4:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-chart-widget-5-ce.png
-        title: 'Resize the widget and apply changes. Publish different telemetry values multiple times, as in Step 2. Note that the widget displays only one minute of data by default. Click "Save" to apply changes;'
+        title: '调整部件大小并应用更改。如步骤 2 多次发布不同遥测值。注意默认仅显示一分钟数据。点击「保存」应用更改；'
 
 step33_2:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-3-1-add-chart-widget-6-ce.png
-        title: 'You can also adjust the time interval for displaying data in the widget, change the aggregation function, and specify the grouping interval. To do this, open the Time window and make the necessary adjustments. Update the time window settings by clicking the "Update" button.'
+        title: '可调整部件数据展示时间间隔、聚合函数及分组间隔。打开时间窗口进行设置，点击「更新」按钮应用。'
 
 step34:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-3-4-add-alarm-widget-1-ce.png
-        title: 'Enter edit mode and click the "Add new widget" button at the top of the screen;'
+        title: '进入编辑模式，点击屏幕顶部「添加新部件」按钮；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-3-4-add-alarm-widget-2-ce.png
-        title: 'Find the "Alarm widgets" bundle and click on it;'
+        title: '找到「告警部件」组并点击；'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-3-4-add-alarm-widget-3-ce.png
-        title: 'Select "Alarms table" widget;'
+        title: '选择「告警表格」部件；'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-3-4-add-alarm-widget-4-ce.png
-        title: 'Specify the previously created device "My New Device" as the data source in the "Device" field. Next, we will configure the filters. All alarms have specific severities and statuses. Mark those you want to see in the widget. If none are marked, all alarms will be displayed regardless of their status or severity;'
+        title: '在「设备」字段指定「My New Device」为数据源。配置筛选器：所有告警有严重程度和状态，勾选要在部件中显示的。若不勾选则显示全部；'
     4:
         image: /images/helloworld/getting-started-ce/hello-world-3-4-add-alarm-widget-5-ce.png
-        title: 'Congratulations! You have added the alarm widget. By default, new widgets are added one below the other, stacking downwards. Let&#39;s organize our widgets a bit to tidy up their arrangement. Drag the "Time series chart" widget to the top right corner of the dashboard to make room for the "Alarms table" widget;'   
+        title: '恭喜，已添加告警部件！默认新部件自上而下堆叠。拖拽「时间序列图表」部件到右上角，为「告警表格」腾出空间；'   
     5:
         image: /images/helloworld/getting-started-ce/hello-world-3-4-add-alarm-widget-6-ce.png
-        title: 'Scroll down, find the "Alarms table" widget, and drag it over to a free spot. Adjust its size to fit your needs. After you&#39;re done tweaking, click "Save" to save the dashboard.'
+        title: '向下滚动找到「告警表格」部件，拖至空闲区域并调整大小。完成后点击「保存」。'
 
 step4:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-1-ce.png
-        title: 'Go to the <b>Devices</b> page in the <b>Entities</b> section.<br>Click <b>My New Device</b> to open its details, and navigate to the <b>Alarm rules</b> tab.<br>Click the "<b>+</b>" button, and select <b>Create new alarm rule</b>.'
+        title: '进入<b>实体</b>下的<b>设备</b>页面。<br>点击<b>My New Device</b>打开详情，进入<b>告警规则</b>标签。<br>点击「<b>+</b>」按钮，选择<b>创建新告警规则</b>。'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-2-ce.png
-        title: 'In the <b>General</b> section, specify the <b>alarm type</b> — <i>High temperature</i> (or any other name you prefer) — which serves as both the name and the unique identifier of the alarm.'
+        title: '在<b>常规</b>区域指定<b>告警类型</b>——<i>High temperature</i>（或任意名称）——作为告警名称和唯一标识。'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-3-ce.png
-        title: 'Add the argument — the data source that the rule will use when evaluating the conditions.'
+        title: '添加参数——规则在评估条件时使用的数据源。'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-4-ce.png
-        title: 'Click <b>Add trigger condition</b>.'
+        title: '点击<b>添加触发条件</b>。'
     4:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-5-ce.png
-        title: 'Keep the <b>Critical</b> severity level and click <b>Add condition</b>.'
+        title: '保持<b>严重</b>严重程度，点击<b>添加条件</b>。'
     5:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-6-ce.png
-        title: 'Click the <b>Add argument filter</b>.'
+        title: '点击<b>添加参数筛选</b>。'
     6:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-7-ce.png
-        title: '<b>General:</b> <b>Argument:</b> temperature (the argument added earlier); <b>Value type:</b> Numeric<br><b>Filters:</b> Click <b>Add</b>; <b>Operation:</b> greater than; <b>Value source:</b> Static; <b>Value:</b> 25.<br>Click <b>Add</b>.'
+        title: '<b>常规：</b><b>参数：</b>temperature（之前添加的）；<b>值类型：</b>数值<br><b>筛选：</b>点击<b>添加</b>；<b>操作：</b>大于；<b>值来源：</b>静态；<b>值：</b>25。<br>点击<b>添加</b>。'
     7:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-8-ce.png
-        title: '<b>Type:</b> Simple.<br><b>Save</b> condition.'
+        title: '<b>类型：</b>简单。<br><b>保存</b>条件。'
     8:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-9-ce.png
-        title: 'Finally, click the <b>Add</b>.'
+        title: '最后点击<b>添加</b>。'
     9:
         image: /images/helloworld/getting-started-ce/hello-world-4-configure-alarm-rules-10-ce.png
-        title: 'The new alarm rule will be created and activated.'
+        title: '新告警规则已创建并激活。'
 
 step5:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-5-create-alarm-1-ce.png
-        title: 'As soon as a new <b>temperature</b> value goes above the threshold, a new active alarm will appear on the dashboard.'
+        title: '当新<b>temperature</b>值超过阈值时，仪表盘将出现新的活动告警。'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-5-create-alarm-2-ce.png
-        title: 'You can <b>acknowledge</b> and <b>clear</b> alarms using the <b>Alarm table</b> widget.'
+        title: '可使用<b>告警表格</b>部件<b>确认</b>和<b>清除</b>告警。'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-5-create-alarm-3-ce.png
-        title: 'After the alarm is created, you will also receive a notification in the <b>Notification center</b>. Click the bell icon in the top-right corner to view the latest notifications.'
+        title: '告警创建后，<b>通知中心</b>会收到通知。点击右上角铃铛图标查看最新通知。'
 
 notification-center:
     0:
         image: /images/helloworld/getting-started-ce/notification-center-getting-started-1-ce.png
-        title: 'The ThingsBoard Notification center allows sending personalized notifications to end-users. These can include notifications about device activity, changes in temperature within your environment, or other events detected in your IoT ecosystem.'
+        title: 'ThingsBoard 通知中心可向最终用户发送个性化通知，包括设备活动、环境温度变化或 IoT 生态中检测到的其他事件。'
 
 step71:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-1-ce.png
-        title: 'Navigate to the Customers page. Click the "+" sign to add a customer;'
+        title: '进入客户页面，点击「+」添加客户；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-2-ce.png
-        title: 'Input customer title and click "Add".'
+        title: '输入客户名称并点击「添加」。'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-3-ce.png
-        title: 'The new customer has been created.'
+        title: '新客户已创建。'
 
 step72:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-1-ce.png
-        title: 'Open "Devices" page, then select your device to open its details;'
+        title: '打开「设备」页面，选择设备打开详情；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-2-ce.png
-        title: 'Click "Assign to customer" button;'
+        title: '点击「分配至客户」按钮；'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-3-ce.png
-        title: 'Select the customer to whom you want to assign the device, and then click "Assign";'
+        title: '选择要分配设备的客户，点击「分配」；'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-4-ce.png
-        title: 'You have changed the owner of the device. In the "Customer" column, you can see the owners name of the device;'
+        title: '设备归属已变更，在「客户」列可看到设备所有者；'
 
 step72_1:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-5-ce.png
-        title: 'Navigate to "Customers" page to make sure that the device is assigned to your customer. Find your customer in the list of customers and then click on the "Manage customer devices" icon;'
+        title: '进入「客户」页面确认设备已分配。在客户列表中找到客户，点击「管理客户设备」图标；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-6-ce.png
-        title: 'The device is with your client.'
+        title: '设备已归属该客户。'
 
 step72_2:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-8-ce.png
-        title: 'Click on the "+" icon in the top right corner of the table and then select "Add new device" from drop-down menu;'
+        title: '点击表格右上角「+」图标，从下拉菜单选择「添加新设备」；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-9-ce.png
-        title: 'Input device name (for example, "Thermostat") and select the customer in the "Assign to customer" field to whom you want to assign the new device. Then, click "Add";'
+        title: '输入设备名称（如「Thermostat」），在「分配至客户」字段选择客户，点击「添加」；'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-10-ce.png
-        title: 'Close check connectivity window;'
+        title: '关闭连接检查窗口；'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-device-to-customer-11-ce.png
-        title: 'The device has been created, and it immediately belongs to the selected customer.'
+        title: '设备已创建，并已归属所选客户。'
 
 step73:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-dashboard-to-customer-3-ce.png
-        title: 'Open "Dashboards" page. Mark your dashboard and click the "Assign dashboards" icon;'
+        title: '打开「仪表盘」页面，勾选仪表盘并点击「分配仪表盘」图标；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-dashboard-to-customer-4-ce.png
-        title: 'Mark "My New Customer" and click "Assign";'
+        title: '勾选「My New Customer」并点击「分配」；'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-dashboard-to-customer-5-ce.png
-        title: 'Navigate to the "Customers" page. Click "Manage customer dashboards" icon for "My New Customer";'
+        title: '进入「客户」页面，点击「My New Customer」的「管理客户仪表盘」图标；'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-71-assign-dashboard-to-customer-6-ce.png
-        title: '"My New Dashboard" is assigned to your customer.'
+        title: '「My New Dashboard」已分配给您的客户。'
 
 step74:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-user-1-ce.png
-        title: 'Navigate to "Customers" page. Find your customer in the list of customers and then click on the "Manage customer users" icon;'
+        title: '进入「客户」页面，在客户列表中找到客户，点击「管理客户用户」图标；'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-user-2-ce.png
-        title: 'Click the "Add user" icon in the top right corner of the table;'
+        title: '点击表格右上角「添加用户」图标；'
     2:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-user-3-ce.png
-        title: 'Specify email that you will use to login as a customer user and click "Add";'
+        title: '输入用于客户用户登录的邮箱，点击「添加」；'
     3:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-user-4-ce.png
-        title: 'Copy the activation link and save it to a safe place. You will use it later to set the password. Click "OK";'
+        title: '复制激活链接并妥善保存，稍后用于设置密码。点击「确定」；'
     4:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-user-6-ce.png
-        title: 'Click on the created user to open details. Click "pencil" icon to enter edit mode;'
+        title: '点击已创建用户打开详情，点击「铅笔」图标进入编辑模式；'
     5:
         image: /images/helloworld/getting-started-ce/hello-world-7-create-customer-user-7-ce.png
-        title: 'Select your "My New Dashboard" as default dashboard and check "Always fullscreen". Apply changes.'
+        title: '将「My New Dashboard」设为默认仪表盘并勾选「始终全屏」。应用更改。'
 
 step75:
     0:
         image: /images/helloworld/getting-started-ce/hello-world-7-5-activate-customer-user-1-ce.png
-        title: 'Paste the previously copied link into a new browser tab and press the "Enter" key. Now create a password by entering it twice and clicking "Create Password".'
+        title: '将之前复制的链接粘贴到新浏览器标签页，按 Enter。输入两次密码并点击「创建密码」。'
     1:
         image: /images/helloworld/getting-started-ce/hello-world-7-5-activate-customer-user-2-ce.png
-        title: 'You are now logged in as a customer user. You may browse the data and acknowledge/clear alarms.'
+        title: '您已以客户用户身份登录，可浏览数据并确认/清除告警。'
 
 mqttWindows:
     0:
         image: /images/helloworld/hello-world-step-3-item-1.png
-        title: 'Create new MQTT Client with the properties listed in screenshots below.' 
+        title: '按下方截图创建新的 MQTT 客户端。' 
     1:
         image: /images/helloworld/hello-world-step-3-item-2.png
-        title: 'Populate the topic name and payload. Make sure the payload is a valid JSON document. Click "Publish" button.' 
+        title: '填写主题名称和 payload，确保 payload 为有效 JSON。点击「发布」按钮。' 
 
 mosquitto-windows:
     0:
         image: /images/helloworld/getting-started-pe/mosquitto-windows-1.png
-        title: 'Press the Win + X, then select "System". Then click on the "System" page;'
+        title: '按 Win + X，选择「系统」，然后点击「系统」页面；'
     1:
         image: /images/helloworld/getting-started-pe/mosquitto-windows-2.png
-        title: 'Navigate to the "About" section, then click "Advanced system settings";'
+        title: '进入「关于」区域，点击「高级系统设置」；'
     2:
         image: /images/helloworld/getting-started-pe/mosquitto-windows-3.png
-        title: 'In the "System Properties" pop-up window, click "Environment Variables" button on the "Advanced" tab;'
+        title: '在「系统属性」弹窗中，点击「高级」标签下的「环境变量」；'
     3:
         image: /images/helloworld/getting-started-pe/mosquitto-windows-4.png
-        title: 'In the "Environment Variables" pop-up window, select the "Path", then click on the "Edit" button;'
+        title: '在「环境变量」弹窗中选中「Path」，点击「编辑」；'
     4:
         image: /images/helloworld/getting-started-pe/mosquitto-windows-5.png
-        title: 'In the "Edit environment variable" pop-up window click on the "New" button and add the path to the directory containing &#39;mosquitto_pub.exe&#39; and &#39;mosquitto_sub.exe&#39; (&#39;C:\Program Files\mosquitto&#39; by default). Click "OK" button;'
+        title: '在「编辑环境变量」弹窗中点击「新建」，添加包含 mosquitto_pub.exe 和 mosquitto_sub.exe 的目录路径（默认 C:\Program Files\mosquitto）。点击「确定」；'
     5:
         image: /images/helloworld/getting-started-pe/mosquitto-windows-6.png
-        title: 'Click "OK" button to save changes in the environment variables;'
+        title: '点击「确定」保存环境变量更改；'
     6:
         image: /images/helloworld/getting-started-pe/mosquitto-windows-7.png
-        title: 'Finally, click "OK" button to apply all changes in the system properties.'
+        title: '最后点击「确定」应用系统属性的所有更改。'
 
 ---
 
@@ -304,275 +304,260 @@ mosquitto-windows:
 
 {% include get-hosts-name.html %}
 
-This guide demonstrates basic usage of popular ThingsBoard features. You will learn how to:
+本指南演示 ThingsBoard 常用功能的基本用法。您将学习如何：
 
-- Connect devices to ThingsBoard
-- Push data from devices to ThingsBoard
-- Build real-time dashboards
-- Create a Customer and assign the dashboard with them.
-- Define thresholds and trigger alarms
-- Set up notifications.
+- 将设备连接至 ThingsBoard
+- 从设备向 ThingsBoard 推送数据
+- 构建实时仪表盘
+- 创建客户并分配仪表盘
+- 定义阈值并触发告警
+- 设置通知
 
-For simplicity, we&#39;ll visualize data from a temperature sensor.
-
-<hr>
-
-## Prerequisites
-
-You will need a ThingsBoard server up and running:
-
-* **ThingsBoard Cloud:** The fastest way to start with zero setup. Click for the [North America](/docs/paas/getting-started-guides/helloworld/) or [Europe](/docs/paas/eu/getting-started-guides/helloworld/) region (these links lead to a separate "Getting Started" guide for our managed service).
-* **Self-Managed Installation:** Alternatively, you can manually install ThingsBoard using our guides for [Windows (Docker)](/docs/user-guide/install/docker-windows/){:target="_blank"} or [Linux and MacOS (Docker)](/docs/user-guide/install/docker/){:target="_blank"}.
+为简化说明，我们将以温度传感器数据为例进行可视化。
 
 <hr>
 
-## Step 1. Provision device
+## 前置条件
 
-Let&#39;s add a device that sends temperature data to ThingsBoard:
+您需要一台运行中的 ThingsBoard 服务器：
+
+* **ThingsBoard Cloud**：零配置快速开始。可选择[北美](/docs/paas/getting-started-guides/helloworld/)或[欧洲](/docs/paas/eu/getting-started-guides/helloworld/)区域（链接指向托管服务版快速入门）。
+* **自托管安装**：可按 [Windows (Docker)](/docs/user-guide/install/docker-windows/){:target="_blank"} 或 [Linux 与 MacOS (Docker)](/docs/user-guide/install/docker/){:target="_blank"} 指南手动安装。
+
+<hr>
+
+## 步骤 1. 创建设备
+
+添加一个向 ThingsBoard 发送温度数据的设备：
 
 {% include images-gallery.html imageCollection="step1" showListImageTitles="true" %}
 
-You will also receive a notification upon adding devices. Click the bell icon (top right) to view notifications.
+添加设备后您会收到通知，点击右上角铃铛图标查看。
 
 {% include images-gallery.html imageCollection="step11" %}
 
-[Learn more about notifications here](#step-6-alarm-notifications).
+[了解更多通知相关内容](#step-6-alarm-notifications)。
 
-**Additional provisioning methods**
-- [Bulk provisioning](/docs/user-guide/bulk-provisioning/){:target="_blank"}: Import multiple devices via CSV through the UI.
-- [Device provisioning](/docs/user-guide/device-provisioning/){:target="_blank"}: Configure devices to self-register automatically. 
-- [REST API](/docs/api/){:target="_blank"} provisioning: Manage devices programmatically through APIs.
+**其他创建设备方式**
+- [批量 provisioning](/docs/user-guide/bulk-provisioning/){:target="_blank"}：通过 UI 以 CSV 批量导入设备。
+- [设备 provisioning](/docs/user-guide/device-provisioning/){:target="_blank"}：配置设备自动自助注册。
+- [REST API](/docs/api/){:target="_blank"} provisioning：通过 API 编程管理设备。
 
 <hr>
 
-## Step 2. Connect device
+## 步骤 2. 连接设备
 
-Let&#39;s verify your device&#39;s connection to ThingsBoard:
+验证设备与 ThingsBoard 的连接：
 
 {% include images-gallery.html imageCollection="step2" showListImageTitles="true" %}
 
 <br>
-Explore [ThingsBoard API reference](/docs/{{docsPrefix}}api){:target="_blank"}. Here you will find more detailed information about all supported protocols for connecting devices.
+查看 [ThingsBoard API 参考](/docs/{{docsPrefix}}api){:target="_blank"}，了解更多设备连接支持协议详情。
 
 <hr>
 
-## Step 3. Create dashboard
+## 步骤 3. 创建仪表盘
 
-A dashboard in ThingsBoard allows users to visualize and monitor data collected from IoT devices.
+ThingsBoard 中的仪表盘用于可视化和监控来自 IoT 设备的数据。
 
-Let&#39;s create a dashboard and add three widgets to it in order to display a list of entities and their latest values, as well as show alarm signals related to the specified entity.
+创建仪表盘并添加三个部件，展示实体列表及其最新值，以及指定实体的告警。
 
-### Step 3.1 Create an empty dashboard
+### 步骤 3.1 创建空仪表盘
 
-To create a new dashboard, follow these steps:
+按以下步骤创建新仪表盘：
 
 {% include images-gallery.html imageCollection="step31" showListImageTitles="true" %}
 
-### Step 3.2 Add an Entities table widget
+### 步骤 3.2 添加实体表格部件
 
-The "Entities table" widget displays a list of entities and their latest values.
-The list of entities corresponds to selected devices or other entities, and filters with the ability of additional full-text search and pagination options.
+「实体表格」部件展示实体列表及其最新值，对应所选设备或其他实体，并支持全文搜索和分页。
 
-To add the table widget we need to select it from the widget library. Widgets are grouped into widget bundles.
-Each widget has a data source. This is how the widget "knows" what data to display.
-To see the latest value of our "temperature" data that we sent during step 2, we should configure the data source.
+从部件库选择表格部件。部件按部件组归类，每个部件有数据源，用于决定显示的数据。
+要显示步骤 2 发送的「temperature」最新值，需配置数据源。
 
-Let&#39;s add your first widget:
+添加第一个部件：
 
 {% include images-gallery.html imageCollection="step32" showListImageTitles="true" %}
 
-Congratulations! You&#39;ve added your first widget.
+恭喜，您已添加第一个部件。
 
-In the "Entities table" widget, there are two columns.
-The first column displays the device&#39;s name, and the second column displays the value of the "temperature" key (device telemetry).
-So, each column corresponds to an added key.
+「实体表格」部件有两列：第一列显示设备名称，第二列显示「temperature」键的值（设备遥测）。每列对应一个已添加的键。
 
-Now you are able to send a new telemetry reading (as in [Step 1](#step-1-provision-device)), and it will immediately appear in the table.
+现在可发送新的遥测读数（如[步骤 1](#step-1-provision-device)），会立即显示在表格中。
 
-### Step 3.3 Add a Chart widget
+### 步骤 3.3 添加图表部件
 
-Chart widgets allow you to display time series data with customizable line charts and bar charts.
+图表部件用于以可定制折线图、柱状图展示时序数据。
 
-To add the chart widget we need to select it from the widget library.
-Chart widget displays multiple historical values of the same data key ("temperature" in our case).
-We should also configure the time window to use the chart widget.
+从部件库选择图表部件。图表显示同一数据键（此处为「temperature」）的多个历史值。
+使用图表部件时还需配置时间窗口。
 
 {% include images-gallery.html imageCollection="step33" showListImageTitles="true" %}
 
-Congratulations! You have added the chart widget. Now you are able to send a new telemetry reading, and it will immediately appear in the chart.
+恭喜，图表部件已添加。发送新遥测读数后，将立即显示在图表中。
 
-You can also adjust the time interval for displaying data in the widget, change the aggregation function, and specify the grouping interval.
-To do this, open the [Time window](/docs/user-guide/dashboards/#time-window){:target="_blank"} and make the necessary adjustments. Update the time window settings by clicking the "Update" button.
+也可调整部件数据展示时间间隔、聚合函数及分组间隔。
+打开[时间窗口](/docs/user-guide/dashboards/#time-window){:target="_blank"}进行设置，点击「更新」按钮应用。
 
 {% include images-gallery.html imageCollection="step33_2" %}
 
-### Step 3.4 Add an Alarms table widget
+### 步骤 3.4 添加告警表格部件
 
-The alarms table widget displays alarms related to the specified entity in the certain time window.
-Alarm widget is configured by specifying an entity as the alarm source, and the corresponding alarm fields.
+告警表格部件在指定时间窗口内显示与指定实体相关的告警。
+通过指定实体为告警源及对应告警字段来配置告警部件。
 
 {% include images-gallery.html imageCollection="step34" showListImageTitles="true" %}
 
-Now it&#39;s time to configure alarm rules and raise some alarms.
+接下来配置告警规则并触发告警。
 
-> **Note:** in this documentation, we are using a single device as a data source for the widgets. 
-To use dynamic entities (for example, devices of a certain type or related to a certain asset) as data source, you should use the alias.
-Alias is a reference to a single entity or a group of entities that are used in the widgets. 
-You may learn more [about different aliases here](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"}.
+> **说明：**本文档以单一设备作为部件数据源。若要以动态实体（如某类型设备或某资产相关设备）为数据源，需使用 alias。Alias 是部件中使用的单个实体或实体组的引用。更多见[不同 alias 说明](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"}。
 
 <hr>
 
-## Step 4. Configure alarm rules
+## 步骤 4. 配置告警规则
 
-We will use the [alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"} feature to define a rule that triggers when the temperature exceeds **25°C**.   
-Alarm rules can be configured either at the **device level** or at the [device profile](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"} level used by the target device.
+使用[告警规则](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"}功能定义温度超过 **25°C** 时触发的规则。
+告警规则可在**设备**级别或目标设备所用的[设备 profile](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"} 级别配置。
 
-> **Recommendation:** If the same rule needs to be applied to multiple devices, create it at the **Device profile** level.   
-This ensures centralized alarm logic management, simplifies maintenance, and eliminates configuration duplication.
+> **建议：**若同一规则需应用于多台设备，请在 **Device profile** 级别创建，便于集中管理告警逻辑、简化维护并避免重复配置。
 
-In this example, we will configure the alarm rule directly on the device "**My New Device**".
+本例中，我们直接在设备「**My New Device**」上配置告警规则。
 
-<br><b><font size="4">Step 4.1 Open the device settings</font></b>
-- Go to the **Devices** page in the **Entities** section.
-- Click **My New Device** to open its details.
-- Navigate to the **Alarm rules** tab.
-- Click the "**+**" button and select **Create new alarm rule**.
+<br><b><font size="4">步骤 4.1 打开设备设置</font></b>
+- 进入**实体**下的**设备**页面。
+- 点击**My New Device**打开详情。
+- 进入**告警规则**标签。
+- 点击「**+**」按钮，选择**创建新告警规则**。
 
-<b><font size="4">Step 4.2 Configure the General parameters</font></b>
+<b><font size="4">步骤 4.2 配置常规参数</font></b>
 
-In the **General** section, specify the **alarm type** — *High temperature* (or any other name you prefer) — which serves as both the name and the unique identifier of the alarm.
+在**常规**区域指定**告警类型**——*High temperature*（或任意名称）——作为告警名称和唯一标识。
 
-<b><font size="4">Step 4.3 Add argument</font></b>
+<b><font size="4">步骤 4.3 添加参数</font></b>
 
-Before defining the alarm trigger condition, you must add at least one **argument** — the data source that the rule will use.
+在定义告警触发条件前，需至少添加一个**参数**——规则使用的数据源。
 
-In the **Arguments** section, click **Add argument** and fill in:
-- **Entity type:** *Current entity*
-- **Argument type:** *Latest telemetry*
-- **Time series key:** <span class="code-light">temperature</span>
-- **Argument name:** temperature
-- Click **Add**.
+在**参数**区域点击**添加参数**，填写：
+- **实体类型：***当前实体*
+- **参数类型：***最新遥测*
+- **时序键：**<span class="code-light">temperature</span>
+- **参数名称：**temperature
+- 点击**添加**。
 
-This creates the <span class="code-light">temperature</span> variable that will be used in the alarm rule conditions.
+将创建用于告警条件的 <span class="code-light">temperature</span> 变量。
 
-<b><font size="4">Step 4.4 Configure the alarm trigger condition</font></b>
+<b><font size="4">步骤 4.4 配置告警触发条件</font></b>
 
-In the **Trigger condition** section, click **Add trigger condition**.
+在**触发条件**区域点击**添加触发条件**。
 
-- **Severity:** *Critical*
-- **Condition**
-  - Click **Add condition**.
-  - In the configuration window, click **Add argument filter** and specify:
-    - **General** block:
-      - **Argument:** temperature (the argument added earlier)
-      - **Value type:** *Numeric*
-    - **Filters** block:
-      - Click **Add**
-      - **Operation:** *greater than*
-      - **Value source:** Static
-      - **Value:** <span class="code-light">25</span>
-    - Click **Add**.
-  - **Type:** *Simple*
-  - Click **Save**.
+- **严重程度：***严重*
+- **条件**
+  - 点击**添加条件**。
+  - 在配置窗口中点击**添加参数筛选**并指定：
+    - **常规**块：**参数：**temperature（之前添加的）；**值类型：***数值*
+    - **筛选**块：点击**添加**；**操作：***大于*；**值来源：**静态；**值：**<span class="code-light">25</span>
+    - 点击**添加**。
+  - **类型：***简单*
+  - 点击**保存**。
 
-As a result, the alarm will trigger immediately when the temperature exceeds **25°C**.
+当温度超过 **25°C** 时，告警将立即触发。
 
-<b><font size="4">Save the rule</font></b>
+<b><font size="4">保存规则</font></b>
 
-Click the **Add** button to save the new alarm creation rule.
+点击**添加**按钮保存新告警规则。
 
-The rule takes effect immediately after it is saved.
+规则保存后立即生效。
 
 {% include images-gallery.html imageCollection="step4" %}
 
-We also recommend reviewing the [alarm rule configuration examples](/docs/{{docsPrefix}}user-guide/alarm-rules/#examples-of-alarm-rule-configurations/){:target="_blank"}
+建议参阅[告警规则配置示例](/docs/{{docsPrefix}}user-guide/alarm-rules/#examples-of-alarm-rule-configurations/){:target="_blank"}
 
 <hr>
 
-## Step 5. Create alarm
+## 步骤 5. 创建告警
 
-Now that the alarm rule is active (see [Step 4](#step-4-configure-alarm-rules)), you need to send new telemetry data from the device (see [Step 2](#step-2-connect-device)) to trigger the alarm.
+告警规则已激活（见[步骤 4](#step-4-configure-alarm-rules)），需从设备发送新遥测（见[步骤 2](#step-2-connect-device)）以触发告警。
 
-> **Important:** The alarm will be created only when the temperature value exceeds the threshold of 25°C defined in the alarm creation condition.
+> **重要：**仅当温度超过告警创建条件中定义的 25°C 阈值时才会创建告警。
 
-**What happens after sending telemetry**
+**发送遥测后发生的变化**
 
 {% include images-gallery.html imageCollection="step5" showListImageTitles="true" %}
 
 <hr>
 
-## Step 6. Alarm notifications
+## 步骤 6. 告警通知
 
-The ThingsBoard [Notification center](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"} allows personalized notifications to end-users regarding device activities, environmental changes, or events in your IoT ecosystem, and more. 
-Notifications can be delivered via email, SMS, or integrated third-party systems.
+ThingsBoard [通知中心](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}可向最终用户发送关于设备活动、环境变化或 IoT 生态中事件的个性化通知。
+通知可通过邮件、短信或集成第三方系统送达。
 
 {% include images-gallery.html imageCollection="notification-center" %}
 
-Additionally, [ThingsBoard Mobile Application](/docs/mobile/){:target="_blank"} provides instant push notifications directly to your smartphone, ensuring you&#39;re always informed of critical events wherever you are.
+此外，[ThingsBoard 移动应用](/docs/mobile/){:target="_blank"}可向手机推送即时通知，确保您随时掌握关键事件。
 
-Follow [this guide](/docs/mobile/getting-started/){:target="_blank"} to install the ThingsBoard mobile app and set up notifications. 
+按[本指南](/docs/mobile/getting-started/){:target="_blank"}安装 ThingsBoard 移动应用并配置通知。
 
-Enjoy exploring ThingsBoard!
+祝您探索愉快！
 
 <hr>
 
-## Step 7. Assign device and dashboard to customer
+## 步骤 7. 将设备和仪表盘分配至客户
 
-One of the most important ThingsBoard features is the ability to assign Dashboards to Customers. 
-You may assign different devices to different customers. Then, you may create a Dashboard(s) and assign it to multiple customers.
-Each customer user will see his own devices and will not be able to see devices or any other data that belongs to a different customer.
+ThingsBoard 的重要功能之一是将仪表盘分配至客户。
+可将不同设备分配给不同客户，创建仪表盘并分配给多名客户。
+每位客户用户只能看到自己的设备，无法查看其他客户的数据。
 
-We have already created a Device (see [Step 1](#step-1-provision-device)), and a Dashboard (see [Step 3](#step-3-create-dashboard)).
-Now it&#39;s time to create a Customer and a Customer User and make sure they will have access to the device's data and the dashboard.
+我们已创建设备（见[步骤 1](#step-1-provision-device)）和仪表盘（见[步骤 3](#step-3-create-dashboard)）。
+接下来创建客户及客户用户，确保其能访问设备数据和仪表盘。
 
-### Step 7.1 Create customer
+### 步骤 7.1 创建客户
 
-Let&#39;s create a customer with the title "My New Customer". Please see the instruction below:
+创建标题为「My New Customer」的客户，操作如下：
 
 {% include images-gallery.html imageCollection="step71" showListImageTitles="true" %}
 
-### Step 7.2 Assign the device to customer
+### 步骤 7.2 将设备分配至客户
 
-Let&#39;s assign device to the customer. The customer users will have ability to read and write telemetry and send commands to devices. 
+将设备分配至客户。客户用户可读写遥测并向设备发送命令。
 
 {% include images-gallery.html imageCollection="step72" showListImageTitles="true" %}
 
-Make sure that the device is assigned to your customer.
+确认设备已分配至客户。
 
 {% include images-gallery.html imageCollection="step72_1" showListImageTitles="true" %}
 
-You can make the customer the owner of the device during its creation stage. To do this, follow this steps:
+可在创建设备时即指定客户为所有者，步骤如下：
 
 {% include images-gallery.html imageCollection="step72_2" showListImageTitles="true" %}
 
-### Step 7.3 Assign the dashboard to customer
+### 步骤 7.3 将仪表盘分配至客户
 
-Let&#39;s share our dashboard with the customer. The customer users will have read-only access to the dashboard. 
+将仪表盘分享给客户。客户用户对仪表盘仅具只读权限。
 
 {% include images-gallery.html imageCollection="step73" showListImageTitles="true" %}
 
-### Step 7.4 Create customer user
+### 步骤 7.4 创建客户用户
 
-Now, let&#39;s create a user that will belong to the customer and will have `read-only` access both to the dashboard and the device.
-You may optionally configure the dashboard to appear just after user logs in to the platform&#39;s web UI.
+创建归属于该客户、对仪表盘和设备具有`read-only`权限的用户。
+可选择配置用户登录平台 Web UI 后直接显示该仪表盘。
 
 {% include images-gallery.html imageCollection="step74" showListImageTitles="true" %}
 
-### Step 7.5 Activate customer user
+### 步骤 7.5 激活客户用户
 
-Finally, log in to ThingsBoard as a customer user.
+最后以客户用户身份登录 ThingsBoard。
 
 {% include images-gallery.html imageCollection="step75" showListImageTitles="true" %}
 
 <hr>
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/guides-banner.md %}
 
 <hr>
 
-## Your feedback
+## 您的反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word. 
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎在 [GitHub](https://github.com/thingsboard/thingsboard){:target="_blank"} 上为 ThingsBoard 加星以支持我们。
+若有任何疑问，请[联系我们](/docs/contact-us/){:target="_blank"}。

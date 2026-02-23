@@ -2,100 +2,100 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-ThingsBoard supports [Multitenancy](https://en.wikipedia.org/wiki/Multitenancy) out-of-the-box.
+ThingsBoard 支持开箱即用的[多租户](https://en.wikipedia.org/wiki/Multitenancy)功能。
 
-You can treat Tenant as a separate business-entity: individual or organization who owns or produces devices and assets.
+您可以将租户视为独立的业务实体：拥有或生产设备与资产的个人或组织。
 
-Tenant may have multiple tenant administrator users, enormous number of [customers](/docs/{{docsPrefix}}user-guide/ui/customers), and an unlimited number of [users](/docs/{{docsPrefix}}user-guide/ui/users), assets, and devices.
+租户可拥有多名租户管理员用户、大量[客户](/docs/{{docsPrefix}}user-guide/ui/customers)，以及不限数量的[用户](/docs/{{docsPrefix}}user-guide/ui/users)、资产和设备。
 
-## Сreate new tenant
+## 创建新租户
 
-The **System administrator** is able to create tenant entities.
+**系统管理员**可以创建租户实体。
 
-To add a new tenant, please follow the instructions below:
+请按以下步骤添加新租户：
 
 {% include images-gallery.html imageCollection="create-tenants-ce" showListImageTitles="true" %}
 
-Learn more about tenant profiles [here](/docs/{{docsPrefix}}user-guide/tenant-profiles).
+了解更多租户配置信息请参阅[此处](/docs/{{docsPrefix}}user-guide/tenant-profiles)。
 
 <br>
-On the Tenant details page, you as the System administrator can view the attributes, the latest telemetry, assign the home dashboard, and copy the tenant ID.
+在租户详情页，作为系统管理员，您可以查看属性、最新遥测数据、分配首页仪表板以及复制租户ID。
 
 {% include images-gallery.html imageCollection="tenant-details-ce" %}
 
-## Create tenant administrator
+## 创建租户管理员
 
-The **System administrator** is also able to create multiple **users with Tenant administrator role** in each tenant.
+**系统管理员**还可以在每个租户下创建多名**具有租户管理员角色的用户**。
 
-To add the User follow the instructions below:
+请按以下步骤添加用户：
 
 {% include images-gallery.html imageCollection="create-tenant-admin-ce" showListImageTitles="true" %}
 
-In a tenant details window, the System administrator can use the following action tabs:
+在租户详情窗口中，系统管理员可使用以下操作选项卡：
 
-1) **Disable the User account**.
+1）**禁用用户账户**。
 
-2) **Display activation link** shows the activation link for the Tenant administrator user.
+2）**显示激活链接**：显示租户管理员用户的激活链接。
 
-3) **Resend activation** resends the account activation email to the user’s email box.
+3）**重新发送激活**：重新将账户激活邮件发送到用户邮箱。
 
-4) **Login as Tenant administrator** opens the Thingsboard platform from the Tenant administrator UI.
+4）**以租户管理员身份登录**：在租户管理员界面中打开 ThingsBoard 平台。
 
-5) The System Administrator can also **Delete user** from both the user details page and tenant admins list.
+5）系统管理员还可从用户详情页和租户管理员列表中**删除用户**。
 
 {% include images-gallery.html imageCollection="user-details-ce" %}
 
-## Edit tenant or user
+## 编辑租户或用户
 
-In the Tenant details you can edit all fields.
+在租户详情中可以编辑所有字段。
 
-Let's see how to do this:
+操作步骤如下：
 
 {% include images-gallery.html imageCollection="tenant-edit-ce" showListImageTitles="true" %}
 
-Also, you can edit the **user**.
+您也可以编辑**用户**。
 
-The steps are similar to how we edit the tenant:
+编辑步骤与编辑租户类似：
 
 {% include images-gallery.html imageCollection="user-edit-ce" showListImageTitles="true" %}
 
-## Delete tenant or user
+## 删除租户或用户
 
-You can delete the **Tenant** at once with all its users. To do this, click on the "trash" icon and then also confirm the deletion by clicking on "Yes".
+您可以一次性删除**租户**及其所有用户。为此，请点击“垃圾桶”图标，然后在确认对话框中点击“Yes”。
 
 {% include images-gallery.html imageCollection="tenant-delete-1-ce" %}
 
-In addition, there is an option to delete the user using the action tab in Tenant details window.
+此外，也可通过租户详情窗口中的操作选项卡删除用户。
 
 {% include images-gallery.html imageCollection="tenant-delete-2-ce" %}
 
-Also, you can delete any **user** from the Tenant. To do this, go to the Tenant, find the user you need and click on the "trash" icon. After clicking, a warning window will appear. If you are sure you want to delete the user, click on "Yes".
+您也可以从租户中删除任意**用户**。为此，进入租户，找到目标用户后点击“垃圾桶”图标。点击后会出现警告窗口。若确认删除，请点击“Yes”。
 
 {% include images-gallery.html imageCollection="user-delete-ce" %}
 
-In addition, there is an option to delete the Tenant using the action tab in Tenant details window.
+此外，可通过租户详情窗口中的操作选项卡删除租户。
 
 {% include images-gallery.html imageCollection="user-delete-2-ce" %}
 
-## Login as tenant administrator
+## 以租户管理员身份登录
 
-If you need to log in as a tenant, just open the tenant group and click the icon opposite to the user account to log in as this tenant.
+如需以租户身份登录，只需打开租户组，点击用户账户对面的图标即可以此租户身份登录。
 
 {% include images-gallery.html imageCollection="tenant-login-ce" %}
 
-The Tenant Administrator is able to do following actions:
+租户管理员可执行以下操作：
 
-- Provision and Manage [Devices](/docs/{{docsPrefix}}user-guide/ui/devices).
-- Provision and Manage [Assets](/docs/{{docsPrefix}}user-guide/ui/assets).
-- Create and Manage [Customers](/docs/{{docsPrefix}}user-guide/ui/customers).
-- Create and Manage [Dashboards](/docs/{{docsPrefix}}user-guide/ui/dashboards).
-- Configure [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/).
-- Add or modify default widgets using [Widget Library](/docs/{{docsPrefix}}user-guide/ui/widget-library).
+- 配置和管理[设备](/docs/{{docsPrefix}}user-guide/ui/devices)。
+- 配置和管理[资产](/docs/{{docsPrefix}}user-guide/ui/assets)。
+- 创建和管理[客户](/docs/{{docsPrefix}}user-guide/ui/customers)。
+- 创建和管理[仪表板](/docs/{{docsPrefix}}user-guide/ui/dashboards)。
+- 配置[规则引擎](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/)。
+- 使用[部件库](/docs/{{docsPrefix}}user-guide/ui/widget-library)添加或修改默认部件。
 
-All actions listed above are available using [REST API](/docs/{{docsPrefix}}reference/rest-api/).
+上述操作均可通过[REST API](/docs/{{docsPrefix}}reference/rest-api/)完成。
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

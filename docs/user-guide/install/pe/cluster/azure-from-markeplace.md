@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Installing ThingsBoard PE from Azure Marketplace
-description: Installing ThingsBoard PE from Azure Marketplace
+title: 从 Azure 应用市场安装 ThingsBoard PE
+description: 从 Azure 应用市场安装 ThingsBoard PE
 
 ---
 

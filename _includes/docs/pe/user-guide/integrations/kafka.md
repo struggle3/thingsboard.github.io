@@ -3,13 +3,13 @@
 * TOC
 {:toc}
 
-## Kafka Integration
+## Kafka集成
 
-[Apache Kafka](https://kafka.apache.org/) — is an open-source distributed software message broker under the Apache foundation. It is written in the Java and Scala programming languages.
+[Apache Kafka](https://kafka.apache.org/)是Apache基金会下的开源分布式软件消息broker，使用Java和Scala编写。
 
-Designed as a distributed, horizontally scalable system that provides capacity growth both with an increase in the number and load from the sources, and the number of subscriber systems. Subscribers can be combined into groups. Supports the ability to temporarily store data for subsequent batch processing.
+设计为分布式、可水平扩展的系统，在源端数量和负载及订阅系统数量增加时均可扩展能力。订阅者可组成消费组。支持临时存储数据供后续批处理。
 
-In some scenarios, Kafka can be used instead of a message queue, in cases where there is no stable connection between the device and an instance.
+在某些场景下，当设备与实例之间无稳定连接时，Kafka可替代消息队列使用。
 
 ![image](/images/user-guide/integrations/kafka/Kafka_main.png)
 

@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: MQTT Client Credentials
-description: UI MQTT Client Credentials
+title: MQTT 客户端凭证
+description: MQTT 客户端凭证界面
 
 add-client-credentials:
   0:
     image: /images/mqtt-broker/user-guide/ui/add-client-credentials-1.png
-    title: 'Go to the Credentials page and click the Add Client Credentials button, represented by a "plus" icon.'
+    title: '进入凭证页面，点击「+」图标添加客户端凭证。'
   1:
     image: /images/mqtt-broker/user-guide/ui/add-client-credentials-2.png
-    title: 'Fill in the Name, Credentials Type.'
+    title: '填写名称、凭证类型。'
   2:
     image: /images/mqtt-broker/user-guide/ui/add-client-credentials-3.png
     title: 'Fill in the Authentication settings.'

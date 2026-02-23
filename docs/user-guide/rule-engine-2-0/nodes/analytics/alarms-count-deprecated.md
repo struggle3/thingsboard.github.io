@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: alarms count (deprecated)
-description: Periodically counts alarms for selected set of entities.
+description: 定期统计所选 entity 集合的 alarm 数量。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

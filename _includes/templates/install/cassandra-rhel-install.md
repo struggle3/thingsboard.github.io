@@ -1,9 +1,9 @@
-The following commands will install Apache Cassandra and its command-line tools:
+以下命令将安装 Apache Cassandra 及其命令行工具：
 
 ```bash
-# Import GPG key
+# 导入 GPG 密钥
 sudo rpm --import https://downloads.apache.org/cassandra/KEYS 
-# Add Cassandra repository
+# 添加 Cassandra 软件源
 sudo tee /etc/yum.repos.d/cassandra.repo > /dev/null <<EOF
 [cassandra]
 name=Apache Cassandra
@@ -13,18 +13,18 @@ repo_gpgcheck=0
 gpgkey=https://downloads.apache.org/cassandra/KEYS
 EOF
 
-# Install packages
+# 安装软件包
 sudo dnf -y update
 sudo dnf -y install cassandra cassandra-tools chkconfig
-# Start service
+# 启动服务
 sudo systemctl daemon-reexec
 sudo systemctl start cassandra.service
-# Configure Cassandra to start on boot
+# 配置 Cassandra 开机自启
 sudo chkconfig cassandra on
 ```
 {: .copy-code}
 
-To verify that Cassandra is running correctly, use the following commands to check both the node status and the system service state:
+要验证 Cassandra 是否正常运行，请使用以下命令检查节点状态和系统服务状态：
 
 ```bash
 nodetool status
@@ -32,7 +32,7 @@ sudo systemctl status cassandra.service
 ```
 {: .copy-code}
 
-The status column in the output should report `UN` which stands for "Up/Normal"; you may need to wait a few moments for Cassandra to initialize. Example output:
+输出中的 status 列应显示 `UN`（表示 "Up/Normal"）；您可能需要等待片刻让 Cassandra 完成初始化。示例输出：
 
 ```
 $ nodetool status
@@ -58,5 +58,5 @@ $ sudo systemctl status cassandra.service
 ...
 ```
 
-You can use Astra DB Cloud instead of installing your own Cassandra.
-See how to [connect ThingsBoard to Astra DB](/docs/user-guide/install/pe/cassandra-cloud-astra-db/)
+您可以使用 Astra DB Cloud 替代自建 Cassandra。
+参见[将 ThingsBoard 连接至 Astra DB](/docs/user-guide/install/pe/cassandra-cloud-astra-db/) 的说明。

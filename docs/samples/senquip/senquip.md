@@ -1,20 +1,20 @@
 ---
 layout: docwithnav
-title: Connecting a Senquip telemetry device to the ThingsBoard
-description: Configuration of a Senquip telemetry device to enable it to send telemetry data to the ThingsBoard.
+title: 将 Senquip 遥测设备连接到 ThingsBoard
+description: 配置 Senquip 遥测设备，使其能够将遥测数据发送到 ThingsBoard。
 
 ---
 
 * TOC 
 {:toc}
 
-## Introduction
-ThingsBoard is a sevice management, data collection, processing and visualization platform for IoT solutions.  If this is your first experience with the platform we recommend to review  [what-is-thingsboard](/docs/getting-started-guides/what-is-thingsboard/) page and [getting-started](/docs/getting-started-guides/helloworld/) guide.
+## 简介
 
+ThingsBoard 是面向物联网解决方案的服务管理、数据采集、处理和可视化平台。若您首次使用平台，建议先阅读 [什么是 ThingsBoard](/docs/getting-started-guides/what-is-thingsboard/) 和 [快速入门](/docs/getting-started-guides/helloworld/) 指南。
 
-Senquip manufactures programmable telemetry devices such as the [ORB-C1](https://www.senquip.com) that connects to any industrial sensor or system. Senquip devices can maintain connection with a third-party endpoint (via UDP, HTTP and MQTT), and the [Senquip Portal](https://portal.senquip.com) at the same time. This allows for configuration changes and firmware updates to be made from the [Senquip Portal](https://portal.senquip.com) whilst sending measured data to the ThingsBoard.
+Senquip 生产可编程遥测设备，如 [ORB-C1](https://www.senquip.com)，可连接任意工业传感器或系统。Senquip 设备可同时保持与第三方端点（通过 UDP、HTTP 和 MQTT）以及 [Senquip Portal](https://portal.senquip.com) 的连接。因此可在 [Senquip Portal](https://portal.senquip.com) 进行配置更改和固件更新，同时将测量数据发送到 ThingsBoard。
 
-Senquip devices can connect to MODBUS, CAN Bus, current, voltage, frequency and many other sensor types.  In this example, location, temperature, and CAN-bus data will be sent from a Senquip ORB-C1 to the ThingsBoard using MQTT.
+Senquip 设备可连接 MODBUS、CAN 总线、电流、电压、频率等多种传感器类型。本示例中，位置、温度和 CAN 总线数据将通过 MQTT 从 Senquip ORB-C1 发送到 ThingsBoard。
 
 Here is an image of a real life install using this data.
 

@@ -1,30 +1,30 @@
 ---
 layout: page-with-filter
-title: ThingsBoard Device Library
-description: Device Library and connecting guides
+title: ThingsBoard设备库
+description: 设备库与连接指南
 containerId: "devices-card-collection"
 filterSelector: ".pagination-render-trigger"
 itemsSelector: ".card"
 itemsPerPage: "18"
 searchControl: "#searchCompanyInput"
 customTitle: "true"
-not-found: "No devices have been found..."
+not-found: "未找到设备..."
 
 filterCollection:
-  - label: Platform
+  - label: Platfrom
     selectPlatfrom: true
     filters:
-      - label: Community Edition
+      - label: 社区版
         platform: ce
-      - label: Professional Edition
+      - label: 专业版
         platform: pe
-      - label: Cloud (North America)
+      - label: 云服务(North America)
         platform: paas
-      - label: Cloud (Europe)
+      - label: 云服务(Europe)
         platform: paas-eu
       - label: Edge
         platform: edge
-      - label: Edge Professional Edition
+      - label: Edge专业版
         platform: pe-edge
   - label: Hardware types
     filters:
@@ -97,13 +97,13 @@ filterCollection:
 <div class="devices-hero">
     <div class="devices-wrapper">
         <div class="devices-hero-text">
-            <h1>Welcome to the ThingsBoard Device Library!</h1>
-            <p>The Device Library is a collection of guides and code snippets that explain how to connect popular IoT development boards to the ThingsBoard platform. We intentionally concentrate on the code snippets for programmable devices to boost the productivity of the firmware engineers. Device Library is a constantly extending resource. We encourage our community members to <a href="/device-library/guidelines/">contribute</a>.</p>
+            <h1>欢迎使用ThingsBoard设备库</h1>
+            <p>设备库汇集了各类指南与代码示例说明如何将常见IoT开发板接入ThingsBoard平台；我们重点提供可编程设备的代码示例，以提升固件工程师的开发效率并持续扩展设备库。<a href="/device-library/guidelines/">参与贡献</a>。</p>
         </div>
         <div class="devices-hero-banner">
-            <p>Wish to integrate existing sensors?</p>
-            <a href="/docs/getting-started-guides/connectivity/">See instruction</a>
-            <img src="/images/devices-library-icon.svg" width="210" height="210" alt="Hardware partner icon">
+            <p>传感器接入</p>
+            <a href="/docs/getting-started-guides/connectivity/">查看说明</a>
+            <img src="/images/devices-library-icon.svg" width="210" height="210" alt="合作伙伴图标">
         </div>
     </div>
 </div>

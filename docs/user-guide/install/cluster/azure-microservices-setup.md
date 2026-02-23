@@ -2,21 +2,21 @@
 layout: docwithnav
 assignees:
 - amykolaichuk
-title: Microservices setup using AKS infrastructure
-description: ThingsBoard IoT platform microservices setup with Kubernetes in Azure AKS 
+title: 使用 AKS 基础设施的微服务设置
+description: 在 Azure AKS 中的 ThingsBoard IoT 平台微服务设置
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to setup ThingsBoard in microservices mode in Azure AKS.
+本指南将帮助您在 Azure AKS 中以微服务模式搭建 ThingsBoard。
 
-## Prerequisites
+## 前置条件
 
 {% include templates/install/azure/aks-prerequisites.md %}
 
-## Step 1. Clone ThingsBoard CE K8S scripts repository
+## 步骤 1. 克隆 ThingsBoard CE K8S 脚本仓库
 
 ```bash
 git clone -b release-{{ site.release.ce_full_ver }} https://github.com/thingsboard/thingsboard-ce-k8s.git
@@ -24,22 +24,22 @@ cd thingsboard-ce-k8s/azure/microservices
 ```
 {: .copy-code}
 
-## Step 2. Define environment variables
+## 步骤 2. 定义环境变量
 
 {% include templates/install/azure/aks-env.md %}
 
-## Step 3. Configure and create AKS cluster
+## 步骤 3. 配置并创建 AKS 集群
 
 {% assign nodeCount = "3" %}
 {% include templates/install/azure/aks-create-cluster.md %}
 
-## Step 4. Update the context of kubectl
+## 步骤 4. 更新 kubectl 的 context
 
 {% include templates/install/azure/aks-kubectl-update-context.md %}
 
-## Step 5. Provision Databases
+## 步骤 5. 配置数据库
 
-### 5.3. Create Azure Database for PostgreSQL servers
+### 5.3. 创建 Azure Database for PostgreSQL 服务器
 
 {% include templates/install/azure/aks-create-db.md %}
 
@@ -47,60 +47,59 @@ cd thingsboard-ce-k8s/azure/microservices
 
 {% include templates/install/azure/configure-cassandra.md %}
 
-## Step 6. Azure Cache for Valkey (optional)
+## 步骤 6. Azure Cache for Valkey（可选）
 
 {% include templates/install/azure/aks-create-redis.md %}
 
-## Step 7. Installation
+## 步骤 7. 安装
 
 {% include templates/install/azure/aks-installation.md %}
 
-## Step 8. Starting
+## 步骤 8. 启动
 
-Execute the following command to deploy ThingsBoard services:
+执行以下命令部署 ThingsBoard 服务：
 
 ```
  ./k8s-deploy-resources.sh
 ```
 {: .copy-code}
 
-After few minutes you may call `kubectl get pods`. If everything went fine, you should be able to see `tb-node-0` pod in the `READY` state.
+几分钟后，您可调用 `kubectl get pods`。若一切正常，您应能看到 `tb-node-0` pod 处于 `READY` 状态。
 
 {% include templates/install/azure/aks-starting-transports.md %}
 
-## Step 9. Configure Load Balancers
+## 步骤 9. 配置负载均衡器
 
-### 9.1. Configure HTTP(S) Load Balancer
+### 9.1. 配置 HTTP(S) 负载均衡器
 {% include templates/install/azure/aks-http-lb.md %}
 
-### 9.2. Configure MQTT Load Balancer (Optional)
+### 9.2. 配置 MQTT 负载均衡器（可选）
 
 {% assign tbServicesFile = "transport/tb-mqtt-transport.yml" %}
 {% include templates/install/azure/configure-mqtt.md %}
 
-### 9.3. Configure CoAP Load Balancer (Optional)
+### 9.3. 配置 CoAP 负载均衡器（可选）
 
 {% assign tbServicesFile = "transport/tb-coap-transport.yml" %}
 {% include templates/install/azure/configure-coap.md %}
 
-### 9.4. Configure LwM2M Load Balancer (Optional)
+### 9.4. 配置 LwM2M 负载均衡器（可选）
 
 {% assign tbServicesFile = "transport/tb-lwm2m-transport.yml" %}
 {% include templates/install/azure/configure-lwm2m.md %}
 
-### 9.5. Configure Edge Load Balancer (Optional)
+### 9.5. 配置 Edge 负载均衡器（可选）
 
 {% include templates/install/k8s-configure-edge-load-balancer.md %}
 
-## Step 10. Using
+## 步骤 10. 使用
 
 {% include templates/install/azure/using.md %}
 
-## Upgrading
+## 升级
 
 {% include templates/install/azure/upgrading-msa.md %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}
-

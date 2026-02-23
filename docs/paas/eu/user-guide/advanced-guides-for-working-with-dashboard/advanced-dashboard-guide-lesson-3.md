@@ -2,7 +2,7 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Lesson 3. Adding and configuring individual states for each device
+title: 第3课：为每个设备添加和配置单独的状态
 
 dashboard-lesson-3:
     0:
@@ -21,592 +21,592 @@ dashboard-lesson-3:
 adding-new-rule-chain-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-1-pe.png
-        title: 'Go to the "Rule chains" page and click "plus" icon, then select the "Create new rule chain" from drop-down menu;'
+        title: '进入「规则链」页面，点击「加号」图标，然后从下拉菜单中选择「创建新规则链」；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-2-pe.png
-        title: 'Name it "Device Telemetry Emulators", and click "Add";'
+        title: '将其命名为「Device Telemetry Emulators」，然后点击「Add」；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-3-pe.png
-        title: 'Open created rule chain by clicking on it.'
+        title: '点击已创建的规则链以打开它。'
 
 adding-new-rule-chain-2:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-4-pe.png
-        title: 'Find the "generator" node and drag it to the rule chain. With its help, we will generate telemetry values for further visualization on the dashboard;'
+        title: '找到「generator」节点并将其拖入规则链。借助该节点，我们将生成遥测值以便在仪表板上进行可视化；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-5-pe.png
-        title: 'Name it "Indoor air quality data emulator". Set the number of messages to send to 100 and the sending period to 600. Specify the device "SD-001" (Indoor Air Quality Sensor) as originator. Copy the script from the documentation and paste it into the generator function section to simulate telemetry data for temperature, humidity, and CO2. Click "Add".'
+        title: '将其命名为「Indoor air quality data emulator」。将发送消息数量设为 100，发送周期设为 600。指定设备「SD-001」（室内空气质量传感器）为发起者。从文档复制脚本并粘贴到 generator 函数区域，以模拟温度、湿度和 CO2 的遥测数据。点击「Add」。'
 
 adding-new-rule-chain-3:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-6-pe.png
-        title: 'Name it "Power consumption data emulator" Set the number of messages to send to 100 and the sending period to 600. Specify the device "EM-002" (Energy Meter) as originator. Copy the script from the documentation and paste it into the generator function section to simulate power consumption telemetry data. Click "Add."'
+        title: '将其命名为「Power consumption data emulator」。将发送消息数量设为 100，发送周期设为 600。指定设备「EM-002」（电能表）为发起者。从文档复制脚本并粘贴到 generator 函数区域，以模拟功耗遥测数据。点击「Add」。'
 
 adding-new-rule-chain-4:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-7-pe.png
-        title: 'Name it "Water consumption data emulator". Set the number of messages to send to 100 and the sending period to 600. Specify the device "WM-003" (Water Flow Meter) as originator. Copy the script from the documentation and paste it into the generator function section to simulate water consumption, and battery voltage telemetry data. Click "Add."'
+        title: '将其命名为「Water consumption data emulator」。将发送消息数量设为 100，发送周期设为 600。指定设备「WM-003」（水表）为发起者。从文档复制脚本并粘贴到 generator 函数区域，以模拟用水量和电池电压遥测数据。点击「Add」。'
 
 adding-new-rule-chain-5:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-8-pe.png
-        title: 'Name it "IAQ data emulator". Set the number of messages to send to 100 and the sending period to 600. Specify the device "AM-307" (IAQ Sensor) as originator. Copy the script from the documentation and paste it into the generator function section to simulate water consumption, and battery voltage telemetry data. Click "Add."'
+        title: '将其命名为「IAQ data emulator」。将发送消息数量设为 100，发送周期设为 600。指定设备「AM-307」（IAQ 传感器）为发起者。从文档复制脚本并粘贴到 generator 函数区域，以模拟用水量和电池电压遥测数据。点击「Add」。'
 
 adding-new-rule-chain-6:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-9-pe.png
-        title: 'Find the "save timeseries" node and drag it to the rule chain;'
+        title: '找到「save timeseries」节点并将其拖入规则链；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-10-pe.png
-        title: 'Name it "save time series", and click "Add";'
+        title: '将其命名为「save time series」，然后点击「Add」；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-11-pe.png
-        title: 'We have added all the necessary nodes.'
+        title: '我们已添加所有必要的节点。'
 
 adding-new-rule-chain-7:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-12-pe.png
-        title: 'Tap on the right grey circle of "generator" node and drag this circle to the left side of "save timeseries" node. Select the "Success" link and click "Add";'
+        title: '点击「generator」节点右侧的灰色圆圈，将其拖至「save timeseries」节点的左侧。选择「Success」链接并点击「Add」；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-new-rule-chain-13-pe.png
-        title: 'Repeat this for each generator node. Afterwards, save rule chain.'
+        title: '对每个 generator 节点重复此操作。之后保存规则链。'
 
 incoming-telemetry-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/incoming-telemetry-1-pe.png
-        title: 'After waiting for the period specified in the generator nodes, you will be able to see the telemetry on the "Latest telemetry" tab of your devices.'
+        title: '等待 generator 节点中指定的周期过后，您即可在设备的「最新遥测」标签页中查看遥测数据。'
 
 customize-office-sensors-list-widget-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-1-pe.png
-        title: 'Go to the dashboard and enter edit mode by clicking the "Edit mode" button on the toolbar;'
+        title: '进入仪表板，点击工具栏上的「Edit mode」按钮进入编辑模式；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-2-pe.png
-        title: 'Click on the "pencil" icon of the "Office sensors list" widget to enter its editing mode;'
+        title: '点击「办公室传感器列表」部件的「铅笔」图标进入其编辑模式；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-3-pe.png
-        title: 'Add the columns for the following data keys: "temperature", "humidity", "co2", "powerConsumption", and "waterConsumption". Then, apply the changes to the widget;'
+        title: '添加以下数据键对应的列：「temperature」「humidity」「co2」「powerConsumption」「waterConsumption」。然后对部件应用更改；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-4-pe.png
-        title: 'Now the table displays the devices&#39; telemetry.'
+        title: '现在表格显示设备的遥测数据。'
 
 customize-office-sensors-list-widget-2:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-5-pe.png
-        title: 'Re-enter the edit mode of the "Office sensors list" widget by clicking the pencil icon;'
+        title: '点击铅笔图标再次进入「办公室传感器列表」部件的编辑模式；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-6-pe.png
-        title: 'Add another column: name it "telemetryValue", and click the "Time series" icon to add a new key;'
+        title: '添加另一列：命名为「telemetryValue」，点击「Time series」图标添加新键；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-7-pe.png
-        title: 'Rename the labels for the keys "Name" and "telemetryValue" to "Device name" and "Telemetry value," respectively. Next, click the "gear" icon next to the "telemetryValue" row to open its settings;'
+        title: '将「Name」和「telemetryValue」键的标签分别重命名为「Device name」和「Telemetry value」。接着点击「telemetryValue」行旁的「齿轮」图标打开其设置；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-8-pe.png
-        title: 'Turn on the "Use cell content function" option. Insert the function from the documentation into the corresponding field. This function will combine several telemetry columns into one for a single device. Then click "Save";'
+        title: '开启「Use cell content function」选项。将文档中的函数插入对应字段。该函数会将多个遥测列合并为单个设备的单一列。然后点击「Save」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-9-pe.png
-        title: 'Now we need to hide the unnecessary columns such as "temperature", "humidity", "co2", "powerConsumption", and "waterConsumption". Click the "gear" icon next to the "temperature" to open its settings;'
+        title: '现在需要隐藏不必要的列，如「temperature」「humidity」「co2」「powerConsumption」「waterConsumption」。点击「temperature」旁的「齿轮」图标打开其设置；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-10-pe.png
-        title: 'Select "Hidden" in the "Default column visibility" menu. Click "Save" to apply the changes for this column;'
+        title: '在「Default column visibility」菜单中选择「Hidden」。点击「Save」应用该列的更改；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-11-pe.png
-        title: 'Repeat the steps described above for the columns "humidity", "co2", "powerConsumption", and "waterConsumption". Ensure that only the columns "Device name" and "Telemetry value" remain visible;'
+        title: '对「humidity」「co2」「powerConsumption」「waterConsumption」列重复上述步骤。确保仅保留「Device name」和「Telemetry value」列可见；'
 
 customize-office-sensors-list-widget-3:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-12-pe.png
-        title: 'Click the "pencil" icon of the "powerConsumption" key;'
+        title: '点击「powerConsumption」键的「铅笔」图标；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-13-pe.png
-        title: 'Select the "Sum" as the aggregation function, and click "Save";'
+        title: '选择「Sum」作为聚合函数，点击「Save」；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-14-pe.png
-        title: 'Also, set "Sum" as the aggregation function for the telemetry key "waterConsumption". Remove the automatically added prefixes from the keys label "powerConsumption" and "waterConsumption" after selecting aggregation;'
+        title: '同样，将遥测键「waterConsumption」的聚合函数设为「Sum」。选择聚合后，移除「powerConsumption」和「waterConsumption」键标签上自动添加的前缀；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-15-pe.png
-        title: 'Scroll up to locate the time window settings. Use the dashboard&#39;s time window and apply the changes to the widget;'
+        title: '向上滚动找到时间窗口设置。使用仪表板的时间窗口并对部件应用更改；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-16-pe.png
-        title: 'Save changes to the dashboard.'
+        title: '保存仪表板的更改。'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-sensors-list-widget-17-pe.png
-        title: 'Now, in the "Office sensors list" widget, the telemetry for the Indoor Air Quality Sensor is displayed in a single column.'
+        title: '现在，「办公室传感器列表」部件中的室内空气质量传感器遥测数据在单列中显示。'
 
 time-window-configuration-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-1-pe.png
-        title: 'Enter dashboard editing mode;'
+        title: '进入仪表板编辑模式；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-2-pe.png
-        title: 'Click the "Edit time window" icon on the toolbar and then click the "gear" icon to open the time window settings;'
+        title: '点击工具栏上的「Edit time window」图标，然后点击「齿轮」图标打开时间窗口设置；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-3-pe.png
-        title: 'A new settings window will open. Start with the "Realtime" tab. Hide interval selection parameter for the "Last" tab;'
+        title: '将打开新的设置窗口。从「Realtime」标签页开始。隐藏「Last」标签页的间隔选择参数；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-4-pe.png
-        title: 'On the "Relative" tab, click the "pencil" icon in the interval settings row;'
+        title: '在「Relative」标签页中，点击间隔设置行的「铅笔」图标；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-5-pe.png
-        title: 'Uncheck all intervals except for "Current day," "Current week" (Sun-Sat), and "Current week" (Mon-Sun). Set their grouping interval and default grouping interval to 1 hour;'
+        title: '取消勾选除「Current day」「Current week」（周日-周六）和「Current week」（周一-周日）外的所有间隔。将其分组间隔和默认分组间隔设为 1 小时；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-6-pe.png
-        title: 'Also check the "Current month" interval. Set grouping interval and default grouping interval to 2 hour. Click "Apply";'
+        title: '同时勾选「Current month」间隔。将分组间隔和默认分组间隔设为 2 小时。点击「Apply」；'
 
 time-window-configuration-2:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-7-pe.png
-        title: 'Navigate to the "History" tab. Hide the "Last" interval option from users;'
+        title: '进入「History」标签页。向用户隐藏「Last」间隔选项；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-8-pe.png
-        title: 'Also, hide the "Range" interval option from users;'
+        title: '同时向用户隐藏「Range」间隔选项；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-9-pe.png
-        title: 'For the "Relative" tab, leave the default settings; Set "Sum" as the aggregation function and ensure users cannot modify this parameter by hiding it;'
+        title: '对于「Relative」标签页，保留默认设置；将聚合函数设为「Sum」，并通过隐藏确保用户无法修改此参数；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-10-pe.png
-        title: 'Configure the grouping interval to "1 hour" and restrict users from changing it. Click "Apply";'
+        title: '将分组间隔配置为「1 hour」并限制用户修改。点击「Apply」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-11-pe.png
-        title: 'Select "Update" to apply the updated time window settings to the dashboard;'
+        title: '选择「Update」将更新的时间窗口设置应用到仪表板；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-12-pe.png
-        title: 'Save the dashboard to confirm the changes;'
+        title: '保存仪表板以确认更改；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/time-window-configuration-13-pe.png
-        title: 'As you can see, the "Office sensors list" widget now displays data on the office&#39;s energy and water consumption for the selected time period, which in our case is the current day.'
+        title: '如您所见，「办公室传感器列表」部件现在显示所选时间段内办公室的能源和用水数据，本例中为当天。'
 
 adding-devices-states-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-devices-states-1-pe.png
-        title: 'Enter dashboard editing mode;'
+        title: '进入仪表板编辑模式；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-devices-states-2-pe.png
-        title: 'Click on the "Manage dashboard states" menu option, then click the "plus" icon to add new dashboard state;'
+        title: '点击「Manage dashboard states」菜单项，然后点击「加号」图标添加新仪表板状态；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-devices-states-3-pe.png
-        title: 'Name it "Indoor Air Quality Sensor", and enter state ID - <b>air_sensor</b>. Click "Add".'
+        title: '命名为「Indoor Air Quality Sensor」，输入状态 ID：<b>air_sensor</b>。点击「Add」。'
 
 adding-devices-states-2:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/adding-devices-states-4-pe.png
-        title: 'Similarly, add "Energy Meter" with the <b>energy_sensor</b> state Id and "Water Flow Meter" state with the <b>water_sensor</b> state Id.'
+        title: '同样，添加带 <b>energy_sensor</b> 状态 ID 的「Energy Meter」和带 <b>water_sensor</b> 状态 ID 的「Water Flow Meter」状态。'
 
 action-go-to-device-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-1-pe.png
-        title: 'Go to the “office” state and enter the editing mode of the "Office sensors list" widget;'
+        title: '进入「office」状态，进入「办公室传感器列表」部件的编辑模式；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-2-pe.png
-        title: 'Scroll to the "Actions" menu section and click the "Add action" button;'
+        title: '滚动到「Actions」菜单区域，点击「Add action」按钮；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-3-pe.png
-        title: 'The "Actions" window will open. Click the "plus" icon in the top-right corner of the screen to open a new "Add action" window;'
+        title: '「Actions」窗口将打开。点击屏幕右上角的「加号」图标打开新的「Add action」窗口；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-4-pe.png
-        title: 'In the "Add action" dialog, select "On row click" action source, and enter action name. Then, choose the "Custom action" action type. After choosing an action type, the "Custom action function" section appears. Paste the function by copying it from the documentation. Afterwards, click "Add";'
+        title: '在「Add action」对话框中，选择「On row click」作为操作来源并输入操作名称。然后选择「Custom action」操作类型。选择操作类型后会出现「Custom action function」区域。从文档复制函数并粘贴进去。之后点击「Add」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-5-pe.png
-        title: 'In the "Actions" window, you can review the configured action, including its source, icon, and type Click "Save";'
+        title: '在「Actions」窗口中，您可查看已配置的操作，包括其来源、图标和类型。点击「Save」；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-6-pe.png
-        title: 'Click "Apply" to save the widget settings;'
+        title: '点击「Apply」保存部件设置；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-7-pe.png
-        title: 'Save the dashboard by clicking "Save" in the upper-right corner of the dashboard page.'
+        title: '点击仪表板页面右上角的「Save」保存仪表板。'
 
 action-go-to-device-2:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-8-pe.png
-        title: 'Click on the row of any device to transition to its state;'
+        title: '点击任意设备行即可切换到其状态；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-device-state-9-pe.png
-        title: 'You will transition to the state of the selected device.'
+        title: '您将切换到所选设备的状态。'
 
 customize-office-plan-widget-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-1-pe.png
-        title: 'While in the "office" state, enter the dashboard edit mode, and click the "pencil" icon of the "Office sensors list" widget to modify its settings.'
+        title: '在「office」状态下，进入仪表板编辑模式，点击「办公室传感器列表」部件的「铅笔」图标修改其设置。'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-2-pe.png
-        title: 'Add the following data keys to the existing ones: "temperature", "humidity", "co2", "powerConsumption", "waterConsumption," and "batteryLevel". Afterwards, navigate to the "Appearance" tab;'
+        title: '在现有数据键的基础上添加以下键：「temperature」「humidity」「co2」「powerConsumption」「waterConsumption」「batteryLevel」。然后进入「Appearance」标签页；'
 
 customize-office-plan-widget-2:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-3-pe.png
-        title: 'Scroll down to the "Tooltip" section, and enable "Use tooltip function" option. Then, copy the tooltip function from the documentation and paste it into the "Tooltip function" field of the widget. Then, set the tooltip Y offset relative to the marker to -0.77;'
+        title: '向下滚动到「Tooltip」区域，开启「Use tooltip function」选项。然后从文档复制提示函数并粘贴到部件的「Tooltip function」字段。将提示 Y 轴相对于标记的偏移设为 -0.77；'
 
 customize-office-plan-widget-3:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-4-pe.png
-        title: 'Go to the "Widget card" tab. Access "Advanced widget style" and paste the provided CSS into the "Widget CSS" field;'
+        title: '进入「Widget card」标签页。打开「Advanced widget style」并将提供的 CSS 粘贴到「Widget CSS」字段；'
 
 customize-office-plan-widget-4:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-5-pe.png
-        title: 'Navigate to the "Actions" tab and click "plus" to add new action;'
+        title: '进入「Actions」标签页，点击「加号」添加新操作；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-6-pe.png
-        title: 'In the "Add action" dialog, select "Tooltip tag action" as the action source. Enter "sensor_details" as action name. Choose "Custom action" for the action type and paste the specified function in the "Custom action function" section. Then, click "Add";'
+        title: '在「Add action」对话框中，选择「Tooltip tag action」作为操作来源。输入「sensor_details」作为操作名称。选择「Custom action」作为操作类型，并将指定函数粘贴到「Custom action function」区域。然后点击「Add」；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-7-pe.png
-        title: 'Click "Apply" to save the modifications;'
+        title: '点击「Apply」保存修改；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-8-pe.png
-        title: 'Save your dashboard configuration by selecting "Save" in the upper-right corner of the dashboard.'
+        title: '点击仪表板右上角的「Save」保存仪表板配置。'
 
 customize-office-plan-widget-5:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-9-pe.png
-        title: 'Click any marker on the "Office plan" widget to open a tooltip. Each device&#39;s tooltip includes a line button to access the details of the selected device. Click on this line.'
+        title: '点击「办公室平面图」部件上的任意标记可打开提示。每个设备的提示包含可访问该设备详情的行按钮。点击此行。'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/customize-office-plan-widget-10-pe.png
-        title: 'You will transition to the state of the selected device.'
+        title: '您将切换到所选设备的状态。'
 
 indoor-air-quality-sensor-card-widgets-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-indoor-ai-quality-state-1-pe.png
-        title: 'Click on the "Indoor Air Quality Sensor" device row in the "Office sensors list" widget to transition to its state;'
+        title: '点击「办公室传感器列表」部件中的「Indoor Air Quality Sensor」设备行以切换到其状态；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-1-pe.png
-        title: 'Enter dashboard editing mode and click either the "+ Add widget" button at the top or the large "Add new widget" icon in the center of the screen;'
+        title: '进入仪表板编辑模式，点击顶部的「+ Add widget」按钮或屏幕中央的大的「Add new widget」图标；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-2-pe.png
-        title: 'Find the "Indoor Environment" widgets bundle and click on it;'
+        title: '找到「Indoor Environment」部件包并点击；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-3-pe.png
-        title: 'Choose the "Indoor temperature card" widget;'
+        title: '选择「Indoor temperature card」部件；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-4-pe.png
-        title: 'Specify "Selected entity" alias as the data source. The "temperature" key, from which the temperature value will be "extracted", has already been added;'
+        title: '将「Selected entity」别名指定为数据源。用于「提取」温度值的「temperature」键已添加；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-5-pe.png
-        title: 'Scroll down to the "Icon" section. Customize icon color change based on temperature value using predefined ranges. This helps to estimate the temperature value faster. Set the value ranges and their corresponding colors. Then, click "Apply";'
+        title: '向下滚动到「Icon」区域。使用预定义范围根据温度值自定义图标颜色变化。便于更快估算温度值。设置取值范围及对应颜色。然后点击「Apply」；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-6-pe.png
-        title: 'Set the value ranges and their corresponding colors for the "Value" section. Apply changes;'
+        title: '为「Value」区域设置取值范围及对应颜色。应用更改；'
     7:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-7-pe.png
-        title: 'Clear the "Card border radius" value, and click "Add";'
+        title: '清空「Card border radius」值，点击「Add」；'
     8:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-temperature-card-widgets-8-pe.png
-        title: 'We&#39;ve added a widget that displays the current temperature. Adjust the widget size to your liking.'
+        title: '我们已添加显示当前温度的部件。按需调整部件大小。'
 
 indoor-air-quality-sensor-card-widgets-2:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-humidity-card-widgets-1-pe.png
-        title: 'Click the "Add widget" button at the top of the screen;'
+        title: '点击屏幕顶部的「Add widget」按钮；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-humidity-card-widgets-2-pe.png
-        title: 'Navigate to the "Indoor Environment" widgets bundle and select the "Indoor humidity card" widget;'
+        title: '进入「Indoor Environment」部件包并选择「Indoor humidity card」部件；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-humidity-card-widgets-3-pe.png
-        title: 'Specify "Selected entity" alias as the data source. The "humidity" key, from which the humidity value will be "extracted", has already been added;'
+        title: '将「Selected entity」别名指定为数据源。用于「提取」湿度值的「humidity」键已添加；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-humidity-card-widgets-4-pe.png
-        title: 'Scroll down to the "Icon" section. Set the value ranges and their corresponding colors. Then, click "Apply";'
+        title: '向下滚动到「Icon」区域。设置取值范围及对应颜色。然后点击「Apply」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-humidity-card-widgets-5-pe.png
-        title: 'Set the value ranges and their corresponding colors for the "Value" section. Apply changes;'
+        title: '为「Value」区域设置取值范围及对应颜色。应用更改；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-humidity-card-widgets-6-pe.png
-        title: 'Clear the "Card border radius" value. Click "Add";'
+        title: '清空「Card border radius」值。点击「Add」；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-humidity-card-widgets-7-pe.png
-        title: 'The widget displaying the current humidity has been added. Place it to the right of the "Temperature" card widget and adjust its size.'
+        title: '已添加显示当前湿度的部件。将其放在「Temperature」卡片部件右侧并调整大小。'
 
 indoor-air-quality-sensor-card-widgets-3:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-co2-card-widgets-1-pe.png
-        title: 'Click the "+ Add widget" button at the top of the screen;'
+        title: '点击屏幕顶部的「+ Add widget」按钮；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-co2-card-widgets-2-pe.png
-        title: 'Select the "Indoor CO2 card" widget. This widget is located in the "Indoor Environment" widgets bundle;'
+        title: '选择「Indoor CO2 card」部件。该部件位于「Indoor Environment」部件包中；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-co2-card-widgets-3-pe.png
-        title: 'Specify "Selected entity" alias as the data source. The "CO2" key has already been added, from which the CO2 value in the air will be "extracted";'
+        title: '将「Selected entity」别名指定为数据源。用于「提取」空气中 CO2 值的「CO2」键已添加；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-co2-card-widgets-4-pe.png
-        title: 'Scroll down to the "Icon" section. Set the value ranges and their corresponding colors. Then, click "Apply";'
+        title: '向下滚动到「Icon」区域。设置取值范围及对应颜色。然后点击「Apply」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-co2-card-widgets-5-pe.png
-        title: 'Set the value ranges and their corresponding colors for the "Value" section. Apply changes;'
+        title: '为「Value」区域设置取值范围及对应颜色。应用更改；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-co2-card-widgets-6-pe.png
-        title: 'Clear the "Card border radius" value. Click "Add";'
+        title: '清空「Card border radius」值。点击「Add」；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-co2-card-widgets-7-pe.png
-        title: 'The widget displaying the current CO2 level has been added. Place it to the right of the "Humidity" widget. Adjust the widget size to match the dashboard aesthetics, and save the dashboard.'
+        title: '已添加显示当前 CO2 水平的部件。将其放在「Humidity」部件右侧。调整部件大小以匹配仪表板样式，并保存仪表板。'
 
 indoor-air-quality-sensor-card-widgets-4:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/indoor-air-quality-sensor-card-three-widgets-1-pe.png
-        title: 'Now you can see the current temperature, humidity, and CO2 values.'
+        title: '现在您可以查看当前的温度、湿度和 CO2 值。'
 
 temperature-and-humidity-history-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-1-pe.png
-        title: 'Enter the edit mode of your dashboard and click the "+ Add widget" button;'
+        title: '进入仪表板编辑模式，点击「+ Add widget」按钮；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-2-pe.png
-        title: 'Find the "Charts" widgets bundle and click on it;'
+        title: '找到「Charts」部件包并点击；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-3-pe.png
-        title: 'Choose the "Line chart" widget;'
+        title: '选择「Line chart」部件；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-4-pe.png
-        title: 'Use the widget&#39;s time window and make some changes to its settings. Select "Relative" and set "Current day" as the time interval. Leave the aggregation function as "Average" and set the grouping interval to 1 hour. Then, click "Update;'
+        title: '使用部件的时间窗口并修改其设置。选择「Relative」，将时间间隔设为「Current day」。聚合函数保持「Average」，分组间隔设为 1 小时。然后点击「Update」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-5-pe.png
-        title: 'Specify "Selected entity" alias as the data source. Add data keys "temperature" and "humidity" and specify their labels and units. Then, click the "gear" icon for "temperature" key to open its configuration window;'
+        title: '将「Selected entity」别名指定为数据源。添加数据键「temperature」和「humidity」并指定其标签和单位。然后点击「temperature」键的「齿轮」图标打开其配置窗口；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-6-pe.png
-        title: 'Turn on "Show points" and "Point label" options. Click "Save". Repeat this for the "humidity" data key;'
+        title: '开启「Show points」和「Point label」选项。点击「Save」。对「humidity」数据键重复此操作；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-7-pe.png
-        title: 'By default, the chart includes a single scale on the Y-axis. Label it "Temperature" and set the units to °C. Add another scale for "Humidity", place it on the right, and set the units to %. Now, apply the "axis1" scale to the "humidity" key;'
+        title: '默认情况下图表在 Y 轴包含一个刻度。将其标为「Temperature」并设置单位为 °C。为「Humidity」添加另一刻度，置于右侧，单位设为 %。将「axis1」刻度应用到「humidity」键；'
     7:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-8-pe.png
-        title: 'Change the chart title to "Temperature and Humidity history";'
+        title: '将图表标题改为「Temperature and Humidity history」；'
     8:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-9-pe.png
-        title: 'Set the "Bottom" legend position and uncheck "Average" of the "Show values" section;'
+        title: '将图例位置设为「Bottom」，取消勾选「Show values」中的「Average」；'
     9:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-10-pe.png
-        title: 'Clear the "Card border radius" value to streamline the widget&#39;s appearance. Click "Add";'
+        title: '清空「Card border radius」值以简化部件外观。点击「Add」；'
     10:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-11-pe.png
-        title: 'Move the widget to the top-right corner of your dashboard and adjust its size;'
+        title: '将部件移至仪表板右上角并调整大小；'
     11:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/temperature-and-humidity-history-12-pe.png
-        title: 'The "Temperature and Humidity history" widget has been added. Save your dashboard to implement the changes.'
+        title: '已添加「Temperature and Humidity history」部件。保存仪表板以应用更改。'
 
 air-quality-widget-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-1-pe.png
-        title: 'Enter the dashboard editing mode, and click the "+ Add widget" button;'
+        title: '进入仪表板编辑模式，点击「+ Add widget」按钮；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-2-pe.png
-        title: 'Select the "Line chart" widget of the "Charts" widgets bundle;'
+        title: '选择「Charts」部件包中的「Line chart」部件；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-3-pe.png
-        title: 'Use the widget&#39;s time window. In the time window settings, select "Relative" and set "Current day" as the time interval. Leave the aggregation function as "Average" and set the grouping interval to 1 hour. Then, click "Update;'
+        title: '使用部件的时间窗口。在时间窗口设置中选择「Relative」，将时间间隔设为「Current day」。聚合函数保持「Average」，分组间隔设为 1 小时。然后点击「Update」；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-4-pe.png
-        title: 'Now, specify "Selected entity" alias as the datasource. Add "co2" as the data key, and set its label and units. Then, click the "gear" icon to configure the "co2" data key settings;'
+        title: '将「Selected entity」别名指定为数据源。添加「co2」作为数据键并设置其标签和单位。然后点击「齿轮」图标配置「co2」数据键设置；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-5-pe.png
-        title: 'Turn on the "Smooth line" option to make the chart line appear smoother. Click "Save";'
+        title: '开启「Smooth line」选项使图表线条更平滑。点击「Save」；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-6-pe.png
-        title: 'Enter a name for the Y-axis, such as "CO2 level", and specify "ppm" as the units;'
+        title: '为 Y 轴输入名称，如「CO2 level」，单位设为「ppm」；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-7-pe.png
-        title: 'Change the chart title to "Air Quality";'
+        title: '将图表标题改为「Air Quality」；'
     7:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-8-pe.png
-        title: 'Set the "Bottom" legend position. Check "Min", "Max" and "Average" options in the "Show values" section to display these statistics on the chart;'
+        title: '将图例位置设为「Bottom」。勾选「Show values」中的「Min」「Max」「Average」以在图表上显示这些统计值；'
     8:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-9-pe.png
-        title: 'Clear the "Card border radius" value. Click "Add";'
+        title: '清空「Card border radius」值。点击「Add」；'
     9:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/air-quality-widget-10-pe.png
-        title: 'Place this widget below the "Temperature and Humidity history" widget in the right-bottom corner of the dashboard and adjust its size. Save the dashboard to apply the changes.'
+        title: '将此部件放在「Temperature and Humidity history」部件下方、仪表板右下角，并调整大小。保存仪表板以应用更改。'
 
 air-sensor-state:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/smart-sensor-state-1-pe.png
-        title: 'Monitor the current air quality status and analyze its changes over time in a separate dashboard state.'
+        title: '在单独的仪表板状态中监控当前空气质量并分析其随时间的变化。'
 
 power-consumption-card-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-energy-meter-state-1-pe.png
-        title: 'Click the "Energy Meter" device row in the "Office sensors list" widget to navigate to its state;'
+        title: '点击「办公室传感器列表」部件中的「Energy Meter」设备行以进入其状态；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-1-pe.png
         title: 'Enter dashboard editing mode, and click the "+ Add widget" button;'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-2-pe.png
-        title: 'In the widget library, locate and click on the "Industrial widgets" bundle;'
+        title: '在部件库中找到并点击「Industrial widgets」包；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-3-pe.png
-        title: 'Select the "Power consumption card" widget;'
+        title: '选择「Power consumption card」部件；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-4-pe.png
-        title: 'Specify the "Selected entity" alias as the datasource. The "powerConsumption" key is already specified as the data key. Open the "powerConsumption" data key configuration by clicking the "pencil" icon;'
+        title: '将「Selected entity」别名指定为数据源。「powerConsumption」键已指定为数据键。点击「铅笔」图标打开「powerConsumption」数据键配置；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-5-pe.png
-        title: 'Select the "Sum" as the aggregation function to sum all data point values within the selected time period. Click "Save";'
+        title: '选择「Sum」作为聚合函数以汇总所选时间段内的所有数据点值。点击「Save」；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-6-pe.png
-        title: 'Use the dashboard time window;'
+        title: '使用仪表板时间窗口；'
     7:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-7-pe.png
-        title: 'Change the widget label to "Power consumption". Open the icon color settings;'
+        title: '将部件标签改为「Power consumption」。打开图标颜色设置；'
     8:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-8-pe.png
-        title: 'Set the value ranges and their corresponding colors as shown in the screenshot. Then, click "Apply";'
+        title: '按截图所示设置取值范围及对应颜色。然后点击「Apply」；'
     9:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-9-pe.png
-        title: 'Open the font settings;'
+        title: '打开字体设置；'
     10:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-10-pe.png
-        title: 'Set the font size to 35 pixels, and click "Apply";'
+        title: '将字体大小设为 35 像素，点击「Apply」；'
     11:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-11-pe.png
-        title: 'Open the value color settings;'
+        title: '打开数值颜色设置；'
     12:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-12-pe.png
-        title: 'Set the value ranges and their corresponding colors as shown in the screenshot. Then, click "Apply";'
+        title: '按截图所示设置取值范围及对应颜色。然后点击「Apply」；'
     13:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-13-pe.png
-        title: 'Clear the "Card border radius" value, and click "Add";'
+        title: '清空「Card border radius」值，点击「Add」；'
     14:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-14-pe.png
-        title: 'The widget has been added to display the total power consumption for the time period specified in the dashboard&#39;s time window. Adjust widget size to your preference. Then, save the dashboard to apply the changes.'
+        title: '已添加显示仪表板时间窗口指定时间段内总功耗的部件。按需调整部件大小，然后保存仪表板以应用更改。'
 
 power-consumption-range-chart-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-1-pe.png
-        title: 'Enter dashboard editing mode, and click the "+ Add widget" button at the top of the screen;'
+        title: '进入仪表板编辑模式，点击屏幕顶部的「+ Add widget」按钮；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-2-pe.png
-        title: 'Select the "Range chart" widget of the "Charts" widgets bundle;'
+        title: '选择「Charts」部件包中的「Range chart」部件；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-3-pe.png
-        title: 'Use the dashboard time window. Specify "Selected entity" alias as the datasource, and the "powerConsumption" key as the data key. Change the chart title to "Power consumption history";'
+        title: '使用仪表板时间窗口。将「Selected entity」别名指定为数据源，「powerConsumption」键为数据键。将图表标题改为「Power consumption history」；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-4-pe.png
-        title: 'Change the units to kW. Then, open the range colors settings;'
+        title: '将单位改为 kW。然后打开范围颜色设置；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-5-pe.png
-        title: 'The line color on the chart is colored according to the range in which the value falls. This will help you to quickly orient yourself with the data by visually highlighting changes in color according to variations in values. Set the value ranges and their corresponding colors. Click "Apply";'
+        title: '图表线条颜色根据数值所属范围着色，便于通过颜色变化快速了解数据。设置取值范围及对应颜色。点击「Apply」；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-6-pe.png
-        title: 'Go to the "Range thresholds settings", and turn off the "Label" option;'
+        title: '进入「Range thresholds settings」，关闭「Label」选项；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-7-pe.png
-        title: 'Open the "Line color" settings, and set the opacity to 40%. Apply changes;'
+        title: '打开「Line color」设置，将不透明度设为 40%。应用更改；'
     7:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-8-pe.png
-        title: 'Expand the Y-axis settings. Enter the "Power consumption" as the axis label, and turn off the "Show split lines" option;'
+        title: '展开 Y 轴设置。输入「Power consumption」作为轴标签，关闭「Show split lines」选项；'
     8:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-9-pe.png
-        title: 'Uncheck the "Data export" box in the "Show card buttons" section, and remove the value for the "Card border radius". Click "Add" to complete adding the range chart widget;'
+        title: '取消勾选「Show card buttons」中的「Data export」，移除「Card border radius」的值。点击「Add」完成范围图表部件的添加；'
     9:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/power-consumption-range-chart-10-pe.png
-        title: 'The "Power consumption history" widget has been added. Place it to the right of the "Power consumption" widget and resize it to your liking. Save the dashboard to apply the changes.'
+        title: '已添加「Power consumption history」部件。将其放在「Power consumption」部件右侧并调整大小。保存仪表板以应用更改。'
 
 energy-meter-state-final:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/energy-meter-state-final-1-pe.png
-        title: 'Now you can monitor the total energy consumption for the current day and track historical data on hourly energy consumption.'
+        title: '现在您可以监控当天的总能耗并追踪按小时统计的历史能耗数据。'
 
 water-consumption-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/go-to-water-flow-meter-state-1-pe.png
-        title: 'Click on the "Water Flow Meter" device in the "Office sensors list" to go to its state;'
+        title: '点击「办公室传感器列表」中的「Water Flow Meter」设备以进入其状态；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-1-pe.png
-        title: 'Enter the dashboard editing mode, and click the "+ Add widget" button;'
+        title: '进入仪表板编辑模式，点击「+ Add widget」按钮；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-2-pe.png
-        title: 'Navigate to the "Industrial widgets" bundle and select any widget, for example "Flow rate card";'
+        title: '进入「Industrial widgets」包并选择任一部件，例如「Flow rate card」；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-3-pe.png
-        title: 'Specify "Selected entity" alias as the data source. Add the "waterConsumption" key as data key, and click "pencil" icon to open its data key configuration;'
+        title: '将「Selected entity」别名指定为数据源。添加「waterConsumption」键作为数据键，点击「铅笔」图标打开其数据键配置；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-4-pe.png
-        title: 'Select the "Sum" as the aggregation function. Click "Save";'
+        title: '选择「Sum」作为聚合函数。点击「Save」；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-5-pe.png
-        title: 'Use the dashboard time window. Change the widget label to "Water consumption". Let&#39;s change the widget icon to better correspond to the type of data displayed. Open the "Icons" window;'
+        title: '使用仪表板时间窗口。将部件标签改为「Water consumption」。修改部件图标以更好地匹配显示的数据类型。打开「Icons」窗口；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-6-pe.png
-        title: 'Choose a new icon;'
+        title: '选择新图标；'
     7:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-7-pe.png
-        title: 'Open the color settings of the icon. Set the value ranges and their corresponding colors. Then, click "Apply";'
+        title: '打开图标的颜色设置。设置取值范围及对应颜色。然后点击「Apply」；'
     8:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-8-pe.png
-        title: 'Set gallon as the units. Open the color settings of the "Value" option;'
+        title: '将单位设为 gallon。打开「Value」选项的颜色设置；'
     9:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-9-pe.png
-        title: 'Set the value ranges and their corresponding colors as shown in the screenshot. Then, click "Apply";'
+        title: '按截图所示设置取值范围及对应颜色。然后点击「Apply」；'
     10:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-10-pe.png
-        title: 'Clear the "Card border radius" value. Click "Add";'
+        title: '清空「Card border radius」值。点击「Add」；'
     11:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-11-pe.png
-        title: 'The widget has been added to display the total water consumption for the time period specified in the dashboard&#39;s time window. Resize widget to your liking, and save the dashboard.'
+        title: '已添加显示仪表板时间窗口指定时间段内总用水量的部件。按需调整部件大小并保存仪表板。'
 
 water-consumption-range-chart-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-1-pe.png
-        title: 'Go to the "Energy Meter" state, and enter the dashboard editing mode. Right-click on the "Power consumption history" widget and select "Copy" from the dropdown menu that appears;'
+        title: '进入「Energy Meter」状态，进入仪表板编辑模式。右键点击「Power consumption history」部件，从下拉菜单中选择「Copy」；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-2-pe.png
-        title: 'Navigate to the "Water Flow Meter" state. Right-click on the dashboard and select "Paste" to insert the copied widget on the dashboard;'
+        title: '进入「Water Flow Meter」状态。在仪表板上右键点击，选择「Paste」以粘贴复制的部件；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-3-pe.png
-        title: 'Place this widget to the right of the "Water consumption" widget, and resize it. Now, enter the "Power consumption history" widget settings by clicking the "pencil" icon;'
+        title: '将此部件放在「Water consumption」部件右侧并调整大小。点击「铅笔」图标进入「Power consumption history」部件设置；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-4-pe.png
-        title: 'Leave the "Selected entity" alias as the datasource. Replace the data key "powerConsumption" with "waterConsumption". Change the title to "Water consumption history";'
+        title: '保留「Selected entity」别名为数据源。将数据键「powerConsumption」替换为「waterConsumption」。将标题改为「Water consumption history」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-5-pe.png
-        title: 'Change units to gal (gallon). Turn off the "Fill area" option. Now, go to the range colors settings;'
+        title: '将单位改为 gal（gallon）。关闭「Fill area」选项。进入范围颜色设置；'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-6-pe.png
-        title: 'Set the value ranges and their corresponding colors as shown in the screenshot. Then, click "Apply";'
+        title: '按截图所示设置取值范围及对应颜色。然后点击「Apply」；'
     6:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-7-pe.png
-        title: 'Expand the Y-axis settings. Change axis label to "Water consumption". Click "Apply" to save changes;'
+        title: '展开 Y 轴设置。将轴标签改为「Water consumption」。点击「Apply」保存更改；'
     7:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-consumption-range-chart-8-pe.png
-        title: 'The "Water consumption history" widget has been added. Save the dashboard.'
+        title: '已添加「Water consumption history」部件。保存仪表板。'
       
 battery-charge-1:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/battery-charge-1-pe.png
-        title: 'While in dashboard editing mode click the "+ Add widget" button;'
+        title: '在仪表板编辑模式下点击「+ Add widget」按钮；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/battery-charge-2-pe.png
-        title: 'Select the "Battery level" widget of the "Status indicators" widgets bundle;'
+        title: '选择「Status indicators」部件包中的「Battery level」部件；'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/battery-charge-3-pe.png
-        title: 'Specify the "Selected entity" alias as the datasource. The "batteryLevel" key is already specified as the data key;'
+        title: '将「Selected entity」别名指定为数据源。「batteryLevel」键已指定为数据键；'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/battery-charge-4-pe.png
-        title: 'Clear the "Card border radius" value. Click "Add";'
+        title: '清空「Card border radius」值。点击「Add」；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/battery-charge-5-pe.png
-        title: 'Place this widget to the right of the "Water consumption history" widget, and resize it. Finally, save the dashboard.'
+        title: '将此部件放在「Water consumption history」部件右侧并调整大小。最后保存仪表板。'
 
 water-flow-meter-final:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/water-flow-meter-state-final-1-pe.png
-        title: 'The state for the "Water Flow Meter" device has been configured. Monitor water consumption for the current day, track historical data on hourly water consumption, and control the battery charge level of the "Water Flow Meter" device.'
+        title: '「Water Flow Meter」设备状态已配置完成。可监控当日用水量、追踪按小时统计的历史用水数据，并控制「Water Flow Meter」设备的电池电量。'
 
 dashboard-final-lesson-3:
     0:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/dashboard-final-lesson-3-1-pe.png
-        title: 'Default state;'
+        title: '默认状态；'
     1:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/dashboard-final-lesson-3-2-pe.png
-        title: 'Building&#39;s state'
+        title: '楼宇状态'
     2:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/dashboard-final-lesson-3-3-pe.png
-        title: 'Office&#39;s state'
+        title: '办公室状态'
     3:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/dashboard-final-lesson-3-4-pe.png
-        title: 'Indoor Air Quality Sensor state;'
+        title: '室内空气质量传感器状态；'
     4:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/dashboard-final-lesson-3-5-pe.png
-        title: 'Energy Meter state'
+        title: '电能表状态'
     5:
         image: /images/user-guide/advanced-guides-for-working-with-dashboard/lesson-3/dashboard-final-lesson-3-6-pe.png
-        title: 'Water Flow Meter state'
+        title: '水表状态'
 
 ---
 

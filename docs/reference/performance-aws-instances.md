@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: ThingsBoard Performance on different AWS instances
-description: ThingsBoard Performance on different AWS instances results
+title: 不同 AWS 实例上的 ThingsBoard 性能
+description: 不同 AWS 实例的 ThingsBoard 性能测试结果
 redirect_from:
   - "/docs/reference/1m-devices-test/"
   - "/docs/reference/20k-devices-test/"

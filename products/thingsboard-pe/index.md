@@ -1,13 +1,13 @@
 ---
 layout: thingsboard-pe
-title: ThingsBoard Professional Edition
+title: ThingsBoard 专业版
 description: 
 ---
 <main>
   <section id="intro">
     <div class="main-div">
-      <h1>Advanced ThingsBoard IoT Platform distribution</h1>
-      <h2 class="sub-title clari">with value added features</h2>
+      <h1>高级 ThingsBoard 物联网平台发行版</h1>
+      <h2 class="sub-title clari">具备增值功能</h2>
     </div>
   </section>
   <section id="labeling">
@@ -18,9 +18,9 @@ description:
         </div>
         <div class="block">
           <div class="feature-des">
-            <h3 class="item-heading">White-labeling</h3>
-            <p>Rebrand ThingsBoard platform web interface with your company or product logo and color scheme in 2 minutes. No coding or service restart required. Allow your customers and their sub-customers to white-label their interface as well.</p>
-            <a class="read-more-button" href="/docs/user-guide/white-labeling/" aria-label="Read more about white labeling">Read more
+            <h3 class="item-heading">白标</h3>
+            <p>2 分钟内以您的公司或产品 Logo 和配色方案重新打造 ThingsBoard 平台 Web 界面。无需编码或重启服务。允许您的客户及其下级客户为其界面进行白标。</p>
+            <a class="read-more-button" href="/docs/user-guide/white-labeling/" aria-label="了解更多白标">了解更多
               <i class="fas fa-chevron-right arrow first"></i>
               <i class="fas fa-chevron-right arrow second"></i>
               <i class="fas fa-chevron-right arrow third"></i>
@@ -32,10 +32,10 @@ description:
           <div id="diagram" class="feature-des preview">
             <ul>
               <li id="menu-item-roles" class="menu-item">
-                <button onClick="activatePricingSection('roles')">Roles</button>
+                <button onClick="activatePricingSection('roles')">角色</button>
               </li>
               <li id="menu-item-hierarchy" class="menu-item">
-                <button onClick="activatePricingSection('hierarchy')">Customer hierarchy</button>
+                <button onClick="activatePricingSection('hierarchy')">客户层级</button>
               </li>
             </ul>
             <img class="diagram-border" src="/images/pe/diagram-border.svg" alt="diagram border" width="620" height="368">
@@ -46,9 +46,9 @@ description:
               <img src="/images/pe/roles.svg" alt="roles" loading="lazy" width="500" height="238">
             </div>
           </div>
-          <div class="feature-des"><h3 class="item-heading">Advanced RBAC for IoT</h3>
-            <p>Advanced management of user roles and permissions. Manage hierarchy of customers with multiple levels of sub-customers, independent users and devices.</p>
-            <a class="read-more-button" href="/docs/user-guide/rbac/" aria-label="Read more about advanced RBAC for IoT">Read more
+          <div class="feature-des"><h3 class="item-heading">物联网高级 RBAC</h3>
+            <p>高级管理用户角色与权限。管理具有多级下级客户、独立用户和设备的客户层级。</p>
+            <a class="read-more-button" href="/docs/user-guide/rbac/" aria-label="了解更多物联网高级 RBAC">了解更多
               <i class="fas fa-chevron-right arrow first"></i>
               <i class="fas fa-chevron-right arrow second"></i>
               <i class="fas fa-chevron-right arrow third"></i>
@@ -68,9 +68,9 @@ description:
           <div class="main2"></div><div class="small4"></div><div class="small5"></div>
         </div>
         <div class="block dark">
-          <div class="feature-des"><h3 class="item-heading ">Platform Integrations</h3>
-            <p>Stream data from devices connected to existing IoT Platforms to enable real-time interactive dashboards and efficient data processing. Connect NB IoT, LoRaWAN and SigFox devices with specific payload formats using highly customizable data converters. Design and plugin your own converter as a JavaScript functions in real-time.</p>
-            <a class="read-more-button" href="/docs/user-guide/integrations/" aria-label="Read more about platform integrations">Read more
+          <div class="feature-des"><h3 class="item-heading ">平台集成</h3>
+            <p>从连接至现有物联网平台的设备流式传输数据，实现实时交互式仪表板和高效数据处理。使用高度可定制的数据转换器，以特定载荷格式连接 NB IoT、LoRaWAN 和 SigFox 设备。实时以 JavaScript 函数设计并插入您自己的转换器。</p>
+            <a class="read-more-button" href="/docs/user-guide/integrations/" aria-label="了解更多平台集成">了解更多
               <i class="fas fa-chevron-right arrow first"></i>
               <i class="fas fa-chevron-right arrow second"></i>
               <i class="fas fa-chevron-right arrow third"></i>
@@ -80,9 +80,9 @@ description:
         </div>
         <div class="block">
           <img class="preview" src="/images/pe/entity-groups.svg" alt="entity groups" loading="lazy" width="626" height="390">
-          <div class="feature-des"><h3 class="item-heading">Entity Groups</h3>
-            <p>Group your entities (device, assets, etc.) to simplify administration tasks. Customize set of columns for each group and trigger actions on entities directly from administration interface.</p>
-            <a class="read-more-button" href="/docs/user-guide/groups/" aria-label="Read more about entity group">Read more
+          <div class="feature-des"><h3 class="item-heading">实体组</h3>
+            <p>对实体（设备、资产等）分组以简化管理任务。为每组自定义列集合并直接从管理界面触发实体操作。</p>
+            <a class="read-more-button" href="/docs/user-guide/groups/" aria-label="了解更多实体组">了解更多
               <i class="fas fa-chevron-right arrow first"></i>
               <i class="fas fa-chevron-right arrow second"></i>
               <i class="fas fa-chevron-right arrow third"></i>
@@ -100,18 +100,18 @@ description:
         </div>
         <div class="block double">
           <div class="left-textblock feature-des">
-            <h3 class="item-heading">Scheduler</h3>
-            <p>Schedule various types of events including report generation, commands to devices and configuration updates with flexible schedule configuration.</p>
-            <a class="read-more-button" href="/docs/user-guide/scheduler/" aria-label="Read more about scheduler">Read more
+            <h3 class="item-heading">调度器</h3>
+            <p>以灵活的调度配置安排各类事件，包括报告生成、设备命令和配置更新。</p>
+            <a class="read-more-button" href="/docs/user-guide/scheduler/" aria-label="了解更多调度器">了解更多
               <i class="fas fa-chevron-right arrow first"></i>
               <i class="fas fa-chevron-right arrow second"></i>
               <i class="fas fa-chevron-right arrow third"></i>
             </a>
           </div>
           <img class="preview" src="/images/pe/scheduler.svg" alt="scheduler" loading="lazy" width="532" height="565">
-          <div class="right-textblock feature-des"><h3 class="item-heading">Reporting</h3>
-            <p>Generate great looking reports using dashboards visualization capabilities. Generate reports by schedule or export by demand.</p>
-            <a class="read-more-button" href="/docs/pe/user-guide/reporting/reporting-key-concepts/" aria-label="Read more about reporting">Read more
+          <div class="right-textblock feature-des"><h3 class="item-heading">报表</h3>
+            <p>利用仪表板可视化能力生成精美报表。按计划生成或按需导出。</p>
+            <a class="read-more-button" href="/docs/pe/user-guide/reporting/reporting-key-concepts/" aria-label="了解更多报表">了解更多
               <i class="fas fa-chevron-right arrow first"></i>
               <i class="fas fa-chevron-right arrow second"></i>
               <i class="fas fa-chevron-right arrow third"></i>
@@ -132,9 +132,9 @@ description:
         </div>
         <div class="block end">
           <img class="preview" src="/images/pe/data-export.svg" alt="data export" loading="lazy" width="626" height="530">
-          <div class="feature-des"><h3 class="item-heading">CSV/XLS data export</h3>
-            <p>Export any dashboard widget data to CSV or XLS format. Allow your customers to download valuable insights from their device's data and review them in offline mode.</p>
-            <a class="read-more-button" href="/docs/user-guide/csv-xls-data-export/" aria-label="Read more about CSV/XLS data export">Read more
+          <div class="feature-des"><h3 class="item-heading">CSV/XLS 数据导出</h3>
+            <p>将任何仪表板部件数据导出为 CSV 或 XLS 格式。允许客户从设备数据下载有价值洞察并在离线模式下查看。</p>
+            <a class="read-more-button" href="/docs/user-guide/csv-xls-data-export/" aria-label="了解更多 CSV/XLS 数据导出">了解更多
               <i class="fas fa-chevron-right arrow first"></i>
               <i class="fas fa-chevron-right arrow second"></i>
               <i class="fas fa-chevron-right arrow third"></i>
@@ -145,11 +145,11 @@ description:
     </div>
   </section>
   <section class="comparison-table">
-    <h3>Feature comparison</h3>
+    <h3>功能对比</h3>
     <div class="header">
-      <p>Features</p>
-      <p><span>Community Edition</span><span>CE</span></p>
-      <p><span>Professional Edition</span><span>PE</span></p>
+      <p>功能</p>
+      <p><span>社区版</span><span>CE</span></p>
+      <p><span>专业版</span><span>PE</span></p>
     </div>
     <div class="block">
       <div class="comparison-row">
@@ -331,20 +331,20 @@ description:
     <div class="main-div">
       <div class="item">
         <img src="/images/pe/cloud-premises.svg" alt="Flexible deployment options" loading="lazy" width="284" height="151">
-        <h3 class="item-heading">Flexible deployment options</h3>
-        <p>Deploy ThingsBoard platform in the cloud or on-premises. Use commodity hardware to scale out horizontally by adding new nodes to your cluster. Single ThingsBoard server can support 10 000+ devices and 100M messages per hour, while simple cluster can support millions of devices and billions of messages.</p>
+        <h3 class="item-heading">灵活部署选项</h3>
+        <p>在云或本地部署 ThingsBoard 平台。使用通用硬件通过向集群添加新节点水平扩展。单个 ThingsBoard 服务器可支持 10,000+ 台设备和每小时 1 亿条消息，简单集群可支持数百万设备和数十亿条消息。</p>
       </div>
       <div class="divider"></div>
       <div class="item">
         <img src="/images/pe/pricing-models.svg" alt="Simple and predictable pricing models" loading="lazy" width="254" height="151">
-        <h3 class="item-heading">Simple and predictable pricing models</h3>
-        <p>Say "No!" to per message or per device pricing that turns to a monster bills in production system. ThingsBoard PE supports two simple and predictable pricing models depending on your product life-cycle stage.</p>
+        <h3 class="item-heading">简单可预测的定价模式</h3>
+        <p>对在生产系统中导致巨额账单的按消息或按设备计费说「不」。ThingsBoard PE 根据您的产品生命周期阶段支持两种简单可预测的定价模式。</p>
       </div>
     </div>
   </section>
   <section id="bottom">
     <div class="main-div">
-      <a id="Products_PE_GetItNow" href="/pricing/" class="try-pe gtm_button">Get it now</a>
+      <a id="Products_PE_GetItNow" href="/pricing/" class="try-pe gtm_button">立即获取</a>
     </div>
   </section>
 </main>

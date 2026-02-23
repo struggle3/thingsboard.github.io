@@ -8,13 +8,13 @@
 * TOC
 {:toc}
 
-OPC UA Integration allows you to stream data from the OPC UA server to ThingsBoard and converts the device payloads to the ThingsBoard format.
+OPC UA集成可从OPC UA服务器向ThingsBoard流式传输数据，并将设备负载转换为ThingsBoard格式。
 
 <object width="100%" style="max-width: max-content;" data="/images/user-guide/integrations/opc-ua-integration.svg"></object>
 
-## OPC-UA integration tutorial
+## OPC-UA集成教程
 
-In this tutorial, we will configure the integration between ThingsBoard and OPC-UA to get the Airconditioners data from the [OPC UA C++ Demo Server](https://www.unified-automation.com/downloads/opc-ua-servers.html){:target="_blank"} and allow the user to switch on/off any Airconditioner using the integration downlink feature.
+本教程将配置ThingsBoard与OPC-UA之间的集成，从[OPC UA C++ Demo Server](https://www.unified-automation.com/downloads/opc-ua-servers.html){:target="_blank"}获取空调数据，并允许用户通过集成下行功能开关任一台空调。
 
 ## Prerequisites
 

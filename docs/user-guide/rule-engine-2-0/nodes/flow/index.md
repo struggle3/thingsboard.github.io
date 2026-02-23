@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Flow nodes
-description: Rule engine flow nodes
+title: Flow 节点
+description: 规则引擎 flow 节点
 hidetoc: "true"
 breadcrumbs: "true"
 breadcrumbs-steps: "1"

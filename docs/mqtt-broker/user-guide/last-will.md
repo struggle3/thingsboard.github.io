@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Last Will and Testament
-description: TBMQ Last Will and Testament guide
+title: 遗嘱（Last Will and Testament）
+description: TBMQ 遗嘱指南
 
 ws-connection-add-camera:
   0:
     image: /images/mqtt-broker/user-guide/ui/ws-connection-add-camera-1.png
-    title: 'Go to the WebSocket Client page and click the Select Connection, represented by the expand more icon.'
+    title: '进入 WebSocket 客户端页面，点击「选择连接」（展开更多图标）。'
   1:
     image: /images/mqtt-broker/user-guide/ui/ws-connection-add-camera-2.png
-    title: 'Click on the button "Add new connection".'
+    title: '点击「Add new connection」按钮。'
   2:
     image: /images/mqtt-broker/user-guide/ui/ws-connection-add-camera-3.png
     title: 'Set name as Security Camera. Click on the Last Will section.'

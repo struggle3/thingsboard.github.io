@@ -1,13 +1,13 @@
-Using the following config, you can configure Gateway to use auto-generated Access Token by server provisioning strategy:
+使用以下配置，可将 Gateway 设置为通过服务器 provisioning 策略使用自动生成的 Access Token：
 
-| **Parameter**         | **Default value** | **Description**                                                                    |
+| **参数**         | **默认值** | **说明**                                                                    |
 |:----------------------|:------------------|------------------------------------------------------------------------------------
-| type                  | **AUTO**          | Type of provisioning strategy.                                                     |
-| provisionDeviceKey    | **DEVICE_KEY**    | Provisioning device key, you should take it from configured device profile.        |
-| provisionDeviceSecret | **DEVICE_SECRET** | Provisioning device secret, you should take it from configured device profile.     |
+| type                  | **AUTO**          | Provisioning 策略类型。                                                     |
+| provisionDeviceKey    | **DEVICE_KEY**    | Provisioning 设备密钥，需从已配置的 device profile 中获取。        |
+| provisionDeviceSecret | **DEVICE_SECRET** | Provisioning 设备密文，需从已配置的 device profile 中获取。     |
 | ---                   
 
-Provisioning subsection in configuration file will look like this:
+配置文件中的 provisioning 配置小节将如下所示：
 ```json
 ...
 "provisioning": {

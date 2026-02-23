@@ -1,56 +1,53 @@
-As an example, we will use ThingsBoard Modbus Demo Server, which can be run using Docker and the following command:
+以下示例使用 ThingsBoard Modbus 演示服务器，可通过 Docker 及以下命令运行：
 
 ```bash
 docker run -it -p 5021:5021 thingsboard/tb-gw-modbus-server:latest
 ```
 {:.copy-code}
 
-The server available at `0.0.0.0:5021`. The server has the following structure:
+服务器地址为 `0.0.0.0:5021`，结构如下：
 
-| Variable Name  | Register Type   | Data Type  | Address    |
-|:---------------|:----------------|------------|:-----------|
-| Temperature    | Holding         | 16int      | 0          |
-| Humidity       | Holding         | 16int      | 1          |
-| Power          | Holding         | 16int      | 2          |
-| Pressure       | Holding         | 16int      | 3          |
-| Relay          | Coil            | bits       | 1          |
+| 变量名       | 寄存器类型 | 数据类型 | 地址   |
+|:-------------|:-----------|----------|:-------|
+| Temperature  | Holding    | 16int    | 0      |
+| Humidity     | Holding    | 16int    | 1      |
+| Power        | Holding    | 16int    | 2      |
+| Pressure     | Holding    | 16int    | 3      |
+| Relay        | Coil       | bits     | 1      |
 | -------------- | --------------- | ---------- | ---------- |
 
-We are interested in register `1`, which contains the relay state value (off/on).
-To read the value of this register, we need to add this register as attribute/telemetry in the device configuration. 
-To do this, follow these steps:
+此处关注寄存器 `1`，用于表示继电器状态（关/开）。
+要读取该寄存器，需在设备配置中将其作为属性/遥测添加。按以下步骤操作：
 
 {% assign readingAttributeAndTimeseries = '
     ===
         image: /images/gateway/modbus-connector/examples/select-created-gateway.png,
-        title: Go to "**Entities**" → "**Gateways**" in the left sidebar and select your gateway.
+        title: 在左侧边栏进入“**实体**”→“**网关**”并选择您的网关。
     ===
         image: /images/gateway/modbus-connector/examples/select-connector-configuration.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单中的“**连接器配置**”按钮。
     ===
         image: /images/gateway/modbus-connector/examples/select-device-configuration.png,
-        title: Select the created Modbus connector and click on the "**Master Connections**" tab. Make sure you have configured and connected device (if you don’t know how to do it, see [Getting Started](/docs/iot-gateway/getting-started/?connectorsCreation=modbus){:target="_blank"} guide or [Connection settings](/docs/iot-gateway/config/modbus/#connection-settings) and [Data mapping](/docs/iot-gateway/config/modbus/#data-mapping) sections of this guide). Click on the “**Pencil**” icon on a device you want to configure attribute updates for.
+        title: 选择已创建的 Modbus 连接器并点击“**主站连接**”标签。请确保已配置并连接设备（若不清楚如何操作，可参阅[入门指南](/docs/iot-gateway/getting-started/?connectorsCreation=modbus){:target="_blank"}或本指南中的[连接设置](/docs/iot-gateway/config/modbus/#connection-settings)和[数据映射](/docs/iot-gateway/config/modbus/#data-mapping)）。点击要配置属性更新的设备旁的“**铅笔**”图标。
     ===
         image: /images/gateway/modbus-connector/examples/reading-attributes-and-time-series-1.png,
-        title: Scroll down to the "**Attributes** or **Time series**" section and click on the "**Pencil**" icon to edit the attributes and telemetry.
+        title: 向下滚动至“**属性**或**时序数据**”部分，点击“**铅笔**”图标编辑属性和遥测。
     ===
         image: /images/gateway/modbus-connector/examples/reading-attributes-and-time-series-2.png,
-        title: Click on the "**Add attribute**" or "**Add telemetry**" button. In our case, we will add `relay` time series, so fill in the "**Key**" field with `relay`, select the "**Type**" as **bits**, select "**Function code**" field as "**01 - Read Coils**", select "**Bit target type**" as "**Boolean**", and in the "**Address**" field enter `1`. This is the address of the Modbus register we want to read.
+        title: 点击“**添加属性**”或“**添加遥测**”按钮。此处添加 `relay` 时序数据，故在“**键**”中填 `relay`，将“**类型**”选为 **bits**，“**功能码**”选为“**01 - 读线圈**”，“**位目标类型**”选为“**布尔**”，“**地址**”填 `1`。该地址为要读取的 Modbus 寄存器。
     ===
         image: /images/gateway/modbus-connector/examples/reading-attributes-and-time-series-3.png,
-        title: Remember to save your changes by clicking the "**Apply**" button.
+        title: 记得点击“**应用**”按钮保存更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=readingAttributeAndTimeseries %}
 
-Now we can check if the attribute/telemetry works. Go to "**Entities**" → "**Devices**" → select a created
-device → "**Last telemetry**" tab and check the value of the `relay` telemetry. It should be `false` since the 
-default value of the relay is off.
+可以检查属性/遥测是否生效。依次进入“**实体**”→“**设备**”→选择已创建设备→“**最新遥测**”标签，查看 `relay` 遥测值。默认继电器为关，应为 `false`。
 
 ![image](/images/gateway/modbus-connector/examples/reading-attributes-and-time-series-4.png)
 
-Full configuration for Modbus connector for the example above will look like this:
+上述示例的 Modbus 连接器完整配置如下：
 
 ```json
 {

@@ -2,7 +2,7 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Working with widgets
+title: 使用部件
 
 add-widget:
     0:

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Deploy TBMQ Cluster on AKS with Helm
-description: TBMQ microservices setup with Helm on AKS
+title: 在 AKS 上使用 Helm 部署 TBMQ 集群
+description: 在 AKS 上使用 Helm 配置 TBMQ 微服务
 
 ---
 

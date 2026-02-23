@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: TBMQ Client Type
-description: TBMQ MQTT Client types overview
+title: TBMQ 客户端类型
+description: TBMQ MQTT 客户端类型概览
 
 mqtt-client-type:
   0:

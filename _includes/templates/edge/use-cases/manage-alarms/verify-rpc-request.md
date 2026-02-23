@@ -1,5 +1,5 @@
-Open the terminal where **mqtt-js.sh** script is running. 
-You should see similar messages on the screen:
+打开运行 **mqtt-js.sh** 脚本的终端。
+您应看到类似以下输出：
 
 ```shell
 pc@pc-XPS-15-9550:~/alarm-tutorial$ bash mqtt-js.sh
@@ -10,4 +10,4 @@ Method: enabled_air_conditioner
 Speed params: 1
 ```
 
-Congratulations! RPC request was successfully sent to **Air Conditioner** device based on the temperature readings from the **DHT22** sensor.
+恭喜！RPC 请求已基于 **DHT22** 传感器的温度读数成功发送至 **空调** 设备。

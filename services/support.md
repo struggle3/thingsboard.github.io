@@ -1,7 +1,7 @@
 ---
 layout: pricing
-title: Support plans
-description: ThingsBoard professional support plans for IoT projects, cloud infrastructure support
+title: 支持计划
+description: ThingsBoard 物联网项目与云基础设施专业支持计划
 defaultActivePricingSection: professional-support
 redirect_from: "docs/services/support/"
 ---
@@ -10,18 +10,18 @@ redirect_from: "docs/services/support/"
     <div class="pricing-header">
        <div class="pricing-hero">
         <div class="pricing-hero-content">
-            <h1>ThingsBoard support options</h1>
+            <h1>ThingsBoard 支持选项</h1>
         </div>
        </div>
        <nav id="inner-navigation" class="inner-navigation">
          <ul id="menu-pricing-navigation-1" class="menu">
             <li id="menu-item-community-support" class="menu-item tb-logo">
                 <a id="Serv_Support_CS" class="gtm_button" href="javascript:void(0);" onClick="activatePricingSection('community-support')
-">Community support</a>
+">社区支持</a>
             </li>
             <li id="menu-item-professional-support" class="menu-item tb-logo active">
                 <a id="Serv_Support_PS" class="gtm_button" href="javascript:void(0);" onClick="activatePricingSection('professional-support')
-">Professional support</a>
+">专业支持</a>
             </li>
          </ul>
        </nav> 

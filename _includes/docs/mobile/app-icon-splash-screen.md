@@ -6,57 +6,57 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-An **app icon** is the visual representation of your application that appears on the user's device home screen, app drawer, and other system interfaces.
+**应用图标**是显示在用户设备主屏幕、应用抽屉和其他系统界面上的应用视觉标识。
 
-A **splash screen** is the initial screen displayed when an application is launched, typically showing a logo or branding while the app loads.
+**启动画面**是应用启动时显示的初始屏幕，通常显示Logo或品牌标识，同时应用正在加载。
 
-For app version 1.7.0 and above, you need several assets to fully customize your app. You will find default examples of the required assets in the `assets/branding` folder.
+对于1.7.0及更高版本，您需要若干资源才能完全自定义应用。您将在`assets/branding`文件夹中找到所需资源的默认示例。
 
 {% capture pre_1_7_0_link %}
-Important Notice: Please use [this guide](/docs/{{peDocsPrefix}}mobile/app-icon-splash-screen-before-v1.7/) for pre 1.7.x configuration
+重要提示：请使用[本指南](/docs/{{peDocsPrefix}}mobile/app-icon-splash-screen-before-v1.7/)进行1.7.x之前的配置
 {% endcapture %} {% include templates/info-banner.md content=pre_1_7_0_link %}
 
 
-### Required Assets
+### 所需资源
 
-The following assets are required for complete customization:
+完整自定义需要以下资源：
 
-| Asset | Specifications | Description |
+| 资源 | 规格 | 说明 |
 |-------|---------------|-------------|
-| `icon_filled.png` | 512×512 pixels | Filled icon with background color |
-| `icon_foreground.png` | 438×438 pixels, transparent background | Foreground icon element |
-| `icon_monochrome.png` | 438×438 pixels, transparent background, solid color | Monochrome version for themed icons |
-| `splash_android_12.png` | Variable size | Splash screen for Android 12+ |
-| `splash.png` | 320×320 pixels | General splash screen logo |
+| `icon_filled.png` | 512×512像素 | 带背景色的填充图标 |
+| `icon_foreground.png` | 438×438像素，透明背景 | 前景图标元素 |
+| `icon_monochrome.png` | 438×438像素，透明背景，纯色 | 主题图标用的单色版本 |
+| `splash_android_12.png` | 可变尺寸 | Android 12+的启动画面 |
+| `splash.png` | 320×320像素 | 通用启动画面Logo |
 
-#### Android 12 splash screen icon
-Choose one of this options, depending on how you want your splash screen to look.
+#### Android 12启动画面图标
+根据您希望的启动画面外观，选择以下选项之一。
 
-**Splash screen icon without background**
-- Size: 1152×1152 pixels
-- Must fit within a circle 768 pixels in diameter
+**无背景的启动画面图标**
+- 尺寸：1152×1152像素
+- 必须适配768像素直径的圆形内
 
-**Splash screen icon with background:**
-- Size: 960×960 pixels  
-- Must fit within a circle 640 pixels in diameter
+**带背景的启动画面图标：**
+- 尺寸：960×960像素
+- 必须适配640像素直径的圆形内
 
 <div style="display: flex; flex-direction: row;">
     <div style="display: flex; flex-direction: column; align-items: center;">
-        <img width="" src="/images/mobile/pe/splash_screen_sizes_template.png" title="Splash screen icon layout" alt="Splash screen icon layout">
-        <span style="margin-top: 16px; font-size: 90%; color: #6c757d;">Splash screen icon layout</span>
+        <img width="" src="/images/mobile/pe/splash_screen_sizes_template.png" title="启动画面图标布局" alt="Splash screen icon layout">
+        <span style="margin-top: 16px; font-size: 90%; color: #6c757d;">启动画面图标布局</span>
     </div>
 </div>
-### Setup Instructions
+### 设置说明
 
-Replace all the images in the `assets/branding` folder while keeping the same file names with your own assets.
+替换`assets/branding`文件夹中的所有图像，同时保持相同的文件名，使用您自己的资源。
 
-### App Icon Configuration
+### 应用图标配置
 
-You can check the [flutter_launcher_icons documentation](https://pub.dev/packages/flutter_launcher_icons) for more detailed information about app icon settings.
+您可查阅[flutter_launcher_icons文档](https://pub.dev/packages/flutter_launcher_icons)获取更详细的应用图标设置信息。
 
-Configuration in `pubspec.yaml`:
+`pubspec.yaml`中的配置：
 
 ```yaml
 flutter_launcher_icons:
@@ -81,41 +81,41 @@ flutter_launcher_icons:
   image_path_ios_dark_transparent: "assets/branding/icon_foreground.png"
 ```
 
-#### Configuration Options
+#### 配置选项
 
-**`background_color_ios: "#ffffff"`**  
-Hex color for your iOS icon background.
+**`background_color_ios: "#ffffff"`**
+iOS图标背景的十六进制颜色。
 
-**`adaptive_icon_background: "#ffffff"`**  
-Hex color for your Android icon background.
+**`adaptive_icon_background: "#ffffff"`**
+Android图标背景的十六进制颜色。
 
-**`adaptive_icon_foreground_inset: 16`**  
-Padding for the image inside the icon frame. Try the default value first, then adjust if needed:
-- If your logo doesn't fit inside the icon frame, increase the value
-- If it appears too small, decrease the value
+**`adaptive_icon_foreground_inset: 16`**
+图标框架内图像的padding。先尝试默认值，然后按需调整：
+- 如果Logo在图标框架内放不下，增大该值
+- 如果显得太小，减小该值
 
-#### Custom Background Images and different platform assets
+#### 自定义背景图像和不同平台资源
 
-By default mobile is configured to use one single icon for both ios and android, as well as to use a solid background color for icons background. You can change this, by modifing config file, and adding additional assets.
+默认情况下，移动应用配置为iOS和Android使用同一图标，以及使用纯色作为图标背景。您可以通过修改配置文件和添加额外资源来更改此设置。
 
-If you want your icons to have a specific background image instead of a solid color:
+如果您希望图标具有特定背景图像而非纯色：
 
-**For IOS:**
-1. Add your 438×438 pixels logo image with background to the `assets/branding` folder. This way you can also set different logos for IOS and Android.
-2. Update the `image_path_ios` line:
+**iOS：**
+1. 将带背景的438×438像素Logo图像添加到`assets/branding`文件夹。这样您也可以为iOS和Android设置不同Logo。
+2. 更新`image_path_ios`行：
    ```yaml
    image_path_ios: "assets/branding/your_custom_ios_logo.png"
    ```
 
-**For Android:**
-1. Create a 438×438 pixels background image and add it to the `assets/branding` folder
-2. Update the `adaptive_icon_background` line:
+**Android：**
+1. 创建438×438像素的背景图像并添加到`assets/branding`文件夹
+2. 更新`adaptive_icon_background`行：
    ```yaml
-   adaptive_icon_background: "/assets/branding/your_android_background.png"
+   adaptive_icon_background: "assets/branding/your_android_background.png"
 
-### Splash Screen Configuration
+### 启动画面配置
 
-Add the following configuration to your `flutter_native_splash.yaml`:
+在`flutter_native_splash.yaml`中添加以下配置：
 
 ```yaml
 flutter_native_splash:
@@ -129,24 +129,24 @@ flutter_native_splash:
   ios: true
 ```
 
-You can customize the splash screen background color and Android 12+ icon background by updating the `color` and `icon_background_color` properties.
+您可通过更新`color`和`icon_background_color`属性自定义启动画面背景色和Android 12+图标背景。
 
 {% capture splash_config_note %}
-**Note:** flutter_native_splash has extensive configuration options. We recommend reading the [official documentation](https://pub.dev/packages/flutter_native_splash) to understand all available features and limitations.
+**注意：**flutter_native_splash有大量配置选项。我们建议阅读[官方文档](https://pub.dev/packages/flutter_native_splash)了解所有可用功能和限制。
 {% endcapture %}
 {% include templates/info-banner.md content=splash_config_note %}
 
-### Apply Settings
+### 应用设置
 
-After configuring your assets and settings, run the following commands to apply the changes:
+配置资源和设置后，运行以下命令应用更改：
 
-**Apply icon settings:**
+**应用图标设置：**
 ```bash
 dart run flutter_launcher_icons
 ```
 {: .copy-code}
 
-**Apply splash screen settings:**
+**应用启动画面设置：**
 ```bash
 dart run flutter_native_splash:create
 ```

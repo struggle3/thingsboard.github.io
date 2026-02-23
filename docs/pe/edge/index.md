@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
 title: ThingsBoard Edge
-description: Run ThingsBoard locally at the edge to process data near its source, reduce cloud costs, and maintain operations during connectivity issues
+description: 在边缘本地运行 ThingsBoard，就近处理数据、降低云成本，并在连接故障时保持运行
 ---
 
 {% assign docsPrefix = "pe/" %}

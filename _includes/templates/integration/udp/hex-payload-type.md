@@ -1,11 +1,11 @@
-In this case payload is hexadecimal string:
+此情况下 payload 为十六进制字符串：
 
 ```text
 534e2d30303164656661756c7432352e373639
 ``` 
 
-Here is the description of the bytes in this payload:
-- **0-5** bytes - **534e2d303031** - device name. If we convert it to text - **SN-001**;
-- **6-12** byte - **64656661756c74** - device type. If we convert it to text - **default**;
-- **13-16** byte - **32352e37** - temperature telemetry. If we convert it to text: - **25.7**;
-- **17-18** byte - **3639** - humidity telemetry. If we convert it to text: - **69**.
+该 payload 中各字节说明如下：
+- **0-5** 字节 - **534e2d303031** - 设备名称，转为文本为 **SN-001**；
+- **6-12** 字节 - **64656661756c74** - 设备类型，转为文本为 **default**；
+- **13-16** 字节 - **32352e37** - 温度遥测，转为文本为 **25.7**；
+- **17-18** 字节 - **3639** - 湿度遥测，转为文本为 **69**。

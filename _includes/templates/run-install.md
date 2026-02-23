@@ -1,8 +1,8 @@
 
-Once ThingsBoard service is installed and DB configuration is updated, you can execute the following script:
+ThingsBoard 服务安装完成且 DB 配置更新后，可执行以下脚本：
 
 ```bash
-# --loadDemo option will load demo data: users, devices, assets, rules, widgets.
+# --loadDemo 选项将加载演示数据：users、devices、assets、rules、部件。
 sudo /usr/share/thingsboard/bin/install/install.sh --loadDemo
 ```
 {: .copy-code}

@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect VIBit to ThingsBoard?
-category: Other devices
+title: 如何将 VIBit 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [Wi-Fi, RS-485, Bluetooth]
 vendor: MachineAstro Pvt Ltd
 hasIntegrationDeviceConfiguration: true

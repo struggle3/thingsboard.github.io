@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Bulk Provisioning
-description: Bulk Provisioning entities guide
+title: 批量 Provisioning
+description: 批量 Provisioning 实体指南
 
 ---
 

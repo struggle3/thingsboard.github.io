@@ -1,13 +1,13 @@
 ![image](/images/user-guide/rule-engine-2-0/nodes/transformation-nodes/deduplication-node.png)
 
-**Deduplicate messages within the same Originator entity for a configurable period based on a specified deduplication strategy.** 
+**在可配置周期内，对来自同一来源实体（Originator）的消息进行去重，并根据指定的去重策略返回结果。**
 
-Deduplication strategies:
-- FIRST - return first message that arrived during deduplication period.
-- LAST - return last message that arrived during deduplication period.
-- ALL - return all messages as a single JSON array message. Where each element represents object with msg and metadata inner properties.
+去重策略：
+- FIRST — 返回去重周期内到达的第一条消息。
+- LAST — 返回去重周期内到达的最后一条消息。
+- ALL — 将所有消息作为单一 JSON 数组消息返回，其中每个元素为包含 msg 和 metadata 内部属性的对象。
 
-Configuration:
+配置：
 {% if docsPrefix == null %}
 <object width="70%" data="/images/user-guide/rule-engine-2-0/nodes/transformation-nodes/deduplication-node-2-ce.png"></object>
 {% endif %}

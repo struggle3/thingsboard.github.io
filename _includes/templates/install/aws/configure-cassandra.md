@@ -1,16 +1,16 @@
-Using Cassandra is an optional step. 
-We recommend to use Cassandra if you plan to insert more than 5K data points per second or would like to optimize storage space.
+使用 Cassandra 为可选步骤。
+若计划每秒插入超过 5K 数据点或需优化存储空间，建议使用 Cassandra。
 
-#### Provision additional node groups
+#### 配置额外节点组
 
-Provision additional node groups that will be hosting Cassandra instances. 
-You may change the machine type. At least 4 vCPUs and 16GB of RAM is recommended.
+配置用于承载 Cassandra 实例的额外节点组。
+可修改机型，建议至少 4 vCPU 和 16GB 内存。
 
-We will create **3** separate node pools with **1** node per zone. 
-Since we plan to use ebs disks, we don't want k8s to launch a pod in the zone where the corresponding disk is not available.
-Those zones will have the same node label. We will use this label to target deployment of our stateful set.
+将创建 **3** 个独立节点池，每个可用区 **1** 个节点。
+因使用 EBS 磁盘，需避免 k8s 在对应磁盘不可用的可用区启动 pod。
+这些可用区使用相同节点标签，我们将用该标签指定 StatefulSet 的部署目标。
 
-Deploy **3** nodes of type **m5.xlarge** in different zones. You may change the zones to correspond to your region:
+在不同可用区部署 **3** 个 **m5.xlarge** 节点。可根据您的区域调整可用区：
 
 ```bash
 eksctl create nodegroup --config-file=<path> --include='cassandra-*'

@@ -1,19 +1,17 @@
-Enrichment nodes are used to include additional information about the message originator, entities related to originator, and other contextual data into the outgoing message 
-for further processing steps within the rule chain. 
+丰富节点用于在出站消息中包含关于消息来源、与来源相关的实体及其他上下文数据，供规则链中的后续处理步骤使用。
 
-These nodes can enrich messages with attributes, latest time series values, historical time series data, and entity details fetched from various sources including 
-the message originator, related entities, current tenant, or customer.
+这些节点可从消息来源、相关实体、当前租户或客户等多个来源获取属性、最新时序值、历史时序数据和实体详情，以丰富消息。
 
-This enrichment allows subsequent rule nodes to make context-aware decisions and apply processing logic based on configuration settings and contextual data.
+这种丰富使后续规则节点能够根据配置设置和上下文数据做出有上下文的决策并应用处理逻辑。
 
-- [calculate delta](/docs/user-guide/rule-engine-2-0/nodes/enrichment/calculate-delta) — calculates the delta (difference) between the current value in an incoming message and the previous value from the same originator, optionally including the time elapsed between messages.
-- [customer attributes](/docs/user-guide/rule-engine-2-0/nodes/enrichment/customer-attributes) — enriches messages by adding [server-side attributes](/docs/user-guide/attributes/) or [latest time series values](/docs/user-guide/telemetry/) from the message originator's customer.
-- [customer details](/docs/user-guide/rule-engine-2-0/nodes/enrichment/customer-details) — enriches messages by adding details (such as name, email, country, address, etc.) from the message originator's customer.
-- [fetch device credentials](/docs/user-guide/rule-engine-2-0/nodes/enrichment/fetch-device-credentials) — enriches messages by adding credentials (type and value) of the originator device.
-- [originator attributes](/docs/user-guide/rule-engine-2-0/nodes/enrichment/originator-attributes) — enriches messages by adding attributes (client, shared, server) and/or latest time series values from the message originator.
-- [originator fields](/docs/user-guide/rule-engine-2-0/nodes/enrichment/originator-fields) — enriches messages by adding details (such as name, label, profile name, etc.) from the message originator.
-- [originator telemetry](/docs/user-guide/rule-engine-2-0/nodes/enrichment/originator-telemetry) — enriches messages by adding [historical time series data](/docs/user-guide/telemetry/) from the message originator within a specified time interval using configurable fetch strategies and optional aggregation functions.
-- [related device attributes](/docs/user-guide/rule-engine-2-0/nodes/enrichment/related-device-attributes) — enriches messages by adding attributes and/or latest time series values from a [related](/docs/{{docsPrefix}}user-guide/entities-and-relations/#relations) device found through configurable relation queries (direction, type, device profiles).
-- [related entity data](/docs/user-guide/rule-engine-2-0/nodes/enrichment/related-entity-data) — enriches messages by adding attributes, latest time series values, or entity fields from a related entity found through configurable relation queries (direction, type and entity filters).
-- [tenant attributes](/docs/user-guide/rule-engine-2-0/nodes/enrichment/tenant-attributes) — enriches messages by adding server-side attributes or latest time series values from the message originator's tenant.
-- [tenant details](/docs/user-guide/rule-engine-2-0/nodes/enrichment/tenant-details) — enriches messages by adding details (such as name, email, country, address, etc.) from the message originator's tenant.
+- [计算差值](/docs/user-guide/rule-engine-2-0/nodes/enrichment/calculate-delta) — 计算入站消息中当前值与来自同一来源的上一值之间的差值，可选择包含消息间经过的时间。
+- [客户属性](/docs/user-guide/rule-engine-2-0/nodes/enrichment/customer-attributes) — 通过添加消息来源客户的[服务端属性](/docs/user-guide/attributes/)或[最新时序值](/docs/user-guide/telemetry/)丰富消息。
+- [客户详情](/docs/user-guide/rule-engine-2-0/nodes/enrichment/customer-details) — 通过添加消息来源客户的详情（如名称、邮箱、国家、地址等）丰富消息。
+- [获取设备凭据](/docs/user-guide/rule-engine-2-0/nodes/enrichment/fetch-device-credentials) — 通过添加来源设备的凭据（类型和值）丰富消息。
+- [来源属性](/docs/user-guide/rule-engine-2-0/nodes/enrichment/originator-attributes) — 通过添加消息来源的属性（客户端、共享、服务端）和/或最新时序值丰富消息。
+- [来源字段](/docs/user-guide/rule-engine-2-0/nodes/enrichment/originator-fields) — 通过添加消息来源的详情（如名称、标签、配置名称等）丰富消息。
+- [来源遥测](/docs/user-guide/rule-engine-2-0/nodes/enrichment/originator-telemetry) — 通过添加消息来源在指定时间间隔内的[历史时序数据](/docs/user-guide/telemetry/)丰富消息，支持可配置的获取策略和可选聚合函数。
+- [关联设备属性](/docs/user-guide/rule-engine-2-0/nodes/enrichment/related-device-attributes) — 通过添加通过可配置关系查询（方向、类型、设备配置）找到的[关联](/docs/{{docsPrefix}}user-guide/entities-and-relations/#relations)设备的属性和/或最新时序值丰富消息。
+- [关联实体数据](/docs/user-guide/rule-engine-2-0/nodes/enrichment/related-entity-data) — 通过添加通过可配置关系查询（方向、类型和实体过滤）找到的关联实体的属性、最新时序值或实体字段丰富消息。
+- [租户属性](/docs/user-guide/rule-engine-2-0/nodes/enrichment/tenant-attributes) — 通过添加消息来源租户的服务端属性或最新时序值丰富消息。
+- [租户详情](/docs/user-guide/rule-engine-2-0/nodes/enrichment/tenant-details) — 通过添加消息来源租户的详情（如名称、邮箱、国家、地址等）丰富消息。

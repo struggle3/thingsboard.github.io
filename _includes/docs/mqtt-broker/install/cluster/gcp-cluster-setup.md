@@ -1,14 +1,14 @@
 * TOC
 {:toc}
 
-This guide will help you set up TBMQ {{tbmqSuffix}} in GKE. 
+本指南将帮助你在 GKE 中部署 TBMQ {{tbmqSuffix}}。
 
-## Prerequisites
+## 前置要求
 
 {% include templates/mqtt-broker/install/gcp/gke-prerequisites.md %}
 
 {% if docsPrefix == null %}
-## Clone TBMQ repository
+## 克隆 TBMQ 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -17,7 +17,7 @@ cd tbmq/k8s/gcp
 {: .copy-code}
 
 {% else %}
-## Clone TBMQ PE K8S repository
+## 克隆 TBMQ PE K8S 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq-pe-k8s.git
@@ -26,37 +26,37 @@ cd tbmq-pe-k8s/gcp
 {: .copy-code}
 {% endif %}
 
-## Define environment variables
+## 定义环境变量
 
 {% assign tbClusterName = "tbmq-cluster" %}
 {% assign tbDbClusterName = "tbmq-db" %}
 {% include templates/mqtt-broker/install/gcp/env-variables.md %}
 
-## Configure and create GKE cluster
+## 配置并创建 GKE 集群
 
 {% include templates/mqtt-broker/install/gcp/regional-gke-cluster.md %}
 
-## Update the context of kubectl
+## 更新 kubectl 上下文
 
 {% include templates/mqtt-broker/install/gcp/update-kubectl-region.md %}
 
-## Provision Google Cloud SQL (PostgreSQL) Instance
+## 配置 Google Cloud SQL（PostgreSQL）实例
 
 {% assign tbDbName = "thingsboard_mqtt_broker" %}
 {% include templates/mqtt-broker/install/gcp/provision-postgresql.md %}
 
-#### Edit database settings
+#### 编辑数据库配置
 
-Replace **YOUR_DB_IP_ADDRESS**, **YOUR_DB_PASSWORD** and **YOUR_DB_NAME** with the correct values:
+将 **YOUR_DB_IP_ADDRESS**、**YOUR_DB_PASSWORD** 和 **YOUR_DB_NAME** 替换为正确值：
 
 ```bash
 nano tbmq-db-configmap.yml
 ```
 {: .copy-code}
 
-## Create Namespace
+## 创建命名空间
 
-Let's create a dedicated namespace for our TBMQ cluster deployment to ensure better resource isolation and management.
+为 TBMQ 集群部署创建专用命名空间，以提升资源隔离与管理效果。
 
 ```bash
 kubectl apply -f tbmq-namespace.yml
@@ -64,7 +64,7 @@ kubectl config set-context $(kubectl config current-context) --namespace=thingsb
 ```
 {: .copy-code}
 
-## Provision Valkey cluster
+## 配置 Valkey 集群
 
 {% include templates/mqtt-broker/install/cluster-common/provision-redis-cluster.md %}
 
@@ -91,14 +91,14 @@ Otherwise, please check if you set the PostgreSQL URL and PostgreSQL password in
 
 ## Configure Load Balancers
 
-### Configure HTTP(S) Load Balancer
+### 配置 HTTP(S) 负载均衡器
 
-Configure HTTP(S) Load Balancer to access the web interface of your TBMQ instance. Basically, you have 2 possible configuration options:
+配置 HTTP(S) 负载均衡器以访问 TBMQ 实例的 Web 界面。主要有两种配置方式：
 
-* http — Load Balancer without HTTPS support. Recommended for **development**. The only advantage is simple configuration and minimum costs. May be a good option for development server but definitely not suitable for production.
-* https — Load Balancer with HTTPS support. Recommended for **production**. Acts as an SSL termination point. You may easily configure it to issue and maintain a valid SSL certificate. Automatically redirects all non-secure (HTTP) traffic to secure (HTTPS) port.
+* http —— 不支持 HTTPS 的负载均衡器。适用于**开发**。优点是配置简单、成本最低。适合开发服务器，但不适合生产环境。
+* https —— 支持 HTTPS 的负载均衡器。适用于**生产**。作为 SSL 终端，可方便地签发与维护有效 SSL 证书，自动将 HTTP 流量重定向到 HTTPS。
 
-See links/instructions below on how to configure each of the suggested options.
+下面提供各选项的配置链接/说明。
 
 #### HTTP Load Balancer
 
@@ -108,9 +108,9 @@ See links/instructions below on how to configure each of the suggested options.
 
 {% assign staticIP = "tbmq-http-lb-address" %}
 {% include templates/mqtt-broker/install/gcp/configure-https-load-balancer.md %}
-Once provisioned, you may use your domain name to access Web UI (over https).
+配置完成后，可通过域名访问 Web UI（https）。
 
-### Configure MQTT Load Balancer
+### 配置 MQTT 负载均衡器
 
 {% include templates/mqtt-broker/install/cluster-common/configure-mqtt-load-balancer.md %}
 
@@ -197,29 +197,29 @@ tbmq-upgrade-with-from-version,Before v2.1.0,markdown,resources/upgrade-options/
 
 {% endif %}
 
-## Cluster deletion
+## 删除集群
 
-Execute the following command to delete TBMQ nodes:
+执行以下命令删除 TBMQ 节点：
 
 ```bash
 ./k8s-delete-tbmq.sh
 ```
 {: .copy-code}
 
-Execute the following command to delete all TBMQ nodes and configmaps, load balancers, etc.:
+执行以下命令删除所有 TBMQ 节点、ConfigMap、负载均衡器等：
 
 ```bash
 ./k8s-delete-all.sh
 ```
 {: .copy-code}
 
-Execute the following command to delete the GKE cluster:
+执行以下命令删除 GKE 集群：
 
 ```bash
 gcloud container clusters delete $TB_CLUSTER_NAME --region=$GCP_REGION
 ```
 {: .copy-code}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/mqtt-broker-guides-banner.md %}

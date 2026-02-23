@@ -2,13 +2,13 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Swimming Pool SCADA system template
-description: Swimming Pool SCADA system template overview
+title: 游泳池 SCADA 系统模板
+description: 游泳池 SCADA 系统模板概览
 
 go-to-solution-templates-page-1:
     0:
         image: /images/solutions/swimming_pool_scada_system/go-to-pool-solution-templates-page-1-pe.png
-        title: 'Go to the "Solution templates" page. Find "Swimming Pool SCADA system" and click "Install" to start the installation process.'
+        title: '进入「解决方案模板」页面，找到「Swimming Pool SCADA system」并点击「Install」开始安装。'
     1:
         image: /images/solutions/swimming_pool_scada_system/solution-instruction-1-pe.png
         title: 'Configuration instructions for this solution will be provided — follow the steps as instructed.'

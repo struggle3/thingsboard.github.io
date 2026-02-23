@@ -1,15 +1,15 @@
 * TOC
 {:toc}
 
-This guide will help you set up TBMQ {{tbmqSuffix}} in cluster mode using Minikube.
+本指南将帮助你在 Minikube 集群模式下部署 TBMQ {{tbmqSuffix}}。
 
-## Prerequisites
+## 前置要求
 
-You need to have a Kubernetes cluster, and the `kubectl` command-line tool must be configured to communicate with your cluster.
-If you don't have Minikube installed, please follow [these instructions](https://kubernetes.io/docs/setup/learning-environment/minikube/).
+需具备 Kubernetes 集群，且 `kubectl` 命令行工具已配置为可与集群通信。
+若未安装 Minikube，请按[此说明](https://kubernetes.io/docs/setup/learning-environment/minikube/)操作。
 
 {% if docsPrefix == null %}
-## Clone TBMQ repository
+## 克隆 TBMQ 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq.git
@@ -18,7 +18,7 @@ cd tbmq/k8s/minikube
 {: .copy-code}
 
 {% else %}
-## Clone TBMQ PE K8S repository
+## 克隆 TBMQ PE K8S 仓库
 
 ```bash
 git clone -b {{ site.release.broker_branch }} https://github.com/thingsboard/tbmq-pe-k8s.git
@@ -27,9 +27,9 @@ cd tbmq-pe-k8s/minikube
 {: .copy-code}
 {% endif %}
 
-## Installation
+## 安装
 
-To install TBMQ {{tbmqSuffix}}, execute the following command:
+要安装 TBMQ {{tbmqSuffix}}，执行以下命令：
 
 ```bash
 ./k8s-install-tbmq.sh
@@ -38,17 +38,17 @@ To install TBMQ {{tbmqSuffix}}, execute the following command:
 
 {% include templates/mqtt-broker/install/cluster-common/configure-license-key.md %}
 
-## Running
+## 运行
 
-Execute the following command to deploy TBMQ {{tbmqSuffix}}:
+执行以下命令部署 TBMQ {{tbmqSuffix}}：
 
 ```bash
 ./k8s-deploy-tbmq.sh
 ```
 {: .copy-code}
 
-After a while when all resources will be successfully started you can open `http://{your-cluster-ip}:30001` in your browser (e.g. **http://192.168.49.2:30001**).
-You can check your cluster IP using the following command:
+所有资源成功启动后，可在浏览器中打开 `http://{your-cluster-ip}:30001`（例如 **http://192.168.49.2:30001**）。
+可使用以下命令查看集群 IP：
 
 ```bash
 minikube ip
@@ -57,19 +57,19 @@ minikube ip
 
 {% include templates/mqtt-broker/login.md %}
 
-## Logs, delete statefulsets and services
+## 日志、删除 StatefulSet 和服务
 
-In case of any issues, you can examine service logs for errors.
-For example, to see TBMQ node logs execute the following commands:
+遇到问题时，可查看服务日志排查错误。
+例如，查看 TBMQ 节点日志：
 
-1) Get the list of the running tbmq pods:
+1) 获取运行中的 tbmq pod 列表：
 
 ```bash
 kubectl get pods -l app=tbmq
 ```
 {: .copy-code}
 
-2) Fetch logs of the tbmq pod:
+2) 获取 tbmq pod 的日志：
 
 ```bash
 kubectl logs -f TBMQ_POD_NAME

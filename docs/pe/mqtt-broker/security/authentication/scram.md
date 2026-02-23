@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: SCRAM Authentication
-description: SCRAM Authentication
+title: SCRAM 认证
+description: SCRAM 认证
 
 ---
 

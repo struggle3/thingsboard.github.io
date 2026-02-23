@@ -4,9 +4,9 @@
 {:toc}
 
 
-## Overview
+## 概述
 
-Azure IoT Hub Integration allows to stream data from AWS IoT Backend to ThingsBoard and converts device payloads to the ThingsBoard format.
+Azure IoT Hub集成可从Azure IoT Hub向ThingsBoard流式传输数据，并将设备负载转换为ThingsBoard格式。
 
   <object width="80%" data="/images/user-guide/integrations/azure/iot-hub-integration.svg"></object>
 

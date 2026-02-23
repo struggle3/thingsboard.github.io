@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: generate dashboard report
-description: Generates a screenshot of a dashboard with specific configuration applied.
+description: 生成应用了特定配置的 dashboard 截图。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

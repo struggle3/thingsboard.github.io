@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: related device attributes
-description: Enriches messages by adding attributes and/or latest time series values from a related device found through configurable relation queries (direction, type, device profiles).
+description: 通过添加从可配置 relation 查询（方向、类型、device profile）找到的相关 device 的 attribute 或最新 time series 值来丰富消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: ThingsBoard instructions for upgrading from Community Edition
-description: Upgrading from Community Edition
+title: 从社区版升级的 ThingsBoard 说明
+description: 从社区版升级
 
 
 ---
@@ -29,7 +29,7 @@ description: Upgrading from Community Edition
 {% capture difference %}
 **NOTE:**
 <br>
-These upgrade steps are applicable for the latest ThingsBoard Community Edition version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
+These upgrade steps are applicable for the latest ThingsBoard社区版version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
 {% endcapture %}
 {% include templates/warn-banner.md content=difference %}
 
@@ -84,7 +84,7 @@ sudo service thingsboard start
 {% capture difference %}
 **NOTE:**
 <br>
-These upgrade steps are applicable for the latest ThingsBoard Community Edition version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
+These upgrade steps are applicable for the latest ThingsBoard社区版version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
 {% endcapture %}
 {% include templates/warn-banner.md content=difference %}
 
@@ -139,7 +139,7 @@ sudo service thingsboard start
 {% capture difference %}
 **NOTE:**
 <br>
-These upgrade steps are applicable for the latest ThingsBoard Community Edition version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
+These upgrade steps are applicable for the latest ThingsBoard社区版version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
 {% endcapture %}
 {% include templates/warn-banner.md content=difference %}
 
@@ -188,7 +188,7 @@ net start thingsboard
 {% capture difference %}
 **NOTE:**
 <br>
-These upgrade steps are applicable for the latest ThingsBoard Community Edition version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
+These upgrade steps are applicable for the latest ThingsBoard社区版version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
 {% endcapture %}
 {% include templates/warn-banner.md content=difference %}
 
@@ -225,7 +225,7 @@ docker compose up -d
 {% capture difference %}
 **NOTE:**
 <br>
-These upgrade steps are applicable for the latest ThingsBoard Community Edition version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
+These upgrade steps are applicable for the latest ThingsBoard社区版version. In order to upgrade to Professional Edition you need to [**upgrade to the latest Community Edition version first**](/docs/user-guide/install/upgrade-instructions/).
 {% endcapture %}
 {% include templates/warn-banner.md content=difference %}
 

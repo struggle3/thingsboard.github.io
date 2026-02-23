@@ -3,16 +3,16 @@ layout: docwithnav
 assignees:
 - ashvayka
 title: Device profiles
-description: IoT device profiles
+description: IoT 设备 profiles
 redirect_from: "/docs/user-guide/ui/device-profiles"
 
 create-device-profile:
     0:
         image: /images/user-guide/device-profile/create-device-profile-1-ce.png
-        title: 'Go to the "<b>Device profiles</b>" page in the "<b>Profiles</b>" section. Click the "<b>+</b>" icon in the upper-right corner and select "<b>Create new device profile</b>" from the dropdown menu.'
+        title: '在「<b>Profiles</b>」部分进入「<b>Device profiles</b>」页面，点击右上角「<b>+</b>」图标，在下拉菜单中选择「<b>Create new device profile</b>」。'
     1:
         image: /images/user-guide/device-profile/create-device-profile-2-ce.png
-        title: 'Only the <b>Name</b> field is required; all other settings are optional. Click "<b>Add</b>" to create the device profile.'
+        title: '仅 <b>Name</b> 为必填；其余为可选。点击「<b>Add</b>」创建 device profile。'
 
 device-profile-rule-chain:
     0:

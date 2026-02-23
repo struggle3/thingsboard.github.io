@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Deploy TBMQ Cluster on Minikube with Helm
-description: TBMQ microservices setup using Helm Chart with Minikube
+title: 在 Minikube 上使用 Helm 部署 TBMQ 集群
+description: 使用 Helm Chart 在 Minikube 上配置 TBMQ 微服务
 
 ---
 

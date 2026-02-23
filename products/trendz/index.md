@@ -84,7 +84,7 @@ description: IoT solution for real-time data analysis, anomaly detection, predic
             <div class="content">
                 <h3 class="header">Connect Data</h3>
                 <p class="text">Connect Trendz to the ThingsBoard in few clicks with automatic Topology Discovery.</p>
-                <p class="text">Trendz works with all ThingsBoard products, including Open Source ThingsBoard Community Edition and ThingsBoard Professional Edition.</p>
+                <p class="text">Trendz works with all ThingsBoard products, including Open Source ThingsBoard社区版and ThingsBoard Professional Edition.</p>
                 <a id="Products_TA_LearnMore2" href="/docs/trendz/connect-thingsboard/" class="button try-pe gtm_button">Learn More</a>
             </div>
             <div class="image-block">

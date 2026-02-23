@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Save predicted telemetry to ThingsBoard
-description: Save predicted telemetry to ThingsBoard
+title: 将预测遥测保存至 ThingsBoard
+description: 将预测遥测保存至 ThingsBoard
 
 models-save-telemetry:
   0: 

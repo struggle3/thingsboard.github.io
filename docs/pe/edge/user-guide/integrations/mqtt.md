@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: MQTT Integration
-description: MQTT Integration guide
+title: MQTT 集成
+description: MQTT 集成指南
 
 assign-integration:
     0:
@@ -107,7 +107,7 @@ The **MQTT broker** should either be co-located with the **ThingsBoard Edge** in
 
 In this tutorial, we will use:
 
-- [ThingsBoard Professional Edition](https://thingsboard.cloud){: target="_blank"} account;
+- [ThingsBoard专业版](https://thingsboard.cloud){: target="_blank"} account;
 - Locally installed [ThingsBoard PE Edge](/docs/user-guide/install/pe/edge/installation-options/){: target="_blank"} instance;
 - **MQTT broker** that can be accessed through the **ThingsBoard Edge** instance: broker.hivemq.com (port 1883);
 - **mosquitto_pub** and **mosquitto_sub** MQTT clients for sending and receiving messages.

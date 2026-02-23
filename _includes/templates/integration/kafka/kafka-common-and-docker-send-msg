@@ -1,4 +1,4 @@
-You can simulate a message from a device or server using a terminal. To send an uplink message, you need a Kafka endpoint URL from the integration.
+可使用终端模拟设备或服务器发送的消息。发送 uplink 消息需要 integration 中的 Kafka endpoint URL。
 ```shell
 echo "{\"EUI\":\"43T1YH-REE\",\"ts\":1638876127000,\"data\":\"3d1f0059\",\"port\":10,\"freq\":24300,\"rssi\":-130,\"serial\":\"230165HRT\"}" | /usr/local/kafka/bin/kafka-console-producer.sh --broker-list URL_OF_YOUR_BOOTSTRAP_SERVER:9092 --topic my-topic > /dev/null
 ```

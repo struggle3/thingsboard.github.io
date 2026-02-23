@@ -1,32 +1,32 @@
 ---
 layout: docwithnav-edge
-title: Edge Device Management
-description: Seamlessly create Edge devices and assign them to the Cloud
+title: Edge设备管理
+description: 在Edge上创建设备并分配至云端
 
 create-device:
     0:
         image: /images/edge/config/devices/0-go-to-devices-section.webp
-        title: 'Any <b>Tenant administrator</b> user is able to create <b>Device</b> entities on the <b>Edge instance</b>. Go to the <b>Entities > Devices</b> section and click the <b>"Add new device"</b> button.'
+        title: '拥有<b>租户管理员</b>权限的用户可在<b>Edge实例</b>上创建<b>设备</b>实体。进入<b>实体 > 设备</b>区域，点击<b>"添加新设备"</b>按钮。'
     1:
         image: /images/edge/config/devices/1-add-new-device.webp
-        title: 'In the pop-up window, fill in the required <b>Device details</b> fields, such as <b>"Name"</b> and <b>"Device profile"</b>. Confirm the action by clicking the <b>"Add"</b> button.'
+        title: '在弹出窗口中填写必填的<b>设备详情</b>字段，如<b>"名称"</b>和<b>"设备配置"</b>，点击<b>"添加"</b>按钮确认。'
     2:
         image: /images/edge/config/devices/2-check-connectivity.webp
-        title: 'To check connectivity, send telemetry on behalf of the <b>Device</b> using shell by following the on-screen instructions.'
+        title: '要检查连接性，请按屏幕提示使用shell代表该<b>设备</b>发送遥测数据。'
     3:
         image: /images/edge/config/devices/3-confirm-on-cloud.webp
-        title: 'To check if the new <b>Device</b> has been deployed to the <b>Cloud (Server)</b>, log in to your <b>Cloud (Server)</b> and navigate to the <b>Entities > Devices</b> section: the newly created <b>Device</b> will be automatically assigned to the <b>Cloud (Server)</b>.'
+        title: '要确认新<b>设备</b>是否已部署到<b>云端（服务器）</b>，请登录<b>云端（服务器）</b>并进入<b>实体 > 设备</b>区域：新创建的<b>设备</b>将自动分配至<b>云端（服务器）</b>。'
 
 assignment-from-cloud:
     0:
         image: /images/edge/config/devices/0-assignment-from-cloud.webp
-        title: 'The variety of buttons on the <b>"Instances"</b> page will help you to manage different <a href="/docs/user-guide/entities-and-relations/" target="_blank">entities</a>, and assign them accordingly to the <b>Edge instance</b>. To assign a <b>Device</b>, click the <b>"Manage devices"</b> button.'
+        title: '<b>"实例"</b>页面上的多种按钮可帮助您管理各类<a href="/docs/user-guide/entities-and-relations/" target="_blank">实体</a>并分配给<b>Edge实例</b>。要分配<b>设备</b>，请点击<b>"管理设备"</b>按钮。'
     1:
         image: /images/edge/config/devices/1-assign-devices-from-cloud.webp
-        title: 'On the <b>"Edge devices"</b> page, click the <b>"+"</b> icon and then select the <b>Device(s)</b> from the drop-down list in the pop-up window. Confirm the action by clicking the <b>"Assign"</b> button.'
+        title: '在<b>"Edge设备"</b>页面，点击<b>"+"</b>图标，从弹出窗口的下拉列表中选择<b>设备</b>，点击<b>"分配"</b>按钮确认。'
     2:
         image: /images/edge/config/devices/2-confirm-on-edge.webp
-        title: 'To confirm that the <b>Device</b> has been assigned to the <b>Edge instance</b>, log in to your <b>Edge instance</b> and go to the  <b>Entities > Devices</b> section.'
+        title: '要确认<b>设备</b>已分配至<b>Edge实例</b>，请登录<b>Edge实例</b>并进入<b>实体 > 设备</b>区域。'
 
 ---
 

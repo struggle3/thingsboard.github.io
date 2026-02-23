@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: RabbitMQ integration
-description: RabbitMQ integration guide
+title: RabbitMQ 集成
+description: RabbitMQ 集成指南
 redirect_to: "/docs/paas/user-guide/integrations/"
 
 ---

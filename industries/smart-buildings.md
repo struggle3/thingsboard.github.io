@@ -1,10 +1,10 @@
 ---
 layout: common
-title: Smart Building Leaders Trust ThingsBoard – Customers Feedback
+title: 智能建筑领军企业为何选择 ThingsBoard——客户反馈
 notitle: "true"
 customTitle: "true"
 contactUsModal: "true"
-description: Learn how companies use ThingsBoard’s IoT platform to optimize building management, workspace monitoring, and smart energy systems. Explore real-world success stories.
+description: 了解企业如何借助 ThingsBoard 物联网平台优化楼宇管理、工作区监控与智慧能源系统。真实成功案例一览。
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: send email
-description: Sends email messages via SMTP server with support for TLS encryption and proxy configuration.
+title: 发送邮件
+description: 通过 SMTP 服务器发送邮件，支持 TLS 加密与代理配置。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

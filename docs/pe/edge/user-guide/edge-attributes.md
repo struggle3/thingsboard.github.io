@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Edge Attributes 
-description: Edge Attributes overview
+title: Edge 属性
+description: Edge 属性概览
 
 addAttributeOnEdge:
   0:

@@ -1,18 +1,18 @@
 * TOC
 {:toc}
 
-This guide demonstrates basic usage of popular ThingsBoard features. You will learn how to:
+本指南演示 ThingsBoard 常用功能的基本用法。您将学习如何：
 
-- Connect devices to ThingsBoard
-- Push data from devices to ThingsBoard
-- Build real-time dashboards
-- Create a Customer and share the dashboard with them.
-- Define thresholds and trigger alarms
-- Set up notifications via email, SMS, mobile apps, or integrate with third-party services.
+- 将设备连接至 ThingsBoard
+- 从设备向 ThingsBoard 推送数据
+- 构建实时仪表板
+- 创建客户并与他们共享仪表板
+- 定义阈值并触发告警
+- 通过邮件、SMS、移动应用或第三方服务配置通知
 
-For simplicity, we will visualize data from a temperature sensor.
+为简化说明，我们将以温度传感器数据为例进行可视化。
 
-Prefer visual learning? Check out our step-by-step getting started [video tutorial](https://www.youtube.com/watch?v=iIuyG1KL-bw){:target="_blank"}.
+更偏好视频学习？可观看分步[视频教程](https://www.youtube.com/watch?v=iIuyG1KL-bw){:target="_blank"}。
 
 <hr>
 
@@ -20,269 +20,269 @@ Prefer visual learning? Check out our step-by-step getting started [video tutori
 
 <hr>
 
-## Step 1. Provision device
+## 步骤 1. 配置设备
 
-As an example, let&#39;s add a device that will transmit the following data to ThingsBoard platform: the device&#39;s name and temperature readings as telemetry.
+示例：添加一台向 ThingsBoard 平台发送以下数据的设备：设备名称及温度遥测读数。
 
-To add a new device, follow these steps:
+按以下步骤添加新设备：
  
 {% include images-gallery.html imageCollection="step1" showListImageTitles="true" %} 
 
-You will also receive a notification upon adding devices. Click the **bell icon** (top right) to view notifications.
+添加设备时您也会收到通知。点击右上角 **铃铛图标** 可查看通知。
 
 {% include images-gallery.html imageCollection="step11" %}
 
-[Learn more about notifications here](#step-6-alarm-notifications).
+[在此了解通知相关说明](#step-6-alarm-notifications)。
 
-**Additional provisioning methods**
-- [Bulk provisioning](/docs/{{docsPrefix}}user-guide/bulk-provisioning/){:target="_blank"}: Import multiple devices via CSV through the UI.
-- [Device provisioning](/docs/{{docsPrefix}}user-guide/device-provisioning/){:target="_blank"}: Configure devices to self-register automatically. 
-- [REST API](/docs/{{docsPrefix}}api/){:target="_blank"} provisioning: Manage devices programmatically through APIs.
+**其他配置方式**
+- [批量配置](/docs/{{docsPrefix}}user-guide/bulk-provisioning/){:target="_blank"}：通过界面 CSV 导入多个设备。
+- [设备配置](/docs/{{docsPrefix}}user-guide/device-provisioning/){:target="_blank"}：配置设备自动注册。
+- [REST API](/docs/{{docsPrefix}}api/){:target="_blank"} 配置：通过 API 编程管理设备。
 
 <hr>
 
-## Step 2. Connect device
+## 步骤 2. 连接设备
 
-Let&#39;s verify your device&#39;s connection to ThingsBoard:
+验证设备与 ThingsBoard 的连接：
 
 {% include images-gallery.html imageCollection="step2" showListImageTitles="true" %}
 
 <br>
-Explore [ThingsBoard API reference](/docs/{{docsPrefix}}api){:target="_blank"}. Here you will find more detailed information about all supported protocols for connecting devices.
+查看 [ThingsBoard API 参考](/docs/{{docsPrefix}}api){:target="_blank"}，获取设备连接所支持协议的更详细说明。
 
 <hr>
 
-## Step 3. Create dashboard
+## 步骤 3. 创建仪表板
 
-A dashboard in ThingsBoard allows users to visualize and monitor data collected from IoT devices.
+ThingsBoard 中的仪表板用于可视化和监控从 IoT 设备采集的数据。
 
-Let&#39;s create a dashboard and add three widgets to it in order to display a list of entities and their latest values, as well as show alarm signals related to the specified entity.
+创建仪表板并添加三个部件，用于展示实体列表及其最新值，以及指定实体的告警信息。
 
-### Step 3.1 Create an empty dashboard
+### 步骤 3.1 创建空仪表板
 
-To create a new dashboard, follow these steps:
+按以下步骤创建新仪表板：
 
 {% include images-gallery.html imageCollection="step31" showListImageTitles="true" %}
 
-### Step 3.2 Add an Entities table widget
+### 步骤 3.2 添加实体表部件
 
-The "Entities table" widget displays a list of entities and their latest values. 
-The list of entities corresponds to selected devices or other entities, and filters with the ability of additional full-text search and pagination options.
+「实体表」部件展示实体列表及其最新值。
+实体列表对应所选设备或其他实体，支持全文搜索和分页过滤。
 
-To add the table widget we need to select it from the widget library. Widgets are grouped into widget bundles.
-Each widget has a data source. This is how the widget "knows" what data to display.
-To see the latest value of our "temperature" data that we sent during step 2, we should configure the data source.
+添加表格部件时需从部件库中选择。部件按部件包分组。
+每个部件有数据源，用于确定要展示的数据。
+为查看步骤 2 中发送的「temperature」数据最新值，需配置数据源。
 
-Let&#39;s add your first widget:
+添加第一个部件：
 
 {% include images-gallery.html imageCollection="step32" showListImageTitles="true" %}
 
-Congratulations! You&#39;ve added your first widget.
+恭喜！您已添加第一个部件。
 
-In the "Entities table" widget, there are two columns. 
-The first column displays the device&#39;s name, and the second column displays the value of the "temperature" key (device telemetry). 
-So, each column corresponds to an added key.
+「实体表」部件包含两列。
+第一列显示设备名称，第二列显示「temperature」键（设备遥测）的值。
+每列对应一个添加的键。
 
-Now you are able to send a new telemetry reading (as in [Step 1](#step-1-provision-device)), and it will immediately appear in the table.
+现在可发送新的遥测读数（同[步骤 1](#step-1-provision-device)），它会立即显示在表格中。
 
-### Step 3.3 Add a Chart widget
+### 步骤 3.3 添加图表部件
 
-Chart widgets allow you to display time series data with customizable line charts and bar charts.
+图表部件用于展示时序数据，支持可定制的折线图和柱状图。
 
-To add the chart widget we need to select it from the widget library. 
-Chart widget displays multiple historical values of the same data key ("temperature" in our case).
-We should also configure the time window to use the chart widget.
+添加图表部件时需从部件库中选择。
+图表部件显示同一数据键的多个历史值（本例为「temperature」）。
+还需配置时间窗口以使用图表部件。
 
 {% include images-gallery.html imageCollection="step33" showListImageTitles="true" %}
 
-Congratulations! You have added the chart widget. Now you are able to send a new telemetry reading, and it will immediately appear in the chart. 
+恭喜！您已添加图表部件。现在可发送新的遥测读数，它会立即显示在图表中。
 
-You can also adjust the time interval for displaying data in the widget, change the aggregation function, and specify the grouping interval.
-To do this, open the [Time window](/docs/{{docsPrefix}}user-guide/dashboards/#time-window){:target="_blank"} and make the necessary adjustments. Update the time window settings by clicking the "Update" button.
+还可调整部件中数据展示的时间间隔、修改聚合函数、指定分组间隔。
+打开[时间窗口](/docs/{{docsPrefix}}user-guide/dashboards/#time-window){:target="_blank"}并进行设置，然后点击「更新」按钮应用时间窗口配置。
 
 {% include images-gallery.html imageCollection="step33_2" %}
 
-### Step 3.4 Add an Alarms table widget
+### 步骤 3.4 添加告警表部件
 
-The alarms table widget displays alarms related to the specified entity in the certain time window.
-Alarm widget is configured by specifying an entity as the alarm source, and the corresponding alarm fields.
+告警表部件在指定时间窗口内显示与指定实体相关的告警。
+通过指定实体为告警源并配置对应告警字段来配置告警部件。
 
 {% include images-gallery.html imageCollection="step34" showListImageTitles="true" %}
 
-Now it&#39;s time to configure alarm rules and raise some alarms. 
+接下来配置告警规则并触发告警。
 
-> **Note:** in this documentation, we are using a single device as a data source for the widgets. 
-To use dynamic entities (for example, devices of a certain type or related to a certain asset) as data source, you should use the alias.
-Alias is a reference to a single entity or a group of entities that are used in the widgets. 
-You may learn more [about different aliases here](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"}.
+> **说明**：本文档以单个设备作为部件数据源。
+若要以动态实体（如某类设备或某资产下的设备）为数据源，需使用 alias。
+Alias 是部件中使用的单个实体或实体组的引用。
+可在此[了解不同类型 alias](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"}。
 
 <hr>
 
-## Step 4. Configure alarm rules
+## 步骤 4. 配置告警规则
 
-We will use the [alarm rules](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"} feature to define a rule that triggers when the temperature exceeds **25°C**.   
-Alarm rules can be configured either at the **device level** or at the [device profile](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"} level used by the target device.
+使用[告警规则](/docs/{{docsPrefix}}user-guide/alarm-rules/){:target="_blank"}功能定义：当温度超过 **25°C** 时触发。  
+告警规则可在**设备级别**或目标设备使用的[设备配置文件](/docs/{{docsPrefix}}user-guide/device-profiles/){:target="_blank"}级别配置。
 
-> **Recommendation:** If the same rule needs to be applied to multiple devices, create it at the **Device profile** level.   
-This ensures centralized alarm logic management, simplifies maintenance, and eliminates configuration duplication.
+> **建议**：若同一规则需应用于多台设备，请在**设备配置文件**级别创建。  
+便于集中管理告警逻辑、简化维护并避免配置重复。
 
-In this example, we will configure the alarm rule directly on the device "**My New Device**".
+本示例中，我们将在设备「**My New Device**」上直接配置告警规则。
 
-<br><b><font size="4">Step 4.1 Open the device settings</font></b>
-- Go to the **Devices** page in the **Entities** section.
-- Click **My New Device** to open its details.
-- Navigate to the **Alarm rules** tab.
-- Click the "**+**" button and select **Create new alarm rule**.
+<br><b><font size="4">步骤 4.1 打开设备设置</font></b>
+- 进入 **实体** 下的 **设备** 页面。
+- 点击 **My New Device** 打开详情。
+- 切换到 **告警规则** 选项卡。
+- 点击「**+**」并选择 **创建新告警规则**。
 
-<b><font size="4">Step 4.2 Configure the General parameters</font></b>
+<b><font size="4">步骤 4.2 配置通用参数</font></b>
 
-In the **General** section, specify the **alarm type** — *High temperature* (or any other name you prefer) — which serves as both the name and the unique identifier of the alarm.
+在 **通用** 部分，填写 **告警类型** —— *高温*（或您喜欢的其他名称）—— 作为告警名称和唯一标识。
 
-<b><font size="4">Step 4.3 Add argument</font></b>
+<b><font size="4">步骤 4.3 添加参数</font></b>
 
-Before defining the alarm trigger condition, you must add at least one **argument** — the data source that the rule will use.
+定义告警触发条件前，需至少添加一个 **参数** —— 规则使用的数据源。
 
-In the **Arguments** section, click **Add argument** and fill in:
-- **Entity type:** *Current entity*
-- **Argument type:** *Latest telemetry*
-- **Time series key:** <span class="code-light">temperature</span>
-- **Argument name:** temperature
-- Click **Add**.
+在 **参数** 部分点击 **添加参数** 并填写：
+- **实体类型**：*当前实体*
+- **参数类型**：*最新遥测*
+- **时序键**：<span class="code-light">temperature</span>
+- **参数名**：temperature
+- 点击 **添加**。
 
-This creates the <span class="code-light">temperature</span> variable that will be used in the alarm rule conditions.
+这将创建告警规则条件中使用的 <span class="code-light">temperature</span> 变量。
 
-<b><font size="4">Step 4.4 Configure the alarm trigger condition</font></b>
+<b><font size="4">步骤 4.4 配置告警触发条件</font></b>
 
-In the **Trigger condition** section, click **Add trigger condition**.
+在 **触发条件** 部分点击 **添加触发条件**。
 
-- **Severity:** *Critical*
-- **Condition** 
-  - Click **Add condition**.
-  - In the configuration window, click **Add argument filter** and specify:
-    - **General** block:
-      - **Argument:** temperature (the argument added earlier)
-      - **Value type:** *Numeric*
-    - **Filters** block:
-      - Click **Add**
-      - **Operation:** *greater than* 
-      - **Value source:** Static
-      - **Value:** <span class="code-light">25</span>
-    - Click **Add**. 
-  - **Type:** *Simple*
-  - Click **Save**.
+- **严重程度**：*严重*
+- **条件** 
+  - 点击 **添加条件**。
+  - 在配置窗口中点击 **添加参数过滤器** 并设置：
+    - **通用** 块：
+      - **参数**：temperature（之前添加的参数）
+      - **值类型**：*数值*
+    - **过滤器** 块：
+      - 点击 **添加**
+      - **操作**：*大于* 
+      - **值来源**：静态
+      - **值**：<span class="code-light">25</span>
+    - 点击 **添加**。 
+  - **类型**：*简单*
+  - 点击 **保存**。
 
-As a result, the alarm will trigger immediately when the temperature exceeds **25°C**.
+配置完成后，温度超过 **25°C** 时将立即触发告警。
 
-<b><font size="4">Save the rule</font></b>
+<b><font size="4">保存规则</font></b>
 
-Click the **Add** button to save the new alarm creation rule.
+点击 **添加** 保存新的告警创建规则。
 
-The rule takes effect immediately after it is saved.
+保存后规则立即生效。
 
 {% include images-gallery.html imageCollection="step4" %}
 
-We also recommend reviewing the [alarm rule configuration examples](/docs/{{docsPrefix}}user-guide/alarm-rules/#examples-of-alarm-rule-configurations){:target="_blank"}
+建议参考[告警规则配置示例](/docs/{{docsPrefix}}user-guide/alarm-rules/#examples-of-alarm-rule-configurations){:target="_blank"}
 
 <hr>
 
-## Step 5. Create alarm
+## 步骤 5. 创建告警
 
-Now that the alarm rule is active (see [Step 4](#step-4-configure-alarm-rules)), you need to send new telemetry data from the device (see [Step 2](#step-2-connect-device)) to trigger the alarm.
+告警规则已生效（见[步骤 4](#step-4-configure-alarm-rules)），需从设备发送新的遥测数据（见[步骤 2](#step-2-connect-device)）以触发告警。
 
-> **Important:** The alarm will be created only when the temperature value exceeds the threshold of 25°C defined in the alarm creation condition.
+> **注意**：仅当温度值超过告警创建条件中定义的 25°C 阈值时才会创建告警。
 
-**What happens after sending telemetry**
+**发送遥测后将发生什么**
 
 {% include images-gallery.html imageCollection="step5" showListImageTitles="true" %}
 
 <hr>
 
-## Step 6. Alarm notifications
+## 步骤 6. 告警通知
 
-The ThingsBoard [Notification center](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"} allows personalized notifications to end-users regarding device activities, environmental changes, or events in your IoT ecosystem, and more.
-Notifications can be delivered via email, SMS, or integrated third-party systems.
+ThingsBoard [通知中心](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"} 可向最终用户发送与设备活动、环境变化或 IoT 生态事件相关的个性化通知。
+通知可通过邮件、SMS 或集成的第三方系统送达。
 
 {% include images-gallery.html imageCollection="notification-center" %}
 
-Additionally, [ThingsBoard PE Mobile Application](/docs/pe/mobile/){:target="_blank"} provides instant push notifications directly to your smartphone, ensuring you&#39;re always informed of critical events wherever you are.
+此外，[ThingsBoard PE 移动应用](/docs/pe/mobile/){:target="_blank"} 可直接向手机推送即时通知，帮助您随时了解关键事件。
 
-Follow [this guide](/docs/pe/mobile/getting-started/){:target="_blank"} to install the ThingsBoard mobile app and set up notifications.
+按[此指南](/docs/pe/mobile/getting-started/){:target="_blank"} 安装 ThingsBoard 移动应用并配置通知。
 
-Enjoy exploring ThingsBoard!
+欢迎继续探索 ThingsBoard！
 
 <hr>
 
-## Step 7. Share dashboard with customers
+## 步骤 7. 与客户共享仪表板
 
-One of the most important ThingsBoard features is the ability to create end-user dashboards.
-Each Customer User should see his own devices and should not be able to see devices or any other data that belongs to a different customer. 
+ThingsBoard 的重要功能之一是为最终用户创建仪表板。
+每位客户用户应仅能看到自己的设备，不能看到属于其他客户的设备或数据。
 
-We have already created the Device (see [Step 1](#step-1-provision-device)), the Dashboard and added widgets to it (see [Step 3](#step-3-create-dashboard)).
-Now it&#39;s time to create a Customer and a Customer User and make sure they will have access to the device&#39;s data and the dashboard.
-There are two options for how Tenant Administrator can give access to a certain Entity (Device, Dashboard, Asset, etc.) for a Customer:
+我们已创建设备（见[步骤 1](#step-1-provision-device)）、创建仪表板并添加部件（见[步骤 3](#step-3-create-dashboard)）。
+接下来创建客户和客户用户，并确保他们能访问设备数据与仪表板。
+租户管理员可通过以下两种方式向客户授予对实体（设备、仪表板、资产等）的访问权限：
 
-* A. Assign the Customer as the owner of the entity. This option is useful to ensure that only this customer can access the device and its data (see [Step 7.2](#step-72-change-owner-of-the-device)).
-* B. Share the entity with the Customer. This option is useful to share a single dashboard with multiple customers (see [Step 7.3](#step-73-share-the-dashboard)).
+* A. 将客户指定为实体的所有者。适用于确保仅该客户可访问设备及其数据（见[步骤 7.2](#step-72-change-owner-of-the-device)）。
+* B. 与客户共享实体。适用于将单个仪表板共享给多个客户（见[步骤 7.3](#step-73-share-the-dashboard)）。
  
-#### Step 7.1 Create a customer
+#### 步骤 7.1 创建客户
 
-Let&#39;s create a customer with the title "My New Customer". Please see the instructions below:
+创建标题为「My New Customer」的客户，按以下说明操作：
 
 {% include images-gallery.html imageCollection="step71" showListImageTitles="true" %}
 
-### Step 7.2 Change owner of the device
+### 步骤 7.2 更改设备所有者
 
-Let&#39;s assign the Customer as the owner of the device. We will also create a group of devices and add our device to this group.
+将客户指定为设备所有者。同时创建设备组并将设备加入其中。
 
 {% include images-gallery.html imageCollection="step72" showListImageTitles="true" %}
 
-Make sure that the device is assigned to your customer.
+确认设备已分配给您的客户。
 
 {% include images-gallery.html imageCollection="step72_1" showListImageTitles="true" %}
 
-You can make the customer the owner of the device during its creation stage. To do this, follow this steps:
+可在创建设备时直接将客户设为所有者。按以下步骤操作：
 
 {% include images-gallery.html imageCollection="step72_2" showListImageTitles="true" %}
 
-### Step 7.3 Share the dashboard
+### 步骤 7.3 共享仪表板
 
-Let&#39;s share our dashboard with the customer.
-In ThingsBoard, you can&#39;t share an individual dashboard directly — you can only share a dashboard group that contains the dashboard you want to share.
-By default, your dashboard is located in the "All" group.
-While the recommended approach is to create a dedicated dashboard group and move your dashboard there, for simplicity, we&#39;ll use the existing "All" group in this guide.
+将仪表板共享给客户。
+在 ThingsBoard 中不能直接共享单个仪表板，只能共享包含该仪表板的仪表板组。
+默认情况下，仪表板位于「全部」组。
+推荐做法是创建专用仪表板组并将仪表板移入其中；为简化说明，本指南使用已有的「全部」组。
 
 {% include images-gallery.html imageCollection="step73" showListImageTitles="true" %}
 
-You can also share the dashboard with a customer during its creation:
+也可在创建仪表板时即与客户共享：
 
 {% include images-gallery.html imageCollection="step73_1" showListImageTitles="true" %}
 
-### Step 7.4 Create a customer user
+### 步骤 7.4 创建客户用户
 
-Now, let&#39;s create a user that will belong to the customer and will have `read-only` access both to the dashboard and the device itself.
-You may optionally configure the dashboard to appear just after user logs in to the platform&#39;s web UI.
+创建属于该客户且对仪表板与设备具有 `只读` 权限的用户。
+可选择性配置用户登录平台 Web 界面后直接显示该仪表板。
 
 {% include images-gallery.html imageCollection="step74" showListImageTitles="true" %}
 
-### Step 7.5 Activate the customer user
+### 步骤 7.5 激活客户用户
 
-Finally, log in to ThingsBoard as a customer user.
+最后，以客户用户身份登录 ThingsBoard。
 
-- Paste the previously copied link into a new browser tab and press the "Enter" key. Now create a password by entering it twice and clicking "Create Password".
-- You are now logged in as a customer user. Since this user has read-only access, you can view device data and its alarms, but you cannot acknowledge or clear them.   
-To learn more about permissions and role-based access control (RBAC), click [here](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}.
+- 将之前复制的链接粘贴到新标签页并按「Enter」。输入两次密码并点击「创建密码」完成密码设置。
+- 您现在已以客户用户身份登录。由于该用户仅有只读权限，可查看设备数据与告警，但无法确认或清除告警。  
+了解更多权限与基于角色的访问控制（RBAC），请点击[此处](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}。
 
 {% include images-gallery.html imageCollection="step75" %}
 
 <hr>
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/multi-project-guides-banner.md %}
 
 <hr>
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word. 
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎在 [GitHub](https://github.com/thingsboard/thingsboard){:target="_blank"} 上为 ThingsBoard 加星，帮助我们推广。  
+若对本示例有疑问，请[联系我们](/docs/contact-us/){:target="_blank"}。

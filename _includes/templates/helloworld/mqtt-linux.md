@@ -1,11 +1,11 @@
-Install mqtt client for **Ubuntu**:
+在 **Ubuntu** 上安装 MQTT 客户端：
 
 ```bash
 sudo apt-get install mosquitto-clients
 ```
 {: .copy-code}
 
-Install cURL for **macOS**:
+在 **macOS** 上安装 MQTT 客户端：
 
 ```bash
 brew install mosquitto-clients
@@ -13,21 +13,21 @@ brew install mosquitto-clients
 {: .copy-code}
 
 
-Replace $THINGSBOARD_HOST_NAME and $ACCESS_TOKEN with corresponding values.
+Replace$THINGSBOARD_HOST_NAMEand$ACCESS_TOKENwith corresponding values.
 
 ```bash
 mosquitto_pub -d -q 1 -h "$THINGSBOARD_HOST_NAME" -p "1883" -t "v1/devices/me/telemetry" -u "$ACCESS_TOKEN" -m {"temperature":25}
 ```
 {: .copy-code}
 
-For example, $THINGSBOARD_HOST_NAME reference ThingsBoard Cloud (North America), $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME 为 ThingsBoard Cloud（北美），$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 mosquitto_pub -d -q 1 -h "mqtt.thingsboard.cloud" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
 ```
 {: .copy-code}
 
-For example, $THINGSBOARD_HOST_NAME reference ThingsBoard Cloud (Europe), $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME 为 ThingsBoard Cloud（欧洲），$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 mosquitto_pub -d -q 1 -h "mqtt.eu.thingsboard.cloud" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
@@ -35,7 +35,7 @@ mosquitto_pub -d -q 1 -h "mqtt.eu.thingsboard.cloud" -p "1883" -t "v1/devices/me
 {: .copy-code}
 
 
-For example, $THINGSBOARD_HOST_NAME reference your local installation, $ACCESS_TOKEN is ABC123:
+例如，$THINGSBOARD_HOST_NAME 为本地部署，$ACCESS_TOKEN 为 ABC123：
 
 ```bash
 mosquitto_pub -d -q 1 -h "localhost" -p "1883" -t "v1/devices/me/telemetry" -u "ABC123" -m {"temperature":25}
@@ -53,7 +53,6 @@ Client mosqpub|xxx sending DISCONNECT
 ```
 
 {% capture difference %}
-**Note:** Since ThingsBoard 3.2, you are able to use basic MQTT credentials (combination of client id, username and password)
-and customize **topic names** and **payload type** using Device Profile. See more info [here](/docs/user-guide/device-profiles/#mqtt-transport-type).
+**注意：** 自 ThingsBoard 3.2 起，可使用基本 MQTT 凭据（client id、username 和 password 组合），并通过设备配置集自定义 **topic 名称**和 **payload 类型**。详见[此处](/docs/user-guide/device-profiles/#mqtt-transport-type)。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}

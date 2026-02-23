@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: ThingsBoard EU Cloud Subscription plans definition
-description: Features and advantages of subscription payment model
+title: ThingsBoard EU Cloud 订阅计划定义
+description: 订阅付费模式的特性与优势
 redirect_from:
   - "/products/paas/eu/subscription/"
   - "/docs/paas/eu/subscription/"

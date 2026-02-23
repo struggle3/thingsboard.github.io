@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect NodeMCU V2 to ThingsBoard?
-category: Microcontrollers
+title: 如何将 NodeMCU V2 连接至 ThingsBoard？
+category: 微控制器
 chip: ESP8266
 connectivity: [HTTP, MQTT, WIFI]
 vendor: NodeMCU

@@ -1,5 +1,5 @@
 
-In case when database upgrade is needed, execute the following commands:
+当需要升级数据库时，执行以下命令：
 
 ```
  ./k8s-delete-resources.sh
@@ -7,6 +7,6 @@ In case when database upgrade is needed, execute the following commands:
  ./k8s-deploy-resources.sh
 ```
 
-Where:
+其中：
 
-- `FROM_VERSION` - from which version upgrade should be started. See [Upgrade Instructions](/docs/user-guide/install/upgrade-instructions) for valid `fromVersion` values. Note, that you have to upgrade versions one by one (for example 3.6.1 -> 3.6.2 -> 3.6.3 etc). 
+- `FROM_VERSION` - 升级起始版本。有关有效 `fromVersion` 值请参阅 [升级说明](/docs/user-guide/install/upgrade-instructions)。注意，必须逐个版本升级（例如 3.6.1 -> 3.6.2 -> 3.6.3 等）。

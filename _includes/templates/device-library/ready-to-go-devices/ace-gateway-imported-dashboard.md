@@ -1,8 +1,6 @@
-### Import dashboard
+### 导入仪表盘
 
-You are able to import a dashboard in JSON format. To import a dashboard, you should go to the Dashboard group and click
- on the **“+”** button in the upper right corner of the page and choose **“Import dashboard”**. The dashboard import window 
-should pop up, and you will be prompted to upload the JSON file and click **“Import”**.
+您可导入 JSON 格式的仪表盘。要导入仪表盘，请进入「仪表盘」组，点击页面右上角的 **「+」** 按钮，选择 **「导入仪表盘」**。仪表盘导入窗口将弹出，系统会提示您上传 JSON 文件并点击 **「导入」**。
 
 {% assign importingDashboardPE = '
     ===
@@ -26,15 +24,15 @@ should pop up, and you will be prompted to upload the JSON file and click **“I
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=importingDashboardCE %}
 {% endif %}
 
-Below, you can find the dashboard JSON file:
+下方可找到仪表盘 JSON 文件：
 
-[Check and control device data dashboard](/docs/devices-library/resources/dashboards/ready-to-go-devices/ace-dashboard.json){:target="_blank" download="ace-dashboard.json"}
+[检查并控制设备数据仪表盘](/docs/devices-library/resources/dashboards/ready-to-go-devices/ace-dashboard.json){:target="_blank" download="ace-dashboard.json"}
 
-After importing, we should choose an entity alias for our device.  
-To do this - we need to press the pen icon and select entity aliases, select alias **"My device"** and open it for editing by pressing the pen icon.    
-Then, choose a device with name My device from dropdown list and save entity alias. Now, you should be able to see the data from the device. 
+导入后，我们需要为设备选择实体别名。
+操作方式：点击铅笔图标并选择实体别名，选择别名 **「My device」** 并点击铅笔图标打开编辑。
+然后，从下拉列表中选择名为 My device 的设备并保存实体别名。完成后即可查看设备数据。
 
-If you did everything right, you have to see the following dashboard:
+若操作正确，您将看到以下仪表盘：
 
 {% if page.docsPrefix == "pe/" or page.docsPrefix contains "paas/" or docsPrefix == "pe/" or docsPrefix contains "paas/" %}
 ![imagePe](/images/devices-library/ready-to-go-devices/ace-iot-gateway/ace-gateway-dashboard.png)

@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Edge Architecture
-description:  Edge Architecture
+title: Edge架构
+description: Edge架构
 ---
 
 {% assign docsPrefix = "edge/" %}

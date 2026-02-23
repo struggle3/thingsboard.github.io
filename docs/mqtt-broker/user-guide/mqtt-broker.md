@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: MQTT broker
-description: What is MQTT broker? Learn how the MQTT protocol works, what MQTT server does, and how clients use topics, and connections for reliable IoT communication
+title: MQTT 消息代理
+description: 什么是 MQTT 消息代理？了解 MQTT 协议工作原理、MQTT 服务器职责以及客户端如何通过主题与连接实现可靠物联网通信
 
 ---
 

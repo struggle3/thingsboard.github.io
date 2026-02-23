@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: HTTP Integration
-description: HTTP integration guide
+title: HTTP 集成
+description: HTTP 集成指南
 
 downlink-rule:
     0:

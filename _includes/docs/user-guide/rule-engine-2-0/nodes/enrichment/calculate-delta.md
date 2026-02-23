@@ -1,23 +1,17 @@
-Calculates the delta and the amount of time passed between the previous time series key reading and the current value for this key from the incoming message.
+计算入站消息中当前值与来自同一来源的上一值之间的差值，以及两者之间经过的时间。
 
-## Configuration
+## 配置
 
-The node configuration allows you to define which key to use for the calculation, where to store the result, and how to handle specific conditions like meter resets.
+节点配置允许定义用于计算的键、结果的存储位置以及如何处理特定条件（如仪表复位）。
 
-- **Input value key** - The key in the incoming message's data that contains the cumulative value (e.g., `fuelLevel`). The value must be numeric or a string that can be parsed
-  into a number.
-- **Output value key** - The key under which the calculated delta will be added to the message data (e.g., `consumption`).
-- **Number of digits after floating point** - An integer specifying the number of decimal places to round the calculated delta to. If not specified, no rounding is performed.
-- **Tell Failure if delta is negative** - If enabled, any message that results in a negative delta will be routed to the `Failure` connection.
-- **Use caching** - If enabled, the node keeps the last known value for each originator in memory. This improves performance by avoiding database queries. If
-  unchecked, the node fetches the last stored timeseries value from the database for each message. **Note**: The cache is local to this rule node and will be cleared on node
-  restart.
-- **Add the time difference between readings** - If enabled, the node will also calculate the time difference (in milliseconds) between the current and previous messages from the
-  originator.
-- **Period value key** - The key for the calculated time difference in milliseconds (e.g., `periodInMs`). This field is required if **Add the time difference between readings** is
-  enabled.
-- **Exclude zero deltas from outbound message** - If enabled, messages that result in a delta of zero will be passed through to the `Success` connection without adding the output
-  key-value pairs to the message data.
+- **Input value key** — 入站消息 data 中包含累计值的键（如 `fuelLevel`）。值必须为数字或可解析为数字的字符串。
+- **Output value key** — 计算得到的差值将以此键添加到消息 data（如 `consumption`）。
+- **Number of digits after floating point** — 整数，指定将计算得到的差值四舍五入到的小数位数。未指定时不进行四舍五入。
+- **Tell Failure if delta is negative** — 若启用，任何产生负差值的消息将经 `Failure` 连接路由。
+- **Use caching** — 若启用，节点在内存中保留每个来源实体的最后已知值。通过避免数据库查询提升性能。若不勾选，节点从数据库获取每条消息的最后存储时序值。**注意**：缓存仅对此规则节点本地有效，节点重启后会清除。
+- **Add the time difference between readings** — 若启用，节点还将计算来源实体当前消息与上一条消息之间的时间差（毫秒）。
+- **Period value key** — 以毫秒为单位计算的时间差的键（如 `periodInMs`）。启用 **Add the time difference between readings** 时此字段必填。
+- **Exclude zero deltas from outbound message** — 若启用，差值为零的消息将经 `Success` 连接透传，且不向消息 data 添加 output 键值对。
 
 ### JSON Schema
 
@@ -69,40 +63,36 @@ The node configuration allows you to define which key to use for the calculation
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node first checks if the incoming message's type is a `POST_TELEMETRY_REQUEST` and if its data contains the specified **Input value key**. If not, the message is passed to
-   the `Other` connection.
-2. It retrieves the previous value and timestamp for the message originator. If **Use caching** is enabled, it checks its internal cache first. If the value is not in the cache, it
-   fetches the latest time series value for the **Input value key** from the database. If no previous value is found, it's assumed to be `0`.
-3. The node calculates the delta: `delta = currentValue - previousValue`.
-4. If **Tell Failure if delta is negative** is enabled and the calculated delta is less than zero, the original message is immediately routed to the `Failure` connection.
-5. If **Exclude zero deltas from outbound message** is enabled and the delta is exactly zero, the original message is routed to the `Success` connection without any modifications.
-6. If a **Number of digits after floating point** value is configured, the delta is rounded to the specified number of decimal places.
-7. The calculated delta is added to the message data using the **Output value key**.
-8. If **Add period between messages** is enabled, the time elapsed since the previous message (in milliseconds) is also calculated and added to the data using the **Period value
-   key**.
-9. The enriched message is then forwarded via the `Success` connection.
+1. 节点首先检查入站消息类型是否为 `POST_TELEMETRY_REQUEST` 且其 data 是否包含指定的 **Input value key**。若不是，消息经 `Other` 连接传递。
+2. 获取该消息来源实体的前一个值和时间戳。若**Use caching**已启用，先检查内部缓存。若缓存中无该值，从数据库获取 **Input value key** 的最新时序值。若未找到前一个值，假定为 `0`。
+3. 节点计算差值：`delta = currentValue - previousValue`。
+4. 若**Tell Failure if delta is negative**已启用且计算得到的差值小于零，原始消息立即经 `Failure` 连接路由。
+5. 若**Exclude zero deltas from outbound message**已启用且差值恰好为零，原始消息经 `Success` 连接路由，不做任何修改。
+6. 若配置了 **Number of digits after floating point** 值，将差值四舍五入到指定小数位。
+7. 使用 **Output value key** 将计算得到的差值添加到消息 data。
+8. 若**Add period between messages**已启用，还将计算自上一条消息以来的经过时间（毫秒）并以 **Period value key** 添加到 data。
+9. 丰富后的消息随后经 `Success` 连接转发。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - The delta was calculated successfully, and the message has been enriched.
-- `Failure`:
-    - An error occurred. The most common cause is a negative delta being calculated when the **Tell Failure if delta is negative** option is enabled.
-- `Other`:
-    - The incoming message is not a `POST_TELEMETRY_REQUEST` message or its data does not contain the required **Input value key**.
+- `Success`：
+    - 差值计算成功，消息已丰富。
+- `Failure`：
+    - 发生错误。最常见原因是**Tell Failure if delta is negative**已启用时计算出负差值。
+- `Other`：
+    - 入站消息不是 `POST_TELEMETRY_REQUEST` 或其 data 不包含所需的 **Input value key**。
 
-## Examples
+## 示例
 
-### Example 1 — Basic meter consumption
+### 示例 1 — 基本仪表用量
 
-This example shows how to calculate consumption from a cumulative counter.
+本示例展示如何从累计计数器计算用量。
 
-**Scenario**: A water meter reports its total cumulative reading via the `pulseCounter` key. We want to calculate the water consumed since the last report and add it to the message
-as `waterConsumption`.
+**场景**：水表通过 `pulseCounter` 键上报其总累计读数。需计算自上次上报以来的用水量并以 `waterConsumption` 添加到消息。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -112,9 +102,9 @@ Data:
 }
 ```
 
-Previous value for this originator (stored in cache or database) for the `pulseCounter` key is `1450`.
+该来源实体在缓存或数据库中 `pulseCounter` 键的前一个值为 `1450`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -127,9 +117,9 @@ Previous value for this originator (stored in cache or database) for the `pulseC
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The message is routed to the `Success` connection with the added `waterConsumption` field.
+消息经 `Success` 连接路由，已添加 `waterConsumption` 字段。
 
 Data:
 
@@ -140,15 +130,15 @@ Data:
 }
 ```
 
-**Explanation**: The node calculated the delta: `1500 - 1450 = 50`, and added this result to the message data.
+**说明**：节点计算差值：`1500 - 1450 = 50`，并将此结果添加到消息 data。
 
-### Example 2 — Calculating rate and handling a meter reset
+### 示例 2 — 计算速率并处理仪表复位
 
-This example shows how the node handles a negative delta.
+本示例展示节点如何处理负差值。
 
-**Scenario**: A meter is reset, causing its cumulative counter to drop. We are configured to detect this.
+**场景**：仪表复位导致其累计计数器下降。已配置检测此情况。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -158,9 +148,9 @@ Data:
 }
 ```
 
-Previous value for this originator for the `pulseCounter` key is `1680`.
+该来源实体 `pulseCounter` 键的前一个值为 `1680`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -173,9 +163,9 @@ Previous value for this originator for the `pulseCounter` key is `1680`.
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-The **original message** is routed to the `Failure` connection.
+**原始消息**经 `Failure` 连接路由。
 
 Data:
 
@@ -185,4 +175,4 @@ Data:
 }
 ```
 
-**Explanation**: The calculated delta is `10 - 1680 = -1670`. Since this is negative and **Tell failure if delta is negative** is enabled, the node routes the message to `Failure`.
+**说明**：计算得到的差值为 `10 - 1680 = -1670`。因差值为负且**Tell failure if delta is negative**已启用，节点将消息路由至 `Failure`。

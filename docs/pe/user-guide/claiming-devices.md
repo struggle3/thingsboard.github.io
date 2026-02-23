@@ -1,31 +1,31 @@
 ---
 layout: docwithnav-pe
-title: Claiming devices
-description: IoT device management using ThingsBoard claiming devices feature
+title: 认领设备
+description: 使用 ThingsBoard 设备认领功能进行 IoT 设备管理
 
 device-claiming-permissions-in-pe-carousel:
     0:
         image: /images/user-guide/claiming-devices/claiming-generic-role.png
-        title: 'Create a generic role.'
+        title: '创建通用角色。'
     1:
         image: /images/user-guide/claiming-devices/assign-claiming-role.png
-        title: 'Assign that role for a user group.'
+        title: '将该角色分配给用户组。'
 device-claiming-widget-carousel:
     0:
         image: /images/user-guide/claiming-devices/claiming-widget-location.png
-        title: 'You are able to find Device Claiming Widget in <b>Static widget</b> section of <b>Input widgets</b> bundle.'
+        title: '您可在<b>输入部件</b>的<b>静态部件</b>部分找到设备认领部件。'
     1:
         image: /images/user-guide/claiming-devices/claim-device-widget.png
-        title: 'Claim device widget is quite simple and allows to input device name and Secret Key.'
+        title: '认领设备部件较为简洁，可输入设备名称和密钥。'
     2:
         image: /images/user-guide/claiming-devices/claim-device-widget-advanced-settings.png
-        title: 'It is possible to "hide" Secret Key input field and change the labels in "General settings".'
+        title: '可在「常规设置」中「隐藏」密钥输入框并修改标签。'
     3:
         image: /images/user-guide/claiming-devices/claim-device-widget-message-settings.png
-        title: 'It is also possible to configure all sorts of messages to the user in "Message settings".'
+        title: '也可在「消息设置」中配置面向用户的各种消息。'
     4:
         image: /images/user-guide/claiming-devices/claim-device-widget-relation-settings.png
-        title: 'Finally, you can relate the claimed device to the current state entity of the dashboard.<br> This is useful if you have multiple assets and would like to relate your device to one of them. '
+        title: '最后，您可将认领的设备关联到仪表板的当前实体。<br>若您有多个资产并希望将设备关联到其中之一，这很有用。'
 ---
 
 {% assign docsPrefix = "pe/" %}

@@ -2,54 +2,54 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Map widgets
-description: Map widgets
+title: 地图部件
+description: 地图部件
 
 adding-map-widget:
     0:
         image: /images/user-guide/widgets/maps/adding-map-widget-1-ce.png
-        title: 'In dashboard edit mode, click the "Add widget" button at the top of the screen, or click the large "Add new widget" icon in the center of the screen (if this is your first widget on the dashboard).'
+        title: '在仪表板编辑模式下，点击屏幕顶部的「添加部件」按钮，或点击屏幕中央的大号「添加新部件」图标（若这是您在仪表板上的首个部件）。'
     1:
         image: /images/user-guide/widgets/maps/adding-map-widget-2-ce.png
-        title: 'Find the "Maps" widget bundle and click on it. This category includes all available map widget types.'
+        title: '找到「地图」部件包并点击。该类别包含所有可用的地图部件类型。'
     2:
         image: /images/user-guide/widgets/maps/adding-map-widget-3-ce.png
-        title: 'Select the map widget that best fits your use case.'
+        title: '选择最适合您用例的地图部件。'
     3:
         image: /images/user-guide/widgets/maps/adding-map-widget-4-ce.png
-        title: 'Configure the widget to match your data and visualization requirements. You can adjust data sources, appearance, map provider settings, and more. Click the "Add" in the bottom-right corner of the widget configuration window to place it on your dashboard.'
+        title: '根据您的数据和可视化需求配置部件。您可以调整数据源、外观、地图提供商设置等。点击部件配置窗口右下角的「添加」将其放置在仪表板上。'
 
 map-type:
     0:
         image: /images/user-guide/widgets/maps/map-type-1-ce.png
-        title: 'The first step in configuring the map widget is selecting the map type. ThingsBoard offers several map widgets, including Image Map, which allows you to use a custom background image as the map. You can also configure map layers, enabling flexible switching between different map styles — such as satellite, hybrid, or custom layers — directly within the widget, with just a few clicks.'
+        title: '配置地图部件的第一步是选择地图类型。ThingsBoard提供多种地图部件，包括Image Map，允许您使用自定义背景图像作为地图。您还可以配置地图图层，在部件内通过几次点击即可在卫星、混合或自定义图层等多种地图样式之间灵活切换。'
 
 map-type-adding-layer-1:
     0:
         image: /images/user-guide/widgets/maps/map-type-adding-layer-1-ce.png
-        title: 'Click "Add layer".'
+        title: '点击「添加图层」。'
     1:
         image: /images/user-guide/widgets/maps/map-type-adding-layer-2-ce.png
-        title: 'Enter a label for the layer. Select a provider from the available options, or add a custom provider and specify its layer.'
+        title: '输入图层标签。从可用选项中选择提供商，或添加自定义提供商并指定其图层。'
 
 changing-map-type:
     0:
         image: /images/user-guide/widgets/maps/changing-map-type-1-ce.png
-        title: 'Click the "Layer" icon button on the widget.'
+        title: '点击部件上的「图层」图标按钮。'
     1:
         image: /images/user-guide/widgets/maps/changing-map-type-2-ce.png
-        title: 'You will see the available map layers. Switch between them.'
+        title: '您将看到可用的地图图层。在其间切换。'
     2:
         image: /images/user-guide/widgets/maps/changing-map-type-3-ce.png
-        title: 'Enter a label for the layer — this name will be shown in the widget&#39;s layer switcher. Choose the map provider by selecting from the available options (OpenStreetMap, Google, HERE, Tencent) or by specifying a custom tile server. Apply changes.'
+        title: '输入图层标签（该名称将显示在部件的图层切换器中）。从可用选项（OpenStreetMap、Google、HERE、Tencent）中选择地图提供商或指定自定义瓦片服务器。应用更改。'
 
 map-type-reference-layer-1:
     0:
         image: /images/user-guide/widgets/maps/map-type-reference-layer-1-ce.png
-        title: 'Go to the "Layer settings" by clicking the "gear" icon.'
+        title: '点击「齿轮」图标进入「图层设置」。'
     1:
         image: /images/user-guide/widgets/maps/map-type-reference-layer-2-ce.png
-        title: 'From the dropdown menu, select the layer type, or leave it as "No layer" if you don&#39;t want to use one. Apply changes.'
+        title: '从下拉菜单中选择图层类型，或如不使用则保留为「无图层」。应用更改。'
     2:
         image: /images/user-guide/widgets/maps/map-type-reference-layer-3-ce.png
         title: ''
@@ -57,13 +57,13 @@ map-type-reference-layer-1:
 add-marker:
     0:
         image: /images/user-guide/widgets/maps/add-marker-1-ce.png
-        title: 'Enter widget edit mode and go to the "Overlays" section. Make sure you&#39;re on the "Marker" tab and click "Add marker".'
+        title: '进入部件编辑模式并前往「叠加层」部分。确保在「标记」选项卡上，点击「添加标记」。'
     1:
         image: /images/user-guide/widgets/maps/add-marker-2-ce.png
-        title: 'Select the data source - it can be a device, an entity alias, or a function. Define the coordinate keys. By default, ThingsBoard uses *latitude* and *longitude* attributes as the coordinate keys for the marker. If your entity uses different key names, update them here. Apply the changes.'
+        title: '选择数据源（可以是设备、实体别名或函数）。定义坐标键。默认情况下ThingsBoard使用*latitude*和*longitude*属性作为标记的坐标键。若实体使用不同键名，请在此更新。应用更改。'
     2:
         image: /images/user-guide/widgets/maps/add-marker-3-ce.png
-        title: 'The marker will appear on the map based on the specified coordinates.'
+        title: '标记将根据指定坐标显示在地图上。'
 
 marker-configuration:
     0:

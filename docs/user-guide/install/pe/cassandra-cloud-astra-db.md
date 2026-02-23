@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Connect ThingsBoard to Datastax Astra DB 
-description: Connect ThingsBoard to Datastax Astra DB
+title: 将 ThingsBoard 连接到 Datastax Astra DB
+description: 将 ThingsBoard 连接到 Datastax Astra DB
 hidetoc: "true"
 ---
 

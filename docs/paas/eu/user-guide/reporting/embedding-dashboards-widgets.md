@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Embedding dashboards in a report
-description: How to embed existing dashboards in a report
+title: 在报表中嵌入仪表盘
+description: 如何在报表中嵌入现有仪表盘
 
 dashboard-component-example-1:
     0:

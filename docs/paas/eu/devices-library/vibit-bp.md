@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect VIBit-BP to ThingsBoard?"
+title: "如何将VIBit-BP连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/vibit-bp/"
 ---

@@ -1,8 +1,8 @@
-##### Output strategy
+##### 输出策略
 
-The output strategy defines how the calculated field result is processed. Two strategies are available:
-- **Process immediately** (default) — the result is processed and stored right away, without using a Rule Chain.
-- **Process via Rule Chains** — the result is passed to a entity&#39;s Default Rule Chain for additional processing logic.
+输出策略定义计算字段结果的处理方式。支持两种策略：
+- **Process immediately**（默认）— 立即处理并存储结果，不经过 Rule Chain。
+- **Process via Rule Chains** — 将结果传入实体的 Default Rule Chain，进行额外处理逻辑。
 
 {% capture outputStrategy %}
 Process right away<small></small>%,%attribute%,%templates/calculated-fields/output-strategy/process-right-away.md%br%

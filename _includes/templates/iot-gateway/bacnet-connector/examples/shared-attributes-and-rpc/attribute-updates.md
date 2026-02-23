@@ -1,41 +1,34 @@
-Attribute updates allow you to update objects values on the BACnet device. You can add new attribute updates in the 
-“**Attribute updates**” section of the device configuration page.
+属性更新允许您更新 BACnet 设备上的对象值。您可以在设备配置页面的 "**属性更新**" 部分添加新的属性更新。
 
-As an example, we will use a BACnet controller to which a relay is connected. We also know that the relay has the 
-following object ID: `Binary Input:1`. We added this Object ID as a telemetry parameter with the key `relay`. We used 
-telemetry so that later it would be convenient for us to see if the value we changed using the attribute update 
-has changed. You, also, can add this telemetry datapoint to the device configuration or use the reserved `get` method 
-to check the value of the node.
+例如，我们将使用连接了继电器的 BACnet 控制器。我们还知道该继电器的对象 ID 为：`Binary Input:1`。我们将此对象 ID 作为遥测参数添加，key 为 `relay`。使用遥测便于我们后续查看通过属性更新更改的值是否生效。您也可以将此遥测数据点添加到设备配置中，或使用保留的 `get` 方法检查节点值。
 
-Let’s add an attribute update to our configuration. For this purpose, follow these steps:
+让我们向配置中添加属性更新。为此，请按以下步骤操作：
 
 {% assign attributeUpdates = '
     ===
         image: /images/gateway/bacnet-connector/examples/select-created-gateway.png,
-        title: Go to "**Entities**" → "**Gateways**" in the left sidebar and select your gateway.
+        title: 在左侧边栏中进入 "**实体**" → "**网关**" 并选择您的网关。
     ===
         image: /images/gateway/bacnet-connector/examples/select-connector-configuration.png,
-        title: Click on the "**Connectors configuration**" button on the right side menu.
+        title: 点击右侧菜单的 "**连接器配置**" 按钮。
     ===
         image: /images/gateway/bacnet-connector/examples/select-device-configuration.png,
-        title: Select the created BACnet connector and click on the "**Devices**" tab. Make sure you have configured and connected device (if you don’t know how to do it, see [Application settings](/docs/iot-gateway/config/bacnet/#application) and [Data mapping](/docs/iot-gateway/config/bacnet/#data-mapping) sections of this guide). Click on the “**Pencil**” icon on a device you want to configure attribute updates for.
+        title: 选择已创建的 BACnet 连接器并点击 "**设备**" 标签。确保已配置并连接设备（若不知如何操作，请参阅本指南的 [应用设置](/docs/iot-gateway/config/bacnet/#application) 和 [数据映射](/docs/iot-gateway/config/bacnet/#data-mapping) 部分）。点击要配置属性更新的设备上的 "**铅笔**" 图标。
     ===
         image: /images/gateway/bacnet-connector/examples/connector-configuration-attribute-updates-1.png,
-        title: Scroll down to the “**Attribute updates**” section and click on the “**Pencil**” icon to edit the attribute updates.
+        title: 向下滚动到 "**属性更新**" 部分，点击 "**铅笔**" 图标以编辑属性更新。
     ===
         image: /images/gateway/bacnet-connector/examples/connector-configuration-attribute-updates-2.png,
-        title: Click on the “**Add attribute update**” button. In our case, we will add `relay` attribute update, so the “**Key**” field, enter `relay`, select the “**Object ID**” as **Analog Input** and "**1**", "**Property ID**" as "**Present Value**".
+        title: 点击 "**添加属性更新**" 按钮。在本例中，我们将添加 `relay` 属性更新，因此在 "**Key**" 字段输入 `relay`，选择 "**Object ID**" 为 **Analog Input** 和 "**1**"，"**Property ID**" 为 "**Present Value**"。
     ===
         image: /images/gateway/bacnet-connector/examples/connector-configuration-attribute-updates-3.png,
-        title: Remember to save your changes by clicking the “**Apply**” button and click save connector configuration button.
+        title: 记得点击 "**应用**" 按钮保存更改，并点击保存连接器配置按钮。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=attributeUpdates %}
 
-Now we can check if the attribute update works. Go to "**Entities**" → "**Devices**" → select a created 
-device → "**Attributes**" tab → select "**Shared attributes**" → click on the "**+**" icon and add `relay` attribute 
-with type "**Boolean**" set it to "**True**".
+现在我们可以检查属性更新是否生效。进入 "**实体**" → "**设备**" → 选择已创建设备 → "**属性**" 标签 → 选择 "**共享属性**" → 点击 "**+**" 图标并添加 `relay` 属性，类型设为 "**Boolean**"，值设为 "**True**"。
 
 {% assign attributeUpdates2 = '
     ===
@@ -47,16 +40,14 @@ with type "**Boolean**" set it to "**True**".
 
 {% include images-gallery.liquid showListImageTitles="false" imageCollection=attributeUpdates2 %}
 
-Now, let’s check the value of the relay Object ID. In the selected device, go to the "**Last telemetry**" tab and 
-check the value of the `relay` telemetry. It should be `true` since we set the shared attribute to `true`.
+现在，让我们检查继电器对象 ID 的值。在所选设备中，进入 "**最新遥测**" 标签并检查 `relay` 遥测的值。由于我们将共享属性设为了 `true`，其应为 `true`。
 
 ![image](/images/gateway/bacnet-connector/examples/connector-configuration-attribute-updates-6.png)
 
-Try to change the value of the `relay` shared attribute to `false`. After a few seconds, you should see that the
-`relay` telemetry value has changed to `false`, which means that the attribute update worked correctly.
+尝试将 `relay` 共享属性的值更改为 `false`。几秒钟后，您应看到 `relay` 遥测值已变为 `false`，这表示属性更新已正确生效。
 
-Full configuration for BACnet connector for the examples above will look like this 
-(**make sure to use the right device host and port**):
+上述示例的 BACnet 连接器完整配置如下
+**（请务必使用正确的设备 host 和 port）**：
 
 ```json
 {

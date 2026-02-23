@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: Working with IoT dashboards
-description: IoT dashboards using ThingsBoard
+title: 使用 IoT 仪表板
+description: 使用 ThingsBoard 的 IoT 仪表板
 redirect_from: "/docs/paas/user-guide/ui/dashboards/"
 
 creating-dashboard:

@@ -1,7 +1,7 @@
 ---
 layout: page-with-filter
-title: Official Thingsboard hardware partners
-description: Meet our official hardware partners and explore IoT devices tailored for seamless ThingsBoard integration. Join the partnership program or find the right vendor for your IoT deployment needs.
+title: ThingsBoard 官方硬件合作伙伴
+description: 了解我们的官方硬件合作伙伴，探索为 ThingsBoard 无缝集成而打造的物联网设备。加入合作伙伴计划或为您的物联网部署找到合适供应商。
 pagination: "true"
 containerId: "card-collection"
 filterSelector: ".pagination-render-trigger"
@@ -10,19 +10,19 @@ itemsPerPage: "15"
 searchControl: "#searchCompanyInput"
 customTitle: "true"
 firstCompaniesInList: "Milesight%Seeed Studio%Lansitec%Shenzhen Beilai Technology Co., Ltd.%MikroTik%MOKO SMART"
-not-found: "No partners have been found..."
+not-found: "未找到合作伙伴..."
 
 filterCollection:
-  - label: Hardware types
+  - label: 硬件类型
     filters:
-      - Microcontrollers
-      - Single-board computers
-      - Sensors
-      - Gateways
-      - Trackers
-      - Other devices
-      - Gateway
-  - label: Connectivity
+      - 微控制器
+      - 单板计算机
+      - 传感器
+      - 网关
+      - 追踪器
+      - 其他设备
+      - 网关
+  - label: 连接方式
     filters:
       - HTTP
       - MQTT
@@ -65,34 +65,34 @@ filterCollection:
       - LAN
       - RS-232
       - RS-485
-  - label: Industry
+  - label: 行业
     filters:
-      - Smart Cities
-      - Retail
-      - Agriculture
-      - Transportation & Logistics
-      - Healthcare
-      - Industrial Manufacturing
-      - Smart Buildings
-      - Energy Management
-      - Security
-      - Environmental Monitoring
-  - label: Use cases
+      - 智慧城市
+      - 零售
+      - 农业
+      - 交通与物流
+      - 医疗健康
+      - 工业制造
+      - 智能建筑
+      - 能源管理
+      - 安防
+      - 环境监测
+  - label: 应用场景
     filters:
-      - Air Quality Monitoring
-      - Assisted Living
-      - Environment Monitoring
-      - Fleet Tracking
-      - Health Care
-      - Smart Energy
-      - Smart Metering
-      - Smart Retail
-      - Smart Office
-      - Smart Farming
-      - Smart Irrigation
-      - Tank Level Monitoring
-      - Waste Management
-      - Water Metering
+      - 空气质量监测
+      - 辅助生活
+      - 环境监测
+      - 车队追踪
+      - 医疗健康
+      - 智慧能源
+      - 智能抄表
+      - 智慧零售
+      - 智慧办公
+      - 智慧农业
+      - 智能灌溉
+      - 储罐液位监测
+      - 废弃物管理
+      - 水表抄表
 
 ---
 
@@ -100,12 +100,12 @@ filterCollection:
 <div class="hardware-hero">
     <div class="hardware-wrapper">
         <div class="hardware-hero-text">
-            <h1>ThingsBoard Hardware Partners</h1>
-            <p>Hardware Partnership Program goal is to reduce time to market for ThingsBoard based solutions. Together with Hardware Partners we simplify implementation of the most challenging IoT projects by providing a rich set of integration tutorials, typical use cases and best practices.</p>
+            <h1>ThingsBoard 硬件合作伙伴</h1>
+            <p>硬件合作伙伴计划旨在缩短基于 ThingsBoard 的解决方案的上市时间。我们与硬件合作伙伴一道，通过提供丰富的集成教程、典型应用场景与最佳实践，简化最具挑战性的物联网项目实施。</p>
         </div>
         <div class="hardware-hero-banner">
-            <p>Want to become ThingsBoard Hardware Partner?</p>
-            <a href="/partners/hardware/program/">Apply for program</a>
+            <p>想成为 ThingsBoard 硬件合作伙伴？</p>
+            <a href="/partners/hardware/program/">申请加入计划</a>
             <img src="/images/hardware-partners-icon.svg" width="210" height="210" alt="Hardware partner icon">
         </div>
     </div>

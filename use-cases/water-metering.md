@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: Smart Water Metering with ThingsBoard IoT Platform
-description: Discover how ThingsBoard enables real-time water monitoring, automated alerts, and consumption analytics with a scalable IoT water metering solution for utilities, buildings, and agriculture.
+title: 基于 ThingsBoard 物联网平台的智能水表计量
+description: 了解 ThingsBoard 如何通过可扩展的物联网水表计量解决方案为公用事业、建筑和农业实现实时水监测、自动化警报和用量分析。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -12,19 +12,19 @@ contactUsModal: "true"
 {% include usecase-nav.html usecase="water-metering" %}
 
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Water metering</h1>
+<h1 class="usecase-title">水表计量</h1>
 <section class="water-metering-about">
     <div class="about-text">
         <div class="short">
             <div class="block">
-                <p class="text">Water is one of our most critical resources, and managing its distribution and consumption is key for sustainable urban development, utility cost control, and infrastructure maintenance. For this purpose, the ThingsBoard platform is an ideal choice, offering powerful capabilities for real-time monitoring, alarms, visualization, and analytics.</p>
+                <p class="text">水是最关键资源之一，其分配与用量管理是可持续城市发展、公用事业成本控制和基础设施维护的核心。ThingsBoard 平台是理想之选，提供实时监测、告警、可视化和分析能力。</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_WaterMeter_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/aff5f200-8b48-11ec-a344-c767c1ab1bb8?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">View live demo</a>            </div>
+                <a id="UseCases_WaterMeter_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/aff5f200-8b48-11ec-a344-c767c1ab1bb8?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">查看实时演示</a>            </div>
             </div>
         <div class="long">
-            <p>Traditional water metering methods often fall short in providing real-time data, accurate billing, and predictive maintenance insights. By leveraging connected sensors and intelligent dashboards, organizations can unlock powerful insights into water usage, detect anomalies like leaks, and automate alarm systems. At the core of these solutions is ThingsBoard, a flexible IoT platform enabling the collection, processing, and visualization of telemetry data from water meters in real time.</p>
-            <p>This ThingsBoard-powered <a href="/docs/pe/solution-templates/water-metering/">water metering solution</a> provides complete real-time visibility into water usage, instant response to anomalies, and valuable analytics for long-term infrastructure planning. Scalable across municipalities, residential complexes, and commercial facilities, it offers a powerful tool for smart and efficient water resource management.</p>
+            <p>传统水表计量方法往往难以及时提供数据、准确计费和预测性维护洞察。借助联网传感器和智能仪表板，企业可深入了解用水情况、检测漏损等异常并实现告警自动化。ThingsBoard 作为灵活的物联网平台，是这些解决方案的核心，支持实时收集、处理并可视化水表遥测数据。</p>
+            <p>基于 ThingsBoard 的<a href="/docs/pe/solution-templates/water-metering/">水表计量解决方案</a>提供用水全程实时可见性、异常即时响应及长期基础设施规划分析。可扩展至市政、住宅和商业设施，为智慧高效的水资源管理提供强大工具。</p>
         </div>
     </div>
 </section>
@@ -36,15 +36,15 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="water-metering-solution-structure">
-    <h2>Solution structure of water metering use case</h2>
+    <h2>水表计量用例解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
-                <p class="text">ThingsBoard seamlessly integrates with IoT-enabled water meters that collect real-time data on consumption, temperature, and battery level, sending it over wireless networks such as LoRaWAN, NB-IoT, and LTE for processing.</p>
+                <p class="text">ThingsBoard 可与支持物联网的水表无缝集成，水表采集用量、温度和电量等实时数据，并通过 LoRaWAN、NB-IoT 和 LTE 等无线网络传输处理。</p>
             </div>
         </div>
         <div class="long">
-            <p>The platform stores this data, applies intelligent rules to trigger alerts, and visualizes everything through intuitive dashboards for immediate operational insights.</p>
+            <p>平台存储数据、应用智能规则触发告警，并通过直观仪表板进行可视化，提供即时运营洞察。</p>
         </div>
     </div>
     <div class="scheme">
@@ -54,7 +54,7 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Dashboard structure of water metering solution</h2>
+        <h2>水表计量解决方案仪表板结构</h2>
         <p>
             The ThingsBoard water metering dashboard is structured into dedicated states, each focusing on a key aspect of system monitoring, control, and analysis. Below is a breakdown of each state with its purpose and content:        
         </p>
@@ -157,7 +157,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header water-section-header">
-        <h2>Applications of water metering: versatility across industries</h2>
+        <h2>水表计量的应用：跨行业通用性</h2>
         <p>IoT-based water metering is not limited to utility companies. The same architecture and approach can be repurposed across a wide range of sectors:</p>
     </div>
     <div class="applications-container-large">
@@ -234,11 +234,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of water metering solution</h2>
+        <h2>水表计量解决方案总结</h2>
         <p>With a low-code approach, intuitive dashboards, and comprehensive alerting mechanisms, ThingsBoard serves as a cornerstone for digital transformation in water resource management. Whether you're scaling for a city or optimizing a single facility, this solution adapts to your needs— one drop at a time.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -338,8 +338,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_WaterMeter_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/aff5f200-8b48-11ec-a344-c767c1ab1bb8?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">View live demo</a>
-                <a id="UseCases_WaterMeter_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_WaterMeter_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/aff5f200-8b48-11ec-a344-c767c1ab1bb8?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">查看实时演示</a>
+                <a id="UseCases_WaterMeter_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
 
             applyImageBg(block);

@@ -1,5 +1,6 @@
-### Create a New Dashboard
-We will create a dashboard and add the most popular widgets. See the instructions below.
+### 创建新仪表盘
+
+我们将创建仪表盘并添加最常用的部件。请参见下方说明。
 
 {% assign creatingNewDashboardPE = '
     ===
@@ -63,11 +64,9 @@ We will create a dashboard and add the most popular widgets. See the instruction
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=creatingNewDashboardCE %}
 {% endif %}
 
-### Add Entity Alias
+### 添加实体别名
 
-Alias is a reference to a single entity or group of entities that are used in the widgets. An alias may be static or 
-dynamic. We will use the 'Single entity' alias, referring to a single entity. In this case, '{{deviceName}}'. It is possible to configure an alias that references multiple devices. For example, devices of a certain 
-type or related to a certain asset. You may learn more about different aliases here.
+别名是对部件中使用的单个实体或实体组的引用。别名可以是静态或动态的。我们将使用「单个实体」别名，引用单个实体，此处为「{{deviceName}}」。也可以配置引用多个设备的别名，例如某类型的设备或与某资产相关的设备。您可在此处了解更多关于不同别名的信息。
 
 {% assign creatingEntityAliasCE = '
     ===
@@ -161,12 +160,12 @@ type or related to a certain asset. You may learn more about different aliases h
     {% include images-gallery.liquid showListImageTitles="true" imageCollection=creatingEntityAliasCE %}
 {% endif %}
 
-To add the new widget, we need to select it from the widget library. The widgets are grouped into widget bundles. 
-Each widget has a data source. It is how the widget “knows” what data to display. We should configure the data source 
-to see the latest value of our “cpu_usage” data that we sent during step 2.
+要添加新部件，我们需要从部件库中选择。部件按部件包分组。 
+每个部件都有数据源，数据源决定了部件显示的数据。以查看在步骤 2 中发送的「cpu_usage」数据的最新值。 
 
-- Enter the edit mode. Click the **"Add new widget"** button;
-- Select the **"Charts"** widget bundle. Click on the header of the Entities widget. The **"Add Widget"** window will appear;
-- Click **"Add"** to add the data source. A widget may have multiple data sources, but we will use only one;
-- Select the **"{{deviceName}}"** entity alias. Then click on the input field on the right. The auto-complete with available data points will appear. Select the **"cpu_usage"** data point and click **"Add"**;
-- To enlarge the widget by dragging its bottom right corner. Feel free to explore advanced settings for additional widget modifications.
+
+- 进入编辑模式，点击 **「添加新部件」** 按钮；
+- 选择 **「Charts」** 部件包，点击 Entities 部件的标题，**「添加部件」** 窗口将出现；
+- 点击 **「添加」** 添加数据源。部件可有多个数据源，我们此处仅使用一个；
+- 选择 **「{{deviceName}}」** 实体别名，然后点击右侧输入框，将显示可用数据点的自动完成，选择 **「cpu_usage」** 数据点并点击 **「添加」**；
+- 可拖拽部件右下角以放大部件。可自由探索高级设置以进行更多部件修改。

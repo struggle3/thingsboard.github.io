@@ -1,6 +1,6 @@
-Define environment variables that you will use in various commands later in this guide.
+定义本指南后续命令中将使用的环境变量。
 
-We assume you are using Linux. Execute the following command:
+假设您使用 Linux。执行以下命令：
 
 ```bash
 export AKS_RESOURCE_GROUP=TBMQResources
@@ -13,10 +13,10 @@ and cluster in it $TB_CLUSTER_NAME with database $TB_DATABASE_NAME"
 ```
 {: .copy-code}
 
-where:
+其中：
 
-* TBMQResources — a logical group in which Azure resources are deployed and managed. We will refer to it later in this guide using **AKS_RESOURCE_GROUP**;
-* eastus — is the location where you want to create the resource group. We will refer to it later in this guide using **AKS_LOCATION**. You can see all locations list by executing `az account list-locations`;
-* tbmq-gateway — the name of Azure application gateway;
-* tbmq-cluster — cluster name. We will refer to it later in this guide using **TB_CLUSTER_NAME**;
-* tbmq-db — is the name of your database server. You may input a different name. We will refer to it later in this guide using **TB_DATABASE_NAME**.
+* TBMQResources — Azure 资源部署和管理的逻辑组。本指南后续将用 **AKS_RESOURCE_GROUP** 表示；
+* eastus — 创建资源组的位置。本指南后续将用 **AKS_LOCATION** 表示。执行 `az account list-locations` 可查看所有可用位置；
+* tbmq-gateway — Azure 应用程序网关名称；
+* tbmq-cluster — 集群名称。本指南后续将用 **TB_CLUSTER_NAME** 表示；
+* tbmq-db — 数据库服务器名称。可输入不同名称。本指南后续将用 **TB_DATABASE_NAME** 表示。

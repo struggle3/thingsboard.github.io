@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard on Linux
-description: Installing ThingsBoard on Linux
+title: 在 Linux 上安装 ThingsBoard
+description: 在 Linux 上安装 ThingsBoard
 redirect_to: "/docs/user-guide/install/ubuntu"
 
 ---

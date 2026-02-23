@@ -1,21 +1,21 @@
 * TOC
 {:toc}
 
-Related entities aggregation collects the **latest telemetry** or **attribute** values from multiple entities (devices, assets, customer, or tenant) related to the target entity, applies one or more aggregation functions, and stores the aggregated result on the target entity.   
+关联实体聚合从与目标实体相关的多个实体（设备、资产、客户或租户）收集**最新遥测**或**属性**值，应用一个或多个聚合函数，并将聚合结果存储到目标实体。
 
-Aggregation is performed only across **direct (single-level) relations**, ensuring predictable selection of entities.
+仅对**直接（单层）关系**进行聚合，确保实体选择可预期。
 
-Use "Related entities aggregation" when you need to compute a "group-level" metric from many entities, for example:
-- **Fleet / building dashboards**: average temperature across all sensors, total power across all meters, max vibration across machines
-- **Operational KPIs**: number of active devices, count of alarms, percentage of online units
-- **Occupancy / presence tracking**: count how many devices are in a certain state (e.g., motion = true)
-- **Energy and usage totals**: sum energy consumption across multiple devices or zones
-- **Quality monitoring**: detect min/max readings across a group (e.g., lowest freezer temperature, highest humidity)
-- **Filtered aggregation**: aggregate only a subset of entities (e.g., only "active" devices or only readings above a threshold)
+在需要从多实体计算「组级」指标时使用「Related entities aggregation」，例如：
+- **车队/建筑仪表板**：所有传感器平均温度、所有电表总功率、所有机器最大振动
+- **运营 KPI**：活跃设备数、告警数、在线率
+- **占用/存在追踪**：统计处于某状态的设备数（如 motion = true）
+- **能耗与用量合计**：多设备或区域的能耗总和
+- **质量监控**：组内最小/最大读数（如最低冷冻温度、最高湿度）
+- **筛选聚合**：仅对实体子集聚合（如仅「active」设备或超出阈值的读数）
 
 <hr>
 
-## Configuration
+## 配置
 
 {% assign calculatedFieldType = "**Related entities aggregation**" %}
 {% include /docs/user-guide/calculated-fields/blocks/creating-calculated-field.md %}
@@ -26,15 +26,15 @@ Use "Related entities aggregation" when you need to compute a "group-level" metr
 
 ThingsBoard will collect data for aggregation from all entities that match the selected relationship direction and relationship type.
 
-<b><font size="3">Relation direction</font></b>   
-Define the path to the entities from which the data will be read:
+<b><font size="3">关系方向</font></b>   
+定义读取数据的实体路径：
 - **Down to child** — data is aggregated from child entities.
 - **Up to parent** — data is aggregated from parent entities.
 
 Aggregation works only with direct (single-level) relationships, without recursion or multi-level traversal.
 
-<b><font size="3">Relation type</font></b>   
-Define the relationship type between the target entity and the related entities (for example, Contains, Manages, or any relation type).
+<b><font size="3">关系类型</font></b>   
+定义目标实体与关联实体间的关系类型（如 Contains、Manages 或任意类型）。
 
 {% assign relatedPathToRelatedEntities = '
     ===
@@ -47,17 +47,17 @@ Define the relationship type between the target entity and the related entities 
 
 <hr>
 
-### Arguments
+### 参数
 
-The arguments define the data that will be retrieved from each related entity for aggregation.
+Arguments 定义从各关联实体获取的聚合数据。
 
-Click **Add argument** and fill in the required fields:
-- **Argument type**: [Latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"} or [Attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"}
-- **Time series key / Attribute key**: the key to read
-- **Argument name**: variable name used in metrics
-- **Default value**: fallback if data is missing
+点击 **Add argument** 并填写必填项：
+- **Argument type**：[Latest telemetry](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=latestTelemetry#arguments){:target="_blank"} 或 [Attribute](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"}
+- **Time series key / Attribute key**：要读取的 key
+- **Argument name**：在 metrics 中使用的变量名
+- **Default value**：数据缺失时的回退值
 
-For more details about arguments and configuration, see the [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} section.
+参数与配置详见 [Arguments](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#arguments){:target="_blank"} 章节。
 
 {% assign relatedArgument = '
     ===
@@ -70,19 +70,19 @@ For more details about arguments and configuration, see the [Arguments](/docs/us
 
 <hr>
 
-### Metrics
+### 指标
 
-Define the function type (aggregation) that will be applied to the data specified in the arguments, and the key under which the aggregated result will be stored.
+定义应用于 arguments 指定数据的函数类型（聚合）以及存储聚合结果的 key。
 
-Each metric includes:
-- **Metric name**: the output key name under which the aggregated result will be stored on the target entity.
-- **Aggregation**: Average / Min / Max / Sum / Count / Count unique
-- **Filter** (optional): include/exclude entity values before aggregation
-- **Value source**: use a direct argument value (Key) or a function result (Function)
-- **Argument name**: the [argument](#arguments) whose data is being aggregated
+每个 metric 包含：
+- **Metric name**：在目标实体上存储聚合结果的输出 key 名。
+- **Aggregation**：Average / Min / Max / Sum / Count / Count unique
+- **Filter**（可选）：聚合前包含/排除实体值
+- **Value source**：使用直接 argument 值（Key）或函数结果（Function）
+- **Argument name**：被聚合数据的 [argument](#arguments)
 
 <b><font size="3">Filter</font></b>   
-The filter is a function that returns <span class="code-light">true/false</span> and can use any defined arguments. If it returns <span class="code-light">true</span>, the entity value is included in the aggregation; otherwise, it is skipped.
+Filter 是返回 <span class="code-light">true/false</span> 的函数，可使用任意已定义 arguments。返回 <span class="code-light">true</span> 时，实体值参与聚合；否则跳过。
 
 Example:
 
@@ -124,25 +124,25 @@ This prevents excessive reprocessing and reduces system load in high-frequency e
 
 <hr>
 
-### Output
+### 输出
 
-The calculation result is stored either as a [time series](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"} or an [attribute](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"}.   
-If needed, set Decimals to round the value.
+计算结果以 [time series](/docs/{{docsPrefix}}user-guide/telemetry/){:target="_blank"} 或 [attribute](/docs/{{docsPrefix}}user-guide/attributes/){:target="_blank"} 形式存储。   
+如需要，可设置 Decimals 进行舍入。
 
-> **[Only for Time series]**   
-Enable **Use latest timestamp** to store the result using the most recent argument timestamp instead of server time.
+> **[仅适用于 Time series]**   
+启用 **Use latest timestamp** 以使用最新 argument 时间戳而非服务器时间存储结果。
 
-For more details about output types and processing strategies, see the [Output](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#output){:target="_blank"} section.
+输出类型与处理策略详见 [Output](/docs/user-guide/calculated-fields/?calculatedfieldsargumenttype=attribute#output){:target="_blank"} 章节。
 
 <hr>
 
-## Example: Aggregate temperature values from multiple child devices
+## 示例：汇总多个子设备的温度值
 
-<b><font size="4">Scenario</font></b>   
-Multiple temperature sensor devices are installed in **Building A** and continuously publish telemetry values.
+<b><font size="4">场景</font></b>   
+多台温度传感器设备安装在 **Building A** 中，并持续发布遥测值。
 
-<b><font size="4">Goal</font></b>   
-Collect temperature telemetry from all sensors related to Building A and compute:
+<b><font size="4">目标</font></b>   
+从与 Building A 相关的所有传感器收集温度遥测并计算：
 - <span class="code-light">avgTemperature</span> — average temperature in the building
 - <span class="code-light">maxTemperature</span> — maximum temperature in the building
 
@@ -284,7 +284,7 @@ Example:
 
 <hr>
 
-## Your feedback
+## 反馈
 
-Don&#39;t hesitate to star ThingsBoard on [github](https://github.com/thingsboard/thingsboard){:target="_blank"} to help us spread the word.
-If you have any questions about this sample, please [contact us](/docs/contact-us/){:target="_blank"}.
+欢迎为 ThingsBoard 在 [github](https://github.com/thingsboard/thingsboard){:target="_blank"} 加星。
+如有疑问，请 [联系我们](/docs/contact-us/){:target="_blank"}。

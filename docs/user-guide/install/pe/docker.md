@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Installing ThingsBoard PE using Docker (Linux or MacOS)
-description: Installing ThingsBoard PE IoT Platform using Docker (Linux or MacOS)
+title: 使用 Docker 安装 ThingsBoard PE（Linux 或 MacOS）
+description: 使用 Docker 安装 ThingsBoard PEIoT平台（Linux 或 MacOS）
 redirect_from: "/docs/pe/user-guide/install/docker/"
 ---
 

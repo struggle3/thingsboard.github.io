@@ -4,8 +4,8 @@
 {% assign cloudLink = "" %}
 {% endif %}
 
-Once the **Edge** service is started, open the **Edge UI** at [http://localhost:8080](http://localhost:8080){: target="_blank"}.
+**Edge** 服务启动后，在 [http://localhost:8080](http://localhost:8080){: target="_blank"} 打开 **Edge UI**。
 
 {% include templates/edge/bind-port-changed-banner.md %}
 
-Please use your tenant credentials from **ThingsBoard Server** {{cloudLink}}to log in to the **ThingsBoard Edge**.
+请使用 **ThingsBoard Server** 的租户凭证 {{cloudLink}}登录 **ThingsBoard Edge**。

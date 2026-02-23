@@ -1,14 +1,14 @@
-### What Is an Edge Rule Chain Template?
+### 什么是 Edge 规则链模板？
 
-An **Edge Rule Chain template** is a predefined [Rule Chain](/docs/user-guide/rule-engine-2-0/overview/#rule-chain){: target="_blank"} in **ThingsBoard**, designed specifically for use with **ThingsBoard Edge**. 
-The **Rule Chain template** does not run on the **Server**. 
-Instead, it serves merely as a template. 
+**Edge 规则链模板**是 **ThingsBoard** 中预定义的 [Rule Chain](/docs/user-guide/rule-engine-2-0/overview/#rule-chain){: target="_blank"}，专为与 **ThingsBoard Edge** 配合使用而设计。
+**规则链模板**不会在 **Server** 上运行。
+它仅作为模板使用。
 
-For the **older versions of ThingsBoard Edge**, the **Rule chain** has to be assigned to an **Edge** instance before use. Only then will it work and process data from devices according to its configuration.
+对于 **较早版本的 ThingsBoard Edge**，使用前需先将 **规则链** 分配给 **Edge** 实例。分配后才会生效并按配置处理设备数据。
 
-Starting with **Edge version 4.0**, the **Rule chain** can be created and edited right on the **Edge** instance.
+从 **Edge 4.0** 版起，可直接在 **Edge** 实例上创建和编辑 **规则链**。
 
-### Creating Rule Chain Template on the Edge
+### 在 Edge 上创建规则链模板
 
 {% assign sinceVersion = "4.0" %}
 {% include templates/edge/since-edge.md %}
@@ -16,31 +16,31 @@ Starting with **Edge version 4.0**, the **Rule chain** can be created and edited
 {% assign createRuleChainTemplatePE = '
     ===
         image: /images/pe/edge/rule-engine/1-edge-rule-chain.webp,
-        title: Sign in to your <b>ThingsBoard Edge PE</b> instance and go to the <b>Rule chains</b> section. To add a new <b>Rule chain</b>, click the <b>"+"</b> button in the top right corner, and choose the <b>"Create new rule chain"</b> option.
+        title: 登录 <b>ThingsBoard Edge PE</b> 实例，进入 <b>Rule chains</b> 部分。要添加新 <b>规则链</b>，点击右上角 <b>"+"</b> 按钮，选择 <b>"Create new rule chain"</b> 选项。
     ===
         image: /images/pe/edge/rule-engine/2-create-rule-chain-template.webp,
-        title: In the pop-up window, enter a <b>name</b> for the new rule chain and click the <b>"Add"</b> button to continue configuring the rule chain.
+        title: 在弹出窗口中输入新规则链的 <b>name</b>，点击 <b>"Add"</b> 按钮继续配置规则链。
     ===
         image: /images/pe/edge/rule-engine/3-in-the-list.webp,
-        title: The rule chain is now listed, usually at the top. Click it to begin editing.
+        title: 规则链已出现在列表中，通常位于顶部。点击即可开始编辑。
     ===
         image: /images/pe/edge/rule-engine/4-configure-and-safe.webp,
-        title: Configure your <a href="/docs/pe/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> and flow. Once the configuration is complete, click the <b>"Apply changes"</b> button.
+        title: 配置 <a href="/docs/pe/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> 和流程。配置完成后，点击 <b>"Apply changes"</b> 按钮。
 '%}
 
 {% assign createRuleChainTemplateCE = '
     ===
         image: /images/edge/rule-engine/1-edge-rule-chain.webp,
-        title: Sign in to your <b>ThingsBoard Edge CE</b> instance and go to the <b>Rule chains</b> section. To add a new <b>Rule chain</b>, click the <b>"+"</b> button in the top right corner, and choose the <b>"Create new rule chain"</b> option.
+        title: 登录 <b>ThingsBoard Edge CE</b> 实例，进入 <b>Rule chains</b> 部分。要添加新 <b>规则链</b>，点击右上角 <b>"+"</b> 按钮，选择 <b>"Create new rule chain"</b> 选项。
     ===
         image: /images/edge/rule-engine/2-create-rule-chain-template.webp,
-        title: In the pop-up window, enter a <b>name</b> for the new rule chain and click the <b>"Add"</b> button to continue configuring the rule chain.
+        title: 在弹出窗口中输入新规则链的 <b>name</b>，点击 <b>"Add"</b> 按钮继续配置规则链。
     ===
         image: /images/edge/rule-engine/3-in-the-list.webp,
-        title: The rule chain is now listed, usually at the top. Click it to begin editing.
+        title: 规则链已出现在列表中，通常位于顶部。点击即可开始编辑。
     ===
         image: /images/edge/rule-engine/4-configure-and-safe.webp,
-        title: Configure your <a href="/docs/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> and flow. Once the configuration is complete, click the <b>"Apply changes"</b> button.
+        title: 配置 <a href="/docs/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> 和流程。配置完成后，点击 <b>"Apply changes"</b> 按钮。
 '%}
 
 {% if docsPrefix == "pe/edge/" %}
@@ -49,36 +49,36 @@ Starting with **Edge version 4.0**, the **Rule chain** can be created and edited
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=createRuleChainTemplateCE %}
 {% endif %}
 
-### Creating Rule Chain Template on the Server
+### 在服务器上创建规则链模板
 
 {% assign createRuleChainTemplatePE = '
     ===
         image: /images/pe/edge/rule-engine/create-rule-chain-template-step-1.webp,
-        title: Sign in to your <b>ThingsBoard PE</b> instance and go to the <b>Edge Management > Rule chain templates</b> section. To add a new **Rule chain**, click the <b>"+"</b> button in the top right corner and choose the <b>"Create new rule chain"</b> option.
+        title: 登录 <b>ThingsBoard PE</b> 实例，进入 <b>Edge Management > Rule chain templates</b> 部分。要添加新 <b>规则链</b>，点击右上角 <b>"+"</b> 按钮，选择 <b>"Create new rule chain"</b> 选项。
     ===
         image: /images/pe/edge/rule-engine/create-rule-chain-template-step-2.webp,
-        title: Enter a name for your rule chain, such as <b>"Remote Farm"</b>. Click the <b>"Add"</b> button to continue configuring the rule chain.
+        title: 输入规则链名称，如 <b>"Remote Farm"</b>。点击 <b>"Add"</b> 按钮继续配置规则链。
     ===
         image: /images/pe/edge/rule-engine/create-rule-chain-template-step-3.webp,
-        title: The rule chain template is now listed, usually at the top. Click it to begin editing.
+        title: 规则链模板已出现在列表中，通常位于顶部。点击即可开始编辑。
     ===
         image: /images/pe/edge/rule-engine/create-rule-chain-template-step-4.webp,
-        title: Within the template, configure your <a href="/docs/pe/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> and flow. Once the configuration is complete, click the <b>"Apply changes"</b> button. <i>Note: This step does not activate the rule chain on the server, it simply prepares it for deployment to an Edge.</i>
+        title: 在模板内配置 <a href="/docs/pe/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> 和流程。配置完成后，点击 <b>"Apply changes"</b> 按钮。<i>注意：此步骤不会在服务器上激活规则链，仅为部署到 Edge 做准备。</i>
 '%}
 
 {% assign createRuleChainTemplateCE = '
     ===
         image: /images/edge/rule-engine/create-rule-chain-template-step-1.webp,
-        title: Sign in to your <b>ThingsBoard CE</b> instance and go to the <b>Edge Management > Rule chain templates</b> section. To add a new <b>Rule chain</b>, click the <b>"+"</b> button in the top right corner and choose the <b>"Create new rule chain"</b> option.
+        title: 登录 <b>ThingsBoard CE</b> 实例，进入 <b>Edge Management > Rule chain templates</b> 部分。要添加新 <b>规则链</b>，点击右上角 <b>"+"</b> 按钮，选择 <b>"Create new rule chain"</b> 选项。
     ===
         image: /images/edge/rule-engine/create-rule-chain-template-step-2.webp,
-        title: Enter a name for your rule chain, such as <b>"Remote Farm"</b>. Click <b>"Add"</b> to confirm the creation of your new rule chain template.
+        title: 输入规则链名称，如 <b>"Remote Farm"</b>。点击 <b>"Add"</b> 确认创建新规则链模板。
     ===
         image: /images/edge/rule-engine/create-rule-chain-template-step-3.webp,
-        title: The rule chain template is now listed, usually at the top. Click it to begin editing.
+        title: 规则链模板已出现在列表中，通常位于顶部。点击即可开始编辑。
     ===
         image: /images/edge/rule-engine/create-rule-chain-template-step-4.webp,
-        title: Within the template, configure your <a href="/docs/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> and flow. Once the configuration is complete, click the <b>"Apply changes"</b> button. <i>Note: This step does not activate the rule chain on the server, it simply prepares it for deployment to an Edge.</i>
+        title: 在模板内配置 <a href="/docs/user-guide/rule-engine-2-0/overview/#rule-node" target="_blank">rule nodes</a> 和流程。配置完成后，点击 <b>"Apply changes"</b> 按钮。<i>注意：此步骤不会在服务器上激活规则链，仅为部署到 Edge 做准备。</i>
 '%}
 
 {% if docsPrefix == "pe/edge/" %}
@@ -87,36 +87,36 @@ Starting with **Edge version 4.0**, the **Rule chain** can be created and edited
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=createRuleChainTemplateCE %}
 {% endif %}
 
-### Assigning the Rule Chain Template to the Edge
+### 将规则链模板分配给 Edge
 
 {% assign assignRuleChainTemplateToEdgePE = '
     ===
         image: /images/pe/edge/rule-engine/assign-rule-chain-template-step-1.webp,
-        title: Go to the <b>Edge management > Instances</b> section and lick the <b>"Manage rule chains"</b> button.
+        title: 进入 <b>Edge management > Instances</b> 部分，点击 <b>"Manage rule chains"</b> 按钮。
     ===
         image: /images/pe/edge/rule-engine/assign-rule-chain-template-step-2.webp,
-        title: To assign the Rule chain template to the Edge, click the <b>"+"</b> button.
+        title: 要将规则链模板分配给 Edge，点击 <b>"+"</b> 按钮。
     ===
         image: /images/pe/edge/rule-engine/assign-rule-chain-template-step-3.webp,
-        title: In the pop-up window, select the rule chain from the drop-down menu and click the <b>"Assign"</b> button.
+        title: 在弹出窗口中从下拉菜单选择规则链，点击 <b>"Assign"</b> 按钮。
     ===
         image: /images/pe/edge/rule-engine/assign-rule-chain-template-step-4.webp,
-        title: The assigned rule chain template now appears at the top of the list. Assigning the rule chain template to the Edge instance enables the rule chain to process data from Edge devices according to the template configurations.
+        title: 已分配的规则链模板将显示在列表顶部。将规则链模板分配给 Edge 实例后，规则链将根据模板配置处理 Edge 设备的数据。
 '%}
 
 {% assign assignRuleChainTemplateToEdgeCE = '
     ===
         image: /images/edge/rule-engine/assign-rule-chain-template-step-1.webp,
-        title: Go to the <b>Edge management > Instances</b> section and lick the <b>"Manage edge rule chains"</b> button.
+        title: 进入 <b>Edge management > Instances</b> 部分，点击 <b>"Manage edge rule chains"</b> 按钮。
     ===
         image: /images/edge/rule-engine/assign-rule-chain-template-step-2.webp,
-        title: To assign the Rule chain template to the Edge, click the <b>"+"</b> button.
+        title: 要将规则链模板分配给 Edge，点击 <b>"+"</b> 按钮。
     ===
         image: /images/edge/rule-engine/assign-rule-chain-template-step-3.webp,
-        title: In the pop-up window, select the rule chain from the drop-down menu and click the <b>"Assign"</b> button.
+        title: 在弹出窗口中从下拉菜单选择规则链，点击 <b>"Assign"</b> 按钮。
     ===
         image: /images/edge/rule-engine/assign-rule-chain-template-step-4.webp,
-        title: The assigned rule chain template now appears at the top of the list. Assigning the rule chain template to the Edge instance enables the rule chain to process data from Edge devices according to the template configurations.
+        title: 已分配的规则链模板将显示在列表顶部。将规则链模板分配给 Edge 实例后，规则链将根据模板配置处理 Edge 设备的数据。
 '%}
 
 {% if docsPrefix == "pe/edge/" %}
@@ -125,24 +125,24 @@ Starting with **Edge version 4.0**, the **Rule chain** can be created and edited
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=assignRuleChainTemplateToEdgeCE %}
 {% endif %}
 
-## Verify Assigned Rule Chain on the Edge
+## 在 Edge 上验证已分配的规则链
 
 {% assign verifyRuleChainPE = '
     ===
         image: /images/pe/edge/rule-engine/verify-rule-chain-template-step-1.webp,
-        title: Sign in to your <b>ThingsBoard Edge PE</b> instance and go to the <b>Rule chains</b> section. To view the Rule chain configuration, click on the rule chain.
+        title: 登录 <b>ThingsBoard Edge PE</b> 实例，进入 <b>Rule chains</b> 部分。要查看规则链配置，点击该规则链。
     ===
         image: /images/pe/edge/rule-engine/verify-rule-chain-template-step-2.webp,
-        title: Verify that all settings and configurations are accurately reflected.
+        title: 确认所有设置和配置已正确反映。
 '%}
 
 {% assign verifyRuleChainCE = '
     ===
         image: /images/edge/rule-engine/verify-rule-chain-template-step-1.webp,
-        title: Sign in to your <b>ThingsBoard Edge PE</b> instance and go to the <b>Rule chains</b> section. To view the Rule chain configuration, click on the rule chain.
+        title: 登录 <b>ThingsBoard Edge PE</b> 实例，进入 <b>Rule chains</b> 部分。要查看规则链配置，点击该规则链。
     ===
         image: /images/edge/rule-engine/verify-rule-chain-template-step-2.webp,
-        title: Verify that all settings and configurations are accurately reflected.
+        title: 确认所有设置和配置已正确反映。
 '%}
 
 {% if docsPrefix == "pe/edge/" %}
@@ -150,4 +150,3 @@ Starting with **Edge version 4.0**, the **Rule chain** can be created and edited
 {% else %}
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=verifyRuleChainCE %}
 {% endif %}
-

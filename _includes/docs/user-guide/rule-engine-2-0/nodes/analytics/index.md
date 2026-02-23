@@ -1,8 +1,8 @@
-Analytics nodes perform statistical calculations and aggregations on incoming data streams and data across entities.
+Analytics 节点对入站数据流及跨实体数据执行统计计算与聚合。
 
-These nodes can compute statistical metrics (minimum, maximum, sum, average, count) from streaming data, track alarm counts or periodically aggregate attributes and telemetry data of entities.
+这些节点可从流数据计算统计指标（最小值、最大值、求和、平均值、计数），跟踪 alarm 数量，或定期聚合实体的 attributes 和 telemetry。
 
-- <span class="item-pe product-label-padding">[aggregate latest](/docs/user-guide/rule-engine-2-0/nodes/analytics/aggregate-latest)</span> — Periodically does aggregation of child entities attributes or latest timeseries for specified set of parent entities.
-- <span class="item-pe product-label-padding">[aggregate stream](/docs/user-guide/rule-engine-2-0/nodes/analytics/aggregate-stream)</span> — Calculates MIN/MAX/SUM/AVG/COUNT/UNIQUE based on the incoming data stream.
-- <span class="item-pe product-label-padding">[alarms count](/docs/user-guide/rule-engine-2-0/nodes/analytics/alarms-count)</span> — Count alarms when receives input message about new alarm.
-- <span class="item-pe product-label-padding">[alarms count (deprecated)](/docs/user-guide/rule-engine-2-0/nodes/analytics/alarms-count-deprecated)</span> — Periodically does count of alarms for selected set of entities.
+- <span class="item-pe product-label-padding">[aggregate latest](/docs/user-guide/rule-engine-2-0/nodes/analytics/aggregate-latest)</span> — 按周期对指定父实体集的子实体 attributes 或最新时序进行聚合。
+- <span class="item-pe product-label-padding">[aggregate stream](/docs/user-guide/rule-engine-2-0/nodes/analytics/aggregate-stream)</span> — 根据入站数据流计算 MIN/MAX/SUM/AVG/COUNT/UNIQUE。
+- <span class="item-pe product-label-padding">[alarms count](/docs/user-guide/rule-engine-2-0/nodes/analytics/alarms-count)</span> — 收到新 alarm 的输入消息时统计 alarm 数量。
+- <span class="item-pe product-label-padding">[alarms count (deprecated)](/docs/user-guide/rule-engine-2-0/nodes/analytics/alarms-count-deprecated)</span> — 按周期对所选实体集统计 alarm 数量。

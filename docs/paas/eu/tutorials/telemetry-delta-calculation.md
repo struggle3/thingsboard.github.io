@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Telemetry delta calculation
-description: Telemetry delta calculation using the Calculated fields feature
+title: 遥测增量计算
+description: 使用计算字段功能进行遥测增量计算
 
 ---
 

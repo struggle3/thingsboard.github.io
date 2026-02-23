@@ -1,20 +1,20 @@
 ---
 layout: docwithnav-gw
-title: ThingsBoard IoT Gateway Features
-description: ThingsBoard IoT Gateway features 
+title: ThingsBoard IoT Gateway 功能
+description: ThingsBoard IoT Gateway 功能概览 
 notitle: true
 
 ---
 
-## Features
+## 功能
 
-| **Feature name**        | **Link**            | **Description**                                                                             |
+| **功能名称**        | **链接**            | **描述**                                                                             |
 |:-|:-|-
-| **Remote logging**      | **[How to enable remote logging](/docs/iot-gateway/guides/how-to-enable-remote-logging/)**               | This feature can help you monitor the gateway status through the ThingsBoard WEB interface.                                                             |
-| **Gateway RPC methods** | **[How to use gateway RPC methods](/docs/iot-gateway/guides/how-to-use-gateway-rpc-methods/)**     | This feature can help you to control and get information from the gateway through ThingsBoard WEB interface.                                                                   |
+| **远程日志**      | **[如何启用远程日志](/docs/iot-gateway/guides/how-to-enable-remote-logging/)**               | 可通过 ThingsBoard Web 界面监控网关状态。                                                             |
+| **Gateway RPC 方法** | **[如何使用 gateway RPC 方法](/docs/iot-gateway/guides/how-to-use-gateway-rpc-methods/)**     | 可通过 ThingsBoard Web 界面控制网关并获取信息。                                                                   |
 |---
 
-## Next steps
+## 下一步
 
- - [General configuration](/docs/iot-gateway/configuration/) - how to configure ThingsBoard IoT gateway.
- - [Customization guide](/docs/iot-gateway/custom/) - how to create custom connectors and converters.
+ - [通用配置](/docs/iot-gateway/configuration/) - 如何配置 ThingsBoard IoT Gateway
+ - [自定义指南](/docs/iot-gateway/custom/) - 如何创建自定义 connector 与 converter

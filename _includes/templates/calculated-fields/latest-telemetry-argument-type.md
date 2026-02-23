@@ -1,24 +1,24 @@
-Uses the most recent **latest telemetry value** for the specified time series key.
+使用指定时序键的**最新遥测值**。
 
-**Examples:** temperature, humidity, latitude, longitude
+**示例：**temperature、humidity、latitude、longitude
 
-**Configuration:**
-- **Argument type**: Latest telemetry
-- Specify the **time series key**.
-- Set the **argument name** - the variable name used in the script logic.
-- Optionally, set **default value** for time series.
+**配置：**
+- **参数类型**：Latest telemetry
+- 指定**时序键**。
+- 设置**参数名称**，即脚本逻辑中使用的变量名。
+- 可选设置时序的**默认值**。
 
 {% assign latestTelemetryArgumentTypeCE = '
     ===
         image: /images/user-guide/calculated-fields/argument-latest-telemetry-1-ce.png
-        title: Select the **latest telemetry** (3) argument type, specify the **time series key** (4), and set the **argument name** (5). Optionally, define a default value (6). Finally, click **Add** (7).
+        title: 选择 **latest telemetry**(3) 参数类型，指定**时序键**(4)，设置**参数名称**(5)。可选定义默认值(6)。最后点击 **Add**(7)。
 '
 %}
 
 {% assign latestTelemetryArgumentTypePE = '
     ===
         image: /images/user-guide/calculated-fields/argument-latest-telemetry-1-pe.png
-        title: Select the **latest telemetry** (3) argument type, specify the **time series key** (4), and set the **argument name** (5). Optionally, define a default value (6). Finally, click **Add** (7).
+        title: 选择 **latest telemetry**(3) 参数类型，指定**时序键**(4)，设置**参数名称**(5)。可选定义默认值(6)。最后点击 **Add**(7)。
 '
 %}
 

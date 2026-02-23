@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Assisted living template
-description: Assisted living template overview
+title: 辅助生活模板
+description: 辅助生活模板概览
 
 solution-highlights:
     0:

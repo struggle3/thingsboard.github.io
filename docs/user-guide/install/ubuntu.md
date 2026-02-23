@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard CE on Ubuntu Server
-description: Installing ThingsBoard CE on Ubuntu Server
+title: 在 Ubuntu Server 上安装 ThingsBoard CE
+description: 在 Ubuntu Server 上安装 ThingsBoard CE
 
 ---
 

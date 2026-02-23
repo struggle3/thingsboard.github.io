@@ -2,37 +2,37 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Send email on alarm
-description: Send email Workflow
+title: 告警时发送邮件
+description: 发送邮件工作流
 
 add-recipients:
     0:
         image: /images/tutorials/send-email/send-email-add-recipients-1-pe.png
-        title: 'Specify the notification recipients.'
+        title: '指定通知接收人。'
 
 add-template:
     0:
         image: /images/tutorials/send-email/send-email-add-template-1-pe.png
-        title: 'Select the delivery method.'
+        title: '选择递送方式。'
     1:
         image: /images/tutorials/send-email/send-email-add-template-2-pe.png
-        title: 'Define the notification content.'
+        title: '定义通知内容。'
 
 add-rule:
     0:
         image: /images/tutorials/send-email/send-email-add-rule-1-pe.png
-        title: 'Specify the trigger, template, and notification recipients.'
+        title: '指定触发器、模板及通知接收人。'
     1:
         image: /images/tutorials/send-email/send-email-add-rule-2-pe.png
-        title: 'Configure trigger conditions.'
+        title: '配置触发条件。'
 
 verification:
     0:
         image: /images/tutorials/send-email/send-email-verification-1.png
-        title: 'The email notification is sent to all users of Customer A.'
+        title: '邮件通知已发送给客户 A 的所有用户。'
     1:
         image: /images/tutorials/send-email/send-email-verification-2.png
-        title: 'The email contains the device name and reported temperature value.'
+        title: '邮件包含设备名称和上报的温度值。'
 
 ---
 

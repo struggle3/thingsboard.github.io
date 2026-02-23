@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: ThingsBoard Professional Edition cluster setup with Kubernetes and Minikube guide
-description: ThingsBoard Professional Edition cluster setup with Kubernetes and Minikube guide
+title: ThingsBoard 专业版 Kubernetes 与 Minikube 集群设置指南
+description: ThingsBoard 专业版 Kubernetes 与 Minikube 集群设置指南
 
 ---
 
@@ -12,34 +12,34 @@ description: ThingsBoard Professional Edition cluster setup with Kubernetes and 
 * TOC
 {:toc}
 
-This guide will help you to setup ThingsBoard in cluster mode with Kubernetes and Minikube. 
-For this purpose, we will use docker container images available on [Docker Hub](https://hub.docker.com/search?q=thingsboard&type=image&image_filter=store).  
+本指南将帮助您使用 Kubernetes 和 Minikube 以集群模式设置 ThingsBoard。
+为此，我们将使用 [Docker Hub](https://hub.docker.com/search?q=thingsboard&type=image&image_filter=store) 上提供的 Docker 容器镜像。
 
-## Prerequisites
+## 前置条件
 
-ThingsBoard Microservices run on the Kubernetes cluster. You need to have a Kubernetes cluster, and the `kubectl` command-line tool must be configured to communicate with your cluster. 
-If you don't have Minikube installed, please follow [these instructions](https://kubernetes.io/docs/setup/learning-environment/minikube/).
+ThingsBoard 微服务在 Kubernetes 集群上运行。您需要拥有 Kubernetes 集群，且 `kubectl` 命令行工具必须已配置为与集群通信。
+若未安装 Minikube，请按照[此处说明](https://kubernetes.io/docs/setup/learning-environment/minikube/)操作。
 
-### Enable ingress addon
+### 启用 ingress 插件
 
-Ingress addon disabled by default in the Minikube, and available only in cluster providers.
-To enable ingress, please execute the following command:
+Minikube 中 ingress 插件默认禁用，仅在集群 provider 中可用。
+要启用 ingress，请执行以下命令：
 
 ```
 minikube addons enable ingress
 ```
 {: .copy-code}
 
-### Pull ThingsBoard PE images from docker hub
+### 从 Docker Hub 拉取 ThingsBoard PE 镜像
 
 {% include templates/install/dockerhub/checkout.md %}
 
-## Step 1. Review the architecture page
+## 步骤 1. 查看架构页面
 
-Starting ThingsBoard v2.2, it is possible to install ThingsBoard cluster using new microservices architecture and docker containers. 
-See [**microservices**](/docs/reference/msa/) architecture page for more details.
+自 ThingsBoard v2.2 起，可使用新的微服务架构和 Docker 容器安装 ThingsBoard 集群。
+详见 [**微服务**](/docs/reference/msa/) 架构页面。
 
-## Step 2. Clone ThingsBoard PE Kubernetes scripts
+## 步骤 2. 克隆 ThingsBoard PE Kubernetes 脚本
 
 ```bash
 git clone -b release-{{ site.release.ce_full_ver }} https://github.com/thingsboard/thingsboard-pe-k8s.git --depth 1
@@ -47,27 +47,27 @@ cd thingsboard-pe-k8s/minikube
 ```
 {: .copy-code}
 
-## Step 3. Obtain your license key
+## 步骤 3. 获取许可证密钥
 
-We assume you have already chosen your subscription plan or decided to purchase a perpetual license. 
-If not, please navigate to [pricing](/pricing/) page to select the best license option for your case and get your license. 
-See [How-to get pay-as-you-go subscription](https://www.youtube.com/watch?v=dK-QDFGxWek){:target="_blank"} or [How-to get perpetual license](https://www.youtube.com/watch?v=GPe0lHolWek){:target="_blank"} for more details.
+我们假定您已选择订阅计划或决定购买永久许可证。
+否则，请前往 [pricing](/pricing/) 页面选择适合的许可证选项并获取许可证。
+详见 [如何获取按需付费订阅](https://www.youtube.com/watch?v=dK-QDFGxWek){:target="_blank"} 或 [如何获取永久许可证](https://www.youtube.com/watch?v=GPe0lHolWek){:target="_blank"}。
 
 {% capture multiple_instances_license %}
 
-We will reference the license key you have obtained during this step as PUT_YOUR_LICENSE_SECRET_HERE later in this guide.
+本指南稍后将使用 PUT_YOUR_LICENSE_SECRET_HERE 引用您在本步骤获取的许可证密钥。
 
 {% endcapture %}
 {% include templates/warn-banner.md content=multiple_instances_license %}
 
-## Step 4. Configure your license key
+## 步骤 4. 配置许可证密钥
 
 ```bash
 nano tb-node.yml
 ```
 {: .copy-code}
 
-and put the license secret parameter:
+并填入许可证密钥参数：
 
 ```
 # tb-node StatefulSet configuration
@@ -76,151 +76,151 @@ and put the license secret parameter:
   value: "PUT_YOUR_LICENSE_SECRET_HERE"
 ```
 
-## Step 5. Review the architecture page
+## 步骤 5. 查看架构页面
 
-Starting ThingsBoard v2.2, it is possible to install ThingsBoard cluster using new microservices architecture and docker containers. 
-See [**microservices**](/docs/reference/msa/) architecture page for more details.
+自 ThingsBoard v2.2 起，可使用新的微服务架构和 Docker 容器安装 ThingsBoard 集群。
+详见 [**微服务**](/docs/reference/msa/) 架构页面。
 
-## Step 6. Configure Minikube
+## 步骤 6. 配置 Minikube
 
-By default ingress addon is disabled in the Minikube, and available only in cluster providers.
-To enable ingress, please execute the following command:
+Minikube 中 ingress 插件默认禁用，仅在集群 provider 中可用。
+要启用 ingress，请执行以下命令：
 
 ```
 minikube addons enable ingress
 ```
 {: .copy-code} 
 
-## Step 7. Configure ThingsBoard database
+## 步骤 7. 配置 ThingsBoard 数据库
 
-Before performing initial installation you can configure the type of database to be used with ThingsBoard.
-In order to set database type change the value of `DATABASE` variable in `.env` file to one of the following:
+执行初始安装前，可配置 ThingsBoard 使用的数据库类型。
+要设置数据库类型，请将 `.env` 文件中 `DATABASE` 变量的值改为以下之一：
 
-- `postgres` - use PostgreSQL database;
-- `hybrid` - use PostgreSQL for entities database and Cassandra for timeseries database;
+- `postgres` - 使用 PostgreSQL 数据库；
+- `hybrid` - 实体数据库使用 PostgreSQL，时序数据使用 Cassandra；
 
-**NOTE**: According to the database type corresponding kubernetes resources will be deployed (see `postgres.yml`, `cassandra.yml` for details).
+**注意**：将根据数据库类型部署相应的 kubernetes 资源（详见 `postgres.yml`、`cassandra.yml`）。
 
-## Step 8. Configure Trendz (Optional)
+## 步骤 8. 配置 Trendz（可选）
 
-### 8.1. Pull Trendz images from docker hub
+### 8.1. 从 Docker Hub 拉取 Trendz 镜像
 
 {% include templates/install/trendz/pull_trendz.md %}
 
-### 8.2. Create a Trendz database in the existing RDS instance
+### 8.2. 在现有 RDS 实例中创建 Trendz 数据库
 
 {% include templates/install/trendz/eks/k8s-trendz-db-creating.md %}
 
-### 8.3. Trendz starting
+### 8.3. 启动 Trendz
 
 {% include templates/install/trendz/k8s-trendz-starting.md %}
 
-## Step 9. Running
+## 步骤 9. 运行
 
-Execute the following command to run installation:
+执行以下命令进行安装：
 
 ```
 ./k8s-install-tb.sh --loadDemo
 ```
 {: .copy-code}
 
-Where:
+其中：
 
-- `--loadDemo` - optional argument. Whether to load additional demo data.
+- `--loadDemo` - 可选参数。是否加载额外演示数据。
 
-Execute the following command to deploy third-party resources:
+执行以下命令部署第三方资源：
 
 ```
 ./k8s-deploy-thirdparty.sh
 ```
 {: .copy-code}
 
-Type **'yes'** when prompted, if you are running ThingsBoard in `high-availability` `DEPLOYMENT_TYPE` for the first time or don't have configured Redis cluster.
+首次以 `high-availability` `DEPLOYMENT_TYPE` 运行 ThingsBoard 或尚未配置 Redis 集群时，提示时输入 **'yes'**。
 
-Execute the following command to deploy ThingsBoard resources:
+执行以下命令部署 ThingsBoard 资源：
  
 ```
 ./k8s-deploy-resources.sh
 ```
 {: .copy-code}
 
-After a while when all resources will be successfully started you can open `http://{your-cluster-ip}` in your browser (for ex. `http://192.168.99.101`).
-You can see your cluster IP using command:
+所有资源成功启动后，可在浏览器中打开 `http://{your-cluster-ip}`（例如 `http://192.168.99.101`）。
+可使用以下命令查看集群 IP：
 
 ```
 minikube ip
 ```
 {: .copy-code}
 
-You should see ThingsBoard login page.
+您应能看到 ThingsBoard 登录页面。
 
-Use the following default credentials:
+使用以下默认凭据：
 
-- **System Administrator**: sysadmin@thingsboard.org / sysadmin
+- **系统管理员**：sysadmin@thingsboard.org / sysadmin
 
-If you installed DataBase with demo data (using `--loadDemo` flag) you can also use the following credentials:
+若使用演示数据安装数据库（使用 `--loadDemo` 参数），还可使用以下凭据：
 
-- **Tenant Administrator**: tenant@thingsboard.org / tenant
-- **Customer User**: customer@thingsboard.org / customer
+- **租户管理员**：tenant@thingsboard.org / tenant
+- **客户用户**：customer@thingsboard.org / customer
 
-In case of any issues you can examine service logs for errors.
-For example to see ThingsBoard node logs execute the following command:
+如有问题，可查看服务日志以排查错误。
+例如，要查看 ThingsBoard 节点日志，请执行以下命令：
 
-1) Get the list of the running tb-node pods:
+1) 获取运行的 tb-node pod 列表：
 
 ```
 kubectl get pods -l app=tb-node
 ```
 {: .copy-code}
 
-2) Fetch logs of the tb-node pod:
+2) 获取 tb-node pod 的日志：
 
 ```
 kubectl logs -f [tb-node-pod-name]
 ```
 {: .copy-code}
 
-Where:
+其中：
 
-- `tb-node-pod-name` - tb-node pod name obtained from the list of the running tb-node pods.
+- `tb-node-pod-name` - 从运行的 tb-node pod 列表中获得的 pod 名称。
 
-Or use `kubectl get pods` to see the state of all the pods.
-Or use `kubectl get services` to see the state of all the services.
-Or use `kubectl get deployments` to see the state of all the deployments.
-See [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) command reference for details.
+或使用 `kubectl get pods` 查看所有 pod 状态。
+或使用 `kubectl get services` 查看所有服务状态。
+或使用 `kubectl get deployments` 查看所有部署状态。
+详见 [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) 命令参考。
 
-Execute the following command to delete all ThingsBoard microservices:
+执行以下命令删除所有 ThingsBoard 微服务：
 
 ```
 ./k8s-delete-resources.sh
 ```
 {: .copy-code}
 
-Execute the following command to delete all third-party microservices:
+执行以下命令删除所有第三方微服务：
 
 ```
 ./k8s-delete-thirdparty.sh
 ```
 {: .copy-code}
 
-Execute the following command to delete all resources (including database):
+执行以下命令删除所有资源（包括数据库）：
 
 ```
 ./k8s-delete-all.sh
 ```
 {: .copy-code}
 
-## Upgrading
+## 升级
 
-### Upgrading to new ThingsBoard version
+### 升级到新版 ThingsBoard
 
-In case you would like to upgrade, please pull the *latest* changes from `master` branch:
+若要升级，请从 `master` 分支拉取*最新*更改：
 ```
 git pull origin master
 ```
 {: .copy-code}
 
-Then, execute the following commands:
+然后执行以下命令：
 
 ```bash
 ./k8s-delete-resources.sh
@@ -229,7 +229,7 @@ Then, execute the following commands:
 ```
 {: .copy-code}
 
-Note, that you have to upgrade versions one by one (for example 4.0.0 -> 4.0.1 -> 4.1.0 etc).
+注意，需逐一升级版本（例如 4.0.0 -> 4.0.1 -> 4.1.0 等）。
 
 {% capture from-version-note %}
 <code style="color:black">"--fromVersion"</code> flag is required for earlier upgrade versions (prior to 3.9.1), for example:
@@ -241,10 +241,10 @@ See [Upgrade Instructions](/docs/user-guide/install/{{docsPrefix}}upgrade-instru
 {% endcapture %}
 {% include templates/info-banner.md content=from-version-note %}
 
-### Upgrading to new Trendz version (Optional)
+### 升级到新版 Trendz（可选）
 
 {% include templates/install/trendz/k8s-trendz-upgrading.md %}
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}

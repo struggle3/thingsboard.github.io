@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: MQTT Integration
-description: TBMQ MQTT integration guide
+title: MQTT 集成
+description: TBMQ MQTT 集成指南
 
 add-mqtt-integration:
   0:

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Indoor Bluetooth Gateway to ThingsBoard?"
+title: "如何将Indoor Bluetooth网关连接到ThingsBoard？"
 redirect_to: "/device-library/ce/indoor-bluetooth-gateway/"
 ---

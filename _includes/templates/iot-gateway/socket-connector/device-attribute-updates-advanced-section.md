@@ -1,13 +1,12 @@
-The “attributeUpdates” configuration allows you to set up the format of the corresponding attribute data that will be 
-sent to the server.
+"attributeUpdates" 配置允许设置将发送到服务器的对应 attribute 数据格式。
 
-| **Parameter**          | **Default value** | **Description**                                             |
+| **参数**          | **默认值** | **说明**                                             |
 |:-----------------------|:------------------|-------------------------------------------------------------|
-| encoding               | **utf-16**        | Encoding used when writing received string data to storage. |
-| attributeOnThingsBoard | **sharedName**    | Shared attribute name                                       |
+| encoding               | **utf-16**        | 将接收到的字符串数据写入存储时使用的编码。 |
+| attributeOnThingsBoard | **sharedName**    | Shared attribute 名称                                       |
 | ---                    |                   |                                                             |
 
-This subsection in configuration file looks like this:
+配置文件中本小节如下所示：
 
 ```json
 "attributeUpdates": [

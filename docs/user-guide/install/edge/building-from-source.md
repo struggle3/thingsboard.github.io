@@ -1,39 +1,38 @@
 ---
 layout: docwithnav-edge
-title: Building from sources
-description: Building ThingsBoard Edge from sources
+title: 从源码构建
+description: 从源码构建 ThingsBoard Edge
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to download and build ThingsBoard Edge from sources. Instructions listed below are tested on Ubuntu 22.04 LTS / 24.04 LTS
-and CentOS 8/9
+本指南介绍如何下载并从源码构建 ThingsBoard Edge。以下说明已在 Ubuntu 22.04 LTS / 24.04 LTS 及 CentOS 8/9 上验证。
 
-## Required tools
+## 必备工具
 
-This section contains installation instructions for build tools.
+本节包含构建工具的安装说明。
 
 ### Java
 
-ThingsBoard Edge is build using Java 17. You can use [following instructions](/docs/user-guide/install/linux#java) to install Java 17.
+ThingsBoard Edge 使用 Java 17 构建。可按 [以下说明](/docs/user-guide/install/linux#java) 安装 Java 17。
 
 ### Maven
 
-ThingsBoard build requires Maven 3.1.0+.
+ThingsBoard 构建需要 Maven 3.1.0 或更高版本。
 
 {% capture tabspec %}maven-installation
 A,Ubuntu,shell,resources/maven-ubuntu-installation.sh,/docs/user-guide/install/resources/maven-ubuntu-installation.sh
 B,CentOS,shell,resources/maven-centos-installation.sh,/docs/user-guide/install/resources/maven-centos-installation.sh{% endcapture %}
 {% include tabs.html %}
 
-**Please note** that maven installation may set Java 7 as a default JVM on certain Linux machines. 
-Use java installation [instructions](#java) to fix this. 
+**注意：** 在某些 Linux 环境下，Maven 安装可能将 Java 7 设为默认 JVM。
+可按 Java 安装 [说明](#java) 进行修正。
 
-## Source code
+## 源码
 
-You can clone source code of the project from the official [github repo](https://github.com/thingsboard/thingsboard-edge).
+可从官方 [GitHub 仓库](https://github.com/thingsboard/thingsboard-edge) 克隆项目源码。
 
 ```bash
 # checkout latest release branch
@@ -42,37 +41,37 @@ cd thingsboard-edge
 ```
 {: .copy-code}
 
-## Build
+## 构建
 
-Run the following command from the thingsboard edge folder to build the project:
+在 thingsboard-edge 目录下运行以下命令进行构建：
 
 ```bash
 mvn clean install -DskipTests
 ```
 {: .copy-code}
 
-## Build local docker images
+## 构建本地 Docker 镜像
 
-Make sure that [Docker](https://docs.docker.com/engine/install/) is installed.
+请确保已安装 [Docker](https://docs.docker.com/engine/install/)。
 
 ```bash
 mvn clean install -DskipTests -Ddockerfile.skip=false
 ```
 {: .copy-code}
 
-## Build artifacts
+## 构建产物
 
-You can find debian, rpm and windows packages in the target folder:
+可在 target 目录中找到 debian、rpm 及 Windows 安装包：
  
 ```bash
 application/target
 ```
 
-## Tips and tricks
+## 技巧与建议
 
-Thingsboard Edge is quite easy to build from sources on a brand-new clear environment.
+在全新的干净环境中从源码构建 ThingsBoard Edge 较为简单。
 
-Here are some tips and tricks to boost build experience: 
+以下建议可提升构建体验： 
 
 - [clean maven cache](https://www.baeldung.com/maven-clear-cache)
   ```bash

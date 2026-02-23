@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: SCADA dashboards
-description: SCADA IoT dashboards using ThingsBoard
+title: SCADA 仪表盘
+description: 使用 ThingsBoard 的 SCADA IoT 仪表盘
 
 scada-dashboard-layout-1:
     0:

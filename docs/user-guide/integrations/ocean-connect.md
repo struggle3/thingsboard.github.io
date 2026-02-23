@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
 title: OceanConnect Integration
-description: Huawei OceanConnect Integration guide 
+description: 华为 OceanConnect 集成指南 
 
 ---
 {% assign docsPrefix = "pe/" %}

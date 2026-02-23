@@ -1,112 +1,112 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Identity access and management (IAM) is essential for today’s business security strategy. 
-Many IAM systems use a method known as role-based access control (RBAC) to assign permissions for who can do what within specified IT resources.
+身份访问与管理 (IAM) 对 当前企业安全策略至关重要。 
+许多 IAM 系统使用 RBAC 来分配在指定 IT 资源中谁可执行何种操作的权限。
 
-Role-Based Access Control (RBAC) allows to create and grant advanced access by assigning a set of permissions. 
-RBAC roles refer to the levels of access that users may have. Access to resources can be limited to specific operations, such as viewing, creating, writing, or deleting data. 
-Similarly, you can restrict access to sensitive information, increasing business security.
+RBAC 通过分配一组权限来创建并授予高级访问。 
+RBAC 角色指用户可具有的访问层级。对资源的访问可限定于特定操作，如查看、创建、写入或删除数据。 
+同样可限制对敏感信息的访问，提升企业安全。
 
-## ThingsBoard CE vs PE security features comparison
+## ThingsBoard CE 与 PE 安全功能对比
 
 ### ThingsBoard Community Edition
 
 ![image](/images/user-guide/security/rbac/TB_CE.png)
 
-ThingsBoard Community Edition supports a straight-forward security model with three main roles: *System administrator*, *Tenant administrator*, and *Customer user*. 
-A system administrator is able to manage tenants, while a tenant administrator manages devices, dashboards, customers, and other entities that belong to a particular tenant.
-Customer user is able to view dashboards and control devices that are assigned to a specific customer.
-ThingsBoard Community Edition functionality is sufficient for a lot of simple use cases, especially building real-time [end-user dashboards](/docs/{{docsPrefix}}user-guide/dashboards/).
+ThingsBoard社区版采用简单安全模型，包含三个主要角色：*System administrator*、*Tenant administrator*、*Customer user*。 
+系统管理员可管理租户，租户管理员可管理属于该租户的设备、仪表板、客户及其他实体。
+客户用户可查看仪表板并控制分配给该客户的设备。
+ThingsBoard社区版功能足以应对多数简单场景，尤其是构建实时[端用户仪表板](/docs/{{docsPrefix}}user-guide/dashboards/)。
 
 ### ThingsBoard Professional Edition
 
 ![image](/images/user-guide/security/rbac/TB_PE.png)
 
-ThingsBoard Professional Edition brings much more flexibility in terms of user, customer, and role management. 
-It is designed to cover use cases for businesses and enterprises with multiple user groups that have different permissions but may interact with the same devices and assets. 
+ThingsBoard Professional Edition 在用户、客户和角色管理方面更加灵活。 
+面向拥有多用户组、权限不同但可能操作相同设备和资产的企业用例。 
 
-ThingsBoard supports the "recursive" customer hierarchy with tens of thousands of sub-customers.
-The root-level Owner is Tenant. Each Owner may have multiple Entity Groups, User Groups, and Customer Groups.
+ThingsBoard 支持数以万计子客户的「递归」客户层级。
+根级 Owner 为 Tenant。每个 Owner 可拥有多个 Entity Groups、User Groups 和 Customer Groups。
 
-Since Customer Groups can contain multiple Customers, each Customer can also own his Entity Groups, User Groups, and Customer Groups (i.e. sub-customer groups).
+由于 Customer Groups 可包含多个 Customers，每个 Customer 也可拥有其 Entity Groups、User Groups 和 Customer Groups（即子客户组）。
 
 {% capture difference %}
-**Note:** Each Entity has only one owner. However, Entities can belong to multiple Entity Groups that belong to the same owner.
+**注意：** 每个 Entity 仅有一个 owner。但 Entity 可属于同一 owner 的多个 Entity Groups。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-The ThingsBoard Professional Edition security model support advanced RBAC for IoT applications and includes security features such as:
+ThingsBoard Professional Edition 安全模型为 IoT 应用提供高级 RBAC，包含以下安全特性：
 
-  - ability to create a hierarchy of customers with multiple levels of sub-customers, independent users, and devices; 
-  - ability to create roles with a flexible set of permissions;
-  - ability to assign roles to exact user groups;
-  - ability to grant specific permissions to particular user groups over precise device groups.
+  - 支持创建多级子客户、独立用户和设备的客户层级； 
+  - 支持创建具有灵活权限集的角色；
+  - 支持将角色分配给指定用户组；
+  - 支持为指定用户组授予对特定设备组的精确权限。
 
-This document covers features that are exclusive to ThingsBoard Professional Edition. We will start with a glossary and will provide step-by-step examples of how to configure the most popular use cases.
+本文档介绍 ThingsBoard Professional Edition 独有功能。先给出术语表，再提供常用用例的逐步配置示例。
 
-## Glossary
+## 术语表
 
 **Tenant**
 
-A [Tenant](/docs/{{docsPrefix}}user-guide/ui/tenants/) is a separate business-entity: an individual, or an organization that owns or produces devices and assets. A tenant can have multiple tenant administrator users and millions of customers.
+[Tenant](/docs/{{docsPrefix}}user-guide/ui/tenants/) 是独立业务实体：个人或拥有/生产设备和资产的组织。一个租户可有多个租户管理员用户和数百万客户。
 
 **Customer**
 
-A [Customer](/docs/{{docsPrefix}}user-guide/ui/customers/) can be a separate business-entity: an individual, or an organization that purchases or uses tenant devices and/or assets. 
-Customer can also be a division within the Tenant organization. 
-Customer can have multiple users, inner customers, and millions of devices and/or assets.
+[Customer](/docs/{{docsPrefix}}user-guide/ui/customers/) 可为独立业务实体：个人或购买/使用租户设备和/或资产的组织。 
+Customer 也可以是租户组织内的部门。 
+Customer 可有多个用户、内嵌客户及数百万设备和/或资产。
 
 **Customer Group**
 
-The Customer group is also an Entity Group. It has the same features as regular Entity Group, but we have a separate term for Customer Group to be able to easily distinct Customer Groups and all other Entity Groups.
+Customer 组也是 Entity Group，与普通 Entity Group 功能相同，但单独命名为 Customer Group 以便与其它 Entity Group 区分。
 
 **User**
 
-Users are able to login to the ThingsBoard web interface, execute REST API calls, access devices, and assets if it's allowed. The User is also an Entity in ThingsBoard.
+用户可登录 ThingsBoard Web 界面、执行 REST API 调用，并在允许时访问设备和资产。User 在 ThingsBoard 中也是 Entity。
 
 **User Group**
 
-A User group is also an Entity Group. It has the same features as regular Entity Group, but we have a separate term for User Group to be able to easily distinct User Groups and all other Entity Groups.
+User 组也是 Entity Group，与普通 Entity Group 功能相同，但单独命名为 User Group 以便与其它 Entity Group 区分。
 
 **Entity**
 
-An Entity can be a device, asset, user, dashboard, entity view, etc. Any entity is managed by ThingsBoard. See [entities and relations](/docs/{{docsPrefix}}user-guide/entities-and-relations/) guide for more details.
+Entity 可为设备、资产、用户、仪表板、实体视图等。ThingsBoard 管理所有实体。详见[实体与关系](/docs/{{docsPrefix}}user-guide/entities-and-relations/)指南。
 
 **Entity Group**
 
-[Entity Groups](/docs/{{docsPrefix}}user-guide/groups/) are groups of entities of the same type, for example, Device Group or Asset Group. A single entity can simultaneously belong to multiple entity groups.
-For example, a thermostat device might belong to group "Thermostats", which contains all devices, and a more specific group like "Thermostats with FW v1.2.3".
+[Entity Groups](/docs/{{docsPrefix}}user-guide/groups/) 是同类型实体的分组，如 Device Group 或 Asset Group。单个实体可同时属于多个实体组。
+例如，温控器设备可属于包含所有设备的「Thermostats」组，以及更具体的「Thermostats with FW v1.2.3」组。
 
 **Owner**
 
-Each Entity Group belongs to one owner. This can be either Tenant or Customer. 
-Also, each Customer has only one owner. If the Customer Owner is a Tenant, it means that this is a top-level Customer.
-If the Customer owner is another Customer, it means that this is a sub-customer. There might be multiple levels of Customers in ThingsBoard.
+每个 Entity Group 属于一个 owner，可为 Tenant 或 Customer。 
+每个 Customer 也仅有一个 owner。若 Customer Owner 为 Tenant，表示其为顶级 Customer。
+若 Customer owner 为另一 Customer，表示其为子客户。ThingsBoard 中可存在多级 Customer。
 
 **Resource**
 
-Anything that has the secure APIs or represents a ThingsBoard Entity is a resource. 
-Examples of Entities are listed in the Entity definition above. Groups of entities are also resources, for example, Device Group, Asset Group, Dashboard Group. 
-Additional resources are white-labeling, audit logs, and admin settings.
+具有安全 API 或代表 ThingsBoard Entity 的对象均为 resource。 
+Entity 示例见上文 Entity 定义。实体组也是 resource，如 Device Group、Asset Group、Dashboard Group。 
+另还有 white-labeling、audit logs、admin settings 等 resource。
 
 **Operation**
 
-Operations represent actions that you might perform over Resources. 
-There are generic actions like "create", "read", "write", "delete", "add to group", "remove from group". There are also specific actions like "read/write credentials".
+Operation 表示对 Resource 执行的操作。 
+通用操作有「create」「read」「write」「delete」「add to group」「remove from group」。特定操作如「read/write credentials」。
 
 **Role**
  
-A Role contains a list of Resources and a list of allowed Operations for each of those resources. There are two Role types: Generic and Group.
-There is a special resource "All" which is a shortcut to all available resource types. 
-There is also a special operation "All" that is a shortcut to all possible operations.  
-We will explain the differences between them later in this article.   
+Role 包含 Resource 列表及每个 resource 的允许 Operation 列表。角色类型有两种：Generic 和 Group。
+特殊 resource「All」表示所有可用 resource 类型的快捷方式。 
+特殊 operation「All」表示所有可用 operation 的快捷方式。  
+后文将说明二者区别。   
  
 **Group Permissions Entity (GPE)**
 
-Group Permissions Entity is basically a mapping between User Group, Role, and optional Entity Group. See [Generic roles](/docs/{{docsPrefix}}user-guide/rbac/#generic-roles) and [Group roles](/docs/{{docsPrefix}}user-guide/rbac/#group-roles) for more details.
+Group Permissions Entity 本质上是在 User Group、Role 和可选 Entity Group 之间的映射。详见 [Generic roles](/docs/{{docsPrefix}}user-guide/rbac/#generic-roles) 和 [Group roles](/docs/{{docsPrefix}}user-guide/rbac/#group-roles)。
 
 ## Roles
 

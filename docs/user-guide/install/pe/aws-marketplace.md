@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Installing ThingsBoard PE from AWS Marketplace
-description: Installing ThingsBoard PE from AWS Marketplace
+title: 从 AWS 应用市场安装 ThingsBoard PE
+description: 从 AWS 应用市场安装 ThingsBoard PE
 redirect_from: 
     - "/docs/user-guide/install/aws-marketplace-pe/"
     - "/products/thingsboard-pe/aws"

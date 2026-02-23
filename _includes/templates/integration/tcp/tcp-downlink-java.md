@@ -1,4 +1,4 @@
-Copy the following script:
+请复制以下脚本：
 
 ```javascript
 // Encode downlink data from incoming Rule Engine message

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Micro Bluetooth Gateway to ThingsBoard?"
+title: "如何将Micro Bluetooth网关连接到ThingsBoard？"
 redirect_to: "/device-library/ce/micro-bluetooth-gateway/"
 ---

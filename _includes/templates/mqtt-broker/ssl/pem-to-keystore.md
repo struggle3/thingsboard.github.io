@@ -1,12 +1,12 @@
-## Convert PEM certificate and private key to PKCS12 keystore
+## 将 PEM 证书和私钥转换为 PKCS12 keystore
 
-Make sure you have the following files:
+确保具备以下文件：
 
-* `server.pem` – the public certificate (may include the chain);
-* `server_key.pem` – the private key;
-* (Optional) `ca.pem` – root or intermediate CA certificates.
+* `server.pem` – 公钥证书（可含链）；
+* `server_key.pem` – 私钥；
+*（可选）`ca.pem` – root 或 intermediate CA 证书。
 
-Run the following command to create a PKCS12 keystore file (`keystore.p12`):
+执行以下命令创建 PKCS12 keystore 文件 (`keystore.p12`)：
 
 ```bash
 openssl pkcs12 -export \
@@ -19,11 +19,11 @@ openssl pkcs12 -export \
 ```
 {: .copy-code}
 
-> `-certfile ca.pem \` line is optional, include if you have a CA certificate chain.
+> `-certfile ca.pem \` 行为可选，若有 CA 证书链则包含。
 >
-> Replace `changeit` with your desired keystore password. You will reference this password in your environment variables.
+> 将 `changeit` 替换为所需 keystore 密码。该密码会在环境变量中引用。
 
-### Tips and best practices
+### 提示与最佳实践
 
-* For production use, we **recommend PKCS12** (`.p12`) format as it is more interoperable than JKS.
-* Make sure your certificate chain is complete (including intermediates) when exporting.
+* 生产环境**建议**使用 PKCS12 (`.p12`) 格式，比 JKS 更具互操作性。
+* 导出时确保证书链完整（含 intermediates）。

@@ -1,80 +1,78 @@
 {% include templates/mqtt-broker/pe-tbmq-explore-banner.md %}
 
-**TBMQ {{tbmqSuffix}}** is an {{tbmqDefinition}} <a target="_blank" href="/products/mqtt-broker/">MQTT message broker</a> designed for massive scalability and high-performance message routing.
-It efficiently handles **millions** of concurrent client connections and delivers [millions of messages per second](/docs/{{docsPrefix}}mqtt-broker/reference/3m-throughput-single-node-performance-test/)
-with low latency in a single-node setup.
-In cluster mode, TBMQ’s capabilities scale even further, enabling it to support [large-scale IoT deployments](/docs/{{docsPrefix}}mqtt-broker/reference/100m-connections-performance-test/) 
-with exceptional reliability and throughput.
+**TBMQ {{tbmqSuffix}}** 是一款 {{tbmqDefinition}}<a target="_blank" href="/products/mqtt-broker/">MQTT 消息代理</a>，专为大规模可扩展性和高性能消息路由而设计。
+它在单节点部署下可高效处理**数百万**并发客户端连接，并以低延迟实现[每秒数百万条消息](/docs/{{docsPrefix}}mqtt-broker/reference/3m-throughput-single-node-performance-test/)的吞吐。
+在集群模式下，TBMQ 的能力进一步扩展，能够支持[大规模 IoT 部署](/docs/{{docsPrefix}}mqtt-broker/reference/100m-connections-performance-test/)，具备卓越的可靠性和吞吐量。
 
-At ThingsBoard, we’ve accumulated extensive experience in building scalable IoT applications, which has allowed us to identify **three key patterns** commonly found in MQTT-based solutions.
+ThingsBoard 在构建可扩展 IoT 应用方面积累了丰富经验，使我们能够识别 MQTT 解决方案中常见的**三种关键模式**：
 
-* **Fan-in pattern:**
-  In this scenario, a large number of devices generate high message volumes that are consumed by a smaller set of applications. 
-  These applications must process all incoming data streams reliably and without message loss.
+* **扇入（Fan-in）模式：**
+  在此场景中，大量设备产生高消息量，由较少的应用消费。
+  这些应用必须可靠地处理所有传入数据流，且不丢失消息。
 
-* **Fan-out (broadcast) pattern:**
-  Here, numerous devices subscribe to specific updates or notifications that must be delivered efficiently. 
-  A small number of incoming messages can result in a large number of outgoing updates, creating a high-output distribution flow.
+* **扇出（广播，Fan-out）模式：**
+  在此场景中，众多设备订阅特定更新或通知，需高效送达。
+  少量传入消息可能产生大量传出更新，形成高输出分发流。
 
-* **Point-to-point (P2P) pattern:**
-  This is a targeted one-to-one communication model, ideal for use cases like private messaging or command-response interactions. 
-  Messages are exchanged directly between a single publisher and a specific subscriber through uniquely defined topics.
+* **点对点（P2P）模式：**
+  这是针对性强的一对一通信模型，适用于私信或命令-响应交互等用例。
+  消息通过唯一定义的主题在单个发布者与特定订阅者之间直接交换。
 
-Recognizing these common patterns, we designed TBMQ to be exceptionally well-suited for all three.
-Developed in **Java**, TBMQ leverages leading open-source technologies, including **Kafka**, to provide low-latency message delivery, data durability, and horizontal scalability across the platform.
+基于这些常见模式，我们将 TBMQ 设计为对以上三种模式均能出色支持。
+TBMQ 使用 **Java** 开发，依托 **Kafka** 等领先开源技术，提供低延迟消息传递、数据持久化以及平台级水平可扩展性。
 
-## Full MQTT Specification Support
+## 完整 MQTT 规范支持
 
-TBMQ is fully compliant with the MQTT protocol, delivering complete support for all core MQTT features across both single-node and clustered environments.
-Whether you're building scalable IoT solutions or ensuring reliable communication for connected devices, TBMQ meets the latest standards for seamless interoperability.
+TBMQ 完全符合 MQTT 协议，在单节点和集群环境中均对 MQTT 核心功能提供完整支持。
+无论您是在构建可扩展的 IoT 解决方案，还是为连接设备提供可靠通信，TBMQ 均满足最新标准，实现无缝互操作性。
 
-### Supported MQTT versions
+### 支持的 MQTT 版本
 
-TBMQ supports the following MQTT versions:
+TBMQ 支持以下 MQTT 版本：
 
 * [MQTT 3.1](https://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html)
 * [MQTT 3.1.1](https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html)
 * [MQTT 5.0](https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html)
 
-Our implementation ensures reliable performance and compatibility across diverse use cases.
+我们的实现可在各类用例中提供可靠的性能和兼容性。
 
-## TBMQ Features
+## TBMQ 功能
 
-* All MQTT v3.x features
-* All MQTT v5.0 features
-* Multi-node cluster support
-* X.509 certificate chain authentication support
-* JWT authentication
-* Access control (ACL) based on client ID, username, or X.509 certificate chain
-* REST query support for clients’ sessions and subscriptions
-* Rate limits of message processing
-* Cluster and clients' metrics monitoring
-* Unauthorized clients
-* MQTT WebSocket client
-* Integrations with external systems (HTTP, MQTT, Kafka)
-* Kafka topics and consumer groups monitoring
-* Proxy protocol
-* Blocked clients
-* MQTT channel backpressure support
+* 所有 MQTT v3.x 功能
+* 所有 MQTT v5.0 功能
+* 多节点集群支持
+* X.509 证书链认证支持
+* JWT 认证
+* 基于客户端 ID、用户名或 X.509 证书链的访问控制（ACL）
+* 客户端会话和订阅的 REST 查询支持
+* 消息处理速率限制
+* 集群与客户端指标监控
+* 未授权客户端
+* MQTT WebSocket 客户端
+* 与外部系统的集成（HTTP、MQTT、Kafka）
+* Kafka 主题和消费者组监控
+* Proxy Protocol
+* 被阻止的客户端
+* MQTT 通道背压支持
 {% if docsPrefix == "pe/" %}
-* Single Sign-On (SSO)
-* Role-Based Access Control (RBAC)
-* White labeling
+* 单点登录（SSO）
+* 基于角色的访问控制（RBAC）
+* 白标
 {% endif %}
 
-## Architecture
+## 架构
 
-TBMQ is designed to be:
+TBMQ 的设计目标是：
 
-* **scalable**: the platform is horizontally scalable and built using the leading open-source technologies;
-* **fault-tolerant**: there is no single point of failure, and every node in the cluster is identical, ensuring high availability and fault tolerance;
-* **robust and efficient**: can manage millions of clients and process millions of messages per second;
-* **durable**: the broker ensures data durability, preventing data loss.
+* **可扩展**：平台支持水平扩展，基于领先的开源技术构建；
+* **容错**：无单点故障，集群中每个节点相同，确保高可用和容错；
+* **健壮高效**：可管理数百万客户端，每秒处理数百万条消息；
+* **持久化**：代理确保数据持久化，防止数据丢失。
 
-See [**TBMQ Architecture**](/docs/{{docsPrefix}}mqtt-broker/architecture) for more details.
+更多详情请参阅 [**TBMQ 架构**](/docs/{{docsPrefix}}mqtt-broker/architecture)。
 
-## Ready to get started?
+## 准备开始？
 
-Follow the getting started guide to learn the basics, or try TBMQ instantly on our public demo instance — no installation required.
+请按快速入门指南学习基础用法，或直接在我们的公共演示实例上试用 TBMQ——无需安装。
 
-<p><a href="/docs/{{docsPrefix}}mqtt-broker/getting-started/" class="button">Hello World Application</a> <a target="_blank" href="https://demo.tbmq.io/signup" class="button">Try TBMQ Live</a></p>
+<p><a href="/docs/{{docsPrefix}}mqtt-broker/getting-started/" class="button">Hello World 应用</a> <a target="_blank" href="https://demo.tbmq.io/signup" class="button">试用 TBMQ 实时版</a></p>

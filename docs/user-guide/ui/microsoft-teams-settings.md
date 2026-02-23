@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Microsoft Teams Settings
+title: Microsoft Teams 设置
 
 ---
 

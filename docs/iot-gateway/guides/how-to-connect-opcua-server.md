@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - samson0v
-title: How to connect OPC-UA server
-description: Understand how to connect OPC-UA server
+title: 如何连接 OPC-UA 服务器
+description: 了解如何连接 OPC-UA 服务器
 
 ---

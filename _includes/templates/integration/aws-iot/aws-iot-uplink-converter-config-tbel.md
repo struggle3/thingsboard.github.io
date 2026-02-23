@@ -1,4 +1,4 @@
-**Example for the Uplink converter:**
+**Uplink converter 示例：**
 
 ```ruby
 // decode payload to JSON

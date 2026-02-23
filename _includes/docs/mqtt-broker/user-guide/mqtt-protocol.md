@@ -2,105 +2,104 @@
 * TOC
 {:toc}
 
-## Introduction to MQTT
+## MQTT 简介
 
-When discussing IoT and real-time communication, one of the first questions is:
-<a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">What is MQTT?</a>
+在讨论 IoT 与实时通信时，首要问题之一便是：
+<a href="/products/mqtt-broker/" target="_blank" style="color: inherit; text-decoration: none;">什么是 MQTT？</a>
 
-MQTT is a lightweight messaging protocol designed for constrained devices and low-bandwidth, high-latency, or unreliable networks. 
-It follows the publish/subscribe messaging model, allowing devices to communicate efficiently in environments with limited resources, 
-such as IoT (Internet of Things) systems, mobile applications, and embedded systems. 
-MQTT is built for simplicity, ensuring minimal overhead and ease of implementation across a wide range of devices, from small sensors to large industrial systems.
+MQTT 是一种为受限设备及低带宽、高延迟或不可靠网络设计的轻量级消息协议。
+它采用发布/订阅消息模型，使设备能在资源受限的环境中高效通信，
+如 IoT（物联网）系统、移动应用和嵌入式系统。
+MQTT 以简洁为目标，保证最小开销，便于从微型传感器到大型工业系统等各种设备的实现。
 
-### MQTT protocol format
+### MQTT 协议格式
 
-The MQTT protocol is designed to minimize data transfer overhead. Its messages consist of a fixed header, an optional variable header, and a payload. 
-Here's a breakdown of the format:
+MQTT 协议旨在最小化数据传输开销。消息由固定头、可选可变头和负载组成。
+格式如下：
 
-1. **Fixed Header:**
-   - Present in every MQTT message, consisting of a control byte and flags.
-   - Indicates the type of message (e.g., CONNECT, PUBLISH, SUBSCRIBE) and specific control information.
+1. **固定头(Fixed Header)**：
+   - 存在于每条 MQTT 消息中，由控制字节和标志组成。
+   - 表明消息类型（如 CONNECT、PUBLISH、SUBSCRIBE）及具体控制信息。
 
-2. **Variable Header:**
-   - Contains additional information depending on the message type.
-   - Examples include packet identifiers or topic names in specific messages.
+2. **可变头(Variable Header)**：
+   - 根据消息类型包含附加信息。
+   - 例如报文标识符或特定消息中的主题名。
 
-3. **Payload:**
-   - Carries the actual application data or message content.
-   - For publish messages, this is the data being transmitted; for subscription messages, it contains the topic filters.
+3. **负载(Payload)**：
+   - 承载实际应用数据或消息内容。
+   - 对发布消息而言为传输的数据；对订阅消息而言为主题过滤器。
 
-The simple format, with its fixed and variable header components, enables MQTT to keep message sizes small and optimize network use.
+固定头与可变头的简单格式使 MQTT 能保持消息体积小并优化网络使用。
 
-### Comparison with other protocols
+### 与其他协议对比
 
-When compared to other widely-used messaging and communication protocols, MQTT stands out for its simplicity and focus on low-bandwidth environments. Here is a brief comparison:
+相比广泛使用的消息与通信协议，MQTT 以简洁及对低带宽环境的专注见长。简要对比如下：
 
-- **MQTT vs. HTTP:**
-   - **HTTP** is a request/response protocol typically used in web applications. It requires a higher bandwidth and more overhead, making it less suitable for devices with limited resources. HTTP is stateless, meaning each request from a client must include all necessary information, increasing data load.
-   - **MQTT** operates on a persistent connection, maintaining a lightweight, stateful session between client and broker. This allows for continuous data exchange with minimal overhead, making it ideal for IoT applications where low power and bandwidth consumption are priorities.
+- **MQTT vs HTTP**：
+   - **HTTP** 是常用于 Web 应用的请求/响应协议。需要更高带宽和更多开销，对资源受限设备不太适合。HTTP 为无状态，即客户端每次请求都须包含全部必要信息，增加数据负载。
+   - **MQTT** 在持久连接上工作，在客户端与 broker 间维持轻量、有状态的会话，支持以最小开销进行持续数据交换，适合低功耗与带宽消耗优先的 IoT 应用。
 
-- **MQTT vs. CoAP (Constrained Application Protocol):**
-   - **CoAP** is another protocol designed for constrained devices. Like HTTP, it operates over UDP and follows a request/response model, but with a reduced overhead for IoT applications.
-   - **MQTT**, by contrast, uses TCP for reliable message delivery and supports the publish/subscribe model, which is better suited for scenarios where devices need to send or receive messages without direct communication between sender and receiver.
+- **MQTT vs CoAP（受限应用协议）**：
+   - **CoAP** 是另一为受限设备设计的协议。与 HTTP 类似，基于 UDP 采用请求/响应模型，但为 IoT 减少了开销。
+   - **MQTT** 则使用 TCP 保证可靠投递，支持发布/订阅模型，更适合设备需收发消息而无需发送方与接收方直接通信的场景。
 
-- **MQTT vs. AMQP (Advanced Message Queuing Protocol):**
-   - **AMQP** is a more feature-rich protocol that supports complex messaging patterns and is commonly used in enterprise messaging systems.
-   - While **MQTT** focuses on simplicity and minimizing overhead, **AMQP** offers more control over messaging guarantees (e.g., message queues, routing) at the cost of increased complexity and resource requirements.
+- **MQTT vs AMQP（高级消息队列协议）**：
+   - **AMQP** 功能更丰富，支持复杂消息模式，常用于企业消息系统。
+   - **MQTT** 侧重简洁与最小开销，**AMQP** 在消息保证（如消息队列、路由）上提供更多控制，但复杂度和资源需求更高。
 
-In summary, MQTT excels in environments where simplicity, low bandwidth, and power efficiency are critical, 
-while other protocols like HTTP, CoAP, and AMQP may be better suited for applications that require richer feature sets, 
-more complex communication patterns, or higher network bandwidth.
+简言之，MQTT 在简洁、低带宽与能效关键的场景中优势明显，
+而 HTTP、CoAP、AMQP 等协议更适合需要更丰富特性、更复杂通信模式或更高网络带宽的应用。
 
-### Purpose of the MQTT protocol
+### MQTT 协议的用途
 
-The main goal of MQTT is to provide a flexible and efficient way to transfer data between devices, particularly in environments where:
-- **Low bandwidth** is a constraint.
-- **Power consumption** needs to be minimized.
-- **Network reliability** may be inconsistent.
+MQTT 的主要目标是在设备间提供灵活高效的数据传输，尤其适用于：
+- **低带宽**受限的环境。
+- **功耗**需尽可能降低。
+- **网络可靠性**不稳定。
 
-By using a small message footprint and lightweight communication, MQTT allows devices with limited processing power and memory to participate in data exchange. 
-It is particularly popular in IoT applications, enabling devices to communicate with each other, cloud platforms, or data processing systems with minimal overhead.
+通过小消息体积和轻量通信，MQTT 使处理能力和内存受限的设备也能参与数据交换。
+在 IoT 应用中尤其流行，使设备能以最小开销相互通信、与云平台或数据处理系统通信。
 
-Some common use cases of MQTT include:
-- **Smart home automation** (lighting, HVAC, security systems).
-- **Wearable devices** (fitness trackers, health monitors).
-- **Connected vehicles** (vehicle telemetry, fleet management).
-- **Industrial monitoring and control** (factory equipment sensors).
+MQTT 的典型用例包括：
+- **智能家居自动化**（照明、HVAC、安防系统）。
+- **可穿戴设备**（健身追踪、健康监测）。
+- **车联网**（车辆遥测、车队管理）。
+- **工业监控与控制**（工厂设备传感器）。
 
-### Core principles
+### 核心原则
 
-MQTT operates based on the following key principles:
+MQTT 基于以下核心原则工作：
 
-1. **Publish/Subscribe model:**
-    - **Publishers** send messages on specific topics without knowing who the receivers (subscribers) are.
-    - **Subscribers** express interest in certain topics and receive only messages that match their subscriptions.
-This model decouples message producers and consumers, allowing for more scalable and flexible communication patterns.
+1. **发布/订阅模型**：
+    - **发布者**向特定主题发送消息，无需知道接收者（订阅者）是谁。
+    - **订阅者**对特定主题表示兴趣，仅接收与其订阅匹配的消息。
+该模型解耦了消息生产者与消费者，支持更可扩展、更灵活的通信模式。
 
-2. **Broker-based communication:**
-    - The MQTT broker acts as a central intermediary that routes messages between publishers and subscribers.
-    - The broker is responsible for managing connections, distributing messages, and ensuring reliable delivery based on the requested Quality of Service (QoS) level.
-    - Multiple clients can publish and subscribe to the same topic, with the broker ensuring that messages are delivered to all interested subscribers.
+2. **基于 broker 的通信**：
+    - MQTT broker 作为中心中介，在发布者与订阅者之间路由消息。
+    - broker 负责管理连接、分发消息，并根据请求的服务质量(QoS)级别确保可靠投递。
+    - 多个客户端可对同一主题发布和订阅，broker 确保消息投递给所有 相关订阅者。
 
-## MQTT architecture
+## MQTT 架构
 
-At the core of the MQTT protocol is a simple but powerful architecture that enables scalable and efficient communication between devices. 
-The architecture is based on three key components: Clients, Brokers, and Topics, each playing a distinct role in ensuring seamless message delivery and communication.
+MQTT 协议的核心是简洁而强大的架构，实现设备间可扩展、高效的通信。
+架构基于三大组件：Client、Broker 和 Topic，各自在保障消息投递与通信顺畅中发挥不同作用。
 
-1. **Client:**
-    - In MQTT, a **client** can be any device or system that participates in the communication process. It can either **publish** data or **subscribe** to receive data. Clients are typically constrained devices such as sensors, mobile devices, or embedded systems.
-    - **Publisher:** A client that sends or "publishes" messages to a specific **topic**.
-    - **Subscriber:** A client that listens to or "subscribes" to topics of interest in order to receive the data being published.
-    - Clients do not need to know each other; they only interact with the **broker**. This makes MQTT scalable and efficient, especially when the number of devices grows significantly.
+1. **Client（客户端）**：
+    - 在 MQTT 中，**client** 可以是参与通信的任何设备或系统。它可**发布**数据或**订阅**以接收数据。客户端多为传感器、移动设备或嵌入式系统等受限设备。
+    - **Publisher（发布者）**：向特定**主题**发送或「发布」消息的客户端。
+    - **Subscriber（订阅者）**：监听或「订阅」感兴趣主题以接收已发布数据的客户端。
+    - 客户端无需相互了解，仅与 **broker** 交互。使 MQTT 可扩展且高效，尤其在设备数量显著增长时。
 
-2. **Broker:**
-    - The **broker** acts as a central server responsible for routing messages between clients. It ensures that messages published by one client are delivered to all clients subscribed to the relevant topic.
-    - The broker also manages client connections, handles message delivery based on the specified **QoS** (Quality of Service), and can persist messages for offline clients.
-    - The broker decouples the publisher and subscriber, allowing them to operate independently. This enables a more scalable system where clients don't need direct knowledge of one another.
+2. **Broker**：
+    - **broker** 作为中心服务器，负责在客户端间路由消息。保证由某客户端发布的消息送达所有订阅相关主题的客户端。
+    - broker 还管理客户端连接，根据指定 **QoS**（服务质量）处理消息投递，并可为离线客户端持久化消息。
+    - broker 解耦发布者与订阅者，使二者可独立运行，从而构建更可扩展的系统，客户端无需直接了解彼此。
 
-3. **Topics:**
-    - A **topic** is essentially a channel through which data is transmitted. When a publisher sends a message, it does so to a specific topic, and the broker delivers that message to all subscribers of the topic.
-    - Topics are arranged in a hierarchical structure, allowing subscribers to listen to specific topics or use wildcards (`+`, `#`) to subscribe to multiple topics at once.
-    - Example: A topic might be `/home/livingroom/temperature` where a client can publish temperature data, and any subscribers to this topic will receive that data.
+3. **Topic（主题）**：
+    - **topic** 本质上是传输数据的通道。发布者向特定主题发送消息，broker 将该消息投递给该主题的所有订阅者。
+    - 主题以层级结构组织，订阅者可监听特定主题或使用通配符(`+`、`#`)一次订阅多个主题。
+    - 示例：主题可为 `/home/livingroom/temperature`，客户端在此发布温度数据，该主题的任意订阅者都会收到该数据。
 
 ## MQTT message flow
 

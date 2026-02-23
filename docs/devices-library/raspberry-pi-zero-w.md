@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Raspberry Pi Zero W to ThingsBoard?"
+title: "如何将Raspberry Pi Zero W连接到ThingsBoard？"
 redirect_to: "/device-library/ce/raspberry-pi-zero-w/"
 ---

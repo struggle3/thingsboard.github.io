@@ -1,9 +1,9 @@
-Parses the incoming payload as a ThingsBoard alarm, fetches the latest alarm by ID, and compares its current status to a configured set of statuses.
-If the fetched status matches, the message is routed via `True`; otherwise via `False`. Parsing errors, missing alarm ID, or a non-existent alarm result in `Failure`.
+将入站负载解析为 ThingsBoard 告警，按 ID 获取最新告警，并将其当前状态与配置的状态集合比对。
+若获取的状态匹配，消息经 `True` 路由；否则经 `False` 路由。解析错误、缺少告警 ID 或不存在的告警会导致 `Failure`。
 
-## Preconditions
+## 前置条件
 
-Generally, the incoming message data should be a JSON alarm object:
+通常，入站消息 data 应为 JSON 告警对象：
 
 ```json
 {
@@ -47,7 +47,7 @@ Generally, the incoming message data should be a JSON alarm object:
 }
 ```
 
-However, the following object is sufficient, because only the `id` field is used:
+但由于仅使用 `id` 字段，以下对象即可满足要求：
 
 ```json
 {
@@ -58,19 +58,18 @@ However, the following object is sufficient, because only the `id` field is used
 }
 ```
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Alarm status** - required. A set of statuses: if the fetched alarm’s status matches any of them, the node routes the message via the `True` connection; otherwise, via the
-  `False` connection.
+* **告警状态** — 必填。状态集合：若获取的告警状态匹配其中任一，节点经 `True` 连接路由消息；否则经 `False` 连接路由。
 
-Available statuses:
+可用状态：
 
-- *Active Acknowledged* (`ACTIVE_ACK`)
-- *Active Unacknowledged* (`ACTIVE_UNACK`)
-- *Cleared Acknowledged* (`CLEARED_ACK`)
-- *Cleared Unacknowledged* (`CLEARED_UNACK`)
+- *Active Acknowledged*（`ACTIVE_ACK`）- 已确认活动中
+- *Active Unacknowledged*（`ACTIVE_UNACK`）- 未确认活动中
+- *Cleared Acknowledged*（`CLEARED_ACK`）- 已确认已清除
+- *Cleared Unacknowledged*（`CLEARED_UNACK`）- 未确认已清除
 
 ### JSON Schema
 
@@ -108,41 +107,41 @@ Available statuses:
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Parses the incoming message data as a ThingsBoard alarm object (the alarm must include an ID, so it must be an existing alarm).
-2. Fetches the alarm from the database to get the latest information.
-    1. If no such alarm is found, processing ends with a `Failure`. The usual failure-connection mechanics apply.
-3. Checks whether the status of the fetched alarm matches the configured alarm statuses.
-    1. If the status matches, the incoming message is routed to downstream nodes using the `True` connection.
-    2. If the status does not match, the incoming message is routed to downstream nodes using the `False` connection.
+1. 将入站消息 data 解析为 ThingsBoard 告警对象（告警必须包含 ID，即必须为已存在告警）。
+2. 从数据库获取告警以获取最新信息。
+    1. 若未找到该告警，处理以 `Failure` 结束。适用常规失败连接机制。
+3. 检查获取的告警状态是否匹配配置的告警状态。
+    1. 若匹配，使用 `True` 连接将入站消息路由至下游节点。
+    2. 若不匹配，使用 `False` 连接将入站消息路由至下游节点。
 
 {% capture status_property_note %}
-**Note:** `status` property is ignored for routing.
+**注意：** 路由时不考虑 `status` 属性。
 {% endcapture %}
 {% include templates/info-banner.md content=status_property_note %}
 
-## Output connections
+## 输出连接
 
-* `True`:
-    * If the incoming message data is successfully parsed into an alarm, the alarm is found, and its fetched status matches one of the statuses set in the node configuration.
-* `False`:
-    * If the incoming message data is successfully parsed into an alarm and the alarm is found, but its fetched status does not match any status set in the node configuration.
-* `Failure`:
-    * If the incoming message data failed to be parsed into an alarm.
-    * If the parsed alarm has no ID.
-    * If an alarm with such an ID was not found.
-    * If another unexpected error occurred during message processing.
+* `True`：
+    * 当入站消息 data 成功解析为告警、找到告警，且其获取的状态匹配节点配置中的状态集合之一时。
+* `False`：
+    * 当入站消息 data 成功解析为告警且找到告警，但其获取的状态不匹配节点配置中任一状态时。
+* `Failure`：
+    * 当入站消息 data 无法解析为告警时。
+    * 当解析的告警无 ID 时。
+    * 当未找到具有该 ID 的告警时。
+    * 消息处理过程中发生其他意外错误时。
 
-## Examples
+## 示例
 
-The examples below show only the **relevant** fields of the incoming message. Unless explicitly stated otherwise, other message fields may have any values.
+以下示例仅展示入站消息的**相关**字段。除非另有说明，其他消息字段可为任意值。
 
 ---
 
-### Example 1 — Status matches → `True`
+### 示例 1 — 状态匹配 → `True`
 
-**Incoming message data**
+**入站消息 data**
 
 ```json
 {
@@ -153,7 +152,7 @@ The examples below show only the **relevant** fields of the incoming message. Un
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -163,21 +162,21 @@ The examples below show only the **relevant** fields of the incoming message. Un
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Alarm exists with status `ACTIVE_UNACK`.
+告警存在且状态为 `ACTIVE_UNACK`。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-The node fetches the alarm by ID and compares its **fetched** status to the configured set; the status matches, so the message is routed via `True`.
+节点按 ID 获取告警，将其**获取的**状态与配置的集合比对；状态匹配，故消息经 `True` 路由。
 
-### Example 2 — Status does not match → `False`
+### 示例 2 — 状态不匹配 → `False`
 
-**Incoming message data**
+**入站消息 data**
 
 ```json
 {
@@ -188,7 +187,7 @@ The node fetches the alarm by ID and compares its **fetched** status to the conf
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -198,23 +197,23 @@ The node fetches the alarm by ID and compares its **fetched** status to the conf
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Alarm exists with status `ACTIVE_UNACK`.
+告警存在且状态为 `ACTIVE_UNACK`。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`False`** 路由。
 
-**Explanation**
+**说明**
 
-Fetched status (`ACTIVE_UNACK`) is not in the configured set.
+获取的状态（`ACTIVE_UNACK`）不在配置的集合中。
 
 ---
 
-### Example 3 — Cleared Acknowledged allowed → `True`
+### 示例 3 — 允许已确认已清除 → `True`
 
-**Incoming message data**
+**入站消息 data**
 
 ```json
 {
@@ -225,7 +224,7 @@ Fetched status (`ACTIVE_UNACK`) is not in the configured set.
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -235,23 +234,23 @@ Fetched status (`ACTIVE_UNACK`) is not in the configured set.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Alarm exists with status `CLEARED_ACK`.
+告警存在且状态为 `CLEARED_ACK`。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-Fetched status matches the configuration.
+获取的状态与配置匹配。
 
 ---
 
-### Example 4 — Alarm not found → `Failure`
+### 示例 4 — 未找到告警 → `Failure`
 
-**Incoming message data**
+**入站消息 data**
 
 ```json
 {
@@ -262,7 +261,7 @@ Fetched status matches the configuration.
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -273,23 +272,23 @@ Fetched status matches the configuration.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-No alarm with this ID exists.
+不存在具有该 ID 的告警。
 
-**Result**
+**结果**
 
-**`Failure`**.
+**`Failure`**。
 
-**Explanation**
+**说明**
 
-Lookup by ID returned no alarm; the node fails.
+按 ID 查询未返回告警，节点失败。
 
 ---
 
-### Example 5 — Missing ID in incoming message data → `Failure`
+### 示例 5 — 入站消息 data 中缺少 ID → `Failure`
 
-**Incoming message data**
+**入站消息 data**
 
 ```json
 {
@@ -297,7 +296,7 @@ Lookup by ID returned no alarm; the node fails.
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -308,23 +307,23 @@ Lookup by ID returned no alarm; the node fails.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-**`Failure`**.
+**`Failure`**。
 
-**Explanation**
+**说明**
 
-Alarm cannot be fetched without an ID; parsing/validation error leads to failure.
+无 ID 无法获取告警；解析/验证错误导致失败。
 
 ---
 
-### Example 6 — Malformed / non-alarm JSON → `Failure`
+### 示例 6 — 格式错误/非告警 JSON → `Failure`
 
-**Incoming message data**
+**入站消息 data**
 
 ```json
 {
@@ -332,7 +331,7 @@ Alarm cannot be fetched without an ID; parsing/validation error leads to failure
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -342,23 +341,23 @@ Alarm cannot be fetched without an ID; parsing/validation error leads to failure
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-**`Failure`**.
+**`Failure`**。
 
-**Explanation**
+**说明**
 
-Incoming message data cannot be parsed into an alarm object.
+入站消息 data 无法解析为告警对象。
 
 ---
 
-### Example 7 — Incoming status differs from database (database wins) → `False`
+### 示例 7 — 入站状态与数据库不同（以数据库为准）→ `False`
 
-**Incoming message data** (includes a status, but it is ignored for routing)
+**入站消息 data**（包含 status，但路由时忽略）
 
 ```json
 {
@@ -370,7 +369,7 @@ Incoming message data cannot be parsed into an alarm object.
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -380,14 +379,14 @@ Incoming message data cannot be parsed into an alarm object.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-Alarm exists with status `CLEARED_UNACK`.
+告警存在且状态为 `CLEARED_UNACK`。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`False`** 路由。
 
-**Explanation**
+**说明**
 
-Routing uses the **fetched** status (`CLEARED_UNACK`), not the incoming field.
+路由使用**获取的**状态（`CLEARED_UNACK`），而非入站字段。

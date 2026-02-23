@@ -1,215 +1,214 @@
 * TOC
 {:toc}
 
-Dashboard layouts organize how widgets appear on the dashboard grid. 
-Each dashboard state can have its own layout type, settings, and breakpoints, 
-which helps create tailored visual presentations for different IoT use cases and screen resolutions.
+仪表板布局决定部件在仪表板网格上的呈现方式。
+每个仪表板状态可拥有自己的布局类型、设置和断点，
+便于针对不同 IoT 用例和屏幕分辨率打造定制化的视觉呈现。
 
-To modify layouts for a specific [state](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"}, follow these steps:
+要修改特定[状态](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"}的布局，请按以下步骤操作：
 
-1. Enter [dashboard edit mode](/docs/{{docsPrefix}}user-guide/dashboards/#edit-mode){:target="_blank"} by clicking the "Edit mode" button in the upper right corner of the window;
-2. Click the "Layouts" button located in the upper left corner of the dashboard window. This will open the layout management window.
+1. 点击窗口右上角的“Edit mode”按钮进入[仪表板编辑模式](/docs/{{docsPrefix}}user-guide/dashboards/#edit-mode){:target="_blank"}；
+2. 点击仪表板窗口左上角的“Layouts”按钮。将打开布局管理窗口。
 
 {% include images-gallery.html imageCollection="layout-1" %}
 
-In the "Manage layouts" window, you can select the layout type suitable for your needs:
+在“Manage layouts”窗口中，可选择适合需求的布局类型：
 
-- **Default** - a flexible, general-purpose layout;
-- **SCADA** - best suited for displaying SCADA HMIs (Human-Machine Interfaces);
-- **Divider** - useful for separating sections visually.
+- **Default** - 灵活的通用布局；
+- **SCADA** - 最适合显示 SCADA HMI（人机界面）；
+- **Divider** - 用于视觉分隔区块。
 
 {% include images-gallery.html imageCollection="select-layout-type-1" %}
 
 <br>
-Breakpoints allow you to create responsive layouts that adapt to different screen sizes.
-You can add and configure breakpoints to ensure your dashboard looks perfect on any device.
-Further details on setting up each layout type and configuring breakpoints will be discussed below.
+断点允许创建可适应不同屏幕尺寸的响应式布局。
+可添加和配置断点，以确保仪表板在任何设备上都能完美呈现。
+下文将详细讨论各布局类型的设置及断点配置。
 
 {% include images-gallery.html imageCollection="breakpoints-1" %}
 
-## Layout types
+## 布局类型
 
-The platform supports three layout types: Default, SCADA, and Divider. Each dashboard [state](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"} has exactly one layout type configured.
+平台支持三种布局类型：Default、SCADA 和 Divider。每个仪表板[状态](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"}仅配置一种布局类型。
 
-### Default layout
+### 默认布局
 
-The **Default** layout is a general-purpose layout that fits most dashboards. 
-This layout type supports screen breakpoints for responsive design.
+**Default**布局是适用于大多数仪表板的通用布局。
+此布局类型支持响应式设计的屏幕断点。
 
 {% include images-gallery.html imageCollection="layout-default-1" %}
 
 ### SCADA
 
-The **SCADA** layout is designed for creating SCADA HMIs (Human-Machine Interfaces). 
-SCADA HMIs typically consist of scalable widgets called SCADA symbols. 
-However, you can also combine [SCADA symbols](/docs/{{docsPrefix}}user-guide/scada){:target="_blank"} with over 500 existing ThingsBoard [widgets](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"} on the same layout.
-This layout type also supports screen breakpoints for responsive design.
+**SCADA**布局专为创建 SCADA HMI（人机界面）设计。
+SCADA HMI 通常由名为 SCADA 符号的可缩放部件组成。
+但也可在同一布局上将[SCADA 符号](/docs/{{docsPrefix}}user-guide/scada){:target="_blank"}与 500 多个 ThingsBoard [部件](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"}结合使用。
+此布局类型同样支持响应式设计的屏幕断点。
 
 {% include images-gallery.html imageCollection="layout-scada-1" %}
 
-### Divider
+### 分隔布局
 
-The legacy **Divider** layout lets you split one "Default" layout into two sub-layouts: left and right. 
-You can configure the width of these sub-layouts using either a fixed pixel value or a percentage of the screen width. 
-Most layout parameters available for the "Default" layout are also supported by the sub-layouts. 
-However, sub-layouts do not support breakpoints at this time.
+旧版**Divider**布局可将一个“Default”布局拆分为左右两个子布局。
+可使用固定像素值或屏幕宽度百分比配置这些子布局的宽度。
+“Default”布局的大多数布局参数同样适用于子布局。
+但目前子布局不支持断点。
 
 {% include images-gallery.html imageCollection="layout-divider-1" %}
 
-Just to see how it can look like, let's set up both layouts in completely different ways. Add a background image to the left layout and apply a new background color to the right layout.
-And we resize the window in a certain percentage ratio to each other (it is just an example and definitely not a recommendation). After setting the parameters, click the "Save" button in the Layouts window to see the changes.
+为展示效果，让我们以完全不同的方式配置左右布局。为左侧布局添加背景图，为右侧布局应用新的背景色。
+并以一定百分比比例调整窗口大小（仅为示例，非推荐做法）。设置参数后，点击 Layouts 窗口中的“Save”按钮查看更改。
 
 {% include images-gallery.html imageCollection="layout-divider-2" %}
 
-## Breakpoints
+## 断点
 
-Breakpoints were introduced in ThingsBoard 3.8.0. 
-They allow you to define different layout settings and widgets based on the screen width of the end-user.
+ThingsBoard 3.8.0 引入了断点。
+允许根据最终用户的屏幕宽度定义不同的布局设置和部件。
 
-Each dashboard [state](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"} has a `Default` breakpoint. 
-This layout is used if no other breakpoints match the current screen resolution.
+每个仪表板[状态](/docs/{{docsPrefix}}user-guide/dashboards/#states){:target="_blank"}拥有一个`Default`断点。
+若没有其他断点匹配当前屏幕分辨率，则使用此布局。
 
-You can define the following breakpoints:
+可定义以下断点：
 
-* Desktop (xl) - min 1920px, max 5000px;
-* Desktop (lg) - min 1280px, max 1919px;
-* Laptop (md) - min 960px, max 1279px;
-* Tablet (sm) - min 600px, max 959px;
-* Mobile (xs) - max 599px.
+* Desktop (xl) - 最小 1920px，最大 5000px；
+* Desktop (lg) - 最小 1280px，最大 1919px；
+* Laptop (md) - 最小 960px，最大 1279px；
+* Tablet (sm) - 最小 600px，最大 959px；
+* Mobile (xs) - 最大 599px。
 
-### Adding a Breakpoint
+### 添加断点
 
-To add a breakpoint, open the "Manage layouts" window and click the "+" button in the breakpoints table. 
-When adding a new breakpoint, you can select the corresponding screen resolution and copy both widgets and layout settings from another breakpoint.
+要添加断点，打开“Manage layouts”窗口并点击断点表中的“+”按钮。
+添加新断点时，可选择对应的屏幕分辨率，并可从其他断点复制部件和布局设置。
 
 {% include images-gallery.html imageCollection="adding-breakpoint-1" %}
 
-You can click the "gears" icon to open the layout settings for that breakpoint. Layout settings determine the background configurations of the dashboard and how widgets will be arranged on it.
+可点击“齿轮”图标打开该断点的布局设置。布局设置决定仪表板的背景配置及部件在仪表板上的排列方式。
 
 {% include images-gallery.html imageCollection="adding-breakpoint-2" %}
 
-You can also click the "waste-bin" icon to delete a breakpoint. Confirm deleting the breakpoint in the dialog box.
+也可点击“垃圾桶”图标删除断点。在对话框中确认删除断点。
 
 {% include images-gallery.html imageCollection="adding-breakpoint-3" %}
 
-### Switching between Breakpoints
+### 切换断点
 
-When a user opens the dashboard, the appropriate breakpoint layout is automatically selected based on the screen resolution.
+用户打开仪表板时，将根据屏幕分辨率自动选择对应的断点布局。
 
-When editing the dashboard, users can switch between layouts using the combobox located in the top-left corner of the screen.
+编辑仪表板时，用户可使用屏幕左上角的下拉框在布局间切换。
 
 {% include images-gallery.html imageCollection="switching-between-breakpoints-1" %}
 
-### Breakpoints demo dashboard
+### 断点示例仪表板
 
-We have prepared a [demo dashboard](/docs/user-guide/resources/example_of_breakpoints_on_my_dashboard.json){:target="_blank"} with some configured breakpoints. You can [import](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"} it into your environment to explore how to switch between different breakpoints in edit mode.
-You can also change the screen resolution in your browser's developer tools to see how layouts change when crossing certain screen resolution breakpoints.
+我们准备了配置了若干断点的[示例仪表板](/docs/user-guide/resources/example_of_breakpoints_on_my_dashboard.json){:target="_blank"}。可[导入](/docs/{{docsPrefix}}user-guide/dashboards/#import-dashboard){:target="_blank"}到您的环境中，在编辑模式下探索如何在不同断点间切换。
+还可在浏览器开发者工具中更改屏幕分辨率，观察跨越特定屏幕分辨率断点时布局的变化。
 
-See how the same dashboard looks on different screen types:
+查看同一仪表板在不同屏幕类型上的效果：
 
 {% include images-gallery.html imageCollection="breakpoints-demo-dashboard-1" %}
 
-### Widget references vs widget copies
+### 部件引用与部件副本
 
-**Widget references**
+**部件引用**
 
-When working with multiple breakpoints, it's important to understand the difference between a widget reference and a widget copy.
+使用多个断点时，理解部件引用与部件副本的区别很重要。
 
-By default, when a new breakpoint layout is created, all widgets from the source layout are copied by reference. 
-For example, if two breakpoints—Default and Desktop (xl)—reference the same chart widget, any changes made to the widget configuration will be synchronized between both layouts. 
-However, changes to the widget's position and size are independent for each layout.
+默认情况下，创建新断点布局时，源布局中的所有部件均按引用复制。
+例如，若 Default 和 Desktop (xl) 两个断点引用同一图表部件，对部件配置的任何更改将在两个布局间同步。
+但部件的位置和大小在各布局中独立设置。
 
-- To copy a widget by reference, right-click on the widget and select "Copy reference" (Ctrl+R);
-- To paste the widget as a reference in another breakpoint layout, right-click on the empty space and select "Paste reference" (Ctrl+I).
+- 要按引用复制部件，右键点击部件并选择“Copy reference”（Ctrl+R）；
+- 要将部件作为引用粘贴到另一断点布局，右键点击空白处并选择“Paste reference”（Ctrl+I）。
 
 {% include images-gallery.html imageCollection="copy-widget-by-reference-1" %}
 
-In edit mode, you can identify a referenced widget by the presence of a "Reference" button in the widget's edit panel.
+在编辑模式下，可通过部件编辑面板中的“Reference”按钮识别引用部件。
 
 {% include images-gallery.html imageCollection="identify-referenced-widget-1" %}
 
-To replace the reference with the widget copy, click the "Reference" button on the widget editing panel, or right-click on the widget and select "Replace reference with widget copy".
+要将引用替换为部件副本，点击部件编辑面板上的“Reference”按钮，或右键点击部件并选择“Replace reference with widget copy”。
 
 {% include images-gallery.html imageCollection="replace-reference-with-widget-copy-1" %}
 
 <br>
-**Widget copies**
+**部件副本**
 
-A widget copy is a complete and independent copy of the widget configuration. Changes made to the copied widget will not affect the original widget.
+部件副本是部件配置的完整独立副本。对副本部件的更改不会影响原始部件。
 
-- To copy a widget, right-click on the widget and select "Copy" (Ctrl+C);
-- To paste the widget in another breakpoint layout, right-click on the empty space and select "Paste" (Ctrl+V).
+- 要复制部件，右键点击部件并选择“Copy”（Ctrl+C）；
+- 要将部件粘贴到另一断点布局，右键点击空白处并选择“Paste”（Ctrl+V）。
 
 {% include images-gallery.html imageCollection="copy-widget-1" %}
 
-## Layout settings
+## 布局设置
 
-Click the "gear" icon opposite the breakpoint to open the layout settings.
+点击断点旁的“齿轮”图标打开布局设置。
 
 {% include images-gallery.html imageCollection="layout-settings-1" %}
 
-### Columns count
+### 列数
 
-While editing the dashboard, specifically the size and space of your widgets, you can notice a whitish grid on a gray background.
-These are columns that determine how many widgets can fit horizontally on a Dashboard.
-By default, the number of columns is 24. You can increase or decrease their number. The minimum number of columns is 10. The maximum number is 1000 columns.
+编辑仪表板尤其是调整部件大小和间距时，可看到灰色背景上的浅色网格。
+这些是决定仪表板水平方向可容纳部件数量的列。默认列数为 24。可增加或减少列数。最小列数为 10，最大为 1000 列。
 
 {% include images-gallery.html imageCollection="layout-settings-columns-count-1" %}
 
-### Minimum layout width
+### 最小布局宽度
 
-By default, the minimum number of columns is 24. You can increase or decrease this number. The minimum number of columns is 10. We recommend that the value of this parameter be equal to or more than the column count.
+默认最小列数为 24。可增加或减少该数值。最小列数为 10。建议此参数值大于或等于列数。
 
 {% include images-gallery.html imageCollection="layout-settings-minimum-layout-width-1" %}
 
-### Margin between widgets
+### 部件间距
 
-This margin type determines how much space is between widgets.
-By default, the margin is set to 10. You can remove it by setting the "**Margin between widgets**" field to 0 or increasing the margin, meaning the distance between widgets. The maximum allowable margin is 50.
+此边距类型决定部件之间的间距。
+默认边距为 10。可将“**部件间距**”设为 0 移除边距，或增加边距（即部件间的距离）。最大允许边距为 50。
 
 {% include images-gallery.html imageCollection="layout-settings-margin-between-widgets-1" %}
 
-### Apply margin to the sides of the layout
+### 将边距应用到布局两侧
 
-This parameter determines whether the "Margin between widgets" value should be applied to the sides of the layout.
+此参数决定是否应将“部件间距”值应用到布局两侧。
 
 {% include images-gallery.html imageCollection="layout-settings-apply-margin-to-sides-of-layout-1" %}
 
-### Auto fill layout height
+### 自动填充布局高度
 
-By default, the "**Auto fill layout height**" checkbox is unchecked so that you can freely adjust the size of the widgets.
-If you tick this option, all the widgets on the dashboard will fill in vertically in the space of the screen.
+默认情况下，“**自动填充布局高度**”复选框未勾选，以便自由调整部件大小。
+勾选此选项后，仪表板上的所有部件将在屏幕空间内垂直填充。
 
 {% include images-gallery.html imageCollection="layout-settings-auto-fill-layout-height-1" %}
 
-### Background color
+### 背景颜色
 
-The "Background color setting allows you to customize the color of the dashboard's background.
-To change the background color, click the color in the small square on the right in the background color section.
-In the popup window, select the desired color and transparency. Then click "Select". Afterward, apply the layout settings. After saving, you can see the customized background.
+“背景颜色”设置允许自定义仪表板的背景颜色。
+要更改背景颜色，点击背景颜色部分右侧小方框中的颜色。
+在弹出窗口中选择所需颜色和透明度。然后点击“Select”。之后应用布局设置。保存后即可看到自定义背景。
 
 {% include images-gallery.html imageCollection="layout-settings-background-color-1" %}
 
-### Background image
+### 背景图片
 
-This option allows you to set an image as the background of the dashboard. You can choose an image from the [Image gallery](/docs/{{docsPrefix}}user-guide/image-gallery/){:target="_blank"} or set a direct link.
+此选项允许将图片设为仪表板背景。可从[图片库](/docs/{{docsPrefix}}user-guide/image-gallery/){:target="_blank"}选择图片或设置直链。
 
-To select an image from the gallery, click "Browse from gallery". Choose an already uploaded image or add a new one.
-To more precisely adjust the position of the image, click the dropdown menu of the "**Background size mode**" section and select how exactly the image will fill the background space.
-For example, let's choose "Cover" and click "Save" to see how the background has changed.
+要从图库选择图片，点击“Browse from gallery”。选择已上传的图片或添加新图片。
+要更精确地调整图片位置，点击“**背景尺寸模式**”部分的下拉菜单，选择图片如何填充背景区域。
+例如，选择“Cover”并点击“Save”查看背景变化。
 
 {% include images-gallery.html imageCollection="layout-settings-background-image-1" %}
 
-### Mobile layout settings
+### 移动布局设置
 
-By default, the "**Auto fill layout height**" checkbox is unchecked so that you can freely adjust the size of the widgets for your mobile device.
-If you tick this option, all the widgets on the Dashboard will fill in vertically in the space of the screen.
+默认情况下，“**自动填充布局高度**”复选框未勾选，以便自由调整移动设备的部件大小。
+勾选此选项后，仪表板上的所有部件将在屏幕空间内垂直填充。
 
 {% include images-gallery.html imageCollection="layout-mobile-settings-auto-fill-layout-height-1" %}
 
-#### Mobile row height
+#### 移动行高
 
-Mobile row height determines how tall you'd like your widgets to be on your mobile device.
-By default, the height is set to 70px, but you can make it smaller or larger. The minimum Mobile row height is 5px, and the maximum allowable value is 200px.
+移动行高决定移动设备上部件的高度。
+默认高度为 70px，可调大或调小。最小移动行高为 5px，最大允许值为 200px。
 
 {% include images-gallery.html imageCollection="layout-mobile-settings-auto-fill-layout-height-2" %}

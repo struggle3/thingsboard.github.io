@@ -11,10 +11,10 @@
 * TOC 
 {:toc}
 
-The ThingsBoard Notification center is a comprehensive tool for sending, managing, and automating notifications within the platform. It allows for a variety of notification methods, including web, email, mobile application, SMS, and integrations with Slack and Microsoft Teams. 
-Users can manually send notifications, automate them through REST API, or set triggers based on events within the system. Users may also schedule delivery of the notification for a particular time.
+ThingsBoard 通知中心是平台上发送、管理和自动化通知的集中工具。支持多种通知方式，包括 Web、邮件、移动应用、SMS，以及与 Slack 和 Microsoft Teams 的集成。
+用户可手动发送通知、通过 REST API 实现自动化，或基于系统内事件设置触发器。还可为通知预约送达时间。
 
-The Notification center is accessible through the sidebar menu and includes options for [sending notifications](#send-notification), viewing [inbox](#inbox) and [sent](#sent) messages, [managing recipients](#recipients), [creating templates](#templates), and [setting up rules](#rules) for automated notifications.
+通知中心可通过侧边栏菜单访问，提供[sending notifications](#send-notification)、查看[收件箱](#inbox)和[已发送](#sent)、[管理收件人](#recipients)、[创建模板](#templates)以及为自动通知[设置规则](#rules)等功能。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/notifications/notification-center-1-ce.png)
@@ -23,65 +23,64 @@ The Notification center is accessible through the sidebar menu and includes opti
 ![image](/images/user-guide/notifications/notification-center-1-pe.png)
 {% endif %}
 
-Let's look at each of the key components of the notification center below.
+下面逐一介绍通知中心的主要功能。
 
-## Notification delivery methods
+## 通知投递方式
 
-ThingsBoard offers several notification delivery methods to keep you and your customers promptly informed about any events in your IoT solution:
+ThingsBoard 提供多种通知投递方式，便于你与客户及时了解 IoT 方案中的事件：
 
-- **Web**. Receive notifications directly within the ThingsBoard web interface. This is perfect for users who are always logged in.
-- **Mobile app**. Receive instant push notifications directly to your smartphone through the [{{mobilePrefix}}]({{mobileUrl}}). Stay informed about all events in your IoT solution, even when you're on the go.<br>
-To use this notification delivery method, you first need to configure the {{mobilePrefix}} and make some settings in the "Mobile settings" section on the ThingsBoard platform itself.
-These steps are detailed in this [documentation]({{mobileGuide}}).
-- **SMS**. The ThingsBoard supports notification delivery via SMS to mobile devices, providing the ability to deliver important information even in the absence of internet access. {% if docsPrefix == 'pe/' %}To send SMS notifications, you need to set up an [SMS provider](/docs/{{docsPrefix}}user-guide/ui/sms-provider-settings/){:target="_blank"}. Use the system administrator's configuration or set the settings at your level.{% endif %}{% if docsPrefix == null %}To send notifications via SMS, a system administrator should set up the [SMS provider](/docs/{{docsPrefix}}user-guide/ui/sms-provider-settings/){:target="_blank"} properly.{% endif %}
-- **Email**. Receive notifications directly in your email inbox. Perfect for users who prefer to stay informed through their email accounts. {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}To send email notifications, you must configure an [outgoing mail server](/docs/{{docsPrefix}}user-guide/ui/mail-settings/){:target="_blank"}. Use the system administrator's configuration or set the settings at your level.{% endif %}{% if docsPrefix == null %}To send notifications via email, a system administrator should configure an [outgoing mail server](/docs/{{docsPrefix}}user-guide/ui/mail-settings/){:target="_blank"} properly.{% endif %}
-- **Slack**. Integrate Slack with ThingsBoard to send notifications as messages to individual users or channels within your Slack workspace. To use this method of notification delivery, you first need to configure the Slack settings in ThingsBoard using [this guide](/docs/{{docsPrefix}}user-guide/ui/slack-settings/){:target="_blank"}.
-- **Microsoft Teams**. Integration of Microsoft Teams with ThingsBoard allows for delivering notifications in the form of messages to specific channels in your Microsoft Teams environment. To use this method a tenant administrator must get **webhook URL** for a needed Microsoft Teams channel using this [guide](/docs/{{docsPrefix}}user-guide/ui/microsoft-teams-settings/){:target="_blank"}.
+- **Web**。在 ThingsBoard Web 界面内直接接收通知，适合常驻登录的用户。
+- **移动应用**。通过 [{{mobilePrefix}}]({{mobileUrl}}) 在手机上接收即时推送通知，随时随地了解 IoT 方案中的事件。<br>
+使用此方式前需先在平台上配置 {{mobilePrefix}}，并在「移动设置」中完成相应配置，详见[文档]({{mobileGuide}})。
+- **SMS**。ThingsBoard 支持通过 SMS 向移动设备投递通知，可在无网络环境下传递重要信息。 {% if docsPrefix == 'pe/' %}To send SMS notifications, you need to set up an [SMS provider](/docs/{{docsPrefix}}user-guide/ui/sms-provider-settings/){:target="_blank"}. Use the system administrator's configuration or set the settings at your level.{% endif %}{% if docsPrefix == null %}To send notifications via SMS, a system administrator should set up the [SMS provider](/docs/{{docsPrefix}}user-guide/ui/sms-provider-settings/){:target="_blank"} properly.{% endif %}
+- **邮件**。在邮箱中直接接收通知，适合偏好邮件提醒的用户。 {% if (docsPrefix == "pe/") or (docsPrefix contains "paas/") %}To send email notifications, you must configure an [outgoing mail server](/docs/{{docsPrefix}}user-guide/ui/mail-settings/){:target="_blank"}. Use the system administrator's configuration or set the settings at your level.{% endif %}{% if docsPrefix == null %}To send notifications via email, a system administrator should configure an [outgoing mail server](/docs/{{docsPrefix}}user-guide/ui/mail-settings/){:target="_blank"} properly.{% endif %}
+- **Slack**。将 Slack 与 ThingsBoard 集成，以消息形式将通知发送到 Slack 工作区中的用户或频道。使用前需在 ThingsBoard 中按[此指南](/docs/{{docsPrefix}}user-guide/ui/slack-settings/){:target="_blank"}配置 Slack。
+- **Microsoft Teams**。将 Microsoft Teams 与 ThingsBoard 集成后，可将通知以消息形式发送到指定 Teams 频道。租户管理员需按[此指南](/docs/{{docsPrefix}}user-guide/ui/microsoft-teams-settings/){:target="_blank"}获取所需频道的 **webhook URL**。
 
-## Send notification
+## 发送通知
 
-To send a notification manually, follow these steps:
+手动发送通知的步骤：
 
-**1.** Click the "<b>Send notification</b>" button in the top-right corner to open the new notification wizard.
+**1.** 点击右上角「<b>发送通知</b>」按钮，打开新建通知向导。
 
-**2. Setup:**
+**2. 设置：**
 
-- Specify <b>recipients</b>
-- Select at least one <b>delivery method</b>.
-- Optionally:
-  - [Attach a report](/docs/{{docsPrefix}}user-guide/reporting/attaching-report-to-notification/){:target="_blank"} (available only for <b>Email</b> and <b>Slack</b> delivery methods).
-  - <b>Schedule the notification</b> for a later time.
-- Click "<b>Next</b>".
+- 指定 <b>收件人</b>
+- 至少选择一种 <b>投递方式</b>。
+- 可选：
+  - [附加报表](/docs/{{docsPrefix}}user-guide/reporting/attaching-report-to-notification/){:target="_blank"}（仅 <b>Email</b> 和 <b>Slack</b> 支持）。
+  - <b>预约通知</b>在指定时间送达。
+- 点击「<b>下一步</b>」。
 
-**3. Compose:**
+**3. 编辑：**
 
-- Configure the subject and message content for each selected delivery method.   
-- [Optionally] For the <b>Web</b> delivery method, you can add an <b>action button</b> to the notification:
-  - Enter the <b>button text</b>.
-  - Select the <b>action type</b> ("<b>Open dashboard</b>" or "<b>Open URL link</b>").
-  - <b>Specify the URL or dashboard</b> to be opened when the button is clicked.
-  - You can also display the icon in the notification and set its color.
-- Click "<b>Next</b>".
+- 为所选投递方式配置主题和消息内容。
+- （可选）对 <b>Web</b> 方式可添加 <b>操作按钮</b>：
+  - 输入 <b>按钮文字</b>。
+  - 选择 <b>操作类型</b>（「<b>打开仪表盘</b>」或「<b>打开链接</b>」）。
+  - <b>指定</b>点击时打开的 <b>URL 或仪表盘</b>。
+  - 可为通知设置图标及颜色。
+- 点击「<b>下一步</b>」。
 
-**4. Review:**
+**4. 预览：**
 
-Here you can preview how your message will look. If everything is set up correctly, click "<b>Send</b>".
+在此处预览消息效果。若配置正确，点击「<b>发送</b>」。
 
 {% include images-gallery.html imageCollection="notification-center-send-notification-1" %}
 
-The recipient will receive the notification in the ThingsBoard interface and can view it on the Notification center page or by clicking the bell icon in the top-right corner of the screen.
-Clicking the "Open this dashboard" button in the notification will open the corresponding dashboard.
+收件人会在 ThingsBoard 界面收到通知，可在通知中心页面或通过右上角铃铛图标查看。
+点击通知中的「打开此仪表盘」按钮会打开对应仪表盘。
 
 {% include images-gallery.html imageCollection="notification-center-send-notification-2" %}
 
-## Inbox
+## 收件箱
 
-Browse your incoming notifications, mark them as read, or delete them on the "Inbox" tab. By default, only unread notifications are displayed. To view all notifications, switch to the "All" tab in the incoming notifications table.
+在「收件箱」标签页中浏览收到的通知、标记为已读或删除。默认仅显示未读通知，要查看全部可切换到「全部」标签。
 
 {% include images-gallery.html imageCollection="notification-center-inbox" %}
 
-You can also view your incoming notifications by clicking on the bell icon in the top right corner of the screen. The number next to the icon indicates the number of unread notifications. 
-Here you can also read the notification, mark it as read, or take action by clicking the action button.
+也可点击右上角铃铛图标查看收件。图标旁数字表示未读数量。
+在此可阅读通知、标记为已读，或通过操作按钮执行操作。
 
 {% include images-gallery.html imageCollection="notification-center-inbox-bell-icon" %}
 

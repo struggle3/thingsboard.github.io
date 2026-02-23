@@ -1,16 +1,16 @@
 ---
 layout: docwithnav
-title: Working with Alarm details
-description: Create and Clear Alarms with details
+title: 使用 Alarm 详情
+description: 创建与清除带详情的 Alarms
 
 ---
 
 * TOC
 {:toc}
 
-## Use case
+## 使用场景
 
-This tutorial is based on the [create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#use-case) tutorial and it's use case.
+本教程基于 [create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#use-case) 教程及其使用场景。
 We will reuse the rule chains from the above-mentioned tutorial and will configure the Alarm Details function in the Create and Clear Alarm nodes.
 Let's assume your device is using DHT22 sensor to collect and push temperature readings to ThingsBoard.
 DHT22 sensor is good for -40 to 80°C temperature readings. We want generate Alarms if temperature is out of good range.
@@ -213,7 +213,7 @@ copy device access token from then device **Thermostat Home**.
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/copy-access-token.png)
 
-***you need to replace $ACCESS_TOKEN with actual device token**
+***you need to replace$ACCESS_TOKENwith actual device token**
 
 Lets post temperature = 99. Alarm should be created:
 

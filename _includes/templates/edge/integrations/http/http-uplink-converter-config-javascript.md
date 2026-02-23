@@ -1,22 +1,22 @@
-Copy the following script:
+复制以下脚本：
 
 ```ruby
-// Decode an uplink message from a buffer
-// payload - array of bytes
-// metadata - key/value object
+// 从 buffer 解码上行消息
+// payload - 字节数组
+// metadata - 键/值对象
 
 /** Decoder **/
 
-// decode payload to string
+// 将 payload 解码为字符串
 // var payloadStr = decodeToString(payload);
 
-// decode payload to JSON
+// 将 payload 解码为 JSON
 var data = decodeToJson(payload);
 
 var deviceName = data.deviceName;
 var deviceType = data.deviceType;
 
-// Result object with device attributes/telemetry data
+// 包含设备属性/遥测数据的结果对象
 var result = {
    deviceName: deviceName,
    deviceType: deviceType,
@@ -29,15 +29,15 @@ var result = {
    }
 };
 
-/** Helper functions **/
+/** 辅助函数 **/
 
 function decodeToString(payload) {
    return String.fromCharCode.apply(String, payload);
 }
 function decodeToJson(payload) {
-   // covert payload to string.
+   // 将 payload 转换为字符串
    var str = decodeToString(payload);
-   // parse string to JSON
+   // 将字符串解析为 JSON
    var data = JSON.parse(str);
    return data;
 }
@@ -46,6 +46,6 @@ return result;
 ```
 {: .copy-code}
 
-Choose "Create new" and paste copied code to the Decoder function section. Click "Next";
+选择「Create new」并将复制的代码粘贴到 Decoder 函数部分。点击「Next」；
 
 ![image](/images/pe/edge/integrations/http/add-http-integration-template-2-java-edge.png)

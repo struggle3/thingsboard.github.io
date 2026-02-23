@@ -8,37 +8,37 @@
 * TOC
 {:toc}
 
-TCP Integration allows to stream data from devices which use a TCP transport protocol to ThingsBoard and converts payloads of these devices into the ThingsBoard format.
+TCP集成可从采用TCP传输协议的设备向ThingsBoard流式传输数据，并将这些设备的负载转换为ThingsBoard格式。
 
 {% capture difference %}
-**Please note** TCP Integration can be started only as [remote Integration](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}. It could be started on the same machine, where TB instance is running, or you can start in on another machine, that has access over the network to the TB instance.
+**请注意**：TCP集成只能以[远程集成](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}方式启动。可在运行TB实例的同一台机器上启动，也可在能通过网络访问TB实例的另一台机器上启动。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Please review the integration diagram to learn more.
+请参阅集成示意图了解更多。
 
 ![image](/images/user-guide/integrations/tcp-integration.svg)
 
-## Prerequisites
+## 前置条件
 
-In this tutorial, we will use:
+本教程将使用：
 
 {% if docsPrefix == "pe/" %}
- - The instance of [ThingsBoard Professional Edition](https://thingsboard.io/docs/user-guide/install/pe/installation-options/){:target="_blank"} installed locally;
+ - 本地安装的[ThingsBoard专业版](https://thingsboard.io/docs/user-guide/install/pe/installation-options/){:target="_blank"}实例；
 {% endif %}
 {% if docsPrefix contains "paas/" %}
- - ThingsBoard Professional Edition instance — [{{hostName}}](https://{{hostName}}){:target="_blank"};
+ - ThingsBoard Professional Edition实例 — [{{hostName}}](https://{{hostName}}){:target="_blank"};
 {% endif %}
- - TCP Integration, running externally and connected to the cloud ThingsBoard PE instance;
- - **echo** command which intended to display a line of text, and will redirect it's output to **netcat** (**nc**) utility;
- - **netcat** (**nc**) utility to establish TCP connections, receive data from there and transfer them;    
+ - 在外部运行且已连接云端ThingsBoard PE实例的TCP集成；
+ - **echo** 命令，用于显示一行文本并将其输出重定向到**netcat**（**nc**）工具；
+ - **netcat**（**nc**）工具，用于建立TCP连接、接收数据并传输；
 
-Let's assume that we have a sensor which is sending current temperature and humidity readings.
-Our sensor device **SN-002** publishes it's temperature and humidity readings to TCP Integration on **10560** port to the machine where TCP Integration is running.
+假设我们有一台正在发送当前温度和湿度读数的传感器。
+传感器设备**SN-002**将其温度和湿度读数发布到运行TCP集成的机器的**10560**端口。
 
-For demo purposes we assume that our device is smart enough to send data in 3 different payload types:
+为便于演示，我们假设设备能够以3种不同负载类型发送数据：
 
-You can select payload type based on your device capabilities and business cases:
+可根据设备能力和业务场景选择负载类型：
 
 {% capture threepayloadtypes %}
 Text payload<br>%,%text%,%templates/integration/tcp/text-payload-type-tcp.md%br%
@@ -48,27 +48,27 @@ Binary payload<br>%,%binary%,%templates/integration/tcp/binary-payload-type-tcp.
 {% include content-toggle.liquid content-toggle-id="threepayloadtypes" toggle-spec=threepayloadtypes %} 
 
 {% capture difference %}
-**Please note**
+**请注意**
 <br>
-On the machine, where TCP Integration is running, port **10560** must be opened for incoming connections - **nc** utility must be able to connect to TCP socket. In case you are running it locally, it should be fine without any additional changes.
+在运行TCP集成的机器上，必须开放**10560**端口以接收入站连接——**nc**工具需能连接到TCP socket。若在本地运行，一般无需额外修改。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Add TCP integration
+## 添加TCP集成
 
-**1. Basic settings**.
+**1. 基本设置**
 
-Go to the "**Integrations**" page of the "**Integrations center**" section. Click "plus" button to start adding new integration. Select type "**TCP**" integration and click "**Next**";
+进入「**Integrations center**」的「**Integrations**」页面，点击「plus」按钮开始添加新集成。选择「**TCP**」类型并点击「**Next**」；
 
 ![image](/images/user-guide/integrations/tcp/tcp-integration-setup-1-pe.png)
 
 <br>
-**2. Uplink data converter**. 
+**2. 上行数据转换器**
 
-An uplink converter that is a script for parsing and transforming the data received by TCP integration to a format that ThingsBoard can consume.
-**deviceName** and **deviceType** are required, while **attributes** and **telemetry** are optional. **attributes** and **telemetry** are flat key-value objects. Nested objects are not supported.
+上行转换器是用于解析并将TCP集成接收的数据转换为ThingsBoard可消费格式的脚本。
+**deviceName**和**deviceType**为必填，**attributes**和**telemetry**为可选。**attributes**和**telemetry**为扁平键值对象，不支持嵌套对象。
 
-Choose device payload type to for decoder configuration:
+选择设备负载类型以配置解码器：
 
 {% capture tcpuplinkdecoderconfiguration %}
 Text payload<br>%,%text%,%templates/integration/tcp/uplink-decoder-text-payload-tcp.md%br%
@@ -78,28 +78,28 @@ Binary payload<br>%,%binary%,%templates/integration/tcp/uplink-decoder-binary-pa
 {% include content-toggle.liquid content-toggle-id="tcpuplinkdecoderconfiguration" toggle-spec=tcpuplinkdecoderconfiguration %}
 
 {% capture difference %}
-**NOTE**
+**注意**
 <br>
-Although the Debug mode is very useful for development and troubleshooting, leaving it enabled in production mode may tremendously increase the disk space, used by the database, because all the debugging data is stored there. It is highly recommended to turn the Debug mode off when done debugging.
+尽管Debug mode对开发和故障排查很有用，但在生产模式下长期启用会大幅增加数据库占用的磁盘空间，因所有调试数据都会存储其中。强烈建议调试完成后关闭Debug mode。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**3. Downlink data converter**.
+**3. 下行数据转换器**
 
-At the step of adding a downlink converter, you can also select a previously created or create a new downlink converter. But for now, leave the "**Downlink data converter**" field empty. Click "**Skip**";
+在添加下行转换器步骤，可选择已有或新建下行转换器。此处保持「**Downlink data converter**」为空。点击「**Skip**」；
 
 ![image](/images/user-guide/integrations/tcp/tcp-integration-setup-3-pe.png)
 
 <br>
-**4. Connection**.
+**4. 连接**
 
-As you mentioned earlier, "**Execute remotely**" option is checked and can not be modified - TCP Integration can be only **remote** type.
+如前所述，「**Execute remotely**」选项已勾选且不可修改——TCP集成只能为**remote**类型。
 
-By default, TCP Integration will use **10560** port, but you can change this to any available port in your case.
+默认情况下TCP集成使用**10560**端口，您可根据需要改为任意可用端口。
 
-Please note down **Integration key** and **Integration secret** - we will use these values later in the configuration on the remote TCP Integration itself.
+请记录**Integration key**和**Integration secret**——后续在远程TCP集成配置中将使用这些值。
 
-Choose device payload type for **Handler Configuration**
+选择**Handler Configuration**的设备负载类型
 
 {% capture handlerconfiguration %}
 Text payload<br>%,%text%,%templates/integration/tcp/tcp-handler-configuration-text.md%br%
@@ -108,26 +108,26 @@ Binary payload<br>%,%binary%,%templates/integration/tcp/tcp-handler-configuratio
 
 {% include content-toggle.liquid content-toggle-id="tcpintegrationhandlerconfiguration" toggle-spec=handlerconfiguration %}
 
-We leave other options by default, but there is brief description of them:
-- **Max number of pending connects on the socket** - The maximum queue length for incoming connection indications (a request to connect) is set to the backlog parameter. If a connection indication arrives when the queue is full, the connection is refused;
-- **Size of the buffer for inbound socket** - the size in KBytes of the socket data receive buffer;
-- **Size of the buffer for outbound socket** - the size in KBytes of the socket data send buffer;
-- **Enable sending of keep-alive messages on connection-oriented sockets** - a flag indicating that probes should be periodically sent across the network to the opposing socket to keep the connection alive;
-- **Forces a socket to send the data without buffering (disable Nagle's buffering algorithm)** - disables Nagle's algorithm on the socket which delays the transmission of data until a certain volume of pending data has accumulated.
+其他选项保持默认，简要说明如下：
+- **Max number of pending connects on the socket** — 入站连接请求队列的最大长度。若队列已满时收到连接请求，连接将被拒绝；
+- **Size of the buffer for inbound socket** — socket数据接收缓冲区的KB大小；
+- **Size of the buffer for outbound socket** — socket数据发送缓冲区的KB大小；
+- **Enable sending of keep-alive messages on connection-oriented sockets** — 标识是否定期向对端socket发送探测以保持连接存活；
+- **Forces a socket to send the data without buffering (disable Nagle's buffering algorithm)** — 禁用socket上的Nagle算法，该算法会延迟发送直到累积一定数据量。
 
-Click "**Add**" to finish adding the TCP integration.
+点击「**Add**」完成TCP集成添加。
 
-## Installing and running external TCP Integration
+## 安装并运行外部TCP集成
 
-Please refer to the [remote integration guide](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"} and install TCP integration service locally or on separate machine.
+请参阅[远程集成指南](/docs/{{peDocsPrefix}}user-guide/integrations/remote-integrations){:target="_blank"}，在本地或单独机器上安装TCP集成服务。
 
-Please use **Integration key** and **Integration secret** from the above section for your TCP Integration configuration.
+请使用上文中的**Integration key**和**Integration secret**配置您的TCP集成。
 
-## Send uplink message
+## 发送上行消息
 
-Once ThingsBoard TCP Integration has been created, the TCP server starts, and then it waits for data from the devices.
+创建ThingsBoard TCP集成后，TCP服务启动并等待设备数据。
 
-Choose device payload type to send uplink message
+选择设备负载类型以发送上行消息
 
 {% capture senduplink %}
 Text payload<br>%,%text%,%templates/integration/tcp/tcp-send-uplink-text.md%br%
@@ -136,20 +136,20 @@ Binary payload<br>%,%binary%,%templates/integration/tcp/tcp-send-uplink-binary.m
 
 {% include content-toggle.liquid content-toggle-id="tcpintegrationsenduplink" toggle-spec=senduplink %}
 
-Going to the "**Devices**" page you should find a **SN-002** device provisioned by the TCP integration.
-Click on the device, navigate to the "**Latest telemetry**" tab to see "**temperature**" key and its value (25.7) there.
+进入「**Devices**」页面，应能看到由TCP集成配置的**SN-002**设备。
+点击设备，进入「**Latest telemetry**」标签可查看「**temperature**」键及其值(25.7)。
 
 ![image](/images/user-guide/integrations/tcp/tcp-integration-create-device-1-pe.png)
 
-If your payload contains "**humidity**" telemetry, you should see "humidity" key and its value (69) there as well.
+若负载包含「**humidity**」遥测，也应能看到「humidity」键及其值(69)。
 
-## Advanced usage: downlink
+## 高级用法：下行
 
-For sending downlink messages from the Thingsboard to the device, we need to define a downlink converter.
+要从ThingsBoard向设备发送下行消息，需定义下行转换器。
 
-### Add downlink converter
+### 添加下行转换器
 
-Let's consider an example where we send an attribute update message. You can use our example of downlink converter, or write your own according to your configuration.
+以下示例为发送属性更新消息。可使用我们的示例下行转换器，或根据您的配置自行编写。
 
 {% include templates/tbel-vs-js.md %}
 
@@ -159,60 +159,60 @@ JavaScript<small></small>%,%anonymous%,%templates/integration/tcp/tcp-downlink-j
 
 {% include content-toggle.liquid content-toggle-id="tcpdownlink" toggle-spec=tcpdownlink %}
 
-To add a downlink data converter to the TCP integration, follow these steps:
+将下行数据转换器添加到TCP集成的步骤：
 
 {% assign tcpAddDownlinkConverter = '
     ===
         image: /images/user-guide/integrations/tcp/tcp-add-downlink-converter-tbel-1-pe.png,
-        title: Go to the "**Integrations**" page, click TCP integration to open its details, and enter integration editing mode by clicking the "pencil" icon;
+        title: 进入「**Integrations**」页面，点击TCP集成打开详情，点击「pencil」图标进入编辑模式；
     ===
         image: /images/user-guide/integrations/tcp/tcp-add-downlink-converter-tbel-2-pe.png,
-        title: Enter a name for the downlink data converter and click "**Create new converter**";
+        title: 输入下行数据转换器名称并点击「**Create new converter**」；
     ===
         image: /images/user-guide/integrations/tcp/tcp-add-downlink-converter-tbel-3-pe.png,
-        title: Paste the script to the encoder function section, and click "Add";
+        title: 将脚本粘贴到encoder function区域，点击「Add」；
     ===
         image: /images/user-guide/integrations/tcp/tcp-add-downlink-converter-tbel-4-pe.png,
-        title: Apply changes.
+        title: 应用更改。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=tcpAddDownlinkConverter %}
 
 {% capture difference %}
-Optionally, configure **Cache Size** and **Cache time to live in minutes** - features, that helps to avoid memory leak when we are storing connections (able just for TCP downlink).<br>
-**Cache Size** - maximum size of messages for TCP client.<br>
-**Cache time to live in minutes** - time to storage messages.
+可选配置**Cache Size**和**Cache time to live in minutes**——用于在存储连接时避免内存泄漏（仅TCP下行支持）。<br>
+**Cache Size** — TCP客户端消息的最大数量。<br>
+**Cache time to live in minutes** — 消息存储时长（分钟）。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Modify Root Rule Chain
+### 修改Root Rule Chain
 
-When integration configured and ready to use, we need to go to the "Rule Chains" page and configure the "**Root Rule Chain**" so that "**Attributes updated**" messages is forwarded to the downlink data converter.
+集成配置就绪后，需进入「Rule Chains」页面并配置「**Root Rule Chain**」，使「**Attributes updated**」消息转发到下行数据转换器。
 
 {% assign tcpRuleChainDownlink = '
     ===
         image: /images/user-guide/integrations/tcp/tcp-rule-chain-downlink-pe.png,
-        title: Open the "Root Rule Chain", find the "**integration downlink**" node and drag it to the rule chain. Name it "**TCP integration downlink**", specify **TCP integration**, and click "Add";
+        title: 打开「Root Rule Chain」，找到「**integration downlink**」节点并拖入规则链。命名为「**TCP integration downlink**」，指定**TCP integration**，点击「Add」；
     ===
         image: /images/user-guide/integrations/tcp/tcp-rule-chain-and-attributes-updated-pe.png,
-        title: After this steps, we need to tap on a right grey circle of rule node "**message type switch**" and drag this circle to left side of "**integration downlink**", here lets choose **Attributes Updated**, tap "**Add**" and save Root Rule Chain.
+        title: 此后，点击「**message type switch**」规则节点右侧灰色圆圈，拖拽到「**integration downlink**」左侧，选择**Attributes Updated**，点击「**Add**」并保存Root Rule Chain。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=tcpRuleChainDownlink %}
 
-### Test downlink
+### 测试下行
 
-To test downlink, create some **shared attribute** on your device:
+要测试下行，请在设备上创建**shared attribute**：
 
 {% assign testDownlink = '
     ===
         image: /images/user-guide/integrations/tcp/tcp-add-shared-attribute-1-pe.png,
-        title: Go to the "**Devices**" page. Click your **SN-002** device and navigate to the "**Attributes**" tab. Select the "**Shared attributes**" option, and click the "**plus**" icon;
+        title: 进入「**Devices**」页面。点击**SN-002**设备，进入「**Attributes**」标签。选择「**Shared attributes**」，点击「**plus**」图标；
     ===
         image: /images/user-guide/integrations/tcp/tcp-add-shared-attribute-2-pe.png,
-        title: Enter the attribute name, and its value (for example, the key name is "**firmware**", value: "**v1.1**") and click "Save";
+        title: 输入属性名及其值（例如键名为「**firmware**」、值为「**v1.1**」）并点击「Save」；
     ===
         image: /images/user-guide/integrations/tcp/tcp-add-shared-attribute-3-pe.png,
 '
@@ -220,38 +220,38 @@ To test downlink, create some **shared attribute** on your device:
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=testDownlink %}
 
-To receive a downlink message you need to set the timeout for responses `-w60` (this option determines how long you will wait for a response) and send the uplink message again:
+要接收下行消息，需设置响应超时`-w60`（该选项决定等待响应的时长）并再次发送上行消息：
 
 ```shell
 echo -e 'SN-002,default,temperature,25.7\nSN-002,default,humidity,69' | nc -w60 127.0.0.1 11560
 ```
 {: .copy-code}
 
-You should get the following response from the ThingsBoard in the terminal:
+终端中应能看到ThingsBoard的如下响应：
 
 ![image](/images/user-guide/integrations/tcp/tcp-terminal-send-downlink-message.png)
 
-Received data and data that was sent can be viewed in the downlink converter. In the "**In**" block of the "**Events**" tab, we see what data entered. The "**Out**" field displays messages to device.
+接收和发送的数据可在下行转换器中查看。在「**Events**」标签的「**In**」块中查看入站数据，「**Out**」字段显示发给设备的消息。
 
 {% assign eventsTab = '
     ===
         image: /images/user-guide/integrations/tcp/tcp-downlink-converter-events-in-pe.png,
-        title: Received data and data that was sent can be viewed in the downlink converter. In the "**In**" block of the "**Events**" tab, we see what data entered.
+        title: 接收和发送的数据可在下行转换器中查看。在「**Events**」标签的「**In**」块中查看入站数据。
     ===
         image: /images/user-guide/integrations/tcp/tcp-downlink-converter-events-out-pe.png,
-        title: The "**Out**" field displays messages to device.
+        title: 「**Out**」字段显示发给设备的消息。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=eventsTab %}
 
 {% capture difference %}
-**Note**
+**注意**
 <br>
-When you use TCP integration, and your connection established for a long time, you will receive just one downlink message. All other will be saved on server side and will be sent on next uplink.
+使用TCP集成且连接建立较长时间时，您将只收到一条下行消息。其余消息将保存在服务端，并在下次上行时发送。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

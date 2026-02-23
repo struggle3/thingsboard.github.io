@@ -1,15 +1,15 @@
-### Step 1. Download the `.rpm` file
+### 步骤 1：下载 .rpm 文件
 
-Download installation `.rpm` package.
+下载安装用的 `.rpm` 包。
 
 ```bash
 wget https://github.com/thingsboard/thingsboard-gateway/releases/latest/download/python3-thingsboard-gateway.rpm
 ````
 {: .copy-code}
 
-### Step 2. Install the new `.rpm` file
+### 步骤 2：安装新的 .rpm 文件
 
-Run the following command in the terminal to install the updated package:
+在终端中执行以下命令安装更新包：
 
 ```bash
 sudo dnf install -y ./python3-thingsboard-gateway.rpm
@@ -17,56 +17,53 @@ sudo dnf install -y ./python3-thingsboard-gateway.rpm
 {: .copy-code}
 
 {% capture difference %}
-This will automatically upgrade your existing Gateway installation without removing your configuration and 
-extension files **(from Gateway version 3.7.6)**.
+将自动升级现有 Gateway 安装，不会删除配置和扩展文件 **（自 Gateway 3.7.6 版本起）**。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% capture difference1 %}
-If you are upgrading from a gateway version lower than 3.7.6, make backups of your configuration and extension files.
+若从低于 3.7.6 的 gateway 版本升级，请备份配置和扩展文件。
 {% endcapture %}
 {% include templates/warn-banner.md content=difference1 %}
 
-### Step 3. Restart the Gateway
+### 步骤 3：重启 Gateway
 
-After the upgrade, restart the Gateway service to apply the changes:
+升级后，重启 Gateway 服务以应用更改：
 
 ```bash
 sudo systemctl restart thingsboard-gateway
 ```
 {: .copy-code}
 
-### Step 4. Verify the Upgrade
+### 步骤 4：验证升级
 
-To ensure the upgrade was successful, check the Gateway status and logs by running:
+为确保升级成功，可通过以下命令检查 Gateway 状态和日志：
 
 ```bash
 sudo systemctl status thingsboard-gateway
 ```
 {: .copy-code}
 
-### Configuration File Preservation
+### 配置文件保留
 
-During the upgrade, **all user configuration files will be preserved.** This includes customizations made to:
-- Connector configuration files.
-- Custom user extensions.
-- `tb_gateway.json` file.
+升级过程中，**将保留所有用户配置文件。** 包括：
+- Connector 配置文件。
+- 自定义用户扩展。
+- `tb_gateway.json` 文件。
 
-The upgrade process also automatically creates a backup of your current configuration directory to ensure 
-recoverability in case of any issues. The backups are stored under the following paths:
+升级过程还会自动备份当前配置目录，确保出现问题时可以恢复。备份存储于以下路径：
 
-- For connector configurations:
+- Connector 配置：
   ```
   /etc/thingsboard-gateway/configs_backup.tar.gz
   ```
 
-- For user extensions:
+- 用户扩展：
   ```
   /var/lib/thingsboard_gateway/extensions_backup.tar.gz
   ```
 
-### Notes
+### 说明
 
-- This upgrade procedure applies only to .rpm package-based installations. If you are using Docker or pip-based 
-  installations, please refer to the appropriate guide that you can find on the top of this page.
-- Always test the Gateway after the upgrade to ensure connectors and extensions operate as expected.
+- 本升级流程仅适用于基于 .rpm 包的安装。若使用 Docker 或 pip 安装，请参阅本页顶部提供的相应指南。
+- 升级后请务必测试 Gateway，确保 connector 和扩展正常工作。

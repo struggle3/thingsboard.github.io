@@ -1,45 +1,44 @@
-Creates new alarms or updates existing active alarms.
+创建新告警或更新现有活动告警。
 
-## Configuration
+## 配置
 
-### Basic settings
+### 基本设置
 
-- **Use message alarm data**: When enabled, the message data is parsed as a ThingsBoard Alarm object, and alarm configuration is extracted from the parsed message instead of using
-  node configuration. If the message cannot be parsed as a valid Alarm object, the message is routed via `Failure` connection.
-- **Overwrite alarm details**: When enabled with **Use message alarm data**, the details script will be executed to generate a value for alarm's `details` field.
+- **Use message alarm data（使用消息告警数据）**：启用时，将消息数据解析为 ThingsBoard Alarm 对象，并从解析后的消息中提取告警配置而非使用节点配置。若消息无法解析为有效 Alarm 对象，消息经 `Failure` 连接路由。
+- **Overwrite alarm details（覆盖告警详情）**：与 **Use message alarm data** 同时启用时，将执行详情脚本以生成告警 `details` 字段的值。
 
-### Alarm configuration
+### 告警配置
 
-- **Alarm type**: Type of the alarm (e.g., "General Alarm", "High Temperature"). Supports templatization.
-- **Use alarm severity pattern**: Enables dynamic severity based on message data rather than a fixed value.
-    - When **enabled**:
-        - **Alarm severity pattern**: A pattern that must resolve to one of the valid severity levels: `CRITICAL`, `MAJOR`, `MINOR`, `WARNING`, or `INDETERMINATE`
-    - When **disabled**:
-        - **Alarm severity**: Fixed severity level. One of: *Critical*, *Major*, *Minor*, *Warning*, or *Indeterminate*
+- **Alarm type（告警类型）**：告警类型（如「General Alarm」、「High Temperature」）。支持模板化。
+- **Use alarm severity pattern（使用告警严重性模式）**：基于消息数据启用动态严重性，而非固定值。
+    - **启用** 时：
+        - **Alarm severity pattern（告警严重性模式）**：必须解析为以下有效严重性之一的模式：`CRITICAL`、`MAJOR`、`MINOR`、`WARNING` 或 `INDETERMINATE`
+    - **禁用** 时：
+        - **Alarm severity（告警严重性）**：固定严重性等级。可选：*Critical*、*Major*、*Minor*、*Warning* 或 *Indeterminate*
 
-### Alarm details script
+### 告警详情脚本
 
-A script (TBEL or JavaScript) that generates the content for the alarm's `details` field. The script must return a valid JSON value, which can be:
+用于生成告警 `details` 字段内容的脚本（TBEL 或 JavaScript）。脚本必须返回有效的 JSON 值，可以是：
 
-- Primitive values (numbers, booleans, strings)
-- JSON arrays
-- JSON objects
+- 原始值（数字、布尔、字符串）
+- JSON 数组
+- JSON 对象
 
-The script has access to the following variables:
+脚本可访问以下变量：
 
-- `msg`: The message data
-- `metadata`: The message metadata
-- `msgType`: The message type
-- `metadata.prevAlarmDetails`: The previous alarm details when updating an existing alarm (provided as a JSON string)
+- `msg`：消息数据
+- `metadata`：消息元数据
+- `msgType`：消息类型
+- `metadata.prevAlarmDetails`：更新现有告警时的先前告警详情（以 JSON 字符串提供）
 
-### Propagation settings
+### 传播设置
 
-- **Propagate alarm to related entities**: Propagates alarms to parent entities through configured relations
-    - When enabled, a **Relation types to propagate** field appears
-    - Select specific relation types to limit propagation paths, or leave empty to propagate through all relations
-- **Propagate alarm to entity owner (Customer or Tenant)**: Propagates alarms to the entity's direct owner
-- **Propagate alarm to entity owners hierarchy**: Propagates alarms up through all levels of the ownership chain
-- **Propagate alarm to Tenant**: Propagates alarms directly to the tenant level, regardless of intermediate ownership
+- **Propagate alarm to related entities（向相关实体传播告警）**：通过配置的关系向父实体传播告警
+    - 启用后会出现 **Relation types to propagate（要传播的关系类型）** 字段
+    - 选择特定关系类型以限制传播路径，或留空以通过所有关系传播
+- **Propagate alarm to entity owner (Customer or Tenant)（向实体所有者传播告警）**：向实体的直接所有者传播告警
+- **Propagate alarm to entity owners hierarchy（向实体所有者层级传播告警）**：沿所有权链的所有层级向上传播告警
+- **Propagate alarm to Tenant（向租户传播告警）**：直接向租户级别传播告警，不考虑中间所有权
 
 ### JSON Schema
 
@@ -119,99 +118,98 @@ The script has access to the following variables:
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-The node's behavior depends on the **Use message alarm data** setting:
+节点行为取决于 **Use message alarm data** 设置：
 
-### When using node configuration (Use message alarm data = disabled)
+### 使用节点配置时（Use message alarm data = 禁用）
 
-1. **Determine alarm type**: Processes the configured alarm type pattern, substituting any placeholders with values from message.
+1. **确定告警类型**：处理配置的告警类型模式，用消息中的值替换占位符。
 
-2. **Search for existing alarm**: Queries for an active (uncleared) alarm with:
-    - Same originator as the incoming message
-    - Alarm type from step 1
+2. **搜索现有告警**：查询满足以下条件的活动（未清除）告警：
+    - 与传入消息发起者相同
+    - 告警类型与步骤 1 一致
 
-3. **Create or update alarm**:
-    - **If no active alarm exists** (new alarm):
-        - Creates alarm with status `ACTIVE_UNACK`
-        - Sets severity from node configuration (or pattern if **Use alarm severity pattern** enabled)
-        - Applies propagation settings from node configuration
-        - Executes details builder script to generate `details` field
-        - Sets both alarm start time and end time to the value of the `ts` property from the metadata. If the `ts` property is not present, they are set to the message's creation
-          timestamp.
-        - Routes to `Created` connection with `isNewAlarm: true` in metadata
-        - Sends `ENTITY_CREATED` lifecycle event with complete alarm object to the originator's root rule chain 
+3. **创建或更新告警**：
+    - **若不存在活动告警**（新告警）：
+        - 创建状态为 `ACTIVE_UNACK` 的告警
+        - 从节点配置设置严重性（或启用 **Use alarm severity pattern** 时从模式设置）
+        - 应用节点配置中的传播设置
+        - 执行详情构建脚本生成 `details` 字段
+        - 将告警开始时间和结束时间均设为元数据中 `ts` 属性的值。若 `ts` 不存在，则设为消息创建时间戳。
+        - 将 `isNewAlarm: true` 放入元数据并路由至 `Created` 连接
+        - 向发起者的根 Rule Chain 发送包含完整告警对象的 `ENTITY_CREATED` 生命周期事件
 
-    - **If active alarm exists** (update):
-        - Keeps existing alarm status unchanged
-        - Sets severity from node configuration (or pattern if **Use alarm severity pattern** enabled)
-        - Updates existing propagation settings from values from node configuration
-        - Executes details builder script to generate a value for `details` field
-        - Updates alarm end time to the current server time
-        - Routes to `Updated` connection with `isExistingAlarm: true` in metadata
-        - Sends `ENTITY_UPDATED` lifecycle event with complete alarm object to the originator's root rule chain
+    - **若存在活动告警**（更新）：
+        - 保持现有告警状态不变
+        - 从节点配置设置严重性（或启用 **Use alarm severity pattern** 时从模式设置）
+        - 用节点配置中的值更新现有传播设置
+        - 执行详情构建脚本生成 `details` 字段的值
+        - 将告警结束时间更新为当前服务器时间
+        - 将 `isExistingAlarm: true` 放入元数据并路由至 `Updated` 连接
+        - 向发起者的根 Rule Chain 发送包含完整告警对象的 `ENTITY_UPDATED` 生命周期事件
 
-### When using message alarm data (Use message alarm data = enabled)
+### 使用消息告警数据时（Use message alarm data = 启用）
 
-1. **Parse message as alarm**: Attempts to deserialize message data as a ThingsBoard Alarm object
-    - If parsing fails, routes to `Failure` connection
-    - Overwrites `tenantId` in parsed alarm with current tenant ID
-    - If `originator` is null in parsed alarm, defaults to message originator
+1. **将消息解析为告警**：尝试将消息数据反序列化为 ThingsBoard Alarm 对象
+    - 若解析失败，路由至 `Failure` 连接
+    - 用当前租户 ID 覆盖解析后告警中的 `tenantId`
+    - 若解析后告警中 `originator` 为 null，默认使用消息发起者
 
-2. **Extract alarm type**: Uses the `type` field from the parsed alarm
+2. **提取告警类型**：使用解析后告警的 `type` 字段
 
-3. **Search for existing alarm**: Same as above, using the parsed alarm type
+3. **搜索现有告警**：同上，使用解析后的告警类型
 
-4. **Create or update alarm**:
-    - **If no active alarm exists** (new alarm):
-        - Uses all fields from parsed alarm (severity, propagation settings, etc.)
-        - Details handling depends on **Overwrite alarm details**:
-            - If enabled: Executes details builder script, replacing parsed details
-            - If disabled: Uses `details` field from parsed alarm directly
-        - Routes to `Created` connection
-        - Sends `ENTITY_CREATED` lifecycle event with complete alarm object to the originator's root rule chain
+4. **创建或更新告警**：
+    - **若不存在活动告警**（新告警）：
+        - 使用解析后告警的所有字段（严重性、传播设置等）
+        - 详情处理取决于 **Overwrite alarm details**：
+            - 启用：执行详情构建脚本，替换解析后的详情
+            - 禁用：直接使用解析后告警的 `details` 字段
+        - 路由至 `Created` 连接
+        - 向发起者的根 Rule Chain 发送包含完整告警对象的 `ENTITY_CREATED` 生命周期事件
 
-    - **If active alarm exists** (update):
-        - Updates existing alarm with values from parsed message:
+    - **若存在活动告警**（更新）：
+        - 用解析后消息中的值更新现有告警：
             - `severity`
             - `propagate`
             - `propagateToOwner`
             - `propagateToOwnerHierarchy`
             - `propagateToTenant`
             - `propagateRelationTypes`
-        - Details handling depends on **Overwrite alarm details**:
-            - If enabled: Executes details builder script with `prevAlarmDetails`
-            - If disabled: Replaces with `details` from parsed alarm
-        - Updates alarm end time to current server time
-        - Routes to `Updated` connection
-        - Sends `ENTITY_UPDATED` lifecycle event with complete alarm object to the originator's root rule chain
+        - 详情处理取决于 **Overwrite alarm details**：
+            - 启用：使用 `prevAlarmDetails` 执行详情构建脚本
+            - 禁用：用解析后告警的 `details` 替换
+        - 将告警结束时间更新为当前服务器时间
+        - 路由至 `Updated` 连接
+        - 向发起者的根 Rule Chain 发送包含完整告警对象的 `ENTITY_UPDATED` 生命周期事件
 
-## Output connections
+## 输出连接
 
 - `Created`
-    - New alarm was successfully created
-    - Message data is replaced with the created alarm object
-    - Metadata includes `isNewAlarm: true`
-    - Message type changed to `ALARM`
+    - 新告警已成功创建
+    - 消息数据替换为已创建的告警对象
+    - 元数据包含 `isNewAlarm: true`
+    - 消息类型更改为 `ALARM`
 - `Updated`
-    - Existing alarm was successfully updated
-    - Message data is replaced with the updated alarm object
-    - Metadata includes `isExistingAlarm: true`
-    - Message type changed to `ALARM`
+    - 现有告警已成功更新
+    - 消息数据替换为已更新的告警对象
+    - 元数据包含 `isExistingAlarm: true`
+    - 消息类型更改为 `ALARM`
 - `Failure`
-    - Alarm severity pattern resolves to invalid value
-    - Script execution error
-    - Message parsing error (when using message alarm data)
+    - 告警严重性模式解析为无效值
+    - 脚本执行错误
+    - 消息解析错误（使用消息告警数据时）
 
-## Examples
+## 示例
 
-### Example 1 — Creating a new alarm
+### 示例 1 — 创建新告警
 
-**Incoming message**
+**传入消息**
 
-Type: `POST_TELEMETRY_REQUEST`
+类型：`POST_TELEMETRY_REQUEST`
 
-Data:
+数据：
 
 ```json
 {
@@ -219,15 +217,15 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {}
 ```
 
-Originator: `DEVICE`
+发起者：`DEVICE`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -238,13 +236,13 @@ Originator: `DEVICE`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-No active "High Temperature" alarm exists for originator device.
+发起者设备不存在活动「High Temperature」告警。
 
-**Outgoing message**
+**传出消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -287,7 +285,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -295,25 +293,24 @@ Metadata:
 }
 ```
 
-Routed via `Created` connection.
+经 `Created` 连接路由。
 
-**Result**
+**结果**
 
-The following actions occur:
+发生以下操作：
 
-- New alarm created: A "High Temperature" alarm with CRITICAL severity is created in the database for the device.
-- Details generated: The details builder script executes and stores `{"temperature": 45.5}` in the alarm's `details` field.
-- Message transformed: The original telemetry message is replaced with an `ALARM` message containing the complete alarm object. The message is routed through the `Created`
-  connection with the `isNewAlarm: true` metadata flag.
-- Lifecycle event triggered: An `ENTITY_CREATED` lifecycle event for the new alarm is automatically sent to the device's root rule chain.
+- 新告警已创建：为设备在数据库中创建了严重性为 CRITICAL 的「High Temperature」告警。
+- 详情已生成：详情构建脚本执行并将 `{"temperature": 45.5}` 存入告警的 `details` 字段。
+- 消息已转换：原始遥测消息替换为包含完整告警对象的 `ALARM` 消息。消息经 `Created` 连接路由，元数据标志为 `isNewAlarm: true`。
+- 已触发生命周期事件：新告警的 `ENTITY_CREATED` 生命周期事件自动发送至设备的根 Rule Chain。
 
-### Example 2 — Updating existing alarm
+### 示例 2 — 更新现有告警
 
-**Incoming message**
+**传入消息**
 
-Type: `POST_TELEMETRY_REQUEST`
+类型：`POST_TELEMETRY_REQUEST`
 
-Data:
+数据：
 
 ```json
 {
@@ -321,15 +318,15 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {}
 ```
 
-Originator: `DEVICE`
+发起者：`DEVICE`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -340,18 +337,18 @@ Originator: `DEVICE`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-An active "High Temperature" alarm exists for the originator device with:
+发起者设备存在活动「High Temperature」告警：
 
-- Status: `ACTIVE_UNACK`
-- Details: `{"temperature": 45.5}`
-- Start time: 1757429087063
-- End time: 1757429087063
+- 状态：`ACTIVE_UNACK`
+- 详情：`{"temperature": 45.5}`
+- 开始时间：1757429087063
+- 结束时间：1757429087063
 
-**Outgoing message**
+**传出消息**
 
-Data:
+数据：
 
 ```json
 {
@@ -394,7 +391,7 @@ Data:
 }
 ```
 
-Metadata:
+元数据：
 
 ```json
 {
@@ -402,16 +399,14 @@ Metadata:
 }
 ```
 
-Routed via `Updated` connection.
+经 `Updated` 连接路由。
 
-**Result**
+**结果**
 
-The following actions occur:
+发生以下操作：
 
-- **Existing alarm updated**: The active "High Temperature" alarm is updated in the database. The alarm status remains `ACTIVE_UNACK` (unchanged).
-- **Details regenerated**: The details builder script executes with access to previous details through `metadata.prevAlarmDetails`. It updates the temperature reading, resulting in
-  `{"temperature": 47.2}`.
-- **End time updated**: The alarm's `endTs` is updated to the current system time (1757429195123), while `startTs` remains at the original creation time.
-- **Message transformed**: The original telemetry message is replaced with an `ALARM` message containing the updated alarm object. The message is routed through the `Updated`
-  connection with the `isExistingAlarm: true` metadata flag.
-- **Lifecycle event triggered**: An `ENTITY_UPDATED` lifecycle event for the updated alarm is automatically sent to the device's root rule chain.
+- **现有告警已更新**：数据库中的活动「High Temperature」告警已更新。告警状态保持 `ACTIVE_UNACK`（未变）。
+- **详情已重新生成**：详情构建脚本通过 `metadata.prevAlarmDetails` 访问先前详情后执行。更新温度读数，结果为 `{"temperature": 47.2}`。
+- **结束时间已更新**：告警的 `endTs` 更新为当前系统时间（1757429195123），时间戳保持原始创建时间。
+- **消息已转换**：原始遥测消息替换为包含已更新告警对象的 `ALARM` 消息。消息经 `Updated` 连接路由，元数据标志为 `isExistingAlarm: true`。
+- **已触发生命周期事件**：已更新告警的 `ENTITY_UPDATED` 生命周期事件自动发送至设备的根 Rule Chain。

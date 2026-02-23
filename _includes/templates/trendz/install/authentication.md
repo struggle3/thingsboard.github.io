@@ -1,7 +1,6 @@
-You can access Trendz UI by default at http://localhost:8888
+默认可在 http://localhost:8888 访问 Trendz UI。
 
-Trendz uses ThingsBoard as an authentication service, so for first authentication, 
-you need to use **Tenant Administrator** credentials from your **ThingsBoard**.
+Trendz 使用 ThingsBoard 作为认证服务，首次认证需使用 **ThingsBoard** 中的 **Tenant Administrator** 凭证。
 
 ### Topology Discovery
 

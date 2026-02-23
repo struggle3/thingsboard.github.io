@@ -1,5 +1,5 @@
 
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.tindie.com/products/sensy32/sensy32-all-in-one-sensor-iot-board-with-lcd/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -10,40 +10,39 @@
   '
   %}
 
-## Introduction
+## 概述
 
-[The Sensy32]({{deviceVendorLink}}){: target="_blank"} is an IoT board designed for sensor enthusiasts, developers, and IoT creators.   
-Powered by ESP32-S3 and packed with a wide array of sensors, it enables seamless monitoring, analysis, and visualization of real-world data.   
+[Sensy32]({{deviceVendorLink}}){: target="_blank"} 是一款面向传感器爱好者、开发者与物联网创客的 IoT 板。  
+基于 ESP32-S3，集成多种传感器，可实现数据的监测、分析与可视化。  
 
-The Sensy32 supports Wi-Fi and Bluetooth connectivity, complemented by two USB Type-C ports that enable charging and power supply, programming and firmware uploads, data communication, peripheral connectivity, and powering external devices such as sensors.
+Sensy32 支持 Wi-Fi 与 Bluetooth，配备两个 USB Type-C 口，用于充电供电、程序与固件上传、数据通信、外设连接及为传感器等外部设备供电。
 
-The Sensy32 board includes the following components and sensors:
-- UV Light Sensor
-- IR Motion and Human Presence Sensor
-- Humidity and Temperature Sensor
-- Altitude and Pressure Sensor
-- 9-DOF Orientation IMU Sensor (Accelerometer/Magnetometer/Gyro)
-- Microcontroller (ESP32-S3 Wi-Fi and Bluetooth)
-- 32Mb Nor Flash Memory
-- USB to Serial Converter
-- Light Intensity Sensor
-- Battery Charger
-- RGB LEDs
-- MEMS Microphone
-- A built-in LCD screen that allows real-time monitoring and control.
+Sensy32 板载组件与传感器包括：
+- 紫外线传感器
+- 红外运动与人体存在传感器
+- 温湿度传感器
+- 高度与气压传感器
+- 九轴姿态 IMU（加速度计/磁力计/陀螺仪）
+- 微控制器（ESP32-S3 Wi-Fi 与 Bluetooth）
+- 32 Mb Nor Flash
+- USB 转串口
+- 光照强度传感器
+- 电池充电器
+- RGB LED
+- MEMS 麦克风
+- 内置 LCD 屏，支持实时监测与控制
 
-In this guide, we will learn how to create a device on Thingsboard, install required libraries and tools.   
-After this we will modify our code and upload it to the device, and check the results of our coding and check data on ThingsBoard using imported dashboard.
+本指南将介绍如何在 ThingsBoard 创建设备、安装所需库和工具，修改代码并上传至设备，使用导入的仪表板在 ThingsBoard 上查看数据。
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide, we will need the following:
+继续本指南前需准备以下内容：
 - Editor [Arduino IDE](https://www.arduino.cc/en/software){:target="_blank"}
 - [CP210xVCP Driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers){:target="_blank"}
 - Sensy32 board (you can get it from [Tindie](https://www.tindie.com/products/sensy32/sensy32-all-in-one-sensor-iot-board-with-lcd/){:target="_blank"} or [Elecrow](https://www.elecrow.com/){:target="_blank"})
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
-## Install required libraries and tools
+## 安装所需库和工具 {#install-required-libraries-and-tools}
 
 Open the [Arduino IDE](https://www.arduino.cc/en/software){:target="_blank"} and install the board package:
 
@@ -156,7 +155,7 @@ Let&#39;s dive deeper to see what are these libraries are used for:
 
 At this point, we have installed all required libraries and tools.
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 For simplicity, we will provide the device manually using the UI.
 
@@ -199,8 +198,7 @@ For simplicity, we will provide the device manually using the UI.
 {% endif %}
 
 
-## Connect device to ThingsBoard
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 To connect your device, you’ll first need to get its credentials. While ThingsBoard supports a variety of device credentials, for this guide, we will use the default auto-generated credentials, which is an access token.
 
 {% assign connectDevicePE = '
@@ -258,13 +256,12 @@ If you cannot upload the code and receive an error: `Property 'upload.tool.seria
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=programmer %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 ThingsBoard provides the ability to create and customize interactive visualizations (dashboards) for monitoring and managing data and devices.
 
 Through ThingsBoard dashboards, you can efficiently manage and monitor your IoT devices and data. So, we will create the dashboard for our device.
 
-To do this, you can either create your own dashboard using custom widgets or import a ready-made one.
+To do this, you can either create your own dashboard using custom 部件 or import a ready-made one.
 
 In this example we will upload a ready-to-use dashboard. You can also customize it or create your own.
 
@@ -288,8 +285,8 @@ To import the ready-to-use dashboard, follow these steps:
 
 "sensy32-demo-dashboard" structure:
 - To check the data from our device we need to open the imported dashboard by clicking on it in the table.
-- The view of "sensy32-demo-dashboard" containing widgets representing the following telemetry values: **temperature, humidity, altitude, pressure, motion, uv, accelerometer (valX, valY, and valZ), orientation (quatI, quatJ, quatK, quatReal, and quatRadianAccuracy), light (ir, full, visible, lux)**.
-- You can also add a Widget to display device & Wi-Fi information.
+- The view of "sensy32-demo-dashboard" containing 部件 representing the following telemetry values: **temperature, humidity, altitude, pressure, motion, uv, accelerometer (valX, valY, and valZ), orientation (quatI, quatJ, quatK, quatReal, and quatRadianAccuracy), light (ir, full, visible, lux)**.
+- 您也可以添加部件以展示设备与 Wi-Fi 信息。
 
 {% assign myDashboard = '
     ===
@@ -299,7 +296,7 @@ To import the ready-to-use dashboard, follow these steps:
 
 {% include images-gallery.liquid imageCollection=myDashboard %}
 
-## Conclusion
+## 总结
 
 Now you can easily connect your Sensy32 and start sending data to ThingsBoard.
 

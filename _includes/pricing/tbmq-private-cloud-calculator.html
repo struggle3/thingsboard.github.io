@@ -3,14 +3,14 @@
     <div class="calculator-body">
         <div class="card calculator">
             <div class="calculator-header">
-                <h2>TBMQ Private Cloud calculator</h2>
+                <h2>TBMQ私有云计价器</h2>
                 <div class="mode-tabs">
                     <button class="mode-tab active" data-mode="basic">Basic</button>
                     <button class="mode-tab" data-mode="advanced">
                         Advanced
                         <span class="tooltip">
                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                            <span class="tooltip-text">Enable network traffic configuration</span>
+                            <span class="tooltip-text">启用网络流量配置</span>
                         </span>
                     </button>
                 </div>
@@ -19,9 +19,9 @@
                 <div class="input-group">
                     <div class="input-label-group xs-row">
                         <label for="tbmqPc-sessions" class="label">
-                            Sessions
+                            会话数
                             <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Total unique logical states managed by the broker (identified by Client ID). Active connections and disconnected clients with persistent sessions both occupy quota slots.</span>
+                                <span class="tooltip-text">代理管理的唯一逻辑状态总数（由Client ID标识）。活动连接和具有持久会话的断开客户端均占用配额槽。</span>
                             </span>
                         </label>
                         <input id="tbmqPc-sessions" type="number" value="5000" min="5000" class="input input-right">
@@ -41,9 +41,9 @@
                 <div class="input-group">
                     <div class="input-label-group xs-row">
                         <label for="tbmqPc-throughput" class="label">
-                            Throughput (msg/sec)
+                            吞吐量（消息/秒）
                             <span class="tooltip"><img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                <span class="tooltip-text">Combined number of MQTT PUBLISH packets processed per second, including both incoming (publisher) and outgoing (subscriber) messages.</span>
+                                <span class="tooltip-text">每秒处理的MQTT PUBLISH包总数，包括入站（发布者）和出站（订阅者）消息。</span>
                             </span>
                         </label>
                         <input id="tbmqPc-throughput" type="number" value="1000" min="1000" class="input input-right">
@@ -62,20 +62,20 @@
                 </div>
                 <div class="input-group addons">
                     <p class="label">
-                        Add-ons
+                        附加模块
                         <span class="tooltip">
                             <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                            <span class="tooltip-text">Unlock advanced optional modules to extend platform functionality.</span>
+                            <span class="tooltip-text">解锁高级可选模块以扩展平台功能。</span>
                         </span>
                     </p>
                     <div class="add-ons-grid">
                         <div class="addon-card" id="tbmqPcMultiAzCard" data-addon="multiAz">
                             <div class="addon-header">
                                 <span class="addon-title">
-                                    Multi-AZ Deployment
+                                    多可用区部署
                                     <span class="tooltip">
                                         <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                        <span class="tooltip-text">Enable high availability (HA) and fault tolerance with deployment across multiple AZs and a guaranteed uptime SLA.</span>
+                                        <span class="tooltip-text">跨多个可用区部署以实现高可用性(HA)和容错，并提供保证的可用性SLA。</span>
                                     </span>
                                 </span>
                                 <label class="toggle-switch">
@@ -83,15 +83,15 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                            <p class="addon-description">Deployment in 3 availability zones with 99.99% SLA</p>
+                            <p class="addon-description">在3个可用区部署，99.99% SLA</p>
                         </div>
                         <div class="addon-card" id="tbmqPcDevQaCard" data-addon="devQa">
                             <div class="addon-header">
                                 <span class="addon-title">
-                                    Dev & QA Instances
+                                    开发与质量保证实例
                                     <span class="tooltip">
                                         <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                        <span class="tooltip-text">Separate environments for development, testing, and CI/CD pipelines.</span>
+                                        <span class="tooltip-text">用于开发、测试和CI/CD流程的独立环境。</span>
                                     </span>
                                 </span>
                                 <label class="toggle-switch">
@@ -99,9 +99,9 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                            <p class="addon-description">Environments for dev, test & CI/CD</p>
+                            <p class="addon-description">用于开发、测试和CI/CD的环境。</p>
                             <div class="addon-counter hidden" data-addon-counter="devQa">
-                                <label>Dev Instances</label>
+                                <label>开发实例</label>
                                 <div class="stepper-control">
                                     <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease dev instances">−</button>
                                     <input type="number" value="1" min="1" id="tbmqPcDevInstances" aria-label="Dev instances count">
@@ -112,10 +112,10 @@
                         <div class="addon-card hidden" id="tbmqPcNetworkCard" data-addon="networkTraffic">
                             <div class="addon-header">
                                 <span class="addon-title">
-                                    Network Traffic
+                                    网络流量
                                     <span class="tooltip">
                                         <img src="/images/pricing/info-icon.svg" alt="Hint icon">
-                                        <span class="tooltip-text">Expand your data transfer capacity beyond the included lmit to ensure uninterrupted connectivity as your message volume scales.</span>
+                                        <span class="tooltip-text">在包含量之外扩展数据传输能力，确保随着消息量增长保持连接不中断。</span>
                                     </span>
                                 </span>
                                 <label class="toggle-switch">
@@ -123,9 +123,9 @@
                                     <span class="slider round"></span>
                                 </label>
                             </div>
-                            <p class="addon-description"><span id="tbmqPcNetworkIncludedText">200</span> GB included, add more as you scale.</p>
+                            <p class="addon-description"><span id="tbmqPcNetworkIncludedText">200</span> GB已包含，可随扩展添加更多。</p>
                             <div class="addon-counter hidden" data-addon-counter="networkTraffic">
-                                <label>Extra Traffic (GB)</label>
+                                <label>额外流量（GB）</label>
                                 <div class="stepper-control">
                                     <button type="button" class="stepper-btn minus" data-action="decrement" disabled aria-label="Decrease network traffic">−</button>
                                     <input type="number" value="1" min="1" id="tbmqPcNetworkTraffic" aria-label="Extra network traffic">
@@ -138,7 +138,7 @@
             </div>
             <div class="actions-container">
                 <div class="reset-container">
-                    <button id="tbmqPcResetBtn" class="button reset">Reset</button>
+                    <button id="tbmqPcResetBtn" class="button reset">重置</button>
                 </div>
             </div>
         </div>
@@ -448,7 +448,7 @@
         tbmqPcUi.results.innerHTML = `
             <div class="card-header">
                 <div class="header-top">
-                    <h3>Calculation summary</h3>
+                    <h3>计算摘要</h3>
                     <div class="header-actions">
                         <div id="tbmqPcCopyBtn" class="icon-button" title="Copy">${copyIcon}</div>
                         <div id="tbmqPcDownloadBtn" class="icon-button" title="Download">${downloadIcon}</div>
@@ -457,18 +457,18 @@
             </div>
             <div class="results-scroll-container">
                 ${detailsHtml}
-                <div class="addons-separator"><span>Add-ons</span></div>
+                <div class="addons-separator"><span>附加模块</span></div>
                 ${addOnsHtml}
             </div>
             <div class="results-footer">
                 <div class="toggle-container">
                     <div class="billing-toggle">
-                        <span class="label-text ${!isAnnual ? 'selected' : ''}" id="tbmqPcLabelMonthly">Monthly</span>
+                        <span class="label-text ${!isAnnual ? 'selected' : ''}" id="tbmqPcLabelMonthly">月付</span>
                         <label class="switch">
                             <input type="checkbox" id="tbmqPcBillingSwitch" ${isAnnual ? 'checked' : ''}>
                             <span class="slider"></span>
                         </label>
-                        <span class="label-text ${isAnnual ? 'selected' : ''}" id="tbmqPcLabelAnnual">Annual (Save 10%)</span>
+                        <span class="label-text ${isAnnual ? 'selected' : ''}" id="tbmqPcLabelAnnual">年付（省10%）</span>
                     </div>
                 </div>
                 <div class="results-total">
@@ -478,8 +478,8 @@
                         <span class="tooltip">${infoIcon}<span class="tooltip-text">${totalTooltip}</span></span>
                     </span>
                 </div>
-                <a id="tbmqPcContactUs" href="/docs/contact-us/" class="button">Contact Us</a>
-                <p class="pricing-disclaimer">Pricing calculation is estimate and depend on traffic volume</p>
+                <a id="tbmqPcContactUs" href="/docs/contact-us/" class="button">联系我们</a>
+                <p class="pricing-disclaimer">价格计算为估算值，取决于流量规模</p>
             </div>`;
 
         tbmqPcInitExpandable();

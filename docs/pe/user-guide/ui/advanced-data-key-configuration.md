@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - ashvayka
-title: Advanced data key configuration
-description: ThingsBoard advanced configuration of data keys
+title: 高级数据键配置
+description: ThingsBoard 数据键高级配置
 
 entity-table-example:
     0:

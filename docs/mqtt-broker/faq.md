@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Frequently Asked Questions
-description: TBMQ FAQ
+title: 常见问题
+description: TBMQ 常见问题
 
 ---
 

@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka 
-title: Entities Table Widget
-description: Advanced Settings of the Entities Table Widget
+title: 实体表部件
+description: 实体表部件高级设置
 
 add-widget:
     0:

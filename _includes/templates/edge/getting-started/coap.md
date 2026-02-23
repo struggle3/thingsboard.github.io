@@ -1,18 +1,18 @@
-Install coap-cli. Assuming you have Node.js and NPM installed on your Windows/Linux/MacOS machine, execute the following command:
+安装coap-cli。假设您的Windows/Linux/MacOS设备已安装Node.js和NPM，请执行以下命令：
 
 ```bash
 npm install coap-cli -g
 ```
 {: .copy-code}
 
-Replace $HOST_NAME, $COAP_PORT and $ACCESS_TOKEN with corresponding values. If $COAP_PORT is not specified, default **5683** used.
+请将$HOST_NAME、$COAP_PORT和$ACCESS_TOKEN替换为对应值。若未指定$COAP_PORT，默认使用**5683**。
 
 ```bash
 echo -n '{"temperature": 25}' | coap post coap://$HOST_NAME:$COAP_PORT/api/v1/$ACCESS_TOKEN/telemetry
 ```
 {: .copy-code}
 
-For example, $HOST_NAME reference your local ThingsBoard Edge installation, coap port is **5683** and access token is **ABC123**:
+例如，$HOST_NAME指向您本地的ThingsBoard Edge安装，CoAP端口为**5683**，访问令牌为**ABC123**：
 
 ```bash
 echo -n '{"temperature": 25}' | coap post coap://localhost:5683/api/v1/ABC123/telemetry

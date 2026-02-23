@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: States
-description: Trendz States
+title: 状态
+description: Trendz 状态说明
 ---
 
 * TOC
@@ -22,34 +22,33 @@ description: Trendz States
 
 ![image](/images/trendz/state-simple-view.png)
 
-In this example we have **Machine** device that submit how many details where produced. We want to find what is 
-production rate of our machines. 
+本例中**Machine**设备上报零件产量。目标是分析设备生产率。
 
-Let's define our states:
-* **Low Production** - amount of produced details < 75;
-* **Moderate Production** - amount of produced details between 75 and 110;
-* **High Production** - amount of produced details greater than 110;
+定义states：
+* **Low Production** - 产量 < 75
+* **Moderate Production** - 产量在75到110之间
+* **High Production** - 产量 > 110
 
-Here is condition that chack does machine in **Low Production** state or not:
+判断设备是否处于**Low Production** state 的条件：
 {% highlight javascript %}
     var okRate = none(Machine.okDetails);
     return okRate < 75;
 {% endhighlight %}  
 
-Here are steps required to do this:
-* Create **Bar** chart
-* Add **Date(RAW)** to **X-axis**
-* Add **State** field and change title to **Low Production**
-* Change field aggregation to **DURATION_PERCENT**
-* Write formula for **Low Production**
-* Repeat last 3 operations for **Moderate Production** and **High Production** states
-* Enable stack mode, 100% stacked bar and labels in view settings
+操作步骤：
+* 创建**Bar** chart
+* 在**X-axis**添加**Date(RAW)**
+* 添加**State**字段，标题改为**Low Production**
+* 字段聚合改为**DURATION_PERCENT**
+* 编写**Low Production**公式
+* 对**Moderate Production**和**High Production**重复上述3步
+* 在view settings中启用stack模式、100% stacked bar和labels
 
 ![image](/images/trendz/state-simple-config-drop.png)
 
 ![image](/images/trendz/state-simple-config.png)
 
-Our view ready and now we know how much time(in percent) machines spent in different states.
+视图已就绪，可查看设备在各state下的停留时间占比。
 
 <div class="image-block">
     <div class="image-wrapper">
@@ -64,25 +63,23 @@ Our view ready and now we know how much time(in percent) machines spent in diffe
 
 ![image](/images/trendz/state-multiple-view.png)
 
-We can also use multiple fields from different assets\devices to calculate state. In this example we want detect how 
-much time machines spent in critical state. Such visualisation will give an understanding how machine prorforms compered to other machines 
-and when it should be maintained to prevent downtime.
+也可使用来自不同assets\devices的多个字段计算state。本例分析设备处于critical state的时间占比。
+该可视化有助于对比设备表现并判断何时维护以预防downtime。
 
-We know that our machines is in critical state when **pressure** goes up and **rotation speed** goes down. So let's find how 
-much time spent in critical state.
+当**pressure**上升且**rotation speed**下降时，设备处于critical state。计算处于critical state的时间。
 
-Here is a formal definition of **Critical** state:
+**Critical** state的形式化定义：
 {% highlight javascript %}
     var pressure = none(Machine.pressure);
     var speed = none(Machine.rotationSpeed);
     return pressure > 700 && speed < 35;
 {% endhighlight %}  
 
-* Create **Heatmap** chart
-* Add **State** field and change title to **Critical**
-* Change field aggregation to **DURATION_PERCENT**
-* Write formula for **Critical** state
-* Select **hour vs day of week** in **By** field
+* 创建**Heatmap** chart
+* 添加**State**字段，标题改为**Critical**
+* 字段聚合改为**DURATION_PERCENT**
+* 编写**Critical** state公式
+* 在**By**字段选择**hour vs day of week**
 
 <div class="image-block">
     <div class="image-wrapper">
@@ -94,27 +91,27 @@ Here is a formal definition of **Critical** state:
 
 ### State Aggregation
 
-Here is a list of supported aggregation functions for state fields:
-* Duration - total time spent in state inside group. In hours, minutes, seconds etc.
-* Duration percent - percent of time spent in state inside group.
+state字段支持的聚合函数：
+* Duration - 组内处于该state的总时间。单位：小时、分钟、秒等。
+* Duration percent - 组内处于该state的时间占比。
 
 ### Get original field value
 
-Before applying transformation you need to get a reference to the original field value. Here is an example how to do this:
+在应用 transformation 前需获取原始字段值的引用。示例：
 
 ```
 var temp = none(Machine.temperature);
 ```
 
-* none() - aggregation function
-* Machine - Entity Name (it can be Asset Type or Device Type)
+* none() - 聚合函数
+* Machine - Entity Name（可为Asset Type或Device Type）
 * temperature - Field Name
 
-**All 3 parts are required**, you can not access original field value without aggregation function. 
+**三部分缺一不可**，没有聚合函数无法访问原始字段值。
 
-If original field value is an attribute, entity name or owner name - you should use **uniq()** aggregation function.
+若原始字段值为attribute、entity name或owner name，应使用**uniq()**聚合函数。
 
-This template can be used for comparing text fields:
+此模板可用于比较文本字段：
 
 ```
 var currentState = none(machine.status);
@@ -123,19 +120,19 @@ return "running" === currentState;
 
 ### Supported Aggregation Functions
 
-State fields supports only following aggregation function: **none()**
+State字段仅支持**none()**聚合函数。
 
-Each function allows only 1 argument - reference to the filed on format EntityName.fieldName. For example:
+每个函数只接受1个参数——格式为EntityName.fieldName的字段引用。例如：
 
 ```
 none(Machine.temperature)
 ```
 
-Commonly, states are used for calculating how much time device/asset spent in different states. 
+States常用于计算设备/asset在各state下的停留时间。
 
 ### Language
 
-State fields use Javascript as a language for writing transformation function. Inner Engine provide 100% support of ECMAScript 5.1
+State字段使用Javascript编写 transformation 函数。内置 Engine 完全支持ECMAScript 5.1。
 
 ## Next Steps
 

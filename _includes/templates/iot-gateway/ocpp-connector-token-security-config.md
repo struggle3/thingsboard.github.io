@@ -1,14 +1,14 @@
-One type of security configuration is token.
-For authorization, token provided in this section of the config will be used.
+Token 是一种安全配置方式。
+授权时将使用本配置节中提供的 token。
 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|-
-| type               | **token**                      | Type of authorization.      |
-| tokens             | **["Bearer ACCESS_TOKEN"]**    | List of allowed tokens.     |
+| type               | **token**                      | 授权类型。      |
+| tokens             | **["Bearer ACCESS_TOKEN"]**    | 允许的 token 列表。     |
 |---
 
-Security subsection in configuration file will look like this: 
+配置文件中的 security 配置小节将如下所示： 
 
 ```yaml
     "security": [

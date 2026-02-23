@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: Report service
-description: ThingsBoard configuration parameters and environment variables
+title: 报告服务
+description: ThingsBoard 配置参数与环境变量
 
 ---
 

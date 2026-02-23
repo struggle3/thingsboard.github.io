@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - ashvayka
-title: ThingsBoard US Cloud Subscription plans definition
-description: Features and advantages of subscription payment model
+title: ThingsBoard US Cloud 订阅计划定义
+description: 订阅付费模式的特性与优势
 redirect_from: 
   - "/products/paas/subscription/"
   - "/docs/paas/subscription/"  

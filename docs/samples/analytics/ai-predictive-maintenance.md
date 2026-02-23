@@ -1,63 +1,63 @@
 ---
 layout: docwithnav
-title: Industrial Equipment Health — AI-Based Anomaly Detection with ThingsBoard
-description: Using Calculated Fields and Rule Engine AI nodes for predictive maintenance in ThingsBoard
+title: 工业设备健康 — 基于 AI 的 ThingsBoard 异常检测
+description: 使用 Calculated Fields 和 Rule Engine AI 节点在 ThingsBoard 中进行预测性维护
 
 import-calculated-field-into-profile:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/import-calculated-field-into-profile-1-ce.png
-        title: 'Navigate to the "<b>Calculated fields</b>" tab of the target entity or profile. Click the "<b>plus</b>" icon button, and select "<b>Import calculated field</b>" from the dropdown menu.'
+        title: '进入目标实体或配置文件的「<b>Calculated fields</b>」选项卡，点击「<b>加号</b>」图标按钮，从下拉菜单中选择「<b>Import calculated field</b>」。'
     1:
         image: /images/samples/analytics/ai-predictive-maintenance/import-calculated-field-into-profile-2-ce.png
-        title: 'In the opened window, <b>upload the JSON file</b> with the calculated field configuration and click "<b>Import</b>".'
+        title: '在打开的窗口中，<b>上传</b>包含计算字段配置的 <b>JSON 文件</b>，然后点击「<b>Import</b>」。'
     2:
         image: /images/samples/analytics/ai-predictive-maintenance/import-calculated-field-into-profile-3-ce.png
-        title: 'Verify the imported configuration: when importing, the edit window will open to allow modifications. Click "<b>Add</b>" to complete the import.'
+        title: '确认导入的配置：导入时会打开编辑窗口以便修改，点击「<b>Add</b>」完成导入。'
     3:
         image: /images/samples/analytics/ai-predictive-maintenance/import-calculated-field-into-profile-4-ce.png
-        title: 'You have imported the calculated field configuration.'
+        title: '已导入计算字段配置。'
 
 import-equipment-sensor-device-profile:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-sensor-device-profile-1-ce.png
-        title: 'Navigate to the "<b>Device profiles</b>" page. Click the "<b>plus</b>" icon button, and select "<b>Import device profile</b>" from the dropdown menu.'
+        title: '进入「<b>Device profiles</b>」页面，点击「<b>加号</b>」图标按钮，从下拉菜单中选择「<b>Import device profile</b>」。'
     1:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-sensor-device-profile-2-ce.png
-        title: 'In the opened window, upload the JSON file with the device profile configuration and click "<b>Import</b>".'
+        title: '在打开的窗口中上传包含设备配置文件配置的 JSON 文件，然后点击「<b>Import</b>」。'
     2:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-sensor-device-profile-3-ce.png
-        title: 'You have imported the device profile configuration.'
+        title: '已导入设备配置文件配置。'
 
 import-equipment-health-analysis-rule-chain:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-health-analysis-rule-chain-1-ce.png
-        title: 'Navigate to the "<b>Rule chains</b>" page. Click the "<b>plus</b>" icon button, and select "<b>Import rule chain</b>" from the dropdown menu.'
+        title: '进入「<b>Rule chains</b>」页面，点击「<b>加号</b>」图标按钮，从下拉菜单中选择「<b>Import rule chain</b>」。'
     1:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-health-analysis-rule-chain-2-ce.png
-        title: 'In the opened window, upload the JSON file with the rule chain configuration and click "<b>Import</b>".'
+        title: '在打开的窗口中上传包含规则链配置的 JSON 文件，然后点击「<b>Import</b>」。'
     2:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-health-analysis-rule-chain-3-ce.png
-        title: 'Locate "<b>AI request</b>" node and enter its <b>edit mode</b>.'
+        title: '找到「<b>AI request</b>」节点并进入其<b>编辑模式</b>。'
     3:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-health-analysis-rule-chain-4-ce.png
-        title: 'Click "<b>Create new</b>" AI model.'
+        title: '点击「<b>Create new</b>」创建新 AI 模型。'
     4:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-health-analysis-rule-chain-5-ce.png
-        title: 'Enter a <b>name for the AI model</b>, choose the <b>AI provider</b>, and paste your <b>API key</b>. This example uses <b>o4-mini</b> from OpenAI. <b>Test connectivity</b> before saving. Then, click "<b>Save</b>".'
+        title: '输入<b>AI 模型名称</b>、选择<b>AI 提供商</b>并粘贴<b>API key</b>。本示例使用 OpenAI 的 <b>o4-mini</b>。保存前点击<b>Test connectivity</b>验证，然后点击「<b>Save</b>」。'
     5:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-health-analysis-rule-chain-6-ce.png
-        title: '<b>Apply changes</b> to "AI request" node.'
+        title: '对「AI request」节点<b>Apply changes</b>。'
     6:
         image: /images/samples/analytics/ai-predictive-maintenance/import-equipment-health-analysis-rule-chain-7-ce.png
-        title: '<b>Save rule chain</b>.'
+        title: '<b>Save rule chain</b> 保存规则链。'
   
 update-equipment-sensor-profile:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/update-equipment-sensor-profile-1-ce.png
-        title: 'Go to the "<b>Device profiles</b>" page. Click on the "<b>EquipmentSensor</b>" profile and enter edit mode.'
+        title: '进入「<b>Device profiles</b>」页面，点击「<b>EquipmentSensor</b>」配置文件并进入编辑模式。'
     1:
         image: /images/samples/analytics/ai-predictive-maintenance/update-equipment-sensor-profile-2-ce.png
-        title: 'Specify "<b>Equipment Health Analysis</b>" as the default rule chain.'
+        title: '将「<b>Equipment Health Analysis</b>」指定为默认规则链。'
     2:
         image: /images/samples/analytics/ai-predictive-maintenance/update-equipment-sensor-profile-3-ce.png
         title: ''
@@ -65,15 +65,15 @@ update-equipment-sensor-profile:
 create-test-device-1:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/create-test-device-1-ce.png
-        title: 'Navigate to the "<b>Devices</b>" page. Click the "<b>plus</b>" icon button, and select "<b>Add new device</b>" from the dropdown menu.'
+        title: '进入「<b>Devices</b>」页面，点击「<b>加号</b>」图标按钮，从下拉菜单中选择「<b>Add new device</b>」。'
     1:
         image: /images/samples/analytics/ai-predictive-maintenance/create-test-device-2-ce.png
-        title: 'Name the device "<b>Equipment Sensor 1</b>". Set the device to the "<b>EquipmentSensor</b>" profile. Click "<b>Add</b>".'
+        title: '将设备命名为「<b>Equipment Sensor 1</b>」，设备配置文件设为「<b>EquipmentSensor</b>」，点击「<b>Add</b>」。'
 
 create-test-device-2:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/create-test-device-3-ce.png
-        title: 'Copy the <b>check connection</b> command.'
+        title: '复制<b>check connection</b>命令。'
 
 check-connectivity-command-from-device:
     0:
@@ -83,17 +83,17 @@ check-connectivity-command-from-device:
 send-test-data-no-alarm-case:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/send-test-data-no-alarm-case-1-ce.png
-        title: 'Send the following test data to ThingsBoard. Be sure to replace $THINGSBOARD_HOST_NAME with the host of your ThingsBoard instance, and $YOUR_DEVICE_ACCESS_TOKEN with your device&#39;s access token.'
+        title: '将以下测试数据发送到 ThingsBoard。请将$THINGSBOARD_HOST_NAME替换为 ThingsBoard 实例的主机地址，$YOUR_DEVICE_ACCESS_TOKEN 替换为设备的 access token。'
 
 send-test-data-bearing-wear-detection:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/alarm-created-1-ce.png
-        title: 'Simulate a bearing wear event by sending the following test data to ThingsBoard. Be sure to replace $THINGSBOARD_HOST_NAME with the host of your ThingsBoard instance, and $YOUR_DEVICE_ACCESS_TOKEN with your device&#39;s access token.'
+        title: '通过发送以下测试数据到 ThingsBoard 模拟轴承磨损事件。请将$THINGSBOARD_HOST_NAME替换为 ThingsBoard 实例的主机地址，$YOUR_DEVICE_ACCESS_TOKEN 替换为设备的 access token。'
 
 send-test-data-misalignment-detection:
     0:
         image: /images/samples/analytics/ai-predictive-maintenance/alarm-created-2-ce.png
-        title: 'Simulate a misalignment event by sending the following test data to ThingsBoard. Be sure to replace $THINGSBOARD_HOST_NAME with the host of your ThingsBoard instance, and $YOUR_DEVICE_ACCESS_TOKEN with your device&#39;s access token.'
+        title: '通过发送以下测试数据到 ThingsBoard 模拟不对中事件。请将$THINGSBOARD_HOST_NAME替换为 ThingsBoard 实例的主机地址，$YOUR_DEVICE_ACCESS_TOKEN 替换为设备的 access token。'
 
 ---
 

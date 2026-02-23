@@ -1,8 +1,8 @@
 {% capture trendz-ad %}
-Note: from ThingsBoard version 4.3.0 **Trendz Analytics** became ThingsBoard addon. The Trendz home page will appear in the left ThingsBoard menu after the upgrade.
+注意：自ThingsBoard 4.3.0版本起，**Trendz Analytics**已成为ThingsBoard插件。升级后，Trendz首页将出现在ThingsBoard左侧菜单中。
 <br>
-You can find out how to read more what is **Trendz Analytics** and how it complements the ThingsBoard analytics functionality [here](/docs/trendz/what-is-trendz/).
+您可了解**Trendz Analytics**的详细信息及其如何补充ThingsBoard分析功能，请参阅[此处](/docs/trendz/what-is-trendz/)。
 <br>
-You can find out how to install Trendz Analytics [here](/docs/trendz/install/installation-options/).
+您可了解如何安装Trendz Analytics，请参阅[此处](/docs/trendz/install/installation-options/)。
 {% endcapture %}
 {% include templates/info-banner.md content=trendz-ad %}

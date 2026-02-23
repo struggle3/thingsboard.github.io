@@ -1,56 +1,54 @@
-
+﻿
 {% assign boardLedCount = 1 %}
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign arduinoBoardPath="**Raspberry Pi Pico/RP2040** > **Raspberry Pi Pico W**" %}
 {% assign prerequisites = "
 - " | append: deviceName | append: "
 - [Arduino IDE](https://www.arduino.cc/en/software)"
  %}
 
-## Introduction
+## 概述
 
 
-Following the hugely popular Raspberry Pi Pico, the new Raspberry Pi Pico W is a wireless-enabled version of the RP2040-based board, adding 2.4GHz 802.11n WiFi connectivity.
-The addition of wireless connectivity opens up the Pico W to a vast new range of projects such as remote sensor readings, remote control, home automation, mini web servers, wireless GPIO pin control and more.
-At the heart of the Pico W is the RP2040 – the same chip used in the original Raspberry Pi Pico, featuring two ARM Cortex-M0+ cores clocked at 133MHz; 256KB RAM; 30 GPIO pins; and a broad range of interfacing options. This is paired with 2MB of onboard QSPI Flash memory for code and data storage.
-WiFi is enabled via the use of an Infineon CYW43439 wireless chip.
+继广受欢迎的 Raspberry Pi Pico 之后，Raspberry Pi Pico W 成为基于 RP2040 的无线版本，新增 2.4 GHz 802.11n Wi-Fi 连接。  
+无线功能使 Pico W 适用于更多项目场景，如远程传感器读数、遥控、智能家居、迷你 Web 服务器、无线 GPIO 控制等。  
+Pico W 核心为 RP2040，与初代 Raspberry Pi Pico 相同，双核 ARM Cortex-M0+，主频 133 MHz，256 KB RAM，30 个 GPIO 引脚，以及丰富的接口选项，搭配 2 MB 板载 QSPI Flash 存储程序与数据。  
+Wi-Fi 由英飞凌 CYW43439 无线芯片实现。
 
 {% include /docs/device-library/blocks/basic/introduction-block.md %}
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 {% include /docs/device-library/blocks/basic/thingsboard-create-device-block.md %}
 
-## Install required libraries and tools
+## 安装所需库和工具 {#install-required-libraries-and-tools}
 
 {% include /docs/device-library/blocks/microcontrollers/raspberry-pi-pico-arduino-library-install-block.md %}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-arduino-library-install-block.md %}
 
-## Connect device to ThingsBoard
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 {% include /docs/device-library/blocks/basic/thingsboard-provide-device-access-token-block.md %}
 
 {% include /docs/device-library/blocks/microcontrollers/rp2040-general-code-to-program-block.md %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/basic/thingsboard-upload-example-dashboard.md %}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-check-example-data-block.md %}
 
-## Synchronize device state using client and shared attribute requests
+## 使用客户端和共享属性请求同步设备状态 {#synchronize-device-state-using-client-and-shared-attribute-requests}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-synchronize-device-state-using-attribute-requests-block.md %}
 
-## Control device using shared attributes
+## 使用共享属性控制设备 {#control-device-using-shared-attributes}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-update-shared-attributes-device-block.md %}
 
-## Control device using RPC
+## 使用 RPC 控制设备 {#control-device-using-rpc}
 
 {% include /docs/device-library/blocks/microcontrollers/thingsboard-send-rpc-to-device-block.md %}
 
-## Conclusion
+## 总结
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

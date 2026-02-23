@@ -1,142 +1,141 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 
-[Elastel EG500](https://www.elastel.com/products/industrial-raspberry-pi/eg500-edge-computing-gateway/){:target="_blank"} is an Industrial Edge Computing Gateway powered by **Raspberry Pi CM4**.
+[Elastel EG500](https://www.elastel.com/products/industrial-raspberry-pi/eg500-edge-computing-gateway/){:target="_blank"} 是一款基于 **Raspberry Pi CM4** 的工业边缘计算网关。
 
-Perfect for use as an IoT Gateway, data acquisition device, Industrial Controller, or for Edge Computing applications.
+适用于 IoT 网关、数据采集设备、工业控制器及边缘计算场景。
 
-Designed for IIoT applications, it features:
-- **Industrial interfaces**: 2× GbE, 2× USB, 1× RS485, 1× RS232, 6× DI, 6× DO, and 3× ADC
-- **Connectivity options**: 4G, LoRa, Wi-Fi/BLE, WiFi HaLow (802.11ah WiFi)
-- **Enclosure**: Truly IPC-grade stability and ruggedness
+面向 IIoT 应用，具备：
+- **工业接口**：2× GbE、2× USB、1× RS485、1× RS232、6× DI、6× DO、3× ADC
+- **连接方式**：4G、LoRa、Wi-Fi/BLE、WiFi HaLow（802.11ah）
+- **机箱**：工业级稳定性与防护
 
-In this tutorial we will use Elastel EG500 as edge gateway to collect data from RS485 Modbus temperature & humidity sensor, also collect the DI status value and control the DO on/off which wiring a LED light. EG500 will connect to ThingsBoard for data visualizing and controlling the LED.
+本教程将使用 Elastel EG500 作为边缘网关，从 RS485 Modbus 温湿度传感器采集数据，采集 DI 状态并控制 DO 开关（接 LED 灯）。EG500 将连接 ThingsBoard 实现数据可视化与 LED 控制。
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide, you will need to have access to ThingsBoard Professional Edition. The easiest way is to use [ThingsBoard Cloud](https://thingsboard.io/installations/choose-region/){:target="_blank"} server.
-The alternative option is to install ThingsBoard using [installation guide](/docs/user-guide/install/pe/installation-options/){:target="_blank"}.
+继续本指南前，需能访问 ThingsBoard 专业版。最简单的方式是使用 [ThingsBoard Cloud](https://thingsboard.io/installations/choose-region/){:target="_blank"}；也可按 [安装指南](/docs/user-guide/install/pe/installation-options/){:target="_blank"} 自行安装 ThingsBoard。
 
-Also, you will require the following items:
+还需准备：
 
-- An **Elastel EG500** device
-- An **RS485 Modbus Temperature & Humidity sensor**
-- A **LED light**
+- **Elastel EG500** 设备
+- **RS485 Modbus 温湿度传感器**
+- **LED 灯**
 
-### Wiring scheme
+### 接线示意
 
 ![wiring1](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/wiring1.png)
 ![wiring2](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/wiring2.png)
 
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
-**1. In our example, we use ThingsBoard Cloud**
+**1. 本例使用 ThingsBoard Cloud**
 
-Create an account and then [log in](https://thingsboard.cloud/login){:target="_blank"}.
+注册账户后 [登录](https://thingsboard.cloud/login){:target="_blank"}。
 
 ![thingsboard_login](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/thingsboard_login.png)
 
-<br>**2. Create a device on ThingsBoard**
+<br>**2. 在 ThingsBoard 中创建设备**
 
-Go to the "**Devices**" page of the "**Entities**" section, click on the "**+**" icon button in the top right corner of the table and then select "**Add new device**" from drop-down menu.
+进入 **「实体」** 下的 **「设备」** 页面，点击表格右上角 **「+」**，从下拉菜单选择 **「添加新设备」**。
 
 ![add_new_device](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/add_new_device.png)
 
-<br>**3.** Enter a device name (e.g., **Elastel_EG500**) and click "**Add**".
+<br>**3.** 输入设备名称（如 **Elastel_EG500**），点击 **「添加」**。
 
 ![add_device_name](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/add_device_name.png)
 
-<br>**4. Copy and save the Access token**
+<br>**4. 复制并保存 Access token**
 
-It will be needed in further device configuration for connecting to ThingsBoard cloud.
+后续设备配置连接 ThingsBoard Cloud 时会用到。
 
 ![access token](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/access_token.png)
 
-## Elastel device configuration
+## Elastel 设备配置
 
-In this step, we will configure Elastel EG500 to collect data from RS485 Modbus sensor and DI/DO status value. Elastel devices has prebuilt [Elastel IIoT gateway software ElastPro](https://www.elastel.com/iiot-gateway-software-elastpro/){:target="_blank"} which provide web-based programs for easy configuration and data collect setup.
+本步将配置 Elastel EG500，从 RS485 Modbus 传感器采集数据并采集 DI/DO 状态。Elastel 设备预装 [Elastel IIoT 网关软件 ElastPro](https://www.elastel.com/iiot-gateway-software-elastpro/){:target="_blank"}，提供基于网页的配置与数据采集设置。
 
-**1. Launch ElastPro**
+**1. 启动 ElastPro**
 
-To launch ElastPro, follow [this guide](https://docs.elastel.com/docs/ElastPro/Getting_Started){:target="_blank"}.
+按 [该指南](https://docs.elastel.com/docs/ElastPro/Getting_Started){:target="_blank"} 启动 ElastPro。
 
-**2. Enable Data Collect** 
+**2. 启用数据采集**
 
-Go to the **Data Collect** -> **Basic**, enable the **Data collect** function, and configure the **Collect period**, **Report period**, then click the "**Apply settings**" button.
+进入 **Data Collect** -> **Basic**，启用 **Data collect**，配置 **Collect period**、**Report period**，点击 **「Apply settings」**。
 
 ![enable data collect](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/basic_setting.png)
 
-<br>**3. Configure the RS485 Serial port for Modbus sensor data collect**
+<br>**3. 配置 RS485 串口以采集 Modbus 传感器数据**
 
-Go to the **Data Collect** -> **Interfaces** to enable the COM1 RS485 for connecting the RS485 **Temp&Humidity Sensor**, configure the related parameters, then "**Apply settings**".
+进入 **Data Collect** -> **Interfaces**，启用 COM1 RS485 以连接 RS485 **温湿度传感器**，配置相关参数后点击 **「Apply settings」**。
 
 ![rs485 interface setting](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/rs485_interface.png)
 
-<br>Go to **Data Collect** -> **South Devices** -> **Modbus Rules** to configure the collect Modbus data from **Temp&Humidity Sensor**, then "**Apply settings**".
+<br>进入 **Data Collect** -> **South Devices** -> **Modbus Rules**，配置从 **温湿度传感器** 采集 Modbus 数据，然后 **「Apply settings」**。
 
 ![Modbus rule settings](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/modbus_rule_settings.png)
 
-<br>**4. Configure the IO port for collect DI status and control DO status** 
+<br>**4. 配置 IO 口以采集 DI 状态并控制 DO**
 
-Go to **Data Collect** -> **South Devices** -> **IO**, add DI and DO Setting rules, configure the relevant parameters and click the "**Apply settings**".
+进入 **Data Collect** -> **South Devices** -> **IO**，添加 DI、DO 设置规则，配置参数后点击 **「Apply settings」**。
 
 ![IO settings](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/io_settings.png)
 
-## Connect device to ThingsBoard
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 
-Go to the **Data Collect** -> **North Apps** -> **Reporting Center** to configure the connection to ThingsBoard platform via MQTT.
+进入 **Data Collect** -> **North Apps** -> **Reporting Center**，配置经 MQTT 连接 ThingsBoard 平台。
 
 ![Connect mqtt to ThingsBoard](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/mqtt_thingsboard_connect.png)
 
-> Note: If using custom MQTT credentials on ThingsBoard, set them under **Next: Credentials → MQTT Basic** during device creation, and use those here.
+> 说明：若在 ThingsBoard 中使用自定义 MQTT 凭据，请在创建设备时在 **下一步：凭据 → MQTT Basic** 下设置，并在此处使用相同凭据。
 
-Refer to the [**ElastPro User Manual**](https://docs.elastel.com/docs/ElastPro/intro){:target="_blank"} for more detailed configuration options.
+更多配置选项请参考 [**ElastPro 用户手册**](https://docs.elastel.com/docs/ElastPro/intro){:target="_blank"}。
 
-## Check data on ThingsBoard
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 
-Once connected, data will appear under the device&#39;s **latest telemetry** tab in ThingsBoard.
+连接成功后，数据会出现在 ThingsBoard 中该设备的 **最新遥测** 选项卡下。
 
 ![check data on thingsboard](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/data_on_thingsboard.png)
 
-<br>You can also view the data on EG500&#39;s local dashboard.
+<br>也可在 EG500 本地仪表板上查看数据。
 
 ![data on device local](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/data_on_devicelocal.png)
 
-### Create Dashboard
+### 创建仪表板
 
-Now let&#39;s display the data from the Elastel EG500 device on the dashboard. Learn more how to work with the dashboard [here](/docs/pe/user-guide/dashboards/){:target="_blank"}.
+下面将 Elastel EG500 的数据展示到仪表板上。更多仪表板用法见[此处](/docs/pe/user-guide/dashboards/){:target="_blank"}。
 
-Go to the "**Dashboards**" page, click on the "**+**" icon button in the top right corner of the table and then select "**Create new dashboard**" from drop-down menu. Enter the Title of the dashboard, then click "**Add**".
+进入 **「Dashboards」** 页面，点击表格右上角 **「+」**，从下拉菜单选择 **「创建新仪表板」**。输入仪表板标题后点击 **「添加」**。
 
 ![add dashboard](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/add_dashboard.png)
 
-<br> On the Dashboard edit page, click the "**+ Add new widget**" button to add [widget](/docs/pe/user-guide/widgets/){:target="_blank"} for displaying our telemetry data.
+<br>在仪表板编辑页点击「**+ 添加新部件**」按钮，添加[部件](/docs/pe/user-guide/widgets/){:target="_blank"}以展示遥测数据。
 
-![add widget](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/add_widget.png)
+![添加部件](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/add_widget.png)
 
-<br>Select the appropriate widget template and configure the data source accordingly. For example, choose a **Value card** to display the "Temperature" data and add the "Temperature" data key as a data source from the EG500 device we created.
+<br>选择合适部件模板并配置数据源。例如选择 **Value card** 显示「Temperature」数据，将 EG500 设备的「Temperature」数据键添加为数据源。
 
-![add temperature widget](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/add_temp_widget.png)
+![添加温度部件](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/add_temp_widget.png)
 
-<br>After completing the widget setup, click the "**Add**" button. We have now added a widget that displays the real-time temperature value.
+<br>完成部件配置后点击 **「添加」**。此时已添加显示实时温度值的部件。
 
-![temperature widget](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/temperature_widget.png)
+![温度部件](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/temperature_widget.png)
 
-<br>Similarly, add widgets to display **humidity** and **door state** data, and add a "**Power button**" widget to control turning on/off the indicator light.
-After completing the dashboard configuration, click the "**Save**" button.
+<br>同理添加部件以显示 **湿度**、**门状态** 数据，并添加 **「Power button」** 部件控制指示灯开关。
+完成仪表板配置后点击 **「保存」**。
 
-Now we have a visualizing dashboard for displaying data and controlling the DO (LED light).
+即可得到用于展示数据并控制 DO（LED 灯）的可视化仪表板。
 
-![add other widget](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/other_widget.png)
+![添加其他部件](/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/other_widget.png)
 
-## Demonstration of the result
+## 效果演示
 
 <object width="100%" data="/images/devices-library/basic/single-board-computers/raspberry-pi-cm4/demonstration_show.gif"></object>
 
-## Conclusion
+## 总结
 
-By following this guide, you can easily integrate Elastel IIoT gateways with ThingsBoard. Elastel’s easy-to-use web UI and ThingsBoard’s powerful visualization tools make the edge-to-cloud connection seamless.
+按本指南操作即可将 Elastel IIoT 网关与 ThingsBoard 集成。Elastel 的易用 Web 界面与 ThingsBoard 的可视化能力可使边缘到云端的连接无缝完成。
 
-- Learn more about [**Elastel Edge Devices**](https://www.elastel.com/products/){:target="_blank"}.
-- Explore ThingsBoard [**Documentation**](https://thingsboard.io/docs/pe/){:target="_blank"} for advanced features and concepts.
+- 了解更多 [**Elastel 边缘设备**](https://www.elastel.com/products/){:target="_blank"}。
+- 查阅 ThingsBoard [**文档**](https://thingsboard.io/docs/pe/){:target="_blank"} 了解进阶功能与概念。
 {% include add-device-banner.liquid %}

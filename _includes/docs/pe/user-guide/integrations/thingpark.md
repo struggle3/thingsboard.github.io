@@ -1,29 +1,29 @@
 {% assign feature = "Platform Integrations" %}{% include templates/pe-feature-banner.md %}
 
 
-ThingPark Integration allows to stream data from Actility ThingPark servers to ThingsBoard and converts binary device payloads to the ThingsBoard format.
+ThingPark 集成可将 Actility ThingPark 服务器的数据流式传输到 ThingsBoard，并将二进制设备 payload 转换为 ThingsBoard 格式。
 
 <object width="100%" style="max-width: max-content;" data="/images/user-guide/integrations/thingpark-integration.svg"></object>
 
-Configuration steps:
-- Review official  ThingPark DX Dataflow API reference documentation:
+配置步骤：
+- 查阅 ThingPark DX Dataflow API 官方参考文档：
 
-[documentation](https://www.actility.com/thingpark-documentation-portal/).
+[文档](https://www.actility.com/thingpark-documentation-portal/)。
 
-- Go through the procedure of your registration and registration of your device on the ThingPark Wireless OSS intelligent logger (Actility).
+- 在 ThingPark Wireless OSS intelligent logger (Actility) 上完成注册及设备注册流程。
 
-[Procedure of your registration and registration of your device](https://thingparkenterprise.eu.actility.com/tpe/#/login).
+[注册与设备注册流程](https://thingparkenterprise.eu.actility.com/tpe/#/login)。
 
-- Check the connection and operation of your device to the ThingPark Wireless OSS intelligent logger (Actility).
+- 检查设备与 ThingPark Wireless OSS intelligent logger (Actility) 的连接和运行状态。
 
-[Check the connection and operation of your device](https://thingparkenterprise.eu.actility.com/thingpark/wlogger/gui/).
+[检查设备连接与运行](https://thingparkenterprise.eu.actility.com/thingpark/wlogger/gui/)。
 
-- To create a new Integration on the ThingsBoard platform with the ThingPark Wireless OSS intelligent logger (Actility) platform, click on the link.
+- 要在 ThingsBoard 平台与 ThingPark Wireless OSS intelligent logger (Actility) 之间创建新 Integration，请点击链接。
 
-[Create new Integration of type "ThingPark"](/docs/samples/abeeway/tracker)
+[创建类型为 "ThingPark" 的新 Integration](/docs/samples/abeeway/tracker)
 
 <br>
 
-## Next steps
+## 下一步
 
  {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

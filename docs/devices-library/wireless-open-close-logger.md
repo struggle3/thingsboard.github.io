@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Wireless open/close logger to ThingsBoard?"
+title: "如何将无线开关记录仪连接到ThingsBoard？"
 redirect_to: "/device-library/ce/wireless-open-close-logger/"
 ---

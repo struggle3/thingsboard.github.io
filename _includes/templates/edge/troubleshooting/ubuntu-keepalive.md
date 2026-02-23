@@ -1,12 +1,12 @@
-#### Server
+#### 服务器
 
-Edit the **ThingsBoard configuration file:**
+编辑 **ThingsBoard 配置文件**：
 ```bash
 sudo nano /etc/thingsboard/conf/thingsboard.conf
 ```
 {: .copy-code}
 
-Add the following lines to the configuration file:
+在配置文件中添加以下内容：
 ```bash
 export EDGES_RPC_CLIENT_MAX_KEEP_ALIVE_TIME_SEC=1
 export EDGES_RPC_KEEP_ALIVE_TIME_SEC=30
@@ -16,17 +16,17 @@ export EDGES_RPC_KEEP_ALIVE_TIMEOUT_SEC=25
 
 #### Edge
 
-Then, edit the **ThingsBoard Edge configuration file:**
+然后编辑 **ThingsBoard Edge 配置文件**：
 ```bash
 sudo nano /etc/tb-edge/conf/tb-edge.conf
 ```
 {: .copy-code}
 
-Add the following lines to the configuration file:
+在配置文件中添加以下内容：
 ```bash
 export CLOUD_RPC_KEEP_ALIVE_TIME_SEC=30
 export CLOUD_RPC_KEEP_ALIVE_TIMEOUT_SEC=25
 ```
 {: .copy-code}
 
-Once all the changes have been made, restart the **ThingsBoard** and **TB Edge services**.
+完成所有更改后，重启 **ThingsBoard** 和 **TB Edge** 服务。

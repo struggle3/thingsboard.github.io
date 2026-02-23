@@ -4,112 +4,112 @@
 {% assign sinceVersion = "4.1" %}
 {% include templates/since.md %}
 
-Starting from ThingsBoard 4.1, widgets support automatic data conversion and unit switching based on the selected unit system. 
-This is especially useful in global IoT solutions and significantly improves data interaction for users across different geographic regions where various measurement standards are used — such as the metric system (°C, km, kg) and the imperial system (°F, miles, lbs).
+自 ThingsBoard 4.1 起，部件支持根据所选单位制自动进行数据转换和单位切换。
+这在全球 IoT 方案中尤为有用，可显著改善使用不同测量标准（如公制 °C、km、kg 与英制 °F、miles、lbs）的各地用户的数据交互体验。
 
-<br><b><font size="4">Key benefits:</font></b>
+<br><b><font size="4">主要优势：</font></b>
 
-- Automatic conversion of numerical values into the appropriate units directly within the widget — no additional data processing required.
-- Flexible widget configuration that eliminates the need to duplicate widgets or create separate dashboards for users with different regional unit standards.
-- Support for a wide range of measurement units, allowing users to view values in the units that are most familiar and convenient to them.
+- 在部件内自动将数值转换为适当单位，无需额外数据处理。
+- 灵活的部件配置，无需为采用不同地区单位标准的用户重复创建部件或单独 dashboard。
+- 支持多种测量单位，用户可按最熟悉和便捷的单位查看数值。
 
-<b><font size="4">Where the unit conversion feature can be applied?</font></b>
+<b><font size="4">单位转换功能适用于哪些场景？</font></b>
 
-All widgets designed to display telemetry data include a unit conversion option.   
-Unit conversion is supported for telemetry data, Y-axis scales, and threshold settings.
+所有用于展示 telemetry 数据的部件均包含单位转换选项。
+单位转换适用于 telemetry 数据、Y 轴刻度和阈值设置。
 
-> **Note:** If a widget contains multiple telemetry keys, the unit conversion feature must be configured individually for each key.
+> **注意：** 若部件包含多个 telemetry key，需为每个 key 单独配置单位转换。
 
-## Enable unit conversion
+## 启用单位转换
 
-Unit conversion is configured in the **unit settings** available in the **telemetry keys**, **Y-axis**, and **thresholds** configurations within the widget settings.
+单位转换在部件设置的 **telemetry keys**、**Y-axis** 和 **thresholds** 配置中的 **unit settings** 中配置。
 
-- Specify the **source unit** — the unit of the incoming telemetry value received from the server to ensure correct conversion to the target unit.
-- Enable unit conversion by toggling the "**Enable unit conversion**" switch.
-- The system will automatically suggest commonly used target units for each unit system (e.g., °C for Metric, °F for Imperial, and °C for Hybrid). However, you can override these by selecting different units from the dropdown list.
+- 指定 **source unit** — 即来自服务器且需正确转换为目标单位的 telemetry 数值单位。
+- 通过切换“**Enable unit conversion**”开关启用单位转换。
+- 系统会按单位制自动建议常用目标单位（如 Metric 为 °C、Imperial 为 °F、Hybrid 为 °C）。也可从下拉列表选择其他单位进行覆盖。
 
-> **Note**: All available units are grouped by category (e.g., temperature, length, mass). You can only select target units from the same category as the source unit.
+> **注意**：所有可用单位按类别分组（如温度、长度、质量）。目标单位只能选择与 source unit 同类的单位。
 
-> **Note**: If you do not specify a unit for a particular unit system, that system will fall back to using the unit defined in the **Source unit** field.
+> **注意**：若未为某单位制指定单位，该单位制将回退使用 **Source unit** 字段中的单位。
 
-- Click "**Apply**" to save the changes.
+- 点击“**Apply**”保存更改。
 
-Once unit conversion is enabled, an icon will appear in the Unit field indicating that the feature is active.
+启用单位转换后，单位字段旁会出现图标，表示该功能已启用。
 
 {% include images-gallery.html imageCollection="unit-conversion-configuring" %}
 
 ### Range color settings
 
-**Range color settings** use the **original telemetry value** received from the server in its source **units** — before any unit conversion is applied.
+**Range color settings** 使用从服务器接收的 **原始 telemetry 值**（在应用任何单位转换之前的 **units**）。
 
-For example, if your device sends a temperature value of **22 °C** and unit conversion is enabled, the widget may display it as **71 °F**. 
-However, the **range logic still uses the original 22 °C** to determine the color.
+例如，若设备发送温度值 **22 °C** 且已启用单位转换，部件可能显示为 **71 °F**。
+但 **范围逻辑仍使用原始 22 °C** 判定颜色。
 
-So if you&#39;ve defined a green range from **18 to 24 °C**, then any temperature readings within that range will be shown in green — regardless of whether it&#39;s displayed as 22 °C or 71 °F.
+因此，若定义 **18 至 24 °C** 的绿色范围，则该范围内的所有温度读数都将显示为绿色 —— 无论是 22 °C 还是 71 °F。
 
-This ensures that **range coloring remains consistent**, even when switching between unit systems.
+这样可确保 **范围着色保持一致**，切换单位制时亦然。
 
 {% include images-gallery.html imageCollection="range-color-settings" %}
 
 ## Changing the unit system
 
-To change the unit system used in your ThingsBoard account:
-- Click the **three-dot icon** in the top-right corner of the screen and select "**Account**".
-- In the **Profile** settings, choose the desired unit system from the dropdown list:
-  - **Auto** - Automatically determines the appropriate unit system based on the user&#39;s browser locale or regional settings.
-  - **Metric** - The most widely used system globally, based on units like meter (m), kilogram (kg), second (s), etc.
-  - **Imperial** - Commonly used in the USA, based on units such as inches (in), feet (ft), miles (m), pounds (lb), gallons (gal), etc.
-  - **Hybrid** - A mixed measurement system, typically used in the United Kingdom. Often blends metric and imperial units depending on the context. For example: miles (mi) for distance, Celsius (°C) for temperature, kilograms (kg) or stones (st) for body weight.
-- Apply changes.
+更改 ThingsBoard 账户使用的单位制：
+- 点击屏幕右上角 **三点图标**，选择“**Account**”。
+- 在 **Profile** 设置中，从下拉列表选择所需单位制：
+  - **Auto** - 根据用户浏览器区域或地区设置自动选择合适单位制。
+  - **Metric** - 全球最广泛使用，基于米 (m)、千克 (kg)、秒 (s) 等单位。
+  - **Imperial** - 常用于美国，基于英寸 (in)、英尺 (ft)、英里 (m)、磅 (lb)、加仑 (gal) 等单位。
+  - **Hybrid** - 混合测量制，常见于英国。通常根据上下文混用公制和英制。例如：距离用英里 (mi)、温度用摄氏度 (°C)、体重用千克 (kg) 或英石 (st)。
+- 应用更改。
 
 {% include images-gallery.html imageCollection="changing-unit-system" %}
 
 ## Example
 
-Let&#39;s walk through configuring the unit conversion feature using the **Temperature & Humidity dashboard** as an example.   
-This dashboard contains widgets that display the **temperature** in degrees Celsius (**°C**) and **humidity** in percentage (**%**).
+下面以 **Temperature & Humidity** dashboard 为例配置单位转换。
+该 dashboard 包含显示 **摄氏度 (°C)** 的 **temperature** 和 **百分比 (%)** 的 **humidity** 的部件。
 
 {% include images-gallery.html imageCollection="unit-conversion-example-1" %}
 
-We will apply the **unit conversion feature** to the **temperature telemetry value**, the **Y-axis of the temperature chart**, **and the temperature threshold**.
-The **humidity** value will remain unchanged, as the unit of measurement for humidity is **percentage (%)**, regardless of the selected **unit system**.
+将为单位转换应用到 **temperature telemetry 值**、**temperature 图表的 Y 轴**和 **temperature 阈值**。
+**humidity** 值保持不变，因为湿度测量单位为 **percentage (%)**，与所选 **unit system** 无关。
 
 <b><font size="3">Step 1: Edit the Chart widget</font></b>
 
-Switch to edit mode for the "**Temperature and Humidity history**" chart widget.
+切换到“**Temperature and Humidity history**”图表部件的编辑模式。
 
-First, configure the unit conversion for the "**temperature**" telemetry key:
-- Click on the "**Units**" row in the "**temperature**" key field. You&#39;ll see that the **source unit** is already set to **Celsius** (°C), which is exactly what we need.
-- To enable conversion, simply toggle on the "**Enable unit conversion**" option and specify the target unit for each unit system (e.g., °F for Imperial, °C for Metric and Hybrid). 
-- Click "**Apply**".
+首先，为“**temperature**” telemetry key 配置单位转换：
+- 在“**temperature**” key 字段中点击“**Units**”行。可见 **source unit** 已设为 **Celsius** (°C)，符合需求。
+- 启用转换：打开“**Enable unit conversion**”选项，并为各单位制指定目标单位（如 Imperial 为 °F，Metric 和 Hybrid 为 °C）。
+- 点击“**Apply**”。
 
 {% include images-gallery.html imageCollection="unit-conversion-example-2" %}
 
-Repeat the same steps to convert temperature values for the **Y-axis** and the **threshold** — enable unit conversion and specify the target units for each measurement system.
-After that, apply all changes.
+对 **Y-axis** 和 **threshold** 的温度值重复同样步骤——启用单位转换并为各测量制指定目标单位。
+完成后应用所有更改。
 
 {% include images-gallery.html imageCollection="unit-conversion-example-3" %}
 
 <b><font size="3">Step 2: Edit the Temperature Card widget</font></b>
 
-Switch to edit mode for the "**Temperature**" card widget.
+切换到“**Temperature**”卡片部件的编辑模式。
 
-In the "**Unit settings**" dialog, enable unit conversion and provide the appropriate units for each unit system, just like before. 
-Apply your changes and save the dashboard.
+在“**Unit settings**”对话框中，如前启用单位转换并为各单位制提供合适单位。
+应用更改并保存 dashboard。
 
 {% include images-gallery.html imageCollection="unit-conversion-example-4" %}
 
-Since our current unit system is set to **Metric**, temperature values are shown in Celsius (**°C**).
+由于当前单位制为 **Metric**，温度以摄氏度 (**°C**) 显示。
 
 {% include images-gallery.html imageCollection="unit-conversion-example-5" %}
 
 <b><font size="3">Step 3: Changing the unit system</font></b>
 
-To see the unit conversion in action, change your unit system to **Imperial**. 
-To do this, go to your **Account** settings, find the "**Unit system**" dropdown, and select **Imperial**.
+要查看单位转换效果，请将单位制改为 **Imperial**。
+进入 **Account** 设置，找到“**Unit system**”下拉列表，选择 **Imperial**。
 
 {% include images-gallery.html imageCollection="unit-conversion-example-6" %}
 
-Return to the dashboard — you will now see that the temperature value, Y-axis labels, and threshold have been converted from Celsius to Fahrenheit according to the selected unit system.
+返回 dashboard，可看到温度值、Y 轴标签和阈值已根据所选单位制从摄氏度转换为华氏度。
 
 {% include images-gallery.html imageCollection="unit-conversion-example-7" %}

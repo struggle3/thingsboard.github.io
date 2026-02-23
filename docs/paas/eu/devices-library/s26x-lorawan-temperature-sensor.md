@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas-eu
-title: "How to connect RS26x LoRaWAN Temperature Sensor to ThingsBoard?"
+title: "如何将RS26x LoRaWAN Temperature Sensor连接到ThingsBoard？"
 redirect_to: "/device-library/paas-eu/s26x-lorawan-temperature-sensor/"
 ---

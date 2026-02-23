@@ -1,12 +1,11 @@
-Insecure connection type is the simplest option. It is useful for testing purpose but not recommended in production
-solution. 
+Insecure 连接类型是最简单的选项，适合测试使用，但不建议用于生产环境。 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**说明**|
 |:-|:-|-
-| type               | **insecure**                      | Type of connection.      |
+| type               | **insecure**                      | 连接类型。      |
 |---
 
-Connection subsection in configuration file will look like this: 
+配置文件中的 connection 配置小节将如下所示： 
 
 ```yaml
     "connection": {

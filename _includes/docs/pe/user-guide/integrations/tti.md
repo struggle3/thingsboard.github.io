@@ -9,9 +9,9 @@
 {:toc}
 
 
-## Overview
-TheThingsIndustries is LoRaWAN network designed for connecting your devices using LoRaWAN stack. 
-After integrating TheThingsIndustries with the ThingsBoard, you can connect, communicate, process and visualize data from devices in the ThingsBoard IoT platform.
+## 概述
+TheThingsIndustries是用于通过LoRaWAN栈连接设备的LoRaWAN网络。
+将TheThingsIndustries与ThingsBoard集成后，可在ThingsBoard IoT平台中连接、通信、处理和可视化设备数据。
 
 
 ## The Things Stack

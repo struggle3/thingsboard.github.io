@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: ThingsBoard EU Cloud Legacy Subscription plans
-description: Features and advantages of subscription payment model
+title: ThingsBoard EU Cloud 历史订阅计划
+description: 历史订阅付费模式的特性与优势
 redirect_from: "/products/paas/subscription/"
 
 cancel-my-subscription:

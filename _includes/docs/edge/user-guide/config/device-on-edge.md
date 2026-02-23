@@ -1,37 +1,36 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-The **Edge Devices** are basic IoT entities that can generate telemetry data and process RPC commands. They are physical objects, such as sensors, actuators, switches, etc. that can collect, process and transmit data locally or to a nearby network, rather than relying solely on a centralised Cloud system.
+**Edge Devices** 是可生成遥测数据并处理 RPC 命令的基本物联网实体。它们是物理对象，如传感器、执行器、开关等，可在本地或附近网络采集、处理和传输数据，而非仅依赖集中式 Cloud 系统。
 
-To better understand **Devices** as entities in the context of the **ThingsBoard platform**, please refer to [this documentation](/docs/{{peDocsPrefix}}user-guide/ui/devices/){:target="_blank"}.
+要更好地理解 **ThingsBoard 平台** 背景下作为实体的 **Devices**，请参阅 [this documentation](/docs/{{peDocsPrefix}}user-guide/ui/devices/){:target="_blank"}。
 
-## Device Management on Edge Instance
+## Edge 实例上的设备管理
 
-A **Device** entity can be created directly on the **Edge instance** and automatically pushed to the **Cloud (Server)** once a connection is established. Any changes made to the **Device** entity are seamlessly provisioned to the **Cloud (Server)** without requiring additional action, ensuring that updates are synchronized across all **Edge** instances.
+**Device** 实体可直接在 **Edge 实例** 上创建，并在连接建立后自动推送到 **Cloud (Server)**。对 **Device** 实体所做的任何更改都会无缝配置到 **Cloud (Server)**，无需额外操作，确保更新在所有 **Edge** 实例间同步。
 
-Once the **Device** is created on the **Edge instance**, it is also pushed for creation on the **Cloud (Server)**, ensuring consistency and efficient management of the entire system.
+在 **Edge 实例** 上创建 **Device** 后，其也会被推送到 **Cloud (Server)** 进行创建，确保整个系统的一致性和高效管理。
 
-## Creating Device on Edge Instance
+## 在 Edge 实例上创建设备
 {% capture local-deployment %}
-Before you create a **Device**, make sure to create and configure a [Device Profile](/docs/{{peDocsPrefix}}user-guide/device-profiles/){:target="_blank"}.
+创建 **Device** 前，请确保已创建并配置 [Device Profile](/docs/{{peDocsPrefix}}user-guide/device-profiles/){: target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=local-deployment %}
 
-You can create and provision **Device** manually, deploy multiple devices from a CSV file with a [Bulk Provisioning](/docs/{{peDocsPrefix}}user-guide/bulk-provisioning/){:target="_blank"} option, or use the [REST API](/docs/{{peDocsPrefix}}api/){:target="_blank"} for programmatic deployment.
-To create the **Device** manually, follow these instructions:
+您可以手动创建和配置 **Device**，使用 [Bulk Provisioning](/docs/{{peDocsPrefix}}user-guide/bulk-provisioning/){: target="_blank"} 选项从 CSV 文件部署多个设备，或使用 [REST API](/docs/{{peDocsPrefix}}api/){: target="_blank"} 进行程序化部署。
+要手动创建 **Device**，请按以下说明操作：
 
 {% include images-gallery.html imageCollection="create-device" showListImageTitles="true" %}
 
-## Assigning Devices from Cloud to Edge
+## 从 Cloud 分配设备到 Edge
 
-**Devices** can be created on **Cloud (Server)** and then provisioned to the **Edge instance**. 
-Log in to your **Server (Cloud)** and go to the **Edge management > Instances** section.
+**Devices** 可在 **Cloud (Server)** 上创建，然后配置到 **Edge 实例**。
+请登录 **Server (Cloud)** 并进入 **Edge management > Instances** 区域。
 
 {% include images-gallery.html imageCollection="assignment-from-cloud" showListImageTitles="true" %}
 
-## Next Steps
+## 下一步
 
 {% include templates/edge/guides-banner-edge.md %}
-

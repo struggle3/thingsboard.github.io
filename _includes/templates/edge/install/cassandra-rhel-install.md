@@ -1,22 +1,22 @@
-In order to run Cassandra, install **Java 11**:
+运行 Cassandra 前需安装 **Java 11**：
 ```bash
 sudo apt install openjdk-11-jdk-headless
 ```
 {: .copy-code}
 
-Set **Java 17** as the default version (required for ThingsBoard Edge):
+将 **Java 17** 设为默认版本（ThingsBoard Edge 所需）：
 ```bash
 sudo update-alternatives --config java
 ```
 {: .copy-code}
 
-Add the Cassandra **repository**:
+添加 Cassandra **软件源**：
 ```bash
 sudo nano /etc/yum.repos.d/cassandra.repo
 ```
 {: .copy-code}
 
-Add the following content:
+加入以下内容：
 ```ini
 [cassandra]
 name=Apache Cassandra
@@ -26,21 +26,21 @@ repo_gpgcheck=1
 gpgkey=https://downloads.apache.org/cassandra/KEYS
 ```
 {: .copy-code}
-* **50x** for Cassandra 5.0 version series.
+* **50x** 对应 Cassandra 5.0 系列。
 
-Update package index if necessary: 
+如需要，更新软件包索引： 
 ```bash
 sudo yum update
 ```
 {: .copy-code}
 
-Install Cassandra:
+安装 Cassandra：
 ```bash
 sudo yum install cassandra
 ```
 {: .copy-code}
 
-Start Cassandra service:
+启动 Cassandra 服务：
 ```bash
 sudo service cassandra start
 ```

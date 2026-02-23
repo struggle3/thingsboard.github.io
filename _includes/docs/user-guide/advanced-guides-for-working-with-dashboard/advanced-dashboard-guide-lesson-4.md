@@ -1,30 +1,30 @@
 * TOC
 {:toc}
 
-We continue developing our dashboard. In the previous lesson, we added and configured separate states for each device and configured them to display telemetry data.
+我们继续开发 dashboard。上节课已为每台设备添加并配置独立 states，并配置展示 telemetry 数据。
 
-If you have not completed the previous lesson yet, we strongly recommend reviewing it before proceeding.
+若尚未完成上节课，强烈建议先完成后再继续。
 
 <br>
 <p><a href="/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-3/" class="button">Lesson 3: Adding and configuring individual states for each device</a></p>
 
 <br>
 
-In this lesson, we focus on configuring alarm rules and visualizing alarms on the dashboard.   
-Specifically, we will:
-- Configure alarm rules for the Indoor Air Quality Sensor that generate alarms when temperature or humidity thresholds are violated, or when CO₂ levels exceed the defined limits.
-- Add dashboard widgets for monitoring active alarms.
-- Test alarm triggering, acknowledgment, and clearing.
+本课聚焦配置 alarm rules 并在 dashboard 上可视化 alarms。
+具体包括：
+- 为 Indoor Air Quality Sensor 配置 alarm rules，在温度或湿度超出阈值或 CO₂ 超过设定限值时生成 alarms。
+- 添加 dashboard 部件以监控活动 alarms。
+- 测试 alarm 的触发、确认和清除。
 
-Let&#39;s get started.
+开始吧。
 
 {% include default-carousel.liquid collectionMap = 'dashboard-lesson-4' nonActiveItemsVisibility = false %}
 
 <hr>
 
-An **alarm** is a notification generated when critical conditions defined in **alarm rules** are detected in your IoT system.
+**alarm** 为 IoT 系统中检测到 **alarm rules** 中定义的关键条件时生成的通知。
 
-For more information on [working with alarms](/docs/pe/user-guide/alarms/){:target="_blank"} and [configuring alarm rules](/docs/pe/user-guide/alarm-rules/){:target="_blank"}, refer to the relevant documentation.
+关于 [working with alarms](/docs/pe/user-guide/alarms/){:target="_blank"} 和 [configuring alarm rules](/docs/pe/user-guide/alarm-rules/){:target="_blank"} 的更多信息，请参阅相关文档。
 
 ## Adding alarm rules
 

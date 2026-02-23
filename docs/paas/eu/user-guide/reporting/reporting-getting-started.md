@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Getting started with Reporting
-description: Getting started with Reporting
+title: 报表功能入门
+description: 报表功能入门
 
 reporting-getting-started-create-template:
     0:

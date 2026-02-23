@@ -1,11 +1,11 @@
-bigheader: "Installation"
-abstract: "Documentation for installation and configuration of Trendz Analytics."
+bigheader: "安装"
+abstract: "Trendz Analytics安装与配置文档。"
 toc:
-- title: Installation options
+- title: 安装选项
   path: /docs/trendz/install/installation-options/
-- title: Cloud
+- title: 云平台
   path: /docs/trendz/install/cloud/
-- title: On-premises
+- title: 本地部署
   section:
   - title: Ubuntu Server
     path: /docs/trendz/install/ubuntu/
@@ -15,13 +15,13 @@ toc:
     path: /docs/trendz/install/windows/
   - title: Docker (Windows)
     path: /docs/trendz/install/docker-windows/
-  - title: Docker (Linux or Mac OS)
+  - title: Docker (Linux或Mac OS)
     path: /docs/trendz/install/docker/
   - title: Kubernetes
     path: /docs/trendz/install/kubernetes/
-- title: Upgrade instructions
+- title: 升级说明
   path: /docs/trendz/install/upgrade-instructions/
-- title: Python Executor Configuration
+- title: Python执行器配置
   path: /docs/trendz/install/python-executor-configuration/
-- title: Configuration properties
+- title: 配置属性
   path: /docs/trendz/configuration-properties/

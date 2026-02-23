@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: copy key-value pairs
-description: Copies specified key-value pairs between the message data and metadata in either direction.
+description: 在消息 data 与 metadata 之间按指定方向复制键值对。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

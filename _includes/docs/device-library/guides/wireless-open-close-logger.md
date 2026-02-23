@@ -1,5 +1,5 @@
-
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+﻿
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://getefento.com/product/wireless-open-close-logger-nb-iot/" %}
 {% assign prerequisites = '
 - <a href="' | append: deviceVendorLink | append: '" target="_blank">' | append: deviceName | append: '</a>
@@ -8,43 +8,41 @@
 '
  %}
 
-## Introduction
+## 概述
 
 
-Wireless open / close sensor detects and logs in its memory events of door opening and closing.  
-If a change of state is detected, the device immediately sends the notification to cloud.  
-The device uses magnetic sensor to detect open / close event.  
+无线开关传感器可检测门开合事件并记录在本地存储器中。  
+检测到状态变化时，设备会立即向云端发送通知。  
+采用磁敏传感器检测开合事件。  
 
-Efento NB-IoT sensors transmit the data over cellular network (Narrowband IoT) and do not require any additional devices (router, gateway, etc.).  
-Sensors are also equipped with Bluetooth Low Energy interface, which allows quick and easy configuration with a smartphone.  
-Efento NB-IoT sensors can be integrated with any cloud platform.  
+Efento NB-IoT 传感器通过蜂窝网络（窄带物联网）传输数据，无需路由器、网关等额外设备。  
+传感器配备 Bluetooth Low Energy 接口，可配合智能手机快速完成配置。  
+Efento NB-IoT 传感器可与任意云平台集成。  
 
-- Sensor detects open / close events
-- Batteries ensure up to 10 years of maintenance free operation
-- NB-IoT sensors send the data over the cellular network to Efento Cloud or any other cloud platform.
-- Sensor's configuration can be changed remotely from the cloud or with a mobile application over Bluetooth Low Energy
-- The device stores 40,000 measurements in its memory, when the memory is full, the oldest measurements are overwritten
+- 传感器检测开合事件
+- 电池可支持最长约 10 年免维护运行
+- NB-IoT 传感器通过蜂窝网络将数据发送至 Efento Cloud 或其他云平台
+- 可通过云端或蓝牙低功耗手机应用远程修改传感器配置
+- 设备本地存储 40,000 条测量记录，存满后覆盖最早数据
 
-### Prerequisites
+### 前置条件
 
-To continue with this guide we will need the following:  
+继续本指南前需准备以下内容：  
 {{ prerequisites }}
 
-- [ThingsBoard account](https://{{hostName}})
+- [ThingsBoard 账户](https://{{hostName}})
 
-## Create device on ThingsBoard
+## 在 ThingsBoard 中创建设备 {#create-device-on-thingsboard}
 
 {% include /docs/device-library/blocks/ready-to-go-devices/thingsboard-create-device-efento-transport-block.md %}
 
-## Connect device to ThingsBoard 
-
+## 连接设备到 ThingsBoard {#connect-device-to-thingsboard}
 {% include /docs/device-library/blocks/ready-to-go-devices/wireless-open-close-logger-configuration-block.md %}
 
-## Check data on ThingsBoard
-
+## 在 ThingsBoard 上查看数据 {#check-data-on-thingsboard}
 {% include /docs/device-library/blocks/ready-to-go-devices/wireless-open-close-logger-check-data-block.md %}
 
-## Conclusion
+## 总结
 
 {% include /docs/device-library/blocks/basic/conclusion-block.md %}
 {% include add-device-banner.liquid %}

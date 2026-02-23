@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect reComputer R1000 to ThingsBoard?
-category: Other devices
+title: 如何将 reComputer R1000 连接至 ThingsBoard？
+category: 其他设备
 connectivity: [LoRaWAN, Ethernet, WIFI, Bluetooth, 4G]
 chip: R1000
 vendor: Seeed Studio

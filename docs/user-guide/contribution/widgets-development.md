@@ -2,7 +2,7 @@
 layout: docwithnav
 assignees:
 - ikulikov
-title: Widgets development guide
+title: 部件开发指南
 redirect_from: 
     - "docs/user-guide/contribution/widgets-development-before-3.0/"
     

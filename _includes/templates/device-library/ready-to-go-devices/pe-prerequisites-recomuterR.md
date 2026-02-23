@@ -1,34 +1,34 @@
-### Prerequisites
+### 前置条件
 
 {% capture prerequisites %}
-Professional Edition<br><small>(North America)</small>%,%prerequisitesNorthAmerica%,%templates/edge/devices-library/prerequisites-pe-america.md%br%
-Professional Edition<br><small>(Europe)</small>%,%professionalEditionAmerica%,%templates/edge/devices-library/prerequisites-pe-europe.md%br%{% endcapture %}
+专业版<br><small>（北美）</small>%,%prerequisitesNorthAmerica%,%templates/edge/devices-library/prerequisites-pe-america.md%br%
+专业版<br><small>（欧洲）</small>%,%professionalEditionAmerica%,%templates/edge/devices-library/prerequisites-pe-europe.md%br%{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="prerequisites" toggle-spec=prerequisites %}
 
-### Starting Edge on the {{deviceName}}
+### 在 {{deviceName}} 上启动 Edge
 
 {% include /templates/edge/user-guide/starting-edge-on-device.md %}
 
-Proceed with the installation of the **Edge instance** on the **{{deviceName}}**:
+继续在 **{{deviceName}}** 上安装 **Edge 实例**：
 
-* To initiate an **SSH (Secure Shell)** connection to the **{{deviceName}}**, open the terminal and execute the following command:
+* 要建立与 **{{deviceName}}** 的 **SSH（Secure Shell）** 连接，请打开终端并执行以下命令：
 
 ```bash
-ssh recomputer@ip_address #Enter the actual IP address
+ssh recomputer@ip_address #输入实际 IP 地址
 ```
 {: .copy-code}
 
-**ip_address:** The IP address of the {{deviceName}}. Enter the actual IP address instead of _ip_address_.<br>
-**Password:** Terminal requests the password. _The **default password** for the {{deviceName}} is: 12345678_
+**ip_address：** {{deviceName}} 的 IP 地址。请将 _ip_address_ 替换为实际 IP 地址。<br>
+**密码：** 终端会请求密码。_{{deviceName}} 的**默认密码**为：12345678_
 
-* Once connected, you can follow the installation instructions below. Start by creating a new directory:
+* 连接成功后，可按以下安装说明操作。首先创建新目录：
 
 ```bash
 mkdir tb_edge
 ```
 {: .copy-code}
 
-* Open this directory:
+* 打开该目录：
 
 ```bash
 cd /home/recomputer/tb_edge
@@ -37,17 +37,17 @@ cd /home/recomputer/tb_edge
 
 {% include /templates/edge/user-guide/preset-edge-config-for-docker.md %}
 
-* To set up a local port forwarding via SSH, open **another terminal tab** and execute the following command:
+* 要设置通过 SSH 的本地端口转发，请打开**另一个终端标签页**并执行以下命令：
 
 ```bash
-ssh -N -L 8080:127.0.0.1:8080 recomputer@ip_address #Enter the actual IP address
+ssh -N -L 8080:127.0.0.1:8080 recomputer@ip_address #输入实际 IP 地址
 ```
 {: .copy-code}
 
-Any connection to **localhost:8080** on your local machine will be forwarded to **127.0.0.1:8080** on the **{{deviceName}}**.
+您本地计算机上对 **localhost:8080** 的任何连接将被转发到 **{{deviceName}}** 上的 **127.0.0.1:8080**。
 
-* The **ThingsBoard Edge** instance is available at [**http://127.0.0.1:8080**](http://127.0.0.1:8080){: target="_blank"}. Use your credentials to log in.
+* **ThingsBoard Edge** 实例可通过 [**http://127.0.0.1:8080**](http://127.0.0.1:8080){: target="_blank"} 访问。请使用您的凭据登录。
 
-### Provisioning the ThingsBoard IoT Gateway on Edge
+### 在 Edge 上预配置 ThingsBoard IoT Gateway
 
 {% include /templates/edge/user-guide/deploying-gw.md %}

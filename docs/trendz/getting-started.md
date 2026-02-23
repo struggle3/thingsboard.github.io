@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-trendz
-title: Getting started with Trendz Analytics
-description: ThingsBoard Trendz - Business Intelligence and Analytics Platform for IoT-powered Business
+title: Trendz Analytics 入门
+description: ThingsBoard Trendz - 面向物联网驱动业务的商业智能与分析平台
 
 demo-topology:
   0:

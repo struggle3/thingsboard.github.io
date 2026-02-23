@@ -2,8 +2,8 @@
 layout: docwithnav-paas-eu
 assignees:
 - stitenko
-title: Calculated fields
-description: Calculated fields
+title: 计算字段
+description: 计算字段
 
 create-new-calculated-field:
     0:

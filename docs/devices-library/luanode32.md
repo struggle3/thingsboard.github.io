@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect LuaNode32 to ThingsBoard?"
+title: "如何将LuaNode32连接到ThingsBoard？"
 redirect_to: "/device-library/ce/luanode32/"
 ---

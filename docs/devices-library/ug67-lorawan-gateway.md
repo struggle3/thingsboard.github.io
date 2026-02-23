@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect UG67 LoRaWAN® Gateway to ThingsBoard?"
+title: "如何将UG67 LoRaWAN®网关连接到ThingsBoard？"
 redirect_to: "/device-library/ce/ug67-lorawan-gateway/"
 ---

@@ -1,15 +1,15 @@
-In case of any issues, you can examine service logs for errors. For example, to see TBMQ logs, execute the following command:
+若遇问题，可查看服务日志排查错误。例如，查看 TBMQ 日志可执行：
 
 ```bash
 kubectl logs -f tbmq-0
 ```
 {: .copy-code}
 
-Use the next command to see the state of all statefulsets.
+使用以下命令查看所有 StatefulSet 的状态：
 
 ```bash
 kubectl get statefulsets
 ```
 {: .copy-code}
 
-See [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) command reference for more details.
+更多命令说明请参阅 [kubectl 速查表](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)。

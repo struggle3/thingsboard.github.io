@@ -3,9 +3,9 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Azure Service Bus Integration allows to stream data from Azure Service bus to ThingsBoard and converts device payloads to the ThingsBoard format.
+Azure Service Bus集成可从Azure Service Bus向ThingsBoard流式传输数据，并将设备负载转换为ThingsBoard格式。
 
 ![image](/images/user-guide/integrations/azure-service-bus/azure-service-bus-overview.png)
 

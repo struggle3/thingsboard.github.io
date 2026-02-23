@@ -1,5 +1,5 @@
 
-**Example for the Uplink converter:**
+**Uplink converter 示例：**
 
 ```javascript
 // Decode an uplink message from a buffer

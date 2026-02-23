@@ -2,269 +2,269 @@
 layout: docwithnav
 assignees:
 - stitenko
-title: Aliases
-description: ThingsBoard Aliases
+title: 实体别名
+description: ThingsBoard 实体别名
 
 create-alias:
     0:
         image: /images/user-guide/widgets/overview/add-new-dashboard-1-ce.png
-        title: 'Open your dashboard and switch to Edit mode;'
+        title: '打开仪表板并切换到编辑模式；'
     1:
         image: /images/user-guide/ui/alias/create-alias-2-ce.png
-        title: 'Click the "Entity aliases" icon in the upper right corner of the window;'
+        title: '点击窗口右上角的“实体别名”图标；'
     2:
         image: /images/user-guide/ui/alias/create-alias-3-ce.png
-        title: 'In the opened "Entity aliases" window click the “Add alias” button on the left side of the dialog box;'
+        title: '在打开的"实体别名"窗口中，点击对话框左侧的"添加别名"按钮；'
     3:
         image: /images/user-guide/ui/alias/create-alias-4-ce.png
-        title: 'In the opened "Add alias" dialog, enter a name for the alias and select a filter type. Then, fill in all required fields and click the "Add" button in the lower right corner;'
+        title: '在打开的“添加别名”对话框中输入别名名称并选择过滤类型。然后填写所有必填项并点击右下角的“添加”按钮；'
     4:
         image: /images/user-guide/ui/alias/create-alias-5-ce.png
-        title: 'We can now see that a new alias has been added. In this window you can view, edit and delete your aliases. Click "Save" in the lower right corner of the dialog box.'
+        title: '此时可以看到已添加新别名。在此窗口中可查看、编辑和删除别名。点击对话框右下角的“保存”。'
 
 use-alias-in-widget:
     0:
         image: /images/user-guide/ui/alias/create-alias-6-ce.png
-        title: 'Click the "Add widget" button at the top of the screen or click the large "Add new widget" icon in the center of the screen (if this is your first widget on this dashboard);'
+        title: '点击屏幕上方的“添加部件”按钮，或点击屏幕中央的“添加新部件”大图标（若为仪表板上的第一个部件）；'
     1:
         image: /images/user-guide/ui/alias/create-alias-7-ce.png
-        title: 'Select the widget bundle. For example, select "Indoor Environment" widgets bundle;'
+        title: '选择部件包，例如选择“室内环境”部件包；'
     2:
         image: /images/user-guide/ui/alias/create-alias-8-ce.png
-        title: 'Now, select the "Indoor temperature card with background" widget;'
+        title: '选择“带背景的室内温度卡片”部件；'
     3:
         image: /images/user-guide/ui/alias/create-alias-9-ce.png
-        title: 'The "Add Widget" window will appear. Navigate to the "Entity alias" tab. Specify the previously created "A new entity alias" in the "Entity alias" field.'
+        title: '将显示“添加部件”窗口。切换到“实体别名”选项卡，在“实体别名”字段中指定先前创建的别名。'
     4:
         image: /images/user-guide/ui/alias/create-alias-10-ce.png
-        title: 'Specify the data key(s) in the "Data key" field. In our example is the "temperature" data key. Then, click "Add";'
+        title: '在“Data key”字段中指定数据键，本例为“temperature”。然后点击“添加”；'
     5:
         image: /images/user-guide/ui/alias/create-alias-11-ce.png
-        title: 'You have added a widget that uses the previously configured alias as a data source.'
+        title: '已添加使用先前配置的别名作为数据源的部件。'
 
 single-alias-1:
     0:
         image: /images/user-guide/ui/alias/single-entity-1-ce.png
-        title: 'In the "Add Alias" dialog box, enter the alias name, and select the "Single Entity" filter type. Then choose the entity type and specify the final entity/entities.'
+        title: '在“添加别名”对话框中输入别名名称，选择“单个实体”过滤类型，然后选择实体类型并指定目标实体。'
     
 single-alias-2:
     0:
         image: /images/user-guide/ui/alias/single-entity-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Single entity" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡，在“实体别名”字段指定“单个实体”别名，在“列”区域指定“temperature”数据键。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/single-entity-3-ce.png
-        title: 'The Entities table widget with the alias that filters one device - Thermometer A1 has been added.'
+        title: '已添加使用该别名过滤单个设备 Thermometer A1 的 Entities table 部件。'
 
 
 entity-list-1:
     0:
         image: /images/user-guide/ui/alias/entity-list-1-ce.png
-        title: 'In the "Add alias" dialog box, enter the alias name, and select the "Entity list" filter type. Then choose the entities type and select the entity group.'
+        title: '在“添加别名”对话框中输入别名名称，选择“实体列表”过滤类型，然后选择实体类型并选择实体组。'
 
 entity-list-2:
     0:
         image: /images/user-guide/ui/alias/entity-list-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity list" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡，在“实体别名”字段指定“实体列表”别名，在“列”区域指定“temperature”数据键。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/entity-list-3-ce.png
-        title: 'The Entities table widget with the alias that displays a list of several devices, which in this case are Thermometer A1, Thermometer A2, and Thermometer A3 has been added.'
+        title: '已添加使用该别名显示多个设备（本例为 Thermometer A1、A2、A3）的 Entities table 部件。'
 
 
 entity-name-1:
     0:
         image: /images/user-guide/ui/alias/entity-name-1-ce.png
-        title: 'In the "Add alias" dialog box, enter the alias name, and select the "Entity name" filter type. Then choose the entities type and enter an expression that will filter the names of the displayed entities.'
+        title: '在“添加别名”对话框中输入别名名称，选择“实体名称”过滤类型，然后选择实体类型并输入用于过滤显示实体名称的表达式。'
 
 entity-name-2:
     0:
         image: /images/user-guide/ui/alias/entity-name-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity name" alias in the "Entity alias" field and "temperature" data key in the "Columns" section. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡，在“实体别名”字段指定“实体名称”别名，在“列”区域指定“temperature”数据键。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/entity-name-3-ce.png
-        title: 'The Entities table widget with alias that filters devices, which names start with ‘Compressor’, has been added.'
+        title: '已添加使用该别名过滤名称以 Compressor 开头的设备的 Entities table 部件。'
 
 
 entity-type-1:
     0:
         image: /images/user-guide/ui/alias/entity-type-1-ce.png
-        title: 'In the "Add alias" dialog box, enter the alias name, select the "Entity type " filter type, and choose the entity type - "Device". Then, click "Add";'
+        title: '在“添加别名”对话框中输入别名名称，选择“实体类型”过滤类型，并选择实体类型“Device”。然后点击“添加”；'
 
 entity-type-2:
     1:
         image: /images/user-guide/ui/alias/entity-type-2-ce.png
-        title: 'Add an Entity table widget that will display a list of entities. Use the "Entity type" alias as a data source;'
+        title: '添加将显示实体列表的 Entity table 部件，使用“实体类型”别名作为数据源；'
     2:
         image: /images/user-guide/ui/alias/entity-type-3-ce.png
-        title: 'The Entity table widget that displays a list of devices has been added.'
+        title: '已添加显示设备列表的 Entity table 部件。'
 
 
 entity-from-dashboard-state-1:
     0:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-2-ce.png
-        title: 'To add this alias, enter the alias name, and select the filter type "Entity from dashboard state" in the "Add alias" dialog. Then click "Add".'
+        title: '要添加此别名，请输入别名名称，并在“添加别名”对话框中选择过滤类型“仪表板状态中的实体”。然后点击“添加”。'
 
 entity-from-dashboard-state-2:
     0:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-3-ce.png
-        title: 'In the "Add alias" dialog box, enter the alias name, select the "Entity type" filter type and choose the entity type;'
+        title: '在“添加别名”对话框中输入别名名称，选择“实体类型”过滤类型并选择实体类型；'
     1:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-4-ce.png
-        title: 'Add an Entity table widget that will display a list of entities. Use the "Entity type" alias as a data source;'
+        title: '添加将显示实体列表的 Entity table 部件，使用“实体类型”别名作为数据源；'
     2:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-5-ce.png
-        title: 'The Entity table widget that will display a list of devices has been added.'
+        title: '已添加将显示设备列表的 Entity table 部件。'
 
 entity-from-dashboard-state-3:
     0:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-6-ce.png
-        title: 'Click the layers icon in the top left corner of the dashboard to create a new state. In the opened dialog window, click a "+" icon to add a new state;'
+        title: '点击仪表板左上角的层图标以创建新状态。在打开的对话框窗口中，点击“+”图标添加新状态；'
     1:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-7-ce.png
-        title: 'Enter state&#39;s name. For the state to be named after the entity, use <b>${entityName}</b> as the name of the state. Thus, during the action, you will be transitioned to a state named after the entity that took part in the action. Click "Add";'
+        title: '输入状态名称。若要使状态以实体名称命名，请使用 <b>${entityName}</b> 作为状态名称。这样，在执行操作时，您将跳转到以参与操作的实体命名的状态。点击“添加”；'
     2:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-8-ce.png
-        title: 'Now you see a list with two states: the root one, and the one that has just been created. Click "Save" in the lower right corner of the dialog.'
+        title: '此时可以看到包含两个状态的列表：根状态和刚刚创建的状态。点击对话框右下角的“保存”。'
 
 entity-from-dashboard-state-4:
     0:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-9-ce.png
-        title: 'In the root dashboard state, enter widget Edit mode by clicking the “pencil” icon in the upper right corner;'
+        title: '在根仪表板状态中，点击右上角的"铅笔"图标进入部件编辑模式；'
     1:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-10-ce.png
-        title: 'Scroll down to find "Actions" section. Click "Add action" button;'
+        title: '向下滚动找到“操作”区域。点击“添加操作”按钮；'
     2:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-11-ce.png
-        title: 'The "Entities table: Actions" window will be opened. Click the "Add action" button in the top right corner;'
+        title: '将打开“Entities table：操作”窗口。点击右上角的“添加操作”按钮；'
     3:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-12-ce.png
-        title: 'In the "Add action" dialog, enter the action name, and select an action source responsible for each entity separately (action cell button, on row click etc.). Then, choose the action type "Navigate to new dashboard state" and specify the new dashboard state to which the transition will be made. After, click "Add";'
+        title: '在“添加操作”对话框中输入操作名称，并选择分别负责每个实体的操作来源（操作单元格按钮、行点击等）。然后选择操作类型“导航到新仪表板状态”并指定要跳转的新仪表板状态。完成后点击“添加”；'
     4:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-13-ce.png
-        title: 'After successfully adding the action, click the "Save" button. Then, click the "Apply" button;'
+        title: '成功添加操作后，点击“保存”按钮。然后点击“应用”按钮；'
     5:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-14-ce.png
-        title: 'Now, go to the created state by selecting it from the drop-down menu accessed through the layers icon in the upper left corner;'
+        title: '现在，通过左上角层图标打开的下拉菜单选择创建的状态进入该状态；'
     6:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-15-ce.png
-        title: 'Click the “Add new widget” icon in the center of the screen;'
+        title: '点击屏幕中央的"添加新部件"图标；'
     7:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-16-ce.png
-        title: 'In the opened widget bundles selection, select "Indoor Environment";'
+        title: '在打开的部件包选择中，选择“室内环境”；'
     8:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-17-ce.png
-        title: 'Select the "Indoor temperature card with background" widget;'
+        title: '选择“带背景的室内温度卡片”部件；'
     9:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-18-ce.png
-        title: 'In the add widget window, navigate to the "Entity alias" tab. Specify the "Entity from dashboard state" alias in the "Entity alias" field and "temperature" data key in the “Columns” section. Click the "Add" button in the lower right corner;'
+        title: '在添加部件窗口中切换到"实体别名"选项卡。在"实体别名"字段中指定"仪表板状态中的实体"别名，在"列"区域指定"temperature"数据键。点击右下角的"添加"按钮；'
     10:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-19-ce.png
-        title: 'After adding the widget save all applied changes;'
+        title: '添加部件后保存所有已应用的更改；'
 
 entity-from-dashboard-state-5:
     0:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-20-ce.png
-        title: 'Now, click an action button opposite any entity;'
+        title: '现在，点击任意实体对面的操作按钮；'
     1:
         image: /images/user-guide/ui/alias/entity-from-dashboard-state-21-ce.png
-        title: 'You will be transitioned to an inner state, which contains a widget with the details of the selected entity.'
+        title: '您将跳转到内部状态，其中包含显示所选实体详情的部件。'
 
 
 asset-type-1:
     0:
         image: /images/user-guide/ui/alias/asset-type-1-ce.png
-        title: 'In the "Add alias" dialog, enter the alias name, and select the “Asset type” filter type. Next, specify the asset profile(s) and optionally enter an expression to filter the names of the displayed assets;'
+        title: 'In the "Add alias" dialog, enter the alias name, and select the “Asset type” filter type. 接着指定资产配置集并可选择输入用于过滤显示资产名称的表达式；'
     
 asset-type-2:
     0:
         image: /images/user-guide/ui/alias/asset-type-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Asset type" alias in the "Entity alias" field. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡。在“实体别名”字段中指定“资产类型”别名。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/asset-type-3-ce.png
-        title: 'The Entities table widget that displays assets with the asset profile "buildings" and whose names begins with "Build" has been added'
+        title: '已添加显示资产配置集为“buildings”且名称以“Build”开头的资产的 Entities table 部件'
 
 
 device-type-1:
     0:
         image: /images/user-guide/ui/alias/device-type-1-ce.png
-        title: 'In the "Add alias" dialog, enter the alias name, and select the "Device type" filter type. Then specify the device profile(s) and optionally enter an expression to filter the names of the displayed devices;'
+        title: '在“添加别名”对话框中输入别名名称，选择“设备类型”过滤类型。然后指定设备配置集并可选择输入用于过滤显示设备名称的表达式；'
     
 device-type-2:
     0:
         image: /images/user-guide/ui/alias/device-type-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Device type" alias in the "Entity alias" field. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡。在“实体别名”字段中指定“设备类型”别名。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/device-type-3-ce.png
-        title: 'The Entities table widget that displays assets with the asset profile "thermometers" and whose names begins with "Therm" has been added'
+        title: '已添加显示设备配置集为“thermometers”且名称以“Therm”开头的设备的 Entities table 部件'
 
 
 entity-view-type-1:
     0:
         image: /images/user-guide/ui/alias/entity-view-type-1-ce.png
-        title: 'In the "Add alias" dialog, enter the alias name, and select the "Entity view type" filter type. Then specify the entity view type(s) and optionally enter an expression to filter the names of the displayed entity views;'
+        title: '在“添加别名”对话框中输入别名名称，选择“实体视图类型”过滤类型。然后指定实体视图类型并可选择输入用于过滤显示实体视图名称的表达式；'
     
 entity-view-type-2:
     0:
         image: /images/user-guide/ui/alias/entity-view-type-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity view type" alias in the "Entity alias" field. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡。在“实体别名”字段中指定“实体视图类型”别名。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/entity-view-type-3-ce.png
-        title: 'The Entities table widget that displays entity views with the entity view type "Entity view type" and whose names begins with "Compressor" has been added'
+        title: '已添加显示实体视图类型为“Entity view type”且名称以“Compressor”开头的实体视图的 Entities table 部件'
 
 
 edge-type-1:
     0:
         image: /images/user-guide/ui/alias/edge-type-1-ce.png
-        title: 'In the "Add alias" dialog, enter the alias name, and select the "Edge type" filter type. Then specify the edge type(s) and enter an expression that will filter the names of the displayed edges;'
+        title: '在“添加别名”对话框中输入别名名称，选择“Edge 类型”过滤类型。然后指定 Edge 类型并输入用于过滤显示 Edge 名称的表达式；'
 
 edge-type-2:
     0:
         image: /images/user-guide/ui/alias/edge-type-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Edge type" alias in the "Entity alias" field. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡。在“实体别名”字段中指定“Edge 类型”别名。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/edge-type-3-ce.png
-        title: 'The Entities table widget that displays edges with the edge type "edge instance" and whose names begins with "Edge" has been added'
+        title: '已添加显示 Edge 类型为“edge instance”且名称以“Edge”开头的 Edge 的 Entities table 部件'
 
 
 api-usage-state-1:
     0:
         image: /images/user-guide/ui/alias/api-usage-state-1-ce.png
-        title: 'In the "Add alias" dialog, enter the alias name, and select the "Api Usage State" filter type.'
+        title: '在“添加别名”对话框中输入别名名称，选择“Api Usage State”过滤类型。'
 
 api-usage-state-2:
     0:
         image: /images/user-guide/ui/alias/api-usage-state-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Api Usage State" alias in the "Entity alias" field and add data key(s) in the "Columns" section that fetches statistics from an API usage. Click "Add";'
+        title: '在“Tables”部件包中选择“Entities table”部件。切换到“实体别名”选项卡，在“实体别名”字段指定“Api Usage State”别名，在“列”区域添加用于获取 API 使用统计的数据键。点击“添加”；'
     1:
         image: /images/user-guide/ui/alias/api-usage-state-3-ce.png
-        title: 'The Entities table widget that displays API usage statistics has been added.'
+        title: '已添加显示 API 使用统计的 Entities table 部件。'
 
 
 relations-query-1:
     0:
         image: /images/user-guide/ui/alias/relations-query-1-ce.png
-        title: 'In the "Add alias" dialog, enter the alias name, specify the "Relations query" filter type. Then, select the type of entity and the entity itself, the relationship with which you want to display. Set direction to "From" or "To" and max relation level.'
+        title: '在“添加别名”对话框中输入别名名称，指定“Relations query”过滤类型。然后选择实体类型和实体本身，设置要显示的关系。将方向设为“From”或“To”并设置最大关系层级。'
     
 relations-query-2:
     0:
         image: /images/user-guide/ui/alias/relations-query-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Relations query" alias in the "Entity alias" field and add the "entityType" data key in the "Columns" section. Click "Add";'
+        title: '在添加部件窗口中切换到"实体别名"选项卡。在"实体别名"字段中指定"仪表板状态中的实体"别名，在"列"区域指定"temperature"数据键。点击右下角的"添加"按钮；'
     1:
         image: /images/user-guide/ui/alias/relations-query-3-ce.png
-        title: 'The Entities table widget displays entities and their type that have any relation to the asset "District A" up to relation level 3.'
+        title: '已添加显示与资产 District A 存在关系（最多 3 级）的实体及其类型的 Entities table 部件。'
 
 
 asset-search-query-1:
     0:
         image: /images/user-guide/ui/alias/asset-search-query-1-ce.png
-        title: 'in the "Add alias" dialog, enter the alias name, select the "Asset search query" filter type, and select the entity type and an entity itself, the relationship with which you want to display. Set direction to "From" or "To" and max relation level and specify the asset profile(s) by which the assets will be filtered.'
+        title: '在“添加别名”对话框中输入别名名称，选择“Asset search query”过滤类型，选择实体类型和实体本身。设置方向为“From”或“To”及最大关系层级，并指定用于过滤资产的资产配置集。'
 
 asset-search-query-2:
     0:
         image: /images/user-guide/ui/alias/asset-search-query-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Asset search query" alias in the "Entity alias" field and add "name" and "type" data keys in the "Columns" section. Click "Add";'
+        title: '在添加部件窗口中切换到"实体别名"选项卡。在"实体别名"字段中指定"仪表板状态中的实体"别名，在"列"区域指定"temperature"数据键。点击右下角的"添加"按钮；'
     1:
         image: /images/user-guide/ui/alias/asset-search-query-3-ce.png
-        title: 'The Entities table widget that displays assets that have any relation to the device "Compressor QA-32" with relation level 2 has been added.'
+        title: '已添加显示与设备 Compressor QA-32 存在关系（关系层级 2）的资产的 Entities table 部件。'
 
 
 device-search-query-1:
@@ -275,7 +275,7 @@ device-search-query-1:
 device-search-query-2:
     0:
         image: /images/user-guide/ui/alias/device-search-query-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Device search query" alias in the "Entity alias" field and add "name", "type" and "temperature" data keys in the "Columns" section. Click "Add";'
+        title: '在添加部件窗口中切换到"实体别名"选项卡。在"实体别名"字段中指定"仪表板状态中的实体"别名，在"列"区域指定"temperature"数据键。点击右下角的"添加"按钮；'
     1:
         image: /images/user-guide/ui/alias/device-search-query-3-ce.png
         title: 'The Entities table widget that displays devices that have any relation to the asset “Building A” up to relation level 1 has been added.'
@@ -289,7 +289,7 @@ entity-view-search-query-1:
 entity-view-search-query-2:
     0:
         image: /images/user-guide/ui/alias/entity-view-search-query-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Entity view search query" alias in the "Entity alias" field and add "name", "type" and "temperature" data keys in the "Columns" section. Click "Add";'
+        title: '在添加部件窗口中切换到"实体别名"选项卡。在"实体别名"字段中指定"仪表板状态中的实体"别名，在"列"区域指定"temperature"数据键。点击右下角的"添加"按钮；'
     1:
         image: /images/user-guide/ui/alias/entity-view-search-query-3-ce.png
         title: 'The Entities table widget that displays entity views that have any relation to the asset "Building A" up to relation level 1 has been added.'
@@ -303,7 +303,7 @@ edge-search-query-1:
 edge-search-query-2:
     0:
         image: /images/user-guide/ui/alias/edge-search-query-2-ce.png
-        title: 'In the "Tables" widgets bundle select the "Entities table" widget. Navigate to the "Entity alias" tab. Specify the "Edge search query" alias in the "Entity alias" field and add "name" and "type" data keys in the "Columns" section. Click "Add";'
+        title: '在添加部件窗口中切换到"实体别名"选项卡。在"实体别名"字段中指定"仪表板状态中的实体"别名，在"列"区域指定"temperature"数据键。点击右下角的"添加"按钮；'
     1:
         image: /images/user-guide/ui/alias/edge-search-query-3-ce.png
         title: 'The Entities table widget that displays edges that have any relation to the asset "Building A" up to relation level 1 has been added.'

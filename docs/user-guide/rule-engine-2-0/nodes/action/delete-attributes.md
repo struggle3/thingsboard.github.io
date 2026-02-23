@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: delete attributes
-description: Deletes specified attributes from message originator.
+description: 从消息 originator 删除指定的 attribute。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

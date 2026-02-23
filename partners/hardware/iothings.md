@@ -1,10 +1,9 @@
 ---
 layout: hardware-partner
 hardware-partner: ioThings
-description: ioTracker is an official ThingsBoard hardware partner. Learn about ioTracker products, supported use cases, and integration guides with the ThingsBoard IoT platform.
+description: ioTracker 是 ThingsBoard 官方硬件合作伙伴。了解 ioTracker 产品、支持的用例及与 ThingsBoard IoT 平台的集成指南。
 redirect_from: "/partners/hardware/iotracker/"
 
 ---
-
 
 

@@ -1,22 +1,22 @@
-ThingsBoard uses cache to improve performance and avoid frequent DB reads.
-By default, deployment already uses the local Valkey cache. Azure does not provide a managed Valkey cluster, however, instead of the default deployment, you can set up your own Valkey cluster according to the [Azure documentation](https://learn.microsoft.com/en-us/azure/aks/valkey-overview).
+ThingsBoard 使用缓存来提高性能并避免频繁的数据库读取。
+默认情况下，部署已使用本地 Valkey 缓存。Azure 不提供托管 Valkey 集群，但您可以根据 [Azure 文档](https://learn.microsoft.com/en-us/azure/aks/valkey-overview) 设置自己的 Valkey 集群，以替代默认部署。
 
 {% capture redis-azure-version %}
-Starting with **ThingsBoard v4.0.0**, Valkey 8.x is the officially supported version.
-Valkey remains compatible with Redis 7.2.x, so the configuration with Redis will work.
-However, Redis 7.2.x is only available in the Enterprise or Enterprise Flash SKUs.
-The Basic, Standard, and Premium SKUs still only support **Redis 6.x**.
-You can find the Redis Enterprise installation guide here:
-[Create a Redis Enterprise cache](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/quickstart-create-redis-enterprise)
+自 **ThingsBoard v4.0.0** 起，Valkey 8.x 为官方支持版本。
+Valkey 仍兼容 Redis 7.2.x，因此使用 Redis 的配置也可工作。
+但 Redis 7.2.x 仅在 Enterprise 或 Enterprise Flash SKU 中可用。
+Basic、Standard 和 Premium SKU 仍仅支持 **Redis 6.x**。
+Redis Enterprise 安装指南请参阅：
+[创建 Redis Enterprise 缓存](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/quickstart-create-redis-enterprise)
 {% endcapture %}
 {% include templates/info-banner.md content=redis-azure-version %}
 
-Edit the `thirdparty.yml` file, find the StatefulSet section named `tb-valkey`, and set the `spec.replicas` value to 0.
+编辑 `thirdparty.yml` 文件，找到名为 `tb-valkey` 的 StatefulSet 部分，将 `spec.replicas` 设置为 0。
 
-Once your Valkey cluster is ready, you will need to replace the endpoint in the configuration file. 
-Edit `tb-cache-configmap.yml` and replace **REDIS_HOST** value with Redis endpoint if you are using standalone Valkey. 
-If you have deployed Valkey in cluster mode, replace **REDIS_HOST** with:
+Valkey 集群就绪后，需要在配置文件中替换端点。
+若使用独立 Valkey，请编辑 `tb-cache-configmap.yml`，将 **REDIS_HOST** 值替换为 Redis 端点。
+若以集群模式部署 Valkey，请将 **REDIS_HOST** 替换为：
 ```yaml
 REDIS_CONNECTION_TYPE: cluster
-REDIS_NODES: (Comma-separated list of "host:port" pairs to bootstrap from)
+REDIS_NODES: (用于引导的 "host:port" 对的逗号分隔列表)
 ```

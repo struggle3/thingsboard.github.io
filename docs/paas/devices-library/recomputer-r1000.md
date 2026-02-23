@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-paas
-title: "How to connect reComputer R1000 to ThingsBoard?"
+title: "如何将reComputer R1000连接到ThingsBoard？"
 redirect_to: "/device-library/paas/recomputer-r1000/"
 ---

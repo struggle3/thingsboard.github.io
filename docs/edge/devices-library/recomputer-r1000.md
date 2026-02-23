@@ -1,5 +1,5 @@
 ---
 layout: docwithnav-edge
-title: "How to install ThingsBoard Edge on reComputer R1000?"
+title: "如何在reComputer R1000上安装ThingsBoard Edge？"
 redirect_to: "/device-library/edge/recomputer-r1000/"
 ---

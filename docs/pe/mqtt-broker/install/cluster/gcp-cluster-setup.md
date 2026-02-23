@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Deploy TBMQ PE Cluster on GCP with Kubernetes
-description: Deploy TBMQ PE Cluster on GCP with Kubernetes
+title: 使用 Kubernetes 在 GCP 上部署 TBMQ PE 集群
+description: 使用 Kubernetes 在 GCP 上部署 TBMQ PE 集群
 
 ---
 

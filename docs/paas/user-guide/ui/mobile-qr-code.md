@@ -2,8 +2,8 @@
 layout: docwithnav-paas
 assignees:
 - stitenko
-title: Mobile application QR code
-description: Mobile app QR code guide
+title: 移动应用二维码
+description: 移动应用二维码指南
 
 download-app-with-qr-code:
     0:

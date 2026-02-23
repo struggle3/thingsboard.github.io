@@ -3,20 +3,19 @@
 {% assign peDocsPrefix = docsPrefix %}
 {% endif %}
 
-Let's assume you have thousands of NB IoT/LoRaWAN/Sigfox devices connected using one of ThingsBoard [Integrations](/docs/{{peDocsPrefix}}user-guide/integrations/).
-The integration layer will automatically provision them in ThingsBoard. 
-Assuming Tenant Admin knows the list of DevEUIs (LoRaWAN) or any other device identifiers, 
-it is possible to generate a random Secret Key per device and upload this key to ThingsBoard as a server-side attribute using [REST API](/docs/{{docsPrefix}}reference/rest-api/) or UI.
-Once this is done, tenant admin can email those keys to the Customer, or put them inside the device package box. 
+假设你通过 ThingsBoard [集成](/docs/{{peDocsPrefix}}user-guide/integrations/)连接了大量 NB IoT/LoRaWAN/Sigfox 设备。
+集成层会在 ThingsBoard 中自动完成预配置。
+若租户管理员知道 DevEUI（LoRaWAN）或其他设备标识符列表，可为每台设备生成随机 Secret Key，并通过 [REST API](/docs/{{docsPrefix}}reference/rest-api/) 或 UI 将其作为服务端属性上传至 ThingsBoard。
+完成后，租户管理员可将这些密钥通过邮件发送给客户，或放入设备包装盒内。
 
 ![image](/images/user-guide/claiming-devices/server-side-key-diagram.png)
 
-In order to provision device Secret Key, Tenant Administrator should set server-side attribute "claimingData" like the following value:
+要预配置设备 Secret Key，租户管理员需将服务端属性「claimingData」设为如下值：
 
 ```json
 {"secretKey": "YOUR_SECRET_KEY", "expirationTime": 1640995200000}
 ``` 
 
-, where expiration date is the end of the time when the device can be claimed that is 01/01/2022 as a unix timestamp with milliseconds precision.
+其中 expirationTime 为设备可被认领的截止时间，以毫秒级 Unix 时间戳表示（如 1640995200000 对应 2022 年 1 月 1 日）。
 
-Once server-side attribute is provisioned, Customer User may use [Claim Device](/docs/{{docsPrefix}}user-guide/claiming-devices/#device-claiming-widget) widget.  
+服务端属性配置完成后，客户用户可使用 [认领设备](/docs/{{docsPrefix}}user-guide/claiming-devices/#device-claiming-widget) 部件。  

@@ -1,5 +1,5 @@
 ---
 layout: docwithnav
-title: "How to connect Hikey 970 Development Board to ThingsBoard?"
+title: "如何将Hikey 970开发板连接到ThingsBoard？"
 redirect_to: "/device-library/ce/hikey-970-development-board/"
 ---

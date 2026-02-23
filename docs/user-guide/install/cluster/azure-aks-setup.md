@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - mekolaichukAlexander
-title: Cluster setup using Azure AKS infrastructure
-description: ThingsBoard IoT platform cluster setup with Kubernetes in Azure AKS
+title: 使用 Azure AKS 基础设施部署集群
+description: 在 Azure AKS 中使用 Kubernetes 部署 ThingsBoardIoT平台集群
 
 ---
 

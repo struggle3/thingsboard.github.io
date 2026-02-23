@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Scheduler vs. Rule Chain Templates - When to Use Each One
-description: Scheduler vs. Rule Chains Templates
+title: 调度器与规则链模板对比 - 何时使用
+description: 调度器与规则链模板对比
 
 example:
     0:

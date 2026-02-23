@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: check relation presence
-description: Routes messages based on whether a specified relation exists between the message originator and a target entity.
+description: 根据消息 originator 与目标实体间是否存在指定 relation 来路由消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

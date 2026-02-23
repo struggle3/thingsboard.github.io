@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.lansitec.com/products/asset-management-tracker/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -13,14 +13,14 @@
 Its IP68-rated enclosure and ultra-long battery life provide dependable performance in harsh conditions, while features like tamper detection, door open/close sensing, and vibration monitoring strengthen security and operational oversight.<br>
 Whether you&#39;re managing remote equipment, monitoring valuable shipments, or consolidating on-site inventory, the Asset Management Tracker helps you stay informed in real time, reduce losses, and streamline processes.
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
 Only ThingsBoard Cloud works when using direct communication from this device to ThingsBoard via MQTT.
 

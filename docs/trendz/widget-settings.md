@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Widget settings
-description: Widget settings description
+title: 部件设置
+description: 部件设置说明
 
 trendz-widget-automated-refresh:
   0:
@@ -19,34 +19,33 @@ trendz-widget-filter-change-event:
 * TOC
 {:toc}
 
-## Trendz widget auto refresh
+## Trendz部件自动刷新
 
-You can update Trendz widgets on the ThingsBoard dashboard with the frequency you prefer by configuring auto refresh.
-Here's how to do it:
+可通过配置自动刷新，按您偏好的频率更新ThingsBoard dashboard上的Trendz部件。操作步骤如下：
 
-* Add a widget to the ThingsBoard dashboard.
-* Open the widget's edit mode and go to the Advanced tab.
-* Check the "Update data in real time" checkbox.
-* Choose the desired interval for updating data in real time (in minutes).
-* Save your changes.
+* 向ThingsBoard dashboard添加部件。
+* 打开部件的编辑模式，进入Advanced选项卡。
+* 勾选"Update data in real time"。
+* 选择所需的实时数据更新间隔（以分钟为单位）。
+* 保存更改。
 
 {% include images-gallery.html imageCollection="trendz-widget-automated-refresh" %}
 
-## Sharing filters between widget
+## 部件间共享过滤器
 
-To improve your experience and usability, we've introduced a new feature in our product – the ability to share filter change events between Trendz views on your dashboard. Here's how it works:
+为提升体验和易用性，我们新增了在dashboard上的Trendz视图之间共享过滤器变更事件的能力。用法如下：
 
-1. **Setting Up the Main View:**
+1. **设置主视图：**
    
-     When you add a new Trendz view to your dashboard using either the latest or static widget, you'll notice three new fields in the Appearance tab while in edit mode. These fields are:
-   * **Broadcast filter change event:** This checkbox allows you to share the filter value with other views.
-   * **Listen filter change event:** Enabling this checkbox for a view indicates that it should update its filters when the filter value changes in the main view.
-   * **Filter change event name:** All connected views must use the same filter change event name to synchronize their filter updates.
+     使用最新或静态部件向dashboard添加新Trendz视图时，编辑模式下Appearance选项卡会出现三个新字段：
+   * **Broadcast filter change event：** 勾选后可将过滤器值共享给其他视图。
+   * **Listen filter change event：** 为主视图外的视图勾选时，主视图过滤器变化时会更新该视图的过滤器。
+   * **Filter change event name：** 所有需要同步的视图必须使用相同的过滤器变更事件名称。
 
-2. **Establishing Connections:**
-   * Start by enabling the 'Broadcast filter change event' checkbox in the Appearance tab of the main view. This action shares the filter value with other views.
-   * Next, enable the 'Listen filter change event' checkbox for each view that should update its filters based on changes in the main view. These views will now respond to filter changes broadcasted by the main view.
-   * Ensure that all connected views use the same filter change event name to maintain synchronization.
+2. **建立连接：**
+   * 先在主视图的Appearance选项卡中勾选'Broadcast filter change event'，将过滤器值共享给其他视图。
+   * 再为需要跟随主视图过滤器变化的视图勾选'Listen filter change event'。
+   * 确保所有连接的视图使用相同的Filter change event name以保持同步。
 
 {% include images-gallery.html imageCollection="trendz-widget-filter-change-event" %}
 

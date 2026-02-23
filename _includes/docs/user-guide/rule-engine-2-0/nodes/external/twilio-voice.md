@@ -1,13 +1,11 @@
-Sends voice messages to specified phone numbers via [Twilio](https://www.twilio.com/voice){:target="_blank"} voice service using text-to-speech technology.
+通过 [Twilio](https://www.twilio.com/voice){:target="_blank"} 语音服务，使用文本转语音技术向指定号码发送语音消息。
 
-## Configuration
+## 配置
 
-### Phone settings
+### Phone settings（电话设置）
 
-- **Phone Number From** – The Twilio phone number to call from. Must be in E.164 format (e.g., `+19995550123`). This field
-  supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}.
-- **Phone Numbers To** – A comma-separated list of phone numbers that will receive the voice call. This field
-  supports [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}.
+- **Phone Number From** — 呼叫发起方 Twilio 号码。须为 E.164 格式（如 `+19995550123`）。该字段支持 [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}。
+- **Phone Numbers To** — 接收语音呼叫的号码列表（逗号分隔）。该字段支持 [templatization](/docs/{{docsPrefix}}user-guide/templatization/){:target="_blank"}。
 
 ### Account settings
 
@@ -15,22 +13,22 @@ Sends voice messages to specified phone numbers via [Twilio](https://www.twilio.
 - **Twilio Account Token** – Your Twilio authentication token.
 
 {% capture credentials_note %}
-**Note**: If you use Professional Edition, we highly recommend using [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} to securely store your account token.
+**注意**：若使用 Professional Edition，建议使用 [Secrets storage](/docs/pe/user-guide/secrets-storage/){:target="_blank"} 安全存储账户令牌。
 {% endcapture %}
 {% include templates/info-banner.md content=credentials_note %}
 
-### Voice settings
+### Voice settings（语音设置）
 
-- **Voice provider** – The text-to-speech voice provider to use.
-- **Language** – The language for the voice message. Corresponds to Twilio's supported languages.
-- **Voice** – The voice type to use.
+- **Voice provider** — 使用的文本转语音提供商。
+- **Language** — 语音消息的语言，对应 Twilio 支持的语言。
+- **Voice** — 使用的语音类型。
 
-### Audio output settings
+### Audio output settings（音频输出设置）
 
-- **Pitch** – The pitch adjustment for the voice in percentage (default: `100`). Higher values produce a higher-pitched voice, lower values produce a lower-pitched voice.
-- **Rate** – The speaking rate in percentage (default: `100`). Higher values speed up the speech, lower values slow it down.
-- **Volume** – The volume adjustment in decibels (default: `0`). Positive values increase volume, negative values decrease it.
-- **Pause before talking** – Duration in seconds to pause before the voice message begins playing.
+- **Pitch** — 音高调整百分比（默认：`100`）。值越大音调越高，越小音调越低。
+- **Rate** — 语速百分比（默认：`100`）。值越大语速越快，越小语速越慢。
+- **Volume** — 音量调整（单位：分贝，默认：`0`）。正值增大音量，负值减小。
+- **Pause before talking** — 语音消息开始播放前的暂停时长（秒）。
 
 ### JSON Schema
 
@@ -101,54 +99,52 @@ Sends voice messages to specified phone numbers via [Twilio](https://www.twilio.
 ```
 {: .copy-code.expandable-3 }
 
-## Output message format
+## 输出消息格式
 
-The node does not modify the incoming message. Both message data and metadata are passed through unchanged to the next node in the chain.
+节点不修改入站消息。消息数据和 metadata 均原样传递给链中下一节点。
 
-## Message acknowledgement behavior
+## 消息确认行为
 
-The node's message acknowledgement behavior is controlled by the `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` environment variable:
+节点的消息确认行为由环境变量 `ACTORS_RULE_EXTERNAL_NODE_FORCE_ACK` 控制：
 
-- **When set to `true`** – The incoming message is acknowledged and marked as successfully processed immediately upon receipt. A new message is created as a copy. The voice call
-  operation proceeds asynchronously, and after completion, the copy is enqueued for processing by the next node.
-- **When set to `false`** (default) – The incoming message remains in an in-processing state throughout the entire voice call operation. The message is passed to the next node
-  after the voice call operation completes.
+- **设为 `true`** — 入站消息在接收后立即确认并标记为成功处理，创建副本。语音呼叫异步执行，完成后副本入队交由下一节点处理。
+- **设为 `false`**（默认）— 入站消息在整个语音呼叫过程中保持处理中状态。语音呼叫完成后将消息传递给下一节点。
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node processes the phone number from template to extract the caller phone number from the incoming message data and metadata.
-2. The node processes the phone numbers to template to extract target phone numbers from the incoming message data and metadata.
-3. The voice message content is taken directly from the incoming message data. Leading and trailing quotes are removed from the data.
-4. A voice response is constructed using Twilio's TwiML with:
-    - A pause of the specified duration before speaking
-    - Text-to-speech configuration with the specified language, voice, pitch, rate, and volume settings
-5. The voice call is initiated asynchronously via Twilio to each specified phone number.
-6. When processing completes:
-    - **Success**: The message is routed to the `Success` connection after all voice calls are initiated successfully.
-    - **Failure**: If any voice call fails to initiate, the message is routed to the `Failure` connection.
+1. 节点处理 from 模板，从入站消息数据和 metadata 中提取主叫号码。
+2. 节点处理 to 模板，从入站消息数据和 metadata 中提取被叫号码。
+3. 语音消息内容直接取自入站消息数据，去除首尾引号。
+4. 使用 Twilio TwiML 构建语音响应：
+    - 播报前按配置暂停指定时长
+    - 使用指定语言、语音、音高、语速和音量的文本转语音配置
+5. 通过 Twilio 异步向每个指定号码发起语音呼叫。
+6. 处理完成时：
+    - **Success**：所有语音呼叫成功发起后将消息路由到 `Success` 连接。
+    - **Failure**：若任一起呼失败，将消息路由到 `Failure` 连接。
 
-## Output connections
+## 输出连接
 
 - **Success**
-    - The voice call was successfully initiated to all specified phone numbers.
+    - 已成功向所有指定号码发起语音呼叫。
 - **Failure**
-    - An unexpected error occurred during voice call initiation, such as invalid phone numbers or Twilio API errors.
+    - 发起语音呼叫时发生意外错误（如号码无效或 Twilio API 错误）。
 
-## Examples
+## 示例
 
-### Example 1 — Sending alarm notification
+### 示例 1 — 发送 alarm 通知
 
-Send a voice alert when a device triggers an alarm.
+设备触发 alarm 时发送语音告警。
 
-**Incoming message**
+**入站消息**
 
-Data:
+数据：
 
 ```json
 "Attention. Device Temperature Sensor 01 has triggered a high temperature alarm."
 ```
 
-Metadata:
+Metadata：
 
 ```json
 {
@@ -159,7 +155,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -176,17 +172,17 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
-Data: unchanged.
+数据：未更改。
 
-Metadata: unchanged.
+Metadata：未更改。
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-A voice call is initiated from +15559876543 to +15551234567. After a 1-second pause, the recipient hears:
+已从 +15559876543 向 +15551234567 发起语音呼叫。1 秒暂停后，收件人将听到：
 
 ```text
 Attention. Device Temperature Sensor 01 has triggered a high temperature alarm.

@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-pe
-title: Guides
+title: 指南
 notitle: "true"
 redirect_from: "/docs/pe/user-guide/"
 ---

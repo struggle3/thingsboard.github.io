@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: TBMQ Professional Edition Release Notes
-description: TBMQ Professional Edition Releases
+title: TBMQ 专业版发布说明
+description: TBMQ 专业版发布
 
 ---
 

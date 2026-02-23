@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Install HAProxy Load Balancer for ThingsBoard on Ubuntu
-description: Install HAProxy Load Balancer for ThingsBoard on Ubuntu
+title: 在 Ubuntu 上为 ThingsBoard 安装 HAProxy 负载均衡器
+description: 在 Ubuntu 上为 ThingsBoard 安装 HAProxy 负载均衡器
 hidetoc: "true"
 redirect_from:
   - "/docs/user-guide/install/aws-marketplace-pe-upgrade-haproxy/"

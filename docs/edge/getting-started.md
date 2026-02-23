@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-edge
-title: Getting Started with ThingsBoard Edge
-description: Getting Started with ThingsBoard Edge 
+title: ThingsBoard Edge快速入门
+description: ThingsBoard Edge快速入门 
 
 step1:
     0:
@@ -96,7 +96,7 @@ step5Server:
 step5Edge:
     0:
         image: /images/edge/getting-started/step-5-item-3-ce.webp
-        title: 'Go to the <b>Dashboards</b> section and open the dashboard you have created on the <b>ThingsBoard Community Edition Server</b>'    
+        title: 'Go to the <b>Dashboards</b> section and open the dashboard you have created on the <b>ThingsBoard社区版Server</b>'    
     1:
         image: /images/edge/getting-started/step-5-item-4-ce.webp
         title: 'Verify that these are the same widgets that you have added on the Cloud.'
@@ -117,34 +117,34 @@ Looking for **white-labeling** or **premium features**? <a href="/docs/pe/edge/"
 
 {% include templates/edge/getting-started/prerequisites.md %}
 
-## Step 1. Connecting Device and Sending Telemetry Data
+## 步骤 1. 连接设备并发送遥测数据
 
 {% include templates/edge/getting-started/step-1.md %}
 
-## Step 2. Creating Dashboard and Configuring Widgets
+## 步骤 2. 创建仪表板并配置部件
 
 {% include templates/edge/getting-started/step-2.md %}
 
-## Step 3. Pushing Data From Edge to Cloud
+## 步骤 3. 将数据从Edge推送到云端
 
 {% include templates/edge/getting-started/step-3.md %}
 
-## Step 4. Provisioning Entities From Edge to Server
+## 步骤 4. 从Edge向服务器配置实体
 
 {% include templates/edge/getting-started/step-4.md %}
 
-## Step 5. Provisioning Entities From Server to Edge
+## 步骤 5. 从服务器向Edge配置实体
 
 {% include templates/edge/getting-started/step-5.md %}
 
-## Your Feedback
+## 您的反馈
 
-Congratulations! You have successfully completed the initial configuration steps for **ThingsBoard Edge**. Now you can send new telemetry readings and they will appear on the dashboard immediately.
+恭喜！您已成功完成 **ThingsBoard Edge** 的初始配置步骤。现在您可以发送新的遥测数据，它们将立即显示在仪表板上。
 
-Help us improve by providing your feedback at [GitHub/Issues](https://github.com/thingsboard/thingsboard-edge/issues){: target="_blank"} or through the ["Contact us"](https://thingsboard.io/docs/contact-us/){: target="_blank"} form.
-We would also greatly appreciate it if you could star our project on [GitHub](https://github.com/thingsboard/thingsboard-edge){: target="_blank"}!
+欢迎通过 [GitHub/Issues](https://github.com/thingsboard/thingsboard-edge/issues){: target="_blank"} 或["联系我们"](https://thingsboard.io/docs/contact-us/){: target="_blank"}表单提供反馈，帮助我们改进。
+若您能在 [GitHub](https://github.com/thingsboard/thingsboard-edge){: target="_blank"} 上为我们的项目加星，我们将不胜感激！
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuide" %}
 {% assign docsPrefix = "edge/" %}

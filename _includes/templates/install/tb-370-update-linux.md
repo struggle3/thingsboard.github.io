@@ -1,9 +1,9 @@
 {% capture tb_3_7_0_upgrade_note %}
-**Important note before upgrading to ThingsBoard 3.7**
+**升级至 ThingsBoard 3.7 前的重要说明**
 
-ThingsBoard backend was migrated to Java 17. Install JDK 17 and ensure that system's default Java version is set to 17.
+ThingsBoard 后端已迁移至 Java 17。请安装 JDK 17 并确保系统默认 Java 版本设置为 17。
 
-Please refer to Step 1 of the corresponding installation guide for detailed instructions:
+请参阅对应安装指南的步骤 1 以获取详细说明：
 
 [**Ubuntu**](/docs/user-guide/install/ubuntu/#step-1-install-java-17-openjdk)
 

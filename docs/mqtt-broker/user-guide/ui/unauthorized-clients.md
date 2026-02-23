@@ -1,15 +1,15 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Unauthorized clients
-description: Unauthorized clients management
+title: 未授权客户端
+description: 未授权客户端管理
 
 unauthorized-clients:
   0:
     image: /images/mqtt-broker/user-guide/ui/unauthorized-clients-1.png
-    title: 'Navigate to the Authentication > Unauthorized Clients page, table shows clients that could not pass authorization.'
+    title: '进入认证 > 未授权客户端页面，表格显示未通过授权的客户端。'
   1:
     image: /images/mqtt-broker/user-guide/ui/unauthorized-clients-2.png
-    title: 'The filter windows allow easily filtering of the table by each column and date.'
+    title: '筛选窗口支持按列和日期筛选表格。'
 
 delete-unauthorized-client:
   0:

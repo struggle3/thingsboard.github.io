@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Enrichment nodes
-description: Rule engine enrichment nodes
+title: Enrichment 节点
+description: 规则引擎 enrichment 节点
 hidetoc: "true"
 breadcrumbs: "true"
 breadcrumbs-steps: "1"

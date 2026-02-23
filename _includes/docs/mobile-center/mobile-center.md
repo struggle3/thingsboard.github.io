@@ -15,204 +15,204 @@
 {% assign sinceVersion = "3.9.0" %}
 {% include templates/since.md %}
 
-The **Mobile сenter** is your one-stop hub for building, configuring, and managing mobile apps in ThingsBoard. Whether you&#39;re starting from scratch or preparing to publish your {{MOBILE_APPLICATION}} to the Google Play Store or App Store, this tool walks you through every step of the process.
+**移动中心**是ThingsBoard中构建、配置和管理移动应用的一站式中心。无论您是从零开始还是准备将{{MOBILE_APPLICATION}}发布到Google Play Store或App Store，此工具都将引导您完成流程的每一步。
 
-The Mobile center is divided into tabs for convenient creation and management of mobile applications:
+移动中心分为多个选项卡，便于创建和管理移动应用：
 
-- [Bundle](#bundle): Manage settings for mobile applications included in the bundle. These settings include configuring secure authentication methods for your clients{% if docsPrefix == null %}, and defining the layout{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}, defining the layout, and managing options for user self-registration{% endif %} within the mobile application.
-- [Applications](/docs/{{docsPrefix}}mobile-center/applications/){:target="_blank"}: Manage your mobile applications - add new ones, edit existing ones, or remove outdated versions.
-- [QR code widget](/docs/{{docsPrefix}}user-guide/ui/mobile-qr-code/){:target="_blank"}: Set up a QR code widget on the ThingsBoard "Home" page to give users easy access to the mobile app.
+- [Bundle](#bundle)：管理bundle中包含的移动应用设置。这些设置包括为客户配置安全认证方法{% if docsPrefix == null %}、定义布局{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}、定义布局和管理移动应用内用户自助注册选项{% endif %}。
+- [应用](/docs/{{docsPrefix}}mobile-center/applications/){:target="_blank"}：管理您的移动应用——添加新应用、编辑现有应用或移除过时版本。
+- [QR code部件](/docs/{{docsPrefix}}user-guide/ui/mobile-qr-code/){:target="_blank"}：在ThingsBoard"主页"上设置QR code部件，方便用户访问移动应用。
 
 ## Bundle
 
-A **Bundle** groups together configurations like OAuth 2.0 settings {% if docsPrefix == null %}and layout design{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}, layout design and self-registration{% endif %} for one or more mobile apps—allowing you to manage Android and iOS versions all in one place.
+**Bundle**将OAuth 2.0设置{% if docsPrefix == null %}和布局设计{% endif %}{% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}、布局设计和自助注册{% endif %}等配置集中到一个或多个移动应用中——让您可以在一个地方管理Android和iOS版本。
 
-The following settings are available for the applications bundle:
+应用的bundle提供以下设置：
 
-1. **Basic settings**: Define the bundle name and link your apps. Don&#39;t have an app yet? You can create one right here.
-2. **OAuth 2.0**: Enable Single Sign-On (SSO) for users by integrating with third-party identity providers that support OAuth 2.0.
-3. **Layout**: Customize the app’s navigation menu to match your use cases.
-{% unless docsPrefix == null %}4. **Self-registration**: Set up a user-friendly registration form for new mobile users.{% endunless %}
+1. **基本设置**：定义bundle名称并关联您的应用。还没有应用？您可以在此直接创建。
+2. **OAuth 2.0**：通过集成支持OAuth 2.0的第三方身份提供方，为用户启用单点登录（SSO）。
+3. **布局**：自定义应用导航菜单以匹配您的使用场景。
+{% unless docsPrefix == null %}4. **自助注册**：为新的移动用户设置用户友好的注册表单。{% endunless %}
 
-<br><b><font size="4">How to add a new bundle</font></b>
+<br><b><font size="4">如何添加新bundle</font></b>
 
-- Go to the "**Mobile center**" page.
-- On the "**Bundle**" tab, click the "**+ Add bundle**" button in the upper-right corner of the window.
+- 进入"**移动中心**"页面。
+- 在"**Bundle**"选项卡中，点击窗口右上角的"**+ 添加bundle**"按钮。
 
-A new settings dialog will open.
+将打开新的设置对话框。
 
 {% include images-gallery.html imageCollection="add-bundle" %}
 
-### Basic settings
+### 基本设置
 
-Enter a name for your bundle and select existing Android/iOS apps, or [create new ones](#create-new-application) directly from this window.
+输入bundle名称并选择现有的Android/iOS应用，或从此窗口[直接创建新应用](#create-new-application)。
 
 {% include images-gallery.html imageCollection="basic-settings-1" %}
 
-> You can add applications even after the bundle with configurations is created.
+> 即使在创建带配置的bundle后，您也可以添加应用。
 
-#### Create new application
+#### 创建新应用
 
-- Click "**Create new**" in the corresponding section (Android Application or iOS Application).
-- Enter the **application package** name.
-- An **Application Secret** will be generated automatically. Remember it or replace with your own.
-- Set the **application status**:
-  - **Draft**: For applications still in development. You can add store information (e.g., Google Play Store or App Store link, and SHA256 certificate fingerprints or App ID) later after the application is created and published.
-  - **Published**: For applications that are ready to be launched and used by end users.
-  - **Deprecated**: For older applications that are no longer actively supported but still available.
-  - **Suspended**: For applications that are temporarily disabled or restricted from use.
-- (Optional) Specify minimum/latest app versions and release notes.
-- Add **store information**:
-  - **Android**: **Google Play Store link** and **SHA256 certificate fingerprints**.
-  - **iOS**: **App Store link** and **App ID**.
-- Click "**Add**" to save your application and complete the process.
+- 在相应部分（Android Application或iOS Application）点击"**创建新**"。
+- 输入**应用包**名称。
+- **应用密钥**将自动生成。请记住或替换为您自己的。
+- 设置**应用状态**：
+  - **草稿**：适用于仍在开发中的应用。您可以在应用创建并发布后添加应用商店信息（如Google Play Store或App Store链接、SHA256证书指纹或App ID）。
+  - **已发布**：适用于已准备好发布供最终用户使用的应用。
+  - **已弃用**：适用于不再积极支持但仍可用的旧版应用。
+  - **已暂停**：适用于暂时禁用或限制使用的应用。
+- （可选）指定最低/最新应用版本及发布说明。
+- 添加**应用商店信息**：
+  - **Android**：**Google Play Store链接**和**SHA256证书指纹**。
+  - **iOS**：**App Store链接**和**App ID**。
+- 点击"**添加**"保存应用并完成流程。
 
 {% include images-gallery.html imageCollection="add-application" %}
 
-Then, click "**Next**".
+然后，点击"**下一步**"。
 
 ### OAuth 2.0
 
-Add an authentication feature for your users in the {{MOBILE_APPLICATION}} through an external provider that supports the [OAuth 2.0](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"} protocol.
-In order to do this, specify an already configured OAuth 2.0 client(s) or [configure a new one](/docs/{{docsPrefix}}user-guide/oauth-2-support/#operations-with-oauth-20-client){:target="_blank"}. After completing the OAuth 2.0 configuration, click "Next".
+通过支持[OAuth 2.0](/docs/{{docsPrefix}}user-guide/oauth-2-support/){:target="_blank"}协议的外部提供方 为{{MOBILE_APPLICATION}}中的用户添加认证功能。
+为此，指定已配置的OAuth 2.0客户端或[配置新客户端](/docs/{{docsPrefix}}user-guide/oauth-2-support/#operations-with-oauth-20-client){:target="_blank"}。完成OAuth 2.0配置后，点击"下一步"。
 
-You can also disable the use of OAuth 2.0 for mobile devices.
+您也可以禁用移动设备的OAuth 2.0使用。
 
 {% include images-gallery.html imageCollection="specify-oauth-clients" %}
 
-### Layout
+### 布局
 
-Set up quick access to the features and dashboards you use most frequently.
-Add new menu items, change icons and item names, and reorganize the navigation menu of the {{MOBILE_APPLICATION}} according to your needs.
+设置您最常使用的功能和仪表板的快速访问。
+添加新菜单项、更改图标和项目名称，并根据您的需求重新组织{{MOBILE_APPLICATION}}的导航菜单。
 
 {% include images-gallery.html imageCollection="layout-1" %}
 
-To add new menu item, follow these steps:
+要添加新菜单项，请遵循以下步骤：
 
-- Click the "**+ Add specific page**" button at the bottom of the page or between existing menu items;
-- Enter the **name for new menu page**;
-- Select the **page type** from the list:
-  - *Dashboard* - link to a ThingsBoard dashboard.
-  - *Webview* - link to an external webpage.
-  - *Custom* - link to built-in ThingsBoard pages.
-- Depending on the selected page type, specify a dashboard, or link to an external webpage or ThingsBoard menu item;
+- 点击页面底部或现有菜单项之间的"**+ 添加特定页面**"按钮；
+- 输入**新菜单页面名称**；
+- 从列表中选择**页面类型**：
+  - *Dashboard* - 链接到ThingsBoard仪表板。
+  - *Webview* - 链接到外部网页。
+  - *Custom* - 链接到内置ThingsBoard页面。
+- 根据所选的页面类型，指定仪表板或链接到外部网页或ThingsBoard菜单项；
 
 {% if docsPrefix == null %}
-- Click "Add";
-- After configuring layout, click "**Add**" to complete the bundle creation.
+- 点击"添加"；
+- 配置布局后，点击"**添加**"完成bundle创建。
 {% endif %}
 {% if docsPrefix == "pe/" or docsPrefix == "paas/" or docsPrefix == "paas/eu/" %}
-- Click "**Add**";
-- After configuring layout, click "**Next**".
+- 点击"**添加**"；
+- 配置布局后，点击"**下一步**"。
 {% endif %}
 
 {% include images-gallery.html imageCollection="custom-page-type" %}
 
 <br>
-The following routes are available for the "Custom" page type:
+以下路由可用于"Custom"页面类型：
 
-| **Page name**      | **Routes**     | **Dicription**                      |
+| **页面名称**      | **路由**     | **说明**                      |
 |:-------------------|:---------------|:------------------------------------|
-| Home               | /home          | Displays the "Home" page            |
-| Assets             | /assets        | Displays the "Assets" page          |
-| Device profiles    | /devices       | Displays the "Device profiles" page |
-| All devices        | /deviceList    | Displays the list of all devices    |
-| Alarms             | /alarms        | Displays the list of alarms         |
-| Dashboards         | /dashboards    | Displays the list of dashboards     |
-| Specific dashboard | /dashboard/:id | Displays the specified dashboard    |
-| Audit logs         | /auditLogs     | Displays the "Audit logs" page      |
-| Customers          | /customers     | Displays the list of customers      |
-| Specific customer  | /customer/:id  | Displays the specified customer     |
-| Notifications      | /notifications | Displays the list of notifications  |
-| Custom URL link    | /url/:link     | Displays the "Assets" page          |
+| Home               | /home          | 显示"主页"页面            |
+| Assets             | /assets        | 显示"资产"页面          |
+| Device profiles    | /devices       | 显示"设备配置"页面 |
+| All devices        | /deviceList    | 显示所有设备列表    |
+| Alarms             | /alarms        | 显示告警列表         |
+| Dashboards         | /dashboards    | 显示仪表板列表     |
+| Specific dashboard | /dashboard/:id | 显示指定仪表板    |
+| Audit logs         | /auditLogs     | 显示"审计日志"页面      |
+| Customers          | /customers     | 显示客户列表      |
+| Specific customer  | /customer/:id  | 显示指定客户     |
+| Notifications      | /notifications | 显示通知列表  |
+| Custom URL link    | /url/:link     | 显示"资产"页面          |
 | ---                 
 
 {% unless docsPrefix == null %}
-The menu configuration algorithm for the mobile application is similar to menu customization in the desktop ThingsBoard. Refer to [this documentation](/docs/{{docsPrefix}}user-guide/custom-menu/){:target="_blank"} for a deeper understanding of menu customization.
+移动应用的菜单配置算法与桌面版ThingsBoard中的菜单自定义类似。有关菜单自定义的深入理解，请参阅[此文档](/docs/{{docsPrefix}}user-guide/custom-menu/){:target="_blank"}。
 {% endunless %}
 
-**"More" page**
+**"更多"页面**
 
-The number of menu items displayed in the navigation menu of the mobile app depends on the screen size of your mobile device.
-Items that do not fit in the bottom navigation menu will be available under the "More" page.
+移动应用导航菜单中显示的菜单项数量取决于您移动设备的屏幕尺寸。
+底部导航菜单中放不下的项将在"更多"页面下可用。
 
 {% include images-gallery.html imageCollection="layout-2" %}
 
 {% unless docsPrefix == null %}
 
-### Self registration
+### 自助注册
 
-The **self registration** feature allows the tenant to configure a sign-up page for their clients, allowing them to easily sign up and log in to ThingsBoard with predefined permission configurations.
+**自助注册**功能允许租户为其客户配置注册页面，让他们能够轻松注册并使用预定义权限配置登录ThingsBoard。
 
-Configure the self registration form for new clients:
+为新客户配置自助注册表单：
 
-- **Page title**. Enter the page title to be displayed at the top of the registration page. It serves as a header to indicate the purpose of the form to users.
-- **Notification recipient**. Specify the recipients that will receive notifications about new user registrations. Learn more about notifications and how to add a new notification recipient [here](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}.
-- **Redirect settings**:
-  - **Application URL scheme**: Defines the custom URL scheme used for redirecting users after successful registration. For example, *tbscheme*.
-  - **Application URL hostname**: The hostname component of the URL used in redirection, e.g., *app.pe.thingsboard.org*.
+- **页面标题**。输入将显示在注册页面顶部的页面标题。它作为标题向用户表明表单的用途。
+- **通知接收人**。指定将接收新用户注册通知的接收人。有关通知及如何添加新通知接收人的更多信息请参阅[此处](/docs/{{docsPrefix}}user-guide/notifications/){:target="_blank"}。
+- **重定向设置**：
+  - **应用URL scheme**：定义成功注册后用于重定向用户的自定义URL scheme。例如*tbscheme*。
+  - **应用URL主机名**：重定向中使用的URL的主机名部分，例如*app.pe.thingsboard.org*。
 
 {% include images-gallery.html imageCollection="self-registration-1" %}
 
-- **Registration form fields**. The mandatory fields for completing the registration form are email, password, and repeat password. If needed, specify additional fields.
+- **注册表单字段**。完成注册表单的必填字段为email、password和repeat password。如需，可指定其他字段。
 
 {% include images-gallery.html imageCollection="self-registration-2" %}
 
-- **Captcha properties**. Captcha (Completely Automated Public Turing test to tell Computers and Humans Apart) is an automated test used to distinguish between human users and bots. 
-Using Captcha in ThingsBoard helps prevent the automated creation of fake accounts in the system.
+- **Captcha属性**。Captcha（Completely Automated Public Turing test to tell Computers and Humans Apart）是用于区分人类用户和机器人的自动测试。
+在ThingsBoard中使用Captcha有助于防止在系统中自动创建虚假账户。
 
-To **generate the Captcha**, navigate to the [Google ReCaptcha admin console](https://www.google.com/recaptcha/intro/v3.html){:target="_blank"}:
-- Select which version of reCAPTCHA you will use: v2, v3, or Enterprise.
-- Specify the domain name of your ThingsBoard instance.
-- Copy and securely store the the site key and secret key.
+要**生成Captcha**，请导航至[Google ReCaptcha管理控制台](https://www.google.com/recaptcha/intro/v3.html){:target="_blank"}：
+- 选择要使用的reCAPTCHA版本：v2、v3或Enterprise。
+- 指定ThingsBoard实例的域名。
+- 复制并安全存储site key和secret key。
 
 {% include images-gallery.html imageCollection="captcha" %}
 
-**In ThingsBoard**:
-- Select the **Captcha version** to be used.
-- Specify **Captcha site key** - the public key used to render the CAPTCHA on the site.
-- Specify **Captcha secret key** - the private key used for verifying CAPTCHA responses on the server.
-- **Captcha log action name**: specifies the action associated with CAPTCHA, used for logging purposes.
+**在ThingsBoard中**：
+- 选择要使用的**Captcha版本**。
+- 指定**Captcha site key** - 用于在网站上渲染CAPTCHA的公钥。
+- 指定**Captcha secret key** - 用于在服务器上验证CAPTCHA响应的私钥。
+- **Captcha log action name**：指定与CAPTCHA关联的操作，用于日志目的。
 
 {% include images-gallery.html imageCollection="self-registration-3" %}
 
-- **Show Privacy Policy**. Enable or disable the display of a Privacy Policy link on the registration page.
-- **Show Terms of Use**. Enable or disable the display of a Terms of Use link on the registration page.
-- **User group roles**. Specify the roles that will be assigned to the user upon successful registration. These roles determine the permissions and access level for the user.
+- **显示隐私政策**。启用或禁用注册页面上隐私政策链接的显示。
+- **显示使用条款**。启用或禁用注册页面上使用条款链接的显示。
+- **用户组角色**。指定用户成功注册后将分配的角色。这些角色决定用户的权限和访问级别。
 
 {% include images-gallery.html imageCollection="self-registration-4" %}
 
-- **Advanced settings**:
-  - **Customer group**: specify the customer group to which the new user will be added.
-  - **Customer title prefix**: specify the prefix that will be added to the customer&#39;s title for identification purposes.
-  - **Custom menu**: Apply a custom navigation menu for the new user.
-  - **Default dashboard**: The dashboard that the user sees upon logging in for the first time.
+- **高级设置**：
+  - **客户组**：指定新用户将加入的客户组。
+  - **客户标题前缀**：指定将添加到客户标题用于识别的前缀。
+  - **自定义菜单**：为新用户应用自定义导航菜单。
+  - **默认仪表板**：用户首次登录时看到的仪表板。
 
 {% include images-gallery.html imageCollection="self-registration-5" %}
 
-- **Home dashboard**. The main dashboard that will be displayed to the user when navigating to the "Home" menu item.
+- **主页仪表板**。用户导航至"主页"菜单项时将显示的主仪表板。
 
 {% include images-gallery.html imageCollection="self-registration-6" %}
 
-- Click "**Add**" to complete the bundle creation.
+- 点击"**添加**"完成bundle创建。
 
 {% endunless %}
 
-### Configuration dialog
+### 配置对话框
 
-Next, a configuration dialog will open. Continue configuring your new mobile app using the provided instructions.
-Or skip this step if you already have a {{MOBILE_APPLICATION}}. Click "**Close**".
+接下来将打开配置对话框。使用提供的说明继续配置您的新移动应用。
+或者，如果您已有{{MOBILE_APPLICATION}}，点击"**关闭**"。
 
 {% include images-gallery.html imageCollection="configuration-dialog" %}
 {% capture difference %}
-For more information on launching your new app, refer to the "{{GETTING_STARTED}}" documentation.
+有关启动新应用的更多信息，请参阅"{{GETTING_STARTED}}"文档。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Bundle has been added. The applications specified in the bundle now use the defined settings.
+bundle已添加。bundle中指定的应用现在使用已定义的设置。
 
 {% include images-gallery.html imageCollection="bundle-added" %}
 
-## Next steps
+## 后续步骤
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

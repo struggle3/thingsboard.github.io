@@ -1,20 +1,20 @@
-This converter is designed for binary payloads, and interprets binary data to retrieve attributes and time series, using specific byte positions for data extraction.
+此转换器专为二进制 payload 设计，通过解释二进制数据并利用特定字节位置提取数据，从而获取属性和时序数据。
 
-| **Parameter**  | **Description**                                                                                                |
+| **参数**  | **描述**                                                                                                |
 |----------------|----------------------------------------------------------------------------------------------------------------|
-| timeseries     | This subsection contains parameters of the device data, that will be interpreted as timeseries for the device. |
-| ... key        | Name for timeseries in the platform.                                                                           |
-| ... objectType | Object type in the BACnet device.                                                                              |
-| ... objectId   | Object id in the BACnet device.                                                                                |
-| ... propertyId | Property id in the BACnet device.                                                                              |
-| attributes     | This subsection contains parameters of the device data, that will be interpreted as attributes for the device. |
-| ... key        | Name for attribute in the platform.                                                                            |
-| ... objectType | Object type in the BACnet device.                                                                              |
-| ... objectId   | Object id in the BACnet device.                                                                                |
-| ... propertyId | Property id in the BACnet device.                                                                              |
+| timeseries     | 该子节包含将被解释为设备时序数据的设备数据参数。 |
+| ... key        | 平台中的时序名称。                                                                           |
+| ... objectType | BACnet 设备中的对象类型。                                                                              |
+| ... objectId   | BACnet 设备中的对象 ID。                                                                                |
+| ... propertyId | BACnet 设备中的属性 ID。                                                                              |
+| attributes     | 该子节包含将被解释为设备属性的设备数据参数。 |
+| ... key        | 平台中的属性名称。                                                                            |
+| ... objectType | BACnet 设备中的对象类型。                                                                              |
+| ... objectId   | BACnet 设备中的对象 ID。                                                                                |
+| ... propertyId | BACnet 设备中的属性 ID。                                                                              |
 | ---            | ---                                                                                                            |
 
-Example:
+示例：
 
 ```json
 "timeseries": [

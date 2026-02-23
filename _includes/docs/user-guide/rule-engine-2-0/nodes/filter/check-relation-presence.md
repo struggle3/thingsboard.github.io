@@ -1,19 +1,18 @@
-Checks whether a relation exists between the incoming message originator and another entity - either any entity or a specific one - based on the configured direction and relation
-type.
+根据配置的方向和关系类型，检查入站消息来源实体与另一实体（任意实体或指定实体）之间是否存在关系。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-#### Relation search parameters
+#### 关系查询参数
 
-* **Direction** — required. Specifies the direction of the relation (*From originator* or *To originator*), relative to the incoming message originator.
-* **Relation type** — required. Specifies the type of relation to match (e.g., *Contains*, *Manages*).
-* **Check relation to specific entity** — toggle.
-    * When enabled, the node checks for a relation that matches the specified direction and type and points to a specific entity. Two additional fields appear:
-        * **Type** — required. Specifies the entity type of the target.
-        * [Entity selector] — required. Lets you select the specific entity by name. The field label changes based on the selected type (e.g., Device, Asset, Customer).
-    * When disabled, the node checks for any relation that matches the selected direction and type, regardless of the other entity.
+* **方向** — 必填。指定相对于入站消息来源实体的关系方向（*From originator* 或 *To originator*）。
+* **关系类型** — 必填。指定要匹配的关系类型（如 *Contains*、*Manages*）。
+* **检查与指定实体的关系** — 开关。
+    * 启用时，节点检查是否存在与指定方向、类型匹配且指向指定实体的关系。此时会出现两个附加字段：
+        * **类型** — 必填。指定目标的实体类型。
+        * [实体选择器] — 必填。按名称选择指定实体。字段标签根据所选类型变化（如 Device、Asset、Customer）。
+    * 禁用时，节点检查是否存在与所选方向和类型匹配的任意关系，不考虑另一实体。
 
 ### JSON Schema
 
@@ -60,40 +59,40 @@ type.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. If **Check relation to specific entity** is enabled:
-    1. Check whether a relation exists that matches:
-        * The configured **direction**,
-        * The specified **relation type**,
-        * And the configured **target entity**.
-    2. If such a relation is found, route the message via `True`; otherwise, via `False`.
-2. If **Check relation to specific entity** is disabled:
-    1. Search for any relation that matches the configured **direction** and **type**.
-    2. If at least one matching relation is found, route the message via `True`; otherwise, via `False`.
+1. 若**检查与指定实体的关系**已启用：
+    1. 检查是否存在满足以下条件的关系：
+        * 配置的**方向**，
+        * 指定的**关系类型**，
+        * 以及配置的**目标实体**。
+    2. 若找到该关系，经 `True` 路由消息；否则经 `False` 路由。
+2. 若**检查与指定实体的关系**已禁用：
+    1. 搜索与配置的**方向**和**类型**匹配的任意关系。
+    2. 若找到至少一个匹配关系，经 `True` 路由消息；否则经 `False` 路由。
 
-## Output connections
+## 输出连接
 
-* `True`:
-    * If matching relation was found.
-* `False`:
-    * If matching relation was not found.
-* `Failure`:
-    * If unexpected error occurred during message processing.
+* `True`：
+    * 当找到匹配的关系时。
+* `False`：
+    * 当未找到匹配的关系时。
+* `Failure`：
+    * 消息处理过程中发生意外错误时。
 
-## Examples
+## 示例
 
-The examples below show only the **relevant** fields of the incoming message. Unless explicitly stated otherwise, other message fields may have any values.
+以下示例仅展示入站消息的**相关**字段。除非另有说明，其他消息字段可为任意值。
 
 ---
 
-### Example 1 — Relation to specific entity exists → `True`
+### 示例 1 — 与指定实体的关系存在 → `True`
 
-**Incoming message**
+**入站消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -105,27 +104,27 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-A relation of type `Contains` exists **from** the originator **to** the specified asset.
+存在类型为 `Contains` 的、**从**来源实体**到**指定资产的关系。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-The relation with matching direction, type, and target entity was found.
+找到与方向、类型和目标实体匹配的关系。
 
 ---
 
-### Example 2 — Relation to specific entity does not exist → `False`
+### 示例 2 — 与指定实体的关系不存在 → `False`
 
-**Incoming message**
+**入站消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -137,27 +136,27 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-No relation of type `Manages` exists **from** the originator to the specified asset.
+来源实体与指定资产之间不存在类型为 `Manages` 的关系。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`False`** 路由。
 
-**Explanation**
+**说明**
 
-The configured relation was not found.
+未找到配置的关系。
 
 ---
 
-### Example 3 — Relation to any entity exists → `True`
+### 示例 3 — 与任意实体的关系存在 → `True`
 
-**Incoming message**
+**入站消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -167,27 +166,27 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The originator has at least one `Connected` relation in the `FROM` direction to another entity.
+来源实体在 `FROM` 方向至少有到一个实体的 `Connected` 关系。
 
-**Result**
+**结果**
 
-Routed via **`True`**.
+经 **`True`** 路由。
 
-**Explanation**
+**说明**
 
-A relation with matching direction and type exists.
+存在与方向和类型匹配的关系。
 
 ---
 
-### Example 4 — No matching relation exists → `False`
+### 示例 4 — 无匹配关系 → `False`
 
-**Incoming message**
+**入站消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -197,27 +196,27 @@ Any message.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-No `Contains` relations in the `TO` direction exist for the originator.
+来源实体在 `TO` 方向不存在 `Contains` 关系。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`False`** 路由。
 
-**Explanation**
+**说明**
 
-No matching relation was found.
+未找到匹配的关系。
 
 ---
 
-### Example 5 — Multi-level relation is not considered → `False`
+### 示例 5 — 不考虑多级关系 → `False`
 
-**Incoming message**
+**入站消息**
 
-Originator is a `CUSTOMER`.
+来源实体为 `CUSTOMER`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -229,17 +228,16 @@ Originator is a `CUSTOMER`.
 }
 ```
 
-**State of the system**
+**系统状态**
 
-* A `Contains` relation exists **from** the customer to an asset.
-* Another `Contains` relation exists **from** that asset to the target device.
-* No direct relation exists between the customer and the device.
+* 存在**从**客户**到**资产的 `Contains` 关系。
+* 该资产**到**目标设备存在另一条 `Contains` 关系。
+* 客户与设备之间不存在直接关系。
 
-**Result**
+**结果**
 
-Routed via **`False`**.
+经 **`False`** 路由。
 
-**Explanation**
+**说明**
 
-The node checks only **direct** relations. Indirect or multi-level relations (e.g., customer → asset → device) are **not** followed. Since there is no direct relation from the
-originator to the target device, the result is `False`.
+节点仅检查**直接**关系。不追踪间接或多级关系（如 客户 → 资产 → 设备）。由于来源实体与目标设备之间无直接关系，结果为 `False`。

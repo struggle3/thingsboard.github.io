@@ -2,8 +2,8 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Installing ThingsBoard Trendz Analytics  on CentOS/RHEL
-description: Installing ThingsBoard Trendz Analytics  on CentOS/RHEL
+title: 在 CentOS/RHEL 上安装 ThingsBoard Trendz Analytics
+description: 在 CentOS/RHEL 上安装 ThingsBoard Trendz Analytics
 
 trendz-settings:
   0:

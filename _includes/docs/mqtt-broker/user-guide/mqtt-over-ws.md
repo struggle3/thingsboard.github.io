@@ -2,67 +2,64 @@
 * TOC
 {:toc}
 
-The evolution of front-end capabilities has given rise to advanced browser functionalities, 
-significantly enhancing user interaction and data communication over the web. 
-Central to this advancement is the WebSocket, a robust communications protocol that has redefined real-time, bi-directional communication in web applications.
+前端能力的演进带来了更先进的浏览器功能，显著提升了 Web 端的用户交互与数据通信。
+其中 WebSocket 是关键：作为一种可靠的通信协议，它重新定义了 Web 应用中的实时双向通信。
 
-Simultaneously, MQTT is renowned for its lightweight structure and reliability, particularly in constrained environments and over unstable networks. 
-The protocol has become the cornerstone for message transmission in IoT ecosystems. 
-Its suitability for low-overhead message delivery aligns perfectly with the need for efficient web communication. 
-This is especially true for mobile devices and in scenarios requiring immediate data exchange, such as sensor data monitoring or receiving critical notifications.
+同时，MQTT 以其轻量结构和高可靠性著称，尤其适合资源受限、网络不稳定的环境。
+该协议已成为 IoT 生态中消息传输的基石。
+其低开销消息传递特性与 Web 端高效通信需求相契合，
+尤其适用于移动设备以及传感器监控、关键通知等需要即时数据交换的场景。
 
-The integration of MQTT over WebSocket is not merely a technological combination but a transformative approach to network communications.
-It enables MQTT messages to be sent and received directly through browsers, leveraging the unique strengths of both MQTT and WebSocket.
-This synergy opens up possibilities, from displaying live device information and receiving real-time alerts to efficient communication in mobile web applications.
+MQTT over WebSocket 不仅是技术组合，更是网络通信方式的转变。
+它让 MQTT 消息可直接在浏览器中收发，充分发挥 MQTT 与 WebSocket 的优势。
+这种结合带来丰富可能：展示实时设备信息、接收实时告警、在移动 Web 应用中进行高效通信等。
 
-## Defining the WebSocket
+## WebSocket 简介
 
-WebSocket is a communication protocol enabling real-time, bi-directional communication between a web client and a server over a single, long-lived TCP connection. 
-It differs significantly from the traditional HTTP request/response model by allowing continuous data exchange with lower latency. 
-Initiated through an HTTP upgrade handshake, it supports both unencrypted (ws://) and encrypted (wss://) connections. 
-WebSocket is essential for web applications requiring live content updates due to its efficient and persistent communication channel.
+WebSocket 是一种通信协议，使 Web 客户端与服务器通过一条长连接实现实时双向通信。
+它明显不同于传统 HTTP 请求/响应模式，支持持续、低延迟的数据交换。
+通过 HTTP 升级握手建立，支持未加密（ws://）和加密（wss://）连接。
+WebSocket 是需实时内容更新的 Web 应用的重要基础，提供高效、持久的通信通道。
 
-## Benefits of using MQTT over WebSocket
+## MQTT over WebSocket 的优势
 
-The integration of MQTT with WebSocket offers significant advantages for web-based IoT applications. 
-By utilizing MQTT over WebSocket, the traditionally non-web MQTT protocol is effectively extended into the web application area. 
-This adaptation is necessary because web browsers do not natively support MQTT, thus necessitating the use of WebSocket as a bridge to facilitate communication.
+MQTT 与 WebSocket 的结合为 Web 端 IoT 应用带来诸多优势。
+通过 MQTT over WebSocket，传统非 Web 的 MQTT 协议可有效延伸到 Web 应用。
+该适配很有必要，因为 Web 浏览器本身不支持 MQTT，需借助 WebSocket 作为桥梁。
 
-Let's outline several key aspects of this combination:
+该结合的主要特点包括：
 
-* **Efficient Resource Utilization**: MQTT is a lightweight protocol, making it ideal for scenarios with limited bandwidth or device capabilities. 
-When used over WebSocket, it ensures efficient use of network and device resources in the context of web applications.
-* **Real-Time Communication**: WebSocket provides a continuous connection, enabling real-time data exchange with low latency.
-* **Bi-Directional Communication**: WebSocket supports full-duplex communication, allowing simultaneous data transmission in both directions. 
-This feature, combined with MQTT's publish/subscribe model, enables dynamic and interactive communication scenarios.
-* **Compatibility with Web Ecosystem**: By using MQTT over WebSocket, the protocol becomes compatible with the web browser security model, facilitating its integration into web applications without additional plugins or special arrangements.
-* **Supports MQTT Features**: The integration does not compromise MQTT's native features like retained messages, last will and testament, and clean session, ensuring robust and feature-rich implementations.
+* **资源利用高效**：MQTT 为轻量协议，适合带宽或设备能力有限的场景。在 WebSocket 上使用时，可在 Web 应用场景下高效利用网络与设备资源。
+* **实时通信**：WebSocket 提供持久连接，实现低延迟实时数据交换。
+* **双向通信**：WebSocket 支持全双工，可同时双向传输数据。结合 MQTT 发布/订阅模型，实现动态、可交互的通信场景。
+* **与 Web 生态兼容**：通过 MQTT over WebSocket，协议可与浏览器安全模型兼容，便于接入 Web 应用，而无需额外插件或特殊配置。
+* **保留 MQTT 特性**：集成不牺牲 MQTT 原生功能（如保留消息、遗嘱、clean session），保障功能完整可靠。
 
-## MQTT over WebSocket in TBMQ
+## TBMQ 中的 MQTT over WebSocket
 
-TBMQ utilizes two listeners, WS (WebSocket) and WSS (WebSocket Secure), to facilitate communication over WebSocket. 
-You can refer to the overview of these listeners provided [here](/docs/{{docsPrefix}}mqtt-broker/security/#ws-listener).
+TBMQ 使用 WS（WebSocket）和 WSS（WebSocket Secure）两个监听器支持 WebSocket 通信。
+可在此[查看](/docs/{{docsPrefix}}mqtt-broker/security/#ws-listener)监听器概览。
 
 {% capture difference %}
-**Note:** For existing deployments prior v1.3.0, it's essential to update configuration files to enable WebSocket communication. 
-For instance, in an AWS deployment, additional port(s) must be opened on the AWS Load Balancer. 
-To address this, pull the latest configuration files or update existing ones to incorporate the necessary changes.
+**说明**：v1.3.0 之前的既有部署需更新配置文件以启用 WebSocket 通信。
+例如在 AWS 部署中，需在 AWS 负载均衡器上开放额外端口。
+请拉取最新配置文件或修改现有配置以应用必要更改。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-For detailed WebSocket-related parameters, please refer to the provided [link](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters) 
-(locate `LISTENER_WS_ENABLED` and related environment variables).
+WebSocket 相关参数详情请参阅[此处](/docs/{{docsPrefix}}mqtt-broker/install/config/#mqtt-listeners-parameters)
+（查找 `LISTENER_WS_ENABLED` 及相关环境变量）。
 
-## Getting started
+## 快速开始
 
-In this guide, we present an illustrative example of how to establish MQTT over WebSocket connection to a TBMQ, subscribe to a specific topic, and exchange messages using the [MQTT.js](https://github.com/mqttjs/MQTT.js) library.
+本指南演示如何使用 [MQTT.js](https://github.com/mqttjs/MQTT.js) 库连接 TBMQ、订阅主题并收发消息的示例。
 
-### Installing TBMQ
+### 安装 TBMQ
 
-Before we delve in, make sure the TBMQ is successfully installed.
-To obtain detailed instructions on how to install TBMQ on different platforms, we recommend exploring the [Installation options](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/) documentation.
+开始前，请确保 TBMQ 已成功安装。
+不同平台安装步骤请参阅[安装选项](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/)文档。
 
-For this guide, we will follow the below instructions for quick TBMQ installation.
+本指南使用以下快速安装说明。
 
 {% capture contenttogglespec %}
 Linux & Mac OS%,%linuxmacos%,%templates/mqtt-broker/install/linux-macos/linux-macos.md%br%
@@ -70,12 +67,12 @@ Windows%,%windows%,%templates/mqtt-broker/install/windows/windows.md{% endcaptur
 
 {% include content-toggle.html content-toggle-id="tbmqGettingStartedInstallation" toggle-spec=contenttogglespec %}
 
-### Installing MQTT WebSocket client
+### 安装 MQTT WebSocket 客户端
 
-To install MQTT.js, ensure you have the Node.js runtime environment installed on your machine. 
-Follow the guide below for instructions on [installing Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
+安装 MQTT.js 前，请确保已安装 Node.js 运行环境。
+安装 Node.js 可参考[此处](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)。
 
-Once Node.js is installed, you can use either the `npm` or `yarn` command to install the MQTT.js library.
+安装 Node.js 后，可使用 `npm` 或 `yarn` 安装 MQTT.js 库。
 
 ```bash
 npm install mqtt --save
@@ -87,8 +84,7 @@ yarn add mqtt
 ```
 {: .copy-code}
 
-You might want to install packages globally.
-This can be done by adding '-g' flag to the installation command with npm and 'global' option for yarn.
+若需全局安装，可使用 npm 的 `-g` 参数或 yarn 的 `global` 选项。
 
 ```bash
 npm install -g mqtt
@@ -100,16 +96,14 @@ yarn global add mqtt
 ```
 {: .copy-code}
 
-Note that global installations should be used judiciously as they can lead to version conflicts.
+注意：全局安装可能引发版本冲突，请谨慎使用。
 
-### Connecting the client
+### 连接客户端
 
-We suggest consulting the [MQTT.js documentation](https://github.com/mqttjs/MQTT.js?tab=readme-ov-file#api) for comprehensive information on connection options, 
-subscribing to topics, and publishing messages with this library.
+连接选项、订阅主题及发布消息的详细说明请参阅 [MQTT.js 文档](https://github.com/mqttjs/MQTT.js?tab=readme-ov-file#api)。
 
 {% capture difference %}
-**Note**: The username 'tbmq_websockets_username' corresponds to the default MQTT client credentials integrated into the system, 
-specifically tailored for WebSocket client functionality.
+**说明**：用户名 `tbmq_websockets_username` 对应系统中预置的默认 MQTT 客户端凭据，专用于 WebSocket 客户端。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 

@@ -1,7 +1,7 @@
 <table>
     <thead>
         <tr>
-            <td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+            <td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
             <td>queue.kafka.compression</td>
             <td>TB_KAFKA_COMPRESSION_TYPE</td>
             <td>none</td>
-            <td>Compression of the Kafka messages: none or gzip</td>
+            <td>Compression of the Kafka messages: none或gzip</td>
         </tr>
         <tr>
             <td>queue.kafka.batch.size</td>
@@ -459,7 +459,7 @@
             <td>queue.partitions.hash_function_name</td>
             <td>TB_QUEUE_PARTITIONS_HASH_FUNCTION_NAME</td>
             <td>murmur3_128</td>
-            <td>Name of hash function used for consistent hash ring in Cluster Mode. See architecture docs for more details. murmur3_32, murmur3_128 or sha256</td>
+            <td>Name of hash function used for consistent hash ring in Cluster Mode. See architecture docs for more details. murmur3_32、murmur3_128或sha256</td>
         </tr>
         <tr>
             <td>queue.transport_api.requests_topic</td>

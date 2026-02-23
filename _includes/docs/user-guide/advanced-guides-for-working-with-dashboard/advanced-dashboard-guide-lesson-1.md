@@ -2,25 +2,25 @@
 {:toc}
 
 {% capture difference %}
-Before proceeding with this guide, it&#39;s recommended that you follow [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"} guide to become familiar with ThingsBoard devices and dashboards. This will enhance your learning experience and understanding of the concepts presented here.
+在继续本指南前，建议先完成 [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/){:target="_blank"} 指南，熟悉 ThingsBoard 设备和 dashboards，以便更好地理解下文概念。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Imagine you have several buildings, each containing multiple office spaces equipped with devices that monitor water and electricity usage, CO2 levels, temperature, and humidity. 
-This lesson is the first in a series of step-by-step tutorials to help you create a multifunctional dashboard for visualizing and monitoring data from your premises-integrated devices.
+假设您有多栋建筑，每栋内有多个办公空间，配有监控水电气用量、CO2、温湿度的设备。
+本课为该系列第一步，通过分步教程帮助您创建用于可视化和监控楼宇集成设备数据的多功能 dashboard。
 
-By completing this series, you will be able to:
+完成本系列后，您将能够：
 
-- Display your buildings on a map widget;
-- Show a list of office spaces with detailed information about each one of them;
-- Show a list of devices in a selected office and visualize their layout on the room plan;
-- Develop dedicated panels for each device, showcasing both real-time and historical data;
-- Share your dashboard with clients.
+- 在地图部件上展示建筑；
+- 显示办公空间列表及每个的详细信息；
+- 显示所选办公室内的设备列表，并在平面图上展示其布局；
+- 为每台设备开发专属面板，展示实时与历史数据；
+- 与客户共享 dashboard。
 
-For simplicity, we&#39;ll concentrate on a single office in Building A, equipped with smart devices to monitor everything from energy consumption to environmental conditions.
+为简化，我们将聚焦 Building A 的一间办公室，配备智能设备监控能耗与环境条件。
 
-Let&#39;s begin with the basics: add new entities, establish relationships between them, and display our buildings in the OpenStreet Map and Entities table widgets.
-After completing the first guide, you will have a dashboard that looks like this:
+从基础开始：添加新实体、建立相互关系，并在 OpenStreet Map 与 Entities table 部件中展示建筑。
+完成本指南后，您的 dashboard 将类似如下：
 
 ![image](/images/user-guide/advanced-guides-for-working-with-dashboard/lesson-1/lesson-1-pe.png)
 
@@ -28,41 +28,41 @@ After completing the first guide, you will have a dashboard that looks like this
 
 ## Adding entities and establishing relationships between them
 
-Before we add and configure the dashboard, we need to add some entities, specifically assets and devices. 
-Assets will represent our buildings and offices, while devices will represent our sensors.
+在添加和配置 dashboard 前，需先添加若干实体，即 assets 和 devices。
+Assets 代表建筑和办公室，devices 代表传感器。
 
 ### Adding assets
 
-[Assets](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"} are abstract IoT entities that may be related to other assets and devices.
+[Assets](/docs/{{docsPrefix}}user-guide/ui/assets/){:target="_blank"} 为可与其它 assets 和 devices 关联的抽象 IoT 实体。
 
-For this tutorial, we will create two assets to represent buildings: **Building A** and **Building B**, and two more assets to represent office spaces: **Office A** and **Office B**.
-Let&#39;s get started.
+本教程中，我们将创建两个代表建筑的 assets：**Building A** 与 **Building B**，以及两个代表办公空间的 assets：**Office A** 与 **Office B**。
+开始操作。
 
-- Login to your ThingsBoard instance as [Tenant Administrator](/docs/{{docsPrefix}}user-guide/ui/tenants/){:target="_blank"};
-- Go to the "Assets" page of the "Entities" section on the sidebar. By default, you&#39;ll be redirected to the "All" device group. We&#39;ll begin by adding new assets to this group;
-- Click the "plus" icon located in the top-right corner of the table. Select "Add new asset" from the drop-down menu to start adding your first asset;
-- In the asset name field, type "Building A". Type "building" in the "Asset profile" section and click on "Create a new one!" to establish a new profile for this asset;
-- Click the "Add" button to confirm the asset profile creation;
-- Now click "Add" to finalize adding the asset.
+- 以 [Tenant Administrator](/docs/{{docsPrefix}}user-guide/ui/tenants/){:target="_blank"} 登录 ThingsBoard；
+- 进入侧边栏 "Entities" 下的 "Assets" 页面。默认会进入 "All" 设备组，我们先在此组添加 assets；
+- 点击表格右上角 "plus" 图标，在下拉菜单中选择 "Add new asset" 开始添加第一个 asset；
+- 在 asset 名称字段输入 "Building A"。在 "Asset profile" 区域输入 "building"，点击 "Create a new one!" 为该 asset 新建 profile；
+- 点击 "Add" 确认 asset profile 创建；
+- 再点击 "Add" 完成 asset 添加。
 
-Congratulations! You have added your first asset.
+恭喜，您已添加第一个 asset。
 
 {% include images-gallery.html imageCollection="adding-assets-1" %}
 
-Similarly, add the asset "Building B". Also, add the assets "Office A" and "Office B" with the asset type "office".
+同样添加 asset "Building B"。再添加 asset type 为 "office" 的 "Office A" 和 "Office B"。
 
 {% include images-gallery.html imageCollection="adding-assets-2" %}
 
 ### Adding devices
 
-[Devices](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"} are basic IoT objects that collect data from their environment and transmit it to the ThingsBoard platform, as well as respond to Remote Procedure Call (RPC) commands.
+[Devices](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"} 是采集环境数据并上传到 ThingsBoard，同时响应 Remote Procedure Call (RPC) 命令的基础 IoT 对象。
 
-You can add devices manually, just like assets. However, ThingsBoard has the capability for [bulk provisioning](/docs/{{docsPrefix}}user-guide/bulk-provisioning/){:target="_blank"} of devices (and assets) using CSV files. This is very useful when you need to add multiple entities at once.
+可像 assets 一样手动添加 devices。ThingsBoard 也支持通过 CSV 对 devices（和 assets）进行 [bulk provisioning](/docs/{{docsPrefix}}user-guide/bulk-provisioning/){:target="_blank"}，批量添加实体时非常方便。
 
-For this tutorial, we need to add four devices: Indoor Air Quality Sensor, Energy Meter, Water Flow Meter, and IAQ Sensor. Later, we will simulate sending telemetry from these devices to ThingsBoard using emulators. 
-So, let&#39;s start:
+本教程需添加四台设备：Indoor Air Quality Sensor、Energy Meter、Water Flow Meter、IAQ Sensor。后续将用模拟器模拟这些设备向 ThingsBoard 发送 telemetry。
+开始操作：
 
-- Create a CSV file or [download a pre-made one](/docs/user-guide/advanced-guides-for-working-with-dashboard/files-from-tutorial/devices.csv){:target="_blank"}, where each row corresponds to the creation of a single device with specified parameters:
+- 创建 CSV 文件或 [下载预置文件](/docs/user-guide/advanced-guides-for-working-with-dashboard/files-from-tutorial/devices.csv){:target="_blank"}，每行对应创建一台带指定参数的设备：
 
 | **Name** | **Type**      | **Label**                 |
 |:---------|:--------------|---------------------------|
@@ -72,7 +72,7 @@ So, let&#39;s start:
 | AM-307   | air-sensor    | IAQ Sensor                |
 | ---      
 
-Your CSV file should look like this:
+CSV 文件应类似如下：
 
 ```text
 name,type,label
@@ -83,86 +83,86 @@ AM-307,air-sensor,IAQ Sensor
 ```
 {: .copy-code}
 
-- Navigate to the "Devices" page of the "Entities" section on the sidebar. By default, you'll be redirected to the "All" device group;
-- Click the "plus" icon located in the top-right corner of the table. Select "Import device" from the drop-down menu;
-- Drag the CSV file into the import window and click "Continue";
-- Select CSV delimiter and click "Continue";
-- Map the data between the columns of the uploaded file and the data types in the ThingsBoard platform. Click "Continue" and then click "OK".
+- 进入侧边栏 "Entities" 下的 "Devices" 页面。默认会进入 "All" 设备组；
+- 点击表格右上角 "plus" 图标，在下拉菜单中选择 "Import device"；
+- 将 CSV 文件拖入导入窗口，点击 "Continue"；
+- 选择 CSV 分隔符，点击 "Continue"；
+- 将上传文件列与 ThingsBoard 数据类型映射，点击 "Continue"，再点击 "OK"。
 
-Four new devices should be successfully created: "SD-001" (Indoor Air Quality Sensor), "EM-002" (Energy Meter), "WM-003" (Water Flow Meter), and "AM-307" (IAQ Sensor).
+应成功创建四台新设备："SD-001"（Indoor Air Quality Sensor）、"EM-002"（Energy Meter）、"WM-003"（Water Flow Meter）、"AM-307"（IAQ Sensor）。
 
 {% include images-gallery.html imageCollection="adding-devices-1" %}
 
 ### Adding relations between entities
 
-[Relations](/docs/{{docsPrefix}}user-guide/entities-and-relations/#relations){:target="_blank"} are directed connections between one entity and one or more others.
-To ensure that our Office A and Office B are linked only to Building A, we will set up relations between them. Follow these steps:
+[Relations](/docs/{{docsPrefix}}user-guide/entities-and-relations/#relations){:target="_blank"} 为一个实体与一个或多个实体间的有向连接。
+为确保 Office A 和 Office B 仅与 Building A 关联，我们建立它们之间的关系。按以下步骤操作：
 
-- Return to the "Assets" page and click on the "Building A" to open the details window. Navigate to the "Relations" tab, ensure the direction is "From", and click the "plus" icon to add new relation;
-- Select the type "Assets", then specify "Office A" and "Office B" in the list of entities. Click "Add".
+- 回到 "Assets" 页面，点击 "Building A" 打开详情。进入 "Relations" 选项卡，确认方向为 "From"，点击 "plus" 添加新 relation；
+- 选择 type "Assets"，在实体列表中指定 "Office A" 和 "Office B"。点击 "Add"。
 
-Now your Office A and Office B are linked only to Building A.
+Office A 和 Office B 现已仅与 Building A 关联。
 
 {% include images-gallery.html imageCollection="relations-from-building-to-office" %}
 
-Now let&#39;s establish relations between the devices "SD-001" (Indoor Air Quality Sensor), "EM-002" (Energy Meter), "WM-003" (Water Flow Meter) and Office A:
+现在为设备 "SD-001"（Indoor Air Quality Sensor）、"EM-002"（Energy Meter）、"WM-003"（Water Flow Meter）与 Office A 建立 relations：
 
-- Click on "Office A" and navigate to the "Relations" tab. Ensure the direction is "From" and click the "plus" icon;
-- Select the type "Device" and specify "SD-001", "EM-002", and "WM-003" in the list of entities. Click "Add".
+- 点击 "Office A"，进入 "Relations" 选项卡。确认方向为 "From"，点击 "plus"；
+- 选择 type "Device"，在实体列表中指定 "SD-001"、"EM-002" 和 "WM-003"。点击 "Add"。
 
-Now the specified devices are "related" to "Office A" asset.
+指定设备现已与 "Office A" asset 建立 relation。
 
 {% include images-gallery.html imageCollection="relations-from-office-to-device-1" %}
 
-Similarly, establish relation between the "AM-307" (IAQ Sensor) device and "Office B" asset.
+同样，建立 "AM-307"（IAQ Sensor）设备与 "Office B" asset 的关系。
 
 {% include images-gallery.html imageCollection="relations-from-office-to-device-2" %}
 
 ## Adding dashboard
 
-The [dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} is more than just a space for displaying your data in a convenient format.
-Creating a structured and visually appealing dashboard is essential for efficiently monitoring and managing your assets and devices efficiently.
+[dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"} 不仅是用于以便利格式展示数据的空间。
+创建结构清晰、视觉效果良好的 dashboard 对高效监控与管理 assets 和 devices 至关重要。
 
-Add a dashboard to start visualizing assets and devices on it. For this dashboard, we will create a separate group:
+添加 dashboard 以开始在其上可视化 assets 和 devices。我们将为 dashboard 单独建组：
 
-- Go to the "Dashboards" page and navigate to the "Groups" tab. Click the "plus" icon to create a new dashboard group. Name it "Buildings" and click "Add";
-- Open the created dashboard group;
-- Click the "plus" icon in the upper-right corner of the screen to add new dashboard;
-- Enter the title for the dashboard - "Buildings" and click "Add";
-- Save the dashboard by clicking the "Save" button in the upper-right corner of the screen.
+- 进入 "Dashboards" 页面，切换到 "Groups" 选项卡。点击 "plus" 创建新 dashboard 组，命名为 "Buildings"，点击 "Add"；
+- 打开新建的 dashboard 组；
+- 点击屏幕右上角 "plus" 添加新 dashboard；
+- 输入 dashboard 标题 "Buildings"，点击 "Add"；
+- 点击屏幕右上角 "Save" 保存 dashboard。
 
-Your first dashboard has been successfully added. It will open automatically after adding. Save the dashboard by clicking the "Save" button in the upper right corner of the page.
+首个 dashboard 已成功添加，添加后会自动打开。点击页面右上角 "Save" 保存。
 
 {% include images-gallery.html imageCollection="adding-dashboard" %}
 
 ## OpenStreet Map widget
 
-Now we move on to the most interesting part — adding your first [widget](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"} – OpenStreet Map, which will display our two assets on the map: Building A and Building B.
-To display the buildings on the map, we need to set their coordinates - latitude and longitude as the attributes.
+接下来添加第一个 [widget](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"} —— OpenStreet Map，用于在地图上展示 Building A 和 Building B。
+要在地图上显示建筑，需将其坐标（纬度和经度）设为 attributes。
 
-Additionally, we will configure the widget to display general information about the building, including its address, email, phone number, and image when the building marker is clicked.
-This information will also be added as attributes.
+此外将配置部件：点击建筑标记时显示建筑一般信息，包括地址、邮箱、电话和图片。
+这些信息也将作为 attributes 添加。
 
-So, let&#39;s start with the preparatory work - adding building images and attributes.
+先从准备着手——添加建筑图片和 attributes。
 
 ### Upload building images
 
-Building images need to be uploaded to the [Image gallery](/docs/{{docsPrefix}}user-guide/image-gallery/#upload-image){:target="_blank"}, which serves as a centralized repository for storing and managing images.
-They will be used in the tooltip of the map widget. You can use the [Building A](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/645-5th-Ave-New-York.png){:target="_blank"} and [Building B](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/641-E-54th-St-New-York.png){:target="_blank"} images from this guide or upload your own images.
+建筑图片需上传至 [Image gallery](/docs/{{docsPrefix}}user-guide/image-gallery/#upload-image){:target="_blank"}，作为集中存储和管理图片的仓库。
+将用于地图部件的 tooltip。可使用本指南中的 [Building A](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/645-5th-Ave-New-York.png){:target="_blank"} 与 [Building B](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/641-E-54th-St-New-York.png){:target="_blank"} 图片，或上传自己的图片。
 
 {% include images-gallery.html imageCollection="adding-buildings-images" showListImageTitles="true" %}
 
-Now you need to obtain and save the links to these images for further use it in the buildings&#39; attributes:
+获取并保存这些图片的链接，以便在建筑 attributes 中使用：
 
 {% include images-gallery.html imageCollection="embed-buildings-images" showListImageTitles="true" %}
 
 ### Adding the necessary attributes
 
-Now let&#39;s move on to adding the necessary attributes:
+接下来添加所需的 attributes：
 
 {% include images-gallery.html imageCollection="adding-building-attributes-1" showListImageTitles="true" %}
 
-Coordinates of the buildings used in this example:
+本示例中 buildings 使用的坐标：
 
 | **Building** | **latitude**        | **longitude** |
 |:-------------|:--------------------|---------------|
@@ -170,11 +170,11 @@ Coordinates of the buildings used in this example:
 | Building B   | 40.75901            | -73.96997     |
 | ---
 
-Similarly, add the following attributes: "**address**", "**email**", "**phone**", **"contactPerson"** and "**buildingImage**" with values from the table below. Use the value type "String" for these attributes.
+同样添加以下 attributes："**address**"、"**email**"、"**phone**"、**"contactPerson"** 和 "**buildingImage**"，取值见下表。这些 attributes 使用 value type "String"。
 
 {% include images-gallery.html imageCollection="adding-building-attributes-2" %}
 
-Buildings' information used in this example:
+本示例中 buildings 的信息：
 
 | **Building** | **Address**                 | **Email**           | **Phone**      | **Contact person** | **Building image**                   |
 |:-------------|:----------------------------|:--------------------|:---------------|:-------------------|:-------------------------------------|
@@ -182,38 +182,38 @@ Buildings' information used in this example:
 | Building B   | 641 Lexington Ave, New York | building-b@mail.com | +121 555 66 77 | Jack Williams      | Use the link to the Building B image |
 |---
 
-Finally, your attributes list for Building A should look like this:
+Building A 的 attributes 列表最终应如下：
 
 {% include images-gallery.html imageCollection="adding-building-attributes-3" %}
 
-The attributes list for Building B should look like this:
+Building B 的 attributes 列表应如下：
 
 {% include images-gallery.html imageCollection="adding-building-attributes-4" %}
 
 ### Adding OpenStreet Map widget
 
-All preparatory settings are done, and now we can add **OpenStreet Map** widget:
+准备工作已完成，现在可添加 **OpenStreet Map** 部件：
 
-- Open the "Buildings" dashboard that you have created;
-- Click the "Add widget" button at the top of the screen or click the large "Add new widget" icon in the center of the screen (if this is your first widget on this dashboard);
-- Find the "OpenStreet Map" widget in the "Maps" widgets bundle and click on it;
-- Now we need to add an [alias](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"} to define the entities from which the data will be extracted. In the "Alias" field, enter a name for it - "Buildings", and click "Create a new one";
-- Enter the name of the alias and select a filter type - "Asset type". Then specify the "building" asset type and click the "Add" button in the lower right corner. This alias will display all assets of the "building" type in the widget;
-- Now, add the following attributes as data keys: "latitude", "longitude", "address", "email", "phone", and "buildingImage".
+- 打开已创建的 "Buildings" dashboard；
+- 点击屏幕顶部的 "Add widget" 或点击中央大图标 "Add new widget"（若为本 dashboard 第一个部件）；
+- 在 "Maps" 部件包中找到 "OpenStreet Map" 并点击；
+- 需添加 [alias](/docs/{{docsPrefix}}user-guide/ui/aliases/){:target="_blank"} 以定义数据来源实体。在 "Alias" 字段输入名称 "Buildings"，点击 "Create a new one"；
+- 输入 alias 名称，选择 filter type "Asset type"，指定 asset type "building"，点击右下角 "Add"。该 alias 将在部件中显示所有 "building" 类型的 assets；
+- 添加以下 attributes 作为 data keys："latitude"、"longitude"、"address"、"email"、"phone"、"buildingImage"。
 
 {% include images-gallery.html imageCollection="adding-maps-widget-1" %}
 
-The "Appearance" tab:
+"Appearance" 选项卡：
 
-- Navigate to the "Appearance" tab. Change OpenStreet map provider to "CartoDB.Positron";
+- 进入 "Appearance" 选项卡，将 OpenStreet map provider 改为 "CartoDB.Positron"；
 
 {% include images-gallery.html imageCollection="adding-maps-widget-2" %}
 
-- Scroll to the "Label" section. The label is located above the marker and can display specific information about the entity, such as its name, type, telemetry data, etc.
+- 滚动到 "Label" 区域。标签位于标记上方，可显示实体信息，如名称、类型、telemetry 等。
 
-    Add the label to the appropriate field by taking it from the documentation. This will display the building&#39;s name and customize the appearance of the tooltip;
+    从文档中复制并在对应字段添加 label，以显示建筑名称并定制 tooltip 样式；
 
-The label used in the example:
+本示例使用的 label：
 
 ```js
 <div style="position: relative; white-space: nowrap; text-align: center; font-size: 12px; top: -5px;"><span style="border-radius: 10px; background-color: #fff; padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px;">${entityName}</span></div>
@@ -222,11 +222,11 @@ The label used in the example:
 
 {% include images-gallery.html imageCollection="adding-maps-widget-3" %}
 
-- A little further down, find the "Tooltip" section. Here we will configure the data that will be displayed in the tooltip when clicking on the building marker.
-  - Turn on the "Use tooltip function" option;
-  - Use the function provided in the documentation to display the selected building's image and its contact details.
+- 向下找到 "Tooltip" 区域。此处配置点击建筑标记时 tooltip 中显示的内容。
+  - 开启 "Use tooltip function" 选项；
+  - 使用文档中的函数以显示所选建筑的图片和联系方式。
 
-The tooltip function used in the example:
+本示例使用的 tooltip 函数：
 
 ```js
 const address = data.address ? data.address : 'N/A';
@@ -254,15 +254,15 @@ return '<div style="display:flex;flex-direction:column;font-family:\'Roboto\';fo
 
 {% include images-gallery.html imageCollection="adding-maps-widget-4" %}
 
-- In the "Marker image" section, turn off the "Use marker image function" option, and add a custom marker image. Click "Browse from gallery" and upload new image marker. Use [provided custom marker image](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/building-icon.svg){:target="_blank"} or upload your own marker image. Set the marker image size to 60 pixels;
+- 在 "Marker image" 区域关闭 "Use marker image function"，添加自定义 marker 图片。点击 "Browse from gallery" 上传新 marker 图。使用 [提供的自定义 marker 图](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/building-icon.svg){:target="_blank"} 或上传自己的 marker 图。将 marker 大小设为 60 像素；
 
 {% include images-gallery.html imageCollection="adding-maps-widget-5" %}
 
-The "Widget card" tab:
+"Widget card" 选项卡：
 
-- Navigate to the "Widget card" tab. Turn off the "Display widget title" option;
-- Set padding value to 0;
-- Open "Advanced widget style" section. Copy the CSS from the documentation and paste it into the "Widget CSS" section. This CSS defines the styling for the tooltip;
+- 进入 "Widget card" 选项卡。关闭 "Display widget title"；
+- 将 padding 设为 0；
+- 打开 "Advanced widget style" 区域。从文档复制 CSS 粘贴到 "Widget CSS"。此 CSS 定义 tooltip 样式；
 
 ```css
 .leaflet-popup-content {
@@ -281,48 +281,48 @@ a.leaflet-popup-close-button {
 ``` 
 {:.copy-code}
 
-- Turn off the "Enable data export" option;
-- Click "Add" to confirm adding the widget.
+- 关闭 "Enable data export"；
+- 点击 "Add" 确认添加部件。
 
 {% include images-gallery.html imageCollection="adding-maps-widget-6" %}
 
-Congratulations, we have added your first widget, that displays our two buildings. Move the widget to the top-right corner of the dashboard and resize it by grabbing any corner and dragging it. 
-After adjusting the placement and size of the widget, click the "Save" button in the top-right corner to save the dashboard.
+恭喜，第一个部件已添加，可展示两栋建筑。将部件拖到 dashboard 右上角，拖动角点调整大小。
+调整好后，点击右上角 "Save" 保存 dashboard。
 
 {% include images-gallery.html imageCollection="adding-maps-widget-7" %}
 
-Now click on any building image to display a tooltip with information about it.
+点击任一建筑图片即可在 tooltip 中显示其信息。
 
 {% include images-gallery.html imageCollection="adding-maps-widget-8" %}
 
 ## Adding Buildings list widget
 
-We have already created a widget that displays our two buildings on a map. Now let&#39;s create another widget - Entities table, which will display our buildings in a list.
+已有部件在地图上显示两栋建筑。下面再添加 Entities table 部件，以列表形式展示建筑。
 
 {% include images-gallery.html imageCollection="adding-entities-table-widget-1" showListImageTitles="true" %}
 
-Our dashboard now features two widgets. The first widget displays the location of our buildings on a map, and the second lists the buildings and their addresses.
+dashboard 现包含两个部件：第一个在地图上显示建筑位置，第二个以列表形式显示建筑及其地址。
 
 {% include images-gallery.html imageCollection="adding-entities-table-widget-2" %}
 
 ## Customize the appearance of the dashboard
 
-Let&#39;s make our dashboard more appealing by customizing its appearance. We will set a custom background for the "Buildings" state and apply custom CSS styles to the widgets.
+通过定制外观使 dashboard 更美观。我们将为 "Buildings" 状态设置自定义背景，并为部件应用自定义 CSS。
 
-**Setting a custom background image**
+**设置自定义背景图**
 
-Transform the look of your dashboard by adding a custom background image for the "Buildings" state. This visual enhancement not only makes the interface more engaging but also aligns it with your branding or aesthetic preferences.
-You can use [the image from this tutorial](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/district-night-background.png){:target="_blank"} or your own.
+为 "Buildings" 状态添加自定义背景图，可提升视觉效果并与品牌或审美一致。
+可使用 [本教程图片](/images/user-guide/advanced-guides-for-working-with-dashboard/images-from-tutorial/district-night-background.png){:target="_blank"} 或自定义图片。
 
 {% include images-gallery.html imageCollection="background-image-building-state" showListImageTitles="true" %}
 
-**Customizing Widgets Appearance with CSS**
+**用 CSS 定制部件外观**
 
-We will also make changes to the appearance of all future widgets on the dashboard using CSS. We will round their corners and add a side shadow.
+我们还将用 CSS 修改 dashboard 上所有部件的样式，包括圆角和阴影。
 
-- Click the "Settings" button on the dashboard toolbar;
-- Scroll down to the "Advanced settings" section. This area allows you to modify in-depth settings that affect the entire dashboard;
-- In the "Dashboard CSS" section, input the following CSS code to style all widgets:
+- 点击 dashboard 工具栏的 "Settings"；
+- 滚动到 "Advanced settings" 区域，可在此修改影响整个 dashboard 的深度设置；
+- 在 "Dashboard CSS" 区域输入以下 CSS 以统一样式：
 
 ```text
 .tb-widget-container > .tb-widget {
@@ -341,28 +341,28 @@ We will also make changes to the appearance of all future widgets on the dashboa
 ```
 {: .copy-code}
 
-This CSS snippet applies styles to elements with the `.tb-widget` class that are direct children of the `.tb-widget-container`.
-It specifies `border-radius: 8px`, which gives the element soft rounded corners, and `box-shadow: 0px 4px 10px rgba(23, 33, 90, 0.5)`, which creates a semi-transparent shadow with a subtle blur, offset by 4 pixels downward, adding visual depth, and specifies `opacity: 0.9` to make the element slightly transparent, allowing for some background visibility while maintaining the content&#39;s visibility.
+此 CSS 作用于 `.tb-widget-container` 直接子元素中带有 `.tb-widget` 类的元素。
+`border-radius: 8px` 使圆角柔和，`box-shadow: 0px 4px 10px rgba(23, 33, 90, 0.5)` 产生半透明模糊阴影并向下偏移 4 像素，增加层次感；`opacity: 0.9` 使元素略透明，在保持内容可见的前提下透出背景。
 
-- After entering the CSS code, click the "Save" button to apply the changes;
-- Save the dashboard by clicking the "Save" button in the upper-right corner of the page.
+- 输入 CSS 后点击 "Save" 应用；
+- 点击页面右上角 "Save" 保存 dashboard。
 
-As you can see, the widget corners are now rounded, and the background is slightly transparent.
+可见部件现已圆角，背景略透明。
 
 {% include images-gallery.html imageCollection="dashboard-settings-css" %}
 
 ## Final view of the dashboard for this lesson
 
-As a result your dashboard should look like this:
+本课完成后的 dashboard 效果如下：
 
 {% include images-gallery.html imageCollection="dashboard-final-lesson-1" %}
 
 ## Next step
 
-Congratulations on completing the first chapter of our guide! You&#39;ve successfully crafted a dashboard that not only lists your buildings but also vividly displays their locations on a map widget.
-This achievement lays a solid foundation for more advanced functionalities that we will explore in the next chapters.
+恭喜完成本系列第一课！您已创建可列出建筑并在地图部件上直观展示其位置的 dashboard。
+这为后续课程中更进阶的功能打下基础。
 
-In the second part of our guide, we will continue developing our dashboard. When you are ready to proceed, simply click the button below.
+在第二部分，我们将继续开发 dashboard。准备就绪后，点击下方按钮继续。
 
 <br>
 <p><a href="/docs/{{docsPrefix}}user-guide/advanced-guides-for-working-with-dashboard/advanced-dashboard-guide-lesson-2/" class="button">Lesson 2. Dashboard states, widget actions, and analogue and digital gauges</a></p>

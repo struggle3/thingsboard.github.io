@@ -1,19 +1,18 @@
-
 * TOC
 {:toc}
 
-ThingsBoard provides a rich set of features related to time-series data:
+ThingsBoard 提供与时间序列数据相关的一系列功能：
 
- - **Collect** data from devices using various [protocols and integrations](/docs/{{docsPrefix}}getting-started-guides/connectivity/);
- - **Store** time series data in SQL (PostgreSQL) or NoSQL (Cassandra or Timescale) databases;
- - **Query** the latest time series data values or all data within the specified time range with flexible aggregation;
- - **Subscribe** to data updates using [WebSockets](#websocket-api) for visualization or real-time analytics;
- - **Visualize** time series data using configurable and highly customizable widgets and [dashboards](/docs/{{docsPrefix}}user-guide/dashboards/);
- - **Filter and analyze** data using flexible [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/);
- - **Generate [alarms](/docs/{{docsPrefix}}user-guide/alarms/)** based on collected data;
- - **Forward** data to external systems using [External Rule Nodes](/docs/user-guide/rule-engine-2-0/nodes/external/) (e.g. Kafka or RabbitMQ Rule Nodes).
+ - **采集**：通过多种[协议与集成](/docs/{{docsPrefix}}getting-started-guides/connectivity/)从设备采集数据；
+ - **存储**：在 SQL（PostgreSQL）或 NoSQL（Cassandra 或 Timescale）数据库中存储时间序列数据；
+ - **查询**：灵活聚合查询最新值或指定时间范围内全部数据；
+ - **订阅**：通过 [WebSockets](#websocket-api) 订阅数据更新，用于可视化或实时分析；
+ - **可视化**：使用可配置、高度自定义的部件和 [dashboards](/docs/{{docsPrefix}}user-guide/dashboards/) 展示时间序列数据；
+ - **筛选与分析**：通过灵活的 [Rule Engine](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/re-getting-started/) 处理数据；
+ - **生成 [alarms](/docs/{{docsPrefix}}user-guide/alarms/)**：基于采集数据生成告警；
+ - **转发**：使用 [External Rule Nodes](/docs/user-guide/rule-engine-2-0/nodes/external/)（如 Kafka 或 RabbitMQ Rule Nodes）将数据转发到外部系统。
 
-This guide provides an overview of the features listed above, and some useful links to get more details.
+本文档概述上述功能，并提供获取更多详情的链接。
 
 ## Data points
 

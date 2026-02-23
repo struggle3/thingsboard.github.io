@@ -3,13 +3,13 @@
 * TOC
 {:toc}
 
-White labeling lets you tailor your ThingsBoard instance to match your brand and preferences—especially useful for companies delivering IoT solutions to their customers.
+白标功能让您可以根据品牌和偏好定制 ThingsBoard 实例——特别适合向客户提供 IoT 解决方案的公司。
 
-Set your company or product name, upload your logo, choose color palettes, use a custom menu or translations—all without writing code or restarting the service.
+设置公司或产品名称、上传 Logo、选择配色方案、使用自定义菜单或翻译——无需编写代码或重启服务即可完成。
 
-<br><b><font size="4">Practical video course 🎥</font></b>
+<br><b><font size="4">实用视频课程 🎥</font></b>
 
-Watch this practical video course for a step-by-step guide to personalizing the look and feel of your IoT platform.
+观看此实用视频课程，按步骤了解如何个性化IoT平台的外观和体验。
 
 &nbsp;
 <div id="video">  
@@ -18,29 +18,29 @@ Watch this practical video course for a step-by-step guide to personalizing the 
     </div>
 </div>
 
-## Basics & Inheritance
+## 基础与继承
 
-White labeling is configured based on the level you&#39;re signed in under:
-{% unless docsPrefix contains "paas/" %}- **System Administrator level** — sets the platform&#39;s default branding for all tenants and their customers.{% endunless %}
-- **Tenant level** — inherits the system branding and can override it for the specific tenant and its customers.
-- **Customer level** — inherits the tenant&#39;s branding and can customize the UI for that customer and its users.
+白标配置基于您当前登录的层级：
+{% unless docsPrefix contains "paas/" %}- **系统管理员级** —— 为所有租户及其客户设置平台默认品牌。{% endunless %}
+- **租户级** —— 继承系统品牌，并可为指定租户及其客户覆盖。
+- **客户级** —— 继承租户品牌，并可为该客户及其用户自定义 UI。
 
-**Inheritance flow:** System → Tenant → Customer. Lower levels can override settings within their scope.
+**继承关系：** System → Tenant → Customer。下级可在其范围内覆盖设置。
 
 ## Customize ThingsBoard web interface
 
 {% capture difference %}
-**Please note:** To configure **White labeling**, you need the appropriate [permissions](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}.
+**请注意：** 配置 **白标** 需要相应的[权限](/docs/{{docsPrefix}}user-guide/rbac/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-To configure your company or product **logo** and **color scheme**, go to the "White labeling" page.
+要配置公司或产品 **Logo** 和 **配色方案**，请前往「白标」页面。
 
 {% include images-gallery.html imageCollection="white-labeling-default" %}
 
-In the "General" tab you can set or change the following options:
+在「常规」选项卡中可设置或修改以下选项：
 
- - Application title - you can specify custom the page's title, which is displayed in the browser tab;
+ - 应用标题 - 可指定自定义页面标题，显示在浏览器标签页中；
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/white-labeling/application-title.png)
@@ -49,7 +49,7 @@ In the "General" tab you can set or change the following options:
 ![image](/images/user-guide/white-labeling/application-title-paas.png)
 {% endif %}
 
- - Favicon (website icon) - you can change the default website icon to your own;
+ - Favicon（网站图标）- 可将默认网站图标改为您自己的图标；
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/white-labeling/website-icon.png)
@@ -58,7 +58,7 @@ In the "General" tab you can set or change the following options:
 ![image](/images/user-guide/white-labeling/website-icon-paas.png)
 {% endif %}
 
- - Logo - you can change the standard logo in the upper left corner to your company logo;
+ - Logo - 可将左上角标准 Logo 替换为公司 Logo；
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/user-guide/white-labeling/logo.png)
@@ -67,37 +67,37 @@ In the "General" tab you can set or change the following options:
 ![image](/images/user-guide/white-labeling/logo-paas.png)
 {% endif %}
 
- - Logo height - you can resize the logo;
- - White labeling allows you to customize the color theme by adjusting the primary and accent palettes to match your desired UI design.
+ - Logo 高度 - 可调整 Logo 尺寸；
+ - 白标允许您通过调整主色和强调色板来自定义配色主题，以符合您期望的 UI 设计。
 
-    - Primary palette - you can customize the background color and font color by choosing one of the suggested UI design options or customizing an existing one;
+    - 主色板 - 可选择建议的 UI 设计选项之一或自定义现有选项来设置背景色和字体颜色；
 
     ![image](/images/user-guide/white-labeling/primary-palette.png)
 
-    - Accent palette - you can customize the color for some elements, for example for a toggle;
+    - 强调色板 - 可为部分元素（如开关）自定义颜色；
 
     ![image](/images/user-guide/white-labeling/accent-palette.png)
 
- - Advanced CSS - you can stylize any elements of the ThingsBoard user interface as you wish. We will talk more about this functionality [below](#advanced-css);
- - Override Trendz analytics Add-on name - by checking this option, the name of the analytics add-on will be overridden from Trendz to Advanced analytics across the platform.
- - Show/hide platform name and version - by checking this option, the name of the platform and its current version will be displayed in the lower left corner.
+ - 高级 CSS - 可按需美化 ThingsBoard 用户界面的任意元素。更多说明见[下文](#advanced-css)；
+ - 覆盖 Trendz 分析插件名称 - 勾选后，分析插件名称将在整个平台中由 Trendz 覆盖为「高级分析」。
+ - 显示/隐藏平台名称和版本 - 勾选后，平台名称及当前版本将显示在左下角。
 
 ![image](/images/user-guide/white-labeling/show-platform-name-and-version.png)
 
-The final look of the customized user interface:
+自定义用户界面的最终效果：
 
 {% include images-gallery.html imageCollection="white-labeling-custom" %}
 
-### Advanced CSS
+### 高级 CSS
 
-Using CSS, you can stylize any elements of the ThingsBoard user interface as you wish. Such elements can be background, icons, fonts, etc.
+使用 CSS 可按需美化 ThingsBoard 用户界面的任意元素，如背景、图标、字体等。
 
-To use CSS in your UI design, do the following:
+在 UI 设计中使用 CSS 的步骤：
 
 {% include images-gallery.html imageCollection="advanced-css-1" showListImageTitles="true" %}
 
 <br>
-CSS code example for customize icons color and scroll color:
+自定义图标颜色和滚动条颜色的 CSS 示例：
 
 ```css
 /*icon color*/
@@ -127,11 +127,11 @@ ng-component::-webkit-scrollbar-thumb {
 ```
 {: .copy-code}
 
-Let's also add a gradient to the left menu:
+再为左侧菜单添加渐变效果：
 
 {% include images-gallery.html imageCollection="advanced-css-2" showListImageTitles="true" %}
 
-An example of CSS code to customize the appearance of the sidebar menu:
+自定义侧边栏菜单外观的 CSS 示例：
 
 ```css
 /*menu gradient*/
@@ -142,28 +142,28 @@ An example of CSS code to customize the appearance of the sidebar menu:
 ```
 {: .copy-code}
 
-Using the functionality described in this documentation, you can customize the appearance of the ThingsBoard UI according to your preferences.
+使用本文档介绍的功能，您可以根据自身偏好自定义 ThingsBoard UI 的外观。
 
-## Customize the login page
+## 自定义登录页
 
-On the "Login" tab, you can configure the **login page** for your clients.
+在「登录」选项卡中，可为客户配置 **登录页**。
 
-- Enter the registered domain name, or refer to [this documentation](/docs/{{docsPrefix}}domains/#domain-registration){:target="_blank"} to learn how to register a new domain;
-- It is recommended to prevent usage of hostnames from headers of the request;
-- Enter a custom application title;
-- Replace the default website icon and logo with your own;
-- Define the primary and accent color palettes;
-- Set the page background color.
+- 输入已注册的域名，或参阅[本文档](/docs/{{docsPrefix}}domains/#domain-registration){:target="_blank"}了解如何注册新域名；
+- 建议禁用从请求头读取主机名的用法；
+- 输入自定义应用标题；
+- 将默认网站图标和 Logo 替换为您自己的；
+- 定义主色和强调色板；
+- 设置页面背景色。
 
-Once done, save the changes.
+完成后保存更改。
 
 {% include images-gallery.html imageCollection="customize-login-page" %}
 
 <br>
-Now, use your custom domain name to access the ThingsBoard web interface login page and verify the result of your configuration.
+使用自定义域名访问 ThingsBoard  Web 界面登录页，验证配置结果。
 
 {% include images-gallery.html imageCollection="verify-result-customize-login-page" %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/multi-project-guides-banner.md %}

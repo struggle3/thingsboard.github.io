@@ -1,74 +1,70 @@
-Finds a device related to the message originator, fetches its attributes and/or latest telemetry, and adds the results to the message data or metadata.
+查找与消息来源实体相关的设备，获取其属性和/或最新遥测，并将结果添加到消息 data 或 metadata。
 
-## Configuration
+## 配置
 
-The configuration window is divided into two main sections: **Device relations query** and **Related device attributes**.
+配置窗口分为两大部分：**Device relations query** 和 **Related device attributes**。
 
 ### Device relations query
 
-This section defines the criteria for finding the related device, starting from the message originator.
+该部分定义从消息来源实体开始查找相关设备的条件。
 
-- **Direction**: The direction of the relation to search for.
-    - **From originator**: Searches for relations where the message originator is the source.
-    - **To originator**: Searches for relations where the message originator is the target.
-- **Max relation level**: The maximum depth of the relationship search (e.g., `1` for directly related devices).
-- **Fetch last level relation only**: A toggle to process only the entities found at the last relation level.
-- **Relation type**: The type of relation to look for (e.g., `Contains`, `Manages`).
-- **Device profiles**: A set of device profiles to filter by. Only devices matching one of these profiles will be considered.
+- **Direction**：要搜索的关系方向。
+    - **From originator**：搜索消息来源实体为源的关系。
+    - **To originator**：搜索消息来源实体为目标的关系。
+- **Max relation level**：关系搜索的最大深度（如 `1` 表示直接相关的设备）。
+- **Fetch last level relation only**：开关，仅处理在最后一层关系找到的实体。
+- **Relation type**：要查找的关系类型（如 `Contains`、`Manages`）。
+- **Device profiles**：用于过滤的设备配置集合。仅考虑匹配其中任一配置的设备。
 
 ### Related device attributes
 
-This section specifies which data to fetch from the related device found by the query. All input fields support templates to use values from the message or metadata.
+该部分指定从查询找到的相关设备获取哪些数据。所有输入字段均支持使用消息或 metadata 中的值的模板。
 
-- **Client attributes**: A set of client-side attribute keys to fetch.
-- **Shared attributes**: A set of shared attribute keys to fetch.
-- **Server attributes**: A set of server-side attribute keys to fetch.
-- **Latest telemetry**: A set of latest telemetry keys to fetch.
-- **Fetch latest telemetry with timestamp**: If enabled, the fetched telemetry value will be a JSON object containing both the value and its timestamp (e.g.,
-  `{"ts":1672531200000, "value":42}`). Otherwise, only the value is fetched.
-- **Add selected attributes to**: Determines where to add the fetched data.
-    - *Message*: Adds the key-value pairs to the message data (payload). The message data must be a JSON object.
-    - *Metadata*: Adds the key-value pairs to the message metadata.
-- **Tell failure if any of the attributes are missing**: If enabled, the message will be routed to the `Failure` chain if any of the specified attribute or telemetry keys are not
-  found on the related device. If disabled, missing keys are simply ignored.
+- **Client attributes**：要获取的客户端属性键集合。
+- **Shared attributes**：要获取的共享属性键集合。
+- **Server attributes**：要获取的服务端属性键集合。
+- **Latest telemetry**：要获取的最新遥测键集合。
+- **Fetch latest telemetry with timestamp**：若启用，获取的遥测值将为包含值和其时间戳的 JSON 对象（如 `{"ts":1672531200000, "value":42}`）。否则仅获取值。
+- **Add selected attributes to**：确定添加获取数据的位置。
+    - *Message*：将键值对添加到消息 data（负载）。消息 data 必须为 JSON 对象。
+    - *Metadata*：将键值对添加到消息 metadata。
+- **Tell failure if any of the attributes are missing**：若启用，当相关设备上找不到任一指定的属性或遥测键时，消息将经 `Failure` 链路由。若禁用，缺失的键被忽略。
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node identifies the originator of the incoming message.
-2. It executes the **Device relations query** to find a related device.
-3. If no related device is found, the message is routed to the `Failure` connection.
-4. If multiple related devices are found, the node proceeds using only the **first one** returned by the query.
-5. The node asynchronously fetches the specified attributes and telemetry from the found device.
-6. If the **Tell failure if any of the attributes are missing** option is enabled and any of the requested keys do not exist on the related device, the message is routed to the
-   `Failure` connection with an error detailing the missing keys.
-7. The fetched data is processed:
-    * **Attribute Prefixes**: Keys for fetched attributes are automatically prefixed to indicate their scope:
-        * Client attributes: `cs_` (e.g., `cs_attributeKey`)
-        * Shared attributes: `shared_` (e.g., `shared_attributeKey`)
-        * Server attributes: `ss_` (e.g., `ss_attributeKey`)
-    * **Telemetry**: Keys for latest telemetry are **not** prefixed.
-8. Based on the **Add selected attributes to** setting, the new key-value pairs are added to either the message data or metadata.
-9. The enriched message is sent via the `Success` connection.
+1. 节点识别入站消息的来源实体。
+2. 执行**Device relations query**查找相关设备。
+3. 若未找到相关设备，消息经 `Failure` 连接路由。
+4. 若找到多个相关设备，节点仅使用查询返回的**第一个**继续处理。
+5. 从找到的设备异步获取指定的属性和遥测。
+6. 若**Tell failure if any of the attributes are missing**已启用，且相关设备上不存在任一请求的键，消息经 `Failure` 连接路由并附带说明缺失键的错误信息。
+7. 处理获取的数据：
+    * **属性前缀**：获取的属性的键会自动添加前缀以表示其范围：
+        * 客户端属性：`cs_`（如 `cs_attributeKey`）
+        * 共享属性：`shared_`（如 `shared_attributeKey`）
+        * 服务端属性：`ss_`（如 `ss_attributeKey`）
+    * **遥测**：最新遥测的键**不**添加前缀。
+8. 根据**Add selected attributes to**设置，将新键值对添加到消息 data 或 metadata。
+9. 丰富后的消息经 `Success` 连接发送。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - The message is successfully enriched with data from the related device.
-- `Failure`:
-    - No related device was found using the specified query.
-    - The **Tell failure if any of the attributes are missing** option is enabled, and at least one specified attribute or telemetry key was not found.
-    - An unexpected error occurred during processing.
+- `Success`：
+    - 消息已成功使用相关设备的数据丰富。
+- `Failure`：
+    - 使用指定查询未找到相关设备。
+    - **Tell failure if any of the attributes are missing**已启用，且至少一个指定的属性或遥测键未找到。
+    - 处理过程中发生意外错误。
 
-## Examples
+## 示例
 
-### Example 1: Enriching metadata with a Related Device's Server Attribute
+### 示例 1：使用相关设备的服务端属性丰富 metadata
 
-This example demonstrates how to add a server-side attribute from a related device to the message metadata.
+本示例演示如何将相关设备的服务端属性添加到消息 metadata。
 
-**Scenario**: A "Gateway" device sends a status message. We want to add the `buildingId` of the parent "HVAC Controller" device, which is stored as a server attribute on the
-controller.
+**场景**：「Gateway」设备发送状态消息。希望添加父「HVAC Controller」设备的 `buildingId`（存储在控制器上的服务端属性）。
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -79,9 +75,9 @@ Metadata:
 }
 ```
 
-Originator: device named "Main Gateway"
+Originator: 名为 "Main Gateway" 的设备
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -106,14 +102,14 @@ Originator: device named "Main Gateway"
 }
 ```
 
-**State of the system**:
+**系统状态**：
 
-* A device named "HVAC-Controller-01" (with profile `hvac-controller`) has a server-side attribute `buildingId` with the value `BLD-123`.
-* There is a `Manages` relation **from** "HVAC-Controller-01" **to** "Main Gateway".
+* 名为 "HVAC-Controller-01" 的设备（配置为 `hvac-controller`）具有值为 `BLD-123` 的服务端属性 `buildingId`。
+* 存在**从** "HVAC-Controller-01" **到** "Main Gateway" 的 `Manages` 关系。
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one, but its metadata is enriched. It is sent via the `Success` connection.
+出站消息与入站消息相同，但其 metadata 已丰富。经 `Success` 连接发送。
 
 Metadata:
 
@@ -125,15 +121,13 @@ Metadata:
 }
 ```
 
-**Explanation**: The node searched for a relation `To` the "Main Gateway" and found the "HVAC-Controller-01" device. It then fetched the `buildingId` server attribute and added its
-value to the message metadata with the prefixed key `ss_buildingId`.
+**说明**：节点搜索**到** "Main Gateway" 的关系，找到 "HVAC-Controller-01" 设备。随后获取 `buildingId` 服务端属性，并以带前缀的键 `ss_buildingId` 将其值添加到消息 metadata。
 
-### Example 2: Enriching Message Data with Telemetry
+### 示例 2：使用遥测丰富消息 data
 
-**Scenario**: A "Pump Controller" device sends a command confirmation. We need to enrich this message with the latest `pressure` reading from a "Pressure Sensor" device it
-contains.
+**场景**：「Pump Controller」设备发送命令确认。需用其包含的「Pressure Sensor」设备的最新 `pressure` 读数丰富此消息。
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -144,16 +138,16 @@ Data:
 }
 ```
 
-Originator: device named "Pump-Controller-A"
+Originator: 名为 "Pump-Controller-A" 的设备
 
-**Node configuration**
+**节点配置**
 
-- **Device relations query**:
+- **Device relations query**：
     - Direction: `From originator`
     - Max relation level: `1`
     - Relation type: `Contains`
     - Device profiles: `pressure-sensor`
-- **Related device attributes**:
+- **Related device attributes**：
     - Latest telemetry: `pressure`
     - Fetch latest telemetry with timestamp: `Enabled`
     - Add selected attributes to: `Message`
@@ -181,14 +175,14 @@ Originator: device named "Pump-Controller-A"
 }
 ```
 
-**State of the system**:
+**系统状态**：
 
-* A device named "Pressure-Sensor-X1" (with profile `pressure-sensor`) has a latest telemetry value for `pressure` of `120.5` at timestamp `1725282600000`.
-* There is a `Contains` relation **from** "Pump-Controller-A" to "Pressure-Sensor-X1".
+* 名为 "Pressure-Sensor-X1" 的设备（配置为 `pressure-sensor`）在时间戳 `1725282600000` 具有 `pressure` 的最新遥测值 `120.5`。
+* 存在**从** "Pump-Controller-A" 到 "Pressure-Sensor-X1" 的 `Contains` 关系。
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message data is enriched with the telemetry reading.
+出站消息 data 已使用遥测读数丰富。
 
 Data:
 
@@ -203,5 +197,4 @@ Data:
 }
 ```
 
-**Explanation**: The node searched for a relation `From` the "Pump-Controller-A" and found "Pressure-Sensor-X1". It fetched the latest `pressure` telemetry with its timestamp and
-added the resulting JSON object to the message data with the key `pressure`.
+**说明**：节点搜索**从** "Pump-Controller-A" 发出的关系，找到 "Pressure-Sensor-X1"。获取其最新带时间戳的 `pressure` 遥测，并将 resulting JSON 对象以键 `pressure` 添加到消息 data。

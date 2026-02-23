@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
 title: send to slack
-description: Sends messages to Slack public channels, private channels, or direct messages via Slack API.
+description: 通过 Slack API 向公共频道、私有频道或私信发送消息。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

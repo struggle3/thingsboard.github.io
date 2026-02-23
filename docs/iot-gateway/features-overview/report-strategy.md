@@ -1,18 +1,18 @@
 ---
 layout: docwithnav-gw
-title: Report Strategy
-description: Report Strategy
+title: 上报策略
+description: 上报策略
 
 ---
 
 * TOC
 {:toc}
-## Introduction
+## 简介
 
-The **Report Strategy** feature allows you to configure how the gateway reports data to the platform. It uses a hierarchical configuration system, enabling you to define strategies at different levels based on your needs.
+**上报策略**（Report Strategy）功能用于配置网关向平台上报数据的方式。它采用分层配置体系，可按需在不同层级定义策略。
 
-### **Configuration Hierarchy**
-The report strategy is applied in the following order of precedence:
+### **配置层级**
+上报策略按以下优先级顺序应用：
 
 1. **Default Configuration**: The default report strategy (`ON_RECEIVED`) is applied if no other configuration is specified.
 2. **General Configuration**: Defined in the `tb_gateway.json` file and applies to all connectors, devices, and datapoints unless overridden.

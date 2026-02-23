@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-edge
-title: CoAP Device API Reference
+title: CoAP设备API参考
 redirect_from: "/docs/edge/reference/coap-api"
 ---
 

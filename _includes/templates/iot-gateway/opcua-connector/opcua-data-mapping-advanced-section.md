@@ -1,15 +1,15 @@
-| **Parameter**                     | **Default value**                                           | **Description**                                                                                         |
+| **参数**                     | **默认值**                                           | **说明**                                                                                         |
 |:----------------------------------|:------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| deviceNodePattern                 | **Root\\\\.Objects\\\\.Device1**                            | Regular expression, which is used for looking up the node for a current device.                         |
-| deviceNodeSource                  | **path**                                                    | Source of the device node.                                                                              |
+| deviceNodePattern                 | **Root\\\\.Objects\\\\.Device1**                            | 用于查找当前设备节点的正则表达式。                         |
+| deviceNodeSource                  | **path**                                                    | 设备节点来源。                                                                              |
 | deviceInfo                        |                                                             |                                                                                                         |
-| ... deviceNameExpressionSource    | **path**                                                    | Source of the device name (can be [path](#path-types), [identifier](#identifier-types) or constant).    |
-| ... deviceNameExpression          | **Device ${Root\\\\.Objects\\\\.Device1\\\\.serialNumber}** | Path to a variable with device name, which is used for looking up the device name in a variable.        |
-| ... deviceProfileExpressionSource | **constant**                                                | Source of the device profile (can be [path](#path-types), [identifier](#identifier-types) or constant). |
-| ... deviceProfileExpression       | **Device**                                                  | Path to a variable with device profile, is used for looking the device profile in some variable.        |
+| ... deviceNameExpressionSource    | **path**                                                    | 设备名称来源（可为 [path](#path-types)、[identifier](#identifier-types) 或 constant）。    |
+| ... deviceNameExpression          | **Device ${Root\\\\.Objects\\\\.Device1\\\\.serialNumber}** | 用于在变量中查找设备名称的设备名称变量路径。        |
+| ... deviceProfileExpressionSource | **constant**                                                | device profile 来源（可为 [path](#path-types)、[identifier](#identifier-types) 或 constant）。 |
+| ... deviceProfileExpression       | **Device**                                                  | 用于在变量中查找 device profile 的 device profile 变量路径。        |
 | ---                               |                                                             |                                                                                                         |
 
-This part of the configuration will look like this:  
+配置的此部分将如下所示：  
 
 ```json
 "deviceNodePattern": "Root\\.Objects\\.Device1",

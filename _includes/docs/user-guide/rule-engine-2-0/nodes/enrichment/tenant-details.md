@@ -1,24 +1,24 @@
-Adds details from the message originator's tenant (e.g., name, email, country) to either the message data or the message metadata.
+将消息来源实体的租户详情（如名称、邮箱、国家）添加到消息 data 或 metadata。
 
-## Configuration
+## 配置
 
-The node's configuration allows you to select which tenant details you want to fetch and where to place them in the message.
+节点配置允许选择要获取的租户详情及其在消息中的放置位置。
 
-- **Select details**: A set of tenant details to retrieve. You must select at least one detail. The available options are:
-    * *Id*: The unique identifier of the tenant.
-    * *Title*: The name of the tenant.
-    * *Country*: The tenant's country.
-    * *State*: The state or province.
-    * *City*: The city.
-    * *Zip*: The postal or ZIP code.
-    * *Address*: The primary street address.
-    * *Address2*: The secondary street address.
-    * *Email*: The contact email address.
-    * *Phone*: The contact phone number.
-    * *Additional Info*: The `description` field from the tenant's `additionalInfo` JSON object.
-- **Add selected details to**: Determines the destination for the fetched tenant details.
-    * *Message*: Adds the details to the message data payload. The message data must be a JSON object for this to succeed.
-    * *Metadata*: Adds the details to the message metadata.
+- **Select details**：要获取的租户详情集合。至少需选择一项。可用选项：
+    * *Id*：租户的唯一标识符。
+    * *Title*：租户名称。
+    * *Country*：租户国家。
+    * *State*：州/省。
+    * *City*：城市。
+    * *Zip*：邮编。
+    * *Address*：主要街道地址。
+    * *Address2*：次要街道地址。
+    * *Email*：联系邮箱地址。
+    * *Phone*：联系电话。
+    * *Additional Info*：租户 `additionalInfo` JSON 对象中的 `description` 字段。
+- **Add selected details to**：确定获取的租户详情的目标位置。
+    * *Message*：将详情添加到消息 data 负载。消息 data 必须为 JSON 对象才能成功。
+    * *Metadata*：将详情添加到消息 metadata。
 
 ### JSON Schema
 
@@ -66,34 +66,30 @@ The node's configuration allows you to select which tenant details you want to f
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node identifies the tenant associated with the incoming message.
-2. It reads the **Select details** set to determine which tenant details to fetch.
-3. The node then asynchronously retrieves the values for the selected details from the tenant.
-4. For each fetched detail, a new key is created by prepending `tenant_` to the detail's name. For example, selecting `Email` results in the key `tenant_email`, and `Title` results
-   in `tenant_title`.
-5. If a selected detail is not set for the tenant, it is simply skipped and not added to the message.
-6. Based on the **Add selected details to** setting, the node adds the resulting key-value pairs (e.g., `"tenant_email": "info@example.com"`) to either the message data or the
-   message metadata.
-7. The enriched message is forwarded via the **Success** connection. If an error occurs (for instance, trying to add details to a non-JSON message data), the original message is
-   routed to the **Failure** connection.
+1. 节点识别与入站消息关联的租户。
+2. 读取**Select details**集合以确定要获取的租户详情。
+3. 节点异步从租户获取所选详情的值。
+4. 对每个获取的详情，通过在详情名称前添加 `tenant_` 创建新键。例如，选择 `Email` 得到键 `tenant_email`，`Title` 得到 `tenant_title`。
+5. 若租户未设置所选详情，则跳过不添加到消息。
+6. 根据**Add selected details to**设置，节点将结果键值对（如 `"tenant_email": "info@example.com"`）添加到消息 data 或 metadata。
+7. 丰富后的消息经 **Success** 连接转发。若发生错误（如尝试向非 JSON 消息 data 添加详情），原始消息经 **Failure** 连接路由。
 
-## Output connections
+## 输出连接
 
-- **Success**: The message has been successfully enriched with the tenant's details.
-- **Failure**: An error occurred during processing. For example, this can happen if **Add selected details to** is set to `Message` but the incoming message data is not a valid
-  JSON object.
+- **Success**：消息已成功使用租户详情丰富。
+- **Failure**：处理过程中发生错误。例如，**Add selected details to** 设为 `Message` 但入站消息 data 不是有效 JSON 对象时。
 
-## Examples
+## 示例
 
-### Example 1: Adding tenant contact info to metadata
+### 示例 1：将租户联系信息添加到 metadata
 
-**Incoming message**
+**入站消息**
 
 Metadata: `{}`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -105,13 +101,13 @@ Metadata: `{}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The current tenant has the title `Building Corp` and the email `example@building-corp.com`.
+当前租户的 title 为 `Building Corp`，邮箱为 `example@building-corp.com`。
 
-**Outgoing message**
+**出站消息**
 
-The node adds the fetched details to the metadata and routes message via `Success` connection.
+节点将获取的详情添加到 metadata，消息经 `Success` 连接路由。
 
 Metadata:
 
@@ -122,15 +118,15 @@ Metadata:
 }
 ```
 
-**Explanation**: The node fetched the `Title` and `Email` from the tenant and added them to the message metadata under the keys `tenant_title` and `tenant_email`.
+**说明**：节点从租户获取 `Title` 和 `Email`，并以键 `tenant_title` 和 `tenant_email` 添加到消息 metadata。
 
-### Example 2: Adding tenant location to message data
+### 示例 2：将租户位置添加到消息 data
 
-**Incoming message**:
+**入站消息**：
 
 Data: `{}`
 
-**Node configuration**:
+**节点配置**：
 
 ```json
 {
@@ -141,13 +137,13 @@ Data: `{}`
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The current tenant has the country set to `Ukraine`.
+当前租户的国家设置为 `Ukraine`。
 
-**Outgoing message**
+**出站消息**
 
-The new key-value pair is merged into the message data's JSON object. Message is routed via `Success` connection.
+新键值对合并到消息 data 的 JSON 对象中。消息经 `Success` 连接路由。
 
 Data:
 
@@ -157,4 +153,4 @@ Data:
 }
 ```
 
-**Explanation**: The node retrieved the `Country` from the tenant and added it to the message data with the key `tenant_country`.
+**说明**：节点从租户获取 `Country`，并以键 `tenant_country` 添加到消息 data。

@@ -1,19 +1,19 @@
 ---
 layout: docwithnav-gw
-title: KNX Connector Configuration
-description: KNX API support for ThingsBoard IoT Gateway
+title: KNX 连接器配置
+description: ThingsBoard IoT Gateway 的 KNX API 支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you get familiar with KNX Connector configuration for ThingsBoard IoT Gateway.
-Use [general configuration guide](/docs/iot-gateway/configuration/) to enable this Connector. The purpose of this 
-Connector is to connect KNX-based devices to ThingsBoard, allowing to process data from KNX devices and control 
-KNX automation systems.
+本指南将帮助您熟悉 ThingsBoard IoT Gateway 的 KNX 连接器配置。
+请使用 [通用配置指南](/docs/iot-gateway/configuration/) 启用此连接器。该连接器的
+用途是将基于 KNX 的设备接入 ThingsBoard，处理来自 KNX 设备的数据并控制
+KNX 自动化系统。
 
-We will describe the connector configuration file below.
+下面将说明连接器配置文件。
 
 ## Connector configuration: knx.json
 

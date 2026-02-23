@@ -1,4 +1,4 @@
-To install the **PostgreSQL** database, run these commands:
+要安装 **PostgreSQL** 数据库，请运行以下命令：
 
 ```bash
 # Automated repository configuration:

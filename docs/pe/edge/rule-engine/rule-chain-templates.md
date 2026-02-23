@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-edge
-title: Rule Chain templates
-description: Rule Chain templates
+title: 规则链模板
+description: 规则链模板
 ---
 
 {% assign docsPrefix = "pe/edge/" %}

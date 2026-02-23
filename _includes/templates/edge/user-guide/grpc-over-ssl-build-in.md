@@ -1,19 +1,19 @@
-Follow the instructions below to generate your own certificate files. This approach is useful for testing but is time-consuming and not recommended for production environments.
+按以下说明生成自己的证书文件。该方法适用于测试，但较耗时，不建议在生产环境使用。
 
-#### Generate a Private Key
+#### 生成私钥
 
-Generate a new private key using the command below. This will create a 2048-bit RSA private key and store it in a file named `privateKey.pem`:
+使用以下命令生成新私钥，将创建 2048 位 RSA 私钥并保存到 `privateKey.pem` 文件：
 
 ```bash
 openssl genpkey -algorithm RSA -out privateKey.pem -pkeyopt rsa_keygen_bits:2048
 ```
 {: .copy-code}
 
-#### Generate a Certificate Signing Request (CSR)
+#### 生成 CSR（证书签名请求）
 
-Next, use your private key to generate a CSR. 
-You will need to provide details such as your organization's name, common name (domain name), and an email address, which will be included in the certificate's subject field. 
-Save the CSR as `certRequest.csr`:
+接着使用私钥生成 CSR。
+需要提供组织名称、Common Name（域名）和电子邮箱等信息，这些将包含在证书的 subject 字段中。
+将 CSR 保存为 `certRequest.csr`：
 
 ```bash
 openssl req -new -key privateKey.pem -out certRequest.csr
@@ -21,26 +21,26 @@ openssl req -new -key privateKey.pem -out certRequest.csr
 {: .copy-code}
 
 {% capture common_name_localhost %}
-If your ThingsBoard server is running locally, ensure you set 'localhost' as the common name (domain name) when generating your certificate. 
-If the server is hosted, use its domain name. 
+若 ThingsBoard 服务器在本地运行，生成证书时需将 Common Name（域名）设置为 `localhost`。
+若服务器为托管部署，请使用其域名。
 
-SSL connections will fail if the certificate's domain name does not match the server's hostname.
+若证书域名与服务器主机名不匹配，SSL 连接将失败。
 {% endcapture %}
 {% include templates/warn-banner.md content=common_name_localhost %}
 
 
-#### Generate a Self-Signed Certificate
+#### 生成自签名证书
 
-Finally, create a self-signed certificate from your CSR. The following command generates a certificate named `certFile.crt`, valid for 365 days. You can modify the `-days` parameter to adjust the certificate's validity period:
+最后，通过 CSR 生成自签名证书。以下命令将生成名为 `certFile.crt` 的证书，有效期为 365 天。可修改 `-days` 参数以调整证书有效期：
 
 ```bash
 openssl x509 -req -in certRequest.csr -signkey privateKey.pem -out certFile.crt -days 365
 ```
 {: .copy-code}
 
-#### Enable SSL Communication on the Server
+#### 在服务器上启用 SSL 通信
 
-For both Ubuntu and CentOS/RHEL installations, enable SSL communication server-side with the following command:
+对于 Ubuntu 和 CentOS/RHEL 安装，使用以下命令在服务端启用 SSL 通信：
 
 ```bash
 sudo sh -c 'cat <<EOL >> /etc/thingsboard/conf/thingsboard.conf
@@ -51,7 +51,7 @@ EOL'
 ```
 {: .copy-code}
 
-Restart the server to apply the changes:
+重启服务器以应用更改：
 
 ```bash
 sudo systemctl restart thingsboard

@@ -1,93 +1,93 @@
 * TOC
 {:toc}
 
-TBMQ offers various options for managing MQTT client credentials via both its Web UI and [REST API](/docs/{{docsPrefix}}mqtt-broker/mqtt-client-credentials-management/). 
+TBMQ 支持通过 Web UI 和 [REST API](/docs/{{docsPrefix}}mqtt-broker/mqtt-client-credentials-management/) 管理 MQTT 客户端凭据的多种方式。
 
-TBMQ supports the following types of client credentials to authenticate client connections:
-- [Basic](/docs/{{docsPrefix}}mqtt-broker/security/#basic-authentication) - basic security measures based on combinations of client ID, username and password.
-  - **Advantages:** Simple and easy to implement. Widely supported by applications and services. Low network overhead.
-  - **Disadvantages:** Limited security.
-- [X.509 Certificate Chain](/docs/{{docsPrefix}}mqtt-broker/security/#tls-authentication) - advanced security measures based on X509 certificate chain that helps in verifying the identity of clients.
-  - **Advantages:** Enhanced security compared to the basic client credentials type. With SSL client credentials, both the client and TBMQ can authenticate each other. 
-  The SSL client credentials type provides more flexibility in terms of access control, as it allows for more granular access control policies based on the certificate subject name and other attributes.
-  - **Disadvantages:** Complexity and increased cost. Setting up and managing SSL client credentials can be more complex and requires more expertise. SSL encryption and decryption require more computing resources.
-- **SCRAM** - advanced security measure using Salted Challenge Response Authentication Mechanism (SCRAM) that provides secure, password-based authentication (MQTT 5.0 Enhanced authentication feature).
-  - **Advantages:** Higher security level compared to basic authentication. It uses a challenge-response process to exchange hashed credentials, ensuring the password is never sent in plain text.
-  - **Disadvantages:** Requires additional computational resources to generate and validate the salted password hashes.
+TBMQ 支持以下类型的客户端凭据以认证客户端连接：
+- [Basic](/docs/{{docsPrefix}}mqtt-broker/security/#basic-authentication) - 基于 client ID、username 和 password 组合的基础安全措施。
+  - **优点：** 简单易实现，应用和服务广泛支持，网络开销低。
+  - **缺点：** 安全性有限。
+- [X.509 Certificate Chain](/docs/{{docsPrefix}}mqtt-broker/security/#tls-authentication) - 基于 X509 证书链的高级安全措施，用于验证客户端身份。
+  - **优点：** 相比基础凭据安全性更高。使用 SSL 客户端凭据时，客户端与 TBMQ 可相互认证。
+  SSL 客户端凭据在访问控制上更灵活，可根据证书主题名等属性制定更细粒度的访问控制策略。
+  - **缺点：** 配置和管理较复杂，成本更高。SSL 加密和解密需要更多计算资源。
+- **SCRAM** - 使用 Salted Challenge Response Authentication Mechanism (SCRAM) 的高级安全措施，提供基于密码的安全认证（MQTT 5.0 增强认证特性）。
+  - **优点：** 比 basic 认证安全性更高。采用 challenge-response 交换哈希凭据，确保密码不以明文传输。
+  - **缺点：** 生成和验证加盐密码哈希需要额外计算资源。
 
-Before using any of the client credential types mentioned above, please ensure that the appropriate _Authentication_ is [enabled](/docs/{{docsPrefix}}mqtt-broker/security/authentication/basic/).
+使用上述任一客户端凭据类型前，请确保已[启用](/docs/{{docsPrefix}}mqtt-broker/security/authentication/basic/)相应的 _Authentication_。
 
-For more information on security issues, please consult this [guide](/docs/{{docsPrefix}}mqtt-broker/security/overview/).
+更多安全相关说明，请参阅本[指南](/docs/{{docsPrefix}}mqtt-broker/security/overview/)。
 
-## Adding MQTT client credentials
+## 添加 MQTT 客户端凭据
 
-To add new client credentials, please follow these steps:
+添加新客户端凭据，请按以下步骤操作：
 
-1. Go to the _Authentication_ - _Credentials_ page and click the Add _Client Credentials_ button, represented by a plus icon.
-2. Fill in the Name field (which does not need to be unique).
-3. Select the appropriate _Client Type_:
-   - **Device**. Use for clients that usually publish a lot of messages, but subscribe to a few topics with low message rate, i.e. IoT devices.
-   - **Applications**. Use for clients that subscribe to topics with high message rates and require message persistence when the client is offline, such as applications like **ThingsBoard, AWS IoT Core** etc.
+1. 进入 _Authentication_ - _Credentials_ 页面，点击以加号图标表示的 Add _Client Credentials_ 按钮。
+2. 填写 Name 字段（不必唯一）。
+3. 选择适用的 _Client Type_：
+   - **Device**。 适用于通常发布大量消息、仅订阅少量低频主题的客户端，即 IoT 设备。
+   - **Application**。 适用于订阅高消息率主题且在离线时需消息持久化的客户端，如 **ThingsBoard、AWS IoT Core** 等应用。
    
-   For more information on client types, please refer to the [docs](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/).
+   有关客户端类型的更多信息，请参阅[文档](/docs/{{docsPrefix}}mqtt-broker/user-guide/mqtt-client-type/)。
 
-4. Select the desired _Credentials Type_ and configure the authentication parameters and authorization rules.
+4. 选择所需的 _Credentials Type_，并配置认证参数和授权规则。
 
 {% include images-gallery.html imageCollection="add-client-credentials" %}
 
-### MQTT Basic credentials
+### MQTT Basic 凭据
 
-#### Authentication
+#### 认证
 
-MQTT Basic authentication is based on different combinations of the client ID, username, and/or password:
-- **Client ID** - verifies if the connecting client has a specified clientId.
-- **Username** - verifies if the connecting client has a specified username.
-- **Client ID and username** - verifies if the connecting client has both specified clientId and username.
-- **Username and password** - verifies if the connecting client has both specified username and password.
-- **Client ID and password** - verifies if the connecting client has both specified clientId and password.
-- **Client ID, username and password** - verifies if the connecting client has specified clientId, username, and password.
+MQTT Basic 认证基于 client ID、username 和/或 password 的不同组合：
+- **Client ID** - 验证连接客户端是否具有指定 clientId。
+- **Username** - 验证连接客户端是否具有指定 username。
+- **Client ID and username** - 验证连接客户端是否同时具有指定 clientId 和 username。
+- **Username and password** - 验证连接客户端是否同时具有指定 username 和 password。
+- **Client ID and password** - 验证连接客户端是否同时具有指定 clientId 和 password。
+- **Client ID, username and password** - 验证连接客户端是否具有指定 clientId、username 和 password。
 
 {% include templates/mqtt-broker/authorization-rules.md %}
 
-#### Changing password for MQTT Basic credentials
+#### 修改 MQTT Basic 凭据密码
 
-Broker administrators can modify the password for MQTT Basic client credentials. To do this, follow these instructions:
-1. Go to _Authentication_ - _Client Credentials_ page.
-2. Click on the corresponding row of the Credentials.
-3. Click the _Change password_ button.
-4. Input your current password, set a new one and confirm changes.
+Broker 管理员可修改 MQTT Basic 客户端凭据的密码。操作步骤：
+1. 进入 _Authentication_ - _Client Credentials_ 页面。
+2. 点击对应 Credentials 行。
+3. 点击 _Change password_ 按钮。
+4. 输入当前密码、设置新密码并确认。
 
 {% include images-gallery.html imageCollection="change-password-basic-credentials" %}
 
-### X.509 certificate chain credentials
+### X.509 证书链凭据
 
-**X.509 Certificate chain** is a secure two-way authentication method over TLS with a chain of public-key certificates.
+**X.509 Certificate chain** 是一种基于公钥证书链的 TLS 双向认证方式。
 
-#### Authentication
+#### 认证
 
-There are two authentication options based on the "Use certificate CN regex" parameter in the credentials. 
-Depending on this parameter, TBMQ can either authenticate clients by exact match using the certificate's Common Name (CN) or apply specific regex patterns to match and authorize clients, 
-providing flexibility for client verification.
+凭据中 "Use certificate CN regex" 参数支持两种认证选项。
+根据该参数，TBMQ 可使用证书的 Common Name (CN) 精确匹配认证客户端，或使用特定正则匹配并授权客户端，
+在客户端验证上提供灵活性。
 
-* The **Certificate common name (CN)** should **exactly** match the client's or, if present, one of the parent's certificate CN. 
-Authentication will fail if none of the certificates in the chain has the same CN.
-* The **Certificate common name (CN) regex** should match with the CN of the client's certificate or, if present, one of the parent's certificate CN.
-Authentication will fail if none of the certificate CN in the chain match the regex.
+* **Certificate common name (CN)** 应**完全**匹配客户端的证书 CN，若存在父证书则需匹配其中之一的 CN。
+  若链中任一证书的 CN 都不相同，认证将失败。
+* **Certificate common name (CN) regex** 应与客户端证书的 CN 或（若存在）父证书之一的 CN 匹配。
+  若链中任一证书的 CN 都不与该正则匹配，认证将失败。
 
 {% include images-gallery.html imageCollection="security-authentication-tls" %}
 
-#### Authorization rules
+#### 授权规则
 
-Authorization rules allow controlling what topics authenticated clients can publish/subscribe to based on the successful combination of:
+授权规则用于控制认证成功的客户端可发布/订阅的主题，基于以下条件的成功组合：
 
-* **Client certificate CN matcher regex** - should match with the CN of the Client certificate.
-* **Publish/subscribe authorization rule patterns** - allow controlling what topics clients with matched Client certificate CN matcher regex can publish/subscribe to.
+* **Client certificate CN matcher regex** - 应与客户端证书的 CN 匹配。
+* **Publish/subscribe authorization rule patterns** - 控制匹配 Client certificate CN matcher regex 的客户端可发布/订阅的主题。
 
-Please consider the following examples:
-* If the client certificate has CN `cn_example_1` - set Client certificate CN matcher regex to `cn_example_1` or `example_1` or `.*example.*`.
-* If Publish authorization rule patterns are set as `pub_topic/one/.*, pub_topic/two/.*` - client will be able to publish only to the topics that starts with `pub_topic/one/` or `pub_topic/two/`.
-* If Subscribe authorization rule patterns is set to default value `.*` - client will be able to subscribe to any topic.
-* If Publish/Subscribe authorization rules has no rules (field is empty) - client will be forbidden to publish/subscribe to any topics.
+请参考以下示例：
+* 若客户端证书的 CN 为 `cn_example_1` - 将 Client certificate CN matcher regex 设为 `cn_example_1`、`example_1` 或 `.*example.*`。
+* 若 Publish authorization rule patterns 设为 `pub_topic/one/.*, pub_topic/two/.*` - 客户端只能发布到以 `pub_topic/one/` 或 `pub_topic/two/` 开头的主题。
+* 若 Subscribe authorization rule patterns 使用默认值 `.*` - 客户端可订阅任意主题。
+* 若 Publish/Subscribe authorization rules 为空 - 客户端将无法发布/订阅任何主题。
 
 {% if docsPrefix == "pe/" %}
 ![image](/images/pe/mqtt-broker/user-guide/ui/ssl-credentials-authorization.png)
@@ -97,50 +97,50 @@ Please consider the following examples:
 
 ### SCRAM
 
-**SCRAM** (Salted Challenge Response Authentication Mechanism) is an enhanced authentication method for MQTT 5 clients, based on **username and password**.
+**SCRAM**（Salted Challenge Response Authentication Mechanism）是 MQTT 5 客户端的增强认证方式，基于 **username 和 password**。
 
-#### Authentication
+#### 认证
 
-* **Username** - a unique identifier for the client, used in conjunction with the password in authentication.
-* **Password** - a secret string known only to the user and the server. Password is salted and hashed before being stored and used in authentication.
+* **Username** - 客户端的唯一标识符，与 password 配合用于认证。
+* **Password** - 仅用户和服务器知晓的密钥。密码在存储和认证前会加盐并哈希。
 
 {% include templates/mqtt-broker/authorization-rules.md %}
 
-## Delete client credentials
+## 删除客户端凭据
 
-Broker administrators can remove client credentials from TBMQ system using the Web UI or [REST API](/docs/{{docsPrefix}}mqtt-broker/mqtt-client-credentials-management/).
+Broker 管理员可通过 Web UI 或 [REST API](/docs/{{docsPrefix}}mqtt-broker/mqtt-client-credentials-management/) 从 TBMQ 系统中移除客户端凭据。
 
-There are a few ways of deleting client credentials:
-1. **Delete single**.
-   - Click on the _Delete_ icon in the corresponding row of the credentials and confirm action.
-   - Click on the credentials row and click the _Delete Client Credentials_ button.
-2. **Delete multiple.** 
-   * By clicking on the checkbox you can select multiple items. Then click the _Delete_ icon in the top right corner and cofirm action.
+删除客户端凭据的方式：
+1. **单条删除**。
+   - 点击凭据对应行的 _Delete_ 图标并确认。
+   - 点击凭据行后点击 _Delete Client Credentials_ 按钮。
+2. **批量删除**。
+   * 勾选复选框选择多条，再点击右上角 _Delete_ 图标并确认。
 
 {% include images-gallery.html imageCollection="delete-client-credentials" %}
 
-## Check connectivity
+## 检查连接
 
-“Check Connectivity” is a useful tool that automatically generates commands to **subscribe to a topic** and **publish a message**.
-This feature utilizes the user's host, port, and client credentials to generate the necessary commands. 
+“Check Connectivity” 工具可自动生成用于**订阅主题**和**发布消息**的命令。
+该功能使用用户配置的 host、port 和客户端凭据生成所需命令。 
 
-It is available only for [Basic](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/mqtt-client-credentials/#mqtt-basic-credentials) credentials.
+仅支持 [Basic](/docs/{{docsPrefix}}mqtt-broker/user-guide/ui/mqtt-client-credentials/#mqtt-basic-credentials) 凭据。
 
-To open a window with commands, please follow the next steps:
-1. Click “Check connectivity” button to open the corresponding window.
-2. In the opened window, select your operating system.
-3. Install the necessary client tools using the command from the guide.
-4. Copy and run commands.
+打开包含命令的窗口步骤：
+1. 点击 "Check connectivity" 按钮打开对应窗口。
+2. 在窗口中选择操作系统。
+3. 按指南中的命令安装所需客户端工具。
+4. 复制并执行命令。
 
 {% include images-gallery.html imageCollection="check-connectivity" %}
 
-If the client credentials include a password, please ensure you replace "$YOUR_PASSWORD" with the actual password. 
-Below are examples of the generated commands for the credentials with password:
+若客户端凭据包含密码，请确保将 "$YOUR_PASSWORD" 替换为实际密码。
+以下是带密码凭据的示例命令：
 
 ```bash
 mosquitto_sub -d -q 1 -h localhost -p 1883 -t tbmq/demo/+ -i "tbmq_eJzCIh6r" -u "tbmq_un_VxUVPaF8" -P "$YOUR_PASSWORD" -v
 mosquitto_pub -d -q 1 -h localhost -p 1883 -t tbmq/demo/topic -i "tbmq_eJzCIh6r" -u "tbmq_un_VxUVPaF8" -P "$YOUR_PASSWORD" -m 'Hello World'
 ```
 
-Also, if the client has configured subscribe/publish **Authorization rule patterns** that differ from the default value `.*` (any topic allowed), it indicates that the client has specific topic restrictions for publishing or subscribing. 
-In this case, you need to replace "$YOUR_TOPIC" with one that the client is permitted to operate.
+若客户端配置的 subscribe/publish **Authorization rule patterns** 与默认值 `.*`（允许任意主题）不同，表示客户端对发布或订阅有主题限制。
+此时需将 "$YOUR_TOPIC" 替换为客户端被允许操作的主题。

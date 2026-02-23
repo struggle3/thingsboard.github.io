@@ -1,19 +1,19 @@
 ---
 layout: docwithnav-gw
-title: FTP Connector Configuration
-description: FTP protocol support for ThingsBoard IoT Gateway
+title: FTP 连接器配置
+description: ThingsBoard IoT Gateway 的 FTP 协议支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to get familiar with FTP Connector configuration for ThingsBoard IoT Gateway.
-Use [general configuration](/docs/iot-gateway/configuration/) to enable this Connector. 
-The purpose of this Connector is to connect to an external FTP server and get data from files from specific paths. 
-The connector is also able to push data to FTP server files based on the updates/commands from ThingsBoard.
+本指南将帮助您熟悉 ThingsBoard IoT Gateway 的 FTP 连接器配置。
+请使用 [通用配置](/docs/iot-gateway/configuration/) 启用此连接器。 
+该连接器的用途是连接外部 FTP 服务器并从指定路径的文件中获取数据。 
+连接器还能根据 ThingsBoard 的更新或命令将数据推送到 FTP 服务器文件。
 
-This connector is useful when you have some FTP server in your device or some data in an external resource and you would like to push this data to the ThingsBoard.    
+当您的设备上有 FTP 服务器或外部资源中有数据并希望将这些数据推送至 ThingsBoard 时，此连接器非常有用。    
 
 We will describe the connector configuration file below. 
 

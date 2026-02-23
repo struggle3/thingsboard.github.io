@@ -3,15 +3,15 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-Particle is a cloud platform that connects a range of devices via the IoT.  
-After integrating Particle with the ThingsBoard, you can connect, manage, communicate, process, and visualize data from your devices in the ThingsBoard IoT platform.
+Particle是通过IoT连接多种设备的云平台。
+将Particle与ThingsBoard集成后，可在ThingsBoard IoT平台中连接、管理、通信、处理和可视化设备数据。
 
-## Particle Integration Tutorial
+## Particle集成教程
 
-In this tutorial, we will use a development board Particle Photon.  
-You can use any other Particle device to connect it to Particle and get the data in ThingsBoard.  
+本教程使用开发板Particle Photon。
+您也可使用其他Particle设备连接至Particle并在ThingsBoard中获取数据。  
 
 ### Prerequisites
 

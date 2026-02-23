@@ -2,32 +2,32 @@
 * TOC 
 {:toc}
 
-TBMQ Kafka Integration enables seamless communication with **Apache Kafka**. It allows TBMQ to **publish messages** to the external Kafka clusters and can be useful for the following scenarios:
+TBMQ Kafka 集成实现与 **Apache Kafka** 的无缝通信，使 TBMQ 能向外部 Kafka 集群**发布消息**。适用于以下场景：
 
-- **Streaming IoT Data** – Forwarding device telemetry, logs, or events to Kafka for processing and storage.
-- **Event-Driven Architectures** – Publishing messages to Kafka topics for real-time analytics and monitoring.
-- **Decoupled System Communication** – Using Kafka as a buffer between TBMQ and downstream applications.
+- **流式 IoT 数据** – 将设备遥测、日志或事件转发至 Kafka 进行处理与存储。
+- **事件驱动架构** – 向 Kafka 主题发布消息以进行实时分析与监控。
+- **解耦系统通信** – 将 Kafka 作为 TBMQ 与下游应用之间的缓冲。
 
-## Data Flow Overview
+## 数据流概述
 
-TBMQ Kafka Integration processes messages and forwards them to an external Kafka cluster in the following steps:
+TBMQ Kafka 集成按以下步骤处理消息并转发至外部 Kafka 集群：
 
-1. **Device (client) publishes an MQTT message** to a topic that matches the Integration's **Topic Filters**.
-2. **TBMQ broker receives the message** and forwards to TBMQ Integration Executor.
-3. **TBMQ Integration Executor processes the message**, formats it accordingly, and sends it to a configured **Kafka topic**.
-4. **Kafka consumers process the message** in downstream systems.
+1. **设备（客户端）发布 MQTT 消息**到匹配集成**主题过滤器**的主题。
+2. **TBMQ 代理接收消息**并转发至 TBMQ Integration Executor。
+3. **TBMQ Integration Executor 处理消息**，按需格式化并发送至已配置的 **Kafka 主题**。
+4. **Kafka 消费者**在下游系统中处理消息。
 
 ![image](/images/mqtt-broker/integrations/tbmq-kafka-integration.png)
 
-## Prerequisites
+## 前置条件
 
-Before setting up the integration, ensure the following:
+设置集成前，请确保：
 
-- A running **[TBMQ](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/) instance**.
-- An external service ready to receive Kafka message (e.g. **Confluent Cloud**).
-- A client capable of publishing MQTT messages (e.g., **TBMQ WebSocket Client**).
+- 有正在运行的 **[TBMQ](/docs/{{docsPrefix}}mqtt-broker/install/installation-options/) 实例**。
+- 有可接收 Kafka 消息的外部服务（如 **Confluent Cloud**）。
+- 有可发布 MQTT 消息的客户端（如 **TBMQ WebSocket Client**）。
 
-## Create TBMQ Kafka Integration
+## 创建 TBMQ Kafka 集成
 
 1. Navigate to the **Integrations** page and click the **"+"** button to create a new integration.
 2. Select **Kafka** as the integration type and click **Next**.
@@ -55,24 +55,24 @@ Confluent Cloud<br><small>Cloud solution</small>%,%confluent%,%/templates/mqtt-b
 
 {% include templates/mqtt-broker/user-guide/integrations/topic-filters.md %}
 
-### Configuration
+### 配置
 
-|**Field**|**Description**|
+|**字段**|**描述**|
 |:-|:-|-
-| **Send only message payload** | If enabled, only the raw message payload is forwarded. If disabled, TBMQ wraps the payload in a JSON object containing additional metadata. |
-| **Bootstrap servers** | The Kafka broker addresses (comma-separated list of hostnames/IPs and ports). |
-| **Topic** | The Kafka topic where messages will be published. |
-| **Key** | (Optional) Used for partitioning messages. If specified, Kafka hashes the key to consistently assign messages to the same partition. |
-| **Client ID prefix** | (Optional) Defines the prefix for the Kafka client ID. If not set, the default `tbmq-ie-kafka-producer` is used. |
-| **Automatically retry times if fails** | Number of retries before marking a message as failed. |
-| **Produces batch size in bytes** | Maximum batch size before sending messages to Kafka. |
-| **Time to buffer locally (ms)** | Time in milliseconds to buffer messages locally before sending. |
-| **Client buffer max size in bytes** | Maximum memory allocated for buffering messages before sending them to Kafka. |
-| **Number of acknowledgments** | Specifies Kafka's acknowledgment mode: `all`, `1`, `0`. |
-| **Compression** | Defines the compression algorithm used for messages: `none`, `gzip`, `snappy`, `lz4`, `zstd`. |
-| **Other properties** | A collection of key-value pairs for additional Kafka producer configurations. |
-| **Kafka headers** | Custom headers added to Kafka messages. |
-| **Metadata** | Custom metadata that can be used for processing and tracking. |
+| **仅发送消息负载** | 启用时，仅转发原始消息负载。禁用时，TBMQ 将负载包装为包含额外元数据的 JSON 对象。 |
+| **Bootstrap servers** | Kafka 代理地址（逗号分隔的主机名/IP 和端口列表）。 |
+| **Topic** | 发布消息的 Kafka 主题。 |
+| **Key** | （可选）用于消息分区。若指定，Kafka 根据 key 哈希将消息分配至同一分区。 |
+| **Client ID prefix** | （可选）定义 Kafka 客户端 ID 前缀。未设置时使用默认 `tbmq-ie-kafka-producer`。 |
+| **Automatically retry times if fails** | 标记消息为失败前的重试次数。 |
+| **Produces batch size in bytes** | 发送至 Kafka 前的最大批次大小（字节）。 |
+| **Time to buffer locally (ms)** | 本地缓冲消息的毫秒数。 |
+| **Client buffer max size in bytes** | 发送至 Kafka 前用于缓冲消息的最大内存（字节）。 |
+| **Number of acknowledgments** | 指定 Kafka 确认模式：`all`、`1`、`0`。 |
+| **Compression** | 定义消息压缩算法：`none`、`gzip`、`snappy`、`lz4`、`zstd`。 |
+| **Other properties** | 用于 Kafka producer 额外配置的键值对集合。 |
+| **Kafka headers** | 添加到 Kafka 消息的自定义头。 |
+| **Metadata** | 用于处理与追踪的自定义元数据。 |
 |---
 
 ### Events

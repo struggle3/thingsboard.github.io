@@ -1,21 +1,21 @@
 ---
 layout: case-studies
-title: How Vypin Ensures Pharmaceutical Compliance with ThingsBoard's IoT Monitoring
+title: Vypin 如何借助 ThingsBoard IoT 监控保障药品合规
 notitle: "true"
 customTitle: "true"
-description: Discover how Vypin leveraged ThingsBoard's IoT platform to achieve real-time temperature and humidity monitoring, ensuring FDA compliance and reducing data loss in pharmaceutical storage.
+description: 了解 Vypin 如何借助 ThingsBoard IoT 平台实现温湿度实时监控，满足 FDA 合规并减少药品存储中的数据丢失。
 ---
 
 <div class="case-study-page-wrapper">
     <section class="case-study-hero">
         <div class="card">
             <div class="text">
-                <p class="category">WAREHOUSE MONITORING</p>
-                <h1>Reliable T&H monitoring with WhereView (ThingsBoard)</h1>
+                <p class="category">仓库监控</p>
+                <h1>WhereView（ThingsBoard）实现可靠温湿度监控</h1>
                 <div class="image inner" style="background-image: url('/images/case-studies/vypin.webp')">
                     <img src="/images/case-studies/vypin.svg" title="Vypin LLC" alt="Vypin LLC logo" width="144" height="58">
                 </div>
-                <p>Vypin is a pharmaceutical company specializing in industrial IoT solutions aimed at enhancing safety, efficiency, and profitability for enterprises. Their products, such as Vypin Cloud™, provide critical data analytics, while their hardware automates data collection processes, eliminating outdated manual methods. Vypin’s solutions are easy to install and scale as businesses grow, offering decision-makers the tools they need to make informed choices without requiring technical expertise.</p>
+                <p>Vypin 是一家专注于工业IoT方案的公司，致力于提升企业的安全、效率与盈利能力。其产品如 Vypin Cloud™ 提供关键数据分析，硬件则自动化数据采集，替代过时的手工方式。Vypin 方案易于安装并随业务扩展，为决策者提供所需工具，无需专业技术背景。</p>
             </div>
             <div class="image large" style="background-image: url('/images/case-studies/vypin.webp')">
                 <img src="/images/case-studies/vypin.svg" title="Vypin LLC" alt="Vypin LLC logo" width="144" height="58">
@@ -27,165 +27,165 @@ description: Discover how Vypin leveraged ThingsBoard's IoT platform to achieve 
             <p>
                 +{% include number-animation.html startNum = 1 targetNum = 32 %}%
             </p>
-            <p>energy efficiancy</p>
+            <p>能效提升</p>
         </div>
         <div class="block">
             <p>
                 +{% include number-animation.html startNum = 1 targetNum = 24 %}%
             </p>
-            <p>profit</p>
+            <p>利润</p>
         </div>
         <div class="block">
             <p>
                 -{% include number-animation.html startNum = 1 targetNum = 12 %}%
             </p>
-            <p>transaction costs</p>
+            <p>交易成本</p>
         </div>
     </section>
     <section class="authored-quote">
-        <img class="h-auto" src="/images/case-studies/JT_McGibbon.webp" title="Vypin LLC General manager JT McGibbon" alt="JT McGibbon" width="1316" height="848">
+        <img class="h-auto" src="/images/case-studies/JT_McGibbon.webp" title="Vypin LLC 总经理 JT McGibbon" alt="JT McGibbon" width="1316" height="848">
         <div class="text">
             <h2>Vypin LLC</h2>
-            <p class="quote">“I wanted to thank everyone at Thingsboard on behalf of us here at Vypin for the tremendous support over the past few months. This has allowed Vypin to taste the finish line for our two primary projects. We are looking forward to continuing our partnership and even strengthening our business relationship and opportunities going forward.”</p>
+            <p class="quote">“我代表 Vypin 全体感谢 ThingsBoard 团队过去数月的大力支持。这让我们两个主要项目得以接近收官。我们期待继续合作，并在未来进一步深化商业关系与机会。”</p>
             <p class="author">JT McGibbon</p>
-            <p class="title">General manager</p>
+            <p class="title">总经理</p>
         </div>
     </section>
     <section class="problem">
         <div class="title-block">
-            <h2>What problem did they face?</h2>
-            <p>The Food & Drug Administration (FDA) has strict regulations regarding the storage conditions of pharmaceutical products. Failure to comply leads to penalties and the risk of product spoilage.</p>
+            <h2>他们面临哪些问题？</h2>
+            <p>美国食品药品监督管理局（FDA）对药品储存条件有严格规定，不合规将面临处罚及产品变质风险。</p>
         </div>
         <div class="cards-row">
             <div class="card">
-                <h3>Challenges</h3>
+                <h3>挑战</h3>
                 <ul>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Data loss due to network or power failures, causing telemetry gaps and inefficiencies.</p>
+                        <p>网络或电力故障导致数据丢失，造成遥测缺口与效率下降。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Lack of telemetry recording leaving the company unaware of temperature fluctuations.</p>
+                        <p>缺乏遥测记录，公司无法感知温度波动。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>No remote access, making real-time monitoring impossible.</p>
+                        <p>无远程访问，无法实现实时监控。</p>
                     </li>
                     <li>
                         <i class="far fa-question-circle"></i>
-                        <p>Gaps in scheduled reports, increasing compliance risks and fines.</p>
+                        <p>定期报告存在缺口，增加合规风险与罚款。</p>
                     </li>
                 </ul>
             </div>
             <div class="card">
-                <h3>Key results</h3>
+                <h3>主要成果</h3>
                 <ul>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>No data loss with persistent local storage and automatic telemetry upload.</p>
+                        <p>持久化本地存储与自动遥测上传，实现零数据丢失。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Continuous telemetry with real-time temperature and humidity tracking.</p>
+                        <p>持续遥测与实时温湿度跟踪。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>24/7 remote access to monitoring dashboards with instant alerts.</p>
+                        <p>7×24 远程访问监控仪表盘与即时告警。</p>
                     </li>
                     <li>
                         <i class="far fa-check-circle"></i>
-                        <p>Accurate compliance reports eliminating regulatory risks and penalties.</p>
+                        <p>准确的合规报告，消除监管风险与处罚。</p>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
     <section class="tb-power mb">
-        <h2>How ThingsBoard powers Vypin?</h2>
+        <h2>ThingsBoard 如何赋能 Vypin？</h2>
         <div class="block">
             <div class="text">
-                <h3>Real-time environmental monitoring</h3>
-                <p>To address temperature and humidity control, ThingsBoard provided an advanced monitoring system that continuously tracks environmental conditions. The solution features real-time dashboards that visualize temperature and humidity levels across multiple warehouse areas. If predefined thresholds are breached, automated alerts notify operators immediately, ensuring corrective actions are taken before critical failures occur.</p>
+                <h3>实时环境监控</h3>
+                <p>针对温湿度控制需求，ThingsBoard 提供持续跟踪环境条件的先进监控系统。方案具备实时仪表盘，可视化多仓储区域的温湿度。若超过预设阈值，自动告警立即通知操作人员，确保在严重故障前采取纠正措施。</p>
             </div>
-            <img src="/images/case-studies/real_time_environmental_monitoring.webp" title="Real-time environmental monitoring" alt="Storage" width="900" height="480">
+            <img src="/images/case-studies/real_time_environmental_monitoring.webp" title="实时环境监控" alt="存储" width="900" height="480">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Automated alerting & compliance tracking</h3>
-                <p>ThingsBoard’s alerting system was customized to detect any anomalies in storage conditions. The platform now generates automatic reports that comply with FDA regulations, ensuring that all required data is logged and traceable. This reduces manual paperwork and the risk of non-compliance penalties.</p>
+                <h3>自动告警与合规跟踪</h3>
+                <p>ThingsBoard 告警系统经定制可检测储存条件中的任何异常。平台现可生成符合 FDA 规定的自动报告，确保所需数据均被记录并可追溯，减少手工记录与不合规处罚风险。</p>
             </div>
-            <img src="/images/case-studies/automated_alerting_compliance_tracking.webp" title="Automated alerting & compliance tracking" alt="Male investigating alert with laptop" width="900" height="480">
+            <img src="/images/case-studies/automated_alerting_compliance_tracking.webp" title="自动告警与合规跟踪" alt="使用笔记本查看告警" width="900" height="480">
         </div>
         <div class="block">
             <div class="text">
-                <h3>Seamless data synchronization & integration</h3>
-                <p>The ThingsBoard platform enables smooth integration with existing enterprise systems. Warehouse managers can now access all sensor data in a unified interface, eliminating inconsistencies between different monitoring tools and improving decision-making processes.</p>
+                <h3>无缝数据同步与集成</h3>
+                <p>ThingsBoard 平台可与现有企业系统平滑集成。仓库管理人员现可在统一界面访问所有传感器数据，消除不同监控工具间的不一致，改善决策流程。</p>
             </div>
-            <img src="/images/case-studies/seamless_data_synchronization_integration.webp" title="Seamless data synchronization & integration" alt="Synchronized devices and tablets" width="900" height="480">
+            <img src="/images/case-studies/seamless_data_synchronization_integration.webp" title="无缝数据同步与集成" alt="同步设备与平板" width="900" height="480">
         </div>
     </section>
-    {% include contact-us-banner.liquid linkLabel='Use cases' link='/iot-use-cases/' %}
+    {% include contact-us-banner.liquid linkLabel='应用场景' link='/iot-use-cases/' %}
     <section class="tb-help">
-        <h2>How ThingsBoard helps warehouse monitoring improve operations with IoT?</h2>
+        <h2>ThingsBoard 如何帮助仓库监控借助IoT改善运营？</h2>
         <div class="block">
             <div class="text">
-                <h3>Real-time inventory and asset tracking</h3>
-                <p>Warehouse managers need complete visibility over stored goods, equipment, and movement of assets to prevent losses and optimize space utilization. ThingsBoard offers a centralized platform to track inventory in real-time.</p>
+                <h3>实时库存与资产追踪</h3>
+                <p>仓库管理者需要全面掌握存储货物、设备与资产动向，以防损失并优化空间利用。ThingsBoard 提供集中平台进行实时库存追踪。</p>
                 <ul>
-                    <li><p>RFID and IoT-enabled tags track item locations and movements.</p></li>
-                    <li><p>Sensors provide real-time data on inventory levels and stock conditions.</p></li>
-                    <li><p>Warehouse personnel access data through an intuitive dashboard.</p></li>
+                    <li><p>RFID 与支持IoT的标签追踪物品位置与移动。</p></li>
+                    <li><p>传感器提供库存水平与存储条件的实时数据。</p></li>
+                    <li><p>仓库人员通过直观仪表盘访问数据。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/entities-table.webp" title="Thingsboard entities table widget" alt="Thingsboard entities table widget" width="776" height="776">
-                <img src="/images/case-studies/time-series-chart.webp" title="Thingsboard time series chart widget" alt="Thingsboard time series chart widget" width="776" height="776">
+                <img src="/images/case-studies/entities-table.webp" title="ThingsBoard 实体表部件" alt="ThingsBoard 实体表部件" width="776" height="776">
+                <img src="/images/case-studies/time-series-chart.webp" title="ThingsBoard 时序图部件" alt="ThingsBoard 时序图部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Warehouse temperature & humidity monitoring</h3>
-                <p>Sensitive inventory, such as food, pharmaceuticals, and electronics, requires strict environmental control. Any fluctuation in temperature or humidity can lead to spoilage, degradation, or product failure.</p>
+                <h3>仓库温湿度监控</h3>
+                <p>食品、药品、电子等敏感库存需要严格的环境控制。温湿度波动可能导致变质、老化或产品失效。</p>
                 <ul>
-                    <li><p>IoT sensors continuously monitor temperature and humidity levels.</p></li>
-                    <li><p>Data is processed in real-time and displayed on custom dashboards.</p></li>
-                    <li><p>If conditions exceed set thresholds, automated alerts are triggered for corrective action.</p></li>
+                    <li><p>IoT 传感器持续监控温湿度水平。</p></li>
+                    <li><p>数据实时处理并在定制仪表盘上展示。</p></li>
+                    <li><p>条件超过设定阈值时触发自动告警以便纠正。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/alarms-table-2.webp" title="Thingsboard alarms table widget" alt="Thingsboard alarms table widget" width="776" height="776">
-                <img src="/images/case-studies/analogue-gauge.webp" title="Thingsboard analogue gauge widget" alt="Thingsboard analogue gauge widget" width="776" height="776">
+                <img src="/images/case-studies/alarms-table-2.webp" title="ThingsBoard 告警表部件" alt="ThingsBoard 告警表部件" width="776" height="776">
+                <img src="/images/case-studies/analogue-gauge.webp" title="ThingsBoard 模拟表盘部件" alt="ThingsBoard 模拟表盘部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Predictive maintenance for warehouse equipment</h3>
-                <p>Unexpected equipment failures, such as conveyor breakdowns or forklift malfunctions, can disrupt operations and lead to costly delays. ThingsBoard helps prevent these issues with predictive maintenance.</p>
+                <h3>仓库设备预测性维护</h3>
+                <p>输送带故障、叉车故障等意外设备故障会打乱运营并造成高额延误。ThingsBoard 通过预测性维护帮助预防此类问题。</p>
                 <ul>
-                    <li><p>Sensors monitor machine vibrations, energy consumption, and wear patterns.</p></li>
-                    <li><p>Analytics detect early warning signs of equipment failure.</p></li>
-                    <li><p>Automated alerts schedule maintenance before breakdowns occur.</p></li>
+                    <li><p>传感器监控机器振动、能耗与磨损模式。</p></li>
+                    <li><p>分析发现设备故障的早期征兆。</p></li>
+                    <li><p>自动告警在故障发生前安排维护。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/notification-widget.webp" title="Thingsboard notification widget" alt="Thingsboard notification widget" width="776" height="776">
-                <img src="/images/case-studies/line-chart.webp" title="Thingsboard line chart widget" alt="Thingsboard line chart widget" width="776" height="776">
+                <img src="/images/case-studies/notification-widget.webp" title="ThingsBoard 通知部件" alt="ThingsBoard 通知部件" width="776" height="776">
+                <img src="/images/case-studies/line-chart.webp" title="ThingsBoard 折线图部件" alt="ThingsBoard 折线图部件" width="776" height="776">
             </div>
         </div>
         <div class="block">
             <div class="text">
-                <h3>Security & access control monitoring</h3>
-                <p>Warehouse security is critical for preventing theft, unauthorized access, and safety incidents. ThingsBoard provides real-time monitoring and automated alerts to enhance security.</p>
+                <h3>安全与门禁监控</h3>
+                <p>仓库安全对防盗、未授权进入与安全事故至关重要。ThingsBoard 提供实时监控与自动告警以增强安全。</p>
                 <ul>
-                    <li><p>IoT-based motion detectors and surveillance cameras monitor restricted zones.</p></li>
-                    <li><p>Unauthorized access attempts trigger instant security notifications.</p></li>
-                    <li><p>Live video feeds and event logs are accessible through ThingsBoard dashboards.</p></li>
+                    <li><p>基于IoT的移动探测器与监控摄像头监控限制区域。</p></li>
+                    <li><p>未授权进入尝试触发即时安全通知。</p></li>
+                    <li><p>可通过 ThingsBoard 仪表盘访问实时视频与事件日志。</p></li>
                 </ul>
             </div>
             <div class="image-container">
-                <img src="/images/case-studies/apartment-image-map.webp" title="Thingsboard apartment image map widget" alt="Thingsboard apartment image map widget" width="776" height="776">
-                <img src="/images/case-studies/status-widget-1.webp" title="Thingsboard status widget" alt="Thingsboard status widget" width="776" height="776">
+                <img src="/images/case-studies/apartment-image-map.webp" title="ThingsBoard 公寓图像地图部件" alt="ThingsBoard 公寓图像地图部件" width="776" height="776">
+                <img src="/images/case-studies/status-widget-1.webp" title="ThingsBoard 状态部件" alt="ThingsBoard 状态部件" width="776" height="776">
             </div>
         </div>
         {% include services-banner.liquid %}
@@ -199,7 +199,7 @@ description: Discover how Vypin leveraged ThingsBoard's IoT platform to achieve 
                 </div>
             </div>
         </div>
-        <p>Real stories, real impact — share your experience with ThingsBoard!</p>
-        <a id="CaseStudy_Vypin_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">Contact us <span class="visually-hidden">to discuss your case</span></a>
+        <p>真实故事，真实影响——分享您与 ThingsBoard 的经验！</p>
+        <a id="CaseStudy_Vypin_ContactUs" target="_blank" href="/docs/contact-us/" class="button gtm_button">联系我们 <span class="visually-hidden">讨论您的案例</span></a>
     </section>
 </div>

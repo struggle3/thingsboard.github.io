@@ -2,19 +2,19 @@
 layout: docwithnav-trendz
 assignees:
 - vparomskiy
-title: Grouping and Aggregation
-description: Grouping and Aggregation 
+title: 分组与聚合
+description: 分组与聚合
 ---
 
-This guide describes how to prepare your dataset for visualization
+本指南说明如何准备用于可视化的数据集。
 
 * TOC
 {:toc}
 
-During Data Analysis it is a common task to define how a big dataset should be aggregated. 
-This task can be split into 2 phases - define groups that will be used during analysis and define aggregation function for groups.
+在数据分析中，定义大数据集的聚合方式是常见任务。  
+该任务可分为两阶段：定义分析过程中使用的分组，以及定义各分组的聚合函数。
 
-Before we continue we need to discuss important topic to understand how data resolved by Trendz:
+在继续之前，需先了解 Trendz 如何解析数据：
 
 ## How Trendz resolve fields from different Business Entities
 Let's assume that we have a Smart Building solution. Our topology contains Buildings, Apartments and different Meters that are connected with each other using relations.

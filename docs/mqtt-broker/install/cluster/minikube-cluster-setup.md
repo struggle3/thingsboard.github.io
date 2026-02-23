@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-mqtt-broker
-title: Deploy TBMQ Cluster on Minikube with Kubernetes
-description: Deploy TBMQ Cluster on Minikube with Kubernetes
+title: 在 Minikube 上使用 Kubernetes 部署 TBMQ 集群
+description: 在 Minikube 上使用 Kubernetes 部署 TBMQ 集群
 
 ---
 

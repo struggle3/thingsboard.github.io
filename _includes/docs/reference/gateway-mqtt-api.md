@@ -1,36 +1,36 @@
 * TOC
 {:toc}
 
-A Gateway in ThingsBoard is a special type of device that acts as a bridge between external devices and the platform. 
-It maintains a single MQTT connection to ThingsBoard while proxying data for multiple physical devices connected behind it.
+ThingsBoard中的网关是一种特殊设备类型，充当外部设备与平台之间的桥梁。 
+网关保持与ThingsBoard的单条MQTT连接，同时为连接在其后的多台物理设备代理数据。
 
-The gateway itself is also a standard ThingsBoard device. It can use the [MQTT Device API](/docs/{{docsPrefix}}reference/mqtt-api/){:target="_blank"} to:
-- Publish its own telemetry and attributes
-- Receive configuration updates
-- Execute RPC commands
+网关本身也是标准ThingsBoard设备。它可使用[MQTT Device API](/docs/{{docsPrefix}}reference/mqtt-api/){:target="_blank"}完成：
+- 发布自身的遥测与属性
+- 接收配置更新
+- 执行RPC命令
 
-In addition, this API defines gateway-specific MQTT topics and payload formats and is used by the open-source [ThingsBoard IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){:target="_blank"}.
+此外，本API定义网关专用的MQTT主题与载荷格式，被开源[ThingsBoard IoT Gateway](/docs/iot-gateway/what-is-iot-gateway/){:target="_blank"}所使用。
 
 {% capture difference %}
-For device-level MQTT details (authentication, QoS, payload format, etc.), refer to the [MQTT Device API](/docs/{{docsPrefix}}reference/mqtt-api/){:target="_blank"}.
+设备级MQTT细节（认证、QoS、载荷格式等）请参见[MQTT Device API](/docs/{{docsPrefix}}reference/mqtt-api/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 <hr>
 
-## Client libraries setup
+## 客户端库配置
 
-Many MQTT client libraries are available for different platforms and languages.
+不同平台和语言有多种MQTT客户端库可用。
 
-The examples in this guide use:   
-&#8194;**&#8226;**&#8194;**Mosquitto** (command-line tools)   
-&#8194;**&#8226;**&#8194;**MQTT.js** (JavaScript)
+本指南示例使用：   
+&#8194;**&#8226;**&#8194;**Mosquitto**（命令行工具）   
+&#8194;**&#8226;**&#8194;**MQTT.js**（JavaScript）
 
-Use the instructions below to install the following command-line utilities:   
+按以下说明安装命令行工具：   
 &#8194;**&#8226;**&#8194;<span class="code-light">mosquitto_pub</span>   
 &#8194;**&#8226;**&#8194;<span class="code-light">mosquitto_sub</span>
 
-Select your operating system to continue with the installation steps:
+选择您的操作系统继续安装：
 
 {% capture connectdevicetogglespec %}
 MQTT<small>Linux or macOS</small>%,%mqtt-linux%,%templates/helloworld-pe/mqtt-linux.md%br%
@@ -39,9 +39,9 @@ MQTT<small>Windows</small>%,%mqtt-windows%,%templates/helloworld-pe/mqtt-windows
 
 <hr>
 
-## Device connect API
+## 设备连接 API
 
-Use this API to inform ThingsBoard that a device behind the Gateway is now connected and ready to exchange data.
+使用此API告知ThingsBoard：网关后的某台设备已连接并准备交换数据。
 
 **Topic:**
 
@@ -56,50 +56,48 @@ v1/gateway/connect
 {"device": "Device A", "type": "Sensor A"}
 ```
 {: .copy-code}
-- **device** - required. The device name in ThingsBoard.
-- **type** – optional. Name of the device profile. If omitted, the `default` device profile is used.
+- **device** - 必填。设备在ThingsBoard中的名称。
+- **type** – 可选。设备配置名称。省略时使用 `default` 设备配置。
 
-**Behavior:**
+**行为：**
 
-- If a device with the given name does not exist, ThingsBoard creates it automatically.
-- If the device profile name is provided and the profile does not exist, ThingsBoard creates it automatically.
-- Once connected, ThingsBoard routes the following events for this device through the Gateway:
-  - Updates to shared attributes.
-  - RPC commands.
+- 若不存在同名设备，ThingsBoard将自动创建。
+- 若提供设备配置名称且该配置不存在，ThingsBoard将自动创建。
+- 连接后，ThingsBoard将通过网关为该设备路由以下事件：
+  - 共享属性更新。
+  - RPC命令。
 
 {% capture difference %}
-**Only for MQTT v.5**
+**仅适用于MQTT v.5**
 
-It is recommended to wait for the PUBACK response to ensure that the device connection was successful.
-If something goes wrong during the connection, for example, the device limit is exceeded, the PUBACK will return with 
-the corresponding [status code](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}.
+建议等待PUBACK响应以确认设备连接成功。
+若连接过程中出错（例如超出设备限制），PUBACK将返回对应的[状态码](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**Examples**
+**示例**
 
 {% unless docsPrefix contains "paas/" %}
 
-> ⚠️ In all examples on this page, the hostname refers to a **local** ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} installation.   
-If your ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %} instance is deployed on a different host, replace <code>localhost</code> with the appropriate hostname or IP address.
+> ⚠️ 本页所有示例中的主机名均指**本地**ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}安装。   
+若您的ThingsBoard{% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %} Edge{% endif %}实例部署在其他主机，请将<code>localhost</code>替换为相应主机名或IP地址。
 
 {% endunless %}
 
-> Don&#39;t forget to replace <code>$ACCESS_TOKEN</code> with your gateway device access token.
+> 请勿忘记将<code>$ACCESS_TOKEN</code>替换为您的网关设备访问令牌。
 
-**Example 1.** Connect a device.
+**示例1.** 连接设备。
 
-In order to inform ThingsBoard that device is connected to the Gateway, one needs to publish following message:
+为告知ThingsBoard设备已连接至网关，需发布以下消息：
 
 ```bash
 mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/connect" -u "$ACCESS_TOKEN" -m '{"device": "Device A"}'
 ```
 {: .copy-code}
 
-**Example 2.** Connect a device with a specific device profile.
+**示例2.** 使用指定设备配置连接设备。
 
-In order to inform ThingsBoard that device is connected to the Gateway with a specific device profile, one needs to 
-publish following message:
+为告知ThingsBoard设备已以指定设备配置连接至网关，需发布以下消息：
 
 ```bash
 mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/connect" -u "$ACCESS_TOKEN" -m '{"device": "Device A", "type": "Sensor A"}'
@@ -108,9 +106,9 @@ mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/connect" -u "$ACCESS_TOKEN" -
 
 <hr>
 
-## Device disconnect API
+## 设备断开连接API
 
-Use this API to inform ThingsBoard that a device behind the Gateway is no longer active.
+使用此API告知ThingsBoard：网关后的某台设备已不再活跃。
 
 **Topic:**
 
@@ -126,25 +124,25 @@ v1/gateway/disconnect
 ```
 {: .copy-code}
 
-**Behavior:**
+**行为：**
 
-- If the device with the given name does not exist, ThingsBoard ignores the message.
-- After processing this message, ThingsBoard stops sending attribute and RPC updates for that device to the Gateway.
+- 若不存在同名设备，ThingsBoard将忽略该消息。
+- 处理此消息后，ThingsBoard将停止向网关发送该设备的属性和RPC更新。
 
 {% capture difference %}
-**Only for MQTT v.5**
+**仅适用于MQTT v.5**
 
-If something goes wrong during the disconnecting, the PUBACK will return with the corresponding [status code](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}.
+断开过程中若出错，PUBACK将返回对应的[状态码](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**Example**
+**示例**
 
-> ⚠️ Replace <code>$ACCESS_TOKEN</code> with your gateway device access token.
+> ⚠️ 请将<code>$ACCESS_TOKEN</code>替换为您的网关设备访问令牌。
 
-Also, make sure that the device is connected before disconnecting it.
+断开前请确保设备已连接。
 
-In order to inform ThingsBoard that device is disconnected from the Gateway, one needs to publish following message:
+为告知ThingsBoard设备已从网关断开，需发布以下消息：
 
 ```bash
 mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/disconnect" -u "$ACCESS_TOKEN" -m '{"device": "Device A"}'
@@ -155,25 +153,24 @@ mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/disconnect" -u "$ACCESS_TOKEN
 
 ## Attributes API
 
-ThingsBoard attributes API allows devices to:
+ThingsBoard属性API允许设备：
 
 {% if docsPrefix == nil or docsPrefix == "pe/" or docsPrefix contains "paas/" %}
-- Upload [client-side](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes to the server.
-- Request [client-side](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} and [shared](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes from ThingsBoard platform.
-- Subscribe to [shared](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"} device attributes from ThingsBoard platform.
+- 将[客户端](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性上传至服务器。
+- 从ThingsBoard平台请求[客户端](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}和[共享](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
+- 订阅ThingsBoard平台的[共享](/docs/{{docsPrefix}}user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
 {% endif %}
 {% if docsPrefix == "edge/" or docsPrefix == "pe/edge/" %}
-- Upload [client-side](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"} device attributes to the server.
-- Request [client-side](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"} and [shared](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"} device attributes from ThingsBoard platform.
-- Subscribe to [shared](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"} device attributes from ThingsBoard platform.
+- 将[客户端](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"}设备属性上传至服务器。
+- 从ThingsBoard平台请求[客户端](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"}和[共享](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
+- 订阅ThingsBoard平台的[共享](/docs/pe/user-guide/attributes/#attribute-types){:target="_blank"}设备属性。
 {% endif %}
 
 <hr>
 
-### Publish attribute to ThingsBoard
+### 发布属性至ThingsBoard
 
-Use this topic to publish client-side device attributes to ThingsBoard platform. All attributes in the payload 
-are stored as client-side attributes for the corresponding devices.
+使用此主题将客户端设备属性发布至ThingsBoard平台。载荷中所有属性将作为对应设备的客户端属性存储。
 
 **Topic:**
 
@@ -198,24 +195,24 @@ v1/gateway/attributes
 ```
 {: .copy-code}
 
-**Behavior:**
+**行为：**
 
-- If the device with the given name does not exist, ThingsBoard creates it automatically with `default` profile name.
-- If the attribute does not exist, it is created.
-- If the attribute already exists, its value is updated.
+- 若不存在同名设备，ThingsBoard将自动创建并使用 `default` 配置名称。
+- 若属性不存在则创建。
+- 若属性已存在则更新其值。
 
 {% capture difference %}
-**Only for MQTT v.5**
+**仅适用于MQTT v.5**
 
-If something goes wrong during the publishing, the PUBACK will return with the corresponding [status code](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}.
+发布过程中若出错，PUBACK将返回对应的[状态码](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**Example**
+**示例**
 
-> ⚠️ Replace <code>$ACCESS_TOKEN</code> with your gateway device access token.
+> ⚠️ 请将<code>$ACCESS_TOKEN</code>替换为您的网关设备访问令牌。
 
-In order to publish client-side device attributes to ThingsBoard platform, one needs to publish following message:
+为将客户端设备属性发布至ThingsBoard平台，需发布以下消息：
 
 ```bash
 mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/attributes" -u "$ACCESS_TOKEN" -m '{"Device A": { "fw_version": "1.0", "battery": 87 }}'
@@ -224,10 +221,9 @@ mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/attributes" -u "$ACCESS_TOKEN
 
 <hr>
 
-### Request attribute values from ThingsBoard
+### 从ThingsBoard请求属性值
 
-Use this API to request client-side or shared device attributes from ThingsBoard platform. Make attention that you 
-need to subscribe to the response topic first in order to receive the response.
+使用此API从ThingsBoard平台请求客户端或共享设备属性。注意需先订阅响应主题才能收到响应。
 
 **Subscribe topic:**
 
@@ -255,18 +251,17 @@ v1/gateway/attributes/request
 ```
 {: .copy-code}
 
-Fields:
-- **id** – required. Your integer request identifier.
-- **device** – required. The device name in ThingsBoard.
-- **client** – optional. An array of client-side attribute keys to request.
-- **shared** – optional. An array of shared attribute keys to request.
+字段：
+- **id** – 必填。整数请求标识符。
+- **device** – 必填。设备在ThingsBoard中的名称。
+- **client** – 可选。要请求的客户端属性键数组。
+- **shared** – 可选。要请求的共享属性键数组。
 
 <hr>
 
-### Subscribe to attribute updates from ThingsBoard
+### 订阅ThingsBoard的属性更新
 
-Use this topic to subscribe to shared device attribute changes. Take attention that you need to subscribe to the topic 
-first in order to receive updates.
+使用此主题订阅共享设备属性变更。注意需先订阅主题才能接收更新。
 
 **Subscribe topic:**
 
@@ -288,15 +283,15 @@ v1/gateway/attributes
 ```
 {: .copy-code}
 
-Fields:
-- **device** – the device name in ThingsBoard.
-- **data** – map of updated shared attributes.
+字段：
+- **device** – 设备在ThingsBoard中的名称。
+- **data** – 更新后的共享属性映射。
 
 <hr>
 
-## Telemetry upload API
+## 遥测上传API
 
-Use this API to publish telemetry for one or more devices in a single MQTT message.
+使用此API在单条MQTT消息中为一台或多台设备发布遥测。
 
 **Topic:**
 
@@ -338,29 +333,29 @@ v1/gateway/telemetry
 ```
 {: .copy-code}
 
-Fields:
-- **device** – required. The device name in ThingsBoard.
-- **ts** – Optional. Unix timestamp in milliseconds.
-- **values** – required. Key-value map of telemetry fields (e.g., temperature, humidity).
+字段：
+- **device** – 必填。设备在ThingsBoard中的名称。
+- **ts** – 可选。Unix毫秒时间戳。
+- **values** – 必填。遥测字段键值映射（如temperature、humidity）。
 
-**Behavior:**
+**行为：**
 
-- If the device with the given name does not exist, ThingsBoard creates it automatically with `default` profile name.
-- If the telemetry keys do not exist, they are created.
-- Telemetry data is stored with the provided timestamps.
+- 若不存在同名设备，ThingsBoard将自动创建并使用 `default` 配置名称。
+- 若遥测键不存在则创建。
+- 遥测数据以提供的时间戳存储。
 
 {% capture difference %}
-**Only for MQTT v.5**
+**仅适用于MQTT v.5**
 
-If something goes wrong during the publishing, the PUBACK will return with the corresponding [status code](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}.
+发布过程中若出错，PUBACK将返回对应的[状态码](/docs/{{docsPrefix}}reference/mqtt-v5-errors-code/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**Example**
+**示例**
 
-> ⚠️ Replace <code>$ACCESS_TOKEN</code> with your gateway device access token.
+> ⚠️ 请将<code>$ACCESS_TOKEN</code>替换为您的网关设备访问令牌。
 
-In order to publish device telemetry to ThingsBoard platform, one needs to publish following message:
+为将设备遥测发布至ThingsBoard平台，需发布以下消息：
 
 ```bash
 mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/telemetry" -u "$ACCESS_TOKEN" -m '{"Device A": [{"ts": 1700000000000, "values": {"temperature": 23.5, "humidity": 61 }}]}'
@@ -373,7 +368,7 @@ mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/telemetry" -u "$ACCESS_TOKEN"
 
 ### Server-side RPC
 
-Use this API to receive and respond to RPC commands from ThingsBoard for devices behind the Gateway.
+使用此API接收并响应ThingsBoard针对网关后设备发来的RPC命令。
 
 **Subscribe topic:**
 
@@ -403,27 +398,25 @@ v1/gateway/rpc
 ```
 {: .copy-code}
 
-Fields:
-- **device** – the device name in ThingsBoard.
-- **id** – your integer request identifier.
-- **data** – response payload.
+字段：
+- **device** – 设备在ThingsBoard中的名称。
+- **id** – 整数请求标识符。
+- **data** – 响应载荷。
 
-You need to subscribe to the request topic first in order to receive RPC commands. After processing the RPC command, 
-you can publish the response message to the response topic.
+需先订阅请求主题才能接收RPC命令。处理完RPC命令后，可将响应消息发布至响应主题。
 
 {% capture difference %}
-Make sure that device is connected via the Gateway to receive RPC commands for it.
+确保设备通过网关连接以接收其RPC命令。
 
-Make attention that the **id** in the response message should match the **id** from the request message.
+注意响应消息中的 **id** 应与请求消息中的 **id** 一致。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 <hr>
 
-## Claiming devices API
+## 设备认领API
 
-ThingsBoard supports a claiming mechanism that allows end users to take ownership of pre-provisioned devices. For 
-conceptual details, see [Claiming devices](/docs/{{docsPrefix}}user-guide/claiming-devices){:target="_blank"} guide.
+ThingsBoard支持认领机制，允许最终用户取得预配置设备的所有权。概念详见[认领设备](/docs/{{docsPrefix}}user-guide/claiming-devices){:target="_blank"}指南。
 
 **Topic:**
 
@@ -448,18 +441,18 @@ v1/gateway/claim
 ```
 {: .copy-code}
 
-Per-device parameters:
-- **secretKey** – optional. The secret key assigned to the device for claiming. If omitted, an empty string is used.
-- **durationMs** – optional. Claiming duration in milliseconds. If omitted, the system parameter 
-**device.claim.duration** is used (in the file **/etc/thingsboard/conf/thingsboard.yml**).
+每设备参数：
+- **secretKey** – 可选。设备认领用密钥。省略时使用空字符串。
+- **durationMs** – 可选。认领有效期（毫秒）。省略时使用系统参数 
+**device.claim.duration**（位于 **/etc/thingsboard/conf/thingsboard.yml**）。
 
-**Example**
+**示例**
 
-> ⚠️ Replace <code>$ACCESS_TOKEN</code> with your gateway device access token.
+> ⚠️ 请将<code>$ACCESS_TOKEN</code>替换为您的网关设备访问令牌。
 
-Also, make sure that the device is connected before testing claiming.
+测试认领前请确保设备已连接。
 
-In order to inform ThingsBoard platform to start claiming process for devices, one needs to publish following message:
+为通知ThingsBoard平台启动设备认领流程，需发布以下消息：
 
 ```bash
 mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/claim" -u "$ACCESS_TOKEN" -m '{"Device A": {"secretKey": "mySecret", "durationMs": 60000}}'
@@ -468,12 +461,12 @@ mosquitto_pub -h "{{mqttHostName}}" -t "v1/gateway/claim" -u "$ACCESS_TOKEN" -m 
 
 <hr>
 
-## Protocol customization
+## 协议自定义
 
-MQTT transport can be fully customized for specific use-case by changing the corresponding [module](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt){:target="_blank"}.
+可通过修改对应[模块](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt){:target="_blank"}，针对特定用例完全自定义MQTT传输。
 
 <hr>
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/multi-project-guides-banner.md %}

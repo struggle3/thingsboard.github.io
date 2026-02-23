@@ -1,28 +1,28 @@
-**HTTP** is a general-purpose network protocol that can be used in IoT applications. HTTP protocol is TCP based and uses request-response model.
+**HTTP** 是一种通用网络协议，可用于 IoT 应用。HTTP 协议基于 TCP，采用请求-响应模型。
 
-#### Subscribe to the Changes in Shared Device Attributes
+#### 订阅共享设备属性变更
 
-To subscribe to changes in shared device attributes, send a GET request to the following URL, with an optional 'timeout' parameter:
+要订阅共享设备属性的变更，向以下 URL 发送 GET 请求，可带可选参数 `timeout`：
 
 ```bash
 http(s)://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/attributes/updates
 ```
 {: .copy-code}
 
-* **/attributes/updates** The endpoint that is used to fetch the updates of device attributes.
-* Replace the **$THINGSBOARD_HOST_NAME** with the actual hostname or IP address of your ThingsBoard Edge instance.
+* **/attributes/updates** 用于获取设备属性更新的端点。
+* 将 **$THINGSBOARD_HOST_NAME** 替换为 ThingsBoard Edge 实例的实际主机名或 IP 地址。
 
 {% assign accessTokenPE = '
     ===
       image: /images/pe/edge/config/subscribe-to-attribute/9-copy-access-token-pe.webp,
-      title: Replace the **$ACCESS_TOKEN** with the actual access token of the device. To find the device access token, go to the **Entities > Devices** section and click on the device. On the **"Device details"** page, you can copy the token by clicking the **"Copy access token"** button.
+      title: 将 **$ACCESS_TOKEN** 替换为设备的实际访问令牌。要查找设备访问令牌，请进入 **实体 > 设备** 部分并点击该设备。在 **「设备详情」** 页面，点击 **「复制访问令牌」** 按钮即可复制令牌。
 '
 %}
 
 {% assign accessTokenCE = '
     ===
       image: /images/edge/config/subscribe-to-attribute/9-copy-access-token.webp,
-      title: Replace the **$ACCESS_TOKEN** with the actual access token of the device. To find the device access token, go to the **Entities > Devices** section and click on the device. On the **"Device details"** page, you can copy the token by clicking the **"Copy access token"** button.
+      title: 将 **$ACCESS_TOKEN** 替换为设备的实际访问令牌。要查找设备访问令牌，请进入 **实体 > 设备** 部分并点击该设备。在 **「设备详情」** 页面，点击 **「复制访问令牌」** 按钮即可复制令牌。
 '
 %}
 
@@ -32,33 +32,33 @@ http(s)://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/attributes/updates
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=accessTokenCE %}
 {% endif %}
 
-Execute the command:
+执行命令：
 ```bash
 curl -v -X GET http(s)://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/attributes/updates?timeout=20000
 ```
 {: .copy-code}
 
-* **timeout=20000** The server will keep the connection open for 20 seconds. If a **shared attribute** for the device is updated within this timeout period, the server will respond immediately with the update.
+* **timeout=20000** 服务器将保持连接 20 秒。若在此超时时间内设备的 **shared attribute**（共享属性）被更新，服务器将立即返回更新结果。
 
-#### Publish Time-Series or Attribute Message.
+#### 发布时序数据或属性消息
 
-To publish client-side device attributes to the **ThingsBoard Edge**, send a POST request to the following URL:
+要向 ThingsBoard Edge 发布客户端设备属性，向以下 URL 发送 POST 请求：
 
 ```bash
 http(s)://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/attributes
 ```
 {: .copy-code}
 
-* **$THINGSBOARD_HOST_NAME:** The actual hostname or IP address of your ThingsBoard Edge instance
-* **$ACCESS_TOKEN:** The actual access token of the device.
+* **$THINGSBOARD_HOST_NAME** 为 ThingsBoard Edge 实例的实际主机名或 IP 地址
+* **$ACCESS_TOKEN** 为设备的实际访问令牌
 
-Publish client-side attributes update
+发布客户端属性更新：
 
 ```bash
 curl -v -X POST --data "{"attribute1": "value1", "attribute2":true, "attribute3": 43.0}" https:/$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/attributes --header "Content-Type:application/json"
 ```
 
-You can also publish client-side attributes update using data from [**new-attributes-values.json**](/docs/reference/resources/new-attributes-values.json){: target="_blank"} file:
+也可使用 [**new-attributes-values.json**](/docs/reference/resources/new-attributes-values.json){: target="_blank"} 文件中的数据发布客户端属性更新：
 
 ```bash
 curl -v -X POST -d @new-attributes-values.json https://$THINGSBOARD_HOST_NAME/api/v1/$ACCESS_TOKEN/attributes --header "Content-Type:application/json"

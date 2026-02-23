@@ -1,22 +1,22 @@
-Executes a user-defined function that returns a connection label or a list of connection labels.
-The message is routed via the specified connection(s).
-If the script returns a single string, it is treated as a one-element list.
-If the script execution fails, the message is routed via the `Failure` connection.
-Supports **TBEL** and **JavaScript**.
+执行用户自定义函数，返回连接标签或连接标签列表。
+消息经指定的连接路由。
+若脚本返回单个字符串，则视为单元素列表。
+若脚本执行失败，消息经 `Failure` 连接路由。
+支持 **TBEL** 和 **JavaScript**。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-* **Script language** — defines which scripting language is used. Can be either *TBEL* or *JavaScript*.
-* **Script body** — the body of the function used to evaluate the incoming message.
-  This script must return either a single string or an array of strings (each string is a connection label).
-  The script can access the following arguments:
-    * `msg` — the message data, typically an object or array.
-    * `metadata` — the message metadata.
-      In JavaScript, this is an object where all values are strings.
-      In TBEL, it is a `java.util.Map<String, String>`.
-    * `msgType` — the type of the message as a string.
+* **脚本语言** — 定义使用的脚本语言。可为 *TBEL* 或 *JavaScript*。
+* **脚本内容** — 用于评估入站消息的函数体。
+  该脚本必须返回单个字符串或字符串数组（每个字符串为一个连接标签）。
+  脚本可访问以下参数：
+    * `msg` — 消息数据，通常为对象或数组。
+    * `metadata` — 消息元数据。
+      在 JavaScript 中为对象，所有值为字符串。
+      在 TBEL 中为 `java.util.Map<String, String>`。
+    * `msgType` — 消息类型（字符串）。
 
 ### JSON Schema
 
@@ -51,30 +51,30 @@ Supports **TBEL** and **JavaScript**.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Determine which script to execute based on the configured **Script language**:
-    * If *TBEL*, use the configured **TBEL script**.
-    * If *JS*, use the configured **JavaScript script**.
-2. Execute the script as a function.
-3. The script must return:
-    * A string — treated as a one-element array with that connection label.
-    * An array of strings — used as the list of connections to route the message through.
-4. If the result is not a string or string array, or if the script throws an exception, route via the `Failure` connection.
+1. 根据配置的**脚本语言**确定要执行的脚本：
+    * 若为 *TBEL*，使用配置的 **TBEL 脚本**。
+    * 若为 *JS*，使用配置的 **JavaScript 脚本**。
+2. 将脚本作为函数执行。
+3. 脚本必须返回：
+    * 字符串 — 视为包含该连接标签的单元素数组。
+    * 字符串数组 — 作为要经其路由消息的连接列表使用。
+4. 若结果不是字符串或字符串数组，或脚本抛出异常，则经 `Failure` 连接路由。
 
-## Output connections
+## 输出连接
 
-* Any connection name returned by the script:
-    * If the returned value is a string or array of strings, the message is routed via the corresponding connection(s).
-* `Failure`:
-    * If the script returns an invalid type (e.g., number, object).
-    * If the script throws an error.
+* 脚本返回的任意连接名称：
+    * 若返回值为字符串或字符串数组，消息经相应的连接路由。
+* `Failure`：
+    * 若脚本返回无效类型（如数字、对象）。
+    * 若脚本抛出错误。
 
-## Examples
+## 示例
 
-### Example 1 — Return a single string → `A`
+### 示例 1 — 返回单个字符串 → `A`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -83,15 +83,15 @@ Supports **TBEL** and **JavaScript**.
 }
 ```
 
-**Output connections:** **`A`**.
+**输出连接：** **`A`**。
 
-**Explanation:** the script returns a string. It is treated as a one-element array, and the message is routed via `A`.
+**说明：** 脚本返回字符串，视为单元素数组，消息经 `A` 路由。
 
 ---
 
-### Example 2 — Return a one-element array → `A`
+### 示例 2 — 返回单元素数组 → `A`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -100,15 +100,15 @@ Supports **TBEL** and **JavaScript**.
 }
 ```
 
-**Output connections:** **`A`**.
+**输出连接：** **`A`**。
 
-**Explanation:** the script returns a one-element array. The message is routed via `A`.
+**说明：** 脚本返回单元素数组，消息经 `A` 路由。
 
 ---
 
-### Example 3 — Return multiple connections → `A`, `B`, `C`
+### 示例 3 — 返回多个连接 → `A`、`B`、`C`
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -117,15 +117,15 @@ Supports **TBEL** and **JavaScript**.
 }
 ```
 
-**Output connections:** **`A`**, **`B`**, and **`C`**.
+**输出连接：** **`A`**、**`B`**、**`C`**。
 
-**Explanation:** the script returns an array of connection labels. The message is routed via each of them.
+**说明：** 脚本返回连接标签数组，消息经其中的每一个路由。
 
 ---
 
-### Example 4 — Dynamic routing based on temperature → `High`, `Normal`, or `Low`
+### 示例 4 — 根据温度动态路由 → `High`、`Normal` 或 `Low`
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -135,7 +135,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -144,6 +144,6 @@ Data:
 }
 ```
 
-**Output connections:** **`High`**.
+**输出连接：** **`High`**。
 
-**Explanation:** temperature is greater than 80, so the script returns `"High"` and the message is routed accordingly.
+**说明：** 温度大于 80，因此脚本返回 `"High"`，消息相应路由。

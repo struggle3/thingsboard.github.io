@@ -1,6 +1,6 @@
-bigheader: "Architecture"
-abstract: "Design docs, deployment scenarios and performance"
+bigheader: "架构"
+abstract: "设计文档、部署场景与性能"
 hidetoc: "true"
 toc:
-- title: PE Edge Architecture Overview
+- title: PE Edge架构概览
   path: /docs/pe/edge/edge-architecture/

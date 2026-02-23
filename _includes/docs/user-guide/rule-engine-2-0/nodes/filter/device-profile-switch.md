@@ -1,14 +1,14 @@
-Routes incoming messages based on the name of the profile of the originator device.
+根据来源设备的配置名称路由入站消息。
 
-## Preconditions
+## 前置条件
 
-Incoming message originator entity type must be a `DEVICE`.
+入站消息的来源实体类型必须为 `DEVICE`。
 
-## Configuration
+## 配置
 
-### Field descriptions
+### 字段说明
 
-There are no available configuration fields.
+无可配置字段。
 
 ### JSON Schema
 
@@ -23,101 +23,101 @@ There are no available configuration fields.
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. Checks whether incoming message originator entity type is a `DEVICE`.
-    1. If the incoming message originator entity type is not a `DEVICE`, processing end with a `Failure`.
-2. Fetches the profile of that device from the database to get profile name.
-    1. If profile was not found (possible if originator no longer exist at the time of message processing), processing ends with a `Failure`.
-3. Routes the incoming message to downstream nodes using connection with a label that matches exactly with fetched profile name.
+1. 检查入站消息的来源实体类型是否为 `DEVICE`。
+    1. 若不是 `DEVICE`，则以 `Failure` 结束处理。
+2. 从数据库获取该设备的配置以得到配置名称。
+    1. 若未找到配置（例如消息处理时来源实体已不存在），则以 `Failure` 结束处理。
+3. 使用标签与获取的配置名称完全匹配的连接将入站消息路由至下游节点。
 
-## Output connections
+## 输出连接
 
-* Device profile name:
-    * If incoming message originator entity type is a `DEVICE` and profile for that device was found.
-* `Failure`:
-    * If the incoming message originator entity type is not a `DEVICE`.
-    * If the profile for the incoming message originator was not found.
-    * If another unexpected error occurred during message processing.
+* 设备配置名称：
+    * 当入站消息的来源实体类型为 `DEVICE` 且已找到该设备的配置时。
+* `Failure`：
+    * 当入站消息的来源实体类型不是 `DEVICE` 时。
+    * 当未找到入站消息来源实体的配置时。
+    * 消息处理过程中发生其他意外错误时。
 
-## Examples
+## 示例
 
-The examples below show only the **relevant** fields of the incoming message. Unless explicitly stated otherwise, other message fields may have any values.
+以下示例仅展示入站消息的**相关**字段。除非另有说明，其他消息字段可为任意值。
 
 ---
 
-### Example 1 — Originator entity type is a `DEVICE` with profile “Temperature Sensor” → routed via **`Temperature Sensor`**
+### 示例 1 — 来源实体类型为 `DEVICE`，配置名称为「Temperature Sensor」→ 经 **`Temperature Sensor`** 路由
 
-**Incoming message**
+**入站消息**
 
-Originator entity type is a `DEVICE`.
+来源实体类型为 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
-The device exists and its **profile name** is `Temperature Sensor`.
+设备存在且其**配置名称**为 `Temperature Sensor`。
 
-**Result**
+**结果**
 
-Routed via **`Temperature Sensor`**.
+经 **`Temperature Sensor`** 路由。
 
-**Explanation**
+**说明**
 
-The node fetches the device’s profile and uses the **exact profile name** as the connection label.
+节点获取设备的配置，使用**精确的配置名称**作为连接标签。
 
 ---
 
-### Example 2 — Originator entity type is **not** a `DEVICE` → **`Failure`**
+### 示例 2 — 来源实体类型**不是** `DEVICE` → **`Failure`**
 
-**Incoming message**
+**入站消息**
 
-Originator entity type is not a `DEVICE`. For example, it could be a `CUSTOMER` or any other entity type.
+来源实体类型不是 `DEVICE`，例如为 `CUSTOMER` 或其它实体类型。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
-Not relevant.
+不相关。
 
-**Result**
+**结果**
 
-**`Failure`**.
+**`Failure`**。
 
-**Explanation**
+**说明**
 
-The node requires the originator entity type to be a `DEVICE`.
+该节点要求来源实体类型为 `DEVICE`。
 
 ---
 
-### Example 3 — Device was not found at processing time → **`Failure`**
+### 示例 3 — 处理时未找到设备 → **`Failure`**
 
-**Incoming message**
+**入站消息**
 
-Originator entity type is a `DEVICE`.
+来源实体类型为 `DEVICE`。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {}
 ```
 
-**State of the system**
+**系统状态**
 
-No device with this ID exists (e.g., it was deleted while message was in queue).
+不存在具有该 ID 的设备（例如消息在队列中时已被删除）。
 
-**Result**
+**结果**
 
-**`Failure`**.
+**`Failure`**。
 
-**Explanation**
+**说明**
 
-The node cannot fetch the device’s profile.
+节点无法获取设备的配置。

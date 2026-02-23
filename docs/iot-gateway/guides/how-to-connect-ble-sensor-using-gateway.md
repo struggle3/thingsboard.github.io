@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - samson0v
-title: How to connect BLE temperature and humidity sensor using the gateway
-description: Understand how to connect BLE temperature and humidity sensor using the gateway
+title: 如何使用网关连接 BLE 温湿度传感器
+description: 了解如何使用网关连接 BLE 温湿度传感器
 redirect_to: "/docs/iot-gateway/config/ble"
 
 ---

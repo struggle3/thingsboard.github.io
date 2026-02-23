@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe
-title: RPC reply with data from related device
-description: RPC reply with data from related device
+title: 使用关联设备数据的 RPC 回复
+description: 使用关联设备数据的 RPC 回复
 redirect_to: "/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/"
 
 ---

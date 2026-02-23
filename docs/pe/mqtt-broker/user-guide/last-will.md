@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: Last Will and Testament
-description: TBMQ Last Will and Testament guide
+title: 遗嘱消息
+description: TBMQ 遗嘱消息指南
 
 ws-connection-add-camera:
   0:

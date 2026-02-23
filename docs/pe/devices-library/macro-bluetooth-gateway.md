@@ -1,5 +1,6 @@
 ---
 layout: docwithnav-pe
-title: "How to connect Macro Bluetooth Gateway to ThingsBoard?"
+title: "如何将 Macro Bluetooth Gateway 连接到 ThingsBoard？"
+description: Macro Bluetooth Gateway 与 ThingsBoard 的连接指南
 redirect_to: "/device-library/pe/macro-bluetooth-gateway/"
 ---

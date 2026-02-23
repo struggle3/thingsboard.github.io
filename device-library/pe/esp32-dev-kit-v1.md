@@ -1,7 +1,7 @@
 ---
 layout: device
-title: How to connect ESP32 Dev Kit V1 to ThingsBoard?
-category: Microcontrollers
+title: 如何将 ESP32 Dev Kit V1 连接至 ThingsBoard？
+category: 微控制器
 chip: ESP32
 connectivity: [HTTP, MQTT, WIFI, Bluetooth]
 vendor: Espressif

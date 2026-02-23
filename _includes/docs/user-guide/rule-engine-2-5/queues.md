@@ -1,38 +1,36 @@
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-ThingsBoard platform uses queues to guarantee the message processing, handle occasional spikes, and keep the system up and running on extreme loads. 
-You can review the architecture to find our [more about queues](/docs/{{docsPrefix}}reference/#message-queues-are-awesome).
+ThingsBoard 使用队列保障消息处理、应对偶发峰值，并在高负载下保持系统稳定运行。
+可在架构说明中[进一步了解队列](/docs/{{docsPrefix}}reference/#message-queues-are-awesome)。
 
-ThingsBoard supports two types of message queues: **Kafka** and **In-Memory**.
-- **Kafka** is a widely used, distributed, and durable message queue system designed to handle large volumes of data. It is well-suited for production environments where high throughput, fault tolerance, and scalability are critical.
-- **In-Memory** queue is a lightweight, fast, and simple message queue implementation designed for smaller-scale or development environments. It stores messages in memory rather than on disk, prioritizing speed over persistence.
+ThingsBoard 支持两类消息队列：**Kafka** 和 **In-Memory**。
+- **Kafka** 是广泛使用的分布式持久化消息队列，面向海量数据，适合高吞吐、高可用、可扩展的生产环境。
+- **In-Memory** 队列是轻量、快速、简单的实现，面向小规模或开发环境，将消息存储在内存而非磁盘，优先考虑速度而非持久化。
 
-With the platform's 3.4 version, the configuration UI was introduced to simplify the setup and management process and to improve user experience.
-In a nutshell, the Rule Engine subscribes to queues on startup and polls new messages. 
-There is always **Main** topic (queue) that is used as a default entry point for new messages. 
-One can put messages into the other topic using the **Checkpoint** node. 
-The latter automatically acknowledges corresponding messages in the targeted topic.
+平台 3.4 版本引入了配置 UI，简化配置与管理并提升用户体验。
+简而言之，规则引擎在启动时订阅队列并轮询新消息。
+始终存在 **Main** 主题（队列）作为新消息的默认入口。
+可通过 **Checkpoint** 节点将消息放入其他主题。
+该节点会自动确认目标主题中的对应消息。
 
-## Queue configuration
+## 队列配置
 
-Only a **system administrator** user can configure queues. After
-configuration, new changes will apply immediately.
-There are two configuration profiles for queues: a **Common queue configuration** and a **Queue configuration for isolated tenants**.
-To know more about isolated tenants please read a [tenant profile](/docs/{{docsPrefix}}user-guide/tenant-profiles/#processing-in-isolated-thingsboard-rule-engine-queues) documentation.
+仅**系统管理员**用户可配置队列。配置后，新更改会立即生效。
+队列有两种配置模式：**通用队列配置**和**隔离租户队列配置**。
+更多关于隔离租户的信息，请参阅[租户配置](/docs/{{docsPrefix}}user-guide/tenant-profiles/#processing-in-isolated-thingsboard-rule-engine-queues)。
 
-### Common queue configuration
+### 通用队列配置
 
-Out of the box, all messages (like telemetry, connectivity or lifecycle events, etc.) are pushed to **Main** or another topic chosen as default.
-ThingsBoard puts messages for all Tenants to a common topics when isolated processing is disabled (default). Pros: this approach is more
-cost-efficient; no need to manage extra VMs or containers. Cons: a single Rule Engine service is shared between all Tenants.
+开箱即用时，所有消息（如遥测、连接或生命周期事件等）会被推送到 **Main** 或选定的默认主题。
+当禁用隔离处理（默认）时，ThingsBoard 将各租户的消息放入公共主题。优点：成本更低；无需额外管理 VM 或容器。缺点：单个规则引擎服务被所有租户共享。
 
-To create a new queue follow these steps:
- - Login as system administrator;
- - Navigate to the **Queues** tab in the **Settings** page;
- - Click the "plus" button to create a new queue.
+创建新队列步骤如下：
+ - 以系统管理员身份登录；
+ - 进入 **Settings** 页面的 **Queues** 标签；
+ - 点击「plus」按钮创建新队列。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/queues/add-queue-1-ce.png)
@@ -41,7 +39,7 @@ To create a new queue follow these steps:
 ![image](/images/user-guide/queues/add-queue-1-pe.png)
 {% endif %}
 
- - Enter queue name. Select the strategy type and configure retries processing settings and polling settings. Click Add.
+ - 输入队列名称。选择策略类型并配置重试处理与轮询设置。点击 Add。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/queues/add-queue-2-ce.png)
@@ -50,7 +48,7 @@ To create a new queue follow these steps:
 ![image](/images/user-guide/queues/add-queue-2-pe.png)
 {% endif %}
 
-You have created a custom queue.
+您已创建自定义队列。
 
 {% if docsPrefix == null %}
 ![image](/images/user-guide/queues/add-queue-3-ce.png)
@@ -60,114 +58,112 @@ You have created a custom queue.
 {% endif %}
 
 {% capture difference %}
-**Note**:
+**注意：**
 <br>
-The **Main** queue settings can be adjusted, but the topic itself cannot be renamed or deleted.
+**Main** 队列设置可调整，但主题本身不能重命名或删除。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-### Queue configuration for isolated tenants
+### 隔离租户的队列配置
 
-For your convenience, this configuration is placed together with the isolated tenant [documentation](/docs/{{docsPrefix}}user-guide/tenant-profiles/#queue-configuration-for-isolated-tenants).
+为便于查阅，该配置与隔离租户[文档](/docs/{{docsPrefix}}user-guide/tenant-profiles/#queue-configuration-for-isolated-tenants)放在一起。
 
-## Queue settings
+## 队列设置
 
-The definition of the queue consists of the following parameters and modules:
+队列定义包含以下参数与模块：
 
-* **Name** - used for statistics and logging;
-* [Submit settings](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#submit-settings) - defines logic and order of submitting messages to rule engine;
-* [Retries processing settings](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#retries-processing-settings) - defines logic of acknowledgement of the messages;
-* [Polling settings](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#polling-settings) - queue settings for batch and immediate processing.
+* **Name** — 用于统计与日志；
+* [提交设置](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#submit-settings) — 定义向规则引擎提交消息的逻辑与顺序；
+* [重试处理设置](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#retries-processing-settings) — 定义消息确认逻辑；
+* [轮询设置](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/queues/#polling-settings) — 批量与即时处理的队列设置。
 
-### Submit settings
+### 提交设置 {#submit-settings}
 
-Rule Engine service constantly polls messages for specific topic and once the Consumer returns a list of messages it creates the
-TbMsgPackProcessingContext object. Queue submit strategy controls how messages from TbMsgPackProcessingContext are delivered to rule chains.
-There are 5 available strategies:
+规则引擎服务持续轮询特定主题的消息，一旦 Consumer 返回消息列表则创建 TbMsgPackProcessingContext 对象。队列提交策略控制 TbMsgPackProcessingContext 中的消息如何投递到规则链。
+共有 5 种策略：
 
-* **Sequential by originator** - messages are submitted one by one for particular entity (originator of the message). A new message for e.g. Device A is not submitted until previous message for Device A is acknowledged. 
-* **Sequential by tenant** - messages are submitted sequentially within Tenant (owner of the originator of the message). New message for e.g Tenant A is not leaving the queue until previous message for Tenant A is acknowledged. 
-* **Sequential** - messages are submitted one after another. New message is not submitted until previous message is acknowledged. This makes processing quite slow.
-* **Burst** - all messages are submitted to the rule chains in the order they arrive.
-* **Batch** - messages are grouped into batches using **grouping parameter "Batch size"**. New batch is not submitted until previous batch is acknowledged.
+* **Sequential by originator** — 按实体（消息来源）逐个提交。例如 Device A 的新消息需等 Device A 的前一条消息被确认后才提交。
+* **Sequential by tenant** — 在租户（消息来源的拥有者）内按序提交。例如 Tenant A 的新消息需等 Tenant A 的前一条消息被确认后才离开队列。
+* **Sequential** — 消息一条接一条提交。前一条消息被确认前，新消息不会提交。处理较慢。
+* **Burst** — 所有消息按到达顺序提交到规则链。
+* **Batch** — 使用**分组参数 "Batch size"** 将消息分批。前一批确认前，新一批不会提交。
 
-See this [guide](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/tutorials/queues-for-synchronization/) as an example of submit strategy use case.
+参见本[指南](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/tutorials/queues-for-synchronization/)了解提交策略用例。
 
-### Retries processing settings
+### 重试处理设置 {#retries-processing-settings}
 
-Processing Strategy controls how failed or timed out messages are re-processed. There are 5 available strategies:
+处理策略控制失败或超时消息如何被重新处理。共有 5 种策略：
 
-* **Retry failed and timeout** - retry all failed and timed-out messages from processing pack.
-* **Skip all failures** - simply ignore all failures. Will cause failed messages to be "lost".
-  For example, if DB is down, the messages will not be persisted but will be still marked as "acknowledged" and deleted from queue.
-  This strategy is created mostly for backward-compatibility with previous releases and development/demo environments.
-  The timed out messages that was already submitted to the rule chains for processing will not be canceled.
-  This means that the rule engine will still attempt to process them despite the timeout.
-* **Skip all failures and timeouts** - simply ignore all failures and timeouts. Will cause failed and timed out messages to be "lost".
-  For example, if DB is down, the messages will not be persisted but will be still marked as "acknowledged" and deleted from queue.
-  The timed out messages that was already submitted to the rule chains for processing will be canceled.
-  The rule nodes will not start processing of the canceled message. However, the rule node that started to process the message before the message was canceled is not interrupted.
-* **Retry all** - retry all messages from processing pack. Let's assume the processing pack contains 100 messages.
-  If 1 out of 100 messages will fail, strategy will still reprocess (resubmit to Rule Engine) 100 messages.
-  Each time the strategy resubmit the messages to the rule engine, those messages are a binary copy of original messages.
-  All messages from a previous submission are canceled before resubmission.
-  The rule nodes will not start processing of the canceled message. However, the rule node that started to process the message before the message was canceled is not interrupted.
-* **Retry failed** - retry all failed messages from processing pack. Let's assume the processing pack contains 100 messages.
-  If 1 out of 100 messages will fail, strategy will reprocess(resubmit to Rule Engine) only 1 message. Timed-out messages will not be reprocessed.
-  Each time the strategy resubmit the messages to the rule engine, those messages are a binary copy of original messages.
-  All messages from a previous submission are canceled before resubmission.
-  The rule nodes will not start processing of the canceled message. However, the rule node that started to process the message before the message was canceled is not interrupted.
-* **Retry timeout** - retry all timed-out messages from processing pack. Let's assume the processing pack contains 100 messages.
-  If 1 out of 100 messages will timeout, strategy will reprocess(resubmit to Rule Engine) only 1 message. Failed messages will not be reprocessed.
-  Each time the strategy resubmit the messages to the rule engine, those messages are a binary copy of original messages.
-  All messages from a previous submission are canceled before resubmission.
-  The rule nodes will not start processing of the canceled message. However, the rule node that started to process the message before the message was canceled is not interrupted.
+* **Retry failed and timeout** — 重试处理包中所有失败和超时的消息。
+* **Skip all failures** — 忽略所有失败，失败消息将「丢失」。
+  例如 DB 宕机时，消息不会被持久化，但仍标记为「acknowledged」并从队列删除。
+  该策略主要用于与旧版本向后兼容及开发/演示环境。
+  已提交给规则链处理的超时消息不会被取消，规则引擎仍会尝试处理。
+* **Skip all failures and timeouts** — 忽略所有失败和超时，失败与超时消息将「丢失」。
+  例如 DB 宕机时，消息不会被持久化，但仍标记为「acknowledged」并从队列删除。
+  已提交给规则链处理的超时消息将被取消。
+  规则节点不会开始处理被取消的消息；已开始处理的消息在取消时不会被中断。
+* **Retry all** — 重试处理包中所有消息。假设处理包有 100 条消息。
+  若其中 1 条失败，策略仍会重新处理（重提交到规则引擎）全部 100 条。
+  每次重提交到规则引擎时，这些消息为原始消息的二进制副本。
+  重提交前会取消前一次提交的所有消息。
+  规则节点不会开始处理被取消的消息；已开始处理的消息在取消时不会被中断。
+* **Retry failed** — 仅重试处理包中失败的消息。假设处理包有 100 条消息。
+  若其中 1 条失败，策略仅重新处理（重提交到规则引擎）该 1 条。超时消息不会重试。
+  每次重提交到规则引擎时，这些消息为原始消息的二进制副本。
+  重提交前会取消前一次提交的所有消息。
+  规则节点不会开始处理被取消的消息；已开始处理的消息在取消时不会被中断。
+* **Retry timeout** — 仅重试处理包中超时的消息。假设处理包有 100 条消息。
+  若其中 1 条超时，策略仅重新处理（重提交到规则引擎）该 1 条。失败消息不会重试。
+  每次重提交到规则引擎时，这些消息为原始消息的二进制副本。
+  重提交前会取消前一次提交的所有消息。
+  规则节点不会开始处理被取消的消息；已开始处理的消息在取消时不会被中断。
 
-All retry processing strategies support important configuration parameters:
+所有重试处理策略均支持以下重要配置参数：
 
-* **Number of retries** - number of iterations, 0 is unlimited;
-* **Percentage of failure messages for skipping retries** - skip retry if failures or timeouts are less then X percentage of messages;
-* **Retry within** - time in seconds to wait in consumer thread before retries;
-* **Additional retry within** - the waiting time in seconds for the second and subsequent retry attempts.
+* **Number of retries** — 重试次数，0 表示不限；
+* **Percentage of failure messages for skipping retries** — 若失败或超时占比小于 X%，则跳过重试；
+* **Retry within** — 在 consumer 线程中等待重试的秒数；
+* **Additional retry within** — 第二次及后续重试的等待秒数。
 
-See this [guide](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/tutorials/queues-for-message-reprocessing/) for an example of processing strategy use case.
+参见本[指南](/docs/{{docsPrefix}}user-guide/rule-engine-2-5/tutorials/queues-for-message-reprocessing/)了解处理策略用例。
 
-### Polling settings
+### 轮询设置 {#polling-settings}
 
-Batch processing:
-* **Poll interval** - duration in milliseconds between polling of the messages if no new messages arrive.
-* **Partitions** - number of partitions to associate with this queue. Used for scaling the number of messages that can be processed in parallel.
+批量处理：
+* **Poll interval** — 无新消息时，两次轮询之间的毫秒间隔。
+* **Partitions** — 与本队列关联的分区数。用于扩展可并行处理的消息数量。
 
-Immediate processing:
-* **Send message poll for each consumer** - the queue is composed of partitions. If the checkbox is unchecked, there is one consumer for all partitions. If checked, there will be separate consumers for each partition.
-* **Processing within** - interval in milliseconds for processing of the particular pack of messages returned by consumer.
+即时处理：
+* **Send message poll for each consumer** — 队列由分区组成。未勾选时，所有分区共用一个 consumer；勾选时，每个分区有独立 consumer。
+* **Processing within** — consumer 返回的消息包的处理间隔（毫秒）。
 
-### Custom properties
+### 自定义属性
 
-You may specify custom properties for queue (topic) creation. They are specific for a queue provider,
-for example `retention.ms:604800000;retention.bytes:1048576000` for Kafka, 
-or `MaximumMessageSize:262144;MessageRetentionPeriod:604800` for AWS SQS, etc.
+可为队列（主题）创建指定自定义属性。属性与队列提供者相关，
+例如 Kafka 的 `retention.ms:604800000;retention.bytes:1048576000`，
+或 AWS SQS 的 `MaximumMessageSize:262144;MessageRetentionPeriod:604800` 等。
 
-Note, that these properties are applied only when a queue is first created.
+注意：这些属性仅在队列首次创建时生效。
 
-## Default queues
+## 默认队列
 
-There are three default queues configured: Main, HighPriority and SequentialByOriginator.
-They differ based on submission and processing strategy.
-Basically, the rule engine process messages from **Main** topic and may optionally put them to other topics using "Checkpoint" rule node.
-Main topic simply ignores failed messages by default. This is done for backward compatibility with previous releases.
-However, you may reconfigure this at your own risk.
-Note that if one message is not processed due to some failure in your rule node script, it may prevent next messages from being processed.
-We have designed specific [dashboard](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-statistics) to monitor Rule Engine processing and failures.
+预配置三个默认队列：Main、HighPriority、SequentialByOriginator。
+它们按提交和处理策略区分。
+规则引擎主要从 **Main** 主题处理消息，也可通过「Checkpoint」规则节点将消息放入其他主题。
+Main 主题默认忽略失败消息，以保持与旧版本兼容。
+您可在了解风险后自行重配置。
+注意：若某条消息因规则节点脚本失败而未处理，可能阻塞后续消息。
+我们设计了专用[仪表板](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-statistics)用于监控规则引擎处理与失败情况。
 
-The **HighPriority** topic may be used for delivery of alarms or other critical processing steps. 
-The messages in HighPriority topic are constantly reprocessed in case of failure until the message processing succeeds.
-This is useful if you have an outage of the SMTP server or external system. The Rule Engine will retry sending the message until it is processed.
+**HighPriority** 主题可用于告警或其他关键处理步骤。
+HighPriority 主题中的消息在失败时会持续重试，直至处理成功。
+适用于 SMTP 或外部系统宕机场景，规则引擎会持续重试发送直至处理完成。
 
-The **SequentialByOriginator** topic is important if you would like to make sure that messages are processed in the correct order.
-Messages from the same entity will be processed with the order they arrive in the queue.
-Rule Engine will not submit a new message to the rule chain until the previous message for the same entity id is acknowledged.
+若需保证消息按正确顺序处理，**SequentialByOriginator** 主题很重要。
+来自同一实体的消息将按进入队列的顺序处理。
+规则引擎在前一条（同一实体 ID）消息被确认前，不会向规则链提交新消息。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/multi-project-guides-banner.md %}

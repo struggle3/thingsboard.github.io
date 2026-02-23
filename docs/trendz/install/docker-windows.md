@@ -2,103 +2,103 @@
 layout: docwithnav-trendz
 assignees:
   - ashvayka
-title: Installing ThingsBoard Trendz Analytics using Docker (Windows)
-description: Installing ThingsBoard Trendz Analytics using Docker (Windows)
+title: 使用 Docker 安装 ThingsBoard Trendz 分析（Windows）
+description: 使用 Docker 安装 ThingsBoard Trendz 分析（Windows）
 
 trendz-settings:
   0:
     image: /images/trendz/install/sync/trendz-settings-1.png
-    title: "Log in to <b>ThingsBoard</b> as a <b>Sysadmin</b>."
+    title: "以 <b>系统管理员</b> 身份登录 <b>ThingsBoard</b>。"
   1:
     image: /images/trendz/install/sync/trendz-settings-2.png
-    title: "Open the <b>Trendz Settings</b> page."
+    title: "打开 <b>Trendz 设置</b> 页面。"
   2:
     image: /images/trendz/install/sync/trendz-settings-3.png
-    title: "If you see the message <b>\"Synchronization completed successfully\"</b>, the synchronization has been completed automatically and no further action is required."
+    title: "如果看到 <b>\"同步成功完成\"</b> 消息，则同步已自动完成，无需进一步操作。"
 trendz-sync:
   0:
     image: /images/trendz/install/sync/trendz-sync-1.png
-    title: "If you see an error message, follow these steps."
+    title: "如果看到错误消息，请按以下步骤操作。"
   1:
     image: /images/trendz/install/sync/trendz-sync-2.png
-    title: "Enter the correct <b>Trendz internal URL</b> and <b>ThingsBoard internal URL</b>."
+    title: "输入正确的 <b>Trendz 内部 URL</b> 和 <b>ThingsBoard 内部 URL</b>。"
   2:
     image: /images/trendz/install/sync/trendz-sync-3.png
-    title: "Click <b>Save configuration</b>."
+    title: "点击 <b>保存配置</b>。"
   3:
     image: /images/trendz/install/sync/trendz-sync-4.png
-    title: "Click <b>Retry discovery</b>."
+    title: "点击 <b>重试发现</b>。"
   4:
     image: /images/trendz/install/sync/trendz-sync-5.png
-    title: "Once the message <b>\"Synchronization completed successfully\"</b> appears, the synchronization is complete."
+    title: "当出现 <b>\"同步成功完成\"</b> 消息时，同步即告完成。"
 
 ---
 
 * TOC 
 {:toc}
 
-This guide will help you to install and start Trendz Analytics using Docker on Windows.
+本指南将帮助您在 Windows 上使用 Docker 安装并启动 Trendz 分析。
 
-## Prerequisites
+## 前置条件
 
 {% include templates/trendz/install/docker-requirements-windows.md %}
 {% include templates/trendz/install/thingsboard-requirements.md %}
 
-## Installation Steps
+## 安装步骤
 
-### Step 1. Docker Compose setup
+### 步骤 1. Docker Compose 设置
 
-Trendz can be run either in the same Docker Compose file as ThingsBoard or in a separate Docker Compose file.
+Trendz 可与 ThingsBoard 在同一 Docker Compose 文件中运行，也可在单独的 Docker Compose 文件中运行。
 
-For small and medium installations, we recommend installing Trendz in the same Docker Compose file as ThingsBoard.
+对于中小型安装，我们建议与 ThingsBoard 在同一 Docker Compose 文件中安装 Trendz。
 
 {% capture contenttogglespec %}
-The same Docker Compose file with ThingsBoard%,%theSameFile%,%templates/trendz/install/docker-compose-the-same-file-windows.md%br%
-Separate Docker Compose file%,%separateFile%,%templates/trendz/install/docker-compose-separate-file-windows.md{% endcapture %}
+与 ThingsBoard 同文件%,%theSameFile%,%templates/trendz/install/docker-compose-the-same-file-windows.md%br%
+单独 Docker Compose 文件%,%separateFile%,%templates/trendz/install/docker-compose-separate-file-windows.md{% endcapture %}
 {% include content-toggle.liquid content-toggle-id="runOption" toggle-spec=contenttogglespec %}
 
-### Step 2. Start Trendz service
+### 步骤 2. 启动 Trendz 服务
 
 {% include templates/trendz/install/docker-start-trendz-service.md %}
 
-### Step 3. Sync ThingsBoard With Trendz
+### 步骤 3. 将 ThingsBoard 与 Trendz 同步
 
 {% include templates/trendz/install/sync-with-tb.md %}
 
-## Authentication
+## 认证
 
 {% include templates/trendz/install/authentication.md %}
 
-## Detaching, stop and start commands
+## 分离、停止和启动命令
 
 {% include templates/trendz/install/docker-detach-stop-start-commands.md %}
 
-## Upgrade Trendz Service
+## 升级 Trendz 服务
 
 {% capture upgrade_version_by_version%}
-**Note, that you can upgrade Trendz from any version to the latest at once (for example, 1.2.0 -> {{ site.release.trendz_ver }} ,etc).**
+**注意，您可一次性将 Trendz 从任意版本升级到最新版本（例如 1.2.0 -> {{ site.release.trendz_ver }} 等）。**
 {% endcapture %}
 {% include templates/info-banner.md content=upgrade_version_by_version %}
 
-Below is an example of how to upgrade from any Trendz version to {{ site.release.trendz_ver }}
+以下是将 Trendz 从任意版本升级到 {{ site.release.trendz_ver }} 的示例
 
-* Create a dump of your database:
+* 创建数据库转储：
 
 ```bash
 docker compose exec trendz-postgres sh -c "pg_dump -U postgres trendz > /var/lib/postgresql/data/trendz_dump"
 ```
 {: .copy-code}
 
-When a new Trendz release is available, follow these steps to update your installation without losing data:
+有新 Trendz 版本可用时，请按以下步骤更新安装而不丢失数据：
 
 {% capture old_manifests_info %}
-**If you are upgrading using previous version of deployment files, make sure to follow steps described in this [instruction](/docs/trendz/install/old-docker-migrate/) first.**
+**如果使用旧版部署文件升级，请先按此[说明](/docs/trendz/install/old-docker-migrate/)中的步骤操作。**
 {% endcapture %}
 {% include templates/warn-banner.md content=old_manifests_info %}
 
-1. Change the version of the `thingsboard/trendz` and `thingsboard/trendz-python-executor` in the `docker-compose.yml` file to the {{ site.release.trendz_ver }}.
+1. 将 `docker-compose.yml` 文件中 `thingsboard/trendz` 和 `thingsboard/trendz-python-executor` 的版本更改为 {{ site.release.trendz_ver }}。
 
-2. Execute the following commands:
+2. 执行以下命令：
 
 ```bash
 docker pull thingsboard/trendz:{{ site.release.trendz_ver }}
@@ -108,12 +108,12 @@ docker compose up -d
 ```
 {: .copy-code}
 
-## Troubleshooting
+## 故障排除
 
-### DNS issues
+### DNS 问题
 
 {% include templates/troubleshooting/dns-issues-windows.md %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationOptions" %}{% include templates/trndz-guides-banner.md %}

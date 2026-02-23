@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: assign to customer
-description: Assigns the message originator to a specified customer.
+title: 分配给客户
+description: 将消息 originator 分配给指定客户。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

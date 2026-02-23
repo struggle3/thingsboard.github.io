@@ -2,16 +2,16 @@
 layout: docwithnav-paas-eu
 assignees:
 - ashvayka
-title: Getting Started with ThingsBoard Cloud
-description: Getting started with ThingsBoard open-source IoT platform and simulated IoT devices
+title: ThingsBoard Cloud 入门
+description: ThingsBoard 开源 IoT 平台与模拟 IoT 设备入门
 
 step1:
     0:
         image: /images/helloworld/getting-started-pe/hello-world-1-1-provision-device-1-pe.png
-        title: 'Login to your ThingsBoard instance and go to the "Devices" page of the "Entities" section;'
+        title: '登录 ThingsBoard 实例，进入「实体」部分的「设备」页面；'
     1:
         image: /images/helloworld/getting-started-pe/hello-world-1-1-provision-device-2-pe.png
-        title: 'By default, you navigate to the device group “All”. Click on the "+" icon in the top right corner of the table and then select "Add new device" from drop-down menu;'
+        title: '默认进入设备组 “All”. Click on the "+" icon in the top right corner of the table and then select "Add new device" from drop-down menu;'
     2:
         image: /images/helloworld/getting-started-pe/hello-world-1-1-provision-device-3-pe.png
         title: 'Enter the device name. For example, "My New Device". No other changes are required at this time. Click "Add";'

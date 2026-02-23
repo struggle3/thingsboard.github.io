@@ -1,7 +1,7 @@
 ---
 layout: use-case
-title: Turn your market into a Smart Retail powerhouse with ThingsBoard IoT
-description: Discover how ThingsBoard's Smart Retail Solutions enable real-time monitoring, automated alarms, and intelligent dashboards for supermarkets and retail chains. A scalable IoT template for building connected, efficient retail environments.
+title: 使用 ThingsBoard 物联网将您的市场打造成智慧零售强权
+description: 了解 ThingsBoard 智慧零售解决方案如何为超市和零售连锁店提供实时监测、自动化警报和智能仪表板。可扩展的物联网模板，用于构建互联、高效的零售环境。
 notitle: "true"
 customTitle: "true"
 includeAdvantages: "true"
@@ -11,7 +11,7 @@ contactUsModal: "true"
 
 {% include usecase-nav.html usecase="smart-retail" %}
 <div id="scada-fullpage" onclick="this.style.display='none'; document.body.style.overflow='unset'"><div class="image"></div><div class="close-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.3337 8.5465L23.4537 6.6665L16.0003 14.1198L8.54699 6.6665L6.66699 8.5465L14.1203 15.9998L6.66699 23.4532L8.54699 25.3332L16.0003 17.8798L23.4537 25.3332L25.3337 23.4532L17.8803 15.9998L25.3337 8.5465Z"></path></svg></div></div>
-<h1 class="usecase-title">Smart retail</h1>
+<h1 class="usecase-title">智慧零售</h1>
 <section class="smart-retail-about">
     <div class="about-text">
         <div class="short">
@@ -19,7 +19,7 @@ contactUsModal: "true"
                 <p class="text">Smart retail solution by ThingsBoard is a powerful platform that helps retailers gain full visibility into store infrastructure, automate data collection, respond to incidents in real time, and make informed decisions. Leveraging the flexibility of ThingsBoard, retailers can integrate a wide range of sensors and devices, visualize key metrics through custom dashboards, and implement intelligent analytics.</p>
             </div>
             <div class="demo-button">
-                <a id="UseCases_SmartRetail_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/551d4ca0-8b54-11ec-98f9-ff45c37940c6?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">View live demo</a>
+                <a id="UseCases_SmartRetail_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/551d4ca0-8b54-11ec-98f9-ff45c37940c6?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">查看实时演示</a>
             </div>
         </div>
         <div class="long">
@@ -36,7 +36,7 @@ contactUsModal: "true"
 {% include contact-us-banner.liquid %}
 
 <section class="smart-retail-solution-structure">
-    <h2>Solution structure of smart retail</h2>
+    <h2>智慧零售解决方案结构</h2>
     <div class="about-text">
         <div class="short">
             <div class="block">
@@ -55,7 +55,7 @@ contactUsModal: "true"
 
 <section class="dashboard-structure section-padding">
     <div class="section-header">
-        <h2>Smart retail dashboard structure</h2>
+        <h2>智慧零售仪表板结构</h2>
         <p>
             <a href="/docs/pe/solution-templates/smart-retail/">Smart retail solution</a> dashboards in ThingsBoard are designed to give retail operators full situational awareness, from high-level monitoring of multiple store locations down to detailed insights into individual devices. Each dashboard state provides a specific layer of visibility to support operational efficiency and safety.
         </p>
@@ -138,7 +138,7 @@ contactUsModal: "true"
 
 <section class="applications applications-additional summary-margin section-padding">
     <div class="section-header">
-        <h2>Applications of smart retail solution</h2>
+        <h2>智慧零售解决方案的应用</h2>
         <p>While smart retail solution were originally designed for retail store environments, the versatility and scalability of ThingsBoard's IoT platform make it a perfect fit for a wide range of industries where real-time monitoring, environmental control, and asset visibility are critical.</p>
     </div>
     <div class="applications-container-large">
@@ -216,11 +216,11 @@ contactUsModal: "true"
 
 <section class="summary">
     <div class="summary-text">
-        <h2>Summary of smart retail</h2>
+        <h2>智慧零售总结</h2>
         <p>Smart retail solution by ThingsBoard is a comprehensive solution that enables centralized monitoring of store operations, improves safety through automated alarms and incident logging, and reduces costs related to equipment failures and product spoilage. By streamlining incident response and automating routine checks, it also enhances staff efficiency. More than just data visualization, this solution transforms retail infrastructure into an intelligent, predictive, and adaptive environment that drives value for both customers and businesses.</p>
     </div>
     <div class="summary-icon">
-        <img src="/images/usecases/health-care/summary.svg" alt="Text summary icon" title="Text summary icon">
+        <img src="/images/usecases/health-care/summary.svg" alt="文本总结图标" title="文本总结图标">
     </div>
 </section>
 
@@ -318,8 +318,8 @@ contactUsModal: "true"
                 <div class=image>${getImage(0)}</div>
             </div>
             <div class="buttons-block">
-                <a id="UseCases_EnvMon_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/551d4ca0-8b54-11ec-98f9-ff45c37940c6?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">View live demo</a>
-                <a id="UseCases_EnvMon_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">Contact us</a>
+                <a id="UseCases_EnvMon_ViewLiveDemo" target="_blank" href="https://thingsboard.cloud/dashboard/551d4ca0-8b54-11ec-98f9-ff45c37940c6?publicId=4978baf0-8a92-11ec-98f9-ff45c37940c6" class="button gtm_button">查看实时演示</a>
+                <a id="UseCases_EnvMon_ContactUs" target="_blank" href="/docs/contact-us/?subject=Custom%20Development" class="button contact-us gtm_button">联系我们</a>
             </div>`;
  
             return block;

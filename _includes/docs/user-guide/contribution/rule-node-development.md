@@ -2,29 +2,28 @@
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-In this tutorial, you will learn how to create custom rule nodes and add them to your ThingsBoard server instance.
-We will review rule nodes of three different types: Filter, Enrichment and Transformation.
+本教程将介绍如何创建自定义 Rule Node 并将其添加到 ThingsBoard 服务器实例。
+将涉及三种 Rule Node：Filter、Enrichment 和 Transformation。
 
-## Prerequisites
+## 前提条件
 
-We assume you have completed the following guides and   reviewed the articles listed below:
+假设你已完成以下指南并阅读了下列文章：
 
-  * [Getting Started](/docs/{{docsPrefix}}getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/) article.
+  * [快速入门](/docs/{{docsPrefix}}getting-started-guides/helloworld/) 指南
+  * [Rule Engine 概述](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/) 文档
 
-We also assume you have the following third-party installed:
+并已安装以下第三方依赖：
 
   * [OpenJDK 17](/docs/{{doscPrefix}}user-guide/install/ubuntu/#step-1-install-java-17-openjdk)
   * [Maven 3.6.0+](https://maven.apache.org/install.html)
   * Any modern Java IDE, although we recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/download)
   * [Optional] Install [Lombok](https://projectlombok.org/) plugin to your favorite IDE.
 
-## Step 1. Download and build sample project
+## Step 1. 下载并构建示例项目
 
-
-Clone the repository and navigate to the repo folder:
+克隆仓库并进入仓库目录：
 
 ```bash
 git clone -b {{ site.release.branch }} https://github.com/thingsboard/rule-node-examples
@@ -32,18 +31,18 @@ cd rule-node-examples
 ```
 {: .copy-code}
 
-By default, sample project is configured to use APIs of the ThingsBoard Community Edition. 
-This makes your rule nodes compatible with both Community and Professional editions of the platform.
+默认情况下，示例项目配置为使用 ThingsBoard社区版的 API。
+这使你的 Rule Node 与平台的 Community 版和 Professional 版均兼容。
 
-In case you would like to use some of the exclusive Professional Edition APIs (like working with Entity Groups, etc), 
-you should change the "thingsboard.version" parameter in thingsboard.yml:
+若需使用 Professional Edition 专属 API（例如操作 Entity Groups 等），
+请在 `pom.xml` 中修改 "thingsboard.version" 参数：
 
 ```bash
 nano pom.xml
 ```
 {: .copy-code}
 
-For example, the property below is set to {{ site.release.pe_full_ver }} Professional Edition:
+例如，以下属性设置为 {{ site.release.pe_full_ver }} Professional Edition：
 
 ```xml
 ...
@@ -57,13 +56,13 @@ For example, the property below is set to {{ site.release.pe_full_ver }} Profess
 {: .copy-code}
 
 
-Finally, build the project:
+最后，构建项目：
 
 ```bash
 mvn clean install
 ```
 
-Expected output:
+预期输出：
 
 ```text
 ...
@@ -75,18 +74,18 @@ Expected output:
 [INFO] ------------------------------------------------------------------------
 ```
 
-## Step 2. Import project to the IDE
+## Step 2. 将项目导入 IDE
 
-Make sure the [Lombok](https://projectlombok.org/) plugin is installed to your favorite IDE. Import project to your favorite IDE as a Maven project.
+确保已安装 [Lombok](https://projectlombok.org/) 插件。将项目以 Maven 项目形式导入 IDE。
 
-## Step 3. Create your rule node
+## Step 3. 创建 Rule Node
 
-In order to create new rule node, you should implement the
+创建新 Rule Node 时，需实现
 [TbNode](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbNode.java) interface and annotate it with the
 [RuleNode](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/RuleNode.java) annotation.
 
-As an example, you may review a very simple Rule Node that filters incoming message based on the existence of the key in the message payload.
-This rule node is part of the project you have downloaded on the previous step.
+例如，可参考一个根据消息 payload 中 key 是否存在过滤传入消息的简单 Rule Node。
+此 Rule Node 是上一步下载项目的一部分。
 
 
 ```java
@@ -128,59 +127,58 @@ public class TbKeyFilterNode implements TbNode {
 }
 ```
 
-Few things to notice in the source code listed above:
+上述源码需注意以下几点：
 
-### The @RuleNode annotation
+### @RuleNode 注解
 
-The @RuleNode annotation defines node type, name, description, UI form and outbound [relations].
+@RuleNode 注解定义节点类型、名称、描述、UI 表单及出站 [relations](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-connection)。
 
-Let's walk through available parameters:
+可用参数说明如下：
 
-* *type* is one of the available [Rule Node Types](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-types). This parameter affects which section of the Rule Chain Editor will contain your Rule Node;
-* *name* - any reasonable name of your rule node that will be used for Rule Chain Editor and debug messages;
-* *nodeDescription* - short description of your node. Visible in the Rule Chain Editor;
-* *nodeDetails* - full description of your node with html tags support. Visible in the Rule Chain Editor;
-* *configClazz* - full class name of the class that describes the configuration json.  
-* *relationTypes* - array of strings with pre-defined [relation types](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-connection);
-This values should correspond to the ones that are used in [TbContext.tellNext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L76) method;
-* *customRelations* - boolean value that indicates you are going to use any custom relations in [TbContext.tellNext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L76) method;
-* *configDirective* - name of the Angular based UI directive that will allow user to edit the configuration of the rule node. This is optional and may be empty. In such case, the user will see raw JSON editor;
-* *uiResources* - path to your Angular UI file that contains the configuration directive. This is optional and may be empty. In such case, the user will see raw JSON editor;
-* *icon* - icon name from the angular material package;
-* *iconUrl* - full URL to the icon that will be used to display the rule node in the list of nodes located in the Rule Chain Editor;
-* *docUrl* - link to the documentation page of the current rule node that will be available in the Rule Chain Editor. 
+* *type*：可选 [Rule Node 类型](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-types) 之一，决定 Rule Chain Editor 中 Rule Node 所属分组；
+* *name*：Rule Node 名称，用于 Rule Chain Editor 及调试信息；
+* *nodeDescription*：节点简要描述，在 Rule Chain Editor 中展示；
+* *nodeDetails*：节点完整描述，支持 HTML，在 Rule Chain Editor 中展示；
+* *configClazz*：描述配置 JSON 的完整类名；
+* *relationTypes*：预定义 [relation types](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-node-connection) 字符串数组，应与 [TbContext.tellNext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L76) 中使用的值一致；
+* *customRelations*：布尔值，表示是否在 [TbContext.tellNext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L76) 中使用自定义 relations；
+* *configDirective*：用于编辑 Rule Node 配置的 Angular UI 指令名，可选，为空时使用原始 JSON 编辑器；
+* *uiResources*：包含配置指令的 Angular UI 文件路径，可选，为空时使用原始 JSON 编辑器；
+* *icon*：angular material 包中的图标名；
+* *iconUrl*：Rule Chain Editor 节点列表中显示 Rule Node 的图标完整 URL；
+* *docUrl*：Rule Node 文档页链接，在 Rule Chain Editor 中可见。 
 
 
-### Rule Node lifecycle
+### Rule Node 生命周期
 
-The **"init"** method is called by the rule engine when the new rule node is created. 
-This may happen if someone adds the rule node to the rule chain or system is stopped.
-This method is mostly used to parse the configuration which is a JSON object or to obtain a local copy of [TbContext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java).
-The "TbNodeUtils.convert" is parsing the raw configuration to the java object of a specified class.
+**"init"** 方法在创建新 Rule Node 时由 Rule Engine 调用，
+例如将 Rule Node 添加到 Rule Chain 或系统重启时。
+此方法主要用于解析 JSON 配置或获取 [TbContext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java) 本地副本。
+"TbNodeUtils.convert" 将原始配置解析为指定类的 Java 对象。
 
-The **"destroy"** method is called by the rule engine when the rule node is destroyed. 
-This may happen if someone removes the rule node from the rule chain or system is stopped.
+**"destroy"** 方法在 Rule Node 销毁时由 Rule Engine 调用，
+例如从 Rule Chain 中移除 Rule Node 或系统停止时。
 
-When the user decides to change the configuration of the existing rule node, the rule engine will call **"destroy"** and **"init"** methods sequentially.
+用户修改现有 Rule Node 配置时，Rule Engine 会依次调用 **"destroy"** 和 **"init"**。
 
-### Processing of the incoming messages
+### 处理传入消息
 
-The Rule Node implementation **must** use one of the following methods to inform the Rule Engine that the message is successfully processed:
+Rule Node 实现**必须**使用下列方法之一告知 Rule Engine 消息已成功处理：
 
 ```java
 
 /**
- * Indicates that message was successfully processed by the rule node.
- * Sends message to all Rule Nodes in the Rule Chain
- * that are connected to the current Rule Node using "Success" relationType.
+ * 表示 Rule Node 已成功处理消息。
+ * 将消息发送到 Rule Chain 中通过 "Success" relationType
+ * 连接到当前 Rule Node 的所有 Rule Node。
  *
  * @param msg
  */
 void tellSuccess(TbMsg msg);
 
 /**
- * Sends message to all Rule Nodes in the Rule Chain
- * that are connected to the current Rule Node using specified relationType.
+ * 将消息发送到 Rule Chain 中通过指定 relationType
+ * 连接到当前 Rule Node 的所有 Rule Node。
  *
  * @param msg
  * @param relationType
@@ -188,8 +186,8 @@ void tellSuccess(TbMsg msg);
 void tellNext(TbMsg msg, String relationType);
 
 /**
- * Sends message to all Rule Nodes in the Rule Chain
- * that are connected to the current Rule Node using one of specified relationTypes.
+ * 将消息发送到 Rule Chain 中通过指定 relationTypes 之一
+ * 连接到当前 Rule Node 的所有 Rule Node。
  *
  * @param msg
  * @param relationTypes
@@ -198,101 +196,100 @@ void tellNext(TbMsg msg, Set<String> relationTypes);
 
 ```
 
-If the message processing fails, the Rule Node implementation **must** call the "tellFailure" method:
+若消息处理失败，Rule Node 实现**必须**调用 "tellFailure" 方法：
 
 ```java
 
 /**
- * Notifies Rule Engine about failure to process current message.
+ * 向 Rule Engine 通知当前消息处理失败。
  *
- * @param msg - message
- * @param th  - exception
+ * @param msg - 消息
+ * @param th  - 异常
  */
 void tellFailure(TbMsg msg, Throwable th);
 
 ```
 
-If the Rule Node implementation will not call any of the methods listed above, the Rule Engine will wait for a configurable timeout and **block** processing of the other messages
-and eventually mark current message as failed.
+若 Rule Node 实现未调用上述任何方法，Rule Engine 将等待可配置超时，**阻塞**其他消息处理，并最终将当前消息标记为失败。
 
-### Using ThingsBoard services
+### 使用 ThingsBoard 服务
 
-The [TbContext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java) contains "getters" for a lot of useful services.
-Please don't forget to press "Download Sources" in your favorite IDE to simplify browsing of the interfaces of those services;
-A short list of available services getters is listed below:
+[TbContext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java) 包含多种有用服务的 "getter"。
+请在 IDE 中勾选 "Download Sources" 以方便浏览这些服务的接口。
+可用服务 getter 简要列表如下：
 
 ```java
-// Allows to work with entity attributes: get and save them;
+// 操作实体 attributes：读取和保存；
 AttributesService getAttributesService();
 
-// Allows CRUD (Create, Read, Updat, Delete) operations over the customer entities;
+// 对 customer 实体执行 CRUD（Create、Read、Update、Delete）操作；
 CustomerService getCustomerService();
 
-// Allows CRUD operations over users;
+// 对用户执行 CRUD 操作；
 UserService getUserService();
 
-// Allows CRUD operations over assets;
+// 对 assets 执行 CRUD 操作；
 AssetService getAssetService();
 
-// Allows CRUD operations over devices;
+// 对 devices 执行 CRUD 操作；
 DeviceService getDeviceService();
 
-// Allows CRUD operations over entity views;
+// 对 entity views 执行 CRUD 操作；
 EntityViewService getEntityViewService();
 
-// Allows to programmatically create and manage dashboards;
+// 以编程方式创建和管理 dashboards；
 DashboardService getDashboardService();
 
-// Allows to create and clear alarms;
+// 创建和清除 alarms；
 RuleEngineAlarmService getAlarmService();
 
-// Allows to programmatically create and manage rule chains;
+// 以编程方式创建和管理 rule chains；
 RuleChainService getRuleChainService();
 
-// Allows to send RPC commands to devices;
+// 向设备发送 RPC 命令；
 RuleEngineRpcService getRpcService();
 
-// Allows to store telemetry to the database and push notifications to the dashbaords via WebSockets;
+// 将 telemetry 存储到数据库并通过 WebSocket 推送到 dashboards；
 RuleEngineTelemetryService getTelemetryService();
 
-// Allows to find telemetry and save it to the database without notifications to the dashboards;
+// 查找 telemetry 并保存到数据库，不向 dashboards 发送通知；
 TimeseriesService getTimeseriesService();
 
-// Allows to programmatically query and manage entity relations;
+// 以编程方式查询和管理实体 relations；
 RelationService getRelationService();
 ```
 
-ThingsBoard PE users may get access to additional services using *TbContext.getPeContext()* method. TbPeContext provides access to the following services:
+ThingsBoard PE 用户可通过 *TbContext.getPeContext()* 访问额外服务。TbPeContext 提供以下服务：
 
 ```java
-// Allows to programmatically create and manage integrations;
+// 以编程方式创建和管理 integrations；
 IntegrationService getIntegrationService();
 
-// Allows to programmatically create and manage entity groups;
+// 以编程方式创建和管理 entity groups；
 EntityGroupService getEntityGroupService();
 
-// Allows to programmatically create reports;
+// 以编程方式创建 reports；
 ReportService getReportService();
 
-// Allows to programmatically manage blob entities;
+// 以编程方式管理 blob 实体；
 BlobEntityService getBlobEntityService();
 
-// Allows to programmatically manage group permissions;
+// 以编程方式管理 group 权限；
 GroupPermissionService getGroupPermissionService();
 
-// Allows to programmatically manage roles;
+// 以编程方式管理 roles；
 RoleService getRoleService();
 
-// Get entity owner (TenantId or CustomerId)
+// 获取实体 owner（TenantId 或 CustomerId）
 EntityId getOwner(TenantId tenantId, EntityId entityId);
 
-// Clear entity owners cache
+// 清除实体 owners 缓存
 void clearOwners(EntityId entityId);
 
-// Get all sub-customers of the current entity
+// 获取当前实体的所有子 customers
 Set<EntityId> getChildOwners(TenantId tenantId, EntityId parentOwnerId);
 
-// Allows to change entity owner. Expects TenantId or CustomerId as targetOwnerId
+// 变更实体 owner，targetOwnerId 为 TenantId 或 CustomerId
 void changeDashboardOwner(TenantId tenantId, EntityId targetOwnerId, Dashboard dashboard) throws ThingsboardException;
 
 void changeUserOwner(TenantId tenantId, EntityId targetOwnerId, User user) throws ThingsboardException;
@@ -307,40 +304,40 @@ void changeDeviceOwner(TenantId tenantId, EntityId targetOwnerId, Device device)
 
 void changeEntityOwner(TenantId tenantId, EntityId targetOwnerId, EntityId entityId, EntityType entityType) throws ThingsboardException;
 
-// Allows to push custom downlink message to the integration
+// 向 integration 推送自定义 downlink 消息
 void pushToIntegration(IntegrationId integrationId, TbMsg tbMsg, FutureCallback<Void> callback);
 ```
 
 
-### Creating new messages from the rule node
+### 从 Rule Node 创建新消息
 
-It might be necessary to create and push messages that are derived from the current message to the Rule Engine. 
-For example, let's write a custom rule node that duplicates message from the current customer to all customer devices:
+有时需要基于当前消息创建并推送派生消息到 Rule Engine。 
+例如，编写一个将当前 customer 的消息复制到其所有 devices 的自定义 Rule Node：
 
 ```java
 
 @Override
 public void onMsg(TbContext ctx, TbMsg msg) {
     EntityId msgOriginator = msg.getOriginator();
-    // Checking that the message originator is a Customer;
+    // 确认消息来源为 Customer；
     if (EntityType.CUSTOMER.equals(msgOriginator.getEntityType())) {
         CustomerId customerId = new CustomerId(msgOriginator.getId());
         boolean hasNext = true;
-        // Creating the page link to iterate through the devices;
+        // 创建 page link 以遍历 devices；
         PageLink pageLink = new PageLink(1024);
         while (hasNext) {
-            // Using the Device Service to get devices from the database;
+            // 使用 Device Service 从数据库获取 devices；
             PageData<Device> devices = ctx.getDeviceService().findDevicesByTenantIdAndCustomerId(ctx.getTenantId(), customerId, pageLink);
             hasNext = devices.hasNext();
             pageLink = pageLink.nextPageLink();
             for (Device device : devices.getData()) {
-                // Creating new message with different originator
+                // 创建具有不同 originator 的新消息
                 TbMsg newMsg = TbMsg.newMsg(msg.getQueueName(), msg.getType(), device.getId(), msg.getMetaData(), msg.getData());
-                // Pushing new message to the queue instead of tellNext to make sure that the message will be persisted;
+                // 使用 enqueueForTellNext 而非 tellNext 推送到队列，确保消息被持久化；
                 ctx.enqueueForTellNext(newMsg, "Success");
             }
         }
-        // Don't forget to acknowledge original message or use ctx.tellSuccess(msg);
+        // 不要忘记确认原始消息或调用 ctx.tellSuccess(msg)；
         ctx.ack(msg);
     } else {
         ctx.tellFailure(msg, new IllegalArgumentException("Msg originator is not Customer!"));
@@ -349,8 +346,8 @@ public void onMsg(TbContext ctx, TbMsg msg) {
 
 ```
 
-You may notice that we have used [TbContext.enqueueForTellNext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L119) method to push new message to the Rule Engine.
-The message will be pushed to the related rule nodes, based on the relation type. The alternative option is to put the message to the beginning of the processing, basically to the root rule chain.
+我们使用 [TbContext.enqueueForTellNext](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L119) 将新消息推送到 Rule Engine。
+消息将根据 relation type 推送到相关 Rule Nodes。另一种方式是将消息置于处理起点，即 root rule chain。
 
 ```java
 
@@ -358,7 +355,7 @@ void enqueue(TbMsg msg, String queueName, Runnable onSuccess, Consumer<Throwable
 
 ```
 
-Also, you may use slightly different method that also allows you to receive confirmation that the new message is successfully pushed to the queue:
+也可使用另一方法，以接收新消息成功入队的确认：
 
 ```java
 
@@ -366,38 +363,38 @@ void enqueueForTellNext(TbMsg msg, String queueName, String relationType, Runnab
 
 ```
 
-### Multithreading
+### 多线程
 
-The Rule Engine is an implementation of an [actor model](https://en.wikipedia.org/wiki/Actor_model) which invokes 
-[TbNode.onMsg](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbNode.java#L30) method sequentially
-for every new message in the rule node mailbox. Thus, if you process the message in the same thread, your implementation is thread safe. 
+Rule Engine 采用 [actor model](https://en.wikipedia.org/wiki/Actor_model) 实现，对 Rule Node 邮箱中的每条新消息
+依次调用 [TbNode.onMsg](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbNode.java#L30)。
+因此，若在同一线程中处理消息，实现是线程安全的。
 
-However, for performance reasons, most of the API calls are executed in a separate threads. 
-For example, let's review how one should save the telemetry from the incoming message:
+但出于性能考虑，大部分 API 调用在单独线程中执行。
+例如，以下为保存传入消息中 telemetry 的正确方式：
 
 ```java
 
 @Override
 public void onMsg(TbContext ctx, TbMsg msg) {
     try {
-        // Parsing the incoming message;
+        // 解析传入消息；
         ObjectNode json = (ObjectNode) mapper.readTree(msg.getData());
-        // Converting temperature from °F to °C
+        // 将温度从 °F 转为 °C
         double temperatureF = json.get("temperature").asDouble();
         double temperatureC = (temperatureF - 32) * 5 / 9;
-        // Creating the telemetry data point
+        // 创建 telemetry 数据点
         TsKvEntry tsKvEntry = new BasicTsKvEntry(System.currentTimeMillis(), new DoubleDataEntry("temperature", temperatureC));
-        // Using async API call to save telemetry with the callback
+        // 使用异步 API 并通过 callback 保存 telemetry
         ctx.getTelemetryService().saveAndNotify(ctx.getTenantId(), msg.getOriginator(), Collections.singletonList(tsKvEntry), new FutureCallback<Void>() {
             @Override
             public void onSuccess(@Nullable Void aVoid) {
-                // Telemetry is saved, now we can acknowledge the message; 
+                // telemetry 已保存，可确认消息；
                 ctx.tellSuccess(msg);
             }
 
             @Override
             public void onFailure(Throwable throwable) {
-                // Telemetry is not saved, we need rule engine to reprocess the message;
+                // telemetry 未保存，需由 Rule Engine 重新处理消息；
                 ctx.tellFailure(msg, throwable);
             }
         });
@@ -408,20 +405,20 @@ public void onMsg(TbContext ctx, TbMsg msg) {
 
 ```
 
-You may notice that we "acknowledge" or "forward" the message via TbContext.tellSuccess in the callback thread and not in the main thread.
+注意，我们是在 callback 线程中通过 TbContext.tellSuccess "确认"或"转发"消息，而非主线程。
 
 
-### Clustering mode
+### 集群模式
 
-Single instance of the rule node is launched for each rule-engine microservice. For example, if you have three rule engine instances, each of them will launch one instance of the RuleNode.
-The Rule Engine [messages](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-message) are partitioned based on the originator id of the message (device or asset id).
-So, messages from one device will always go to the same rule node instance on a specific rule engine microservice. 
-The only corner case is when the rule nodes are added or removed. In such a case, the "repartition" event occur.
+每个 rule-engine 微服务会启动一个 Rule Node 实例。例如有 3 个 rule engine 实例时，每个都会启动一个 RuleNode 实例。
+Rule Engine [messages](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#rule-engine-message) 按消息 originator id（device 或 asset id）分区。
+因此，来自同一 device 的消息会始终发送到特定 rule engine 微服务上的同一 Rule Node 实例。
+仅当 Rule Nodes 被添加或移除时会出现 "repartition" 事件。
 
-As a rule node developer, you may override default method [TbNode.onPartitionChangeMsg](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbNode.java#L34)
-to react on the changes of cluster topology. This is useful for stateful nodes that decide to cache information based on the originator (device/asset) id of the message.
-In order to determine that the current entity id belongs to current list of assigned partitions, one may use [TbContext.isLocalEntity](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L152).
-See complete example below:
+作为 Rule Node 开发者，可重写 [TbNode.onPartitionChangeMsg](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbNode.java#L34)
+以响应集群拓扑变化。对根据消息 originator（device/asset）id 缓存信息的有状态节点很有用。
+要判断当前 entity id 是否属于当前分配的 partition 列表，可使用 [TbContext.isLocalEntity](https://github.com/thingsboard/thingsboard/blob/{{ site.release.branch }}/rule-engine/rule-engine-api/src/main/java/org/thingsboard/rule/engine/api/TbContext.java#L152)。
+完整示例如下：
 
 ```java
 package org.thingsboard.rule.engine.node.filter;
@@ -472,12 +469,12 @@ public class TbCacheExampleNode implements TbNode {
     @Override
     public void onMsg(TbContext ctx, TbMsg msg) {
         try {
-            // Parsing the incoming message;
+            // 解析传入消息；
             ObjectNode json = (ObjectNode) mapper.readTree(msg.getData());
             double temperature = json.get("temperature").asDouble();
-            // Fetching temperatureThreshold attribute from cache or from the database
+            // 从缓存或数据库获取 temperatureThreshold attribute
             Double temperatureThreshold = getCacheValue(ctx, msg.getOriginator(), "temperatureThreshold", 42);
-            // Compare and do something with the result of comparison;
+            // 比较并对比较结果进行处理；
             ctx.tellNext(msg, temperature > temperatureThreshold ? "True" : "False");
         } catch (JsonProcessingException e) {
             ctx.tellFailure(msg, e);
@@ -486,12 +483,12 @@ public class TbCacheExampleNode implements TbNode {
 
     @Override
     public void onPartitionChangeMsg(TbContext ctx, PartitionChangeMsg msg) {
-        // Cleanup the cache for all entities that are no longer assigned to current server partitions
+        // 清除已不再分配给当前服务器 partition 的实体缓存
         cache.entrySet().removeIf(entry -> !ctx.isLocalEntity(entry.getKey()));
     }
 
     private double getCacheValue(TbContext ctx, EntityId entityId, String attributeKey, double defaultValue) {
-        // Get value from cache or from the database.
+        // 从缓存或数据库获取值。
         return cache.computeIfAbsent(entityId, id -> {
             try {
                 Optional<AttributeKvEntry> attr = ctx.getAttributesService().find(ctx.getTenantId(), entityId, DataConstants.SERVER_SCOPE, attributeKey).get();
@@ -509,7 +506,7 @@ public class TbCacheExampleNode implements TbNode {
 
     @Override
     public void destroy() {
-        // In case you have changed the configuration, it is good idea to clear the entire cache.
+        // 若配置已变更，建议清空整个缓存。
         cache.clear();
     }
 }
@@ -517,99 +514,99 @@ public class TbCacheExampleNode implements TbNode {
 ```
 
 
-## Step 4. Import custom rule nodes to your ThingsBoard instance
+## Step 4. 将自定义 Rule Nodes 导入 ThingsBoard 实例
 
-Once you have finished coding of the rule node, execute the build command again:
+完成 Rule Node 编码后，再次执行构建命令：
 
 ```bash
 mvn clean install
 ```
 
-Then, locate the jar-file to your ThingsBoard project as dependency library. The result of the build is located here:
+然后，将 jar 文件作为依赖库放入 ThingsBoard 项目。构建产物位于：
 
 ```bash
 target/rule-engine-1.0.0-custom-nodes.jar
 ```
 
-Now you are ready to add the jar-file with your rule nodes to your ThingsBoard instance:
+现在可将包含 Rule Nodes 的 jar 文件添加到 ThingsBoard 实例：
 {% unless docsPrefix %}
-* Use Step 4.1 if your ThingsBoard is installed as a service. 
-* Use Step 4.2 if your ThingsBoard is built from sources and launched locally from your IDE
+* ThingsBoard 以服务方式安装时使用 Step 4.1。
+* ThingsBoard 从源码构建并本地 IDE 启动时使用 Step 4.2。
 
-### Step 4.1 Add JAR file to ThingsBoard installed as a service
+### Step 4.1 将 JAR 文件添加到以服务方式安装的 ThingsBoard
 {% endunless %}
 
- - first, you need to execute the following command to copy jar-file to ThingsBoard extensions:
+- 首先，执行以下命令将 jar 文件复制到 ThingsBoard extensions：
 
 ```bash
 sudo cp rule-engine-1.0.0-custom-nodes.jar /usr/share/thingsboard/extensions/
 ```
 
- - next, execute the following to change the owner to ThingsBoard:
+- 接着执行以下命令将 owner 改为 ThingsBoard：
 
 ```bash
 sudo chown thingsboard:thingsboard /usr/share/thingsboard/extensions/*
 ```
 
-Restart Thingsboard service:
+重启 ThingsBoard 服务：
 
 ```bash
 sudo service thingsboard restart
 ```
 
-**Once ThingsBoard was restarted you need to clear browser cache and refresh the web page to reload UI of Rule Nodes**
+**ThingsBoard 重启后需清除浏览器缓存并刷新页面以重新加载 Rule Nodes 的 UI**
 
 {% unless docsPrefix %}
-### Step 4.2 Add JAR file to local ThingsBoard launched using IDE
+### Step 4.2 将 JAR 文件添加到使用 IDE 启动的本地 ThingsBoard
 
- - See separate instructions for [IDEA](https://www.jetbrains.com/help/idea/library.html#add-library-to-module-dependencies) and [Eclipse](https://help.eclipse.org/luna/index.jsp?topic=%2Forg.eclipse.jst.j2ee.doc.user%2Ftopics%2Ftjimpapp.html).
+- 参见 [IDEA](https://www.jetbrains.com/help/idea/library.html#add-library-to-module-dependencies) 和 [Eclipse](https://help.eclipse.org/luna/index.jsp?topic=%2Forg.eclipse.jst.j2ee.doc.user%2Ftopics%2Ftjimpapp.html) 的独立说明。
  
-Restart ThingsBoard server-side container. Please, refer to the following link to see how to do this: [Running server-side container](/docs/{{docsPrefix}}user-guide/contribution/how-to-contribute/#running-server-side-container). 
+重启 ThingsBoard 服务端容器。详见：[Running server-side container](/docs/{{docsPrefix}}user-guide/contribution/how-to-contribute/#running-server-side-container)。
  
-**Once ThingsBoard was restarted you need to clear browser cache and refresh the web page to reload UI of Rule Nodes**
+**ThingsBoard 重启后需清除浏览器缓存并刷新页面以重新加载 Rule Nodes 的 UI**
 {% endunless %}
 
-## Step 5. Add your custom package name to thingsboard.yml
+## Step 5. 在 thingsboard.yml 中添加自定义包名
 
-**NOTE** if you have changed the package name from **org.thingsboard.rule.engine** to your company package name, e.g. **com.example.rule.engine**, 
-you need also to add your package name in **thingsboard.yml** file in plugins section:
+**注意**：若将包名从 **org.thingsboard.rule.engine** 改为公司包名（如 **com.example.rule.engine**），
+需在 **thingsboard.yml** 的 plugins 部分添加该包名：
 
 ```yaml
-# Plugins configuration parameters
+# 插件配置参数
 plugins:
-  # Comma separated package list used during classpath scanning for plugins
+  # 插件 classpath 扫描时使用的逗号分隔包列表
   scan_packages: "${PLUGINS_SCAN_PACKAGES:org.thingsboard.server.extensions,org.thingsboard.rule.engine,com.example.rule.engine}"
 
 ```
 
-## Step 6. Troubleshoot your rule node
+## Step 6. 排查 Rule Node 问题
 
-The easiest way to validate your custom rule node is to create a [generator](/docs/user-guide/rule-engine-2-0/nodes/action/generator/) rule node 
-and connect it to your custom rule node. This will generate configurable stream of incoming messages. 
-Once this is done, you should enable [debug](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#debugging) for your custom rule node to validate node output and check them for errors. 
+验证自定义 Rule Node 的简便方式是创建 [generator](/docs/user-guide/rule-engine-2-0/nodes/action/generator/) Rule Node
+并连接到自定义 Rule Node，以生成可配置的传入消息流。
+完成后，为自定义 Rule Node 开启 [debug](/docs/{{docsPrefix}}user-guide/rule-engine-2-0/overview/#debugging) 以验证节点输出并检查错误。 
 
 {% unless docsPrefix %}
-## Step 7. Rule Node UI customization (optional)
+## Step 7. Rule Node UI 定制（可选）
 
-The ThingsBoard rule nodes UI is configured with another project in the official [github repo](https://github.com/thingsboard/rule-node-examples-ui-ngx). Please, refer to the following [link](https://github.com/thingsboard/rule-node-examples-ui-ngx#rule-node-examples-ui-ngx) to see build instructions.
+ThingsBoard Rule Nodes 的 UI 通过官方 [github repo](https://github.com/thingsboard/rule-node-examples-ui-ngx) 中的另一项目配置。构建说明详见 [link](https://github.com/thingsboard/rule-node-examples-ui-ngx#rule-node-examples-ui-ngx)。
 
-To run Rule Node UI container in hot redeploy mode:
+在热重载模式下运行 Rule Node UI 容器：
 
- - first you need to change constant **ruleNodeUiforwardPort** from **8080** to **5000** in file **proxy.conf.js** that should be here:
+- 首先在 **proxy.conf.js** 中将常量 **ruleNodeUiforwardPort** 从 **8080** 改为 **5000**，文件位置：
 
 ```
 nano ${TB_WORK_DIR}/ui-ngx/proxy.conf.js
 ```
 
- - second, you need to run UI container in hot redeploy mode. Please, refer to the following link to see how to do this: [Running UI container in hot redeploy mode](/docs/{{docsPrefix}}user-guide/contribution/how-to-contribute/#running-ui-container-in-hot-redeploy-mode).
+- 其次，以热重载模式运行 UI 容器。详见：[Running UI container in hot redeploy mode](/docs/{{docsPrefix}}user-guide/contribution/how-to-contribute/#running-ui-container-in-hot-redeploy-mode)。
 
- - last step is to execute the following command from your local directory **TB_RULE_NODE_UI_WORK_DIR**:
+- 最后在本地目录 **TB_RULE_NODE_UI_WORK_DIR** 中执行：
 
     ```
     npm start
     ```
 {% endunless %}
 
-## Next steps
+## 下一步
 
  {% assign currentGuide = "Contribution" %}{% include templates/multi-project-guides-banner.md %}

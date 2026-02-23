@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: remove from group
-description: Removes the message originator entity from an entity group found by group name pattern.
+title: 从分组移除
+description: 将消息 originator 实体从按分组名模式匹配的 entity 分组中移除。
 breadcrumbs: "true"
 breadcrumbs-steps: "2"
 hidetoc: "true"

@@ -1,20 +1,18 @@
-Retrieves attributes and/or the latest time series data from the message originator and adds the results to either the message data or the message metadata.
+从消息来源实体获取属性和/或最新时序数据，并将结果添加到消息 data 或 metadata。
 
-## Configuration
+## 配置
 
-The node's configuration allows you to specify which keys to fetch from different data sources and where to place the results.
+节点配置允许指定从不同数据源获取哪些键以及将结果放置的位置。
 
-- **Client attributes** - A list of client-side attribute keys to fetch. The fetched keys will be prefixed with `cs_`.
-- **Shared attributes** - A list of shared attribute keys to fetch. The fetched keys will be prefixed with `shared_`.
-- **Server attributes** - A list of server-side attribute keys to fetch. The fetched keys will be prefixed with `ss_`.
-- **Latest telemetry** - A list of time series keys for which to fetch the latest values. These keys are not prefixed.
-    - **Fetch latest telemetry with timestamp** - If checked, the latest telemetry values are returned as a JSON object containing the value and its timestamp (e.g.,
-      `{"ts":1672531200000, "value": "42"}`). If unchecked, only the raw value is returned.
-- **Add originator attributes to** - Determines the destination for the fetched data.
-    - *Message*: Adds the fetched key-value pairs to the message data. The message data must be a JSON object.
-    - *Metadata*: Adds the fetched key-value pairs to the message metadata.
-- **Tell failure if attribute or telemetry are missing** - If checked, the message is routed via `Failure` connected if any of the specified keys do not exist on the originator
-  entity. If unchecked, missing keys are simply ignored, and the message proceeds to the `Success` connection with the data that was found.
+- **Client attributes** — 要获取的客户端属性键列表。获取的键将添加前缀 `cs_`。
+- **Shared attributes** — 要获取的共享属性键列表。获取的键将添加前缀 `shared_`。
+- **Server attributes** — 要获取的服务端属性键列表。获取的键将添加前缀 `ss_`。
+- **Latest telemetry** — 要获取最新值的时序键列表。这些键不添加前缀。
+    - **Fetch latest telemetry with timestamp** — 若勾选，最新遥测值以包含值和其时间戳的 JSON 对象返回（如 `{"ts":1672531200000, "value": "42"}`）。若不勾选，仅返回原始值。
+- **Add originator attributes to** — 确定获取数据的目标位置。
+    - *Message*：将获取的键值对添加到消息 data。消息 data 必须为 JSON 对象。
+    - *Metadata*：将获取的键值对添加到消息 metadata。
+- **Tell failure if attribute or telemetry are missing** — 若勾选，当来源实体上不存在任一指定键时，消息经 `Failure` 连接路由。若不勾选，缺失的键被忽略，消息携带已找到的数据经 `Success` 连接继续。
 
 ### JSON Schema
 
@@ -77,38 +75,36 @@ The node's configuration allows you to specify which keys to fetch from differen
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理逻辑
 
-1. The node identifies the originator of the incoming message (e.g., the specific Device or Asset).
-2. It asynchronously requests the attributes and latest telemetry values specified in the configuration for that originator.
-3. The node checks if all requested keys were found. If the **Tell failure if attribute or telemetry are missing** option is enabled and any key is missing, the original message is
-   routed to the `Failure` connection with an error detailing the missing keys.
-4. For each successfully fetched attribute, a prefix is added to its key:
-    * Client attributes: `cs_`
-    * Shared attributes: `shared_`
-    * Server attributes: `ss_`
-    * Time series keys are **not** prefixed.
-5. Based on the **Add originator attributes to** setting, the node adds the new key-value pairs to either the message data or the message metadata.
-6. The enriched message is sent via the `Success` connection.
+1. 节点识别入站消息的来源实体（如具体 Device 或 Asset）。
+2. 异步向该来源实体请求配置中指定的属性和最新遥测值。
+3. 节点检查是否找到所有请求的键。若**Tell failure if attribute or telemetry are missing**已启用且任一键缺失，原始消息经 `Failure` 连接路由，并附带说明缺失键的错误信息。
+4. 对每个成功获取的属性，为其键添加前缀：
+    * 客户端属性：`cs_`
+    * 共享属性：`shared_`
+    * 服务端属性：`ss_`
+    * 时序键**不**添加前缀。
+5. 根据**Add originator attributes to**设置，节点将新键值对添加到消息 data 或 metadata。
+6. 丰富后的消息经 `Success` 连接发送。
 
-## Output connections
+## 输出连接
 
-- `Success`:
-    - The message is successfully enriched with the requested data.
-- `Failure`:
-    - An error occurred during data fetching.
-    - A requested key was not found, and the **Tell failure if attribute or telemetry are missing** option was enabled.
+- `Success`：
+    - 消息已成功使用请求数据丰富。
+- `Failure`：
+    - 数据获取过程中发生错误。
+    - 请求的键未找到，且**Tell failure if attribute or telemetry are missing**已启用。
 
-## Examples
+## 示例
 
-### Example 1 — Enriching metadata with attributes
+### 示例 1 — 使用属性丰富 metadata
 
-This example demonstrates how to fetch a server-side attribute and add it to the message metadata for use in a subsequent filter node.
+本示例演示如何获取服务端属性并将其添加到消息 metadata，供后续过滤节点使用。
 
-**Scenario**: A device sends a temperature reading. We need to enrich the message with a `tempThreshold` attribute stored on the device, so a later "script" node can check if the
-temperature exceeds this threshold.
+**场景**：设备发送温度读数。需要用存储在设备上的 `tempThreshold` 属性丰富消息，以便后续「script」节点可检查温度是否超过该阈值。
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -119,7 +115,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -135,13 +131,13 @@ Metadata:
 }
 ```
 
-**State of the system**
+**系统状态**
 
-The originator of the message (device) has the server-side attribute `tempThreshold` with value `25`.
+消息来源实体（设备）具有值为 `25` 的服务端属性 `tempThreshold`。
 
-**Outgoing message**
+**出站消息**
 
-The outgoing message is identical to the incoming one, but its metadata is enriched. It is sent via the `Success` connection.
+出站消息与入站消息相同，但其 metadata 已丰富。经 `Success` 连接发送。
 
 Metadata:
 
@@ -153,12 +149,11 @@ Metadata:
 }
 ```
 
-**Explanation**: The node identified the message originator, fetched its server-side attribute `tempThreshold`, prefixed it with `ss_`, and added the key-value pair
-`ss_tempThreshold: "25"` to the message metadata.
+**说明**：节点识别消息来源实体，获取其服务端属性 `tempThreshold`，添加 `ss_` 前缀，并将键值对 `ss_tempThreshold: "25"` 添加到消息 metadata。
 
-### Example 2 — Enriching data with latest time series values (without timestamp)
+### 示例 2 — 使用最新时序值丰富 data（无时间戳）
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -168,7 +163,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -185,7 +180,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -197,9 +192,9 @@ Data:
 }
 ```
 
-### Example 3 — Enriching metadata with latest time series values (without timestamp)
+### 示例 3 — 使用最新时序值丰富 metadata（无时间戳）
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -210,7 +205,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -227,7 +222,7 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Metadata:
 
@@ -240,9 +235,9 @@ Metadata:
 }
 ```
 
-### Example 4 — Enriching data with latest time series values (with timestamp)
+### 示例 4 — 使用最新时序值丰富 data（含时间戳）
 
-**Incoming message**
+**入站消息**
 
 Data:
 
@@ -252,7 +247,7 @@ Data:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -269,7 +264,7 @@ Data:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Data:
 
@@ -287,9 +282,9 @@ Data:
 }
 ```
 
-### Example 5 — Enriching metadata with latest time series values (with timestamp)
+### 示例 5 — 使用最新时序值丰富 metadata（含时间戳）
 
-**Incoming message**
+**入站消息**
 
 Metadata:
 
@@ -300,7 +295,7 @@ Metadata:
 }
 ```
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -317,7 +312,7 @@ Metadata:
 }
 ```
 
-**Outgoing message**
+**出站消息**
 
 Metadata:
 

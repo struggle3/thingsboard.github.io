@@ -1,18 +1,18 @@
 ---
 layout: docwithnav-gw
-title: OCPP Connector Configuration
-description: OCPP protocol support for ThingsBoard IoT Gateway
+title: OCPP 连接器配置
+description: ThingsBoard IoT Gateway 的 OCPP 协议支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you get familiar with OCPP Connector configuration for ThingsBoard IoT Gateway.
-Use [general configuration](/docs/iot-gateway/configuration/) to enable this Connector.
-The purpose of this connector is to communicate between Charge Point and Central System using OCPP protocol.
+本指南将帮助您熟悉 ThingsBoard IoT Gateway 的 OCPP 连接器配置。
+请使用 [通用配置](/docs/iot-gateway/configuration/) 启用此连接器。
+该连接器的用途是使用 OCPP 协议在充电桩与中央系统之间通信。
 
-We will describe the connector configuration file below.
+下面将说明连接器配置文件。
 
 ## Connector configuration: ocpp.json
 Connector configuration is a JSON file that contains information about how to connect to Charge Points, process

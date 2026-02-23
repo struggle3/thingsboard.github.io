@@ -367,22 +367,22 @@ void loop() {
 
 
 {% capture replacePlaceholders %}
-Don’t forget to replace placeholders with your real WiFi network SSID, password, ThingsBoard device access token.
+请勿忘记将占位符替换为您的真实 Wi-Fi 网络 SSID、密码及 ThingsBoard 设备访问令牌。
 {% endcapture %}
 
 {% include templates/info-banner.md content=replacePlaceholders %}
 
-Necessary variables for connection:  
+连接所需变量：  
 
-| Variable name | Default value                | Description | 
+| 变量名 | 默认值 | 说明 | 
 |-|------------------------------|-|
-| WIFI_SSID | **YOUR_WIFI_SSID**           | Your WiFi network name. | 
-| WIFI_PASSWORD | **YOUR_WIFI_PASSWORD**       | Your WiFi network password. |
-| TOKEN | **YOUR_DEVICE_ACCESS_TOKEN** | Access token from device. Obtaining process described in #connect-device-to-thingsboard | 
-| THINGSBOARD_SERVER | **{{hostName}}**             | Your ThingsBoard host or ip address. |
-| THINGSBOARD_PORT | **1883U**                    | ThingsBoard server MQTT port. Can be default for this guide. |
-| MAX_MESSAGE_SIZE | **512U**                     | Maximal size of MQTT messages. Can be default for this guide. |
-| SERIAL_DEBUG_BAUD | **1883U**                    | Baud rate for serial port. Can be default for this guide. |  
+| WIFI_SSID | **YOUR_WIFI_SSID**           | 您的 Wi-Fi 网络名称。 | 
+| WIFI_PASSWORD | **YOUR_WIFI_PASSWORD**       | 您的 Wi-Fi 网络密码。 |
+| TOKEN | **YOUR_DEVICE_ACCESS_TOKEN** | 设备访问令牌。获取方式参见 #connect-device-to-thingsboard | 
+| THINGSBOARD_SERVER | **{{hostName}}**             | 您的 ThingsBoard 主机或 IP 地址。 |
+| THINGSBOARD_PORT | **1883U**                    | ThingsBoard 服务 MQTT 端口。本指南可使用默认值。 |
+| MAX_MESSAGE_SIZE | **512U**                     | MQTT 消息最大尺寸。本指南可使用默认值。 |
+| SERIAL_DEBUG_BAUD | **1883U**                    | 串口波特率。本指南可使用默认值。 |  
 
 ```cpp
 ...
@@ -401,7 +401,7 @@ constexpr uint32_t SERIAL_DEBUG_BAUD = 115200U;
 ...
 ```
 
-Send data part in code (By default the example sends random value for **temperature** key and some WiFi information):  
+代码中的数据发送部分（默认示例发送 **temperature** 的随机值及部分 Wi-Fi 信息）：  
 
 ```cpp
 ...
@@ -413,7 +413,7 @@ Send data part in code (By default the example sends random value for **temperat
 ...
 ```
 
-Then upload the code to the device by pressing Upload button or keyboard combination Ctrl+U.  
+然后按上传按钮或 Ctrl+U 将代码上传到设备。  
 {% assign codeByUploadButton='
     ===
         image: /images/devices-library/basic/arduino-ide/upload.png

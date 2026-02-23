@@ -1,55 +1,45 @@
-Generates a screenshot of a dashboard with specific configuration applied. The dashboard is captured by a separate reports server that runs a headless browser. The generated report
-is saved as a blob entity, and its ID is added to the message metadata under the `attachments` key. The message is routed to either the `Success` connection (if the report is
-successfully generated) or the `Failure` connection (if an error occurs during generation).
+根据指定配置截取仪表板并生成截图。仪表板由运行无头浏览器的独立 reports server 截取。生成的报表保存为 blob 实体，其 ID 添加到消息元数据的 `attachments` 键下。报表生成成功则消息路由到 `Success`，生成出错则路由到 `Failure`。
 
-## Usage
+## 使用方法
 
-The typical workflow for generating dashboard reports follows these steps:
+生成仪表板报表的典型流程如下：
 
-1. A message arrives at the "generate dashboard report" node containing either the complete report configuration in the message data, or the node uses its pre-configured report
-   settings.
+1. 消息到达「generate dashboard report」节点，消息数据中可包含完整报表配置，或节点使用其预配置的报表设置。
 
-2. The node requests the reports server (either the system default or a custom endpoint) to generate the dashboard report. The reports server opens the dashboard in a headless
-   browser and captures a screenshot.
+2. 节点请求 reports server（系统默认或自定义端点）生成仪表板报表。reports server 在无头浏览器中打开仪表板并截取截图。
 
-3. The generated report is saved as a blob entity in ThingsBoard, and its ID is appended to the `attachments` metadata field of the message.
+3. 生成的报表以 blob 实体形式保存到 ThingsBoard，其 ID 追加到消息的 `attachments` 元数据字段。
 
-4. If the report is successfully generated and saved, the message is routed via the `Success` connection. If an error occurs during generation, it's routed via the `Failure`
-   connection.
+4. 若报表成功生成并保存，消息经 `Success` 连接路由；若生成过程中出错，经 `Failure` 连接路由。
 
 {% capture server_note %}
-**Reports server required:** Before using this node, ensure that the reports server is properly configured and accessible. The system default reports server URL is controlled by
-the `REPORTS_SERVER_ENDPOINT_URL` environment variable (default: `http://localhost:8383`).
+**需要 Reports server：** 使用此节点前，请确保 reports server 已正确配置且可访问。系统默认 reports server URL 由 `REPORTS_SERVER_ENDPOINT_URL` 环境变量控制（默认：`http://localhost:8383`）。
 {% endcapture %}
 {% include templates/info-banner.md content=server_note %}
 
-## Configuration
+## 配置
 
-The configuration specifies how the report should be generated and which reports server to use.
+配置指定报表如何生成以及使用哪个 reports server。
 
-- **Use system reports server** - When enabled, uses the default reports server configured in ThingsBoard. When disabled, requires a custom reports server endpoint URL.
-- **Reports server endpoint URL** - The URL of the custom reports server to use (only applicable when **Use system reports server** is disabled).
-- **Use report config from message** - When enabled, reads the report configuration from the incoming message data `reportConfig` field. When disabled, uses the report
-  configuration specified in this node.
-- **Report configuration** - The dashboard report configuration to use (only applicable when **Use report config from message** is disabled). Contains settings such as dashboard
-  ID, timezone, output format, and timewindow.
+- **Use system reports server** - 启用时使用 ThingsBoard 中配置的默认 reports server。禁用时需提供自定义 reports server 端点 URL。
+- **Reports server endpoint URL** - 要使用的自定义 reports server URL（仅在 **Use system reports server** 禁用时适用）。
+- **Use report config from message** - 启用时从传入消息的 `reportConfig` 字段读取报表配置。禁用时使用本节点中指定的报表配置。
+- **Report configuration** - 要使用的仪表板报表配置（仅在 **Use report config from message** 禁用时适用）。包含仪表板 ID、时区、输出格式、timewindow 等设置。
 
-### Report configuration structure
+### 报表配置结构
 
-When providing report configuration (either in the node or message), the following fields are used:
+提供报表配置（在节点或消息中）时，使用以下字段：
 
-- `baseUrl` (required) - Base URL of ThingsBoard UI that should be accessible by the reports server (e.g., "https://thingsboard.cloud")
-- `dashboardId` (required) - UUID of the dashboard to capture
-- `state` - Target dashboard state to open during report generation
-- `timezone` (required) - Timezone in which the dashboard will be presented (e.g., "America/New_York")
-- `useDashboardTimewindow` - If true, uses the timewindow configured in the dashboard itself
-- `timewindow` - Specific dashboard timewindow configuration (JSON object) to use during report generation
-- `namePattern` (required) - File name pattern for the generated report. Supports date formatting
-  using [Java SimpleDateFormat](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/text/SimpleDateFormat.html){:target="_blank"} syntax within `%d{}` placeholders (
-  e.g., "report-%d{yyyy-MM-dd_HH:mm:ss}")
-- `type` - Report file format: PDF, PNG, or JPEG (default: PDF)
-- `useCurrentUserCredentials` - If true, uses credentials of the user who created the report configuration
-- `userId` (required) - UUID of the user whose credentials will be used to open the dashboard
+- `baseUrl`（必填）- reports server 可访问的 ThingsBoard UI 基础 URL（如 "https://thingsboard.cloud"）
+- `dashboardId`（必填）- 要截取的仪表板 UUID
+- `state` - 报表生成时打开的仪表板状态
+- `timezone`（必填）- 仪表板显示时区（如 "America/New_York"）
+- `useDashboardTimewindow` - 若为 true，使用仪表板自身配置的 timewindow
+- `timewindow` - 报表生成时使用的具体仪表板 timewindow 配置（JSON 对象）
+- `namePattern`（必填）- 生成报表的文件名模式。支持在 `%d{}` 占位符内使用 [Java SimpleDateFormat](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/text/SimpleDateFormat.html){:target="_blank"} 语法进行日期格式化（如 "report-%d{yyyy-MM-dd_HH:mm:ss}"）
+- `type` - 报表文件格式：PDF、PNG 或 JPEG（默认：PDF）
+- `useCurrentUserCredentials` - 若为 true，使用创建报表配置的用户的凭证
+- `userId`（必填）- 用于打开仪表板的用户凭证的 UUID
 
 ### JSON Schema
 
@@ -141,54 +131,54 @@ When providing report configuration (either in the node or message), the followi
 ```
 {: .copy-code.expandable-3 }
 
-## Message processing algorithm
+## 消息处理算法
 
-1. The node determines the report configuration source:
-    - If **Use report config from message** is enabled, extracts `reportConfig` from the incoming message data
-    - Otherwise, uses the report configuration specified in the node settings
+1. 节点确定报表配置来源：
+    - 若启用 **Use report config from message**，从传入消息数据中提取 `reportConfig`
+    - 否则使用节点设置中指定的报表配置
 
-2. The node determines which reports server to use:
-    - If **Use system reports server** is enabled, uses the default system reports server
-    - Otherwise, uses the custom reports server endpoint URL
+2. 节点确定使用的 reports server：
+    - 若启用 **Use system reports server**，使用默认系统 reports server
+    - 否则使用自定义 reports server 端点 URL
 
-3. The node submits the report generation request to the reports server, which:
-    - Opens the specified dashboard in a headless browser
-    - Applies the specified dashboard state and timewindow
-    - Captures a screenshot in the requested format
+3. 节点向 reports server 提交报表生成请求，server 将：
+    - 在无头浏览器中打开指定仪表板
+    - 应用指定仪表板状态和 timewindow
+    - 以请求的格式截取截图
 
-4. The generated report data is saved as a blob entity with:
-    - The report data as binary content
-    - Content type based on the report format
-    - Report name based on the name pattern
-    - Associated with the tenant and customer of the user
+4. 生成的报表数据保存为 blob 实体，包含：
+    - 二进制报表数据
+    - 基于报表格式的 content type
+    - 基于 name pattern 的报表名称
+    - 与用户所属租户和客户的关联
 
-5. The blob entity ID is appended to the message metadata:
-    - If the `attachments` metadata field already exists, the blob ID is appended with a comma separator
-    - Otherwise, the `attachments` field is created with the blob ID
+5. blob 实体 ID 追加到消息元数据：
+    - 若 `attachments` 元数据字段已存在，blob ID 以逗号分隔追加
+    - 否则创建 `attachments` 字段并写入 blob ID
 
-6. The updated message is forwarded via the appropriate connection.
+6. 更新后的消息经相应连接转发。
 
-## Output connections
+## 输出连接
 
 - `Success`
-    - The report was successfully generated and saved. The outgoing message includes the blob entity ID in the `attachments` metadata field.
+    - 报表已成功生成并保存。传出消息在 `attachments` 元数据字段中包含 blob 实体 ID。
 - `Failure`
-    - An error occurred during report generation, such as:
-        - Invalid report configuration in the message
-        - Reports server is unavailable or unreachable
-        - Failed to capture the dashboard screenshot
-        - Failed to save the blob entity
-        - User not found
+    - 报表生成过程中出错，例如：
+        - 消息中的报表配置无效
+        - Reports server 不可用或不可达
+        - 仪表板截图截取失败
+        - blob 实体保存失败
+        - 用户未找到
 
-## Examples
+## 示例
 
-### Example 1 — Generate dashboard report using node settings
+### 示例 1 — 使用节点设置生成仪表板报表
 
-**Incoming message**
+**传入消息**
 
-Any message.
+任意消息。
 
-**Node configuration**
+**节点配置**
 
 ```json
 {
@@ -217,9 +207,9 @@ Any message.
 }
 ```
 
-**Outgoing message**
+**传出消息**
 
-A message that is a complete copy of the incoming message, with the blob entity ID added to the `attachments` metadata field:
+与传入消息完全相同的消息，并将 blob 实体 ID 添加到 `attachments` 元数据字段：
 
 ```json
 {
@@ -227,8 +217,8 @@ A message that is a complete copy of the incoming message, with the blob entity 
 }
 ```
 
-Routed via the `Success` connection.
+经 `Success` 连接路由。
 
-**Result**
+**结果**
 
-A PDF report of the dashboard is generated, saved as a blob entity, and its ID is added to the message metadata.
+仪表板的 PDF 报表已生成，保存为 blob 实体，其 ID 已添加到消息元数据。

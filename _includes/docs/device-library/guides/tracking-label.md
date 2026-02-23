@@ -1,4 +1,4 @@
-{% assign deviceName = page.title | remove: "How to connect " | remove: " to ThingsBoard?" %}
+﻿{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: " to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://www.lansitec.com/products/tracking-label/" %}
 {% assign thingsboardHost = "https://" | append: hostName %}
 {% assign prerequisites = '
@@ -13,14 +13,14 @@
 Whether you&#39;re shipping goods across the globe or simply managing inventory within a warehouse, the Tracking Label&#39;s 3-axis accelerometer and automatic BLE/GNSS switching ensure efficient power use without compromising on accuracy.<br>
 With up to three years of battery life (based on six GNSS reports per day) and an IP66 rating, this label is built to stand up to harsh conditions and lengthy transit times — giving you the confidence to monitor and manage your assets from end to end.
 
-## Prerequisites
+## 前置条件
 
-To continue with this guide we will need the following:
+继续本指南前，需准备以下内容：
 {{prerequisites}}
-- [ThingsBoard account]({{ thingsboardHost }}){: target="_blank"}
+- [ThingsBoard 账户]({{ thingsboardHost }}){: target="_blank"}
 
 
-## Configuration
+## 配置
 
 Only ThingsBoard Cloud works when using direct communication from this device to ThingsBoard via MQTT.
 

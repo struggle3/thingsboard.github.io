@@ -1,10 +1,10 @@
 * TOC
 {:toc}
 
-ThingsBoard allows you to export data from widgets to CSV or XLS. Nearly any widget supports this functionality if applicable to widget type.
-The list of columns in the exported data set corresponds to the list of parameters you configure in data set configuration.
+ThingsBoard 支持将部件数据导出为 CSV 或 XLS。几乎所有部件在适用类型下均支持此功能。
+导出数据集中的列列表与数据集中配置的参数列表对应。
  
-See video tutorial below for step-by-step instruction how to use this feature.
+观看下方视频教程，按步骤了解如何使用此功能。
 
 <br> 
 <div id="video">  

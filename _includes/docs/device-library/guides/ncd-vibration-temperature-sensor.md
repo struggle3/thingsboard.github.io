@@ -1,107 +1,107 @@
 
-{% assign deviceName = page.title | remove: "How to connect " | remove: "to ThingsBoard?" %}
+{% assign deviceName = page.title | remove: "如何将 " | remove: " 连接至 ThingsBoard？" | remove: "How to connect " | remove: "to ThingsBoard?" %}
 {% assign deviceVendorLink = "https://store.ncd.io/product/c1d2-industrial-iot-wireless-2-channel-vibration-temperature-sensor-v3" %}
 {% assign thingsboardHost = "https://" | append: {{hostName}} %}
 {% assign officialManualLink = "https://resource.milesight.com/milesight/iot/document/am300-series-user-guide-en.pdf" %}
 
-## Introduction
+## 概述
 
-**Industrial IoT Wireless Vibration Temperature Sensor**
+**工业物联网无线振动温度传感器**
 
-This IIoT sensor is designed to monitor vibration, frequency, and temperature in industrial environments. It provides valuable data that can be used for predictive maintenance, equipment monitoring, and overall operational efficiency.
+该 IIoT 传感器用于监测工业环境中的振动、频率与温度，为预测性维护、设备监控及整体运行效率提供数据支持。
 
 <br><br><br>
-Some Vibration Plus Applications:
+振动类典型应用场景：
 
-• Advanced Predictive Maintenance for Rotating Equipment<br>
-• Comprehensive Structural Health Monitoring<br>
-• Process Automation and Quality Control in Manufacturing<br>
-• Optimization of Energy Efficiency in Industrial Systems
+• 旋转设备的高级预测性维护<br>
+• 结构健康综合监测<br>
+• 制造过程自动化与质量控制<br>
+• 工业系统能效优化
 
-In this tutorial, we will guide you through the process of setting up the NCD Industrial IoT Wireless Vibration and Temperature Sensor with the Enterprise IIoT Gateway.This includes creating a device, configuring parameters, transmitting sensor data to ThingsBoard via the MQTT protocol, and designing a real-time dashboard for sensor data monitoring and analysis.
+本教程将引导您完成 NCD 工业物联网无线振动温度传感器与 Enterprise IIoT 网关的配置，包括创建设备、配置参数、通过 MQTT 协议将传感器数据发送至 ThingsBoard，以及设计用于传感器数据监控与分析的实时仪表板。
 
-**Enterprise IIoT Gateway Lite**
+**Enterprise IIoT Gateway Lite（企业 IIoT 网关精简版）**
 
 ![Enterprise IIoT Gateway Lite](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/3-ncd-to-thingsboard-IIoT-Gateway-Lite.png){: style="float: left; max-width: 200px; max-height: 200px; margin: 0px 10px 0px 0px"}
-The Enterprise IIoT Gateway gets, processes, decodes, and transmits data from the NCD Industrial IoT sensor to various cloud services or Industrial protocols. You can think of it as a Wi-Fi router, but it uses a specialized wireless protocol called DigiMesh®. Both the NCD sensor and the Enterprise IIoT Gateway communicate using this protocol, which is specifically designed and tested for industrial applications.
+Enterprise IIoT 网关负责接收、处理、解码并转发 NCD 工业物联网传感器的数据至各类云服务或工业协议。可将其类比为 Wi-Fi 路由器，但采用名为 DigiMesh® 的专用无线协议。NCD 传感器与 Enterprise IIoT 网关均通过该协议通信，专为工业场景设计与验证。
 
-## Overview
+## 概述（集成流程）
 
-The Industrial IoT Wireless Vibration and Temperature Sensor captures critical field parameters, including temperature and vibration data. Utilizing the robust DigiMesh® industrial protocol, the sensor transmits this data to the Enterprise IIoT Gateway. The gateway, equipped with the NCD Node-RED library, receives, decodes, and filters the data for further processing. Once prepared, the data is transmitted to the ThingsBoard platform via the MQTT protocol. Within ThingsBoard, the data can be queried, analyzed, and visualized in real-time through custom dashboards, providing actionable insights for monitoring and decision-making.
+工业物联网无线振动温度传感器采集温度与振动等现场关键参数，通过 DigiMesh® 工业协议将数据发送至 Enterprise IIoT 网关。网关搭载 NCD Node-RED 库，对数据进行接收、解码与过滤后，经 MQTT 协议上传至 ThingsBoard。在 ThingsBoard 中，可通过自定义仪表板对数据进行查询、分析与实时可视化，为监控与决策提供依据。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/4-ncd-to-thingsboard-overview.png)
 
-## Requirements
+## 前提条件
 
-To transmit data from NCD Industrial IoT sensors to ThingsBoard, certain prerequisites must be met.
+要将 NCD 工业物联网传感器数据发送至 ThingsBoard，需满足以下条件：
 
-- [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"} account 
-- NCD Industrial IoT Wireless Vibration Temperature Sensor V3
-- NCD Enterprise IIoT Gateway Standard or Lite version:
+- [ThingsBoard Cloud](https://thingsboard.io/installations/){:target="_blank"} 账户
+- NCD 工业物联网无线振动温度传感器 V3
+- NCD Enterprise IIoT 网关标准版或精简版：
   - [Enterprise IIoT Gateway](https://store.ncd.io/product/enterprise-iiot-gateway/){:target="_blank"}
   - [Enterprise IIoT Gateway Lite](https://store.ncd.io/product/enterprise-iiot-gateway-lite/){:target="_blank"}
 
 {% capture difference %}
-**Note**: While the ThingsBoard Cloud is used in this example, [ThingsBoard on-premise deployment](/docs/user-guide/install/pe/installation-options/){:target="_blank"} can also be used.
+**说明**：本示例使用 ThingsBoard Cloud，也可使用 [ThingsBoard 本地部署](/docs/user-guide/install/pe/installation-options/){:target="_blank"}。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 {% capture difference %}
-**Note**: This tutorial can be replicated with any other NCD Industrial Sensor.
+**说明**：本教程同样适用于其他 NCD 工业传感器。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-With these components, you can connect the NCD sensor to the Enterprise IIoT Gateway and leverage the built-in Node-RED instance to forward sensor data to ThingsBoard using the MQTT protocol.
+具备上述组件后，可将 NCD 传感器接入 Enterprise IIoT 网关，并利用内置 Node-RED 通过 MQTT 协议将传感器数据转发至 ThingsBoard。
 
-This tutorial provides a comprehensive walkthrough of the essential configuration steps, including connecting NCD devices, registering them on the platform, setting up a ThingsBoard Cloud account, adding and linking a new gateway, and creating a dashboard to visualize real-time sensor data effectively.
+本教程将按步骤说明关键配置：连接 NCD 设备、在平台上注册、配置 ThingsBoard Cloud 账户、添加并关联新网关，以及创建仪表板以有效展示实时传感器数据。
 
-## Configuring the NCD Vibration Sensor and Enterprise IIoT Gateway
+## 配置 NCD 振动传感器与 Enterprise IIoT 网关
 
-We'll start by setting up the Enterprise IIoT Gateway and the Vibration Sensor, followed by connecting them. This process is straightforward, and we have a detailed guide available for reference. Below is a brief overview, but for complete instructions, please refer to the following NCD documentation:
+我们先配置 Enterprise IIoT 网关与振动传感器，再将二者连接。流程较为简单，详细步骤可参考下方 NCD 文档，此处仅作简要说明：
 
-- [Industrial IoT Wireless Vibration Temperature Sensor V3 Quick Start Guide](https://ncd.io/blog/industrial-iot-wireless-vibration-temperature-sensor-v3-quick-start-guide/){:target="_blank"}<br>
-- [Industrial IoT Wireless Vibration Temperature Sensor V3 User Manual](https://ncd.io/blog/industrial-iot-wireless-vibration-temperature-sensor-v3-user-manual/){:target="_blank"}
+- [工业物联网无线振动温度传感器 V3 快速入门](https://ncd.io/blog/industrial-iot-wireless-vibration-temperature-sensor-v3-quick-start-guide/){:target="_blank"}<br>
+- [工业物联网无线振动温度传感器 V3 用户手册](https://ncd.io/blog/industrial-iot-wireless-vibration-temperature-sensor-v3-user-manual/){:target="_blank"}
 
-Unbox your NCD Enterprise IIoT Gateway, connect it, and power it on following the provided instructions. Then, connect the ETH0 port to your DHCP-enabled router (the Gateway will act as a DHCP client). It will automatically obtain an IP address. After giving the device some time to boot, you should be able to access the Node-RED instance running on it by using its local IP address or domain name, appending port 1880 (the default Node-RED port).
+按说明开箱、接线并上电 NCD Enterprise IIoT 网关。将 ETH0 口接入支持 DHCP 的路由器（网关作为 DHCP 客户端），将自动获取 IP。等待设备启动后，可通过其本地 IP 或域名加端口 1880（Node-RED 默认端口）访问其上的 Node-RED。
 
-We recommend using the local domain name format: **ncd-xxxx.local:1880**, where "**xxxx**" refers to the last four digits of the Enterprise IIoT Gateway's MAC address (printed on the side of the device). For example, **http://ncd-c398.local:1880**
+建议使用本地域名格式：**ncd-xxxx.local:1880**，其中 **xxxx** 为 Enterprise IIoT 网关 MAC 地址后四位（印于设备侧面）。例如：**http://ncd-c398.local:1880**
 
-### Connect the sensor to the Gateway
+### 将传感器连接到网关
 
-Upon accessing the Node-RED instance, you will notice a pre-configured flow that includes a Wireless Gateway node and a Debug node. These nodes form part of the default configuration, enabling the system to receive and display messages from connected devices.
+打开 Node-RED 后，可见已预置的流，包含 Wireless Gateway 节点与 Debug 节点，用于接收并显示已连接设备的消息。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/5-ncd-to-thingsboard-nodered.png)
 
-This flow is preconfigured and ready to receive data from NCD sensors. When an NCD sensor connects to the wireless network and transmits data, the "**Wireless Gateway**" node automatically receives and processes the message. The processed message is then passed through its output terminal and sent to the "**Debug**" node. This node displays the message in the **Debug window**, located on the right side of the Node-RED editor.
-At this stage, everything is ready, and you can proceed to power on your NCD Vibration Sensor. NCD Industrial Sensors come pre-equipped with batteries and also support an external power supply option, which can be selected during the purchase process.
+该流已预配置，可直接接收 NCD 传感器数据。当 NCD 传感器接入无线网络并上报数据时，**Wireless Gateway** 节点会自动接收并处理消息，再经输出端发送至 **Debug** 节点，在 Node-RED 编辑器右侧的 **调试窗口** 中显示。
+此时可上电 NCD 振动传感器。NCD 工业传感器出厂带电池，也支持外接供电（可在购买时选配）。
 
-In this tutorial, we will focus on an example using a battery-powered sensor. However, the steps are equally applicable to sensors powered by an external supply. To activate the sensor, open its casing and toggle the power switch to the "Power by Internal Battery" position.
+本教程以电池供电为例，步骤同样适用于外接供电。启用传感器时，打开外壳并将电源开关拨到「内部电池供电」档位。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/6-ncd-to-thingsboard-vibration-sensor-inside.png)
 
-The power switch on this device has three positions:
+该设备电源开关有三档：
 
-- Battery Power
-- Off
-- External Power
+- 电池供电
+- 关闭
+- 外接供电
 
-The **Battery Power** position will use the onboard batteries to power the sensor and transmit data.
+**电池供电** 档使用机内电池为传感器供电并上报数据。
 
-The **Off** position will power down all components of the sensor and no data will be transmitted
+**关闭** 档会关闭传感器所有模块，不再上报数据。
 
-The **External Power** position will use the external power supply connected to the onboard barrel connector to power the sensor and transmit data.
+**外接供电** 档通过机身上的圆孔电源接口连接外部电源为传感器供电并上报数据。
 
-### NCD Vibration Sensor messages
+### NCD 振动传感器消息
 
-Once the sensor is powered on, it begins transmitting data, and you will start seeing incoming messages. The "**Wireless Gateway**" node decodes the sensor data and forwards it through its output terminal to the "**Debug**" node. These messages are displayed in the **debug window** of the Node-RED editor. After activating the NCD Vibration Sensor, the Debug window should display messages similar to the following:
+传感器上电后开始上报数据，您会在 Node-RED 中看到传入消息。**Wireless Gateway** 节点解码传感器数据并经输出端发送至 **Debug** 节点，在 Node-RED 编辑器的 **调试窗口** 中显示。激活 NCD 振动传感器后，调试窗口会显示类似以下内容：
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/7-ncd-to-thingsboard-debug-window.png)
 
-NCD sensors transmit a variety of messages that provide insight into the sensor&#39;s current mode and operational status, along with the actual sensor data. In this tutorial, we will focus specifically on the **RUN sensor_mode** and **sensor_data** message.
+NCD 传感器会发送多种消息，用于反映当前模式、运行状态及实际传感器数据。本教程主要关注 **RUN sensor_mode** 与 **sensor_data** 消息。
 
-### RUN sensor_mode message
+### RUN sensor_mode 消息
 
-A RUN message signifies that the sensor, identified by the **msg.payload.mac** property, is powered on and successfully communicating with the **Enterprise IIoT Gateway** via the wireless network. This message contains critical details, including the sensor&#39;s MAC **Address**, **sensor type**, **node ID**, **mode**, and **timestamp**.
+RUN 消息表示由 **msg.payload.mac** 标识的传感器已上电，并已通过无线网络与 **Enterprise IIoT 网关** 成功通信。该消息包含 MAC **地址**、**传感器类型**、**节点 ID**、**模式** 与 **时间戳** 等关键信息。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/8-ncd-to-thingsboard-debug-run-message.png)
 
@@ -121,134 +121,134 @@ In this tutorial, our primary focus will be on transmitting **RUN sensor mode** 
 
 {% include images-gallery.liquid imageCollection=thingsboardDebugMsgPayload %}
 
-## Configuring ThingsBoard Cloud
+## 配置 ThingsBoard Cloud
 
-You can find the documentation to help you get started with ThingsBoard Professional Edition, as well as the MQTT Gateway API Reference, available here:
+可参考以下文档快速上手 ThingsBoard 专业版及 MQTT 网关 API：
 
-- [Getting Started with ThingsBoard Professional Edition](https://thingsboard.io/docs/paas/eu/getting-started-guides/helloworld/){:target="_blank"}
-- [MQTT Gateway API Reference](https://thingsboard.io/docs/reference/gateway-mqtt-api/){:target="_blank"}
+- [ThingsBoard 专业版入门](https://thingsboard.io/docs/paas/eu/getting-started-guides/helloworld/){:target="_blank"}
+- [MQTT 网关 API 参考](https://thingsboard.io/docs/reference/gateway-mqtt-api/){:target="_blank"}
 
-The first step is to [sign in using your ThingsBoard account](https://thingsboard.cloud/login){:target="_blank"}. 
+第一步：使用您的 ThingsBoard 账户 [登录](https://thingsboard.cloud/login){:target="_blank"}。 
 
 {% assign thingsboardWelcome = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/sign-into-thingsboard-1-pe.png,
-        title: The first step is to sign in using your ThingsBoard account.
+        title: 第一步：使用您的 ThingsBoard 账户登录。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=thingsboardWelcome %}
 
 <br>
-Once you sign in, you will be presented with important resources to help you get started, along with solution templates. Take a moment to explore these to familiarize yourself with the **ThingsBoard** environment.
+登录后将看到入门资源与解决方案模板，可先浏览以熟悉 **ThingsBoard** 环境。
 
 {% assign thingsboardWelcome2 = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/thingsboard-welcome-1-pe.png,
-        title: Once you sign in, you will be presented with important resources to help you get started, along with solution templates. Take a moment to explore these to familiarize yourself with the ThingsBoard environment.
+        title: 登录后将看到入门资源与解决方案模板，可先浏览以熟悉 ThingsBoard 环境。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=thingsboardWelcome2 %}
 
 <br>
-The first step is to add a new [device](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"} to your ThingsBoard instance. To do this, follow thi steps:
+接着在 ThingsBoard 实例中 [添加新设备](/docs/{{docsPrefix}}user-guide/ui/devices/){:target="_blank"}。按以下步骤操作：
 
 {% assign addingIsGatewayDevice = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-is-gateway-device-1-pe.png,
-        title: Go to the "**Devices**" page in the "**Entities**" section. In the next window, you will see a list of all your devices. We need to add a new one. Click the "**+**" icon in the upper right corner of the table. Then, from the dropdown menu, select "**Add new device**".
+        title: 进入 **「实体」** 下的 **「设备」** 页面，在设备列表中点击表格右上角 **「+」**，从下拉菜单中选择 **「添加新设备」**。
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-is-gateway-device-2-pe.png,
-        title: Once you do this, a new window will appear. You need to assign a name to the new device - in this case, we used "**NCD Enterprise IIoT Gateway**". You can also specify a label, groups, description, and other parameters. Make sure to enable the "**Is gateway**" toggle. Next, click "**Next: Credentials**".
+        title: 在弹出的新窗口中为设备命名（本例使用 **NCD Enterprise IIoT Gateway**），可填写标签、分组、描述等。勾选 **「Is gateway」**，然后点击 **「下一步：凭据」**。
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-is-gateway-device-3-pe.png,
-        title: You will now be taken to the device credentials window. Select the "**MQTT Basic**" option (you can optionally add additional MQTT security layers here). Next, generate the **Client ID**, **Username**, and **Password** by clicking the "Generate" button next to each option. These credentials are required for configuring the **Node-RED MQTT node** to establish a connection with the **Enterprise IIoT Gateway**.
+        title: 进入设备凭据窗口，选择 **「MQTT Basic」**（可在此增加 MQTT 安全层）。在各选项旁点击 **「生成」** 生成 **Client ID**、**Username**、**Password**，供 **Node-RED MQTT 节点** 与 **Enterprise IIoT 网关** 建立连接使用。
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-is-gateway-device-4-pe.png,
-        title: After generating the credentials, use the "**Copy**" button to obtain each value. We recommend saving these values in a temporary file, as we will use them later in the **Node-RED MQTT node** in this guide. Next, click "**Add**".
+        title: 生成凭据后，使用 **「复制」** 获取各值，建议暂存到临时文件，后续在本指南的 **Node-RED MQTT 节点** 中会用到。然后点击 **「添加」**。
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-is-gateway-device-5-pe.png,
-        title: After this, a new window will appear, allowing you to test the connectivity. However, since we are using a Gateway, a different set of MQTT topics is required for proper integration with the ThingsBoard gateway device. You can skip this step. For now, we will identify the MQTT server to use for the connection: "mqtt.thingsboard.cloud". Click the "**Close**" button to proceed.
+        title: 随后会弹出连接测试窗口。因使用网关需配合 ThingsBoard 网关设备的 MQTT 主题，可跳过该步。连接使用的 MQTT 服务器为「mqtt.thingsboard.cloud」。点击 **「关闭」** 继续。
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-is-gateway-device-6-pe.png,
-        title: We have successfully added a new Gateway configured to use the MQTT protocol. The next step is to configure the MQTT credentials in the Enterprise IIoT Gateway to verify connectivity.
+        title: 已成功添加使用 MQTT 协议的新网关。下一步在 Enterprise IIoT 网关中配置 MQTT 凭据以验证连接。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addingIsGatewayDevice %}
 
-## Importing and configuring the NCD template flow
+## 导入并配置 NCD 模板流
 
-The next step is to **import** and **configure** a pre-configured **flow template**. This flow will allow us to filter and format the vibration sensor data before connecting it to the ThingsBoard MQTT broker server and publishing the sensor data. The flow will also set the appropriate topics based on the ThingsBoard MQTT Gateway API reference. To import the flow into your workspace, begin by navigating to the GitHub repository and copying or downloading the RAW JSON file: [ncd-vibration-sensor-t80-to-thingsboard-mqtt.json](/docs/devices-library/resources/ncd-vibration-sensor-t80-to-thingsboard-mqtt.json){:target="_blank"}
+下一步是 **导入** 并 **配置** 预置的 **流模板**。该流会在将振动传感器数据连接到 ThingsBoard MQTT 代理并发布前进行过滤与格式化，并依据 ThingsBoard MQTT 网关 API 参考设置相应主题。导入流时，请打开 GitHub 仓库并复制或下载 RAW JSON 文件：[ncd-vibration-sensor-t80-to-thingsboard-mqtt.json](/docs/devices-library/resources/ncd-vibration-sensor-t80-to-thingsboard-mqtt.json){:target="_blank"}
 
 {% capture difference %}
-**Internal note**: This flow will be on NCD Github repository.
+**内部说明**：该流将位于 NCD Github 仓库。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Next, in Node-RED, navigate to the main menu in the top right corner of the editor and click on the "**Import**" option:
+在 Node-RED 中，点击编辑器右上角主菜单中的 **「导入」**：
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/28-ncd-to-thingsboard-node-red-import.png)
 
 <br>
-To import the **ncd-vibration-sensor-t80-to-thingsboard-mqtt.json** file, simply open the window and either select the file using the "**Select a file to import**" button or paste the copied JSON code into the pink text box. Once done, click the "**Import**" button to proceed.
+导入 **ncd-vibration-sensor-t80-to-thingsboard-mqtt.json** 时，在弹出窗口中点击 **「选择要导入的文件」** 选择文件，或将复制的 JSON 粘贴到粉色文本框，然后点击 **「导入」**。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/29-ncd-to-thingsboard-node-red-import.png)
 
 <br>
-A pop-up message will appear at the top of the Node-RED editor, indicating the nodes that have been successfully imported into your workspace.
+Node-RED 编辑器顶部会弹出提示，显示已成功导入工作区的节点。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/30-ncd-to-thingsboard-node-red-importing.png)
 
 <br>
-You can now position the flow within your Node-RED workspace. The next step is to connect the output of the "**Wireless Gateway**" node to the input of the "**ncd-filter-mode**" node, as demonstrated in the following image.
+可在 Node-RED 工作区中摆放流。下一步将 **Wireless Gateway** 节点的输出连接到 **ncd-filter-mode** 节点的输入，如下图所示。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/31-ncd-to-thingsboard-node-red-connect.png)
 
 <br>
-Next, we will provide a general overview of the function of each node in this flow. We will not go into a deep explanation of each node&#39;s function.
+下面简要说明该流中各节点的作用，不展开每个节点的详细说明。
 
 {% capture difference %}
-**Note:** If you want to learn more about how these nodes work, you can select a node within the Node-RED editor and click on the "Info" tab, where you can find documentation related to each node in Node-RED.
+**说明**：若需了解各节点用法，可在 Node-RED 编辑器中选中节点并点击「Info」选项卡，查看 Node-RED 中与该节点相关的文档。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/32-ncd-to-thingsboard-node-red-info.png)
 
 <br>
-**ncd-filter-mode**: This node evaluates the incoming messages from the "**Wireless Gateway**" node. It specifically filters and directs messages based on their topic. **Output 1** is dedicated to messages of topic **sensor_mode**, which contain the operational modes of the sensor. For this tutorial, we will focus on **RUN mode**, which indicates that the sensor is connected to the Enterprise IIoT Gateway network and ready to transmit data. **Output 2** is for **sensor_data** messages, which include critical information such as **battery percentage**, **vibration**, **temperature**, and other sensor readings.
+**ncd-filter-mode**：该节点处理来自 **Wireless Gateway** 节点的消息，按 topic 过滤并分流。**输出 1** 对应 topic **sensor_mode** 的消息（传感器运行模式）；本教程关注 **RUN 模式**，表示传感器已接入 Enterprise IIoT 网关网络并可上报数据。**输出 2** 对应 **sensor_data** 消息，包含 **电池电量**、**振动**、**温度** 等传感器读数。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/33-ncd-to-thingsboard-node-red-filter.png)
 
 <br>
-**ncd-filter-by-run-mode**: This node will evaluate whether the sensor is in **RUN mode**. If the sensor is not in **RUN mode**, the message will not flow through the node.
+**ncd-filter-by-run-mode**：该节点判断传感器是否处于 **RUN 模式**。若非 RUN 模式，消息不会通过该节点。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/34-ncd-to-thingsboard-node-red-run-mode.png)
 
 <br>
-**ncd-set-device**: This node allows us to extract the MAC address of the sensor (by specifying the last 8 alphanumeric characters: &#39;**xx:xx:xx:xx**&#39;) and assign it as the **msg.payload.device** value.
+**ncd-set-device**：该节点从传感器 MAC 地址中取后 8 位（**xx:xx:xx:xx**）并赋给 **msg.payload.device**。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/35-ncd-to-thingsboard-node-red-set-device.png)
 
 <br>
 {% capture difference %}
-**Note**: An example of an NCD device MAC address is: **00:13:A2:00:42:53:64:33**. After processing through this node, the msg.payload.device property will contain the shortened MAC address: **42:53:64:33**.
+**说明**：NCD 设备 MAC 地址示例：**00:13:A2:00:42:53:64:33**。经该节点处理后，msg.payload.device 将包含缩短后的 MAC 地址：**42:53:64:33**。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-**ncd-set-mqtt-topic-connect**: This node sets the MQTT topic for ThingsBoard, which serves to inform the platform that the device is successfully connected to the Gateway.   
+**ncd-set-mqtt-topic-connect**：该节点设置发往 ThingsBoard 的 MQTT 主题，用于通知平台设备已成功连接网关。  
 **msg.topic = &#39;v1/gateway/connect&#39;**
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/36-ncd-to-thingsboard-node-red-topic-connect.png)
 
 <br>
-**ncd-filter-by-type**: NCD IoT manufactures a wide range of Industrial IoT Sensors, each identified by a **sensor type**. This node allows us to filter sensor messages based on the sensor type. In this case, it filters messages corresponding to the "**One Channel Vibration Sensor**", which is identified by sensor type '**80**'.
+**ncd-filter-by-type**：NCD IoT 提供多种工业物联网传感器，以 **sensor type** 区分。该节点按传感器类型过滤消息；本例过滤 **单通道振动传感器**（sensor type **80**）的消息。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/37-ncd-to-thingsboard-node-red-filter-by-type.png)
 
 <br>
-**ncd-attributes**: This is a function node that uses JavaScript code to ensure that a sensor_data message of **type 80** is sent only once after a deployment. The node allows us to define various **sensor attributes**, such as the **address**, **sensor name**, **firmware version**, **node ID**, and **sensor type**. These attributes are then wrapped in the correct format according to the ThingsBoard MQTT Gateway API. Below is the JavaScript code:
+**ncd-attributes**：该函数节点通过 JavaScript 保证 **type 80** 的 sensor_data 在部署后仅发送一次，并可定义 **地址**、**传感器名称**、**固件版本**、**节点 ID**、**传感器类型** 等 **传感器属性**，再按 ThingsBoard MQTT 网关 API 格式封装。JavaScript 代码如下：
 
 ```js
 // Retrieve the 'flag' from the context or default to false
@@ -282,18 +282,18 @@ if (!flag) {
 }
 ```
 
-**ncd-set-mqtt-topic-attributes**:  This node sets the MQTT topic for ThingsBoard. The topic is used to update the sensor attributes on ThingsBoard.   
+**ncd-set-mqtt-topic-attributes**：该节点设置发往 ThingsBoard 的 MQTT 主题，用于在 ThingsBoard 上更新传感器属性。  
 **msg.topic = &#39;v1/gateway/attributes&#39;**
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/38-ncd-to-thingsboard-node-red-topic-atributes.png)
 
 <br>
-**ncd-add-battery-to-sensor-data**: This node allows us to add the property containing the vibration sensor's battery percentage to the **msg.payload.sensor_data** message, which already includes temperature and vibration variables. This way, we can have all the relevant variables in a single message for this tutorial.
+**ncd-add-battery-to-sensor-data**：该节点将振动传感器的电池电量加入 **msg.payload.sensor_data**，该消息已包含温度与振动等变量，便于在本教程中以单条消息携带全部相关变量。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/39-ncd-to-thingsboard-node-red-battery.png)
 
 <br>
-**ncd-telemetry**: This is a function node. The JavaScript code extracts the **Sensor MAC address** and **timestamp** data from the msg.payload message. It then retrieves the **sensor_data** message (which includes battery percentage) and wraps it in the correct format for the ThingsBoard MQTT Gateway API. The JavaScript code is as follows:
+**ncd-telemetry**：该函数节点从 msg.payload 中取出 **传感器 MAC 地址** 与 **时间戳**，再取 **sensor_data**（含电池电量）并按 ThingsBoard MQTT 网关 API 格式封装。JavaScript 代码如下：
 
 ```js
 // Destructure relevant properties from msg.payload
@@ -318,72 +318,72 @@ msg.payload = {
 return msg;
 ```
 
-**ncd-set-mqtt-topic-telemetry**: this node Set the MQTT ThingsBoard telemetry topic, this topic serves to set the sensor data values on telemetry ThingsBoard.   
+**ncd-set-mqtt-topic-telemetry**：该节点设置发往 ThingsBoard 的遥测 MQTT 主题，用于在 ThingsBoard 上写入传感器遥测数据。  
 **msg.topic = &#39;v1/gateway/telemetry&#39;**
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/40-ncd-to-thingsboard-node-red-topic-telemetry.png)
 
 <br>
-**ncd-to-thingsboard**: This MQTT output node establishes a connection to the MQTT Broker using the required credentials to connect to ThingsBoard, allowing the data generated by the vibration sensor to be published to the ThingsBoard Cloud.
+**ncd-to-thingsboard**：该 MQTT 输出节点使用所需凭据连接 MQTT 代理并接入 ThingsBoard，将振动传感器数据发布到 ThingsBoard Cloud。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/41-ncd-to-thingsboard-node-red-mqtt-node.png)
 
 <br>
-Once we've reviewed the general functions of each Node-RED node in the flow, the next step is to configure the MQTT out node with the credentials generated in **ThingsBoard**. To access the properties of this node, double-click on the "**ncd-to-ThingsBoard**" node. Once you've opened the properties, the first step is to configure the "**mqtt-broker config node**". To do this, click the "**Add new mqtt-broker config node**" button.
+了解流中各 Node-RED 节点的作用后，下一步使用 **ThingsBoard** 中生成的凭据配置 MQTT 输出节点。双击 **ncd-to-ThingsBoard** 节点打开属性，先配置 **mqtt-broker config 节点**：点击 **「添加新的 mqtt-broker config 节点」**。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/42-ncd-to-thingsboard-node-red-add-new-mqtt.png)
 
 <br>
-The next step is to set the Server property with the ThingsBoard MQTT Broker server address: "**mqtt.thingsboard.cloud**". For this example, we&#39;ll use the default port, **1883**. Lastly, you need to configure the **Client ID** property, which is generated in ThingsBoard.
+将 Server 属性设为 ThingsBoard MQTT 代理地址：**mqtt.thingsboard.cloud**。本例使用默认端口 **1883**。最后配置 **Client ID**（在 ThingsBoard 中生成）。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/43-ncd-to-thingsboard-node-red-client-id.png)
 
 <br>
-The next step is to navigate to the security tab and enter the **Username** and **Password** credentials generated in **ThingsBoard**.
+在「安全」选项卡中填入 **ThingsBoard** 中生成的 **Username** 与 **Password**。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/44-ncd-to-thingsboard-node-red-security.png)
 
 <br>
-Finally, to save the configurations made within the node, click the "**Update**" button.
+保存节点内配置时，点击 **「Update」** 按钮。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/45-ncd-to-thingsboard-node-red-update.png)
 
 <br>
-Once this is completed, the MQTT server configuration is finalized. The Topic property should be left empty because it will dynamically receive its value from the msg properties configured in the preceding nodes. These nodes have already defined the appropriate topics for each type of MQTT message.
+完成后即完成 MQTT 服务器配置。Topic 属性保持为空，其值将由前述节点中的 msg 属性动态传入，这些节点已为各类 MQTT 消息设置了对应主题。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/46-ncd-to-thingsboard-node-red-mqtt-server.png)
 
 <br>
-To save the changes made within the MQTT out node, click on the "**Done**" icon.
+保存 MQTT 输出节点的修改后，点击 **「Done」** 图标。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/47-ncd-to-thingsboard-node-red-done.png)
 
 <br>
-Once the MQTT credentials are configured, the next time the NCD vibration sensor transmits a message, it will be published to ThingsBoard via MQTT on the corresponding topic. To save and apply the changes made in your Node-RED application, click the "**Deploy**" button located at the top-right corner of the Node-RED editor.
+配置好 MQTT 凭据后，NCD 振动传感器再次上报时，数据将经 MQTT 在对应主题下发布到 ThingsBoard。要保存并应用 Node-RED 中的修改，请点击编辑器右上角的 **「Deploy」** 按钮。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/48-ncd-to-thingsboard-node-red-deploy.png)
 
 <br>
-Once you press the "**Deploy**" button, you will see the status "**connecting**" displayed just below the MQTT out node. This indicates that the system is attempting to establish a connection with the MQTT server.
+点击 **「Deploy」** 后，MQTT 输出节点下方会显示 **connecting**，表示正在尝试连接 MQTT 服务器。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/48-ncd-to-thingsboard-node-red-mqtt-node.png)
 
 <br>
-Once the connection is successfully established, you should see the status change to "**connected**", indicating that the Node-RED instance is now communicating with the MQTT server.
+连接成功后，状态会变为 **connected**，表示 Node-RED 已与 MQTT 服务器通信。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/49-ncd-to-thingsboard-node-red-mqtt-node-connected.png)
 
 <br>
-To test communication, you can manually **trigger a data transmission** from the NCD Vibration Sensor by pressing the "**RESET**" button inside the sensor. To access the button, remove the four screws from the white casing. Once inside, locate the RESET button and press it once.
+要测试通信，可手动触发 NCD 振动传感器上报：按下传感器内部的 **RESET** 按钮。需先卸下白色外壳上的四颗螺丝，找到 RESET 按钮并按一次。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/50-ncd-to-thingsboard-vibration-reset-button.jpg)
 
 {% capture difference %}
-**Note**: It is also possible to wait for the next transmission from the sensor to perform the test, without the need to press the RESET button, as the sensor sends data periodically at user-defined intervals.
+**说明**：也可不按 RESET，等待传感器按用户设定周期下一次上报后再进行测试。
 {% endcapture %}
 {% include templates/info-banner.md content=difference %}
 
-Once a new message is transmitted by the sensor, you should be able to see some messages into the debug window that comes from the "**debug thingsboard**" node, you can identify this messages by the **msg.topic** property:
+传感器发送新消息后，调试窗口会显示来自 **debug thingsboard** 节点的消息，可通过 **msg.topic** 识别：
 
 - **v1/gateway/connect**   
 - **v1/gateway/attributes**   
@@ -392,13 +392,13 @@ Once a new message is transmitted by the sensor, you should be able to see some 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/51-ncd-to-thingsboard-node-red-mqtt-messages.png)
 
 <br>
-When you press the "**RESET**" button on the sensor, it first attempts to establish wireless network communication. Once the sensor successfully connects to the **Enterprise IIoT Gateway** network, it transmits a **RUN** message. Afterward, the sensor sends a **sensor_data** message.
-The flow then uses the information from the RUN and sensor_data messages to build the **connect**, **attributes**, and **telemetry** messages. Let&#39;s break down each of these messages in detail.
+按下传感器上的 **RESET** 后，传感器会先尝试建立无线网络连接；成功接入 **Enterprise IIoT 网关** 网络后发送 **RUN** 消息，随后发送 **sensor_data** 消息。
+流会利用 RUN 与 sensor_data 中的信息组装 **connect**、**attributes**、**telemetry** 消息。下面分别说明这三类消息。
 
-## Connect message
+## Connect 消息
 
-This first message is generated when the **Industrial IoT Wireless Vibration Temperature Sensor** successfully establishes a connection with the **Enterprise IIoT Gateway**. **The Wireless Gateway node** receives the **sensor_mode** message, which contains the connection status of the sensor. The flow then uses a **switch node** to check if the message is a **RUN** message, indicating the sensor is successfully connected and operational.
-If the message is a **RUN** message, the flow extracts the **MAC address** of the sensor and formats the message according to the **ThingsBoard API**. This message is crucial as it informs ThingsBoard that the device is successfully connected to the Gateway, allowing the platform to recognize the sensor and begin receiving telemetry and attribute data for further analysis and visualization.
+当 **工业物联网无线振动温度传感器** 与 **Enterprise IIoT 网关** 成功建立连接时，会生成第一条消息。**Wireless Gateway** 节点收到包含传感器连接状态的 **sensor_mode** 消息后，流通过 **switch** 节点判断是否为 **RUN** 消息（表示传感器已成功连接并可工作）。
+若为 **RUN** 消息，流会提取传感器 **MAC 地址** 并按 **ThingsBoard API** 格式化。该消息用于告知 ThingsBoard 设备已成功连接网关，平台可识别传感器并开始接收遥测与属性数据以供分析与可视化。
 
 ```
 Topic: v1/gateway/connect
@@ -412,11 +412,11 @@ Message: {
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/52-ncd-to-thingsboard-node-red-mqtt-connect.png)
 
-### Attributes message
+### Attributes 消息
 
-To build this message, the flow uses the **sensor_data** message, which contains essential sensor data. It extracts key pieces of information such as the **sensor name**, **firmware version**, **node ID**, and **sensor type**. This data is then formatted according to the **ThingsBoard attributes API**, which requires the data to be in key-value pair format. The flow sends this message only once to ThingsBoard.
+该消息由流根据 **sensor_data** 构建，从中提取 **传感器名称**、**固件版本**、**节点 ID**、**传感器类型** 等关键信息，并按 **ThingsBoard 属性 API** 的键值对格式封装。流仅向 ThingsBoard 发送一次该消息。
 
-In ThingsBoard, **device attributes** are key-value pairs that are associated with a device. These attributes are used to store important information, such as configuration settings, metadata, and operational details, providing context for the device. By including the sensor's attributes, ThingsBoard can store relevant information like the sensor's name, its version, and other characteristics, which are crucial for monitoring and managing the device efficiently within the platform.
+在 ThingsBoard 中，**设备属性** 是与设备关联的键值对，用于存储配置、元数据与运行信息等，为设备提供上下文。通过上传传感器属性，ThingsBoard 可保存传感器名称、版本等特征，便于在平台内监控与管理设备。
 
 ```
 Topic: v1/gateway/attributes
@@ -437,11 +437,11 @@ Message:{
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/53-ncd-to-thingsboard-node-red-mqtt-attributes.png)
 
-### Telemetry message
+### Telemetry 消息
 
-This message contains the real-time **sensor data**, which includes key readings such as **temperature**, **vibration**, and **battery percentage**. The flow formats this data and publishes it to **ThingsBoard** as **telemetry data**. Telemetry data in ThingsBoard is used for real-time monitoring and visualization, enabling users to track the sensor's status and performance over time.
+该消息包含实时 **传感器数据**，如 **温度**、**振动**、**电池电量** 等。流将数据格式化后以 **遥测数据** 形式发布到 **ThingsBoard**。ThingsBoard 中的遥测用于实时监控与可视化，便于用户跟踪传感器状态与历史表现。
 
-By sending this telemetry message, the sensor's data is continuously updated on the ThingsBoard platform, where it can be displayed on dashboards for analysis, triggering alerts, or taking other actions based on the sensor&#39;s readings. This allows for effective monitoring and management of sensor networks in industrial IoT applications.
+通过发送该遥测消息，传感器数据会在 ThingsBoard 上持续更新，可在仪表板中展示、用于分析、触发告警或根据读数执行其他操作，从而在工业物联网应用中实现有效的传感器网络监控与管理。
 
 ```
 Topic: v1/gateway/attributes
@@ -463,42 +463,42 @@ Message: {
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/54-ncd-to-thingsboard-debug-sensor-data.png)
 
-## Checking connection to ThingsBoard Cloud
+## 检查与 ThingsBoard Cloud 的连接
 
-Now, return to the **ThingsBoard** platform. You will notice that a new device has been automatically added, identified by its **MAC address**. Both the **Enterprise IIoT Gateway** and the **Sensor device** will show an **Active** state. The system will automatically update the device status based on the sensor&#39;s communication.
-You can click on the newly added device to explore its details, **Attributes**, **Latest telemetry**, **Alarms**, **Events**, **Relations**, **Audit Logs**, among others. By reviewing these sections, you can gain deeper insights into the device's status and performance within the ThingsBoard platform.
+返回 **ThingsBoard** 平台后，会看到已按 **MAC 地址** 自动添加新设备。**Enterprise IIoT 网关** 与 **传感器设备** 均会显示为 **Active**。系统会根据传感器通信情况自动更新设备状态。
+可点击新设备查看 **属性**、**最新遥测**、**告警**、**事件**、**关系**、**审计日志** 等，以了解设备在 ThingsBoard 中的状态与运行情况。
 
 {% assign createdDevice1 = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/created-new-device-1-pe.png,
-        title: Now, return to the **ThingsBoard** platform. You will notice that a new device has been automatically added, identified by its **MAC address**. Both the **Enterprise IIoT Gateway** and the **Sensor device** will show an **Active** state. The system will automatically update the device status based on the sensor's communication.
+        title: 返回 **ThingsBoard** 平台后，会看到已按 **MAC 地址** 自动添加新设备；**Enterprise IIoT 网关** 与 **传感器设备** 均为 **Active**，系统会根据传感器通信自动更新状态。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=createdDevice1 %}
 
-You can click on the "**Attributes**" tab to view the newly added sensor attributes. These attributes are typically updated once and do not change every time the sensor transmits data. They represent static or infrequent details about the sensor, such as:
+可点击 **「Attributes」** 选项卡查看新添加的传感器属性。这些属性一般只更新一次，不会随每次上报变化，表示传感器的静态或较少变更信息，例如：
 
-- Sensor Name: The name assigned to the sensor for easy identification.
-- Firmware Version: The version of the firmware currently installed on the sensor.
-- Node ID: A unique identifier for the sensor within the network.
-- Sensor Type: The type of sensor.
+- 传感器名称：便于识别的名称。
+- 固件版本：传感器当前固件版本。
+- 节点 ID：网络中该传感器的唯一标识。
+- 传感器类型：传感器类型。
 
 {% assign createdDevice2 = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/created-new-device-2-pe.png,
-        title: You can click on the "**Attributes**" tab to view the newly added sensor attributes.
+        title: 可点击 **「Attributes」** 选项卡查看新添加的传感器属性。
 '
 %}
 
 {% include images-gallery.liquid imageCollection=createdDevice2 %}
 
-You can also view the latest sensor telemetry under the "**Latest telemetry**" tab. This section displays the sensor's real-time data, such as temperature, vibration, and battery percentage. These values are updated every time the sensor transmits data to the ThingsBoard platform. This telemetry data is of primary interest for monitoring the sensor's performance and status. You can use this data to create alarms or build dashboards that visually represent the sensor's real-time measurements. You should see something similar to this, displaying the updated values each time the sensor sends data.
+可在 **「Latest telemetry」** 选项卡下查看最新传感器遥测，包括温度、振动、电池电量等实时数据。每次传感器向 ThingsBoard 上报时这些值会更新，是监控传感器性能与状态的主要数据来源，可用于创建告警或构建展示实时测量的仪表板。每次传感器发送数据后，界面会显示更新后的数值，与下图类似。
 
 {% assign createdDevice3 = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/created-new-device-3-pe.png,
-        title: You can also view the latest sensor telemetry under the "**Latest telemetry**" tab.
+        title: 可在 **「Latest telemetry」** 选项卡下查看最新传感器遥测。
 '
 %}
 
@@ -506,83 +506,83 @@ You can also view the latest sensor telemetry under the "**Latest telemetry**" t
 
 ## Create a ThingsBoard Dashboard
 
-The next step is to create a ThingsBoard [Dashboard](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}. The **Dashboard** in ThingsBoard allows users to visualize and monitor data collected from IoT devices. Let's create a dashboard and add some [widgets](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"} to display a list of entities and their latest NCD Sensor values.
-To create a new, empty dashboard, follow these steps:
+下一步是在 ThingsBoard 中创建[仪表板](/docs/{{docsPrefix}}user-guide/dashboards/){:target="_blank"}。ThingsBoard 的**仪表板**用于可视化与监控从 IoT 设备采集的数据。请创建仪表板并添加若干[部件](/docs/{{docsPrefix}}user-guide/widgets/){:target="_blank"}，以展示实体列表及其最新 NCD 传感器数值。
+创建新的空白仪表板可按以下步骤操作：
 
 {% assign addingDashboard = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-1-pe.png,
-        title: Navigate to the "Dashboards" page through the main menu on the left of the screen. By default, you navigate to the dashboard group "All". Click the "**+**" sign in the upper right corner of the screen, and select "**Create new dashboard**" from the drop-down menu;
+        title: 通过左侧主菜单进入 **「Dashboards」** 页面（默认进入「All」分组），点击右上角 **「+」**，从下拉菜单选择 **「创建新仪表板」**；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-2-pe.png,
-        title: In the opened dialog, it is necessary to enter a dashboard title, description is optional. Click "**Add**";
+        title: 在弹出对话框中输入仪表板标题，描述可选，点击 **「添加」**；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-3-pe.png,
-        title: Click the "**Add widget**" button at the top of the screen or click the large "**Add new widget**" icon in the center of the screen (if this is your first widget on this dashboard);
+        title: 点击屏幕顶部的「**添加部件**」按钮，或点击屏幕中央的「**添加新部件**」大图标（若为本仪表板首个部件）；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-4-pe.png,
-        title: Find the "**Digital gauges**" widget bundle and click on it;
+        title: 找到 **「Digital gauges」** 部件组并点击；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-5-pe.png,
-        title: Select the "**Mini gauge**" widget;
+        title: 选择「**迷你仪表盘**」部件；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-6-pe.png,
-        title: You will need to specify the device this widget will be linked to. In the "**Device**" property, select the device we have created. In the "**Data key**" property, clicking "**+Add**" will display a list of variables emitted by the sensor. In this case, select the "**Temperature**" option.
+        title: 在 **「Device」** 属性中选择已创建设备；在 **「Data key」** 中点击 **「+Add」** 会列出传感器上报的变量，本例选择 **「Temperature」**。
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-7-pe.png,
-        title: Within the properties, you can customize the unit of measurement, operation range, number of decimal places to be displayed, style, and many other settings. To add the widget to your dashboard, click the "**Add**" icon;
+        title: 在属性中可设置单位、量程、小数位数、样式等。点击 **「添加」** 图标将部件加入仪表板；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-8-pe.png,
-        title: To make the widget slightly larger, simply grab the bottom right corner and drag it.
+        title: 可拖拽部件右下角以略微放大。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addingDashboard %}
 
-Once this is done, you should see the gauge widget added to your dashboard, displaying the most recent value sent by the sensor, in this case, 23 degrees Celsius.
+完成后，仪表板上会出现该仪表部件，显示传感器上报的最新值（本例为 23 摄氏度）。
 
-When you hover over the widget in 'Edit' mode, you will see buttons in the top-right corner of the widget. These buttons allow you to edit, download, or delete the widget, as well as adjust its position or size.
+在「编辑」模式下将鼠标悬停于部件上时，部件右上角会显示按钮，用于编辑、下载、删除部件或调整位置与大小。
 
-To add more widgets to the dashboard, follow this steps:
+添加更多部件时可按以下步骤操作：
 
 {% assign addingDashboard2 = '
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-9-pe.png,
-        title: Click the "**Add widget**" button again;
+        title: 再次点击「**添加部件**」；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-10-pe.png,
-        title: In this case, we will add a second widget to display the sensor&#39;s battery percentage. Go to the "**Status indicators**" widget bundle;
+        title: 本例添加第二个部件以显示传感器电池电量。进入 **「Status indicators」** 部件组；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-11-pe.png,
-        title: Select the "**Battery level**" widget;
+        title: 选择「**电池电量**」部件；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-12-pe.png,
-        title: You will need to set the "**Device**" property again with the NCD device that we previously added. The next step is to set the "**Data key**" property. Click on the "**Data key**" field, and this will display the list of variables emitted by the NCD vibration sensor. From the list, select the property defined as "**battery_percent**";
+        title: 将 **「Device」** 再次设为之前添加的 NCD 设备；在 **「Data key」** 中点击并选择 NCD 振动传感器上报变量列表中的 **「battery_percent」**；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-13-pe.png,
-        title: We will adjust the layout by selecting the "**Horizontal. Divided**" option under the "**Appearance**" properties. ThingsBoard provides real-time visualization of available layout types for this widget, making it a valuable tool for fine-tuning this property. Click "**Add**";
+        title: 在 **「Appearance」** 下选择 **「Horizontal. Divided」** 调整布局。ThingsBoard 会实时预览该部件的布局效果。点击 **「添加」**；
     ===
         image: /images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-14-pe.png,
-        title: Edit the size and position of the widget according to your needs. To save any changes made to your ThingsBoard dashboard, you should click the "**Save**" button located in the upper right corner.
+        title: 按需调整部件大小与位置。保存对 ThingsBoard 仪表板的修改请点击右上角 **「保存」**。
 '
 %}
 
 {% include images-gallery.liquid showListImageTitles="true" imageCollection=addingDashboard2 %}
 
-This way, you can add as many widgets as you need to your dashboard. The steps for doing so are the same as shown earlier. Each widget can be **customized** and **adjusted**, including **style**, **color**, **unit of measurement**, **icon**, **elements**, **distribution**, **size**, and many other options. You can also link each widget to the variables emitted by the vibration sensor.
+按需可添加任意数量部件，步骤与前述相同。每个部件均可 **自定义** 与 **调整**，包括 **样式**、**颜色**、**单位**、**图标**、**元素**、**分布**、**大小** 等，并可绑定振动传感器上报的变量。
 
-We have added several other widgets to our dashboard and linked each one to the vibration variables emitted by the sensor in the same way. The final layout of our dashboard looks as follows.
-You can view the dashboard in full screen by clicking the "**Expand to fullscreen**" button located at the top right.
+我们已按同样方式在仪表板上添加了若干部件并绑定传感器振动变量。仪表板最终布局如下。
+点击右上角 **「Expand to fullscreen」** 可全屏查看仪表板。
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-17-pe.png)
 
-Finally, our dashboard is displayed as follows:
+最终仪表板效果如下：
 
 ![image](/images/devices-library/ready-to-go-devices/ncd-vibration-temperature-sensor/adding-new-dashboard-18-pe.png)
 
-## Summary
+## 总结
 
-This tutorial explained the basic, step-by-step process of integrating the NCD Industrial IoT Wireless Vibration and Temperature Sensor with ThingsBoard Cloud, enabling you to manage and visualize the vibration and temperature variables sent by the NCD sensor.
+本教程介绍了将 NCD 工业物联网无线振动温度传感器与 ThingsBoard Cloud 集成的步骤，便于您管理与可视化 NCD 传感器上报的振动与温度数据。
 
-After successfully connecting the NCD Industrial IoT Wireless Vibration and Temperature Sensor to the ThingsBoard platform, you can expand its functionality by setting up thresholds and alarms for sensor data, enabling notifications via email, SMS, or web when thresholds are exceeded. You can manage users by adding them with specific roles and permissions, allowing customized access to devices and dashboards. 
+将 NCD 工业物联网无线振动温度传感器成功接入 ThingsBoard 后，可进一步为传感器数据设置阈值与告警、在超限时通过邮件、短信或网页通知；也可通过为用户分配角色与权限，实现对设备与仪表板的定制访问。 
 {% include add-device-banner.liquid %}

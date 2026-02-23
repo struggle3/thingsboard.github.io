@@ -1,4 +1,4 @@
-It's a good practice to create a dedicated namespace for your TBMQ cluster deployment:
+建议为 TBMQ 集群部署创建专用命名空间：
 
 ```bash
 kubectl create namespace tbmq
@@ -10,5 +10,4 @@ kubectl config set-context --current --namespace=tbmq
 ```
 {: .copy-code}
 
-This sets tbmq as the default namespace for your current context, so you don’t need to pass --namespace to every
-command.
+这将把 tbmq 设为当前上下文的默认命名空间，因此您无需在每个命令中传递 --namespace 参数。

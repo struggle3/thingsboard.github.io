@@ -1,6 +1,6 @@
 ---
 layout: docwithnav-mobile-pe
-title: Configure app icon and splash screen in ThingsBoard PE Mobile Application
+title: 在ThingsBoard PE移动应用中配置应用图标和启动画面
 
 ---
 {% assign docsPrefix = "pe/" %}

@@ -1,9 +1,7 @@
-Review the [release notes](/docs/{{docsPrefix}}mqtt-broker/releases/) and [upgrade instruction](/docs/{{docsPrefix}}mqtt-broker/install/upgrade-instructions/)
-for detailed information on the latest changes.
+查看 [release notes](/docs/{{docsPrefix}}mqtt-broker/releases/) 和 [升级说明](/docs/{{docsPrefix}}mqtt-broker/install/upgrade-instructions/) 了解最新变更详情。
 
 {% if docsPrefix == null %}
-If there are no **Upgrade to x.x.x** notes for your version, you can proceed directly with the general [upgrade instructions](#run-upgrade).
+若您当前版本无 **Upgrade to x.x.x** 说明，可直接按[升级说明](#run-upgrade)执行。
 {% endif %}
 
-If the documentation does not cover the specific upgrade instructions for your case, 
-please [contact us](/docs/{{docsPrefix}}mqtt-broker/help/) so we can provide further guidance.
+若文档未涵盖您的升级场景，请[联系我们](/docs/{{docsPrefix}}mqtt-broker/help/)以获取进一步指导。

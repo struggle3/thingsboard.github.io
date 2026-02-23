@@ -1,12 +1,12 @@
 - Turn on the "**Create Loriot Application output**" option. 
 - Fill in the "**Server**" and "**Application ID**" fields.
 - Select the "**Basic**" credential type and enter your Loriot account credentials.
-- Click "Add" to confirm creating integration.
+- 点击「Add」确认创建 integration。
 
 ![image](/images/user-guide/integrations/loriot/loriot-add-integration-4-2-pe.png)
 
 <br>
-You can find the values for "**Server**" and "**Application ID**" in the Loriot UI:
+「**Server**」和「**Application ID**」的值可在 Loriot UI 中查看：
 
 **Server**:
 

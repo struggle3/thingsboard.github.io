@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-pe-mqtt-broker
-title: What is TBMQ Professional Edition?
-description: TBMQ key features, architecture, etc.
+title: 什么是 TBMQ 专业版？
+description: TBMQ 主要特性、架构等
 ---
 
 {% assign docsPrefix = "pe/" %}

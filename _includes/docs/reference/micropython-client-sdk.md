@@ -1,30 +1,24 @@
 * TOC
 {:toc}
 
-### Overview
+### 概述
 
-The [MicroPython Client SDK](https://github.com/thingsboard/thingsboard-micropython-client-sdk) is a software
-development kit for client-side integration of your MicroPython projects. It allows you to connect your MicroPython 
-devices to ThingsBoard using MQTT protocol and send telemetry data, attributes, and receive RPC calls. The SDK 
-provides a simple and easy-to-use API for connecting to ThingsBoard and sending data, making it easier for developers 
-to integrate their MicroPython devices with the platform.
+[MicroPython Client SDK](https://github.com/thingsboard/thingsboard-micropython-client-sdk)是用于MicroPython项目客户端集成的软件开发套件。允许您使用MQTT协议将MicroPython设备连接到ThingsBoard，发送遥测数据、属性并接收RPC调用。SDK提供简洁易用的API，便于开发者将MicroPython设备与平台集成。
 
-MicroPython Client SDK supports the following features:
+MicroPython Client SDK支持以下功能：
 
-- Connecting to ThingsBoard using MQTT protocol.
-- Sending attributes to ThingsBoard.
-- Sending telemetry data to ThingsBoard.
-- Receiving RPC calls from ThingsBoard.
-- Request client and shared attributes from ThingsBoard.
-- Subscribing to attribute updates from ThingsBoard.
-- Device claiming.
-- Device provisioning.
+- 使用MQTT协议连接ThingsBoard。
+- 向ThingsBoard发送属性。
+- 向ThingsBoard发送遥测数据。
+- 从ThingsBoard接收RPC调用。
+- 从ThingsBoard请求客户端和共享属性。
+- 订阅ThingsBoard的属性更新。
+- 设备认领。
+- 设备预配置。
 
-### Installation
+### 安装
 
-To install the MicroPython Client SDK, you can use the
-[mip](https://docs.micropython.org/en/latest/reference/packages.html) package manager. Run the following command in
-the REPL or in your code:
+要安装MicroPython Client SDK，可使用[mip](https://docs.micropython.org/en/latest/reference/packages.html)包管理器。在REPL或代码中运行以下命令：
 
 ```python
 import mip
@@ -33,8 +27,7 @@ mip.install('github:thingsboard/thingsboard-micropython-client-sdk')
 ```
 {: .copy-code}
 
-It is recommended to use the following code snippet to make sure that the SDK is installed and imported correctly,
-and also to not install the SDK every time you run your code:
+建议使用以下代码片段，以确保SDK正确安装和导入，并避免每次运行代码时重复安装：
 
 ```python
 try:
@@ -48,34 +41,31 @@ except ImportError:
 ```
 {: .copy-code}
 
-### Methods
+### 方法
 
-#### Introduction
+#### 简介
 
-The MicroPython Client SDK has a `TBDeviceMqttClient` class that provides methods for connecting to ThingsBoard and
-sending data.
+MicroPython Client SDK提供`TBDeviceMqttClient`类，用于连接ThingsBoard并发送数据。
 
-This class is designed to be simple to use and easy to understand for developers who are new to MicroPython or
-ThingsBoard.
+该类设计简洁，便于MicroPython或ThingsBoard新手使用。
 
 #### connect
 
-Connects to ThingsBoard using MQTT protocol. This method should be called before sending any data to ThingsBoard.
-Credentials for connecting to ThingsBoard should be provided when creating an instance of the `TBDeviceMqttClient` 
-class. When you call the `connect` method, `self.connected` property of the client will be set to `True`.
+使用MQTT协议连接ThingsBoard。在向ThingsBoard发送任何数据前需调用此方法。
+创建`TBDeviceMqttClient`实例时需提供连接凭证。调用`connect`后，客户端的`self.connected`将设为`True`。
 
-**Method Syntax**
+**方法语法**
 
 `client.connect(timeout=10)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Default value** | **Description**                                           |
 |:--------------|-------------------|:----------------------------------------------------------|
-| timeout       | **10**            | (Optional) Time to establish a connection to ThingsBoard. |
+| timeout       | **10**            | （可选）建立与ThingsBoard连接的超时时间。 |
 | ---           |                   |                                                           |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Default connecting
@@ -91,17 +81,14 @@ result = client.connect(timeout=20)
 
 #### disconnect
 
-Disconnects from ThingsBoard. This method can be called after connecting to ThingsBoard. It is recommended to call 
-this method when you no longer need to send data to ThingsBoard or when you want to free up resources. After calling 
-this method, you will need to call the [connect](/docs/reference/micropython-client-sdk/#connect) method again to send 
-data to ThingsBoard. When you call the `disconnect` method, `self.connected` property of the client will be set 
-to `False`.
+断开与ThingsBoard的连接。连接后即可调用。建议在不再需要发送数据或需释放资源时调用。
+调用后需再次调用[connect](/docs/reference/micropython-client-sdk/#connect)才能发送数据。调用`disconnect`后，`self.connected`将设为`False`。
 
-**Method Syntax**
+**方法语法**
 
 `client.disconnect()`
 
-**Example usage**
+**使用示例**
 
 ```python
 client.connect()
@@ -114,21 +101,20 @@ client.disconnect()
 
 #### send_attributes
 
-Sends attributes to ThingsBoard. This method can be called after connecting to ThingsBoard. Method supports sending
-attributes in key-value pairs.
+向ThingsBoard发送属性。连接后即可调用。支持以键值对形式发送。
 
-**Method Syntax**
+**方法语法**
 
 `client.send_attributes(data)`
 
-**Arguments**
+**参数**
 
 | **Arguments** | **Description**                                                 |
 |:--------------|:----------------------------------------------------------------|
-| data          | (Required) Data that will be sent as attributes to ThingsBoard. |
+| data          | （必填）将作为属性发送至ThingsBoard的数据。 |
 | ---           |                                                                 |
 
-**Example usage**
+**使用示例**
 
 ```python
 attributes = {"sensorModel": "DHT-22", "attribute_2": "value"}
@@ -138,11 +124,9 @@ client.send_attributes(attributes)
 
 #### send_telemetry
 
-Sends telemetry data to ThingsBoard. This method can be called after connecting to ThingsBoard. Method supports 
-sending telemetry data in different formats, key-value pairs, and lists. Also, it supports sending telemetry data 
-grouped by timestamp, which is useful for sending historical data to ThingsBoard.
+向ThingsBoard发送遥测数据。连接后即可调用。支持以键值对、列表等格式发送。也支持按时间戳分组，便于发送历史数据。
 
-**Method Syntax**
+**方法语法**
 
 `client.send_telemetry(data)`
 
@@ -150,10 +134,10 @@ grouped by timestamp, which is useful for sending historical data to ThingsBoard
 
 | **Arguments** | **Description**                                                  |
 |:--------------|:-----------------------------------------------------------------|
-| data          | (Required) Data that will be sent as a telemetry to ThingsBoard. |
+| data          | （必填）将作为遥测发送至ThingsBoard的数据。 |
 | ---           |                                                                  |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Sending telemetry data in dictionary format
@@ -189,7 +173,7 @@ will be called with empty result.
 | callback      | (Optional) Callback function that will be called when the requested attributes are received from ThingsBoard. The callback function should accept two arguments: `result` and `exception`, which will contain the requested attributes.                               |
 | ---           |                                                                                                                                                                                                                                                                       |
 
-**Example usage**
+**使用示例**
 
 ```python
 def on_attributes_change(result, exception=None):
@@ -225,7 +209,7 @@ the [Device claiming](/docs/user-guide/claiming-devices/) section of the documen
 | duration_ms   | (Optional) Duration in milliseconds for which the claim code will be valid. If not provided, the claim code will be valid indefinitely until it is used to claim a device. |
 | ---           |                                                                                                                                                                            |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Claiming a device with a claim code that will be valid indefinitely until it is used to claim a device
@@ -257,7 +241,7 @@ the [unsubscribe_from_attribute](/docs/reference/micropython-client-sdk/#unsubsc
 | callback      | (Required) A user-defined function triggered whenever a subscribed attribute is updated on ThingsBoard. The callback must accept two parameters: result (the updated data dictionary) and *args (additional metadata). |
 | ---           |                                                                                                                                                                                                                        |
 
-**Example usage**
+**使用示例**
 
 ```python
 def callback(result, *args):
@@ -287,7 +271,7 @@ the [unsubscribe_from_attribute](/docs/reference/micropython-client-sdk/#unsubsc
 | callback      | (Required) Triggers when any shared attribute change is pushed from the server. The callback receives a result object containing the modified key-value pairs and *args for extended context. |
 | ---           |                                                                                                                                                                                               |
 
-**Example usage**
+**使用示例**
 
 ```python
 def callback(result, *args):
@@ -316,7 +300,7 @@ the associated callback will no longer trigger upon server-side changes.
 | subscription_id | (Required) Subscription ID returned when subscribing to attribute updates using the [subscribe_to_attribute](/docs/reference/micropython-client-sdk/#subscribe_to_attribute) or [subscribe_to_all_attributes](/docs/reference/micropython-client-sdk/#subscribe_to_all_attributes) methods.         |
 | ---             |                                                                                                                                                                                                                                                                                                     |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Subscribing to attribute updates
@@ -349,7 +333,7 @@ handler, passing the following arguments:
 | handler       | Defines the logic to execute when ThingsBoard initiates a remote command. The function receives two parameters: request_id, representing the transaction ID, and request_body, containing the specific request payload. |
 | ---           |                                                                                                                                                                                                                         |
 
-**Example usage**
+**使用示例**
 
 ```python
 def handler(request_id, request_body):
@@ -377,7 +361,7 @@ call this method may result in `request timeout` errors on the ThingsBoard dashb
 | response      | (Required) Data that will be sent as a reply to the received RPC.               |
 | ---           |                                                                                 |
 
-**Example usage**
+**使用示例**
 
 ```python
 def handler(request_id, request_body):
@@ -413,7 +397,7 @@ The returned provision request should be sent to ThingsBoard using the
 | gateway          | (Optional) Flag that indicates whether the provision request is for a gateway device. If not provided, the provision request will be for a regular device.   |
 | ---              |                                                                                                                                                              |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Forming provision request with required arguments
@@ -454,7 +438,7 @@ provision key and provision secret. If the request is not successful, an excepti
 | provision_request | (Required) Request that will be sent to ThingsBoard for device provisioning. The provision request should be formed using the `get_provision_request` static method. |
 | ---               |                                                                                                                                                                      |
 
-**Example usage**
+**使用示例**
 
 ```python
 # Forming provision request
@@ -464,13 +448,11 @@ provisioned_credentials = client.provision("thingsboard.cloud", 1883, provision_
 ```
 {: .copy-code}
 
-### Concepts
+### 概念
 
-#### Introduction
+#### 简介
 
-In this section, we will go over the core concepts of the MicroPython Client SDK, such as connecting to ThingsBoard, 
-sending and receiving data. Understanding these concepts will help you to use the MicroPython Client SDK effectively 
-in your projects.
+本节介绍MicroPython Client SDK的核心概念，如连接ThingsBoard、发送和接收数据。理解这些概念有助于在项目中有效使用SDK。
 
 Let's review the main concepts of the MicroPython Client SDK using the following code example:
 
@@ -534,13 +516,9 @@ while True:
 ```
 {:.copy-code.expandable-15}
 
-#### Connecting to ThingsBoard
+#### 连接ThingsBoard
 
-To connect to ThingsBoard using the MicroPython Client SDK, instantiate the `TBDeviceMqttClient` class by providing 
-your server credentials: host, port, and access token. Once the client is initialized, invoke the 
-[connect()](/docs/reference/micropython-client-sdk/#connect) method to establish the MQTT session. After a successful 
-connection, the device is ready to transmit telemetry or subscribe to updates. We recommend the following minimal code 
-snippet to use:
+使用MicroPython Client SDK连接ThingsBoard时，实例化`TBDeviceMqttClient`并传入host、port和access token。初始化后调用[connect()](/docs/reference/micropython-client-sdk/#connect)建立MQTT会话。连接成功后即可发送遥测或订阅更新。推荐使用以下最小代码：
 
 ```python
 import network
@@ -566,21 +544,14 @@ while True:
 ```
 {: .copy-code}
 
-Before communicating with the ThingsBoard, the device must bridge the gap between the hardware and the network:
+与ThingsBoard通信前，设备需先建立网络连接：
 
-- The network module initializes the Wi-Fi instance. We use STA_IF (Station Interface) to connect the device to an existing
-  access point.
-- The `TBDeviceMqttClient` is the primary class. It requires ThingsBoard host and a unique Access Token generated in the
-  ThingsBoard device page.
+- 网络模块初始化Wi-Fi实例，使用STA_IF（站点接口）连接至现有接入点。
+- `TBDeviceMqttClient`是主类，需要ThingsBoard host和在设备页面生成的唯一Access Token。
 
-#### Handling Server-Side RPC
+#### 处理服务端RPC
 
-[Remote Procedure Calls](/docs/user-guide/rpc/) allow ThingsBoard to send commands to your device 
-(e.g., "Turn on the LED" or "Reset"). To handle these commands, you need to set a handler function using
-the [set_server_side_rpc_request_handler](/docs/reference/micropython-client-sdk/#set_server_side_rpc_request_handler)
-method. This handler will be called whenever a server-side RPC request is received from ThingsBoard. The handler
-function should accept two arguments: `request_id` and `request_body`, which will contain the ID of the received RPC
-request and the data of the received RPC request, respectively.
+[远程过程调用](/docs/user-guide/rpc/)允许ThingsBoard向设备发送命令（如“打开LED”或“重置”）。要处理这些命令，需通过[set_server_side_rpc_request_handler](/docs/reference/micropython-client-sdk/#set_server_side_rpc_request_handler)设置处理器。收到服务端RPC请求时该处理器会被调用，函数应接受`request_id`和`request_body`，分别对应请求ID和请求数据。
 
 ```python
 # This callback will be called when an RPC request is received from ThingsBoard.
@@ -595,29 +566,24 @@ client.set_server_side_rpc_request_handler(on_server_side_rpc_request)
 ```
 {: .copy-code}
 
-In the SDK, we don't "wait" for a command, instead we provide a callback function (`on_server_side_rpc_request`):
+SDK不会“等待”命令，而是通过回调`on_server_side_rpc_request`处理：
 
-- Tells the client which function to run when a RPC arrives using [set_server_side_rpc_request_handler()](/docs/reference/micropython-client-sdk/#set_server_side_rpc_request_handler).
-- When a RPC arrives, the SDK automatically passes the `request_id` (used for the reply) and the `request_body` to your function.
-- The [send_rpc_reply()](/docs/reference/micropython-client-sdk/#send_rpc_reply) informs the server that the RPC was received and processed
-  successfully.
+- 使用[set_server_side_rpc_request_handler()](/docs/reference/micropython-client-sdk/#set_server_side_rpc_request_handler)指定收到RPC时执行的函数。
+- 收到RPC时，SDK自动将`request_id`和`request_body`传入处理器。
+- [send_rpc_reply()](/docs/reference/micropython-client-sdk/#send_rpc_reply)告知服务器RPC已收到并处理成功。
 
-#### The Non-Blocking Loop
+#### 非阻塞循环
 
-The most critical part of the SDK implementation is the main loop. In MicroPython, if you use `time.sleep_ms()`, the 
-device is effectively "blind" to incoming messages during that pause.
+SDK实现中最关键的是主循环。在MicroPython中，使用`time.sleep_ms()`期间设备无法处理传入消息。
 
-`client.check_for_msg()` method is the "heartbeat" of your communication:
+`client.check_for_msg()`是通信的“心跳”：
 
-- It checks the MQTT buffer for incoming messages.
-- By wrapping it in a `safe_check_msg()` function, we ensure that if a network interruption occurs (an `OSError`), the program
-  doesn't crash, but simply logs the error and tries again in the next cycle.
+- 检查MQTT缓冲区中的传入消息。
+- 封装在`safe_check_msg()`中，确保网络中断（如`OSError`）时程序不崩溃，仅记录错误并在下一轮重试。
 
-#### Telemetry and Data Flow
+#### 遥测与数据流
 
-The SDK provides methods to send telemetry data to ThingsBoard. You can use the [send_telemetry()](/docs/reference/micropython-client-sdk/#send_telemetry) method to send
-data in various formats, including key-value pairs and lists. The SDK also supports sending telemetry data grouped by 
-timestamp, which is useful for sending historical data to ThingsBoard.
+SDK提供向ThingsBoard发送遥测的方法，可使用[send_telemetry()](/docs/reference/micropython-client-sdk/#send_telemetry)以键值对、列表等格式发送。SDK也支持按时间戳分组，便于发送历史数据。
 
 ```python
 # Main loop (non-blocking)
@@ -629,26 +595,19 @@ while True:
 ```
 {: .copy-code}
 
-By placing this inside the main loop, the device continuously streams its state. Because we use a non-blocking approach,
-the device can simultaneously send telemetry and receive RPC commands without one interrupting the other.
+将其置于主循环后，设备将持续上报状态。采用非阻塞方式，设备可同时发送遥测和接收RPC命令，互不阻塞。
 
-### Examples
+### 示例
 
-You can find more examples of using the MicroPython Client SDK in
-the [examples](https://github.com/thingsboard/thingsboard-micropython-client-sdk/tree/main/examples) directory of the
-[thingsboard-micropython-client-sdk](https://github.com/thingsboard/thingsboard-micropython-client-sdk) repository on
-GitHub.
+更多MicroPython Client SDK使用示例见GitHub上[thingsboard-micropython-client-sdk](https://github.com/thingsboard/thingsboard-micropython-client-sdk)仓库的[examples](https://github.com/thingsboard/thingsboard-micropython-client-sdk/tree/main/examples)目录。
 
-### Troubleshooting
+### 故障排除
 
-- **Mip installation failed with OSError: -202**
+- **Mip安装失败 OSError: -202**
 
-  This error can occur when the device is not connected to the internet or when there are issues with the network
-  connection. To resolve this issue, make sure that your device is connected to the internet and that there are no
-  issues with the network connection. You can also try restarting your device and running the installation command
-  again.
+  设备未联网或网络异常时可能出现此错误。请确保设备已连接互联网且网络正常。可尝试重启设备后再次运行安装命令。
 
-  Recommended firstly to establish a connection to the internet and then run the installation command:
+  建议先建立互联网连接再执行安装命令：
 
     ```python
     import network

@@ -6,7 +6,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -14,19 +14,19 @@
 			<td>server.address</td>
 			<td>HTTP_BIND_ADDRESS</td>
 			<td>0.0.0.0</td>
-			<td> Server bind-address</td>
+			<td> 服务器绑定地址</td>
 		</tr>
 		<tr>
 			<td>server.port</td>
 			<td>HTTP_BIND_PORT</td>
 			<td>8080</td>
-			<td> Server bind port</td>
+			<td> 服务器绑定端口</td>
 		</tr>
 		<tr>
 			<td>server.forward_headers_strategy</td>
 			<td>HTTP_FORWARD_HEADERS_STRATEGY</td>
 			<td>framework</td>
-			<td> Server forward headers strategy. Required for SWAGGER UI when reverse proxy is used</td>
+			<td> 服务器转发头策略。使用反向代理时SWAGGER UI需要</td>
 		</tr>
 		<tr>
 			<td>server.ssl.enabled</td>
@@ -38,61 +38,61 @@
 			<td>server.ssl.credentials.type</td>
 			<td>SSL_CREDENTIALS_TYPE</td>
 			<td>PEM</td>
-			<td> Server credentials type (PEM - pem certificate file; KEYSTORE - java keystore)</td>
+			<td> 服务器凭证类型(PEM-pem证书文件;KEYSTORE-java keystore)</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.pem.cert_file</td>
 			<td>SSL_PEM_CERT</td>
 			<td>server.pem</td>
-			<td> Path to the server certificate file (holds server certificate or certificate chain, may include server private key)</td>
+			<td> 服务器证书文件路径（含服务器证书或证书链，可包含服务器私钥）</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.pem.key_file</td>
 			<td>SSL_PEM_KEY</td>
 			<td>server_key.pem</td>
-			<td> Path to the server certificate private key file (optional). Required if the private key is not present in the server certificate file</td>
+			<td> 服务器证书私钥文件路径（可选）. Required if the private key is not present in the server certificate file</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.pem.key_password</td>
 			<td>SSL_PEM_KEY_PASSWORD</td>
 			<td>server_key_password</td>
-			<td> Server certificate private key password (optional)</td>
+			<td> 服务器证书私钥密码（可选）</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.type</td>
 			<td>SSL_KEY_STORE_TYPE</td>
 			<td>PKCS12</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td> Keystore类型(JKS或PKCS12)</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.store_file</td>
 			<td>SSL_KEY_STORE</td>
 			<td>classpath:keystore/keystore.p12</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td> 存放SSL证书的keystore路径</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.store_password</td>
 			<td>SSL_KEY_STORE_PASSWORD</td>
 			<td>thingsboard</td>
-			<td> Password used to access the key store</td>
+			<td> 访问keystore的密码</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.key_alias</td>
 			<td>SSL_KEY_ALIAS</td>
 			<td>tomcat</td>
-			<td> Key alias</td>
+			<td> 密钥别名</td>
 		</tr>
 		<tr>
 			<td>server.ssl.credentials.keystore.key_password</td>
 			<td>SSL_KEY_PASSWORD</td>
 			<td>thingsboard</td>
-			<td> Password used to access the key</td>
+			<td> 访问密钥的密码</td>
 		</tr>
 		<tr>
 			<td>server.http.max_payload_size</td>
 			<td>HTTP_MAX_PAYLOAD_SIZE_LIMIT_CONFIGURATION</td>
 			<td>/api/image*/**=52428800;/api/resource/**=52428800;/api/**=16777216</td>
-			<td> Semi-colon-separated list of urlPattern=maxPayloadSize pairs that define max http request size for specified url pattern. After first match all other will be skipped</td>
+			<td> urlPattern=maxPayloadSize对的列表（分号分隔），定义指定URL模式的最大HTTP请求大小。首次匹配后其余将被跳过</td>
 		</tr>
 		<tr>
 			<td>server.http2.enabled</td>
@@ -219,7 +219,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -238,7 +238,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -252,31 +252,31 @@
 			<td>zk.url</td>
 			<td>ZOOKEEPER_URL</td>
 			<td>localhost:2181</td>
-			<td> Zookeeper connect string</td>
+			<td> Zookeeper连接字符串</td>
 		</tr>
 		<tr>
 			<td>zk.retry_interval_ms</td>
 			<td>ZOOKEEPER_RETRY_INTERVAL_MS</td>
 			<td>3000</td>
-			<td> Zookeeper retry interval in milliseconds</td>
+			<td> Zookeeper重试间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>zk.connection_timeout_ms</td>
 			<td>ZOOKEEPER_CONNECTION_TIMEOUT_MS</td>
 			<td>3000</td>
-			<td> Zookeeper connection timeout in milliseconds</td>
+			<td> Zookeeper连接超时（毫秒）</td>
 		</tr>
 		<tr>
 			<td>zk.session_timeout_ms</td>
 			<td>ZOOKEEPER_SESSION_TIMEOUT_MS</td>
 			<td>3000</td>
-			<td> Zookeeper session timeout in milliseconds</td>
+			<td> Zookeeper会话超时（毫秒）</td>
 		</tr>
 		<tr>
 			<td>zk.zk_dir</td>
 			<td>ZOOKEEPER_NODES_DIR</td>
 			<td>/thingsboard</td>
-			<td> Name of the directory in zookeeper 'filesystem'</td>
+			<td> Zookeeper'文件系统'中的目录名</td>
 		</tr>
 		<tr>
 			<td>zk.recalculate_delay</td>
@@ -295,7 +295,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -320,7 +320,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -339,7 +339,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -442,7 +442,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -467,7 +467,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -493,7 +493,7 @@
 			<td>usage.stats.report.pack_size</td>
 			<td>USAGE_STATS_REPORT_PACK_SIZE</td>
 			<td>1024</td>
-			<td> Amount of statistic messages in pack</td>
+			<td> 每个包中的统计消息数</td>
 		</tr>
 		<tr>
 			<td>usage.stats.check.cycle</td>
@@ -522,7 +522,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -547,7 +547,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -578,7 +578,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -900,7 +900,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1292,7 +1292,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -1556,7 +1556,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2146,7 +2146,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2165,7 +2165,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2179,13 +2179,13 @@
 			<td>redis.standalone.host</td>
 			<td>REDIS_HOST</td>
 			<td>localhost</td>
-			<td> Redis connection host</td>
+			<td> Redis连接主机</td>
 		</tr>
 		<tr>
 			<td>redis.standalone.port</td>
 			<td>REDIS_PORT</td>
 			<td>6379</td>
-			<td> Redis connection port</td>
+			<td> Redis连接端口</td>
 		</tr>
 		<tr>
 			<td>redis.standalone.useDefaultClientConfig</td>
@@ -2197,37 +2197,37 @@
 			<td>redis.standalone.clientName</td>
 			<td>REDIS_CLIENT_NAME</td>
 			<td>standalone</td>
-			<td> This value may be used only if you used not default ClientConfig</td>
+			<td> 仅当使用非默认ClientConfig时生效</td>
 		</tr>
 		<tr>
 			<td>redis.standalone.connectTimeout</td>
 			<td>REDIS_CLIENT_CONNECT_TIMEOUT</td>
 			<td>30000</td>
-			<td> This value may be used only if you used not default ClientConfig</td>
+			<td> 仅当使用非默认ClientConfig时生效</td>
 		</tr>
 		<tr>
 			<td>redis.standalone.readTimeout</td>
 			<td>REDIS_CLIENT_READ_TIMEOUT</td>
 			<td>60000</td>
-			<td> This value may be used only if you used not default ClientConfig</td>
+			<td> 仅当使用非默认ClientConfig时生效</td>
 		</tr>
 		<tr>
 			<td>redis.standalone.usePoolConfig</td>
 			<td>REDIS_CLIENT_USE_POOL_CONFIG</td>
 			<td>false</td>
-			<td> This value may be used only if you used not default ClientConfig</td>
+			<td> 仅当使用非默认ClientConfig时生效</td>
 		</tr>
 		<tr>
 			<td>redis.cluster.nodes</td>
 			<td>REDIS_NODES</td>
 			<td></td>
-			<td> Comma-separated list of "host:port" pairs to bootstrap from.</td>
+			<td> 用于引导的"host:port"对列表（逗号分隔）.</td>
 		</tr>
 		<tr>
 			<td>redis.cluster.max-redirects</td>
 			<td>REDIS_MAX_REDIRECTS</td>
 			<td>12</td>
-			<td> Maximum number of redirects to follow when executing commands across the cluster.</td>
+			<td> 集群中执行命令时允许的最大重定向数.</td>
 		</tr>
 		<tr>
 			<td>redis.cluster.useDefaultPoolConfig</td>
@@ -2382,7 +2382,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2401,7 +2401,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2444,7 +2444,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2523,7 +2523,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2652,7 +2652,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2825,7 +2825,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2886,7 +2886,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -2971,7 +2971,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3039,7 +3039,7 @@
 			<td>js.local.max_requests_timeout</td>
 			<td>LOCAL_JS_MAX_REQUEST_TIMEOUT</td>
 			<td>0</td>
-			<td> JS Eval max request timeout. 0 - no timeout</td>
+			<td> JS Eval最大请求超时. 0 - no timeout</td>
 		</tr>
 		<tr>
 			<td>js.local.max_black_list_duration_sec</td>
@@ -3098,7 +3098,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3106,20 +3106,13 @@
 			<td>transport.sessions.inactivity_timeout</td>
 			<td>TB_TRANSPORT_SESSIONS_INACTIVITY_TIMEOUT</td>
 			<td>600000</td>
-			<td> Session inactivity timeout is a global configuration parameter that defines how long the device transport session will be opened after the last message arrives from the device.
- The parameter value is in milliseconds.
- The last activity time of the device session is updated if the device sends any message, including keepalive messages
- If there is no activity, the session will be closed, and all subscriptions will be deleted.
- We recommend this parameter to be in sync with device inactivity timeout ("state.defaultInactivityTimeoutInSec" or DEFAULT_INACTIVITY_TIMEOUT) parameter
- which is responsible for detection of the device connectivity status in the core service of the platform.
- The value of the session inactivity timeout parameter should be greater or equal to the device inactivity timeout.
- Note that the session inactivity timeout is set in milliseconds while device inactivity timeout is in seconds.</td>
+			<td> 会话空闲超时为全局配置，定义设备最后一条消息到达后传输会话保持开放的时长（毫秒）。设备发送任何消息（含keepalive）时会更新会话最后活动时间。若无活动则会关闭会话并删除所有订阅。建议与设备空闲超时(state.defaultInactivityTimeoutInSec或DEFAULT_INACTIVITY_TIMEOUT)同步，该参数负责核心服务中设备连接状态检测。会话空闲超时应大于等于设备空闲超时。注意会话空闲超时为毫秒，设备空闲超时为秒。</td>
 		</tr>
 		<tr>
 			<td>transport.sessions.report_timeout</td>
 			<td>TB_TRANSPORT_SESSIONS_REPORT_TIMEOUT</td>
 			<td>3000</td>
-			<td> Interval of periodic check for expired sessions and report of the changes to session last activity time</td>
+			<td> 定期检查过期会话及上报会话最后活动时间变更的间隔</td>
 		</tr>
 		<tr>
 			<td>transport.activity.reporting_strategy</td>
@@ -3136,19 +3129,19 @@
 			<td>transport.json.type_cast_enabled</td>
 			<td>JSON_TYPE_CAST_ENABLED</td>
 			<td>true</td>
-			<td> Cast String data types to Numeric if possible when processing Telemetry/Attributes JSON</td>
+			<td> 处理遥测/属性JSON时尽可能将String转为Numeric</td>
 		</tr>
 		<tr>
 			<td>transport.json.max_string_value_length</td>
 			<td>JSON_MAX_STRING_VALUE_LENGTH</td>
 			<td>0</td>
-			<td> Maximum allowed string value length when processing Telemetry/Attributes JSON (0 value disables string value length check)</td>
+			<td> 处理遥测/属性JSON时允许的最大字符串长度(0表示禁用长度检查)</td>
 		</tr>
 		<tr>
 			<td>transport.client_side_rpc.timeout</td>
 			<td>CLIENT_SIDE_RPC_TIMEOUT</td>
 			<td>60000</td>
-			<td> Processing timeout interval of the RPC command on the CLIENT SIDE. Time in milliseconds</td>
+			<td> 客户端侧RPC命令处理超时间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>transport.api_enabled</td>
@@ -3160,13 +3153,13 @@
 			<td>transport.log.enabled</td>
 			<td>TB_TRANSPORT_LOG_ENABLED</td>
 			<td>true</td>
-			<td> Enable/Disable log of transport messages to telemetry. For example, logging of LwM2M registration update</td>
+			<td> 启用/禁用将传输消息记录到遥测。例如LwM2M注册更新日志</td>
 		</tr>
 		<tr>
 			<td>transport.log.max_length</td>
 			<td>TB_TRANSPORT_LOG_MAX_LENGTH</td>
 			<td>1024</td>
-			<td> Maximum length of the log message. The content will be truncated to the specified value if needed</td>
+			<td> 日志消息最大长度。超出时将截断至指定值</td>
 		</tr>
 		<tr>
 			<td>transport.rate_limits.ip_limits_enabled</td>
@@ -3178,7 +3171,7 @@
 			<td>transport.rate_limits.max_wrong_credentials_per_ip</td>
 			<td>TB_TRANSPORT_MAX_WRONG_CREDENTIALS_PER_IP</td>
 			<td>10</td>
-			<td> Maximum number of connect attempts with invalid credentials</td>
+			<td> 使用无效凭据的最大连接尝试次数</td>
 		</tr>
 		<tr>
 			<td>transport.rate_limits.ip_block_timeout</td>
@@ -3208,7 +3201,7 @@
 			<td>transport.http.max_payload_size</td>
 			<td>HTTP_TRANSPORT_MAX_PAYLOAD_SIZE_LIMIT_CONFIGURATION</td>
 			<td>/api/v1/*/rpc/**=65536;/api/v1/**=52428800</td>
-			<td> Semi-colon-separated list of urlPattern=maxPayloadSize pairs that define max http request size for specified url pattern. After first match all other will be skipped</td>
+			<td> urlPattern=maxPayloadSize对的列表（分号分隔），定义指定URL模式的最大HTTP请求大小。首次匹配后其余将被跳过</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.enabled</td>
@@ -3311,49 +3304,49 @@
 			<td>transport.mqtt.ssl.protocol</td>
 			<td>MQTT_SSL_PROTOCOL</td>
 			<td>TLSv1.2</td>
-			<td> SSL protocol: See https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#sslcontext-algorithms</td>
+			<td> SSL协议：参见 https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#sslcontext-algorithms</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.type</td>
 			<td>MQTT_SSL_CREDENTIALS_TYPE</td>
 			<td>PEM</td>
-			<td> Server credentials type (PEM - pem certificate file; KEYSTORE - java keystore)</td>
+			<td> 服务器凭证类型(PEM-pem证书文件;KEYSTORE-java keystore)</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.pem.cert_file</td>
 			<td>MQTT_SSL_PEM_CERT</td>
 			<td>mqttserver.pem</td>
-			<td> Path to the server certificate file (holds server certificate or certificate chain, may include server private key)</td>
+			<td> 服务器证书文件路径（含服务器证书或证书链，可包含服务器私钥）</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.pem.key_file</td>
 			<td>MQTT_SSL_PEM_KEY</td>
 			<td>mqttserver_key.pem</td>
-			<td> Path to the server certificate private key file. Optional by default. Required if the private key is not present in server certificate file;</td>
+			<td> 服务器证书私钥文件路径。默认可选。若证书文件中无私钥则为必填；</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.pem.key_password</td>
 			<td>MQTT_SSL_PEM_KEY_PASSWORD</td>
 			<td>server_key_password</td>
-			<td> Server certificate private key password (optional)</td>
+			<td> 服务器证书私钥密码（可选）</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.keystore.type</td>
 			<td>MQTT_SSL_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td> Keystore类型(JKS或PKCS12)</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.keystore.store_file</td>
 			<td>MQTT_SSL_KEY_STORE</td>
 			<td>mqttserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td> 存放SSL证书的keystore路径</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.keystore.store_password</td>
 			<td>MQTT_SSL_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td> 访问keystore的密码</td>
 		</tr>
 		<tr>
 			<td>transport.mqtt.ssl.credentials.keystore.key_alias</td>
@@ -3371,7 +3364,7 @@
 			<td>transport.mqtt.ssl.skip_validity_check_for_client_cert</td>
 			<td>MQTT_SSL_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT</td>
 			<td>false</td>
-			<td> Skip certificate validity check for client certificates.</td>
+			<td> 跳过客户端证书的有效性检查。</td>
 		</tr>
 		<tr>
 			<td>transport.coap.enabled</td>
@@ -3383,7 +3376,7 @@
 			<td>transport.coap.timeout</td>
 			<td>COAP_TIMEOUT</td>
 			<td>10000</td>
-			<td> CoaP processing timeout in milliseconds</td>
+			<td> CoAP处理超时（毫秒）</td>
 		</tr>
 		<tr>
 			<td>transport.coap.piggyback_timeout</td>
@@ -3469,13 +3462,13 @@
 			<td>transport.lwm2m.server.security.credentials.type</td>
 			<td>LWM2M_SERVER_CREDENTIALS_TYPE</td>
 			<td>PEM</td>
-			<td> Server credentials type (PEM - pem certificate file; KEYSTORE - java keystore)</td>
+			<td> 服务器凭证类型(PEM-pem证书文件;KEYSTORE-java keystore)</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.pem.cert_file</td>
 			<td>LWM2M_SERVER_PEM_CERT</td>
 			<td>lwm2mserver.pem</td>
-			<td> Path to the server certificate file (holds server certificate or certificate chain, may include server private key)</td>
+			<td> 服务器证书文件路径（含服务器证书或证书链，可包含服务器私钥）</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.pem.key_file</td>
@@ -3487,37 +3480,37 @@
 			<td>transport.lwm2m.server.security.credentials.pem.key_password</td>
 			<td>LWM2M_SERVER_PEM_KEY_PASSWORD</td>
 			<td>server_key_password</td>
-			<td> Server certificate private key password (optional)</td>
+			<td> 服务器证书私钥密码（可选）</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.type</td>
 			<td>LWM2M_SERVER_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td> Keystore类型(JKS或PKCS12)</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.store_file</td>
 			<td>LWM2M_SERVER_KEY_STORE</td>
 			<td>lwm2mserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td> 存放SSL证书的keystore路径</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.store_password</td>
 			<td>LWM2M_SERVER_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td> 访问keystore的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.key_alias</td>
 			<td>LWM2M_SERVER_KEY_ALIAS</td>
 			<td>server</td>
-			<td> Key alias</td>
+			<td> 密钥别名</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.credentials.keystore.key_password</td>
 			<td>LWM2M_SERVER_KEY_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key</td>
+			<td> 访问密钥的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.server.security.skip_validity_check_for_client_cert</td>
@@ -3571,13 +3564,13 @@
 			<td>transport.lwm2m.bootstrap.security.credentials.type</td>
 			<td>LWM2M_BS_CREDENTIALS_TYPE</td>
 			<td>PEM</td>
-			<td> Server credentials type (PEM - pem certificate file; KEYSTORE - java keystore)</td>
+			<td> 服务器凭证类型(PEM-pem证书文件;KEYSTORE-java keystore)</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.pem.cert_file</td>
 			<td>LWM2M_BS_PEM_CERT</td>
 			<td>lwm2mserver.pem</td>
-			<td> Path to the server certificate file (holds server certificate or certificate chain, may include server private key)</td>
+			<td> 服务器证书文件路径（含服务器证书或证书链，可包含服务器私钥）</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.pem.key_file</td>
@@ -3589,37 +3582,37 @@
 			<td>transport.lwm2m.bootstrap.security.credentials.pem.key_password</td>
 			<td>LWM2M_BS_PEM_KEY_PASSWORD</td>
 			<td>server_key_password</td>
-			<td> Server certificate private key password (optional)</td>
+			<td> 服务器证书私钥密码（可选）</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.type</td>
 			<td>LWM2M_BS_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td> Keystore类型(JKS或PKCS12)</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.store_file</td>
 			<td>LWM2M_BS_KEY_STORE</td>
 			<td>lwm2mserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td> 存放SSL证书的keystore路径</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.store_password</td>
 			<td>LWM2M_BS_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td> 访问keystore的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.key_alias</td>
 			<td>LWM2M_BS_KEY_ALIAS</td>
 			<td>bootstrap</td>
-			<td> Key alias</td>
+			<td> 密钥别名</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.bootstrap.security.credentials.keystore.key_password</td>
 			<td>LWM2M_BS_KEY_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key</td>
+			<td> 访问密钥的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.security.trust-credentials.enabled</td>
@@ -3643,7 +3636,7 @@
 			<td>transport.lwm2m.security.trust-credentials.keystore.type</td>
 			<td>LWM2M_TRUST_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td> Keystore类型(JKS或PKCS12)</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.security.trust-credentials.keystore.store_file</td>
@@ -3655,7 +3648,7 @@
 			<td>transport.lwm2m.security.trust-credentials.keystore.store_password</td>
 			<td>LWM2M_TRUST_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td> 访问keystore的密码</td>
 		</tr>
 		<tr>
 			<td>transport.lwm2m.security.recommended_ciphers</td>
@@ -3781,13 +3774,13 @@
 			<td>transport.stats.enabled</td>
 			<td>TB_TRANSPORT_STATS_ENABLED</td>
 			<td>true</td>
-			<td> Enable/Disable the collection of transport statistics</td>
+			<td> 启用/禁用传输统计收集</td>
 		</tr>
 		<tr>
 			<td>transport.stats.print-interval-ms</td>
 			<td>TB_TRANSPORT_STATS_PRINT_INTERVAL_MS</td>
 			<td>60000</td>
-			<td> Interval of transport statistics logging</td>
+			<td> 传输统计日志间隔</td>
 		</tr>
 		<tr>
 			<td>transport.gateway.dashboard.sync.enabled</td>
@@ -3822,7 +3815,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -3836,19 +3829,19 @@
 			<td>coap.bind_address</td>
 			<td>COAP_BIND_ADDRESS</td>
 			<td>0.0.0.0</td>
-			<td> CoAP bind address</td>
+			<td> CoAP绑定地址</td>
 		</tr>
 		<tr>
 			<td>coap.bind_port</td>
 			<td>COAP_BIND_PORT</td>
 			<td>5683</td>
-			<td> CoAP bind port</td>
+			<td> CoAP绑定端口</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.enabled</td>
 			<td>COAP_DTLS_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable DTLS 1.2 support</td>
+			<td> 启用/禁用DTLS 1.2支持</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.retransmission_timeout</td>
@@ -3860,13 +3853,13 @@
 			<td>coap.dtls.bind_address</td>
 			<td>COAP_DTLS_BIND_ADDRESS</td>
 			<td>0.0.0.0</td>
-			<td> CoAP DTLS bind address</td>
+			<td> CoAP DTLS绑定地址</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.bind_port</td>
 			<td>COAP_DTLS_BIND_PORT</td>
 			<td>5684</td>
-			<td> CoAP DTLS bind port</td>
+			<td> CoAP DTLS绑定端口</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.connection_id_length</td>
@@ -3918,13 +3911,13 @@
 			<td>coap.dtls.credentials.type</td>
 			<td>COAP_DTLS_CREDENTIALS_TYPE</td>
 			<td>PEM</td>
-			<td> Server credentials type (PEM - pem certificate file; KEYSTORE - java keystore)</td>
+			<td> 服务器凭证类型(PEM-pem证书文件;KEYSTORE-java keystore)</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.pem.cert_file</td>
 			<td>COAP_DTLS_PEM_CERT</td>
 			<td>coapserver.pem</td>
-			<td> Path to the server certificate file (holds server certificate or certificate chain, may include server private key)</td>
+			<td> 服务器证书文件路径（含服务器证书或证书链，可包含服务器私钥）</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.pem.key_file</td>
@@ -3936,43 +3929,43 @@
 			<td>coap.dtls.credentials.pem.key_password</td>
 			<td>COAP_DTLS_PEM_KEY_PASSWORD</td>
 			<td>server_key_password</td>
-			<td> Server certificate private key password (optional)</td>
+			<td> 服务器证书私钥密码（可选）</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.type</td>
 			<td>COAP_DTLS_KEY_STORE_TYPE</td>
 			<td>JKS</td>
-			<td> Type of the key store (JKS or PKCS12)</td>
+			<td> Keystore类型(JKS或PKCS12)</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.store_file</td>
 			<td>COAP_DTLS_KEY_STORE</td>
 			<td>coapserver.jks</td>
-			<td> Path to the key store that holds the SSL certificate</td>
+			<td> 存放SSL证书的keystore路径</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.store_password</td>
 			<td>COAP_DTLS_KEY_STORE_PASSWORD</td>
 			<td>server_ks_password</td>
-			<td> Password used to access the key store</td>
+			<td> 访问keystore的密码</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.key_alias</td>
 			<td>COAP_DTLS_KEY_ALIAS</td>
 			<td>serveralias</td>
-			<td> Key alias</td>
+			<td> 密钥别名</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.credentials.keystore.key_password</td>
 			<td>COAP_DTLS_KEY_PASSWORD</td>
 			<td>server_key_password</td>
-			<td> Password used to access the key</td>
+			<td> 访问密钥的密码</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.x509.skip_validity_check_for_client_cert</td>
 			<td>TB_COAP_X509_DTLS_SKIP_VALIDITY_CHECK_FOR_CLIENT_CERT</td>
 			<td>false</td>
-			<td> Skip certificate validity check for client certificates.</td>
+			<td> 跳过客户端证书的有效性检查。</td>
 		</tr>
 		<tr>
 			<td>coap.dtls.x509.dtls_session_inactivity_timeout</td>
@@ -3995,7 +3988,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4134,7 +4127,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4288,7 +4281,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4313,7 +4306,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4404,7 +4397,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -4412,13 +4405,13 @@
 			<td>queue.type</td>
 			<td>TB_QUEUE_TYPE</td>
 			<td>in-memory</td>
-			<td> in-memory or kafka (Apache Kafka)</td>
+			<td> in-memory or kafka(Apache Kafka)</td>
 		</tr>
 		<tr>
 			<td>queue.prefix</td>
 			<td>TB_QUEUE_PREFIX</td>
 			<td></td>
-			<td> Global queue prefix. If specified, prefix is added before default topic name: 'prefix.default_topic_name'. Prefix is applied to all topics (and consumer groups for kafka).</td>
+			<td> 全局队列前缀。若指定，则在默认topic名前添加：'prefix.default_topic_name'。应用于所有topic（及kafka consumer group）。</td>
 		</tr>
 		<tr>
 			<td>queue.in_memory.stats.print-interval-ms</td>
@@ -4436,25 +4429,25 @@
 			<td>queue.kafka.ssl.enabled</td>
 			<td>TB_KAFKA_SSL_ENABLED</td>
 			<td>false</td>
-			<td> Enable/Disable SSL Kafka communication</td>
+			<td> 启用/禁用Kafka SSL通信</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.ssl.truststore.location</td>
 			<td>TB_KAFKA_SSL_TRUSTSTORE_LOCATION</td>
 			<td></td>
-			<td> The location of the trust store file</td>
+			<td> truststore文件路径</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.ssl.truststore.password</td>
 			<td>TB_KAFKA_SSL_TRUSTSTORE_PASSWORD</td>
 			<td></td>
-			<td> The password of trust store file if specified</td>
+			<td> 若指定了truststore则为其密码</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.ssl.keystore.location</td>
 			<td>TB_KAFKA_SSL_KEYSTORE_LOCATION</td>
 			<td></td>
-			<td> The location of the key store file. This is optional for the client and can be used for two-way authentication for the client</td>
+			<td> keystore文件路径。客户端可选，用于客户端双向认证</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.ssl.keystore.password</td>
@@ -4478,49 +4471,49 @@
 			<td>queue.kafka.retries</td>
 			<td>TB_KAFKA_RETRIES</td>
 			<td>1</td>
-			<td> Number of retries. Resend any record whose send fails with a potentially transient error</td>
+			<td> 重试次数。重发因瞬时错误发送失败的记录</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.compression.type</td>
 			<td>TB_KAFKA_COMPRESSION_TYPE</td>
 			<td>none</td>
-			<td> none or gzip</td>
+			<td> none或gzip</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.batch.size</td>
 			<td>TB_KAFKA_BATCH_SIZE</td>
 			<td>16384</td>
-			<td> Default batch size. This setting gives the upper bound of the batch size to be sent</td>
+			<td> 默认批量大小。为待发送批量的上限</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.linger.ms</td>
 			<td>TB_KAFKA_LINGER_MS</td>
 			<td>1</td>
-			<td> This variable creates a small amount of artificial delay—that is, rather than immediately sending out a record</td>
+			<td> 创建少许人工延迟，即不立即发送记录</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.max.request.size</td>
 			<td>TB_KAFKA_MAX_REQUEST_SIZE</td>
 			<td>1048576</td>
-			<td> The maximum size of a request in bytes. This setting will limit the number of record batches the producer will send in a single request to avoid sending huge requests</td>
+			<td> 单次请求最大字节数。限制生产者单次请求发送的批次数以避免发送过大请求</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.max.in.flight.requests.per.connection</td>
 			<td>TB_KAFKA_MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION</td>
 			<td>5</td>
-			<td> The maximum number of unacknowledged requests the client will send on a single connection before blocking</td>
+			<td> 客户端在单连接上阻塞前可发送的未确认请求最大数</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.buffer.memory</td>
 			<td>TB_BUFFER_MEMORY</td>
 			<td>33554432</td>
-			<td> The total bytes of memory the producer can use to buffer records waiting to be sent to the server</td>
+			<td> 生产者用于缓冲待发送记录的内存总字节数</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.replication_factor</td>
 			<td>TB_QUEUE_KAFKA_REPLICATION_FACTOR</td>
 			<td>1</td>
-			<td> The multiple copies of data over the multiple brokers of Kafka</td>
+			<td> Kafka多broker上的数据副本数</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.max_poll_interval_ms</td>
@@ -4538,61 +4531,61 @@
 			<td>queue.kafka.max_partition_fetch_bytes</td>
 			<td>TB_QUEUE_KAFKA_MAX_PARTITION_FETCH_BYTES</td>
 			<td>16777216</td>
-			<td> The maximum amount of data per-partition the server will return. Records are fetched in batches by the consumer</td>
+			<td> 服务器每分区返回的最大数据量。消费者按批获取记录</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.fetch_max_bytes</td>
 			<td>TB_QUEUE_KAFKA_FETCH_MAX_BYTES</td>
 			<td>134217728</td>
-			<td> The maximum amount of data the server will return. Records are fetched in batches by the consumer</td>
+			<td> 服务器返回的最大数据量。消费者按批获取记录</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.request.timeout.ms</td>
 			<td>TB_QUEUE_KAFKA_REQUEST_TIMEOUT_MS</td>
 			<td>30000</td>
-			<td> (30 seconds) </td>
+			<td> (30秒) </td>
 		</tr>
 		<tr>
 			<td>queue.kafka.session.timeout.ms</td>
 			<td>TB_QUEUE_KAFKA_SESSION_TIMEOUT_MS</td>
 			<td>10000</td>
-			<td> (10 seconds) </td>
+			<td> (10秒) </td>
 		</tr>
 		<tr>
 			<td>queue.kafka.auto_offset_reset</td>
 			<td>TB_QUEUE_KAFKA_AUTO_OFFSET_RESET</td>
 			<td>earliest</td>
-			<td> earliest, latest or none</td>
+			<td> earliest、latest或none</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.use_confluent_cloud</td>
 			<td>TB_QUEUE_KAFKA_USE_CONFLUENT_CLOUD</td>
 			<td>false</td>
-			<td> Enable/Disable using of Confluent Cloud</td>
+			<td> 启用/禁用Confluent Cloud</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.confluent.ssl.algorithm</td>
 			<td>TB_QUEUE_KAFKA_CONFLUENT_SSL_ALGORITHM</td>
 			<td>https</td>
-			<td> The endpoint identification algorithm used by clients to validate server hostname. The default value is https</td>
+			<td> 客户端验证服务器主机名的端点标识算法。默认https</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.confluent.sasl.mechanism</td>
 			<td>TB_QUEUE_KAFKA_CONFLUENT_SASL_MECHANISM</td>
 			<td>PLAIN</td>
-			<td> The mechanism used to authenticate Schema Registry requests. SASL/PLAIN should only be used with TLS/SSL as a transport layer to ensure that clear passwords are not transmitted on the wire without encryption</td>
+			<td> 认证Schema Registry请求的机制。SASL/PLAIN应仅与TLS/SSL传输层配合使用以确保明文密码不未加密传输</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.confluent.sasl.config</td>
 			<td>TB_QUEUE_KAFKA_CONFLUENT_SASL_JAAS_CONFIG</td>
 			<td>org.apache.kafka.common.security.plain.PlainLoginModule required username=\"CLUSTER_API_KEY\" password=\"CLUSTER_API_SECRET\";</td>
-			<td> Using JAAS Configuration for specifying multiple SASL mechanisms on a broker</td>
+			<td> 使用JAAS配置指定broker上的多个SASL机制</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.confluent.security.protocol</td>
 			<td>TB_QUEUE_KAFKA_CONFLUENT_SECURITY_PROTOCOL</td>
 			<td>SASL_SSL</td>
-			<td> Protocol used to communicate with brokers. Valid values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL</td>
+			<td> 与broker通信的协议。有效值：PLAINTEXT、SSL、SASL_PLAINTEXT、SASL_SSL</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.consumer-properties-per-topic.tb_ota_package.key</td>
@@ -4737,25 +4730,25 @@
 			<td>queue.kafka.topic-properties.rule-engine</td>
 			<td>TB_QUEUE_KAFKA_RE_TOPIC_PROPERTIES</td>
 			<td>retention.ms:604800000;segment.bytes:52428800;retention.bytes:1048576000;partitions:1;min.insync.replicas:1</td>
-			<td> Kafka properties for Rule Engine</td>
+			<td> 规则引擎的Kafka属性</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.topic-properties.core</td>
 			<td>TB_QUEUE_KAFKA_CORE_TOPIC_PROPERTIES</td>
 			<td>retention.ms:604800000;segment.bytes:52428800;retention.bytes:1048576000;partitions:1;min.insync.replicas:1</td>
-			<td> Kafka properties for Core topics</td>
+			<td> Core topic的Kafka属性</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.topic-properties.transport-api</td>
 			<td>TB_QUEUE_KAFKA_TA_TOPIC_PROPERTIES</td>
 			<td>retention.ms:604800000;segment.bytes:52428800;retention.bytes:1048576000;partitions:10;min.insync.replicas:1</td>
-			<td> Kafka properties for Transport Api topics</td>
+			<td> Transport Api topic的Kafka属性</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.topic-properties.notifications</td>
 			<td>TB_QUEUE_KAFKA_NOTIFICATIONS_TOPIC_PROPERTIES</td>
 			<td>retention.ms:604800000;segment.bytes:52428800;retention.bytes:1048576000;partitions:1;min.insync.replicas:1</td>
-			<td> Kafka properties for Notifications topics</td>
+			<td> 通知topic的Kafka属性</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.topic-properties.js-executor</td>
@@ -4779,7 +4772,7 @@
 			<td>queue.kafka.topic-properties.housekeeper</td>
 			<td>TB_QUEUE_KAFKA_HOUSEKEEPER_TOPIC_PROPERTIES</td>
 			<td>retention.ms:604800000;segment.bytes:52428800;retention.bytes:1048576000;partitions:10;min.insync.replicas:1</td>
-			<td> Kafka properties for Housekeeper tasks topic</td>
+			<td> Housekeeper任务topic的Kafka属性</td>
 		</tr>
 		<tr>
 			<td>queue.kafka.topic-properties.housekeeper-reprocessing</td>
@@ -4857,43 +4850,43 @@
 			<td>queue.kafka.topics_cache_ttl_ms</td>
 			<td>TB_QUEUE_KAFKA_TOPICS_CACHE_TTL_MS</td>
 			<td>300000</td>
-			<td> Topics cache TTL in milliseconds. 5 minutes by default</td>
+			<td> topic缓存TTL（毫秒）。默认5分钟</td>
 		</tr>
 		<tr>
 			<td>queue.partitions.hash_function_name</td>
 			<td>TB_QUEUE_PARTITIONS_HASH_FUNCTION_NAME</td>
 			<td>murmur3_128</td>
-			<td> murmur3_32, murmur3_128 or sha256</td>
+			<td> murmur3_32、murmur3_128或sha256</td>
 		</tr>
 		<tr>
 			<td>queue.transport_api.requests_topic</td>
 			<td>TB_QUEUE_TRANSPORT_API_REQUEST_TOPIC</td>
 			<td>tb_transport.api.requests</td>
-			<td> Topic used to consume api requests from transport microservices</td>
+			<td> 消费传输微服务api请求的topic</td>
 		</tr>
 		<tr>
 			<td>queue.transport_api.responses_topic</td>
 			<td>TB_QUEUE_TRANSPORT_API_RESPONSE_TOPIC</td>
 			<td>tb_transport.api.responses</td>
-			<td> Topic used to produce api responses to transport microservices</td>
+			<td> 向传输微服务发送api响应的topic</td>
 		</tr>
 		<tr>
 			<td>queue.transport_api.max_pending_requests</td>
 			<td>TB_QUEUE_TRANSPORT_MAX_PENDING_REQUESTS</td>
 			<td>10000</td>
-			<td> Maximum pending api requests from transport microservices to be handled by server</td>
+			<td> 服务器待处理的传输微服务api请求最大数</td>
 		</tr>
 		<tr>
 			<td>queue.transport_api.max_requests_timeout</td>
 			<td>TB_QUEUE_TRANSPORT_MAX_REQUEST_TIMEOUT</td>
 			<td>10000</td>
-			<td> Maximum timeout in milliseconds to handle api request from transport microservice by server</td>
+			<td> 服务器处理传输微服务api请求的最大超时（毫秒）</td>
 		</tr>
 		<tr>
 			<td>queue.transport_api.max_callback_threads</td>
 			<td>TB_QUEUE_TRANSPORT_MAX_CALLBACK_THREADS</td>
 			<td>100</td>
-			<td> Amount of threads used to invoke callbacks</td>
+			<td> 用于调用回调的线程数</td>
 		</tr>
 		<tr>
 			<td>queue.transport_api.max_core_handler_threads</td>
@@ -4905,43 +4898,43 @@
 			<td>queue.transport_api.request_poll_interval</td>
 			<td>TB_QUEUE_TRANSPORT_REQUEST_POLL_INTERVAL_MS</td>
 			<td>25</td>
-			<td> Interval in milliseconds to poll api requests from transport microservices</td>
+			<td> 轮询传输微服务api请求的间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>queue.transport_api.response_poll_interval</td>
 			<td>TB_QUEUE_TRANSPORT_RESPONSE_POLL_INTERVAL_MS</td>
 			<td>25</td>
-			<td> Interval in milliseconds to poll api response from transport microservices</td>
+			<td> 轮询传输微服务api响应的间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>queue.core.topic</td>
 			<td>TB_QUEUE_CORE_TOPIC</td>
 			<td>tb_core</td>
-			<td> Default topic name</td>
+			<td> 默认topic名</td>
 		</tr>
 		<tr>
 			<td>queue.core.notifications_topic</td>
 			<td>TB_QUEUE_CORE_NOTIFICATIONS_TOPIC</td>
 			<td>tb_core.notifications</td>
-			<td> For high-priority notifications that require minimum latency and processing time</td>
+			<td> 需要最低延迟和处理时间的高优先级通知</td>
 		</tr>
 		<tr>
 			<td>queue.core.poll-interval</td>
 			<td>TB_QUEUE_CORE_POLL_INTERVAL_MS</td>
 			<td>25</td>
-			<td> Interval in milliseconds to poll messages by Core microservices</td>
+			<td> Core微服务轮询消息的间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>queue.core.partitions</td>
 			<td>TB_QUEUE_CORE_PARTITIONS</td>
 			<td>10</td>
-			<td> Amount of partitions used by Core microservices</td>
+			<td> Core微服务使用的分区数</td>
 		</tr>
 		<tr>
 			<td>queue.core.pack-processing-timeout</td>
 			<td>TB_QUEUE_CORE_PACK_PROCESSING_TIMEOUT_MS</td>
 			<td>2000</td>
-			<td> Timeout for processing a message pack by Core microservices</td>
+			<td> Core微服务处理消息包的超时</td>
 		</tr>
 		<tr>
 			<td>queue.core.consumer-per-partition</td>
@@ -4953,7 +4946,7 @@
 			<td>queue.core.ota.topic</td>
 			<td>TB_QUEUE_CORE_OTA_TOPIC</td>
 			<td>tb_ota_package</td>
-			<td> Default topic name for OTA updates</td>
+			<td> 默认topic名 for OTA updates</td>
 		</tr>
 		<tr>
 			<td>queue.core.ota.pack-interval-ms</td>
@@ -4977,25 +4970,25 @@
 			<td>queue.core.stats.enabled</td>
 			<td>TB_QUEUE_CORE_STATS_ENABLED</td>
 			<td>true</td>
-			<td> Enable/disable statistics for Core microservices</td>
+			<td> 启用/禁用Core微服务统计</td>
 		</tr>
 		<tr>
 			<td>queue.core.stats.print-interval-ms</td>
 			<td>TB_QUEUE_CORE_STATS_PRINT_INTERVAL_MS</td>
 			<td>60000</td>
-			<td> Statistics printing interval for Core microservices</td>
+			<td> Core微服务统计打印间隔</td>
 		</tr>
 		<tr>
 			<td>queue.core.housekeeper.topic</td>
 			<td>TB_HOUSEKEEPER_TOPIC</td>
 			<td>tb_housekeeper</td>
-			<td> Topic name for Housekeeper tasks</td>
+			<td> Housekeeper任务topic名</td>
 		</tr>
 		<tr>
 			<td>queue.core.housekeeper.reprocessing-topic</td>
 			<td>TB_HOUSEKEEPER_REPROCESSING_TOPIC</td>
 			<td>tb_housekeeper.reprocessing</td>
-			<td> Topic name for Housekeeper tasks to be reprocessed</td>
+			<td> Housekeeper任务topic名 to be reprocessed</td>
 		</tr>
 		<tr>
 			<td>queue.core.housekeeper.poll-interval-ms</td>
@@ -5177,7 +5170,7 @@
 			<td>queue.vc.topic</td>
 			<td>TB_QUEUE_VC_TOPIC</td>
 			<td>tb_version_control</td>
-			<td> Default topic name</td>
+			<td> 默认topic名</td>
 		</tr>
 		<tr>
 			<td>queue.vc.partitions</td>
@@ -5213,25 +5206,25 @@
 			<td>queue.js.request_topic</td>
 			<td>REMOTE_JS_EVAL_REQUEST_TOPIC</td>
 			<td>js_eval.requests</td>
-			<td> JS Eval request topic</td>
+			<td> JS Eval请求topic</td>
 		</tr>
 		<tr>
 			<td>queue.js.response_topic_prefix</td>
 			<td>REMOTE_JS_EVAL_RESPONSE_TOPIC</td>
 			<td>js_eval.responses</td>
-			<td> JS Eval responses topic prefix that is combined with node id</td>
+			<td> 与节点id组合的JS Eval响应topic前缀</td>
 		</tr>
 		<tr>
 			<td>queue.js.max_pending_requests</td>
 			<td>REMOTE_JS_MAX_PENDING_REQUESTS</td>
 			<td>10000</td>
-			<td> JS Eval max pending requests</td>
+			<td> JS Eval最大待处理请求数</td>
 		</tr>
 		<tr>
 			<td>queue.js.max_eval_requests_timeout</td>
 			<td>REMOTE_JS_MAX_EVAL_REQUEST_TIMEOUT</td>
 			<td>60000</td>
-			<td> JS Eval max request timeout</td>
+			<td> JS Eval最大请求超时</td>
 		</tr>
 		<tr>
 			<td>queue.js.max_requests_timeout</td>
@@ -5249,43 +5242,43 @@
 			<td>queue.js.response_poll_interval</td>
 			<td>REMOTE_JS_RESPONSE_POLL_INTERVAL_MS</td>
 			<td>25</td>
-			<td> JS response poll interval</td>
+			<td> JS响应轮询间隔</td>
 		</tr>
 		<tr>
 			<td>queue.rule-engine.topic</td>
 			<td>TB_QUEUE_RULE_ENGINE_TOPIC</td>
 			<td>tb_rule_engine</td>
-			<td> Deprecated. It will be removed in the nearest releases</td>
+			<td> 已弃用。将在近期版本中移除</td>
 		</tr>
 		<tr>
 			<td>queue.rule-engine.notifications_topic</td>
 			<td>TB_QUEUE_RULE_ENGINE_NOTIFICATIONS_TOPIC</td>
 			<td>tb_rule_engine.notifications</td>
-			<td> For high-priority notifications that require minimum latency and processing time</td>
+			<td> 需要最低延迟和处理时间的高优先级通知</td>
 		</tr>
 		<tr>
 			<td>queue.rule-engine.poll-interval</td>
 			<td>TB_QUEUE_RULE_ENGINE_POLL_INTERVAL_MS</td>
 			<td>25</td>
-			<td> Interval in milliseconds to poll messages by Rule Engine</td>
+			<td> 规则引擎轮询消息的间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>queue.rule-engine.pack-processing-timeout</td>
 			<td>TB_QUEUE_RULE_ENGINE_PACK_PROCESSING_TIMEOUT_MS</td>
 			<td>2000</td>
-			<td> Timeout for processing a message pack of Rule Engine</td>
+			<td> 规则引擎处理消息包的超时</td>
 		</tr>
 		<tr>
 			<td>queue.rule-engine.stats.enabled</td>
 			<td>TB_QUEUE_RULE_ENGINE_STATS_ENABLED</td>
 			<td>true</td>
-			<td> Enable/disable statistics for Rule Engine</td>
+			<td> 启用/禁用规则引擎统计</td>
 		</tr>
 		<tr>
 			<td>queue.rule-engine.stats.print-interval-ms</td>
 			<td>TB_QUEUE_RULE_ENGINE_STATS_PRINT_INTERVAL_MS</td>
 			<td>60000</td>
-			<td> Statistics printing interval for Rule Engine</td>
+			<td> 规则引擎统计打印间隔</td>
 		</tr>
 		<tr>
 			<td>queue.rule-engine.stats.max-error-message-length</td>
@@ -5321,13 +5314,13 @@
 			<td>queue.calculated_fields.notifications_topic</td>
 			<td>TB_QUEUE_CF_NOTIFICATIONS_TOPIC</td>
 			<td>calculated_field.notifications</td>
-			<td> For high-priority notifications that require minimum latency and processing time</td>
+			<td> 需要最低延迟和处理时间的高优先级通知</td>
 		</tr>
 		<tr>
 			<td>queue.calculated_fields.poll_interval</td>
 			<td>TB_QUEUE_CF_POLL_INTERVAL_MS</td>
 			<td>1000</td>
-			<td> Interval in milliseconds to poll messages by CF (Rule Engine) microservices</td>
+			<td> 轮询消息的间隔（毫秒） by CF (Rule Engine) microservices</td>
 		</tr>
 		<tr>
 			<td>queue.calculated_fields.pack_processing_timeout</td>
@@ -5363,13 +5356,13 @@
 			<td>queue.transport.notifications_topic</td>
 			<td>TB_QUEUE_TRANSPORT_NOTIFICATIONS_TOPIC</td>
 			<td>tb_transport.notifications</td>
-			<td> For high-priority notifications that require minimum latency and processing time</td>
+			<td> 需要最低延迟和处理时间的高优先级通知</td>
 		</tr>
 		<tr>
 			<td>queue.transport.poll_interval</td>
 			<td>TB_QUEUE_TRANSPORT_NOTIFICATIONS_POLL_INTERVAL_MS</td>
 			<td>25</td>
-			<td> Interval in milliseconds to poll messages</td>
+			<td> 轮询消息的间隔（毫秒）</td>
 		</tr>
 		<tr>
 			<td>queue.edge.topic</td>
@@ -5485,7 +5478,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -5504,7 +5497,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -5518,7 +5511,7 @@
 			<td>service.id</td>
 			<td>TB_SERVICE_ID</td>
 			<td></td>
-			<td> Unique id for this service (autogenerated if empty)</td>
+			<td> 本服务的唯一ID（空则自动生成）</td>
 		</tr>
 		<tr>
 			<td>service.rule_engine.assigned_tenant_profiles</td>
@@ -5542,7 +5535,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -5550,7 +5543,7 @@
 			<td>metrics.enabled</td>
 			<td>METRICS_ENABLED</td>
 			<td>false</td>
-			<td> Enable/disable actuator metrics.</td>
+			<td> 启用/禁用actuator指标。</td>
 		</tr>
 		<tr>
 			<td>metrics.timer.percentiles</td>
@@ -5579,7 +5572,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -5610,7 +5603,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -5624,7 +5617,7 @@
 			<td>notification_system.rules.deduplication_durations</td>
 			<td>TB_NOTIFICATION_RULES_DEDUPLICATION_DURATIONS</td>
 			<td>NEW_PLATFORM_VERSION:0;RATE_LIMITS:14400000;</td>
-			<td> Semicolon-separated deduplication durations (in millis) for trigger types. Format: 'NotificationRuleTriggerType1:123;NotificationRuleTriggerType2:456'</td>
+			<td> 触发器类型的去重时长（毫秒，分号分隔）。格式：'NotificationRuleTriggerType1:123;NotificationRuleTriggerType2:456'</td>
 		</tr>
 	</tbody>
 </table>
@@ -5635,7 +5628,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -5643,7 +5636,7 @@
 			<td>management.endpoints.web.exposure.include</td>
 			<td>METRICS_ENDPOINTS_EXPOSE</td>
 			<td>info</td>
-			<td> Expose metrics endpoint (use value 'prometheus' to enable prometheus metrics).</td>
+			<td> 暴露指标端点（使用'prometheus'启用prometheus指标）。</td>
 		</tr>
 		<tr>
 			<td>management.health.elasticsearch.enabled</td>
@@ -5660,7 +5653,7 @@
 <table>
 	<thead>
 		<tr>
-			<td style="width: 25%"><b>Parameter</b></td><td style="width: 30%"><b>Environment Variable</b></td><td style="width: 15%"><b>Default Value</b></td><td style="width: 30%"><b>Description</b></td>
+			<td style="width: 25%"><b>参数</b></td><td style="width: 30%"><b>环境变量</b></td><td style="width: 15%"><b>默认值</b></td><td style="width: 30%"><b>说明</b></td>
 		</tr>
 	</thead>
 	<tbody>

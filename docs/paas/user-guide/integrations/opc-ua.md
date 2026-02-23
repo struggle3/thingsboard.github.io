@@ -1,7 +1,7 @@
 ---
 layout: docwithnav-paas
-title: OPC-UA Integration
-description: OPC-UA Integration Guide 
+title: OPC-UA 集成
+description: OPC-UA 集成指南 
 
 create_rule_chain:
     0:

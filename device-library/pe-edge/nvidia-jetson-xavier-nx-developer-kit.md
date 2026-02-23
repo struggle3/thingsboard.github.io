@@ -1,8 +1,8 @@
 ---
 docsTag: "edge-pe"
 layout: device
-title: How to install ThingsBoard Edge on NVIDIA Jetson Xavier NX Developer Kit?
-category: Single-board computers
+title: 如何在 NVIDIA Jetson Xavier NX Developer Kit 上安装 ThingsBoard Edge？
+category: 单板计算机
 chip: NVIDIA CUDA
 connectivity: [Ethernet, WIFI, Bluetooth]
 vendor: NVIDIA

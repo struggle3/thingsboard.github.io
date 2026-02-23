@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Installing ThingsBoard CE on Azure
-description: Installing ThingsBoard CE on Azure
+title: 在 Azure 上安装 ThingsBoard CE
+description: 在 Azure 上安装 ThingsBoard CE
 
 ---
 

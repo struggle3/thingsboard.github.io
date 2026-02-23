@@ -1,12 +1,12 @@
-You can customize the downlink according to your configuration. Let's consider an example where we send an attribute update message. So we should change code in the downlink encoder function under
-line `//downlink data input`
+可根据您的配置自定义 downlink。以下示例为发送 attribute 更新消息。需在 downlink encoder function 中的
+`//downlink data input` 行修改代码
 
 ```
 data: msg.firmware
 ```
 {: .copy-code}
 
-Also, indicate the required parameters in the metadata:
+并在 metadata 中指明所需参数：
 
 ```
 metadata: {
@@ -16,13 +16,13 @@ metadata: {
 ```
 {: .copy-code}
 
-ㅤㅤ&#42;**EUI** is device EUI and is taken from the device in LORIOT.
+&#42;**EUI** 为设备 EUI，来自 LORIOT 中的设备。
 
-ㅤㅤ&#42; **port** can be from 1 to 223.
+&#42;**port** 取值范围为 1 到 223。
 
 {% include images-gallery.html imageCollection="devices" %}
 
-Example for downlink converter:
+Downlink converter 示例：
 
 ```javascript
 // Encode downlink data from incoming Rule Engine message
@@ -47,17 +47,17 @@ return result;
 {: .copy-code}
 
 <br>
-In **ThingsBoard 4.0**, an option has been added to the Loriot downlink functionality, allowing users to avoid double hexadecimal encoding.
-If your data is already in hexadecimal format, you can add the following metadata property to your message:
+**ThingsBoard 4.0** 中为 Loriot downlink 功能新增选项，支持避免双重十六进制编码。
+若数据已是十六进制格式，可在消息中添加以下 metadata 属性：
 
 ```
 "isHexEncoded": "true"
 ```
 {: .copy-code}
 
-With this property enabled, the downlink message will be sent to Loriot without double hexadecimal encoding.
+启用该属性后，downlink 消息将以非双重十六进制编码形式发送至 Loriot。
 
-Example for downlink converter without double hexadecimal encoding:
+无双重十六进制编码的 downlink converter 示例：
 
 ```javascript
 // Encode downlink data from incoming Rule Engine message
@@ -82,6 +82,6 @@ return result;
 ``` 
 {: .copy-code}
 
-Add a converter to the integration. You can do this at the stage of creating an integration or editing it.
+向 integration 添加 converter。可在创建 integration 或编辑时完成。
 
 {% include images-gallery.html imageCollection="create_downlink-java" %}

@@ -2,8 +2,8 @@
 layout: docwithnav-pe
 assignees:
 - stitenko
-title: Embedding charts in a report
-description: How to embed charts in a report
+title: 在报告中嵌入图表
+description: 如何在报告中嵌入图表
 redirect_from: "/docs/user-guide/reporting/embedding-charts/"
 
 chart-component-example-1:
